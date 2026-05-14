@@ -1,0 +1,258 @@
+{
+  "modal-border-radius": {
+    "value": "{borderRadius.xl}",
+    "type": "borderRadius",
+    "description": "Modal container border radius"
+  },
+  "modal-callout-bar-padding": {
+    "value": "{space.xl}",
+    "type": "spacing"
+  },
+  "modal-callout-bar-padding-small-screen": {
+    "value": "{space.s} {space.s} {space.s} {space.l}",
+    "type": "spacing"
+  },
+  "modal-content-gap": {
+    "value": "0",
+    "type": "spacing",
+    "description": "Space below header section"
+  },
+  "modal-content-gap-small-screen": {
+    "value": "0",
+    "type": "spacing",
+    "description": "Space below header section on mobile"
+  },
+  "modal-header-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.4}",
+      "lineHeight": "{lineHeight.4}"
+    },
+    "type": "typography",
+    "description": "Modal heading typography: semibold, 18px, 28px line-height"
+  },
+  "modal-overlay-color": {
+    "value": "{color.greyscale.black}",
+    "type": "color"
+  },
+  "modal-padding": {
+    "value": "{space.xl}",
+    "type": "spacing"
+  },
+  "modal-padding-small-screen": {
+    "value": "{space.l}",
+    "type": "spacing"
+  },
+  "modal-shadow": {
+    "value": [
+      {
+        "x": "0",
+        "y": "0",
+        "blur": "4",
+        "spread": "0",
+        "color": "rgba(0,0,0,0.1)",
+        "type": "dropShadow"
+      },
+      {
+        "x": "0",
+        "y": "8",
+        "blur": "40",
+        "spread": "0",
+        "color": "rgba(0,0,0,0.2)",
+        "type": "dropShadow"
+      }
+    ],
+    "type": "boxShadow",
+    "description": "Two-layer elevation shadow for modal"
+  },
+  "modal-overlay-opacity": {
+    "value": "{opacity.background.modal}",
+    "type": "opacity"
+  },
+  "modal-color-bg": {
+    "value": "{color.greyscale.white}",
+    "type": "color",
+    "description": "Modal background color"
+  },
+  "modal-pane-width": {
+    "value": "90%",
+    "type": "sizing",
+    "description": "Modal container width"
+  },
+  "modal-border": {
+    "value": "{borderWidth.s} solid {color.greyscale.150}",
+    "type": "other",
+    "description": "Subtle border for modal container"
+  },
+  "modal-content-margin": {
+    "value": "0",
+    "type": "spacing",
+    "description": "Content section margin for desktop"
+  },
+  "modal-content-margin-mobile": {
+    "value": "0",
+    "type": "spacing",
+    "description": "Content section margin for mobile"
+  },
+  "modal-max-width": {
+    "value": "480px",
+    "type": "sizing",
+    "description": "Modal maximum width"
+  },
+  "modal-heading-border-bottom": {
+    "value": "{borderWidth.s} solid {color.greyscale.150}",
+    "type": "other",
+    "description": "Heading section bottom border separator"
+  },
+  "modal-heading-padding": {
+    "value": "20px {space.l}",
+    "type": "spacing",
+    "description": "Heading section padding"
+  },
+  "modal-content-padding": {
+    "value": "{space.l} 0 {space.xl} 0",
+    "type": "spacing",
+    "description": "Content section padding"
+  },
+  "modal-actions-padding": {
+    "value": "0 {space.xl} {space.xl} {space.xl}",
+    "type": "spacing",
+    "description": "Actions section padding"
+  },
+  "modal-content-wrapper-padding": {
+    "value": "0",
+    "type": "spacing",
+    "description": "Outer content wrapper padding"
+  },
+  "modal-scrollable-padding-desktop": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Scrollable component horizontal padding for desktop"
+  },
+  "modal-scrollable-padding-mobile": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Scrollable component horizontal padding for mobile"
+  },
+  "modal-callout-heading-padding": {
+    "value": "{space.m} {space.l}",
+    "type": "spacing",
+    "description": "Callout variant heading padding"
+  },
+  "modal-heading-padding-mobile": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Heading section padding for mobile (16px all around)"
+  },
+  "modal-callout-heading-padding-mobile": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Callout variant heading padding for mobile (16px all around)"
+  },
+  "modal-content-padding-mobile": {
+    "value": "{space.l} 0 {space.xl} 0",
+    "type": "spacing",
+    "description": "Content section padding for mobile (24px top, 16px sides, 32px bottom)"
+  },
+  "modal-actions-padding-mobile": {
+    "value": "0 {space.m} {space.m} {space.m}",
+    "type": "spacing",
+    "description": "Actions section padding for mobile (0 top, 16px sides and bottom)"
+  },
+  "modal-callout-information-bg": {
+    "value": "{color.info.light}",
+    "type": "color",
+    "description": "Information callout heading background"
+  },
+  "modal-callout-information-border": {
+    "value": "{color.info.border}",
+    "type": "color",
+    "description": "Information callout heading border"
+  },
+  "modal-callout-information-icon": {
+    "value": "{color.info.default}",
+    "type": "color",
+    "description": "Information callout icon color"
+  },
+  "modal-callout-success-bg": {
+    "value": "{color.success.background}",
+    "type": "color",
+    "description": "Success callout heading background"
+  },
+  "modal-callout-success-border": {
+    "value": "{color.success.border}",
+    "type": "color",
+    "description": "Success callout heading border"
+  },
+  "modal-callout-success-icon": {
+    "value": "{color.success.default}",
+    "type": "color",
+    "description": "Success callout icon color"
+  },
+  "modal-callout-important-bg": {
+    "value": "{color.warning.background}",
+    "type": "color",
+    "description": "Important callout heading background"
+  },
+  "modal-callout-important-border": {
+    "value": "{color.warning.border}",
+    "type": "color",
+    "description": "Important callout heading border"
+  },
+  "modal-callout-important-icon": {
+    "value": "{color.warning.dark}",
+    "type": "color",
+    "description": "Important callout icon color"
+  },
+  "modal-callout-emergency-bg": {
+    "value": "{color.emergency.background}",
+    "type": "color",
+    "description": "Emergency callout heading background"
+  },
+  "modal-callout-emergency-border": {
+    "value": "{color.emergency.border}",
+    "type": "color",
+    "description": "Emergency callout heading border"
+  },
+  "modal-callout-emergency-icon": {
+    "value": "{color.emergency.default}",
+    "type": "color",
+    "description": "Emergency callout icon color"
+  },
+  "modal-callout-event-bg": {
+    "value": "{color.info.light}",
+    "type": "color",
+    "description": "Event callout heading background (uses info colors)"
+  },
+  "modal-callout-event-border": {
+    "value": "{color.info.border}",
+    "type": "color",
+    "description": "Event callout heading border (uses info colors)"
+  },
+  "modal-callout-event-icon": {
+    "value": "{color.info.default}",
+    "type": "color",
+    "description": "Event callout icon color"
+  },
+  "modal-callout-information-close-bg-hover": {
+    "value": "{color.info.border}",
+    "type": "color",
+    "description": "Information callout close button hover background"
+  },
+  "modal-callout-success-close-bg-hover": {
+    "value": "{color.success.border}",
+    "type": "color",
+    "description": "Success callout close button hover background"
+  },
+  "modal-callout-important-close-bg-hover": {
+    "value": "{color.important.border}",
+    "type": "color",
+    "description": "Important callout close button hover background"
+  },
+  "modal-callout-emergency-close-bg-hover": {
+    "value": "{color.emergency.border}",
+    "type": "color",
+    "description": "Emergency callout close button hover background"
+  }
+}

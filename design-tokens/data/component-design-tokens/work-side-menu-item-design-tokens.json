@@ -1,0 +1,58 @@
+{
+  "work-side-menu-item-badge-background-color": {
+    "value": "{color.success.default}",
+    "type": "color"
+  },
+  "work-side-menu-item-badge-emergency-background-color": {
+    "value": "{color.emergency.default}",
+    "type": "color"
+  },
+  "work-side-menu-item-badge-success-background-color": {
+    "value": "{color.success.default}",
+    "type": "color"
+  },
+  "work-side-menu-item-badge-text-size": {
+    "value": "{fontSize.2}",
+    "type": "fontSize"
+  },
+  "work-side-menu-item-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius"
+  },
+  "work-side-menu-item-color-bg-current": {
+    "value": "{color.greyscale.100}",
+    "type": "color"
+  },
+  "work-side-menu-item-color-bg-hover": {
+    "value": "{color.greyscale.100}",
+    "type": "color"
+  },
+  "work-side-menu-item-icon-display": {
+    "value": "flex",
+    "type": "other"
+  },
+  "work-side-menu-item-min-height": {
+    "value": "2.5rem",
+    "type": "spacing"
+  },
+  "work-side-menu-item-padding": {
+    "value": "{space.xs} {space.xs} {space.xs} 0.625rem",
+    "type": "spacing"
+  },
+  "work-side-menu-item-text-color": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "work-side-menu-item-text-color-current": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "work-side-menu-item-text-color-hover": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "work-side-menu-item-text-size": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  }
+}

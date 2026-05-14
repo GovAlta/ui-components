@@ -1,0 +1,68 @@
+{
+  "microsite-header-alpha-badge-color": {
+    "value": "{color.warning.default}",
+    "type": "color"
+  },
+  "microsite-header-alpha-badge-color-text": {
+    "value": "{color.text.default}",
+    "dark": "#4d3700",
+    "type": "color"
+  },
+  "microsite-header-beta-badge-color": {
+    "value": "{color.brand.default}",
+    "type": "color"
+  },
+  "microsite-header-beta-badge-color-text": {
+    "value": "{color.text.light}",
+    "dark": "#00527c",
+    "type": "color"
+  },
+  "microsite-header-color-bg": {
+    "value": "{color.greyscale.100}",
+    "type": "color"
+  },
+  "microsite-header-color-links": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "microsite-header-color-links-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "microsite-header-color-version-number": {
+    "value": "{color.text.secondary}",
+    "type": "color"
+  },
+  "microsite-header-gap": {
+    "value": "{space.m}",
+    "type": "spacing"
+  },
+  "microsite-header-link-focus-border": {
+    "value": {
+      "width": "{borderWidth.l}",
+      "style": "solid",
+      "color": "{color.interactive.focus}"
+    },
+    "type": "border"
+  },
+  "microsite-header-padding-large-screen": {
+    "value": "{space.2xs} {space.3xl}",
+    "type": "spacing"
+  },
+  "microsite-header-padding-medium-screen": {
+    "value": "{space.2xs} {space.xl}",
+    "type": "spacing"
+  },
+  "microsite-header-padding-small-screen": {
+    "value": "{space.2xs} {space.m}",
+    "type": "spacing"
+  },
+  "microsite-header-typography": {
+    "value": "{typography.body.xs}",
+    "type": "other"
+  },
+  "microsite-header-typography-version-number": {
+    "value": "{fontSize.1}",
+    "type": "other"
+  }
+}

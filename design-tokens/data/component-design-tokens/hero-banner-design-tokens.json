@@ -1,0 +1,22 @@
+{
+  "hero-banner-padding": {
+    "value": "{space.2xl} 0",
+    "type": "spacing"
+  },
+  "hero-banner-mobile-padding": {
+    "value": "{space.xl} 0",
+    "type": "spacing"
+  },
+  "hero-banner-content-gap": {
+    "value": "{space.l} 0 0",
+    "type": "spacing"
+  },
+  "hero-banner-heading": {
+    "value": "{typography.heading.xl}",
+    "type": "other"
+  },
+  "hero-banner-content": {
+    "value": "{typography.body.l}",
+    "type": "other"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "form-item-error-message-color": {
+    "value": "{input.color.text.error}",
+    "type": "color",
+    "description": "Color for error message text"
+  },
+  "form-item-help-message-color": {
+    "value": "{input.color.text.helper}",
+    "type": "color",
+    "description": "Color for helper message text"
+  },
+  "form-item-label-large-padding-bottom": {
+    "value": "1.375rem",
+    "type": "spacing",
+    "description": "Space between large label and form input"
+  },
+  "form-item-label-large-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.bold}",
+      "fontSize": "{fontSize.8}",
+      "lineHeight": "{lineHeight.5}",
+      "letterSpacing": "{letterSpacing.m}"
+    },
+    "type": "typography",
+    "description": "Typography for large form field labels"
+  },
+  "form-item-label-padding-bottom": {
+    "value": "0.625rem",
+    "type": "spacing",
+    "description": "Space between regular label and form input"
+  },
+  "form-item-label-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.4}",
+      "lineHeight": "{lineHeight.4}",
+      "letterSpacing": "0"
+    },
+    "type": "typography",
+    "description": "Typography for regular form field labels"
+  },
+  "form-item-label-compact-padding-bottom": {
+    "value": "0.5625rem",
+    "type": "spacing",
+    "description": "Space between compact label and form input"
+  },
+  "form-item-label-compact-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.3}",
+      "lineHeight": "{lineHeight.2}",
+      "letterSpacing": "0"
+    },
+    "type": "typography",
+    "description": "Typography for compact form field labels"
+  },
+  "form-item-message-gap": {
+    "value": "{space.2xs}",
+    "type": "spacing",
+    "description": "Icon to text gap in error message"
+  },
+  "form-item-message-gap-compact": {
+    "value": "0.1875rem",
+    "type": "spacing",
+    "description": "Icon to text gap in compact error message"
+  },
+  "form-item-message-margin-top-large": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Space between input and messages for large label size with text inputs"
+  },
+  "form-item-message-margin-top-regular": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Space between input and messages for regular label size with text inputs"
+  },
+  "form-item-message-margin-top-compact": {
+    "value": "{space.xs}",
+    "type": "spacing",
+    "description": "Space between input and messages for compact label size with text inputs"
+  },
+  "form-item-message-margin-top-selection-large": {
+    "value": "1.25rem",
+    "type": "spacing",
+    "description": "Space between selection controls and messages for large label size"
+  },
+  "form-item-message-margin-top-selection-regular": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Space between selection controls and messages for regular label size"
+  },
+  "form-item-message-margin-top-selection-compact": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Space between selection controls and messages for compact label size"
+  },
+  "form-item-message-stack-gap": {
+    "value": "{space.xs}",
+    "type": "spacing",
+    "description": "Space between error and helper messages when both present"
+  },
+  "form-item-message-stack-gap-compact": {
+    "value": "{space.2xs}",
+    "type": "spacing",
+    "description": "Space between error and helper messages for compact size"
+  },
+  "form-item-message-typography": {
+    "value": "{typography.body.xs}",
+    "type": "other",
+    "description": "Typography for error and helper messages"
+  },
+  "form-item-optional-label-color": {
+    "value": "{color.greyscale.600}",
+    "type": "color",
+    "description": "Color for optional and required indicator text"
+  },
+  "form-item-optional-label-typography": {
+    "value": "{typography.body.xs}",
+    "type": "other",
+    "description": "Typography for optional and required indicator text"
+  }
+}

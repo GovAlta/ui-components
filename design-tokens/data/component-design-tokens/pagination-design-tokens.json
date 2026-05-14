@@ -1,0 +1,17 @@
+{
+  "pagination-gap": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Gap between page selector and navigation controls"
+  },
+  "pagination-text-size": {
+    "value": "{typography.body.m}",
+    "type": "other",
+    "description": "Typography for 'Page' and 'of X' labels"
+  },
+  "pagination-text-color": {
+    "value": "{color.text.default}",
+    "type": "color",
+    "description": "Color for 'Page' and 'of X' labels"
+  }
+}

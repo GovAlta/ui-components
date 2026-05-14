@@ -1,0 +1,38 @@
+{
+  "tooltip-border-focus": {
+    "value": {
+      "width": "{borderWidth.l}",
+      "style": "solid",
+      "color": "{color.interactive.focus}"
+    },
+    "type": "border"
+  },
+  "tooltip-border-radius": {
+    "value": "{borderRadius.xl}",
+    "type": "borderRadius"
+  },
+  "tooltip-color-bg": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "tooltip-color-text": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "tooltip-gap": {
+    "value": "{space.2xs}",
+    "type": "spacing"
+  },
+  "tooltip-max-width": {
+    "value": "400px",
+    "type": "dimension"
+  },
+  "tooltip-padding": {
+    "value": "{space.m}",
+    "type": "spacing"
+  },
+  "tooltip-text-size": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  }
+}

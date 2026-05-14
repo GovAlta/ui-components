@@ -1,0 +1,48 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "22"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Add auto-generated file
+        run: |
+          echo "Autobuild is currently disabled"
+          # npm run build
+          # git config user.email "build-bot@gov.ab.ca"
+          # git config user.name "Build Bot"
+          # PREVIOUS_MESSAGE="$(git log --format=%B -n 1)"
+          # CURRENT_BRANCH="$(git branch --show-current)"
+          # echo $(git branch)
+          # git add .
+          # git commit --amend -m "$PREVIOUS_MESSAGE"
+          # git push origin $CURRENT_BRANCH -f
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_GRANULAR }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_GRANULAR }}

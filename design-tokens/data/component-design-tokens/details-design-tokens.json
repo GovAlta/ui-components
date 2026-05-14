@@ -1,0 +1,107 @@
+{
+  "details-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius",
+    "description": "4px"
+  },
+  "details-color-bg-hover": {
+    "value": "transparent",
+    "type": "color"
+  },
+  "details-color-text": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "details-color-text-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "details-content-left-border": {
+    "value": {
+      "width": "{borderWidth.s}",
+      "style": "solid",
+      "color": "{color.greyscale.200}"
+    },
+    "type": "border"
+  },
+  "details-content-margin-left": {
+    "value": "19px",
+    "type": "spacing"
+  },
+  "details-content-padding-bottom": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "details-content-padding-left": {
+    "value": "19px",
+    "type": "spacing"
+  },
+  "details-content-padding-right": {
+    "value": "{space.m}",
+    "type": "spacing"
+  },
+  "details-content-padding-top": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "details-focus-border": {
+    "value": {
+      "width": "{borderWidth.l}",
+      "style": "solid",
+      "color": "{color.interactive.focus}"
+    },
+    "type": "border"
+  },
+  "details-margin-bottom": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "details-padding-bottom": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "details-padding-left": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "details-padding-right": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "details-padding-top": {
+    "value": "6px",
+    "type": "spacing",
+    "description": "6px"
+  },
+  "details-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.4}",
+      "lineHeight": "{lineHeight.4}",
+      "letterSpacing": "{letterSpacing.2xs}"
+    },
+    "type": "typography",
+    "description": "Medium heading - 18px/24px with -0.5px letter-spacing"
+  },
+  "details-content-typography": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  },
+  "details-text-decoration": {
+    "value": "underline",
+    "type": "textDecoration"
+  },
+  "details-icon-color": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "details-icon-color-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "details-heading-width": {
+    "value": "fit-content",
+    "type": "other"
+  }
+}

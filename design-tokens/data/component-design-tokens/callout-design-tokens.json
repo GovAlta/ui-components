@@ -1,0 +1,234 @@
+{
+  "callout-border": {
+    "value": {
+      "color": "{color.greyscale.150}",
+      "width": "{borderWidth.s}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "callout-border-radius": {
+    "value": "{borderRadius.xl}",
+    "type": "borderRadius"
+  },
+  "callout-heading-gap": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "callout-heading-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.4}",
+      "lineHeight": "{lineHeight.2}",
+      "letterSpacing": "{letterSpacing.2xs}"
+    },
+    "type": "typography"
+  },
+  "callout-heading-color": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "callout-heading-padding": {
+    "value": "{space.s} {space.s} {space.s} 1.125rem",
+    "type": "spacing"
+  },
+  "callout-body-typography": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "callout-body-color": {
+    "value": "{color.text.secondary}",
+    "type": "color"
+  },
+  "callout-body-padding": {
+    "value": "1.25rem",
+    "type": "spacing",
+    "description": "20px"
+  },
+  "callout-l-with-heading-body-padding": {
+    "value": "0 1.25rem 1.25rem",
+    "type": "spacing",
+    "description": "14px 12px 16px 0px"
+  },
+  "callout-l-without-heading-body-padding": {
+    "value": "0.875rem {space.s} {space.m} 0",
+    "type": "spacing"
+  },
+  "callout-h-info-heading-color": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "callout-h-important-heading-color": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "callout-h-success-heading-color": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "callout-h-emergency-heading-color": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "callout-h-info-border-color": {
+    "value": "{color.info.border}",
+    "type": "color"
+  },
+  "callout-l-info-border-color": {
+    "value": "{color.info.border}",
+    "type": "color"
+  },
+  "callout-h-important-border-color": {
+    "value": "{color.warning.border}",
+    "type": "color"
+  },
+  "callout-l-important-border-color": {
+    "value": "{color.warning.border}",
+    "type": "color"
+  },
+  "callout-h-success-border-color": {
+    "value": "{color.success.border}",
+    "type": "color"
+  },
+  "callout-l-success-border-color": {
+    "value": "{color.success.border}",
+    "type": "color"
+  },
+  "callout-h-emergency-border-color": {
+    "value": "{color.emergency.border}",
+    "type": "color"
+  },
+  "callout-l-emergency-border-color": {
+    "value": "{color.emergency.border}",
+    "type": "color"
+  },
+  "callout-info-heading-bg-color": {
+    "value": "{color.info.light}",
+    "type": "color"
+  },
+  "callout-h-info-heading-bg-color": {
+    "value": "{color.info.default}",
+    "dark": "#386590",
+    "type": "color"
+  },
+  "callout-important-heading-bg-color": {
+    "value": "{color.warning.light}",
+    "type": "color"
+  },
+  "callout-h-important-heading-bg-color": {
+    "value": "{color.warning.default}",
+    "dark": "#5e4e20",
+    "type": "color"
+  },
+  "callout-success-heading-bg-color": {
+    "value": "{color.success.light}",
+    "type": "color"
+  },
+  "callout-h-success-heading-bg-color": {
+    "value": "{color.success.default}",
+    "dark": "#386030",
+    "type": "color"
+  },
+  "callout-emergency-heading-bg-color": {
+    "value": "{color.emergency.light}",
+    "type": "color"
+  },
+  "callout-h-emergency-heading-bg-color": {
+    "value": "{color.emergency.default}",
+    "dark": "#6e4242",
+    "type": "color"
+  },
+  "callout-info-content-bg-color": {
+    "value": "{color.greyscale.white}",
+    "dark": "#1e2830",
+    "type": "color"
+  },
+  "callout-h-info-content-bg-color": {
+    "value": "{color.info.background}",
+    "dark": "#1e2830",
+    "type": "color"
+  },
+  "callout-l-info-content-bg-color": {
+    "value": "{color.info.background}",
+    "dark": "#1e2830",
+    "type": "color"
+  },
+  "callout-important-content-bg-color": {
+    "value": "{color.greyscale.white}",
+    "dark": "#28251e",
+    "type": "color"
+  },
+  "callout-h-important-content-bg-color": {
+    "value": "{color.warning.background}",
+    "dark": "#28251e",
+    "type": "color"
+  },
+  "callout-l-important-content-bg-color": {
+    "value": "{color.warning.background}",
+    "dark": "#28251e",
+    "type": "color"
+  },
+  "callout-success-content-bg-color": {
+    "value": "{color.greyscale.white}",
+    "dark": "#1e2820",
+    "type": "color"
+  },
+  "callout-h-success-content-bg-color": {
+    "value": "{color.success.background}",
+    "dark": "#1e2820",
+    "type": "color"
+  },
+  "callout-l-success-content-bg-color": {
+    "value": "{color.success.background}",
+    "dark": "#1e2820",
+    "type": "color"
+  },
+  "callout-emergency-content-bg-color": {
+    "value": "{color.greyscale.white}",
+    "dark": "#2a1c1c",
+    "type": "color"
+  },
+  "callout-h-emergency-content-bg-color": {
+    "value": "{color.emergency.background}",
+    "dark": "#352020",
+    "type": "color"
+  },
+  "callout-l-emergency-content-bg-color": {
+    "value": "{color.emergency.background}",
+    "dark": "#352020",
+    "type": "color"
+  },
+  "callout-info-icon-color": {
+    "value": "{color.info.default}",
+    "type": "color"
+  },
+  "callout-h-info-icon-color": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "callout-important-icon-color": {
+    "value": "{color.warning.dark}",
+    "type": "color"
+  },
+  "callout-h-important-icon-color": {
+    "value": "{color.greyscale.800}",
+    "type": "color"
+  },
+  "callout-success-icon-color": {
+    "value": "{color.success.default}",
+    "type": "color"
+  },
+  "callout-h-success-icon-color": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "callout-emergency-icon-color": {
+    "value": "{color.emergency.default}",
+    "type": "color"
+  },
+  "callout-h-emergency-icon-color": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  }
+}

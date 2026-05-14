@@ -1,0 +1,6 @@
+{
+  "divider-color": {
+    "value": "{color.greyscale.200}",
+    "type": "color"
+  }
+}

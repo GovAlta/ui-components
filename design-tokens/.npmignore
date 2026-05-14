@@ -1,0 +1,12 @@
+﻿#IDE
+.idea
+
+**/*.js.map
+**/*.tsx
+
+.npmignore
+.gitignore
+.env.*
+.eslintrc.json
+tsconfig.json
+.prettierrc

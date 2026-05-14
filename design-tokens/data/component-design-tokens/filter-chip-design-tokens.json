@@ -1,0 +1,92 @@
+{
+  "filter-chip-border-radius": {
+    "value": "{borderRadius.3xl}",
+    "type": "borderRadius"
+  },
+  "filter-chip-border": {
+    "value": {
+      "color": "{color.greyscale.300}",
+      "width": "{borderWidth.s}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "filter-chip-text-color": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "filter-chip-text-color-error": {
+    "value": "{input.color.border.error}",
+    "type": "color"
+  },
+  "filter-chip-bg-color": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "filter-chip-bg-color-error": {
+    "value": "{input.color.background.error}",
+    "type": "color"
+  },
+  "filter-chip-border-color-error": {
+    "value": "{input.color.border.error}",
+    "type": "color"
+  },
+  "filter-chip-icon-color": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "filter-chip-icon-color-error": {
+    "value": "{input.color.text.error}",
+    "type": "color"
+  },
+  "filter-chip-secondary-text-color": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "filter-chip-secondary-text-color-error": {
+    "value": "{input.color.text.error}",
+    "type": "color"
+  },
+  "filter-chip-padding-vertical": {
+    "value": "0.3125rem",
+    "type": "spacing",
+    "description": "5px"
+  },
+  "filter-chip-padding-horizontal-left": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "filter-chip-padding-horizontal-right": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "filter-chip-gap": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "filter-chip-label-gap": {
+    "value": "0.375rem",
+    "type": "spacing",
+    "description": "6px"
+  },
+  "filter-chip-typography": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "filter-chip-line-height": {
+    "value": "{lineHeight.2}",
+    "type": "lineHeights"
+  },
+  "filter-chip-min-height": {
+    "value": "{space.xl}",
+    "type": "sizing"
+  },
+  "filter-chip-min-width": {
+    "value": "56px",
+    "type": "sizing"
+  },
+  "filter-chip-close-button-error-hover-bg-color": {
+    "value": "{input.color.background.error-hover}",
+    "type": "color"
+  }
+}

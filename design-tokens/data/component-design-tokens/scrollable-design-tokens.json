@@ -1,0 +1,12 @@
+{
+  "scrollable-padding-desktop": {
+    "value": "2rem",
+    "type": "spacing",
+    "description": "32px"
+  },
+  "scrollable-padding-mobile": {
+    "value": "1.5rem",
+    "type": "spacing",
+    "description": "24px"
+  }
+}

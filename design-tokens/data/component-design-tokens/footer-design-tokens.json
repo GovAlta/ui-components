@@ -1,0 +1,87 @@
+{
+  "footer-border-bottom": {
+    "value": {
+      "width": "{borderWidth.none}",
+      "style": "solid",
+      "color": "{color.brand.default}"
+    },
+    "type": "border"
+  },
+  "footer-border-top": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "solid",
+      "color": "{color.greyscale.150}"
+    },
+    "type": "border"
+  },
+  "footer-color-bg": {
+    "value": "{color.greyscale.100}",
+    "type": "color"
+  },
+  "footer-color-text": {
+    "value": "{color.text.default}",
+    "dark": "#909090",
+    "type": "color"
+  },
+  "footer-color-links": {
+    "value": "{color.greyscale.black}",
+    "dark": "#909090",
+    "type": "color"
+  },
+  "footer-color-links-hover": {
+    "value": "{color.greyscale.700}",
+    "dark": "#aaaaaa",
+    "type": "color"
+  },
+  "footer-color-links-secondary": {
+    "value": "{color.text.secondary}",
+    "dark": "#808080",
+    "type": "color"
+  },
+  "footer-color-links-secondary-hover": {
+    "value": "{color.greyscale.800}",
+    "dark": "#999999",
+    "type": "color"
+  },
+  "footer-link-focus": {
+    "value": {
+      "width": "{borderWidth.l}",
+      "style": "solid",
+      "color": "{color.interactive.focus}"
+    },
+    "type": "border"
+  },
+  "footer-link-focus-border-radius": {
+    "value": "{borderRadius.s}",
+    "type": "borderRadius"
+  },
+  "footer-padding-large-screen": {
+    "value": "{space.l} {space.3xl}",
+    "type": "spacing"
+  },
+  "footer-padding-medium-screen": {
+    "value": "{space.l} {space.xl}",
+    "type": "spacing"
+  },
+  "footer-padding-small-screen": {
+    "value": "{space.l} {space.m}",
+    "type": "spacing"
+  },
+  "footer-typography-small-screen": {
+    "value": "{fontSize.3}",
+    "type": "other"
+  },
+  "footer-meta-links-gap": {
+    "value": "{space.xl}",
+    "type": "spacing"
+  },
+  "footer-meta-links-gap-small-screen": {
+    "value": "20px",
+    "type": "spacing"
+  },
+  "footer-meta-links-margin": {
+    "value": "{space.none}",
+    "type": "spacing"
+  }
+}

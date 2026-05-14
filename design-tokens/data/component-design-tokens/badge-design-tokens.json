@@ -1,0 +1,212 @@
+{
+  "badge-padding": {
+    "value": "0 {space.xs}",
+    "type": "spacing",
+    "description": "0px 8px"
+  },
+  "badge-padding-large": {
+    "value": "0 {space.xs}",
+    "type": "spacing",
+    "description": "0px 8px"
+  },
+  "badge-gap": {
+    "value": "{space.2xs}",
+    "type": "spacing",
+    "description": "4px"
+  },
+  "badge-font-size": {
+    "value": "{fontSize.2}",
+    "type": "fontSizes",
+    "description": "14px"
+  },
+  "badge-font-size-large": {
+    "value": "{fontSize.3}",
+    "type": "fontSizes",
+    "description": "16px"
+  },
+  "badge-line-height": {
+    "value": "{lineHeight.1}",
+    "type": "lineHeights",
+    "description": "20px"
+  },
+  "badge-line-height-large": {
+    "value": "{lineHeight.2}",
+    "type": "lineHeights",
+    "description": "22px"
+  },
+  "badge-icon-size": {
+    "value": "{iconSize.s}",
+    "type": "sizing",
+    "description": "18px"
+  },
+  "badge-icon-size-large": {
+    "value": "{iconSize.m}",
+    "type": "sizing",
+    "description": "20px"
+  },
+  "badge-border-radius": {
+    "value": "{borderRadius.s}",
+    "type": "borderRadius",
+    "description": "6px"
+  },
+  "badge-border-width": {
+    "value": "{borderWidth.s}",
+    "type": "borderWidth",
+    "description": "1px"
+  },
+  "badge-height": {
+    "value": "24px",
+    "type": "sizing"
+  },
+  "badge-height-large": {
+    "value": "32px",
+    "type": "sizing"
+  },
+  "badge-info-color-bg": {
+    "value": "{color.info.default}",
+    "type": "color"
+  },
+  "badge-info-color-content": {
+    "value": "{color.info.textInverse}",
+    "type": "color"
+  },
+  "badge-info-subtle-color-bg": {
+    "value": "{color.info.light}",
+    "type": "color"
+  },
+  "badge-info-subtle-color-content": {
+    "value": "{color.info.textDark}",
+    "type": "color"
+  },
+  "badge-info-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.info.border}",
+    "type": "dropShadow"
+  },
+  "badge-success-color-bg": {
+    "value": "{color.success.default}",
+    "type": "color"
+  },
+  "badge-success-color-content": {
+    "value": "{color.success.textInverse}",
+    "type": "color"
+  },
+  "badge-success-subtle-color-bg": {
+    "value": "{color.success.light}",
+    "type": "color"
+  },
+  "badge-success-subtle-color-content": {
+    "value": "{color.success.textDark}",
+    "type": "color"
+  },
+  "badge-success-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.success.border}",
+    "type": "dropShadow"
+  },
+  "badge-important-color-bg": {
+    "value": "{color.warning.default}",
+    "type": "color"
+  },
+  "badge-important-color-content": {
+    "value": "{color.warning.textDark}",
+    "type": "color"
+  },
+  "badge-important-subtle-color-bg": {
+    "value": "{color.warning.light}",
+    "type": "color"
+  },
+  "badge-important-subtle-color-content": {
+    "value": "{color.warning.textDark}",
+    "dark": "var(--goa-color-important-text)",
+    "type": "color"
+  },
+  "badge-important-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.warning.border}",
+    "type": "dropShadow"
+  },
+  "badge-emergency-color-bg": {
+    "value": "{color.emergency.default}",
+    "type": "color"
+  },
+  "badge-emergency-color-content": {
+    "value": "{color.emergency.textInverse}",
+    "type": "color"
+  },
+  "badge-emergency-subtle-color-bg": {
+    "value": "{color.emergency.light}",
+    "type": "color"
+  },
+  "badge-emergency-subtle-color-content": {
+    "value": "{color.emergency.textDark}",
+    "type": "color"
+  },
+  "badge-emergency-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.emergency.border}",
+    "type": "dropShadow"
+  },
+  "badge-default-color-bg": {
+    "value": "{color.greyscale.800}",
+    "type": "color"
+  },
+  "badge-default-color-content": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "badge-default-subtle-color-bg": {
+    "value": "{color.greyscale.100}",
+    "dark": "var(--goa-color-surface-heading)",
+    "type": "color"
+  },
+  "badge-default-subtle-color-content": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "badge-default-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.greyscale.200}",
+    "dark": "inset 0 0 0 1px #4a4a4a",
+    "type": "dropShadow"
+  },
+  "badge-archived-color-bg": {
+    "value": "{color.greyscale.200}",
+    "type": "color"
+  },
+  "badge-archived-color-content": {
+    "value": "{color.greyscale.800}",
+    "type": "color"
+  },
+  "badge-archived-subtle-color-bg": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "badge-archived-subtle-color-content": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "badge-archived-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.greyscale.200}",
+    "type": "dropShadow"
+  },
+  "badge-sky-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.sky.border}",
+    "type": "dropShadow"
+  },
+  "badge-prairie-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.prairie.border}",
+    "type": "dropShadow"
+  },
+  "badge-lilac-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.lilac.border}",
+    "type": "dropShadow"
+  },
+  "badge-pasture-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.pasture.border}",
+    "type": "dropShadow"
+  },
+  "badge-sunset-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.sunset.border}",
+    "type": "dropShadow"
+  },
+  "badge-dawn-subtle-border": {
+    "value": "inset 0 0 0 {borderWidth.s} {color.extended.dawn.border}",
+    "type": "dropShadow"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "tab-border-focus": {
+    "value": {
+      "width": "{borderWidth.xl}",
+      "style": "solid",
+      "color": "{color.interactive.focus}"
+    },
+    "type": "border"
+  },
+  "tab-border-hover": {
+    "value": {
+      "width": "{borderWidth.xl}",
+      "style": "solid",
+      "color": "{color.greyscale.200}"
+    },
+    "type": "border"
+  },
+  "tab-border-not-selected": {
+    "value": {
+      "width": "{borderWidth.xl}",
+      "style": "solid",
+      "color": "transparent"
+    },
+    "type": "border"
+  },
+  "tab-border-selected": {
+    "value": {
+      "width": "{borderWidth.xl}",
+      "style": "solid",
+      "color": "{color.interactive.default}"
+    },
+    "type": "border"
+  },
+  "tab-indicator-width": {
+    "value": "{borderWidth.xl}",
+    "type": "sizing",
+    "description": "Width of the active/hover indicator line (desktop bottom bar, mobile left bar)"
+  },
+  "tab-indicator-border-radius-desktop": {
+    "value": "{borderRadius.s} {borderRadius.s} 0px 0px",
+    "type": "other"
+  },
+  "tab-indicator-border-radius-small-screen": {
+    "value": "0px {borderRadius.s} {borderRadius.s} 0px",
+    "type": "other"
+  },
+  "tab-color-bg-selected": {
+    "value": "transparent",
+    "type": "color"
+  },
+  "tab-color-bg-selected-small-screen": {
+    "value": "{color.info.light}",
+    "type": "color"
+  },
+  "tab-color-bg-hover-small-screen": {
+    "value": "{color.greyscale.50}",
+    "type": "color",
+    "description": "Mobile hover background color"
+  },
+  "tab-color-text": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "tab-color-text-hover": {
+    "value": "{color.text.default}",
+    "type": "color",
+    "description": "Text color on hover state"
+  },
+  "tab-color-text-selected": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "tab-color-text-not-selected": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "tab-indicator-color-active": {
+    "value": "{color.interactive.default}",
+    "type": "color",
+    "description": "Active tab indicator color (blue underline/left bar)"
+  },
+  "tab-indicator-color-hover": {
+    "value": "{color.greyscale.300}",
+    "type": "color",
+    "description": "Hover tab indicator color (grey underline/left bar)"
+  },
+  "tab-padding": {
+    "value": "{space.xs} {space.2xs} 9px {space.2xs}",
+    "type": "spacing",
+    "description": "Desktop tab padding"
+  },
+  "tab-padding-mobile": {
+    "value": "{space.2xs} {space.s} {space.2xs} 15px",
+    "type": "spacing"
+  },
+  "tab-typography": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.medium}",
+      "fontSize": "{fontSize.3}",
+      "lineHeight": "{lineHeight.2}",
+      "letterSpacing": "{letterSpacing.3xs}"
+    },
+    "type": "typography"
+  },
+  "tab-typography-selected": {
+    "value": {
+      "fontFamily": "{fontFamily.sans}",
+      "fontWeight": "{fontWeight.semiBold}",
+      "fontSize": "{fontSize.3}",
+      "lineHeight": "{lineHeight.2}",
+      "letterSpacing": "{letterSpacing.3xs}"
+    },
+    "type": "typography"
+  },
+  "tabs-bottom-border": {
+    "value": {
+      "width": "{borderWidth.s}",
+      "style": "solid",
+      "color": "{color.greyscale.150}"
+    },
+    "type": "border"
+  },
+  "tabs-gap": {
+    "value": "{space.m}",
+    "type": "spacing"
+  },
+  "tabs-gap-small-screen": {
+    "value": "{space.2xs}",
+    "type": "spacing"
+  },
+  "tabs-padding-bottom-small-screen": {
+    "value": "{space.m}",
+    "type": "spacing"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "icon-button-small-padding": {
+    "value": "{space.2xs}",
+    "type": "spacing"
+  },
+  "icon-button-medium-padding": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "icon-button-large-padding": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "icon-button-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius"
+  },
+  "icon-button-focus-border-width": {
+    "value": "{input.borderWidth.focus}",
+    "type": "borderWidth"
+  },
+  "icon-button-focus-border-color": {
+    "value": "{input.color.border.focus}",
+    "type": "color"
+  },
+  "icon-button-medium-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius"
+  },
+  "icon-button-large-border-radius": {
+    "value": "{borderRadius.xl}",
+    "type": "borderRadius"
+  },
+  "icon-button-default-color": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "icon-button-default-hover-color": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "icon-button-default-hover-color-bg": {
+    "value": "{color.greyscale.100}",
+    "dark": "#3a3a3a",
+    "type": "color"
+  },
+  "icon-button-default-disabled-color": {
+    "value": "{color.interactive.disabled}",
+    "type": "color"
+  },
+  "icon-button-light-color": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "icon-button-light-hover-color-bg": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "icon-button-light-disabled-color": {
+    "value": "{color.greyscale.500}",
+    "type": "color"
+  },
+  "icon-button-dark-color": {
+    "value": "{color.greyscale.black}",
+    "type": "color"
+  },
+  "icon-button-dark-hover-color-bg": {
+    "value": "{color.greyscale.100}",
+    "dark": "#3a3a3a",
+    "type": "color"
+  },
+  "icon-button-dark-disabled-color": {
+    "value": "{color.greyscale.500}",
+    "type": "color"
+  },
+  "icon-button-destructive-color": {
+    "value": "{color.emergency.default}",
+    "type": "color"
+  },
+  "icon-button-destructive-hover-color": {
+    "value": "{color.emergency.dark}",
+    "type": "color"
+  },
+  "icon-button-destructive-hover-color-bg": {
+    "value": "{color.emergency.light}",
+    "type": "color"
+  },
+  "icon-button-destructive-disabled-color": {
+    "value": "{color.greyscale.500}",
+    "type": "color"
+  }
+}

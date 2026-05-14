@@ -1,0 +1,39 @@
+{
+  "name": "@abgov/design-tokens",
+  "version": "0.0.0-development",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GovAlta/design-tokens.git"
+  },
+  "keywords": [
+    "GoA",
+    "Alberta Government",
+    "DDI",
+    "style",
+    "dictionary",
+    "design-tokens"
+  ],
+  "devDependencies": {
+    "style-dictionary": "^3.7.1",
+    "jest": "^29.2.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^24.2.3"
+  },
+  "scripts": {
+    "build": "node index.js",
+    "test": "jest && rimraf ./tmp",
+    "semantic-release": "semantic-release"
+  },
+  "bugs": {
+    "url": "https://github.com/GovAlta/design-tokens/issues"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

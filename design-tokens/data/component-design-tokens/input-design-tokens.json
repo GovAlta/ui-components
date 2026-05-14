@@ -1,0 +1,115 @@
+{
+  "text-input-border": {
+    "value": "inset 0 0 0 {input.borderWidth.default} {input.color.border.default}",
+    "type": "other"
+  },
+  "text-input-border-disabled": {
+    "value": "inset 0 0 0 {input.borderWidth.default} {input.color.border.disabled}",
+    "type": "other"
+  },
+  "text-input-border-error": {
+    "value": "inset 0 0 0 {input.borderWidth.hover} {input.color.border.error}",
+    "type": "other"
+  },
+  "text-input-border-focus": {
+    "value": "inset 0 0 0 {input.borderWidth.focus} {input.color.border.focus}",
+    "type": "other"
+  },
+  "text-input-border-hover": {
+    "value": "inset 0 0 0 {input.borderWidth.hover} {input.color.border.hover}",
+    "type": "other"
+  },
+  "text-input-border-radius": {
+    "value": "{input.borderRadius.input}",
+    "type": "borderRadius"
+  },
+  "text-input-color-bg": {
+    "value": "{input.color.background.default}",
+    "type": "color"
+  },
+  "text-input-color-bg-disabled": {
+    "value": "{input.color.background.disabled}",
+    "type": "color"
+  },
+  "text-input-color-icon-disabled": {
+    "value": "{input.color.text.disabled}",
+    "type": "color"
+  },
+  "text-input-color-text": {
+    "value": "{input.color.text.default}",
+    "type": "color"
+  },
+  "text-input-color-text-disabled": {
+    "value": "{input.color.text.disabled}",
+    "type": "color"
+  },
+  "text-input-color-text-placeholder": {
+    "value": "{input.color.text.placeholder}",
+    "type": "color"
+  },
+  "text-input-lt-content-color-bg": {
+    "value": "{color.greyscale.150}",
+    "type": "color"
+  },
+  "text-input-padding": {
+    "value": "9px {text-input-padding-lr} 11px",
+    "type": "spacing"
+  },
+  "text-input-padding-lr": {
+    "value": "{space.m}",
+    "type": "spacing"
+  },
+  "text-input-space-btw-icon-text": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "text-input-transition": {
+    "value": "box-shadow 0.05s ease-in",
+    "type": "other"
+  },
+  "text-input-typography": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  },
+  "text-input-height": {
+    "value": "56px",
+    "type": "sizing"
+  },
+  "text-input-height-compact": {
+    "value": "40px",
+    "type": "sizing"
+  },
+  "text-input-padding-compact-lr": {
+    "value": "{space.s}",
+    "type": "spacing"
+  },
+  "text-input-padding-compact": {
+    "value": "{space.2xs} {text-input-padding-compact-lr}",
+    "type": "spacing"
+  },
+  "text-input-typography-compact": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "text-input-space-btw-icon-text-compact": {
+    "value": "{space.xs}",
+    "type": "spacing"
+  },
+  "text-input-border-readonly": {
+    "value": "inset 0 0 0 {input.borderWidth.default} {input.color.border.readonly}",
+    "type": "other"
+  },
+  "text-input-color-bg-readonly": {
+    "value": "{input.color.background.readonly}",
+    "type": "color"
+  },
+  "text-input-lt-content-color-bg-readonly": {
+    "value": "{input.color.background.readonly-content}",
+    "type": "color"
+  },
+  "text-input-color-icon": {
+    "value": "{color.greyscale.600}",
+    "dark": "#aaaaaa",
+    "type": "color"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "date-input-calendar-width": {
+    "value": "280px",
+    "type": "dimension"
+  },
+  "date-input-calendar-border": {
+    "value": {
+      "color": "{input.color.border.default}",
+      "width": "{input.borderWidth.default}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "date-input-calendar-border-radius": {
+    "value": "{input.borderRadius.input}",
+    "type": "borderRadius"
+  },
+  "date-input-day-of-week-font": {
+    "value": "{typography.heading.2xs}",
+    "type": "other"
+  },
+  "date-input-day-font": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "date-input-day-of-week-margin": {
+    "value": "{space.xs} 0",
+    "type": "spacing"
+  },
+  "date-input-day-font-today": {
+    "value": "{typography.heading.2xs}",
+    "type": "other"
+  },
+  "date-input-day-underline-today": {
+    "value": {
+      "color": "{color.interactive.default}",
+      "width": "{borderWidth.xl}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "date-input-day-underline-today-width": {
+    "value": "{space.l}",
+    "type": "spacing"
+  },
+  "date-input-day-underline-today-selected": {
+    "value": {
+      "color": "{color.greyscale.white}",
+      "width": "{borderWidth.l}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "date-input-day-border-radius": {
+    "value": "{borderRadius.xs}",
+    "type": "borderRadius"
+  },
+  "date-input-day-size": {
+    "value": "2.5rem",
+    "type": "dimension"
+  },
+  "date-input-day-color-text": {
+    "value": "{input.color.text.default}",
+    "type": "color"
+  },
+  "date-input-day-color-bg": {
+    "value": "transparent",
+    "type": "color"
+  },
+  "date-input-day-color-text-hover": {
+    "value": "{input.color.text.default}",
+    "type": "color"
+  },
+  "date-input-day-color-bg-hover": {
+    "value": "{color.greyscale.150}",
+    "type": "color"
+  },
+  "date-input-day-border-focus": {
+    "value": {
+      "color": "{color.interactive.focus}",
+      "width": "{borderWidth.l}",
+      "style": "solid"
+    },
+    "type": "border"
+  },
+  "date-input-day-today-outline-offset": {
+    "value": "{space.3xs}",
+    "type": "spacing"
+  },
+  "date-input-day-color-text-selected": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "date-input-day-color-bg-selected": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "date-input-day-color-text-selected-hover": {
+    "value": "{color.text.light}",
+    "type": "color"
+  },
+  "date-input-day-color-bg-selected-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "date-input-day-color-text-other-month": {
+    "value": "{input.color.text.disabled}",
+    "type": "color"
+  },
+  "date-input-day-color-text-disabled": {
+    "value": "{input.color.text.disabled}",
+    "type": "color"
+  },
+  "date-input-cursor": {
+    "value": "pointer",
+    "type": "other"
+  }
+}
