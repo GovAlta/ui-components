@@ -71196,11 +71196,11 @@ function Feat1233DropdownMultiselectRoute() {
   const [selected1, setSelected1] = reactExports.useState([]);
   const [selected2, setSelected2] = reactExports.useState(["apple", "banana"]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h1", mt: "none", children: "feat(#1233): DropdownMultiselect component" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", children: "feat(#1233): DropdownMultiselect component" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "A dropdown component that presents a CheckboxList for multiple selection. The trigger displays a comma-separated summary of selected labels with ellipsis overflow. Keyboard: ArrowDown/Enter/Space opens, Escape and Tab close." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "column", gap: "xl", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Basic usage" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Basic usage" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "Select items from the list. The trigger label updates as you select." }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { maxWidth: "400px" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Favourite fruit", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -71227,7 +71227,7 @@ function Feat1233DropdownMultiselectRoute() {
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Ellipsis overflow" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Ellipsis overflow" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "When the selected labels exceed the trigger width, they truncate with an ellipsis." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { maxWidth: "250px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           GoabDropdownMultiselect,
@@ -71247,7 +71247,7 @@ function Feat1233DropdownMultiselectRoute() {
         ) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Controlled (pre-selected values)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Controlled (pre-selected values)" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { maxWidth: "400px" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             GoabDropdownMultiselect,
@@ -71271,7 +71271,7 @@ function Feat1233DropdownMultiselectRoute() {
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Disabled state" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Disabled state" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { maxWidth: "400px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           GoabDropdownMultiselect,
           {
@@ -71288,7 +71288,7 @@ function Feat1233DropdownMultiselectRoute() {
         ) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Error state" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Error state" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { maxWidth: "400px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabFormItem,
           {
@@ -71311,7 +71311,7 @@ function Feat1233DropdownMultiselectRoute() {
         ) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h2", children: "Compact size" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Compact size" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { maxWidth: "400px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           GoabDropdownMultiselect,
           {
