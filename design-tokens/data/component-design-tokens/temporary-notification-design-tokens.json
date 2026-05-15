@@ -1,0 +1,135 @@
+{
+  "temporary-notification-color-bg-basic": {
+    "value": "#333333",
+    "dark": "var(--goa-color-surface-heading)",
+    "type": "color",
+    "description": "Background color for basic, indeterminate, and progress notifications"
+  },
+  "temporary-notification-color-bg-success": {
+    "value": "{color.success.default}",
+    "type": "color",
+    "description": "Background color for success notifications"
+  },
+  "temporary-notification-color-bg-failure": {
+    "value": "{color.emergency.default}",
+    "type": "color",
+    "description": "Background color for failure notifications"
+  },
+  "temporary-notification-color-text": {
+    "value": "{color.text.light}",
+    "type": "color",
+    "description": "Text color for notification messages"
+  },
+  "temporary-notification-color-border": {
+    "value": "{color.greyscale.700}",
+    "type": "color",
+    "description": "Border color for basic notification type"
+  },
+  "temporary-notification-borderWidth": {
+    "value": "{borderWidth.s}",
+    "type": "borderWidth",
+    "description": "Border width for basic notification type"
+  },
+  "temporary-notification-borderRadius": {
+    "value": "{borderRadius.l}",
+    "type": "borderRadius",
+    "description": "Border radius for notification container"
+  },
+  "temporary-notification-padding": {
+    "value": "{space.m} {space.l}",
+    "type": "spacing",
+    "description": "Container padding (top/bottom left/right)"
+  },
+  "temporary-notification-padding-text-top": {
+    "value": "{space.2xs}",
+    "type": "spacing",
+    "description": "Top margin for message text when icon is present (helps vertically center first line with icon)"
+  },
+  "temporary-notification-padding-with-progress": {
+    "value": "{space.m} {space.l} 22px {space.l}",
+    "type": "spacing",
+    "description": "Container padding when progress bar is present (16px + 6px progress bar height)"
+  },
+  "temporary-notification-row-gap": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Vertical gap when elements wrap to new rows"
+  },
+  "temporary-notification-column-gap": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Horizontal gap between icon and message within content wrapper"
+  },
+  "temporary-notification-typography": {
+    "value": "{typography.body.m}",
+    "type": "other",
+    "description": "Typography for notification message text"
+  },
+  "temporary-notification-max-width": {
+    "value": "640px",
+    "type": "sizing",
+    "description": "Maximum width for notification container"
+  },
+  "temporary-notification-min-width-desktop": {
+    "value": "360px",
+    "type": "sizing",
+    "description": "Minimum width for notification on desktop"
+  },
+  "temporary-notification-iconSize": {
+    "value": "{iconSize.xl}",
+    "type": "sizing",
+    "description": "Icon size for success and failure indicators"
+  },
+  "temporary-notification-progress-bar-height": {
+    "value": "6px",
+    "type": "sizing",
+    "description": "Height of progress bar"
+  },
+  "temporary-notification-progress-bar-borderRadius": {
+    "value": "{borderRadius.l}",
+    "type": "borderRadius",
+    "description": "Border radius for progress bar bottom corners"
+  },
+  "temporary-notification-progress-bar-color-bg": {
+    "value": "{color.greyscale.400}",
+    "type": "color",
+    "description": "Progress bar unfilled background color"
+  },
+  "temporary-notification-progress-bar-color-fill": {
+    "value": "{color.greyscale.white}",
+    "type": "color",
+    "description": "Progress bar fill color"
+  },
+  "temporary-notification-shadow": {
+    "value": [
+      {
+        "x": "0",
+        "y": "0",
+        "blur": "2",
+        "spread": "0",
+        "color": "rgba(0,0,0,0.3)",
+        "type": "dropShadow"
+      },
+      {
+        "x": "0",
+        "y": "16",
+        "blur": "32",
+        "spread": "-8",
+        "color": "rgba(0,0,0,0.35)",
+        "type": "dropShadow"
+      }
+    ],
+    "type": "boxShadow",
+    "description": "Raised shadow for notification surface"
+  },
+  "temporary-notification-transition-duration": {
+    "value": "0.3s",
+    "type": "time",
+    "description": "Animation transition duration"
+  },
+  "temporary-notification-animation-distance": {
+    "value": "100px",
+    "type": "sizing",
+    "description": "Distance for slide in/out animation"
+  }
+}

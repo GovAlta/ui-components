@@ -1,0 +1,81 @@
+{
+  "text-area-border": {
+    "value": "inset 0 0 0 {input.borderWidth.default} {input.color.border.default}",
+    "type": "other"
+  },
+  "text-area-border-disabled": {
+    "value": "inset 0 0 0 {input.borderWidth.default} {input.color.border.disabled}",
+    "type": "other"
+  },
+  "text-area-border-error": {
+    "value": "inset 0 0 0 {input.borderWidth.hover} {input.color.border.error}",
+    "type": "other"
+  },
+  "text-area-border-focus": {
+    "value": "inset 0 0 0 {input.borderWidth.focus} {input.color.border.focus}",
+    "type": "other"
+  },
+  "text-area-border-hover": {
+    "value": "inset 0 0 0 {input.borderWidth.hover} {input.color.border.hover}",
+    "type": "other"
+  },
+  "text-area-border-radius": {
+    "value": "{input.borderRadius.input}",
+    "type": "borderRadius"
+  },
+  "text-area-color-bg": {
+    "value": "{input.color.background.default}",
+    "type": "color"
+  },
+  "text-area-color-bg-disabled": {
+    "value": "{input.color.background.disabled}",
+    "type": "color"
+  },
+  "text-area-color-bg-readonly": {
+    "value": "{input.color.background.readonly}",
+    "type": "color"
+  },
+  "text-area-color-text": {
+    "value": "{input.color.text.secondary}",
+    "type": "color"
+  },
+  "text-area-color-text-counter": {
+    "value": "{input.color.text.secondary}",
+    "type": "color"
+  },
+  "text-area-color-text-counter-error": {
+    "value": "{input.color.border.error}",
+    "type": "color"
+  },
+  "text-area-color-text-disabled": {
+    "value": "{input.color.text.disabled}",
+    "type": "color"
+  },
+  "text-area-color-text-placeholder": {
+    "value": "{input.color.text.placeholder}",
+    "type": "color"
+  },
+  "text-area-padding": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Regular size: 16px all around"
+  },
+  "text-area-padding-compact": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Compact variant: 12px all around"
+  },
+  "text-area-typography": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  },
+  "text-area-typography-compact": {
+    "value": "{typography.body.s}",
+    "type": "other",
+    "description": "Compact variant typography for content text"
+  },
+  "text-area-typography-counter": {
+    "value": "{typography.body.xs}",
+    "type": "other"
+  }
+}

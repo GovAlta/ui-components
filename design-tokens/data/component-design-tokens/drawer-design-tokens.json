@@ -1,0 +1,61 @@
+{
+  "drawer-overlay-color": {
+    "value": {
+      "light": "rgba(51, 51, 51, 0.5)",
+      "dark": "rgba(0, 0, 0, 0.6)"
+    },
+    "type": "color",
+    "description": "Background overlay color behind drawer"
+  },
+  "drawer-border-radius": {
+    "value": "{borderRadius.3xl}",
+    "type": "borderRadius",
+    "description": "Border radius for drawer corners"
+  },
+  "drawer-offset": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Offset from screen edges when open"
+  },
+  "drawer-content-padding-horizontal": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Horizontal padding for content section"
+  },
+  "drawer-content-padding-vertical": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Vertical padding for content section"
+  },
+  "drawer-actions-padding-top": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Top padding for actions section"
+  },
+  "drawer-actions-padding-bottom": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Bottom padding for actions section"
+  },
+  "drawer-heading-typography": {
+    "value": "{typography.heading.s}",
+    "type": "other",
+    "description": "Typography for drawer heading"
+  },
+  "drawer-shadow": {
+    "value": {
+      "light": "0 0 4px 0 rgba(0, 0, 0, 0.10), 0 8px 40px 0 rgba(0, 0, 0, 0.20)",
+      "dark": "0 0 4px 0 rgba(0, 0, 0, 0.3), 0 8px 40px 0 rgba(0, 0, 0, 0.4)"
+    },
+    "type": "other",
+    "description": "Drop shadow for drawer"
+  },
+  "drawer-transition-time": {
+    "value": "0.25s",
+    "type": "other"
+  },
+  "drawer-padding": {
+    "value": "{space.m}",
+    "type": "spacing"
+  }
+}

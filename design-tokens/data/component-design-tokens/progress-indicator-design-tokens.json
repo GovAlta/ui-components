@@ -1,0 +1,25 @@
+{
+  "circular-progress-color-background": {
+    "value": {
+      "light": "rgba(255, 255, 255, 0.9)",
+      "dark": "rgba(30, 30, 30, 0.9)"
+    },
+    "type": "color"
+  },
+  "circular-progress-large-margin-top": {
+    "value": "{space.xl}",
+    "type": "spacing"
+  },
+  "circular-progress-large-text": {
+    "value": "{typography.body.l}",
+    "type": "other"
+  },
+  "circular-progress-small-margin-top": {
+    "value": "{space.l}",
+    "type": "spacing"
+  },
+  "circular-progress-small-text": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  }
+}

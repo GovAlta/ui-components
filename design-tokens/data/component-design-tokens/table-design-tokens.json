@@ -1,0 +1,167 @@
+{
+  "table-color-heading": {
+    "value": "{color.greyscale.600}",
+    "type": "color",
+    "description": "Header text color"
+  },
+  "table-color-heading-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color",
+    "description": "Header text color on hover"
+  },
+  "table-color-bg-heading-hover": {
+    "value": "{color.greyscale.100}",
+    "dark": "var(--goa-color-surface-heading-hover)",
+    "type": "color",
+    "description": "Header background color on hover"
+  },
+  "table-typography-heading": {
+    "value": "{typography.body.xs}",
+    "type": "other",
+    "description": "Header text typography"
+  },
+  "table-color-bg-heading": {
+    "value": "{color.greyscale.50}",
+    "dark": "var(--goa-color-surface-heading)",
+    "type": "color",
+    "description": "Header cell background color"
+  },
+  "table-color-bg-data": {
+    "value": "{color.greyscale.white}",
+    "dark": "var(--goa-color-surface-table-data)",
+    "type": "color",
+    "description": "Data cell background color"
+  },
+  "table-heading-border": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "solid",
+      "color": "{color.greyscale.150}"
+    },
+    "type": "border",
+    "description": "Header cell bottom border"
+  },
+  "table-data-border": {
+    "value": {
+      "width": "{borderWidth.s}",
+      "style": "solid",
+      "color": "{color.greyscale.150}"
+    },
+    "type": "border",
+    "description": "Data cell bottom border"
+  },
+  "table-container-border": {
+    "value": {
+      "width": "{borderWidth.s}",
+      "style": "solid",
+      "color": "{color.greyscale.150}"
+    },
+    "type": "border",
+    "description": "Table container border"
+  },
+  "table-border-radius-container": {
+    "value": "{borderRadius.2xl}",
+    "type": "other",
+    "description": "Table container border radius"
+  },
+  "table-padding-heading": {
+    "value": "18px {space.m} {space.m} {space.m}",
+    "type": "spacing",
+    "description": "Header cell padding (normal variant, top right bottom left)"
+  },
+  "table-padding-heading-relaxed": {
+    "value": "18px {space.m} {space.m} {space.m}",
+    "type": "spacing",
+    "description": "Header cell padding (relaxed variant, top right bottom left)"
+  },
+  "table-padding-data": {
+    "value": "{space.s} {space.m} {space.s} {space.m}",
+    "type": "spacing",
+    "description": "Data cell base padding (normal variant, 12px vertical for 48px height)"
+  },
+  "table-padding-data-relaxed": {
+    "value": "18px {space.m} 18px {space.m}",
+    "type": "spacing",
+    "description": "Data cell base padding (relaxed variant, top right bottom left)"
+  },
+  "table-height-heading": {
+    "value": "56px",
+    "type": "sizing",
+    "description": "Header cell minimum height (normal variant)"
+  },
+  "table-height-heading-relaxed": {
+    "value": "56px",
+    "type": "sizing",
+    "description": "Header cell minimum height (relaxed variant)"
+  },
+  "table-height-data": {
+    "value": "48px",
+    "type": "sizing",
+    "description": "Data cell minimum height (normal variant)"
+  },
+  "table-height-data-relaxed": {
+    "value": "64px",
+    "type": "sizing",
+    "description": "Data cell minimum height (relaxed variant)"
+  },
+  "table-padding-cell-text": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Vertical padding for text-only cells in normal variant (12px for 48px height)"
+  },
+  "table-padding-cell-text-relaxed": {
+    "value": "20px",
+    "type": "spacing",
+    "description": "Vertical padding for text-only cells in relaxed variant (20px for 64px height)"
+  },
+  "table-padding-cell-checkbox": {
+    "value": "{space.3xs}",
+    "type": "spacing",
+    "description": "Vertical padding for checkbox cells in normal variant (2px for 48px height)"
+  },
+  "table-padding-cell-checkbox-relaxed": {
+    "value": "10px",
+    "type": "spacing",
+    "description": "Vertical padding for checkbox cells in relaxed variant (10px for 64px height)"
+  },
+  "table-padding-cell-form-field": {
+    "value": "3px",
+    "type": "spacing",
+    "description": "Vertical padding for form field cells (input, dropdown, etc.) in normal variant (3px for 48px height)"
+  },
+  "table-padding-cell-form-field-relaxed": {
+    "value": "11px",
+    "type": "spacing",
+    "description": "Vertical padding for form field cells (input, dropdown, etc.) in relaxed variant (11px for 64px height)"
+  },
+  "table-padding-cell-badge": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "Vertical padding for badge cells in normal variant (12px for 48px height)"
+  },
+  "table-padding-cell-badge-relaxed": {
+    "value": "20px",
+    "type": "spacing",
+    "description": "Vertical padding for badge cells in relaxed variant (20px for 64px height)"
+  },
+  "table-padding-cell-actions": {
+    "value": "7px",
+    "type": "spacing",
+    "description": "Vertical padding for action cells (buttons, icon buttons, links) in normal variant (7px for 48px height)"
+  },
+  "table-padding-cell-actions-relaxed": {
+    "value": "14px",
+    "type": "spacing",
+    "description": "Vertical padding for action cells (buttons, icon buttons, links) in relaxed variant (14px for 64px height)"
+  },
+  "table-padding-cell-text-supporting-relaxed": {
+    "value": "{space.xs}",
+    "type": "spacing",
+    "description": "Vertical padding for text-supporting cells in relaxed variant (8px for 64px height)"
+  },
+  "table-sort-header-gap": {
+    "value": "{space.xs}",
+    "type": "spacing",
+    "description": "Gap between sort header text and icon"
+  }
+}

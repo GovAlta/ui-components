@@ -1,0 +1,104 @@
+{
+  "file-upload-border": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "dashed",
+      "color": "{color.interactive.default}"
+    },
+    "type": "border"
+  },
+  "file-upload-border-active": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "solid",
+      "color": "{color.interactive.hover}"
+    },
+    "type": "border"
+  },
+  "file-upload-border-drag": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "solid",
+      "color": "{color.interactive.hover}"
+    },
+    "type": "border"
+  },
+  "file-upload-border-focus": {
+    "value": "0 0 0 {borderWidth.l} {color.interactive.focus}",
+    "type": "other"
+  },
+  "file-upload-border-hover": {
+    "value": {
+      "width": "{borderWidth.m}",
+      "style": "dashed",
+      "color": "{color.interactive.hover}"
+    },
+    "type": "border"
+  },
+  "file-upload-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius"
+  },
+  "file-upload-color-bg": {
+    "value": "{color.info.background}",
+    "type": "color"
+  },
+  "file-upload-color-bg-active": {
+    "value": "{color.info.background}",
+    "type": "color"
+  },
+  "file-upload-color-bg-drag": {
+    "value": "{color.info.background}",
+    "type": "color"
+  },
+  "file-upload-color-bg-focus": {
+    "value": "{color.greyscale.100}",
+    "dark": "#252d35",
+    "type": "color"
+  },
+  "file-upload-color-bg-hover": {
+    "value": "{color.greyscale.100}",
+    "dark": "#252d35",
+    "type": "color"
+  },
+  "file-upload-help-text": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "file-upload-help-text-color": {
+    "value": "{color.greyscale.700}",
+    "type": "color"
+  },
+  "file-upload-instruction-color": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "file-upload-instruction-color-active": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "file-upload-instruction-color-drag": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "file-upload-instruction-color-focus": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "file-upload-instruction-color-hover": {
+    "value": "{color.interactive.hover}",
+    "type": "color"
+  },
+  "file-upload-instruction-text": {
+    "value": "{typography.body.m}",
+    "type": "other"
+  },
+  "file-upload-padding": {
+    "value": "{space.xl}",
+    "type": "spacing"
+  },
+  "file-upload-text-gap": {
+    "value": "{space.m}",
+    "type": "spacing"
+  }
+}

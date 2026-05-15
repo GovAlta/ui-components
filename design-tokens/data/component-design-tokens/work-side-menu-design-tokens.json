@@ -1,0 +1,91 @@
+{
+  "work-side-menu-height": {
+    "value": "100vh",
+    "type": "spacing"
+  },
+  "work-side-menu-width-open": {
+    "value": "17.5rem",
+    "type": "spacing"
+  },
+  "work-side-menu-width-closed": {
+    "value": "4.5rem",
+    "type": "spacing"
+  },
+  "work-side-menu-color-bg": {
+    "value": "transparent",
+    "type": "color"
+  },
+  "work-side-menu-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius"
+  },
+  "work-side-menu-border": {
+    "value": "{borderWidth.s} solid {color.greyscale.200}",
+    "type": "other"
+  },
+  "work-side-menu-account-shadow": {
+    "value": "{shadow.500}",
+    "type": "other"
+  },
+  "work-side-menu-account-bg": {
+    "value": "{color.greyscale.white}",
+    "dark": "var(--goa-color-surface-widget)",
+    "type": "color"
+  },
+  "work-side-menu-logo": {
+    "value": "initial",
+    "dark": "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgZmlsbD0nbm9uZSc+PHJlY3Qgd2lkdGg9JzMxLjY5NScgaGVpZ2h0PSczMS42ODgnIHg9Jy4wMjgnIGZpbGw9JyMwMDg0QkInIHJ4PSc0Jy8+PGcgY2xpcC1wYXRoPSd1cmwoI2EpJz48bWFzayBpZD0nYicgd2lkdGg9JzQ3JyBoZWlnaHQ9JzM5JyB4PSctMTEnIHk9Jy0yJyBtYXNrVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBzdHlsZT0nbWFzay10eXBlOmFscGhhJz48cGF0aCBmaWxsPScjNTQ1ODYwJyBkPSdNMjIuMDE3IDMxLjEwM2E2My40NyA2My40NyAwIDAgMS03LjIyLTMuMTY0IDUyLjQxIDUyLjQxIDAgMCAwIDYuMTk1LTIuNzI0IDQzLjE0OCA0My4xNDggMCAwIDAgMS4wMjMgNS44OW0xMy4yNy0yNC4zOTJjLTEuMDM0LS4xMy0uNDk3LjM0OC0uNzg1IDEuNy0xLjI0NiA1LjgzMi02LjA1IDEwLjAzNS0xMC44NzMgMTIuODU1LS41MDYtNi42NzgtLjMtMTQuMDkzLjk2Ny0xOC42MzYgMS4wNjktMy44MzYgMi4zNC0zLjEzMi43NjMtMy45MzgtMS42Ni0uODQ4LTMuNDQuMjczLTQuODgyIDMuMTNDMTkuMDMzIDQuNjggMTIuMzkzIDIwLjE5IDEuNzggMzAuNjY0Yy01LjQzIDUuMzYtMTAuMzQgMi42LTExLjMyMyAxLjc3NS0uOC0uNjctMS4wOTYuMzY1LS4xMDMgMS40MjYgNC4zOSA0LjcgMTAuODA1IDIuMDAzIDEzLjE0MS0uMzE0IDYuNDU1LTYuNDA1IDEzLjk2LTIwLjE5MyAxNi45OTYtMjYuMDQ0YTg5Ljg5IDg5Ljg5IDAgMCAwIC4yNDMgMTUuMjk0IDQ0LjY5IDQ0LjY5IDAgMCAxLTcuNjE5IDIuODg1Yy0xLjUwNC4zOTEtMi40MzUgMS0yLjQ2MiAxLjY5MS0uMDMuNzU4Ljk4IDEuMzk3IDIuNDQgMi4wODUgMi42IDEuMjI2IDEwLjIxNiA0Ljc5OCAxMi4wOTMgNS44NzggMS42MDYuOTI1IDIuMzkuMjA0IDIuODY2LS43OTYuNjIyLTEuMzAyLTEuMDgzLTIuMDU0LTIuNzM1LTIuNTQ1YTUwLjQ3IDUwLjQ3IDAgMCAxLTEuNDgtOC4zODVjMy44Ny0yLjM2NSA3LjY4Mi01LjUyIDkuODgtOS40NTJhMTguMDA0IDE4LjAwNCAwIDAgMCAxLjU2OC00LjM2NWMuMjMtLjkzNC4yOTMtMS45LjE4Ni0yLjg1NSAwIDAtLjAzLS4yMDktLjE4Ni0uMjI5Jy8+PC9tYXNrPjxnIG1hc2s9J3VybCgjYiknPjxyZWN0IHdpZHRoPSczMS42OTUnIGhlaWdodD0nMzEuNjk1JyB4PScuMDI4JyBmaWxsPScjQzJDNkNFJyByeD0nMy4wNDgnLz48L2c+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0nYSc+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMxLjk5MicgeT0nLjAwOCcgZmlsbD0nI2ZmZicgcng9JzQnLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=)",
+    "type": "other",
+    "description": "Work side menu logo. Light mode falls back to component-internal default; dark mode uses #0084BB blue + #C2C6CE 'A' shape tuned for dark backgrounds."
+  },
+  "work-side-menu-popover-shadow": {
+    "value": "{shadow.raised-light}",
+    "dark": "0 4px 6px rgba(0,0,0,0.4)",
+    "type": "other",
+    "description": "Box shadow applied to popovers (account, item) inside the work side menu"
+  },
+  "work-side-menu-text-color": {
+    "value": "{color.greyscale.600}",
+    "type": "color"
+  },
+  "work-side-menu-mobile-bg": {
+    "value": "{color.greyscale.50}",
+    "type": "color"
+  },
+  "work-side-menu-transition-duration-medium": {
+    "value": "{motionDuration.medium-2}",
+    "type": "other"
+  },
+  "work-side-menu-top-section-border": {
+    "value": "{borderWidth.s} solid transparent",
+    "type": "other"
+  },
+  "work-side-menu-top-section-shadow": {
+    "value": "0 4px 6px -4px rgba(0, 0, 0, 0)",
+    "type": "other"
+  },
+  "work-side-menu-top-section-border-scrolled": {
+    "value": "{borderWidth.s} solid {color.greyscale.200}",
+    "type": "other"
+  },
+  "work-side-menu-top-section-shadow-scrolled": {
+    "value": "0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+    "type": "other"
+  },
+  "work-side-menu-bottom-section-border": {
+    "value": "{borderWidth.s} solid transparent",
+    "type": "other"
+  },
+  "work-side-menu-bottom-section-shadow": {
+    "value": "0 -4px 6px -4px rgba(0, 0, 0, 0)",
+    "type": "other"
+  },
+  "work-side-menu-bottom-section-border-scrolled": {
+    "value": "{borderWidth.s} solid {color.greyscale.200}",
+    "type": "other"
+  },
+  "work-side-menu-bottom-section-shadow-scrolled": {
+    "value": "0 -4px 6px -4px rgba(0, 0, 0, 0.1)",
+    "type": "other"
+  }
+}

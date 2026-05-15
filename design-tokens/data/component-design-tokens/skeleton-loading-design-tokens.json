@@ -1,0 +1,6 @@
+{
+  "skeleton-loading-color-bg": {
+    "value": "{color.greyscale.100}",
+    "type": "color"
+  }
+}

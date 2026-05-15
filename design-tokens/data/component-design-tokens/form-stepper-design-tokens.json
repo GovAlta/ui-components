@@ -1,0 +1,98 @@
+{
+  "step-border": {
+    "value": {
+      "width": "{borderWidth.xl}",
+      "style": "solid",
+      "color": "{step-color-border-active}"
+    },
+    "type": "border"
+  },
+  "step-color-bg": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "step-color-bg-active": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "step-color-bg-complete": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "step-color-bg-incomplete": {
+    "value": "{color.greyscale.white}",
+    "type": "color"
+  },
+  "step-color-border": {
+    "value": "{color.greyscale.400}",
+    "type": "color"
+  },
+  "step-color-border-active": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "step-color-border-complete": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "step-color-border-incomplete": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "step-color-label": {
+    "value": "{color.text.default}",
+    "type": "color"
+  },
+  "step-color-step-number": {
+    "value": "{color.text.secondary}",
+    "type": "color"
+  },
+  "step-color-sublabel": {
+    "value": "{color.text.secondary}",
+    "type": "color"
+  },
+  "step-gap-small-screen": {
+    "value": "0px",
+    "type": "spacing"
+  },
+  "step-padding": {
+    "value": "{space.l}",
+    "type": "spacing"
+  },
+  "step-padding-vertical": {
+    "value": "{space.2xs} {space.l}",
+    "type": "spacing"
+  },
+  "step-size": {
+    "value": "2.5rem",
+    "type": "sizing"
+  },
+  "step-typography-label": {
+    "value": "{typography.body.s}",
+    "type": "other"
+  },
+  "step-typography-label-active": {
+    "value": "{typography.heading.xs}",
+    "type": "other"
+  },
+  "step-typography-step-number": {
+    "value": "{typography.heading.xs}",
+    "type": "other"
+  },
+  "step-typography-sublabel": {
+    "value": "{typography.body.xs}",
+    "type": "other"
+  },
+  "stepper-color-line": {
+    "value": "{color.greyscale.200}",
+    "type": "color"
+  },
+  "stepper-color-line-active": {
+    "value": "{color.interactive.default}",
+    "type": "color"
+  },
+  "stepper-line-thickness": {
+    "value": "4px",
+    "type": "sizing"
+  }
+}

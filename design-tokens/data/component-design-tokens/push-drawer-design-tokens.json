@@ -1,0 +1,40 @@
+{
+  "push-drawer-border-radius": {
+    "value": "{borderRadius.3xl}",
+    "type": "borderRadius",
+    "description": "Border radius for drawer corners"
+  },
+  "push-drawer-content-padding-horizontal": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Horizontal padding for content section"
+  },
+  "push-drawer-content-padding-vertical": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Vertical padding for content section"
+  },
+  "push-drawer-actions-padding-top": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "Top padding for actions section"
+  },
+  "push-drawer-actions-padding-bottom": {
+    "value": "{space.l}",
+    "type": "spacing",
+    "description": "Bottom padding for actions section"
+  },
+  "push-drawer-heading-typography": {
+    "value": "{typography.heading.s}",
+    "type": "other",
+    "description": "Typography for drawer heading"
+  },
+  "push-drawer-transition-time": {
+    "value": "0.25s",
+    "type": "other"
+  },
+  "push-drawer-padding": {
+    "value": "{space.m}",
+    "type": "spacing"
+  }
+}

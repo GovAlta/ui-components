@@ -1,0 +1,12 @@
+{
+  "button-group-gap": {
+    "value": "{space.m}",
+    "type": "spacing",
+    "description": "16px"
+  },
+  "button-group-compact-gap": {
+    "value": "{space.s}",
+    "type": "spacing",
+    "description": "12px"
+  }
+}

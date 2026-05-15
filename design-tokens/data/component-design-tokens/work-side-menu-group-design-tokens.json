@@ -1,0 +1,26 @@
+{
+  "work-side-menu-group-border": {
+    "value": "{borderWidth.xl} solid {color.greyscale.100}",
+    "type": "other"
+  },
+  "work-side-menu-group-margin": {
+    "value": "{space.xs} 0 0.375rem 1.125rem",
+    "type": "spacing"
+  },
+  "work-side-menu-group-padding": {
+    "value": "0 0 0 0.75rem",
+    "type": "spacing"
+  },
+  "work-side-menu-group-item-padding": {
+    "value": "{space.2xs} {space.xs}",
+    "type": "spacing"
+  },
+  "work-side-menu-group-item-min-height": {
+    "value": "1.75rem",
+    "type": "spacing"
+  },
+  "work-side-menu-group-item-text-size": {
+    "value": "{typography.body.xs}",
+    "type": "other"
+  }
+}

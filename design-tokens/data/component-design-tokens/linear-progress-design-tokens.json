@@ -1,0 +1,42 @@
+{
+  "linear-progress-height": {
+    "value": "{space.2xs}",
+    "type": "sizing",
+    "description": "4px - Height of the progress bar track"
+  },
+  "linear-progress-border-radius": {
+    "value": "{borderRadius.m}",
+    "type": "borderRadius",
+    "description": "8px - Border radius of progress bar and indicator"
+  },
+  "linear-progress-color-track": {
+    "value": "{color.greyscale.200}",
+    "type": "color",
+    "description": "Background color of the progress bar track"
+  },
+  "linear-progress-color-indicator": {
+    "value": "{color.info.default}",
+    "type": "color",
+    "description": "Color of the progress indicator (both determinate and indeterminate)"
+  },
+  "linear-progress-percentage-gap": {
+    "value": "{space.xs}",
+    "type": "spacing",
+    "description": "8px - Gap between the progress bar and percentage text"
+  },
+  "linear-progress-percentage-color": {
+    "value": "{color.text.secondary}",
+    "type": "color",
+    "description": "Color of the percentage text"
+  },
+  "linear-progress-percentage-text": {
+    "value": "{typography.body.xs}",
+    "type": "other",
+    "description": "Typography for the percentage text (14px/20px)"
+  },
+  "linear-progress-percentage-width": {
+    "value": "4ch",
+    "type": "sizing",
+    "description": "Fixed width for percentage text to prevent layout shift"
+  }
+}

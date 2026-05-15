@@ -74,3 +74,6 @@ vitest.config.*.timestamp*
 
 .claude/worktrees
 .claude/settings.local.json
+
+# design-tokens
+design-tokens/dist
