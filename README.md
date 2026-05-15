@@ -1,94 +1,171 @@
-## About the Project
+# Government of Alberta UI Components
 
-The project contains the Government of Alberta UI components. The output packages support multiple model frontend frameworks, such as React, Angular and Vue.
+This repository contains the Government of Alberta Design System component libraries for Web Components, React, and Angular.
 
-### Contribution Guidelines
+## Documentation
 
-The design system team is using “Discussions” in the UI-components GitHub repository for managing the creation and assessment of new ideas for platform components, services, and capabilities.
+- Design system docs: [design.alberta.ca](https://design.alberta.ca)
+- Developer setup: [design.alberta.ca/get-started/developers/setup](https://design.alberta.ca/get-started/developers/setup/)
+- Contribution guidelines: [design.alberta.ca/get-started/contribute](https://design.alberta.ca/get-started/contribute/)
+- Issue tracker: [github.com/GovAlta/ui-components/issues](https://github.com/GovAlta/ui-components/issues)
 
-#### Ideas for enhancements, additions, or improvements
+## Published packages
 
-Before creating a new discussion topic, check the discussion board for any existing ideas that may match yours. If there is a good match, please add your examples and comments to the existing discussion instead of creating a new one.
+| Package | Use when | npm |
+| --- | --- | --- |
+| `@abgov/web-components` | You want framework-agnostic custom elements. | [npm](https://www.npmjs.com/package/@abgov/web-components) |
+| `@abgov/react-components` | You are building a React application. | [npm](https://www.npmjs.com/package/@abgov/react-components) |
+| `@abgov/angular-components` | You are building an Angular application. | [npm](https://www.npmjs.com/package/@abgov/angular-components) |
+| `@abgov/ui-components-common` | You need shared types, event detail interfaces, or common utilities used by the component packages. | [npm](https://www.npmjs.com/package/@abgov/ui-components-common) |
+| `@abgov/design-tokens` | You need the design tokens used by the components. | [npm](https://www.npmjs.com/package/@abgov/design-tokens) |
 
-Add a new discussion topic 
+`@abgov/styles` is deprecated. Import `@abgov/web-components/index.css` instead.
 
-If a related discussion topic already exists please join in the discussion!
+## Quick start
 
-Provide a high-level description, relevant links and examples of the idea to the discussion topic.
+### Web Components (Vue)
 
-Socialize your discussion topic with your colleges to help refine and drive out contexts and use cases. If possible have those team members join the “discussion”.
+Install the packages:
 
-“Vote” on the topics that you think are the highest priority.
+```bash
+npm i @abgov/web-components @abgov/design-tokens
+```
 
-#### What happens to these "discussions?"
+Register the custom elements in your app entry point, for example `src/main.js`:
 
-Discussion topics that have the most votes and/or input from a number of different team members will be evaluated every two-week cycle by the Design System team. Those items that  
+```js
+import "@abgov/web-components";
+```
 
-Discussion topics that have the most number of votes and/or input will be evaluated 
+Import the component styles and tokens in your main stylesheet:
 
-Opportunities are assessed against WIP limits.
+```css
+@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+```
 
-After an assessment, selected “discussions” will be transitioned to “issues” and assigned and prioritized in the different “project” views (Figma, Angular, React, etc.)
+Add Ionicons to your `index.html` `<head>`:
 
-[Contributing](contributing.md)
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+```
 
-### Library and Applications
+You can then use the components directly in markup:
 
-| Library                     | Description                                                                                                                                                                 |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| core-css                    | Library of core CSS, SCSS, SVGs, and JavaScript. Published to NPM [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css).                                         |
-| angular-components          | Library of components for Angular. Published to NPM [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components).                                   |
-| angular-material-components | Library of themed components for Angular Material. Published to NPM [@abgov/angular-material-components](https://www.npmjs.com/package/@abgov/angular-material-components). |
-| vue-components              | Library of components for Vue. Published to NPM [@abgov/vue-components](https://www.npmjs.com/package/@abgov/vue-components).                                               |
-| react-components            | Library of components for React. Published to NPM [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components).                                         |
-| shared/storybook-common     | Library containing stories and elements common to all library storybook documentation.                                                                                      |
-| shared/common               | Library containing common javascript which will be used by all ui frameworks.                                                                                               |
-| core-css                    | Library containing common scss which will be used by all ui frameworks.                                                                                                     |
-| samples                     | Sample applications showing how to integrate the NPM packages into each library type.                                                                                       |
+```html
+<goa-button type="primary">Continue</goa-button>
+```
 
-### Building
+### React
 
-To build all libraries and applications run `npm build:all`.
-To build only changed libraries and applications run `npm run affected:build -- --base=branchtocompareagainst`.
-To build the storybooks run `npm run build:storybook` or choose and individual storybook `npm run build:UIPROJECTNAME`.
+Supported React versions: `17`, `18`, `19`.
 
-### Running Locally
+Install the packages:
 
-There are currently no applications.
-To run a storybook run `npm run run:angular-storybook` or `npm run run:vue-storybook` or `npm run run:core-storybook` or `npm run run:angular-material-storybook` or `npm run run:react-storybook`.
+```bash
+npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
+```
 
-### Running Tests
+Register the underlying web components in your app entry point, for example `src/main.tsx`:
 
-To run all of the available unit tests run `npm run test:all`.
-To run only the current affected tests run `npm run affected:test -- --base=branchtocompareagainst`.
-To run e2e tests run `npm run affected:e2e -- --base=branchtocompareagainst`.
+```ts
+import "@abgov/web-components";
+```
 
-## Environments
+Import the styles in your main stylesheet:
 
-| Name | Website URL                                                       | Openshift Home                                                                           |
-| ---- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| test | [Click](https://ui-components-ui-components-test.os99.gov.ab.ca/) | [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-test/overview) |
-| dev  | [Click](https://ui-components-ui-components-dev.os99.gov.ab.ca/)  | [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-dev/overview)  |
-| prod | [Click](https://ui-components.alpha.alberta.ca/)                  | [Click](https://console.os99.gov.ab.ca:8443/console/project/ui-components-prod/overview) |
+```css
+@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+```
 
-## NPM
+Add Ionicons to your `index.html` `<head>`:
 
-Current stable release can be found tagged with @latest.
-Beta functionality can be found tagged with @next.
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+```
 
-| Package                            | URL                                                                                                    | Documentation                                                     | Comments                                |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | --------------------------------------- |
-| @abgov/angular-components          | [@abgov/angular-components](https://www.npmjs.com/package/@abgov/angular-components)                   | [Click](https://ui-components.alpha.alberta.ca/angular/)          | Angular based components.               |
-| @abgov/angular-material-components | [@abgov/angular-material-components](https://www.npmjs.com/package/@abgov/angular-material-components) | [Click](https://ui-components.alpha.alberta.ca/angular-material/) | Angular material themed components.     |
-| @abgov/vue-components              | [@abgov/vue-components](https://www.npmjs.com/package/@abgov/vue-components)                           | [Click](https://ui-components.alpha.alberta.ca/vue/)              | Vue based components.                   |
-| @abgov/react-components            | [@abgov/react-components](https://www.npmjs.com/package/@abgov/react-components)                       | [Click](https://ui-components.alpha.alberta.ca/react/)            | React based components.                 |
-| @abgov/core-css                    | [@abgov/core-css](https://www.npmjs.com/package/@abgov/core-css)                                       | [Click](https://ui-components.alpha.alberta.ca/core/)             | CSS and SVGs for HTML based components. |
+Example:
 
-## VS Code Extensions
+```tsx
+import { GoabButton } from "@abgov/react-components";
 
-### Formatting
+export function App() {
+  return <GoabButton type="primary">Continue</GoabButton>;
+}
+```
 
-To allow for project specific formatting the follow extensions are required
+### Angular
 
-- octref.vetur
-- esbenp.prettier-vscode
+Supported Angular versions in the current docs: `18`, `19`, `20`, `21`.
+
+Install the packages:
+
+```bash
+npm i @abgov/web-components @abgov/angular-components @abgov/ui-components-common @abgov/design-tokens
+```
+
+Add Ionicons to `src/index.html`:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+```
+
+Update your app module:
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+
+import "@abgov/web-components";
+import { AngularComponentsModule } from "@abgov/angular-components";
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, AngularComponentsModule],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AppModule {}
+```
+
+If your Angular app uses standalone bootstrapping instead of `AppModule`, use the same package installs, web component import, styles, and Ionicons setup, then adapt the module example to your bootstrap configuration.
+
+Import the styles in `src/styles.css`:
+
+```css
+@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+```
+
+## Local development
+
+This repo uses Nx. The toolchain is pinned to Node `24.11.0` in [mise.toml](./mise.toml).
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Useful commands:
+
+- `npm run serve:docs` to run the docs site locally.
+- `npm run dev:setup` to create the local dev app scaffold in `apps/dev`.
+- `npm run dev:watch` to rebuild `web-components` while developing against a preview app.
+- `npm run serve:dev:web` to run the web preview app.
+- `npm run serve:dev:react` to run the React preview app.
+- `npm run serve:dev:angular` to run the Angular preview app.
+- `npm run test:unit` to run unit tests.
+- `npm run test:headless` to run headless browser tests.
+- `npm run test:browser` to run browser-based tests.
+- `npm run build` to build affected projects.
+- `npm run validate` to run the full validation pipeline.
+
+## License
+
+Apache-2.0

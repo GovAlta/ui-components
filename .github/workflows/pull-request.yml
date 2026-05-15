@@ -1,34 +1,44 @@
 name: Pull Request Check
+permissions:
+  contents: read
+  pull-requests: write
 
 on:
   pull_request:
     branches:
       - main
-      - beta
-      - alpha
+      - next
+      - dev
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+
+      - uses: actions/setup-node@v6
         with:
-          node-version: "16"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          node-version: "24"
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
       - run: npm ci
-      # Run with the target branch as the base.
+
       - name: Lint
-        run: npx nx affected --target=lint --base=origin/${{ github.base_ref }}
-      - name: Test
-        run: npx nx affected --target=test --base=origin/${{ github.base_ref }}
+        run: npm run lint
+
       - name: Build
         run: |
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
+
+      - name: Test
+        run: |
+          if [ -d "./dist" ]; then
+            npx playwright install --with-deps
+            npm run test:pr
+          fi

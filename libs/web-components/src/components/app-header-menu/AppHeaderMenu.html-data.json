@@ -1,0 +1,21 @@
+{
+  "name": "goa-app-header-menu",
+  "attributes": [
+    {
+      "name": "heading",
+      "description": "Set the group name to display at the top of the app header menu",
+      "type": "string"
+    },
+    {
+      "name": "leadingicon",
+      "description": "Icon to display to the left of the menu text",
+      "type": "string"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA App header menu",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=components-app-header--basic&args=#app-header"
+    }
+  ]
+}

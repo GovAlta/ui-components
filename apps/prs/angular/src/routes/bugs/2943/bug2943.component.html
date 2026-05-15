@@ -1,0 +1,102 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">bug2943 - Drawer sizing and content interactions</goab-text>
+  <goab-text tag="p">
+    Use the buttons below to open drawers anchored to the bottom and side. Each drawer
+    contains enough content to highlight overflow, inputs, and nested actions.
+  </goab-text>
+
+  <goab-grid minChildWidth="260px" gap="l">
+    <goab-block direction="column" gap="m" class="demo-card">
+      <goab-text tag="h2">Bottom drawer scenario</goab-text>
+      <goab-text tag="p">
+        Opens a medium-height drawer from the bottom with form item content so it reaches
+        roughly half the viewport.
+      </goab-text>
+      <goab-button (onClick)="toggleBottomDrawer()">Open bottom drawer</goab-button>
+
+      <goab-drawer
+        [open]="bottomDrawerOpen()"
+        position="bottom"
+        heading="Bottom drawer with form content"
+        maxSize="60vh"
+        (onClose)="toggleBottomDrawer()"
+      >
+        <goab-block direction="column" gap="m">
+          <goab-form-item label="Contact email">
+            <goab-input name="bottom-email" placeholder="name@example.com"></goab-input>
+          </goab-form-item>
+          <goab-text tag="p">
+            Add steps, notes, or instructions here. The block content encourages scrolling
+            if the screen height is short.
+          </goab-text>
+          <goab-form-item label="Description">
+            <goab-input
+              name="bottom-description"
+              placeholder="Summarize the request"
+            ></goab-input>
+          </goab-form-item>
+          <goab-text tag="p">
+            Use this area to capture any additional details needed to reproduce the
+            experience. The drawer height should adjust while leaving the backdrop
+            visible.
+          </goab-text>
+          <goab-text tag="p">
+            Provide checklist items, validation notes, or follow-up actions to exercise
+            the space and confirm scroll behaviour when content grows.
+          </goab-text>
+          <goab-button (onClick)="toggleBottomDrawer()" type="primary">
+            Finish and close
+          </goab-button>
+        </goab-block>
+      </goab-drawer>
+    </goab-block>
+
+    <goab-block direction="column" gap="m" class="demo-card">
+      <goab-text tag="h2">Side drawer scenario</goab-text>
+      <goab-text tag="p">
+        Opens from the right and contains multiple sections to force vertical scrolling.
+      </goab-text>
+      <goab-button (onClick)="toggleSideDrawer()">Open side drawer</goab-button>
+
+      <goab-drawer
+        [open]="sideDrawerOpen()"
+        position="right"
+        heading="Side drawer with scrollable content"
+        maxSize="520px"
+        (onClose)="toggleSideDrawer()"
+      >
+        <goab-block direction="column" gap="m" class="drawer-content">
+          <goab-form-item label="Search term">
+            <goab-input
+              name="side-search"
+              placeholder="What are you looking for?"
+            ></goab-input>
+          </goab-form-item>
+          <goab-text tag="p">
+            Provide a longer description to ensure the drawer needs to scroll. Each
+            paragraph adds context for the tester.
+          </goab-text>
+          <goab-text tag="p">
+            Additional paragraph to stretch the layout and highlight scroll shadows.
+            Repeat content with slight variations to mimic real instructions.
+          </goab-text>
+          <goab-form-item label="Notes">
+            <goab-input name="side-notes" placeholder="Add follow-up notes"></goab-input>
+          </goab-form-item>
+          <goab-text tag="p">
+            Checklist: confirm header, close button, and backdrop interactions behave
+            correctly when scrolling through dense content within the drawer.
+          </goab-text>
+          <goab-form-item label="Assigned to">
+            <goab-input name="side-assignee" placeholder="Case owner"></goab-input>
+          </goab-form-item>
+          <goab-text tag="p">
+            Final copy block to ensure the drawer consumes the available height and
+            requires scroll.
+          </goab-text>
+          <goab-button type="secondary">Save changes</goab-button>
+        </goab-block>
+      </goab-drawer>
+    </goab-block>
+  </goab-grid>
+</goab-block>

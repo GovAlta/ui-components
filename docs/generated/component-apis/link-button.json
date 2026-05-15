@@ -1,0 +1,59 @@
+{
+  "componentSlug": "link-button",
+  "extractedFrom": "libs/web-components/src/components/link-button/LinkButton.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "angular": {
+      "props": [],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
+    }
+  }
+}

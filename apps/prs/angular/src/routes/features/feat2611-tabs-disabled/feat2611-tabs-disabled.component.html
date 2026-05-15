@@ -1,0 +1,61 @@
+<div style="padding: 2rem">
+  <h1>Feature 2611 - Disabled Tab Edge Cases</h1>
+
+  <h2>Test Case 1: initialTab=1 with first tab disabled</h2>
+  <p>Expected: Tab 2 should be selected (first enabled tab), not Tab 1 (disabled)</p>
+  <goab-tabs [initialTab]="1" testId="test-tabs">
+    <goab-tab heading="Tab 1 (disabled)" [disabled]="true">
+      <p>Content 1 - This should NOT be visible</p>
+    </goab-tab>
+    <goab-tab heading="Tab 2">
+      <p>Content 2 - This SHOULD be visible on load</p>
+    </goab-tab>
+    <goab-tab heading="Tab 3">
+      <p>Content 3</p>
+    </goab-tab>
+  </goab-tabs>
+
+  <h2>Test Case 2: no initialTab with first tab disabled</h2>
+  <p>
+    Expected: Tab 2 should be selected (first enabled tab), not Tab 1 (disabled), even
+    without initialTab.
+  </p>
+  <goab-tabs testId="test-tabs-no-initial">
+    <goab-tab heading="Tab 1 (disabled)" [disabled]="true">
+      <p>Content 1 - This should NOT be visible</p>
+    </goab-tab>
+    <goab-tab heading="Tab 2">
+      <p>Content 2 - This SHOULD be visible on load</p>
+    </goab-tab>
+    <goab-tab heading="Tab 3">
+      <p>Content 3</p>
+    </goab-tab>
+  </goab-tabs>
+
+  <h2>Test Case 3: hash change to disabled tab</h2>
+  <p>
+    Expected: If the hash is set to a disabled tab (for example
+    <code>#tab-0</code>), selection should not move to the disabled tab. The URL should
+    ideally normalize back to the current enabled tab hash.
+  </p>
+  <goab-button-group mb="l">
+    <goab-button (onClick)="setHash('tab-0')">Set hash to #tab-0 (disabled)</goab-button>
+    <goab-button (onClick)="setHash('tab-1')">Set hash to #tab-1 (enabled)</goab-button>
+    <goab-button (onClick)="setHash('tab-2')">Set hash to #tab-2 (enabled)</goab-button>
+    <goab-button (onClick)="clearHash()">Clear hash</goab-button>
+  </goab-button-group>
+  <ng-template #hashHeading1>Disabled (tab-0)</ng-template>
+  <ng-template #hashHeading2>Enabled (tab-1)</ng-template>
+  <ng-template #hashHeading3>Enabled (tab-2)</ng-template>
+  <goab-tabs [initialTab]="2" testId="test-tabs-hash">
+    <goab-tab [heading]="hashHeading1" [disabled]="true">
+      <p>Content A - This should NOT be visible</p>
+    </goab-tab>
+    <goab-tab [heading]="hashHeading2">
+      <p>Content B - This SHOULD stay visible when hash targets disabled tab</p>
+    </goab-tab>
+    <goab-tab [heading]="hashHeading3">
+      <p>Content C - Should also stay visible if hash is changed to disabled tab</p>
+    </goab-tab>
+  </goab-tabs>
+</div>

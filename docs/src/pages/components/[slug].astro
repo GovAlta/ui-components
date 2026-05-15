@@ -1,0 +1,438 @@
+---
+import { withBase } from '@/lib/base-url';
+import { getCollection, render } from 'astro:content';
+import ComponentPageLayout from '../../layouts/ComponentPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PropsTable from '../../components/PropsTable.astro';
+import GuidanceGrid from '../../components/GuidanceGrid.astro';
+import ExampleDisplay from '../../components/ExampleDisplay.astro';
+import ConfigurationPreview from '../../components/ConfigurationPreview';
+import TabContentWrapper from '../../components/TabContentWrapper.astro';
+import {
+  getComponentApi,
+  getGuidanceForComponent,
+  getExamplesForComponent,
+  getRelatedComponents,
+  getSubcomponents,
+  categorizeGuidance,
+} from '../../lib/content-queries';
+import { getComponentConfigurations } from '../../data/configurations';
+import { getThumbnailPath } from '../../lib/component-thumbnails';
+
+
+// Generate static paths for all components
+export async function getStaticPaths() {
+  const components = await getCollection('components');
+  return components.map((component) => ({
+    params: { slug: component.slug },
+    props: { component },
+  }));
+}
+
+const { component } = Astro.props;
+const { slug } = Astro.params;
+const categoryLabel = component.data.category
+  .split('-').map((w: string, i: number) => i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ');
+
+// 1. Render the component MDX content
+const { Content } = await render(component);
+
+// 2. Get the extracted API
+const api = await getComponentApi(slug);
+
+// 2b. Get subcomponent APIs (discovered via relatedComponents + subcomponent flag)
+const subcomponents = await getSubcomponents(component.data.relatedComponents);
+
+// 3. Query related guidance
+const allGuidance = await getGuidanceForComponent(slug);
+const { usage: usageGuidance, accessibility: accessibilityGuidance } =
+  categorizeGuidance(allGuidance);
+
+// 4. Query related examples
+const componentExamples = await getExamplesForComponent(slug);
+
+// 5. Get component configurations (if available)
+const configurations = getComponentConfigurations(slug);
+
+// 6. Get visible related components (peers, not subcomponents)
+const relatedComponents = await getRelatedComponents(component.data.relatedComponents ?? []);
+
+// GitHub issues URL for this component
+const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3Aissue+is%3Aopen+label%3A%22${encodeURIComponent(component.data.name)}%22`;
+
+const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
+---
+
+<ComponentPageLayout
+  title={component.data.name}
+  description={`Documentation for the ${component.data.name} component`}
+  currentSlug={slug}
+  category={component.data.category}
+>
+  <div class="component-page">
+  <Breadcrumbs
+    parentGroup={{ label: categoryLabel, url: withBase(`/components?category=${component.data.category}`) }}
+  />
+  <!-- Component Header -->
+  <header class="component-header">
+    <!-- Title -->
+    <h1 class="component-title">{component.data.name}</h1>
+
+    <!-- Description -->
+    {component.data.description && (
+      <p class="component-description">{component.data.description}</p>
+    )}
+  </header>
+
+  <!-- Configuration Preview (dropdown + preview + code snippet + external links) -->
+  <!-- Using client:only to avoid SSR hook issues with React components -->
+  {configurations ? (
+    <ConfigurationPreview
+      client:only="react"
+      configurations={configurations}
+      figmaUrl={component.data.figmaUrl}
+      githubUrl={githubIssuesUrl}
+      componentName={component.data.name}
+    />
+  ) : (
+    <div class="no-configurations">
+      <goa-callout version="2" type="information" heading="Preview coming soon">
+        Interactive preview configurations are being developed for this component.
+      </goa-callout>
+    </div>
+  )}
+
+  <!-- Spacer before tabs -->
+  <goa-spacer version="2" vspacing="xl"></goa-spacer>
+
+  <!-- Documentation Tabs - each tab has its own TOC via TabContentWrapper -->
+  <goa-tabs version="2" initialtab="1">
+    <!-- Properties Tab -->
+    <goa-tab heading="Properties">
+      <TabContentWrapper tocQuery=".api-section h3, .sub-component-section h2">
+        {api ? (
+          <>
+            <PropsTable frameworks={api.frameworks} />
+            {api.subComponents && api.subComponents.length > 0 && (
+              api.subComponents.map((sub) => (
+                <div class="sub-component-section">
+                  <h2 id={sub.webComponentTag}>{sub.name}</h2>
+                  <p class="sub-component-description">{sub.description}</p>
+                  <PropsTable frameworks={sub.frameworks} />
+                </div>
+              ))
+            )}
+          </>
+        ) : (
+          <goa-callout version="2" type="information" heading="No API data available">
+            API documentation is automatically extracted from the component source code.
+          </goa-callout>
+        )}
+        {subcomponents.map((sub) => (
+          <div class="subcomponent-section">
+            <PropsTable
+              frameworks={sub.api.frameworks}
+              headingPrefix={sub.name}
+              idPrefix={sub.slug}
+              badge="Subcomponent"
+            />
+          </div>
+        ))}
+      </TabContentWrapper>
+    </goa-tab>
+
+    <!-- Examples Tab -->
+    <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation -->
+    <goa-tab heading="Examples">
+      <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
+      <TabContentWrapper tocQuery=".example-preview .example-title">
+        {componentExamples.length > 0 ? (
+          <div class="examples-list">
+            {componentExamples.map((example) => (
+              <ExampleDisplay example={example} />
+            ))}
+          </div>
+        ) : (
+          <goa-callout version="2" type="information" heading="No examples available">
+            Examples show common usage patterns and implementation guidance.
+          </goa-callout>
+        )}
+      </TabContentWrapper>
+    </goa-tab>
+
+    <!-- Usage Guidelines Tab -->
+    <goa-tab heading="Usage guidelines">
+      <TabContentWrapper tocQuery=".guidance-section .topic-heading">
+        <GuidanceGrid
+          guidance={usageGuidance}
+          emptyMessage="No usage guidelines have been documented for this component yet."
+        />
+
+        <!-- MDX Content (additional usage info) -->
+        <div class="mdx-content">
+          <Content />
+        </div>
+      </TabContentWrapper>
+    </goa-tab>
+
+    <!-- Accessibility Tab -->
+    <goa-tab heading="Accessibility">
+      <TabContentWrapper tocQuery=".guidance-section .topic-heading">
+        <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch">
+          All GoA Design System components are built to meet <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 AA</a> standards.
+          The following guidelines provide additional context for accessible implementation.
+        </goa-callout>
+        <GuidanceGrid
+          guidance={accessibilityGuidance}
+          emptyMessage="No accessibility-specific guidelines have been documented for this component yet."
+        />
+      </TabContentWrapper>
+    </goa-tab>
+  </goa-tabs>
+
+  {relatedComponents.length > 0 && (
+    <section class="related-components">
+      <h2 class="related-heading">Related components</h2>
+      <div class="related-cards">
+        {relatedComponents.map((comp) => {
+          const compSlug = comp.data.slug || comp.slug;
+          return (
+            <a href={withBase(`/components/${compSlug}`)} class="related-card">
+              <div class="related-card-thumbnail" aria-hidden="true">
+                <img src={getThumbnailPath(compSlug)} alt="" loading="lazy"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                <span class="related-card-thumbnail-fallback">{comp.data.name}</span>
+              </div>
+              <div class="related-card-info">
+                <span class="related-card-name">{comp.data.name}</span>
+                {comp.data.description && (
+                  <p class="related-card-description">{comp.data.description}</p>
+                )}
+                <div class="related-card-badge">
+                  <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <goa-spacer version="2" vspacing="xl"></goa-spacer>
+  <goa-divider version="2"></goa-divider>
+  <goa-spacer version="2" vspacing="m"></goa-spacer>
+  </div>
+  <goa-link size="small" trailingicon="open">
+    <a href={v1DocsUrl} target="_blank" rel="noopener noreferrer"
+      >View old component docs</a
+    >
+  </goa-link>
+</ComponentPageLayout>
+
+<style>
+  .component-page {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+
+  /* Component Header */
+  .component-header {
+    margin-bottom: var(--goa-space-l);
+  }
+
+  .component-title {
+    font-size: var(--goa-font-size-9);
+    font-weight: 700;
+    margin: var(--goa-space-xs) 0 var(--goa-space-s);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  .component-description {
+    font-size: 1.125rem;
+    color: var(--goa-color-text-secondary, #666);
+    margin: 0;
+    max-width: 688px;
+  }
+
+  /* Subcomponent API sections */
+  .subcomponent-section {
+    margin-top: var(--goa-space-xl);
+  }
+
+  /* No configurations fallback */
+  .no-configurations {
+    margin-bottom: var(--goa-space-l);
+  }
+
+  /* Tab content headings */
+  :global(.tab-main-content) h2 {
+    font-size: 1.5rem;
+    font-weight: var(--goa-font-weight-semi-bold);
+    margin-bottom: var(--goa-space-l);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  :global(.tab-main-content) h3 {
+    font-size: 1.25rem;
+    font-weight: var(--goa-font-weight-semi-bold);
+    margin: var(--goa-space-l) 0 var(--goa-space-m);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .section-intro {
+    color: var(--goa-color-text-secondary, #666);
+    margin-bottom: var(--goa-space-l);
+    max-width: 65ch;
+  }
+
+  /* Tab content without TOC */
+  .tab-content-no-toc {
+    padding: var(--goa-space-l, 1.5rem) 0;
+  }
+
+  /* Examples List */
+  .examples-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Sub-component sections */
+  .sub-component-section {
+    margin-top: var(--goa-space-2xl);
+    padding-top: var(--goa-space-xl);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .sub-component-section h2 {
+    font: var(--goa-typography-heading-m);
+    color: var(--goa-color-text-default);
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  .sub-component-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin-bottom: var(--goa-space-l);
+    max-width: 65ch;
+  }
+
+  /* MDX Content */
+  .mdx-content {
+    margin-top: var(--goa-space-xl);
+  }
+
+  .mdx-content :global(h2) {
+    font-size: 1.25rem;
+    margin: var(--goa-space-xl) 0 var(--goa-space-m);
+  }
+
+  .mdx-content :global(h3) {
+    font-size: 1.1rem;
+    margin: var(--goa-space-l) 0 var(--goa-space-s);
+  }
+
+  .mdx-content :global(p) {
+    margin-bottom: var(--goa-space-m);
+    max-width: 65ch;
+  }
+
+  .mdx-content :global(ul),
+  .mdx-content :global(ol) {
+    margin: 0 0 var(--goa-space-m);
+    padding-left: var(--goa-space-l);
+    max-width: 65ch;
+  }
+
+  /* Related Components */
+  .related-components {
+    margin-top: var(--goa-space-2xl);
+    padding-top: var(--goa-space-xl);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .related-heading {
+    font: var(--goa-typography-heading-s);
+    color: var(--goa-color-text-default);
+    margin: 0 0 var(--goa-space-m);
+  }
+
+  .related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 15rem));
+    gap: var(--goa-space-m);
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-card:focus-visible {
+    outline: 2px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  .related-card-thumbnail {
+    aspect-ratio: 386 / 256;
+    background: var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+    overflow: hidden;
+  }
+
+  .related-card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .related-card-thumbnail-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font: var(--goa-typography-heading-xs);
+    color: var(--goa-color-text-secondary);
+    text-align: center;
+    padding: var(--goa-space-s);
+  }
+
+  .related-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-2xs);
+    padding-top: var(--goa-space-xs);
+  }
+
+  .related-card-name {
+    font: var(--goa-typography-heading-xs);
+    color: var(--goa-color-interactive-default);
+    text-decoration: none;
+  }
+
+  .related-card:hover .related-card-name {
+    text-decoration: underline;
+  }
+
+  .related-card-description {
+    margin: 0;
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .related-card-badge {
+    margin-top: var(--goa-space-3xs);
+  }
+</style>
+

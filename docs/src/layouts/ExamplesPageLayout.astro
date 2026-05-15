@@ -1,0 +1,181 @@
+---
+/**
+ * ExamplesPageLayout.astro
+ *
+ * Two-column layout for examples pages:
+ * - Left: SiteNav navigation (280px)
+ * - Center: Main content area (flexible)
+ *
+ * Mobile behavior (< 624px):
+ * - Sidebar hidden, triggered by hamburger in MobileHeader
+ * - Content card chrome removed (white background, no borders)
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import { SiteNav } from '../components/SiteNav';
+import { MobileHeader } from '../components/MobileHeader';
+import { getNavCategories } from '../lib/nav-categories';
+import { getGetStartedNav } from '../lib/get-started-nav';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentSlug?: string;
+}
+
+const { title, description, currentSlug } = Astro.props;
+const navCategories = await getNavCategories();
+const getStartedNav = await getGetStartedNav();
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- Full-width grey background wrapper -->
+  <div class="layout-wrapper">
+    <div class="layout-container">
+      <!-- Left Sidebar: SiteNav -->
+      <aside class="sidebar-left">
+        <SiteNav
+          client:only="react"
+          currentSlug={currentSlug}
+          initialSection="examples"
+          categories={navCategories}
+          getStartedNav={getStartedNav}
+        />
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Mobile Header: hamburger + brand + search (hidden on desktop via CSS) -->
+        <div class="mobile-header-container">
+          <MobileHeader client:only="react" />
+        </div>
+
+        <div class="content-with-drawer">
+          <div class="content-card">
+            <slot />
+          </div>
+        </div>
+        <div id="push-drawer-portal"></div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full-width grey background that extends to edges */
+  .layout-wrapper {
+    background: var(--goa-color-greyscale-50);
+    min-height: 100vh;
+  }
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width, 280px) 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--goa-color-greyscale-50);
+    z-index: 2; /* Above content (1) for tooltips, below modals (998+) */
+  }
+
+  .main-content {
+    display: flex;
+    min-height: 100vh;
+    min-width: 0; /* Prevent grid blowout */
+    padding: var(--goa-space-m);
+    padding-left: 0;
+  }
+
+  .content-with-drawer {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Push drawer portal: desktop (push mode) */
+  #push-drawer-portal {
+    margin-top: calc(-1 * var(--goa-space-m));
+    margin-bottom: calc(-1 * var(--goa-space-m));
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  #push-drawer-portal:has([open]) {
+    margin-right: calc(-1 * var(--goa-space-m));
+  }
+
+  .content-card {
+    flex: 1;
+    min-width: 0;
+    background: var(--goa-color-greyscale-white);
+    border-radius: var(--goa-border-radius-3xl);
+    border: 1px solid var(--goa-color-greyscale-150);
+    --card-padding-h: var(--goa-space-2xl);
+    padding: var(--goa-space-xl) var(--card-padding-h);
+  }
+
+  /* Tablet: modal drawer mode (push drawer switches at 1023px) */
+  @media (max-width: 1023px) {
+    .content-card {
+      --card-padding-h: var(--goa-space-xl);
+      padding: var(--goa-space-l) var(--card-padding-h);
+    }
+
+    #push-drawer-portal {
+      position: static;
+      height: auto;
+      margin: 0;
+    }
+
+    #push-drawer-portal:has([open]) {
+      margin-right: 0;
+    }
+
+    /* When drawer is open, lower mobile header so scrim covers it */
+    :global(.mobile-header-container:has(~ * [open])) {
+      z-index: 0 !important;
+    }
+  }
+
+  /* Mobile: 624px breakpoint matches GoA components */
+  @media (max-width: 623px) {
+    .layout-wrapper {
+      background: var(--goa-color-greyscale-white);
+    }
+
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+
+    /* Sidebar: hidden off-screen, slides in when menu open */
+    .sidebar-left {
+      position: fixed;
+      left: -280px;
+      z-index: 100;
+      transition: left 0.3s ease;
+    }
+
+    /* Content: full viewport, no card chrome */
+    .main-content {
+      display: block;
+      padding: 0;
+    }
+
+    .content-card {
+      border-radius: var(--goa-border-radius-none);
+      border: none;
+      --card-padding-h: var(--goa-space-m);
+      padding: var(--goa-space-m) var(--card-padding-h);
+      min-height: auto;
+    }
+  }
+
+  /* Sidebar open state - controlled by body attribute from mobile-bridge.ts */
+  :global(body[data-menu-open="true"]) .sidebar-left {
+    left: 0;
+  }
+</style>

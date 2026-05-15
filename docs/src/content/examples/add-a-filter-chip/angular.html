@@ -1,0 +1,13 @@
+<div>
+  @for (filter of activeFilters; track filter) {
+  <goab-filter-chip
+    [content]="filter"
+    (onClick)="removeFilter(filter)"
+    mr="s"
+    mb="s"
+    mt="s"
+  >
+  </goab-filter-chip>
+  }
+</div>
+<goab-button mt="l" (onClick)="addFilter()">Add Random Filter</goab-button>

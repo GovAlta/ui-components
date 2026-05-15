@@ -1,0 +1,183 @@
+import { render } from "vitest-browser-react";
+import { GoabButton, GoabRadioGroup, GoabRadioItem } from "../src";
+import { expect, describe, it, vi } from "vitest";
+import { useState } from "react";
+import React from "react";
+import { userEvent } from "@vitest/browser/context";
+
+describe("Radio", () => {
+  it("should enable and disable radio group programmatically", async () => {
+    const Component = () => {
+      const [isDisabled, setIsDisabled] = useState(true);
+      const [selectedValue, setSelectedValue] = useState("");
+
+      return (
+        <div>
+          <GoabRadioGroup
+            name="fruits"
+            disabled={isDisabled}
+            value={selectedValue}
+            onChange={(e) => {
+              setSelectedValue(e.value);
+            }}
+          >
+            <GoabRadioItem name="fruits" value="apple" label="Apple" />
+            <GoabRadioItem name="fruits" value="banana" label="Banana" />
+          </GoabRadioGroup>
+
+          <GoabButton
+            testId="toggle-button"
+            onClick={() => {
+              setIsDisabled((value) => !value);
+            }}
+          >
+            {isDisabled ? "Enable" : "Disable"}
+          </GoabButton>
+
+          <div data-testid="selected-value">{selectedValue}</div>
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const radioItemsLoc = result.getByTestId(/^radio-option-.*/);
+    const selectedValue = result.getByTestId("selected-value");
+
+    // check that the radio items are all disabled
+    await vi.waitFor(() => {
+      const els = radioItemsLoc.all();
+      expect(els.length).toBe(2);
+      for (const item of els) {
+        expect(item).toBeDisabled();
+      }
+    });
+
+    // validate the selected value is blank
+    await vi.waitFor(() => {
+      expect(selectedValue.element().textContent).toBe("");
+    });
+
+    // enable the radio group
+    const toggleButton = result.getByTestId("toggle-button");
+    await toggleButton.click();
+
+    // validate they are now enabled
+    await vi.waitFor(() => {
+      for (const item of radioItemsLoc.all()) {
+        expect(item).toBeEnabled();
+      }
+    });
+
+    // click the first radio item
+    const appleRadioItem = radioItemsLoc.nth(0).element() as HTMLInputElement;
+    appleRadioItem.click();
+
+    // Check that the value was selected
+    await vi.waitFor(() => {
+      expect(selectedValue.element().textContent).toBe("apple");
+    });
+
+    // Click the toggle button again to disable the radio group
+    await toggleButton.click();
+
+    // Check that radio inputs are disabled again
+    await vi.waitFor(() => {
+      for (const item of radioItemsLoc.all()) {
+        expect(item).toBeDisabled();
+      }
+    });
+
+    // Try to click a different radio item - it should not work when disabled
+    const bananaRadioItem = radioItemsLoc.nth(1).element() as HTMLInputElement;
+    bananaRadioItem.click();
+
+    // Check that the value didn't change (should still be apple)
+    await vi.waitFor(() => {
+      expect(selectedValue.element().textContent).toBe("apple");
+    });
+  });
+
+  it("should have a 44px x 44px touch target area", async () => {
+    const result = render(
+      <GoabRadioGroup name="test" value="">
+        <GoabRadioItem name="test" value="option1" label="Option 1" />
+      </GoabRadioGroup>,
+    );
+
+    const radioInput = result.getByTestId("radio-option-option1");
+    await vi.waitFor(() => {
+      expect(radioInput.element()).toBeTruthy();
+    });
+
+    // Get the parent label element and find the .icon element
+    const label = radioInput.element().closest("label");
+    expect(label).toBeTruthy();
+
+    const icon = label?.querySelector(".icon") as HTMLElement;
+    expect(icon).toBeTruthy();
+
+    // Get computed styles for the ::before pseudo-element (touch target)
+    const beforeStyles = window.getComputedStyle(icon, "::before");
+
+    // Verify the touch target dimensions
+    expect(beforeStyles.width).toBe("44px");
+    expect(beforeStyles.height).toBe("44px");
+    expect(beforeStyles.position).toBe("absolute");
+
+    // Verify the icon itself has position: relative for proper positioning context
+    const iconStyles = window.getComputedStyle(icon);
+    expect(iconStyles.position).toBe("relative");
+
+    // Verify the actual visual size of the icon (24px) vs touch target (44px)
+    const iconRect = icon.getBoundingClientRect();
+    expect(iconRect.width).toBe(24); // Visual icon is 24px
+    expect(iconRect.height).toBe(24); // Visual icon is 24px
+
+    // Verify the transform is applied correctly for centering
+    // CSS: transform: translate(-50%, -50%) converts to matrix(a, b, c, d, tx, ty)
+    // a,b,c,d: 2x2 transformation identity matrix
+    expect(beforeStyles.transform).toBe("matrix(1, 0, 0, 1, -22, -22)");
+
+    // Final verification: Check that all styles are applied and rendered
+    // After the page is fully loaded and all CSS is computed
+    await vi.waitFor(() => {
+      const finalIconStyles = window.getComputedStyle(icon);
+      const finalBeforeStyles = window.getComputedStyle(icon, "::before");
+
+      // Verify final computed styles match expectations
+      expect(finalIconStyles.position).toBe("relative");
+      expect(finalBeforeStyles.width).toBe("44px");
+      expect(finalBeforeStyles.height).toBe("44px");
+    });
+  });
+
+  it("passes the browser event in change detail", async () => {
+    const handleChange = vi.fn();
+    const result = render(
+      <GoabRadioGroup name="test" value="" onChange={handleChange}>
+        <GoabRadioItem name="test" value="option1" label="Option 1" />
+      </GoabRadioGroup>,
+    );
+
+    const radioInput = result.getByTestId("radio-option-option1");
+    await vi.waitFor(() => {
+      expect(radioInput.element()).toBeTruthy();
+    });
+
+    const radioEl = radioInput.element() as HTMLInputElement;
+    // This sets up the label to be clicked instead of the element
+    // I don't understand why this is necessary, but it works when the actual element doesn't
+    const radioLabel = radioEl.closest("label") as HTMLElement;
+    expect(radioLabel).toBeTruthy();
+
+    await userEvent.click(radioLabel);
+
+    await vi.waitFor(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      const detail = handleChange.mock.calls[0][0];
+      expect(detail.name).toBe("test");
+      expect(detail.value).toBe("option1");
+      expect(detail.event).toBeInstanceOf(Event);
+    });
+  });
+});

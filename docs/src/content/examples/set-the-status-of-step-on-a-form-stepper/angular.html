@@ -1,0 +1,16 @@
+<goab-form-stepper ml="s" mr="s" [step]="step" (onChange)="updateStep($event)">
+  <goab-form-step text="Personal details" [status]="status[0]"></goab-form-step>
+  <goab-form-step text="Employment history" [status]="status[1]"></goab-form-step>
+  <goab-form-step text="References" [status]="status[2]"></goab-form-step>
+  <goab-form-step text="Review" [status]="status[3]"></goab-form-step>
+</goab-form-stepper>
+<goab-pages [current]="step" mb="3xl" mt="xl" mr="xl" ml="xl">
+  <div><!-- Page 1 content --></div>
+  <div><!-- Page 2 content --></div>
+  <div><!-- Page 3 content --></div>
+  <div><!-- Page 4 content --></div>
+</goab-pages>
+<div style="display: flex; justify-content: space-between">
+  <goab-button (onClick)="setPage(step-1)" type="secondary">Previous</goab-button>
+  <goab-button (onClick)="setPage(step+1)" type="primary">Next</goab-button>
+</div>

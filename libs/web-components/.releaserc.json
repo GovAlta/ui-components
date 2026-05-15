@@ -1,0 +1,19 @@
+{
+  "extends": "../../.releaserc.json",
+  "tagFormat": "web-components-v${version}",
+  "plugins": [
+    [
+      "@abgov/nx-release",
+      {
+        "project": "web-components"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "dist/libs/web-components"
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}

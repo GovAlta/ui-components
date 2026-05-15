@@ -1,0 +1,24 @@
+---
+id: tooltip-over-140-chars
+type: dont
+description: Don't add more than 140 characters to a tooltip; for lengthy information use the details component.
+topic: feedback
+tags:
+  - tooltip
+  - content
+  - details
+appliesTo:
+  components:
+    - tooltip
+    - details
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Hometown">
+    <goa-input name="hometown" />
+    <goa-tooltip content="Hometowns can only be a city you were born in and you spent the formative years of your life in. Hometowns cannot be the town or city you have lived in for less than 10 consecutive years. If you are not sure where your hometown is, contact the office and we will provide help.">
+      <goa-icon type="information-circle" />
+    </goa-tooltip>
+  </goa-form-item>
+</Preview>

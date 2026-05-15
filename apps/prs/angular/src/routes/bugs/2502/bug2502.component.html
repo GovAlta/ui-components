@@ -1,0 +1,25 @@
+<main>
+  <h3>Bug 2502 - Dropdown Test</h3>
+
+  <goab-block gap="m" direction="row">
+    <goab-form-item label="Native Dropdown">
+      <goab-dropdown
+        name="nativeDropdown"
+        (onChange)="onDropdownChange($event)"
+        [native]="true"
+      >
+        <goab-dropdown-item value="red" label="Red" />
+        <goab-dropdown-item value="green" label="Green" />
+        <goab-dropdown-item value="blue" label="Blue" />
+      </goab-dropdown>
+    </goab-form-item>
+
+    <goab-form-item label="Custom Dropdown">
+      <goab-dropdown name="customDropdown" (onChange)="onDropdownChange($event)">
+        <goab-dropdown-item value="red" label="Red" />
+        <goab-dropdown-item value="green" label="Green" />
+        <goab-dropdown-item value="blue" label="Blue" />
+      </goab-dropdown>
+    </goab-form-item>
+  </goab-block>
+</main>

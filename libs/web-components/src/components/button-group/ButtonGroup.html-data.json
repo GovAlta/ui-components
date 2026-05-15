@@ -1,0 +1,44 @@
+{
+  "name": "goa-button-group",
+  "attributes": [
+    {
+      "name": "alignment",
+      "type": "string",
+      "description": "Positions the button group in the page layout",
+      "values": [{ "name": "start" }, { "name": "end"}, { "name": "center"}]
+    },
+    {
+      "name": "gap",
+      "type": "string",
+      "description": "Defines the spacing between buttons in the button group",
+      "values": [{"name": "relaxed"}, {"name": "compact"}],
+      "default": "relaxed"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Button Group",
+      "url": "{{siteUrl}}/?path=/docs/components-button-group--alignment"
+    }
+  ]
+}

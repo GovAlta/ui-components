@@ -1,0 +1,66 @@
+<div>
+  <h1>3699 - Notification Popover rounded corners</h1>
+   <goab-work-side-menu heading="Bug 3279" url="#" userName="Jane Doe" userSecondaryText="jane.doe@gov.ab.ca"
+    [open]="open" (onToggle)="onToggle()" [primaryContent]="primaryTemplate" [secondaryContent]="secondaryTemplate">
+  </goab-work-side-menu>
+
+  <ng-template #primaryTemplate>
+    <goab-work-side-menu-item label="Primary item 1" icon="home" url="#primary-1" />
+    <goab-work-side-menu-item label="Primary item 2" icon="bookmark" badge="2" url="#primary-2" />
+
+    <goab-work-side-menu-group heading="Primary group" icon="folder">
+      <goab-work-side-menu-item label="Grouped item 1" icon="document" url="#primary-group-1" />
+      <goab-work-side-menu-item label="Grouped item 2" icon="document-text" url="#primary-group-2" />
+    </goab-work-side-menu-group>
+
+    <goab-work-side-menu-item label="Primary item 3" icon="list" url="#primary-3" />
+
+    <div style="display: flex; flex-direction: column; gap: 1rem">
+      <goab-container type="non-interactive" padding="compact">
+        <goab-button type="primary" (click)="onActionClick()">Action</goab-button>
+      </goab-container>
+
+      <goab-link href="#testthis">Link</goab-link>
+
+      <goab-details heading="Details">
+        <p>This is some details content inside the primary content area.</p>
+      </goab-details>
+    </div>
+  </ng-template>
+
+  <ng-template #secondaryTemplate>
+    <goab-work-side-menu-item label="Secondary item 1" icon="analytics" url="#secondary-1" />
+    <goab-work-side-menu-item label="Secondary item 2" icon="settings" url="#secondary-2" />
+    <goab-work-side-menu-item
+      icon="notifications"
+      label="Notifications"
+      badge="3"
+      type="success"
+      [popoverContent]="notificationsTpl"
+    ></goab-work-side-menu-item>
+  </ng-template>
+<ng-template #notificationsTpl>
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="unread"
+  >
+    <goab-work-side-notification-item
+      title="New case assigned"
+      description="Case #12345 has been assigned to you."
+      timestamp="2025-02-09T10:30:00Z"
+      type="info"
+      readStatus="unread"
+      priority="normal"
+    ></goab-work-side-notification-item>
+    <goab-work-side-notification-item
+      title="System maintenance"
+      description="Scheduled maintenance tonight at 11 PM."
+      timestamp="2025-02-09T09:00:00Z"
+      type="critical"
+      readStatus="unread"
+      priority="urgent"
+    ></goab-work-side-notification-item>
+  </goab-work-side-notification-panel>
+</ng-template>
+
+</div>

@@ -1,0 +1,21 @@
+---
+id: textarea-char-count-valid-reason
+type: do
+description: Use the character count only when there's a valid reason to limit the number of characters.
+topic: forms
+tags:
+  - textarea
+  - character-count
+  - validation
+appliesTo:
+  components:
+    - textarea
+    - form-item
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Describe your situation">
+    <goa-textarea name="situation" value="Lorem ipsum dolor sit ame" countby="character" maxcharcount="106"></goa-textarea>
+  </goa-form-item>
+</Preview>

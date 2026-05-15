@@ -1,0 +1,87 @@
+{
+  "componentSlug": "form-step",
+  "extractedFrom": "libs/web-components/src/components/form-step/FormStep.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "status",
+          "type": "GoabFormStepStatus",
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "status",
+          "type": "GoabFormStepStatus",
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "last",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether this is the last step in the form stepper. Affects styling when complete."
+        },
+        {
+          "name": "status",
+          "type": "\"complete\" | \"incomplete\" | \"not-started\"",
+          "values": [
+            "complete",
+            "incomplete",
+            "not-started"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<{ step: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
+    }
+  }
+}

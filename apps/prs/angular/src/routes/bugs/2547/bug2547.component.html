@@ -1,0 +1,29 @@
+<goab-microsite-header
+  type="live"
+  feedbackUrl="https://forms.microsoft.com/r/8Zp7zSJS6W"
+  maxContentWidth="1440px"
+  [version]="version"
+>
+  <ng-template #version>
+    <goab-tooltip content="Framework">
+      <goab-popover [target]="tooltip" [padded]="false">
+        <ng-template #tooltip>
+          <a id="language-switcher">
+            <goab-icon type="chevron-down" size="small" />Angular
+          </a>
+        </ng-template>
+        <a class="styled">Angular</a>
+        <a class="styled">React</a>
+      </goab-popover>
+    </goab-tooltip>
+    <goab-popover [target]="target">
+      <ng-template #target>
+        <goab-button type="secondary" size="compact"> Click me </goab-button>
+      </ng-template>
+      <p>This is a popover</p>
+      It can be used for a number of different contexts.
+    </goab-popover>
+  </ng-template>
+</goab-microsite-header>
+
+<goab-notification type="information">Notification banner message</goab-notification>

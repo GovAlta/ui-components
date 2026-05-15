@@ -1,0 +1,20 @@
+{
+  "name": "goa-app-footer-nav-section",
+  "attributes": [
+    {
+      "name": "heading",
+      "type": "string"
+    },
+    {
+      "name": "maxcolumncount",
+      "type": "number",
+      "default": "1"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Footer",
+      "url": "{{siteUrl}}/?path=/docs/components-app-footer--basic"
+    }
+  ]
+}

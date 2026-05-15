@@ -1,0 +1,86 @@
+import { NgTemplateOutlet } from "@angular/common";
+import {
+  booleanAttribute,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  OnInit,
+  ChangeDetectorRef,
+  inject,
+} from "@angular/core";
+import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
+
+@Component({
+  standalone: true,
+  selector: "goab-drawer",
+  imports: [NgTemplateOutlet],
+  template: `@if (isReady) {
+    <goa-drawer
+      [open]="open"
+      [attr.position]="position"
+      [attr.heading]="getHeadingAsString()"
+      [attr.maxsize]="maxSize"
+      [attr.testid]="testId"
+      [attr.version]="version"
+      (_close)="_onClose($event)"
+    >
+      <ng-content></ng-content>
+      <div slot="heading">
+        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+      </div>
+      <div slot="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+      </div>
+    </goa-drawer>
+  } `,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+/** A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view. */
+export class GoabDrawer implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  version = "2";
+
+  /** @required Whether the drawer is open. */
+  @Input({ required: true, transform: booleanAttribute }) open!: boolean;
+  /** @required The position of the drawer. */
+  @Input({ required: true }) position!: GoabDrawerPosition;
+  /** The heading text displayed at the top of the drawer. */
+  @Input() heading!: string | TemplateRef<any>;
+  /** Sets max height on bottom position, sets width on left and right position. */
+  @Input() maxSize?: GoabDrawerSize;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
+  /** Sets the actions area content using an Angular template reference. */
+  @Input() actions!: TemplateRef<any>;
+  /** Emits when the drawer is closed. */
+  @Output() onClose = new EventEmitter();
+
+  isReady = false;
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
+  _onClose(event: Event) {
+    if (event.target !== event.currentTarget) return;
+    this.onClose.emit();
+  }
+
+  getHeadingAsString(): string {
+    return this.heading instanceof TemplateRef ? "" : this.heading;
+  }
+
+  getHeadingAsTemplate(): TemplateRef<any> | null {
+    if (!this.heading) return null;
+    return this.heading instanceof TemplateRef ? this.heading : null;
+  }
+}

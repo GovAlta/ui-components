@@ -1,0 +1,47 @@
+{
+  "name": "goa-details",
+  "required": ["heading"],
+  "attributes": [
+    {
+      "name": "heading",
+      "type": "string",
+      "description": "The title heading."
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "open",
+      "description": "Controls if details is expanded or collapsed.",
+      "valueSet": "boolean"
+    },
+    {
+      "name": "maxwidth",
+      "description": "Sets the maximum width of the details.",
+      "type": "string"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Details",
+      "url": "{{siteUrl}}/?path=/docs/components-details--basic"
+    }
+  ]
+}

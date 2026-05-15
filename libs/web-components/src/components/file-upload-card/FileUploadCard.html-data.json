@@ -1,0 +1,44 @@
+{
+  "name": "goa-file-upload-card",
+  "required": [
+    "name",
+    "_cancel",
+    "_delete"
+  ],
+  "attributes": [
+    {
+      "name": "name",
+      "description": "Name of the file",
+      "valueSet": "string"
+    },
+    {
+      "name": "size",
+      "description": "Size (B) of the file",
+      "valueSet": "number"
+    },
+    {
+      "name": "type",
+      "description": "Type of the file",
+      "valueSet": "string"
+    },
+    {
+      "name": "error",
+      "description": "Error message",
+      "valueSet": "string"
+    },
+    {
+      "name": "_cancel",
+      "description": "Event fired when a file upload is cancelled"
+    },
+    {
+      "name": "_delete",
+      "description": "Event fired when an uploaded file is deleted"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA FileUploadCard",
+      "url": "{{siteUrl}}/?path=/docs/components-file-upload--basic"
+    }
+  ]
+}

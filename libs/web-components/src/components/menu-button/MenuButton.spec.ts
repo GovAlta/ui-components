@@ -1,0 +1,155 @@
+import { render } from "@testing-library/svelte";
+import GoAMenuButton from "./MenuButton.svelte";
+
+describe("GoAMenuButton", () => {
+  it("should render", async () => {
+    const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+    expect(container.innerHTML).toContain("goa-popover");
+    expect(container.innerHTML).toContain("goa-button");
+    expect(container.innerHTML).toContain("Menu Button");
+  });
+
+  it("should render with testid", async () => {
+    const { container } = render(GoAMenuButton, {
+      text: "Menu Button",
+      testid: "menu-button-test",
+    });
+
+    expect(container.innerHTML).toContain('data-testid="menu-button-test"');
+  });
+
+  describe("button types", () => {
+    ["primary", "secondary", "tertiary"].forEach((type) => {
+      it(`should render ${type} type`, async () => {
+        const { container } = render(GoAMenuButton, {
+          text: "Menu Button",
+          type: type as "primary" | "secondary" | "tertiary",
+        });
+
+        expect(container.innerHTML).toContain(`type="${type}"`);
+      });
+    });
+  });
+
+  describe("popover integration", () => {
+    it("should render popover with correct configuration", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      expect(container.innerHTML).toContain('padded="false"');
+      expect(container.innerHTML).toContain('tabindex="-1"');
+    });
+
+    it("should render goa-block with correct props", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      expect(container.innerHTML).toContain('direction="column"');
+      expect(container.innerHTML).toContain('gap="none"');
+    });
+  });
+
+  describe("icon states", () => {
+    it("should show chevron-down icon initially", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      expect(container.innerHTML).toContain('trailingicon="chevron-down"');
+    });
+  });
+
+  describe("component structure", () => {
+    it("should have proper DOM structure", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      // Check that all required elements are present
+      expect(container.innerHTML).toContain("goa-popover");
+      expect(container.innerHTML).toContain("goa-button");
+      expect(container.innerHTML).toContain("goa-block");
+      expect(container.innerHTML).toContain('slot="target"');
+    });
+
+    it("should render menu content area", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      // Check that the component structure is correct for menu items
+      expect(container.innerHTML).toContain("goa-block");
+    });
+  });
+
+  describe("accessibility", () => {
+    it("should have proper tabindex on popover", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      expect(container.innerHTML).toContain('tabindex="-1"');
+    });
+
+    it("should render button with proper slot", async () => {
+      const { container } = render(GoAMenuButton, { text: "Menu Button" });
+
+      expect(container.innerHTML).toContain('slot="target"');
+    });
+  });
+
+  describe("icon-only mode", () => {
+    it("should render icon-button with default ariaLabel when no text is provided", async () => {
+      const { container } = render(GoAMenuButton);
+
+      const iconButton = container.querySelector("goa-icon-button");
+      expect(iconButton).toBeTruthy();
+      expect(iconButton?.getAttribute("arialabel")).toBe("Open menu");
+    });
+
+    it("should render icon-button with custom ariaLabel", async () => {
+      const { container } = render(GoAMenuButton, {
+        ariaLabel: "Actions for John Smith",
+      });
+
+      const iconButton = container.querySelector("goa-icon-button");
+      expect(iconButton).toBeTruthy();
+      expect(iconButton?.getAttribute("arialabel")).toBe("Actions for John Smith");
+    });
+  });
+
+  describe("button variants", () => {
+    ["normal", "destructive"].forEach((variant) => {
+      it(`should render ${variant} variant`, async () => {
+        const { container } = render(GoAMenuButton, {
+          text: "Menu Button",
+          variant: variant as "normal" | "destructive",
+        });
+
+        expect(container.innerHTML).toContain(`variant="${variant}"`);
+      });
+    });
+
+    it("should default to normal variant", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+      });
+
+      expect(container.innerHTML).toContain('variant="normal"');
+    });
+  });
+
+  describe("leading icon", () => {
+    it("should render without leadingIcon by default", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+      });
+
+      const button = container.querySelector("goa-button");
+      expect(button).toBeTruthy();
+      expect(button?.getAttribute("leadingicon")).toBeNull();
+    });
+
+    it("should render with leadingIcon when provided", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+        leadingIcon: "add",
+      });
+
+      const button = container.querySelector("goa-button");
+      expect(button).toBeTruthy();
+      expect(button?.getAttribute("leadingicon")).toBe("add");
+    });
+  });
+});

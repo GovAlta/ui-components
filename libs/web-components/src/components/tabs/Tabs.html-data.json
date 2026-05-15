@@ -1,0 +1,16 @@
+{
+  "name": "goa-tabs",
+  "attributes": [
+    {
+      "name": "initialtab",
+      "type": "string",
+      "description": "Tab position that is currently active"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Tabs",
+      "url": "{{siteUrl}}/?path=/docs/components-tabs--basic"
+    }
+  ]
+}

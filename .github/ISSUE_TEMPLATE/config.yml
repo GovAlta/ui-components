@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: View documentation
+    url: https://ui-components.alberta.ca/?path=/story/overview--page
+    about: Check out the official docs for answers to common questions
+  - name: Questions and Discussions
+    url: https://github.com/GovAlta/ui-components/discussions
+    about: Ask questions, request features and discuss components

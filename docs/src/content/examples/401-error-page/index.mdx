@@ -1,0 +1,38 @@
+---
+id: 401-error-page
+title: Restricted access (401)
+categories:
+  - content-layout
+scale: page
+userType: both
+tags:
+  - error
+  - page-structure
+  - "401"
+components:
+  - page-block
+  - block
+  - text
+  - icon
+  - link
+  - button
+status: published
+fullWidth: true
+previewStyle: "padding: 0"
+accessibilityNotes: 'Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. The support email is a real mailto link inside GoabLink so keyboard users can activate it. No role="alert" is applied because the ARIA alert role is reserved for dynamically inserted messages.'
+---
+
+A full page that tells the user they cannot access the requested resource, with a clear next step and a way to contact support.
+
+## When to use
+
+- A user lands on a page that requires authentication they don't have.
+- A user's session has expired and you need to prompt them to sign in again.
+- A user is signed in but lacks the role or permission for the requested resource.
+
+## Considerations
+
+- Keep the message short and give the user one clear next step (usually sign in or go home).
+- Include a support contact when the user may not be able to self-serve (for example, a role they need to be granted).
+- A small amount of custom CSS covers the icon-in-circle treatment, the brand-color accent bar, centred text, and the icon scaled beyond `xlarge`. Each is a pattern the design system doesn't yet cover and is tracked as a gap for the library to absorb over time.
+- The `<h1>` uses `heading-l` (not the default `heading-xl`) to match the Figma spec for page-scale error states.

@@ -1,0 +1,19 @@
+---
+id: notificationbanner-dont-multiple-links
+type: dont
+description: Don't include more than one link in a notification banner.
+topic: content
+tags:
+  - notification-banner
+  - links
+appliesTo:
+  components:
+    - notification-banner
+status: published
+---
+
+<Preview bad>
+  <goa-notification-banner type="information">
+    <a href="/first">First link</a> and a <a href="/second">Second link</a>
+  </goa-notification-banner>
+</Preview>

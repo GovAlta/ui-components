@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+.demo-card {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.tooltip-wrapper {
+  width: 800px;
+}
+
+.tooltip-trigger {
+  display: inline-block;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding: 16px;
+  }
+
+  .tooltip-wrapper {
+    width: 100%;
+  }
+}

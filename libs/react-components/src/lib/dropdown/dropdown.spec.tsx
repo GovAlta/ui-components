@@ -1,195 +1,132 @@
-import '@testing-library/jest-dom';
-import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import React from 'react';
-import { useState } from 'react';
-import { GoADropdown, GoADropdownOption } from './dropdown';
+import { render, cleanup, fireEvent, waitFor } from "@testing-library/react";
+import { GoabDropdown } from "./dropdown";
+import { GoabDropdownItem, GoabDropdownOption } from "./dropdown-item";
+import { describe, it, expect, vi } from "vitest";
+
+const noop = () => {
+  /* do nothing */
+};
 
 afterEach(cleanup);
 
-describe('GoADropdown', () => {
-  it('should allow for a single selection', async () => {
-    let selectedColors: string[];
-
-    const TestComponent = () => {
-      const [colors, setColors] = useState([]);
-      const selectColor = (colors: string[]) => {
-        setColors(colors);
-        selectedColors = colors;
-      }
-      return (
-        <GoADropdown name="favColor" selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
-
-    const { queryByTestId } = render(<TestComponent />);
-
-    fireEvent.click(queryByTestId('favColor-dropdown'));
-
-    expect(queryByTestId('favColor-dropdown-background')).toBeInTheDocument();
-    expect(queryByTestId('favColor-dropdown-option--red')).toBeInTheDocument();
-    expect(queryByTestId('favColor-dropdown-option--blue')).toBeInTheDocument();
-    expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
-
-    fireEvent.click(queryByTestId('favColor-dropdown-option--blue'));
+describe("GoabDropdown", () => {
+  it("should inform the user that GoabDropdownOption is deprecated", async () => {
+    const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+      /* do nothing */
+    });
+    render(
+      <GoabDropdown onChange={noop}>
+        <GoabDropdownOption value="foo" />
+      </GoabDropdown>,
+    );
 
     await waitFor(() => {
-      expect(selectedColors).toContain('blue');
+      // @ts-expect-error: console mock
+      expect(console.warn["mock"].calls.length).toBe(1);
     });
-  })
+    mock.mockRestore();
+  });
 
-  it('should allow for multi-selection', async () => {
-    let selectedColors: string[];
+  it("should render", async () => {
+    const { baseElement } = render(<GoabDropdown onChange={noop}></GoabDropdown>);
 
-    const TestComponent = () => {
-      const [colors, setColors] = useState([]);
-      const selectColor = (colors: string[]) => {
-        setColors(colors);
-        selectedColors = colors;
-      }
-      return (
-        <GoADropdown name="favColor" multiSelect={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el?.getAttribute("disabled")).toBeNull();
+    expect(el?.getAttribute("error")).toBeNull();
+    expect(el?.getAttribute("filterable")).toBeNull();
+    expect(el?.getAttribute("multiselect")).toBeNull();
+    expect(el?.getAttribute("native")).toBeNull();
+  });
 
-    const { queryByTestId } = render(<TestComponent />);
+  it("should bind all web-component attributes", async () => {
+    const { baseElement } = render(
+      <GoabDropdown
+        leadingIcon="color-wand"
+        name="favColor"
+        value={[""]}
+        maxHeight="100px"
+        placeholder="Select..."
+        disabled
+        error
+        filterable
+        multiselect
+        native
+        testId="foo"
+        id="foo-dropdown"
+        width="200px"
+        maxWidth="400px"
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
+        ariaLabel={"label"}
+        ariaLabelledBy={"foo-dropdown-label"}
+        autoComplete="off"
+        size="compact"
+        onChange={noop}
+      >
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
+    );
 
-    fireEvent.click(queryByTestId('favColor-dropdown'));
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el?.getAttribute("leadingicon")).toBe("color-wand");
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
+    expect(el?.getAttribute("id")).toBe("foo-dropdown");
+    expect(el?.getAttribute("disabled")).toBe("true");
+    expect(el?.getAttribute("error")).toBe("true");
+    expect(el?.getAttribute("filterable")).toBe("true");
+    expect(el?.getAttribute("multiselect")).toBe("true");
+    expect(el?.getAttribute("native")).toBe("true");
+    expect(el?.getAttribute("arialabel")).toBe("label");
+    expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
+    expect(el?.getAttribute("autocomplete")).toBe("off");
+    expect(el?.getAttribute("maxwidth")).toBe("400px");
+    expect(el?.getAttribute("size")).toBe("compact");
+  });
 
-    expect(queryByTestId('favColor-dropdown-option--red')).toBeInTheDocument();
-    expect(queryByTestId('favColor-dropdown-option--blue')).toBeInTheDocument();
-    expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
+  it("should allow for a single selection", async () => {
+    const fn = vi.fn();
 
-    fireEvent.click(queryByTestId('favColor-dropdown-option--blue'));
-    fireEvent.click(queryByTestId('favColor-dropdown-option--red'));
+    const { baseElement } = render(
+      <GoabDropdown name="favColor" value="yellow" onChange={fn} native>
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+        <GoabDropdownItem name="favColor" label="Blue" value="blue" />
+        <GoabDropdownItem name="favColor" label="Yellow" value="yellow" />
+      </GoabDropdown>,
+    );
 
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el).toBeTruthy();
+
+    el &&
+      fireEvent(
+        el,
+        new CustomEvent("_change", { detail: { name: "favColor", value: "blue" } }),
+      );
     await waitFor(() => {
-      expect(selectedColors).toContain('blue');
-      expect(selectedColors).toContain('red');
+      expect(fn).toBeCalledWith(
+        expect.objectContaining({
+          name: "favColor",
+          value: "blue",
+          event: expect.any(Event),
+        }),
+      );
     });
+  });
 
-    // close
-    fireEvent.click(queryByTestId('favColor-dropdown-background'));
-    expect(queryByTestId('favColor-dropdown-option--red')).not.toBeInTheDocument();
-  })
-
-  it('should show a leading icon', async () => {
-    const TestComponent = () => {
-      return (
-        <GoADropdown leadingIcon="color-wand" name="favColor" multiSelect={true} selectedValues={[]} onChange={() => { }}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
-
-    const { queryByTestId } = render(<TestComponent />);
-    expect(queryByTestId('favColor-dropdown')).toBeInTheDocument();
-  })
-
-  it('should allow for autocomplete', async () => {
-    let selectedColors: string[];
-
-    const TestComponent = () => {
-      const [colors, setColors] = useState([]);
-      const selectColor = (colors: string[]) => {
-        setColors(colors);
-        selectedColors = colors;
-      }
-      return (
-        <GoADropdown name="favColor" autoComplete={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
-
-    const { queryByTestId } = render(<TestComponent />);
-
-    fireEvent.click(queryByTestId('favColor-dropdown'));
-
-    const filter = queryByTestId('favColor-dropdown-filter');
-
-    waitFor(() => {
-      expect(filter).toBeInTheDocument();
-      expect(queryByTestId('favColor-dropdown-option--red')).toBeInTheDocument();
-      expect(queryByTestId('favColor-dropdown-option--blue')).toBeInTheDocument();
-      expect(queryByTestId('favColor-dropdown-option--yellow')).toBeInTheDocument();
-
-      fireEvent.change(filter, { target: { value: 'r' } });
-      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
-      expect(queryByTestId('favColor-dropdown-option--blue')).not.toBeVisible();
-
-      // close
-      fireEvent.click(queryByTestId('favColor-dropdown-background'));
-      expect(queryByTestId('favColor-dropdown-option--red')).not.toBeInTheDocument();
-    });
-
-  })
-
-  it('should clear the autocomplete filter', async () => {
-    let selectedColors: string[];
-
-    const TestComponent = () => {
-      const [colors, setColors] = useState([]);
-      const selectColor = (colors: string[]) => {
-        setColors(colors);
-        selectedColors = colors;
-      }
-      return (
-        <GoADropdown name="favColor" autoComplete={true} selectedValues={colors} onChange={(_name, value) => selectColor(value)}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
-
-    const { queryByTestId } = render(<TestComponent />);
-
-    fireEvent.click(queryByTestId('favColor-dropdown'));
-
-    waitFor(() => {
-      const filter = queryByTestId('favColor-dropdown-filter');
-      fireEvent.change(filter, { target: { value: 'red' } });
-      expect(filter).toHaveValue('red');
-      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
-      expect(queryByTestId('favColor-dropdown-option--blue')).not.toBeVisible();
-
-      // reset filter
-      fireEvent.click(queryByTestId('filter-input-trailing-button'));
-      expect(filter).toHaveValue('');
-      expect(queryByTestId('favColor-dropdown-option--red')).toBeVisible();
-      expect(queryByTestId('favColor-dropdown-option--blue')).toBeVisible();
-    });
-  })
-
-  it('should not be able to interact with when disabled', async () => {
-    const TestComponent = () => {
-      return (
-        <GoADropdown disabled={true} name="favColor" multiSelect={true} selectedValues={[]} onChange={() => { }}>
-          <GoADropdownOption label="Red" value="red" />
-          <GoADropdownOption label="Blue" value="blue" />
-          <GoADropdownOption label="Yellow" value="yellow" />
-        </GoADropdown>
-      )
-    };
-
-    const { queryByTestId } = render(<TestComponent />);
-
-    fireEvent.click(queryByTestId('favColor-dropdown'));
-
-    await waitFor(() => {
-      expect(queryByTestId('favColor-dropdown-option--red')).not.toBeInTheDocument();
-    });
-  })
-})
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabDropdown name="test" onChange={noop} data-grid="cell">
+        <GoabDropdownItem name="test" label="Option 1" value="option1" />
+      </GoabDropdown>,
+    );
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
+});

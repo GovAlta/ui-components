@@ -1,0 +1,38 @@
+{
+  "name": "goa-card",
+  "attributes": [
+    {
+      "name": "elevation",
+      "type": "number"
+    },
+    {
+      "name": "width",
+      "type": "number"
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "values": [{"name": "auto"}, {"name": "max"}]
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ]
+}

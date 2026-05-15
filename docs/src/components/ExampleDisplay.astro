@@ -1,0 +1,119 @@
+---
+/**
+ * ExampleDisplay - Full example with live preview and code tabs
+ *
+ * Reads code files at build time, passes to ExamplePreview for client-side rendering.
+ * Use this on component pages and example pages.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { ExamplePreview } from './ExamplePreview';
+import { getExampleCode } from '../lib/example-code';
+import { withBase } from '@/lib/base-url';
+
+interface Props {
+  example: CollectionEntry<'examples'>;
+  /** Title size - 'large' for standalone pages, 'small' for embedded */
+  titleSize?: 'large' | 'small';
+}
+
+const { example, titleSize = 'small' } = Astro.props;
+const { data } = example;
+
+// Read code files at build time
+const code = await getExampleCode(example.slug);
+const hasCode = !!(code.react || code.angular || code.webComponents);
+---
+
+<div class="example-display">
+  {hasCode ? (
+    <ExamplePreview
+      client:load
+      title={data.title}
+      slug={example.slug}
+      code={code}
+      figmaUrl={data.figmaUrl}
+      fullWidth={data.fullWidth}
+      previewStyle={data.previewStyle}
+      titleSize={titleSize}
+    />
+  ) : (
+    <!-- Examples without code files (e.g. product-scale examples like Workspace) show as a linked card -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <h3 class="example-title">{data.title}</h3>
+        <a href={withBase(`/examples/${example.slug}`)} aria-label={`View ${data.title} example`}>
+          <goa-icon type="link" size="small" />
+        </a>
+      </div>
+      {data.previewImage && (
+        <a href={withBase(`/examples/${example.slug}`)} class="example-card-image">
+          <img src={withBase(data.previewImage)} alt={data.title} />
+        </a>
+      )}
+      {data.description && <p class="example-card-description" set:html={data.description} />}
+      <goa-link><a href={withBase(`/examples/${example.slug}`)}>View example</a></goa-link>
+    </div>
+  )}
+
+  {/* Accessibility notes */}
+  {data.accessibilityNotes && (
+    <div class="example-meta">
+      <goa-details version="2" heading="Accessibility">
+        <p>{data.accessibilityNotes}</p>
+      </goa-details>
+    </div>
+  )}
+</div>
+
+<style>
+  .example-display {
+    margin-bottom: var(--goa-space-2xl, 2.5rem);
+    padding-bottom: var(--goa-space-xl, 2rem);
+    border-bottom: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-display:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .example-meta {
+    margin-top: var(--goa-space-xs, 0.25rem);
+  }
+
+  .example-meta p {
+    margin: 0;
+    color: var(--goa-color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .example-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-card-header .example-title {
+    font: var(--goa-typography-heading-s);
+    margin: 0;
+  }
+
+  .example-card-image {
+    display: block;
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-card-image img {
+    width: 100%;
+    border-radius: var(--goa-border-radius-m);
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-card-description {
+    color: var(--goa-color-text-secondary, #666);
+    font: var(--goa-typography-body-m);
+    margin: 0 0 var(--goa-space-m, 1rem);
+    line-height: 1.5;
+  }
+</style>

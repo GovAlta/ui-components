@@ -1,0 +1,260 @@
+---
+// Import v2 design tokens and web component styles
+import '@abgov/web-components/index.css';
+import '@design-tokens/tokens.css';
+
+// Import search styles eagerly so inline search inputs don't flash unstyled
+import '../components/search/search.css';
+
+// Global search modal (available on all pages)
+import { SearchModal } from '../components/search';
+
+interface Props {
+  title: string;
+  description?: string;
+  page?: string;
+}
+
+import { withBase } from '@/lib/base-url';
+
+const { title, description, page } = Astro.props;
+const metaDescription = description || "Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.";
+const ogImage = new URL(withBase('/og-image.png'), Astro.site).href;
+const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Sidebar width init - runs before body to prevent layout shift -->
+  <script is:inline>
+    (function() {
+      var MOBILE = 624, EXPANDED = 280, COLLAPSED = 72;
+      var w;
+      if (window.innerWidth < MOBILE) {
+        w = 0;
+      } else {
+        var saved = localStorage.getItem('goa-ds-menu-open');
+        var isOpen = saved === null ? true : saved === 'true';
+        w = isOpen ? EXPANDED : COLLAPSED;
+      }
+      document.documentElement.style.setProperty('--sidebar-width', w + 'px');
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page === 'home' ? title : `${title} - GoA Design System`}</title>
+  <meta name="description" content={metaDescription}>
+
+  <!-- Favicon & icons -->
+  <link rel="icon" type="image/x-icon" href={withBase('/favicon.ico')}>
+  <link rel="icon" type="image/png" href={withBase('/favicon.png')} sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} sizes="any">
+  <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} sizes="180x180">
+  <link rel="manifest" href={withBase('/site.webmanifest')}>
+  <meta name="theme-color" content="#333333">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={metaDescription}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:url" content={ogUrl}>
+
+  <!-- GoA Web Components JavaScript (registers custom elements) -->
+  <script>
+    import '@abgov/web-components';
+  </script>
+
+  <!-- Ionicons CDN (required for GoabIcon) -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Mobile bridge: bridges React menu state to page-level CSS -->
+  <script>
+    import '../scripts/mobile-bridge.ts';
+  </script>
+
+    <style is:global>
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Reset margin but NOT padding - padding resets break component internals and slots */
+      *:where(:not([slot])) {
+        margin: 0;
+      }
+
+      html {
+        color-scheme: light;
+      }
+
+      body {
+        font: var(--goa-typography-body-m);
+        color: var(--goa-color-text-default);
+        background: var(--goa-color-greyscale-white);
+      }
+
+      h1 {
+        font: var(--goa-typography-heading-xl);
+      }
+
+      h2 {
+        font: var(--goa-typography-heading-l);
+      }
+
+      h3 {
+        font: var(--goa-typography-heading-m);
+      }
+
+      h4 {
+        font: var(--goa-typography-heading-s);
+      }
+
+      h5 {
+        font: var(--goa-typography-heading-xs);
+      }
+
+      h6 {
+        font: var(--goa-typography-heading-2xs);
+      }
+
+      code {
+        background: var(--goa-color-greyscale-white);
+        padding: var(--goa-space-2xs) var(--goa-space-xs);
+        border-radius: var(--goa-border-radius-s);
+        font-family: var(--goa-font-family-number);
+        font-size: var(--goa-font-size-2);
+      }
+
+      pre code {
+        display: block;
+        padding: var(--goa-space-m);
+        overflow-x: auto;
+      }
+
+      a {
+        color: var(--goa-color-interactive-default);
+      }
+
+      a:hover {
+        color: var(--goa-color-interactive-hover);
+      }
+
+      /* Focus styles for accessibility */
+      :focus-visible {
+        outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+        outline-offset: var(--goa-space-3xs);
+      }
+
+      /* ==========================================================================
+       Mobile Bridge: Base styles for responsive behavior
+       Uses body attributes set by mobile-bridge.ts script
+       ========================================================================== */
+
+      /* Mobile header - hidden by default, shown on mobile */
+      .mobile-header-container {
+        display: none;
+      }
+
+      /* Mobile viewport (< 624px) - matches GoA component breakpoint */
+      body[data-mobile="true"] .mobile-header-container {
+        display: block;
+        position: sticky;
+        top: 0;
+        background: var(--goa-color-greyscale-white);
+        z-index: 50;
+        padding: var(--goa-space-m) var(--goa-space-m); /* 16px vertical, 16px horizontal */
+        border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
+        /* Smooth transitions for hide/show and background */
+        transform: translateY(0);
+        transition:
+          transform 0.25s ease-out,
+          background 0.2s ease,
+          border-bottom 0.2s ease;
+      }
+
+      /* Header hidden on scroll down */
+      body[data-mobile="true"][data-header-hidden="true"] .mobile-header-container {
+        transform: translateY(-100%);
+      }
+
+      /* Homepage: transparent header at top blends with hero */
+      body[data-page="home"][data-mobile="true"][data-scrolled="false"]
+        .mobile-header-container {
+        background: transparent;
+        border-bottom: none;
+      }
+
+      /* Homepage: restore white header when scrolled */
+      body[data-page="home"][data-mobile="true"][data-scrolled="true"]
+        .mobile-header-container {
+        background: var(--goa-color-greyscale-white);
+        border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
+      }
+
+      /* Mobile header content layout */
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .mobile-header__left {
+        display: flex;
+        align-items: center;
+        gap: var(--goa-space-xs);
+      }
+
+      .mobile-header__right {
+        display: flex;
+        align-items: center;
+      }
+
+      /* Icon buttons: keep clickable area 16px from screen edge */
+      .mobile-header__left > goa-icon-button:first-child {
+        margin-left: 0;
+      }
+
+      .mobile-header__right > goa-icon-button:last-child {
+        margin-right: 0;
+      }
+
+      /* Brand link with logo and title */
+      .mobile-header__brand {
+        display: flex;
+        align-items: center;
+        gap: var(--goa-space-s);
+        text-decoration: none;
+      }
+
+      .mobile-header__brand:hover {
+        text-decoration: none;
+      }
+
+      .mobile-header__logo {
+        flex-shrink: 0;
+      }
+
+      .mobile-header__title {
+        font: var(--goa-typography-body-s);
+        color: var(--goa-color-greyscale-700);
+      }
+
+    /* Menu overlay backdrop when sidebar is open on mobile */
+    body[data-mobile="true"][data-menu-open="true"]::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 90;
+    }
+  </style>
+</head>
+<body data-page={page}>
+  <!-- Global search modal (Cmd+K / Ctrl+K or mobile search button) -->
+  <SearchModal client:only="react" />
+  <slot />
+</body>
+</html>

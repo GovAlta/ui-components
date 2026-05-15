@@ -1,0 +1,25 @@
+---
+id: tooltip-inconsistent-icon-buttons
+type: dont
+description: Don't use tooltips inconsistently; if one icon button has a tooltip, the rest of the icon buttons must also have tooltips.
+topic: feedback
+tags:
+  - tooltip
+  - icon-button
+  - consistency
+appliesTo:
+  components:
+    - tooltip
+    - icon-button
+status: published
+---
+
+<Preview>
+  <goa-block direction="row" gap="s">
+    <goa-tooltip content="Notifications">
+      <goa-icon-button icon="notifications" />
+    </goa-tooltip>
+    <goa-icon-button icon="settings" />
+    <goa-icon-button icon="help" />
+  </goa-block>
+</Preview>

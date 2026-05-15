@@ -1,0 +1,85 @@
+/**
+ * toc.module.css
+ *
+ * Styles for Table of Contents - copied from ui-components-docs.
+ */
+
+.toc {
+  /* Sticky positioning handled by parent .tab-toc */
+  width: 100%;
+}
+
+a.toc-item-h2,
+a.toc-item-h3 {
+  border-left: 1px solid var(--goa-color-greyscale-200);
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-600);
+  padding-top: var(--goa-space-2xs);
+  padding-bottom: var(--goa-space-2xs);
+  display: block;
+  text-decoration: none;
+}
+
+.toc-item-h2 {
+  padding-left: var(--goa-space-m);
+}
+
+.toc-item-h3 {
+  padding-left: var(--goa-space-xl);
+}
+
+a.toc-item-h2:hover,
+a.toc-item-h3:hover {
+  color: var(--goa-color-interactive-hover);
+}
+
+a[href^="#"].toc-item-h2::before,
+a[href^="#"].toc-item-h3::before {
+  background: none;
+  margin: 0;
+  width: 0;
+}
+
+/* Remove GoA global link focus styles */
+.toc-item-h2:focus,
+.toc-item-h3:focus {
+  outline: none;
+  border-bottom: none;
+}
+
+.toc-item-h2:focus::after,
+.toc-item-h3:focus::after {
+  display: none;
+}
+
+/* Keyboard focus only */
+.toc-item-h2:focus-visible,
+.toc-item-h3:focus-visible {
+  outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  outline-offset: -2px;
+}
+
+.active.toc-item-h2,
+.active.toc-item-h3 {
+  font: var(--goa-typography-body-s);
+  font-weight: 700;
+  color: var(--goa-color-interactive-default);
+  border-left: 3px solid var(--goa-color-interactive-default);
+}
+
+.active.toc-item-h2 {
+  padding-left: calc(var(--goa-space-m) - 2px);
+}
+
+.active.toc-item-h3 {
+  padding-left: calc(var(--goa-space-xl) - 2px);
+}
+
+/* Flat mode: when no H2s exist, H3s use H2 padding */
+.flat .toc-item-h3 {
+  padding-left: var(--goa-space-m);
+}
+
+.flat .active.toc-item-h3 {
+  padding-left: calc(var(--goa-space-m) - 2px);
+}

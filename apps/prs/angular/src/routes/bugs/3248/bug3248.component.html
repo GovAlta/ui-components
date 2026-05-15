@@ -1,0 +1,61 @@
+<div style="width: 1024px; margin: 0 auto; padding: 2rem">
+  <goab-text size="heading-l" mb="xl"> Bug #2333: Dropdown Reset Test </goab-text>
+
+  <goab-text size="body-m" mb="2xl">
+    This test demonstrates the dropdown reset issue. When dropdown items are dynamically removed,
+    the dropdown should properly sync its internal state to reflect the updated list of options.
+  </goab-text>
+
+  <goab-text size="heading-m" mb="l"> Test Scenario </goab-text>
+
+  <goab-text size="body-s" mb="m"> 1. Select a color from the dropdown below </goab-text>
+  <goab-text size="body-s" mb="m">
+    2. Click one of the buttons to reduce the number of available options
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    3. Open the dropdown again - it should only show the remaining options
+  </goab-text>
+  <goab-text size="body-s" mb="2xl">
+    4. The bug occurred when the filtered options weren't synced after items were destroyed
+  </goab-text>
+
+  <goab-text size="body-m" mb="m">
+    Currently showing {{ colorsCount }} color(s): {{ colorsList }}
+  </goab-text>
+
+  <goab-text size="body-m" mb="m">
+    Selected value: {{ selectedColor || "None" }}
+  </goab-text>
+
+  <goab-dropdown
+    name="favcolor"
+    placeholder="Select a color"
+    [value]="selectedColor"
+    (onChange)="onChange($event)"
+    mb="xl"
+  >
+    @for (color of colors; track color) {
+    <goab-dropdown-item [label]="color" [value]="color"></goab-dropdown-item>
+    }
+  </goab-dropdown>
+
+  <div style="display: flex; gap: 1rem; margin-bottom: 1rem">
+    <goab-button type="secondary" (click)="reduceToOne()">
+      Reduce to 1 item (blue)
+    </goab-button>
+    <goab-button type="secondary" (click)="reduceToTwo()">
+      Reduce to 2 items (green, yellow)
+    </goab-button>
+    <goab-button type="primary" (click)="resetToAll()"> Reset to all items </goab-button>
+  </div>
+
+  <goab-text size="body-s" mb="m" mt="2xl">
+    <strong>Expected behavior:</strong> After clicking a reduction button, opening the dropdown
+    should only display the items that remain in the list.
+  </goab-text>
+  <goab-text size="body-s">
+    <strong>Bug behavior (before fix):</strong> The dropdown would still show all original items
+    even after they were removed, because syncFilteredOptions() wasn't called when child items
+    were destroyed.
+  </goab-text>
+</div>

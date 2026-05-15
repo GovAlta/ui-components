@@ -1,0 +1,32 @@
+---
+id: input-width-required
+type: do
+description: Size text inputs based on the expected content length to help users understand what information is needed.
+topic: sizing
+tags:
+  - input
+  - forms
+  - layout
+appliesTo:
+  components:
+    - input
+    - text-area
+relatedProps:
+  - width
+status: published
+---
+
+<Preview>
+  <goa-block direction="column" gap="m">
+    <goa-form-item label="Postal code">
+      <goa-input name="postalCode" width="88px"></goa-input>
+    </goa-form-item>
+    <goa-form-item label="Full name">
+      <goa-input name="name" width="100%"></goa-input>
+    </goa-form-item>
+  </goa-block>
+</Preview>
+
+**Known input length:** Use fixed-width inputs for content with a specific length, such as postal code (7 characters) or year (4 characters).
+
+**Unknown input length:** If you don't know how many characters the user will need (like their name), make your text input 100% of the container.

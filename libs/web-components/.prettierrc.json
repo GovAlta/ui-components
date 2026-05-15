@@ -1,0 +1,7 @@
+{
+  "svelteBracketNewLine": true,
+  "svelteStrictMode": false,
+  "plugins": [
+    "prettier-plugin-svelte"
+  ]
+}

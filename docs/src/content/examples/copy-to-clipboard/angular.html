@@ -1,0 +1,7 @@
+<goab-block alignment="center" gap="s">
+  <div class="token-block"></div>
+  <span>$goa-color-interactive-default</span>
+  <goab-tooltip [content]="isCopied ? 'Copied' : 'Copy?'" position="top">
+    <goab-icon-button icon="copy" (onClick)="copyCode()" mt="2xs"></goab-icon-button>
+  </goab-tooltip>
+</goab-block>

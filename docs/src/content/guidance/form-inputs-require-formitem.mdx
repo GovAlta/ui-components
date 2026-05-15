@@ -1,0 +1,29 @@
+---
+id: form-inputs-require-formitem
+type: do
+description: Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
+topic: other
+tags:
+  - forms
+  - accessibility
+  - labeling
+appliesTo:
+  components:
+    - input
+    - text-area
+    - dropdown
+    - date-picker
+    - radio-group
+    - checkbox-list
+    - checkbox
+    - form-item
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Email address" helptext="We'll use this to contact you">
+    <goa-input name="email" type="email" width="100%"></goa-input>
+  </goa-form-item>
+</Preview>
+
+The form item automatically associates the label with the input for screen readers, ensuring your form is accessible.

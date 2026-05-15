@@ -1,0 +1,13 @@
+{
+  "name": "goa-card-image",
+  "attributes": [
+    {
+      "name": "src",
+      "type": "string"
+    },
+    {
+      "name": "height",
+      "type": "string"
+    }
+  ]
+}

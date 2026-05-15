@@ -1,177 +1,56 @@
-import '@testing-library/jest-dom';
-import React from 'react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom'
-import userEvent from '@testing-library/user-event';
-import GoANotification from './notification';
+import { render } from "@testing-library/react";
+import GoabNotification  from "./notification";
+import { fireEvent } from "@testing-library/dom";
+import { describe, it, expect, vi } from "vitest";
+import { GoabNotificationType } from "@abgov/ui-components-common";
 
-describe('Notification', () => {
-  const notificationTitle = 'Test Title';
-  const notificationClassName = 'goa-notification';
-  const notificationCloseXClassName = 'close';
-  const notificationEmergencyClassName = 'goa--emergency';
-  const notificationEventClassName = 'goa--even';
-  const notificationInformationClassName = 'goa--information';
-  const notificationImportantClassName = 'goa--important';
-
-  const message = "Information to the user goes in the content"
-
-  it('should render successfully and there should be a notification class', () => {
-    const { baseElement } = render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Hidden Title'
-    />);
-    expect(baseElement).toBeTruthy();
-
-    const header = screen.getByRole('notification');
-    expect(header.className).toContain(notificationClassName);
+describe("GoabNotification", () => {
+  describe("type", () => {
+    (["important", "information", "emergency", "event"] as const).forEach(
+      (type: GoabNotificationType) => {
+        it(`should render ${type} notification`, async function () {
+          render(
+            <GoabNotification type={type}>
+              Information to the user goes in the content
+            </GoabNotification>,
+          );
+          const el = document.querySelector("goa-notification");
+          expect(el?.getAttribute("type")).toEqual(type);
+        });
+      },
+    );
   });
 
-  it('should render content message', () => {
-    const { baseElement } = render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    expect(screen.getByText(notificationTitle));
+  it("Event triggered on notification banner dismiss", async () => {
+    const onDismiss = vi.fn();
+    const { container } = render(
+      <GoabNotification type="information" onDismiss={onDismiss}>
+        Information to the user goes in the content
+      </GoabNotification>,
+    );
+    const notificationBanner = container.querySelector("goa-notification");
+    notificationBanner && fireEvent(notificationBanner, new CustomEvent("_dismiss"));
+    expect(onDismiss).toBeCalled();
   });
 
-  test('should have link if set', async () => {
-    const { baseElement } = render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    expect(screen.getByRole('url'));
-    expect(screen.getByText(message));
+  it("should render notification banner with ariaLive", async () => {
+    render(
+      <GoabNotification type="information" ariaLive="assertive">
+        Information to the user goes in the content
+      </GoabNotification>,
+    );
+    const el = document.querySelector("goa-notification");
+    expect(el?.getAttribute("ariaLive")).toEqual("assertive");
   });
 
-  test('there should be a close x at the top right', () => {
-    render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    const closeBox = screen.getByRole('closeBox');
-    expect(closeBox.className).toContain(notificationCloseXClassName);
+  it("should render notification banner with emphasis and compact", async () => {
+    render(
+      <GoabNotification type="information" emphasis="low" compact>
+        Information to the user goes in the content
+      </GoabNotification>,
+    );
+    const el = document.querySelector("goa-notification");
+    expect(el?.getAttribute("emphasis")).toEqual("low");
+    expect(el?.getAttribute("compact")).toEqual("true");
   });
-
-  test('clicking the close x should hide everything', () => {
-    const onClickStub = jest.fn()
-    render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-      onDismiss={onClickStub}
-    />);
-
-    const closeBox = screen.getByRole('closeBox');
-
-    userEvent.click(closeBox);
-    const goaNotification = document.getElementsByClassName('goa-notification');
-    expect(goaNotification.length).toBe(0);
-    const goaNotifications = document.getElementsByClassName('goa-notifications');
-    expect(goaNotifications.length).toBe(0);
-
-
-  });
-
-  test('emergency is selected', () => {
-    render(<GoANotification
-      type='emergency'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    const notifications = document.getElementsByClassName('goa-notification');
-    expect(notifications.length).toBe(1);
-    expect(notifications[0].className).toContain(notificationEmergencyClassName);
-    expect(notifications[0].className).not.toContain(notificationEventClassName);
-    expect(notifications[0].className).not.toContain(notificationImportantClassName);
-    expect(notifications[0].className).not.toContain(notificationInformationClassName);
-  });
-
-  test('event is selected', () => {
-    render(<GoANotification
-      type='event'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    const notifications = document.getElementsByClassName('goa-notification');
-    expect(notifications.length).toBe(1);
-    expect(notifications[0].className).not.toContain(notificationEmergencyClassName);
-    expect(notifications[0].className).toContain(notificationEventClassName);
-    expect(notifications[0].className).not.toContain(notificationImportantClassName);
-    expect(notifications[0].className).not.toContain(notificationInformationClassName);
-  });
-
-  test('information is selected', () => {
-    render(<GoANotification
-      type='information'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    const notifications = document.getElementsByClassName('goa-notification');
-    expect(notifications.length).toBe(1);
-    expect(notifications[0].className).not.toContain(notificationEmergencyClassName);
-    expect(notifications[0].className).not.toContain(notificationEventClassName);
-    expect(notifications[0].className).not.toContain(notificationImportantClassName);
-    expect(notifications[0].className).toContain(notificationInformationClassName);
-  });
-
-  test('important is selected', () => {
-    render(<GoANotification
-      type='important'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-    />);
-
-    const notifications = document.getElementsByClassName('goa-notification');
-    expect(notifications.length).toBe(1);
-    expect(notifications[0].className).not.toContain(notificationEmergencyClassName);
-    expect(notifications[0].className).not.toContain(notificationEventClassName);
-    expect(notifications[0].className).toContain(notificationImportantClassName);
-    expect(notifications[0].className).not.toContain(notificationInformationClassName);
-  });
-
-  test('onDismiss is triggered', () => {
-    const onClickStub = jest.fn()
-    render(<GoANotification
-      type='important'
-      message={message}
-      isDismissable={true}
-      notificationUrl='#'
-      title='Test Title'
-      onDismiss={onClickStub}
-    />);
-
-    const closex = screen.getByRole('closeBox');
-    userEvent.click(closex)
-    expect(onClickStub).toHaveBeenCalled()
-  });
-
 });

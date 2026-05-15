@@ -1,0 +1,278 @@
+<h1>Button State Persistence Bug Test (Issue #2839)</h1>
+
+<goab-block gap="l" direction="column">
+  <!-- Issue Description -->
+  <goab-block gap="m" direction="column">
+    <h2>Issue Description</h2>
+    <p>
+      According to
+      <a href="https://github.com/GovAlta/ui-components/issues/2839" target="_blank"
+        >GitHub issue #2839</a
+      >, buttons stay in the same state after being clicked:
+    </p>
+    <ul>
+      <li>
+        <strong>Problem:</strong> When you click a button, it changes state as expected,
+        but the state remains in effect until you click something else
+      </li>
+      <li>
+        <strong>Expected:</strong> The state should change back as soon as the mouse
+        button is released
+      </li>
+      <li><strong>Reported by:</strong> Kevin Yu</li>
+    </ul>
+  </goab-block>
+
+  <!-- Test Instructions -->
+  <goab-block gap="m" direction="column">
+    <h2>Test Instructions</h2>
+    <p>
+      Click each button below and observe if the button state returns to normal
+      immediately after releasing the mouse button. The button should not remain in a
+      "pressed" or "active" state after the click is complete.
+    </p>
+    <p><strong>Click Count:</strong> {{ clickCount }}</p>
+  </goab-block>
+
+  <!-- Test 1: Basic Button Types -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 1: Basic Button Types</h2>
+    <p>Test primary, secondary, and tertiary button types:</p>
+
+    <goab-block gap="s" direction="row">
+      <goab-button
+        type="primary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-primary-button"
+      >
+        Primary Button
+      </goab-button>
+
+      <goab-button
+        type="secondary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-secondary-button"
+      >
+        Secondary Button
+      </goab-button>
+
+      <goab-button
+        type="tertiary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-tertiary-button"
+      >
+        Tertiary Button
+      </goab-button>
+    </goab-block>
+  </goab-block>
+
+  <!-- Test 2: Button Sizes -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 2: Button Sizes</h2>
+    <p>Test normal and compact button sizes:</p>
+
+    <goab-block gap="s" direction="row">
+      <goab-button
+        type="primary"
+        size="normal"
+        (onClick)="onButtonClick()"
+        testId="bug2839-normal-size-button"
+      >
+        Normal Size
+      </goab-button>
+
+      <goab-button
+        type="primary"
+        size="compact"
+        (onClick)="onButtonClick()"
+        testId="bug2839-compact-size-button"
+      >
+        Compact Size
+      </goab-button>
+    </goab-block>
+  </goab-block>
+
+  <!-- Test 3: Button Variants -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 3: Button Variants</h2>
+    <p>Test normal and destructive button variants:</p>
+
+    <goab-block gap="s" direction="row">
+      <goab-button
+        type="primary"
+        variant="normal"
+        (onClick)="onButtonClick()"
+        testId="bug2839-normal-variant-button"
+      >
+        Normal Variant
+      </goab-button>
+
+      <goab-button
+        type="primary"
+        variant="destructive"
+        (onClick)="onButtonClick()"
+        testId="bug2839-destructive-variant-button"
+      >
+        Destructive Variant
+      </goab-button>
+    </goab-block>
+  </goab-block>
+
+  <!-- Test 4: Buttons with Icons -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 4: Buttons with Icons</h2>
+    <p>Test buttons with leading and trailing icons:</p>
+
+    <goab-block gap="s" direction="row">
+      <goab-button
+        type="primary"
+        leadingIcon="add"
+        (onClick)="onButtonClick()"
+        testId="bug2839-leading-icon-button"
+      >
+        Leading Icon
+      </goab-button>
+
+      <goab-button
+        type="primary"
+        trailingIcon="arrow-forward"
+        (onClick)="onButtonClick()"
+        testId="bug2839-trailing-icon-button"
+      >
+        Trailing Icon
+      </goab-button>
+
+      <goab-button
+        type="primary"
+        leadingIcon="add"
+        trailingIcon="arrow-forward"
+        (onClick)="onButtonClick()"
+        testId="bug2839-both-icons-button"
+      >
+        Both Icons
+      </goab-button>
+    </goab-block>
+  </goab-block>
+
+  <!-- Test 5: Icon Buttons -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 5: Icon Buttons</h2>
+    <p>Test GoabIconButton components:</p>
+
+    <goab-block gap="s" direction="row">
+      <goab-icon-button
+        icon="add"
+        (onClick)="onButtonClick()"
+        testId="bug2839-icon-button-add"
+      ></goab-icon-button>
+
+      <goab-icon-button
+        icon="trash"
+        (onClick)="onButtonClick()"
+        testId="bug2839-icon-button-delete"
+      ></goab-icon-button>
+
+      <goab-icon-button
+        icon="pencil"
+        (onClick)="onButtonClick()"
+        testId="bug2839-icon-button-edit"
+      ></goab-icon-button>
+
+      <goab-icon-button
+        icon="close"
+        (onClick)="onButtonClick()"
+        testId="bug2839-icon-button-close"
+      ></goab-icon-button>
+    </goab-block>
+  </goab-block>
+
+  <!-- Test 6: Button Groups -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 6: Button Groups</h2>
+    <p>Test multiple buttons inside GoabButtonGroup:</p>
+
+    <goab-button-group>
+      <goab-button
+        type="primary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-group-button-1"
+      >
+        Group Button 1
+      </goab-button>
+
+      <goab-button
+        type="secondary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-group-button-2"
+      >
+        Group Button 2
+      </goab-button>
+
+      <goab-button
+        type="tertiary"
+        (onClick)="onButtonClick()"
+        testId="bug2839-group-button-3"
+      >
+        Group Button 3
+      </goab-button>
+    </goab-button-group>
+  </goab-block>
+
+  <!-- Test 7: Mixed Button Group -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 7: Mixed Button Group with Icons</h2>
+    <p>Test button group with mixed types and icons:</p>
+
+    <goab-button-group>
+      <goab-button
+        type="primary"
+        leadingIcon="add"
+        (onClick)="onButtonClick()"
+        testId="bug2839-mixed-group-primary"
+      >
+        Add Item
+      </goab-button>
+
+      <goab-button
+        type="secondary"
+        trailingIcon="pencil"
+        (onClick)="onButtonClick()"
+        testId="bug2839-mixed-group-secondary"
+      >
+        Edit
+      </goab-button>
+
+      <goab-icon-button
+        icon="trash"
+        (onClick)="onButtonClick()"
+        testId="bug2839-mixed-group-icon"
+      ></goab-icon-button>
+    </goab-button-group>
+  </goab-block>
+
+  <!-- Expected vs Actual Behavior -->
+  <goab-block gap="m" direction="column">
+    <h2>Expected vs Actual Behavior</h2>
+    <goab-block gap="s" direction="column">
+      <h3>Expected Behavior (After Fix)</h3>
+      <ul>
+        <li>
+          Button state should return to normal immediately after mouse button release
+        </li>
+        <li>No visual indication of "pressed" or "active" state should persist</li>
+        <li>Focus state should not interfere with mouse interaction states</li>
+        <li>All button types and variants should behave consistently</li>
+      </ul>
+    </goab-block>
+
+    <goab-block gap="s" direction="column">
+      <h3>Actual Behavior (Before Fix)</h3>
+      <ul>
+        <li>Button state remains in "pressed" or "active" state after click</li>
+        <li>State only changes when clicking something else</li>
+        <li>Focus state interferes with mouse interaction</li>
+        <li>Poor user experience with buttons appearing "stuck"</li>
+      </ul>
+    </goab-block>
+  </goab-block>
+</goab-block>

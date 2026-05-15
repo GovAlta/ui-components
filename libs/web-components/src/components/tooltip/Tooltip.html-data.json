@@ -1,0 +1,80 @@
+{
+  "name": "goa-tooltip",
+  "attributes": [
+    {
+      "name": "content",
+      "description": "Sets the tooltip text content",
+      "type": "string"
+    },
+    {
+      "name": "position",
+      "default": "top",
+      "description": "Sets the tooltip position",
+      "values": [
+        {
+          "name": "top",
+          "description": "Renders the tooltip to the top of the target element"
+        },
+        {
+          "name": "bottom",
+          "description": "Renders the tooltip to the bottom of the target element"
+        },
+        {
+          "name": "left",
+          "description": "Renders the tooltip to the left of the target element"
+        },
+        {
+          "name": "right",
+          "description": "Renders the tooltip to the right of the target element"
+        }
+      ],
+      "type": "string"
+    },
+    {
+      "name": "halign",
+      "default": "center",
+      "description": "Set alignment for a tooltip rendered on the top or bottom",
+      "values": [
+        {
+          "name": "center",
+          "description": "Aligns the tooltip to the center of the target element"
+        },
+        {
+          "name": "left",
+          "description": "Aligns the tooltip to the left of the target element"
+        },
+        {
+          "name": "right",
+          "description": "Aligns the tooltip to the right of the target element"
+        }
+      ],
+      "type": "string"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Tooltip",
+      "url": "{{siteUrl}}/?path=/docs/components-tooltip--basic"
+    }
+  ]
+}

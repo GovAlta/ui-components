@@ -1,0 +1,233 @@
+---
+/**
+ * Foundations - Content guidelines - Capitalization
+ *
+ * Capitalization guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Content guidelines -> Capitalization.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../components/DoDont.astro";
+import Preview from "../../../components/Preview.astro";
+---
+
+<DocumentationPageLayout
+  title="Capitalization"
+  description="Capitalization guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Capitalization</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    Use <strong>sentence case</strong> for all headings, labels, and content.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="sentence-case">Sentence case</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Sentence case means everything is lowercase except for the
+    first word of a label, phrase, or sentence. It follows the natural
+    patterns of written language, which makes text easier to scan and comprehend.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Use sentence case in most titles and headings. Only capitalize the
+    first word of a sentence or title.
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont
+      type="do"
+      description="Always capitalize the first word of a heading or new sentence."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="xs">
+            <strong>Applicant admission requirements</strong>
+          </goa-text>
+          <goa-text size="body-m" mt="none" mb="none">
+            An Alberta high school diploma or non-Alberta Canadian equivalent is required.
+          </goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use all uppercase for emphasis.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">
+            Document types will gradually be made available. If you need to file an
+            UNSUPPORTED DOCUMENT TYPE, you must file via the existing email filing
+            procedure or it will be rejected by the digital service.
+          </goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="do" description="Capitalize proper nouns.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">
+            Find available dates for Civil Regular Chambers, Family Docket Court, or
+            Applications Judges Chambers in Edmonton or Calgary.
+          </goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't write proper nouns, services, or brand names in lowercase."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">
+            Before the alberta digital filing services, the only way to file court
+            documents was in person or through email.
+          </goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-text size="body-m" mt="none" mb="xl">
+    There are many chief operating officers, so <i>chief operating officer</i> is a
+    common noun.
+    There is only one John Doe, Chief Operating Officer, so it is a
+    proper noun.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="title-case">Title case</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Title case may be used in certain situations, including:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>proper nouns</li>
+      <li>brands</li>
+      <li>products</li>
+      <li>service names</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    A <strong>proper noun</strong> is the name of a particular person, place, organization,
+    or thing.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Examples:</goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Margaret</li>
+      <li>Calgary</li>
+      <li>Government of Alberta</li>
+      <li>Community Initiatives Program</li>
+    </ul>
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont
+      type="do"
+      description="Capitalize the first word after a colon, slash or ampersand."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="xs">Country/Region</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">On/Off</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Capitalize the first word after a colon, slash or ampersand."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="xs">Personal: Employment</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Personal: Education</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use internal capitalization unless it is part of a proper noun."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none"
+            >Submitting adjournment Pre-Court</goa-text
+          >
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="uppercase">Uppercase</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    When displaying information pulled from legacy systems, some content
+    may need to remain in capital letters due to system limitations.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use this style only when required, because uppercase:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>is less readable</li>
+      <li>is less accessible</li>
+      <li>creates the perception of emphasis</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Whenever possible, convert the content to sentence case for better readability.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="references">References</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>
+        <goa-link trailingicon="open">
+          <a
+            href="https://medium.com/@jsaito/making-a-case-for-letter-case-19d09f653c98"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Making a case for letter case - Medium
+          </a>
+        </goa-link>
+      </li>
+      <li>
+        <goa-link trailingicon="open">
+          <a
+            href="https://uxplanet.org/why-letter-casing-is-important-to-consider-during-design-decisions-50402acd0a4e"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Why letter casing is important to consider during design decisions - Medium
+          </a>
+        </goa-link>
+      </li>
+    </ul>
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+</style>

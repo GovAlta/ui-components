@@ -1,0 +1,56 @@
+import { GoabSkeletonSize, GoabSkeletonType, Spacing } from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  numberAttribute,
+  OnInit,
+  ChangeDetectorRef,
+  inject,
+} from "@angular/core";
+
+import { GoabBaseComponent } from "../base.component";
+
+@Component({
+  standalone: true,
+  selector: "goab-skeleton",
+  template: `
+    @if (isReady) {
+      <goa-skeleton
+        [attr.maxwidth]="maxWidth"
+        [attr.size]="size"
+        [attr.linecount]="lineCount"
+        [attr.type]="type"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+      </goa-skeleton>
+    }
+  `,
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+/** Provide visual feedback to users while loading a content heavy page or page element. */
+export class GoabSkeleton extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  isReady = false;
+  /** @required Sets the skeleton shape to represent your content. */
+  @Input({ required: true }) type!: GoabSkeletonType;
+  /** Sets the maximum width. Currently only used in card skeleton type. @default "300px" */
+  @Input() maxWidth = "300px";
+  /** Size can affect either the height, width or both for different skeleton types. */
+  @Input() size?: GoabSkeletonSize;
+  /** Used within components that contain multiple lines. Currently only used in card skeleton type. */
+  @Input({ transform: numberAttribute }) lineCount?: number;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
+}

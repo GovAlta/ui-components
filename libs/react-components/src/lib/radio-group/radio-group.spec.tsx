@@ -1,87 +1,290 @@
-import React, { useState } from 'react';
-import { render, screen, fireEvent, waitFor, logDOM } from '@testing-library/react';
+import { render, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { fireEvent } from "@testing-library/dom";
 
-import { GoARadioGroup, GoARadio } from './radio-group';
+import { GoabRadioGroup, GoabRadioItem } from "./radio-group";
+import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
-describe('RadioGroup', () => {
-  const baseMockData = {
-    title: 'mock title',
-    helperText: 'mock helper text',
-    disabled: false,
-    labelPosition: 'after',
+type MockData = {
+  title: string;
+  helperText: string;
+  value: string;
+  labelPosition: string;
+
+  required: boolean;
+  requiredErrorMessage: string;
+
+  radios: { text: string; value: string; description?: string | React.ReactNode }[];
+};
+
+const noop = (detail: GoabRadioGroupOnChangeDetail) => {
+  /* do nothing */
+};
+
+describe("GoabRadioGroup", () => {
+  const baseMockData: MockData = {
+    title: "mock title",
+    value: "",
+    helperText: "mock helper text",
+    labelPosition: "after",
     required: true,
-    requiredErrorMessage: 'mock required error message',
+    requiredErrorMessage: "mock required error message",
 
     radios: [
-      { text: 'Apples', value: 'apples' },
-      { text: 'Oranges', value: 'oranges' },
-      { text: 'Bananas', value: 'bananas' },
+      { text: "Apples", value: "apples" },
+      { text: "Oranges", value: "oranges", description: "Oranges are orange" },
+      { text: "Bananas", value: "bananas", description: <h3>Bananas are banana</h3> },
     ],
   };
 
-  function Template(data, onChange) {
-    let value = data.value;
-    function setValue(newValue) {
-      value = newValue;
-    }
-    return (
-      <GoARadioGroup
-        name="fruits"
-        disabled={data.disabled}
-        value={value}
-        onChange={(name, newValue) => onChange && onChange(name, newValue)}
-      >
-        {data.radios.map((radio) => (
-          <GoARadio key={radio.value} checked={data.value === radio.value} value={radio.value}>
-            {radio.text}
-          </GoARadio>
-        ))}
-      </GoARadioGroup>
-    )
-  }
-
-  describe('Basic rendering', () => {
-    const mockData = { ...baseMockData };
-
-    it('should render successfully', async () => {
-      const { baseElement } = render(Template(baseMockData, null));
+  describe("Basic rendering", () => {
+    it("should render", async () => {
+      const data = baseMockData;
+      const { baseElement } = render(
+        <GoabRadioGroup name="fruits" onChange={noop}>
+          {data.radios.map((radio) => (
+            <GoabRadioItem key={radio.value} name="fruits"></GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
+      );
       expect(baseElement).toBeTruthy();
+      const el = baseElement.querySelector("goa-radio-group");
+
+      expect(el?.getAttribute("name")).toBe("fruits");
+      expect(el?.getAttribute("disabled")).toBeNull();
+      expect(el?.getAttribute("error")).toBeNull();
+
+      const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
+      radios.forEach((radio) => {
+        expect(radio.getAttribute("disabled")).toBeNull();
+        expect(radio.getAttribute("error")).toBeNull();
+        expect(radio.getAttribute("checked")).toBeNull();
+      });
+    });
+
+    it("should render with properties", async () => {
+      const data = baseMockData;
+      const { baseElement } = render(
+        <GoabRadioGroup
+          name="fruits"
+          value={data.value}
+          disabled
+          error
+          size="compact"
+          mt="s"
+          mr="m"
+          mb="l"
+          ml="xl"
+          ariaLabel={"please select fruit"}
+          onChange={noop}
+        >
+          {data.radios.map((radio) => (
+            <GoabRadioItem
+              key={radio.value}
+              label={radio.text}
+              name="fruits"
+              disabled
+              error
+              checked
+              compact
+              value={radio.value}
+              ariaLabel={"you are choosing " + radio.value}
+            >
+              {radio.text}
+            </GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
+      );
+      expect(baseElement).toBeTruthy();
+      const el = baseElement.querySelector("goa-radio-group");
+      expect(el).toBeTruthy();
+
+      expect(el?.getAttribute("mt")).toBe("s");
+      expect(el?.getAttribute("mr")).toBe("m");
+      expect(el?.getAttribute("mb")).toBe("l");
+      expect(el?.getAttribute("ml")).toBe("xl");
+      expect(el?.getAttribute("name")).toBe("fruits");
+      expect(el?.getAttribute("arialabel")).toBe("please select fruit");
+      expect(el?.getAttribute("disabled")).toBe("true");
+      expect(el?.getAttribute("error")).toBe("true");
+      expect(el?.getAttribute("size")).toBe("compact");
+
+      const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
+      radios.forEach((radio) => {
+        expect(radio.getAttribute("arialabel")).toBe("you are choosing " + radio.value);
+        expect(radio.getAttribute("disabled")).toBe("true");
+        expect(radio.getAttribute("error")).toBe("true");
+        expect(radio.getAttribute("checked")).toBe("true");
+        expect(radio.getAttribute("compact")).toBe("true");
+      });
     });
   });
 
-  describe('Initial data', () => {
-    const selectedValue = 'oranges';
+  describe("Initial data", () => {
+    const selectedValue = "oranges";
 
-    let mockData;
-    beforeEach(() => {
-      mockData = { ...baseMockData, value: selectedValue };
-    });
-
-    it('initial data is set', async () => {
-      render(Template(mockData, null));
-
-      const radios = document.querySelectorAll<HTMLInputElement>(
-        'input[type=radio]'
+    it("initial data is set", async () => {
+      const data = baseMockData;
+      render(
+        <GoabRadioGroup
+          name="fruits"
+          value={data.value}
+          mt="s"
+          mr="m"
+          mb="l"
+          ml="xl"
+          onChange={noop}
+        >
+          {data.radios.map((radio) => (
+            <GoabRadioItem
+              key={radio.value}
+              label={radio.text}
+              name="fruits"
+              checked={data.value === radio.value}
+              value={radio.value}
+            >
+              {radio.text}
+            </GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
       );
+
+      const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       radios.forEach((radio) => {
         expect(radio.checked).toBe(radio.value === selectedValue);
       });
     });
+
+    it("render with description", async () => {
+      const data = baseMockData;
+      const result = render(
+        <GoabRadioGroup name="fruits" value={data.value} onChange={noop}>
+          {data.radios.map((radio) => (
+            <GoabRadioItem
+              key={radio.value}
+              label={radio.text}
+              name="fruits"
+              checked={data.value === radio.value}
+              value={radio.value}
+              description={radio.description}
+            >
+              {radio.text}
+            </GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
+      );
+
+      const radios = document.querySelectorAll("goa-radio-item");
+      expect(radios[0].getAttribute("description")).toBe(null);
+      expect(radios[1].getAttribute("description")).toBe("Oranges are orange");
+      expect(
+        result.container.querySelector("div[slot='description']")?.innerHTML,
+      ).toContain("Bananas are banana");
+    });
+
+    it("should pass the revealAriaLabel property to the web component", () => {
+      const result = render(
+        <GoabRadioGroup name="fruits" onChange={noop}>
+          <GoabRadioItem
+            label="Apples with reveal"
+            name="fruits"
+            value="apples"
+            reveal={<div>Additional apple options</div>}
+            revealAriaLabel="Screen reader announcement for radio reveal content"
+          />
+        </GoabRadioGroup>,
+      );
+
+      const radioItem = document.querySelector("goa-radio-item");
+      expect(radioItem?.getAttribute("revealarialabel")).toBe("Screen reader announcement for radio reveal content");
+      expect(
+        result.container.querySelector("div[slot='reveal']")?.innerHTML,
+      ).toContain("Additional apple options");
+    });
   });
 
-  describe('Selection Change Tests', () => {
-    it('change event should work', async () => {
-      let newValue
-      render(Template({ ...baseMockData, value: 'oranges' }, (name, _newValue) => {
-        newValue = _newValue;
-      }));
+  describe("Selection Change Tests", () => {
+    it("event should not fire when disabled", async () => {
+      const onChange = vi.fn();
+      const data = { ...baseMockData, value: "oranges", disabled: true };
 
-      const radios = screen.getAllByRole('radio');
-      fireEvent.click(radios[0]);
+      const { container } = render(
+        <GoabRadioGroup
+          name="fruits"
+          disabled={data.disabled}
+          value={data.value}
+          onChange={(event: GoabRadioGroupOnChangeDetail) => onChange(event)}
+        >
+          {data.radios.map((radio) => (
+            <GoabRadioItem
+              key={radio.value}
+              label={radio.text}
+              name="fruits"
+              checked={data.value === radio.value}
+              value={radio.value}
+            >
+              {radio.text}
+            </GoabRadioItem>
+          ))}
+        </GoabRadioGroup>,
+      );
 
       await waitFor(() => {
-        expect(newValue).toBe('apples');
+        const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
+        expect(radios[0]).toBeTruthy();
+        fireEvent.click(radios[0]);
+        expect(onChange).not.toBeCalled();
       });
     });
+  });
+
+  it("change event should work", async () => {
+    const onChange = vi.fn();
+    const data = { ...baseMockData, value: "oranges" };
+    const { container } = render(
+      <GoabRadioGroup name="fruits" value={data.value} onChange={onChange}>
+        {data.radios.map((radio) => (
+          <GoabRadioItem
+            key={radio.value}
+            label={radio.text}
+            name="fruits"
+            checked={data.value === radio.value}
+            value={radio.value}
+          >
+            {radio.text}
+          </GoabRadioItem>
+        ))}
+      </GoabRadioGroup>,
+    );
+
+    const radios = container.querySelectorAll<HTMLInputElement>("goa-radio-item");
+    const radioGroup = container.querySelector("goa-radio-group");
+
+    expect(radios[0]).toBeTruthy();
+    radioGroup &&
+      fireEvent(
+        radioGroup,
+        new CustomEvent("_change", {
+          detail: { name: "fruits", value: radios[0].value },
+        }),
+      );
+
+    await waitFor(() => {
+      expect(onChange).toBeCalled();
+    });
+  });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabRadioGroup
+        name="fruits"
+        onChange={noop}
+        data-grid="cell"
+      >
+        <GoabRadioItem name="fruits" value="apples">Apples</GoabRadioItem>
+      </GoabRadioGroup>
+    );
+    const el = baseElement.querySelector("goa-radio-group");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
   });
 });

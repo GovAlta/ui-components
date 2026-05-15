@@ -1,0 +1,16 @@
+.bug3072__actions {
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.bug3072__values {
+  max-width: 720px;
+}
+
+.bug3072__json {
+  background: #f4f4f4;
+  border-radius: 4px;
+  padding: 12px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}

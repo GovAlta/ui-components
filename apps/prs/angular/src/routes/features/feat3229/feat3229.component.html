@@ -1,0 +1,546 @@
+<div>
+  <goab-text tag="h1" mt="m">Feature #3229: MenuButton</goab-text>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  @if (lastAction) {
+    <goab-block mb="m">
+      <goab-badge type="information" [content]="lastAction"></goab-badge>
+    </goab-block>
+  }
+
+  <!-- ── Test 1: Icon-only edge cases ── -->
+  <goab-text tag="h2">1. Icon-only (no text) — edge cases</goab-text>
+  <goab-text tag="p">
+    When no <code>text</code> is provided, renders as a borderless icon button.
+  </goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>No text, no icon, no size — defaults to ellipsis-horizontal, normal size, ariaLabel="Open menu"</goab-text>
+      <goab-menu-button (onAction)="handleAction($event, 'icon-only defaults')">
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>No text, no icon, no ariaLabel, size="compact"</goab-text>
+      <goab-menu-button
+        size="compact"
+        (onAction)="handleAction($event, 'icon-only compact no ariaLabel')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>No text, custom ariaLabel="Actions for John Smith"</goab-text>
+      <goab-menu-button
+        ariaLabel="Actions for John Smith"
+        (onAction)="handleAction($event, 'icon-only custom ariaLabel')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>No text, custom ariaLabel, size="compact"</goab-text>
+      <goab-menu-button
+        ariaLabel="Actions for John Smith"
+        size="compact"
+        (onAction)="handleAction($event, 'icon-only custom ariaLabel compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 2: Size on icon-only ── -->
+  <goab-text tag="h2">2. Size on icon-only</goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>icon + normal (default)</goab-text>
+      <goab-menu-button
+        leadingIcon="ellipsis-horizontal"
+        (onAction)="handleAction($event, 'icon normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>icon + compact</goab-text>
+      <goab-menu-button
+        leadingIcon="ellipsis-horizontal"
+        size="compact"
+        (onAction)="handleAction($event, 'icon compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 3: Size on text-only ── -->
+  <goab-text tag="h2">3. Size on text-only</goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>text + normal (default)</goab-text>
+      <goab-menu-button
+        text="Actions"
+        (onAction)="handleAction($event, 'text normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>text + compact</goab-text>
+      <goab-menu-button
+        text="Actions"
+        size="compact"
+        (onAction)="handleAction($event, 'text compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 4: Size on text + icon ── -->
+  <goab-text tag="h2">4. Size on text + leadingIcon</goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>text + icon + normal</goab-text>
+      <goab-menu-button
+        text="More"
+        leadingIcon="ellipsis-horizontal"
+        (onAction)="handleAction($event, 'text+icon normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>text + icon + compact</goab-text>
+      <goab-menu-button
+        text="More"
+        leadingIcon="ellipsis-horizontal"
+        size="compact"
+        (onAction)="handleAction($event, 'text+icon compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 5: Menu action variants ── -->
+  <goab-text tag="h2">5. Menu action items — with icon vs text-only</goab-text>
+  <goab-text tag="p">
+    Verify that menu action items render correctly for both normal and compact sizes,
+    with and without icons.
+  </goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>normal — actions with icon + text</goab-text>
+      <goab-menu-button
+        text="With Icons"
+        (onAction)="handleAction($event, 'actions with icons normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>compact — actions with icon + text</goab-text>
+      <goab-menu-button
+        text="With Icons"
+        size="compact"
+        (onAction)="handleAction($event, 'actions with icons compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>normal — actions text-only</goab-text>
+      <goab-menu-button
+        text="Text Only"
+        (onAction)="handleAction($event, 'actions text-only normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>compact — actions text-only</goab-text>
+      <goab-menu-button
+        text="Text Only"
+        size="compact"
+        (onAction)="handleAction($event, 'actions text-only compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 6: Button types ── -->
+  <goab-text tag="h2">6. Button types (normal vs compact)</goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>primary</goab-text>
+      <goab-menu-button
+        text="Primary"
+        type="primary"
+        (onAction)="handleAction($event, 'primary normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Primary"
+        type="primary"
+        size="compact"
+        (onAction)="handleAction($event, 'primary compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>secondary</goab-text>
+      <goab-menu-button
+        text="Secondary"
+        type="secondary"
+        (onAction)="handleAction($event, 'secondary normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Secondary"
+        type="secondary"
+        size="compact"
+        (onAction)="handleAction($event, 'secondary compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>tertiary</goab-text>
+      <goab-menu-button
+        text="Tertiary"
+        type="tertiary"
+        (onAction)="handleAction($event, 'tertiary normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Tertiary"
+        type="tertiary"
+        size="compact"
+        (onAction)="handleAction($event, 'tertiary compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 7: Button variants (normal, destructive) ── -->
+  <goab-text tag="h2">7. Button variants</goab-text>
+  <goab-text tag="p">
+    The <code>variant</code> prop controls the color scheme: normal or destructive.
+  </goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>normal (default)</goab-text>
+      <goab-menu-button
+        text="Normal"
+        variant="normal"
+        (onAction)="handleAction($event, 'variant normal')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Normal"
+        variant="normal"
+        size="compact"
+        (onAction)="handleAction($event, 'variant normal compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>destructive</goab-text>
+      <goab-menu-button
+        text="Destructive"
+        variant="destructive"
+        (onAction)="handleAction($event, 'variant destructive')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Destructive"
+        variant="destructive"
+        size="compact"
+        (onAction)="handleAction($event, 'variant destructive compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>icon-only destructive</goab-text>
+      <goab-menu-button
+        variant="destructive"
+        (onAction)="handleAction($event, 'icon-only destructive')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        variant="destructive"
+        size="compact"
+        (onAction)="handleAction($event, 'icon-only destructive compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>destructive + secondary</goab-text>
+      <goab-menu-button
+        text="Delete"
+        type="secondary"
+        variant="destructive"
+        (onAction)="handleAction($event, 'destructive secondary')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Delete"
+        type="secondary"
+        variant="destructive"
+        size="compact"
+        (onAction)="handleAction($event, 'destructive secondary compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>destructive + tertiary</goab-text>
+      <goab-menu-button
+        text="Delete"
+        type="tertiary"
+        variant="destructive"
+        (onAction)="handleAction($event, 'destructive tertiary')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        text="Delete"
+        type="tertiary"
+        variant="destructive"
+        size="compact"
+        (onAction)="handleAction($event, 'destructive tertiary compact')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- ── Test 8: Icon theme — filled vs outline ── -->
+  <goab-text tag="h2">8. Icon theme (filled vs outline)</goab-text>
+  <goab-text tag="p">
+    Use <code>icon-name:filled</code> or <code>icon-name:outline</code> suffix to
+    control icon theme.
+  </goab-text>
+
+  <goab-block direction="column" gap="m" mt="m">
+    <goab-block gap="l" alignment="center">
+      <goab-text>ellipsis-horizontal</goab-text>
+      <goab-menu-button
+        leadingIcon="ellipsis-horizontal:outline"
+        (onAction)="handleAction($event, 'ellipsis outline')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        leadingIcon="ellipsis-horizontal:filled"
+        (onAction)="handleAction($event, 'ellipsis filled')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>ellipsis-vertical</goab-text>
+      <goab-menu-button
+        leadingIcon="ellipsis-vertical:outline"
+        (onAction)="handleAction($event, 'ellipsis-v outline')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        leadingIcon="ellipsis-vertical:filled"
+        (onAction)="handleAction($event, 'ellipsis-v filled')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>menu</goab-text>
+      <goab-menu-button
+        leadingIcon="menu:outline"
+        (onAction)="handleAction($event, 'menu outline')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        leadingIcon="menu:filled"
+        (onAction)="handleAction($event, 'menu filled')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block gap="l" alignment="center">
+      <goab-text>settings</goab-text>
+      <goab-menu-button
+        leadingIcon="settings:outline"
+        (onAction)="handleAction($event, 'settings outline')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
+        leadingIcon="settings:filled"
+        (onAction)="handleAction($event, 'settings filled')"
+      >
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-block>
+</div>

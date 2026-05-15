@@ -1,0 +1,37 @@
+---
+id: 404-error-page
+title: Page not found (404)
+categories:
+  - content-layout
+scale: page
+userType: both
+tags:
+  - error
+  - page-structure
+  - "404"
+components:
+  - page-block
+  - block
+  - text
+  - icon
+  - button
+status: published
+fullWidth: true
+previewStyle: "padding: 0"
+accessibilityNotes: 'Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. No role="alert" is applied because the ARIA alert role is reserved for dynamically inserted messages; a static error route does not meet that criterion.'
+---
+
+A full page that tells the user a page can't be found, with an action to get them back on track.
+
+## When to use
+
+- A user navigates to a URL that doesn't exist in your service.
+- A resource has been moved or deleted and you need a catch-all route.
+- As the fallback route rendered by your router's outlet.
+
+## Considerations
+
+- Keep the message short and give the user one clear next step.
+- Render the pattern inside your existing layout (e.g. as the route in a `GoabOneColumnLayout` outlet) so it sits below your service's header and above its footer.
+- A small amount of custom CSS covers the icon-in-circle treatment, the brand-color accent bar, centred text, and the icon scaled beyond `xlarge`. Each is a pattern the design system doesn't yet cover and is tracked as a gap for the library to absorb over time.
+- The `<h1>` uses `heading-l` (not the default `heading-xl`) to match the Figma spec for page-scale error states.

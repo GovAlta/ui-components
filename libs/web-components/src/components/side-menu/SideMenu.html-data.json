@@ -1,0 +1,10 @@
+{
+  "name": "goa-side-menu",
+  "attributes": [],
+  "references": [
+    {
+      "name": "GoA SideMenu",
+      "url": "{{siteUrl}}/?path=/docs/components-sidemenu--basic"
+    }
+  ]
+}

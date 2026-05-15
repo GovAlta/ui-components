@@ -1,0 +1,38 @@
+<goab-text tag="h1" mb="s">#3201: Modify GoabInput onChange to not fire on tab</goab-text>
+<goab-text tag="p" mb="s"
+  >This is to test the GoabInput and GoabTextArea components. Specifically the onChange
+  event, it should only fire when a change is detected inside the component. It should not
+  fire when you tab out of the component.</goab-text
+>
+<goab-text tag="p" mb="xl"
+  >You can see the events fire in the UI for 500ms, or you can check the console
+  log.</goab-text
+>
+<goab-form-item label="Text Area Component" maxWidth="50%">
+  <goab-textarea
+    name="area-event"
+    (onChange)="handleAreaChange($event)"
+    (onBlur)="handleAreaBlur($event)"
+    width="100%"
+    [value]="textAreaValue"
+  />
+</goab-form-item>
+<div>Change: {{ this.areaChange }} || Blur: {{ this.areaBlur }}</div>
+<goab-form-item label="Input Component" mb="s" maxWidth="50%" mt="xl">
+  <goab-input
+    name="input-event"
+    (onChange)="handleInputChange($event)"
+    (onBlur)="handleInputBlur($event)"
+    width="100%"
+    [value]="inputValue"
+  />
+</goab-form-item>
+<div>Change: {{ this.inputChange }} || Blur: {{ this.inputBlur }}</div>
+<goab-text tag="p" mt="l"
+  >The buttons below will add text to each component. No change event should be
+  fired.</goab-text
+>
+<goab-button-group mt="xl">
+  <goab-button (onClick)="addInputText()">Add Input Text</goab-button>
+  <goab-button (onClick)="addTextAreaText()">Add</goab-button>
+</goab-button-group>

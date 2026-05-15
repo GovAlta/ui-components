@@ -1,0 +1,25 @@
+---
+id: notification-multiple
+type: dont
+description: Don't show multiple temporary notifications at the same time as it can overwhelm users before they time out.
+topic: feedback
+tags:
+  - notification
+  - temporary-notification
+  - timing
+appliesTo:
+  components:
+    - notification
+status: published
+---
+
+<Preview>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <goa-notification type="success">
+      Your profile information has been updated.
+    </goa-notification>
+    <goa-notification type="success">
+      Your contact information has been updated.
+    </goa-notification>
+  </div>
+</Preview>

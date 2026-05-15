@@ -1,44 +1,76 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../../../../core-css/src/lib/styles/callout/callout.scss'
+import {
+  GoabCalloutAriaLive,
+  GoabCalloutEmphasis,
+  GoabCalloutSize,
+  GoabCalloutType,
+  GoabCalloutIconTheme,
+  Margins,
+  DataAttributes,
+} from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
-type calloutType = "important" | 'information' | 'event' | 'success' | 'emergency';
-
-export interface CalloutProps {
-  /**
-   * Callout title.
-  */
-  title?: string,
-  /**
-   * The type of the callout, changes stylings and icons.
-  */
-  type?: calloutType,
-  /**
-   * Callout description
-  */
-  content?: string,
-  children?: React.ReactNode,
+interface WCProps extends Margins {
+  heading?: string;
+  type?: GoabCalloutType;
+  size?: GoabCalloutSize;
+  arialive?: GoabCalloutAriaLive;
+  maxwidth?: string;
+  icontheme?: GoabCalloutIconTheme;
+  emphasis?: GoabCalloutEmphasis;
+  testid?: string;
+  version?: string;
 }
 
-export const GoACallout = ({ title, type = "information", content, children = null, ...props }: CalloutProps) => {
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-callout": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
+export interface GoabCalloutProps extends Margins, DataAttributes {
+  /** Callout heading text. */
+  heading?: string;
+  /** Sets the context and colour of the callout. @default "information" */
+  type?: GoabCalloutType;
+  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. @default "large" */
+  size?: GoabCalloutSize;
+  /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. @default "outline" */
+  iconTheme?: GoabCalloutIconTheme;
+  /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. @default "medium" */
+  emphasis?: GoabCalloutEmphasis;
+  /** Sets the maximum width of the callout. */
+  maxWidth?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Indicates how assistive technology should handle updates to the live region. @default "off" */
+  ariaLive?: GoabCalloutAriaLive;
+  /** Content rendered inside the callout body. */
+  children?: React.ReactNode;
+}
+
+/** Communicate important information through a strong visual emphasis. */
+export const GoabCallout = ({
+  type = "information",
+  iconTheme = "outline",
+  size = "large",
+  ariaLive = "off",
+  emphasis = "medium",
+  children,
+  ...rest
+}: GoabCalloutProps) => {
+  const _props = transformProps<WCProps>(
+    { type, icontheme: iconTheme, size, arialive: ariaLive, emphasis, ...rest },
+    lowercase,
+  );
+
   return (
-    <div>
-      <div className={`goa-callout goa--${type}`}>
-        <div>
-          <h3 data-testid='callout-title'>{title}</h3>
-          <div className="messages" data-testid='callout-content'>
-            {content || children}
-          </div>
-        </div>
-      </div>
-    </div>
+    <goa-callout {..._props} version="2">
+      {children}
+    </goa-callout>
   );
 };
 
-GoACallout.propTypes = {
-  title: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  content: PropTypes.string,
-};
-
-export default GoACallout;
+export default GoabCallout;

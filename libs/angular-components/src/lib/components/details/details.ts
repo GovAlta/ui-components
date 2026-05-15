@@ -1,0 +1,56 @@
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
+  inject,
+} from "@angular/core";
+
+import { GoabBaseComponent } from "../base.component";
+
+@Component({
+  standalone: true,
+  selector: "goab-details",
+
+  template: `
+    @if (isReady) {
+      <goa-details
+        [attr.heading]="heading"
+        [attr.testid]="testId"
+        [attr.open]="open"
+        [attr.maxwidth]="maxWidth"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-details>
+    }
+  `,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+/** Let users reveal more detailed information when they need it. */
+export class GoabDetails extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** @required The title heading. */
+  @Input({ required: true }) heading!: string;
+  /** Controls if details is expanded or not. */
+  @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets the maximum width of the details. */
+  @Input() maxWidth?: string;
+
+  isReady = false;
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+}

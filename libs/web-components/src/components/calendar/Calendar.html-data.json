@@ -1,0 +1,51 @@
+{
+  "name": "goa-calendar",
+  "attributes": [
+    {
+      "name": "name",
+      "description": "Name of the date property",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Selected date value"
+    },
+    {
+      "name": "min",
+      "type": "string",
+      "description": "Min allowed date value"
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "description": "Max allowed date value"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Calendar",
+      "url": "{{siteUrl}}/iframe.html?viewMode=docs&id=components-calendar--basic&args=#calendar"
+    }
+  ]
+}

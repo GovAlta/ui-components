@@ -1,0 +1,25 @@
+---
+id: tabs-dont-nest
+type: dont
+description: Avoid nesting tabs inside other tabs.
+topic: usage
+tags:
+  - tabs
+  - layout
+appliesTo:
+  components:
+    - tabs
+status: published
+---
+
+<Preview bad>
+  <goa-tabs>
+    <goa-tab heading="Open">
+      <goa-tabs>
+        <goa-tab heading="Today">Nested content</goa-tab>
+        <goa-tab heading="Yesterday">Nested content</goa-tab>
+      </goa-tabs>
+    </goa-tab>
+    <goa-tab heading="Completed">Content</goa-tab>
+  </goa-tabs>
+</Preview>

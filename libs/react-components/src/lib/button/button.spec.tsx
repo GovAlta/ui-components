@@ -1,79 +1,160 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom'
-import userEvent from '@testing-library/user-event';
-import GoAButton from './button';
+import { render } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/dom";
+import GoabButton from "./button";
+import { describe, it, expect, vi } from "vitest";
+import { GoabButtonSize, GoabButtonType } from "@abgov/ui-components-common";
 
-describe('GoA Button', () => {
-  const buttonText = 'Test Title';
-  const buttonClassName = 'goa-button';
-  const buttonSecondaryClassName = 'goa--secondary';
-  const buttonTertiaryClassName = 'goa--tertiary';
-  const buttonSmallClassName = 'btn-small';
-  const buttonTitle = 'hovering';
+describe("GoabButton", () => {
+  const buttonText = "Test Title";
 
-  it('should render content', () => {
-    const { baseElement } = render(<GoAButton buttonType='primary' buttonSize='normal'>{buttonText}</GoAButton>);
+  const noop = () => {
+    /* do nothing */
+  };
+
+  it("should render", () => {
+    const { container } = render(<GoabButton></GoabButton>);
+
+    const el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBeNull();
+  });
+
+  it("should render the properties", () => {
+    const { container } = render(
+      <GoabButton
+        disabled
+        type="primary"
+        size="compact"
+        variant="destructive"
+        leadingIcon="car"
+        trailingIcon="bag"
+        mt="s"
+        mr="m"
+        mb="l"
+        ml="xl"
+      />,
+    );
+    const el = container.querySelector("goa-button");
+
+    expect(el?.getAttribute("disabled")).toBe("true");
+    expect(el?.getAttribute("type")).toBe("primary");
+    expect(el?.getAttribute("size")).toBe("compact");
+    expect(el?.getAttribute("variant")).toBe("destructive");
+    expect(el?.getAttribute("leadingicon")).toBe("car");
+    expect(el?.getAttribute("trailingicon")).toBe("bag");
+
+    expect(el?.getAttribute("mt")).toBe("s");
+    expect(el?.getAttribute("mr")).toBe("m");
+    expect(el?.getAttribute("mb")).toBe("l");
+    expect(el?.getAttribute("ml")).toBe("xl");
+  });
+
+  it("should render content", () => {
+    const { baseElement } = render(
+      <GoabButton
+        onClick={() => {
+          /* do nothing */
+        }}
+      >
+        {buttonText}
+      </GoabButton>,
+    );
 
     expect(baseElement).toBeTruthy();
     expect(screen.getByText(buttonText));
   });
 
-  test('buttonType=primary should render primary styling', () => {
-    render(<GoAButton buttonType='primary' buttonSize='normal'>{buttonText}</GoAButton>);
+  describe("size", () => {
+    (["compact", "normal"] as const).forEach((size: GoabButtonSize) => {
+      it(`should render ${size} size`, async () => {
+        const { container } = render(
+          <GoabButton size={size} onClick={noop}>
+            Button
+          </GoabButton>,
+        );
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).not.toContain(buttonSecondaryClassName);
-    expect(button.className).not.toContain(buttonTertiaryClassName);
+        const button = container.querySelector("goa-button");
+        expect(button).toBeTruthy();
+        expect(button?.getAttribute("size")).toEqual(size);
+      });
+    });
   });
 
-  test('buttonType=secondary should render secondary styling', () => {
-    render(<GoAButton buttonType='secondary'>{buttonText}</GoAButton>);
+  describe("type", () => {
+    (["primary", "submit", "secondary", "tertiary"] as const).forEach(
+      (type: GoabButtonType) => {
+        it(`should render ${type} type`, async () => {
+          const { container } = render(
+            <GoabButton type={type} onClick={noop}>
+              Button
+            </GoabButton>,
+          );
+          const button = container.querySelector("goa-button");
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).toContain(buttonSecondaryClassName);
-    expect(button.className).not.toContain(buttonTertiaryClassName);
+          expect(button).toBeTruthy();
+          expect(button?.getAttribute("type")).toEqual(type);
+        });
+      },
+    );
   });
 
-  test('buttonType=tertiary should render tertiary styling', () => {
-    render(<GoAButton buttonType='tertiary'>{buttonText}</GoAButton>);
-
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonClassName);
-    expect(button.className).not.toContain(buttonSecondaryClassName);
-    expect(button.className).toContain(buttonTertiaryClassName);
+  it("responds to events", async () => {
+    const onClick = vi.fn();
+    const { container } = render(<GoabButton onClick={onClick}>Button</GoabButton>);
+    const button = container.querySelector("goa-button");
+    expect(button).toBeTruthy();
+    button && fireEvent(button, new CustomEvent("_click"));
+    expect(onClick).toBeCalled();
   });
 
-  test('buttonSize=small should render small styling', () => {
-    render(<GoAButton buttonType='tertiary' buttonSize='small'>{buttonText}</GoAButton>);
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabButton
+        data-grid="cell"
+      >
+        Button Text
+      </GoabButton>,
+    );
+    const el = container.querySelector("goa-button");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
+});
 
+describe("GoabButton disabled attribute", () => {
+  it("should set disabled attribute correctly when disabled=true", () => {
+    const { container } = render(
+      <GoabButton disabled={true}>Disabled Button</GoabButton>
+    );
+    const el = container.querySelector("goa-button");
 
-    const button = screen.getByRole('button');
-    expect(button.className).toContain(buttonSmallClassName);
+    expect(el?.getAttribute("disabled")).toBe("true");
   });
 
-  test('buttonSize unset should render no small styling', () => {
-    render(<GoAButton buttonType='tertiary'>{buttonText}</GoAButton>);
+  it("should not include disabled attribute when disabled=false", () => {
+    const { container } = render(
+      <GoabButton disabled={false}>Enabled Button</GoabButton>
+    );
+    const el = container.querySelector("goa-button");
 
-    const button = screen.getByRole('button');
-    expect(button.className).not.toContain(buttonSmallClassName);
+    // disabled attribute should not be present
+    expect(el?.hasAttribute("disabled")).toBe(false);
   });
 
-  test('title is set to button title', () => {
-    render(<GoAButton buttonType='tertiary' title={buttonTitle}>{buttonText}</GoAButton>);
+  it("should handle toggle between disabled states", () => {
+    // First render with disabled=true
+    const { container, rerender } = render(
+      <GoabButton disabled={true}>Toggle Button</GoabButton>
+    );
+    let el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
 
-    const button = screen.getByRole('button');
-    expect(button.title).toContain(buttonTitle);
+    // Rerender with disabled=false
+    rerender(<GoabButton disabled={false}>Toggle Button</GoabButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.hasAttribute("disabled")).toBe(false);
+
+    // Rerender with disabled=true again
+    rerender(<GoabButton disabled={true}>Toggle Button</GoabButton>);
+    el = container.querySelector("goa-button");
+    expect(el?.getAttribute("disabled")).toBe("true");
   });
-
-  test('responds to events', () => {
-    const onClickStub = jest.fn()
-    render(<GoAButton data-testid="goaButton" buttonType='tertiary' onClick={onClickStub}>{buttonText}</GoAButton>);
-    const button = screen.getByTestId('goaButton');
-    userEvent.click(button)
-    expect(onClickStub).toHaveBeenCalled()
-  });
-
 });

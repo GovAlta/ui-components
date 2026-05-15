@@ -1,0 +1,14 @@
+<goab-form-item label="Date Picker using min" mb="l">
+  <goab-date-picker name="dob" formControlName="dob" [min]="date100YearsAgo" />
+</goab-form-item>
+<goab-form-item label="Date Picker using min and max" mb="l">
+  <goab-date-picker
+    name="dob"
+    formControlName="dob"
+    [min]="date100YearsAgo"
+    [max]="dateToday"
+  />
+</goab-form-item>
+<goab-form-item label="Date picker using max">
+  <goab-date-picker name="dob" formControlName="dob" [max]="dateToday" />
+</goab-form-item>

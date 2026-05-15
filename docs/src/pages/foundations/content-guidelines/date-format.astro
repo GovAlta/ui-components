@@ -1,0 +1,575 @@
+---
+/**
+ * Foundations - Content guidelines - Date format
+ *
+ * Date and time formatting guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Content guidelines -> Date format.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../components/DoDont.astro";
+import Preview from "../../../components/Preview.astro";
+
+const monthAbbreviations = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const dayAbbreviations = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+const standardTimeZones = [
+  ["PST", "Pacific standard time", "Standard time used in the Pacific time zone"],
+  ["MST", "Mountain standard time", "Standard time used in the Mountain time zone"],
+  ["CST", "Central standard time", "Standard time used in the Central time zone"],
+  ["EST", "Eastern standard time", "Standard time used in the Eastern time zone"],
+  ["AST", "Atlantic standard time", "Standard time used in the Atlantic time zone"],
+  [
+    "NST",
+    "Newfoundland standard time",
+    "Standard time used in the Newfoundland time zone",
+  ],
+];
+
+const daylightTimeZones = [
+  ["PDT", "Pacific daylight time", "Daylight saving time used in the Pacific time zone"],
+  [
+    "MDT",
+    "Mountain daylight time",
+    "Daylight saving time used in the Mountain time zone",
+  ],
+  ["CDT", "Central daylight time", "Daylight saving time used in the Central time zone"],
+  ["EDT", "Eastern daylight time", "Daylight saving time used in the Eastern time zone"],
+  [
+    "ADT",
+    "Atlantic daylight time",
+    "Daylight saving time used in the Atlantic time zone",
+  ],
+  [
+    "NDT",
+    "Newfoundland daylight time",
+    "Daylight saving time used in the Newfoundland time zone",
+  ],
+];
+---
+
+<DocumentationPageLayout
+  title="Date format"
+  description="Date and time formatting guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Date format</goa-text>
+  <goa-text size="body-l" mt="none" mb="m">
+    Use consistent date formats to ensure clarity and reduce confusion across Government
+    of Alberta digital products. Dates should be easy to read, easy to understand, and
+    accessible across different contexts.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="conversational-and-long-form-dates">Conversational and long-form dates</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use long-form dates in narrative contexts such as:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Instructions</li>
+      <li>Descriptions</li>
+      <li>Help content</li>
+      <li>Notifications</li>
+    </ul>
+  </goa-text>
+
+  <goa-container type="non-interactive" accent="filled" padding="relaxed">
+    <goa-text size="body-l" mt="none" mb="none"
+      ><strong>Month day, year</strong> (for example, March 14, 2026)</goa-text
+    >
+  </goa-container>
+
+  <goa-text size="body-m" mt="m" mb="xl">
+    This format follows the Canadian Style Guide.
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Use the format: Month cardinal day, year.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">March 14, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="do" description="Use cardinal numbers when the year is not included.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">March 14</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use ordinal numbers.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">March 14th, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't capitalize the month.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">MARCH 14th, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use two-digit years.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">March 14, 26</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="short-form-dates">Short-form dates</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use short-form dates when space is limited, such as in:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Tables</li>
+      <li>Forms</li>
+      <li>Summary pages</li>
+      <li>Mobile layouts</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    The format remains the same but uses a three-letter month abbreviation.
+  </goa-text>
+
+  <h3 id="short-form-format">Format</h3>
+  <goa-text size="body-m" mt="none" mb="m">Month cardinal day, year</goa-text>
+
+  <h3 id="short-form-examples">Examples</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>
+        Jan 14, 2026
+      </li>
+      <li>
+        Feb 6, 2026
+      </li>
+    </ul>
+  </goa-text>
+
+  <h3 id="month-abbreviations">Month abbreviations</h3>
+  <ul>
+    {monthAbbreviations.map((month) => <li>{month}</li>)}
+  </ul>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Use the format: Month cardinal day, year.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Mar 14, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use two-digit years.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Mar 14, 26</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't add extra punctuation.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Mar. 14, 26</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't capitalize month abbreviations.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">MAR 14, 26</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use leading zeros.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Mar 07, 26</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use numeric slash formats.">
+      <Preview>
+        <goa-block direction="column" gap="s">
+          <goa-text size="body-m" mt="none" mb="xs">03/07/2026</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">07/03/2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="including-the-day-of-the-week">Including the day of the week</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Include the day of the week when it helps users better understand the date.
+  </goa-text>
+
+  <h3 id="day-of-week-format">Format</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Day-of-the-week, month cardinal day, year
+  </goa-text>
+
+  <h3 id="day-of-week-example">Example</h3>
+  <goa-text size="body-m" mt="none" mb="m">Friday, March 14, 2026</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Short-form day abbreviations may also be used.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>
+        Tue, Jan 13, 2026
+      </li>
+      <li>
+        Wed, Feb 18, 2026
+      </li>
+    </ul>
+  </goa-text>
+
+  <h3 id="day-abbreviations">Day abbreviations</h3>
+  <ul>
+    {dayAbbreviations.map((day) => <li>{day}</li>)}
+  </ul>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Use consistent formats.">
+      <Preview>
+        <goa-block direction="column" gap="s">
+          <goa-text size="body-m" mt="none" mb="xs">Monday, March 16, 2026</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Mon, Mar 16, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't mix long and short formats.">
+      <Preview>
+        <goa-block direction="column" gap="s">
+          <goa-text size="body-m" mt="none" mb="xs">Monday, Mar 16, 2026</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Mon, March 16, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use other punctuation, other than a comma, in the date expression."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Mon; March 16, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't forget to delineate day and month with a comma.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Monday March 16, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <h3 id="best-practice">Best practice</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Avoid including the day of the week in:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Tables</li>
+      <li>Forms</li>
+      <li>Summary views</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    This can add unnecessary visual clutter.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="time-format">Time format</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use the <strong>12-hour clock format</strong>. Write <strong>am</strong> and <strong
+      >pm</strong
+    >
+    in lowercase without periods.
+  </goa-text>
+
+  <h3 id="time-examples">Examples</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>8:00 am</li>
+      <li>11:45 pm</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="date-with-time">Date with time</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    When a date and time appear together, write the <strong>date first</strong>, followed by
+    <strong>at</strong> and the time.
+  </goa-text>
+
+  <h4 id="date-with-time-format">Format</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Day-of-the-week, month cardinal day, year at time
+  </goa-text>
+
+  <h4 id="date-with-time-example">Example</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Friday, March 14, 2026 at 2:26 pm</li>
+    </ul>
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Write the date first, followed by at and the time.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">Monday, March 16, 2026 at 3:30 pm</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't include leading zeros.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">08:15am</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't use periods in am or pm.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">4:43 p.m.</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't place the time before the date.">
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">7:55 am on Monday, March 16, 2026</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="time-zones">Time zones</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Include time zones when needed. You may use either the long form or the abbreviated form.
+  </goa-text>
+
+  <h3 id="long-form">Long form</h3>
+  <goa-text size="body-m" mt="none" mb="m">Write the full name in parentheses.</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Example:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>8:00 am (Eastern standard time)</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="short-form">Short form</h3>
+  <goa-text size="body-m" mt="none" mb="m">Use a three-letter abbreviation.</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Example:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>11:45 pm PDT</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="canadian-time-zones">Canadian time zones</h3>
+  <h4 id="standard-time">Standard time</h4>
+  <goa-table version="2" width="100%">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th>Abbreviation</th>
+          <th>Full name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          standardTimeZones.map(([abbreviation, fullName, description]) => (
+            <tr>
+              <td>{abbreviation}</td>
+              <td>{fullName}</td>
+              <td>{description}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </goa-table>
+
+  <h4 id="daylight-saving-time">Daylight saving time</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    From mid-March to early November, most time zones observe daylight saving time, when
+    clocks are moved ahead by one hour.
+  </goa-text>
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    In Alberta daylight saving time begins on the <strong
+      >second Sunday in March at 2:00 am</strong
+    >
+    and returns to standard time on the <strong
+      >first Sunday in November at 2:00 am</strong
+    >.
+  </goa-callout>
+
+  <goa-table version="2" width="100%">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th>Abbreviation</th>
+          <th>Full name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          daylightTimeZones.map(([abbreviation, fullName, description]) => (
+            <tr>
+              <td>{abbreviation}</td>
+              <td>{fullName}</td>
+              <td>{description}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </goa-table>
+
+  <div class="dodont-grid dodont-grid-single">
+    <DoDont
+      type="dont"
+      description="Don't place time zone abbreviations inside parentheses."
+    >
+      <Preview>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-m" mt="none" mb="none">4:43pm (MST)</goa-text>
+        </goa-block>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="accessibility-and-screen-readers">Accessibility and screen readers</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Dates should be readable for assistive technologies. Use accessible formatting when
+    presenting dates in code. Refer to
+    <goa-link trailingicon="open">
+      <a
+        href="https://github.com/MikesBarto/accessible-date"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        accessible-date
+      </a>
+    </goa-link>
+    for guidance.
+  </goa-text>
+
+  <h3 id="example-html">Example HTML</h3>
+  <pre><code>&lt;time id="timestamp" datetime="2001-05-15T19:30"&gt;
+  May 15, 2001 - 7:30 pm
+&lt;/time&gt;</code></pre>
+
+  <goa-text size="body-m" mt="none" mb="m">Some screen readers may read this as:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    &quot;May one five, two zero zero one, seven three zero pm&quot;
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Using the <strong>accessible-date</strong> npm module improves the reading experience.
+  </goa-text>
+  <h4 id="example-output">Example output:</h4>
+  <goa-text size="body-m" mt="none" mb="l">
+    &quot;Tuesday, May fifteenth, two-thousand one at seven thirty pm&quot;
+  </goa-text>
+
+  <goa-callout
+    version="2"
+    type="information"
+    emphasis="low"
+    heading="ISO 8601 format"
+    mb="xl"
+  >
+    The date time variables entered into the module for producing readable and
+    conversational dates need to be rendered in ISO 8601 format.
+  </goa-callout>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  .dodont-grid-single {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .dodont-grid-single {
+      grid-template-columns: minmax(320px, 480px);
+    }
+  }
+
+  .token-grid {
+    display: grid;
+    gap: var(--goa-space-s);
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    margin: 0 0 var(--goa-space-xl);
+  }
+
+  .token-grid-item {
+    background: var(--goa-color-greyscale-50);
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+    font: var(--goa-typography-body-m);
+    padding: var(--goa-space-s);
+    text-align: center;
+  }
+</style>

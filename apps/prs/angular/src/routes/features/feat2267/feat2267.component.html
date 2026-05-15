@@ -1,0 +1,205 @@
+<div style="border-bottom: 2px solid #000; padding-bottom: 20px; margin-bottom: 30px">
+  <goab-text tag="h1">Checkbox Testing</goab-text>
+  <goab-form-item label="Basic" mb="l">
+    <goab-checkbox
+      name="item"
+      text="Item"
+      value="value1"
+      (onChange)="checkboxOnChange($event)"
+    />
+  </goab-form-item>
+  <goab-form-item label="Basic Disabled" mb="l">
+    <goab-checkbox
+      name="item"
+      text="Item"
+      value=""
+      disabled="{true}"
+      (onChange)="checkboxOnChange($event)"
+    />
+  </goab-form-item>
+  <goab-form-item label="Basic w/ Max Width" mb="l">
+    <goab-checkbox
+      name="item"
+      text="Label that should easily extend past the max width of 200px"
+      value=""
+      maxWidth="200px"
+      (onChange)="checkboxOnChange($event)"
+    />
+  </goab-form-item>
+  <goab-form-item [formGroup]="form" label="Basic w/ Reactive Forms" mb="l">
+    <goab-checkbox
+      name="item"
+      text="Label that should easily extend past the max width of 200px"
+      maxWidth="200px"
+      (onChange)="checkboxFormControlOnChange()"
+      formControlName="checkboxItem"
+    />
+    <p>Selected Value: {{ form.get("checkboxItem")?.value }}</p>
+  </goab-form-item>
+  <goab-form-item
+    label="How would you like to be contacted?"
+    helpText="Choose all that apply"
+    mb="l"
+  >
+    <goab-checkbox checked="{false}" name="optionOne" text="Email" />
+    <goab-checkbox checked="{false}" name="optionTwo" text="Phone" />
+    <goab-checkbox checked="{false}" name="optionThree" text="Text message" />
+  </goab-form-item>
+  <goab-form-item
+    label="How would you like to be contacted?"
+    mb="l"
+    helpText="This is some help text"
+  >
+    <goab-checkbox
+      [checked]="false"
+      name="optionOne"
+      text="Email"
+      [reveal]="checkboxOneReveal"
+    >
+      <ng-template #checkboxOneReveal>
+        <goab-form-item label="Email address">
+          <goab-input name="email" (onChange)="inputOnChange()" value="" />
+        </goab-form-item>
+      </ng-template>
+    </goab-checkbox>
+    <goab-checkbox
+      [checked]="false"
+      name="optionTwo"
+      text="Phone"
+      [reveal]="checkboxTwoReveal"
+    >
+      <ng-template #checkboxTwoReveal>
+        <goab-form-item label="Phone number">
+          <goab-input name="phoneNumber" (onChange)="inputOnChange()" value="" />
+        </goab-form-item>
+      </ng-template>
+    </goab-checkbox>
+    <goab-checkbox
+      [checked]="false"
+      name="optionThree"
+      text="Text message"
+      [reveal]="checkboxThreeReveal"
+    >
+      <ng-template #checkboxThreeReveal>
+        <goab-form-item label="Mobile phone number">
+          <goab-input name="mobilePhoneNumber" (onChange)="inputOnChange()" value="" />
+        </goab-form-item>
+      </ng-template>
+    </goab-checkbox>
+  </goab-form-item>
+</div>
+<div style="border-top: 2px solid #000; padding-top: 20px">
+  <goab-form-item
+    label="Checkbox List w/ 5 items and helper text"
+    helpText="This is some help text"
+    mb="2xl"
+  >
+    <goab-checkbox-list
+      [value]="basicSelection"
+      (onChange)="checkboxListBasicOnChange($event)"
+    >
+      <goab-checkbox name="basic1" value="basic1" text="Basic 1" />
+      <goab-checkbox name="basic2" value="basic2" text="Basic 2" />
+      <goab-checkbox name="basic3" value="basic3" text="Basic 3" />
+      <goab-checkbox name="basic4" value="basic4" text="Basic 4" />
+      <goab-checkbox name="basic5" value="basic5" text="Basic 5" />
+    </goab-checkbox-list>
+    <p>Basic Selection: {{ basicSelection }}</p>
+  </goab-form-item>
+  <goab-form-item label="Diasbled Checkbox List" mb="2xl">
+    <goab-checkbox-list
+      [value]="basicSelection"
+      (onChange)="checkboxListBasicOnChange($event)"
+      [disabled]="true"
+    >
+      <goab-checkbox name="basic1" value="basic1" text="Basic 1" />
+      <goab-checkbox name="basic2" value="basic2" text="Basic 2" />
+      <goab-checkbox name="basic3" value="basic3" text="Basic 3" />
+      <goab-checkbox name="basic4" value="basic4" text="Basic 4" />
+      <goab-checkbox name="basic5" value="basic5" text="Basic 5" />
+    </goab-checkbox-list>
+  </goab-form-item>
+  <goab-form-item label="Error Checkbox List" [error]="checkboxListError" mb="2xl">
+    <goab-checkbox-list
+      [value]="errorSelection"
+      (onChange)="checkboxListErrorOnChange($event)"
+      [error]="checkboxListHasError"
+    >
+      <goab-checkbox name="error1" value="error1" text="Error 1" />
+      <goab-checkbox name="error2" value="error2" text="Error 2" />
+      <goab-checkbox name="error3" value="error3" text="Error 3" />
+      <goab-checkbox name="error4" value="error4" text="Error 4" />
+      <goab-checkbox name="error5" value="error5" text="Error 5" />
+    </goab-checkbox-list>
+    <p>Error Selection: {{ errorSelection }}</p>
+  </goab-form-item>
+  <goab-form-item label="MaxWidth Checkbox List" mb="2xl">
+    <goab-checkbox-list
+      [value]="basicSelection"
+      (onChange)="checkboxListBasicOnChange($event)"
+      maxWidth="200px"
+    >
+      <goab-checkbox
+        name="basic1"
+        value="basic1"
+        text="Some long text that should easily exceed 200px"
+      />
+      <goab-checkbox
+        name="basic2"
+        value="basic2"
+        text="Some long text that should easily exceed 200px"
+      />
+      <goab-checkbox
+        name="basic3"
+        value="basic3"
+        text="Some long text that should easily exceed 200px"
+      />
+      <goab-checkbox
+        name="basic4"
+        value="basic4"
+        text="Some long text that should easily exceed 200px"
+      />
+      <goab-checkbox
+        name="basic5"
+        value="basic5"
+        text="Some long text that should easily exceed 200px"
+      />
+    </goab-checkbox-list>
+    <p>Basic Selection: {{ basicSelection }}</p>
+  </goab-form-item>
+  <goab-form-item label="Indeterminate Test" mb="2xl">
+    <goab-checkbox
+      name="manual-all"
+      text="All"
+      [checked]="manualAllChecked"
+      [indeterminate]="manualAllIndeterminate"
+      (onChange)="toggleManualAll()"
+    ></goab-checkbox>
+    <goab-checkbox-list
+      name="manual-contact-preferences"
+      [value]="manualContactPreferences"
+      (onChange)="onManualContactPreferencesChange($event)"
+      ml="l"
+    >
+      <goab-checkbox
+        name="email"
+        value="email"
+        text="Email"
+        [checked]="manualContactPreferences.includes('email')"
+      ></goab-checkbox>
+      <goab-checkbox
+        name="phone"
+        value="phone"
+        text="Phone"
+        [checked]="manualContactPreferences.includes('phone')"
+      ></goab-checkbox>
+      <goab-checkbox
+        name="sms"
+        value="sms"
+        text="Text message"
+        [checked]="manualContactPreferences.includes('sms')"
+      ></goab-checkbox>
+    </goab-checkbox-list>
+    <p>Selected: {{ manualContactPreferences }}</p>
+  </goab-form-item>
+</div>

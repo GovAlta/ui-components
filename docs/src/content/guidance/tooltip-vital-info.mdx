@@ -1,0 +1,23 @@
+---
+id: tooltip-vital-info
+type: dont
+description: Don't use tooltips for information that is vital to task completion.
+topic: feedback
+tags:
+  - tooltip
+  - accessibility
+  - content
+appliesTo:
+  components:
+    - tooltip
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Password">
+    <goa-input type="password" name="password" />
+    <goa-tooltip content="Passwords must be at least 8 characters long and include 1 upper case character.">
+      <goa-icon type="information-circle" />
+    </goa-tooltip>
+  </goa-form-item>
+</Preview>

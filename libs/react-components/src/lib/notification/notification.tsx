@@ -1,77 +1,91 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import '../../../../core-css/src/lib/styles/notification/notification.scss'
-import '../../../../core-css/src/lib/styles/notification-banner/notification-banner.scss';
+import {
+  GoabAriaLiveType,
+  GoabNotificationEmphasis,
+  GoabNotificationType,
+} from "@abgov/ui-components-common";
+import { useEffect, useRef } from "react";
 
-
-type notificationType = "important" | 'information' | 'event' | 'emergency';
-
-export interface NotificationProps {
-  /**
-    * The type of the notification, changes stylings and icons.
-  */
-  type?: notificationType,
-  /**
-   * Notification message
-  */
-  message?: string,
-  /**
-   * Hidden title message
-  */
-  title?: string,
-  /**
-   * Optional link for notification, if no link is provided notification will not contain anchor.
-  */
-  notificationUrl?: string,
-  /**
-   * Boolean: can this notification be closed?
-  */
-  isDismissable?: boolean,
-  children?: React.ReactNode,
-  onDismiss?: () => void,
+interface WCProps {
+  ref: React.RefObject<HTMLElement | null>;
+  type: GoabNotificationType;
+  maxcontentwidth?: string;
+  arialive?: GoabAriaLiveType;
+  testid?: string;
+  emphasis?: GoabNotificationEmphasis;
+  compact?: string;
+  version?: string;
 }
 
-export const GoANotification = ({title, type = "information", message, notificationUrl, isDismissable = true, children = null, onDismiss, ...props }: NotificationProps) => {
-  const [dismissed, setDismissed] = useState(false);
-
-  const dismissTrigger = (dismissAction) => {
-    setDismissed(dismissAction);
-    onDismiss();
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-notification": WCProps & React.HTMLAttributes<HTMLButtonElement>;
+    }
   }
+}
 
-  if (!dismissed) {
-    return (
-      <div>
-        <div className="goa-notifications">
-          <h2 className="title">{title}</h2>
-        </div>
-        <div role="notification" className={`goa-notification goa--${type}`}>
-          <div className='content'>
-            { notificationUrl ? (
-              <a className="message" role="url" href={notificationUrl}>{message || children}</a>
-            ) : (
-              <span className="message">{message || children}</span>
-            )}
-            { isDismissable &&
-              <a role="closeBox" className="close" title="Dismiss" onClick={() => dismissTrigger(!dismissed)}>
-                <svg width="16px" height="16px" viewBox="0 0 16 16">
-                  <path d="M 15.99 14.54C 15.99 14.54 14.54 15.99 14.54 15.99 14.54 15.99 8 9.45 8 9.45 8 9.45 1.46 15.99 1.46 15.99 1.46 15.99 0.01 14.54 0.01 14.54 0.01 14.54 6.55 8 6.55 8 6.55 8 0.01 1.46 0.01 1.46 0.01 1.46 1.46 0.01 1.46 0.01 1.46 0.01 8 6.55 8 6.55 8 6.55 14.54 0.01 14.54 0.01 14.54 0.01 15.99 1.46 15.99 1.46 15.99 1.46 9.45 8 9.45 8 9.45 8 15.99 14.54 15.99 14.54Z"/>
-                </svg>
-              </a>
-            }
-          </div>
-        </div>
-      </div>
-    )
-  } else {
-    return null;
-  }
+export interface GoabNotificationProps {
+  /** Define the context and colour of the notification. */
+  type?: GoabNotificationType;
+  /** Indicates how assistive technology should handle updates to the live region. @default "polite" */
+  ariaLive?: GoabAriaLiveType;
+  /** Maximum width of the content area. @default "100%" */
+  maxContentWidth?: string;
+  /** Sets the visual prominence. 'high' for full background, 'low' for a bordered style. @default "high" */
+  emphasis?: GoabNotificationEmphasis;
+  /** When true, reduces padding for a more compact notification. */
+  compact?: boolean;
+  /** Content rendered inside the notification. */
+  children?: React.ReactNode;
+  /** Callback fired when the notification is dismissed. */
+  onDismiss?: () => void;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+}
+
+/** Display important page level information or notifications. */
+export const GoabNotification = ({
+  type = "information",
+  emphasis = "high",
+  compact,
+  ariaLive,
+  maxContentWidth,
+  children,
+  testId,
+  onDismiss,
+}: GoabNotificationProps) => {
+  const el = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    const current = el.current;
+    const listener = () => {
+      onDismiss?.();
+    };
+
+    current.addEventListener("_dismiss", listener);
+    return () => {
+      current.removeEventListener("_dismiss", listener);
+    };
+  }, [el, onDismiss]);
+
+  return (
+    <goa-notification
+      ref={el}
+      type={type}
+      testid={testId}
+      maxcontentwidth={maxContentWidth}
+      arialive={ariaLive}
+      emphasis={emphasis}
+      compact={compact ? "true" : undefined}
+      version="2"
+    >
+      {children}
+    </goa-notification>
+  );
 };
 
-GoANotification.propTypes = {
-  title: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  content: PropTypes.string,
-};
-
-export default GoANotification;
+export default GoabNotification;

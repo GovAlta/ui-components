@@ -1,0 +1,25 @@
+{
+  "name": "goa-spacer",
+  "attributes": [
+    {
+      "name": "hSpacing",
+      "description": "Horizontal spacing",
+      "type": "string",
+      "valueSet": "spacing",
+      "default": "none"
+    },
+    {
+      "name": "vSpacing",
+      "description": "Vertical spacing",
+      "type": "string",
+      "valueSet": "spacing",
+      "default": "none"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Spacer",
+      "url": "{{siteUrl}}/?path=/docs/utility-spacer--basic"
+    }
+  ]
+}

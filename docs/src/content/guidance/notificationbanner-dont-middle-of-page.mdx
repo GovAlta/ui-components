@@ -1,0 +1,23 @@
+---
+id: notificationbanner-dont-middle-of-page
+type: dont
+description: Don't place notification banners in the middle of a page.
+topic: positioning
+tags:
+  - notification-banner
+  - layout
+appliesTo:
+  components:
+    - notification-banner
+status: published
+---
+
+<Preview bad>
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <div>Page content above...</div>
+    <goa-notification-banner type="emergency">
+      System outage notification
+    </goa-notification-banner>
+    <div>Page content below...</div>
+  </div>
+</Preview>

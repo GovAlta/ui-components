@@ -1,5 +1,7 @@
 # Add files here to ignore them from prettier formatting
-
 /dist
 /coverage
-/tmp
+/.nx/cache
+.angular
+
+/.nx/workspace-data

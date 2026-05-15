@@ -1,0 +1,23 @@
+{
+  "name": "goa-spinner",
+  "required": ["size"],
+  "attributes": [
+    {
+      "name": "size",
+      "description": "Size of the spinner",
+      "type": "string",
+      "valueSet": "size"
+    },
+    {
+      "name": "invert",
+      "type": "boolean",
+      "valueSet": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "default": "-1"
+    }
+  ]
+}

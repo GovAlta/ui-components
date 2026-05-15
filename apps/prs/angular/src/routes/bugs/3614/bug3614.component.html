@@ -1,0 +1,136 @@
+<goab-text tag="h1" mt="m">Bug #3614: IconButton Hitboxes</goab-text>
+
+<goab-block>
+  <goab-details heading="Issue Description" [open]="true">
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3614"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+    <goab-text tag="p">
+      Icon buttons at <code>2xsmall</code> and <code>xsmall</code> sizes do not render as
+      square buttons - they show as weird rounded rectangles. The clickable area has a
+      non-square aspect ratio, which is inconsistent with the larger sizes
+      (<code>small</code>, <code>medium</code>, <code>large</code>, <code>xlarge</code>)
+      that all render as squares.
+    </goab-text>
+  </goab-details>
+</goab-block>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Test Cases</goab-text>
+
+<goab-text tag="h3">Test 1: Named sizes (2xsmall to xlarge)</goab-text>
+<goab-text tag="p">
+  All sizes should render as square buttons with consistent aspect ratios.
+</goab-text>
+<goab-block gap="s" direction="row" alignment="center">
+  <goab-icon-button
+    icon="settings"
+    size="2xsmall"
+    arialabel="Settings"
+  ></goab-icon-button>
+  <goab-icon-button icon="settings" size="xsmall" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="small" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="medium" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="large" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="xlarge" arialabel="Settings"></goab-icon-button>
+</goab-block>
+
+<goab-text tag="h3" mt="l">Test 2: Numeric sizes (1 to 6)</goab-text>
+<goab-text tag="p">All numeric sizes should also render as square buttons.</goab-text>
+<goab-block gap="s" direction="row" alignment="center">
+  <goab-icon-button icon="settings" size="1" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="2" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="3" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="4" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="5" arialabel="Settings"></goab-icon-button>
+  <goab-icon-button icon="settings" size="6" arialabel="Settings"></goab-icon-button>
+</goab-block>
+
+<goab-text tag="h3" mt="l">Test 3: Other Components that use IconButton</goab-text>
+<goab-text tag="p">
+  Testing various components that use IconButton internally. Verify that the icon buttons
+  within these components render with correct square hitboxes.
+</goab-text>
+
+<goab-text tag="h4" mt="m">Dropdown</goab-text>
+<goab-text tag="p">
+  The dropdown toggle button should have a properly sized square hitbox.
+</goab-text>
+<goab-block gap="m" direction="row">
+  <goab-dropdown
+    [value]="dropdownValue"
+    (onChange)="dropdownValue = $event.value || ''"
+    placeholder="Select an option"
+    width="250px"
+  >
+    <goab-dropdown-item value="option1" label="Option 1"></goab-dropdown-item>
+    <goab-dropdown-item value="option2" label="Option 2"></goab-dropdown-item>
+    <goab-dropdown-item value="option3" label="Option 3"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-block>
+
+<goab-text tag="h4" mt="m">Filter Chips</goab-text>
+<goab-text tag="p">
+  The v2 FilterChip uses IconButton. The close/remove icon button on each chip should look
+  normal.
+</goab-text>
+<goab-block gap="s" direction="row">
+  @for (chip of chips; track chip) {
+    <goab-filter-chip [content]="chip" (onClick)="removeChip(chip)"></goab-filter-chip>
+  }
+</goab-block>
+
+<goab-text tag="h4" mt="m">Menu Button</goab-text>
+<goab-text tag="p">
+  The dropdown arrow icon button should have a square hitbox.
+</goab-text>
+<goab-block gap="m" direction="row">
+  <goab-menu-button text="Actions" type="secondary">
+    <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+    <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+    <goab-menu-action text="Archive" action="archive" icon="archive"></goab-menu-action>
+  </goab-menu-button>
+</goab-block>
+
+<goab-text tag="h4" mt="m">Modal</goab-text>
+<goab-text tag="p">
+  The close icon button in the modal header should be a square hitbox.
+</goab-text>
+<goab-block>
+  <goab-button type="secondary" (onClick)="modalOpen = true">Open Modal</goab-button>
+  <goab-modal
+    heading="Test Modal"
+    [open]="modalOpen"
+    (onClose)="modalOpen = false"
+    [actions]="modalActions"
+  >
+    <goab-text tag="p">
+      Check that the close (X) icon button in the top-right corner has a square hitbox.
+    </goab-text>
+  </goab-modal>
+  <ng-template #modalActions>
+    <goab-button (onClick)="modalOpen = false">Close</goab-button>
+  </ng-template>
+</goab-block>
+
+<goab-text tag="h4" mt="m">Input with Trailing Icon</goab-text>
+<goab-text tag="p">The trailing icon button should have a square hitbox.</goab-text>
+<goab-block gap="m" direction="column">
+  <goab-input
+    name="search-input"
+    [value]="inputValue"
+    (onChange)="inputValue = $event.value"
+    trailingIcon="close"
+    trailingIconAriaLabel="Clear input"
+    (onTrailingIconClick)="inputValue = ''"
+    placeholder="The X is an icon button - check its hitbox!"
+    width="350px"
+  ></goab-input>
+</goab-block>

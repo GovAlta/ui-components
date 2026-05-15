@@ -1,6 +1,0 @@
-@mixin box-arrow {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:none;%7D.b%7Bfill:currentColor;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(-381 -66)'%3E%3Crect class='a' width='24' height='24' transform='translate(381 66)'/%3E%3Cpath class='b' d='M377.171,15.772a.529.529,0,0,1-.489.5H362.918a.529.529,0,0,1-.489-.5V3.146a.529.529,0,0,1,.489-.5h2.606V1h-2.606A2.171,2.171,0,0,0,360.8,3.146V15.854A2.171,2.171,0,0,0,362.918,18h13.765a2.171,2.171,0,0,0,2.118-2.146V13.214h-1.629Z' transform='translate(23.2 68)'/%3E%3Cpath class='b' d='M380.2,1h-6.583a.787.787,0,0,0-.833.833.787.787,0,0,0,.833.833h4.5L371.95,8.833a.806.806,0,0,0,0,1.167.806.806,0,0,0,1.167,0l6.167-6.167v4.5a.833.833,0,1,0,1.667,0v-6.5A.721.721,0,0,0,380.2,1Z' transform='translate(21.05 68)'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-}

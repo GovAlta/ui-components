@@ -1,0 +1,25 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run extract-api && npm run build:search-index && astro build",
+    "build:search-index": "npx tsx src/scripts/build-search-index.ts",
+    "extract-api": "npx tsx src/scripts/extract-api.ts --all",
+    "preview": "astro preview",
+    "generate-previews": "npx tsx src/scripts/generate-preview-images.ts",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.1.1",
+    "@abgov/react-components": "*",
+    "@abgov/ui-components-common": "*",
+    "@abgov/web-components": "*",
+    "flexsearch": "^0.7.43"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
+}

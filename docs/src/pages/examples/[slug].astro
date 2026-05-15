@@ -1,0 +1,317 @@
+---
+import { withBase } from '@/lib/base-url';
+/**
+ * Individual Example Page
+ *
+ * Shows a single example with:
+ * - Live preview with framework code tabs
+ * - MDX content (when to use, considerations, etc.)
+ * - Metadata (category, userType, components used)
+ * - Related examples
+ */
+import { getCollection, render } from 'astro:content';
+import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ExampleDisplay from '../../components/ExampleDisplay.astro';
+import { TableOfContents } from '../../components/TableOfContents';
+import { getExampleCode } from '../../lib/example-code';
+
+
+// Generate static paths for all examples
+export async function getStaticPaths() {
+  const examples = await getCollection('examples');
+  const visibleExamples = examples.filter((example) => !example.data.hidden);
+  return visibleExamples.map((example) => ({
+    params: { slug: example.slug },
+    props: { example },
+  }));
+}
+
+const { example } = Astro.props;
+const { slug } = Astro.params;
+const { data } = example;
+
+// Render the MDX content
+const { Content } = await render(example);
+
+// Check if this example has code files
+const code = await getExampleCode(example.slug);
+const hasCode = !!(code.react || code.angular || code.webComponents);
+
+// Get related examples if defined
+let relatedExamples: typeof example[] = [];
+if (data.relatedExamples?.length) {
+  const allExamples = await getCollection('examples');
+  relatedExamples = allExamples.filter(e =>
+    !e.data.hidden &&
+    data.relatedExamples?.includes(e.data.id)
+  );
+}
+
+// Format category for display
+function formatCategory(category: string): string {
+  return category
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Format scale for display
+function formatScale(scale: string): string {
+  return scale.charAt(0).toUpperCase() + scale.slice(1);
+}
+
+// Format user type for display
+function formatUserType(userType: string): string {
+  if (userType === 'both') return 'Citizen & Worker';
+  return userType.charAt(0).toUpperCase() + userType.slice(1);
+}
+
+// Format component name to sentence case (e.g., "form-item" → "Form item")
+function formatComponentName(component: string): string {
+  return component
+    .split('-')
+    .map((word, i) => i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
+    .join(' ');
+}
+
+const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
+---
+
+<ExamplesPageLayout
+  title={data.title}
+  description={`Example: ${data.title}`}
+  currentSlug={slug}
+>
+  <article class="example-page">
+    <Breadcrumbs />
+    <!-- Header -->
+    <header class="example-header">
+      <div class="badges">
+        {data.categories.map((cat: string) => (
+          <goa-badge version="2" type="information" emphasis="subtle" icon="false" content={formatCategory(cat)}></goa-badge>
+        ))}
+        <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={formatScale(data.scale)}></goa-badge>
+        <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={formatUserType(data.userType)}></goa-badge>
+      </div>
+    </header>
+
+    <!-- Live Preview + Code (only if code files exist) -->
+    {hasCode ? (
+      <section class="example-preview-section">
+        <ExampleDisplay example={example} titleSize="large" />
+      </section>
+    ) : data.previewImage ? (
+      <section class="example-hero-section">
+        <h1 class="example-title">{data.title}</h1>
+        {data.description && (
+          <p class="example-description" set:html={data.description} />
+        )}
+        <div class="example-hero-image">
+          <img src={data.previewImage} alt={`${data.title} example`} />
+        </div>
+      </section>
+    ) : null}
+
+    <!-- MDX Content (When to use, Considerations, etc.) -->
+    {!hasCode ? (
+      <div class="content-with-toc">
+        <section class="example-content">
+          <Content />
+        </section>
+        <aside class="example-toc">
+          <div class="example-toc-sticky">
+            <TableOfContents client:only="react" cssQuery=".example-content h2[id]" />
+          </div>
+        </aside>
+      </div>
+    ) : (
+      <section class="example-content">
+        <Content />
+      </section>
+    )}
+
+    <!-- Related Examples -->
+    {relatedExamples.length > 0 && (
+      <section class="related-examples">
+        <h2>Related examples</h2>
+        <div class="related-grid">
+          {relatedExamples.map((related) => (
+            <a href={withBase(`/examples/${related.slug}`)} class="related-card">
+              <span class="related-title">{related.data.title}</span>
+              <span class="related-category">{formatCategory(related.data.categories[0])}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <goa-link size="small" trailingicon="open">
+      <a href={v1DocsUrl} target="_blank" rel="noopener noreferrer">View old example docs</a>
+    </goa-link>
+  </article>
+</ExamplesPageLayout>
+
+<style>
+  .example-page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .example-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--goa-space-l, 1.5rem);
+  }
+
+  /* Badges */
+  .badges {
+    display: flex;
+    gap: var(--goa-space-xs, 0.25rem);
+    flex-wrap: wrap;
+  }
+
+  .example-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  .example-description {
+    font-size: 1.125rem;
+    color: var(--goa-color-text-secondary, #666);
+    margin: var(--goa-space-s, 0.5rem) 0 var(--goa-space-l, 1.5rem);
+    max-width: 688px;
+    line-height: 1.6;
+  }
+
+  /* Preview Section */
+  .example-preview-section {
+    margin-bottom: var(--goa-space-xl, 2rem);
+  }
+
+  /* Hero section (when no code preview) */
+  .example-hero-section {
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-hero-image {
+    margin-top: var(--goa-space-l, 1.5rem);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-hero-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Content Section */
+  .example-content {
+    margin-bottom: var(--goa-space-2xl, 2.5rem);
+  }
+
+  .example-content :global(h2) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .example-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .example-content :global(p) {
+    margin-bottom: var(--goa-space-m, 1rem);
+    max-width: 65ch;
+    line-height: 1.6;
+  }
+
+  .example-content :global(ul),
+  .example-content :global(ol) {
+    margin: 0 0 var(--goa-space-m, 1rem);
+    padding-left: var(--goa-space-l, 1.5rem);
+    max-width: 65ch;
+  }
+
+  .example-content :global(li) {
+    margin-bottom: var(--goa-space-xs, 0.25rem);
+  }
+
+  /* Content + TOC grid (for long-form examples without code) */
+  .content-with-toc {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: var(--goa-space-2xl, 2.5rem);
+  }
+
+  .example-toc {
+    position: relative;
+  }
+
+  .example-toc-sticky {
+    position: sticky;
+    top: var(--goa-space-l, 1.5rem);
+    padding-top: var(--goa-space-m, 1rem);
+  }
+
+  @media (max-width: 1024px) {
+    .content-with-toc {
+      grid-template-columns: 1fr;
+    }
+
+    .example-toc {
+      display: none;
+    }
+  }
+
+  /* Related Examples */
+  .related-examples {
+    border-top: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    padding: var(--goa-space-xl) 0;
+  }
+
+  .related-examples h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--goa-space-m, 1rem);
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-2xs, 0.125rem);
+    padding: var(--goa-space-m, 1rem);
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+    border-radius: var(--goa-border-radius-m, 4px);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .related-card:hover {
+    background: var(--goa-color-greyscale-200, #e5e5e5);
+  }
+
+  .related-title {
+    font-weight: 500;
+    color: var(--goa-color-interactive-default, #0070c4);
+  }
+
+  .related-category {
+    font-size: 0.875rem;
+    color: var(--goa-color-text-secondary, #666);
+  }
+</style>

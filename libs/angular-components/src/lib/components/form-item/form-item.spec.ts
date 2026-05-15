@@ -1,0 +1,112 @@
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { GoabFormItem } from "./form-item";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
+import { GoabFormItemRequirement, Spacing } from "@abgov/ui-components-common";
+import { By } from "@angular/platform-browser";
+
+@Component({
+  standalone: true,
+  imports: [GoabFormItem],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <goab-form-item
+      [label]="label"
+      [requirement]="requirement"
+      [error]="errorSlot ? errorTemplate : error"
+      [helpText]="helpTextSlot ? helpTextTemplate : helpText"
+      [id]="id"
+      [testId]="testId"
+      maxWidth="480px"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
+    >
+      <input data-testid="foo" />
+
+      <ng-template #errorTemplate> This is an error slot </ng-template>
+      <ng-template #helpTextTemplate> This is a helpText slot </ng-template>
+    </goab-form-item>
+  `,
+})
+class TestFormItemComponent {
+  label?: string;
+  requirement?: GoabFormItemRequirement;
+  error?: string | TemplateRef<any>;
+  helpText?: string | TemplateRef<any>;
+  id?: string;
+  testId?: string;
+  errorSlot?: boolean;
+  helpTextSlot?: boolean;
+  mt?: Spacing;
+  mb?: Spacing;
+  mr?: Spacing;
+  ml?: Spacing;
+}
+
+describe("GoABFormItem", () => {
+  let fixture: ComponentFixture<TestFormItemComponent>;
+  let component: TestFormItemComponent;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFormItem, TestFormItemComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestFormItemComponent);
+    component = fixture.componentInstance;
+
+    component.label = "First name";
+    component.requirement = "optional";
+    component.id = "firstName";
+    component.testId = "foo";
+    component.mt = "s";
+    component.mb = "l";
+    component.ml = "xl";
+    component.mr = "m";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should render with properties", () => {
+    component.error = "This is an error";
+    component.helpText = "this is some helptext";
+    fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-form-item")).nativeElement;
+
+    expect(el?.getAttribute("label")).toBe(component.label);
+    expect(el?.getAttribute("requirement")).toBe(component.requirement);
+    expect(el?.getAttribute("error")).toBe(component.error);
+    expect(el?.getAttribute("helptext")).toBe(component.helpText);
+    expect(el?.getAttribute("id")).toBe(component.id);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
+    expect(el?.getAttribute("maxwidth")).toBe("480px");
+    expect(el?.getAttribute("mt")).toBe(component.mt);
+    expect(el?.getAttribute("mb")).toBe(component.mb);
+    expect(el?.getAttribute("mr")).toBe(component.mr);
+    expect(el?.getAttribute("ml")).toBe(component.ml);
+    expect(el?.getAttribute("version")).toBe("2");
+    expect(el?.getAttribute("type")).toBe("");
+
+    // Children is rendered
+    expect(el?.querySelector("input[data-testid='foo']")).toBeTruthy();
+  });
+
+  it("should render error and helpText slot", () => {
+    component.errorSlot = true;
+    component.helpTextSlot = true;
+    fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-form-item")).nativeElement;
+    expect(el?.querySelector("[slot='error']")).toBeTruthy();
+    expect(el?.innerHTML).toContain("This is an error slot");
+    expect(el?.querySelector("[slot='helptext']")).toBeTruthy();
+    expect(el?.innerHTML).toContain("This is a helpText slot");
+    expect(el?.getAttribute("error")).toBeFalsy();
+    expect(el?.getAttribute("helptext")).toBeFalsy();
+    expect(el?.querySelector("input[data-testid='foo']")).toBeTruthy();
+  });
+});

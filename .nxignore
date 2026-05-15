@@ -1,0 +1,4 @@
+**/.*/
+!apps/dev/web
+!apps/dev/react
+!apps/dev/angular

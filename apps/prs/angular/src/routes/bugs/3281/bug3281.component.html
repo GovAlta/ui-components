@@ -1,0 +1,80 @@
+<main>
+  <h1>Angular Version</h1>
+  <goab-block gap="l" direction="column">
+    <goab-block gap="l">
+      <goab-container maxWidth="400px">
+        <p>Basic p simple text to extend to 400px width</p>
+      </goab-container>
+      <goab-container maxWidth="400px">
+        <goab-text tag="p">GoabText text to extend to 400px width</goab-text>
+      </goab-container>
+    </goab-block>
+  </goab-block>
+  <hr />
+  <goab-container testId="pContainer">
+    <p>A p inside of a Container</p>
+  </goab-container>
+  <hr />
+  <goab-container testId="nopContainer"> No tag inside of a Container </goab-container>
+  <hr />
+  <goab-container testId="textContainer">
+    <goab-text tag="p">goab-text inside of a Container </goab-text>
+  </goab-container>
+  <hr />
+  <p>
+    The Actions block could interfere with the
+    <code>.content :global(::slotted(*:last-child))</code> selector
+  </p>
+  <goab-container
+    testId="pActionsContainer"
+    accent="thick"
+    [actions]="actionsTemplate"
+    [title]="titleTemplate"
+  >
+    <p>A p inside of a Container with Actions</p>
+  </goab-container>
+  <ng-template #actionsTemplate>
+    <p>p in Actions</p>
+  </ng-template>
+  <ng-template #titleTemplate>
+    <p>p in Title</p>
+  </ng-template>
+  <hr />
+  <goab-container
+    testId="pActionsContainer2"
+    accent="thick"
+    [actions]="actionsTemplate"
+    [title]="titleTemplate"
+  >
+    <h1>This is an h1</h1>
+    <p>A p inside of a Container with Actions</p>
+  </goab-container>
+  <ng-template #actionsTemplate>
+    <p>p in Actions</p>
+  </ng-template>
+  <ng-template #titleTemplate>
+    <p>p in Title</p>
+  </ng-template>
+  <hr />
+  <goab-container testId="ptableContainer">
+    <p>This is a paragraph.</p>
+    <goab-table>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+        </tr>
+        <tr>
+          <td>Data 3</td>
+          <td>Data 4</td>
+        </tr>
+      </tbody>
+    </goab-table>
+  </goab-container>
+</main>

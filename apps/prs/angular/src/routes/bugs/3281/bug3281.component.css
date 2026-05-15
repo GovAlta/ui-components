@@ -1,0 +1,6 @@
+.bug3281div {
+  /* box-sizing: border-box; */
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+}

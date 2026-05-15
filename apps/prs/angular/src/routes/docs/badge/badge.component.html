@@ -1,0 +1,144 @@
+<h2>Badge</h2>
+
+<h3>Basic badge</h3>
+<goab-badge type="default" content="New" [icon]="false"></goab-badge>
+
+<h3>Semantic types</h3>
+<goab-badge type="information" content="Information"></goab-badge>
+<goab-badge type="important" content="Important"></goab-badge>
+<goab-badge type="emergency" content="Emergency"></goab-badge>
+<goab-badge type="success" content="Success"></goab-badge>
+<goab-badge type="archived" content="Archived"></goab-badge>
+
+<h3>Extended colours</h3>
+<goab-badge type="sky" content="Sky" [icon]="false"></goab-badge>
+<goab-badge type="sky" content="Sky" [icon]="false" emphasis="subtle"></goab-badge>
+<goab-badge type="prairie" content="Prairie" [icon]="false"></goab-badge>
+<goab-badge type="prairie" content="Prairie" [icon]="false" emphasis="subtle"></goab-badge>
+<goab-badge type="lilac" content="Lilac" [icon]="false"></goab-badge>
+<goab-badge type="lilac" content="Lilac" [icon]="false" emphasis="subtle"></goab-badge>
+<goab-badge type="pasture" content="Pasture" [icon]="false"></goab-badge>
+<goab-badge type="pasture" content="Pasture" [icon]="false" emphasis="subtle"></goab-badge>
+<goab-badge type="sunset" content="Sunset" [icon]="false"></goab-badge>
+<goab-badge type="sunset" content="Sunset" [icon]="false" emphasis="subtle"></goab-badge>
+<goab-badge type="dawn" content="Dawn" [icon]="false"></goab-badge>
+<goab-badge type="dawn" content="Dawn" [icon]="false" emphasis="subtle"></goab-badge>
+
+<h3>High emphasis</h3>
+<goab-badge type="default" content="Default" [icon]="false"></goab-badge>
+<goab-badge type="information" content="Information" [icon]="false"></goab-badge>
+<goab-badge type="important" content="Important" [icon]="false"></goab-badge>
+<goab-badge type="emergency" content="Emergency" [icon]="false"></goab-badge>
+<goab-badge type="success" content="Success" [icon]="false"></goab-badge>
+<goab-badge type="archived" content="Archived" [icon]="false"></goab-badge>
+<goab-badge type="sky" content="Sky" [icon]="false"></goab-badge>
+<goab-badge type="prairie" content="Prairie" [icon]="false"></goab-badge>
+<goab-badge type="lilac" content="Lilac" [icon]="false"></goab-badge>
+<goab-badge type="pasture" content="Pasture" [icon]="false"></goab-badge>
+<goab-badge type="sunset" content="Sunset" [icon]="false"></goab-badge>
+<goab-badge type="dawn" content="Dawn" [icon]="false"></goab-badge>
+
+<h3>Low emphasis</h3>
+<goab-badge type="default" content="Default" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="information" content="Information" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="important" content="Important" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="emergency" content="Emergency" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="success" content="Success" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="archived" content="Archived" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="sky" content="Sky" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="prairie" content="Prairie" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="lilac" content="Lilac" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="pasture" content="Pasture" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="sunset" content="Sunset" emphasis="subtle" [icon]="false"></goab-badge>
+<goab-badge type="dawn" content="Dawn" emphasis="subtle" [icon]="false"></goab-badge>
+
+<h3>With custom icon</h3>
+<goab-badge type="success" content="Approved" iconType="checkmark"></goab-badge>
+<goab-badge type="emergency" content="Rejected" iconType="close"></goab-badge>
+<goab-badge type="information" content="Pending" iconType="time"></goab-badge>
+
+<h3>Sizes</h3>
+<goab-badge type="default" content="Medium" size="medium" emphasis="subtle"></goab-badge>
+<goab-badge type="default" content="Large" size="large" emphasis="subtle"></goab-badge>
+
+<h2>Examples</h2>
+
+<h3>Card view of case files</h3>
+<goab-container mt="l">
+  <div class="case-file-row">
+    <goab-block direction="column" gap="2xs">
+      <goab-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2021/2022</goab-text>
+      <goab-text size="body-s" mt="none" mb="none">Submitted: April 23, 2023</goab-text>
+    </goab-block>
+    <goab-block direction="row" gap="l" alignment="center">
+      <goab-badge type="default" content="Not started"></goab-badge>
+      <goab-button type="tertiary" size="compact">Start</goab-button>
+    </goab-block>
+  </div>
+</goab-container>
+<goab-container>
+  <div class="case-file-row">
+    <goab-block direction="column" gap="2xs">
+      <goab-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2020/2021</goab-text>
+      <goab-text size="body-s" mt="none" mb="none">Submitted: April 9, 2022</goab-text>
+    </goab-block>
+    <goab-block direction="row" gap="l" alignment="center">
+      <goab-badge type="important" content="Information needed"></goab-badge>
+      <goab-button type="tertiary" size="compact">Edit</goab-button>
+    </goab-block>
+  </div>
+</goab-container>
+<goab-container>
+  <div class="case-file-row">
+    <goab-block direction="column" gap="2xs">
+      <goab-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2019/2020</goab-text>
+      <goab-text size="body-s" mt="none" mb="none">Submitted: April 14, 2021</goab-text>
+    </goab-block>
+    <goab-block direction="row" gap="l" alignment="center">
+      <goab-badge type="success" content="Approved"></goab-badge>
+      <goab-button type="tertiary" size="compact">View</goab-button>
+    </goab-block>
+  </div>
+</goab-container>
+
+<h3>Expand or collapse part of a form</h3>
+<goab-text tag="h3" mt="none" mb="m">Review your application</goab-text>
+<goab-accordion heading="Referral details" [headingContent]="importantBadge">
+  <ng-template #importantBadge>
+    <goab-badge type="important" content="Updated"></goab-badge>
+  </ng-template>
+  <dl class="accordion-example">
+    <dt>Date of referral</dt>
+    <dd>January 27, 2021</dd>
+    <dt>Work safety concerns</dt>
+    <dd>None</dd>
+    <dt>Type of referral</dt>
+    <dd>Word of mouth, internet search</dd>
+    <dt>Intake received from another site</dt>
+    <dd>Yes</dd>
+  </dl>
+</goab-accordion>
+<goab-accordion heading="Contact information">
+  <dl class="accordion-example">
+    <dt>Name</dt>
+    <dd>Joan Smith</dd>
+    <dt>Contact preference</dt>
+    <dd>Text message</dd>
+  </dl>
+</goab-accordion>
+
+<h3>Show multiple tags together</h3>
+<goab-block gap="xs">
+  <goab-badge type="information" content="In progress"></goab-badge>
+  <goab-badge type="important" content="Priority"></goab-badge>
+  <goab-badge type="emergency" content="Past deadline"></goab-badge>
+</goab-block>
+
+<h3>Show status on a card</h3>
+<goab-container type="non-interactive" accent="thick" [title]="statusTitle" [actions]="statusActions">
+  <ng-template #statusTitle>Heading</ng-template>
+  <ng-template #statusActions>
+    <goab-badge type="important" content="Priority"></goab-badge>
+  </ng-template>
+  Content
+</goab-container>

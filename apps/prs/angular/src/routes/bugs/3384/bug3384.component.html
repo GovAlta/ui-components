@@ -1,0 +1,26 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">Bug 3384 - GoabTable Border</goab-text>
+
+  <goab-text tag="p"> The below table should have a border and border radius.</goab-text>
+
+  <goab-table width="100%">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Status</th>
+        <th class="Goab-table-number-header">Requests</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track $index) {
+      <tr>
+        <td>{{ row.service }}</td>
+        <td>{{ row.status }}</td>
+        <td class="Goab-table-number-cell">{{ row.requests }}</td>
+        <td>{{ row.updated }}</td>
+      </tr>
+      }
+    </tbody>
+  </goab-table>
+</goab-block>

@@ -1,0 +1,45 @@
+---
+/**
+ * StaticGuidanceGrid
+ *
+ * Shared responsive grid wrapper for hand-authored DoDont content on docs pages.
+ * Mirrors the layout pattern used by GuidanceGrid on component pages.
+ */
+
+interface Props {
+  singleColumn?: boolean;
+}
+
+const { singleColumn = false } = Astro.props;
+---
+
+<section class="guidance-section">
+  <div class:list={['guidance-grid', { 'single-column': singleColumn }]}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .guidance-section {
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  .guidance-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+  }
+
+  .single-column {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .guidance-grid:not(.single-column) {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .single-column {
+      grid-template-columns: minmax(320px, 480px);
+    }
+  }
+</style>

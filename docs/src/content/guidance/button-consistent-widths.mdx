@@ -1,0 +1,25 @@
+---
+id: button-consistent-widths
+type: dont
+description: Don't stack standard and full width buttons.
+topic: sizing
+tags:
+  - button
+  - sizing
+  - consistency
+  - mobile
+appliesTo:
+  components:
+    - button
+    - button-group
+relatedProps:
+  - width
+status: published
+---
+
+<Preview>
+  <goa-block direction="column" gap="s" style="width: 200px;">
+    <goa-button type="secondary">Cancel</goa-button>
+    <goa-button type="primary" width="full">Save</goa-button>
+  </goa-block>
+</Preview>

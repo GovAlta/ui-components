@@ -1,0 +1,81 @@
+<goab-button-group alignmnent="start">
+  <goab-button type="primary" (onClick)="openRightDrawer()"
+    >Open Drawer (Right)</goab-button
+  >
+  <goab-button type="secondary" (onClick)="openBottomDrawer()"
+    >Open Drawer (Bottom)</goab-button
+  >
+</goab-button-group>
+
+<ng-template #drawerActionsRight>
+  <goab-button-group alignment="end" gap="relaxed">
+    <goab-button type="secondary" (onClick)="closeRightDrawer()">Cancel</goab-button>
+    <goab-button type="primary" (onClick)="closeRightDrawer()">Save</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<ng-template #drawerActionsBottom>
+  <goab-button-group alignment="end" gap="relaxed">
+    <goab-button type="secondary" (onClick)="closeBottomDrawer()">Cancel</goab-button>
+    <goab-button type="primary" (onClick)="closeBottomDrawer()">Save</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<ng-template #drawerContent>
+  <p>
+    Use the buttons below to close this right-positioned drawer. The content area
+    stretches to fill the available vertical space for layout testing.
+  </p>
+  <goab-text tag="h4">Review checklist</goab-text>
+  <ul>
+    <li>Confirm scope alignment</li>
+    <li>Validate stakeholder sign-offs</li>
+    <li>Verify accessibility and QA coverage</li>
+  </ul>
+  <p>
+    This panel expands to the full viewport height so you can test scrolling and layout
+    behavior. Add or remove content here to simulate different drawer payloads.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+  </p>
+</ng-template>
+
+<goab-drawer
+  [open]="rightDrawerOpen"
+  position="right"
+  heading="Project Review Panel"
+  [actions]="drawerActionsRight"
+  maxSize="400px"
+  (onClose)="closeRightDrawer()"
+>
+  <ng-container *ngTemplateOutlet="drawerContent"></ng-container>
+</goab-drawer>
+
+<goab-drawer
+  [open]="bottomDrawerOpen"
+  position="bottom"
+  heading="Project Review Panel"
+  [actions]="drawerActionsBottom"
+  maxSize="400px"
+  (onClose)="closeBottomDrawer()"
+>
+  <ng-container *ngTemplateOutlet="drawerContent"></ng-container>
+</goab-drawer>

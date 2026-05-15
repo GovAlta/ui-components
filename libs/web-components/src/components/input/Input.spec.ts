@@ -1,0 +1,706 @@
+import { render, fireEvent, waitFor, cleanup } from "@testing-library/svelte";
+import GoAInput from "./Input.svelte";
+import GoAInputWrapper from "./Input.test.svelte";
+import GoAInputFormItemWrapper from "./InputFormItemWrapper.test.svelte";
+import { it, describe, expect, afterEach, vi } from "vitest";
+
+afterEach(cleanup);
+
+describe("GoAInput Component", () => {
+  it("should render", async () => {
+    const el = render(GoAInput, { testid: "input-test", id: "test" });
+    const input = await el.findByTestId("input-test");
+    expect(input).toBeTruthy();
+    expect(input.getAttribute("id")).toBe("test");
+  });
+
+  describe("Properties", () => {
+    it("allows for setting of the value", async () => {
+      const el = render(GoAInput, { testid: "input-test", value: "foobar" });
+      const input = await el.findByTestId("input-test");
+      expect((input as HTMLInputElement).value).toBe("foobar");
+    });
+
+    it("allows for setting of the name", async () => {
+      const el = render(GoAInput, { testid: "input-test", name: "test-id" });
+      const input = await el.findByTestId("input-test");
+      expect(input.getAttribute("name")).toBe("test-id");
+    });
+
+    [
+      "text",
+      "number",
+      "password",
+      "email",
+      "date",
+      "datetime-local",
+      "month",
+      "search",
+      "tel",
+      "time",
+      "url",
+      "week",
+    ].forEach((type: string) => {
+      it(`renders the ${type} type`, async () => {
+        const el = render(GoAInput, { testid: "input-test", type });
+        const input = await el.findByTestId("input-test");
+        expect(input.getAttribute("type")).toBe(type);
+      });
+    });
+
+    it("allows for placeholder text", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        placeholder: "test-id",
+      });
+      const input = await el.findByTestId("input-test");
+      expect(input.getAttribute("placeholder")).toBe("test-id");
+    });
+
+    it("allows for a leading icon", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        leadingicon: "finger-print",
+      });
+      const icon = await el.findByTestId("leading-icon");
+      expect(icon).toBeTruthy();
+    });
+
+    it("allows for a trailing icon", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        trailingicon: "finger-print",
+      });
+      const icon = await el.findByTestId("trailing-icon");
+      expect(icon).toBeTruthy();
+    });
+
+    it("allows for a variant", async () => {
+      const el = render(GoAInput, { testid: "input-test", variant: "bare" });
+      const root = el.container.querySelector(".variant--bare");
+      expect(root).toBeTruthy();
+    });
+
+    it("can be disabled", async () => {
+      const el = render(GoAInput, { testid: "input-test", disabled: "true" });
+      const root = el.container.querySelector(".input--disabled");
+      expect(root).toBeTruthy();
+    });
+
+    it("allows the input to be marked as readonly", async () => {
+      const el = render(GoAInput, { testid: "input-test", readonly: "true" });
+      const root = el.container.querySelector("input[readonly]");
+      expect(root).toBeTruthy();
+    });
+
+    it("allows the input to be set to an error state", async () => {
+      const el = render(GoAInput, { testid: "input-test", error: "true" });
+      const root = el.container.querySelector(".error");
+      expect(root).toBeTruthy();
+    });
+
+    it("accepts an arialabel property", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        arialabel: "First Name",
+      });
+      const root = el.container.querySelector('[aria-label="First Name"]');
+      expect(root).toBeTruthy();
+    });
+
+    it("should generate an aria-label value when not provided", async () => {
+      const result = render(GoAInputFormItemWrapper, {
+        inputId: "",
+        inputName: "inputName",
+        label: "DDD Alberta",
+        testIdFormItem: "formItem-testid",
+        testIdInput: "input-testid",
+      });
+      const inputEl = result.queryByTestId("input-testid");
+
+      await waitFor(() => {
+        expect(inputEl?.getAttribute("aria-label")).toBe("DDD Alberta");
+      });
+    });
+
+    it("shouldn't overwrite aria-label if a value has already been assigned", async () => {
+      const result = render(GoAInputFormItemWrapper, {
+        inputId: "inputId",
+        inputName: "inputName",
+        arialabel: "DONT OVERWRITE ME",
+        label: "DDD Alberta",
+        testIdFormItem: "formItem-testid",
+        testIdInput: "input-testid",
+      });
+      const inputEl = result.queryByTestId("input-testid");
+
+      await waitFor(() => {
+        expect(inputEl?.getAttribute("aria-label")).toBe("DONT OVERWRITE ME");
+      });
+    });
+
+    it("accepts an arialabelledby property", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        arialabelledby: "firstName",
+      });
+      const root = el.container.querySelector('[aria-labelledby="firstName"]');
+      expect(root).toBeTruthy();
+    });
+
+    it("has an autocapitalize prop", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        autocapitalize: "on",
+      });
+      const root = el.container.querySelector("[autocapitalize=on]");
+      expect(root).toBeTruthy();
+    });
+
+    it("has an autocomplete prop", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        autocomplete: "off",
+      });
+      const root = el.container.querySelector("[autocomplete=off]");
+      expect(root).toBeTruthy();
+    });
+  });
+
+  it("allows for the trailing icon click event handling", async () => {
+    const el = render(GoAInput, {
+      testid: "input-test",
+      trailingicon: "finger-print",
+      handletrailingiconclick: "true",
+    });
+    const icon = await el.findByTestId("trailing-icon-button");
+
+    const click = vi.fn();
+    icon.addEventListener("_trailingIconClick", click);
+    await fireEvent.click(icon);
+    await waitFor(() => {
+      expect(click).toBeCalled();
+    });
+  });
+
+  it("allows the input to be focused", async () => {
+    const el = render(GoAInput, { testid: "input-test", focused: "true" });
+    const input = el.container.querySelector("input");
+    expect(input).toBeTruthy();
+
+    await waitFor(() => {
+      input && expect(input).toHaveFocus();
+    });
+  });
+
+  it("handles keyup event", async () => {
+    const { findByTestId } = render(GoAInput, {
+      name: "test-name",
+      testid: "input-test",
+    });
+    const input = await findByTestId("input-test");
+    const change = vi.fn();
+    const keypress = vi.fn();
+
+    input.addEventListener("_change", (e: Event) => {
+      const ce = e as CustomEvent;
+      expect(ce.detail.name).toBe("test-name");
+      expect(ce.detail.value).toBe("foobar");
+      change();
+    });
+
+    input.addEventListener("_keyPress", (e: Event) => {
+      const ce = e as CustomEvent;
+      expect(ce.detail.name).toBe("test-name");
+      expect(ce.detail.value).toBe("foobar");
+      expect(ce.detail.key).toBe("r");
+      keypress();
+    });
+
+    await fireEvent.input(input, { target: { value: "foobar" } });
+    await fireEvent.keyUp(input, { target: { value: "foobar" }, key: "r" });
+    await waitFor(() => {
+      expect(change).toBeCalledTimes(1);
+      expect(keypress).toBeCalledTimes(1);
+    });
+  });
+
+  // The change event is what is fired when selecting a date from the calender supplied
+  // by the `date` input type. Both the change and keyup event handling is required.
+  it("handles the change event", async () => {
+    const { findByTestId } = render(GoAInput, {
+      name: "test-name",
+      testid: "input-test",
+      type: "date",
+      value: "2024-01-01",
+    });
+    const input = await findByTestId("input-test");
+    const change = vi.fn();
+
+    input.addEventListener("_change", () => {
+      change();
+    });
+
+    await fireEvent.input(input, { target: { value: "2024-01-02" } });
+    await waitFor(() => {
+      expect(change).toBeCalledTimes(1);
+    });
+  });
+
+  it("handles trailing icon click", async () => {
+    const { findByTestId } = render(GoAInput, {
+      testid: "input-test",
+      handletrailingiconclick: "true",
+      trailingicon: "finger-print",
+    });
+    const onClick = vi.fn();
+    const iconButton = await findByTestId("trailing-icon-button");
+
+    iconButton.addEventListener("_trailingIconClick", onClick);
+
+    await fireEvent.click(iconButton);
+    await waitFor(() => {
+      expect(onClick).toBeCalledTimes(1);
+    });
+  });
+
+  describe("type=number", () => {
+    it("allows for a numeric props", async () => {
+      const el = render(GoAInput, {
+        type: "number",
+        min: "0",
+        max: "10",
+        step: 2,
+      });
+      const root = el.container.querySelector("input");
+      expect(root).toBeTruthy();
+
+      root && expect(root).toHaveAttribute("min", "0");
+      root && expect(root).toHaveAttribute("max", "10");
+      root && expect(root).toHaveAttribute("step", "2");
+    });
+  });
+
+  describe("maxlength", () => {
+    it("allows for a maxlength prop", async () => {
+      const el = render(GoAInput, { maxlength: 10 });
+      const root = el.container.querySelector("input");
+      expect(root).toBeTruthy();
+      expect(root).toHaveAttribute("maxlength", "10");
+    });
+  });
+
+  describe("type=date", () => {
+    it("allows for a date type", async () => {
+      const el = render(GoAInput, { type: "date" });
+      const input = el.container.querySelector("input");
+      expect(input).toBeTruthy();
+      expect(input?.getAttribute("min")).toBe("");
+      expect(input?.getAttribute("max")).toBe("");
+      expect(input?.getAttribute("step")).toBe("1");
+    });
+  });
+
+  describe("Search type", () => {
+    it("clears the input when the search x icon is clicked", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+        type: "search",
+        value: "foo",
+      });
+      const input = await findByTestId("input-test");
+      const search = vi.fn();
+
+      input.addEventListener("_change", () => {
+        search();
+      });
+
+      await fireEvent.input(input, { target: { value: "" } });
+      await waitFor(() => {
+        expect(search).toBeCalledTimes(1);
+      });
+    });
+
+    it("does fire the search event if it is not a search input type", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+        type: "text",
+      });
+      const input = await findByTestId("input-test");
+      const search = vi.fn();
+
+      input.addEventListener("_change", () => {
+        search();
+      });
+
+      await fireEvent(input, new Event("search"));
+      expect(search).toBeCalledTimes(0);
+    });
+  });
+
+  describe("Prefix and suffix text", () => {
+    it("does not show prefix or suffix text", async () => {
+      const { container } = render(GoAInput, { type: "text" });
+      expect(container.querySelector(".prefix")).toBeNull();
+      expect(container.querySelector(".suffix")).toBeNull();
+    });
+    it("shows prefix text and also a warning message in console", async () => {
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+        /* do nothing */
+      });
+      const { container } = render(GoAInput, { type: "text", prefix: "$" });
+      const prefix = container.querySelector(".prefix");
+
+      expect(prefix).toBeTruthy();
+      expect(prefix?.innerHTML).toContain("$");
+      await waitFor(() => {
+        expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
+      });
+      mock.mockRestore();
+    });
+    it("shows suffix text and also a warning message in console", async () => {
+      const mock = vi.spyOn(console, "warn").mockImplementation(() => {
+        /* do nothing */
+      });
+      const { container } = render(GoAInput, {
+        type: "text",
+        suffix: "per item",
+      });
+      expect(container.querySelector(".suffix")?.innerHTML).toContain(
+        "per item",
+      );
+      await waitFor(() => {
+        expect(console.warn["mock"].calls.length).toBeGreaterThan(0);
+      });
+      mock.mockRestore();
+    });
+  });
+
+  describe("Margins", () => {
+    it(`should add the margin`, async () => {
+      const baseElement = render(GoAInput, {
+        testid: "input-test",
+        mt: "s",
+        mr: "m",
+        mb: "l",
+        ml: "xl",
+      });
+      const input = await baseElement.findByTestId("input-test");
+      const containerElement =
+        baseElement.container.querySelector(".container");
+
+      expect(input).toBeTruthy();
+      expect(containerElement).toBeTruthy();
+      await waitFor(() => {
+        const style = containerElement?.getAttribute("style");
+        expect(style).toContain("margin-top:var(--goa-space-s)");
+        expect(style).toContain("margin-right:var(--goa-space-m)");
+        expect(style).toContain("margin-bottom:var(--goa-space-l)");
+        expect(style).toContain("margin-left:var(--goa-space-xl)");
+      });
+    });
+  });
+
+  describe("Leading and Trailing content", () => {
+    it("should not have a slot for the leading and trailing content", async () => {
+      const el = render(GoAInputWrapper);
+      expect(el.container.querySelector("[slot=leadingContent]")).toBeNull();
+      expect(el.container.querySelector("[slot=trailingContent]")).toBeNull();
+    });
+
+    it("should have a slot for the leading content", async () => {
+      const content = "$";
+      const el = render(GoAInputWrapper, { leadingContent: content });
+      expect(el.container.innerHTML).toContain(content);
+
+      const leadingContent = el.container.querySelector(
+        "[slot=leadingContent]",
+      );
+      expect(leadingContent).toBeTruthy();
+      expect(leadingContent?.innerHTML).toContain(content);
+    });
+
+    it("should have a slot for the trailing content", async () => {
+      const content = "items";
+      const el = render(GoAInputWrapper, { trailingContent: content });
+      const trailingContent = el.container.querySelector(
+        "[slot=trailingContent]",
+      );
+
+      expect(el.container.innerHTML).toContain(content);
+      expect(trailingContent?.innerHTML).toContain(content);
+    });
+  });
+
+  it("should delay the _change event when debounce is set", async () => {
+    const fn = vi.fn();
+    const el = render(GoAInput, { testid: "input-test", debounce: 1000 });
+    const input = el.getByTestId("input-test");
+    expect(input).toBeTruthy();
+
+    input.addEventListener("_change", () => {
+      fn();
+    });
+
+    await fireEvent.input(input, { target: { value: "foobar" } });
+    await waitFor(
+      () => {
+        expect(fn).not.toBeCalled();
+      },
+      { timeout: 500 },
+    );
+
+    await waitFor(
+      () => {
+        expect(fn).toBeCalled();
+      },
+      { timeout: 2000 },
+    );
+  });
+
+  describe("Text Alignment", () => {
+    it("defaults to left alignment when no textalign prop is provided", async () => {
+      const el = render(GoAInput, { testid: "input-test" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.textAlign).toBe("");
+      expect(input.style.cssText).not.toContain("text-align: right");
+    });
+
+    it("applies left alignment when textalign is set to 'left'", async () => {
+      const el = render(GoAInput, { testid: "input-test", textalign: "left" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.cssText).not.toContain("text-align: right");
+    });
+
+    it("applies right alignment when textalign is set to 'right'", async () => {
+      const el = render(GoAInput, { testid: "input-test", textalign: "right" });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.style.cssText).toContain("text-align: right");
+    });
+
+    it("applies right alignment to number input", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        type: "number",
+        textalign: "right",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input.getAttribute("type")).toBe("number");
+      expect(input.style.cssText).toContain("text-align: right");
+    });
+
+    it("renders left-aligned input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        textalign: "left",
+        value: "Sample left-aligned text",
+        placeholder: "Left aligned placeholder",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.style.cssText).not.toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe(
+        "Sample left-aligned text",
+      );
+    });
+
+    it("renders right-aligned input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        textalign: "right",
+        value: "Sample right-aligned text",
+        placeholder: "Right aligned placeholder",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.style.cssText).toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe(
+        "Sample right-aligned text",
+      );
+    });
+
+    it("renders right-aligned number input for visual regression testing", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        type: "number",
+        textalign: "right",
+        value: "12345.67",
+        placeholder: "0.00",
+      });
+      const input = await el.findByTestId("input-test");
+
+      expect(input).toBeTruthy();
+      expect(input.getAttribute("type")).toBe("number");
+      expect(input.style.cssText).toContain("text-align: right");
+      expect((input as HTMLInputElement).value).toBe("12345.67");
+    });
+  });
+
+  describe("Width Tests", () => {
+    it("rem width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "20rem",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 20rem");
+      });
+    });
+
+    it("em width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "15em",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 15em");
+      });
+    });
+
+    it("px width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "300px",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 300px");
+      });
+    });
+
+    it("percentage width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "50%",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 50%");
+      });
+    });
+
+    it("ch width applied correctly", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "25ch",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("26ch"); // 25 + 1 for regular inputs
+      });
+    });
+
+    it("empty width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("unitless width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "300",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default behavior, same as empty width
+      });
+    });
+
+    it("whitespace-only width uses default behavior", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "   ", // only spaces
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("handles invalid ch values gracefully", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "invalidch", // invalid number
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        const hasValidWidth =
+          input.style.width === "1ch" || input.style.width === "";
+        expect(hasValidWidth).toBe(true);
+      });
+    });
+
+    it("uses default 30ch when no width prop provided", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        // no width provided
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("31ch"); // default 30 + 1
+      });
+    });
+
+    it("fractional rem values work correctly", async () => {
+      const testCases = ["1.25rem", "3.75rem", "10.5rem", "0.5rem"];
+
+      for (const width of testCases) {
+        const el = render(GoAInput, {
+          testid: "input-test",
+          width,
+        });
+
+        await waitFor(() => {
+          const container = el.container.querySelector(".container");
+          expect(container?.getAttribute("style")).toContain(`width: ${width}`);
+        });
+
+        cleanup();
+      }
+    });
+
+    it("fractional em values work correctly", async () => {
+      const testCases = ["2.25em", "5.75em", "12.5em", "0.8em"];
+
+      for (const width of testCases) {
+        const el = render(GoAInput, {
+          testid: "input-test",
+          width,
+        });
+
+        await waitFor(() => {
+          const container = el.container.querySelector(".container");
+          expect(container?.getAttribute("style")).toContain(`width: ${width}`);
+        });
+
+        cleanup();
+      }
+    });
+  });
+});

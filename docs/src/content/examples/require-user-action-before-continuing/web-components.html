@@ -1,0 +1,38 @@
+<goa-button version="2" id="open-modal-btn">Open Basic Modal</goa-button>
+<goa-modal
+  version="2"
+  id="confirmation-modal"
+  heading="Are you sure you want to continue?"
+>
+  <p>You cannot return to this page.</p>
+  <div slot="actions">
+    <goa-button-group alignment="end">
+      <goa-button version="2" id="back-btn" type="secondary" size="compact"
+        >Back</goa-button
+      >
+      <goa-button version="2" id="continue-btn" type="primary" size="compact"
+        >Continue</goa-button
+      >
+    </goa-button-group>
+  </div>
+</goa-modal>
+
+<script>
+  const modal = document.getElementById("confirmation-modal");
+  const openBtn = document.getElementById("open-modal-btn");
+  const backBtn = document.getElementById("back-btn");
+  const continueBtn = document.getElementById("continue-btn");
+
+  function openModal() {
+    modal.setAttribute("open", "true");
+  }
+
+  function closeModal() {
+    modal.removeAttribute("open");
+  }
+
+  openBtn.addEventListener("_click", openModal);
+  backBtn.addEventListener("_click", closeModal);
+  continueBtn.addEventListener("_click", closeModal);
+  modal.addEventListener("_close", closeModal);
+</script>

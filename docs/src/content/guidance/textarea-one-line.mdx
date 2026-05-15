@@ -1,0 +1,22 @@
+---
+id: textarea-one-line
+type: dont
+description: Don't use a text area which is only one line high; instead, use text input if just one line is needed.
+topic: forms
+tags:
+  - textarea
+  - input
+  - sizing
+appliesTo:
+  components:
+    - textarea
+    - input
+    - form-item
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Input label" helptext="This is some helper text">
+    <goa-textarea name="oneline" rows="1"></goa-textarea>
+  </goa-form-item>
+</Preview>

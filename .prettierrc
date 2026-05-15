@@ -1,3 +1,6 @@
 {
-  "singleQuote": true
+  "printWidth": 90,
+  "singleQuote": false,
+  "endOfLine": "lf",
+  "trailingComma": "all"
 }

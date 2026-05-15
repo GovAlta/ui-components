@@ -1,0 +1,21 @@
+.history-item {
+  border-left: 3px solid var(--goa-color-info-default);
+  padding-left: var(--goa-space-m);
+  margin-bottom: var(--goa-space-s);
+}
+
+pre {
+  background-color: var(--goa-color-greyscale-100);
+  padding: var(--goa-space-m);
+  border-radius: var(--goa-border-radius-s);
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+code {
+  background-color: var(--goa-color-greyscale-100);
+  padding: var(--goa-space-2xs) var(--goa-space-xs);
+  border-radius: var(--goa-border-radius-xs);
+  font-family: monospace;
+}

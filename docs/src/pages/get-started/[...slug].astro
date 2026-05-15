@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import DocumentationPageLayout from "../../layouts/DocumentationPageLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("get-started");
+  return entries.map((entry) => ({
+    // The "index" entry maps to the collection root URL (/get-started).
+    // Astro's [...slug] rest route accepts undefined for the parent path.
+    params: { slug: entry.slug === "index" ? undefined : entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<DocumentationPageLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  section="get-started"
+>
+  <Content />
+</DocumentationPageLayout>

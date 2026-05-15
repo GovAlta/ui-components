@@ -1,0 +1,32 @@
+{
+  "name": "goa-dropdown-item",
+  "attributes": [
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The value of the item. This value will be contained within the onChange event"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "The displayed value within the selection box. The value property is the fallback value."
+    },
+    {
+      "name": "filter",
+      "type": "string",
+      "description": "When true the dropdown will have the ability to filter options by typing into the input field."
+    },
+    {
+      "name": "mount",
+      "description": "How newly added items will be added to the existing list",
+      "valueSet": "mountType",
+      "default": "append"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Dropdown",
+      "url": "{{siteUrl}}/?path=/docs/components-dropdown--basic"
+    }
+  ]
+}

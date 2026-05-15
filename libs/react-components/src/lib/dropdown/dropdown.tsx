@@ -1,167 +1,157 @@
-import React, { FC, ReactElement, useState } from 'react'
-import { GoAInput, GoAScrollable } from '../../experimental'
-import type { GoAIconType } from '../../experimental';
-import './dropdown.scss'
+import {
+  GoabDropdownOnChangeDetail,
+  GoabDropdownSize,
+  GoabIconType,
+  Margins,
+  DataAttributes,
+} from "@abgov/ui-components-common";
+import { useEffect, useRef, type JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
-export { GoADropdownOption } from './option'
-
-const MAX_HEIGHT = 300;
-
-interface Props {
-  // required
-  name: string;
-  selectedValues: string[]
-  onChange: (name: string, values: string[]) => void;
-
-  // optional
-  disabled?: boolean;
-  autoComplete?: boolean;
-  leadingIcon?: GoAIconType,
-  maxHeight?: number;
-  multiSelect?: boolean;
+interface WCProps extends Margins {
+  arialabel?: string;
+  arialabelledby?: string;
+  disabled?: string;
+  error?: string;
+  filterable?: string;
+  leadingicon?: string;
+  maxheight?: string;
+  multiselect?: string;
+  name?: string;
+  native?: string;
   placeholder?: string;
+  value?: string;
+  width?: string;
+  maxwidth?: string;
+  relative?: string;
+  id?: string;
+  autocomplete?: string;
+  testid?: string;
+  size?: GoabDropdownSize;
+  version?: string;
 }
 
-export const GoADropdown: FC<Props> = ({ selectedValues = [], ...props }) => {
-  const [isMenuVisible, _setMenuVisibility] = useState<boolean>(false)
-  const [filter, setFilter] = useState<string>('');
-
-  /**
-   * Override the useState method to set the menu visibility to allow for conditional rendering
-   */
-  function setMenuVisibility(isVisible: boolean) {
-    if (!props.disabled) {
-      _setMenuVisibility(isVisible)
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      "goa-dropdown": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
+}
 
-  /**
-   * Binds the children with additional properties and events
-   */
-  function getChildren() {
-    const _filter = filter.toLowerCase();
-    return React.Children
-      .map(props.children, (child: ReactElement) => {
-        if (child.props.value) {
-          const visible = !_filter
-            || child.props.value.toLowerCase().includes(_filter)
-            || child.props.label.toLowerCase().includes(_filter);
+export interface GoabDropdownProps extends Margins, DataAttributes {
+  /** Identifier for the dropdown. Should be unique. */
+  name?: string;
+  /** The currently selected value(s) of the dropdown. */
+  value?: string[] | string;
+  /** Callback fired when the selected value changes. */
+  onChange?: (detail: GoabDropdownOnChangeDetail) => void;
+  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  ariaLabel?: string;
+  /** The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. */
+  ariaLabelledBy?: string;
+  /** The id attribute for the dropdown element. */
+  id?: string;
+  /** Dropdown items rendered inside the dropdown. */
+  children?: React.ReactNode;
+  /** Disables the dropdown control. */
+  disabled?: boolean;
+  /** Shows an error state on the dropdown. */
+  error?: boolean;
+  /** When true, allows filtering options by typing into the input field. */
+  filterable?: boolean;
+  /** Icon shown to the left of the dropdown input. */
+  leadingIcon?: GoabIconType;
+  /** Maximum height of the dropdown menu. Non-native only. @default "276px" */
+  maxHeight?: string;
+  /** When true, allows multiple items to be selected. @internal */
+  multiselect?: boolean;
+  /** When true, renders the native select HTML element. */
+  native?: boolean;
+  /** The text displayed in the dropdown before a selection is made. Non-native only. */
+  placeholder?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Overrides the autosized menu width. Non-native only. */
+  width?: string;
+  /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
+  maxWidth?: string;
+  /** Specifies the autocomplete attribute for the dropdown input. Native only. */
+  autoComplete?: string;
+  /** Sets the size of the dropdown. Compact reduces height for dense layouts. */
+  size?: GoabDropdownSize;
+  /** @deprecated This property has no effect and will be removed in a future version. */
+  relative?: boolean;
+}
 
-          return React.cloneElement(child, {
-            ...child.props,
-            visible: visible,
-            onClick: handleSelection,
-            selected: selectedValues.includes(child.props.value),
-            _testId: `${props.name}-dropdown-option--${child.props.value}`
-          })
-        }
-
-        if (filter) {
-          return
-        }
-        return child;
-      })
+function stringify(value: string | string[] | undefined): string {
+  if (typeof value === "undefined") {
+    return "";
   }
+  if (typeof value === "string") {
+    return value;
+  }
+  return JSON.stringify(value);
+}
 
-  /**
-   * Allows for conditional value relaying to the parent component and updates the selected labels
-   */
-  function handleSelection(value: string) {
-    let values: string[];
-    if (props.multiSelect) {
-      if (selectedValues.includes(value)) {
-        values = selectedValues.filter(v => v !== value);
-      } else {
-        values = [...selectedValues, value];
+/** Present a list of options to the user to select from. */
+export function GoabDropdown({
+  value,
+  onChange,
+  disabled,
+  error,
+  filterable,
+  multiselect,
+  native,
+  relative,
+  children,
+  size = "default",
+  ...rest
+}: GoabDropdownProps): JSX.Element {
+  const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>({ size, ...rest }, lowercase);
+
+  useEffect(() => {
+    if (!el.current) {
+      return;
+    }
+    const current = el.current;
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
+      onChange?.({ ...detail, event: e });
+    };
+    if (onChange) {
+      current.addEventListener("_change", handler);
+    }
+    return () => {
+      if (onChange) {
+        current.removeEventListener("_change", handler);
       }
-    } else {
-      values = selectedValues.includes(value) ? [] : [value];
-    }
-    props.onChange(props.name, values);
-    toggleMenuVisibility();
-  }
-
-  /**
-   * Controls whether the menu is hidden or not when clicked
-   */
-  function toggleMenuVisibility() {
-    // always show if hidden
-    if (!isMenuVisible) {
-      setMenuVisibility(true)
-    }
-    // only hide if not multi select
-    if (isMenuVisible && !props.multiSelect) {
-      setMenuVisibility(false)
-      setFilter('');
-    }
-  }
-
-  /**
-   * Generates a description of the selected options
-   */
-  function getSelectedLabel(): string {
-    const selectedLabels =
-      React.Children
-        .map(props.children, (child: ReactElement) => child)
-        .filter(child => selectedValues.includes(child.props.value))
-        .map(child => child.props.label)
-
-    if (props.multiSelect && selectedLabels.length > 1) {
-      return `${selectedLabels.length} items selected`
-    }
-
-    if (selectedLabels.length === 1) {
-      return selectedLabels[0];
-    }
-
-    return '';
-  }
+    };
+  }, [el, onChange]);
 
   return (
-    <div className="goa-dropdown-box">
-      {isMenuVisible &&
-        <div data-testid={`${props.name}-dropdown-background`} className="goa-dropdown-background" onClick={() => setMenuVisibility(false)}></div>
-      }
-      <div>
-        {(!isMenuVisible || !props.autoComplete) &&
-          <div
-            onClick={toggleMenuVisibility}
-            data-testid={`${props.name}-dropdown`}>
-            <GoAInput
-              type="text"
-              disabled={props.disabled}
-              trailingIcon="chevron-down"
-              leadingIcon={props.leadingIcon}
-              name="search"
-              readonly={true}
-              onChange={null}
-              placeholder={props.placeholder}
-              value={getSelectedLabel()} />
-          </div>
-        }
-        {isMenuVisible &&
-          <>
-            {props.autoComplete &&
-              <GoAInput
-                type="text"
-                placeholder="Filter"
-                focused={isMenuVisible}
-                variant="goa"
-                name="filter"
-                value={filter}
-                trailingIcon={filter.length > 0 ? 'close-circle' : 'search'}
-                onTrailingIconClick={() => filter.length > 0 && setFilter('')}
-                onChange={(_name, value) => setFilter(value)} />
-            }
-            <ul className="goa-dropdown-list">
-              <GoAScrollable vertical={true} height={props.maxHeight || MAX_HEIGHT}>
-                {getChildren()}
-              </GoAScrollable>
-            </ul>
-          </>
-        }
-      </div>
-    </div>
-  )
+    <goa-dropdown
+      ref={el}
+      value={stringify(value)}
+      disabled={disabled ? "true" : undefined}
+      error={error ? "true" : undefined}
+      filterable={filterable ? "true" : undefined}
+      multiselect={multiselect ? "true" : undefined}
+      native={native ? "true" : undefined}
+      relative={relative ? "true" : undefined}
+      {..._props}
+      version="2"
+    >
+      {children}
+    </goa-dropdown>
+  );
 }
-export default GoADropdown
+
+export default GoabDropdown;

@@ -1,0 +1,25 @@
+import type { JSX } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-card-group": React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
+export interface GoabCardGroupProps extends DataAttributes {
+  /** Content rendered inside the card group, typically multiple Card components. */
+  children?: React.ReactNode;
+}
+
+/** A container that groups related content and actions. */
+export function GoabCardGroup({ children, ...rest }: GoabCardGroupProps): JSX.Element {
+  const _props = transformProps(rest, lowercase);
+
+  return <goa-card-group {..._props}>{children}</goa-card-group>;
+}
+
+export default GoabCardGroup;

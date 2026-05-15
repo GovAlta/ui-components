@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.lib.json",
-  "include": [
-    "src/experimental/**/*.js",
-    "src/experimental/**/*.ts",
-    "src/experimental/**/*.tsx",
-    "src/experimental/**/*.vue"
-  ]
-}

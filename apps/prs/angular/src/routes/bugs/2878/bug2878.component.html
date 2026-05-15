@@ -1,0 +1,22 @@
+<goab-block direction="column" gap="l">
+  <h2>Bug #2878: DatePicker onChange and type="input" Test</h2>
+
+  <goab-form-item label="DatePicker (default)">
+    <goab-date-picker
+      name="date1"
+      (onChange)="onChange1($event)"
+      [value]="value1"
+    ></goab-date-picker>
+  </goab-form-item>
+  <div>Value: {{ value1 }}</div>
+
+  <goab-form-item label="DatePicker (type='input')">
+    <goab-date-picker
+      name="date2"
+      type="input"
+      (onChange)="onChange2($event)"
+      [value]="value2"
+    ></goab-date-picker>
+  </goab-form-item>
+  <div>Value: {{ value2 }}</div>
+</goab-block>

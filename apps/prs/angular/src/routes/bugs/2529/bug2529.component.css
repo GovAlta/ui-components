@@ -1,0 +1,52 @@
+/* Bug 2529 Component Styles */
+main {
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 16px;
+}
+
+h3 {
+  color: #555;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+ul {
+  margin-bottom: 16px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Debug styles to help visualize the issue */
+.debug-container {
+  position: relative;
+}
+
+.debug-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed red;
+  pointer-events: none;
+  z-index: 1;
+}

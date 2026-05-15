@@ -1,0 +1,101 @@
+<svelte:options customElement={{
+  tag: "goa-tab",
+  props: {
+    open: { reflect: true, type: "String" },
+  }
+}} />
+
+<script lang="ts" context="module">
+  export type GoATabProps = {
+    el: HTMLElement;
+    headingType: "slot" | "string";
+    heading: HTMLSlotElement | string;
+    open: boolean;
+    disabled: boolean;
+    slug: string;
+  }
+</script>
+
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { ensureSlotExists, getSlottedChildren } from "../../common/utils";
+
+  // ======
+  // Public
+  // ======
+
+  /** The text label for this tab. Can also use the heading slot for custom content. */
+  export let heading: string = "";
+  /** Whether this tab is currently selected/active. */
+  export let open: boolean = false;
+  export let disabled: boolean = false;
+  export let slug: string = "";
+
+  // =======
+  // Private
+  // =======
+
+  let _rootEl: HTMLElement;
+  let _headingSlotEl: HTMLElement;
+  let _contentEl: HTMLElement;
+
+  // ========
+  // Hooks
+  // ========
+
+  onMount(() => {
+    ensureSlotExists(_contentEl);
+    dispatchInit();
+    addSetOpenEventListener();
+  });
+
+  // =========
+  // Functions
+  // =========
+
+  function dispatchInit() {
+    setTimeout(() => {
+      const headingType = $$slots.heading ? "slot" : "string";
+      _rootEl?.dispatchEvent(new CustomEvent("tab:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          el: _rootEl,
+          headingType,
+          heading: headingType === "string" ? heading : getHeadingContents(),
+          disabled,
+          open,
+          slug,
+        }
+      }))
+    }, 1);
+  }
+
+  function getHeadingContents() {
+    return getSlottedChildren(_headingSlotEl, "*")[0]
+  }
+
+  // Listen for parent Tab component open event
+  function addSetOpenEventListener() {
+    _rootEl.addEventListener("tabs:set-open", (e: Event) => {
+      const props = (e as CustomEvent<Partial<GoATabProps>>).detail;
+      open = !!props.open;
+    })
+  }
+</script>
+
+<section bind:this={_rootEl}>
+  <div bind:this={_headingSlotEl} style="display:none">
+    <slot name="heading" />
+    {heading}
+  </div>
+  <div bind:this={_contentEl} role="tabpanel" class:hidden={!open}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>

@@ -1,0 +1,43 @@
+{
+  "name": "goa-grid",
+  "required": ["minChildWidth"],
+  "attributes": [
+    {
+      "name": "gap",
+      "description": "Gap between child items",
+      "valueSet": "spacing",
+      "default": "m"
+    },
+    {
+      "name": "minChildWidth",
+      "type": "number",
+      "description": "Minimum width of the child elements"
+    },
+    {
+      "name": "mt",
+      "description": "Top margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mr",
+      "description": "Right margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "mb",
+      "description": "Bottom margin",
+      "valueSet": "spacing"
+    },
+    {
+      "name": "ml",
+      "description": "Left margin",
+      "valueSet": "spacing"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Grid",
+      "url": "{{siteUrl}}/?path=/docs/utility-grid--basic"
+    }
+  ]
+}

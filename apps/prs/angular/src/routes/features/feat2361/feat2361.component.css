@@ -1,0 +1,11 @@
+.feat2361__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.feat2361__checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

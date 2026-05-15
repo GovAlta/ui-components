@@ -1,0 +1,814 @@
+<svelte:options
+  customElement={{
+    tag: "goa-input",
+    props: {
+      value: { attribute: "value", type: "String", reflect: true },
+    },
+  }}
+/>
+
+<script lang="ts" context="module">
+  export type GoAInputVariant = "goa" | "bare";
+</script>
+
+<script lang="ts">
+  import {
+    typeValidator,
+    toBoolean,
+    relay,
+    receive,
+    dispatch,
+    styles,
+  } from "../../common/utils";
+  import type { GoAIconType } from "../icon/Icon.svelte";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
+  import { onMount } from "svelte";
+  import {
+    FieldsetErrorRelayDetail,
+    FieldsetResetErrorsMsg,
+    FieldsetResetFieldsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
+  } from "../../types/relay-types";
+  // Validators
+  const [Types, validateType] = typeValidator("Input type", [
+    "text",
+    "number",
+    "password",
+    "email",
+    "date",
+    "datetime-local",
+    "month",
+    "range",
+    "search",
+    "tel",
+    "time",
+    "url",
+    "week",
+  ]);
+
+  const [AutoCapitalize, validateAutoCapitalize] = typeValidator(
+    "Input auto capitalize",
+    ["on", "off", "none", "sentences", "words", "characters"],
+  );
+
+  const [TextAlign, validateTextAlign] = typeValidator("Input text align", [
+    "left",
+    "right",
+  ]);
+
+  // Types
+  type Type = (typeof Types)[number];
+  type AutoCapitalize = (typeof AutoCapitalize)[number];
+  type TextAlign = (typeof TextAlign)[number];
+
+  /** Sets the type of the input field. */
+  export let type: Type = "text";
+  /** Name of input value that is received in the onChange event. */
+  export let name: string = "";
+  /** Bound to value. */
+  export let value: string = "";
+  /** Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. */
+  export let autocapitalize: AutoCapitalize = "off";
+  /** Specifies the autocomplete attribute for the input field. */
+  export let autocomplete: string = "";
+  /** Text displayed within the input when no value is set. */
+  export let placeholder: string = "";
+  /** Icon shown to the left of the text. */
+  export let leadingicon: GoAIconType | null = null;
+  /** Icon shown to the right of the text. */
+  export let trailingicon: GoAIconType | null = null;
+  /** Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. */
+  export let variant: GoAInputVariant = "goa";
+  /** Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]. */
+  export let disabled: string = "false";
+  /** Flag that will result in an icon button component being rendered instead of an icon. */
+  export let handletrailingiconclick: string = "false";
+  /** Sets the cursor focus to the input. */
+  export let focused: string = "false";
+  /** Makes the input readonly. */
+  export let readonly: string = "false";
+  /** Sets the input to an error state. */
+  export let error: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
+  export let testid: string = "";
+  /** Sets the width of the text input area. */
+  export let width: string = "30ch";
+  /** Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. */
+  export let arialabel: string = "";
+  /** The aria-labelledby attribute identifies the element (or elements) that labels the input. */
+  export let arialabelledby: string = "";
+  /** A string value that supports any number, or an ISO 8601 format if using the date or datetime type. */
+  export let min: string = "";
+  /** A string value that supports any number, or an ISO 8601 format if using the date or datetime type. */
+  export let max: string = "";
+  /** How much a number or date should change by. */
+  export let step: number = 1;
+  /** @deprecated Use leadingContent slot instead. */
+  export let prefix: string = "";
+  /** @deprecated Use trailingContent slot instead. */
+  export let suffix: string = "";
+  /** Debounce delay in milliseconds before firing the change event. 0 means no debounce. */
+  export let debounce: number = 0;
+  /** Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input. */
+  export let maxlength: number | null = null;
+  /** Unique identifier for the input element. Used for label associations and accessibility. */
+  export let id: string = "";
+  /** Top margin. */
+  export let mt: Spacing = null;
+  /** Right margin. */
+  export let mr: Spacing = null;
+  /** Bottom margin. */
+  export let mb: Spacing = null;
+  /** Left margin. */
+  export let ml: Spacing = null;
+  /** Aria label for the trailing icon. Use only when the trailing icon is interactive. */
+  export let trailingiconarialabel: string = "";
+  /** Sets the text alignment within the input field. */
+  export let textalign: TextAlign = "left";
+  /** Sets the size of the input. 'compact' reduces height for dense layouts. */
+  export let size: "default" | "compact" = "default";
+  /** @internal Design system version for styling. */
+  export let version: "1" | "2" = "1";
+
+  let _leadingContentSlot = false;
+  let _trailingContentSlot = false;
+  let _debounceId: any;
+  let _inputEl: HTMLInputElement;
+  let _rootEl: HTMLElement;
+  let _error = false;
+  let _prevError = false;
+  // separate styles for input and input's container
+  let _containerStyle = "";
+  let _inputWidth = "";
+
+  // ========
+  // Reactive
+  // ========
+
+  $: handlesTrailingIconClick = toBoolean(handletrailingiconclick);
+  $: isFocused = toBoolean(focused);
+  $: isReadonly = toBoolean(readonly);
+  $: isDisabled = toBoolean(disabled);
+  $: {
+    _error = toBoolean(error);
+    if (_error !== _prevError) {
+      dispatch(
+        _rootEl,
+        "error::change",
+        { isError: _error },
+        { bubbles: true },
+      );
+      _prevError = _error;
+    }
+  }
+
+  // TODO: determine if this and the next reactive statement need to be reactive, as they are both
+  // things that should only be run once
+  $: if (isFocused && _inputEl) {
+    setTimeout(() => _inputEl.focus(), 2);
+  }
+
+  $: if (_inputEl && type === "search") {
+    _inputEl.addEventListener("search", (e) => {
+      onKeyUp(e);
+    });
+  }
+
+  // =====
+  // Hooks
+  // =====
+
+  onMount(() => {
+    validateType(type);
+    validateAutoCapitalize(autocapitalize);
+    validateTextAlign(textalign);
+    addRelayListener();
+    showDeprecationWarnings();
+    checkSlots();
+    sendMountedMessage();
+
+    const { containerStyle, inputWidth } = handleWidth(width, type);
+    _containerStyle = containerStyle;
+    _inputWidth = inputWidth;
+  });
+
+  // =========
+  // Functions
+  // =========
+
+  function handleWidth(width: string, type: Type) {
+    const unitPattern = /(px|%|ch|rem|em)$/;
+
+    // For both empty width or unitless values - default behavior of 31ch
+    if (width.trim() === "" || !unitPattern.test(width)) {
+      return {
+        containerStyle: "",
+        inputWidth: `${parseInt("30") + 1}ch`,
+      };
+    }
+
+    // Handle 'ch' unit specifically
+    if (width.endsWith("ch")) {
+      const chValue = parseInt(width);
+      if (type === "number") {
+        return {
+          containerStyle: "",
+          inputWidth: `${chValue + 2}ch`,
+        };
+      } else {
+        return {
+          containerStyle: "",
+          inputWidth: `${chValue + 1}ch`,
+        };
+      }
+    }
+
+    // Handle all other supported units (px, %, rem, em)
+    return {
+      containerStyle: `width: ${width}; `,
+      inputWidth: "",
+    };
+  }
+
+  function addRelayListener() {
+    receive(_inputEl, (action, data) => {
+      switch (action) {
+        case FieldsetSetValueMsg:
+          setValue(data as FieldsetSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          setError(data as FieldsetErrorRelayDetail);
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          setValue({ name, value: "" });
+          break;
+      }
+    });
+  }
+
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function setValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
+    value = detail.value;
+    dispatchOnChange(value);
+  }
+
+  function dispatchOnChange(value: string) {
+    dispatch(_rootEl, "_change", { name, value: value }, { bubbles: true });
+  }
+
+  // Relay message up the chain to allow any parent element to have a reference to the input element
+  function sendMountedMessage() {
+    if (name) {
+      relay<FormFieldMountRelayDetail>(
+        _rootEl,
+        FormFieldMountMsg,
+        { name, el: _inputEl },
+        { bubbles: true, timeout: 10 },
+      );
+    }
+  }
+
+  function onInput(e: Event) {
+    const input = e.target as HTMLInputElement;
+
+    if (!input) return;
+    if (isReadonly) return;
+
+    if (_debounceId != null) {
+      clearTimeout(_debounceId);
+    }
+
+    _debounceId = setTimeout(() => {
+      input.dispatchEvent(
+        new CustomEvent("_change", {
+          composed: true,
+          bubbles: true,
+          cancelable: true,
+          detail: { name, value: input.value },
+        }),
+      );
+    }, debounce);
+  }
+
+  function onKeyUp(e: Event) {
+    const input = e.target as HTMLInputElement;
+
+    if (!input || isReadonly) return;
+
+    input.dispatchEvent(
+      new CustomEvent("_keyPress", {
+        composed: true,
+        detail: { name, value: input.value, key: (e as KeyboardEvent).key },
+      }),
+    );
+    value = input.value;
+  }
+
+  function onFocus(e: Event) {
+    const input = e.target as HTMLInputElement;
+    // TODO: create `dispatch` util function
+    input.dispatchEvent(
+      new CustomEvent("_focus", {
+        composed: true,
+        detail: { name, value: input.value },
+      }),
+    );
+
+    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+  }
+
+  function onBlur(e: Event) {
+    focused = "false";
+    const input = e.target as HTMLInputElement;
+    input.dispatchEvent(
+      new CustomEvent("_blur", {
+        composed: true,
+        detail: { name, value: input.value },
+      }),
+    );
+  }
+
+  function doClick() {
+    this.dispatchEvent(
+      new CustomEvent("_trailingIconClick", { composed: true }),
+    );
+  }
+
+  function checkSlots() {
+    if (!_rootEl) return; // for unit test if it isn't rendered fast enough
+
+    const leadingContentSlot = _rootEl.querySelector(
+      "slot[name=leadingContent]",
+    ) as HTMLSlotElement;
+
+    if (
+      leadingContentSlot?.assignedNodes().length > 0 &&
+      leadingContentSlot.assignedNodes()[0]?.textContent?.trim() !== ""
+    ) {
+      _leadingContentSlot = true;
+    }
+
+    const trailingContentSlot = _rootEl.querySelector(
+      "slot[name=trailingContent]",
+    ) as HTMLSlotElement;
+
+    if (
+      trailingContentSlot?.assignedNodes().length > 0 &&
+      trailingContentSlot.assignedNodes()[0]?.textContent?.trim() !== ""
+    ) {
+      _trailingContentSlot = true;
+    }
+  }
+
+  function showDeprecationWarnings() {
+    if (prefix != "" || suffix != "") {
+      console.warn(
+        "GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.",
+      );
+    }
+  }
+</script>
+
+<!-- HTML -->
+
+<div
+  class="container"
+  style={`${_containerStyle}${calculateMargin(mt, mr, mb, ml)}`}
+  bind:this={_rootEl}
+  class:leading-content={_leadingContentSlot}
+  class:trailing-content={_trailingContentSlot}
+  class:compact={size === "compact"}
+  class:v2={version === "2"}
+>
+  {#if $$slots.leadingContent}
+    <div class="leading-content-slot">
+      <slot name="leadingContent" />
+    </div>
+  {/if}
+
+  <div
+    class="goa-input variant--{variant} type--{type}"
+    class:input--disabled={isDisabled}
+    class:error={_error}
+    class:has-icon={leadingicon || trailingicon}
+  >
+    {#if prefix}
+      <div class="prefix">
+        {prefix}
+      </div>
+    {/if}
+
+    {#if leadingicon}
+      <goa-icon
+        class="leading-icon"
+        data-testid="leading-icon"
+        type={leadingicon}
+        tabindex="-1"
+      />
+    {/if}
+
+    <input
+      bind:this={_inputEl}
+      class="input--{variant}"
+      style={styles(
+        `--search-icon-offset: ${trailingicon ? "-0.5rem" : "0"}`,
+        _inputWidth && `width: ${_inputWidth}`,
+        textalign === "right" && `text-align: right`,
+      )}
+      readonly={isReadonly}
+      disabled={isDisabled}
+      data-testid={testid}
+      {autocapitalize}
+      {autocomplete}
+      {name}
+      {type}
+      value={value ?? ""}
+      {placeholder}
+      {min}
+      {max}
+      {step}
+      {maxlength}
+      id={id || name}
+      role="textbox"
+      aria-label={arialabel}
+      aria-labelledby={arialabelledby}
+      aria-invalid={_error ? "true" : "false"}
+      on:input={onInput}
+      on:keyup={onKeyUp}
+      on:focus={onFocus}
+      on:blur={onBlur}
+    />
+
+    <!-- Trailing Icon -->
+    {#if trailingicon && !handlesTrailingIconClick}
+      <goa-icon
+        class="trailing-icon"
+        data-testid="trailing-icon"
+        size="medium"
+        type={trailingicon}
+        arialabel={trailingiconarialabel}
+        tabindex="-1"
+      />
+    {/if}
+
+    <!-- Trailing Icon Button -->
+    {#if trailingicon && handlesTrailingIconClick}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <goa-icon-button
+        on:click={doClick}
+        disabled={isDisabled}
+        variant="dark"
+        size="medium"
+        icon={trailingicon}
+        data-testid="trailing-icon-button"
+        class="trailing-icon-button"
+        arialabel={trailingiconarialabel}
+      />
+    {/if}
+
+    {#if suffix}
+      <span class="suffix">{suffix}</span>
+    {/if}
+  </div>
+
+  {#if $$slots.trailingContent}
+    <div class="trailing-content-slot">
+      <slot name="trailingContent" />
+    </div>
+  {/if}
+</div>
+
+<!-- Styles -->
+<style>
+  :host {
+    box-sizing: border-box; /* border box: the element's specified width and height include the content, padding, and border. The margin is still added */
+  }
+
+  .container {
+    position: relative;
+    display: inline-flex;
+    vertical-align: top;
+    z-index: 0;
+    width: var(--width, auto);
+    max-width: 100%;
+  }
+
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)),
+  .goa-input,
+  .goa-input * {
+    line-height: normal;
+  }
+
+  .goa-input {
+    outline: none;
+    transition: var(--goa-text-input-transition);
+    background-clip: padding-box;
+    display: inline-flex;
+    align-items: stretch;
+    width: 100%;
+    height: var(--goa-text-input-height, 42px);
+    z-index: 1;
+    background-color: var(--goa-text-input-color-bg);
+    /* default border */
+    box-shadow: var(--goa-text-input-border);
+    border-radius: var(--goa-text-input-border-radius);
+    /* The vertical align fixes inputs with a leading icon to not be vertically offset */
+    vertical-align: middle;
+    min-width: 0;
+  }
+
+  /* V2 Compact size */
+  .container.v2.compact {
+    --goa-text-input-height: var(--goa-text-input-height-compact);
+    --goa-text-input-padding: var(--goa-text-input-padding-compact);
+    --goa-text-input-padding-lr: var(--goa-text-input-padding-compact-lr);
+    --goa-text-input-typography: var(--goa-text-input-typography-compact);
+    --goa-text-input-space-btw-icon-text: var(
+      --goa-text-input-space-btw-icon-text-compact
+    );
+  }
+
+  .goa-input:not(.error):not(.input--disabled):hover:not(
+      :has(input:focus-visible)
+    ) {
+    /* hover border */
+    box-shadow: var(--goa-text-input-border-hover);
+  }
+
+  .goa-input:not(.error):has(input:focus-visible) {
+    /* focus border(s) */
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
+  }
+
+  /* Error state */
+  .goa-input.error:not(input:focus-visible) {
+    box-shadow: var(--goa-text-input-border-error);
+  }
+
+  /* Focus state (including when in error state) */
+  .goa-input:has(input:focus-visible),
+  .goa-input.error:has(input:focus-visible) {
+    box-shadow:
+      var(--goa-text-input-border), var(--goa-text-input-border-focus);
+  }
+
+  /* V2: Focus state shows only blue focus border (no default border) */
+  .container.v2 .goa-input:has(input:focus-visible) {
+    box-shadow: var(--goa-text-input-border-focus);
+  }
+
+  /* type=range does not have an outline/box-shadow */
+  .goa-input.type--range {
+    border: none;
+
+    &.type--range:active,
+    &.type--range:focus-visible,
+    &.type--range:focus-within {
+      box-shadow: none;
+    }
+  }
+
+  .leading-icon {
+    margin-left: var(--goa-text-input-padding-lr);
+  }
+
+  .trailing-icon {
+    margin-right: var(--goa-text-input-padding-lr);
+  }
+
+  .leading-icon,
+  .trailing-icon {
+    color: var(--goa-text-input-color-icon);
+  }
+
+  .trailing-icon-button {
+    margin-right: var(--goa-text-input-padding-lr);
+  }
+
+  input {
+    color: var(--goa-text-input-color-text);
+    font: var(--goa-text-input-typography);
+    padding: var(--goa-text-input-padding);
+    background-color: transparent;
+    max-width: 100%;
+    flex: 1 1 auto;
+    z-index: 1;
+    border-radius: var(--goa-text-input-border-radius);
+    min-width: 0;
+  }
+
+  input,
+  input:focus-visible,
+  input:hover,
+  input:active {
+    outline: none;
+    border: none;
+  }
+
+  input:read-only {
+    cursor: var(--goa-text-input-cursor-readonly, default);
+  }
+
+  input[type="number"] {
+    text-overflow: initial;
+  }
+
+  .leading-icon + input {
+    padding-left: var(--goa-text-input-space-btw-icon-text);
+  }
+
+  /* Disabled state */
+  .goa-input.input--disabled,
+  .goa-input.input--disabled:hover,
+  .goa-input.input--disabled:active,
+  .goa-input.input--disabled:focus {
+    background-color: var(--goa-text-input-color-bg-disabled);
+    cursor: default;
+    box-shadow: var(--goa-text-input-border-disabled);
+    border: none;
+    z-index: -1;
+  }
+
+  .goa-input.input--disabled input,
+  .goa-input.input--disabled input:hover,
+  .goa-input.input--disabled input:active,
+  .goa-input.input--disabled input:focus {
+    color: var(--goa-text-input-color-text-disabled);
+  }
+
+  .goa-input.input--disabled input:hover {
+    cursor: default !important;
+  }
+
+  /* Adjust the leading icon style when input is disabled */
+  .input--disabled .leading-icon,
+  .input--disabled .trailing-icon {
+    color: var(--goa-text-input-color-icon-disabled);
+    cursor: default;
+  }
+
+  .prefix,
+  .suffix,
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
+    background-color: var(--goa-text-input-lt-content-color-bg);
+    box-shadow: var(--goa-text-input-border);
+    display: flex;
+    align-items: center;
+    white-space: normal;
+    height: var(--goa-text-input-height, 42px);
+  }
+
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
+    padding: var(--goa-text-input-padding);
+    font: var(--goa-text-input-typography);
+  }
+
+  .prefix,
+  .leading-content .leading-content-slot :global(::slotted(div)) {
+    margin-right: calc(var(--goa-border-width-s) * -1);
+    /* background-clip doesn't want to work */
+    border-top-left-radius: var(--goa-text-input-border-radius);
+    border-bottom-left-radius: var(--goa-text-input-border-radius);
+  }
+
+  .suffix,
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
+    margin-left: calc(var(--goa-border-width-s) * -1);
+    /* background-clip doesn't want to work */
+    border-top-right-radius: var(--goa-text-input-border-radius);
+    border-bottom-right-radius: var(--goa-text-input-border-radius);
+  }
+
+  /* V2: Read-only input field styling (exclude disabled inputs) */
+  .container.v2 .goa-input:has(input:read-only:not(:disabled)) {
+    background-color: var(--goa-text-input-color-bg-readonly);
+  }
+
+  /* V2: Read-only input field styling (exclude disabled inputs) */
+  .container.v2.goa-input:not(.error)::has(
+      input:read-only:not(:disabled):not(:focus-visible):not(:hover)
+    ) {
+    box-shadow: var(--goa-text-input-border-readonly);
+  }
+
+  /* V2: Read-only leading/trailing content - background, border, and text color */
+  .container.v2.leading-content:has(input:read-only:not(:disabled))
+    .leading-content-slot
+    :global(::slotted(div)),
+  .container.v2.trailing-content:has(input:read-only:not(:disabled))
+    .trailing-content-slot
+    :global(::slotted(div)) {
+    background-color: var(--goa-text-input-lt-content-color-bg-readonly);
+    box-shadow: var(--goa-text-input-border-readonly);
+    color: var(--goa-text-input-color-text);
+  }
+
+  /* V2: Disabled leading/trailing content - text color and border (must come after all default slot styles) */
+  .container.v2.leading-content:has(.input--disabled)
+    .leading-content-slot
+    :global(::slotted(div)),
+  .container.v2.trailing-content:has(.input--disabled)
+    .trailing-content-slot
+    :global(::slotted(div)) {
+    color: var(--goa-text-input-color-text-disabled);
+    box-shadow: var(--goa-text-input-border-disabled);
+  }
+
+  .goa-input:has(.prefix) .leading-icon,
+  .leading-content .leading-icon {
+    margin-right: calc(var(--goa-border-width-s) * -1);
+    margin-left: calc(
+      var(--goa-text-input-padding-lr) + var(--goa-border-width-s)
+    );
+  }
+
+  .goa-input:has(.suffix) .trailing-icon,
+  .trailing-content .trailing-icon {
+    margin-left: calc(var(--goa-border-width-s) * -1);
+    margin-right: calc(
+      var(--goa-text-input-padding-lr) + var(--goa-border-width-s)
+    );
+  }
+
+  .goa-input:not(.input--disabled):has(.prefix) input,
+  .leading-content .goa-input:not(.input--disabled) input {
+    margin-left: var(--goa-border-width-s);
+  }
+
+  .goa-input:not(.input--disabled):has(.suffix) input,
+  .trailing-content .goa-input:not(.input--disabled) input {
+    margin-right: var(--goa-border-width-s);
+  }
+
+  .leading-content .goa-input {
+    border-top-left-radius: var(--goa-border-radius-none);
+    border-bottom-left-radius: var(--goa-border-radius-none);
+  }
+
+  .trailing-content .goa-input {
+    border-top-right-radius: var(--goa-border-radius-none);
+    border-bottom-right-radius: var(--goa-border-radius-none);
+  }
+
+  /* Themes */
+  input.input--goa {
+    display: block;
+    border: none;
+    flex: 1 1 auto;
+  }
+
+  .variant--bare {
+    border: none;
+  }
+
+  .variant--bare:focus-visible,
+  .variant--bare:active,
+  .variant--bare:focus-within {
+    box-shadow: none;
+  }
+
+  input[type="search"]:enabled:read-write:-webkit-any(
+      :focus-visible,
+      :hover
+    )::-webkit-search-cancel-button {
+    position: relative;
+    right: var(--search-icon-offset);
+    cursor: pointer;
+    -webkit-appearance: none;
+    height: 1.2rem;
+    width: 1.2rem;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23333" d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>')
+      center center no-repeat;
+  }
+
+  ::-ms-reveal {
+    display: none;
+  }
+
+  ::placeholder {
+    color: var(--goa-text-input-color-text-placeholder);
+    opacity: 1;
+  }
+
+  /* Autofill styling - override browser defaults */
+  input:autofill {
+    transition: all 0s 5000s;
+  }
+</style>
