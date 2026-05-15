@@ -78571,11 +78571,20 @@ function EverythingRoute() {
           },
           type
         )),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabContainer, { type: "interactive", accent: "filled", padding: "relaxed", width: "content", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", size: "body-m", children: [
-          "Type: interactive",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          "Accent: filled"
-        ] }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabContainer,
+          {
+            type: "interactive",
+            accent: "filled",
+            padding: "relaxed",
+            width: "content",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", size: "body-m", children: [
+              "Type: interactive",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "Accent: filled"
+            ] })
+          }
+        )
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabContainer, { type: "interactive", padding: "relaxed", children: [
@@ -79444,7 +79453,13 @@ function EverythingRoute() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: TABLE_DATA.map((row) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { "data-grid": "row", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("td", { "data-grid": "cell", children: row.name }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("td", { "data-grid": "cell", children: row.created }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { "data-grid": "cell", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: row.status === "Active" ? "success" : "important", content: row.status }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { "data-grid": "cell", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabBadge,
+            {
+              type: row.status === "Active" ? "success" : "important",
+              content: row.status
+            }
+          ) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { "data-grid": "cell", children: [
             row.progress,
             "%"
@@ -84437,14 +84452,7 @@ function EverythingBRoute() {
                     }
                   ) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--text", children: "001" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    GoabInput,
-                    {
-                      name: "tom_name1",
-                      value: "John Doe",
-                      width: "100%"
-                    }
-                  ) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "tom_name1", value: "John Doe", width: "100%" }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                     GoabInput,
                     {
@@ -84461,8 +84469,22 @@ function EverythingBRoute() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "Low", label: "Low" })
                   ] }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--icon-button", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "xs", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "pencil", size: "small", onClick: () => console.log("Edit 001") }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "trash", size: "small", onClick: () => console.log("Delete 001") })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "pencil",
+                        size: "small",
+                        onClick: () => console.log("Edit 001")
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "trash",
+                        size: "small",
+                        onClick: () => console.log("Delete 001")
+                      }
+                    )
                   ] }) })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
@@ -84476,14 +84498,7 @@ function EverythingBRoute() {
                     }
                   ) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--text", children: "002" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    GoabInput,
-                    {
-                      name: "tom_name2",
-                      value: "Jane Smith",
-                      width: "100%"
-                    }
-                  ) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "tom_name2", value: "Jane Smith", width: "100%" }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                     GoabInput,
                     {
@@ -84500,8 +84515,22 @@ function EverythingBRoute() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "Low", label: "Low" })
                   ] }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--icon-button", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "xs", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "pencil", size: "small", onClick: () => console.log("Edit 002") }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "trash", size: "small", onClick: () => console.log("Delete 002") })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "pencil",
+                        size: "small",
+                        onClick: () => console.log("Edit 002")
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "trash",
+                        size: "small",
+                        onClick: () => console.log("Delete 002")
+                      }
+                    )
                   ] }) })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
@@ -84515,14 +84544,7 @@ function EverythingBRoute() {
                     }
                   ) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--text", children: "003" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    GoabInput,
-                    {
-                      name: "tom_name3",
-                      value: "Bob Johnson",
-                      width: "100%"
-                    }
-                  ) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "tom_name3", value: "Bob Johnson", width: "100%" }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--input", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                     GoabInput,
                     {
@@ -84539,8 +84561,22 @@ function EverythingBRoute() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "Low", label: "Low" })
                   ] }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--icon-button", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "xs", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "pencil", size: "small", onClick: () => console.log("Edit 003") }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "trash", size: "small", onClick: () => console.log("Delete 003") })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "pencil",
+                        size: "small",
+                        onClick: () => console.log("Edit 003")
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "trash",
+                        size: "small",
+                        onClick: () => console.log("Delete 003")
+                      }
+                    )
                   ] }) })
                 ] })
               ] })
@@ -84577,8 +84613,22 @@ function EverythingBRoute() {
                   ) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--badge", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Active", icon: true }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--icon-button", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "xs", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "pencil", size: "small", onClick: () => console.log("Edit") }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "trash", size: "small", onClick: () => console.log("Delete") })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "pencil",
+                        size: "small",
+                        onClick: () => console.log("Edit")
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "trash",
+                        size: "small",
+                        onClick: () => console.log("Delete")
+                      }
+                    )
                   ] }) })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
@@ -84602,8 +84652,22 @@ function EverythingBRoute() {
                   ) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--badge", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "information", content: "Pending", icon: true }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "goa-table-cell--icon-button", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "xs", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "pencil", size: "small", onClick: () => console.log("Edit") }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabIconButton, { icon: "trash", size: "small", onClick: () => console.log("Delete") })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "pencil",
+                        size: "small",
+                        onClick: () => console.log("Edit")
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      GoabIconButton,
+                      {
+                        icon: "trash",
+                        size: "small",
+                        onClick: () => console.log("Delete")
+                      }
+                    )
                   ] }) })
                 ] })
               ] })
