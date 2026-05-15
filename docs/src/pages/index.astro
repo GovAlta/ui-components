@@ -76,6 +76,41 @@ import CardLite from '../components/CardLite.astro';
       />
     </div>
 
+    <!-- Dark Mode Experimental -->
+    <div class="cta-section dark-mode-section">
+      <div class="cta-text">
+        <h2>Dark mode — experimental</h2>
+        <p>
+          Dark mode is available as an experimental capability in the design system. Try it in your service and share what you learn — your feedback helps shape how we develop it further.
+        </p>
+        <ul class="dark-mode-links">
+          <li>
+            <goa-link version="2" trailingicon="arrow-forward">
+              <a href="https://design.alberta.ca/get-started/designers/designing-for-dark-mode/">Designing for dark mode</a>
+            </goa-link>
+          </li>
+          <li>
+            <goa-link version="2" trailingicon="arrow-forward">
+              <a href="https://design.alberta.ca/get-started/developers/dark-mode-theme/">Dark mode theme</a>
+            </goa-link>
+          </li>
+          <li>
+            <goa-link version="2" trailingicon="open">
+              <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9" target="_blank" rel="noopener noreferrer">#design-system-support on Slack</a>
+            </goa-link>
+          </li>
+          <li>
+            <goa-link version="2" trailingicon="open">
+              <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Bhy1K5uvxUKL9Tw7exCFC3Ec1TzonW9AiPeNaYegn-5UN09LVjlJNDY4UDlSTUlNNlZYTVZLTTYwRC4u" target="_blank" rel="noopener noreferrer">Share your feedback</a>
+            </goa-link>
+          </li>
+        </ul>
+      </div>
+      <div class="cta-image">
+        <img src={withBase(`/images/home/splash-reel.png`)} alt="Dark mode preview placeholder" />
+      </div>
+    </div>
+
     <!-- Research Tools -->
     <h2 class="section-heading">Research tools</h2>
     <p class="section-description">
@@ -264,6 +299,15 @@ import CardLite from '../components/CardLite.astro';
     font: var(--goa-typography-body-m);
     color: var(--goa-color-text-secondary);
     margin: 0 0 var(--goa-space-m);
+  }
+
+  .dark-mode-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-s);
   }
 
   .cta-image {
