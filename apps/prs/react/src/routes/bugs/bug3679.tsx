@@ -1,0 +1,73 @@
+import { GoabContainer, GoabTable } from "@abgov/react-components";
+
+export function Bug3679Route() {
+  return (
+    <div>
+      <h1>Bug 3679: Table: 1px horizontal overflow from v2 border</h1>
+      <p>
+        The V2 table container has <code>width: 100%</code> (inline style) and
+        <code>border: 1px solid</code> but no
+        <code>box-sizing: border-box</code>. The border adds 2px to the total rendered
+        width, causing 1px horizontal scroll on both sides.
+      </p>
+      <GoabContainer>
+        <h2>Test inside GoabContainer</h2>
+        <GoabTable>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Job</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Joey</td>
+              <td>Tribbiani</td>
+              <td>Actor</td>
+            </tr>
+            <tr>
+              <td>Chandler</td>
+              <td>Bing</td>
+              <td>Statistical Analysis and Data Reconfiguration</td>
+            </tr>
+            <tr>
+              <td>Ross</td>
+              <td>Geller</td>
+              <td>Paleontologist</td>
+            </tr>
+          </tbody>
+        </GoabTable>
+      </GoabContainer>
+      <div style={{ marginTop: "1rem", width: "40%" }}>
+        <h2>Test inside div with width 40%</h2>
+        <GoabTable>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Job</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rachel</td>
+              <td>Green</td>
+              <td>Barrista</td>
+            </tr>
+            <tr>
+              <td>Monica</td>
+              <td>Geller</td>
+              <td>Chef</td>
+            </tr>
+            <tr>
+              <td>Phoebe</td>
+              <td>Buffay</td>
+              <td>Musician</td>
+            </tr>
+          </tbody>
+        </GoabTable>
+      </div>
+    </div>
+  );
+}
