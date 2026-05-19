@@ -50085,26 +50085,26 @@ class z5 extends ze {
 }
 customElements.define("goa-spinner", Ce(z5, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
 function M5(t) {
-  je(t, "svelte-pptkx1", `:host{display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;font-family:var(--goa-font-family-sans);width:100%;background-color:var(
+  je(t, "svelte-9sdxkd", `:host{display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;font-family:var(--goa-font-family-sans);width:100%;background-color:var(
       --goa-scroll-panel-color-bg,
       var(--goa-color-greyscale-white)
-    )}:host .svelte-pptkx1{box-sizing:border-box}.scroll-panel-header.svelte-pptkx1{flex:0 0 auto;background-color:var(
+    )}:host .svelte-9sdxkd{box-sizing:border-box}.scroll-panel-header.svelte-9sdxkd{flex:0 0 auto;background-color:var(
       --goa-scroll-panel-header-color-bg,
       var(--goa-color-greyscale-white)
-    );border-bottom:var(--goa-border-width-s) solid transparent;transition:border-color 0.15s ease;z-index:1}.scroll-panel-header--bordered.svelte-pptkx1{border-bottom-color:var(--goa-color-greyscale-200)}.scroll-panel-content.svelte-pptkx1{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;min-height:0}.scroll-panel-content--shadow-bottom.svelte-pptkx1{box-shadow:var(
+    );border-bottom:var(--goa-border-width-s) solid transparent;transition:border-color 0.15s ease;z-index:1}.scroll-panel-header--bordered.svelte-9sdxkd{border-bottom-color:var(--goa-color-greyscale-200)}.scroll-panel-content.svelte-9sdxkd{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;min-height:0}.scroll-panel-content--shadow-bottom.svelte-9sdxkd{box-shadow:var(
       --goa-scroll-panel-content-shadow-bottom,
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3)
-    )}.scroll-panel-content--shadow-top.svelte-pptkx1{box-shadow:var(
+      inset 0 -4px 8px -4px rgba(0, 0, 0, 0.3)
+    )}.scroll-panel-content--shadow-top.svelte-9sdxkd{box-shadow:var(
       --goa-scroll-panel-content-shadow-top,
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.3)
-    )}.scroll-panel-content--shadow-both.svelte-pptkx1{box-shadow:var(
+      inset 0 4px 8px -4px rgba(0, 0, 0, 0.3)
+    )}.scroll-panel-content--shadow-both.svelte-9sdxkd{box-shadow:var(
       --goa-scroll-panel-content-shadow-top-bottom,
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2)
-    )}.scroll-panel-footer.svelte-pptkx1{flex:0 0 auto;background-color:var(
+      inset 0 4px 8px -4px rgba(0, 0, 0, 0.2),
+      inset 0 -4px 8px -4px rgba(0, 0, 0, 0.2)
+    )}.scroll-panel-footer.svelte-9sdxkd{flex:0 0 auto;background-color:var(
       --goa-scroll-panel-footer-color-bg,
       var(--goa-color-greyscale-white)
-    );border-top:var(--goa-border-width-s) solid transparent;transition:border-color 0.15s ease;z-index:1}.scroll-panel-footer--bordered.svelte-pptkx1{border-top-color:var(--goa-color-greyscale-200)}`);
+    );border-top:var(--goa-border-width-s) solid transparent;transition:border-color 0.15s ease;z-index:1}.scroll-panel-footer--bordered.svelte-9sdxkd{border-top-color:var(--goa-color-greyscale-200)}`);
 }
 const j5 = (t) => ({}), ea = (t) => ({}), L5 = (t) => ({}), ta = (t) => ({});
 function oa(t) {
@@ -50121,7 +50121,7 @@ function oa(t) {
   );
   return {
     c() {
-      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-header svelte-pptkx1"), u(e, "aria-label", "Panel header"), q(
+      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-header svelte-9sdxkd"), u(e, "aria-label", "Panel header"), q(
         e,
         "scroll-panel-header--bordered",
         /*_scrollState*/
@@ -50185,7 +50185,7 @@ function ia(t) {
   );
   return {
     c() {
-      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-footer svelte-pptkx1"), u(e, "aria-label", "Panel footer"), q(
+      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-footer svelte-9sdxkd"), u(e, "aria-label", "Panel footer"), q(
         e,
         "scroll-panel-footer--bordered",
         /*_scrollState*/
@@ -50256,7 +50256,7 @@ function N5(t) {
   );
   return {
     c() {
-      d && d.c(), e = F(), o = C("div"), f && f.c(), n = F(), g && g.c(), l = Je(), u(o, "class", "scroll-panel-content svelte-pptkx1"), u(o, "role", "region"), u(o, "aria-label", "Scrollable content"), u(o, "data-testid", i = /*testid*/
+      d && d.c(), e = F(), o = C("div"), f && f.c(), n = F(), g && g.c(), l = Je(), u(o, "class", "scroll-panel-content svelte-9sdxkd"), u(o, "role", "region"), u(o, "aria-label", "Scrollable content"), u(o, "data-testid", i = /*testid*/
       t[0] || void 0), q(
         o,
         "scroll-panel-content--shadow-bottom",
