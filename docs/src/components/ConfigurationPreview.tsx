@@ -14,6 +14,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 // Note: Using web component directly for v2 styling (React wrapper doesn't pass version prop)
 import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
+import { extractWebComponentsCode } from "../lib/extract-code-parts";
 import { useGitHubIssueCount } from "../hooks/useGitHubIssueCount";
 import type { ComponentConfigurations } from "@/data/configurations";
 import DOMPurify from "dompurify";
@@ -44,6 +45,9 @@ export function ConfigurationPreview({
   const [selectedConfigId, setSelectedConfigId] = useState(
     configurations.defaultConfigurationId,
   );
+  // User-edited HTML for the current variant. undefined means "use the canonical
+  // HTML from the config." Resets to undefined whenever the variant changes.
+  const [editedHtml, setEditedHtml] = useState<string | undefined>(undefined);
   const previewRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLElement | null>(null);
   const issueCount = useGitHubIssueCount(componentName);
@@ -53,18 +57,32 @@ export function ConfigurationPreview({
     (c) => c.id === selectedConfigId,
   );
 
-  // Update preview when configuration changes
+  // Update preview when configuration changes (or when the user edits the HTML).
+  // The user only edits the HTML portion via the editable code block; CSS and JS
+  // for the variant are spliced back in from the canonical config.
   useEffect(() => {
     if (previewRef.current && selectedConfig) {
       const webComponentCode = selectedConfig.code.webComponents;
-      const rawCode =
-        typeof webComponentCode === "string"
-          ? webComponentCode
-          : [
-              webComponentCode.css ? `<style>${webComponentCode.css}</style>` : "",
-              webComponentCode.html,
-              webComponentCode.js ? `<script>${webComponentCode.js}</script>` : "",
-            ].join("");
+
+      let canonicalHtml: string;
+      let cssPart: string | undefined;
+      let jsPart: string | undefined;
+      if (typeof webComponentCode === "string") {
+        const extracted = extractWebComponentsCode(webComponentCode);
+        canonicalHtml = extracted.html;
+        cssPart = extracted.css;
+        jsPart = extracted.javascript;
+      } else {
+        canonicalHtml = webComponentCode.html;
+        cssPart = webComponentCode.css;
+        jsPart = webComponentCode.js;
+      }
+
+      const rawCode = [
+        cssPart ? `<style>${cssPart}</style>` : "",
+        editedHtml ?? canonicalHtml,
+        jsPart ? `<script>${jsPart}</script>` : "",
+      ].join("");
 
       const previewHtml = configurations.previewWrapper
         ? configurations.previewWrapper.replace("{{slot}}", rawCode)
@@ -104,7 +122,13 @@ export function ConfigurationPreview({
         }
       }
     }
-  }, [selectedConfig]);
+  }, [selectedConfig, editedHtml]);
+
+  // Reset edits when the user switches to a different variant. Each variant has
+  // its own code, so a prior edit's text wouldn't translate meaningfully.
+  useEffect(() => {
+    setEditedHtml(undefined);
+  }, [selectedConfigId]);
 
   // Handle configuration dropdown change
   const handleConfigChange = useCallback(
@@ -205,6 +229,7 @@ export function ConfigurationPreview({
           }}
           maxHeight={200}
           showCopy={true}
+          onHtmlEdit={setEditedHtml}
         />
       </div>
 

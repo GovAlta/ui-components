@@ -53,6 +53,12 @@ interface CodeSnippetProps {
   title?: string;
   /** Extract and display CSS, setup, and JSX/template as separate blocks (default: true for frameworkCode) */
   extractParts?: boolean;
+  /**
+   * When provided, the Web Components HTML block becomes editable in place. The
+   * callback fires (debounced) with the new HTML on each edit. The parent uses
+   * this to drive a live re-render of its preview.
+   */
+  onHtmlEdit?: (html: string) => void;
 }
 
 const FRAMEWORK_LABELS: Record<Framework, string> = {
@@ -190,6 +196,59 @@ function SingleCodeBlock({
 }
 
 // ============================================================================
+// Editable HTML Block (Brief 121)
+// ============================================================================
+
+interface EditableHtmlBlockProps {
+  html: string;
+  onEdit: (html: string) => void;
+}
+
+/**
+ * Plain-text textarea version of the WC HTML block. Local state owns the value
+ * so cursor position stays stable while typing; the parent only hears the
+ * debounced "new HTML" event and decides what to do with it.
+ *
+ * The canonical `html` prop changes when the variant switches, which resets
+ * the textarea content back to the new variant's canonical HTML.
+ */
+function EditableHtmlBlock({ html, onEdit }: EditableHtmlBlockProps) {
+  const [value, setValue] = useState(html);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setValue(html);
+  }, [html]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => onEdit(newValue), 300);
+  };
+
+  const lineCount = value.split("\n").length;
+  const minHeight = Math.max(80, Math.min(lineCount * 20 + 32, 400));
+
+  return (
+    <div className="code-snippet">
+      <div className="code-blocks">
+        <div className="code-block editable-html-block">
+          <textarea
+            className="editable-html"
+            value={value}
+            onChange={handleChange}
+            spellCheck={false}
+            style={{ minHeight: `${minHeight}px` }}
+            aria-label="Editable HTML preview source"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
 // Main CodeSnippet Component
 // ============================================================================
 
@@ -204,6 +263,7 @@ export function CodeSnippet({
   maxHeight,
   title,
   extractParts = true,
+  onHtmlEdit,
 }: CodeSnippetProps) {
   // Initialize from global preference (falls back to initialFramework prop if not set)
   const [selectedFramework, setSelectedFramework] = useState<Framework>(() => {
@@ -427,24 +487,32 @@ export function CodeSnippet({
   const renderWebComponentsBlocks = (wc?: string | WebComponentsExample) => {
     if (!wc) return <div className="no-code">No Web Components code available</div>;
 
-    // Object form: use fields directly
+    let css: string | undefined;
+    let javascript: string | undefined;
+    let html: string;
+
     if (typeof wc !== "string") {
-      return (
-        <>
-          {wc.css && wrapCodeBlock(wc.css, "css", "css")}
-          {wc.js && wrapCodeBlock(wc.js, "javascript", "js")}
-          {wrapCodeBlock(wc.html, "html", "html")}
-        </>
-      );
+      css = wc.css;
+      javascript = wc.js;
+      html = wc.html;
+    } else {
+      const extracted = extractWebComponentsCode(wc);
+      css = extracted.css;
+      javascript = extracted.javascript;
+      html = extracted.html;
     }
 
-    // String form: parse via extractor (handles inline <style> and <script>)
-    const extracted = extractWebComponentsCode(wc);
+    const htmlBlock = onHtmlEdit ? (
+      <EditableHtmlBlock html={html} onEdit={onHtmlEdit} key="html" />
+    ) : (
+      wrapCodeBlock(html, "html", "html")
+    );
+
     return (
       <>
-        {extracted.css && wrapCodeBlock(extracted.css, "css", "css")}
-        {extracted.javascript && wrapCodeBlock(extracted.javascript, "javascript", "js")}
-        {wrapCodeBlock(extracted.html, "html", "html")}
+        {css && wrapCodeBlock(css, "css", "css")}
+        {javascript && wrapCodeBlock(javascript, "javascript", "js")}
+        {htmlBlock}
       </>
     );
   };
