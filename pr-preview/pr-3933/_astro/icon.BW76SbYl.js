@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D_zvdyIk.js";import{t as a,l as n}from"./workspace-layout-scroll-state.D9kgPCZd.js";function m({inverted:o,...r}){const s=a(r,n);return t.jsx("goa-icon",{inverted:typeof o=="boolean"?o?"true":void 0:o,...s})}export{m as G};

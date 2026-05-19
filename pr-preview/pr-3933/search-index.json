@@ -2393,6 +2393,19 @@
   },
   {
     "type": "page",
+    "id": "designers/designing-for-dark-mode",
+    "title": "Designing for dark mode",
+    "description": "How dark mode works for designers",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers/designing-for-dark-mode"
+  },
+  {
+    "type": "page",
     "id": "designers/designing-with-ds",
     "title": "Designing with Design System 2.0",
     "description": "How to start new designs and update existing projects to Design System 2.0",
@@ -2455,6 +2468,19 @@
       "developer"
     ],
     "slug": "get-started/developers/bug"
+  },
+  {
+    "type": "page",
+    "id": "developers/dark-mode-theme",
+    "title": "Dark mode theme",
+    "description": "Switch between light and dark mode using the React useTheme hook or Angular GoabThemeService",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/dark-mode-theme"
   },
   {
     "type": "page",

@@ -1,1 +1,0 @@
-import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{t as p,l as m}from"./workspace-layout-scroll-state.D9kgPCZd.js";function f({as:o,tag:r,children:s,...t}){const a=p(t,m);return e.jsx("goa-text",{as:r||o,...a,children:s})}export{f as G};

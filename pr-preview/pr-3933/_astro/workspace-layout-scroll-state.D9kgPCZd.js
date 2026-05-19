@@ -1,1 +1,0 @@
-import{r}from"./index.DeO6U63H.js";const c=o=>o.toLowerCase(),f=o=>o.replace(/([a-z])([A-Z])/g,"$1-$2").toLowerCase();function u(o,s=c){const t={};for(const[e,a]of Object.entries(o))a!==void 0&&(e.startsWith("data-")?t[e]=a:t[s(e)]=a);return t}const l={NO_SCROLL:"no-scroll"},n={scrollPosition:l.NO_SCROLL,isScrollable:!1};r.createContext(n);export{f as k,c as l,u as t};
