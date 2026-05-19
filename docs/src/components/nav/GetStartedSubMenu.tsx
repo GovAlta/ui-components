@@ -50,7 +50,11 @@ export function GetStartedSubMenu({
 
       {/* Top-level pages */}
       {items.topPages.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
+        <GoabWorkSideMenuItem
+          key={page.url}
+          label={page.label}
+          url={withBase(page.url)}
+        />
       ))}
 
       {/* Grouped sections */}
@@ -82,7 +86,11 @@ export function GetStartedSubMenu({
 
       {/* Bottom pages */}
       {items.bottomPages.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
+        <GoabWorkSideMenuItem
+          key={page.url}
+          label={page.label}
+          url={withBase(page.url)}
+        />
       ))}
     </>
   );

@@ -21,6 +21,8 @@ export const quickLinks: QuickLink[] = [
   { label: "Examples", href: "/examples", icon: "browsers" },
   { label: "Components", href: "/components", icon: "shapes" },
   { label: "Design tokens", href: "/tokens", icon: "code-slash" },
+  { label: "Get support", href: "/support", icon: "help-circle" },
+  { label: "Release notes", href: "https://github.com/GovAlta/ui-components/releases", icon: "open" },
 ];
 
 /**

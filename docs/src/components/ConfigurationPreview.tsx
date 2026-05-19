@@ -12,6 +12,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 // Note: Using web component directly for v2 styling (React wrapper doesn't pass version prop)
+import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
 import { useGitHubIssueCount } from "../hooks/useGitHubIssueCount";
 import type { ComponentConfigurations } from "@/data/configurations";
@@ -157,29 +158,31 @@ export function ConfigurationPreview({
 
         <div className="external-links">
           {figmaUrl && (
-            <a
-              href={figmaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="external-link"
-              aria-label="View in Figma"
-              title="View in Figma"
-            >
-              <goa-icon type="logo-figma" size="medium"></goa-icon>
-            </a>
+            <GoabTooltip content="View Figma component">
+              <a
+                href={figmaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="external-link"
+                aria-label="View Figma component"
+              >
+                <goa-icon type="logo-figma" size="medium"></goa-icon>
+              </a>
+            </GoabTooltip>
           )}
           {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="external-link github-link"
-              aria-label="View GitHub issues"
-              title="View GitHub issues"
-            >
-              <goa-icon type="logo-github" size="medium"></goa-icon>
-              {issueCount !== null && <span className="issue-count">({issueCount})</span>}
-            </a>
+            <GoabTooltip content="View GitHub issues">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="external-link github-link"
+                aria-label="View GitHub issues"
+              >
+                <goa-icon type="logo-github" size="medium"></goa-icon>
+                {issueCount !== null && <span className="issue-count">({issueCount})</span>}
+              </a>
+            </GoabTooltip>
           )}
         </div>
       </div>
@@ -230,7 +233,8 @@ export function ConfigurationPreview({
           gap: var(--goa-space-s, 0.5rem);
         }
 
-        .external-link {
+        .external-link,
+        .external-link:visited {
           display: flex;
           align-items: center;
           gap: var(--goa-space-2xs, 0.25rem);

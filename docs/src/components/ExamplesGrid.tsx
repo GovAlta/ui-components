@@ -549,7 +549,11 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               loading="lazy"
             />
           ) : (
-            <div className="example-card-thumbnail" aria-hidden="true" />
+            <div className="example-card-thumbnail" aria-hidden="true">
+              <span className="example-card-thumbnail-fallback">
+                {example.data.title}
+              </span>
+            </div>
           )}
 
           {/* Title */}
@@ -1328,6 +1332,16 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           background: var(--goa-color-greyscale-200);
           border-radius: var(--goa-border-radius-m);
           margin-bottom: var(--goa-space-xs);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: var(--goa-space-m);
+        }
+
+        .example-card-thumbnail-fallback {
+          font: var(--goa-typography-heading-s);
+          color: var(--goa-color-text-secondary);
+          text-align: center;
         }
 
         .example-card-title {

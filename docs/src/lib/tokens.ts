@@ -29,6 +29,10 @@ export interface FlatToken {
   isColor: boolean;
   /** Description if available */
   description?: string;
+  /** Dark mode "as defined" value (only set if token is themed). */
+  darkValue?: string;
+  /** Dark mode resolved value (only set if token is themed). */
+  darkResolvedValue?: string;
 }
 
 /**
@@ -98,14 +102,34 @@ function boxShadowToCss(shadow: {
 }
 
 /**
- * Format a token value for display
+ * Check if a value is a themed value (has `light` and `dark` keys).
+ * These are emitted by Style Dictionary for tokens that flip between modes.
+ * The inner values may be strings (e.g. colors) or objects (e.g. box shadows).
  */
-function formatValue(value: string | number | object): string {
+function isThemedValue(value: unknown): value is { light: unknown; dark: unknown } {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "light" in value &&
+    "dark" in value
+  );
+}
+
+/**
+ * Format a token value for display. For themed `{ light, dark }` values,
+ * returns the light variant (recursively formatted, so themed box-shadow
+ * objects, themed strings, etc. all flatten correctly).
+ */
+function formatValue(value: unknown): string {
   if (typeof value === "string") {
     return value;
   }
   if (typeof value === "number") {
     return String(value);
+  }
+  // Themed value: recurse on the light variant
+  if (isThemedValue(value)) {
+    return formatValue(value.light);
   }
   // Convert box-shadow objects to CSS syntax
   if (isBoxShadowObject(value)) {
@@ -213,7 +237,10 @@ function flattenTokensRecursive(
       const tokenPath = currentPath.slice(1).join("/");
       const tokenType = value.type || "unknown";
 
-      // Keep original value, resolve for preview
+      // Detect themed { light, dark } shape, split into separate light + dark fields.
+      const themed = isThemedValue(value.value) ? value.value : null;
+
+      // Keep original value, resolve for preview (light by default for themed values)
       const rawValue = formatValue(value.value);
       let resolvedValue: string;
 
@@ -224,6 +251,18 @@ function flattenTokensRecursive(
       } else {
         resolvedValue =
           typeof rawValue === "string" ? resolveTokenReference(rawValue, rootTokens) : rawValue;
+      }
+
+      // Resolve dark variant if the value is themed
+      let darkValue: string | undefined;
+      let darkResolvedValue: string | undefined;
+      if (themed) {
+        // Themed inner value may be a string, box-shadow object, etc.
+        // Formatting recursively lets it produce a CSS string for any shape.
+        darkValue = formatValue(themed.dark);
+        darkResolvedValue = isTokenReference(darkValue)
+          ? resolveTokenReference(darkValue, rootTokens)
+          : darkValue;
       }
 
       const isColor =
@@ -239,6 +278,8 @@ function flattenTokensRecursive(
         type: tokenType,
         isColor,
         description: value.description,
+        darkValue,
+        darkResolvedValue,
       });
     } else if (typeof value === "object" && value !== null) {
       // Recurse into nested object

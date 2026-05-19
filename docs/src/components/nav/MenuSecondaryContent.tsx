@@ -8,10 +8,18 @@
  */
 
 import { useCallback, useState, useEffect } from "react";
-import { GoabIcon, GoabSpacer, GoabWorkSideMenuItem } from "@abgov/react-components";
+import { GoabBadge, GoabIcon, GoabSpacer, GoabWorkSideMenuItem } from "@abgov/react-components";
 
 import { withBase } from "@/lib/base-url";
 import "./menu-secondary.css";
+
+const THEME_STORAGE_KEY = "goab-theme";
+
+function readInitialTheme(): "light" | "dark" {
+  if (typeof document === "undefined") return "light";
+  const attr = document.documentElement.getAttribute("data-theme");
+  return attr === "dark" ? "dark" : "light";
+}
 
 interface MenuSecondaryContentProps {
   /** Whether the side menu is expanded (controls label/badge visibility) */
@@ -24,6 +32,23 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
   useEffect(() => {
     const isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
     setShortcutKey(isMac ? "⌘K" : "Ctrl K");
+  }, []);
+
+  // Theme state — synced with <html data-theme> attribute set by pre-paint script
+  const [themeMode, setThemeMode] = useState<"light" | "dark">(readInitialTheme);
+  const isDark = themeMode === "dark";
+
+  const toggleTheme = useCallback(() => {
+    setThemeMode((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, next);
+      } catch {
+        // localStorage blocked: fail silently
+      }
+      return next;
+    });
   }, []);
 
   // Open search modal (workaround until #3340 adds onClick to WorkSideMenuItem)
@@ -83,12 +108,23 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
           </>
         )}
       </button>
+      <button
+        className="search-menu-button"
+        onClick={toggleTheme}
+        type="button"
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        <GoabIcon type={isDark ? "sunny" : "moon"} size="small" />
+        {isOpen && (
+          <>
+            <span className="search-menu-label">
+              {isDark ? "Light mode" : "Dark mode"}
+            </span>
+            <GoabBadge type="important" emphasis="subtle" content="New" />
+          </>
+        )}
+      </button>
       <GoabWorkSideMenuItem label="Get support" icon="help-circle" url={withBase("/support")} />
-      <GoabWorkSideMenuItem
-        label="Release notes"
-        icon="open"
-        url="https://github.com/GovAlta/ui-components/releases"
-      />
       <GoabSpacer vSpacing="m" />
     </>
   );
