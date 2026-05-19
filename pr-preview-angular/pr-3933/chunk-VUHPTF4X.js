@@ -1,4 +1,0 @@
-import{a as d}from"./chunk-DKNCSQOT.js";import{$a as t,Da as o,ab as a,xb as n}from"./chunk-N7ZRPFT5.js";var p=(()=>{class e{static{this.\u0275fac=function(i){return new(i||e)}}static{this.\u0275cmp=o({type:e,selectors:[["abgov-feat2440"]],decls:6,vars:0,consts:[["id","blankID","mb","l"],["tag","h1","id","headingID","mb","l"],["tag","p","size","heading-m","id","paragraphID","mb","l"]],template:function(i,m){i&1&&(t(0,"goab-text",0),n(1,` This element should have the id "blankID" and be the default with no tag.
-`),a(),t(2,"goab-text",1),n(3,` This element should have the id "headingID" and have an "h1" tag.
-`),a(),t(4,"goab-text",2),n(5,` This element should have the id "paragraphID" and have a "p" tag with a size of "heading-m"
-`),a())},dependencies:[d],encapsulation:2})}}return e})();export{p as Feat2440Component};
