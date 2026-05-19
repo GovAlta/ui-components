@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GoabThemeProvider } from "@abgov/react-components";
 import "@abgov/web-components";
 import App from "./app/app";
 import { EverythingRoute } from "./routes/everything";
@@ -12,17 +13,19 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <StrictMode>
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <Routes>
-        <Route path="/everything/b" element={<EverythingBRoute />} />
-        <Route path="/" element={<App />}>
-          <Route path="everything" element={<EverythingRoute />} />
-          {prRouteDefinitions.map((route) => {
-            const Component = route.component;
+      <GoabThemeProvider>
+        <Routes>
+          <Route path="/everything/b" element={<EverythingBRoute />} />
+          <Route path="/" element={<App />}>
+            <Route path="everything" element={<EverythingRoute />} />
+            {prRouteDefinitions.map((route) => {
+              const Component = route.component;
 
-            return <Route key={route.path} path={route.path} element={<Component />} />;
-          })}
-        </Route>
-      </Routes>
+              return <Route key={route.path} path={route.path} element={<Component />} />;
+            })}
+          </Route>
+        </Routes>
+      </GoabThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 );

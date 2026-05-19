@@ -8,6 +8,7 @@ import {
   GoabWorkSideMenu,
   GoabWorkSideMenuGroup,
   GoabWorkSideMenuItem,
+  useTheme,
 } from "@abgov/react-components";
 import {
   bugRouteDefinitions,
@@ -37,16 +38,20 @@ const appContentStyle: CSSProperties = {
 
 export function App() {
   const navigate = useNavigate();
+  const { mode, toggle } = useTheme();
+  const isDark = mode === "dark";
   const baseUrl = import.meta.env.BASE_URL;
-  const [tokenMode, setTokenMode] = useState<TokenVersion>(() =>
-    resolveTokenVersion(),
-  );
+  const [tokenMode, setTokenMode] = useState<TokenVersion>(() => resolveTokenVersion());
 
   const handleSideMenuNavigate = (path: string) => {
     if (path === TOKEN_TOGGLE_URL) {
       const next: TokenVersion = tokenMode === "v1" ? "v2" : "v1";
       setTokenMode(next);
       applyTokenVersion(next);
+      return;
+    }
+    if (path === "#toggle-theme") {
+      toggle();
       return;
     }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
@@ -66,11 +71,18 @@ export function App() {
           open={true}
           onNavigate={handleSideMenuNavigate}
           secondaryContent={
-            <GoabWorkSideMenuItem
-              label={`Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`}
-              icon="swap-horizontal"
-              url={TOKEN_TOGGLE_URL}
-            />
+            <>
+              <GoabWorkSideMenuItem
+                label={`Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`}
+                icon="swap-horizontal"
+                url={TOKEN_TOGGLE_URL}
+              />
+              <GoabWorkSideMenuItem
+                icon={isDark ? "sunny" : "moon"}
+                label={isDark ? "Light mode" : "Dark mode"}
+                url="#toggle-theme"
+              />
+            </>
           }
           primaryContent={
             <>
@@ -102,7 +114,11 @@ export function App() {
                   />
                 ))}
               </GoabWorkSideMenuGroup>
-              <GoabWorkSideMenuItem icon="list" label="Everything" url={`${baseUrl}everything`} />
+              <GoabWorkSideMenuItem
+                icon="list"
+                label="Everything"
+                url={`${baseUrl}everything`}
+              />
             </>
           }
         />

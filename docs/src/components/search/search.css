@@ -764,6 +764,7 @@
 
 /* Give the input a full border and compact padding when used inline */
 .inline-search .search-input-container {
+  background: var(--goa-input-color-background-default);
   border: 1px solid var(--goa-color-greyscale-300, #ccc);
   border-radius: var(--goa-border-radius-m);
   border-bottom: 1px solid var(--goa-color-greyscale-300, #ccc);
@@ -795,7 +796,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: white;
+  background: var(--goa-color-greyscale-white);
   border: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
   border-radius: var(--goa-border-radius-m);
   box-shadow:

@@ -3,9 +3,9 @@ input,
 textarea,
 button,
 textarea {
-  background: #fff;
+  background: var(--goa-color-greyscale-white, #fff);
   font-family: var(--goa-font-family-sans);
-  font-weight: 400;
+  font-weight: var(--goa-font-weight-regular);
   font-size: var(--goa-font-size-4);
   color: var(--goa-color-text-default);
 }
@@ -24,21 +24,21 @@ body {
 
 p {
   margin: 0;
-  margin-bottom: 1rem;
+  margin-bottom: var(--goa-space-m);
 }
 
 hr {
   border-width: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--goa-color-greyscale-200);
   height: 0;
   padding: 0;
-  margin: 2rem 0;
+  margin: var(--goa-space-xl) 0;
 }
 
 ul,
 ol {
   padding-left: 0;
-  padding-left: 1rem;
+  padding-left: var(--goa-space-m);
 }
 
 li > ul,
@@ -54,7 +54,7 @@ dl {
 }
 
 dd {
-  margin-left: 0.5rem;
+  margin-left: var(--goa-space-xs);
 }
 
 a,
@@ -75,19 +75,19 @@ a:focus-visible {
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #999;
+  color: var(--goa-input-color-text-placeholder);
   opacity: 1;
   /* Firefox */
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #999;
+  color: var(--goa-input-color-text-placeholder);
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #999;
+  color: var(--goa-input-color-text-placeholder);
 }
 
 h1 {
@@ -121,7 +121,7 @@ h3 + h1 {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--goa-space-m);
   font-size: var(--goa-font-size-4);
 }
 

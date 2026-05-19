@@ -64,27 +64,29 @@ export function GoabWorkSideMenu({
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!el?.current || !onToggle) {
+    const node = el.current;
+    if (!node || !onToggle) {
       return;
     }
-    el.current?.addEventListener("_toggle", onToggle);
+    node.addEventListener("_toggle", onToggle);
     return () => {
-      el.current?.removeEventListener("_toggle", onToggle);
+      node.removeEventListener("_toggle", onToggle);
     };
-  }, [el, onToggle]);
+  }, [onToggle]);
 
   useEffect(() => {
-    if (!el?.current || !onNavigate) {
+    const node = el.current;
+    if (!node || !onNavigate) {
       return;
     }
     const handler = (e: Event) => {
       onNavigate((e as CustomEvent).detail.url);
     };
-    el.current?.addEventListener("_navigate", handler);
+    node.addEventListener("_navigate", handler);
     return () => {
-      el.current?.removeEventListener("_navigate", handler);
+      node.removeEventListener("_navigate", handler);
     };
-  }, [el, onNavigate]);
+  }, [onNavigate]);
 
   return (
     <goa-work-side-menu

@@ -170,3 +170,15 @@ code {
 .hljs-built_in { color: #6639ba; }
 .hljs-title { color: #6639ba; }
 .hljs-params { color: #953800; }
+
+/* Dark mode: lighter hue-preserved variants for readability on dark code bg */
+:root[data-theme="dark"] .hljs-keyword { color: #79c0ff; }
+:root[data-theme="dark"] .hljs-string { color: #7ee787; }
+:root[data-theme="dark"] .hljs-number { color: #79c0ff; }
+:root[data-theme="dark"] .hljs-comment { color: #8b949e; }
+:root[data-theme="dark"] .hljs-tag { color: #79c0ff; }
+:root[data-theme="dark"] .hljs-attr { color: #79c0ff; }
+:root[data-theme="dark"] .hljs-name { color: #7ce38b; }
+:root[data-theme="dark"] .hljs-built_in { color: #d2a8ff; }
+:root[data-theme="dark"] .hljs-title { color: #d2a8ff; }
+:root[data-theme="dark"] .hljs-params { color: #ffa657; }

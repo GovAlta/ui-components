@@ -10,6 +10,7 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
 import type { ExampleCode } from "../lib/example-code";
 import DOMPurify from "dompurify";
@@ -136,29 +137,31 @@ export function ExamplePreview({
           </h3>
         )}
         <div className="example-actions">
-          <button
-            className={`copy-link-button ${copied ? "copied" : ""}`}
-            onClick={handleCopyLink}
-            aria-label="Copy link to this example"
-            title="Copy link"
-          >
-            {copied ? (
-              <goa-icon version="2" type="checkmark" size="small"></goa-icon>
-            ) : (
-              <goa-icon version="2" type="link" size="small"></goa-icon>
-            )}
-          </button>
-          {figmaUrl && (
-            <a
-              href={figmaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="figma-link"
-              aria-label="View in Figma"
-              title="View in Figma"
+          <GoabTooltip content={copied ? "Copied" : "Copy link"}>
+            <button
+              className={`copy-link-button ${copied ? "copied" : ""}`}
+              onClick={handleCopyLink}
+              aria-label="Copy link to this example"
             >
-              <goa-icon version="2" type="logo-figma" size="small"></goa-icon>
-            </a>
+              {copied ? (
+                <goa-icon type="checkmark" size="small"></goa-icon>
+              ) : (
+                <goa-icon type="link" size="small"></goa-icon>
+              )}
+            </button>
+          </GoabTooltip>
+          {figmaUrl && (
+            <GoabTooltip content="View Figma component">
+              <a
+                href={figmaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="figma-link"
+                aria-label="View Figma component"
+              >
+                <goa-icon type="logo-figma" size="small"></goa-icon>
+              </a>
+            </GoabTooltip>
           )}
         </div>
       </div>
@@ -240,7 +243,8 @@ export function ExamplePreview({
         }
 
         .copy-link-button,
-        .figma-link {
+        .figma-link,
+        .figma-link:visited {
           display: flex;
           align-items: center;
           justify-content: center;
