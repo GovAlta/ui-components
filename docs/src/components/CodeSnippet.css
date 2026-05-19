@@ -155,7 +155,7 @@ code {
   font-style: italic;
 }
 
-/* Brief 121: editable HTML block. Visually matches a code block but accepts
+/* Editable HTML block. Visually matches a code block but accepts
    direct edits; the only affordance is the text-caret cursor on hover. */
 .editable-html {
   display: block;

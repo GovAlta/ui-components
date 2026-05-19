@@ -196,7 +196,7 @@ function SingleCodeBlock({
 }
 
 // ============================================================================
-// Editable HTML Block (Brief 121)
+// Editable HTML Block
 // ============================================================================
 
 interface EditableHtmlBlockProps {
