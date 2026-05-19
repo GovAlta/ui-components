@@ -10,6 +10,8 @@ NOTES.md
 /test-results
 __screenshots__
 docs/.astro
+docs/generated/mcp/
+docs/generated/md-bundle/
 
 # environment
 .env
