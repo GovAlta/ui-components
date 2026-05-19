@@ -1794,8 +1794,8 @@ var escapeSelectorAttributeValueInsideDoubleQuotesRegex = /[\n"\\]/g;
 function escapeSelectorAttributeValueInsideDoubleQuotes(value) {
   return value.replace(
     escapeSelectorAttributeValueInsideDoubleQuotesRegex,
-    function(ch2) {
-      return "\\" + ch2.charCodeAt(0).toString(16) + " ";
+    function(ch) {
+      return "\\" + ch.charCodeAt(0).toString(16) + " ";
     }
   );
 }
@@ -53535,11 +53535,11 @@ class hv extends je {
 customElements.define("goa-three-column-layout", Me(hv, { leftcolumnwidth: {}, rightcolumnwidth: {}, maxcontentwidth: {} }, ["header", "nav", "default", "sidebar", "side-menu", "footer"], [], true));
 const { window: Zs } = mo;
 function mv(t) {
-  xe(t, "svelte-hle3gn", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}.tooltip.svelte-hle3gn.svelte-hle3gn{position:relative;display:inline-flex;justify-content:center;align-items:center}.tooltip.svelte-hle3gn.svelte-hle3gn:focus-visible{outline:var(--goa-tooltip-border-focus);outline-offset:-4px;border-radius:8px}.tooltip-text.svelte-hle3gn.svelte-hle3gn{pointer-events:none;position:absolute;z-index:2;opacity:0;font:var(--goa-tooltip-text-size);background-color:var(--goa-tooltip-color-bg);color:var(--goa-tooltip-color-text);text-align:center;border-radius:var(--goa-tooltip-border-radius);transition:opacity 0.3s;padding:var(--goa-tooltip-padding);text-align:left;white-space:nowrap;display:flex;flex-direction:column;overflow:visible;border-width:0}.show.tooltip-text.svelte-hle3gn.svelte-hle3gn{opacity:1}.use-manual-positioning.svelte-hle3gn .tooltip-text.svelte-hle3gn{position:fixed;z-index:9999;top:auto;bottom:auto;left:auto;right:auto}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.svelte-hle3gn{position-anchor:--goa-tooltip-target;margin:0;inset-block-start:anchor(bottom);inset-inline-start:anchor(left)}.use-anchor-based-positioning.svelte-hle3gn .tooltip-target.svelte-hle3gn{anchor-name:--goa-tooltip-target;margin:var(--goa-tooltip-gap);height:auto;display:flex}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.bottom.svelte-hle3gn{inset-block-start:anchor(bottom);inset-inline-start:anchor(center);translate:-50% 10px;position-try-fallbacks:flip-block}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.top.svelte-hle3gn{inset-block-start:anchor(top);inset-inline-start:anchor(center);translate:-50% calc(-100% - 10px);position-try-fallbacks:flip-block}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.right.svelte-hle3gn{inset-block-start:anchor(center);inset-inline-start:anchor(right);translate:10px -50%;position-try-fallbacks:flip-inline}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.left.svelte-hle3gn{inset-block-start:anchor(center);inset-inline-start:anchor(left);translate:calc(-100% - 10px) -50%;position-try-fallbacks:flip-inline}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.bottom.align-right.svelte-hle3gn{inset-inline-start:anchor(left);translate:-1rem 10px;position-try-fallbacks:--align-right-flipped-bottom, flip-block}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.top.align-right.svelte-hle3gn{inset-inline-start:anchor(left);translate:-1rem calc(-100% - 10px);position-try-fallbacks:--align-right-flipped-top, flip-block}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.bottom.align-left.svelte-hle3gn{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) 10px;position-try-fallbacks:--align-left-flipped-bottom, flip-block}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.top.align-left.svelte-hle3gn{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) calc(-100% - 10px);position-try-fallbacks:--align-left-flipped-top, flip-block}@position-try --align-right-flipped-bottom{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) 10px}@position-try --align-right-flipped-top{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) calc(-100% - 10px)}@position-try --align-left-flipped-bottom{inset-inline-start:anchor(left);translate:-1rem 10px}@position-try --align-left-flipped-top{inset-inline-start:anchor(left);translate:-1rem calc(-100% - 10px)}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.bottom.align-right.svelte-hle3gn::before,.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.top.align-right.svelte-hle3gn::before{left:calc(var(--target-width) + 1rem)}.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.bottom.align-left.svelte-hle3gn::before,.use-anchor-based-positioning.svelte-hle3gn .tooltip-text.top.align-left.svelte-hle3gn::before{left:calc(100% - var(--target-width) - 1rem)}.tooltip-text.bottom.svelte-hle3gn.svelte-hle3gn::before,.tooltip-text.top.svelte-hle3gn.svelte-hle3gn::before,.tooltip-text.left.svelte-hle3gn.svelte-hle3gn::before,.tooltip-text.right.svelte-hle3gn.svelte-hle3gn::before{content:"";position:absolute;border-style:solid}.tooltip-text.bottom.svelte-hle3gn.svelte-hle3gn::before{top:-9px;left:50%;border-width:0 10px 10px 10px;transform:translateX(-50%);border-color:transparent transparent var(--goa-tooltip-color-bg)
-      transparent}.tooltip-text.top.svelte-hle3gn.svelte-hle3gn::before{bottom:-9px;left:50%;transform:translateX(-50%);border-width:10px 10px 0 10px;border-color:var(--goa-tooltip-color-bg) transparent transparent
-      transparent}.tooltip-text.left.svelte-hle3gn.svelte-hle3gn::before{top:50%;right:-9px;transform:translateY(-50%);border-width:10px 0 10px 10px;border-color:transparent transparent transparent
-      var(--goa-tooltip-color-bg)}.tooltip-text.right.svelte-hle3gn.svelte-hle3gn::before{top:50%;left:-9px;transform:translateY(-50%);border-width:10px 10px 10px 0;border-style:solid;border-color:transparent var(--goa-tooltip-color-bg) transparent
-      transparent}.tooltip-text.bottom.align-left.svelte-hle3gn.svelte-hle3gn::before,.tooltip-text.top.align-left.svelte-hle3gn.svelte-hle3gn::before{left:calc(100% - (var(--target-width) + 1rem))}.tooltip-text.bottom.align-right.svelte-hle3gn.svelte-hle3gn::before,.tooltip-text.top.align-right.svelte-hle3gn.svelte-hle3gn::before{left:calc(var(--target-width) + 1rem)}`);
+  xe(t, "svelte-1ol5g3u", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}.tooltip.svelte-1ol5g3u.svelte-1ol5g3u{position:relative;display:inline-flex;justify-content:center;align-items:center}.tooltip.svelte-1ol5g3u.svelte-1ol5g3u:focus-visible{outline:var(--goa-tooltip-border-focus);outline-offset:-4px;border-radius:8px}.tooltip-text.svelte-1ol5g3u.svelte-1ol5g3u{pointer-events:none;font:var(--goa-tooltip-text-size);background-color:var(--goa-tooltip-color-bg);color:var(--goa-tooltip-color-text);text-align:center;border-radius:var(--goa-tooltip-border-radius);position:absolute;z-index:2;opacity:0;transition:opacity 0.3s;padding:var(--goa-tooltip-padding);text-align:left;white-space:nowrap;display:flex;flex-direction:column;overflow:visible;border-width:0}.show.tooltip-text.svelte-1ol5g3u.svelte-1ol5g3u{opacity:1}.use-manual-positioning.svelte-1ol5g3u .tooltip-text.svelte-1ol5g3u{position:fixed;z-index:9999;top:auto;bottom:auto;left:auto;right:auto}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.svelte-1ol5g3u{position-anchor:--goa-tooltip-target;margin:0;inset-block-start:anchor(bottom);inset-inline-start:anchor(left)}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-target.svelte-1ol5g3u{anchor-name:--goa-tooltip-target;margin:var(--goa-tooltip-gap);height:auto;display:flex}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.bottom.svelte-1ol5g3u{inset-block-start:anchor(bottom);inset-inline-start:anchor(center);translate:-50% 10px;position-try-fallbacks:flip-block}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.top.svelte-1ol5g3u{inset-block-start:anchor(top);inset-inline-start:anchor(center);translate:-50% calc(-100% - 10px);position-try-fallbacks:flip-block}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.right.svelte-1ol5g3u{inset-block-start:anchor(center);inset-inline-start:anchor(right);translate:10px -50%;position-try-fallbacks:flip-inline}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.left.svelte-1ol5g3u{inset-block-start:anchor(center);inset-inline-start:anchor(left);translate:calc(-100% - 10px) -50%;position-try-fallbacks:flip-inline}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.bottom.align-right.svelte-1ol5g3u{inset-inline-start:anchor(left);translate:-1rem 10px;position-try-fallbacks:--align-right-flipped-bottom, flip-block}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.top.align-right.svelte-1ol5g3u{inset-inline-start:anchor(left);translate:-1rem calc(-100% - 10px);position-try-fallbacks:--align-right-flipped-top, flip-block}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.bottom.align-left.svelte-1ol5g3u{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) 10px;position-try-fallbacks:--align-left-flipped-bottom, flip-block}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.top.align-left.svelte-1ol5g3u{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) calc(-100% - 10px);position-try-fallbacks:--align-left-flipped-top, flip-block}@position-try --align-right-flipped-bottom{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) 10px}@position-try --align-right-flipped-top{inset-inline-start:anchor(right);translate:calc(-100% + 1rem) calc(-100% - 10px)}@position-try --align-left-flipped-bottom{inset-inline-start:anchor(left);translate:-1rem 10px}@position-try --align-left-flipped-top{inset-inline-start:anchor(left);translate:-1rem calc(-100% - 10px)}.tooltip-text.bottom.svelte-1ol5g3u.svelte-1ol5g3u::before,.tooltip-text.top.svelte-1ol5g3u.svelte-1ol5g3u::before,.tooltip-text.left.svelte-1ol5g3u.svelte-1ol5g3u::before,.tooltip-text.right.svelte-1ol5g3u.svelte-1ol5g3u::before{content:"";position:absolute;border-style:solid}.tooltip-text.bottom.svelte-1ol5g3u.svelte-1ol5g3u::before{top:-9px;left:50%;border-width:0 10px 10px 10px;transform:translateX(-50%);border-color:transparent transparent var(--goa-tooltip-color-bg)
+      transparent}.tooltip-text.top.svelte-1ol5g3u.svelte-1ol5g3u::before{bottom:-9px;left:50%;transform:translateX(-50%);border-width:10px 10px 0 10px;border-color:var(--goa-tooltip-color-bg) transparent transparent
+      transparent}.tooltip-text.left.svelte-1ol5g3u.svelte-1ol5g3u::before{top:50%;right:-9px;transform:translateY(-50%);border-width:10px 0 10px 10px;border-color:transparent transparent transparent
+      var(--goa-tooltip-color-bg)}.tooltip-text.right.svelte-1ol5g3u.svelte-1ol5g3u::before{top:50%;left:-9px;transform:translateY(-50%);border-width:10px 10px 10px 0;border-style:solid;border-color:transparent var(--goa-tooltip-color-bg) transparent
+      transparent}.tooltip-text.bottom.align-left.svelte-1ol5g3u.svelte-1ol5g3u::before,.tooltip-text.top.align-left.svelte-1ol5g3u.svelte-1ol5g3u::before{left:calc(100% - (var(--target-width) + 1rem))}.tooltip-text.bottom.align-right.svelte-1ol5g3u.svelte-1ol5g3u::before,.tooltip-text.top.align-right.svelte-1ol5g3u.svelte-1ol5g3u::before{left:calc(var(--target-width) + 1rem)}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.bottom.align-right.svelte-1ol5g3u::before,.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.top.align-right.svelte-1ol5g3u::before{left:calc(var(--target-width) + 1rem)}.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.bottom.align-left.svelte-1ol5g3u::before,.use-anchor-based-positioning.svelte-1ol5g3u .tooltip-text.top.align-left.svelte-1ol5g3u::before{left:calc(100% - var(--target-width) - 1rem)}`);
 }
 const bv = (t) => ({}), pa = (t) => ({});
 function pv(t) {
@@ -53644,17 +53644,17 @@ function _v(t) {
   }
   return l = M(t), a = z[l] = y[l](t), {
     c() {
-      e = C("div"), o = C("div"), p && p.c(), n = Y(), r = C("span"), a.c(), f(o, "class", "tooltip-target svelte-hle3gn"), f(o, "popovertarget", i = /*_tooltipInstanceId*/
+      e = C("div"), o = C("div"), p && p.c(), n = Y(), r = C("span"), a.c(), f(o, "class", "tooltip-target svelte-1ol5g3u"), f(o, "popovertarget", i = /*_tooltipInstanceId*/
       t[14] + "-tooltip"), f(r, "id", c = /*_tooltipInstanceId*/
       t[14] + "-tooltip"), f(r, "popover", "manual"), f(r, "class", d = "tooltip-text " + /*position*/
       t[0] + " align-" + /*halign*/
-      t[1] + " svelte-hle3gn"), I(
+      t[1] + " svelte-1ol5g3u"), I(
         r,
         "show",
         /*_tooltipVisible*/
         t[12]
       ), f(e, "class", s = "tooltip align-" + /*halign*/
-      t[1] + " svelte-hle3gn"), f(
+      t[1] + " svelte-1ol5g3u"), f(
         e,
         "data-testid",
         /*testid*/
@@ -53741,7 +53741,7 @@ function _v(t) {
       x[14] + "-tooltip")) && f(r, "id", c), (!v || L[0] & /*position, halign*/
       3 && d !== (d = "tooltip-text " + /*position*/
       x[0] + " align-" + /*halign*/
-      x[1] + " svelte-hle3gn")) && f(r, "class", d), (!v || L[0] & /*position, halign, _tooltipVisible*/
+      x[1] + " svelte-1ol5g3u")) && f(r, "class", d), (!v || L[0] & /*position, halign, _tooltipVisible*/
       4099) && I(
         r,
         "show",
@@ -53749,7 +53749,7 @@ function _v(t) {
         x[12]
       ), (!v || L[0] & /*halign*/
       2 && s !== (s = "tooltip align-" + /*halign*/
-      x[1] + " svelte-hle3gn")) && f(e, "class", s), (!v || L[0] & /*testid*/
+      x[1] + " svelte-1ol5g3u")) && f(e, "class", s), (!v || L[0] & /*testid*/
       8) && f(
         e,
         "data-testid",
@@ -53849,8 +53849,8 @@ function yv(t, e, o) {
     const K = oe.currentTarget;
     (we = K == null ? void 0 : K.matches) != null && we.call(K, ":focus-visible") && (clearTimeout(H), S());
   }
-  function R() {
-    if (!j || !L)
+  async function R() {
+    if (await tt(), !j || !L)
       return;
     const oe = j.getBoundingClientRect(), K = L.getBoundingClientRect(), we = K.top, Ne = window.innerHeight - K.bottom, Ye = K.left, Le = window.innerWidth - K.right, me = x || window.innerWidth, Ue = s && s.endsWith("px") ? parseFloat(s) : 400, Xe = Math.min(me * 0.8, Ue, oe.width, Math.max(Ye, Le) - 10), ce = s && s.endsWith("px") || Xe > K.width || Xe > Ye || Xe > Le;
     o(10, j.style.width = `${Math.max(Xe - 32, 1)}px`, j), ce ? o(10, j.style.whiteSpace = "normal", j) : o(10, j.style.whiteSpace = "nowrap", j);
@@ -55617,8 +55617,8 @@ function Xv(t) {
       var(--goa-font-size-2)
     );--goa-badge-border-radius:1.25rem;margin-top:var(--goa-space-3xs)}@container (max-width: 160px){.menu-item.svelte-1qix1n1.svelte-1qix1n1{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}.menu-item-label.svelte-1qix1n1.svelte-1qix1n1,.trailing-content-slot.svelte-1qix1n1.svelte-1qix1n1{display:none}goa-badge.badge.svelte-1qix1n1.svelte-1qix1n1{position:absolute;top:var(--goa-space-3xs);right:var(--goa-space-3xs);--goa-badge-height:var(--goa-space-m);--goa-badge-padding:0;--goa-badge-font-size:var(--goa-font-size-1)}goa-badge.badge.svelte-1qix1n1.svelte-1qix1n1:not(.alwaysvisible){--goa-badge-font-size:0}@keyframes svelte-1qix1n1-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}}`);
 }
-const Kv = (t) => ({}), xa = (t) => ({}), $v = (t) => ({}), qa = (t) => ({}), eh = (t) => ({}), Da = (t) => ({}), th = (t) => ({}), Ea = (t) => ({}), oh = (t) => ({}), Ia = (t) => ({});
-function ih(t) {
+const Kv = (t) => ({}), xa = (t) => ({}), $v = (t) => ({}), qa = (t) => ({}), e7 = (t) => ({}), Da = (t) => ({}), t7 = (t) => ({}), Ea = (t) => ({}), o7 = (t) => ({}), Ia = (t) => ({});
+function i7(t) {
   let e = (
     /*url*/
     t[2] ? "a" : "button"
@@ -55653,9 +55653,9 @@ function ih(t) {
     }
   };
 }
-function nh(t) {
+function n7(t) {
   let e, o, i, n;
-  const r = [lh, rh], l = [];
+  const r = [l7, r7], l = [];
   function a(c, d) {
     return (
       /*_isMobile*/
@@ -55924,7 +55924,7 @@ function Go(t) {
     }
   };
 }
-function rh(t) {
+function r7(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v, h = (
     /*icon*/
     t[5] && Oa(t)
@@ -56027,7 +56027,7 @@ function rh(t) {
     }
   };
 }
-function lh(t) {
+function l7(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v = (
     /*icon*/
     t[5] && Va(t)
@@ -56100,7 +56100,7 @@ function lh(t) {
           /*$$scope*/
           y[23],
           z,
-          th
+          t7
         ) : he(
           /*$$scope*/
           y[23]
@@ -56193,7 +56193,7 @@ function Ha(t) {
           /*$$scope*/
           r[23],
           l,
-          eh
+          e7
         ) : he(
           /*$$scope*/
           r[23]
@@ -56336,7 +56336,7 @@ function Za(t) {
           /*$$scope*/
           r[23],
           l,
-          oh
+          o7
         ) : he(
           /*$$scope*/
           r[23]
@@ -56405,13 +56405,13 @@ function Ba(t) {
     }
   };
 }
-function ah(t) {
+function a7(t) {
   let e, o, i, n, r, l;
   lt(
     /*onwindowresize*/
     t[25]
   );
-  const a = [nh, ih], c = [];
+  const a = [n7, i7], c = [];
   function d(s, u) {
     return (
       /*_hasPopoverContent*/
@@ -56477,7 +56477,7 @@ function ah(t) {
     }
   };
 }
-function sh(t, e, o) {
+function s7(t, e, o) {
   let i, n, r, l, a, { $$slots: c = {}, $$scope: d } = e;
   const s = vt(c);
   let { label: u } = e, { url: g = "" } = e, { badge: v = "" } = e, { current: h = false } = e, { divider: b = false } = e, { icon: w = void 0 } = e, { testid: p = "" } = e, { type: y = "normal" } = e, z, M, x, L = null, j = [], V = false, N = window.innerWidth;
@@ -56601,13 +56601,13 @@ function sh(t, e, o) {
     re
   ];
 }
-class ch extends je {
+class c7 extends je {
   constructor(e) {
     super(), ze(
       this,
       e,
-      sh,
-      ah,
+      s7,
+      a7,
       ke,
       {
         label: 1,
@@ -56672,8 +56672,8 @@ class ch extends je {
     this.$$set({ type: e }), k();
   }
 }
-customElements.define("goa-work-side-menu-item", Me(ch, { label: {}, url: {}, badge: {}, current: { type: "Boolean" }, divider: { type: "Boolean" }, icon: {}, testid: {}, type: {} }, ["trailingContent", "popoverContent"], [], true));
-function dh(t) {
+customElements.define("goa-work-side-menu-item", Me(c7, { label: {}, url: {}, badge: {}, current: { type: "Boolean" }, divider: { type: "Boolean" }, icon: {}, testid: {}, type: {} }, ["trailingContent", "popoverContent"], [], true));
+function d7(t) {
   xe(t, "svelte-oco8y3", `:host .svelte-oco8y3.svelte-oco8y3{box-sizing:border-box}.root.svelte-oco8y3.svelte-oco8y3{container-type:inline-size;position:relative}summary.svelte-oco8y3.svelte-oco8y3{display:flex;cursor:pointer;list-style:none;gap:var(--goa-space-m);align-items:flex-start;border-radius:var(
       --goa-work-side-menu-item-border-radius,
       var(--goa-border-radius-m)
@@ -56744,7 +56744,7 @@ function Ya(t) {
     }
   };
 }
-function uh(t) {
+function u7(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v, h, b = (
     /*icon*/
     t[2] && Ya(t)
@@ -56847,7 +56847,7 @@ function uh(t) {
     }
   };
 }
-function fh(t, e, o) {
+function f7(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { heading: r } = e, { icon: l = void 0 } = e, { testid: a = "" } = e, { open: c = false } = e, d;
   Ie(() => {
     d.addEventListener("_itemCurrent", s);
@@ -56879,9 +56879,9 @@ function fh(t, e, o) {
     v
   ];
 }
-class gh extends je {
+class g7 extends je {
   constructor(e) {
-    super(), ze(this, e, fh, uh, ke, { heading: 1, icon: 2, testid: 3, open: 0 }, dh);
+    super(), ze(this, e, f7, u7, ke, { heading: 1, icon: 2, testid: 3, open: 0 }, d7);
   }
   get heading() {
     return this.$$.ctx[1];
@@ -56908,8 +56908,8 @@ class gh extends je {
     this.$$set({ open: e }), k();
   }
 }
-customElements.define("goa-work-side-menu-group", Me(gh, { heading: {}, icon: {}, testid: {}, open: { type: "Boolean", reflect: true } }, ["default"], [], true));
-function vh(t) {
+customElements.define("goa-work-side-menu-group", Me(g7, { heading: {}, icon: {}, testid: {}, open: { type: "Boolean", reflect: true } }, ["default"], [], true));
+function v7(t) {
   xe(t, "svelte-2rxsax", ":host{display:block;box-sizing:border-box;font-family:var(--goa-font-family-sans)}:host .svelte-2rxsax.svelte-2rxsax{box-sizing:border-box}.notification-panel.svelte-2rxsax.svelte-2rxsax{display:flex;flex-direction:column;background:var(--goa-color-greyscale-white);border-radius:var(--goa-popover-border-radius);height:710px}.header.svelte-2rxsax.svelte-2rxsax{flex-shrink:0;display:flex;align-items:center;justify-content:space-between}goa-tabs.svelte-2rxsax.svelte-2rxsax{--goa-tabs-margin-bottom:0;padding-left:var(--goa-space-m);padding-right:var(--goa-space-m)}.content.svelte-2rxsax.svelte-2rxsax{flex:1;overflow-y:auto;min-height:0}.footer.svelte-2rxsax.svelte-2rxsax{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:var(--goa-space-m);border-top:1px solid var(--goa-color-greyscale-100)}.empty.svelte-2rxsax.svelte-2rxsax{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--goa-space-2xl) var(--goa-space-m);text-align:center}.empty.svelte-2rxsax img.svelte-2rxsax{width:100px;height:78px;margin-bottom:var(--goa-space-l)}.empty.svelte-2rxsax .heading.svelte-2rxsax{font:var(--goa-typography-heading-xs);color:var(--goa-color-text-default);margin-bottom:var(--goa-space-xs)}.empty.svelte-2rxsax .subline.svelte-2rxsax{font:var(--goa-typography-body-s);color:var(--goa-color-text-secondary)}");
 }
 function Fa(t) {
@@ -56962,7 +56962,7 @@ function Qa(t) {
   ), d, s;
   return {
     c() {
-      e = C("div"), o = C("img"), n = Y(), r = C("span"), r.textContent = "You're all caught up", l = Y(), a = C("span"), d = se(c), f(o, "alt", ""), Vt(o.src, i = mh) || f(o, "src", i), f(o, "class", "svelte-2rxsax"), f(r, "class", "heading svelte-2rxsax"), f(a, "class", "subline svelte-2rxsax"), f(a, "data-testid", s = `empty-notifications-${/*testid*/
+      e = C("div"), o = C("img"), n = Y(), r = C("span"), r.textContent = "You're all caught up", l = Y(), a = C("span"), d = se(c), f(o, "alt", ""), Vt(o.src, i = m7) || f(o, "src", i), f(o, "class", "svelte-2rxsax"), f(r, "class", "heading svelte-2rxsax"), f(a, "class", "subline svelte-2rxsax"), f(a, "data-testid", s = `empty-notifications-${/*testid*/
       t[2]}`), f(e, "class", "empty svelte-2rxsax");
     },
     m(u, g) {
@@ -56983,7 +56983,7 @@ function Qa(t) {
     }
   };
 }
-function hh(t) {
+function h7(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v, h, b, w, p, y, z, M, x, L, j, V, N, Q, P, H, T, W, E, S, Z, X, B = (
     /*_unreadCount*/
     t[3] > 0 && Fa(t)
@@ -57104,19 +57104,19 @@ function hh(t) {
     }
   };
 }
-const mh = "data:image/svg+xml,%3csvg%20width='100'%20height='78'%20viewBox='0%200%20100%2078'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M35.3916%2010.3377L89.7579%2019.1046C95.0394%2019.9563%2098.2025%2025.4482%2096.2887%2030.4439L78.9942%2075.591C78.846%2075.978%2078.5679%2076.2827%2078.2253%2076.469C77.9557%2076.7837%2077.6176%2076.7584%2077.1425%2076.651C77.1243%2076.648%2077.1061%2076.6447%2077.0879%2076.641L75.7496%2076.3725C76.3188%2076.4338%2076.7722%2076.5674%2077.1425%2076.651C77.5243%2076.7148%2077.9033%2076.6442%2078.2253%2076.469C78.2465%2076.4443%2078.2673%2076.4175%2078.2876%2076.3884C78.4498%2076.1572%2078.4664%2075.8597%2078.4317%2075.5794L73.4827%2035.6546C72.5591%2028.2041%2066.8211%2022.2617%2059.4075%2021.078L26.1553%2015.7688C27.5305%2011.9754%2031.4081%209.69529%2035.3916%2010.3377Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M95.5272%2022.3047C97.5167%2024.4198%2098.3017%2027.5943%2097.1683%2030.5801L80.0464%2075.6832C79.8681%2076.1528%2079.5193%2076.5121%2079.0948%2076.7125C78.7271%2076.9892%2078.301%2076.9332%2077.9393%2076.8551L77.9145%2076.8499C75.9533%2076.452%2077.424%2076.9001%2077.8885%2075.2938L78.5706%2073.3849L95.6772%2028.323C96.4561%2026.271%2096.3286%2024.1299%2095.5272%2022.3047Z'%20fill='black'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M19.7062%2014.8763L19.5582%2013.3068C18.999%207.37653%2014.5443%202.55192%208.67735%201.52252C4.33738%200.761031%200.48074%204.37732%200.961767%208.75726L6.59424%2060.0431C6.79604%2061.8806%208.17145%2063.3722%209.98658%2063.7221L76.1867%2076.4832C77.3099%2076.6997%2078.3181%2075.7589%2078.1797%2074.6235L73.4332%2035.6892C72.5207%2028.2049%2066.7506%2022.236%2059.3015%2021.0706L19.7062%2014.8763Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3c/svg%3e";
-function bh(t) {
+const m7 = "data:image/svg+xml,%3csvg%20width='100'%20height='78'%20viewBox='0%200%20100%2078'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M35.3916%2010.3377L89.7579%2019.1046C95.0394%2019.9563%2098.2025%2025.4482%2096.2887%2030.4439L78.9942%2075.591C78.846%2075.978%2078.5679%2076.2827%2078.2253%2076.469C77.9557%2076.7837%2077.6176%2076.7584%2077.1425%2076.651C77.1243%2076.648%2077.1061%2076.6447%2077.0879%2076.641L75.7496%2076.3725C76.3188%2076.4338%2076.7722%2076.5674%2077.1425%2076.651C77.5243%2076.7148%2077.9033%2076.6442%2078.2253%2076.469C78.2465%2076.4443%2078.2673%2076.4175%2078.2876%2076.3884C78.4498%2076.1572%2078.4664%2075.8597%2078.4317%2075.5794L73.4827%2035.6546C72.5591%2028.2041%2066.8211%2022.2617%2059.4075%2021.078L26.1553%2015.7688C27.5305%2011.9754%2031.4081%209.69529%2035.3916%2010.3377Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M95.5272%2022.3047C97.5167%2024.4198%2098.3017%2027.5943%2097.1683%2030.5801L80.0464%2075.6832C79.8681%2076.1528%2079.5193%2076.5121%2079.0948%2076.7125C78.7271%2076.9892%2078.301%2076.9332%2077.9393%2076.8551L77.9145%2076.8499C75.9533%2076.452%2077.424%2076.9001%2077.8885%2075.2938L78.5706%2073.3849L95.6772%2028.323C96.4561%2026.271%2096.3286%2024.1299%2095.5272%2022.3047Z'%20fill='black'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M19.7062%2014.8763L19.5582%2013.3068C18.999%207.37653%2014.5443%202.55192%208.67735%201.52252C4.33738%200.761031%200.48074%204.37732%200.961767%208.75726L6.59424%2060.0431C6.79604%2061.8806%208.17145%2063.3722%209.98658%2063.7221L76.1867%2076.4832C77.3099%2076.6997%2078.3181%2075.7589%2078.1797%2074.6235L73.4332%2035.6892C72.5207%2028.2049%2066.7506%2022.236%2059.3015%2021.0706L19.7062%2014.8763Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3c/svg%3e";
+function b7(t) {
   if (!t) return "";
   const e = new Date(t);
   return isNaN(e.getTime()) ? "" : `${e.getFullYear()}-${e.getMonth()}-${e.getDate()}`;
 }
-function ph(t, e) {
+function p7(t, e) {
   return e === "all" ? true : e === "unread" ? t.readStatus === "unread" : e === "urgent" ? t.priority === "urgent" : true;
 }
 function Ua(t, e) {
   t.dispatchEvent(new CustomEvent("notification-panel:dategroup", { detail: { dateGroup: e } }));
 }
-function wh(t, e, o) {
+function w7(t, e, o) {
   let i, n, r, { $$slots: l = {}, $$scope: a } = e;
   const [c, d] = Se("WorkSideNotificationPanel activeTab", ["unread", "urgent", "all"], true);
   let { heading: s = "Notifications" } = e, { activeTab: u = "unread" } = e, { testid: g = "" } = e, v, h = [], b = /* @__PURE__ */ new Map(), w = null;
@@ -57163,8 +57163,8 @@ function wh(t, e, o) {
     }), b.clear(), [...h].sort((E, S) => {
       const Z = E.timestamp ? new Date(E.timestamp).getTime() : 0;
       return (S.timestamp ? new Date(S.timestamp).getTime() : 0) - Z;
-    }).filter((E) => ph(E, u)).forEach((E) => {
-      const S = bh(E.timestamp);
+    }).filter((E) => p7(E, u)).forEach((E) => {
+      const S = b7(E.timestamp);
       S && !b.has(S) && (b.set(S, E), Ua(E.el, j(E.timestamp)));
     });
   }
@@ -57208,9 +57208,9 @@ function wh(t, e, o) {
     H
   ];
 }
-class _h extends je {
+class _7 extends je {
   constructor(e) {
-    super(), ze(this, e, wh, hh, ke, { heading: 1, activeTab: 0, testid: 2 }, vh);
+    super(), ze(this, e, w7, h7, ke, { heading: 1, activeTab: 0, testid: 2 }, v7);
   }
   get heading() {
     return this.$$.ctx[1];
@@ -57231,8 +57231,8 @@ class _h extends je {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-work-side-notification-panel", Me(_h, { heading: {}, activeTab: { type: "String", attribute: "active-tab" }, testid: {} }, ["default"], [], true));
-function yh(t) {
+customElements.define("goa-work-side-notification-panel", Me(_7, { heading: {}, activeTab: { type: "String", attribute: "active-tab" }, testid: {} }, ["default"], [], true));
+function y7(t) {
   xe(t, "svelte-1bsy3n4", ":host{display:block;box-sizing:border-box;width:100%}:host .svelte-1bsy3n4.svelte-1bsy3n4{box-sizing:border-box}.date-header.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-heading-2xs);color:var(--goa-color-greyscale-600);padding-left:var(--goa-space-m);margin-top:0;margin-bottom:0;padding-top:var(--goa-space-s);padding-bottom:var(--goa-space-s);border-bottom:1px solid var(--goa-color-greyscale-100)}.date-header.hidden.svelte-1bsy3n4.svelte-1bsy3n4{display:none}.card.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;flex-direction:column;gap:var(--goa-space-xs);padding:var(--goa-space-m) var(--goa-space-l);cursor:pointer;border:none;border-bottom:1px solid var(--goa-color-greyscale-100);background:white;width:100%;box-sizing:border-box;text-align:left;transition:background-color 0.2s ease}.card.svelte-1bsy3n4.svelte-1bsy3n4:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:-2px}.card.read.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-greyscale-50)}.card.read.svelte-1bsy3n4 .notification-title.svelte-1bsy3n4{color:var(--goa-color-greyscale-700)}.card.urgent.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-warning-background)}.card.urgent.read.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-greyscale-50)}.card.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:var(--goa-color-greyscale-100)}.card.hidden.svelte-1bsy3n4.svelte-1bsy3n4{display:none}.card.urgent.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:#f5ecdb}.card.urgent.read.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:var(--goa-color-greyscale-100)}.top-row.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--goa-space-s);width:100%}.header-row.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;align-items:center;gap:var(--goa-space-xs);flex-wrap:wrap;flex:1;min-width:0}.notification-title.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-heading-2xs);color:var(--goa-color-text-default);margin:0}.badge-container.svelte-1bsy3n4.svelte-1bsy3n4{display:inline-flex;align-items:center;gap:var(--goa-space-3xs)}.description.svelte-1bsy3n4.svelte-1bsy3n4{font-size:var(--goa-font-size-2);color:var(--goa-color-greyscale-700);line-height:1.5;word-wrap:break-word}.timestamp-container.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;align-items:center;gap:var(--goa-space-2xs);flex-shrink:0;margin-top:2px}.unread-dot.svelte-1bsy3n4.svelte-1bsy3n4{display:inline-block;width:12px;height:12px;border-radius:50%;background-color:var(--goa-color-success-default);flex-shrink:0;position:relative;top:-1px}.unread-dot.hidden.svelte-1bsy3n4.svelte-1bsy3n4{visibility:hidden}.timestamp.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-body-xs);color:var(--goa-color-greyscale-600);white-space:nowrap;margin:0}@media(max-width: 624px){.card.svelte-1bsy3n4.svelte-1bsy3n4{padding:var(--goa-space-s) var(--goa-space-l)}.timestamp-container.svelte-1bsy3n4.svelte-1bsy3n4{flex-direction:column;align-items:flex-end;gap:var(--goa-space-3xs)}}");
 }
 function Ra(t) {
@@ -57333,7 +57333,7 @@ function Ja(t) {
     }
   };
 }
-function kh(t) {
+function k7(t) {
   let e, o;
   return {
     c() {
@@ -57353,7 +57353,7 @@ function kh(t) {
     }
   };
 }
-function Ch(t) {
+function C7(t) {
   let e, o, i, n, r, l, a, c;
   return {
     c() {
@@ -57440,7 +57440,7 @@ function Xa(t) {
     }
   };
 }
-function zh(t) {
+function z7(t) {
   let e, o, i, n, r, l, a, c, d, s = (
     /*_dateGroupHeading*/
     t[6] && Ra(t)
@@ -57454,7 +57454,7 @@ function zh(t) {
   function v(p, y) {
     return (
       /*timestamp*/
-      p[1] ? Ch : kh
+      p[1] ? C7 : k7
     );
   }
   let h = v(t), b = h(t), w = (
@@ -57522,7 +57522,7 @@ function zh(t) {
     }
   };
 }
-function Mh(t) {
+function M7(t) {
   switch (t) {
     case "info":
       return "information";
@@ -57536,12 +57536,12 @@ function Mh(t) {
       return "";
   }
 }
-function jh(t, e, o) {
+function j7(t, e, o) {
   let i;
   const [n, r] = Se("WorkSideNotificationItem type", ["default", "success", "critical", "warning", "info"], true), [l, a] = Se("WorkSideNotificationItem readStatus", ["read", "unread"], true), [c, d] = Se("WorkSideNotificationItem priority", ["normal", "urgent"], true);
   let { type: s = "default" } = e, { timestamp: u = "" } = e, { title: g = "" } = e, { description: v = "" } = e, { readStatus: h = "unread" } = e, { priority: b = "normal" } = e, { testid: w = "" } = e, p, y = "", z = "", M = "", x = true, L = "unread", j = false, V = "", N = false;
   Ie(() => {
-    r(s), a(h), d(b), o(10, j = b === "urgent"), o(11, V = Mh(s)), o(12, N = s !== "default"), o(7, z = C1(u ? new Date(u) : null)), o(8, M = z1(u ? new Date(u) : null)), p.addEventListener("notification-panel:tabchange", Q), p.addEventListener("notification-panel:dategroup", P), De(
+    r(s), a(h), d(b), o(10, j = b === "urgent"), o(11, V = M7(s)), o(12, N = s !== "default"), o(7, z = C1(u ? new Date(u) : null)), o(8, M = z1(u ? new Date(u) : null)), p.addEventListener("notification-panel:tabchange", Q), p.addEventListener("notification-panel:dategroup", P), De(
       p,
       "notification-item:mounted",
       {
@@ -57609,13 +57609,13 @@ function jh(t, e, o) {
     S
   ];
 }
-class Lh extends je {
+class L7 extends je {
   constructor(e) {
     super(), ze(
       this,
       e,
-      jh,
-      zh,
+      j7,
+      z7,
       ke,
       {
         type: 0,
@@ -57626,7 +57626,7 @@ class Lh extends je {
         priority: 17,
         testid: 4
       },
-      yh
+      y7
     );
   }
   get type() {
@@ -57672,7 +57672,7 @@ class Lh extends je {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-work-side-notification-item", Me(Lh, { type: {}, timestamp: { reflect: true }, title: {}, description: {}, readStatus: { reflect: true, attribute: "read-status" }, priority: { reflect: true }, testid: {} }, [], [], true));
+customElements.define("goa-work-side-notification-item", Me(L7, { type: {}, timestamp: { reflect: true }, title: {}, description: {}, readStatus: { reflect: true, attribute: "read-status" }, priority: { reflect: true }, testid: {} }, [], [], true));
 function Bug2152Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Icons in Tooltip" }),
