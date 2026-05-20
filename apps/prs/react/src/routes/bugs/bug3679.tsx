@@ -68,6 +68,44 @@ export function Bug3679Route() {
           </tbody>
         </GoabTable>
       </div>
+      <div
+        style={{
+          marginTop: "1rem",
+          width: "600px",
+          backgroundColor: "#fff8e1",
+          outline: "2px dashed #ffa000",
+        }}
+      >
+        <h2 style={{ margin: 0, padding: "0.5rem" }}>
+          Test inside fixed 600px container (table should fill container exactly)
+        </h2>
+        <GoabTable>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Job</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Carol</td>
+              <td>Willick</td>
+              <td>Teacher</td>
+            </tr>
+            <tr>
+              <td>Gunther</td>
+              <td>Centralperk</td>
+              <td>Barista</td>
+            </tr>
+            <tr>
+              <td>Janice</td>
+              <td>Litman</td>
+              <td>Sales</td>
+            </tr>
+          </tbody>
+        </GoabTable>
+      </div>
     </div>
   );
 }
