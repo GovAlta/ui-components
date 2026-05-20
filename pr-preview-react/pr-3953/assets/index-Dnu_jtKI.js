@@ -64797,6 +64797,17 @@ function Fix3323Route() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTooltip, { content: "Center aligned tooltip", hAlign: "center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", children: "Center" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTooltip, { content: "Right aligned tooltip", hAlign: "right", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", children: "Right" }) })
       ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { style: stackStyle, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Long Tooltip" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        GoabTooltip,
+        {
+          content: "This is a deliberately long tooltip message that should render at a readable width, wrap naturally, and not collapse into a one-pixel column on first hover.",
+          maxWidth: "320px",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "Long tooltip" })
+        }
+      )
     ] })
   ] });
 }
