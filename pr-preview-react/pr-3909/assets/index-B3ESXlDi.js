@@ -64534,16 +64534,14 @@ function Bug3762Route() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 1" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 2" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "navigation", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "s", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Dashboard" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Applications", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "New application" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Active" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Archived" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Reports" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Settings" })
-          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { slot: "navigation", href: "#", children: "Dashboard" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { slotName: "navigation", heading: "Applications", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "New application" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Active" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Archived" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { slot: "navigation", href: "#", children: "Reports" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { slot: "navigation", href: "#", children: "Settings" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "utilities", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { text: "John Smith", type: "tertiary", size: "compact", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "User settings", action: "user-settings" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
