@@ -11,7 +11,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import { typeValidator, toBoolean, dispatch } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
@@ -67,9 +67,13 @@
   // Private
 
   let _rootEl: HTMLElement;
+  let _scrollEl: HTMLElement;
   let _isTableRoot: boolean = false;
   let _sorts: SortEntry[] = [];
   let _headings: NodeListOf<Element> | undefined;
+  let _horizontalScrollPos: "left" | "middle" | "right" | null = null;
+  let _initSortTimeout: ReturnType<typeof setTimeout>;
+  let _initScrollTimeout: ReturnType<typeof setTimeout>;
   const MAX_SORTS = 2;
 
   // Reactive
@@ -94,7 +98,16 @@
     _isTableRoot = slot.assignedElements()[0].tagName === "TABLE";
 
     // without setTimeout it won't properly find headers in Safari
-    setTimeout(initializeSortHeaders, 0);
+    _initSortTimeout = setTimeout(initializeSortHeaders, 0);
+    _initScrollTimeout = setTimeout(updateHorizontalScrollShadows, 0);
+
+    window.addEventListener("resize", updateHorizontalScrollShadows);
+  });
+
+  onDestroy(() => {
+    clearTimeout(_initSortTimeout);
+    clearTimeout(_initScrollTimeout);
+    window.removeEventListener("resize", updateHorizontalScrollShadows);
   });
 
   // Functions
@@ -258,11 +271,39 @@
       );
     }
   }
+
+  function updateHorizontalScrollShadows() {
+    if (!_scrollEl) {
+      return;
+    }
+
+    const hasHorizontalScroll = _scrollEl.scrollWidth > _scrollEl.clientWidth;
+    if (!hasHorizontalScroll) {
+      _horizontalScrollPos = null;
+      return;
+    }
+
+    if (_scrollEl.scrollLeft === 0) {
+      _horizontalScrollPos = "left";
+    } else if (
+      Math.abs(
+        _scrollEl.scrollWidth - _scrollEl.scrollLeft - _scrollEl.clientWidth,
+      ) < 1
+    ) {
+      _horizontalScrollPos = "right";
+    } else {
+      _horizontalScrollPos = "middle";
+    }
+  }
+
+  function handleHorizontalScroll() {
+    updateHorizontalScrollShadows();
+  }
 </script>
 
 <div
   bind:this={_rootEl}
-  class={`goatable ${variant}`}
+  class={`goatable ${variant} ${_horizontalScrollPos ?? ""}`}
   class:v2={version === "2"}
   class:sticky={_stickyHeader}
   class:striped={_striped}
@@ -272,13 +313,19 @@
   `}
   data-testid={testid}
 >
-  {#if _isTableRoot}
-    <slot />
-  {:else}
-    <table style={width && "width: 100%;"}>
+  <div
+    class="goatable-scroll"
+    bind:this={_scrollEl}
+    on:scroll={handleHorizontalScroll}
+  >
+    {#if _isTableRoot}
       <slot />
-    </table>
-  {/if}
+    {:else}
+      <table style={width && "width: 100%;"}>
+        <slot />
+      </table>
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -295,11 +342,55 @@
     border-collapse: collapse;
   }
 
+  .goatable {
+    position: relative;
+  }
+
   /* V2 Border and Border-Radius */
   .v2.goatable {
+    box-sizing: border-box;
     border: var(--goa-table-container-border, 1px solid #e7e7e7);
     border-radius: var(--goa-table-border-radius-container, 16px);
     overflow: hidden;
-    box-sizing: border-box;
+  }
+
+  .goatable-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+  /*  Horizontal scroll shadows */
+
+  .goatable::before,
+  .goatable::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--goa-space-xs);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.15s ease;
+  }
+
+  .goatable::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+  }
+
+  .goatable::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+  }
+
+  .goatable.right::before,
+  .goatable.middle::before {
+    opacity: 1;
+  }
+
+  .goatable.left::after,
+  .goatable.middle::after {
+    opacity: 1;
   }
 </style>

@@ -1,0 +1,56 @@
+<goab-block gap="m" direction="column">
+  <goab-text tag="h1" size="heading-l" mt="none">
+    Feature 3346: Table Horizontal Scroll Shadows
+  </goab-text>
+  <goab-text mt="none">
+    This demo intentionally uses many columns and long values to force horizontal overflow.
+    Scroll the table to verify left and right edge shadows.
+  </goab-text>
+
+  <div style="max-width: 800px; width: 100%">
+    <goab-table width="100%">
+      <thead>
+        <tr>
+          <th>Record ID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Created Date</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Region</th>
+          <th>Office</th>
+          <th>Manager</th>
+          <th>Project</th>
+          <th>Priority</th>
+          <th>Risk</th>
+          <th>Progress</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row.recordId) {
+        <tr>
+          <td>{{ row.recordId }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.status }}</td>
+          <td>{{ row.createdDate }}</td>
+          <td>{{ row.department }}</td>
+          <td>{{ row.role }}</td>
+          <td>{{ row.email }}</td>
+          <td>{{ row.phone }}</td>
+          <td>{{ row.region }}</td>
+          <td>{{ row.office }}</td>
+          <td>{{ row.manager }}</td>
+          <td>{{ row.project }}</td>
+          <td>{{ row.priority }}</td>
+          <td>{{ row.risk }}</td>
+          <td>{{ row.progress }}</td>
+          <td>{{ row.notes }}</td>
+        </tr>
+        }
+      </tbody>
+    </goab-table>
+  </div>
+</goab-block>
