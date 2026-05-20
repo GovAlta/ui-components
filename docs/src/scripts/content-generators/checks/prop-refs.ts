@@ -1,5 +1,6 @@
 import type { AnyRecord, ComponentRecord, Finding } from "../types";
 import { computeHint } from "./lib";
+import { buildComponentLookup } from "../transforms/component-lookup";
 
 /**
  * Validates guidance.relatedProps against the extracted prop names on the
@@ -9,15 +10,19 @@ import { computeHint } from "./lib";
  * of the linked components, matching the semantic "this guidance is about
  * this prop, which lives on one of these components."
  *
+ * Component slugs resolve through aliases, so a guidance atom that points
+ * at `text-area` validates against the props of the canonical `textarea`
+ * record.
+ *
  * Skips guidance atoms whose appliesTo.components references components
  * that do not exist; component-refs.ts reports those separately.
  */
 export function checkPropRefs(records: AnyRecord[]): Finding[] {
   const findings: Finding[] = [];
-  const componentMap = new Map<string, ComponentRecord>();
-  for (const r of records) {
-    if (r.collection === "components") componentMap.set(r.id, r);
-  }
+  const components = records.filter(
+    (r): r is ComponentRecord => r.collection === "components",
+  );
+  const lookup = buildComponentLookup(components);
 
   for (const r of records) {
     if (r.collection !== "guidance") continue;
@@ -33,7 +38,7 @@ export function checkPropRefs(records: AnyRecord[]): Finding[] {
     const allValidProps = new Set<string>();
     const knownComponents: string[] = [];
     for (const componentId of linkedComponents) {
-      const component = componentMap.get(componentId);
+      const component = lookup.get(componentId);
       if (!component) continue;
       knownComponents.push(componentId);
       for (const propName of extractPropNames(component)) {
