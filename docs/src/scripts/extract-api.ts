@@ -1967,17 +1967,137 @@ function removeStaleApiFiles(validComponentNames: string[]): void {
 }
 
 // =============================================================================
+// Slug → Svelte resolution
+// =============================================================================
+
+/**
+ * Resolves a docs slug to its canonical Svelte file via the React wrapper's
+ * IntrinsicElements declaration. The wrapper is the source of truth for
+ * which custom element it presents to the consuming app, so its tag points
+ * to the matching Svelte file even when the docs slug, the wrapper filename,
+ * and the Svelte filename don't agree (e.g. docs slug `temporary-notification`
+ * but the public element lives in `TemporaryNotificationCtrl.svelte`).
+ *
+ * Returns undefined when the slug has no resolvable React wrapper, so the
+ * caller can fall back to the naming-convention heuristic.
+ */
+function resolveSvelteViaReactWrapper(slug: string): string | undefined {
+  const reactRoot = path.join(WORKSPACE_ROOT, "libs/react-components/src/lib");
+  if (!fs.existsSync(reactRoot)) return undefined;
+
+  const reactFile = findReactWrapperForSlug(slug, reactRoot);
+  if (!reactFile) return undefined;
+
+  const tag = extractIntrinsicElementTag(fs.readFileSync(reactFile, "utf-8"));
+  if (!tag) return undefined;
+
+  return findSvelteDeclaringTag(tag);
+}
+
+/**
+ * Two attempts in order:
+ * 1. Direct: `<slug>.tsx` somewhere under reactRoot.
+ * 2. Discovery: a Svelte file inside `libs/.../<slug>/` declares a tag,
+ *    and exactly one React wrapper anywhere wraps that tag. This handles
+ *    `temporary-notification` (no `temporary-notification.tsx` exists, but
+ *    `temporary-notification-ctrl.tsx` wraps `goa-temp-notification-ctrl`,
+ *    which is declared in the slug's Svelte folder).
+ */
+function findReactWrapperForSlug(slug: string, reactRoot: string): string | undefined {
+  const direct = findFirstFileByName(reactRoot, `${slug}.tsx`);
+  if (direct) return direct;
+
+  const componentPath = path.join(UI_COMPONENTS_PATH, slug);
+  if (!fs.existsSync(componentPath) || !fs.statSync(componentPath).isDirectory()) {
+    return undefined;
+  }
+
+  const wrappedFiles = new Set<string>();
+  for (const file of fs.readdirSync(componentPath)) {
+    if (!file.endsWith(".svelte") || file.includes(".test.")) continue;
+    const tag = extractTagName(fs.readFileSync(path.join(componentPath, file), "utf-8"));
+    if (!tag) continue;
+    const wrapper = findReactWrapperForTag(tag, reactRoot);
+    if (wrapper) wrappedFiles.add(wrapper);
+  }
+
+  if (wrappedFiles.size === 1) return [...wrappedFiles][0];
+  return undefined;
+}
+
+function findReactWrapperForTag(tag: string, reactRoot: string): string | undefined {
+  const declRegex = new RegExp(`["']${escapeRegExp(tag)}["']\\s*:`);
+  const stack = [reactRoot];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current) continue;
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(full);
+      } else if (
+        entry.isFile() &&
+        entry.name.endsWith(".tsx") &&
+        !entry.name.endsWith(".spec.tsx") &&
+        !entry.name.endsWith(".test.tsx")
+      ) {
+        if (declRegex.test(fs.readFileSync(full, "utf-8"))) return full;
+      }
+    }
+  }
+  return undefined;
+}
+
+function extractIntrinsicElementTag(content: string): string | undefined {
+  // declare module "react" { ... interface IntrinsicElements { "goa-foo": ... } }
+  const match = content.match(/IntrinsicElements\s*\{[\s\S]*?["'](goa-[a-z0-9-]+)["']\s*:/);
+  return match ? match[1] : undefined;
+}
+
+function findSvelteDeclaringTag(tag: string): string | undefined {
+  const stack = [UI_COMPONENTS_PATH];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current) continue;
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(full);
+      } else if (
+        entry.isFile() &&
+        entry.name.endsWith(".svelte") &&
+        !entry.name.includes(".test.")
+      ) {
+        const content = fs.readFileSync(full, "utf-8");
+        if (extractTagName(content) === tag) return full;
+      }
+    }
+  }
+  return undefined;
+}
+
+// =============================================================================
 // Main Extraction
 // =============================================================================
 
 function extractComponentAPI(componentName: string): ExtractedComponentAPI | null {
   const componentPath = path.join(UI_COMPONENTS_PATH, componentName);
 
-  // Find the Svelte file by the component's public name first, then fall back
-  // to any .svelte file inside a matching directory.
-  const svelteFileName = `${capitalize(toCamelCase(componentName))}.svelte`;
-  let svelteFilePath = findFirstFileByName(UI_COMPONENTS_PATH, svelteFileName);
+  // 1. Auto-derive via the React wrapper. The React wrapper's
+  //    IntrinsicElements declaration is the source of truth for which
+  //    custom element it wraps, so its tag points at the canonical
+  //    svelte file. Handles the menu-button / temporary-notification
+  //    case where the docs slug and the public element's filename
+  //    diverge.
+  let svelteFilePath = resolveSvelteViaReactWrapper(componentName);
 
+  // 2. Fall back to the naming convention (works for the majority).
+  if (!svelteFilePath) {
+    const svelteFileName = `${capitalize(toCamelCase(componentName))}.svelte`;
+    svelteFilePath = findFirstFileByName(UI_COMPONENTS_PATH, svelteFileName) ?? undefined;
+  }
+
+  // 3. Final fallback: any svelte inside a directory matching the slug.
   if (!svelteFilePath && fs.existsSync(componentPath) && fs.statSync(componentPath).isDirectory()) {
     const files = fs.readdirSync(componentPath);
     const svelteFile = files.find((f) => f.endsWith(".svelte"));

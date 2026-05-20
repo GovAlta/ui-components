@@ -1,6 +1,6 @@
 {
   "componentSlug": "temporary-notification",
-  "extractedFrom": "libs/web-components/src/components/temporary-notification/TemporaryNotification.svelte",
+  "extractedFrom": "libs/web-components/src/components/temporary-notification/TemporaryNotificationCtrl.svelte",
   "frameworks": {
     "react": {
       "props": [
@@ -77,6 +77,18 @@
           "description": "Direction the notification animates from when appearing or disappearing."
         },
         {
+          "name": "horizontal-position",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "values": [
+            "left",
+            "center",
+            "right"
+          ],
+          "required": false,
+          "default": "center",
+          "description": "Horizontal position of the notification container."
+        },
+        {
           "name": "message",
           "type": "string",
           "required": false,
@@ -93,8 +105,8 @@
         {
           "name": "testid",
           "type": "string",
-          "required": false,
-          "default": "",
+          "required": true,
+          "default": null,
           "description": "Sets a data-testid attribute for automated testing."
         },
         {
@@ -110,6 +122,17 @@
           "required": false,
           "default": "basic",
           "description": "The notification type which determines the visual style and icon."
+        },
+        {
+          "name": "vertical-position",
+          "type": "\"top\" | \"bottom\"",
+          "values": [
+            "top",
+            "bottom"
+          ],
+          "required": false,
+          "default": "bottom",
+          "description": "Vertical position of the notification container."
         },
         {
           "name": "visible",
