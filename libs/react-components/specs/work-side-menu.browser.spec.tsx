@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 import { useState } from "react";
-import { GoabButton } from "../src";
+import { GoabBadge, GoabButton } from "../src";
 import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
@@ -22,6 +22,7 @@ describe("WorkSideMenu", () => {
                 url="#item1"
                 label="Item 1"
                 testId="primary-menu-item"
+                trailingContent={<div data-testid="trailing-content">Trailing</div>}
               />
             }
             secondaryContent={
@@ -51,11 +52,15 @@ describe("WorkSideMenu", () => {
         const primarySlot = result.baseElement.querySelector("[slot='primary']");
         const primaryMenuItem = result.getByTestId("primary-menu-item");
         const primaryLink = primaryMenuItem.element().querySelector("a");
+        const primaryTrailing = result.getByTestId("trailing-content");
 
         expect(primarySlot).toBeTruthy();
         expect(primaryLink?.getAttribute("href")).toBe("#item1");
         expect(primaryLink?.textContent).toContain("Item 1");
         expect(primaryLink?.role).toBe("menuitem");
+
+        expect(primaryTrailing).toBeTruthy();
+        expect(primaryTrailing.element().textContent).toBe("Trailing");
 
         const secondarySlot = result.baseElement.querySelector("[slot='secondary']");
         const secondaryMenuItem = result.getByTestId("secondary-menu-item");

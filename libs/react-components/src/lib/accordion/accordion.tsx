@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import type {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
+  GoabAccordionHeadingType,
   Margins,
   DataAttributes,
 } from "@abgov/ui-components-common";
@@ -17,6 +18,7 @@ interface WCProps extends Margins {
   maxwidth?: string;
   testid?: string;
   iconposition?: GoabAccordionIconPosition;
+  headingType?: GoabAccordionHeadingType;
 }
 
 declare module "react" {
@@ -42,12 +44,16 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
   secondaryText?: string;
   /** Sets content rendered within the accordion heading, alongside the heading text. */
   headingContent?: ReactNode;
+  /** Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon. */
+  actions?: ReactNode;
   /** Sets the maximum width of the accordion. @default "none" */
   maxWidth?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the position of the expand/collapse icon. @default "left" */
   iconPosition?: GoabAccordionIconPosition;
+  /** Sets the accordion style variant. @default "normal" */
+  headingType?: GoabAccordionHeadingType;
   /** Callback fired when the accordion is opened or closed. Receives the new open state as a boolean. */
   onChange?: (open: boolean) => void;
   /** Content rendered inside the accordion body. */
@@ -59,6 +65,8 @@ export function GoabAccordion({
   open,
   onChange,
   headingContent,
+  headingType,
+  actions,
   children,
   ...rest
 }: GoabAccordionProps): JSX.Element {
@@ -81,8 +89,14 @@ export function GoabAccordion({
   }, [onChange]);
 
   return (
-    <goa-accordion ref={ref} open={open ? "true" : undefined} {..._props}>
+    <goa-accordion
+      ref={ref}
+      open={open ? "true" : undefined}
+      heading-type={headingType}
+      {..._props}
+    >
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
+      {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-accordion>
   );

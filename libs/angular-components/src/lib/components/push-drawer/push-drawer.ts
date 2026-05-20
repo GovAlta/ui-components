@@ -23,7 +23,7 @@ import {
       [attr.testid]="testId"
       [attr.width]="width"
       [attr.version]="version"
-      (_close)="_onClose()"
+      (_close)="_onClose($event)"
     >
       <ng-content></ng-content>
       <div slot="heading">
@@ -55,7 +55,7 @@ export class GoabPushDrawer implements OnInit {
   /** Sets the template reference for the actions slot content. */
   @Input() actions!: TemplateRef<any>;
   /** Emits when the push drawer closes. */
-  @Output() onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter<void>();
 
   isReady = false;
 
@@ -66,7 +66,8 @@ export class GoabPushDrawer implements OnInit {
     }, 0);
   }
 
-  _onClose() {
+  _onClose(event: Event) {
+    if (event.target !== event.currentTarget) return;
     this.onClose.emit();
   }
 

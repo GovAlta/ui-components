@@ -1,0 +1,24 @@
+---
+import PreviewLayout from "../../../../../layouts/PreviewLayout.astro";
+import { QuestionPage } from "../../../../../content/examples/question-page/variants/one-question/react";
+---
+
+<PreviewLayout
+  title="Ask one question at a time preview"
+  backUrl="/examples/question-page"
+  backLabel="Back to Question page"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/question-page/variants/one-question/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/question-page/variants/one-question"
+>
+  <div class="preview-frame">
+    <QuestionPage client:load />
+  </div>
+</PreviewLayout>
+
+<style is:global>
+  .preview-frame {
+    max-width: 41.5rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+</style>

@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   GoabAppFooter,
@@ -8,13 +8,27 @@ import {
   GoabWorkSideMenu,
   GoabWorkSideMenuGroup,
   GoabWorkSideMenuItem,
+  useTheme,
 } from "@abgov/react-components";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
   featureRouteDefinitions,
 } from "./route-manifest";
-import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
+
+import "@abgov/style";
+// Runtime V1/V2 token switching. Importing this module applies the currently
+// selected token set (default V2) to <head> before the app renders. The
+// playground's work-side-menu exposes a secondary item that flips between
+// V1 and V2 at runtime without editing source or restarting the dev server.
+import {
+  applyTokenVersion,
+  resolveTokenVersion,
+  type TokenVersion,
+} from "./tokenVersion";
+
+// Sentinel URL handled by onNavigate below to toggle tokens instead of routing.
+const TOKEN_TOGGLE_URL = "#tokens";
 
 const appContentStyle: CSSProperties = {
   display: "flex",
@@ -24,9 +38,22 @@ const appContentStyle: CSSProperties = {
 
 export function App() {
   const navigate = useNavigate();
+  const { mode, toggle } = useTheme();
+  const isDark = mode === "dark";
   const baseUrl = import.meta.env.BASE_URL;
+  const [tokenMode, setTokenMode] = useState<TokenVersion>(() => resolveTokenVersion());
 
-  const handleNavigate = (path: string) => {
+  const handleSideMenuNavigate = (path: string) => {
+    if (path === TOKEN_TOGGLE_URL) {
+      const next: TokenVersion = tokenMode === "v1" ? "v2" : "v1";
+      setTokenMode(next);
+      applyTokenVersion(next);
+      return;
+    }
+    if (path === "#toggle-theme") {
+      toggle();
+      return;
+    }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate(internal);
   };
@@ -42,7 +69,21 @@ export function App() {
           heading="Testing Playground"
           url={baseUrl}
           open={true}
-          onNavigate={handleNavigate}
+          onNavigate={handleSideMenuNavigate}
+          secondaryContent={
+            <>
+              <GoabWorkSideMenuItem
+                label={`Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`}
+                icon="swap-horizontal"
+                url={TOKEN_TOGGLE_URL}
+              />
+              <GoabWorkSideMenuItem
+                icon={isDark ? "sunny" : "moon"}
+                label={isDark ? "Light mode" : "Dark mode"}
+                url="#toggle-theme"
+              />
+            </>
+          }
           primaryContent={
             <>
               <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
@@ -73,7 +114,11 @@ export function App() {
                   />
                 ))}
               </GoabWorkSideMenuGroup>
-              <GoabWorkSideMenuItem icon="list" label="Everything" url={`${baseUrl}everything`} />
+              <GoabWorkSideMenuItem
+                icon="list"
+                label="Everything"
+                url={`${baseUrl}everything`}
+              />
             </>
           }
         />

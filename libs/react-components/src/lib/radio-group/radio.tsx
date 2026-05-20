@@ -44,7 +44,7 @@ export interface GoabRadioItemProps extends Margins {
   maxWidth?: string;
   /** Disables this radio option. Also disabled if the parent RadioGroup is disabled. */
   disabled?: boolean;
-  /** Sets this radio option as checked/selected. */
+  /** @internal Sets this radio option as checked/selected. */
   checked?: boolean;
   /** Shows an error state on this radio option. */
   error?: boolean;

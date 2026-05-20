@@ -5,7 +5,11 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
-  import { getSlottedChildren, styles, toBoolean, typeValidator } from "../../common/utils";
+  import {
+    getSlottedChildren,
+    toBoolean,
+    typeValidator,
+  } from "../../common/utils";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import type { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
   import AppHeaderNavigation from "../app-header-navigation/AppHeaderNavigation.svelte";
@@ -13,6 +17,7 @@
   // Version control
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   type VersionType = "1" | "2";
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
 
   // optional
@@ -157,12 +162,12 @@
 
     // Check for elements with slot="banner" attribute
     _hasBannerSlot = Array.from(lightDomChildren).some(
-      (el) => el.getAttribute('slot') === 'banner'
+      (el) => el.getAttribute("slot") === "banner",
     );
 
     // Check for elements with slot="navigation" attribute
     _hasNavigationSlot = Array.from(lightDomChildren).some(
-      (el) => el.getAttribute('slot') === 'navigation'
+      (el) => el.getAttribute("slot") === "navigation",
     );
   }
 
@@ -175,7 +180,7 @@
 
     // Find all elements with slot="utilities" attribute
     _utilitiesSlotItems = Array.from(lightDomChildren).filter(
-      (el) => el.getAttribute('slot') === 'utilities'
+      (el) => el.getAttribute("slot") === "utilities",
     );
 
     _utilitiesItemCount = _utilitiesSlotItems.length;
@@ -190,7 +195,11 @@
 
     // Debounce the check to prevent infinite loops
     _utilitiesCheckTimeout = window.setTimeout(() => {
-      if (!_utilitiesPlaceholderEl || version !== "2" || _utilitiesItemCount < 2) {
+      if (
+        !_utilitiesPlaceholderEl ||
+        version !== "2" ||
+        _utilitiesItemCount < 2
+      ) {
         if (_showUtilitiesMenu !== false) {
           _showUtilitiesMenu = false;
         }
@@ -208,7 +217,9 @@
       // TABLET/DESKTOP: Space-based calculation
       // Get the header placeholder (parent container) width
       const shadowRoot = _utilitiesPlaceholderEl.getRootNode() as ShadowRoot;
-      const headerPlaceholder = shadowRoot?.querySelector('.v2-header-placeholder') as HTMLElement;
+      const headerPlaceholder = shadowRoot?.querySelector(
+        ".v2-header-placeholder",
+      ) as HTMLElement;
 
       if (!headerPlaceholder) {
         if (_showUtilitiesMenu !== false) {
@@ -221,7 +232,9 @@
 
       // Use minimum widths for predictable calculation
       // Service/phase wrapper has min-width: 200px and uses flex: 1, so reserve that space
-      const logoArea = shadowRoot?.querySelector('.v2-logo-area') as HTMLElement;
+      const logoArea = shadowRoot?.querySelector(
+        ".v2-logo-area",
+      ) as HTMLElement;
       const logoWidth = logoArea?.offsetWidth || (_mobile ? 32 : 118); // Fixed logo sizes
 
       const servicePhaseMinWidth = 200; // Minimum width for service area
@@ -230,10 +243,17 @@
 
       // Calculate available space for utilities using minimum service area width
       // This prevents the service area flex growing/shrinking from affecting the calculation
-      const availableWidth = headerWidth - logoWidth - servicePhaseMinWidth - headerPadding - gapBetweenElements;
+      const availableWidth =
+        headerWidth -
+        logoWidth -
+        servicePhaseMinWidth -
+        headerPadding -
+        gapBetweenElements;
 
       // Measure actual utility items
-      const utilitySlot = shadowRoot?.querySelector('slot[name="utilities"]') as HTMLSlotElement;
+      const utilitySlot = shadowRoot?.querySelector(
+        'slot[name="utilities"]',
+      ) as HTMLSlotElement;
       let totalItemsWidth = 0;
 
       if (utilitySlot) {
@@ -253,7 +273,9 @@
           // Fallback: estimate if items not yet rendered
           const estimatedItemWidth = 100;
           const gap = 12;
-          totalItemsWidth = (_utilitiesItemCount * estimatedItemWidth) + ((_utilitiesItemCount - 1) * gap);
+          totalItemsWidth =
+            _utilitiesItemCount * estimatedItemWidth +
+            (_utilitiesItemCount - 1) * gap;
         }
       }
 
@@ -266,7 +288,6 @@
       }
     }, 100); // 100ms debounce
   }
-
 
   function getChildren() {
     if (!_slotParentEl) return;
@@ -289,9 +310,10 @@
     // Use composedPath to check clicks through shadow DOM
     const path = event.composedPath();
     const clickedInsideUtilities = path.some((el) => {
-      return el instanceof Element && (
-        el.classList?.contains('v2-utilities-menu-button') ||
-        el.classList?.contains('v2-utilities-dropdown')
+      return (
+        el instanceof Element &&
+        (el.classList?.contains("v2-utilities-menu-button") ||
+          el.classList?.contains("v2-utilities-dropdown"))
       );
     });
 
@@ -418,12 +440,32 @@
         <div class="v2-logo-area">
           {#if url}
             <a href={url} data-testid="v2-logo-link">
-              <img alt="GoA Logo" class="v2-logo-mobile" src={_v2MobileLogo} />
-              <img alt="GoA Logo" class="v2-logo-desktop" src={_v2DesktopLogo} />
+              <div
+                role="img"
+                aria-label="GoA Logo"
+                class="v2-logo-mobile"
+                style="--logo-default: url({_v2MobileLogo});"
+              ></div>
+              <div
+                role="img"
+                aria-label="GoA Logo"
+                class="v2-logo-desktop"
+                style="--logo-default: url({_v2DesktopLogo});"
+              ></div>
             </a>
           {:else}
-            <img alt="GoA Logo" class="v2-logo-mobile" src={_v2MobileLogo} />
-            <img alt="GoA Logo" class="v2-logo-desktop" src={_v2DesktopLogo} />
+            <div
+              role="img"
+              aria-label="GoA Logo"
+              class="v2-logo-mobile"
+              style="--logo-default: url({_v2MobileLogo});"
+            ></div>
+            <div
+              role="img"
+              aria-label="GoA Logo"
+              class="v2-logo-desktop"
+              style="--logo-default: url({_v2DesktopLogo});"
+            ></div>
           {/if}
         </div>
 
@@ -440,17 +482,23 @@
           </div>
         </div>
 
-        <div class="v2-utilities-placeholder" bind:this={_utilitiesPlaceholderEl}>
+        <div
+          class="v2-utilities-placeholder"
+          bind:this={_utilitiesPlaceholderEl}
+        >
           {#if _showUtilitiesMenu}
             <!-- 2+ items: Show compact Menu button -->
             <button
               class="v2-utilities-menu-button"
-              on:click={() => _utilitiesMenuOpen = !_utilitiesMenuOpen}
+              on:click={() => (_utilitiesMenuOpen = !_utilitiesMenuOpen)}
               aria-expanded={_utilitiesMenuOpen}
               aria-label="Utilities menu"
             >
               Menu
-              <goa-icon type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"} size="small" />
+              <goa-icon
+                type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"}
+                size="small"
+              />
             </button>
 
             {#if _utilitiesMenuOpen}
@@ -468,7 +516,7 @@
       <!-- Navigation section - only show if content provided -->
       {#if _hasNavigationSlot}
         <AppHeaderNavigation
-          version={version}
+          {version}
           windowWidth={_windowWidth}
           mobile={_mobile}
         >
@@ -483,68 +531,38 @@
     class="container"
     bind:this={_rootEl}
     data-testid={testid}
-  style={`
+    style={`
   --max-content-width: ${maxcontentwidth || "100%"};
   --desktop-padding: ${maxcontentwidth && maxcontentwidth !== "100%" && _windowWidth > +maxcontentwidth ? "0" : "var(--goa-space-3xl)"};
 `}
-  class:show-menu={_showMenu}
-  class:mobile={_mobile}
-  class:tablet={_tablet}
-  class:desktop={_desktop}
->
-  <div class="layout">
-    <!-- Logo and optional heading link -->
-    {#if url}
-      <a href={url} class="header-logo-title-area" data-testid="url">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
-        {#if heading}
-          <span data-testid="title" class="title">{heading}</span>
-        {/if}
-      </a>
-    {:else}
-      <div class="header-logo-title-area">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
-        {#if heading}
-          <span data-testid="title" class="title">{heading}</span>
-        {/if}
-      </div>
-    {/if}
-
-    <!-- Menu button for mobile -->
-    {#if _showToggleMenu && _mobile}
-      <div class="menu-toggle-area">
-        <button
-          on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
-          data-testid="menu-toggle"
-          bind:this={_menuButton}
-          class:menu-open={_showMenu}
-        >
-          Menu
-          {#if !_hasMenuClickHandler}
-            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="2" />
+    class:show-menu={_showMenu}
+    class:mobile={_mobile}
+    class:tablet={_tablet}
+    class:desktop={_desktop}
+  >
+    <div class="layout">
+      <!-- Logo and optional heading link -->
+      {#if url}
+        <a href={url} class="header-logo-title-area" data-testid="url">
+          <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+          <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
+          {#if heading}
+            <span data-testid="title" class="title">{heading}</span>
           {/if}
-        </button>
-      </div>
-    {/if}
+        </a>
+      {:else}
+        <div class="header-logo-title-area">
+          <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
+          <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
+          {#if heading}
+            <span data-testid="title" class="title">{heading}</span>
+          {/if}
+        </div>
+      {/if}
 
-    <!-- Menu and menu button for tablet -->
-    {#if _showToggleMenu && _tablet}
-      <goa-popover
-        class="app-header-popover"
-        context="menu-toggle-area"
-        minwidth="16rem"
-        focusborderwidth="0"
-        borderradius="4"
-        padded="false"
-        tabindex="-1"
-        height="full"
-        position="below"
-        on:_close={hideMenu}
-        on:_open={showMenu}
-      >
-        <div slot="target" class="menu-toggle-area">
+      <!-- Menu button for mobile -->
+      {#if _showToggleMenu && _mobile}
+        <div class="menu-toggle-area">
           <button
             on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
             data-testid="menu-toggle"
@@ -560,33 +578,66 @@
             {/if}
           </button>
         </div>
+      {/if}
 
-        {#if _showMenu}
-          <div bind:this={_slotParentEl} data-testid="slot">
-            <slot />
+      <!-- Menu and menu button for tablet -->
+      {#if _showToggleMenu && _tablet}
+        <goa-popover
+          class="app-header-popover"
+          context="menu-toggle-area"
+          minwidth="16rem"
+          focusborderwidth="0"
+          borderradius="4"
+          padded="false"
+          tabindex="-1"
+          height="full"
+          position="below"
+          on:_close={hideMenu}
+          on:_open={showMenu}
+        >
+          <div slot="target" class="menu-toggle-area">
+            <button
+              on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
+              data-testid="menu-toggle"
+              bind:this={_menuButton}
+              class:menu-open={_showMenu}
+            >
+              Menu
+              {#if !_hasMenuClickHandler}
+                <goa-icon
+                  type={_showMenu ? "chevron-up" : "chevron-down"}
+                  mt="2"
+                />
+              {/if}
+            </button>
           </div>
-        {/if}
-      </goa-popover>
-    {/if}
 
-    <!--
+          {#if _showMenu}
+            <div bind:this={_slotParentEl} data-testid="slot">
+              <slot />
+            </div>
+          {/if}
+        </goa-popover>
+      {/if}
+
+      <!--
       Need to render slot content to allow mobile and tablet views to
       know whether or not to show the Menu button. `_slotContainer` provides
       a reference to determine if any slot children exist.
     -->
-    {#if !_showMenu && (_mobile || _tablet)}
-      <div bind:this={_slotParentEl} style="display: none">
-        <slot />
-      </div>
-    {/if}
+      {#if !_showMenu && (_mobile || _tablet)}
+        <div bind:this={_slotParentEl} style="display: none">
+          <slot />
+        </div>
+      {/if}
 
-    <!-- Mobile and desktop slot content -->
-    {#if (_showMenu && _mobile && !_hasMenuClickHandler) || _desktop}
-      <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
-        <slot />
-      </div>
-    {/if}
-  </div>
+      <!-- Mobile and desktop slot content -->
+      {#if (_showMenu && _mobile && !_hasMenuClickHandler) || _desktop}
+        <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
+          <slot />
+        </div>
+      {/if}
+    </div>
   </div>
 {/if}
 
@@ -1091,13 +1142,15 @@
     display: flex;
     gap: var(--goa-app-header-logo-service-gap);
     align-items: center;
-    padding: var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-desktop);
+    padding: var(--goa-app-header-padding-v)
+      var(--goa-app-header-padding-h-desktop);
     border-bottom: var(--goa-app-header-border-bottom);
   }
 
   .v2.mobile .v2-header-placeholder {
     gap: var(--goa-app-header-logo-service-gap-small-screen);
-    padding: var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-mobile);
+    padding: var(--goa-app-header-padding-v)
+      var(--goa-app-header-padding-h-mobile);
     align-items: flex-start; /* Top-align logo and service name on mobile */
   }
 
@@ -1210,7 +1263,9 @@
     line-height: 26px;
     cursor: pointer;
     white-space: nowrap;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .v2 .v2-utilities-menu-button:hover {
@@ -1339,7 +1394,10 @@
     .v2 .v2-logo-desktop {
       display: block;
       height: var(--goa-app-header-logo-desktop-height, 32px);
-      width: auto;
+      width: 118px;
+      background-image: var(--goa-app-header-logo-desktop, var(--logo-default));
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .v2 .v2-logo-mobile {
@@ -1357,7 +1415,9 @@
       display: block;
       width: var(--goa-app-header-logo-mobile-size, 32px);
       height: var(--goa-app-header-logo-mobile-size, 32px);
+      background-image: var(--goa-app-header-logo-mobile, var(--logo-default));
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
-
 </style>

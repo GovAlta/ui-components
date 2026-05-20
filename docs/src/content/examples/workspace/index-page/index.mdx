@@ -1,0 +1,36 @@
+---
+id: workspace-index-page
+title: Index page
+size: page
+productType: workspace
+description: The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.
+previewUrl: https://digital-service-demo-v2.netlify.app/workspace/applications
+previewImage: /thumbnails/workspace-table-view.png
+reactSourceUrl: https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/search
+angularSourceUrl: https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/search
+components:
+  - work-side-menu
+  - data-grid
+  - tabs
+  - filter-chip
+  - badge
+tags:
+  - workspace
+  - index
+  - worker
+status: published
+---
+
+## When to use
+
+Use the index page as the workspace's main listing surface. Most workspaces have one or more, organized by record type (applications, cases, claims, requests).
+
+## Structure
+
+The index page is built around a [data view](/examples/workspace#data-views) showing the records the user is responsible for. Tabs filter by status. Search and filter chips narrow further. A primary action button (often "New record") lives in the page header.
+
+## Considerations
+
+- Surface what staff need to act on first. The default sort and filter should reflect a typical worker's queue, not the database's order.
+- Keep the action bar slim. Filters and search go inside the table region; high-level actions sit in the page header.
+- Pair with [sidebar navigation](/examples/workspace#sidebar-navigation) so staff can jump between index pages for different record types.

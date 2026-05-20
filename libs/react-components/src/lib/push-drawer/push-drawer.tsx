@@ -51,9 +51,16 @@ export function GoabPushDrawer({
     if (!el?.current || !onClose) {
       return;
     }
-    el.current?.addEventListener("_close", onClose);
+    const current = el.current;
+    const listener = (e: Event) => {
+      if (e.target !== current) {
+        return;
+      }
+      onClose();
+    };
+    current.addEventListener("_close", listener);
     return () => {
-      el.current?.removeEventListener("_close", onClose);
+      current.removeEventListener("_close", listener);
     };
   }, [el, onClose]);
 

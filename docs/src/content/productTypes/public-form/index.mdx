@@ -1,0 +1,166 @@
+---
+id: public-form
+title: Public form
+summary: For citizen-facing services where users apply for a benefit, request a service, or submit information. Designed around simplicity and low cognitive load, with plain-language questions, focused pages that ask one thing at a time, save-and-resume, and a clear confirmation of what happens next.<br><span style="display:block;height:0.5rem"></span>The reference example is a starting point to expand on, not a rigid template. Adapt it to fit each service's context.
+heroImage: /images/examples/my-applications-page.png
+demoUrl: https://digital-service-demo-v2.netlify.app/
+tags:
+  - form
+  - public
+  - citizen
+  - pattern
+components: []
+status: published
+---
+
+<goa-button version="2" type="tertiary" mt="s" mb="l" onclick="window.open('https://digital-service-demo-v2.netlify.app/', '_blank')">View demo</goa-button>
+
+import PreviewContainer from "../../../components/PreviewContainer.astro";
+
+<goa-callout version="2" type="information" emphasis="low" maxwidth="480px"><strong>Primary user:</strong> Citizens applying for a service, benefit, permit, or status update.</goa-callout>
+
+## Pages
+
+A public form is built from a small set of page types. Combine and adapt them to fit the work the service supports.
+
+### Start page
+
+The starting point for a citizen to begin your form from within your service or from Alberta.ca.
+
+<PreviewContainer
+  image="/images/examples/start-page.png"
+  alt="Public form start page"
+  previewUrl="/examples/start-page/preview"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/start-page/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/start-page"
+  moreUrl="/examples/start-page"
+/>
+
+### Task list page (optional)
+
+Outline the entire process for the user and help them through it by breaking the experience into individual tasks. Use it for longer or multi-section forms.
+
+<PreviewContainer
+  image="/images/examples/task-list-page.png"
+  alt="Public form task list page"
+  previewUrl="/examples/task-list-page/preview"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/task-list-page/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/task-list-page"
+  moreUrl="/examples/task-list-page"
+/>
+
+### Question page
+
+Ask a user a question, or a small set of closely related questions. The most common page in a public form. Several variants cover progress indicators, section titles, background context, expandable help, and grouped fields.
+
+<PreviewContainer
+  image="/images/examples/question-page.png"
+  alt="Public form question page"
+  previewUrl="/examples/question-page/variants/one-question/preview"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/question-page/variants/one-question/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/question-page/variants/one-question"
+  moreUrl="/examples/question-page"
+/>
+
+### Review page
+
+Let users check their answers before submitting information to the service. Group answers by section and let the user jump back to any answer they want to change.
+
+<PreviewContainer
+  image="/images/examples/review-page.png"
+  alt="Public form review page"
+  previewUrl="/examples/review-page/preview"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/review-page/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/review-page"
+  moreUrl="/examples/review-page"
+/>
+
+### Result page
+
+Confirm to users that they have completed a form, application, or task, and tell them what to do next.
+
+<PreviewContainer
+  image="/images/examples/result-page.png"
+  alt="Public form result page"
+  previewUrl="/examples/result-page/preview"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/result-page/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/result-page"
+  moreUrl="/examples/result-page"
+/>
+
+---
+
+## Form structure
+
+Use the public form structure focused on content. Asking the right questions in the right shape keeps the interaction as simple as possible.
+
+### Start with one idea per page
+
+Split the form across multiple pages with each page containing just one idea. For example:
+
+- one decision they have to make
+- one question they have to answer
+- one piece of information you are telling a user
+
+Starting with one thing per page helps users to:
+
+- understand what you are asking them to do
+- focus on a specific question and its answer
+- find their way through an unfamiliar process
+- use the service on a mobile device
+- recover easily from form errors
+
+It also helps the service to:
+
+- handle branching questions and loops
+- design for mobile use
+- save a user's answers automatically as they go
+- capture analytics about each question
+
+### Combine questions when helpful
+
+Asking a question does not necessarily mean you should use one form field. Asking a user for their address is best captured all on the same page with multiple fields. See the [grouped fields variant on the question page](/examples/question-page#group-related-questions-on-one-page).
+
+---
+
+## When to use
+
+Use the public form pattern when:
+
+- The service is for citizens, not internal staff
+- Users may complete the form infrequently and need plain-language guidance
+- The form has more than a handful of questions and benefits from being split across pages
+- Branching, conditional logic, or save-and-resume matters
+
+---
+
+## Accessibility
+
+Structuring your form with one idea per page simplifies the experience and makes it more accessible.
+
+1. **Reduced cognitive load.** Presenting only one idea at a time reduces cognitive load on the user. This is particularly beneficial for users with cognitive impairments who might find it difficult to process and respond to multiple questions at once.
+2. **Improved navigation for a screen reader.** This simplified approach efficiently guides the user through the form based on each answer and makes it easier to navigate with screen readers or other assistive technology.
+3. **Better error handling.** With smaller sets of questions validated at a time, errors can be identified and addressed in context. This makes it less confusing and less overwhelming, particularly for users with cognitive impairments and those using assistive technologies.
+4. **Progressive disclosure.** One idea per page allows the user to focus on the current task and move through information slowly. This is especially helpful for users who are easily distracted or overwhelmed by too much information.
+
+---
+
+## Adding complexity
+
+Start by making sure the content and questions you are asking the user are as simple as possible.
+
+As the complexity of your form grows, consider:
+
+- adding simple [progress indicators on a question page](/examples/question-page#show-a-progress-indicator) to communicate progress
+- breaking the form into sections on a [task list page](/examples/task-list-page)
+
+---
+
+## Form stepper
+
+Avoid using a traditional horizontal form stepper on every form. Research has shown that horizontal steppers shown on every page can distract and confuse some users, take up too much space, and make it hard to handle branching and conditional sections of a form.
+
+As the complexity of your form grows, consider:
+
+- adding simple text progress indicators to communicate progress
+- following the one idea per page approach, and breaking the form into sections as needed using a task list page

@@ -1,112 +1,59 @@
 {
   "componentSlug": "link-button",
   "extractedFrom": "libs/web-components/src/components/link-button/LinkButton.svelte",
-  "props": [
-    {
-      "name": "color",
-      "type": "\"interactive\" | \"light\"",
-      "values": [
-        "interactive",
-        "light"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        }
       ],
-      "required": false,
-      "default": "interactive",
-      "description": "@deprecated Use GoabButton instead. Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds.",
-      "deprecated": true
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "leadingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": true,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Icon displayed before the button text.",
-      "deprecated": true
+    "angular": {
+      "props": [],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "trailingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": true,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Icon displayed after the button text.",
-      "deprecated": true
-    },
-    {
-      "name": "disabled",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "@deprecated Use GoabButton instead. When true, prevents user interaction and applies disabled styling.",
-      "deprecated": true
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "@deprecated Use GoabButton instead. Sets a data-testid attribute for automated testing.",
-      "deprecated": true
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Top margin.",
-      "deprecated": true
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Right margin.",
-      "deprecated": true
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Bottom margin.",
-      "deprecated": true
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "@deprecated Use GoabButton instead. Left margin.",
-      "deprecated": true
+    "webComponents": {
+      "props": [],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_click",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

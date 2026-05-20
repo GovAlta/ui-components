@@ -1,41 +1,108 @@
 {
   "componentSlug": "table-sort-header",
   "extractedFrom": "libs/web-components/src/components/table/TableSortHeader.svelte",
-  "extractedAt": "2026-02-26T00:00:00.000Z",
-  "props": [
-    {
-      "name": "name",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Column name identifier for sorting."
-    },
-    {
-      "name": "direction",
-      "type": "\"asc\" | \"desc\" | \"none\"",
-      "typeLabel": "GoabTableSortDirection",
-      "values": [
-        "asc",
-        "desc",
-        "none"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "direction",
+          "type": "GoabTableSortDirection",
+          "required": false,
+          "default": "none",
+          "description": "Sets the sort direction indicator."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Column name identifier for sorting."
+        },
+        {
+          "name": "sortOrder",
+          "type": "GoabTableSortOrder",
+          "required": false,
+          "default": null,
+          "description": "Sort order number for multi-column sort display. Used for displaying priority numbers when multiple columns are sorted."
+        }
       ],
-      "required": false,
-      "default": "none",
-      "description": "Sets the sort direction indicator."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "sortOrder",
-      "type": "number",
-      "required": false,
-      "default": 0,
-      "description": "Sort order number for multi-column sort display (1, 2, etc)."
+    "angular": {
+      "props": [
+        {
+          "name": "direction",
+          "type": "GoabTableSortDirection",
+          "required": false,
+          "default": "none",
+          "description": "Sets the sort direction indicator."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Column name identifier for sorting."
+        },
+        {
+          "name": "sortOrder",
+          "type": "GoabTableSortOrder",
+          "required": false,
+          "default": null,
+          "description": "Sort order number for multi-column sort display (\"1\", \"2\", etc)."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"asc\" | \"desc\" | \"none\"",
+          "values": [
+            "asc",
+            "desc",
+            "none"
+          ],
+          "required": false,
+          "default": "none",
+          "description": "Sets the sort direction indicator."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Column name identifier for sorting."
+        },
+        {
+          "name": "sort-order",
+          "type": "\"0\" | \"1\" | \"2\"",
+          "values": [
+            "0",
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "0",
+          "description": "Sort order number for multi-column sort display (\"1\", \"2\", etc)."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

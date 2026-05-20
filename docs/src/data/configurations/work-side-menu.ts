@@ -5,11 +5,14 @@
  */
 
 import type { ComponentConfigurations } from "./types";
+import { workspacePreviewStyle, workspacePreviewWrapper } from "./shared/shared-previews";
 
 export const workSideMenuConfigurations: ComponentConfigurations = {
   componentSlug: "work-side-menu",
   componentName: "Work side menu",
   defaultConfigurationId: "basic",
+  previewStyle: workspacePreviewStyle,
+  previewWrapper: workspacePreviewWrapper,
 
   configurations: [
     {
@@ -49,7 +52,7 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
     {
       id: "with-user-profile",
       name: "With user profile",
-      description: "Menu showing user name and role",
+      description: "Menu showing user name and role with an account menu",
       code: {
         react: `<GoabWorkSideMenu
   heading="My Application"
@@ -63,18 +66,40 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
     </>
   }
+  accountContent={
+    <>
+      <GoabWorkSideMenuItem icon="person-circle" label="Profile" url="/profile" />
+      <GoabWorkSideMenuItem icon="settings" label="Settings" url="/settings" />
+      <GoabWorkSideMenuItem icon="log-out" label="Sign out" url="/sign-out" />
+    </>
+  }
 />`,
-        angular: `<goab-work-side-menu heading="My Application" url="/" userName="Jane Smith" userSecondaryText="Case Worker" (onNavigate)="handleNavigate($event)" [primaryContent]="primaryTpl">
-  <ng-template #primaryTpl>
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>`,
+        angular: `<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  userName="Jane Smith"
+  userSecondaryText="Case Worker"
+  [primaryContent]="primaryTpl"
+  [accountContent]="accountTpl"
+  (onNavigate)="handleNavigate($event)"
+></goab-work-side-menu>
+
+<ng-template #primaryTpl>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #accountTpl>
+  <goab-work-side-menu-item icon="person-circle" label="Profile" url="/profile"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="settings" label="Settings" url="/settings"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="log-out" label="Sign out" url="/sign-out"></goab-work-side-menu-item>
+</ng-template>`,
         webComponents: `<goa-work-side-menu heading="My Application" url="/" user-name="Jane Smith" user-secondary-text="Case Worker" open="true">
   <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
   <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="secondary" icon="help-circle" label="Help" url="/help"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="secondary" icon="settings" label="Settings" url="/settings"></goa-work-side-menu-item>
+  <goa-work-side-menu-item slot="account" icon="person-circle" label="Profile" url="/profile"></goa-work-side-menu-item>
+  <goa-work-side-menu-item slot="account" icon="settings" label="Settings" url="/settings"></goa-work-side-menu-item>
+  <goa-work-side-menu-item slot="account" icon="log-out" label="Sign out" url="/sign-out"></goa-work-side-menu-item>
 </goa-work-side-menu>`,
       },
     },

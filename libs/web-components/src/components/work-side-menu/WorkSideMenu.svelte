@@ -32,7 +32,7 @@
   // optional
 
   /** Controls whether the side menu is expanded or collapsed. */
-  export let open = false;
+  export let open: boolean = false;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** User's name displayed in the profile section. */
@@ -55,10 +55,10 @@
 
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
-  let _containerEl: HTMLElement;
+  let _containerEl: HTMLElement | undefined;
   let _rootEl: HTMLElement;
   let _scrollEl: HTMLElement;
-  let _toggleButtonEl: HTMLElement;
+  let _toggleButtonEl: HTMLElement | undefined;
   let _tooltipEl: HTMLElement;
   let _tooltipLabel: string = "";
 
@@ -71,7 +71,7 @@
   let _resizeObserver: ResizeObserver | null = null;
 
   const _logo =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none'%3E%3Crect width='31.695' height='31.688' x='.028' fill='%2300B6ED' rx='4'/%3E%3Cg clip-path='url(%23a)'%3E%3Cmask id='b' width='47' height='39' x='-11' y='-2' maskUnits='userSpaceOnUse' style='mask-type:alpha'%3E%3Cpath fill='%23545860' d='M22.017 31.103a63.47 63.47 0 0 1-7.22-3.164 52.41 52.41 0 0 0 6.195-2.724 43.148 43.148 0 0 0 1.023 5.89m13.27-24.392c-1.034-.13-.497.348-.785 1.7-1.246 5.832-6.05 10.035-10.873 12.855-.506-6.678-.3-14.093.967-18.636 1.069-3.836 2.34-3.132.763-3.938-1.66-.848-3.44.273-4.882 3.13C19.033 4.68 12.393 20.19 1.78 30.664c-5.43 5.36-10.34 2.6-11.323 1.775-.8-.67-1.096.365-.103 1.426 4.39 4.7 10.805 2.003 13.141-.314 6.455-6.405 13.96-20.193 16.996-26.044a89.89 89.89 0 0 0 .243 15.294 44.69 44.69 0 0 1-7.619 2.885c-1.504.391-2.435 1-2.462 1.691-.03.758.98 1.397 2.44 2.085 2.6 1.226 10.216 4.798 12.093 5.878 1.606.925 2.39.204 2.866-.796.622-1.302-1.083-2.054-2.735-2.545a50.47 50.47 0 0 1-1.48-8.385c3.87-2.365 7.682-5.52 9.88-9.452a18.004 18.004 0 0 0 1.568-4.365c.23-.934.293-1.9.186-2.855 0 0-.03-.209-.186-.229'/%3E%3C/mask%3E%3Cg mask='url(%23b)'%3E%3Crect width='31.695' height='31.695' x='.028' fill='%23fff' rx='3.048'/%3E%3C/g%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='32' height='31.992' y='.008' fill='%23fff' rx='4'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E";
+    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgZmlsbD0nbm9uZSc+PHJlY3Qgd2lkdGg9JzMxLjY5NScgaGVpZ2h0PSczMS42ODgnIHg9Jy4wMjgnIGZpbGw9JyMwMEI2RUQnIHJ4PSc0Jy8+PGcgY2xpcC1wYXRoPSd1cmwoI2EpJz48bWFzayBpZD0nYicgd2lkdGg9JzQ3JyBoZWlnaHQ9JzM5JyB4PSctMTEnIHk9Jy0yJyBtYXNrVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBzdHlsZT0nbWFzay10eXBlOmFscGhhJz48cGF0aCBmaWxsPScjNTQ1ODYwJyBkPSdNMjIuMDE3IDMxLjEwM2E2My40NyA2My40NyAwIDAgMS03LjIyLTMuMTY0IDUyLjQxIDUyLjQxIDAgMCAwIDYuMTk1LTIuNzI0IDQzLjE0OCA0My4xNDggMCAwIDAgMS4wMjMgNS44OW0xMy4yNy0yNC4zOTJjLTEuMDM0LS4xMy0uNDk3LjM0OC0uNzg1IDEuNy0xLjI0NiA1LjgzMi02LjA1IDEwLjAzNS0xMC44NzMgMTIuODU1LS41MDYtNi42NzgtLjMtMTQuMDkzLjk2Ny0xOC42MzYgMS4wNjktMy44MzYgMi4zNC0zLjEzMi43NjMtMy45MzgtMS42Ni0uODQ4LTMuNDQuMjczLTQuODgyIDMuMTNDMTkuMDMzIDQuNjggMTIuMzkzIDIwLjE5IDEuNzggMzAuNjY0Yy01LjQzIDUuMzYtMTAuMzQgMi42LTExLjMyMyAxLjc3NS0uOC0uNjctMS4wOTYuMzY1LS4xMDMgMS40MjYgNC4zOSA0LjcgMTAuODA1IDIuMDAzIDEzLjE0MS0uMzE0IDYuNDU1LTYuNDA1IDEzLjk2LTIwLjE5MyAxNi45OTYtMjYuMDQ0YTg5Ljg5IDg5Ljg5IDAgMCAwIC4yNDMgMTUuMjk0IDQ0LjY5IDQ0LjY5IDAgMCAxLTcuNjE5IDIuODg1Yy0xLjUwNC4zOTEtMi40MzUgMS0yLjQ2MiAxLjY5MS0uMDMuNzU4Ljk4IDEuMzk3IDIuNDQgMi4wODUgMi42IDEuMjI2IDEwLjIxNiA0Ljc5OCAxMi4wOTMgNS44NzggMS42MDYuOTI1IDIuMzkuMjA0IDIuODY2LS43OTYuNjIyLTEuMzAyLTEuMDgzLTIuMDU0LTIuNzM1LTIuNTQ1YTUwLjQ3IDUwLjQ3IDAgMCAxLTEuNDgtOC4zODVjMy44Ny0yLjM2NSA3LjY4Mi01LjUyIDkuODgtOS40NTJhMTguMDA0IDE4LjAwNCAwIDAgMCAxLjU2OC00LjM2NWMuMjMtLjkzNC4yOTMtMS45LjE4Ni0yLjg1NSAwIDAtLjAzLS4yMDktLjE4Ni0uMjI5Jy8+PC9tYXNrPjxnIG1hc2s9J3VybCgjYiknPjxyZWN0IHdpZHRoPSczMS42OTUnIGhlaWdodD0nMzEuNjk1JyB4PScuMDI4JyBmaWxsPScjZmZmJyByeD0nMy4wNDgnLz48L2c+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0nYSc+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMxLjk5MicgeT0nLjAwOCcgZmlsbD0nI2ZmZicgcng9JzQnLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=";
 
   // *****
   // Hooks
@@ -198,6 +198,7 @@
   }
 
   function setTooltipPos(label: string, el: HTMLElement) {
+    if (!_containerEl || !_tooltipEl) return;
     const rect = el?.getBoundingClientRect();
     const containerRect = _containerEl.getBoundingClientRect();
     const top = rect.top - containerRect.top + rect.height / 2;
@@ -218,7 +219,7 @@
   }
 
   function handleToggleHover() {
-    if (open) return;
+    if (open || !_toggleButtonEl) return;
 
     setTooltipPos("Expand menu", _toggleButtonEl);
     showTooltip();
@@ -378,12 +379,12 @@
     <header class="top-section">
       {#if url}
         <a href={url} class="header" role="menuitem" data-testid="url">
-          <img alt="GoA Logo" class="logo" src={_logo} />
+          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
           <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
         </a>
       {:else}
         <div class="header">
-          <img alt="GoA Logo" class="logo" src={_logo} />
+          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
           <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
         </div>
       {/if}
@@ -477,6 +478,13 @@
 </div>
 
 <style>
+  :host {
+    --goa-popover-box-shadow: var(
+      --goa-work-side-menu-popover-shadow,
+      var(--goa-shadow-raised-light)
+    );
+  }
+
   :host * {
     box-sizing: border-box;
   }
@@ -613,6 +621,15 @@
     box-shadow: var(--goa-work-side-menu-top-section-shadow-scrolled);
   }
 
+  .logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-image: var(--goa-work-side-menu-logo, var(--logo-default));
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
   .heading {
     display: block;
     visibility: visible;
@@ -671,7 +688,10 @@
   .account-menu {
     visibility: hidden;
     opacity: 0;
-    background: var(--goa-color-greyscale-white);
+    background: var(
+      --goa-work-side-menu-account-bg,
+      var(--goa-color-greyscale-white)
+    );
     box-shadow: var(
       --goa-work-side-menu-account-shadow,
       0px 12px 20px -8px rgba(26, 26, 26, 0.24)

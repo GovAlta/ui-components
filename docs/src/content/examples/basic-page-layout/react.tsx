@@ -15,7 +15,7 @@ export function BasicPageLayout() {
           <a href="/login">Sign in</a>
         </GoabAppHeader>
       </section>
-      <GoabPageBlock width="704px">
+      <GoabPageBlock width="full">
         <p>
           <GoabSkeleton type="header" size="4" />
           <GoabSkeleton type="text" size="1" />

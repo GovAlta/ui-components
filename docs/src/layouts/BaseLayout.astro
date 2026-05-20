@@ -2,6 +2,7 @@
 // Import v2 design tokens and web component styles
 import '@abgov/web-components/index.css';
 import '@design-tokens/tokens.css';
+import '@design-tokens/dark-theme.css';
 
 // Import search styles eagerly so inline search inputs don't flash unstyled
 import '../components/search/search.css';
@@ -26,6 +27,24 @@ const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Theme init - runs before paint to prevent FOUC.
+       Priority: localStorage > prefers-color-scheme > "light" -->
+  <script is:inline>
+    (function() {
+      var stored = null;
+      try { stored = localStorage.getItem('goab-theme'); } catch (e) {}
+      var mode;
+      if (stored === 'light' || stored === 'dark') {
+        mode = stored;
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+      } else {
+        mode = 'light';
+      }
+      document.documentElement.setAttribute('data-theme', mode);
+    })();
+  </script>
+
   <!-- Sidebar width init - runs before body to prevent layout shift -->
   <script is:inline>
     (function() {
@@ -88,6 +107,10 @@ const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
 
       html {
         color-scheme: light;
+      }
+
+      html[data-theme="dark"] {
+        color-scheme: dark;
       }
 
       body {

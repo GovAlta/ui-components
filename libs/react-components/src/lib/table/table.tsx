@@ -10,7 +10,6 @@ import { ReactNode, useEffect, useRef } from "react";
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
   width?: string;
-  stickyheader?: string;
   variant?: GoabTableVariant;
   "sort-mode"?: GoabTableSortMode;
   testid?: string;
@@ -37,7 +36,7 @@ export interface GoabTableProps extends Margins {
   onMultiSort?: (detail: GoabTableOnMultiSortDetail) => void;
   /** Sort mode: "single" allows one column, "multi" allows up to 2 columns. @default "single" */
   sortMode?: GoabTableSortMode;
-  // stickyHeader?: boolean; TODO: enable this later
+  // stickyHeader intentionally not exposed in wrapper yet.
   /** A relaxed variant of the table with more vertical padding for the cells. @default "normal" */
   variant?: GoabTableVariant;
   /** When true, alternates row background colors for improved readability. */

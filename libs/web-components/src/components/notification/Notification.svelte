@@ -191,11 +191,11 @@
     color: unset !important;
     outline: unset !important;
   }
-  :global(::slotted(a:focus)) {
+  :global(::slotted(a:focus-visible)) {
     outline: auto !important;
     border-radius: var(--goa-border-radius-xs);
   }
-  .notification.important :global(::slotted(a:focus)) {
+  .notification.important :global(::slotted(a:focus-visible)) {
     outline: unset !important;
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-black);
     border-radius: var(--goa-border-radius-xs);
@@ -423,27 +423,27 @@
   }
 
   /* V2 link focus states */
-  .v2 .notification.important.high :global(::slotted(a:focus)) {
+  .v2 .notification.important.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-important-high-focus-border);
   }
 
-  .v2 .notification.important.low :global(::slotted(a:focus)) {
+  .v2 .notification.important.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-important-low-focus-border);
   }
 
-  .v2 .notification.information.high :global(::slotted(a:focus)) {
+  .v2 .notification.information.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-information-high-focus-border);
   }
 
-  .v2 .notification.information.low :global(::slotted(a:focus)) {
+  .v2 .notification.information.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-information-low-focus-border);
   }
 
-  .v2 .notification.emergency.high :global(::slotted(a:focus)) {
+  .v2 .notification.emergency.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-emergency-high-focus-border);
   }
 
-  .v2 .notification.emergency.low :global(::slotted(a:focus)) {
+  .v2 .notification.emergency.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-emergency-low-focus-border);
   }
 </style>

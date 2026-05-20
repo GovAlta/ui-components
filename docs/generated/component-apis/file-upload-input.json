@@ -1,68 +1,185 @@
 {
   "componentSlug": "file-upload-input",
   "extractedFrom": "libs/web-components/src/components/file-upload-input/FileUploadInput.svelte",
-  "props": [
-    {
-      "name": "variant",
-      "type": "\"dragdrop\" | \"button\"",
-      "values": [
-        "dragdrop",
-        "button"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
+        },
+        {
+          "name": "maxFileSize",
+          "type": "string",
+          "required": false,
+          "default": "5MB",
+          "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Files exceeding this will be rejected."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabFileUploadInputVariant",
+          "required": false,
+          "default": "dragdrop",
+          "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
+        }
       ],
-      "required": false,
-      "default": "dragdrop",
-      "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
-    },
-    {
-      "name": "accept",
-      "type": "string",
-      "required": false,
-      "default": "*",
-      "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
-    },
-    {
-      "name": "maxfilesize",
-      "type": "string",
-      "required": false,
-      "default": "5MB",
-      "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Defaults to 5MB. Files exceeding this will be rejected."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+      "events": [
+        {
+          "name": "onSelectFile",
+          "type": "(detail: GoabFileUploadInputOnSelectFileDetail) => void",
+          "description": "Callback fired when a valid file is selected or dropped.",
+          "frameworks": [
+            "react"
+          ]
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": ""
-    }
-  ],
-  "events": [
-    {
-      "name": "onSelectFile",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "slots": []
     },
-    {
-      "name": "_selectFile",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
+    "angular": {
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the id attribute on the file upload input element."
+        },
+        {
+          "name": "maxFileSize",
+          "type": "string",
+          "required": false,
+          "default": "5MB",
+          "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Files exceeding this will be rejected."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabFileUploadInputVariant",
+          "required": false,
+          "default": "dragdrop",
+          "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
+        }
+      ],
+      "events": [
+        {
+          "name": "onSelectFile",
+          "type": "(event: GoabFileUploadInputOnSelectFileDetail) => void",
+          "description": "Emits when a file is selected. Emits the selected file details.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "required": false,
+          "default": "*",
+          "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
+        },
+        {
+          "name": "maxfilesize",
+          "type": "string",
+          "required": false,
+          "default": "5MB",
+          "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Defaults to 5MB. Files exceeding this will be rejected."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "\"dragdrop\" | \"button\"",
+          "values": [
+            "dragdrop",
+            "button"
+          ],
+          "required": false,
+          "default": "dragdrop",
+          "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_selectFile",
+          "type": "CustomEvent<{ file: File; event: Event }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "slots": []
+  }
 }

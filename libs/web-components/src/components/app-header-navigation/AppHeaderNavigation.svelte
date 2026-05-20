@@ -5,6 +5,7 @@
   import { isUrlMatch, getMatchedLink } from '../../common/urls';
 
   // Props
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   export let windowWidth: number;
   export let mobile: boolean = false;

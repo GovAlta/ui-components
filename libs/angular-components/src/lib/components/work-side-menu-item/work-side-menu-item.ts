@@ -31,6 +31,11 @@ import { NgTemplateOutlet } from "@angular/common";
             <ng-container [ngTemplateOutlet]="popoverContent"></ng-container>
           </div>
         }
+        @if (trailingContent) {
+          <div slot="trailingContent">
+            <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
+          </div>
+        }
         <ng-content />
       </goa-work-side-menu-item>
     }
@@ -45,7 +50,7 @@ export class GoabWorkSideMenuItem implements OnInit {
   @Input({ required: true }) label!: string;
   /** The URL the menu item links to. Optional — when absent, renders as a button instead of a link. */
   @Input() url?: string;
-  /** Badge text displayed alongside the menu item (e.g., notification count). */
+  /** @deprecated Use trailingContent instead. Badge text displayed alongside the menu item (e.g., notification count). */
   @Input() badge?: string;
   /** When true, indicates this is the currently active menu item. */
   @Input() current?: boolean;
@@ -55,10 +60,12 @@ export class GoabWorkSideMenuItem implements OnInit {
   @Input() icon?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. @default "normal" */
+  /** @deprecated Use trailingContent instead. Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. @default "normal" */
   @Input() type?: GoabWorkSideMenuItemType = "normal";
   /** Template reference for the popover content slot. */
   @Input() popoverContent!: TemplateRef<any>;
+  /** Template reference for the trailing content slot. */
+  @Input() trailingContent!: TemplateRef<any>;
 
   isReady = false;
 

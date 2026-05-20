@@ -54,13 +54,13 @@
   /** Disables the popover interaction. Used by parent components like Dropdown. */
   export let disabled: string = "false";
   /** Additional vertical offset added to the popover's position. */
-  export let voffset = "";
+  export let voffset: string = "";
   /** Additional horizontal offset added to the popover's position. */
-  export let hoffset = "";
+  export let hoffset: string = "";
   /** Width of the focus outline border. */
-  export let focusborderwidth = "var(--goa-border-width-l)";
+  export let focusborderwidth: string = "var(--goa-border-width-l)";
   /** Border radius of the popover window. */
-  export let borderradius = "var(--goa-border-radius-m)";
+  export let borderradius: string = "var(--goa-border-radius-m)";
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
@@ -200,6 +200,44 @@
     }
   }
 
+  function isInPopoverComposedTree(node: EventTarget | null): boolean {
+    if (!_popoverEl || !(node instanceof Node)) {
+      return false;
+    }
+
+    if (_popoverEl.contains(node)) {
+      return true;
+    }
+
+    // Walk across slot and shadow boundaries to detect nested/slotted descendants.
+    let current: Node | null = node;
+    while (current) {
+      if (current === _popoverEl) {
+        return true;
+      }
+
+      if (current instanceof Element && current.assignedSlot) {
+        current = current.assignedSlot;
+        continue;
+      }
+
+      if (current.parentNode) {
+        current = current.parentNode;
+        continue;
+      }
+
+      const rootNode = current.getRootNode?.();
+      if (rootNode instanceof ShadowRoot) {
+        current = rootNode.host;
+        continue;
+      }
+
+      current = null;
+    }
+
+    return false;
+  }
+
   // When one popover is opened it dispatches a `goa:closePopover` to the document.body element, so adding a listener
   // here will allow any other popover that is currently open to be closed
   function addGlobalCloseListener() {
@@ -213,7 +251,10 @@
       // the popover that is being opened will, at that time have the an open state, so we need to prevent
       // that one that is being opened be immediately closed.
       if (target !== _targetEl) {
-        closePopover();
+        // Don't close if the target is a child popover (descendant of this popover's content)
+        if (target && !isInPopoverComposedTree(target)) {
+          closePopover();
+        }
       }
     });
   }
@@ -404,7 +445,7 @@
     class:use-anchor-based-positioning={!_needsManualPositioning}
     class:align-right={_alignment === "right"}
     style={styles(
-      style("width", position !== "right" ? width : undefined),
+      position !== "right" && style("width", width),
       style("min-width", minwidth),
       style(
         "max-width",

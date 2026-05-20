@@ -6,6 +6,7 @@ import {
   GoabAppFooter,
   GoabAppHeader,
   GoabMicrositeHeader,
+  GoabThemeService,
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
@@ -15,6 +16,14 @@ import {
   docsRouteDefinitions,
   featureRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
+import {
+  applyTokenVersion,
+  resolveTokenVersion,
+  TokenVersion,
+} from "./token-version/token-version";
+
+// Sentinel URL handled by handleNavigate to toggle tokens instead of routing.
+const TOKEN_TOGGLE_URL = "#tokens";
 
 @Component({
   standalone: true,
@@ -39,9 +48,12 @@ export class AppComponent {
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
   readonly baseHref = inject(LocationStrategy).getBaseHref();
+  readonly tokenToggleUrl = TOKEN_TOGGLE_URL;
+  tokenMode: TokenVersion = resolveTokenVersion();
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);
+  readonly theme = inject(GoabThemeService);
 
   constructor() {
     this.router.events
@@ -54,6 +66,15 @@ export class AppComponent {
   }
 
   handleNavigate(path: string): void {
+    if (path === TOKEN_TOGGLE_URL) {
+      this.tokenMode = this.tokenMode === "v1" ? "v2" : "v1";
+      applyTokenVersion(this.tokenMode);
+      return;
+    }
+    if (path === "#toggle-theme") {
+      this.theme.toggle();
+      return;
+    }
     const internal = path.startsWith(this.baseHref)
       ? "/" + path.slice(this.baseHref.length)
       : path;

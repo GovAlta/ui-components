@@ -10,6 +10,7 @@
   export let testid: string = "";
   /** URL for the Government of Alberta logo link. Set to empty string to disable the link. */
   export let url: string = "https://alberta.ca";
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   let rootEl: HTMLElement;
@@ -99,6 +100,7 @@
 
   .app-footer {
     background-color: var(--goa-footer-color-bg);
+    color: var(--goa-footer-color-text, var(--goa-color-text-default));
     border-top: var(--goa-footer-border-top);
     border-bottom: var(--goa-footer-border-bottom);
     container: self / inline-size;

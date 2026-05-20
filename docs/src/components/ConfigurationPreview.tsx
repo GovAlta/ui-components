@@ -10,11 +10,12 @@
  * Code snippet changes based on selected framework preference.
  */
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 // Note: Using web component directly for v2 styling (React wrapper doesn't pass version prop)
+import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
 import { useGitHubIssueCount } from "../hooks/useGitHubIssueCount";
-import type { ComponentConfigurations } from "../data/configurations/types";
+import type { ComponentConfigurations } from "@/data/configurations";
 import DOMPurify from "dompurify";
 
 // Allow GoA web component custom elements through DOMPurify.
@@ -65,20 +66,22 @@ export function ConfigurationPreview({
               webComponentCode.js ? `<script>${webComponentCode.js}</script>` : "",
             ].join("");
 
+      const previewHtml = configurations.previewWrapper
+        ? configurations.previewWrapper.replace("{{slot}}", rawCode)
+        : rawCode;
+
       // Extract script content before sanitization
-      const scriptMatch = rawCode.match(/<script>([\s\S]*?)<\/script>/i);
+      const scriptMatch = previewHtml.match(/<script>([\s\S]*?)<\/script>/i);
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
       // Sanitize HTML and add version="2" to all goa- components
-      const sanitizedHtml = DOMPurify.sanitize(rawCode, DOMPURIFY_CONFIG);
-      const html = sanitizedHtml
+      const sanitizedHtml = DOMPurify.sanitize(previewHtml, DOMPURIFY_CONFIG);
+      previewRef.current.innerHTML = sanitizedHtml
         .replace(
           /<goa-(?!microsite-header)([a-z-]+)(?![^>]*version=)/g,
           '<goa-$1 version="2"',
         )
         .trim();
-
-      previewRef.current.innerHTML = html;
 
       // Execute script content after HTML is rendered
       if (scriptContent) {
@@ -123,6 +126,13 @@ export function ConfigurationPreview({
     return () => el.removeEventListener("_change", handler);
   }, [handleConfigChange]);
 
+  // Apply optional previewStyle before paint to avoid a flash of unstyled preview
+  useLayoutEffect(() => {
+    if (previewRef.current && configurations.previewStyle) {
+      previewRef.current.style.cssText = configurations.previewStyle;
+    }
+  }, [configurations.previewStyle]);
+
   if (!selectedConfig) {
     return <div>No configuration found</div>;
   }
@@ -132,7 +142,6 @@ export function ConfigurationPreview({
       {/* Control Bar */}
       <div className="control-bar">
         <div className="config-dropdown">
-          {/* @ts-expect-error - goa-dropdown is a web component */}
           <goa-dropdown
             name="configuration"
             value={selectedConfigId}
@@ -149,35 +158,38 @@ export function ConfigurationPreview({
 
         <div className="external-links">
           {figmaUrl && (
-            <a
-              href={figmaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="external-link"
-              aria-label="View in Figma"
-              title="View in Figma"
-            >
-              <goa-icon type="logo-figma" size="medium"></goa-icon>
-            </a>
+            <GoabTooltip content="View Figma component">
+              <a
+                href={figmaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="external-link"
+                aria-label="View Figma component"
+              >
+                <goa-icon type="logo-figma" size="medium"></goa-icon>
+              </a>
+            </GoabTooltip>
           )}
           {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="external-link github-link"
-              aria-label="View GitHub issues"
-              title="View GitHub issues"
-            >
-              <goa-icon type="logo-github" size="medium"></goa-icon>
-              {issueCount !== null && <span className="issue-count">({issueCount})</span>}
-            </a>
+            <GoabTooltip content="View GitHub issues">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="external-link github-link"
+                aria-label="View GitHub issues"
+              >
+                <goa-icon type="logo-github" size="medium"></goa-icon>
+                {issueCount !== null && <span className="issue-count">({issueCount})</span>}
+              </a>
+            </GoabTooltip>
           )}
         </div>
       </div>
 
       {/* Preview Area */}
       <div className="preview-area">
+        {/* previewStyle applied via useLayoutEffect above for contextual previews (e.g. grey workspace background) */}
         <div className="preview-container" ref={previewRef}>
           {/* Web components rendered here via innerHTML */}
         </div>
@@ -221,7 +233,8 @@ export function ConfigurationPreview({
           gap: var(--goa-space-s, 0.5rem);
         }
 
-        .external-link {
+        .external-link,
+        .external-link:visited {
           display: flex;
           align-items: center;
           gap: var(--goa-space-2xs, 0.25rem);
@@ -260,6 +273,8 @@ export function ConfigurationPreview({
 
         .configuration-preview .preview-container {
           padding: var(--goa-space-xl, 2rem);
+          border-radius: inherit;
+          overflow: hidden;
         }
       `}</style>
     </div>

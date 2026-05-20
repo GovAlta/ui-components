@@ -1,4 +1,11 @@
-<svelte:options customElement="goa-accordion" />
+<svelte:options
+  customElement={{
+    tag: "goa-accordion",
+    props: {
+      headingType: { type: "String", attribute: "heading-type", reflect: true },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
@@ -28,10 +35,16 @@
     ["left", "right"],
   );
 
+  const [AccordionHeadingTypes, validateAccordionTypes] = typeValidator(
+    "Accordion Type",
+    ["normal", "filled"],
+  );
+
   // Types
 
   type HeadingSize = (typeof HeadingSizes)[number];
   type IconPosition = (typeof IconPositions)[number];
+  type AccordionHeadingType = (typeof AccordionHeadingTypes)[number];
 
   // Props
 
@@ -59,6 +72,8 @@
   export let ml: Spacing = null;
   /** Sets the position of the expand/collapse icon. */
   export let iconposition: IconPosition = "left";
+  /** Sets the accordion style variant. @default "normal" */
+  export let headingType: AccordionHeadingType = "normal";
 
   // Private
 
@@ -90,6 +105,7 @@
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
     validateIconPosition(iconposition);
+    validateAccordionTypes(headingType);
     ensureSlotExists(_slotEl);
 
     _headingSlotChildren = getHeadingChildren();
@@ -299,6 +315,7 @@
       aria-controls={`${_accordionId}-content`}
       aria-expanded={isOpen}
       class:iconRight={iconposition === "right"}
+      class:filled={headingType === "filled"}
       bind:this={_summaryEl}
       on:click={onAccordionToggle}
       data-testid={`${testid}-summary`}
@@ -320,6 +337,7 @@
         {#if secondarytext}
           <span class="secondary-text">{secondarytext}</span>
         {/if}
+        <!-- svelte-ignore a11y-click-events-have-key-events because the enter and space handlers are blocked too-->
         <div
           class="heading-content"
           class:heading-content-top={_headingSlotChildren.length}
@@ -328,6 +346,14 @@
           <slot name="headingcontent" />
         </div>
       </div>
+
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      {#if $$slots.actions}
+        <div class="actions" on:click|stopPropagation>
+          <slot name="actions" />
+        </div>
+      {/if}
 
       {#if iconposition === "right"}
         <goa-icon
@@ -382,12 +408,26 @@
     cursor: pointer;
     list-style: none;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 
     /* safari hack (see below) */
     position: relative;
     transition: var(--goa-motion-duration-short-2) background-color
       var(--goa-motion-curve-expressive);
+  }
+
+  summary.filled {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading,
+      var(--goa-color-greyscale-100)
+    );
+  }
+
+  summary.filled:hover {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading-hover,
+      var(--goa-color-greyscale-150)
+    );
   }
 
   summary.iconRight {
@@ -403,6 +443,14 @@
   summary:active {
     background-color: var(--goa-accordion-color-bg-heading);
     outline: none;
+  }
+
+  summary.filled:focus-visible,
+  summary.filled:active {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading,
+      var(--goa-color-greyscale-100)
+    );
   }
 
   /* Hack to make outline radius work on Safari */
@@ -469,6 +517,13 @@
 
   .heading-content {
     flex: 1;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    padding-left: var(--goa-space-xs, 0.5rem);
   }
 
   .container-medium {

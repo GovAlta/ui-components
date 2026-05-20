@@ -265,6 +265,7 @@ export type GoabButtonGroupGap = "relaxed" | "compact";
 // Accordion
 export type GoabAccordionHeadingSize = "small" | "medium";
 export type GoabAccordionIconPosition = "left" | "right";
+export type GoabAccordionHeadingType = "normal" | "filled";
 
 // Tooltip
 
@@ -1337,6 +1338,7 @@ export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw" | "%";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
 
 // Work side menu
+/** @deprecated Use trailingContent with explicit badge components for indicator styling. */
 export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
 
 // Work side notification
@@ -1378,3 +1380,5 @@ export type GoabRadioGroupSize = "default" | "compact";
 export type GoabInputSize = "default" | "compact";
 
 export type GoabTextAreaSize = "default" | "compact";
+
+export type GoabThemeMode = "light" | "dark";

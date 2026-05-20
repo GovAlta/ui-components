@@ -1,31 +1,70 @@
 {
   "componentSlug": "page-block",
   "extractedFrom": "libs/web-components/src/components/page-block/PageBlock.svelte",
-  "props": [
-    {
-      "name": "width",
-      "type": "\"full\" | string",
-      "values": [
-        "full",
-        "string"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "GoabPageBlockSize",
+          "required": false,
+          "default": "full",
+          "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+        }
       ],
-      "required": false,
-      "default": "full",
-      "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "angular": {
+      "props": [
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "GoabPageBlockSize",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "\"full\" | string",
+          "values": [
+            "full",
+            "string"
+          ],
+          "required": false,
+          "default": "full",
+          "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

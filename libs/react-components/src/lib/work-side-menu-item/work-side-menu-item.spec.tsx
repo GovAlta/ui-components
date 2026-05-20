@@ -57,4 +57,19 @@ describe("WorkSideMenuItem", () => {
     const slotDiv = menuItem?.querySelector('[slot="popoverContent"]');
     expect(slotDiv).toBeNull();
   });
+
+  it("should render trailingContent slot", () => {
+    const { baseElement } = render(
+      <WorkSideMenuItem
+        label="Notifications"
+        trailingContent={<span data-testid="trailing">2</span>}
+      />,
+    );
+    const menuItem = baseElement.querySelector("goa-work-side-menu-item");
+    expect(menuItem).toBeTruthy();
+
+    const trailingSlot = menuItem?.querySelector('[slot="trailingContent"]');
+    expect(trailingSlot).toBeTruthy();
+    expect(trailingSlot?.textContent).toBe("2");
+  });
 });

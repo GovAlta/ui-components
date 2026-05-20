@@ -32,7 +32,7 @@ import { NgTemplateOutlet } from "@angular/common";
         [attr.closable]="closable"
         [attr.transition]="transition"
         [attr.heading]="getHeadingAsString()"
-        (_close)="_onClose()"
+        (_close)="_onClose($event)"
       >
         <div slot="heading">
           @if (this.heading !== "" && getHeadingAsTemplate() !== null) {
@@ -91,7 +91,7 @@ export class GoabModal implements OnInit {
   @Input() actions!: TemplateRef<any>;
 
   /** Emits when the modal is closed. */
-  @Output() onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter<void>();
 
   getHeadingAsString(): string {
     return this.heading instanceof TemplateRef ? "" : this.heading;
@@ -102,7 +102,8 @@ export class GoabModal implements OnInit {
     return this.heading instanceof TemplateRef ? this.heading : null;
   }
 
-  _onClose() {
+  _onClose(event: Event) {
+    if (event.target !== event.currentTarget) return;
     this.onClose.emit();
   }
 }

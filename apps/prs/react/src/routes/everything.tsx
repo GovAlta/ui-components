@@ -26,7 +26,6 @@ import {
   GoabDrawer,
   GoabDropdown,
   GoabDropdownItem,
-  GoabFieldset,
   GoabFileUploadCard,
   GoabFileUploadInput,
   GoabFilterChip,
@@ -50,13 +49,6 @@ import {
   GoabPages,
   GoabPagination,
   GoabPopover,
-  GoabPublicForm,
-  GoabPublicFormPage,
-  GoabPublicFormSummary,
-  GoabPublicFormTask,
-  GoabPublicFormTaskList,
-  GoabPublicSubform,
-  GoabPublicSubformIndex,
   GoabRadioGroup,
   GoabRadioItem,
   GoabSideMenu,
@@ -657,7 +649,12 @@ export function EverythingRoute(): JSX.Element {
                 </GoabText>
               </GoabContainer>
             ))}
-            <GoabContainer type="interactive" accent="filled" padding="relaxed" width="content">
+            <GoabContainer
+              type="interactive"
+              accent="filled"
+              padding="relaxed"
+              width="content"
+            >
               <GoabText tag="p" size="body-m">
                 Type: interactive
                 <br />
@@ -1133,6 +1130,17 @@ export function EverythingRoute(): JSX.Element {
                 ))}
               </GoabDropdown>
             </GoabFormItem>
+            <GoabFormItem label="Native dropdown">
+              <GoabDropdown
+                name="native-countries"
+                native
+                onChange={handleDropdownChange}
+              >
+                <GoabDropdownItem value="ca" label="Canada" />
+                <GoabDropdownItem value="us" label="United States" />
+                <GoabDropdownItem value="mx" label="Mexico" />
+              </GoabDropdown>
+            </GoabFormItem>
           </GoabGrid>
         </GoabContainer>
         <GoabContainer type="interactive" padding="relaxed">
@@ -1577,7 +1585,8 @@ export function EverythingRoute(): JSX.Element {
             Data Grid (Keyboard Navigation)
           </GoabText>
           <GoabText tag="p" size="body-s" mb="m">
-            The data grid wraps a table to enable keyboard navigation. Use arrow keys to move between cells.
+            The data grid wraps a table to enable keyboard navigation. Use arrow keys to
+            move between cells.
           </GoabText>
           <GoabDataGrid keyboardNav="table">
             <GoabTable width="100%">
@@ -1597,11 +1606,16 @@ export function EverythingRoute(): JSX.Element {
                       <td data-grid="cell">{row.name}</td>
                       <td data-grid="cell">{row.created}</td>
                       <td data-grid="cell">
-                        <GoabBadge type={row.status === "Active" ? "success" : "important"} content={row.status} />
+                        <GoabBadge
+                          type={row.status === "Active" ? "success" : "important"}
+                          content={row.status}
+                        />
                       </td>
                       <td data-grid="cell">{row.progress}%</td>
                       <td data-grid="cell">
-                        <GoabButton type="tertiary" size="compact">View</GoabButton>
+                        <GoabButton type="tertiary" size="compact">
+                          View
+                        </GoabButton>
                       </td>
                     </tr>
                   ))}

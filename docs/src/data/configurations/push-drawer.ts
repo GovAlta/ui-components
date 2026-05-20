@@ -51,6 +51,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   componentSlug: "push-drawer",
   componentName: "Push Drawer",
   defaultConfigurationId: "basic",
+  previewStyle: "padding: 0;",
 
   configurations: [
     {

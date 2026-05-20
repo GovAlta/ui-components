@@ -1,6 +1,8 @@
 {
   "name": "goa-accordion",
-  "required": ["heading"],
+  "required": [
+    "heading"
+  ],
   "attributes": [
     {
       "name": "heading",
@@ -40,6 +42,22 @@
         {
           "name": "medium",
           "description": "Heading size of the accordion container is medium."
+        }
+      ],
+      "type": "string"
+    },
+    {
+      "name": "heading-type",
+      "default": "normal",
+      "description": "Sets the accordion style variant.",
+      "values": [
+        {
+          "name": "normal",
+          "description": "Normal accordion style."
+        },
+        {
+          "name": "filled",
+          "description": "Filled accordion style."
         }
       ],
       "type": "string"

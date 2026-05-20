@@ -1,0 +1,117 @@
+<div>
+  <goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+
+  <goab-text tag="h1" mt="m">Bug #3668: Temporary notification refinements</goab-text>
+
+  <goab-block>
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3668"
+        target="_blank"
+        rel="noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        1. Indeterminate and progress variants should not have a dark grey border, and
+        should have a raised-heavy shadow. 2. Action button should be a tertiary
+        button, not a text button. 3. Below 360px, message and action button stack
+        vertically with button right-aligned.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <goab-text tag="h3">
+    Test 1: Indeterminate and progress variants (border + shadow)
+  </goab-text>
+  <goab-text tag="p">
+    Click each to trigger. Inspect the notification surface. Indeterminate and
+    progress should NOT have a dark grey border and SHOULD have a raised-heavy shadow
+    (matching basic/success/failure).
+  </goab-text>
+  <goab-block gap="s" direction="column" mb="l">
+    <goab-button type="secondary" (onClick)="showBasic()">
+      Basic (reference)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showSuccess()">
+      Success (reference)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showFailure()">
+      Failure (reference)
+    </goab-button>
+    <goab-button (onClick)="showIndeterminate()">Indeterminate</goab-button>
+    <goab-button (onClick)="showProgress()">Progress</goab-button>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3">Test 2: Action button style</goab-text>
+  <goab-text tag="p">
+    The action button should render as a tertiary button, not a text button. Inspect
+    the button element.
+  </goab-text>
+  <goab-button (onClick)="showWithAction()">Show with action button</goab-button>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3">Test 3: Stacking below 360px</goab-text>
+  <goab-text tag="p">
+    Resize your browser below 360px width and trigger a notification with an action.
+    Message and action button should stack vertically with button right-aligned.
+  </goab-text>
+  <goab-block gap="s" direction="column" mb="l">
+    <goab-button (onClick)="showWithAction()">
+      Show with action (then resize to 360px)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showLongContent()">
+      Show with long content + action
+    </goab-button>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3">
+    Test 4: Centered controller overlay blocks underlying UI
+  </goab-text>
+  <goab-text tag="p">
+    Click the button below to show a centered notification, then try clicking the
+    fixed Underlying target button at the bottom-right while the notification is
+    visible. If the count does not increase until the notification disappears, the
+    full-width controller overlay is blocking pointer events outside the snackbar.
+  </goab-text>
+  <goab-block gap="s" direction="column" mb="l">
+    <goab-button (onClick)="showControllerOverlayIssue()">
+      Show centered notification
+    </goab-button>
+    <goab-button type="secondary" (onClick)="resetUnderlyingTargetClicks()">
+      Reset target count
+    </goab-button>
+  </goab-block>
+
+  <goab-text tag="p">Underlying target clicks: {{ underlyingTargetClicks }}</goab-text>
+</div>
+
+<button
+  type="button"
+  (click)="incrementUnderlyingTargetClicks()"
+  style="
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #666;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: #222;
+    font: inherit;
+  "
+>
+  Underlying target
+</button>

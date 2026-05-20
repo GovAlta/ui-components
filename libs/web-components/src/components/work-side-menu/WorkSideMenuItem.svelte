@@ -18,7 +18,7 @@
   export let url: string = "";
 
   // optional
-  /** Badge text displayed alongside the menu item (e.g., notification count). */
+  /** @deprecated Use trailingContent instead. Badge text displayed alongside the menu item (e.g., notification count). */
   export let badge: string = "";
   /** When true, indicates this is the currently active menu item. */
   export let current: boolean = false;
@@ -28,7 +28,7 @@
   export let icon: GoAIconType | undefined = undefined;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. */
+  /** @deprecated Use trailingContent instead. Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. */
   export let type: WorkSideMenuItemType = "normal";
 
   // *******
@@ -52,6 +52,7 @@
   $: _alwaysVisible =
     !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
   $: _hasPopoverContent = $$slots.popoverContent;
+  $: _hasTrailingContent = $$slots.trailingContent;
   $: _badgeType = type === "emergency" ? "emergency" : "success";
 
   // *****
@@ -260,6 +261,11 @@
         <div class="menu-item-label">
           {label}
         </div>
+        {#if _hasTrailingContent}
+          <div class="trailing-content-slot">
+            <slot name="trailingContent" />
+          </div>
+        {/if}
         {#if badge}
           <goa-badge
             class="badge"
@@ -310,6 +316,11 @@
           <div class="menu-item-label">
             {label}
           </div>
+          {#if _hasTrailingContent}
+            <div class="trailing-content-slot">
+              <slot name="trailingContent" />
+            </div>
+          {/if}
           {#if badge}
             <goa-badge
               class="badge"
@@ -348,6 +359,11 @@
       <div class="menu-item-label">
         {label}
       </div>
+      {#if _hasTrailingContent}
+        <div class="trailing-content-slot">
+          <slot name="trailingContent" />
+        </div>
+      {/if}
       {#if badge}
         <goa-badge
           class="badge"
@@ -451,10 +467,6 @@
       var(--goa-typography-body-s)
     );
     animation: delayText 100ms;
-  }
-
-  .trailing-content-slot {
-    display: flex;
   }
 
   /* Current item */

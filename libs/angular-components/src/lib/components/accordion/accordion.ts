@@ -1,6 +1,7 @@
 import {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
+  GoabAccordionHeadingType,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -28,9 +29,11 @@ import { GoabBaseComponent } from "../base.component";
         [attr.secondarytext]="secondaryText"
         [attr.open]="open"
         [attr.headingsize]="headingSize"
+        [attr.heading-type]="headingType"
         [attr.maxwidth]="maxWidth"
         [attr.testid]="testId"
         [attr.iconposition]="iconPosition"
+        [attr.heading-type]="headingType"
         [attr.mt]="mt"
         [attr.mb]="mb"
         [attr.ml]="ml"
@@ -40,6 +43,11 @@ import { GoabBaseComponent } from "../base.component";
         <div slot="headingcontent">
           <ng-container [ngTemplateOutlet]="headingContent"></ng-container>
         </div>
+        @if (actions) {
+          <div slot="actions">
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+          </div>
+        }
         <ng-content></ng-content>
       </goa-accordion>
     }
@@ -60,10 +68,14 @@ export class GoabAccordion extends GoabBaseComponent implements OnInit {
   @Input() headingSize?: GoabAccordionHeadingSize;
   /** Sets the heading content template reference. */
   @Input() headingContent!: TemplateRef<any>;
+  /** Sets the actions content template reference, rendered right-aligned in the heading before the expand/collapse icon. */
+  @Input() actions?: TemplateRef<any>;
   /** Sets the maximum width of the accordion. */
   @Input() maxWidth?: string;
   /** Sets the position of the expand/collapse icon. */
   @Input() iconPosition?: GoabAccordionIconPosition;
+  /** Sets the accordion style variant. */
+  @Input() headingType?: GoabAccordionHeadingType;
 
   /** Emits when the accordion opens or closes. Emits the new open state as a boolean. */
   @Output() onChange = new EventEmitter<boolean>();

@@ -38,9 +38,7 @@ import {
   GoabAppFooterMetaSection,
   GoabAppFooterNavSection,
   GoabFileUploadInput,
-  GoabFileUploadCard,
   GoabSideMenuHeading,
-  GoabAccordion,
   GoabSkeleton,
   GoabCheckbox,
   GoabFormStep,
@@ -53,11 +51,9 @@ import {
   GoabTableSortHeader,
   GoabGrid,
 } from "@abgov/react-components";
-import "@abgov/style";
 import {
   GoabDropdownOnChangeDetail,
   GoabInputOnChangeDetail,
-  GoabSkeletonSize,
   GoabTextAreaOnChangeDetail,
 } from "@abgov/ui-components-common";
 
@@ -81,7 +77,7 @@ export function EverythingBRoute() {
   const [step, setStep] = useState<number>(-1);
   const [step2, setStep2] = useState<number>(-1);
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const noop = () => {};
+  const noop = () => { };
   // Snackbar states
   const [snackbarVisible, setSnackbarVisible] = useState<
     | false
@@ -199,8 +195,7 @@ export function EverythingBRoute() {
       <section slot="header">
         <GoabMicrositeHeader type="alpha" version="Design-system-sandbox" />
 
-        <GoabAppHeader url="/" heading="All components">
-        </GoabAppHeader>
+        <GoabAppHeader url="/" heading="All components"></GoabAppHeader>
       </section>
 
       {/* Back link after first header */}
@@ -3743,7 +3738,7 @@ export function EverythingBRoute() {
                         name="item"
                         value={value}
                         width="20ch"
-                        onChange={function (
+                        onChange={function(
                           detail: GoabInputOnChangeDetail<string>,
                         ): void {
                           throw new Error("Function not implemented.");
@@ -5468,16 +5463,14 @@ export function EverythingBRoute() {
                         <GoabCheckbox
                           name="tom_row1"
                           checked={false}
-                          onChange={() => { /* noop */ }}
+                          onChange={() => {
+                            /* noop */
+                          }}
                         />
                       </td>
                       <td className="goa-table-cell--text">001</td>
                       <td className="goa-table-cell--input">
-                        <GoabInput
-                          name="tom_name1"
-                          value="John Doe"
-                          width="100%"
-                        />
+                        <GoabInput name="tom_name1" value="John Doe" width="100%" />
                       </td>
                       <td className="goa-table-cell--input">
                         <GoabInput
@@ -5499,8 +5492,16 @@ export function EverythingBRoute() {
                       </td>
                       <td className="goa-table-cell--icon-button">
                         <GoabBlock direction="row" gap="xs">
-                          <GoabIconButton icon="pencil" size="small" onClick={() => console.log('Edit 001')} />
-                          <GoabIconButton icon="trash" size="small" onClick={() => console.log('Delete 001')} />
+                          <GoabIconButton
+                            icon="pencil"
+                            size="small"
+                            onClick={() => console.log("Edit 001")}
+                          />
+                          <GoabIconButton
+                            icon="trash"
+                            size="small"
+                            onClick={() => console.log("Delete 001")}
+                          />
                         </GoabBlock>
                       </td>
                     </tr>
@@ -5509,16 +5510,14 @@ export function EverythingBRoute() {
                         <GoabCheckbox
                           name="tom_row2"
                           checked={true}
-                          onChange={() => { /* noop */ }}
+                          onChange={() => {
+                            /* noop */
+                          }}
                         />
                       </td>
                       <td className="goa-table-cell--text">002</td>
                       <td className="goa-table-cell--input">
-                        <GoabInput
-                          name="tom_name2"
-                          value="Jane Smith"
-                          width="100%"
-                        />
+                        <GoabInput name="tom_name2" value="Jane Smith" width="100%" />
                       </td>
                       <td className="goa-table-cell--input">
                         <GoabInput
@@ -5540,8 +5539,16 @@ export function EverythingBRoute() {
                       </td>
                       <td className="goa-table-cell--icon-button">
                         <GoabBlock direction="row" gap="xs">
-                          <GoabIconButton icon="pencil" size="small" onClick={() => console.log('Edit 002')} />
-                          <GoabIconButton icon="trash" size="small" onClick={() => console.log('Delete 002')} />
+                          <GoabIconButton
+                            icon="pencil"
+                            size="small"
+                            onClick={() => console.log("Edit 002")}
+                          />
+                          <GoabIconButton
+                            icon="trash"
+                            size="small"
+                            onClick={() => console.log("Delete 002")}
+                          />
                         </GoabBlock>
                       </td>
                     </tr>
@@ -5550,16 +5557,14 @@ export function EverythingBRoute() {
                         <GoabCheckbox
                           name="tom_row3"
                           checked={false}
-                          onChange={() => { /* noop */ }}
+                          onChange={() => {
+                            /* noop */
+                          }}
                         />
                       </td>
                       <td className="goa-table-cell--text">003</td>
                       <td className="goa-table-cell--input">
-                        <GoabInput
-                          name="tom_name3"
-                          value="Bob Johnson"
-                          width="100%"
-                        />
+                        <GoabInput name="tom_name3" value="Bob Johnson" width="100%" />
                       </td>
                       <td className="goa-table-cell--input">
                         <GoabInput
@@ -5581,8 +5586,16 @@ export function EverythingBRoute() {
                       </td>
                       <td className="goa-table-cell--icon-button">
                         <GoabBlock direction="row" gap="xs">
-                          <GoabIconButton icon="pencil" size="small" onClick={() => console.log('Edit 003')} />
-                          <GoabIconButton icon="trash" size="small" onClick={() => console.log('Delete 003')} />
+                          <GoabIconButton
+                            icon="pencil"
+                            size="small"
+                            onClick={() => console.log("Edit 003")}
+                          />
+                          <GoabIconButton
+                            icon="trash"
+                            size="small"
+                            onClick={() => console.log("Delete 003")}
+                          />
                         </GoabBlock>
                       </td>
                     </tr>
@@ -5611,7 +5624,9 @@ export function EverythingBRoute() {
                         <GoabCheckbox
                           name="tom_relaxed1"
                           checked={false}
-                          onChange={() => { /* noop */ }}
+                          onChange={() => {
+                            /* noop */
+                          }}
                         />
                       </td>
                       <td className="goa-table-cell--text">001</td>
@@ -5627,8 +5642,16 @@ export function EverythingBRoute() {
                       </td>
                       <td className="goa-table-cell--icon-button">
                         <GoabBlock direction="row" gap="xs">
-                          <GoabIconButton icon="pencil" size="small" onClick={() => console.log('Edit')} />
-                          <GoabIconButton icon="trash" size="small" onClick={() => console.log('Delete')} />
+                          <GoabIconButton
+                            icon="pencil"
+                            size="small"
+                            onClick={() => console.log("Edit")}
+                          />
+                          <GoabIconButton
+                            icon="trash"
+                            size="small"
+                            onClick={() => console.log("Delete")}
+                          />
                         </GoabBlock>
                       </td>
                     </tr>
@@ -5637,7 +5660,9 @@ export function EverythingBRoute() {
                         <GoabCheckbox
                           name="tom_relaxed2"
                           checked={true}
-                          onChange={() => { /* noop */ }}
+                          onChange={() => {
+                            /* noop */
+                          }}
                         />
                       </td>
                       <td className="goa-table-cell--text">002</td>
@@ -5653,14 +5678,21 @@ export function EverythingBRoute() {
                       </td>
                       <td className="goa-table-cell--icon-button">
                         <GoabBlock direction="row" gap="xs">
-                          <GoabIconButton icon="pencil" size="small" onClick={() => console.log('Edit')} />
-                          <GoabIconButton icon="trash" size="small" onClick={() => console.log('Delete')} />
+                          <GoabIconButton
+                            icon="pencil"
+                            size="small"
+                            onClick={() => console.log("Edit")}
+                          />
+                          <GoabIconButton
+                            icon="trash"
+                            size="small"
+                            onClick={() => console.log("Delete")}
+                          />
                         </GoabBlock>
                       </td>
                     </tr>
                   </tbody>
                 </GoabTable>
-
               </GoabBlock>
             </GoabTab>
 
