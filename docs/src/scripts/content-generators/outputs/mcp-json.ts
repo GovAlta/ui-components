@@ -13,10 +13,20 @@ export function writeMcpJson(records: AnyRecord[]): { written: number } {
 
   fs.mkdirSync(paths.output.mcp, { recursive: true });
 
+  // Clear stale files in each collection folder before writing. Renamed or
+  // removed records would otherwise leave orphan JSON behind. Errors block
+  // the orchestrator before this point (see index.ts), so the previous
+  // output stays as last-known-good on a failed run.
   let written = 0;
   for (const [collection, list] of byCollection) {
     const dir = path.join(paths.output.mcp, collection);
-    fs.mkdirSync(dir, { recursive: true });
+    if (fs.existsSync(dir)) {
+      for (const entry of fs.readdirSync(dir)) {
+        if (entry.endsWith(".json")) fs.unlinkSync(path.join(dir, entry));
+      }
+    } else {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     for (const rec of list) {
       // Flatten nested ids (e.g. "designers/designing-with-ds") into a
       // filesystem-safe filename. The canonical id lives in the JSON body.
