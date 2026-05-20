@@ -2,110 +2,463 @@
   "$ref": "#/definitions/examples",
   "definitions": {
     "examples": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "content-layout",
-              "feedback-and-alerts",
-              "inputs-and-actions",
-              "forms",
-              "structure-and-navigation",
-              "technical"
-            ]
-          }
-        },
-        "scale": {
-          "type": "string",
-          "enum": [
-            "interaction",
-            "task",
-            "page",
-            "product"
-          ]
-        },
-        "userType": {
-          "type": "string",
-          "enum": [
-            "citizen",
-            "worker",
-            "both"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "components": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "relatedExamples": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "accessibilityNotes": {
-          "type": "string"
-        },
-        "figmaUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "published",
-            "draft",
-            "deprecated"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "productType": {
+              "type": "string",
+              "enum": [
+                "workspace",
+                "public-form"
+              ]
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "relatedExamples": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "aliases": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "accessibilityNotes": {
+              "type": "string"
+            },
+            "figmaUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "published",
+                "draft",
+                "deprecated"
+              ],
+              "default": "published"
+            },
+            "previewImage": {
+              "type": "string"
+            },
+            "hideHero": {
+              "type": "boolean"
+            },
+            "previewFullWidth": {
+              "type": "boolean"
+            },
+            "styles": {
+              "type": "string"
+            },
+            "fullWidth": {
+              "type": "boolean"
+            },
+            "previewStyle": {
+              "type": "string"
+            },
+            "hidden": {
+              "type": "boolean"
+            },
+            "size": {
+              "type": "string",
+              "const": "interaction"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "components",
+            "size"
           ],
-          "default": "published"
+          "additionalProperties": false
         },
-        "hidden": {
-          "type": "boolean"
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/id"
+            },
+            "title": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/title"
+            },
+            "description": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/description"
+            },
+            "slug": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/slug"
+            },
+            "productType": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/productType"
+            },
+            "tags": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/tags"
+            },
+            "components": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/components"
+            },
+            "relatedExamples": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/relatedExamples"
+            },
+            "aliases": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/aliases"
+            },
+            "accessibilityNotes": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/accessibilityNotes"
+            },
+            "figmaUrl": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/figmaUrl"
+            },
+            "status": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/status"
+            },
+            "previewImage": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewImage"
+            },
+            "hideHero": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hideHero"
+            },
+            "previewFullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewFullWidth"
+            },
+            "styles": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/styles"
+            },
+            "fullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/fullWidth"
+            },
+            "previewStyle": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewStyle"
+            },
+            "hidden": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hidden"
+            },
+            "size": {
+              "type": "string",
+              "const": "section"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "components",
+            "size"
+          ],
+          "additionalProperties": false
         },
-        "previewImage": {
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/id"
+            },
+            "title": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/title"
+            },
+            "description": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/description"
+            },
+            "slug": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/slug"
+            },
+            "productType": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/productType"
+            },
+            "tags": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/tags"
+            },
+            "components": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/components"
+            },
+            "relatedExamples": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/relatedExamples"
+            },
+            "aliases": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/aliases"
+            },
+            "accessibilityNotes": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/accessibilityNotes"
+            },
+            "figmaUrl": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/figmaUrl"
+            },
+            "status": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/status"
+            },
+            "previewImage": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewImage"
+            },
+            "hideHero": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hideHero"
+            },
+            "previewFullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewFullWidth"
+            },
+            "styles": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/styles"
+            },
+            "fullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/fullWidth"
+            },
+            "previewStyle": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewStyle"
+            },
+            "hidden": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hidden"
+            },
+            "size": {
+              "type": "string",
+              "const": "page"
+            },
+            "previewUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "reactSourceUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "angularSourceUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "sourceUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "stackblitzUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "frameworks": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "react",
+                  "angular",
+                  "web-components"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "components",
+            "size"
+          ],
+          "additionalProperties": false
         },
-        "fullWidth": {
-          "type": "boolean"
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/id"
+            },
+            "title": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/title"
+            },
+            "description": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/description"
+            },
+            "slug": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/slug"
+            },
+            "productType": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/productType"
+            },
+            "tags": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/tags"
+            },
+            "components": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/components"
+            },
+            "relatedExamples": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/relatedExamples"
+            },
+            "aliases": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/aliases"
+            },
+            "accessibilityNotes": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/accessibilityNotes"
+            },
+            "figmaUrl": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/figmaUrl"
+            },
+            "status": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/status"
+            },
+            "previewImage": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewImage"
+            },
+            "hideHero": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hideHero"
+            },
+            "previewFullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewFullWidth"
+            },
+            "styles": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/styles"
+            },
+            "fullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/fullWidth"
+            },
+            "previewStyle": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewStyle"
+            },
+            "hidden": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hidden"
+            },
+            "size": {
+              "type": "string",
+              "const": "task"
+            },
+            "previewUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/previewUrl"
+            },
+            "reactSourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/reactSourceUrl"
+            },
+            "angularSourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/angularSourceUrl"
+            },
+            "sourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/sourceUrl"
+            },
+            "stackblitzUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/stackblitzUrl"
+            },
+            "frameworks": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/frameworks"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "components",
+            "size"
+          ],
+          "additionalProperties": false
         },
-        "previewStyle": {
-          "type": "string"
-        },
-        "$schema": {
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/id"
+            },
+            "title": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/title"
+            },
+            "description": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/description"
+            },
+            "slug": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/slug"
+            },
+            "productType": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/productType"
+            },
+            "tags": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/tags"
+            },
+            "components": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/components"
+            },
+            "relatedExamples": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/relatedExamples"
+            },
+            "aliases": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/aliases"
+            },
+            "accessibilityNotes": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/accessibilityNotes"
+            },
+            "figmaUrl": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/figmaUrl"
+            },
+            "status": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/status"
+            },
+            "previewImage": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewImage"
+            },
+            "hideHero": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hideHero"
+            },
+            "previewFullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewFullWidth"
+            },
+            "styles": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/styles"
+            },
+            "fullWidth": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/fullWidth"
+            },
+            "previewStyle": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/previewStyle"
+            },
+            "hidden": {
+              "$ref": "#/definitions/examples/anyOf/0/properties/hidden"
+            },
+            "size": {
+              "type": "string",
+              "const": "product"
+            },
+            "previewUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/previewUrl"
+            },
+            "reactSourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/reactSourceUrl"
+            },
+            "angularSourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/angularSourceUrl"
+            },
+            "sourceUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/sourceUrl"
+            },
+            "stackblitzUrl": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/stackblitzUrl"
+            },
+            "frameworks": {
+              "$ref": "#/definitions/examples/anyOf/2/properties/frameworks"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "components",
+            "size"
+          ],
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "id",
-        "title",
-        "categories",
-        "scale",
-        "userType",
-        "components"
-      ],
-      "additionalProperties": false
+      ]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"
