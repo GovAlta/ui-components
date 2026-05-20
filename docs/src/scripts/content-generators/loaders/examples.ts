@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { paths } from "../config";
 import { parseFrontmatter } from "./frontmatter";
-import { asString, asStringArray, listDirectories } from "./lib";
+import { asString, asStringArray, findIndexMdxFolders } from "./lib";
 import type { ExampleRecord } from "../types";
 
 const PAGE_LIKE_SIZES = new Set(["page", "task", "product"]);
@@ -18,10 +18,9 @@ const VALID_SIZES = new Set<ExampleRecord["size"]>([
 export function loadExamples(): ExampleRecord[] {
   const records: ExampleRecord[] = [];
 
-  for (const folder of listDirectories(paths.content.examples)) {
+  for (const folder of findIndexMdxFolders(paths.content.examples)) {
     const slug = path.basename(folder);
     const indexPath = path.join(folder, "index.mdx");
-    if (!fs.existsSync(indexPath)) continue;
 
     const raw = fs.readFileSync(indexPath, "utf8");
     const { data, body } = parseFrontmatter(raw);

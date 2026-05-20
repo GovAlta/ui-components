@@ -43,3 +43,21 @@ export function listDirectories(dir: string): string[] {
     .filter((e) => e.isDirectory())
     .map((e) => path.join(dir, e.name));
 }
+
+// Walks the tree for index.mdx files and returns the folder containing each.
+// Used by example collections that nest by productType (workspace/case-detail).
+export function findIndexMdxFolders(dir: string): string[] {
+  if (!fs.existsSync(dir)) return [];
+  const folders: string[] = [];
+  function walk(current: string): void {
+    if (fs.existsSync(path.join(current, "index.mdx"))) {
+      folders.push(current);
+      return;
+    }
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      if (entry.isDirectory()) walk(path.join(current, entry.name));
+    }
+  }
+  walk(dir);
+  return folders;
+}
