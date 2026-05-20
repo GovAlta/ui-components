@@ -16,14 +16,12 @@ const EXAMPLE_SLUG_ALIASES: Record<string, string[]> = {
 
 // Legacy or sub-component names that don't show up from code derivation
 // (no matching React class, web component tag, or Angular selector). Used
-// when a renamed component still appears in older content references, or
-// when a sub-component reasonably routes to its parent for navigation.
+// when a renamed component still appears in older content references.
 const COMPONENT_SLUG_ALIASES: Record<string, string[]> = {
   // newSlug: [oldSlug1, oldSlug2, ...]
   "text-area": ["textarea"],
   notification: ["notification-banner"],
   "menu-button": ["multi-action-button"],
-  table: ["table-sort-header"],
 };
 
 export function addComponentAliases(components: ComponentRecord[]): ComponentRecord[] {
