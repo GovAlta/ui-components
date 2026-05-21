@@ -139,7 +139,10 @@
 
     _headings?.forEach((heading) => {
       const name = heading.getAttribute("name");
-      const direction = heading.getAttribute("direction") as SortDirection | "none" | null;
+      const direction = heading.getAttribute("direction") as
+        | SortDirection
+        | "none"
+        | null;
       const sortOrder = Number(heading.getAttribute("sort-order")) || 0;
       if (name && direction && direction !== "none") {
         entries.push({ column: name, direction, order: sortOrder });
@@ -154,8 +157,8 @@
       if (withoutSortOrder.length > 0) {
         console.warn(
           `[goa-table] Multiple headers have initial sort direction but no sort-order set ` +
-          `[${withoutSortOrder.map((e) => e.column).join(", ")}]. ` +
-          `Falling back to DOM order. Add sort-order="1", sort-order="2" to set explicit priority.`,
+            `[${withoutSortOrder.map((e) => e.column).join(", ")}]. ` +
+            `Falling back to DOM order. Add sort-order="1", sort-order="2" to set explicit priority.`,
         );
       }
     }
@@ -241,12 +244,7 @@
 
   function dispatchSortEvent() {
     if (sortMode === "multi") {
-      dispatch(
-        _rootEl,
-        "_multisort",
-        { sorts: _sorts },
-        { bubbles: true },
-      );
+      dispatch(_rootEl, "_multisort", { sorts: _sorts }, { bubbles: true });
     } else {
       const firstSort = _sorts[0];
       dispatch(
@@ -284,6 +282,10 @@
 </div>
 
 <style>
+  :host {
+    box-sizing: border-box;
+  }
+
   /* other styles can be found in the assets/css/components.css file */
   .goatable {
     width: 0;
@@ -298,5 +300,6 @@
     border: var(--goa-table-container-border, 1px solid #e7e7e7);
     border-radius: var(--goa-table-border-radius-container, 16px);
     overflow: hidden;
+    box-sizing: border-box;
   }
 </style>
