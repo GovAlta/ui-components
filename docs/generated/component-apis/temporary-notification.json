@@ -59,24 +59,6 @@
     "webComponents": {
       "props": [
         {
-          "name": "action-text",
-          "type": "string",
-          "required": false,
-          "default": "",
-          "description": "Text for the optional action button. When provided, displays a clickable link button."
-        },
-        {
-          "name": "animation-direction",
-          "type": "\"up\" | \"down\"",
-          "values": [
-            "up",
-            "down"
-          ],
-          "required": false,
-          "default": "down",
-          "description": "Direction the notification animates from when appearing or disappearing."
-        },
-        {
           "name": "horizontal-position",
           "type": "\"left\" | \"center\" | \"right\"",
           "values": [
@@ -89,39 +71,11 @@
           "description": "Horizontal position of the notification container."
         },
         {
-          "name": "message",
-          "type": "string",
-          "required": false,
-          "default": "",
-          "description": "The notification message text to display."
-        },
-        {
-          "name": "progress",
-          "type": "number",
-          "required": false,
-          "default": "-1",
-          "description": "Progress value from 0-100. Use -1 to hide the progress bar. Only applies when type is \"progress\"."
-        },
-        {
           "name": "testid",
           "type": "string",
           "required": true,
           "default": null,
           "description": "Sets a data-testid attribute for automated testing."
-        },
-        {
-          "name": "type",
-          "type": "\"basic\" | \"success\" | \"failure\" | \"indeterminate\" | \"progress\"",
-          "values": [
-            "basic",
-            "success",
-            "failure",
-            "indeterminate",
-            "progress"
-          ],
-          "required": false,
-          "default": "basic",
-          "description": "The notification type which determines the visual style and icon."
         },
         {
           "name": "vertical-position",
@@ -133,13 +87,6 @@
           "required": false,
           "default": "bottom",
           "description": "Vertical position of the notification container."
-        },
-        {
-          "name": "visible",
-          "type": "boolean",
-          "required": false,
-          "default": "true",
-          "description": "Controls whether the notification is visible."
         }
       ],
       "events": [],

@@ -2294,7 +2294,6 @@ function mergeItemArray<T extends { name: string; description: string }>(
   context: string,
 ): T[] {
   const existingByName = new Map(existing.map((item) => [item.name, item]));
-  const nextNames = new Set(next.map((item) => item.name));
 
   // Backfill non-empty descriptions from existing into new items that have empty ones
   const merged: T[] = next.map((item) => {
@@ -2304,18 +2303,6 @@ function mergeItemArray<T extends { name: string; description: string }>(
     }
     return item;
   });
-
-  // Preserve items from existing that are absent in the new extraction
-  // (but skip deprecated entries — they are intentionally excluded)
-  for (const existingItem of existing) {
-    if (!nextNames.has(existingItem.name)) {
-      if ((existingItem as Record<string, unknown>).deprecated) continue;
-      console.warn(
-        `  Preserved manually-added entry "${existingItem.name}" in ${context} (not found in extraction — check source)`,
-      );
-      merged.push(existingItem);
-    }
-  }
 
   return merged.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -2356,8 +2343,8 @@ function saveComponentAPI(api: ExtractedComponentAPI): void {
 
   const filePath = path.join(OUTPUT_PATH, `${api.componentSlug}.json`);
 
-  // Merge with existing file to preserve manually-added entries that the extractor
-  // cannot see (e.g. props defined in function-level intersections, or wrapper gaps).
+  // Merge with existing file to backfill descriptions when the new extraction
+  // has none for an entry.
   let merged = api;
   if (fs.existsSync(filePath)) {
     try {
