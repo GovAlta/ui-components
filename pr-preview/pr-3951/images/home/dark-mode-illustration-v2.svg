@@ -1,0 +1,33 @@
+<svg width="719" height="382" viewBox="0 0 719 382" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="718.67" height="382" rx="12" fill="#1E1E1E"/>
+<!-- Verticals: 87px spacing, varied lengths -->
+<path d="M181 104V278" stroke="#0075D7" stroke-linecap="round"/>
+<path d="M268 17V365"  stroke="#0075D7" stroke-linecap="round"/>
+<path d="M355 191V365" stroke="#0075D7" stroke-linecap="round"/>
+<path d="M442 17V278"  stroke="#0075D7" stroke-linecap="round"/>
+<path d="M529 104V278" stroke="#0075D7" stroke-linecap="round"/>
+<!-- Horizontals: 87px spacing (y=104, 191, 278), varied widths -->
+<path d="M90 104H529"  stroke="#0075D7" stroke-linecap="round"/>
+<path d="M181 191H629" stroke="#0075D7" stroke-linecap="round"/>
+<path d="M90 278H629"  stroke="#0075D7" stroke-linecap="round"/>
+<defs>
+  <clipPath id="moon-clip"><circle cx="224" cy="147" r="60"/></clipPath>
+  <clipPath id="sun-clip"><circle cx="311" cy="278" r="62"/></clipPath>
+</defs>
+<!-- Crescent moon: upper-left -->
+<circle cx="224" cy="147" r="60" fill="#9BA0EB"/>
+<circle cx="255" cy="119" r="50" fill="#1E1E1E" clip-path="url(#moon-clip)"/>
+<!-- Setting sun: striped semicircle on y=278 horizon -->
+<g clip-path="url(#sun-clip)">
+<rect x="249.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="252.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="255.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="258.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="261.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="265.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="268.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="271.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="274.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="277.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="281.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="284.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="287.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="290.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="293.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="297.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="300.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="303.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="306.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="309.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="313.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="316.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="319.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="322.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="325.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="329.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="332.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="335.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="338.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="341.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="345.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="348.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="351.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="354.6" y="216" width="2" height="62" fill="#0075D7"/><rect x="357.8" y="216" width="2" height="62" fill="#0075D7"/><rect x="361.0" y="216" width="2" height="62" fill="#0075D7"/><rect x="364.2" y="216" width="2" height="62" fill="#0075D7"/><rect x="367.4" y="216" width="2" height="62" fill="#0075D7"/><rect x="370.6" y="216" width="2" height="62" fill="#0075D7"/>
+</g>
+<!-- Stars: all within cell x=442–529, y=104–191 -->
+<path d="M486 114 L491 125 L502 130 L491 135 L486 146 L481 135 L470 130 L481 125 Z" fill="#0075D7"/>
+<path d="M463 155 L466 163 L474 166 L466 169 L463 177 L460 169 L452 166 L460 163 Z" fill="#9BA0EB"/>
+<path d="M512 153 L514 158 L519 160 L514 162 L512 167 L510 162 L505 160 L510 158 Z" fill="#0075D7"/>
+<!-- Closing eye: replaces concentric circles, centred on y=278 horizon -->
+<path d="M449 278 C457 257 515 257 523 278 C515 299 457 299 449 278 Z" fill="#9BA0EB"/>
+<path d="M449 278 C457 257 515 257 523 278 C515 276 457 276 449 278 Z" fill="#747BD6"/>
+<!-- Small accent dot: lower-left, on y=278 horizon -->
+<circle cx="137" cy="278" r="10" fill="#747BD6"/>
+</svg>
