@@ -1,0 +1,259 @@
+---
+id: developers/dark-mode-theme
+title: Dark mode theme
+description: Switch between light and dark mode using the React useTheme hook or Angular GoabThemeService
+section: developers
+order: 3
+status: published
+---
+import { withBase } from "@/lib/base-url";
+
+<goa-text size="heading-xl" mt="none" mb="m">Dark mode theme</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">
+  Toggle light and dark mode using the React useTheme hook or the Angular
+  GoabThemeService. The user&apos;s choice persists across sessions.
+</goa-text>
+
+<goa-callout version="2" type="important" heading="Dark mode is still experimental" mt="none" mb="2xl">
+  <goa-text size="body-m" mt="none" mb="none">
+    Dark mode is still being tested. The CSS API and tokens may evolve as we iterate.
+  </goa-text>
+</goa-callout>
+
+<goa-callout version="2" type="information" emphasis="low" mb="2xl">
+  <span style="color: var(--goa-color-text-default)">
+    Theme switching requires <code>@abgov/design-tokens</code> version <strong>2.8.0</strong> or
+    higher with the dark theme stylesheet imported. See <a href={withBase('/get-started/developers/setup')}>Setup</a>
+    for installation steps.
+  </span>
+</goa-callout>
+
+<h2 id="how-it-works">How it works</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  Both the React provider and the Angular service write a <code>data-theme</code>
+  attribute on the document root (<code>&lt;html&gt;</code>). Design tokens scoped
+  to <code>:root[data-theme=&quot;dark&quot;]</code> activate via CSS cascade,
+  automatically applying dark colors to every component without re-rendering.
+</goa-text>
+
+<h3 id="initial-mode-priority">Initial mode priority</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  On first load, the active mode is resolved in this order:
+</goa-text>
+<ol>
+  <li>The user&apos;s previously chosen mode, read from local storage</li>
+  <li>The operating system preference (light or dark)</li>
+  <li>The framework default (light)</li>
+</ol>
+
+<goa-divider mt="xl" mb="xl"></goa-divider>
+
+<h2 id="react">React</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  The React package exposes a context provider and a hook.
+</goa-text>
+
+<h3 id="react-step-1">1. Wrap your app with GoabThemeProvider</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Place the provider near the top of your app, alongside other framework
+  providers such as <code>BrowserRouter</code>:
+</goa-text>
+<pre><code>{`// main.tsx
+import { GoabThemeProvider } from "@abgov/react-components";
+import { BrowserRouter } from "react-router-dom";
+import "@abgov/design-tokens/dist/tokens.css";
+import "@abgov/design-tokens/dist/dark-theme.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <BrowserRouter>
+    <GoabThemeProvider>
+      <App />
+    </GoabThemeProvider>
+  </BrowserRouter>,
+);`}</code></pre>
+
+<h3 id="react-step-2">2. Read and toggle theme with useTheme</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Inside any component below the provider, call <code>useTheme()</code> to read
+  the current mode and switch theme:
+</goa-text>
+<pre><code>{`import { GoabButton, useTheme } from "@abgov/react-components";
+
+function ThemeToggle() {
+  const { mode, toggle } = useTheme();
+  const isDark = mode === "dark";
+
+  return (
+    <GoabButton
+      type="tertiary"
+      leadingIcon={isDark ? "sunny" : "moon"}
+      onClick={toggle}
+    >
+      {isDark ? "Light mode" : "Dark mode"}
+    </GoabButton>
+  );
+}`}</code></pre>
+
+<h3 id="react-api">API</h3>
+<pre><code>{`interface GoabThemeContextValue {
+  /** Current theme mode. */
+  mode: "light" | "dark";
+  /** Set theme to a specific mode. */
+  setMode: (next: "light" | "dark") => void;
+  /** Flip between light and dark. */
+  toggle: () => void;
+}
+
+interface GoabThemeProviderProps {
+  children: ReactNode;
+  /** Initial mode used when no stored or system preference is found. @default "light" */
+  defaultMode?: "light" | "dark";
+}`}</code></pre>
+
+<goa-callout version="2" type="information" emphasis="low" mb="m">
+  <span style="color: var(--goa-color-text-default)">
+    <code>useTheme</code> throws if called outside of <code>GoabThemeProvider</code>.
+  </span>
+</goa-callout>
+
+<goa-divider mt="xl" mb="xl"></goa-divider>
+
+<h2 id="angular">Angular</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  The Angular package exposes a root-provided service backed by a Signal.
+</goa-text>
+
+<h3 id="angular-step-1">1. Import the dark theme stylesheet</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Add the import to your global stylesheet (typically <code>src/styles.css</code>):
+</goa-text>
+<pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+@import "@abgov/design-tokens/dist/dark-theme.css";</code></pre>
+
+<h3 id="angular-step-2">2. Inject GoabThemeService</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  The service is provided in root, so inject it from any component or service:
+</goa-text>
+<pre><code>{`// app.component.ts
+import { Component, inject } from "@angular/core";
+import { GoabThemeService } from "@abgov/angular-components";
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+})
+export class AppComponent {
+  readonly theme = inject(GoabThemeService);
+
+  toggleTheme() {
+    this.theme.toggle();
+  }
+}`}</code></pre>
+
+<h3 id="angular-step-3">3. Bind to the signal in templates</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Read <code>theme.mode()</code> as a signal — Angular tracks the dependency
+  automatically and re-renders when the mode changes:
+</goa-text>
+<pre><code>{`<!-- app.component.html -->
+<goab-button
+  type="tertiary"
+  [leadingIcon]="theme.mode() === 'dark' ? 'sunny' : 'moon'"
+  (onClick)="toggleTheme()"
+>
+  {{ theme.mode() === "dark" ? "Light mode" : "Dark mode" }}
+</goab-button>`}</code></pre>
+
+<h3 id="angular-api">API</h3>
+<pre><code>{`@Injectable({ providedIn: "root" })
+class GoabThemeService {
+  /** Read-only signal — use in templates: theme.mode() === "dark". */
+  readonly mode: Signal<"light" | "dark">;
+  /** Set theme to a specific mode. */
+  setMode(next: "light" | "dark"): void;
+  /** Flip between light and dark. */
+  toggle(): void;
+}`}</code></pre>
+
+<goa-divider mt="xl" mb="xl"></goa-divider>
+
+<h2 id="custom-styling">Custom styling for dark mode</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  If you&apos;re using design system components, they handle dark mode automatically.
+</goa-text>
+<goa-text size="body-m" mt="none" mb="m">
+  If your custom CSS uses <a href={withBase('/tokens')}>design system tokens</a>, dark mode is handled too. The tokens cascade to their dark values when <code>data-theme=&quot;dark&quot;</code> is active.
+</goa-text>
+<pre><code>{`.my-card {
+  background-color: var(--goa-color-surface-card);
+}`}</code></pre>
+<goa-text size="body-m" mt="none" mb="m">
+  Always verify in both modes.
+</goa-text>
+<goa-text size="body-m" mt="none" mb="m">
+  If your custom CSS uses values that aren&apos;t from our design tokens (specific colors, backgrounds, hardcoded styles), those won&apos;t switch on their own. You can either swap them out for design tokens where possible, or extend dark mode by setting up your own custom property and overriding it under <code>:root[data-theme=&quot;dark&quot;]</code>:
+</goa-text>
+<pre><code>{`/* Default (light) value */
+:root {
+  --my-card-background: #f9f9f9;
+}
+
+/* Dark mode value */
+:root[data-theme="dark"] {
+  --my-card-background: #1a1a1a;
+}
+
+/* Use it in your component */
+.my-card {
+  background-color: var(--my-card-background);
+}`}</code></pre>
+
+<goa-divider mt="xl" mb="xl"></goa-divider>
+
+<h2 id="scss">Using design tokens in SCSS</h2>
+
+<goa-callout version="2" type="important" emphasis="low" mb="m">
+  <span style="color: var(--goa-color-text-default)">
+    Dark theme support requires CSS custom properties. Sass variables
+    (<code>{`$goa-*`}</code>) are inlined at compile time and cannot flip when the
+    theme changes. Reference tokens via <code>{`var(--goa-*)`}</code> wherever a
+    value should respond to theme switching.
+  </span>
+</goa-callout>
+
+<goa-text size="body-m" mt="none" mb="m">
+  The simplest setup imports only <code>tokens.css</code> and uses
+  <code>{`var(--goa-*)`}</code> everywhere — every token automatically participates
+  in theme switching, and there is one syntax to remember.
+</goa-text>
+<pre><code>{`@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+@import "@abgov/design-tokens/dist/dark-theme.css";`}</code></pre>
+<pre><code>{`.my-card {
+  background: var(--goa-color-surface-card);
+  font-family: var(--goa-font-family-sans);
+  padding: var(--goa-space-m);
+  transition-duration: var(--goa-motion-duration-medium-2);
+}`}</code></pre>
+
+<h3 id="scss-sass-vars">When you need Sass variables</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Some workflows need Sass arithmetic, mixins, or functions over token values
+  (for example <code>{`$goa-space-m * 2`}</code>). In that case, import
+  <code>tokens.scss</code> alongside the CSS files and use <code>{`$goa-*`}</code>
+  for compile-time values only — never for colors, surfaces, or anything that
+  should flip with theme.
+</goa-text>
+<pre><code>{`@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
+@import "@abgov/design-tokens/dist/dark-theme.css";
+@import "@abgov/design-tokens/dist/tokens.scss";`}</code></pre>
+<pre><code>{`.my-card {
+  // Theme-responsive — must use var()
+  background: var(--goa-color-surface-card);
+
+  // Compile-time only — Sass arithmetic OK
+  padding: $goa-space-m * 2;
+  border-radius: $goa-border-radius-m;
+}`}</code></pre>

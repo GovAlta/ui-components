@@ -30,6 +30,7 @@ import {
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
+import { useIsDarkMode } from "../hooks/useIsDarkMode";
 import type { FlatToken } from "../lib/tokens";
 import { InlineSearch, type SlashCommand } from "./search/InlineSearch";
 
@@ -100,7 +101,22 @@ function toScssSyntax(cssName: string): string {
   return cssName.replace(/^--/, "$");
 }
 
+/**
+ * Pick the active-theme variant of a token's display values. Returns light values
+ * when not in dark mode, or when the token has no dark variant.
+ */
+function activeOf(token: FlatToken, isDark: boolean): { value: string; resolvedValue: string } {
+  if (isDark && token.darkValue) {
+    return {
+      value: token.darkValue,
+      resolvedValue: token.darkResolvedValue ?? token.resolvedValue,
+    };
+  }
+  return { value: token.value, resolvedValue: token.resolvedValue };
+}
+
 export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
+  const isDark = useIsDarkMode();
   // State
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -343,7 +359,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
   // Render token preview (color, opacity, etc.)
   const renderPreview = (token: FlatToken) => {
-    const value = token.resolvedValue || token.value;
+    const active = activeOf(token, isDark);
+    const value = active.resolvedValue || active.value;
     if (token.isColor) {
       return (
         <div
@@ -352,10 +369,10 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             width: 24,
             height: 24,
             borderRadius: 4,
-            backgroundColor: token.resolvedValue,
+            backgroundColor: active.resolvedValue,
             border: "1px solid var(--goa-color-greyscale-200)",
           }}
-          title={token.resolvedValue}
+          title={active.resolvedValue}
         />
       );
     }
@@ -578,18 +595,16 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "white",
-            borderRadius: 4,
           }}
-          title={token.value}
+          title={active.value}
         >
           <div
             style={{
               width: 32,
               height: 32,
-              backgroundColor: "white",
               borderRadius: 8,
               border: "1px solid var(--goa-color-greyscale-100)",
+              backgroundColor: "var(--goa-color-surface-heading)",
               boxShadow: value,
             }}
           />
@@ -731,7 +746,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               {renderPreview(token)}
               <div className="token-card-info">
                 <code className="token-name">{getFormattedTokenName(token.name)}</code>
-                <span className="token-value">{token.value}</span>
+                <span className="token-value">{activeOf(token, isDark).value}</span>
               </div>
               <GoabIconButton
                 icon={copiedToken === token.name ? "checkmark" : "copy"}
@@ -752,7 +767,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         </GoabContainer>
       </div>
     ),
-    [copiedToken, copyToClipboard, getFormattedTokenName],
+    [copiedToken, copyToClipboard, getFormattedTokenName, isDark],
   );
 
   // Render table row (list view)
@@ -764,7 +779,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           <code className="token-name">{getFormattedTokenName(token.name)}</code>
         </td>
         <td>
-          <code className="token-value">{token.value}</code>
+          <code className="token-value">{activeOf(token, isDark).value}</code>
         </td>
         <td>
           <goa-badge
@@ -786,7 +801,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         </td>
       </tr>
     ),
-    [copiedToken, copyToClipboard, getFormattedTokenName],
+    [copiedToken, copyToClipboard, getFormattedTokenName, isDark],
   );
 
   const hasActiveFilters = appliedFilters.length > 0 || sortConfig.primary;

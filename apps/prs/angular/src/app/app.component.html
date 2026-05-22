@@ -15,15 +15,20 @@
         [open]="true"
         (onNavigate)="handleNavigate($event)"
         [primaryContent]="primaryTemplate"
-        [secondaryContent]="tokenToggleTemplate"
+        [secondaryContent]="secondaryTemplate"
       >
       </goab-work-side-menu>
 
-      <ng-template #tokenToggleTemplate>
+      <ng-template #secondaryTemplate>
         <goab-work-side-menu-item
           [label]="'Switch to ' + (tokenMode === 'v1' ? 'V2' : 'V1') + ' tokens'"
           icon="swap-horizontal"
           [url]="tokenToggleUrl"
+        ></goab-work-side-menu-item>
+        <goab-work-side-menu-item
+          [icon]="theme.mode() === 'dark' ? 'sunny' : 'moon'"
+          [label]="theme.mode() === 'dark' ? 'Light mode' : 'Dark mode'"
+          url="#toggle-theme"
         ></goab-work-side-menu-item>
       </ng-template>
 

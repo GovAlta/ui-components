@@ -1380,3 +1380,5 @@ export type GoabRadioGroupSize = "default" | "compact";
 export type GoabInputSize = "default" | "compact";
 
 export type GoabTextAreaSize = "default" | "compact";
+
+export type GoabThemeMode = "light" | "dark";

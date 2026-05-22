@@ -6,6 +6,7 @@ import {
   GoabAppFooter,
   GoabAppHeader,
   GoabMicrositeHeader,
+  GoabThemeService,
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
@@ -52,6 +53,7 @@ export class AppComponent {
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);
+  readonly theme = inject(GoabThemeService);
 
   constructor() {
     this.router.events
@@ -67,6 +69,10 @@ export class AppComponent {
     if (path === TOKEN_TOGGLE_URL) {
       this.tokenMode = this.tokenMode === "v1" ? "v2" : "v1";
       applyTokenVersion(this.tokenMode);
+      return;
+    }
+    if (path === "#toggle-theme") {
+      this.theme.toggle();
       return;
     }
     const internal = path.startsWith(this.baseHref)

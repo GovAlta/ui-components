@@ -240,6 +240,10 @@ const config = typeConfig[type];
     min-height: 2rem;
   }
 
+  :root[data-theme="dark"] .do-container {
+    background: var(--goa-color-surface-card);
+  }
+
   .do-container:empty {
     display: none;
   }

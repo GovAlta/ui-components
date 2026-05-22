@@ -1,0 +1,56 @@
+---
+id: designers/designing-for-dark-mode
+title: Designing for dark mode
+description: How dark mode works for designers
+section: designers
+order: 3
+status: published
+---
+import { withBase } from "@/lib/base-url";
+
+<goa-text size="heading-xl" mt="none" mb="m">Designing for dark mode</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">
+  Dark mode is handled by the design system. Here's what that means for your designs.
+</goa-text>
+
+<goa-callout version="2" type="important" heading="Dark mode is still experimental" mt="none" mb="2xl">
+  <goa-text size="body-m" mt="none" mb="none">
+    Available in code now, not in Figma yet. Design in light mode and work with a developer to see your designs in dark mode.
+  </goa-text>
+</goa-callout>
+
+<goa-text as="h2" id="how-it-works" size="heading-m" mt="xl">How it works</goa-text>
+<p>
+  We have an experimental version of dark mode you can try out in your service. It's handled automatically in code, so designers don't need to do anything different. The Figma library doesn't have a dark mode yet, so keep designing in light mode like you always have. Your designs will translate to dark mode when developers add the <a href={withBase('/get-started/developers/dark-mode-theme')}>dark mode theme</a> to your service.
+</p>
+
+<goa-text as="h2" id="custom-components-and-styles" size="heading-m">Custom components and styles</goa-text>
+<p>
+  If you're using design system components, they all work with dark mode automatically.
+</p>
+<p>
+  If you have custom components that use our design tokens, they'll switch to dark mode along with the rest of the system. Always worth testing to make sure things look right in both modes.
+</p>
+<p>
+  If your custom components don't use our design tokens, they won't switch on their own. You'll need to handle dark mode for those yourself. We recommend using design tokens where you can so most of this happens automatically.
+</p>
+<p>
+  Either way, you can extend dark mode for custom needs by working with developers to <a href={withBase('/get-started/developers/dark-mode-theme')}>add custom dark mode styles to your service</a>.
+</p>
+<p>
+  The same goes for illustrations and images with set colors. These look the same in both modes, so check whether they read well on a dark background or whether you need a dark version.
+</p>
+
+<goa-text as="h2" id="try-it-and-share-feedback" size="heading-m">Try it and share feedback</goa-text>
+<p>
+  Dark mode is still being tested. Try it out in your service and let the design system team know what works, what doesn't, and what's missing.
+</p>
+
+<goa-text as="h2" id="ways-to-apply-dark-mode" size="heading-m">Ways to apply dark mode in your service</goa-text>
+<p>
+  Two ways users end up in dark mode. Use either, or both:
+</p>
+<ul>
+  <li><strong>System settings.</strong> If their operating system is in dark mode, your service follows automatically.</li>
+  <li><strong>A toggle in your service.</strong> Let users switch modes themselves through a preferences or settings screen.</li>
+</ul>

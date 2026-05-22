@@ -414,32 +414,50 @@
 
   .v2.badge-sky {
     background-color: var(--goa-color-extended-sky-default);
-    color: var(--goa-color-extended-sky-text);
+    color: var(
+      --goa-color-extended-sky-text-dark,
+      var(--goa-color-extended-sky-text)
+    );
   }
 
   .v2.badge-prairie {
     background-color: var(--goa-color-extended-prairie-default);
-    color: var(--goa-color-extended-prairie-text);
+    color: var(
+      --goa-color-extended-prairie-text-dark,
+      var(--goa-color-extended-prairie-text)
+    );
   }
 
   .v2.badge-lilac {
     background-color: var(--goa-color-extended-lilac-default);
-    color: var(--goa-color-extended-lilac-text);
+    color: var(
+      --goa-color-extended-lilac-text-dark,
+      var(--goa-color-extended-lilac-text)
+    );
   }
 
   .v2.badge-pasture {
     background-color: var(--goa-color-extended-pasture-default);
-    color: var(--goa-color-extended-pasture-text);
+    color: var(
+      --goa-color-extended-pasture-text-dark,
+      var(--goa-color-extended-pasture-text)
+    );
   }
 
   .v2.badge-sunset {
     background-color: var(--goa-color-extended-sunset-default);
-    color: var(--goa-color-extended-sunset-text);
+    color: var(
+      --goa-color-extended-sunset-text-dark,
+      var(--goa-color-extended-sunset-text)
+    );
   }
 
   .v2.badge-dawn {
     background-color: var(--goa-color-extended-dawn-default);
-    color: var(--goa-color-extended-dawn-text);
+    color: var(
+      --goa-color-extended-dawn-text-dark,
+      var(--goa-color-extended-dawn-text)
+    );
   }
 
   .v2.badge-subtle.badge-sky {

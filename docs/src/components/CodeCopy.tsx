@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { GoabIconButton } from "@abgov/react-components";
+import { GoabIconButton, GoabTooltip } from "@abgov/react-components";
 
 interface Props {
   code: string;
@@ -21,7 +21,9 @@ export const CodeCopy: React.FC<Props> = ({ code, className }) => {
   return (
     <>
     <div className={`goa-code-copy ${className || ""}`}>
-      <GoabIconButton ml="xs" mt="3xs" size="small" icon={isCopied ? "checkmark" :  "copy"} onClick={copyCode} />
+      <GoabTooltip content={isCopied ? "Copied" : "Copy"} position="left">
+        <GoabIconButton ml="xs" mt="3xs" size="small" icon={isCopied ? "checkmark" :  "copy"} onClick={copyCode} />
+      </GoabTooltip>
     </div>
     </>
   );
