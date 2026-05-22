@@ -78,9 +78,6 @@ import CardLite from '../components/CardLite.astro';
 
     <!-- Dark Mode Experimental -->
     <div class="cta-section dark-mode-section">
-      <div class="cta-image">
-        <img src={withBase(`/images/home/dark-mode-illustration-v2.svg`)} alt="Dark mode illustration" />
-      </div>
       <div class="cta-text">
         <h2>Dark mode</h2>
         <p>
@@ -89,12 +86,12 @@ import CardLite from '../components/CardLite.astro';
         <ul class="dark-mode-links">
           <li>
             <goa-link version="2" trailingicon="arrow-forward">
-              <a href="https://design.alberta.ca/get-started/designers/designing-for-dark-mode/">Designing for dark mode</a>
+              <a href={withBase(`/get-started/designers/designing-for-dark-mode/`)}>Designing for dark mode</a>
             </goa-link>
           </li>
           <li>
             <goa-link version="2" trailingicon="arrow-forward">
-              <a href="https://design.alberta.ca/get-started/developers/dark-mode-theme/">Building with the dark mode theme</a>
+              <a href={withBase(`/get-started/developers/dark-mode-theme/`)}>Building with dark mode</a>
             </goa-link>
           </li>
           <li>
@@ -103,6 +100,9 @@ import CardLite from '../components/CardLite.astro';
             </goa-link>
           </li>
         </ul>
+      </div>
+      <div class="cta-image">
+        <img src={withBase(`/images/home/dark-mode-illustration-v2.svg`)} alt="Dark mode illustration" />
       </div>
     </div>
 
@@ -422,6 +422,10 @@ import CardLite from '../components/CardLite.astro';
 
     .cta-section {
       flex-direction: column;
+    }
+
+    .dark-mode-section .cta-image {
+      width: 100%;
     }
   }
 
