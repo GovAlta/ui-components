@@ -78,10 +78,13 @@ import CardLite from '../components/CardLite.astro';
 
     <!-- Dark Mode Experimental -->
     <div class="cta-section dark-mode-section">
+      <div class="cta-image">
+        <img src={withBase(`/images/home/dark-mode-illustration-v2.svg`)} alt="Dark mode illustration" />
+      </div>
       <div class="cta-text">
         <h2>Dark mode</h2>
         <p>
-          Dark mode is available as an <strong>experimental</strong> capability in the design system. Try it in your service and share what you learn — your feedback helps shape how we develop it further.
+          Dark mode is available as an <strong>experimental capability</strong> in the design system. Try it in your service and share what you learn — your feedback helps shape how we develop it further.
         </p>
         <ul class="dark-mode-links">
           <li>
@@ -100,9 +103,6 @@ import CardLite from '../components/CardLite.astro';
             </goa-link>
           </li>
         </ul>
-      </div>
-      <div class="cta-image">
-        <img src={withBase(`/images/home/dark-mode-illustration-v2.svg`)} alt="Dark mode illustration" />
       </div>
     </div>
 
