@@ -389,7 +389,10 @@ function findMdxFiles(dir: string): string[] {
     return files;
   }
 
-  for (const entry of readdirSync(dir)) {
+  // Sort so file order is stable across machines and filesystems. The freshness
+  // hook compares regenerated output byte-for-byte, so traversal order (and thus
+  // the order of entries in the index) must be deterministic.
+  for (const entry of readdirSync(dir).sort()) {
     const fullPath = join(dir, entry);
     const stat = statSync(fullPath);
 

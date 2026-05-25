@@ -71,6 +71,55 @@ The site resolves monorepo packages directly via aliases in `astro.config.mjs`:
 
 ---
 
+## Keeping generated files in sync
+
+The generated files (`generated/component-apis/*.json` and `public/search-index.json`) are committed to git so they show up in PR diffs. The catch: they only refresh when someone runs the build, and most component PRs never touch docs. So the committed files drift out of sync with the Svelte and MDX they come from (see [#3868](https://github.com/GovAlta/ui-components/issues/3868)).
+
+A pre-commit hook keeps them honest.
+
+### What the hook does
+
+When a commit stages a file that feeds a generator, the hook regenerates the outputs and blocks the commit if the committed versions are stale.
+
+- Sources it watches:
+  - `libs/web-components/src/components/**` (Svelte JSDoc, feeds `extract-api`)
+  - `libs/react-components/src/lib/**` (React wrappers, feed `extract-api`)
+  - `libs/angular-components/src/lib/components/**` (Angular wrappers, feed `extract-api`)
+  - `docs/src/content/**` (MDX frontmatter, feeds `build:search-index`)
+- If none of those are staged, the hook does nothing.
+- If the regenerated output matches what you staged, the commit goes through. The generators are deterministic, so a file that is already fresh comes back byte-identical and nothing is slowed down.
+- If they differ, the commit is blocked, naming the file that drifted and what to run.
+
+### Install it (one time per clone)
+
+```bash
+git config core.hooksPath .githooks
+```
+
+That points git at the tracked `.githooks/` directory. There is no automatic installer. It is one command, run once, worth doing right after cloning.
+
+### Docs dependencies are required
+
+The generators need the docs dependencies (`tsx`). If `docs/node_modules` is missing, the hook blocks the commit and tells you to run `npm install` in `docs/`. This is a one-time setup per clone; once it is in place the hook just works for any source you stage.
+
+### Bypassing
+
+`git commit --no-verify` skips the hook. Avoid it. A bypassed commit can put a stale file on `dev`, which is the exact problem this prevents. If the hook keeps stopping you, a generated file really is out of date.
+
+### Adding a new generator
+
+To bring a new generator under the same net:
+
+1. Make sure it runs from a single npm script in `docs/` and is deterministic (same input gives byte-identical output, so no timestamps or unsorted file reads).
+2. Add its source path to `SOURCE_REGEX` and its output path to `OUTPUTS` in `.githooks/pre-commit`, and run it in the regenerate step.
+3. Add it to the content sources table above.
+
+### Known limitation
+
+The hook checks the working tree, not the staged snapshot. With partial staging (`git add -p`, or staging a source change while leaving other edits to the same file unstaged), the generators read the working-tree version, which can differ from what you are committing. In that case the hook may stop a commit that is actually consistent. Stage the regenerated output, or commit the rest of your edits, and it clears. This is a deliberate trade-off to keep the hook simple.
+
+---
+
 ## Content collections
 
 Defined in `src/content/config.ts`. Four collections:

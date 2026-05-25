@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# Pre-commit hook: keep committed docs generated files in sync with their sources.
+#
+# When a commit stages source that feeds a docs generator, this regenerates the
+# docs outputs and blocks the commit if the staged outputs are stale. The
+# generators are deterministic, so when the staged outputs are already fresh this
+# is a no-op and the commit proceeds with no change.
+#
+# Install once per clone:
+#   git config core.hooksPath .githooks
+#
+# Covers:
+#   docs/generated/component-apis/*.json   from libs/*/src/components/** (Svelte JSDoc)
+#   docs/public/search-index.json          from docs/src/content/** (MDX frontmatter)
+#
+# To add a new generator, extend SOURCE_REGEX and OUTPUTS below and run it in the
+# regenerate step. See docs/ARCHITECTURE.md.
+#
+# Limitation: this validates the working tree, not the staged snapshot. With
+# partial staging (git add -p, or staging some edits while leaving others
+# unstaged) the generators read working-tree source, which can differ from what
+# is being committed. Accepted for simplicity; see docs/ARCHITECTURE.md.
+
+set -euo pipefail
+
+cd "$(git rev-parse --show-toplevel)"
+
+# Sources that feed a generator, and the output paths those generators own.
+# extract-api scans three libs roots: Svelte components (web-components/src/components),
+# React wrappers (react-components/src/lib), and Angular wrappers
+# (angular-components/src/lib/components). build:search-index scans MDX in docs/src/content.
+SOURCE_REGEX='^(libs/(web-components/src/components|react-components/src/lib|angular-components/src/lib/components)/|docs/src/content/)'
+OUTPUTS=(docs/generated/component-apis docs/public/search-index.json)
+
+# 1. Only act when staged changes touch a generator source.
+# Capture to a variable rather than piping to grep: under `set -o pipefail`, grep -q
+# can close the pipe early, making git diff exit with SIGPIPE and silently skipping
+# the check on very large commits.
+staged="$(git diff --cached --name-only)"
+if ! grep -Eq "$SOURCE_REGEX" <<<"$staged"; then
+  exit 0
+fi
+
+# 2. The generators need docs dependencies (tsx). Without them we cannot verify
+#    that committed outputs match the source, so block the commit with a clear,
+#    actionable message instead of letting a potentially-stale commit through.
+if [ ! -x docs/node_modules/.bin/tsx ]; then
+  echo "pre-commit: cannot verify generated docs files: docs dependencies missing." >&2
+  echo "            run 'npm install' in docs/ and commit again." >&2
+  exit 1
+fi
+
+echo "pre-commit: checking generated docs files are up to date..." >&2
+
+# 3. Regenerate. If a generator cannot run (for example a missing dependency),
+#    skip with a clear warning instead of blocking the commit or printing a stack.
+genlog="$(mktemp)"
+if ! ( cd docs && npm --silent run extract-api && npm --silent run build:search-index ) >"$genlog" 2>&1; then
+  echo "pre-commit: skipping freshness check: a generator did not run." >&2
+  echo "            ensure dependencies are installed (npm install at the repo root and in docs/)." >&2
+  sed 's/^/            | /' "$genlog" >&2 || true
+  rm -f "$genlog"
+  exit 0
+fi
+rm -f "$genlog"
+
+# 4. Stale if regenerated outputs differ from what is staged (modified tracked
+#    files) or if a brand-new output was produced (untracked, e.g. a new
+#    component's JSON that was never generated).
+stale=0
+if ! git diff --quiet -- "${OUTPUTS[@]}"; then stale=1; fi
+if [ -n "$(git ls-files --others --exclude-standard -- "${OUTPUTS[@]}")" ]; then stale=1; fi
+
+if [ "$stale" -ne 0 ]; then
+  echo "pre-commit: generated docs files are out of date." >&2
+  echo "            in docs/, run 'npm run extract-api' and 'npm run build:search-index'," >&2
+  echo "            stage the result, and commit again." >&2
+  echo "" >&2
+  git status --short -- "${OUTPUTS[@]}" >&2
+  exit 1
+fi
+
+exit 0
