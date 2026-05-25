@@ -568,7 +568,7 @@
     "name": "Scroll Panel",
     "description": "A bounded container with sticky header and footer slots that scrolls its body content when it overflows.",
     "status": "stable",
-    "category": "content-layout",
+    "category": "utilities",
     "tags": [
       "container",
       "layout",
@@ -732,24 +732,6 @@
       "panel"
     ],
     "slug": "work-side-notification-panel"
-  },
-  {
-    "type": "component",
-    "id": "workspace-layout",
-    "name": "Workspace Layout",
-    "description": "A full-page shell with side navigation, sticky page header, scrollable main content, and a sticky page footer.",
-    "status": "stable",
-    "category": "content-layout",
-    "tags": [
-      "layout",
-      "shell",
-      "workspace",
-      "sidebar",
-      "sticky header",
-      "sticky footer",
-      "scroll state"
-    ],
-    "slug": "workspace-layout"
   },
   {
     "type": "example",
@@ -2356,6 +2338,30 @@
     "slug": "workspace/index-page"
   },
   {
+    "type": "example",
+    "id": "workspace-layout",
+    "title": "Workspace Layout",
+    "description": "A full-page shell for workspace-style applications. Side navigation, sticky page header and footer, a scrollable main card, and an optional push-drawer slot.",
+    "status": "published",
+    "size": "page",
+    "tags": [
+      "layout",
+      "shell",
+      "workspace",
+      "sidebar",
+      "sticky header",
+      "sticky footer"
+    ],
+    "components": [
+      "workspace-layout",
+      "work-side-menu",
+      "table",
+      "push-drawer"
+    ],
+    "aliases": [],
+    "slug": "workspace-layout"
+  },
+  {
     "type": "page",
     "id": "automated-accessibility",
     "title": "Automated accessibility",
@@ -2407,8 +2413,8 @@
   {
     "type": "page",
     "id": "designers/designing-with-ds",
-    "title": "Designing with Design System 2.0",
-    "description": "How to start new designs and update existing projects to Design System 2.0",
+    "title": "Designing with the updated design system",
+    "description": "How to start using the updated design system in your designs",
     "status": "published",
     "category": "get started",
     "tags": [
