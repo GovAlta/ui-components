@@ -14,6 +14,8 @@ import { withBase } from "@/lib/base-url";
 import "./menu-secondary.css";
 
 const THEME_STORAGE_KEY = "goab-theme";
+const SANS_FAMILY_ACUMIN = "acumin-variable, helvetica-neue, arial, sans-serif";
+const SANS_FAMILY_FALLBACK = "helvetica-neue, arial, sans-serif";
 
 function readInitialTheme(): "light" | "dark" {
   if (typeof document === "undefined") return "light";
@@ -37,6 +39,7 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
   // Theme state — synced with <html data-theme> attribute set by pre-paint script
   const [themeMode, setThemeMode] = useState<"light" | "dark">(readInitialTheme);
   const isDark = themeMode === "dark";
+  const [isAcuminSansEnabled, setIsAcuminSansEnabled] = useState(true);
 
   const toggleTheme = useCallback(() => {
     setThemeMode((prev) => {
@@ -47,6 +50,17 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
       } catch {
         // localStorage blocked: fail silently
       }
+      return next;
+    });
+  }, []);
+
+  const toggleSansFontFamily = useCallback(() => {
+    setIsAcuminSansEnabled((prev) => {
+      const next = !prev;
+      document.documentElement.style.setProperty(
+        "--goa-font-family-sans",
+        next ? SANS_FAMILY_ACUMIN : SANS_FAMILY_FALLBACK,
+      );
       return next;
     });
   }, []);
@@ -124,7 +138,31 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
           </>
         )}
       </button>
-      <GoabWorkSideMenuItem label="Get support" icon="help-circle" url={withBase("/support")} />
+      <button
+        className="search-menu-button"
+        onClick={toggleSansFontFamily}
+        type="button"
+        aria-label={
+          isAcuminSansEnabled
+            ? "Switch to system sans font"
+            : "Switch to acumin variable sans font"
+        }
+      >
+        <GoabIcon type="settings" size="small" />
+        {isOpen && (
+          <>
+            <span className="search-menu-label">Toggle font</span>
+            <span className="search-menu-badge">
+              {isAcuminSansEnabled ? "Acumin" : "System"}
+            </span>
+          </>
+        )}
+      </button>
+      <GoabWorkSideMenuItem
+        label="Get support"
+        icon="help-circle"
+        url={withBase("/support")}
+      />
       <GoabSpacer vSpacing="m" />
     </>
   );
