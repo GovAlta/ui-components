@@ -99,6 +99,16 @@ function parseObject(
         obj[key] = sub;
         i = consumed;
       }
+    } else if (/^[|>][+-]?$/.test(valueText)) {
+      // YAML block scalar: `|` keeps newlines, `>` folds them into spaces.
+      const [text, consumed] = parseBlockScalar(
+        lines,
+        i + 1,
+        expectedIndent,
+        valueText[0] as "|" | ">",
+      );
+      obj[key] = text;
+      i = consumed;
     } else if (valueText.startsWith("[") && valueText.endsWith("]")) {
       obj[key] = parseInlineArray(valueText);
       i++;
@@ -146,6 +156,42 @@ function parseInlineArray(text: string): unknown[] {
   const inner = text.slice(1, -1).trim();
   if (!inner) return [];
   return inner.split(",").map((s) => parseScalar(s.trim()));
+}
+
+function parseBlockScalar(
+  lines: string[],
+  startIdx: number,
+  parentIndent: number,
+  style: "|" | ">",
+): [string, number] {
+  const collected: string[] = [];
+  let blockIndent: number | null = null;
+  let i = startIdx;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    if (line.trim() === "") {
+      collected.push("");
+      i++;
+      continue;
+    }
+    const indent = leadingSpaces(line);
+    if (indent <= parentIndent) break;
+    if (blockIndent === null) blockIndent = indent;
+    collected.push(line.slice(blockIndent));
+    i++;
+  }
+
+  // Clip chomping (YAML default): drop trailing blank lines.
+  while (collected.length > 0 && collected[collected.length - 1] === "") {
+    collected.pop();
+  }
+
+  const text =
+    style === ">"
+      ? collected.join(" ").replace(/\s+/g, " ").trim()
+      : collected.join("\n");
+  return [text, i];
 }
 
 function parseScalar(text: string): unknown {
