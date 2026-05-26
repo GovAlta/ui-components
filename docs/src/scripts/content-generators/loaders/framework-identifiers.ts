@@ -54,7 +54,7 @@ export function loadFrameworkIdentifiers(): Map<string, FrameworkIdentifiers> {
 
     bySlug.set(slug, {
       webComponentTag: tag,
-      reactClassName: react?.classNames[0],
+      reactClassName: pickReactClassName(tag, react?.classNames ?? []),
       reactClassNames: react?.classNames ?? [],
       angularSelector,
     });
@@ -96,9 +96,21 @@ function buildAngularWrapperIndex(): Map<string, string> {
     const selectorMatch = content.match(/selector\s*:\s*["']goab-([a-z0-9-]+)["']/);
     if (!selectorMatch) continue;
     const stem = selectorMatch[1];
-    const tag = `goa-${stem}`;
     const selector = `goab-${stem}`;
-    if (!byTag.has(tag)) byTag.set(tag, selector);
+    // Read the web component tag the template actually renders rather than
+    // deriving it from the selector stem. They diverge for wrappers like
+    // goab-temporary-notification-ctrl, whose tag is goa-temp-notification-ctrl.
+    const tagMatch = content.match(/<(goa-[a-z0-9-]+)/);
+    if (!tagMatch) continue;
+    const tag = tagMatch[1];
+    // One tag can have several wrappers (goa-input <- goab-input and
+    // goab-input-number). Prefer the wrapper whose selector stem matches the
+    // tag stem; otherwise keep the first seen, which covers the divergent
+    // goab-temporary-notification-ctrl -> goa-temp-notification-ctrl case.
+    const tagStem = tag.replace(/^goa-/, "");
+    if (!byTag.has(tag) || stem === tagStem) {
+      byTag.set(tag, selector);
+    }
   }
 
   return byTag;
@@ -149,6 +161,30 @@ function extractGoabComponentExports(src: string): string[] {
   return [...names].filter(
     (n) => !n.endsWith("Props") && !n.endsWith("Detail") && !n.endsWith("Event"),
   );
+}
+
+/** Canonical React class for a tag: `goa-dropdown-item` -> `GoabDropdownItem`. */
+function tagToReactClassName(tag: string): string {
+  const pascal = tag
+    .replace(/^goa-/, "")
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+  return `Goab${pascal}`;
+}
+
+/**
+ * Pick the React class for a tag. A wrapper file can export more than one Goab
+ * component (e.g. a deprecated alias declared before the real one), so prefer
+ * the class whose name matches the tag and fall back to the first export.
+ */
+function pickReactClassName(
+  tag: string,
+  classNames: string[],
+): string | undefined {
+  if (classNames.length === 0) return undefined;
+  const canonical = tagToReactClassName(tag);
+  return classNames.includes(canonical) ? canonical : classNames[0];
 }
 
 function walkSourceFiles(root: string, ext: string): string[] {
