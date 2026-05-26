@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/get-started",
+  "definitions": {
+    "get-started": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "navLabel": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string",
+          "enum": [
+            "intro",
+            "designers",
+            "developers",
+            "appendix"
+          ]
+        },
+        "order": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "published",
+            "draft",
+            "deprecated"
+          ],
+          "default": "published"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "section",
+        "order"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
