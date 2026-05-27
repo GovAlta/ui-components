@@ -5,6 +5,6 @@ export default {
   type: "bug",
   id: "3323",
   path: "bugs/bug3323",
-  title: "Tooltip popover positioning",
+  title: "Tooltip with fixed positioning",
   component: Bug3323Route,
 } satisfies PrRouteDefinition;

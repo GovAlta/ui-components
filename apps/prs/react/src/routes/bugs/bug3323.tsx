@@ -18,7 +18,7 @@ export function Bug3323Route() {
   return (
     <>
       <GoabText tag="h1" mt="m" mb="s">
-        Fix 3323 - Tooltip popover positioning
+        Fix 3323 - Tooltip with fixed positioning
       </GoabText>
       <GoabText>
         CSS anchor positioning support in this browser:{" "}
