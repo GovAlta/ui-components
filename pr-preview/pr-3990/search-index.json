@@ -2587,11 +2587,11 @@
     "type": "page",
     "id": "stories",
     "title": "Stories",
-    "description": "How real GoA product teams approached migrating to the updated design system",
+    "description": "Real stories from Government of Alberta product teams building with the updated design system",
     "status": "published",
     "category": "get started",
     "tags": [
-      "intro"
+      "stories"
     ],
     "slug": "get-started/stories"
   },
