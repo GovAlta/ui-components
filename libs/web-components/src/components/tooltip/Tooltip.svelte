@@ -50,7 +50,7 @@
     if (!maxwidth) return "";
 
     // Check for 'px' unit
-    if (!maxwidth.endsWith('px')) {
+    if (!maxwidth.endsWith("px")) {
       return "";
     }
 
@@ -78,10 +78,18 @@
   let _screenSize = 0;
   let _rootEl: HTMLElement;
   let _tooltipEl: HTMLElement;
+  let _targetEl: HTMLElement;
   let _initialPosition: Position;
+  let _computedAlign: Alignment = "center";
   let _tooltipVisible = false;
   let _showTooltipTimeout: ReturnType<typeof setTimeout> | undefined;
   let _hideTooltipTimeout: ReturnType<typeof setTimeout> | undefined;
+  let _positionRafId: number | null = null;
+  const _needsManualPositioning =
+    typeof document !== "undefined" &&
+    !("anchorName" in document.documentElement.style);
+  const _manualGap = 12;
+  const _manualOffset = 16;
 
   // Use a unique id for each tooltip instance.
   // So screen readers can identify the tooltip instance when
@@ -91,17 +99,7 @@
   // Reactive
 
   $: {
-    if (_rootEl && _tooltipEl) {
-      _rootEl.style.setProperty(
-        "--target-width",
-        `${_rootEl.getBoundingClientRect().width / 2}px`,
-      );
-    }
-  }
-
-  // call checkAndAdjustPosition function when content changes
-  $: {
-    content && checkAndAdjustPosition();
+    content && reconcileTooltipLayout(); // Check position when content changes.
   }
 
   // Hooks
@@ -113,24 +111,39 @@
     maxwidth = validateMaxWidth(maxwidth);
 
     _initialPosition = position;
+    _computedAlign = halign;
     _tooltipInstanceId = Math.random().toString(36);
 
-    window.addEventListener("resize", checkAndAdjustPosition);
-    checkAndAdjustPosition();
+    window.addEventListener("resize", onWindowResize);
   });
 
   onDestroy(() => {
-    window.removeEventListener("resize", checkAndAdjustPosition);
+    window.removeEventListener("resize", onWindowResize);
+
     clearTimeout(_showTooltipTimeout);
     clearTimeout(_hideTooltipTimeout);
+
+    if (_needsManualPositioning || _positionRafId !== null) {
+      stopManualPositioning();
+    }
   });
 
   // Functions
 
   const showTooltip = () => {
     _showTooltipTimeout = setTimeout(() => {
+      // Measure target width here — layout is guaranteed to be available on hover
+      updateTargetWidth();
       _tooltipVisible = true;
-      checkAndAdjustPosition();
+
+      // Popover promotion to the top layer can require one paint before
+      // dimensions are stable, so size/position on the next frame.
+      requestAnimationFrame(() => {
+        reconcileTooltipLayout();
+        if (_needsManualPositioning) {
+          startManualPositioning();
+        }
+      });
     }, 300);
   };
 
@@ -140,8 +153,36 @@
     _hideTooltipTimeout = setTimeout(() => {
       _tooltipVisible = false;
       position = _initialPosition;
+      _computedAlign = halign;
+      if (_needsManualPositioning || _positionRafId !== null) {
+        stopManualPositioning();
+      }
     }, 500);
   };
+
+  function startManualPositioning() {
+    if (!_needsManualPositioning || _positionRafId !== null) {
+      return;
+    }
+
+    const loop = () => {
+      updateManualPopoverCoordinates();
+      _positionRafId = requestAnimationFrame(loop);
+    };
+
+    _positionRafId = requestAnimationFrame(loop);
+  }
+
+  function stopManualPositioning() {
+    if (_positionRafId !== null) {
+      cancelAnimationFrame(_positionRafId);
+      _positionRafId = null;
+    }
+  }
+
+  function onWindowResize() {
+    reconcileTooltipLayout();
+  }
 
   // Mouse click also fires on:focus on a tabindex=0 element, but we only want
   // to reveal the tooltip on keyboard-driven focus so JS state stays aligned
@@ -153,84 +194,203 @@
     showTooltip();
   }
 
-  async function checkAndAdjustPosition() {
-    // angular needs time to render the _tooltipEl
-    await tick();
-
-    if (!_tooltipEl || !_rootEl) {
-      return;
-    }
-
-    // determine the bounding rectangle of the tooltip and root element
-    const tooltipRect = _tooltipEl.getBoundingClientRect();
-    const rootRect = _rootEl.getBoundingClientRect();
-
-    const spaceTop = rootRect.top;
-    const spaceBottom = window.innerHeight - rootRect.bottom;
-    const spaceLeft = rootRect.left;
-    const spaceRight = window.innerWidth - rootRect.right;
-
-    const calculatedMaxWidth = maxwidth && maxwidth.endsWith('px') ? parseFloat(maxwidth) : 400;
+  function applyTooltipWidth(
+    tooltipRect: DOMRect,
+    targetRect: DOMRect,
+    spaceLeft: number,
+    spaceRight: number,
+  ) {
+    const viewportWidth = _screenSize || window.innerWidth;
+    const calculatedMaxWidth =
+      maxwidth && maxwidth.endsWith("px") ? parseFloat(maxwidth) : 400;
     const newWidth = Math.min(
-      _screenSize * 0.8,
+      viewportWidth * 0.8,
       calculatedMaxWidth,
       tooltipRect.width,
       Math.max(spaceLeft, spaceRight) - 10,
     );
     const shouldWrapContent =
-      (maxwidth && maxwidth.endsWith('px')) ||
-      newWidth > rootRect.width ||
+      (maxwidth && maxwidth.endsWith("px")) ||
+      newWidth > targetRect.width ||
       newWidth > spaceLeft ||
       newWidth > spaceRight;
-    _tooltipEl.style.width = `${newWidth - 32}px`;
 
-    if (shouldWrapContent) {
-      _tooltipEl.style.whiteSpace = "normal";
-    } else {
-      _tooltipEl.style.whiteSpace = "nowrap";
+    _tooltipEl.style.width = `${Math.ceil(Math.max(newWidth - 32, 1))}px`;
+    _tooltipEl.style.whiteSpace = shouldWrapContent ? "normal" : "nowrap";
+  }
+
+  function getAdjustedPosition(
+    currentPosition: Position,
+    tooltipRect: DOMRect,
+    spaceTop: number,
+    spaceBottom: number,
+    spaceLeft: number,
+    spaceRight: number,
+  ): Position {
+    let adjustedPosition = currentPosition;
+
+    if (currentPosition === "bottom" && tooltipRect.height > spaceBottom) {
+      adjustedPosition = "top";
+    } else if (currentPosition === "top" && tooltipRect.height > spaceTop) {
+      adjustedPosition = "bottom";
     }
 
-    let newPosition = position; // use a local variable to determine the new position
-    let newAlign = halign; // use a local variable to determine the new position
-
-    // check if there is enough space for the tooltip in the initial position
-    if (position === "bottom" && tooltipRect.height > spaceBottom) {
-      newPosition = "top";
-    } else if (position === "top" && tooltipRect.height > spaceTop) {
-      newPosition = "bottom";
+    if (currentPosition === "right" && tooltipRect.width > spaceRight) {
+      adjustedPosition = "left";
+    } else if (currentPosition === "left" && tooltipRect.width > spaceLeft) {
+      adjustedPosition = "right";
     }
 
-    // similar check for left and right position
-    if (position === "right" && tooltipRect.width > spaceRight) {
-      newPosition = "left";
-    } else if (position === "left" && tooltipRect.width > spaceLeft) {
-      newPosition = "right";
+    return adjustedPosition;
+  }
+
+  function resolveTopBottomAlign(
+    requestedAlign: Alignment,
+    targetRect: DOMRect,
+    tooltipRect: DOMRect,
+    offset: number,
+  ): Alignment {
+    const viewportWidth = window.innerWidth;
+    const centerLeft =
+      targetRect.left + (targetRect.width - tooltipRect.width) / 2;
+    const rightLeft = targetRect.left - offset;
+    const leftLeft = targetRect.right - tooltipRect.width + offset;
+
+    const projectedLeftByAlign = (align: Alignment): number => {
+      if (align === "left") return leftLeft;
+      if (align === "right") return rightLeft;
+      return centerLeft;
+    };
+
+    const overflowsViewport = (left: number): boolean => {
+      const right = left + tooltipRect.width;
+      return left < 0 || right > viewportWidth;
+    };
+
+    const overflowAmount = (left: number): number => {
+      const right = left + tooltipRect.width;
+      return Math.max(0, -left) + Math.max(0, right - viewportWidth);
+    };
+
+    const requestedLeft = projectedLeftByAlign(requestedAlign);
+    const requestedOverflows = overflowsViewport(requestedLeft);
+
+    if (!requestedOverflows) {
+      return requestedAlign;
     }
 
-    // similar check for left and right alignmewnt
-    if (halign === "right" && tooltipRect.width > spaceRight) {
-      newAlign = "left";
-    } else if (halign === "left" && tooltipRect.width > spaceLeft) {
-      newAlign = "right";
-    } else if (
-      halign === "center" &&
-      (position === "top" || position === "bottom") &&
-      (tooltipRect.width / 2 > spaceLeft || tooltipRect.width / 2 > spaceRight)
-    ) {
-      newAlign = spaceLeft > spaceRight ? "left" : "right";
+    if (requestedAlign === "right" || requestedAlign === "left") {
+      const oppositeAlign: Alignment =
+        requestedAlign === "right" ? "left" : "right";
+      const oppositeLeft = projectedLeftByAlign(oppositeAlign);
+
+      if (!overflowsViewport(oppositeLeft)) {
+        return oppositeAlign;
+      }
+
+      if (overflowAmount(oppositeLeft) < overflowAmount(requestedLeft)) {
+        return oppositeAlign;
+      }
+
+      return requestedAlign;
     }
+
+    const leftOverflow = overflowAmount(leftLeft);
+    const rightOverflow = overflowAmount(rightLeft);
+    return leftOverflow <= rightOverflow ? "left" : "right";
+  }
+
+  async function reconcileTooltipLayout() {
+    // angular needs time to render the _tooltipEl
+    await tick();
+
+    if (!_tooltipEl || !_rootEl || !_targetEl || !_tooltipVisible) {
+      return;
+    }
+
+    // determine the bounding rectangle of the tooltip and target element
+    let tooltipRect = _tooltipEl.getBoundingClientRect();
+    const targetRect = _targetEl.getBoundingClientRect();
+
+    const spaceTop = targetRect.top;
+    const spaceBottom = window.innerHeight - targetRect.bottom;
+    const spaceLeft = targetRect.left;
+    const spaceRight = window.innerWidth - targetRect.right;
+    applyTooltipWidth(tooltipRect, targetRect, spaceLeft, spaceRight);
+
+    // Re-measure the tooltip rect after applying width/white-space
+    // since text wrapping can change the tooltip's dimensions
+    tooltipRect = _tooltipEl.getBoundingClientRect();
+
+    const newPosition = getAdjustedPosition(
+      position,
+      tooltipRect,
+      spaceTop,
+      spaceBottom,
+      spaceLeft,
+      spaceRight,
+    );
+
+    const newAlign =
+      newPosition === "top" || newPosition === "bottom"
+        ? resolveTopBottomAlign(halign, targetRect, tooltipRect, _manualOffset)
+        : "center";
 
     // update tooltip position
     position = newPosition;
-    halign = newAlign;
+    _computedAlign = newAlign;
+  }
+
+  function updateManualPopoverCoordinates() {
+    if (!_tooltipVisible || !_tooltipEl || !_targetEl) return;
+
+    const targetRect = _targetEl.getBoundingClientRect();
+    const tooltipRect = _tooltipEl.getBoundingClientRect();
+    const gap = _manualGap;
+    const offset = _manualOffset;
+
+    if (position === "top") {
+      _tooltipEl.style.top = `${targetRect.top - tooltipRect.height - gap}px`;
+      _tooltipEl.style.left = `${targetRect.left + (targetRect.width - tooltipRect.width) / 2}px`;
+    } else if (position === "bottom") {
+      _tooltipEl.style.top = `${targetRect.bottom + gap}px`;
+      _tooltipEl.style.left = `${targetRect.left + (targetRect.width - tooltipRect.width) / 2}px`;
+    } else if (position === "left") {
+      _tooltipEl.style.top = `${targetRect.top + (targetRect.height - tooltipRect.height) / 2}px`;
+      _tooltipEl.style.left = `${targetRect.left - tooltipRect.width - gap}px`;
+    } else if (position === "right") {
+      _tooltipEl.style.top = `${targetRect.top + (targetRect.height - tooltipRect.height) / 2}px`;
+      _tooltipEl.style.left = `${targetRect.right + gap}px`;
+    }
+
+    // Adjust horizontal alignment for top/bottom positions
+    if (position === "top" || position === "bottom") {
+      if (_computedAlign === "left") {
+        // tooltip's right edge aligns with target's right edge
+        _tooltipEl.style.left = `${targetRect.right - tooltipRect.width + offset}px`;
+      } else if (_computedAlign === "right") {
+        // tooltip's left edge aligns with target's left edge
+        _tooltipEl.style.left = `${targetRect.left - offset}px`;
+      }
+    }
+  }
+
+  function updateTargetWidth() {
+    if (!_rootEl || !_tooltipEl || !_targetEl) return;
+
+    const targetHalfWidth = `${_targetEl.getBoundingClientRect().width / 2}px`;
+    _rootEl.style.setProperty("--target-width", targetHalfWidth);
   }
 </script>
 
 <svelte:window bind:innerWidth={_screenSize} />
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-  class="tooltip align-{halign}"
+  class="tooltip"
+  class:use-anchor-based-positioning={!_needsManualPositioning}
+  class:use-manual-positioning={_needsManualPositioning}
   bind:this={_rootEl}
   on:mouseenter={() => {
     clearTimeout(_hideTooltipTimeout);
@@ -240,19 +400,24 @@
   on:focus={handleFocus}
   on:blur={hideTooltip}
   data-testid={testid}
-  role="tooltip"
   aria-describedby="{_tooltipInstanceId}-tooltip"
   tabindex="0"
   style={calculateMargin(mt, mr, mb, ml)}
 >
-  <div class="tooltip-target">
+  <div
+    class="tooltip-target"
+    bind:this={_targetEl}
+    aria-describedby="{_tooltipInstanceId}-tooltip"
+  >
     <slot />
   </div>
   <span
     id="{_tooltipInstanceId}-tooltip"
-    class="tooltip-text {position} align-{halign}"
+    class="tooltip-text {position} align-{_computedAlign}"
     bind:this={_tooltipEl}
-    style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}"
+    role="tooltip"
+    aria-hidden={!_tooltipVisible}
+    class:show={_tooltipVisible}
   >
     {#if $$slots.content}
       <slot name="content" />
@@ -282,49 +447,123 @@
   }
 
   .tooltip-text {
-    visibility: hidden;
+    pointer-events: none;
     font: var(--goa-tooltip-text-size);
     background-color: var(--goa-tooltip-color-bg);
     color: var(--goa-tooltip-color-text);
     text-align: center;
     border-radius: var(--goa-tooltip-border-radius);
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 9999;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity var(--goa-motion-duration-medium-2)
+      var(--goa-motion-curve-productive);
     padding: var(--goa-tooltip-padding);
     text-align: left;
     white-space: nowrap;
     display: flex;
     flex-direction: column;
+    overflow: visible;
+    border-width: 0;
+  }
+
+  .show.tooltip-text {
+    opacity: 1;
+  }
+
+  .use-manual-positioning .tooltip-text {
+    position: fixed;
+    z-index: 9999;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+
+  .use-anchor-based-positioning .tooltip-text {
+    position-anchor: --goa-tooltip-target;
+    margin: 0;
+    inset-block-start: anchor(bottom);
+    inset-inline-start: anchor(left);
   }
 
   .tooltip-target {
     margin: var(--goa-tooltip-gap);
     height: auto;
     display: flex;
+    cursor: pointer;
   }
 
-  .tooltip-text.bottom {
-    top: calc(100% + 10px);
+  .use-anchor-based-positioning .tooltip-target {
+    anchor-name: --goa-tooltip-target;
   }
 
-  .tooltip-text.top {
-    bottom: calc(100% + 10px);
+  /* Positions */
+
+  .use-anchor-based-positioning .tooltip-text.bottom {
+    inset-block-start: anchor(bottom);
+    inset-inline-start: anchor(center);
+    translate: -50% var(--goa-space-s);
   }
 
-  .tooltip-text.right {
-    left: calc(100% + 10px);
+  .use-anchor-based-positioning .tooltip-text.top {
+    inset-block-start: anchor(top);
+    inset-inline-start: anchor(center);
+    translate: -50% calc(-100% - var(--goa-space-s));
   }
 
-  .tooltip-text.left {
-    right: calc(100% + 10px);
+  .use-anchor-based-positioning .tooltip-text.right {
+    inset-block-start: anchor(center);
+    inset-inline-start: anchor(right);
+    translate: var(--goa-space-s) -50%;
   }
 
-  .tooltip:hover .tooltip-text,
-  .tooltip:focus-visible .tooltip-text {
-    opacity: 1;
+  .use-anchor-based-positioning .tooltip-text.left {
+    inset-block-start: anchor(center);
+    inset-inline-start: anchor(left);
+    translate: calc(-100% - var(--goa-space-s)) -50%;
   }
+
+  /* Alignments */
+  .use-anchor-based-positioning .tooltip-text.bottom.align-right {
+    inset-inline-start: anchor(left);
+    translate: calc(var(--goa-space-m) * -1) var(--goa-space-s);
+  }
+
+  .use-anchor-based-positioning .tooltip-text.top.align-right {
+    inset-inline-start: anchor(left);
+    translate: calc(var(--goa-space-m) * -1) calc(-100% - var(--goa-space-s));
+  }
+
+  .use-anchor-based-positioning .tooltip-text.bottom.align-left {
+    inset-inline-start: anchor(right);
+    translate: calc(-100% + var(--goa-space-m)) var(--goa-space-s);
+  }
+
+  .use-anchor-based-positioning .tooltip-text.top.align-left {
+    inset-inline-start: anchor(right);
+    translate: calc(-100% + var(--goa-space-m)) calc(-100% - var(--goa-space-s));
+  }
+
+  /* Overflow fallbacks: flip to opposite alignment when tooltip goes off-screen */
+  @position-try --align-right-flipped-bottom {
+    inset-inline-start: anchor(right);
+    translate: calc(-100% + var(--goa-space-m)) var(--goa-space-s);
+  }
+  @position-try --align-right-flipped-top {
+    inset-inline-start: anchor(right);
+    translate: calc(-100% + var(--goa-space-m)) calc(-100% - var(--goa-space-s));
+  }
+  @position-try --align-left-flipped-bottom {
+    inset-inline-start: anchor(left);
+    translate: calc(var(--goa-space-m) * -1) var(--goa-space-s);
+  }
+  @position-try --align-left-flipped-top {
+    inset-inline-start: anchor(left);
+    translate: calc(var(--goa-space-m) * -1) calc(-100% - var(--goa-space-s));
+  }
+
+  /* Callout */
 
   .tooltip-text.bottom::before,
   .tooltip-text.top::before,
@@ -371,27 +610,21 @@
 
   .tooltip-text.bottom.align-left::before,
   .tooltip-text.top.align-left::before {
-    left: calc(100% - (var(--target-width) + 1rem));
+    left: calc(100% - (var(--target-width) + var(--goa-space-m)));
   }
 
   .tooltip-text.bottom.align-right::before,
   .tooltip-text.top.align-right::before {
-    left: calc(var(--target-width) + 1rem);
+    left: calc(var(--target-width) + var(--goa-space-m));
   }
 
-  .tooltip.align-right {
-    justify-content: flex-start;
-  }
-  .tooltip.align-left {
-    justify-content: flex-end;
+  .use-anchor-based-positioning .tooltip-text.bottom.align-right::before,
+  .use-anchor-based-positioning .tooltip-text.top.align-right::before {
+    left: calc(var(--target-width) + var(--goa-space-m));
   }
 
-  .tooltip-text.align-right {
-    left: 0;
-    margin-left: -1rem;
-  }
-  .tooltip-text.align-left {
-    right: 0;
-    margin-right: -1rem;
+  .use-anchor-based-positioning .tooltip-text.bottom.align-left::before,
+  .use-anchor-based-positioning .tooltip-text.top.align-left::before {
+    left: calc(100% - var(--target-width) - var(--goa-space-m));
   }
 </style>

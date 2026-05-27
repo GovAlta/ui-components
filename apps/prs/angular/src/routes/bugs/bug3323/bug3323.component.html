@@ -1,0 +1,46 @@
+<goab-text tag="h1" mt="m" mb="s">Fix 3323 - Tooltip popover positioning</goab-text>
+<goab-text>
+  CSS anchor positioning support in this browser:
+  <strong>{{ supportsCssAnchorPositioning ? "Supported" : "Not supported" }}</strong
+  >.
+</goab-text>
+
+<goab-text tag="h2" mt="m" mb="s">Tooltip in callout</goab-text>
+<goab-callout emphasis="low">
+  <goab-tooltip content="This tooltip shoudn't be cut off">
+    <goab-button type="tertiary" size="compact">Hover me</goab-button>
+  </goab-tooltip>
+</goab-callout>
+
+<goab-text tag="h2" mt="m" mb="s">Tooltip in container</goab-text>
+<goab-container>
+  <goab-tooltip content="This tooltip shoudn't be cut off">
+    <goab-icon type="information-circle"></goab-icon>
+  </goab-tooltip>
+</goab-container>
+
+<goab-text tag="h2" mt="m" mb="s">Basic tooltip</goab-text>
+<goab-tooltip content="Additional information about this item">
+  <goab-button type="secondary">Hover me</goab-button>
+</goab-tooltip>
+
+<goab-text tag="h2" mt="m" mb="s">Horizontal alignment</goab-text>
+<goab-grid minChildWidth="60px">
+  <goab-tooltip content="Left aligned tooltip" hAlign="left">
+    <goab-icon type="information-circle" />
+  </goab-tooltip>
+  <goab-tooltip content="Center aligned tooltip" hAlign="center">
+    <goab-icon type="information-circle" />
+  </goab-tooltip>
+  <goab-tooltip content="Right aligned tooltip" hAlign="right">
+    <goab-icon type="information-circle" />
+  </goab-tooltip>
+</goab-grid>
+
+<goab-text tag="h2" mt="m" mb="s"> Long Tooltip </goab-text>
+<goab-tooltip
+  content="This is a deliberately long tooltip message that should render at a readable width, wrap naturally, and not collapse into a one-pixel column on first hover."
+  maxWidth="320px"
+>
+  <goab-button type="tertiary" size="compact"> Long tooltip </goab-button>
+</goab-tooltip>

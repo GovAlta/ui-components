@@ -1,4 +1,5 @@
 import { render } from "vitest-browser-react";
+import { page } from "@vitest/browser/context";
 
 import { GoabTooltip, GoabButton } from "../src";
 import { expect, describe, it, vi } from "vitest";
@@ -324,7 +325,9 @@ describe("Tooltip Browser Tests", () => {
     );
   });
 
-  it("should apply maxWidth using CSS custom property", async () => {
+  it("should apply maxWidth for long tooltip content", async () => {
+    await page.viewport(1280, 800);
+
     const Component = () => {
       return (
         <div data-testid="container">
@@ -338,8 +341,10 @@ describe("Tooltip Browser Tests", () => {
               </div>
             }
             maxWidth="300px"
+            hAlign="right"
+            testId="test-tooltip"
           >
-            <GoabButton>Constrained tooltip</GoabButton>
+            <GoabButton>Tooltip</GoabButton>
           </GoabTooltip>
         </div>
       );
@@ -347,34 +352,41 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
 
-        // Should not exceed declared maxWidth of 300px (padding/internal adjustments already applied)
-        expect(numericWidth).toBeLessThanOrEqual(300);
-      },
-      { timeout: 3000 },
-    );
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(200);
+        expect(renderedWidth).toBeLessThanOrEqual(301);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("should accept valid px units for maxWidth", async () => {
+    await page.viewport(1280, 800);
     const Component = () => {
       return (
         <div data-testid="container">
@@ -390,34 +402,41 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        // Trigger tooltip visibility
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        // Check that width is constrained by maxWidth
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
-        expect(numericWidth).toBeLessThanOrEqual(250);
-      },
-      { timeout: 3000 },
-    );
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
+
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(200);
+        expect(renderedWidth).toBeLessThanOrEqual(251);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("should use default width when maxWidth has invalid percentage unit", async () => {
+    await page.viewport(1280, 800);
     const Component = () => {
       return (
         <div data-testid="container">
@@ -433,37 +452,41 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        // Trigger tooltip visibility
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        // Should use default width (400px) since percentage is invalid
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
 
-        // Should use default maxWidth of 400px (minus padding adjustments)
-        // The actual width will be constrained by the default 400px maxWidth
-        expect(numericWidth).toBeLessThanOrEqual(400);
-      },
-      { timeout: 3000 },
-    );
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(300);
+        expect(renderedWidth).toBeLessThanOrEqual(401);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("should use default width when maxWidth has invalid em unit", async () => {
+    await page.viewport(1280, 800);
     const Component = () => {
       return (
         <div data-testid="container">
@@ -479,36 +502,41 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        // Trigger tooltip visibility
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        // Should use default width (400px) since em unit is invalid
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
 
-        // Should use default maxWidth of 400px (minus padding adjustments)
-        expect(numericWidth).toBeLessThanOrEqual(400);
-      },
-      { timeout: 3000 },
-    );
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(300);
+        expect(renderedWidth).toBeLessThanOrEqual(401);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("should use default width when maxWidth has invalid ch unit", async () => {
+    await page.viewport(1280, 800);
     const Component = () => {
       return (
         <div data-testid="container">
@@ -524,36 +552,41 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        // Trigger tooltip visibility
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        // Should use default width (400px) since ch unit is invalid
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
 
-        // Should use default maxWidth of 400px (minus padding adjustments)
-        expect(numericWidth).toBeLessThanOrEqual(400);
-      },
-      { timeout: 3000 },
-    );
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(200);
+        expect(renderedWidth).toBeLessThanOrEqual(401);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("should use default width when maxWidth has completely invalid value", async () => {
+    await page.viewport(1280, 800);
     const Component = () => {
       return (
         <div data-testid="container">
@@ -569,32 +602,36 @@ describe("Tooltip Browser Tests", () => {
 
     const result = render(<Component />);
     const container = result.getByTestId("container");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
 
-    await vi.waitFor(
-      () => {
-        const tooltipEl = container
-          .element()
-          .querySelector("goa-tooltip") as HTMLElement | null;
-        expect(tooltipEl).toBeTruthy();
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
 
-        // Trigger tooltip visibility
-        tooltipEl?.dispatchEvent(new Event("mouseenter", { bubbles: true }));
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
 
-        const tooltipTextEl =
-          tooltipEl?.shadowRoot?.querySelector<HTMLElement>(".tooltip-text");
-        expect(tooltipTextEl).toBeTruthy();
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
 
-        // Should use default width (400px) since value is completely invalid
-        const inlineWidth = tooltipTextEl?.style.width;
-        expect(inlineWidth).toBeTruthy();
+      await vi.advanceTimersByTimeAsync(350);
 
-        const numericWidth = parseInt(inlineWidth || "0", 10);
-        expect(numericWidth).toBeGreaterThan(0);
+      await vi.waitFor(() => {
+        const tooltipTextEl = host?.shadowRoot?.querySelector(
+          ".tooltip-text",
+        ) as HTMLElement | null;
 
-        // Should use default maxWidth of 400px (minus padding adjustments)
-        expect(numericWidth).toBeLessThanOrEqual(400);
-      },
-      { timeout: 3000 },
-    );
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+
+        const renderedWidth = tooltipTextEl?.getBoundingClientRect().width ?? 0;
+
+        expect(renderedWidth).toBeGreaterThan(200);
+        expect(renderedWidth).toBeLessThanOrEqual(401);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
