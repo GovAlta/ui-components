@@ -76,6 +76,36 @@ import CardLite from '../components/CardLite.astro';
       />
     </div>
 
+    <!-- Dark Mode Experimental -->
+    <div class="cta-section dark-mode-section">
+      <div class="cta-text">
+        <h2>Dark mode</h2>
+        <p>
+          Dark mode is available as an <strong>experimental capability</strong> in the design system. Try it in your service and share what you learn — your feedback helps shape how we develop it further.
+        </p>
+        <ul class="dark-mode-links">
+          <li>
+            <goa-link version="2" trailingicon="arrow-forward">
+              <a href={withBase(`/get-started/designers/designing-for-dark-mode/`)}>Designing for dark mode</a>
+            </goa-link>
+          </li>
+          <li>
+            <goa-link version="2" trailingicon="arrow-forward">
+              <a href={withBase(`/get-started/developers/dark-mode-theme/`)}>Building with dark mode</a>
+            </goa-link>
+          </li>
+          <li>
+            <goa-link version="2" trailingicon="open">
+              <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=Bhy1K5uvxUKL9Tw7exCFC3Ec1TzonW9AiPeNaYegn-5UN09LVjlJNDY4UDlSTUlNNlZYTVZLTTYwRC4u" target="_blank" rel="noopener noreferrer">Share your feedback</a>
+            </goa-link>
+          </li>
+        </ul>
+      </div>
+      <div class="cta-image">
+        <img src={withBase(`/images/home/dark-mode-feature-animation.svg`)} alt="Animated dark mode feature toggle with subtle grid movement" />
+      </div>
+    </div>
+
     <!-- Understand Your Service -->
     <h2 class="section-heading">Understand your service</h2>
     <p class="section-description">
@@ -280,6 +310,15 @@ import CardLite from '../components/CardLite.astro';
     margin: 0 0 var(--goa-space-m);
   }
 
+  .dark-mode-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-s);
+  }
+
   .cta-image {
     flex: 2;
     min-width: 0;
@@ -383,6 +422,10 @@ import CardLite from '../components/CardLite.astro';
 
     .cta-section {
       flex-direction: column;
+    }
+
+    .dark-mode-section .cta-image {
+      width: 100%;
     }
   }
 
