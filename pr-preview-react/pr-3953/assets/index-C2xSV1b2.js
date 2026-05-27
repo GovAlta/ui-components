@@ -61484,7 +61484,7 @@ const __vite_glob_0_39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const supportsCssAnchorPositioning = typeof CSS !== "undefined" && typeof CSS.supports === "function" && CSS.supports("anchor-name: --goa-tooltip-target");
 function Bug3323Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", mb: "s", children: "Fix 3323 - Tooltip popover positioning" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", mb: "s", children: "Fix 3323 - Tooltip with fixed positioning" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { children: [
       "CSS anchor positioning support in this browser:",
       " ",
@@ -61518,7 +61518,7 @@ const bug3323_route = {
   type: "bug",
   id: "3323",
   path: "bugs/bug3323",
-  title: "Tooltip popover positioning",
+  title: "Tooltip with fixed positioning",
   component: Bug3323Route
 };
 const __vite_glob_0_40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
