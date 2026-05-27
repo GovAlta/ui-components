@@ -139,7 +139,7 @@ describe("WorkSideMenu", () => {
       vi.useFakeTimers();
       try {
         await menuItem.hover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
@@ -153,7 +153,7 @@ describe("WorkSideMenu", () => {
         });
 
         await menuItem.unhover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
@@ -197,7 +197,7 @@ describe("WorkSideMenu", () => {
       vi.useFakeTimers();
       try {
         await group.hover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
@@ -211,7 +211,7 @@ describe("WorkSideMenu", () => {
         });
 
         await group.unhover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
@@ -249,7 +249,7 @@ describe("WorkSideMenu", () => {
       vi.useFakeTimers();
       try {
         await toggle.hover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
@@ -263,7 +263,7 @@ describe("WorkSideMenu", () => {
         });
 
         await toggle.unhover();
-        await vi.advanceTimersByTimeAsync(300);
+        await vi.advanceTimersByTimeAsync(400);
 
         await vi.waitFor(() => {
           const tooltipEl = menu
