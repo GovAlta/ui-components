@@ -481,11 +481,10 @@
 
   .heading {
     font: var(--goa-accordion-heading);
-    padding: 0.125rem 1rem 0 0;
+    padding-right: var(--goa-space-m);
   }
 
   .heading-small {
-    padding-top: 0.25rem;
     line-height: 1.75rem;
     font: var(--goa-accordion-heading);
   }

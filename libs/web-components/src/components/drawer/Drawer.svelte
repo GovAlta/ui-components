@@ -282,7 +282,7 @@
           {#if heading || $$slots.heading}
             {#if heading}
               {#if version === "2"}
-                <goa-text size="heading-s" as="h3" mt="2xs" mb="none"
+                <goa-text size="heading-s" as="h3" mt="3xs" mb="none"
                   >{heading}</goa-text
                 >
               {:else}

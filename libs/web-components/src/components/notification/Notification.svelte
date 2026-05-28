@@ -184,7 +184,7 @@
 
   /* V2: Improved vertical alignment with icon */
   .v2 .content {
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
   :global(::slotted(a)) {

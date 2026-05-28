@@ -348,7 +348,7 @@
   }
   /* V2: Adjust for different line-height */
   .radio.v2 .label {
-    margin-top: 1px; /* V2: Optical centering - slight downward adjustment */
+    margin-top: -1px;
   }
 
   /* V2 compact: Use smaller gap */
