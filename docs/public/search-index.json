@@ -564,6 +564,23 @@
   },
   {
     "type": "component",
+    "id": "scroll-panel",
+    "name": "Scroll Panel",
+    "description": "A bounded container with sticky header and footer slots that scrolls its body content when it overflows.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "container",
+      "layout",
+      "scroll",
+      "sticky header",
+      "sticky footer",
+      "bounded"
+    ],
+    "slug": "scroll-panel"
+  },
+  {
+    "type": "component",
     "id": "side-menu",
     "name": "Side menu",
     "description": "A side navigation that helps the user navigate between pages.",
@@ -2319,6 +2336,30 @@
     ],
     "aliases": [],
     "slug": "workspace/index-page"
+  },
+  {
+    "type": "example",
+    "id": "workspace-layout",
+    "title": "Workspace Layout",
+    "description": "A full-page shell for workspace-style applications. Side navigation, sticky page header and footer, a scrollable main card, and an optional push-drawer slot.",
+    "status": "published",
+    "size": "page",
+    "tags": [
+      "layout",
+      "shell",
+      "workspace",
+      "sidebar",
+      "sticky header",
+      "sticky footer"
+    ],
+    "components": [
+      "workspace-layout",
+      "work-side-menu",
+      "table",
+      "push-drawer"
+    ],
+    "aliases": [],
+    "slug": "workspace-layout"
   },
   {
     "type": "page",

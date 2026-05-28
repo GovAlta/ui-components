@@ -1,0 +1,44 @@
+---
+/**
+ * Workspace Layout: Basic standalone preview.
+ *
+ * Bare full-viewport render of the example for embedding via iframe from
+ * preview.astro. No chrome — workspace layout fills the entire iframe viewport
+ * at its natural 100vh default.
+ */
+import "@abgov/web-components/index.css";
+import "@design-tokens/tokens.css";
+import { BasicWorkspaceLayoutExample } from "../../../../content/examples/workspace-layout/basic/react";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Basic workspace layout</title>
+    <script>
+      import "@abgov/web-components";
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </head>
+  <body>
+    <div class="workspace-standalone-frame">
+      <BasicWorkspaceLayoutExample client:load />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* Scoped to the standalone route via :has() — Astro's `is:global` styles
+     can leak across pages, so we gate the layout constraints on the presence
+     of the .workspace-standalone-frame element. */
+  html:has(.workspace-standalone-frame),
+  body:has(.workspace-standalone-frame) {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,253 @@
+<h1>#3347 Scroll Panel — Workspace shell evaluation</h1>
+<h2>Test 1: Bounded panel (the use case it's built for)</h2>
+<p>
+  Fixed height 480px. Header + scrollable body + footer. This is where the component
+  shines.
+</p>
+
+<ng-template #t1Header>
+  <div class="demo-header">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <goab-text tag="h2" size="heading-m" mt="none" mb="none">Case details</goab-text>
+      <!-- Tooltip popover should overlay scroll content below (verifies z-index of sticky header) -->
+      <goab-tooltip
+        content="This tooltip should appear ABOVE the scrolling content. If it's clipped or hidden behind the body, the sticky header z-index is wrong."
+        position="bottom"
+      >
+        <goab-icon-button
+          icon="information-circle"
+          size="small"
+          variant="dark"
+          ariaLabel="Help"
+        />
+      </goab-tooltip>
+    </div>
+    <goab-button type="tertiary" size="compact">Close</goab-button>
+  </div>
+</ng-template>
+<ng-template #t1Footer>
+  <div class="demo-footer">
+    <goab-button-group alignment="end">
+      <goab-button type="secondary">Cancel</goab-button>
+      <goab-button type="primary">Save changes</goab-button>
+    </goab-button-group>
+  </div>
+</ng-template>
+
+<goab-scroll-panel
+  height="480px"
+  testId="panel-bounded"
+  [header]="t1Header"
+  [footer]="t1Footer"
+>
+  <div class="demo-body">
+    @for (n of paragraphs; track n) {
+      <p>
+        Paragraph {{ n }} — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </p>
+    }
+  </div>
+</goab-scroll-panel>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<!-- ============================================================ -->
+<!-- Test 2 — Header only / footer only                            -->
+<!-- ============================================================ -->
+<h2>Test 2: Header only / Footer only</h2>
+<p>Verifying optional template slots render correctly.</p>
+
+<ng-template #t2HeaderOnly>
+  <div class="demo-header">
+    <goab-text tag="h2" size="heading-s" mt="none" mb="none"
+      >Header only — pinned at top</goab-text
+    >
+  </div>
+</ng-template>
+<ng-template #t2FooterOnly>
+  <div class="demo-footer">
+    <goab-button-group alignment="end">
+      <goab-button type="primary" size="compact"
+        >Footer only — pinned at bottom</goab-button
+      >
+    </goab-button-group>
+  </div>
+</ng-template>
+
+<goab-block gap="l">
+  <goab-scroll-panel height="320px" testId="panel-header-only" [header]="t2HeaderOnly">
+    <div class="demo-body">
+      @for (n of paragraphs; track n) {
+        <p>Row {{ n }} — scroll me, header stays pinned.</p>
+      }
+    </div>
+  </goab-scroll-panel>
+
+  <goab-scroll-panel height="320px" testId="panel-footer-only" [footer]="t2FooterOnly">
+    <div class="demo-body">
+      @for (n of paragraphs; track n) {
+        <p>Row {{ n }} — scroll me, footer stays pinned.</p>
+      }
+    </div>
+  </goab-scroll-panel>
+</goab-block>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Test 3: Default height (100%) inside a constrained parent</h2>
+<p>Parent gives the height context — scroll panel fills it.</p>
+
+<ng-template #t3Header>
+  <div class="demo-header">
+    <goab-text tag="h2" size="heading-s" mt="none" mb="none"
+      >Inherits parent height</goab-text
+    >
+  </div>
+</ng-template>
+<ng-template #t3Footer>
+  <div class="demo-footer">
+    <span>Footer pinned at the bottom</span>
+  </div>
+</ng-template>
+
+<div style="height: 380px">
+  <goab-scroll-panel
+    testId="panel-default-height"
+    [header]="t3Header"
+    [footer]="t3Footer"
+  >
+    <div class="demo-body">
+      @for (n of paragraphs; track n) {
+        <p>Row {{ n }} — body scrolls within the parent's 380px.</p>
+      }
+    </div>
+  </goab-scroll-panel>
+</div>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Test 4: Drawer V2 (refactored internally with goa-scroll-panel)</h2>
+<p>
+  Verifies Drawer V2 still works after its internal scroll mechanics were replaced with
+  <code>&lt;goa-scroll-panel&gt;</code>. Open and scroll inside — header should stay
+  pinned at top (with border on scroll), actions footer should stay pinned at bottom (with
+  border when content overflows above).
+</p>
+
+<ng-template #t4Actions>
+  <goab-button-group alignment="end">
+    <goab-button type="secondary" (onClick)="closeDrawer()">Cancel</goab-button>
+    <goab-button type="primary" (onClick)="closeDrawer()">Save</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-button type="primary" (onClick)="openDrawer()">Open drawer</goab-button>
+
+<goab-drawer
+  heading="Drawer V2 test"
+  position="right"
+  [maxSize]="'480px'"
+  [open]="drawerOpen"
+  [actions]="t4Actions"
+  (onClose)="closeDrawer()"
+>
+  @for (n of paragraphs; track n) {
+    <p>
+      Paragraph {{ n }} — Drawer V2 now uses goa-scroll-panel internally. Verify header
+      sticky + actions sticky + content scrolls + borders appear when scrolled
+      (top/middle/bottom states).
+    </p>
+  }
+</goab-drawer>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<p>
+  Push Drawer V2 also got the scroll-panel treatment — see the dedicated full-page test at
+  <code>features/3347-push</code> (linked in the side menu as
+  <strong>3347-push - Scroll Panel - Push Drawer V2</strong>) so the drawer's internal
+  scroll can be verified without page scroll bubbling.
+</p>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<!-- ============================================================ -->
+<!-- Test 5 — Modal V2 (also refactored to use scroll-panel)       -->
+<!-- ============================================================ -->
+<h2>Test 5: Modal (refactored internally with goa-scroll-panel)</h2>
+<p>
+  Verifies Modal still works after its V2 path was refactored to use
+  <code>&lt;goa-scroll-panel&gt;</code> instead of <code>&lt;goa-scrollable&gt;</code>. V1
+  path is unchanged (still uses goa-scrollable + maxheight calc). The
+  <code>GoabModal</code> React/Angular wrapper hardcodes <code>version="2"</code>
+  so this test exercises the new path. Open and scroll inside — header should stay pinned
+  at top with border on scroll, action footer pinned at bottom with border when content
+  overflows above.
+</p>
+
+<ng-template #t5Actions>
+  <goab-button-group alignment="end">
+    <goab-button type="secondary" (onClick)="closeModal()">Cancel</goab-button>
+    <goab-button type="primary" (onClick)="closeModal()">Save</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-button type="primary" (onClick)="openModal()">Open modal</goab-button>
+
+<goab-modal
+  heading="Modal V2 test"
+  [open]="modalOpen"
+  [closable]="true"
+  maxWidth="60ch"
+  [actions]="t5Actions"
+  (onClose)="closeModal()"
+>
+  @for (n of paragraphs; track n) {
+    <p>
+      Paragraph {{ n }} — Modal V2 now uses goa-scroll-panel internally. Verify header
+      sticky + actions sticky + content scrolls + borders appear when scrolled
+      (top/middle/bottom states). The pane should remain centered with a 64px gap from
+      viewport edges.
+    </p>
+  }
+</goab-modal>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<!-- ============================================================ -->
+<!-- Test 6 — WorkSideNotificationPanel (refactored to scroll-panel) -->
+<!-- ============================================================ -->
+<h2>Test 6: WorkSideNotificationPanel (refactored to use goa-scroll-panel)</h2>
+<p>
+  Verifies the notification panel still works after its layout was refactored to use
+  <code>&lt;goa-scroll-panel&gt;</code> internally (header slot for title + tabs,
+  default slot for the scrollable notification list, footer slot for "View all"
+  / "Mark all as read" actions). Rendered inline here (normally lives inside a
+  popover triggered from a work-side-menu icon). Scroll inside the notification
+  list to verify sticky header + sticky footer + border feedback on scroll.
+</p>
+
+<div class="notification-panel-stage">
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="unread"
+    testId="notification-panel-test"
+    (onMarkAllRead)="handleMarkAllRead()"
+    (onViewAll)="handleViewAll()"
+  >
+    @for (notif of notifications; track trackById($index, notif)) {
+      <goab-work-side-notification-item
+        [title]="notif.title"
+        [description]="notif.description"
+        [timestamp]="notif.timestamp"
+        [type]="notif.type"
+        [readStatus]="notif.readStatus"
+        [priority]="notif.priority"
+        (onClick)="handleNotificationClick(notif.id)"
+      />
+    }
+  </goab-work-side-notification-panel>
+</div>

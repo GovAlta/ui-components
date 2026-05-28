@@ -70,6 +70,7 @@ export { dataGridConfigurations } from "./data-grid";
 export { modalConfigurations } from "./modal";
 export { drawerConfigurations } from "./drawer";
 export { pushDrawerConfigurations } from "./push-drawer";
+export { scrollPanelConfigurations } from "./scroll-panel";
 export { popoverConfigurations } from "./popover";
 export { accordionConfigurations } from "./accordion";
 export { detailsConfigurations } from "./details";
@@ -137,6 +138,7 @@ import { dataGridConfigurations } from "./data-grid";
 import { modalConfigurations } from "./modal";
 import { drawerConfigurations } from "./drawer";
 import { pushDrawerConfigurations } from "./push-drawer";
+import { scrollPanelConfigurations } from "./scroll-panel";
 import { popoverConfigurations } from "./popover";
 import { accordionConfigurations } from "./accordion";
 import { detailsConfigurations } from "./details";
@@ -214,6 +216,7 @@ export const configurationRegistry: ConfigurationRegistry = {
   modal: modalConfigurations,
   drawer: drawerConfigurations,
   "push-drawer": pushDrawerConfigurations,
+  "scroll-panel": scrollPanelConfigurations,
   popover: popoverConfigurations,
   accordion: accordionConfigurations,
   details: detailsConfigurations,

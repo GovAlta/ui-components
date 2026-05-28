@@ -16,8 +16,15 @@
 />
 
 <script lang="ts">
-  import { dispatch, performOnce } from "../../common/utils";
+  import { dispatch, performOnce, relay, receive } from "../../common/utils";
   import { getMatchedLink } from "../../common/urls";
+  import { MOBILE_BP } from "../../common/breakpoints";
+  import {
+    WorkSideMenuBindMsg,
+    type WorkSideMenuBindRelayDetail,
+    WorkSideMenuOpenMsg,
+    WorkSideMenuCloseMsg,
+  } from "../../types/relay-types";
   import { onMount, onDestroy, tick } from "svelte";
 
   // ******
@@ -52,6 +59,13 @@
   let _showTooltip = false;
   let _menuItemWithOpenPopover: HTMLElement | null = null;
   let _mobilePopoverOpen = false;
+  let _windowWidth = window.innerWidth;
+
+  // ========
+  // Reactive
+  // ========
+
+  $: _isMobile = _windowWidth < MOBILE_BP;
 
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
@@ -88,6 +102,23 @@
       });
       if (_menuEl) _resizeObserver.observe(_menuEl);
     }
+    // send this message to WorkspaceLayout component
+    relay<WorkSideMenuBindRelayDetail>(
+      _rootEl,
+      WorkSideMenuBindMsg,
+      { el: _rootEl },
+      { bubbles: true },
+    );
+    // if this WorkSideMenu is put under slot sideMenu of Workspace Layout, its open state should be synced with the WorkspaceLayout
+    receive(_rootEl, (action) => {
+      if (action === WorkSideMenuOpenMsg) {
+        open = true;
+      } else if (action === WorkSideMenuCloseMsg) {
+        open = false;
+      }
+    });
+
+    document.addEventListener("keydown", handleKeydown);
   });
 
   onDestroy(() => {
@@ -98,7 +129,14 @@
     clearTimeout(_resizeTimeoutId);
     clearTimeout(_mouseEnterTimeoutId);
     clearTimeout(_mouseLeaveTimeoutId);
+    document.removeEventListener("keydown", handleKeydown);
   });
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape" && _isMobile && open) {
+      dispatch(_rootEl, "_toggle", {}, { bubbles: true });
+    }
+  }
 
   // *********
   // Functions
@@ -358,6 +396,8 @@
   }
 </script>
 
+<svelte:window bind:innerWidth={_windowWidth} />
+
 <div
   class="root"
   class:closed={!open}
@@ -379,12 +419,22 @@
     <header class="top-section">
       {#if url}
         <a href={url} class="header" role="menuitem" data-testid="url">
-          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="logo"
+            style="--logo-default: url({_logo});"
+          ></div>
           <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
         </a>
       {:else}
         <div class="header">
-          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="logo"
+            style="--logo-default: url({_logo});"
+          ></div>
           <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
         </div>
       {/if}
@@ -482,6 +532,11 @@
 
 <style>
   :host {
+    /* Render the host as a block element with an explicit height so the
+       internal layout can fill it. Defaults to 100vh (full-page shell);
+       consumers (e.g. GoabWorkspaceLayout) override via the CSS var. */
+    display: block;
+    height: var(--goa-work-side-menu-height, 100vh);
     --goa-popover-box-shadow: var(
       --goa-work-side-menu-popover-shadow,
       var(--goa-shadow-raised-light)
@@ -555,7 +610,7 @@
   .root {
     position: relative;
     z-index: 101;
-    height: var(--goa-work-side-menu-height, 100vh);
+    height: 100%; /* sized by :host via --goa-work-side-menu-height; this 100% keeps the bottom Collapse Menu always visible */
   }
 
   .background {
@@ -651,7 +706,7 @@
     animation: none;
   }
 
- .scroll-area {
+  .scroll-area {
     flex: 1 1 0;
     min-height: 0;
     overflow: hidden;
@@ -957,6 +1012,15 @@
     }
     100% {
       visibility: visible;
+    }
+  }
+
+  @media (--mobile) {
+    :host {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 200; /* > burger menu z-index, < drawer and modal z-index */
     }
   }
 </style>

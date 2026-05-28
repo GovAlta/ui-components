@@ -5,12 +5,16 @@ import { filter } from "rxjs/operators";
 import {
   GoabAppFooter,
   GoabAppHeader,
-  GoabMicrositeHeader,
+  GoabButton,
+  GoabButtonGroup,
+  GoabPushDrawer,
   GoabThemeService,
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
+  GoabWorkspaceLayout,
 } from "@abgov/angular-components";
+import { PushDrawerHostService } from "../routes/features/feat3347PushDrawer/push-drawer-host.service";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
@@ -34,35 +38,57 @@ const TOKEN_TOGGLE_URL = "#tokens";
     RouterOutlet,
     GoabAppFooter,
     GoabAppHeader,
-    GoabMicrositeHeader,
+    GoabButton,
+    GoabButtonGroup,
+    GoabPushDrawer,
     GoabWorkSideMenu,
     GoabWorkSideMenuItem,
     GoabWorkSideMenuGroup,
+    GoabWorkspaceLayout,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppComponent {
   isFullPage = false;
-  readonly workSideMenuHeight = "calc(100vh - 10.1875rem)";
+  isPushDrawerRoute = false;
   readonly bugRouteDefinitions = bugRouteDefinitions;
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
   readonly baseHref = inject(LocationStrategy).getBaseHref();
   readonly tokenToggleUrl = TOKEN_TOGGLE_URL;
   tokenMode: TokenVersion = resolveTokenVersion();
+  readonly pushDrawerParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);
   readonly theme = inject(GoabThemeService);
+  private pushDrawerHost = inject(PushDrawerHostService);
+  readonly pushDrawerOpen = this.pushDrawerHost.open;
 
   constructor() {
+    // Resolve route state synchronously from the current URL so the
+    // workspace-layout sees the push-drawer slot on its very first render.
+    // Svelte's `$$slots` is captured at mount time — if we wait for the async
+    // NavigationEnd, the slot is wired up too late and never gets projected.
+    const initialUrl = window.location.pathname.startsWith(this.baseHref)
+      ? "/" + window.location.pathname.slice(this.baseHref.length)
+      : window.location.pathname;
+    this.isFullPage = this.fullPageRoutes.includes(initialUrl);
+    this.isPushDrawerRoute = initialUrl.startsWith("/features/3347-push");
+    if (this.isPushDrawerRoute) this.pushDrawerHost.openDrawer();
+
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
-        this.isFullPage = this.fullPageRoutes.includes(
-          (event as NavigationEnd).urlAfterRedirects,
-        );
+        const url = (event as NavigationEnd).urlAfterRedirects;
+        this.isFullPage = this.fullPageRoutes.includes(url);
+        this.isPushDrawerRoute = url.startsWith("/features/3347-push");
+        if (this.isPushDrawerRoute) this.pushDrawerHost.openDrawer();
       });
+  }
+
+  closePushDrawer() {
+    this.pushDrawerHost.closeDrawer();
   }
 
   handleNavigate(path: string): void {

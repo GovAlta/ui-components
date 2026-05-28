@@ -1,0 +1,103 @@
+{
+  "componentSlug": "scroll-panel",
+  "extractedFrom": "libs/web-components/src/components/scroll-panel/ScrollPanel.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the height of the panel. Any valid CSS height value (e.g. \"400px\", \"100%\", \"100vh\"). Defaults to \"100%\". The parent element must establish a height context for \"100%\" to work."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "description": "Content rendered in the sticky footer region.",
+          "required": false
+        },
+        {
+          "name": "header",
+          "type": "ReactNode",
+          "description": "Content rendered in the sticky header region.",
+          "required": false
+        }
+      ]
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the height of the panel. Any valid CSS height value (e.g. \"400px\", \"100%\", \"100vh\"). Defaults to \"100%\". The parent element must establish a height context for \"100%\" to work."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "footer",
+          "type": "TemplateRef",
+          "description": "Content rendered in the sticky footer region.",
+          "required": false
+        },
+        {
+          "name": "header",
+          "type": "TemplateRef",
+          "description": "Content rendered in the sticky header region.",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Sets the height of the container. Any valid CSS height value (e.g. \"400px\", \"100%\", \"100vh\"). Defaults to \"100%\". The parent element must establish a height context for \"100%\" to work. The value is applied directly to the host element's style."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "footer",
+          "description": "Content rendered in the sticky footer region.",
+          "required": false
+        },
+        {
+          "name": "header",
+          "description": "Content rendered in the sticky header region.",
+          "required": false
+        }
+      ]
+    }
+  }
+}

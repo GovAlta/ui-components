@@ -233,82 +233,86 @@
   }
 </script>
 
-<div class="notification-panel" data-testid={testid} bind:this={_rootEl}>
-  <!-- Header -->
-  <div class="header">
-    <goa-text as="h2" size="heading-s" mt="l" mb="s" ml="m">{heading}</goa-text>
-    <goa-icon-button
-      icon="close"
-      size="medium"
-      variant="dark"
-      mr="s"
+<goa-scroll-panel
+  class="notification-panel"
+  height="710px"
+  data-testid={testid || undefined}
+  bind:this={_rootEl}
+>
+  <div slot="header" class="panel-header">
+    <div class="header">
+      <goa-text as="h2" size="heading-s" mt="l" mb="s" ml="m"
+        >{heading}</goa-text
+      >
+      <goa-icon-button
+        icon="close"
+        size="medium"
+        variant="dark"
+        mr="s"
+        version="2"
+        testid={`close-${testid}`}
+        on:_click={handleClose}
+      />
+    </div>
+
+    <goa-tabs
+      initialtab="1"
+      navigation="none"
       version="2"
-      testid={`close-${testid}`}
-      on:_click={handleClose}
-    />
-  </div>
-
-  <!-- Tabs -->
-  <goa-tabs
-    initialtab="1"
-    navigation="none"
-    version="2"
-    variant="segmented"
-    on:_change={handleTabChange}
-  >
-    <goa-tab>
-      <span slot="heading">
-        Unread
-        {#if _unreadCount > 0}
-          <goa-badge
-            testid="unreadCount"
-            type="default"
-            icon="false"
-            version="2"
-            content={`${_unreadCount}`}
-            emphasis="subtle"
-          />
-        {/if}
-      </span>
-    </goa-tab>
-    <goa-tab>
-      <span slot="heading">
-        Urgent
-        {#if _urgentCount > 0}
-          <goa-badge
-            icon="false"
-            type="important"
-            version="2"
-            content={`${_urgentCount}`}
-            emphasis="subtle"
-          />
-        {/if}
-      </span>
-    </goa-tab>
-    <goa-tab>
-      <span slot="heading">All</span>
-    </goa-tab>
-  </goa-tabs>
-
-  <div class="content">
-    {#if _isEmptyState}
-      <div class="empty">
-        <img alt="" src={_emptyImage} />
-        <span class="heading">You're all caught up</span>
-        <span class="subline" data-testid={`empty-notifications-${testid}`}>
-          {activeTab === "unread"
-            ? "No unread notifications"
-            : activeTab === "urgent"
-              ? "No urgent notifications"
-              : "No notifications"}
+      variant="segmented"
+      on:_change={handleTabChange}
+    >
+      <goa-tab>
+        <span slot="heading">
+          Unread
+          {#if _unreadCount > 0}
+            <goa-badge
+              testid="unreadCount"
+              type="default"
+              icon="false"
+              version="2"
+              content={`${_unreadCount}`}
+              emphasis="subtle"
+            />
+          {/if}
         </span>
-      </div>
-    {/if}
-    <slot />
+      </goa-tab>
+      <goa-tab>
+        <span slot="heading">
+          Urgent
+          {#if _urgentCount > 0}
+            <goa-badge
+              icon="false"
+              type="important"
+              version="2"
+              content={`${_urgentCount}`}
+              emphasis="subtle"
+            />
+          {/if}
+        </span>
+      </goa-tab>
+      <goa-tab>
+        <span slot="heading">All</span>
+      </goa-tab>
+    </goa-tabs>
   </div>
 
-  <!-- Footer -->
-  <div class="footer">
+  {#if _isEmptyState}
+    <div class="empty">
+      <img alt="" src={_emptyImage} />
+      <span class="heading">You're all caught up</span>
+      <span class="subline" data-testid={`empty-notifications-${testid}`}>
+        {activeTab === "unread"
+          ? "No unread notifications"
+          : activeTab === "urgent"
+            ? "No urgent notifications"
+            : "No notifications"}
+      </span>
+    </div>
+  {/if}
+  <slot />
+
+  <div slot="footer" class="footer">
     <goa-link-button on:_click={handleViewAll} testid={`view-all-${testid}`}
       >View all</goa-link-button
     >
@@ -318,7 +322,7 @@
       on:_click={handleMarkAllRead}>Mark all as read</goa-link-button
     >
   </div>
-</div>
+</goa-scroll-panel>
 
 <style>
   :host {
@@ -332,15 +336,16 @@
   }
 
   .notification-panel {
+    border-radius: var(--goa-popover-border-radius);
+  }
+
+  /* Header slot: title row + tabs stacked vertically. */
+  .panel-header {
     display: flex;
     flex-direction: column;
-    background: var(--goa-color-greyscale-white);
-    border-radius: var(--goa-popover-border-radius);
-    height: 710px;
   }
 
   .header {
-    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -352,14 +357,7 @@
     padding-right: var(--goa-space-m);
   }
 
-  .content {
-    flex: 1;
-    overflow-y: auto;
-    min-height: 0;
-  }
-
   .footer {
-    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -12,8 +12,12 @@
 />
 
 <script lang="ts">
-  import { onMount, onDestroy, tick } from "svelte";
-  import { dispatch, typeValidator } from "../../common/utils";
+  import { onMount, onDestroy } from "svelte";
+  import { dispatch, receive, typeValidator } from "../../common/utils";
+  import {
+    ScrollPanelStateChangeMsg,
+    type ScrollPanelStateChangeRelayDetail,
+  } from "../../types/relay-types";
 
   type DrawerState = "initial" | "open" | "closed" | "closing";
   type VersionType = "1" | "2";
@@ -28,6 +32,7 @@
   export let version: VersionType = "1";
 
   let _contentEl: HTMLElement | null = null;
+  let _scrollPanelEl: HTMLElement | null = null;
   let drawerState: DrawerState = "initial";
   let closingTimeout: number | null = null;
   let _scrollPos: "top" | "middle" | "bottom" | null = null;
@@ -56,6 +61,13 @@
       console.error(
         "PushDrawer does not support percentage widths. Please use a fixed width instead.",
       );
+    }
+    if (_scrollPanelEl) {
+      receive(_scrollPanelEl, (action, data) => {
+        if (action === ScrollPanelStateChangeMsg) {
+          handleScrollPanelStateChange(data as ScrollPanelStateChangeRelayDetail);
+        }
+      });
     }
   });
 
@@ -103,76 +115,15 @@
     checkActionsSlotContent();
   }
 
-  // V2: Check initial scroll state when drawer opens
-  $: if (open && version === "2" && _contentEl) {
-    tick().then(() => {
-      const drawerContent = _contentEl?.querySelector(".drawer-content");
-      if (drawerContent) {
-        const { scrollTop, scrollHeight, clientHeight } = drawerContent;
-        _scrollPos = calculateScrollPos(
-          scrollTop,
-          scrollHeight,
-          clientHeight,
-          _scrollPos,
-        );
-      }
-    });
-  }
-
-  // Hysteresis threshold: prevents jitter when dynamic edge margin/height
-  // changes shift the scroll position slightly at boundaries.
-  const SCROLL_HYSTERESIS = 20;
-
-  function calculateScrollPos(
-    scrollTop: number,
-    scrollHeight: number,
-    clientHeight: number,
-    currentPos: "top" | "middle" | "bottom" | null,
-  ): "top" | "middle" | "bottom" | null {
-    const hasScroll = scrollHeight > clientHeight;
-    if (!hasScroll) return null;
-    const distFromTop = scrollTop;
-    const distFromBottom = scrollHeight - scrollTop - clientHeight;
-
-    // Use hysteresis: stay in current state unless we've moved past the threshold
-    if (currentPos === "top" && distFromTop < SCROLL_HYSTERESIS) return "top";
-    if (currentPos === "bottom" && distFromBottom < SCROLL_HYSTERESIS)
-      return "bottom";
-
-    if (distFromTop < 1) return "top";
-    if (distFromBottom < 1) return "bottom";
-    return "middle";
-  }
-
-  function onScroll(e: Event) {
-    const target = e.currentTarget as HTMLDivElement;
-    if (!open) return;
-
-    if (version === "2") {
-      const { scrollTop, scrollHeight, clientHeight } = target;
-      _scrollPos = calculateScrollPos(
-        scrollTop,
-        scrollHeight,
-        clientHeight,
-        _scrollPos,
-      );
-    } else {
-      const hasScroll = target.scrollHeight > target.offsetHeight;
-      if (!hasScroll) return;
-
-      const isAtTop = target.scrollTop == 0;
-      const isAtBottom =
-        Math.abs(target.scrollHeight - target.scrollTop - target.offsetHeight) <
-        1;
-
-      if (isAtTop) {
-        _scrollPos = "top";
-      } else if (isAtBottom) {
-        _scrollPos = "bottom";
-      } else {
-        _scrollPos = "middle";
-      }
+  function handleScrollPanelStateChange(detail: ScrollPanelStateChangeRelayDetail) {
+    if (!detail.isScrollable) {
+      _scrollPos = null;
+      return;
     }
+    if (detail.state === "at-top") _scrollPos = "top";
+    else if (detail.state === "at-bottom") _scrollPos = "bottom";
+    else if (detail.state === "middle") _scrollPos = "middle";
+    else _scrollPos = null;
   }
 </script>
 
@@ -190,70 +141,62 @@
   aria-labelledby="goa-drawer-heading"
   style="--goa-push-drawer-width: {width};"
 >
-  <div
-    id="goa-drawer-heading"
-    class="drawer-header"
-    class:v2-scrolled={version === "2" &&
-      (_scrollPos === "middle" || _scrollPos === "bottom")}
-  >
-    <div class="drawer-default-header">
-      {#if heading || $$slots.heading}
-        {#if heading}
-          {#if version === "2"}
-            <goa-text
-              size={_scrollPos === "middle" || _scrollPos === "bottom"
-                ? "heading-xs"
-                : "heading-s"}
-              as="h3"
-              mt="2xs"
-              mb="none"
-            >
-              {heading}
-            </goa-text>
+  <goa-scroll-panel bind:this={_scrollPanelEl}>
+    <div id="goa-drawer-heading" slot="header" class="drawer-header">
+      <div class="drawer-default-header">
+        {#if heading || $$slots.heading}
+          {#if heading}
+            {#if version === "2"}
+              <goa-text
+                size={_scrollPos === "middle" || _scrollPos === "bottom"
+                  ? "heading-xs"
+                  : "heading-s"}
+                as="h3"
+                mt="2xs"
+                mb="none"
+              >
+                {heading}
+              </goa-text>
+            {:else}
+              <goa-text size="heading-m" as="h3" mt="none" mb="none">
+                {heading}
+              </goa-text>
+            {/if}
           {:else}
-            <goa-text size="heading-m" as="h3" mt="none" mb="none">
-              {heading}
-            </goa-text>
+            <slot name="heading" />
           {/if}
-        {:else}
-          <slot name="heading" />
         {/if}
-      {/if}
 
-      <goa-icon-button
-        size="medium"
-        data-ignore-focus="true"
-        data-testid="drawer-close-button"
-        arialabel="Close the drawer"
-        variant="dark"
-        icon="close"
-        theme="filled"
-        on:click={close}
-      />
+        <goa-icon-button
+          size="medium"
+          data-ignore-focus="true"
+          data-testid="drawer-close-button"
+          arialabel="Close the drawer"
+          variant="dark"
+          icon="close"
+          theme="filled"
+          on:click={close}
+        />
+      </div>
     </div>
-  </div>
 
-  <div
-    data-testid="drawer-content"
-    class="drawer-content {_scrollPos ?? ''}"
-    on:scroll={onScroll}
-  >
-    <div class="scroll-content">
-      <slot />
+    <div data-testid="drawer-content" class="drawer-content">
+      <div class="scroll-content">
+        <slot />
+      </div>
     </div>
-  </div>
 
-  {#if $$slots.actions}
-    <section
-      class="drawer-actions"
-      data-testid="drawer-actions"
-      class:empty-actions={!_actionsSlotHasContent}
-      class:v2-scrolled={version === "2" &&
-        (_scrollPos === "top" || _scrollPos === "middle")}
-    >
-      <slot name="actions" />
-    </section>
-  {/if}
+    {#if $$slots.actions}
+      <section
+        slot="footer"
+        class="drawer-actions"
+        data-testid="drawer-actions"
+        class:empty-actions={!_actionsSlotHasContent}
+      >
+        <slot name="actions" />
+      </section>
+    {/if}
+  </goa-scroll-panel>
 </div>
 
 <style>
@@ -338,24 +281,15 @@
     height: calc(100% - var(--goa-drawer-offset, 16px));
   }
 
-  /* Shadow styles for scrollable content */
-  .top {
-    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+  goa-scroll-panel {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
-  .bottom {
-    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3);
-  }
-
-  .middle {
-    box-shadow:
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
-  }
-
-  /* V2: No scroll shadows on content */
-  .v2 .drawer-content {
-    box-shadow: none !important;
+  .goa-push-drawer.v2 goa-scroll-panel {
+    --goa-scroll-panel-content-shadow-top: none;
+    --goa-scroll-panel-content-shadow-bottom: none;
+    --goa-scroll-panel-content-shadow-top-bottom: none;
   }
 
   @starting-style {
@@ -379,8 +313,6 @@
   }
 
   .drawer-header {
-    position: sticky;
-    top: 0;
     box-sizing: border-box;
     display: flex;
     padding: var(--goa-space-l) var(--goa-space-l) var(--goa-space-s)
@@ -392,19 +324,11 @@
     background: var(--goa-color-greyscale-white);
   }
 
-  /* V2: Header pinned via flex (not sticky), no border by default */
+  /* V2: no permanent border — scroll-panel's .scroll-panel-header--bordered
+     handles the sticky border feedback when content overflows. */
   .v2 .drawer-header {
-    position: static;
-    flex: 0 0 auto;
     gap: var(--goa-space-2xs);
     border-bottom: none;
-  }
-
-  /* V2: Show header border + shadow when content is scrolled */
-  .drawer-header.v2-scrolled {
-    border-bottom: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-150);
-    box-shadow: var(--goa-shadow-shallow-below);
   }
 
   .drawer-default-header {
@@ -415,8 +339,6 @@
   }
 
   .drawer-actions {
-    position: sticky;
-    bottom: 0;
     width: 100%;
     padding: var(--goa-push-drawer-actions-padding-top)
       var(--goa-push-drawer-content-padding-horizontal)
@@ -426,17 +348,10 @@
     background: var(--goa-color-greyscale-white);
   }
 
-  /* V2: Actions pinned via flex (not sticky), no border by default */
+  /* V2: no permanent border — scroll-panel's .scroll-panel-footer--bordered
+     handles the sticky border feedback when content overflows. */
   .v2 .drawer-actions {
-    position: static;
-    flex: 0 0 auto;
     border-top: none;
-  }
-
-  /* V2: Show actions border + shadow when content has overflow */
-  .drawer-actions.v2-scrolled {
-    border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
-    box-shadow: var(--goa-shadow-shallow-below);
   }
 
   .drawer-actions.empty-actions {
@@ -454,11 +369,9 @@
   .drawer-content {
     display: flex;
     width: 100%;
-    flex: 1 0 0;
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
-    overflow-y: auto;
   }
 
   .scroll-content {

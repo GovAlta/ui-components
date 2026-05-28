@@ -1,78 +1,103 @@
 @if (!isFullPage) {
-  <div style="min-height: 100vh; display: flex; flex-direction: column">
-    <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
-      <goab-microsite-header type="alpha" version="UAT" />
-      <goab-app-header heading="Testing Playground" [url]="baseHref"></goab-app-header>
-    </section>
+  <ng-template #sideMenuTpl>
+    <goab-work-side-menu
+      heading="Testing Playground"
+      [url]="baseHref"
+      [open]="true"
+      (onNavigate)="handleNavigate($event)"
+      [primaryContent]="primaryTemplate"
+      [secondaryContent]="tokenToggleTemplate"
+    />
+  </ng-template>
 
-    <div
-      style="display: flex; flex: 1 1 auto; min-height: calc(100vh - 10.1875rem)"
-      [style.--goa-work-side-menu-height]="workSideMenuHeight"
+  <ng-template #pageHeaderTpl>
+    <goab-app-header heading="Testing Playground" [url]="baseHref" />
+  </ng-template>
+
+  <ng-template #pageFooterTpl>
+    <goab-app-footer maxContentWidth="100%" />
+  </ng-template>
+
+  <ng-template #pushActionsTpl>
+    <goab-button-group alignment="end">
+      <goab-button type="secondary" (onClick)="closePushDrawer()">Cancel</goab-button>
+      <goab-button type="primary" (onClick)="closePushDrawer()">Save</goab-button>
+    </goab-button-group>
+  </ng-template>
+
+  <ng-template #pushDrawerTpl>
+    <goab-push-drawer
+      testId="push-drawer-v2"
+      heading="Push Drawer V2 test"
+      [open]="pushDrawerOpen()"
+      width="492px"
+      [actions]="pushActionsTpl"
+      (onClose)="closePushDrawer()"
     >
-      <goab-work-side-menu
-        heading="Testing Playground"
-        [url]="baseHref"
-        [open]="true"
-        (onNavigate)="handleNavigate($event)"
-        [primaryContent]="primaryTemplate"
-        [secondaryContent]="secondaryTemplate"
-      >
-      </goab-work-side-menu>
+      @for (n of pushDrawerParagraphs; track n) {
+        <p>
+          Paragraph {{ n }} — Push Drawer V2 now uses goa-scroll-panel internally. Verify
+          header sticky + actions sticky + content scrolls + outer chrome morphs
+          (margins/radius/height) as scroll state changes between top / middle / bottom.
+        </p>
+      }
+    </goab-push-drawer>
+  </ng-template>
 
-      <ng-template #secondaryTemplate>
-        <goab-work-side-menu-item
-          [label]="'Switch to ' + (tokenMode === 'v1' ? 'V2' : 'V1') + ' tokens'"
-          icon="swap-horizontal"
-          [url]="tokenToggleUrl"
-        ></goab-work-side-menu-item>
-        <goab-work-side-menu-item
-          [icon]="theme.mode() === 'dark' ? 'sunny' : 'moon'"
-          [label]="theme.mode() === 'dark' ? 'Light mode' : 'Dark mode'"
-          url="#toggle-theme"
-        ></goab-work-side-menu-item>
-      </ng-template>
-
-      <ng-template #primaryTemplate>
-        <goab-work-side-menu-item
-          label="All Components"
-          [url]="baseHref + 'everything'"
-          icon="list"
-        ></goab-work-side-menu-item>
-        <goab-work-side-menu-group icon="alert-circle" heading="Bugs">
-          @for (route of bugRouteDefinitions; track route.path) {
-            <goab-work-side-menu-item
-              [label]="route.id + ' - ' + route.title"
-              [url]="baseHref + route.path"
-            ></goab-work-side-menu-item>
-          }
-        </goab-work-side-menu-group>
-        <goab-work-side-menu-group icon="book" heading="Docs">
-          @for (route of docsRouteDefinitions; track route.path) {
-            <goab-work-side-menu-item
-              [label]="route.title"
-              [url]="baseHref + route.path"
-            ></goab-work-side-menu-item>
-          }
-        </goab-work-side-menu-group>
-        <goab-work-side-menu-group icon="star" heading="Features">
-          @for (route of featureRouteDefinitions; track route.path) {
-            <goab-work-side-menu-item
-              [label]="route.id + ' - ' + route.title"
-              [url]="baseHref + route.path"
-            ></goab-work-side-menu-item>
-          }
-        </goab-work-side-menu-group>
-      </ng-template>
-      <section style="padding: 30px; width: 100%" role="main">
-        <router-outlet></router-outlet>
-      </section>
+  <goab-workspace-layout
+    [sideMenu]="sideMenuTpl"
+    [pageHeader]="pageHeaderTpl"
+    [pageFooter]="pageFooterTpl"
+    [pushDrawer]="isPushDrawerRoute ? pushDrawerTpl : undefined"
+  >
+    <div style="padding: 30px">
+      <router-outlet />
     </div>
-    <section slot="footer" role="footer" style="flex: 0 0 auto">
-      <goab-app-footer maxContentWidth="100%" />
-    </section>
-  </div>
+  </goab-workspace-layout>
+
+  <ng-template #tokenToggleTemplate>
+    <goab-work-side-menu-item
+      [label]="'Switch to ' + (tokenMode === 'v1' ? 'V2' : 'V1') + ' tokens'"
+      icon="swap-horizontal"
+      [url]="tokenToggleUrl"
+    />
+    <goab-work-side-menu-item
+      [icon]="theme.mode() === 'dark' ? 'sunny' : 'moon'"
+      [label]="theme.mode() === 'dark' ? 'Light mode' : 'Dark mode'"
+      url="#toggle-theme"
+    />
+  </ng-template>
+
+  <ng-template #primaryTemplate>
+    <goab-work-side-menu-item
+      label="All Components"
+      [url]="baseHref + 'everything'"
+      icon="list"
+    />
+    <goab-work-side-menu-group icon="alert-circle" heading="Bugs">
+      @for (route of bugRouteDefinitions; track route.path) {
+        <goab-work-side-menu-item
+          [label]="route.id + ' - ' + route.title"
+          [url]="baseHref + route.path"
+        />
+      }
+    </goab-work-side-menu-group>
+    <goab-work-side-menu-group icon="book" heading="Docs">
+      @for (route of docsRouteDefinitions; track route.path) {
+        <goab-work-side-menu-item [label]="route.title" [url]="baseHref + route.path" />
+      }
+    </goab-work-side-menu-group>
+    <goab-work-side-menu-group icon="star" heading="Features">
+      @for (route of featureRouteDefinitions; track route.path) {
+        <goab-work-side-menu-item
+          [label]="route.id + ' - ' + route.title"
+          [url]="baseHref + route.path"
+        />
+      }
+    </goab-work-side-menu-group>
+  </ng-template>
 }
 
 @if (isFullPage) {
-  <router-outlet></router-outlet>
+  <router-outlet />
 }

@@ -1382,3 +1382,24 @@ export type GoabInputSize = "default" | "compact";
 export type GoabTextAreaSize = "default" | "compact";
 
 export type GoabThemeMode = "light" | "dark";
+
+export const GoabWorkspaceLayoutScrollState = {
+  NO_SCROLL: "no-scroll",
+  AT_TOP: "at-top",
+  MIDDLE: "middle",
+  AT_BOTTOM: "at-bottom",
+} as const;
+export type GoabWorkspaceLayoutScrollState =
+  (typeof GoabWorkspaceLayoutScrollState)[keyof typeof GoabWorkspaceLayoutScrollState];
+
+/**
+ * Provides details when the workspace-layout's internal scroll state changes.
+ */
+export interface GoabWorkspaceLayoutOnScrollStateChangeDetail {
+  /** The new scroll state. */
+  state: GoabWorkspaceLayoutScrollState;
+  /** Whether the content currently overflows (i.e. is scrollable). */
+  isScrollable: boolean;
+  /** The originating DOM event. */
+  event: Event;
+}
