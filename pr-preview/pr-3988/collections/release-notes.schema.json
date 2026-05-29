@@ -43,6 +43,16 @@
               "title": {
                 "type": "string"
               },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "breaking",
+                  "addition",
+                  "feature-change",
+                  "fix",
+                  "website"
+                ]
+              },
               "detail": {
                 "type": "string"
               },
@@ -83,9 +93,6 @@
               "experimental": {
                 "type": "boolean"
               },
-              "breaking": {
-                "type": "boolean"
-              },
               "migration": {
                 "type": "object",
                 "properties": {
@@ -103,7 +110,8 @@
               }
             },
             "required": [
-              "title"
+              "title",
+              "type"
             ],
             "additionalProperties": false
           }
