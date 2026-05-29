@@ -2322,6 +2322,30 @@
   },
   {
     "type": "page",
+    "id": "early-adopter-experiences",
+    "title": "Two teams migrate to the updated design system",
+    "description": "The Caregiver Portal and Alberta Childcare Family Portal teams share how they approached migrating to the updated design system",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/early-adopter-experiences"
+  },
+  {
+    "type": "page",
+    "id": "articles",
+    "title": "Articles",
+    "description": "Real stories from Government of Alberta product teams building with the updated design system",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/articles"
+  },
+  {
+    "type": "page",
     "id": "automated-accessibility",
     "title": "Automated accessibility",
     "description": "Guidance on using automated accessibility testing tools effectively",
@@ -2558,42 +2582,6 @@
       "intro"
     ],
     "slug": "get-started/roadmap"
-  },
-  {
-    "type": "page",
-    "id": "alberta-childcare-family-portal",
-    "title": "Alberta Childcare Family Portal",
-    "description": "How the Child Care Digital team updated a product in early development to the updated design system over approximately 2 months",
-    "status": "published",
-    "category": "get started",
-    "tags": [
-      "stories"
-    ],
-    "slug": "get-started/stories/alberta-childcare-family-portal"
-  },
-  {
-    "type": "page",
-    "id": "caregiver-portal",
-    "title": "Caregiver Portal",
-    "description": "How the Child Intervention Platform team migrated a new product to the updated design system in 7–8 days across two phases",
-    "status": "published",
-    "category": "get started",
-    "tags": [
-      "stories"
-    ],
-    "slug": "get-started/stories/caregiver-portal"
-  },
-  {
-    "type": "page",
-    "id": "stories",
-    "title": "Stories",
-    "description": "Real stories from Government of Alberta product teams building with the updated design system",
-    "status": "published",
-    "category": "get started",
-    "tags": [
-      "stories"
-    ],
-    "slug": "get-started/stories"
   },
   {
     "type": "example",
