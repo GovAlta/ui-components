@@ -13,11 +13,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.0-noble
+
+    env:
+      # the playwright npm postinstall not to download them during `npm ci`.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      # The container runs as root but GitHub sets HOME=/github/home, which the
+      # image owns as `pwuser`. Firefox refuses to launch when $HOME is owned by a
+      # different user, so point HOME at root's own home.
+      HOME: /root
 
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Allow git to use the container workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - uses: actions/setup-node@v6
         with:
@@ -39,6 +53,5 @@ jobs:
       - name: Test
         run: |
           if [ -d "./dist" ]; then
-            npx playwright install --with-deps
             npm run test:pr
           fi
