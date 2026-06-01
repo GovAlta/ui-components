@@ -72,251 +72,7 @@ Defaults to <code data-astro-cid-lv5w65io>relaxed</code>.
 Defaults to <code data-astro-cid-lv5w65io>start</code>.
 </div> </div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io> <div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-name" data-astro-cid-lv5w65io>gap</span>   </div> <div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-type" data-astro-cid-lv5w65io>GoabButtonGroupGap</span> <span class="prop-type-details" data-astro-cid-lv5w65io> relaxed | compact </span> </div> <div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io> Sets the spacing between buttons in the button group. </div> <div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
 Defaults to <code data-astro-cid-lv5w65io>relaxed</code>.
-</div> </div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io> <div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-name" data-astro-cid-lv5w65io>testid</span>   </div> <div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-type" data-astro-cid-lv5w65io>string</span>  </div> <div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io> Sets a data-testid attribute for automated testing. </div>  </div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io> <div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-name" data-astro-cid-lv5w65io>mt, mr, mb, ml</span>   </div> <div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-type" data-astro-cid-lv5w65io>Spacing</span>  </div> <div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io> Apply margin to the top, right, bottom, and/or left of the component. </div>  </div> </goa-data-grid> </goa-container> </div> </div>   </div>    </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="5DgSU" component-url="/ui-components/pr-preview/pr-4006/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.api-section h3, .sub-component-section h2&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Examples Tab --> <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation --> <goa-tab heading="Examples" data-astro-cid-ocziw4lk="true"> <span slot="heading" data-astro-cid-ocziw4lk>Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="16" data-astro-cid-ocziw4lk="true"></goa-badge></span> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d> <div class="examples-list" data-astro-cid-ocziw4lk> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="qeHE9" prefix="r13" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add another item in a modal&quot;],&quot;slug&quot;:[0,&quot;add-another-item-in-a-modal&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabModal,\n  GoabTextArea,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddAnotherItemInAModal() {\n  const [open, setOpen] = useState(false);\n  const [type, setType] = useState&lt;string&gt;();\n  const [name, setName] = useState&lt;string&gt;();\n  const [description, setDescription] = useState&lt;string&gt;();\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Add another item\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Add a new item\&quot;\n        open={open}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Save new item\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n        &lt;GoabFormItem label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;\n            &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Option 1\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Option 2\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput\n            onChange={(e) =&gt; setName(e.value)}\n            value={name}\n            name=\&quot;name\&quot;\n            width=\&quot;100%\&quot;\n          /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabTextArea\n            name=\&quot;description\&quot;\n            rows={3}\n            width=\&quot;100%\&quot;\n            onChange={(e) =&gt; setDescription(e.value)}\n            value={description}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Add another item&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Add a new item\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goab-form-item label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-dropdown (onChange)=\&quot;updateType($event)\&quot; [value]=\&quot;type\&quot;&gt;\n      &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;name\&quot;\n      width=\&quot;100%\&quot;\n      (onChange)=\&quot;updateName($event)\&quot;\n      [value]=\&quot;name\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-textarea\n      name=\&quot;description\&quot;\n      width=\&quot;100%\&quot;\n      [rows]=\&quot;3\&quot;\n      (onChange)=\&quot;updateDescription($event)\&quot;\n      [value]=\&quot;description\&quot;\n    &gt;&lt;/goab-textarea&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Save new item&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-another-item-in-a-modal\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddAnotherItemInAModalComponent {\n  open = false;\n  type: string | undefined = \&quot;\&quot;;\n  name = \&quot;\&quot;;\n  description = \&quot;\&quot;;\n\n  toggleModal() {\n    this.open = !this.open;\n  }\n\n  updateType(event: any) {\n    this.type = event.value;\n  }\n\n  updateName(event: any) {\n    this.name = event.value;\n  }\n\n  updateDescription(event: any) {\n    this.description = event.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;add\&quot;\n  &gt;Add another item&lt;/goa-button\n&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;add-item-modal\&quot; heading=\&quot;Add a new item\&quot;&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;type-dropdown\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;name\&quot; width=\&quot;100%\&quot; id=\&quot;name-input\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-textarea\n      version=\&quot;2\&quot;\n      name=\&quot;description\&quot;\n      width=\&quot;100%\&quot;\n      rows=\&quot;3\&quot;\n      id=\&quot;description-textarea\&quot;\n    &gt;&lt;/goa-textarea&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;save-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Save new item&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;add-item-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const saveBtn = document.getElementById(\&quot;save-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  saveBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-another-item-in-a-modal" class="example-title">Add another item in a modal</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
-const [type, setType] = useState&lt;string&gt;();
-const [name, setName] = useState&lt;string&gt;();
-const [description, setDescription] = useState&lt;string&gt;();</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; onClick={() =&gt; setOpen(true)}&gt;
-  Add another item
-&lt;/GoabButton&gt;
-&lt;GoabModal
-  heading=&quot;Add a new item&quot;
-  open={open}
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
-      &lt;GoabButton type=&quot;tertiary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Cancel
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Save new item
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
-&gt;
-  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
-  &lt;GoabFormItem label=&quot;Type&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;
-      &lt;GoabDropdownItem value=&quot;1&quot; label=&quot;Option 1&quot; /&gt;
-      &lt;GoabDropdownItem value=&quot;2&quot; label=&quot;Option 2&quot; /&gt;
-    &lt;/GoabDropdown&gt;
-  &lt;/GoabFormItem&gt;
-  &lt;GoabFormItem label=&quot;Name&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabInput
-      onChange={(e) =&gt; setName(e.value)}
-      value={name}
-      name=&quot;name&quot;
-      width=&quot;100%&quot;
-    /&gt;
-  &lt;/GoabFormItem&gt;
-  &lt;GoabFormItem label=&quot;Description&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabTextArea
-      name=&quot;description&quot;
-      rows={3}
-      width=&quot;100%&quot;
-      onChange={(e) =&gt; setDescription(e.value)}
-      value={description}
-    /&gt;
-  &lt;/GoabFormItem&gt;
-&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
-type: string | undefined = &quot;&quot;;
-name = &quot;&quot;;
-description = &quot;&quot;;
-
-toggleModal() {
-  this.open = !this.open;
-}
-
-updateType(event: any) {
-  this.type = event.value;
-}
-
-updateName(event: any) {
-  this.name = event.value;
-}
-
-updateDescription(event: any) {
-  this.description = event.value;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; (onClick)=&quot;toggleModal()&quot;
-  &gt;Add another item&lt;/goab-button
-&gt;
-&lt;goab-modal
-  [open]=&quot;open&quot;
-  (onClose)=&quot;toggleModal()&quot;
-  heading=&quot;Add a new item&quot;
-  [actions]=&quot;actions&quot;
-&gt;
-  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
-  &lt;goab-form-item label=&quot;Type&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-dropdown (onChange)=&quot;updateType($event)&quot; [value]=&quot;type&quot;&gt;
-      &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goab-dropdown-item&gt;
-      &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goab-dropdown-item&gt;
-    &lt;/goab-dropdown&gt;
-  &lt;/goab-form-item&gt;
-  &lt;goab-form-item label=&quot;Name&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-input
-      name=&quot;name&quot;
-      width=&quot;100%&quot;
-      (onChange)=&quot;updateName($event)&quot;
-      [value]=&quot;name&quot;
-    &gt;&lt;/goab-input&gt;
-  &lt;/goab-form-item&gt;
-  &lt;goab-form-item label=&quot;Description&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-textarea
-      name=&quot;description&quot;
-      width=&quot;100%&quot;
-      [rows]=&quot;3&quot;
-      (onChange)=&quot;updateDescription($event)&quot;
-      [value]=&quot;description&quot;
-    &gt;&lt;/goab-textarea&gt;
-  &lt;/goab-form-item&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;end&quot;&gt;
-      &lt;goab-button type=&quot;tertiary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
-        &gt;Cancel&lt;/goab-button
-      &gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
-        &gt;Save new item&lt;/goab-button
-      &gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;add-item-modal&quot;);
-const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
-const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
-const saveBtn = document.getElementById(&quot;save-btn&quot;);
-
-openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
-});
-
-modal.addEventListener(&quot;_close&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-saveBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot; type=&quot;tertiary&quot; leadingicon=&quot;add&quot;
-  &gt;Add another item&lt;/goa-button
-&gt;
-&lt;goa-modal version=&quot;2&quot; id=&quot;add-item-modal&quot; heading=&quot;Add a new item&quot;&gt;
-  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Type&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-dropdown version=&quot;2&quot; id=&quot;type-dropdown&quot;&gt;
-      &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goa-dropdown-item&gt;
-      &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goa-dropdown-item&gt;
-    &lt;/goa-dropdown&gt;
-  &lt;/goa-form-item&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Name&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-input version=&quot;2&quot; name=&quot;name&quot; width=&quot;100%&quot; id=&quot;name-input&quot;&gt;&lt;/goa-input&gt;
-  &lt;/goa-form-item&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Description&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-textarea
-      version=&quot;2&quot;
-      name=&quot;description&quot;
-      width=&quot;100%&quot;
-      rows=&quot;3&quot;
-      id=&quot;description-textarea&quot;
-    &gt;&lt;/goa-textarea&gt;
-  &lt;/goa-form-item&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;end&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;cancel-btn&quot; type=&quot;tertiary&quot; size=&quot;compact&quot;
-        &gt;Cancel&lt;/goa-button
-      &gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;save-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
-        &gt;Save new item&lt;/goa-button
-      &gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link,
-        .figma-link:visited {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="ZU5CqK" prefix="r14" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add a record using a drawer&quot;],&quot;slug&quot;:[0,&quot;add-a-record-using-a-drawer&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabBlock,\n  GoabButton,\n  GoabButtonGroup,\n  GoabCheckbox,\n  GoabDatePicker,\n  GoabDrawer,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddARecordUsingADrawer() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton leadingIcon=\&quot;add\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Add Record\n      &lt;/GoabButton&gt;\n      &lt;GoabDrawer\n        maxSize=\&quot;492px\&quot;\n        open={open}\n        heading=\&quot;Add Record\&quot;\n        position=\&quot;right\&quot;\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;start\&quot;&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Add record\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabFormItem label=\&quot;Level of education\&quot;&gt;\n          &lt;GoabDropdown onChange={() =&gt; {}} name=\&quot;education\&quot; value=\&quot;university\&quot;&gt;\n            &lt;GoabDropdownItem value=\&quot;high-school\&quot; label=\&quot;High School Diploma\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;college\&quot; label=\&quot;College Diploma\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;university\&quot; label=\&quot;University Degree\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput name=\&quot;education\&quot; type=\&quot;text\&quot; onChange={() =&gt; {}} /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput name=\&quot;fieldOfStudy\&quot; type=\&quot;text\&quot; onChange={() =&gt; {}} /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;attendTraining\&quot;\n            orientation=\&quot;horizontal\&quot;\n            onChange={() =&gt; {}}\n          &gt;\n            &lt;GoabRadioItem value=\&quot;yes\&quot; label=\&quot;Yes\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;no\&quot; label=\&quot;No\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDatePicker onChange={() =&gt; {}} value={new Date(\&quot;2022-09-01\&quot;)} /&gt;\n          &lt;GoabCheckbox\n            name=\&quot;startDateApproximate\&quot;\n            text=\&quot;Approximate date\&quot;\n            value=\&quot;y\&quot;\n            mt=\&quot;s\&quot;\n          /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;credentialReceived\&quot;\n            orientation=\&quot;horizontal\&quot;\n            onChange={() =&gt; {}}\n          &gt;\n            &lt;GoabRadioItem value=\&quot;yes\&quot; label=\&quot;Yes\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;no\&quot; label=\&quot;No\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabDrawer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button leadingIcon=\&quot;add\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Add Record&lt;/goab-button&gt;\n&lt;goab-drawer\n  maxSize=\&quot;492px\&quot;\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Add Record\&quot;\n  position=\&quot;right\&quot;\n  (onClose)=\&quot;onClose()\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-form-item label=\&quot;Level of education\&quot;&gt;\n    &lt;goab-dropdown\n      (onChange)=\&quot;dropdownOnChange($event)\&quot;\n      name=\&quot;education\&quot;\n      value=\&quot;university\&quot;\n    &gt;\n      &lt;goab-dropdown-item\n        value=\&quot;high-school\&quot;\n        label=\&quot;High School Diploma\&quot;\n      &gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;college\&quot; label=\&quot;College Diploma\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item\n        value=\&quot;university\&quot;\n        label=\&quot;University Degree\&quot;\n      &gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;education\&quot;\n      type=\&quot;text\&quot;\n      (onChange)=\&quot;inputOnChange($event)\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;fieldOfStudy\&quot;\n      type=\&quot;text\&quot;\n      (onChange)=\&quot;inputOnChange($event)\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;attendTraining\&quot;\n      orientation=\&quot;horizontal\&quot;\n      (onChange)=\&quot;radioOnChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-date-picker (onChange)=\&quot;dateOnChange($event)\&quot;&gt;&lt;/goab-date-picker&gt;\n    &lt;goab-checkbox\n      name=\&quot;startDateApproximate\&quot;\n      text=\&quot;Approximate date\&quot;\n      value=\&quot;y\&quot;\n      mt=\&quot;s\&quot;\n    &gt;&lt;/goab-checkbox&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;credentialReceived\&quot;\n      orientation=\&quot;horizontal\&quot;\n      (onChange)=\&quot;radioOnChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Add record&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-drawer&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-a-record-using-a-drawer\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddARecordUsingADrawerComponent {\n  open = false;\n\n  onClick() {\n    this.open = true;\n  }\n\n  onClose() {\n    this.open = false;\n  }\n\n  dropdownOnChange(event: any) {\n    console.log(event);\n  }\n\n  inputOnChange(event: any) {\n    console.log(event);\n  }\n\n  radioOnChange(event: any) {\n    console.log(event);\n  }\n\n  dateOnChange(event: any) {\n    console.log(event);\n  }\n\n  closeDrawer() {\n    this.open = false;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-drawer-btn\&quot; leadingicon=\&quot;add\&quot;&gt;Add Record&lt;/goa-button&gt;\n&lt;goa-drawer\n  version=\&quot;2\&quot;\n  id=\&quot;record-drawer\&quot;\n  max-size=\&quot;492px\&quot;\n  heading=\&quot;Add Record\&quot;\n  position=\&quot;right\&quot;\n&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Level of education\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;education\&quot; value=\&quot;university\&quot;&gt;\n      &lt;goa-dropdown-item\n        value=\&quot;high-school\&quot;\n        label=\&quot;High School Diploma\&quot;\n      &gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;college\&quot; label=\&quot;College Diploma\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;university\&quot; label=\&quot;University Degree\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;education\&quot; type=\&quot;text\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;fieldOfStudy\&quot; type=\&quot;text\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;attendTraining\&quot; orientation=\&quot;horizontal\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-date-picker version=\&quot;2\&quot;&gt;&lt;/goa-date-picker&gt;\n    &lt;goa-checkbox\n      version=\&quot;2\&quot;\n      name=\&quot;startDateApproximate\&quot;\n      text=\&quot;Approximate date\&quot;\n      value=\&quot;y\&quot;\n      mt=\&quot;s\&quot;\n    &gt;&lt;/goa-checkbox&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;credentialReceived\&quot; orientation=\&quot;horizontal\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;add-record-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Add record&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-drawer&gt;\n\n&lt;script&gt;\n  const drawer = document.getElementById(\&quot;record-drawer\&quot;);\n  const openBtn = document.getElementById(\&quot;open-drawer-btn\&quot;);\n  const addBtn = document.getElementById(\&quot;add-record-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  drawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  addBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170434&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-a-record-using-a-drawer" class="example-title">Add a record using a drawer</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170434" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton leadingIcon=&quot;add&quot; onClick={() =&gt; setOpen(true)}&gt;
+</div> </div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io> <div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-name" data-astro-cid-lv5w65io>testid</span>   </div> <div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-type" data-astro-cid-lv5w65io>string</span>  </div> <div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io> Sets a data-testid attribute for automated testing. </div>  </div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io> <div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-name" data-astro-cid-lv5w65io>mt, mr, mb, ml</span>   </div> <div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io> <span class="prop-type" data-astro-cid-lv5w65io>Spacing</span>  </div> <div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io> Apply margin to the top, right, bottom, and/or left of the component. </div>  </div> </goa-data-grid> </goa-container> </div> </div>   </div>    </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="5DgSU" component-url="/ui-components/pr-preview/pr-4006/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.api-section h3, .sub-component-section h2&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Examples Tab --> <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation --> <goa-tab heading="Examples" data-astro-cid-ocziw4lk="true"> <span slot="heading" data-astro-cid-ocziw4lk>Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="16" data-astro-cid-ocziw4lk="true"></goa-badge></span> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d> <div class="examples-list" data-astro-cid-ocziw4lk> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="ZU5CqK" prefix="r13" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add a record using a drawer&quot;],&quot;slug&quot;:[0,&quot;add-a-record-using-a-drawer&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabBlock,\n  GoabButton,\n  GoabButtonGroup,\n  GoabCheckbox,\n  GoabDatePicker,\n  GoabDrawer,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddARecordUsingADrawer() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton leadingIcon=\&quot;add\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Add Record\n      &lt;/GoabButton&gt;\n      &lt;GoabDrawer\n        maxSize=\&quot;492px\&quot;\n        open={open}\n        heading=\&quot;Add Record\&quot;\n        position=\&quot;right\&quot;\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;start\&quot;&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Add record\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabFormItem label=\&quot;Level of education\&quot;&gt;\n          &lt;GoabDropdown onChange={() =&gt; {}} name=\&quot;education\&quot; value=\&quot;university\&quot;&gt;\n            &lt;GoabDropdownItem value=\&quot;high-school\&quot; label=\&quot;High School Diploma\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;college\&quot; label=\&quot;College Diploma\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;university\&quot; label=\&quot;University Degree\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput name=\&quot;education\&quot; type=\&quot;text\&quot; onChange={() =&gt; {}} /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput name=\&quot;fieldOfStudy\&quot; type=\&quot;text\&quot; onChange={() =&gt; {}} /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;attendTraining\&quot;\n            orientation=\&quot;horizontal\&quot;\n            onChange={() =&gt; {}}\n          &gt;\n            &lt;GoabRadioItem value=\&quot;yes\&quot; label=\&quot;Yes\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;no\&quot; label=\&quot;No\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDatePicker onChange={() =&gt; {}} value={new Date(\&quot;2022-09-01\&quot;)} /&gt;\n          &lt;GoabCheckbox\n            name=\&quot;startDateApproximate\&quot;\n            text=\&quot;Approximate date\&quot;\n            value=\&quot;y\&quot;\n            mt=\&quot;s\&quot;\n          /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;credentialReceived\&quot;\n            orientation=\&quot;horizontal\&quot;\n            onChange={() =&gt; {}}\n          &gt;\n            &lt;GoabRadioItem value=\&quot;yes\&quot; label=\&quot;Yes\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;no\&quot; label=\&quot;No\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabDrawer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button leadingIcon=\&quot;add\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Add Record&lt;/goab-button&gt;\n&lt;goab-drawer\n  maxSize=\&quot;492px\&quot;\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Add Record\&quot;\n  position=\&quot;right\&quot;\n  (onClose)=\&quot;onClose()\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-form-item label=\&quot;Level of education\&quot;&gt;\n    &lt;goab-dropdown\n      (onChange)=\&quot;dropdownOnChange($event)\&quot;\n      name=\&quot;education\&quot;\n      value=\&quot;university\&quot;\n    &gt;\n      &lt;goab-dropdown-item\n        value=\&quot;high-school\&quot;\n        label=\&quot;High School Diploma\&quot;\n      &gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;college\&quot; label=\&quot;College Diploma\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item\n        value=\&quot;university\&quot;\n        label=\&quot;University Degree\&quot;\n      &gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;education\&quot;\n      type=\&quot;text\&quot;\n      (onChange)=\&quot;inputOnChange($event)\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;fieldOfStudy\&quot;\n      type=\&quot;text\&quot;\n      (onChange)=\&quot;inputOnChange($event)\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;attendTraining\&quot;\n      orientation=\&quot;horizontal\&quot;\n      (onChange)=\&quot;radioOnChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-date-picker (onChange)=\&quot;dateOnChange($event)\&quot;&gt;&lt;/goab-date-picker&gt;\n    &lt;goab-checkbox\n      name=\&quot;startDateApproximate\&quot;\n      text=\&quot;Approximate date\&quot;\n      value=\&quot;y\&quot;\n      mt=\&quot;s\&quot;\n    &gt;&lt;/goab-checkbox&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;credentialReceived\&quot;\n      orientation=\&quot;horizontal\&quot;\n      (onChange)=\&quot;radioOnChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Add record&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-drawer&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-a-record-using-a-drawer\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddARecordUsingADrawerComponent {\n  open = false;\n\n  onClick() {\n    this.open = true;\n  }\n\n  onClose() {\n    this.open = false;\n  }\n\n  dropdownOnChange(event: any) {\n    console.log(event);\n  }\n\n  inputOnChange(event: any) {\n    console.log(event);\n  }\n\n  radioOnChange(event: any) {\n    console.log(event);\n  }\n\n  dateOnChange(event: any) {\n    console.log(event);\n  }\n\n  closeDrawer() {\n    this.open = false;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-drawer-btn\&quot; leadingicon=\&quot;add\&quot;&gt;Add Record&lt;/goa-button&gt;\n&lt;goa-drawer\n  version=\&quot;2\&quot;\n  id=\&quot;record-drawer\&quot;\n  max-size=\&quot;492px\&quot;\n  heading=\&quot;Add Record\&quot;\n  position=\&quot;right\&quot;\n&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Level of education\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;education\&quot; value=\&quot;university\&quot;&gt;\n      &lt;goa-dropdown-item\n        value=\&quot;high-school\&quot;\n        label=\&quot;High School Diploma\&quot;\n      &gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;college\&quot; label=\&quot;College Diploma\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;university\&quot; label=\&quot;University Degree\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;masters\&quot; label=\&quot;Master&#39;s Degree\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;doctorate\&quot; label=\&quot;Doctorate\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Educational institution\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;education\&quot; type=\&quot;text\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Field of study\&quot; requirement=\&quot;optional\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;fieldOfStudy\&quot; type=\&quot;text\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Is the person currently attending?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;attendTraining\&quot; orientation=\&quot;horizontal\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Start date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-date-picker version=\&quot;2\&quot;&gt;&lt;/goa-date-picker&gt;\n    &lt;goa-checkbox\n      version=\&quot;2\&quot;\n      name=\&quot;startDateApproximate\&quot;\n      text=\&quot;Approximate date\&quot;\n      value=\&quot;y\&quot;\n      mt=\&quot;s\&quot;\n    &gt;&lt;/goa-checkbox&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Credential received?\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;credentialReceived\&quot; orientation=\&quot;horizontal\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;yes\&quot; label=\&quot;Yes\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;no\&quot; label=\&quot;No\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;add-record-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Add record&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-drawer&gt;\n\n&lt;script&gt;\n  const drawer = document.getElementById(\&quot;record-drawer\&quot;);\n  const openBtn = document.getElementById(\&quot;open-drawer-btn\&quot;);\n  const addBtn = document.getElementById(\&quot;add-record-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  drawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  addBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170434&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-a-record-using-a-drawer" class="example-title">Add a record using a drawer</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170434" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton leadingIcon=&quot;add&quot; onClick={() =&gt; setOpen(true)}&gt;
   Add Record
 &lt;/GoabButton&gt;
 &lt;GoabDrawer
@@ -567,6 +323,250 @@ cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
     &lt;/goa-button-group&gt;
   &lt;/div&gt;
 &lt;/goa-drawer&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link,
+        .figma-link:visited {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="qeHE9" prefix="r14" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add another item in a modal&quot;],&quot;slug&quot;:[0,&quot;add-another-item-in-a-modal&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabModal,\n  GoabTextArea,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddAnotherItemInAModal() {\n  const [open, setOpen] = useState(false);\n  const [type, setType] = useState&lt;string&gt;();\n  const [name, setName] = useState&lt;string&gt;();\n  const [description, setDescription] = useState&lt;string&gt;();\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Add another item\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Add a new item\&quot;\n        open={open}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Save new item\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n        &lt;GoabFormItem label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;\n            &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Option 1\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Option 2\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabInput\n            onChange={(e) =&gt; setName(e.value)}\n            value={name}\n            name=\&quot;name\&quot;\n            width=\&quot;100%\&quot;\n          /&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabTextArea\n            name=\&quot;description\&quot;\n            rows={3}\n            width=\&quot;100%\&quot;\n            onChange={(e) =&gt; setDescription(e.value)}\n            value={description}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Add another item&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Add a new item\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goab-form-item label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-dropdown (onChange)=\&quot;updateType($event)\&quot; [value]=\&quot;type\&quot;&gt;\n      &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input\n      name=\&quot;name\&quot;\n      width=\&quot;100%\&quot;\n      (onChange)=\&quot;updateName($event)\&quot;\n      [value]=\&quot;name\&quot;\n    &gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-textarea\n      name=\&quot;description\&quot;\n      width=\&quot;100%\&quot;\n      [rows]=\&quot;3\&quot;\n      (onChange)=\&quot;updateDescription($event)\&quot;\n      [value]=\&quot;description\&quot;\n    &gt;&lt;/goab-textarea&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Save new item&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-another-item-in-a-modal\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddAnotherItemInAModalComponent {\n  open = false;\n  type: string | undefined = \&quot;\&quot;;\n  name = \&quot;\&quot;;\n  description = \&quot;\&quot;;\n\n  toggleModal() {\n    this.open = !this.open;\n  }\n\n  updateType(event: any) {\n    this.type = event.value;\n  }\n\n  updateName(event: any) {\n    this.name = event.value;\n  }\n\n  updateDescription(event: any) {\n    this.description = event.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;add\&quot;\n  &gt;Add another item&lt;/goa-button\n&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;add-item-modal\&quot; heading=\&quot;Add a new item\&quot;&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;type-dropdown\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;name\&quot; width=\&quot;100%\&quot; id=\&quot;name-input\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-textarea\n      version=\&quot;2\&quot;\n      name=\&quot;description\&quot;\n      width=\&quot;100%\&quot;\n      rows=\&quot;3\&quot;\n      id=\&quot;description-textarea\&quot;\n    &gt;&lt;/goa-textarea&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;save-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Save new item&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;add-item-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const saveBtn = document.getElementById(\&quot;save-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  saveBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-another-item-in-a-modal" class="example-title">Add another item in a modal</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
+const [type, setType] = useState&lt;string&gt;();
+const [name, setName] = useState&lt;string&gt;();
+const [description, setDescription] = useState&lt;string&gt;();</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; onClick={() =&gt; setOpen(true)}&gt;
+  Add another item
+&lt;/GoabButton&gt;
+&lt;GoabModal
+  heading=&quot;Add a new item&quot;
+  open={open}
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+      &lt;GoabButton type=&quot;tertiary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Cancel
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Save new item
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
+&gt;
+  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+  &lt;GoabFormItem label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;
+      &lt;GoabDropdownItem value=&quot;1&quot; label=&quot;Option 1&quot; /&gt;
+      &lt;GoabDropdownItem value=&quot;2&quot; label=&quot;Option 2&quot; /&gt;
+    &lt;/GoabDropdown&gt;
+  &lt;/GoabFormItem&gt;
+  &lt;GoabFormItem label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabInput
+      onChange={(e) =&gt; setName(e.value)}
+      value={name}
+      name=&quot;name&quot;
+      width=&quot;100%&quot;
+    /&gt;
+  &lt;/GoabFormItem&gt;
+  &lt;GoabFormItem label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabTextArea
+      name=&quot;description&quot;
+      rows={3}
+      width=&quot;100%&quot;
+      onChange={(e) =&gt; setDescription(e.value)}
+      value={description}
+    /&gt;
+  &lt;/GoabFormItem&gt;
+&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
+type: string | undefined = &quot;&quot;;
+name = &quot;&quot;;
+description = &quot;&quot;;
+
+toggleModal() {
+  this.open = !this.open;
+}
+
+updateType(event: any) {
+  this.type = event.value;
+}
+
+updateName(event: any) {
+  this.name = event.value;
+}
+
+updateDescription(event: any) {
+  this.description = event.value;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; (onClick)=&quot;toggleModal()&quot;
+  &gt;Add another item&lt;/goab-button
+&gt;
+&lt;goab-modal
+  [open]=&quot;open&quot;
+  (onClose)=&quot;toggleModal()&quot;
+  heading=&quot;Add a new item&quot;
+  [actions]=&quot;actions&quot;
+&gt;
+  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+  &lt;goab-form-item label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-dropdown (onChange)=&quot;updateType($event)&quot; [value]=&quot;type&quot;&gt;
+      &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goab-dropdown-item&gt;
+      &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goab-dropdown-item&gt;
+    &lt;/goab-dropdown&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-input
+      name=&quot;name&quot;
+      width=&quot;100%&quot;
+      (onChange)=&quot;updateName($event)&quot;
+      [value]=&quot;name&quot;
+    &gt;&lt;/goab-input&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-textarea
+      name=&quot;description&quot;
+      width=&quot;100%&quot;
+      [rows]=&quot;3&quot;
+      (onChange)=&quot;updateDescription($event)&quot;
+      [value]=&quot;description&quot;
+    &gt;&lt;/goab-textarea&gt;
+  &lt;/goab-form-item&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;tertiary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
+        &gt;Cancel&lt;/goab-button
+      &gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
+        &gt;Save new item&lt;/goab-button
+      &gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;add-item-modal&quot;);
+const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
+const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
+const saveBtn = document.getElementById(&quot;save-btn&quot;);
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+modal.addEventListener(&quot;_close&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+saveBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot; type=&quot;tertiary&quot; leadingicon=&quot;add&quot;
+  &gt;Add another item&lt;/goa-button
+&gt;
+&lt;goa-modal version=&quot;2&quot; id=&quot;add-item-modal&quot; heading=&quot;Add a new item&quot;&gt;
+  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-dropdown version=&quot;2&quot; id=&quot;type-dropdown&quot;&gt;
+      &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goa-dropdown-item&gt;
+      &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goa-dropdown-item&gt;
+    &lt;/goa-dropdown&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-input version=&quot;2&quot; name=&quot;name&quot; width=&quot;100%&quot; id=&quot;name-input&quot;&gt;&lt;/goa-input&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-textarea
+      version=&quot;2&quot;
+      name=&quot;description&quot;
+      width=&quot;100%&quot;
+      rows=&quot;3&quot;
+      id=&quot;description-textarea&quot;
+    &gt;&lt;/goa-textarea&gt;
+  &lt;/goa-form-item&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;cancel-btn&quot; type=&quot;tertiary&quot; size=&quot;compact&quot;
+        &gt;Cancel&lt;/goa-button
+      &gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;save-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
+        &gt;Save new item&lt;/goa-button
+      &gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
@@ -1545,182 +1545,7 @@ datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2nr0ve" prefix="r19" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm before navigating away&quot;],&quot;slug&quot;:[0,&quot;confirm-before-navigating-away&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmBeforeNavigatingAway() {\n  const [open, setOpen] = useState(false);\n\n  const handleChangeRoute = () =&gt; {\n    setOpen(false);\n    // In a real app, you would use your router&#39;s navigate function\n    // setTimeout(() =&gt; navigate(\&quot;/some-path\&quot;), 300);\n    console.log(\&quot;Navigating to new route...\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to change route?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={handleChangeRoute}&gt;\n              Change route\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      /&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onOpen()\&quot;&gt;Open&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Are you sure you want to change route?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onClose()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onChangeRoute()\&quot;\n        &gt;Change route&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { Router } from \&quot;@angular/router\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-before-navigating-away\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmBeforeNavigatingAwayComponent {\n  open = false;\n\n  constructor(private router: Router) {}\n\n  onOpen(): void {\n    this.open = true;\n  }\n\n  onClose(): void {\n    this.open = false;\n  }\n\n  onChangeRoute(): void {\n    this.open = false;\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; this.router.navigate([\&quot;/components\&quot;]), 0);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-btn\&quot;&gt;Open&lt;/goa-button&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;route-modal\&quot; heading=\&quot;Are you sure you want to change route?\&quot;&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;change-route-btn\&quot;\n        &gt;Change route&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;route-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const changeRouteBtn = document.getElementById(\&quot;change-route-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  changeRouteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; {\n      window.location.href = \&quot;/components\&quot;;\n    }, 300);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-before-navigating-away" class="example-title">Confirm before navigating away</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
-
-const handleChangeRoute = () =&gt; {
-  setOpen(false);
-  // In a real app, you would use your router&#x27;s navigate function
-  // setTimeout(() =&gt; navigate(&quot;/some-path&quot;), 300);
-  console.log(&quot;Navigating to new route...&quot;);
-};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;
-&lt;GoabModal
-  heading=&quot;Are you sure you want to change route?&quot;
-  open={open}
-  onClose={() =&gt; setOpen(false)}
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
-      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Cancel
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={handleChangeRoute}&gt;
-        Change route
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
-/&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
-
-constructor(private router: Router) {}
-
-onOpen(): void {
-  this.open = true;
-}
-
-onClose(): void {
-  this.open = false;
-}
-
-onChangeRoute(): void {
-  this.open = false;
-  // setTimeout will allow any modal transitions to be run
-  setTimeout(() =&gt; this.router.navigate([&quot;/components&quot;]), 0);
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onOpen()&quot;&gt;Open&lt;/goab-button&gt;
-&lt;goab-modal
-  [open]=&quot;open&quot;
-  heading=&quot;Are you sure you want to change route?&quot;
-  [actions]=&quot;actions&quot;
-&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;end&quot;&gt;
-      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;onClose()&quot;
-        &gt;Cancel&lt;/goab-button
-      &gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;onChangeRoute()&quot;
-        &gt;Change route&lt;/goab-button
-      &gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;route-modal&quot;);
-const openBtn = document.getElementById(&quot;open-btn&quot;);
-const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
-const changeRouteBtn = document.getElementById(&quot;change-route-btn&quot;);
-
-openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
-});
-
-cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-changeRouteBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-  // setTimeout will allow any modal transitions to be run
-  setTimeout(() =&gt; {
-    window.location.href = &quot;/components&quot;;
-  }, 300);
-});
-
-modal.addEventListener(&quot;_close&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-btn&quot;&gt;Open&lt;/goa-button&gt;
-&lt;goa-modal version=&quot;2&quot; id=&quot;route-modal&quot; heading=&quot;Are you sure you want to change route?&quot;&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;end&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;cancel-btn&quot;
-        &gt;Cancel&lt;/goa-button
-      &gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;change-route-btn&quot;
-        &gt;Change route&lt;/goa-button
-      &gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link,
-        .figma-link:visited {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="C423C" prefix="r20" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a destructive action&quot;],&quot;slug&quot;:[0,&quot;confirm-a-destructive-action&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmADestructiveAction() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Delete record\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to delete this record?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton\n              type=\&quot;primary\&quot;\n              variant=\&quot;destructive\&quot;\n              size=\&quot;compact\&quot;\n              onClick={() =&gt; setOpen(false)}\n            &gt;\n              Delete record\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Delete record&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Delete record&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-destructive-action\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmADestructiveActionComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;trash\&quot; id=\&quot;delete-btn\&quot;\n  &gt;Delete record&lt;/goa-button\n&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;delete-modal\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        id=\&quot;confirm-delete-btn\&quot;\n        &gt;Delete record&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;delete-modal\&quot;);\n  const deleteBtn = document.getElementById(\&quot;delete-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const confirmDeleteBtn = document.getElementById(\&quot;confirm-delete-btn\&quot;);\n\n  deleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmDeleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-destructive-action" class="example-title">Confirm a destructive action</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;trash&quot; onClick={() =&gt; setOpen(true)}&gt;
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="C423C" prefix="r19" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a destructive action&quot;],&quot;slug&quot;:[0,&quot;confirm-a-destructive-action&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmADestructiveAction() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Delete record\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to delete this record?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton\n              type=\&quot;primary\&quot;\n              variant=\&quot;destructive\&quot;\n              size=\&quot;compact\&quot;\n              onClick={() =&gt; setOpen(false)}\n            &gt;\n              Delete record\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Delete record&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Delete record&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-destructive-action\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmADestructiveActionComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;trash\&quot; id=\&quot;delete-btn\&quot;\n  &gt;Delete record&lt;/goa-button\n&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;delete-modal\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        id=\&quot;confirm-delete-btn\&quot;\n        &gt;Delete record&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;delete-modal\&quot;);\n  const deleteBtn = document.getElementById(\&quot;delete-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const confirmDeleteBtn = document.getElementById(\&quot;confirm-delete-btn\&quot;);\n\n  deleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmDeleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-destructive-action" class="example-title">Confirm a destructive action</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;trash&quot; onClick={() =&gt; setOpen(true)}&gt;
   Delete record
 &lt;/GoabButton&gt;
 &lt;GoabModal
@@ -1812,6 +1637,181 @@ modal.addEventListener(&quot;_close&quot;, () =&gt; {
         size=&quot;compact&quot;
         id=&quot;confirm-delete-btn&quot;
         &gt;Delete record&lt;/goa-button
+      &gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link,
+        .figma-link:visited {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2nr0ve" prefix="r20" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm before navigating away&quot;],&quot;slug&quot;:[0,&quot;confirm-before-navigating-away&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmBeforeNavigatingAway() {\n  const [open, setOpen] = useState(false);\n\n  const handleChangeRoute = () =&gt; {\n    setOpen(false);\n    // In a real app, you would use your router&#39;s navigate function\n    // setTimeout(() =&gt; navigate(\&quot;/some-path\&quot;), 300);\n    console.log(\&quot;Navigating to new route...\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to change route?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={handleChangeRoute}&gt;\n              Change route\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      /&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onOpen()\&quot;&gt;Open&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Are you sure you want to change route?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onClose()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onChangeRoute()\&quot;\n        &gt;Change route&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { Router } from \&quot;@angular/router\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-before-navigating-away\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmBeforeNavigatingAwayComponent {\n  open = false;\n\n  constructor(private router: Router) {}\n\n  onOpen(): void {\n    this.open = true;\n  }\n\n  onClose(): void {\n    this.open = false;\n  }\n\n  onChangeRoute(): void {\n    this.open = false;\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; this.router.navigate([\&quot;/components\&quot;]), 0);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-btn\&quot;&gt;Open&lt;/goa-button&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;route-modal\&quot; heading=\&quot;Are you sure you want to change route?\&quot;&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;change-route-btn\&quot;\n        &gt;Change route&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;route-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const changeRouteBtn = document.getElementById(\&quot;change-route-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  changeRouteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; {\n      window.location.href = \&quot;/components\&quot;;\n    }, 300);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-before-navigating-away" class="example-title">Confirm before navigating away</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
+
+const handleChangeRoute = () =&gt; {
+  setOpen(false);
+  // In a real app, you would use your router&#x27;s navigate function
+  // setTimeout(() =&gt; navigate(&quot;/some-path&quot;), 300);
+  console.log(&quot;Navigating to new route...&quot;);
+};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;
+&lt;GoabModal
+  heading=&quot;Are you sure you want to change route?&quot;
+  open={open}
+  onClose={() =&gt; setOpen(false)}
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Cancel
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={handleChangeRoute}&gt;
+        Change route
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
+/&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
+
+constructor(private router: Router) {}
+
+onOpen(): void {
+  this.open = true;
+}
+
+onClose(): void {
+  this.open = false;
+}
+
+onChangeRoute(): void {
+  this.open = false;
+  // setTimeout will allow any modal transitions to be run
+  setTimeout(() =&gt; this.router.navigate([&quot;/components&quot;]), 0);
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onOpen()&quot;&gt;Open&lt;/goab-button&gt;
+&lt;goab-modal
+  [open]=&quot;open&quot;
+  heading=&quot;Are you sure you want to change route?&quot;
+  [actions]=&quot;actions&quot;
+&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;onClose()&quot;
+        &gt;Cancel&lt;/goab-button
+      &gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;onChangeRoute()&quot;
+        &gt;Change route&lt;/goab-button
+      &gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;route-modal&quot;);
+const openBtn = document.getElementById(&quot;open-btn&quot;);
+const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
+const changeRouteBtn = document.getElementById(&quot;change-route-btn&quot;);
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+changeRouteBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+  // setTimeout will allow any modal transitions to be run
+  setTimeout(() =&gt; {
+    window.location.href = &quot;/components&quot;;
+  }, 300);
+});
+
+modal.addEventListener(&quot;_close&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-btn&quot;&gt;Open&lt;/goa-button&gt;
+&lt;goa-modal version=&quot;2&quot; id=&quot;route-modal&quot; heading=&quot;Are you sure you want to change route?&quot;&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;cancel-btn&quot;
+        &gt;Cancel&lt;/goa-button
+      &gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;change-route-btn&quot;
+        &gt;Change route&lt;/goa-button
       &gt;
     &lt;/goa-button-group&gt;
   &lt;/div&gt;
@@ -2091,78 +2091,79 @@ cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         }
       </style></div><!--astro:end--></astro-island>  </div> <article class="example-display" data-astro-cid-iocfgxgr> <div class="example-preview page-scale-preview" data-astro-cid-iocfgxgr> <h3 id="example-question-page" class="example-title page-scale-title" data-astro-cid-iocfgxgr>Question page</h3> <div class="preview-container" data-astro-cid-zrrfk47p><div class="preview-image-static" data-astro-cid-zrrfk47p><img src="/ui-components/pr-preview/pr-4006/images/examples/question-page.png" alt="Question page preview" data-astro-cid-zrrfk47p></div><div class="preview-actions" data-astro-cid-zrrfk47p><div class="preview-actions-left" data-astro-cid-zrrfk47p></div><div class="preview-actions-right" data-astro-cid-zrrfk47p><goa-button version="2" type="tertiary" size="compact" onclick="window.location.href='/ui-components/pr-preview/pr-4006/examples/question-page'" data-astro-cid-zrrfk47p="true">
 View more
-</goa-button></div></div></div> </div> </article> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="zfTWU" prefix="r22" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Reset date picker field&quot;],&quot;slug&quot;:[0,&quot;reset-date-picker-field&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDatePicker,\n  GoabFormItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ResetDatePickerField() {\n  const [date, setDate] = useState&lt;Date | undefined&gt;();\n\n  const setNewDate = (value: Date | undefined) =&gt; {\n    setDate(value);\n  };\n\n  function setValue() {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    setDate(d);\n  }\n\n  function clearValue() {\n    setDate(undefined);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem label=\&quot;Date Picker\&quot;&gt;\n        &lt;GoabDatePicker\n          name=\&quot;item\&quot;\n          value={date}\n          onChange={(e) =&gt; setNewDate(e.value as Date)}\n          mb=\&quot;xl\&quot;\n        /&gt;\n      &lt;/GoabFormItem&gt;\n\n      &lt;GoabButtonGroup mt=\&quot;xs\&quot; alignment=\&quot;start\&quot;&gt;\n        &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;\n        &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;\n      &lt;/GoabButtonGroup&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Date Picker\&quot;&gt;\n  &lt;goab-date-picker (onChange)=\&quot;onChange($event)\&quot; name=\&quot;item\&quot; [value]=\&quot;item\&quot;&gt;\n  &lt;/goab-date-picker&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goab-button (onClick)=\&quot;setValue()\&quot;&gt;Set Value&lt;/goab-button&gt;\n  &lt;goab-button (onClick)=\&quot;clearValue()\&quot;&gt;Clear Value&lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-reset-date-picker-field\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ResetDatePickerFieldComponent {\n  item: Date | undefined = undefined;\n\n  onChange(event: GoabDatePickerOnChangeDetail): void {\n    this.item = event.valueStr ? new Date(event.valueStr) : undefined;\n  }\n\n  setValue(): void {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    this.item = d;\n  }\n\n  clearValue(): void {\n    this.item = undefined;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date Picker\&quot;&gt;\n  &lt;goa-date-picker version=\&quot;2\&quot; id=\&quot;date-picker\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-date-picker&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;set-value-btn\&quot;&gt;Set Value&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;clear-value-btn\&quot;&gt;Clear Value&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;script&gt;\n  const datePicker = document.getElementById(\&quot;date-picker\&quot;);\n  const setValueBtn = document.getElementById(\&quot;set-value-btn\&quot;);\n  const clearValueBtn = document.getElementById(\&quot;clear-value-btn\&quot;);\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Date changed:\&quot;, e.detail.value);\n  });\n\n  setValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    datePicker.setAttribute(\&quot;value\&quot;, d.toISOString());\n  });\n\n  clearValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    datePicker.removeAttribute(\&quot;value\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-reset-date-picker-field" class="example-title">Reset date picker field</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [date, setDate] = useState&lt;Date | undefined&gt;();
+</goa-button></div></div></div> </div> </article> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="XLb2r" prefix="r22" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Require user action before continuing&quot;],&quot;slug&quot;:[0,&quot;require-user-action-before-continuing&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function RequireUserActionBeforeContinuing() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open Basic Modal&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to continue?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Back\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Continue\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;toggleModal()\&quot;&gt;Open Basic Modal&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to continue?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Back&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Continue&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-require-user-action-before-continuing\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class RequireUserActionBeforeContinuingComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot;&gt;Open Basic Modal&lt;/goa-button&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;confirmation-modal\&quot;\n  heading=\&quot;Are you sure you want to continue?\&quot;\n&gt;\n  &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;back-btn\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot;\n        &gt;Back&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;continue-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Continue&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;confirmation-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const backBtn = document.getElementById(\&quot;back-btn\&quot;);\n  const continueBtn = document.getElementById(\&quot;continue-btn\&quot;);\n\n  function openModal() {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  }\n\n  function closeModal() {\n    modal.removeAttribute(\&quot;open\&quot;);\n  }\n\n  openBtn.addEventListener(\&quot;_click\&quot;, openModal);\n  backBtn.addEventListener(\&quot;_click\&quot;, closeModal);\n  continueBtn.addEventListener(\&quot;_click\&quot;, closeModal);\n  modal.addEventListener(\&quot;_close\&quot;, closeModal);\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-114585&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-require-user-action-before-continuing" class="example-title">Require user action before continuing</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-114585" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open Basic Modal&lt;/GoabButton&gt;
+&lt;GoabModal
+  heading=&quot;Are you sure you want to continue?&quot;
+  open={open}
+  onClose={() =&gt; setOpen(false)}
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Back
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Continue
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
+&gt;
+  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
+&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
 
-const setNewDate = (value: Date | undefined) =&gt; {
-  setDate(value);
-};
+toggleModal(): void {
+  this.open = !this.open;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;toggleModal()&quot;&gt;Open Basic Modal&lt;/goab-button&gt;
+&lt;goab-modal
+  [open]=&quot;open&quot;
+  (onClose)=&quot;toggleModal()&quot;
+  heading=&quot;Are you sure you want to continue?&quot;
+  [actions]=&quot;actions&quot;
+&gt;
+  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
+        &gt;Back&lt;/goab-button
+      &gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
+        &gt;Continue&lt;/goab-button
+      &gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;confirmation-modal&quot;);
+const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
+const backBtn = document.getElementById(&quot;back-btn&quot;);
+const continueBtn = document.getElementById(&quot;continue-btn&quot;);
 
-function setValue() {
-  const d = new Date();
-  d.setDate(d.getDate() - 7);
-  setDate(d);
+function openModal() {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
 }
 
-function clearValue() {
-  setDate(undefined);
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;Date Picker&quot;&gt;
-  &lt;GoabDatePicker
-    name=&quot;item&quot;
-    value={date}
-    onChange={(e) =&gt; setNewDate(e.value as Date)}
-    mb=&quot;xl&quot;
-  /&gt;
-&lt;/GoabFormItem&gt;
-
-&lt;GoabButtonGroup mt=&quot;xs&quot; alignment=&quot;start&quot;&gt;
-  &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;
-  &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;
-&lt;/GoabButtonGroup&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">item: Date | undefined = undefined;
-
-onChange(event: GoabDatePickerOnChangeDetail): void {
-  this.item = event.valueStr ? new Date(event.valueStr) : undefined;
+function closeModal() {
+  modal.removeAttribute(&quot;open&quot;);
 }
 
-setValue(): void {
-  const d = new Date();
-  d.setDate(d.getDate() - 7);
-  this.item = d;
-}
-
-clearValue(): void {
-  this.item = undefined;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;Date Picker&quot;&gt;
-  &lt;goab-date-picker (onChange)=&quot;onChange($event)&quot; name=&quot;item&quot; [value]=&quot;item&quot;&gt;
-  &lt;/goab-date-picker&gt;
-&lt;/goab-form-item&gt;
-
-&lt;goab-button-group alignment=&quot;start&quot; mt=&quot;xs&quot;&gt;
-  &lt;goab-button (onClick)=&quot;setValue()&quot;&gt;Set Value&lt;/goab-button&gt;
-  &lt;goab-button (onClick)=&quot;clearValue()&quot;&gt;Clear Value&lt;/goab-button&gt;
-&lt;/goab-button-group&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const datePicker = document.getElementById(&quot;date-picker&quot;);
-const setValueBtn = document.getElementById(&quot;set-value-btn&quot;);
-const clearValueBtn = document.getElementById(&quot;clear-value-btn&quot;);
-
-datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
-  console.log(&quot;Date changed:&quot;, e.detail.value);
-});
-
-setValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  const d = new Date();
-  d.setDate(d.getDate() - 7);
-  datePicker.setAttribute(&quot;value&quot;, d.toISOString());
-});
-
-clearValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  datePicker.removeAttribute(&quot;value&quot;);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot; label=&quot;Date Picker&quot;&gt;
-  &lt;goa-date-picker version=&quot;2&quot; id=&quot;date-picker&quot; name=&quot;item&quot;&gt;&lt;/goa-date-picker&gt;
-&lt;/goa-form-item&gt;
-
-&lt;goa-button-group alignment=&quot;start&quot; mt=&quot;xs&quot;&gt;
-  &lt;goa-button version=&quot;2&quot; id=&quot;set-value-btn&quot;&gt;Set Value&lt;/goa-button&gt;
-  &lt;goa-button version=&quot;2&quot; id=&quot;clear-value-btn&quot;&gt;Clear Value&lt;/goa-button&gt;
-&lt;/goa-button-group&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+openBtn.addEventListener(&quot;_click&quot;, openModal);
+backBtn.addEventListener(&quot;_click&quot;, closeModal);
+continueBtn.addEventListener(&quot;_click&quot;, closeModal);
+modal.addEventListener(&quot;_close&quot;, closeModal);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot;&gt;Open Basic Modal&lt;/goa-button&gt;
+&lt;goa-modal
+  version=&quot;2&quot;
+  id=&quot;confirmation-modal&quot;
+  heading=&quot;Are you sure you want to continue?&quot;
+&gt;
+  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;back-btn&quot; type=&quot;secondary&quot; size=&quot;compact&quot;
+        &gt;Back&lt;/goa-button
+      &gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;continue-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
+        &gt;Continue&lt;/goa-button
+      &gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
@@ -2248,79 +2249,78 @@ clearValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="XLb2r" prefix="r23" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Require user action before continuing&quot;],&quot;slug&quot;:[0,&quot;require-user-action-before-continuing&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function RequireUserActionBeforeContinuing() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open Basic Modal&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to continue?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Back\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Continue\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;toggleModal()\&quot;&gt;Open Basic Modal&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to continue?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Back&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Continue&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-require-user-action-before-continuing\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class RequireUserActionBeforeContinuingComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot;&gt;Open Basic Modal&lt;/goa-button&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;confirmation-modal\&quot;\n  heading=\&quot;Are you sure you want to continue?\&quot;\n&gt;\n  &lt;p&gt;You cannot return to this page.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;back-btn\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot;\n        &gt;Back&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;continue-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Continue&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;confirmation-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const backBtn = document.getElementById(\&quot;back-btn\&quot;);\n  const continueBtn = document.getElementById(\&quot;continue-btn\&quot;);\n\n  function openModal() {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  }\n\n  function closeModal() {\n    modal.removeAttribute(\&quot;open\&quot;);\n  }\n\n  openBtn.addEventListener(\&quot;_click\&quot;, openModal);\n  backBtn.addEventListener(\&quot;_click\&quot;, closeModal);\n  continueBtn.addEventListener(\&quot;_click\&quot;, closeModal);\n  modal.addEventListener(\&quot;_close\&quot;, closeModal);\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-114585&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-require-user-action-before-continuing" class="example-title">Require user action before continuing</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-114585" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open Basic Modal&lt;/GoabButton&gt;
-&lt;GoabModal
-  heading=&quot;Are you sure you want to continue?&quot;
-  open={open}
-  onClose={() =&gt; setOpen(false)}
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
-      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Back
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Continue
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
-&gt;
-  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
-&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="zfTWU" prefix="r23" component-url="/ui-components/pr-preview/pr-4006/_astro/ExamplePreview.DC9MKWGW.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4006/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Reset date picker field&quot;],&quot;slug&quot;:[0,&quot;reset-date-picker-field&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDatePicker,\n  GoabFormItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ResetDatePickerField() {\n  const [date, setDate] = useState&lt;Date | undefined&gt;();\n\n  const setNewDate = (value: Date | undefined) =&gt; {\n    setDate(value);\n  };\n\n  function setValue() {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    setDate(d);\n  }\n\n  function clearValue() {\n    setDate(undefined);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem label=\&quot;Date Picker\&quot;&gt;\n        &lt;GoabDatePicker\n          name=\&quot;item\&quot;\n          value={date}\n          onChange={(e) =&gt; setNewDate(e.value as Date)}\n          mb=\&quot;xl\&quot;\n        /&gt;\n      &lt;/GoabFormItem&gt;\n\n      &lt;GoabButtonGroup mt=\&quot;xs\&quot; alignment=\&quot;start\&quot;&gt;\n        &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;\n        &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;\n      &lt;/GoabButtonGroup&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Date Picker\&quot;&gt;\n  &lt;goab-date-picker (onChange)=\&quot;onChange($event)\&quot; name=\&quot;item\&quot; [value]=\&quot;item\&quot;&gt;\n  &lt;/goab-date-picker&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goab-button (onClick)=\&quot;setValue()\&quot;&gt;Set Value&lt;/goab-button&gt;\n  &lt;goab-button (onClick)=\&quot;clearValue()\&quot;&gt;Clear Value&lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-reset-date-picker-field\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ResetDatePickerFieldComponent {\n  item: Date | undefined = undefined;\n\n  onChange(event: GoabDatePickerOnChangeDetail): void {\n    this.item = event.valueStr ? new Date(event.valueStr) : undefined;\n  }\n\n  setValue(): void {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    this.item = d;\n  }\n\n  clearValue(): void {\n    this.item = undefined;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date Picker\&quot;&gt;\n  &lt;goa-date-picker version=\&quot;2\&quot; id=\&quot;date-picker\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-date-picker&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;set-value-btn\&quot;&gt;Set Value&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;clear-value-btn\&quot;&gt;Clear Value&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;script&gt;\n  const datePicker = document.getElementById(\&quot;date-picker\&quot;);\n  const setValueBtn = document.getElementById(\&quot;set-value-btn\&quot;);\n  const clearValueBtn = document.getElementById(\&quot;clear-value-btn\&quot;);\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Date changed:\&quot;, e.detail.value);\n  });\n\n  setValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    datePicker.setAttribute(\&quot;value\&quot;, d.toISOString());\n  });\n\n  clearValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    datePicker.removeAttribute(\&quot;value\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-reset-date-picker-field" class="example-title">Reset date picker field</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [date, setDate] = useState&lt;Date | undefined&gt;();
 
-toggleModal(): void {
-  this.open = !this.open;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;toggleModal()&quot;&gt;Open Basic Modal&lt;/goab-button&gt;
-&lt;goab-modal
-  [open]=&quot;open&quot;
-  (onClose)=&quot;toggleModal()&quot;
-  heading=&quot;Are you sure you want to continue?&quot;
-  [actions]=&quot;actions&quot;
-&gt;
-  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;end&quot;&gt;
-      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
-        &gt;Back&lt;/goab-button
-      &gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;
-        &gt;Continue&lt;/goab-button
-      &gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;confirmation-modal&quot;);
-const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
-const backBtn = document.getElementById(&quot;back-btn&quot;);
-const continueBtn = document.getElementById(&quot;continue-btn&quot;);
+const setNewDate = (value: Date | undefined) =&gt; {
+  setDate(value);
+};
 
-function openModal() {
-  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+function setValue() {
+  const d = new Date();
+  d.setDate(d.getDate() - 7);
+  setDate(d);
 }
 
-function closeModal() {
-  modal.removeAttribute(&quot;open&quot;);
+function clearValue() {
+  setDate(undefined);
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;Date Picker&quot;&gt;
+  &lt;GoabDatePicker
+    name=&quot;item&quot;
+    value={date}
+    onChange={(e) =&gt; setNewDate(e.value as Date)}
+    mb=&quot;xl&quot;
+  /&gt;
+&lt;/GoabFormItem&gt;
+
+&lt;GoabButtonGroup mt=&quot;xs&quot; alignment=&quot;start&quot;&gt;
+  &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;
+  &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;
+&lt;/GoabButtonGroup&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">item: Date | undefined = undefined;
+
+onChange(event: GoabDatePickerOnChangeDetail): void {
+  this.item = event.valueStr ? new Date(event.valueStr) : undefined;
 }
 
-openBtn.addEventListener(&quot;_click&quot;, openModal);
-backBtn.addEventListener(&quot;_click&quot;, closeModal);
-continueBtn.addEventListener(&quot;_click&quot;, closeModal);
-modal.addEventListener(&quot;_close&quot;, closeModal);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot;&gt;Open Basic Modal&lt;/goa-button&gt;
-&lt;goa-modal
-  version=&quot;2&quot;
-  id=&quot;confirmation-modal&quot;
-  heading=&quot;Are you sure you want to continue?&quot;
-&gt;
-  &lt;p&gt;You cannot return to this page.&lt;/p&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;end&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;back-btn&quot; type=&quot;secondary&quot; size=&quot;compact&quot;
-        &gt;Back&lt;/goa-button
-      &gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;continue-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
-        &gt;Continue&lt;/goa-button
-      &gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+setValue(): void {
+  const d = new Date();
+  d.setDate(d.getDate() - 7);
+  this.item = d;
+}
+
+clearValue(): void {
+  this.item = undefined;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;Date Picker&quot;&gt;
+  &lt;goab-date-picker (onChange)=&quot;onChange($event)&quot; name=&quot;item&quot; [value]=&quot;item&quot;&gt;
+  &lt;/goab-date-picker&gt;
+&lt;/goab-form-item&gt;
+
+&lt;goab-button-group alignment=&quot;start&quot; mt=&quot;xs&quot;&gt;
+  &lt;goab-button (onClick)=&quot;setValue()&quot;&gt;Set Value&lt;/goab-button&gt;
+  &lt;goab-button (onClick)=&quot;clearValue()&quot;&gt;Clear Value&lt;/goab-button&gt;
+&lt;/goab-button-group&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const datePicker = document.getElementById(&quot;date-picker&quot;);
+const setValueBtn = document.getElementById(&quot;set-value-btn&quot;);
+const clearValueBtn = document.getElementById(&quot;clear-value-btn&quot;);
+
+datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
+  console.log(&quot;Date changed:&quot;, e.detail.value);
+});
+
+setValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  const d = new Date();
+  d.setDate(d.getDate() - 7);
+  datePicker.setAttribute(&quot;value&quot;, d.toISOString());
+});
+
+clearValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  datePicker.removeAttribute(&quot;value&quot;);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot; label=&quot;Date Picker&quot;&gt;
+  &lt;goa-date-picker version=&quot;2&quot; id=&quot;date-picker&quot; name=&quot;item&quot;&gt;&lt;/goa-date-picker&gt;
+&lt;/goa-form-item&gt;
+
+&lt;goa-button-group alignment=&quot;start&quot; mt=&quot;xs&quot;&gt;
+  &lt;goa-button version=&quot;2&quot; id=&quot;set-value-btn&quot;&gt;Set Value&lt;/goa-button&gt;
+  &lt;goa-button version=&quot;2&quot; id=&quot;clear-value-btn&quot;&gt;Clear Value&lt;/goa-button&gt;
+&lt;/goa-button-group&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
