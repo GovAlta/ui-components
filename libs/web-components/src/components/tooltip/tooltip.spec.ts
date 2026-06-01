@@ -20,25 +20,35 @@ it("shows and hides tooltip on mouseenter/mouseleave", async () => {
   const tooltipContainer = container.querySelector(".tooltip");
   const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
 
-  // Initially, tooltip should be hidden
-  expect(tooltipEl.style.visibility).toBe("hidden");
+  // Initially, tooltip should be hidden (no show class)
+  expect(tooltipEl.classList.contains("show")).toBe(false);
+  expect(tooltipEl.getAttribute("aria-hidden")).toBe("true");
 
   // Simulate mouse enter
   expect(tooltipContainer).toBeTruthy();
   if (!tooltipContainer) return;
 
-  await fireEvent.mouseEnter(tooltipContainer);
+  vi.useFakeTimers();
+  try {
+    await fireEvent.mouseEnter(tooltipContainer);
+    vi.advanceTimersByTime(350);
 
-  await waitFor(() => expect(tooltipEl.style.visibility).toBe("visible"), {
-    timeout: 350,
-  });
+    await waitFor(() =>
+      expect(tooltipEl.classList.contains("show")).toBe(true),
+    );
+    expect(tooltipEl.getAttribute("aria-hidden")).toBe("false");
 
-  // Simulate mouse leave
-  await fireEvent.mouseLeave(tooltipContainer);
+    // Simulate mouse leave
+    await fireEvent.mouseLeave(tooltipContainer);
+    vi.advanceTimersByTime(550);
 
-  await waitFor(() => expect(tooltipEl.style.visibility).toBe("hidden"), {
-    timeout: 600,
-  });
+    await waitFor(() =>
+      expect(tooltipEl.classList.contains("show")).toBe(false),
+    );
+    expect(tooltipEl.getAttribute("aria-hidden")).toBe("true");
+  } finally {
+    vi.useRealTimers();
+  }
 });
 
 it("validates the props", async () => {
@@ -93,26 +103,29 @@ it.skip("should try and change tooltip position on window resize", async () => {
 });
 
 it("does not exceed 80% of the screen size or 400px", async () => {
-  const { container } = render(Tooltip, { content: "Hello, Tooltip!" });
+  const { container } = render(Tooltip, {
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  });
+  const tooltipContainer = container.querySelector(".tooltip");
   const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
 
-  // Mock getBoundingClientRect to return a large width
-  tooltipEl.getBoundingClientRect = () => ({
-    width: 500,
-    height: 100,
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  });
+  expect(tooltipContainer).toBeTruthy();
+  if (!tooltipContainer) return;
 
-  // Simulate window resize to trigger the tooltip"s responsive behavior
-  global.dispatchEvent(new Event("resize"));
+  vi.useFakeTimers();
+  try {
+    // Simulate mouse enter
+    await fireEvent.mouseEnter(tooltipContainer);
+    vi.advanceTimersByTime(350);
 
-  await tick(); // to wait for Svelte"s reactive updates
-
-  // Verify that the tooltip"s width has been adjusted
-  expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(400);
+    await waitFor(() =>
+      // Verify that the tooltip"s width has been adjusted
+      expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(400),
+    );
+  } finally {
+    vi.useRealTimers();
+  }
 });
 
 it("cursor style remains same on hover", async () => {
@@ -122,56 +135,54 @@ it("cursor style remains same on hover", async () => {
   expect(tooltipContainer).toBeTruthy();
   if (!tooltipContainer) return;
 
-  const initialCursorStyle = window.getComputedStyle(tooltipContainer).cursor;
-  await fireEvent.mouseEnter(tooltipContainer);
+  vi.useFakeTimers();
+  try {
+    const initialCursorStyle = window.getComputedStyle(tooltipContainer).cursor;
+    await fireEvent.mouseEnter(tooltipContainer);
+    vi.advanceTimersByTime(350);
 
-  await waitFor(
-    () => {
+    await waitFor(() => {
       const cursorStyleOnHover =
         window.getComputedStyle(tooltipContainer).cursor;
       expect(cursorStyleOnHover).toBe(initialCursorStyle);
-    },
-    { timeout: 500 },
-  );
+    });
 
-  await fireEvent.mouseLeave(tooltipContainer);
+    await fireEvent.mouseLeave(tooltipContainer);
+    vi.advanceTimersByTime(350);
 
-  await waitFor(
-    () => {
+    await waitFor(() => {
       const cursorStyleOnLeave =
         window.getComputedStyle(tooltipContainer).cursor;
       expect(cursorStyleOnLeave).toBe(initialCursorStyle);
-    },
-    { timeout: 500 },
-  );
+    });
+  } finally {
+    vi.useRealTimers();
+  }
 });
 
 it("should render tooltip with maxwidth property", async () => {
   const { container } = render(Tooltip, {
-    content: "Hello, Tooltip!",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     maxwidth: "300px",
   });
+    const tooltipContainer = container.querySelector(".tooltip");
   const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
 
-  expect(tooltipEl).toBeTruthy();
+  expect(tooltipContainer).toBeTruthy();
+  if (!tooltipContainer) return;
 
-  // Mock getBoundingClientRect to simulate a tooltip that would exceed maxwidth
-  tooltipEl.getBoundingClientRect = () => ({
-    width: 500,
-    height: 100,
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    x: 0,
-    y: 0,
-    toJSON: () => ({}),
-  });
+  vi.useFakeTimers();
+  try {
+    // Simulate mouse enter
+    await fireEvent.mouseEnter(tooltipContainer);
+    vi.advanceTimersByTime(350);
 
-  // Trigger resize to apply maxwidth calculation
-  global.dispatchEvent(new Event("resize"));
-  await tick();
-
-  // The width should be constrained by maxwidth (300px - 32px padding = 268px)
-  expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(268);
+    await waitFor(() =>
+      // The width should be constrained by maxwidth (300px - 32px padding = 268px)
+      expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(268),
+    );
+  } finally {
+    vi.useRealTimers();
+  }
 });

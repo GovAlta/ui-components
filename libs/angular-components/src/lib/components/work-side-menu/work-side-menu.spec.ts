@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, tick, fakeAsync } from "@angular/core/testing";
 import { GoabWorkSideMenu } from "./work-side-menu";
-import { Component } from "@angular/core";
+import { Component, TemplateRef } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
@@ -44,13 +44,40 @@ class TestWorkSideMenuComponent {
     this.navigatedUrl = path;
   }
 }
+
+@Component({
+  standalone: true,
+  imports: [GoabWorkSideMenu],
+  template: `
+    <goab-work-side-menu
+      [open]="open"
+      [heading]="heading"
+      [url]="url"
+      [primaryContent]="primaryTemplate"
+      [secondaryContent]="secondaryContent"
+      [accountContent]="accountContent"
+    >
+    </goab-work-side-menu>
+    <ng-template #primaryTemplate>
+      <div>Primary content</div>
+    </ng-template>
+  `,
+})
+class TestWorkSideMenuEmptySlotsComponent {
+  open = true;
+  heading = "Test heading";
+  url = "/test";
+  secondaryContent?: TemplateRef<unknown>;
+  accountContent?: TemplateRef<unknown>;
+}
+
 describe("GoabBWorkSideMenu", () => {
   let fixture: ComponentFixture<TestWorkSideMenuComponent>;
   let component: TestWorkSideMenuComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TestWorkSideMenuComponent],
+      imports: [TestWorkSideMenuComponent, TestWorkSideMenuEmptySlotsComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestWorkSideMenuComponent);
@@ -83,4 +110,18 @@ describe("GoabBWorkSideMenu", () => {
 
     expect(component.navigatedUrl).toBe("/dashboard");
   }));
+
+  it("should not render secondary or account slot content when those inputs are empty", fakeAsync(() => {
+    const emptyFixture = TestBed.createComponent(TestWorkSideMenuEmptySlotsComponent);
+    emptyFixture.detectChanges();
+    tick(); // Wait for setTimeout in ngOnInit
+    emptyFixture.detectChanges();
+
+    const menuElement = emptyFixture.debugElement.query(By.css("goa-work-side-menu"))
+      .nativeElement as HTMLElement;
+
+    expect(menuElement.querySelector('[slot="secondary"]')).toBeNull();
+    expect(menuElement.querySelector('[slot="account"]')).toBeNull();
+  }));
+
 });
