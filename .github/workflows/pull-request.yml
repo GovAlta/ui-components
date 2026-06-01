@@ -30,11 +30,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Prepare git base ref
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git fetch --no-tags --depth=1 origin \
-            "+refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
+      - name: Allow git to use the container workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - uses: actions/setup-node@v6
         with:
@@ -53,15 +50,8 @@ jobs:
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
 
-      - name: Check for build output
-        id: dist
+      - name: Test
         run: |
           if [ -d "./dist" ]; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
+            npm run test:pr
           fi
-
-      - name: Test
-        if: steps.dist.outputs.exists == 'true'
-        run: npm run test:pr
