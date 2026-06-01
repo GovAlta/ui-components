@@ -13,11 +13,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.0-noble
+
+    env:
+      # the playwright npm postinstall not to download them during `npm ci`.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      # The container runs as root but GitHub sets HOME=/github/home, which the
+      # image owns as `pwuser`. Firefox refuses to launch when $HOME is owned by a
+      # different user, so point HOME at root's own home.
+      HOME: /root
 
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Prepare git base ref
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --no-tags --depth=1 origin \
+            "+refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
 
       - uses: actions/setup-node@v6
         with:
@@ -36,9 +53,15 @@ jobs:
           npx nx affected --target=build --base=origin/${{ github.base_ref }}
           npx nx affected --target=post --base=origin/${{ github.base_ref }}
 
-      - name: Test
+      - name: Check for build output
+        id: dist
         run: |
           if [ -d "./dist" ]; then
-            npx playwright install --with-deps
-            npm run test:pr
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Test
+        if: steps.dist.outputs.exists == 'true'
+        run: npm run test:pr
