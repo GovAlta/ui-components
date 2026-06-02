@@ -286,12 +286,6 @@
     min-height: 0;
   }
 
-  .goa-push-drawer.v2 goa-scroll-panel {
-    --goa-scroll-panel-content-shadow-top: none;
-    --goa-scroll-panel-content-shadow-bottom: none;
-    --goa-scroll-panel-content-shadow-top-bottom: none;
-  }
-
   @starting-style {
     .goa-push-drawer.closed {
       display: none;

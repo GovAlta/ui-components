@@ -339,10 +339,13 @@
     border-radius: var(--goa-popover-border-radius);
   }
 
-  /* Header slot: title row + tabs stacked vertically. */
+  /* Header slot: title row + tabs stacked vertically. The bottom padding drops
+     the scroll-panel header cue (border + shadow) ~8px below the tabs instead of
+     sitting flush against them. */
   .panel-header {
     display: flex;
     flex-direction: column;
+    padding-bottom: var(--goa-space-xs);
   }
 
   .header {

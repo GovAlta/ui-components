@@ -66,11 +66,11 @@ export function App() {
 
   const closePushDrawer = () => setPushDrawerOpen(false);
   const pushDrawerActions = (
-    <GoabButtonGroup alignment="end">
-      <GoabButton type="secondary" onClick={closePushDrawer}>
+    <GoabButtonGroup alignment="start">
+      <GoabButton type="secondary" size="compact" onClick={closePushDrawer}>
         Cancel
       </GoabButton>
-      <GoabButton type="primary" onClick={closePushDrawer}>
+      <GoabButton type="primary" size="compact" onClick={closePushDrawer}>
         Save
       </GoabButton>
     </GoabButtonGroup>

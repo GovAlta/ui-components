@@ -285,11 +285,8 @@
     transition: opacity 200ms ease-out;
   }
 
-  /* V2: scroll-panel handles scroll mechanics + sticky-border feedbacks */
+  /* V2: scroll-panel owns scroll mechanics and the sticky header/footer scroll cue */
   .drawer.v2 goa-scroll-panel {
-    --goa-scroll-panel-content-shadow-top: none;
-    --goa-scroll-panel-content-shadow-bottom: none;
-    --goa-scroll-panel-content-shadow-top-bottom: none;
     flex: 1 1 auto;
     min-height: 0;
   }

@@ -130,7 +130,7 @@
 {#if $$slots.header}
   <section
     class="scroll-panel-header"
-    class:scroll-panel-header--bordered={_scrollState === "middle" ||
+    class:scroll-panel-header--shadow={_scrollState === "middle" ||
       _scrollState === "at-bottom"}
     aria-label="Panel header"
   >
@@ -140,9 +140,6 @@
 
 <div
   class="scroll-panel-content"
-  class:scroll-panel-content--shadow-bottom={_scrollState === "at-top"}
-  class:scroll-panel-content--shadow-top={_scrollState === "at-bottom"}
-  class:scroll-panel-content--shadow-both={_scrollState === "middle"}
   bind:this={_scrollEl}
   on:scroll={onScroll}
   role="region"
@@ -155,8 +152,8 @@
 {#if $$slots.footer}
   <section
     class="scroll-panel-footer"
-    class:scroll-panel-footer--bordered={_scrollState === "middle" ||
-      _scrollState === "at-top"}
+    class:scroll-panel-footer--shadow={_scrollState === "at-top" ||
+      _scrollState === "middle"}
     aria-label="Panel footer"
   >
     <slot name="footer" />
@@ -182,20 +179,37 @@
     box-sizing: border-box;
   }
 
-  /* Header */
+  /* Header — casts a drop shadow down onto the content when content is scrolled
+     above it. Drop shadow (not inset) so it stays visible over slotted content
+     that has its own opaque background (e.g. notification cards). */
   .scroll-panel-header {
     flex: 0 0 auto;
     background-color: var(
       --goa-scroll-panel-header-color-bg,
       var(--goa-color-greyscale-white)
     );
-    border-bottom: var(--goa-border-width-s) solid transparent;
-    transition: border-color 0.15s ease;
+    border-bottom: var(--goa-border-width-2xs) solid transparent;
     z-index: 1;
+    transition:
+      box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
   }
 
-  .scroll-panel-header--bordered {
-    border-bottom-color: var(--goa-color-greyscale-200);
+  /* When content is scrolled under the header: a hairline border defines the edge
+     crisply and an outset drop shadow falls below it for depth. A real border (not a
+     second box-shadow layer) sits on top of the shadow instead of merging into it,
+     and it's transparent at rest (see base rule) so it only shows when scrolled,
+     with no layout shift. The shadow is the system shallow-below token; the host
+     overflow:hidden clips any side bleed at the edge. */
+  .scroll-panel-header--shadow {
+    border-bottom-color: var(
+      --goa-scroll-panel-header-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
+    box-shadow: var(
+      --goa-scroll-panel-header-scroll-shadow,
+      var(--goa-shadow-shallow-below)
+    );
   }
 
   /* Scrollable content */
@@ -207,44 +221,30 @@
     min-height: 0;
   }
 
-  /* Scroll shadows on content area. Fallbacks mirror the light-mode values
-     in scroll-panel-design-tokens.json so apps without design-tokens loaded
-     render the same as those with it. */
-  .scroll-panel-content--shadow-bottom {
-    box-shadow: var(
-      --goa-scroll-panel-content-shadow-bottom,
-      inset 0 -4px 8px -4px rgba(0, 0, 0, 0.25)
-    );
-  }
-
-  .scroll-panel-content--shadow-top {
-    box-shadow: var(
-      --goa-scroll-panel-content-shadow-top,
-      inset 0 4px 8px -4px rgba(0, 0, 0, 0.25)
-    );
-  }
-
-  .scroll-panel-content--shadow-both {
-    box-shadow: var(
-      --goa-scroll-panel-content-shadow-top-bottom,
-      inset 0 4px 8px -4px rgba(0, 0, 0, 0.175),
-      inset 0 -4px 8px -4px rgba(0, 0, 0, 0.175)
-    );
-  }
-
-  /* Footer */
+  /* Footer — casts a drop shadow up onto the content when content is below it. */
   .scroll-panel-footer {
     flex: 0 0 auto;
     background-color: var(
       --goa-scroll-panel-footer-color-bg,
       var(--goa-color-greyscale-white)
     );
-    border-top: var(--goa-border-width-s) solid transparent;
-    transition: border-color 0.15s ease;
+    border-top: var(--goa-border-width-2xs) solid transparent;
     z-index: 1;
+    transition:
+      box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
   }
 
-  .scroll-panel-footer--bordered {
-    border-top-color: var(--goa-color-greyscale-200);
+  /* Mirror of the header cue: a hairline top border + soft shadow casting up
+     onto the content above the footer. */
+  .scroll-panel-footer--shadow {
+    border-top-color: var(
+      --goa-scroll-panel-footer-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
+    box-shadow: var(
+      --goa-scroll-panel-footer-scroll-shadow,
+      var(--goa-shadow-shallow-above)
+    );
   }
 </style>

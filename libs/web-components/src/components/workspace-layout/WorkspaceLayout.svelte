@@ -423,12 +423,11 @@
       --goa-workspace-layout-header-bg-color,
       var(--goa-color-greyscale-white)
     );
-    border-bottom: var(
-      --goa-workspace-layout-header-border-bottom,
-      var(--goa-border-width-s) solid var(--goa-color-greyscale-200)
-    );
+    border-bottom: var(--goa-border-width-2xs) solid transparent;
     flex: 0 0 auto;
-    transition: box-shadow 0.15s ease;
+    transition:
+      box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
   }
 
   .page-footer {
@@ -439,12 +438,11 @@
       --goa-workspace-layout-footer-bg-color,
       var(--goa-color-greyscale-white)
     );
-    border-top: var(
-      --goa-workspace-layout-footer-border-top,
-      var(--goa-border-width-s) solid var(--goa-color-greyscale-200)
-    );
+    border-top: var(--goa-border-width-2xs) solid transparent;
     flex: 0 0 auto;
-    transition: box-shadow 0.15s ease;
+    transition:
+      box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
   }
 
   /* Scroll cue: cast a soft shadow off the sticky page-header / page-footer
@@ -452,17 +450,25 @@
      exists past the sticky edge.*/
   .shell.state-middle .page-header,
   .shell.state-at-bottom .page-header {
+    border-bottom-color: var(
+      --goa-workspace-layout-header-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
     box-shadow: var(
       --goa-workspace-layout-header-scroll-shadow,
-      0 4px 8px -4px rgba(0, 0, 0, 0.25)
+      var(--goa-shadow-shallow-below)
     );
   }
 
   .shell.state-at-top .page-footer,
   .shell.state-middle .page-footer {
+    border-top-color: var(
+      --goa-workspace-layout-footer-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
     box-shadow: var(
       --goa-workspace-layout-footer-scroll-shadow,
-      0 -4px 8px -4px rgba(0, 0, 0, 0.25)
+      var(--goa-shadow-shallow-above)
     );
   }
 

@@ -276,10 +276,10 @@ export function Feat3347Route() {
   // ===== Test 5 (modal) actions =====
   const t5Actions = (
     <GoabButtonGroup alignment="end">
-      <GoabButton type="secondary" onClick={() => setModalOpen(false)}>
+      <GoabButton type="secondary" size="compact" onClick={() => setModalOpen(false)}>
         Cancel
       </GoabButton>
-      <GoabButton type="primary" onClick={() => setModalOpen(false)}>
+      <GoabButton type="primary" size="compact" onClick={() => setModalOpen(false)}>
         Save
       </GoabButton>
     </GoabButtonGroup>
