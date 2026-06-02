@@ -65456,7 +65456,7 @@ function DocsAppHeaderRoute() {
       {
         heading: "My Application",
         url: "/",
-        utilities: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { alignment: "center", direction: "row", gap: "m", children: [
+        utilities: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "Help" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", leadingIcon: "person", children: "Sign in" })
         ] })
