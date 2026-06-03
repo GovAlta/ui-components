@@ -48,7 +48,7 @@ const resolvedBackUrl = withBase(backUrl);
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </head>
-  <body>
+  <body class="preview-doc">
     <header class="preview-bar">
       <goa-link size="small" leadingicon="arrow-back">
         <a href={resolvedBackUrl} data-back-link>
@@ -103,14 +103,11 @@ const resolvedBackUrl = withBase(backUrl);
 </html>
 
 <style is:global>
-  html,
-  body {
+  /* Scoped to .preview-doc (set on this layout's own body) so this
+     full-viewport reset cannot leak onto pages that use BaseLayout. */
+  body.preview-doc {
     margin: 0;
     padding: 0;
-    height: 100%;
-  }
-
-  body {
     font-family: var(--goa-font-family-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif);
     color: var(--goa-color-text-default, #333);
     background: var(--goa-color-surface-default, #fff);
@@ -145,7 +142,9 @@ const resolvedBackUrl = withBase(backUrl);
 
   /* GoA layout web components default to display:inline because their
      :host rules don't set display:block. Force them to block layout so
-     they fill their parent container in preview routes. */
+     they fill their parent container. Intentionally global: inline
+     <Preview> examples on guidance/docs pages render these components
+     outside this layout and rely on it too. */
   goa-one-column-layout,
   goa-page-block,
   goa-app-header,
