@@ -343,6 +343,7 @@
 
   .label {
     font: var(--goa-radio-label);
+    color: var(--goa-radio-color-label, var(--goa-input-color-text-secondary));
     margin-top: -3px; /* V1: Optical centering - move text up */
     padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
   }
