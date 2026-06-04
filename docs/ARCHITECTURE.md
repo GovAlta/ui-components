@@ -87,16 +87,24 @@ When a commit stages a file that feeds a generator, the hook regenerates the out
   - `libs/angular-components/src/lib/components/**` (Angular wrappers, feed `extract-api`)
   - `docs/src/content/**` (MDX frontmatter, feeds `build:search-index`)
 - If none of those are staged, the hook does nothing.
-- If the regenerated output matches what you staged, the commit goes through. The generators are deterministic, so a file that is already fresh comes back byte-identical and nothing is slowed down.
+- If the regenerated output matches what you staged, the commit goes through with no new files to stage. The generators still run on every commit that touches a watched source; they are deterministic, so an already-fresh file comes back byte-identical.
 - If they differ, the commit is blocked, naming the file that drifted and what to run.
 
-### Install it (one time per clone)
+### Install it
+
+Running `npm install` in `docs/` wires up the hook automatically. A `prepare` script in `docs/package.json` points git at the tracked `.githooks/` directory:
+
+```json
+"prepare": "git config core.hooksPath .githooks || true"
+```
+
+The hook needs the docs dependencies to run, so installing it from `docs/` keeps the two together: the people set up to build the docs are the ones who get the hook. The `|| true` keeps `npm install` from failing where git is not available (CI images, tarball installs).
+
+To set it by hand, or to confirm it is set:
 
 ```bash
 git config core.hooksPath .githooks
 ```
-
-That points git at the tracked `.githooks/` directory. There is no automatic installer. It is one command, run once, worth doing right after cloning.
 
 ### Docs dependencies are required
 
