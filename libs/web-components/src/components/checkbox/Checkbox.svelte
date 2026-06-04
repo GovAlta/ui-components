@@ -451,7 +451,6 @@ max-width: ${maxwidth};
     background-color: var(--goa-checkbox-color-bg);
     height: var(--goa-checkbox-size);
     width: var(--goa-checkbox-size);
-    margin-top: 3px; /* aligns the checkbox with the text */
     display: flex;
     justify-content: center;
     flex: 0 0 auto; /* prevent squishing of checkbox */
@@ -590,10 +589,6 @@ max-width: ${maxwidth};
   }
 
   /* Version 2 */
-
-  .v2 .text {
-    margin-top: var(--goa-space-2xs);
-  }
 
   .v2 .container svg {
     margin: 6px 3px;

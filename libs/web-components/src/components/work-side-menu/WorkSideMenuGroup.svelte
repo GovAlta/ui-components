@@ -114,7 +114,7 @@
     outline-offset: 2px;
   }
   summary goa-icon {
-    margin-top: 3px;
+    margin-top: var(--goa-space-3xs);
   }
   .group {
     border-left: var(
