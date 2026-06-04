@@ -64761,6 +64761,14 @@ const bigNavigationSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExpor
   /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Filter" }),
   /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Help" })
 ] });
+const navigationSlot2 = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Nav 1" }),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Nav Menu", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Nav Menu 1" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Nav Menu 2" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Nav Menu 3" })
+  ] })
+] });
 const utilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "Help" }),
   /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { text: "John Smith", type: "tertiary", size: "compact", children: [
@@ -64936,7 +64944,21 @@ function Bug3762Route() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", size: "body-m", children: "Content area with side menu demonstrates layout wrappers." }) })
         ] })
       ] })
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "AppHeader example mixing slot and navigation prop" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is to demonstrate what happens when both slot and navigation prop are used together." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Expectation:" }),
+      " The two should be combined, one should not overwrite the other."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabContainer, { type: "interactive", padding: "relaxed", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Combined Slot Test", navigation: navigationSlot2, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { slot: "navigation", href: "#", children: "Slot 1" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { slotName: "navigation", heading: "Slot Navigation", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Slot Nav 1" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Slot Nav 2" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Slot Nav 3" })
+      ] })
+    ] }) })
   ] });
 }
 const bug3762_route = {
