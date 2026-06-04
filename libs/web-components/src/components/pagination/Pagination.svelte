@@ -137,7 +137,7 @@
         <span>of {itemcount <= 0 ? "1" : _pageCount}</span>
       </goa-block>
     {/if}
-    <goa-block alignment="center" gap="m" data-testid="page-links">
+    <goa-block alignment="center" gap="l" data-testid="page-links">
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
