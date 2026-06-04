@@ -27,6 +27,7 @@ status: published
 
 import LinkCard from "../../../components/LinkCard.astro";
 import PreviewContainer from "../../../components/PreviewContainer.astro";
+import { withBase } from "@/lib/base-url";
 
 <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:0.5rem;margin-bottom:2rem;">
   <goa-button version="2" type="secondary" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
@@ -105,21 +106,21 @@ Workers need different ways to view, scan, and act on records depending on the t
 <goa-tabs initialtab="1">
   <goa-tab heading="Table">
     <img
-      src="/thumbnails/workspace-table-view.png"
+      src={withBase("/thumbnails/workspace-table-view.png")}
       alt="Table view with sortable columns"
       style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin-top: 0; display: block;"
     />
   </goa-tab>
   <goa-tab heading="Card">
     <img
-      src="/thumbnails/workspace-card-view.png"
+      src={withBase("/thumbnails/workspace-card-view.png")}
       alt="Card view of case files"
       style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin-top: 0; display: block;"
     />
   </goa-tab>
   <goa-tab heading="Expandable list">
     <img
-      src="/thumbnails/workspace-list-view.png"
+      src={withBase("/thumbnails/workspace-list-view.png")}
       alt="Expandable list view with grouping"
       style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin-top: 0; display: block;"
     />
@@ -141,7 +142,7 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
       Main workspace navigation
     </p>
     <img
-      src="/thumbnails/workspace-sidebar-main.png"
+      src={withBase("/thumbnails/workspace-sidebar-main.png")}
       alt="Workspace main sidebar navigation with Dashboard and Applications items"
       style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
     />
@@ -151,7 +152,7 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
       Secondary contextual navigation
     </p>
     <img
-      src="/thumbnails/workspace-sidebar-contextual.png"
+      src={withBase("/thumbnails/workspace-sidebar-contextual.png")}
       alt="Workspace contextual sidebar showing case-specific navigation items"
       style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
     />
@@ -170,7 +171,7 @@ Set the content for each page based on the task:
 Do not pin everything. Keep only the information and actions people need to continue their work without losing context.
 
 <img
-  src="/thumbnails/workspace-sticky-action-bar.png"
+  src={withBase("/thumbnails/workspace-sticky-action-bar.png")}
   alt="Workspace sticky action bar"
   style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
 />
@@ -189,7 +190,7 @@ This works well for actions such as:
 Use it when users need to keep the main record in view while completing the task.
 
 <img
-  src="/thumbnails/workspace-push-drawer.png"
+  src={withBase("/thumbnails/workspace-push-drawer.png")}
   alt="Workspace push drawer"
   style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
 />

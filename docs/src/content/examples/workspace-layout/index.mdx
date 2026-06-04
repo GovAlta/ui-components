@@ -21,6 +21,7 @@ status: published
 ---
 
 import PreviewContainer from "../../../components/PreviewContainer.astro";
+import { withBase } from "@/lib/base-url";
 
 <PreviewContainer
   image="/images/examples/workspace-layout-basic.png"
@@ -34,7 +35,7 @@ import PreviewContainer from "../../../components/PreviewContainer.astro";
 ## Anatomy
 
 <img
-  src="/images/examples/workspace-layout-diagram.png"
+  src={withBase("/images/examples/workspace-layout-diagram.png")}
   alt="Diagram of the workspace layout showing its pieces: a work side menu down the left, a sticky header with a heading and actions across the top, the page content in the centre, a sticky footer along the bottom, and a push drawer on the right."
   style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin: var(--goa-space-m, 1rem) 0; display: block;"
 />
