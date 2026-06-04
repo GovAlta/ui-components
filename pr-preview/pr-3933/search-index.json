@@ -2341,9 +2341,10 @@
     "type": "example",
     "id": "workspace-layout",
     "title": "Workspace Layout",
-    "description": "A full-page shell for workspace-style applications. Side navigation, sticky page header and footer, a scrollable main card, and an optional push-drawer slot.",
+    "description": "A full-page layout for workspace-style applications that wraps your content responsively.",
     "status": "published",
     "size": "page",
+    "productType": "workspace",
     "tags": [
       "layout",
       "shell",
@@ -2621,7 +2622,7 @@
     "type": "example",
     "id": "workspace",
     "title": "Workspace",
-    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.",
+    "description": "The workspace is a pattern for productivity-focused services that service delivery staff use as a daily tool to review information, manage records, and complete tasks. The design prioritizes efficiency and accuracy. The reference example is a starting point to adapt to your service's context, not a rigid template.",
     "status": "published",
     "size": "product",
     "tags": [
