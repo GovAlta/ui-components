@@ -2,7 +2,8 @@
 id: workspace-layout
 title: Workspace Layout
 size: page
-description: A full-page shell for workspace-style applications. Side navigation, sticky page header and footer, a scrollable main card, and an optional push-drawer slot.
+productType: workspace
+description: A full-page layout for workspace-style applications that wraps your content responsively.
 hideHero: true
 components:
   - workspace-layout
@@ -21,69 +22,57 @@ status: published
 
 import PreviewContainer from "../../../components/PreviewContainer.astro";
 
-The workspace layout owns the page chrome — side menu, sticky page header and footer, and the scrollable main card — so each route can focus on its own content. The variants below show common compositions.
-
-## Basic workspace layout
-
-Side menu plus sticky page header and footer wrap a scrollable text content area. The simplest shell for a workspace page.
-
 <PreviewContainer
   image="/images/examples/workspace-layout-basic.png"
-  alt="Basic workspace layout preview"
+  alt="Complete workspace layout preview"
   previewUrl="/examples/workspace-layout/basic/preview"
+  figmaUrl="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library?node-id=58855-102956"
   reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/workspace-layout/basic/react.tsx"
   angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/workspace-layout/basic"
 />
 
-## Bulk action bar
+## Anatomy
 
-A long table inside the workspace card scrolls under a sticky page header that carries a bulk action toolbar. The footer surfaces a selection summary that stays visible as users move through the list.
-
-<PreviewContainer
-  image="/images/examples/workspace-layout-bulk-action-bar.png"
-  alt="Workspace layout with bulk action bar preview"
-  previewUrl="/examples/workspace-layout/bulk-action-bar/preview"
-  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/workspace-layout/bulk-action-bar/react.tsx"
-  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/workspace-layout/bulk-action-bar"
+<img
+  src="/images/examples/workspace-layout-diagram.png"
+  alt="Diagram of the workspace layout showing its pieces: a work side menu down the left, a sticky header with a heading and actions across the top, the page content in the centre, a sticky footer along the bottom, and a push drawer on the right."
+  style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin: var(--goa-space-m, 1rem) 0; display: block;"
 />
 
-## Reacting to scroll state
+<goa-callout version="2" type="information" emphasis="low" maxwidth="40ch">
+  <a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library?node-id=58855-102956" target="_blank" rel="noopener noreferrer">View the workspace layout template in Figma</a>
+</goa-callout>
 
-Read the layout's scroll state from `useGoabWorkspaceLayoutScrollState()` (React) or `GoabWorkspaceLayoutScrollStateService` (Angular) to drive consumer-side reactivity — for example, collapse a header title or show a back-to-top button once content has scrolled past the top.
+### Work side menu
 
-<PreviewContainer
-  image="/images/examples/workspace-layout-scroll-state.png"
-  alt="Workspace layout reacting to scroll state preview"
-  previewUrl="/examples/workspace-layout/scroll-state/preview"
-  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/workspace-layout/scroll-state/react.tsx"
-  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/workspace-layout/scroll-state"
-/>
+The main navigation for the workspace, built with a [work side menu](/components/work-side-menu). It stays in place while the content scrolls. On narrow screens it hides and opens from the [mobile hamburger menu](#mobile-hamburger-menu).
 
-## With push drawer
+### Sticky header
 
-The optional `pushDrawer` slot accepts a `GoabPushDrawer` that pushes only the main card, not the side menu. Use it for filters, reference content, or short forms that should live alongside the page without overlaying it.
+A header pinned to the top while the content scrolls. Use it for the page title, key actions, or a toolbar. A soft shadow appears under it once content scrolls past, so people can tell there is more above. It can also collapse as people scroll down, see [scroll state](#scroll-state).
 
-<PreviewContainer
-  image="/images/examples/workspace-layout-push-drawer.png"
-  alt="Workspace layout with push drawer preview"
-  previewUrl="/examples/workspace-layout/push-drawer/preview"
-  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/workspace-layout/push-drawer/react.tsx"
-  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/workspace-layout/push-drawer"
-/>
+### Page content
 
-## When to use
+Your page content. The layout wraps it in a scrollable card and handles the spacing, so the header and footer stay in place while this area scrolls.
 
-Use the workspace layout when:
+### Sticky footer
 
-- Building a workspace-style application such as a case management tool, internal dashboard, or back-office app
-- The page needs persistent side navigation alongside the main content
-- Users will scroll through long content while header and footer actions stay accessible
-- Multiple routes share the same shell — the layout owns the chrome and each route owns its content
+A footer pinned to the bottom while the content scrolls. Use it for a summary or actions that should stay reachable, such as a running count of selected items.
+
+### Push drawer
+
+An optional drawer that opens beside the page content instead of over it. It narrows the content rather than covering it, so people keep their place on the page.
+
+### Mobile hamburger menu
+
+At narrow screen widths the side menu hides to save space, and the layout adds a hamburger button that opens it. This comes with the layout, you do not wire it up yourself.
+
+## Scroll state
+
+The layout keeps track of how far the content has scrolled (at the top, somewhere in the middle, or at the bottom) and lets you read that to respond. A common use is collapsing a tall header into a compact one as people scroll down, or showing a "back to top" button. Read it with `useGoabWorkspaceLayoutScrollState()` (React) or `GoabWorkspaceLayoutScrollStateService` (Angular).
 
 ## Considerations
 
+- Use the workspace layout for workspace-style applications such as case management tools, internal dashboards, or back-office apps, where pages share a side menu and people scroll through long content while header and footer actions stay in reach.
 - The layout fills the viewport (100vh). Host it directly inside the router outlet, not inside another scrolling container.
-- Sticky page header and page footer cast a soft scroll shadow when content scrolls past them, signalling there is more content beyond the sticky edge.
-- The push-drawer slot is a sibling of the main card. Opening the drawer narrows the card but leaves the side menu in place — appropriate when the drawer is contextual to the current page.
-- The current scroll state (no-scroll, at-top, middle, at-bottom) is exposed via `useGoabWorkspaceLayoutScrollState()` (React) and `GoabWorkspaceLayoutScrollStateService` (Angular) when consumers need to react to scroll position.
-- These examples use placeholder elements for page header / footer rather than real `GoabAppHeader` / `GoabAppFooter` so the focus stays on the workspace-layout structure itself.
+- The push drawer opens beside the main content and leaves the side menu in place, which suits a drawer that is contextual to the current page.

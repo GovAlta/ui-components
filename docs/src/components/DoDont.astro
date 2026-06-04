@@ -211,9 +211,20 @@ const config = typeConfig[type];
 
   /* Info type: minimal wrapper for raw content */
   .info-content {
-    color: var(--goa-color-info-text);
+    color: var(--goa-color-text-default);
+    font: var(--goa-typography-body-m);
     margin-bottom: var(--goa-space-l);
     max-width: 70ch;
+  }
+
+  .info-content :global(p),
+  .info-content :global(li) {
+    font: var(--goa-typography-body-m);
+  }
+
+  .info-content .description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-default);
   }
 
   .info-content :global(p) {

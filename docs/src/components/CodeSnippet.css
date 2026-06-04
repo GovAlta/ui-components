@@ -124,13 +124,13 @@
   mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
 }
 
-pre {
+.code-snippet pre {
   margin: 0;
   padding: var(--goa-space-m, 1rem);
   overflow-x: auto;
 }
 
-code {
+.code-snippet code {
   font-family: "SF Mono", Monaco, "Courier New", monospace;
   line-height: 1.6;
   background: transparent !important;

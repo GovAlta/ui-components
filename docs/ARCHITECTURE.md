@@ -90,6 +90,7 @@ relatedComponents: [button-group, icon-button]
 figmaUrl: https://www.figma.com/...
 hidden: true # optional — hide from nav (used for subcomponents, deprecated, internal)
 subcomponent: true # optional — show API on parent component page
+hideTabs: [examples] # optional, hide tabs on this page (examples, usage, accessibility); Properties always shows
 ---
 ```
 
@@ -299,6 +300,16 @@ grep -rl "subcomponent: true" docs/src/content/components/
 ### Hide a component from navigation
 
 Set `hidden: true` in the component's MDX frontmatter. It won't appear in the nav or component grid, but the page still exists if you visit the URL directly.
+
+### Hide a tab on a component page
+
+Not every component needs all four tabs (for example, a primitive with no curated examples). Set `hideTabs` in the component's MDX frontmatter to drop specific tabs:
+
+```yaml
+hideTabs: [examples] # any of: examples, usage, accessibility
+```
+
+Properties always shows (it is the API). The page renders only the remaining tabs. Used on `scroll-panel` to drop its empty Examples tab.
 
 ### Add guidance for a component
 

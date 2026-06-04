@@ -1,7 +1,7 @@
 ---
 id: workspace
 title: Workspace
-summary: The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.<br><span style="display:block;height:0.5rem"></span>Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.
+summary: The workspace is a pattern for productivity-focused services that service delivery staff use as a daily tool to review information, manage records, and complete tasks. The design prioritizes efficiency and accuracy. The reference example is a starting point to adapt to your service's context, not a rigid template.
 heroImage: /thumbnails/workspace-preview.png
 demoUrl: https://digital-service-demo-v2.netlify.app/workspace
 sourceUrl: https://github.com/GovAlta/goa-workspace-playground
@@ -25,31 +25,25 @@ components:
 status: published
 ---
 
-<goa-button version="2" type="tertiary" mt="s" mb="l" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
-
 import LinkCard from "../../../components/LinkCard.astro";
 import PreviewContainer from "../../../components/PreviewContainer.astro";
 
-<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;">
-  <LinkCard
-    href="https://github.com/GovAlta/goa-workspace-playground"
-    icon="logo-react"
-    title="React template"
-    description="GitHub template for building a workspace with React"
-  />
-  <LinkCard
-    href="https://github.com/GovAlta/goa-workspace-angular"
-    icon="logo-angular"
-    title="Angular template"
-    description="GitHub template for building a workspace with Angular"
-  />
+<div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:0.5rem;margin-bottom:2rem;">
+  <goa-button version="2" type="secondary" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
+  <goa-button version="2" type="tertiary" leadingicon="logo-react" onclick="window.open('https://github.com/GovAlta/goa-workspace-playground', '_blank')">React template</goa-button>
+  <goa-button version="2" type="tertiary" leadingicon="logo-angular" onclick="window.open('https://github.com/GovAlta/goa-workspace-angular', '_blank')">Angular template</goa-button>
 </div>
 
-<goa-callout version="2" type="information" emphasis="low" maxwidth="480px"><strong>Primary user:</strong> Service delivery staff</goa-callout>
+## Page types
 
-## Pages
+Common pages seen in workspace products that you can combine and adapt to fit the work your service supports.
 
-Combine and adapt these to fit the work your service supports.
+<goa-callout version="2" type="information" emphasis="low" heading="Workspace layout component" maxwidth="80ch">
+  All of the page examples are built using the workspace layout component. It is a responsive shell with a side menu, sticky page header and footer, and an optional push drawer. On small screens, the side menu collapses into a hamburger menu.
+  <div style="margin-top: var(--goa-space-s, 0.75rem);">
+    <goa-link size="small"><a href="/examples/workspace-layout">View layout component</a></goa-link>
+  </div>
+</goa-callout>
 
 ### Dashboard
 
@@ -62,6 +56,7 @@ The landing view of a workspace, showing staff their counts, trends, and assigne
   reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/dashboard"
   angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/dashboard"
   moreUrl="/examples/workspace/dashboard"
+  figmaUrl="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library?node-id=60158-598232"
 />
 
 ### Index page
@@ -75,6 +70,7 @@ The page where staff scan and pick records to work on, with filters, search, and
   reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/search"
   angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/search"
   moreUrl="/examples/workspace/index-page"
+  figmaUrl="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library?node-id=67092-145149"
 />
 
 ### Case detail
@@ -88,25 +84,25 @@ A single-record view for reviewing and acting on one case.
   reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/cases"
   angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/cases"
   moreUrl="/examples/workspace/case-detail"
+  figmaUrl="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library?node-id=60159-129834"
 />
 
 ---
 
-## Patterns
+## Interaction patterns
 
-Patterns that show up across multiple workspace pages.
+Common interaction patterns that show up across multiple workspace pages.
 
 ### Data views
 
 Workers need different ways to view, scan, and act on records depending on the task. Choose the data view that best supports the task.
 
-- **Table view.** Dense, scannable rows with sortable columns. Best for users who need to compare fields across many records at once.
-- **Card view.** Each record as a card showing key details grouped into sections. Useful when records have more complex data that doesn't fit neatly into columns.
-- **Expandable list view.** Compact rows that expand inline to reveal detail. A middle ground between the density of a table and the richness of cards.
+- **Table view:** Dense, scannable rows with sortable columns. Best for users who need to compare fields across many records at once.
+- **Card view:** Each record as a card showing key details grouped into sections. Useful when records have more complex data that doesn't fit neatly into columns.
+- **Expandable list view:** Compact rows that expand inline to reveal detail. A middle ground between the density of a table and the richness of cards.
 
-Any view can be combined with grouping (for example, group by priority or status) to organize records into collapsible sections. Users can also search, filter by status using [tabs](/components/tabs), sort with multi-level sorting, and manage active filters with [filter chips](/components/filter-chip).
-
-<goa-tabs initialtab="1" mt="m" mb="m">
+<div style="margin-top: var(--goa-space-l); margin-bottom: var(--goa-space-2xl);">
+<goa-tabs initialtab="1">
   <goa-tab heading="Table">
     <img
       src="/thumbnails/workspace-table-view.png"
@@ -129,10 +125,13 @@ Any view can be combined with grouping (for example, group by priority or status
     />
   </goa-tab>
 </goa-tabs>
+</div>
+
+Any view can be combined with grouping (for example, group by priority or status) to organize records into collapsible sections. Users can also search, filter by status using [tabs](/components/tabs), sort with multi-level sorting, and manage active filters with [filter chips](/components/filter-chip).
 
 ### Sidebar navigation
 
-Use the [work side menu](/components/work-side-menu) as the primary navigation for a workspace.
+Use the [work side menu](/components/work-side-menu) as the primary navigation for a workspace. The [workspace layout](/examples/workspace-layout) provides this navigation, including the collapse to a hamburger on mobile.
 
 Keep top-level navigation focused on the main areas of work. When a user opens a record or case, switch to contextual navigation that supports that task. This puts the user into a focused mode with relevant navigation items (like sections of an application, comments, reminders) and a back link to return to the main view. The sidebar can adapt to what the user is doing, it doesn't have to show everything at once.
 
@@ -149,7 +148,7 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
   </div>
   <div>
     <p style="font-size: 0.875rem; color: var(--goa-color-text-secondary, #666); margin-bottom: 0.5rem; margin-top: 0;">
-      Contextual case navigation
+      Secondary contextual navigation
     </p>
     <img
       src="/thumbnails/workspace-sidebar-contextual.png"
@@ -161,7 +160,7 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
 
 ### Sticky action bar
 
-A scroll-aware header that pins to the top of the content area as the user scrolls. Use it to keep the most important tools visible.
+A scroll-aware header that pins to the top of the content area as the user scrolls. Use it to keep the most important tools visible. The [workspace layout](/examples/workspace-layout) provides this as its sticky page header.
 
 Set the content for each page based on the task:
 
@@ -178,7 +177,7 @@ Do not pin everything. Keep only the information and actions people need to cont
 
 ### Push drawer
 
-Use a [push drawer](/components/push-drawer) for focused work that should happen without leaving the current page.
+Use a [push drawer](/components/push-drawer) for focused work that should happen without leaving the current page. The [workspace layout](/examples/workspace-layout) hosts this as a push drawer that narrows the main card rather than overlaying it.
 
 This works well for actions such as:
 
@@ -201,12 +200,12 @@ Use it when users need to keep the main record in view while completing the task
 
 Workspace patterns are supported by component features designed for denser, more productive interfaces:
 
-- **Compact inputs.** Every input component now has a `compact` variant that reduces height and spacing. This lets you build tighter forms and toolbars without sacrificing usability.
-- **Compact badges and notifications.** [Badges](/components/badge) and [notification banners](/components/notification) also have compact sizing to fit within dense data views and action bars.
-- **Badge variants.** [Badges](/components/badge) now include `strong` and `subtle` emphasis options, giving you control over visual weight depending on context.
-- **Data grid.** The [data grid](/components/data-grid) works with the table component to support accessible, keyboard-navigable data views. Use them together when the user needs to move through records efficiently without relying on a mouse.
-- **Segmented tabs.** A new [tab](/components/tab) variant that works as a segmented toggle for switching between views or modes within a workspace, rather than navigating between pages.
-- **Enhanced filter chips.** [Filter chips](/components/filter-chip) now support secondary text and secondary icons, making them more useful for richer filtering in workspace data views.
+- **Compact inputs:** Every input component now has a `compact` variant that reduces height and spacing. This lets you build tighter forms and toolbars without sacrificing usability.
+- **Compact badges and notifications:** [Badges](/components/badge) and [notification banners](/components/notification) also have compact sizing to fit within dense data views and action bars.
+- **Badge variants:** [Badges](/components/badge) now include `strong` and `subtle` emphasis options, giving you control over visual weight depending on context.
+- **Data grid:** The [data grid](/components/data-grid) works with the table component to support accessible, keyboard-navigable data views. Use them together when the user needs to move through records efficiently without relying on a mouse.
+- **Segmented tabs:** A new [tab](/components/tab) variant that works as a segmented toggle for switching between views or modes within a workspace, rather than navigating between pages.
+- **Enhanced filter chips:** [Filter chips](/components/filter-chip) now support secondary text and secondary icons, making them more useful for richer filtering in workspace data views.
 
 ---
 
@@ -227,7 +226,7 @@ Use the workspace when your service needs to support regular, task-based work, s
 
 ## When not to use
 
-- Citizen-facing services. Use the [public form](/examples/public-form) pattern instead.
+- Public facing applications or forms. Use the [public form](/examples/public-form) pattern instead.
 - Content-only pages that do not involve case management.
 - Simple internal tools that do not need structured case processing.
 
@@ -251,12 +250,3 @@ Use one of the workspace templates as a starting point for your service. Each te
     description="GitHub template for building a workspace with Angular"
   />
 </div>
-
----
-
-## Considerations
-
-- The reference demo is a spike. Component customizations have not gone through the production pipeline yet.
-- There should be significant variability within a workspace to meet each service's specific context and user needs.
-- The demo is a starting point to expand on and adapt, not a rigid template to copy exactly.
-- Desktop uses a card container pattern for the main content area. This is removed on mobile for space.
