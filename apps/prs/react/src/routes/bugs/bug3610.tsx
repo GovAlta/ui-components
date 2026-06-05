@@ -19,6 +19,7 @@ export function Bug3610Route() {
 
       <GoabFormItem label="What is your birthday?">
         <GoabDatePicker
+          type="input"
           name="birthday"
           value={date}
           onChange={({ value }) => setDate(value)}
