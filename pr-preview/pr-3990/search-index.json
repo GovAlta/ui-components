@@ -2322,15 +2322,27 @@
   },
   {
     "type": "page",
-    "id": "early-adopter-experiences",
-    "title": "Two teams migrate to the updated design system",
-    "description": "The Caregiver Portal and Alberta Childcare Family Portal teams share how they approached migrating to the updated design system",
+    "id": "parallel-paths-migration",
+    "title": "Parallel paths: migration alongside feature development",
+    "description": "How the Alberta Childcare Family Portal team managed a design system migration while actively building new features over approximately 2 months",
     "status": "published",
     "category": "get started",
     "tags": [
       "articles"
     ],
-    "slug": "get-started/articles/early-adopter-experiences"
+    "slug": "get-started/articles/parallel-paths-migration"
+  },
+  {
+    "type": "page",
+    "id": "two-phase-migration",
+    "title": "A two-phase migration: early adopter to production",
+    "description": "How the Caregiver Portal team joined the early adopter program and migrated a new product to the updated design system in 7–8 days across two phases",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/two-phase-migration"
   },
   {
     "type": "page",
