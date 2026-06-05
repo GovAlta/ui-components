@@ -16,9 +16,9 @@ import { withBase } from "@/lib/base-url";
 <goa-text size="body-l" mt="none" mb="2xl">The live lookup tool your AI editor calls when it needs design system component APIs, examples, or guidance.</goa-text>
 
 <goa-callout version="2" type="information" emphasis="low" heading="Quick start: Point your AI tool at this endpoint" mt="none" mb="m">
-  <CodeSnippet language="javascript" showCopy client:visible code={`https://design-system-mcp-dcp-prod.apps.aro-01.int.gov.ab.ca/mcp`} />
-  <goa-text version="2" size="body-m" mt="s" mb="none"><goa-link version="2"><a href="#setup">View tool-specific setup</a></goa-link></goa-text>
+  <CodeSnippet language="javascript" showCopy client:visible code={`https://mcp.design.alberta.ca/mcp`} />
 </goa-callout>
+<goa-text version="2" size="body-m" mt="s" mb="none"><goa-link version="2"><a href="#setup">View tool-specific setup</a></goa-link></goa-text>
 
 <goa-callout version="2" type="information" emphasis="low" mt="m" mb="l">
   <goa-text version="2" size="body-s" mt="none" mb="none">The MCP is one tool in a larger AI toolset. For the overview of all available AI tools and how they fit together, see <a href={withBase("/get-started/ai-tools-and-resources")}>AI tools and resources</a>.</goa-text>
@@ -183,7 +183,7 @@ import { withBase } from "@/lib/base-url";
   language="javascript"
   showCopy
   client:visible
-  code={`claude mcp add --transport http goa-design-system https://design-system-mcp-dcp-prod.apps.aro-01.int.gov.ab.ca/mcp --scope user`}
+  code={`claude mcp add --transport http goa-design-system https://mcp.design.alberta.ca/mcp --scope user`}
 />
 
 <goa-text as="h4" size="heading-xs" mt="xl">Claude Desktop</goa-text>
@@ -205,7 +205,7 @@ import { withBase } from "@/lib/base-url";
   "mcpServers": {
     "goa-design-system": {
       "command": "npx",
-      "args": ["mcp-remote", "https://design-system-mcp-dcp-prod.apps.aro-01.int.gov.ab.ca/mcp"]
+      "args": ["mcp-remote", "https://mcp.design.alberta.ca/mcp"]
     }
   }
 }`}
@@ -224,7 +224,7 @@ import { withBase } from "@/lib/base-url";
   code={`{
   "mcpServers": {
     "goa-design-system": {
-      "url": "https://design-system-mcp-dcp-prod.apps.aro-01.int.gov.ab.ca/mcp"
+      "url": "https://mcp.design.alberta.ca/mcp"
     }
   }
 }`}
@@ -236,7 +236,7 @@ import { withBase } from "@/lib/base-url";
 
 <p>Custom MCP connectors are in beta and require a ChatGPT Plus or Pro subscription. In ChatGPT, open <strong>Settings &gt; Connectors &gt; Advanced</strong> and turn on <strong>Developer mode</strong>. A new <strong>Add custom connector</strong> button appears. Click it, paste this MCP endpoint URL, set authentication to <strong>None</strong>, and save:</p>
 
-<CodeSnippet code="https://design-system-mcp-dcp-prod.apps.aro-01.int.gov.ab.ca/mcp" language="javascript" showCopy client:visible />
+<CodeSnippet code="https://mcp.design.alberta.ca/mcp" language="javascript" showCopy client:visible />
 
 <goa-callout version="2" type="information" emphasis="low" mt="xl" mb="2xl">
   <goa-text version="2" size="body-m" mt="none" mb="none">Using a different AI tool? If it supports remote MCP servers, paste the MCP endpoint URL into its config. For stdio-only tools, bridge through <code>npx mcp-remote &lt;URL&gt;</code>. <goa-link version="2" trailingicon="open"><a href="https://modelcontextprotocol.io/clients" target="_blank" rel="noopener noreferrer">View the list of MCP-compatible clients</a></goa-link></goa-text>
