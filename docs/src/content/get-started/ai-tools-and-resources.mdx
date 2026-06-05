@@ -8,6 +8,7 @@ order: 1
 status: published
 ---
 import DropInCallout from "../../components/DropInCallout.astro";
+import { CodeSnippet } from "../../components/CodeSnippet";
 import { withBase } from "@/lib/base-url";
 
 <goa-text size="heading-xl" mt="none" mb="m">AI tools and resources</goa-text>
@@ -31,8 +32,8 @@ import { withBase } from "@/lib/base-url";
         <td>Component APIs, examples, and guidance, like asking a reference librarian</td>
       </tr>
       <tr>
-        <td><a href="#workflows">Workflows / Skills</a></td>
-        <td>Workflows that load when the work matches.</td>
+        <td><a href="#skills">Skills</a></td>
+        <td>Skills that load when the work matches.</td>
         <td>Layered instructions for using the design system in your work, like a playbook for the work at hand</td>
       </tr>
       <tr>
@@ -57,18 +58,21 @@ import { withBase } from "@/lib/base-url";
 <p>Reach for it for instant lookup, or to surface details that would take longer to find by browsing.</p>
 <p><goa-link><a href={withBase("/get-started/ai-tools-and-resources/goa-design-system-mcp")}>View more</a></goa-link></p>
 
-<goa-text as="h2" id="workflows" size="heading-m">Workflows</goa-text>
-<p>Workflows are stored as plain Markdown. Some AI tools auto-load them when the request matches; others let you paste them in or reference them as project rules. Anthropic calls them skills; other tools have their own names for the same idea.</p>
+<goa-text as="h2" id="skills" size="heading-m">Skills</goa-text>
+<p>Skills are the SKILL.md open standard: plain Markdown instructions your AI loads when the work matches. Most major AI tools read them, including Claude Code, Cursor, and Copilot.</p>
+<p>You add a skill with a single command pointed at our repo, the same way you'd add our package. Run <code>npx skills update</code> to pull the latest, or add that to a SessionStart hook so it refreshes automatically.</p>
 
 <goa-text size="heading-s">using-goa-design-system</goa-text>
-<p>Tell your AI what you're working on, like a public form or a case management tool. It walks your AI through the product type, examples, and components that fit.</p>
+<p>Tell your AI what you're working on, like a public form or a case management tool. It walks your AI down the system's structure, from product type to templates to the components that fit, and surfaces the known gotchas before any code is written.</p>
 <p>Reach for it any time you want your AI to follow the design system's patterns, whether you're starting fresh or building on existing work.</p>
-<p><strong>How to access it:</strong> <em>[installation instructions to be confirmed]</em></p>
+<p><strong>How to add it:</strong></p>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill using-goa-design-system`} />
 
 <goa-text size="heading-s">content-design</goa-text>
 <p>Tell your AI to write or refine a piece of user-facing copy, like an error message or a status update. It names the reader first, a citizen or a worker, then shapes the wording to fit, because the same message reads differently for each.</p>
 <p>Reach for it when you're working on the words in a service: labels, guidance, errors, empty states, notifications.</p>
-<p><strong>How to access it:</strong> <em>[installation instructions to be confirmed]</em></p>
+<p><strong>How to add it:</strong></p>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill content-design`} />
 
 <goa-text as="h2" id="md-files" size="heading-m">MD files</goa-text>
 <p>Useful when you want to give your AI broad design system context, include the reference in a project, or reach for the content offline.</p>
