@@ -2334,6 +2334,18 @@
   },
   {
     "type": "page",
+    "id": "ai-tools-and-resources/skills",
+    "title": "Skills",
+    "description": "Plain-Markdown workflows your AI loads when the work matches, for building GoA services",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "ai-tools-and-resources"
+    ],
+    "slug": "get-started/ai-tools-and-resources/skills"
+  },
+  {
+    "type": "page",
     "id": "ai-tools-and-resources",
     "title": "AI tools and resources",
     "description": "AI tools and resources to help you and your AI editor work better with the GoA Design System",
