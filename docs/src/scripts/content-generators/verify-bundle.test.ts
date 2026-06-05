@@ -101,3 +101,53 @@ test("verifyBundle flags an unterminated code fence", () => {
     "should flag the unterminated fence rather than silently stop checking",
   );
 });
+
+test("verifyBundle catches raw inline-formatting tags leaking outside fences", () => {
+  // The tag list previously stopped at block-level tags, so a raw inline tag (an
+  // anchor, or bold/italic that should have become Markdown) could leak
+  // unflagged. Each of these is a real leak the verifier must catch.
+  for (const tag of ["a", "b", "i", "em", "strong", "code", "blockquote", "hr"]) {
+    const dir = fixture();
+    fs.mkdirSync(path.join(dir, "react", "components"), { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, "react", "components", "bad.md"),
+      `---\nid: bad\n---\n\n# Bad\n\nSome <${tag}>leaked</${tag}> text.\n`,
+    );
+    const violations = verifyBundle(dir, path.join(dir, "no-mcp"));
+    assert.ok(
+      violations.some((v) => /raw tag/.test(v.message)),
+      `should flag a raw <${tag}> outside a code fence`,
+    );
+  }
+});
+
+test("verifyBundle expects React and Angular to omit web-component-only components", () => {
+  const dir = fixture();
+  const mcp = path.join(dir, "mcp");
+  fs.mkdirSync(path.join(mcp, "components"), { recursive: true });
+  fs.writeFileSync(path.join(mcp, "components", "button.json"), "{}");
+  fs.writeFileSync(path.join(mcp, "components", "focus-trap.json"), "{}");
+  // web-components carries the full MCP set; react and angular correctly omit
+  // the web-component-only focus-trap.
+  fs.mkdirSync(path.join(dir, "web-components", "components"), { recursive: true });
+  fs.writeFileSync(
+    path.join(dir, "web-components", "components", "button.md"),
+    "---\nid: button\n---\n\n# Button\n",
+  );
+  fs.writeFileSync(
+    path.join(dir, "web-components", "components", "focus-trap.md"),
+    "---\nid: focus-trap\n---\n\n# Focus Trap\n",
+  );
+  for (const fw of ["react", "angular"]) {
+    fs.mkdirSync(path.join(dir, fw, "components"), { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, fw, "components", "button.md"),
+      "---\nid: button\n---\n\n# Button\n",
+    );
+  }
+  assert.deepEqual(
+    verifyBundle(dir, mcp),
+    [],
+    "omitting a web-component-only component from React/Angular is expected, not a divergence",
+  );
+});

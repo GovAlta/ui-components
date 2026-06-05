@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { paths } from "../config";
+import { paths, WEB_COMPONENT_ONLY } from "../config";
 import type {
   AnyRecord,
   ComponentRecord,
@@ -27,6 +27,13 @@ export interface FrameworkTarget {
   apiKey: string;
   /** Human label used in headings. */
   label: string;
+  /**
+   * Heading for the content-insertion section. Web components have native
+   * slots; React passes content as ReactNode, Angular via Template Ref. Naming
+   * it per framework stops an AI reaching for a `slot` attribute where the
+   * framework uses a different mechanism.
+   */
+  slotsLabel: string;
   /** Frontmatter key for this framework's component identifier. */
   frontmatterKey: string;
   /** ComponentRecord field holding the identifier (e.g. `GoabButton`). */
@@ -47,6 +54,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     id: "react",
     apiKey: "react",
     label: "React",
+    slotsLabel: "ReactNode",
     frontmatterKey: "react",
     identifierKey: "reactClassName",
     sources: [{ file: "react.tsx", lang: "tsx" }],
@@ -56,6 +64,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     id: "angular",
     apiKey: "angular",
     label: "Angular",
+    slotsLabel: "Template Ref",
     frontmatterKey: "angular",
     identifierKey: "angularSelector",
     sources: [
@@ -68,6 +77,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     id: "web-components",
     apiKey: "webComponents",
     label: "Web component",
+    slotsLabel: "Slots",
     frontmatterKey: "webComponent",
     identifierKey: "webComponentTag",
     sources: [{ file: "web-components.html", lang: "html" }],
@@ -102,6 +112,19 @@ interface FrameworkApi {
 }
 interface ApiBlob {
   frameworks?: Record<string, FrameworkApi>;
+}
+
+/**
+ * Components for a framework's set. Web components carry the full set; React and
+ * Angular drop the web-component-only utilities (no wrapper there), so an AI is
+ * not shown a component it cannot use in that framework.
+ */
+export function componentsForTarget(
+  components: ComponentRecord[],
+  target: FrameworkTarget,
+): ComponentRecord[] {
+  if (target.id === "web-components") return components;
+  return components.filter((c) => !WEB_COMPONENT_ONLY.has(c.id));
 }
 
 /** Generate the Markdown bundle: one self-contained set per framework. */
@@ -155,6 +178,7 @@ export function writeMdBundle(records: AnyRecord[]): { written: number } {
   let written = 0;
   for (const target of targets) {
     const root = path.join(paths.output.mdBundle, target.id);
+    const targetComponents = componentsForTarget(components, target);
     let chars = 0;
     let fileCount = 0;
     // Write a file and tally its size, so the index can report the set's weight.
@@ -165,7 +189,7 @@ export function writeMdBundle(records: AnyRecord[]): { written: number } {
       written++;
     };
 
-    for (const c of components) {
+    for (const c of targetComponents) {
       emit(
         path.join(root, "components", filename(c.id)),
         renderComponent(
@@ -198,7 +222,7 @@ export function writeMdBundle(records: AnyRecord[]): { written: number } {
     // Index last; it reports the set size, counting itself (hence fileCount + 1).
     emit(
       path.join(root, "index.md"),
-      renderIndex(target, components, foundations, examples, getStarted, productTypes, {
+      renderIndex(target, targetComponents, foundations, examples, getStarted, productTypes, {
         files: fileCount + 1,
         chars,
       }),
@@ -254,7 +278,7 @@ export function renderComponent(
     out.push("## Properties");
     if (propsTable) out.push(propsTable);
     if (eventsTable) out.push("### Events", eventsTable);
-    if (slotsTable) out.push("### Slots", slotsTable);
+    if (slotsTable) out.push(`### ${target.slotsLabel}`, slotsTable);
   } else {
     out.push("## Properties", "_No extracted API for this component._");
   }
@@ -500,7 +524,7 @@ function renderGetStarted(g: GetStartedRecord): string {
 
 // --- Product type ------------------------------------------------------------
 
-function renderProductType(
+export function renderProductType(
   pt: ProductTypeRecord,
   componentNameById: Map<string, string>,
 ): string {
@@ -511,7 +535,8 @@ function renderProductType(
     ["tags", pt.tags],
   ];
   const out = [frontmatter(fm), `# ${pt.title}`];
-  if (pt.summary) out.push(mdxBodyProse(pt.summary));
+  const summary = mdxBodyProse(pt.summary);
+  if (summary) out.push(summary);
   const body = mdxBodyProse(pt.body);
   if (body) out.push(body);
   if (pt.components.length) {

@@ -4,18 +4,26 @@ import {
   mdxBodyProse,
   renderComponent,
   renderExample,
+  renderProductType,
+  componentsForTarget,
   sizeNote,
   extractVariantLinks,
   cell,
   yamlScalar,
   type FrameworkTarget,
 } from "./md-bundle";
-import type { ComponentRecord, ExampleRecord, GuidanceRecord } from "../types";
+import type {
+  ComponentRecord,
+  ExampleRecord,
+  GuidanceRecord,
+  ProductTypeRecord,
+} from "../types";
 
 const REACT_TARGET: FrameworkTarget = {
   id: "react",
   apiKey: "react",
   label: "React",
+  slotsLabel: "ReactNode",
   frontmatterKey: "react",
   identifierKey: "reactClassName",
   sources: [{ file: "react.tsx", lang: "tsx" }],
@@ -26,6 +34,7 @@ const WC_TARGET: FrameworkTarget = {
   id: "web-components",
   apiKey: "webComponents",
   label: "Web component",
+  slotsLabel: "Slots",
   frontmatterKey: "webComponent",
   identifierKey: "webComponentTag",
   sources: [{ file: "web-components.html", lang: "html" }],
@@ -351,5 +360,67 @@ test("renderComponent shows a deprecation banner pointing to related components"
   assert.match(
     out,
     /> \*\*Deprecated\.\*\* This component is no longer recommended for new work\. See Related components for current options\./,
+  );
+});
+
+test("renderProductType omits a summary that renders to empty", () => {
+  // Guard parity with the body and foundation paths: a summary that is non-empty
+  // as input but strips to "" once rendered must not be pushed as a blank block.
+  const base: ProductTypeRecord = {
+    id: "pt",
+    collection: "productTypes",
+    body: "Real body.",
+    title: "PT",
+    summary: "",
+    tags: [],
+    components: [],
+    status: "stable",
+  };
+  const names = new Map<string, string>();
+  // "<Foo />" is a capitalised JSX component the prose pipeline strips to "".
+  const noSummary = renderProductType(base, names);
+  const emptyRenderedSummary = renderProductType({ ...base, summary: "<Foo />" }, names);
+  assert.equal(
+    emptyRenderedSummary,
+    noSummary,
+    "a summary that renders empty should be omitted, matching an absent summary",
+  );
+});
+
+test("renderComponent labels the content-insertion section per framework", () => {
+  const c = componentFixture({
+    api: {
+      frameworks: {
+        react: { slots: [{ name: "content", type: "ReactNode", description: "Body." }] },
+        webComponents: { slots: [{ name: "content", type: "", description: "Body." }] },
+      },
+    },
+  });
+  // React calls it ReactNode (not "Slots", which would push an AI toward a slot attribute).
+  const reactOut = renderComponent(c, REACT_TARGET, new Map(), [], new Map());
+  assert.match(reactOut, /### ReactNode/, "React content section should be ReactNode");
+  assert.doesNotMatch(reactOut, /### Slots/, "React must not use the Slots heading");
+  // Web components keep the native Slots wording.
+  const wcOut = renderComponent(c, WC_TARGET, new Map(), [], new Map());
+  assert.match(wcOut, /### Slots/, "Web components keep Slots");
+});
+
+test("componentsForTarget drops web-component-only components from React and Angular", () => {
+  const all = [
+    componentFixture({ id: "button", name: "Button" }),
+    componentFixture({ id: "focus-trap", name: "Focus Trap" }),
+    componentFixture({ id: "scrollable", name: "Scrollable" }),
+  ];
+  assert.deepEqual(
+    componentsForTarget(all, REACT_TARGET).map((c) => c.id),
+    ["button"],
+    "React drops focus-trap and scrollable",
+  );
+  assert.deepEqual(
+    componentsForTarget(all, WC_TARGET)
+      .map((c) => c.id)
+      .sort(),
+    ["button", "focus-trap", "scrollable"],
+    "Web components keep the full set",
   );
 });

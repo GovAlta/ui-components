@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
 import { parse as parseYaml } from "yaml";
-import { paths } from "./config";
+import { paths, WEB_COMPONENT_ONLY } from "./config";
 
 // `parseYaml` is a strict parser: it throws on malformed input. The loaders'
 // own frontmatter parser is deliberately lenient (it skips bad lines so content
@@ -27,7 +27,7 @@ export interface Violation {
 
 const SENTINEL = "@@CODEMASK@@";
 const TAG =
-  /<\/?(goa-[a-z]+|[A-Z][A-Za-z0-9]+|div|span|p|h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|br|img|pre)\b/;
+  /<\/?(goa-[a-z]+|[A-Z][A-Za-z0-9]+|div|span|p|h[1-6]|ul|ol|li|table|thead|tbody|tr|td|th|br|img|pre|a|b|i|em|strong|code|blockquote|hr)\b/;
 const FENCE = /^\s{0,3}(```|~~~)/;
 
 function walkMarkdown(dir: string): string[] {
@@ -166,11 +166,18 @@ export function verifyBundle(
   const mcp = sortedIds(path.join(mcpDir, "components"), ".json");
   if (mcp.length) {
     for (const framework of ["react", "angular", "web-components"]) {
+      // Web components carry the full MCP set. React and Angular drop the
+      // web-component-only utilities (no wrapper there), so an AI isn't shown a
+      // component it can't use in that framework.
+      const expected =
+        framework === "web-components"
+          ? mcp
+          : mcp.filter((id) => !WEB_COMPONENT_ONLY.has(id));
       const bundled = sortedIds(path.join(bundleDir, framework, "components"), ".md");
-      if (mcp.join(",") !== bundled.join(",")) {
+      if (expected.join(",") !== bundled.join(",")) {
         violations.push({
           file: `(${framework} component set)`,
-          message: `differs from MCP (mcp ${mcp.length}, bundle ${bundled.length})`,
+          message: `differs from expected (expected ${expected.length}, bundle ${bundled.length})`,
         });
       }
     }
