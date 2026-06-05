@@ -15,3 +15,5 @@ To create a new component you will have to use the following steps:
 - Create a new browser test file in `libs/react-components/specs/{component-name}.browser.spec.tsx`
 - Create the documentation meta page in `docs/src/content/components/{component-name}.mdx`
 - Create the documentation examples page in `docs/src/data/configurations/{component-name}.ts`
+
+Make sure to follow the rules including `component-authoring`, `common-utilities`, `testing`, `framework-wrappers` when creating the component and its tests.
