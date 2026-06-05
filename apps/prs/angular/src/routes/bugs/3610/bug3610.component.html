@@ -1,0 +1,18 @@
+<goab-block gap="m" direction="column">
+  <goab-text tag="h1" mt="m">Bug #3610: DatePicker month dropdown placeholder</goab-text>
+  <goab-text tag="span">
+    The month dropdown placeholder should display em dashes and title case:
+    <strong>—Select a month—</strong>
+  </goab-text>
+  <goab-text tag="span">
+    Previously it showed <strong>--select a month--</strong> (hyphens, lowercase).
+  </goab-text>
+
+  <goab-form-item label="What is your birthday?">
+    <goab-date-picker
+      name="birthday"
+      [value]="date"
+      (onChange)="onDateChange($event)"
+    ></goab-date-picker>
+  </goab-form-item>
+</goab-block>
