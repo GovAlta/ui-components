@@ -97,8 +97,7 @@ goa-grid[data-astro-cid-wdnwltix] goa-container[data-astro-cid-wdnwltix]{margin:
 <h3 id="childcare-portal-migration-at-a-glance">Migration at a glance</h3>
 <div style="margin-bottom:var(--goa-space-xl)"><goa-table version="2" width="100%"><table width="100%"><tbody><tr><td style="width:30%"><goa-text size="body-s" mt="none" mb="none"><strong>Migration type</strong></goa-text></td><td><goa-text size="body-s" mt="none" mb="none">New product with some legacy components</goa-text></td></tr><tr><td><goa-text size="body-s" mt="none" mb="none"><strong>Team</strong></goa-text></td><td><goa-text size="body-s" mt="none" mb="none">1 designer, 1 developer, 1 digital architect, 2 QA</goa-text></td></tr><tr><td><goa-text size="body-s" mt="none" mb="none"><strong>Timeline</strong></goa-text></td><td><goa-text size="body-s" mt="none" mb="none">Approximately 2 months (alongside active feature development)</goa-text></td></tr><tr><td><goa-text size="body-s" mt="none" mb="none"><strong>Product size</strong></goa-text></td><td><goa-text size="body-s" mt="none" mb="none">8–12 screens at time of migration</goa-text></td></tr></tbody></table></goa-table></div>
 <h3 id="childcare-portal-how-they-approached-it">How they approached it</h3>
-<goa-text size="body-m" mt="none" mb="m">The team updated while the product was still being built. Of the roughly two months the work spanned, around 30% of the effort went into the design system update — the rest was ongoing feature development running in parallel.</goa-text>
-<goa-text size="body-m" mt="none" mb="m">The key technical decision was to wrap design system components inside their own internal library and export everything from a single place. This gives the team more control as the design system evolves. With around 12 teams involved in the wider childcare ecosystem, updates need to be managed centrally — a single internal library makes that easier to manage.</goa-text>
+<goa-text size="body-m" mt="none" mb="m">The team updated while the product was still being built. Of the roughly two months the work spanned, around 30% of the effort went into the design system update — the rest was ongoing feature development which was running in parallel.</goa-text>
 <goa-text size="body-m" mt="none" mb="xl">On the design side, the team identified what needed to change first, then moved quickly. Once the audit was done, the design updates — swapping and updating components — were quick and straightforward.</goa-text>
 <h3 id="childcare-portal-what-went-faster">What went faster than expected</h3>
 <goa-text size="body-m" mt="none" mb="m">Design updates were quicker than the team expected. After a clear audit of what needed to change, moving through the updates was fast. The smaller product size at the time of migration helped — 8–12 screens is a manageable scope for a focused review.</goa-text>
@@ -110,6 +109,21 @@ goa-grid[data-astro-cid-wdnwltix] goa-container[data-astro-cid-wdnwltix]{margin:
 <h3 id="childcare-portal-how-they-used-ai">How they used AI</h3>
 <goa-text size="body-m" mt="none" mb="xl">Claude was used for design audits — comparing layout, spacing, and sizing across pages and understanding differences between versions. The team found AI most useful when prompts included design system context before asking specific questions.</goa-text>
 <h3 id="childcare-portal-what-theyd-tell-another-team">What they’d tell another team</h3>
-<ul><li>On the development side: expect to spend time on package setup and understanding how styling changes affect your application. Preparation and awareness of your dependencies matter.</li><li>On the design side: start early. The updated design system supports newer patterns and can help you make better design decisions as you go.</li></ul>
+<ul>
+<li>On the development side:
+<ul>
+<li>It’s ideal to do the migration in one shot.</li>
+<li>If possible, pause new feature development while your team tackles the upgrade.</li>
+<li>Expect to spend time on package setup and understanding how styling changes affect your application.</li>
+<li>Preparation and awareness of your dependencies matter.</li>
+</ul>
+</li>
+<li>On the design side:
+<ul>
+<li>Start working with the updated design system early to explore new possibilities.</li>
+<li>The updated design system supports newer patterns and can help you make better design decisions as you go.</li>
+</ul>
+</li>
+</ul>
 <goa-divider mt="xl" mb="xl"></goa-divider>
 <goa-link version="2" leadingicon="arrow-back"><a href="/ui-components/pr-preview/pr-3990/get-started/articles">Back to articles</a></goa-link>  </article> <!-- Optional Table of Contents --> <aside class="toc-sidebar" data-astro-cid-gw4kcmq6> <div class="toc-sticky" data-astro-cid-gw4kcmq6> <astro-island uid="Z1jXgO9" component-url="/ui-components/pr-preview/pr-3990/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3990/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;h2[id], h3[id], goa-text[id][as=\&quot;h2\&quot;], goa-text[id][as=\&quot;h3\&quot;]&quot;],&quot;data-astro-cid-gw4kcmq6&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </div> </aside> </div> </div> </main> </div> </div>  </body></html> 
