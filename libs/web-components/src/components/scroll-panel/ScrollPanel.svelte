@@ -1,6 +1,9 @@
 <svelte:options
   customElement={{
     tag: "goa-scroll-panel",
+    props: {
+      direction: { type: "String", attribute: "direction", reflect: true },
+    },
   }}
 />
 
@@ -24,12 +27,14 @@
    * The value is applied directly to the host element's style.
    */
   export let height: string = "100%";
+  /** Sets the scroll direction. Can be "vertical" or "horizontal". Defaults to "vertical". */
+  export let direction: "vertical" | "horizontal" = "vertical";
 
   // *******
   // Private
   // *******
 
-  type ScrollState = "no-scroll" | "at-top" | "middle" | "at-bottom";
+  type ScrollState = "no-scroll" | "at-start" | "middle" | "at-end";
 
   let _hostEl: HTMLElement | null = null;
   let _scrollEl: HTMLElement | null = null;
@@ -50,7 +55,7 @@
 
   $: if (_hostEl) {
     relay<ScrollPanelStateChangeRelayDetail>(_hostEl, ScrollPanelStateChangeMsg, {
-      state: _scrollState,
+      state: getRelayedScrollState(),
       isScrollable: _isScrollable,
     });
   }
@@ -78,28 +83,38 @@
   }
 
   function calculateScrollState(
-    scrollTop: number,
-    scrollHeight: number,
-    clientHeight: number,
+    scrollPos: number,
+    scrollSize: number,
+    clientSize: number,
     prev: ScrollState,
   ): { state: ScrollState; isScrollable: boolean } {
-    const isScrollable = scrollHeight > clientHeight;
+    const isScrollable = scrollSize > clientSize;
     if (!isScrollable) return { state: "no-scroll", isScrollable: false };
 
-    const distFromTop = scrollTop;
-    const distFromBottom = scrollHeight - scrollTop - clientHeight;
+    const distFromStart = scrollPos;
+    const distFromEnd = scrollSize - scrollPos - clientSize;
 
     // Stay in current edge state until we've moved past the exit threshold
-    if (prev === "at-top" && distFromTop < EDGE_EXIT_THRESHOLD_PX) {
-      return { state: "at-top", isScrollable: true };
+    if (prev === "at-start" && distFromStart < EDGE_EXIT_THRESHOLD_PX) {
+      return { state: "at-start", isScrollable: true };
     }
-    if (prev === "at-bottom" && distFromBottom < EDGE_EXIT_THRESHOLD_PX) {
-      return { state: "at-bottom", isScrollable: true };
+    if (prev === "at-end" && distFromEnd < EDGE_EXIT_THRESHOLD_PX) {
+      return { state: "at-end", isScrollable: true };
     }
 
-    if (distFromTop < 1) return { state: "at-top", isScrollable: true };
-    if (distFromBottom < 1) return { state: "at-bottom", isScrollable: true };
+    if (distFromStart < 1) return { state: "at-start", isScrollable: true };
+    if (distFromEnd < 1) return { state: "at-end", isScrollable: true };
     return { state: "middle", isScrollable: true };
+  }
+
+  function getRelayedScrollState(): ScrollPanelStateChangeRelayDetail["state"] {
+    if (_scrollState === "at-start") {
+      return direction === "horizontal" ? "at-start" : "at-top";
+    }
+    if (_scrollState === "at-end") {
+      return direction === "horizontal" ? "at-end" : "at-bottom";
+    }
+    return _scrollState;
   }
 
   function applyScrollState(next: {
@@ -112,17 +127,23 @@
 
   function updateScrollState() {
     if (!_scrollEl) return;
-    const { scrollTop, scrollHeight, clientHeight } = _scrollEl;
+    const isHorizontal = direction === "horizontal";
+    const scrollPos = isHorizontal ? _scrollEl.scrollLeft : _scrollEl.scrollTop;
+    const scrollSize = isHorizontal ? _scrollEl.scrollWidth : _scrollEl.scrollHeight;
+    const clientSize = isHorizontal ? _scrollEl.clientWidth : _scrollEl.clientHeight;
     applyScrollState(
-      calculateScrollState(scrollTop, scrollHeight, clientHeight, _scrollState),
+      calculateScrollState(scrollPos, scrollSize, clientSize, _scrollState),
     );
   }
 
   function onScroll(e: Event) {
     const target = e.currentTarget as HTMLElement;
-    const { scrollTop, scrollHeight, clientHeight } = target;
+    const isHorizontal = direction === "horizontal";
+    const scrollPos = isHorizontal ? target.scrollLeft : target.scrollTop;
+    const scrollSize = isHorizontal ? target.scrollWidth : target.scrollHeight;
+    const clientSize = isHorizontal ? target.clientWidth : target.clientHeight;
     applyScrollState(
-      calculateScrollState(scrollTop, scrollHeight, clientHeight, _scrollState),
+      calculateScrollState(scrollPos, scrollSize, clientSize, _scrollState),
     );
   }
 </script>
@@ -131,7 +152,7 @@
   <section
     class="scroll-panel-header"
     class:scroll-panel-header--shadow={_scrollState === "middle" ||
-      _scrollState === "at-bottom"}
+      _scrollState === "at-end"}
     aria-label="Panel header"
   >
     <slot name="header" />
@@ -139,20 +160,34 @@
 {/if}
 
 <div
-  class="scroll-panel-content"
-  bind:this={_scrollEl}
-  on:scroll={onScroll}
-  role="region"
-  aria-label="Scrollable content"
-  data-testid={testid || undefined}
+  class="scroll-panel-content-shell"
+  class:horizontal={direction === "horizontal"}
+  class:scroll-panel-content--shadow-left={direction === "horizontal" &&
+    (_scrollState === "middle" || _scrollState === "at-end")}
+  class:scroll-panel-content--shadow-right={direction === "horizontal" &&
+    (_scrollState === "at-start" || _scrollState === "middle")}
 >
-  <slot />
+  <div
+    class="scroll-panel-content"
+    class:horizontal={direction === "horizontal"}
+    class:scroll-panel-content--shadow-left={direction === "horizontal" &&
+      (_scrollState === "middle" || _scrollState === "at-end")}
+    class:scroll-panel-content--shadow-right={direction === "horizontal" &&
+      (_scrollState === "at-start" || _scrollState === "middle")}
+    bind:this={_scrollEl}
+    on:scroll={onScroll}
+    role="region"
+    aria-label="Scrollable content"
+    data-testid={testid || undefined}
+  >
+    <slot />
+  </div>
 </div>
 
 {#if $$slots.footer}
   <section
     class="scroll-panel-footer"
-    class:scroll-panel-footer--shadow={_scrollState === "at-top" ||
+    class:scroll-panel-footer--shadow={_scrollState === "at-start" ||
       _scrollState === "middle"}
     aria-label="Panel footer"
   >
@@ -213,12 +248,71 @@
   }
 
   /* Scrollable content */
-  .scroll-panel-content {
+  .scroll-panel-content-shell {
     flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+  }
+
+  .scroll-panel-content {
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
     min-height: 0;
+    height: 100%;
+  }
+
+  .scroll-panel-content.horizontal {
+    overflow-y: hidden;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+    min-width: 0;
+    display: flex;
+  }
+
+  .scroll-panel-content-shell.horizontal::before,
+  .scroll-panel-content-shell.horizontal::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--goa-scroll-panel-horizontal-shadow-width, 1.5rem);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
+  }
+
+  .scroll-panel-content-shell.horizontal::before {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      var(
+        --goa-scroll-panel-horizontal-shadow-color,
+        rgba(0, 0, 0, 0.07)
+      ),
+      transparent
+    );
+  }
+
+  .scroll-panel-content-shell.horizontal::after {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      var(
+        --goa-scroll-panel-horizontal-shadow-color,
+        rgba(0, 0, 0, 0.07)
+      ),
+      transparent
+    );
+  }
+
+  .scroll-panel-content-shell.horizontal.scroll-panel-content--shadow-left::before {
+    opacity: 1;
+  }
+
+  .scroll-panel-content-shell.horizontal.scroll-panel-content--shadow-right::after {
+    opacity: 1;
   }
 
   /* Footer — casts a drop shadow up onto the content when content is below it. */

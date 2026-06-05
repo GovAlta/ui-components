@@ -60,6 +60,14 @@ describe("ScrollPanel", () => {
     expect(el?.getAttribute("data-testid")).toBe("sp-test");
   });
 
+  it("passes direction prop to the web component", () => {
+    const { container } = render(
+      <GoabScrollPanel direction="horizontal">Body content</GoabScrollPanel>,
+    );
+    const el = container.querySelector("goa-scroll-panel");
+    expect(el?.getAttribute("direction")).toBe("horizontal");
+  });
+
   it("does not render header slot when header is not provided", () => {
     const { container } = render(<GoabScrollPanel>Body content</GoabScrollPanel>);
     const el = container.querySelector("goa-scroll-panel");

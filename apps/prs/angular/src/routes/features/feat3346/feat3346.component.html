@@ -1,0 +1,20 @@
+<goab-text tag="h1">Feature 3346: Horizontal scroll panel</goab-text>
+
+<goab-text>
+  A wide comparison matrix inside goa-scroll-panel with horizontal scrolling enabled.
+  Scroll horizontally to verify edge shadows: at-start shows right only, middle shows
+  both, and at-end shows left only.
+</goab-text>
+
+<goab-scroll-panel direction="horizontal" height="auto" testId="horizontal-scroll-panel">
+  <goab-block maxWidth="300px">
+    @for (_item of items; track _item) {
+      <goab-container type="non-interactive">
+        <goab-text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua
+        </goab-text>
+      </goab-container>
+    }
+  </goab-block>
+</goab-scroll-panel>

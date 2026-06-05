@@ -5,6 +5,17 @@
     "react": {
       "props": [
         {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The scroll direction. Can be \"vertical\" (default) or \"horizontal\"."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -38,6 +49,17 @@
     "angular": {
       "props": [
         {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The scroll direction. Can be \"vertical\" (default) or \"horizontal\"."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -70,6 +92,17 @@
     },
     "webComponents": {
       "props": [
+        {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": "vertical",
+          "description": "Sets the scroll direction. Can be \"vertical\" or \"horizontal\". Defaults to \"vertical\"."
+        },
         {
           "name": "height",
           "type": "string",

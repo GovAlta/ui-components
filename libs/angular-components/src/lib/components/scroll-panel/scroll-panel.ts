@@ -16,6 +16,7 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `@if (isReady) {
     <goa-scroll-panel
       [attr.height]="height"
+      [attr.direction]="direction"
       [attr.testid]="testId"
       [style.height]="height"
     >
@@ -40,6 +41,8 @@ export class GoabScrollPanel implements OnInit {
    * Defaults to "100%". The parent element must establish a height context for "100%" to work.
    */
   @Input() height?: string;
+  /** The scroll direction. Can be "vertical" (default) or "horizontal". */
+  @Input() direction?: "vertical" | "horizontal";
   /** Template ref for the sticky header region. */
   @Input() header!: TemplateRef<unknown>;
   /** Template ref for the sticky footer region. */

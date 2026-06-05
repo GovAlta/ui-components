@@ -240,7 +240,13 @@ export type FormSummaryEditPageRelayDetail = {
 
 export const ScrollPanelStateChangeMsg = "scroll-panel:state-change";
 export type ScrollPanelStateChangeRelayDetail = {
-  state: "no-scroll" | "at-top" | "middle" | "at-bottom";
+  state:
+    | "no-scroll"
+    | "at-top"
+    | "middle"
+    | "at-bottom"
+    | "at-start"
+    | "at-end";
   isScrollable: boolean;
 };
 

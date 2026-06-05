@@ -9,6 +9,7 @@ import { By } from "@angular/platform-browser";
   template: `
     <goab-scroll-panel
       [height]="height"
+      [direction]="direction"
       [testId]="testId"
       [header]="header"
       [footer]="footer"
@@ -25,6 +26,7 @@ import { By } from "@angular/platform-browser";
 })
 class TestScrollPanelComponent {
   height?: string = "400px";
+  direction?: "vertical" | "horizontal" = "horizontal";
   testId?: string = "panel-test";
 }
 
@@ -56,6 +58,11 @@ describe("GoabScrollPanel", () => {
     expect(el?.getAttribute("height")).toBe("400px");
     // height is also applied as inline style so shadow-DOM flex layout is constrained
     expect(el?.style.height).toBe("400px");
+  });
+
+  it("should set the direction attribute", () => {
+    const el = fixture.debugElement.query(By.css("goa-scroll-panel"))?.nativeElement;
+    expect(el?.getAttribute("direction")).toBe("horizontal");
   });
 
   it("should set the testid attribute", () => {
