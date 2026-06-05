@@ -62728,6 +62728,7 @@ function Bug3610Route() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "What is your birthday?", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabDatePicker,
       {
+        type: "input",
         name: "birthday",
         value: date,
         onChange: ({ value }) => setDate(value)
