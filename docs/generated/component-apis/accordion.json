@@ -322,7 +322,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": "Sets the state of the accordion container open or closed."
+          "description": "Sets the state of the accordion container open or closed. blah blah blah blah blah"
         },
         {
           "name": "secondarytext",

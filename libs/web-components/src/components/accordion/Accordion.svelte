@@ -48,7 +48,7 @@
 
   // Props
 
-  /** Sets the state of the accordion container open or closed. blah blah blah */
+  /** Sets the state of the accordion container open or closed. blah blah blah blah blah */
   export let open: string = "false";
   /** @required Sets the heading text. */
   export let heading: string = "";
