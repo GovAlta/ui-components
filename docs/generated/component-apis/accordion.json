@@ -33,6 +33,13 @@
           "description": "Sets the position of the expand/collapse icon."
         },
         {
+          "name": "ignored",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "IGNORE ME"
+        },
+        {
           "name": "maxWidth",
           "type": "string",
           "required": false,

@@ -58,6 +58,8 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
   onChange?: (open: boolean) => void;
   /** Content rendered inside the accordion body. */
   children?: ReactNode;
+  /** IGNORE ME */
+  ignored?: string;
 }
 
 /** Let users show and hide sections of related content on a page. */
