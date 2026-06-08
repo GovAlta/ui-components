@@ -11,13 +11,13 @@ This repository contains the Government of Alberta Design System component libra
 
 ## Published packages
 
-| Package | Use when | npm |
-| --- | --- | --- |
-| `@abgov/web-components` | You want framework-agnostic custom elements. | [npm](https://www.npmjs.com/package/@abgov/web-components) |
-| `@abgov/react-components` | You are building a React application. | [npm](https://www.npmjs.com/package/@abgov/react-components) |
-| `@abgov/angular-components` | You are building an Angular application. | [npm](https://www.npmjs.com/package/@abgov/angular-components) |
+| Package                       | Use when                                                                                            | npm                                                              |
+| ----------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `@abgov/web-components`       | You want framework-agnostic custom elements.                                                        | [npm](https://www.npmjs.com/package/@abgov/web-components)       |
+| `@abgov/react-components`     | You are building a React application.                                                               | [npm](https://www.npmjs.com/package/@abgov/react-components)     |
+| `@abgov/angular-components`   | You are building an Angular application.                                                            | [npm](https://www.npmjs.com/package/@abgov/angular-components)   |
 | `@abgov/ui-components-common` | You need shared types, event detail interfaces, or common utilities used by the component packages. | [npm](https://www.npmjs.com/package/@abgov/ui-components-common) |
-| `@abgov/design-tokens` | You need the design tokens used by the components. | [npm](https://www.npmjs.com/package/@abgov/design-tokens) |
+| `@abgov/design-tokens`        | You need the design tokens used by the components.                                                  | [npm](https://www.npmjs.com/package/@abgov/design-tokens)        |
 
 `@abgov/styles` is deprecated. Import `@abgov/web-components/index.css` instead.
 
@@ -47,8 +47,14 @@ Import the component styles and tokens in your main stylesheet:
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+></script>
 ```
 
 You can then use the components directly in markup:
@@ -83,8 +89,14 @@ Import the styles in your main stylesheet:
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+></script>
 ```
 
 Example:
@@ -110,8 +122,14 @@ npm i @abgov/web-components @abgov/angular-components @abgov/ui-components-commo
 Add Ionicons to `src/index.html`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+></script>
 ```
 
 Update your app module:
@@ -169,3 +187,5 @@ Useful commands:
 ## License
 
 Apache-2.0
+
+PRECOMMIT SHOULD PASS
