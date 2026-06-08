@@ -92,7 +92,7 @@ When a commit stages a file that feeds a generator, the hook regenerates the out
 
 ### Install it
 
-Running `npm install` at the repo root wires up the hook automatically. A `prepare` script in the root `package.json` points git at the tracked `.githooks/` directory:
+Running `npm install` at the repo root wires up the hook automatically. A `prepare` script in the root `package.json` points git at the tracked `.githooks/` directory, and a `postinstall` script installs the docs dependencies the generators need (see below):
 
 ```json
 "prepare": "git config core.hooksPath .githooks || true"
@@ -106,12 +106,11 @@ To set it by hand, or to confirm it is set:
 git config core.hooksPath .githooks
 ```
 
-### Docs dependencies and the missing-deps behavior
+### Docs dependencies
 
-The generators need the docs dependencies (`tsx`), which a root `npm install` does not install (docs is a separate package). The hook handles a missing `docs/node_modules` based on what you are committing:
+The generators need the docs dependencies (`tsx`). The docs are a separate npm package, so the root `package.json` has a `postinstall` that runs `npm install --prefix docs`. A single `npm install` at the repo root therefore installs them for everyone, and the hook always has what it needs to run.
 
-- Staging a `docs/src/content` change: the hook blocks and tells you to run `npm install` in `docs/`. If you are editing docs, you should have the docs tooling.
-- Staging only component sources (`libs/`): the hook skips with a warning instead of blocking, so it never gets in the way of component work. Run `npm install` in `docs/` once if you want it to check your component changes too. Until then the CI freshness check is the backstop.
+If `docs/node_modules` is missing anyway (for example an interrupted install), the hook blocks with a message to run `npm install` at the repo root, rather than letting a possibly-stale file through.
 
 ### Bypassing
 

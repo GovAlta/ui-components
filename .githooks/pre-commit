@@ -43,21 +43,15 @@ if ! grep -Eq "$SOURCE_REGEX" <<<"$staged"; then
   exit 0
 fi
 
-# 2. The generators need docs dependencies (tsx). A root `npm install` does not
-#    install them (docs is a separate package), so a contributor working only in
-#    libs/ may not have them. When a docs/src/content change is staged the author
-#    is working in docs, so block and tell them to install. For a libs-only commit,
-#    skip with a warning rather than block the whole component team; the CI
-#    freshness check is the backstop for that case.
+# 2. The generators need docs dependencies (tsx). The root `postinstall` runs
+#    `npm install --prefix docs`, so a normal `npm install` at the repo root sets
+#    these up for everyone and the hook always has what it needs. If they are
+#    still missing the environment is not set up, so block rather than let a
+#    possibly-stale file through.
 if [ ! -x docs/node_modules/.bin/tsx ]; then
-  if grep -Eq '^docs/src/content/' <<<"$staged"; then
-    echo "pre-commit: cannot verify generated docs files: docs dependencies missing." >&2
-    echo "            run 'npm install' in docs/ and commit again." >&2
-    exit 1
-  fi
-  echo "pre-commit: skipping generated-docs check: docs dependencies not installed." >&2
-  echo "            run 'npm install' in docs/ to check component changes too." >&2
-  exit 0
+  echo "pre-commit: cannot verify generated docs files: docs dependencies missing." >&2
+  echo "            run 'npm install' at the repo root and commit again." >&2
+  exit 1
 fi
 
 echo "pre-commit: checking generated docs files are up to date..." >&2
