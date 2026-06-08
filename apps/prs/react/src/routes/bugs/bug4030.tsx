@@ -12,7 +12,7 @@ export function Bug4030Route() {
         should both be removed.
       </GoabText>
 
-      <GoabAppFooter version="2" />
+      <GoabAppFooter />
     </div>
   );
 }
