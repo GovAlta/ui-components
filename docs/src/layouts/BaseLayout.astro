@@ -107,10 +107,22 @@ const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
 
       html {
         color-scheme: light;
+        /* Match the page's grey wrapper so the scroll overflow / overscroll
+           area (visible on elastic scroll) blends instead of showing white.
+           Same token as .layout-wrapper, so it matches in light/dark/forced-dark. */
+        background: var(--goa-color-greyscale-50);
       }
 
       html[data-theme="dark"] {
         color-scheme: dark;
+      }
+
+      /* Below 624px the layouts flip the page wrapper to white, so match the
+         overscroll area there too instead of leaving it grey. */
+      @media (max-width: 623px) {
+        html {
+          background: var(--goa-color-greyscale-white);
+        }
       }
 
       body {
