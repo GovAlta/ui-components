@@ -90,6 +90,8 @@ export function GoabAccordion({
     }
   }, [onChange]);
 
+  // This is not a relevant change
+
   return (
     <goa-accordion
       ref={ref}
