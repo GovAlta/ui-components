@@ -92,13 +92,13 @@ When a commit stages a file that feeds a generator, the hook regenerates the out
 
 ### Install it
 
-Running `npm install` in `docs/` wires up the hook automatically. A `prepare` script in `docs/package.json` points git at the tracked `.githooks/` directory:
+Running `npm install` at the repo root wires up the hook automatically. A `prepare` script in the root `package.json` points git at the tracked `.githooks/` directory:
 
 ```json
 "prepare": "git config core.hooksPath .githooks || true"
 ```
 
-The hook needs the docs dependencies to run, so installing it from `docs/` keeps the two together: the people set up to build the docs are the ones who get the hook. The `|| true` keeps `npm install` from failing where git is not available (CI images, tarball installs).
+`prepare` runs at the end of every root `npm install`, so a fresh clone gets the hook after its first install with no extra step. The `|| true` keeps `npm install` from failing where git is not available (CI images, tarball installs).
 
 To set it by hand, or to confirm it is set:
 
@@ -106,9 +106,12 @@ To set it by hand, or to confirm it is set:
 git config core.hooksPath .githooks
 ```
 
-### Docs dependencies are required
+### Docs dependencies and the missing-deps behavior
 
-The generators need the docs dependencies (`tsx`). If `docs/node_modules` is missing, the hook blocks the commit and tells you to run `npm install` in `docs/`. This is a one-time setup per clone; once it is in place the hook just works for any source you stage.
+The generators need the docs dependencies (`tsx`), which a root `npm install` does not install (docs is a separate package). The hook handles a missing `docs/node_modules` based on what you are committing:
+
+- Staging a `docs/src/content` change: the hook blocks and tells you to run `npm install` in `docs/`. If you are editing docs, you should have the docs tooling.
+- Staging only component sources (`libs/`): the hook skips with a warning instead of blocking, so it never gets in the way of component work. Run `npm install` in `docs/` once if you want it to check your component changes too. Until then the CI freshness check is the backstop.
 
 ### Bypassing
 

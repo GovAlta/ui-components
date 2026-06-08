@@ -8,8 +8,8 @@
 # outputs are already fresh the regenerated files are byte-identical and the
 # commit proceeds with nothing new to stage.
 #
-# Installed automatically when you `npm install` in docs/ (a `prepare` script
-# sets core.hooksPath). To set it by hand: git config core.hooksPath .githooks
+# Installed automatically by the root `npm install` (a `prepare` script sets
+# core.hooksPath). To set it by hand: git config core.hooksPath .githooks
 #
 # Covers:
 #   docs/generated/component-apis/*.json   from Svelte components + React/Angular wrappers
@@ -43,13 +43,21 @@ if ! grep -Eq "$SOURCE_REGEX" <<<"$staged"; then
   exit 0
 fi
 
-# 2. The generators need docs dependencies (tsx). Without them we cannot verify
-#    that committed outputs match the source, so block the commit with a clear,
-#    actionable message instead of letting a potentially-stale commit through.
+# 2. The generators need docs dependencies (tsx). A root `npm install` does not
+#    install them (docs is a separate package), so a contributor working only in
+#    libs/ may not have them. When a docs/src/content change is staged the author
+#    is working in docs, so block and tell them to install. For a libs-only commit,
+#    skip with a warning rather than block the whole component team; the CI
+#    freshness check is the backstop for that case.
 if [ ! -x docs/node_modules/.bin/tsx ]; then
-  echo "pre-commit: cannot verify generated docs files: docs dependencies missing." >&2
-  echo "            run 'npm install' in docs/ and commit again." >&2
-  exit 1
+  if grep -Eq '^docs/src/content/' <<<"$staged"; then
+    echo "pre-commit: cannot verify generated docs files: docs dependencies missing." >&2
+    echo "            run 'npm install' in docs/ and commit again." >&2
+    exit 1
+  fi
+  echo "pre-commit: skipping generated-docs check: docs dependencies not installed." >&2
+  echo "            run 'npm install' in docs/ to check component changes too." >&2
+  exit 0
 fi
 
 echo "pre-commit: checking generated docs files are up to date..." >&2

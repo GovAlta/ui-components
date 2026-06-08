@@ -10,8 +10,7 @@
     "extract-api": "npx tsx src/scripts/extract-api.ts --all",
     "preview": "astro preview",
     "generate-previews": "npx tsx src/scripts/generate-preview-images.ts",
-    "astro": "astro",
-    "prepare": "git config core.hooksPath .githooks || true"
+    "astro": "astro"
   },
   "dependencies": {
     "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.8.0",
