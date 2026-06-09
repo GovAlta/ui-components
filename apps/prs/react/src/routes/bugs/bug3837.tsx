@@ -6,6 +6,7 @@ import {
   GoabLink,
   GoabTabs,
   GoabTab,
+  GoabBadge,
 } from "@abgov/react-components";
 
 export function Bug3837Route() {
@@ -72,7 +73,7 @@ export function Bug3837Route() {
         </GoabTab>
       </GoabTabs>
 
-      <GoabText tag="h3">Test 3: Slot headings</GoabText>
+      <GoabText tag="h3">Test 3: Slot headings (text only)</GoabText>
       <GoabText tag="p">
         Tabs using the heading slot (ReactNode) rather than a string prop. Verify no shift occurs.
       </GoabText>
@@ -85,6 +86,23 @@ export function Bug3837Route() {
         </GoabTab>
         <GoabTab heading={<span>Medium label</span>}>
           <GoabText tag="p">Medium tab content</GoabText>
+        </GoabTab>
+      </GoabTabs>
+
+      <GoabText tag="h3">Test 4: Slot headings with badge</GoabText>
+      <GoabText tag="p">
+        Tabs with a badge alongside the label text in the slot. The ghost text only reserves space
+        for the text portion, so a small shift may still occur here.
+      </GoabText>
+      <GoabTabs>
+        <GoabTab heading={<>Notifications <GoabBadge type="information" content="3" /></>}>
+          <GoabText tag="p">Notifications content</GoabText>
+        </GoabTab>
+        <GoabTab heading={<>Much longer label <GoabBadge type="important" content="12" /></>}>
+          <GoabText tag="p">Longer tab content</GoabText>
+        </GoabTab>
+        <GoabTab heading={<>History</>}>
+          <GoabText tag="p">History content</GoabText>
         </GoabTab>
       </GoabTabs>
     </div>
