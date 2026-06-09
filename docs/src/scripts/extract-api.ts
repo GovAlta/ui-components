@@ -154,7 +154,11 @@ interface WrapperExtraction {
   slotRequired: Record<string, boolean>;
 }
 
-const INTERNAL_PROP_NAMES = new Set(["publicformsummaryorder", "filterablecontext", "version"]);
+const INTERNAL_PROP_NAMES = new Set([
+  "publicformsummaryorder",
+  "filterablecontext",
+  "version",
+]);
 const INTERNAL_SLOT_NAMES = new Set(["version"]);
 const INTERNAL_EVENT_NAMES = new Set(["_revealChange", "_update"]);
 
@@ -176,6 +180,7 @@ const WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES: Record<string, Set<string>> = {
     "_mountItem",
     "_navigate",
   ]),
+  "menu-button": new Set(["close"]),
 };
 const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>> = {
   dropdown: {
@@ -224,7 +229,9 @@ function shouldSkipInternalProp(componentName: string, propName: string): boolea
 function shouldAllowInternalProp(componentName: string, propName: string): boolean {
   const normalizedComponentName = toKebabCase(componentName);
   return Boolean(
-    ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(propName.toLowerCase()),
+    ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(
+      propName.toLowerCase(),
+    ),
   );
 }
 
@@ -235,7 +242,9 @@ function isInternalPropName(propName: string): boolean {
 function isStandardV1V2VersionProp(prop: ExtractedProp | undefined): boolean {
   if (!prop || prop.name.toLowerCase() !== "version") return false;
 
-  const values = (prop.values || []).map((value) => String(value).replace(/['"]/g, "").trim());
+  const values = (prop.values || []).map((value) =>
+    String(value).replace(/['"]/g, "").trim(),
+  );
   if (values.length === 2 && values.includes("1") && values.includes("2")) {
     return true;
   }
@@ -342,7 +351,9 @@ function extractDefaultFromDescription(description: string): {
   defaultValue: string | null;
 } {
   const defaultMatch = description.match(/@default\s+([^@]+)/i);
-  const defaultValue = defaultMatch ? defaultMatch[1].trim().replace(/^["']|["']$/g, "") : null;
+  const defaultValue = defaultMatch
+    ? defaultMatch[1].trim().replace(/^["']|["']$/g, "")
+    : null;
   const cleanDescription = description.replace(/@default\s+([^@]+)/gi, "").trim();
   return {
     description: cleanDescription,
@@ -489,7 +500,10 @@ function extractProps(
     if (rawName.startsWith("_")) continue;
 
     // Keep `version` on Web Component docs; wrappers are filtered later.
-    if (rawName.toLowerCase() !== "version" && shouldSkipInternalProp(componentName, rawName)) {
+    if (
+      rawName.toLowerCase() !== "version" &&
+      shouldSkipInternalProp(componentName, rawName)
+    ) {
       continue;
     }
 
@@ -589,7 +603,8 @@ function extractProps(
     const isReadonly = isReadonlyDescription(description);
     // Use @required from JSDoc if present, otherwise fall back to checking if no default value.
     // Read-only, component-managed values should not be presented as consumer-required props.
-    const isRequired = Boolean(jsDocInfo?.required) || (!isReadonly && defaultStr === undefined);
+    const isRequired =
+      Boolean(jsDocInfo?.required) || (!isReadonly && defaultStr === undefined);
 
     props.push({
       name,
@@ -732,7 +747,10 @@ interface ReactInterfaceInfo {
   declaration: ts.InterfaceDeclaration;
 }
 
-function getTypeReferenceName(typeNode: ts.TypeReferenceNode, sourceFile: ts.SourceFile): string {
+function getTypeReferenceName(
+  typeNode: ts.TypeReferenceNode,
+  sourceFile: ts.SourceFile,
+): string {
   const typeName = typeNode.typeName.getText(sourceFile);
   return typeName.split(".").pop() || typeName;
 }
@@ -751,7 +769,10 @@ function getNodeDecorators(node: ts.Node): readonly ts.Decorator[] {
   return legacyDecorators ?? [];
 }
 
-function getDecoratorCall(node: ts.Node, decoratorName: string): ts.CallExpression | null {
+function getDecoratorCall(
+  node: ts.Node,
+  decoratorName: string,
+): ts.CallExpression | null {
   for (const decorator of getNodeDecorators(node)) {
     const expression = decorator.expression;
     if (ts.isCallExpression(expression) && ts.isIdentifier(expression.expression)) {
@@ -803,7 +824,10 @@ function hasDecorator(node: ts.Node, decoratorName: string): boolean {
   return false;
 }
 
-function parseReactInterfaces(content: string, filePath: string): Map<string, ReactInterfaceInfo> {
+function parseReactInterfaces(
+  content: string,
+  filePath: string,
+): Map<string, ReactInterfaceInfo> {
   const interfaces = new Map<string, ReactInterfaceInfo>();
   const sourceFile = createTsSourceFile(filePath, content);
 
@@ -811,7 +835,10 @@ function parseReactInterfaces(content: string, filePath: string): Map<string, Re
     if (!ts.isInterfaceDeclaration(statement)) continue;
 
     const name = statement.name.text;
-    const exported = statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword) ?? false;
+    const exported =
+      statement.modifiers?.some(
+        (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword,
+      ) ?? false;
     const extendsNames =
       statement.heritageClauses
         ?.filter((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)
@@ -901,20 +928,31 @@ function resolvePrimaryReactComponentParameterType(
       ts.isFunctionDeclaration(statement) &&
       statement.name &&
       candidates.includes(statement.name.text) &&
-      statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)
+      statement.modifiers?.some(
+        (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword,
+      )
     ) {
       return getFunctionLikeFirstParameterType(statement);
     }
 
     if (
       ts.isVariableStatement(statement) &&
-      statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)
+      statement.modifiers?.some(
+        (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword,
+      )
     ) {
       for (const declaration of statement.declarationList.declarations) {
-        if (!ts.isIdentifier(declaration.name) || !candidates.includes(declaration.name.text)) continue;
+        if (
+          !ts.isIdentifier(declaration.name) ||
+          !candidates.includes(declaration.name.text)
+        )
+          continue;
         if (!declaration.initializer) continue;
 
-        if (ts.isArrowFunction(declaration.initializer) || ts.isFunctionExpression(declaration.initializer)) {
+        if (
+          ts.isArrowFunction(declaration.initializer) ||
+          ts.isFunctionExpression(declaration.initializer)
+        ) {
           return getFunctionLikeFirstParameterType(declaration.initializer);
         }
       }
@@ -933,7 +971,12 @@ function collectReactTypeNodeMembers(
   if (!typeNode) return [];
 
   if (ts.isParenthesizedTypeNode(typeNode)) {
-    return collectReactTypeNodeMembers(typeNode.type, interfaces, sourceFile, visitedTypeRefs);
+    return collectReactTypeNodeMembers(
+      typeNode.type,
+      interfaces,
+      sourceFile,
+      visitedTypeRefs,
+    );
   }
 
   if (ts.isIntersectionTypeNode(typeNode)) {
@@ -976,7 +1019,9 @@ function hasReactMarginsInHierarchy(
   );
 }
 
-function extractReactCallbackAliases(sourceFile: ts.SourceFile): Map<string, ReactCallbackAliasInfo> {
+function extractReactCallbackAliases(
+  sourceFile: ts.SourceFile,
+): Map<string, ReactCallbackAliasInfo> {
   const aliases = new Map<string, ReactCallbackAliasInfo>();
   for (const statement of sourceFile.statements) {
     if (!ts.isTypeAliasDeclaration(statement)) continue;
@@ -984,7 +1029,9 @@ function extractReactCallbackAliases(sourceFile: ts.SourceFile): Map<string, Rea
 
     const aliasName = statement.name.text;
     const typeParam = statement.typeParameters?.[0]?.name.text;
-    const defaultTypeArg = statement.typeParameters?.[0]?.default?.getText(sourceFile)?.trim();
+    const defaultTypeArg = statement.typeParameters?.[0]?.default
+      ?.getText(sourceFile)
+      ?.trim();
     const detailType = cleanType(
       statement.type.parameters[0]?.type?.getText(sourceFile)?.trim() || "unknown",
     );
@@ -1037,11 +1084,17 @@ function resolveReactCallbackEventType(
   }
 
   const typeParamPattern = new RegExp(`\\b${aliasInfo.typeParam}\\b`, "g");
-  let resolvedDetailType = aliasInfo.detailType.replace(typeParamPattern, resolvedTypeArg);
+  let resolvedDetailType = aliasInfo.detailType.replace(
+    typeParamPattern,
+    resolvedTypeArg,
+  );
 
   // Keep docs concise when the generic argument matches the alias default.
   if (aliasInfo.defaultTypeArg && resolvedTypeArg === aliasInfo.defaultTypeArg) {
-    const defaultGenericPattern = new RegExp(`\\<\\s*${escapeRegExp(resolvedTypeArg)}\\s*\\>`, "g");
+    const defaultGenericPattern = new RegExp(
+      `\\<\\s*${escapeRegExp(resolvedTypeArg)}\\s*\\>`,
+      "g",
+    );
     resolvedDetailType = resolvedDetailType.replace(defaultGenericPattern, "");
   }
 
@@ -1065,7 +1118,9 @@ function isFunctionType(type: string): boolean {
 }
 
 function isSlotCarrierType(type: string): boolean {
-  return /React(?:\.[A-Za-z]+)?(?:Node|Element)(?:<.+?>)?|JSX\.Element|TemplateRef\s*<.+?>/.test(type);
+  return /React(?:\.[A-Za-z]+)?(?:Node|Element)(?:<.+?>)?|JSX\.Element|TemplateRef\s*<.+?>/.test(
+    type,
+  );
 }
 
 function isPureSlotCarrierType(type: string): boolean {
@@ -1105,7 +1160,10 @@ function createEmptyWrapperExtraction(found: boolean = false): WrapperExtraction
   };
 }
 
-function findImmediateJsDocBefore(content: string, markerIndex: number): string | undefined {
+function findImmediateJsDocBefore(
+  content: string,
+  markerIndex: number,
+): string | undefined {
   const beforeMarker = content.slice(0, markerIndex);
   const start = beforeMarker.lastIndexOf("/**");
   if (start === -1) return undefined;
@@ -1131,8 +1189,8 @@ function extractAngularBaseComponentProps(): Map<string, ExtractedProp> {
   const sourceFile = createTsSourceFile(baseFile, content);
   const props = new Map<string, ExtractedProp>();
 
-  const classDecls = sourceFile.statements.filter(
-    (node): node is ts.ClassDeclaration => ts.isClassDeclaration(node),
+  const classDecls = sourceFile.statements.filter((node): node is ts.ClassDeclaration =>
+    ts.isClassDeclaration(node),
   );
 
   for (const classDecl of classDecls) {
@@ -1145,9 +1203,12 @@ function extractAngularBaseComponentProps(): Map<string, ExtractedProp> {
       const propName = member.name.text;
       const inputDecorator = getDecoratorCall(member, "Input");
       const rawDefault = member.initializer?.getText(sourceFile)?.trim();
-      const rawType = cleanType(member.type?.getText(sourceFile)?.trim() || inferTypeFromDefault(rawDefault));
+      const rawType = cleanType(
+        member.type?.getText(sourceFile)?.trim() || inferTypeFromDefault(rawDefault),
+      );
       const fullDescription = parseDescriptionFromJSDoc(rawComment);
-      const { description, defaultValue: descriptionDefault } = extractDefaultFromDescription(fullDescription);
+      const { description, defaultValue: descriptionDefault } =
+        extractDefaultFromDescription(fullDescription);
       const defaultValue = descriptionDefault ?? parseDefaultValue(rawDefault);
 
       props.set(propName, {
@@ -1273,7 +1334,9 @@ function extractReactWrapperApi(
   const reactTagPattern = new RegExp(`<\\s*${escapeRegExp(tagName)}(?=[\\s>/])`);
 
   const reactFile =
-    reactFileNameCandidates.map((name) => findFirstFileByName(reactRoot, name)).find(Boolean) ??
+    reactFileNameCandidates
+      .map((name) => findFirstFileByName(reactRoot, name))
+      .find(Boolean) ??
     findFirstFileMatchingPattern(reactRoot, [".tsx"], reactTagPattern) ??
     findFirstFileContaining(reactRoot, [".tsx"], tagName);
 
@@ -1282,10 +1345,17 @@ function extractReactWrapperApi(
   const content = fs.readFileSync(reactFile, "utf-8");
   const sourceFile = createTsSourceFile(reactFile, content);
   const interfaces = parseReactInterfaces(content, reactFile);
-  const primaryInterfaceName = resolvePrimaryReactPropsInterface(wrapperComponentName, interfaces);
+  const primaryInterfaceName = resolvePrimaryReactPropsInterface(
+    wrapperComponentName,
+    interfaces,
+  );
   if (!primaryInterfaceName) return createEmptyWrapperExtraction(true);
 
-  const interfaceMembers = collectReactInterfaceMembers(primaryInterfaceName, interfaces, sourceFile);
+  const interfaceMembers = collectReactInterfaceMembers(
+    primaryInterfaceName,
+    interfaces,
+    sourceFile,
+  );
   const componentParameterType = resolvePrimaryReactComponentParameterType(
     wrapperComponentName,
     sourceFile,
@@ -1316,7 +1386,8 @@ function extractReactWrapperApi(
     const { internal, deprecated } = parseJSDocContent(rawComment || "");
 
     // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName))) continue;
+    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName)))
+      continue;
 
     const fullDescription = parseDescriptionFromJSDoc(rawComment);
     const { description, defaultValue } = extractDefaultFromDescription(fullDescription);
@@ -1398,13 +1469,18 @@ function extractAngularWrapperApi(
   slotNames: string[],
   wrapperComponentName: string = componentName,
 ): WrapperExtraction {
-  const angularRoot = path.join(WORKSPACE_ROOT, "libs/angular-components/src/lib/components");
+  const angularRoot = path.join(
+    WORKSPACE_ROOT,
+    "libs/angular-components/src/lib/components",
+  );
   const angularSelector = tagName.replace(/^goa-/, "goab-");
   const angularFileNameCandidates = [
     `${wrapperComponentName}.ts`,
     `${wrapperComponentName.replace(/-/g, "")}.ts`,
   ];
-  const angularSelectorPattern = new RegExp(`selector\\s*:\\s*["']${escapeRegExp(angularSelector)}["']`);
+  const angularSelectorPattern = new RegExp(
+    `selector\\s*:\\s*["']${escapeRegExp(angularSelector)}["']`,
+  );
   const angularTagPattern = new RegExp(`<\\s*${escapeRegExp(tagName)}(?=[\\s>/])`);
 
   const angularFile =
@@ -1427,7 +1503,8 @@ function extractAngularWrapperApi(
   const slotRequired: Record<string, boolean> = {};
 
   const classDecl = sourceFile.statements.find(
-    (node): node is ts.ClassDeclaration => ts.isClassDeclaration(node) && hasDecorator(node, "Component"),
+    (node): node is ts.ClassDeclaration =>
+      ts.isClassDeclaration(node) && hasDecorator(node, "Component"),
   );
 
   if (!classDecl) return createEmptyWrapperExtraction(true);
@@ -1443,15 +1520,19 @@ function extractAngularWrapperApi(
     const { internal, deprecated } = parseJSDocContent(rawComment || "");
     const propName = member.name.text;
     const rawDefault = member.initializer?.getText(sourceFile)?.trim();
-    const rawType = cleanType(member.type?.getText(sourceFile)?.trim() || inferTypeFromDefault(rawDefault));
+    const rawType = cleanType(
+      member.type?.getText(sourceFile)?.trim() || inferTypeFromDefault(rawDefault),
+    );
 
     const fullDescription = parseDescriptionFromJSDoc(rawComment);
-    const { description, defaultValue: descriptionDefault } = extractDefaultFromDescription(fullDescription);
+    const { description, defaultValue: descriptionDefault } =
+      extractDefaultFromDescription(fullDescription);
     const isReadonly = isReadonlyDescription(description);
     const required = !isReadonly && isAngularInputRequired(inputDecorator);
 
     // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName))) continue;
+    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName)))
+      continue;
 
     if (shouldSkipInternalProp(componentName, propName)) continue;
 
@@ -1526,11 +1607,12 @@ function extractAngularWrapperApi(
   // Inject inherited props when the class extends common Angular base wrappers.
   const extendsName = classDecl.heritageClauses
     ?.find((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)
-    ?.types?.[0]
-    ?.expression
-    ?.getText(sourceFile);
+    ?.types?.[0]?.expression?.getText(sourceFile);
 
-  if (extendsName && (extendsName === "GoabBaseComponent" || extendsName === "GoabControlValueAccessor")) {
+  if (
+    extendsName &&
+    (extendsName === "GoabBaseComponent" || extendsName === "GoabControlValueAccessor")
+  ) {
     const existingNames = new Set(props.map((p) => p.name));
     const baseComponentProps = extractAngularBaseComponentProps();
     const inheritedPropNames =
@@ -1631,10 +1713,14 @@ function inferDetailPropertyType(key: string, expression: string): string {
   if (/^["'`].*["'`]$/.test(expr)) return "string";
   if (/^\{[\s\S]*\}$/.test(expr)) return "Record<string, unknown>";
   if (/^\[[\s\S]*\]$/.test(expr)) return "unknown[]";
-  if (/\b(open|checked|disabled|selected|expanded|collapsed|visible|active)\b/i.test(expr)) {
+  if (
+    /\b(open|checked|disabled|selected|expanded|collapsed|visible|active)\b/i.test(expr)
+  ) {
     return "boolean";
   }
-  if (/(open|checked|disabled|selected|expanded|collapsed|visible|active)/.test(lowerKey)) {
+  if (
+    /(open|checked|disabled|selected|expanded|collapsed|visible|active)/.test(lowerKey)
+  ) {
     return "boolean";
   }
   if (/\b(event|e)\b/.test(expr)) return "Event";
@@ -1710,7 +1796,11 @@ function buildCustomEventTypeFromDetail(detailObjectLiteral: string): string {
 }
 
 function scoreCustomEventType(eventType: string): number {
-  if (eventType === "CustomEvent" || eventType === "CustomEvent<Record<string, unknown>>" || eventType === "CustomEvent<void>") {
+  if (
+    eventType === "CustomEvent" ||
+    eventType === "CustomEvent<Record<string, unknown>>" ||
+    eventType === "CustomEvent<void>"
+  ) {
     return 0;
   }
 
@@ -1855,11 +1945,14 @@ function transformWebComponentEvents(
   rawEventNames: string[],
   content: string,
 ): ExtractedEvent[] {
-  const internalOverrides = WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES[componentName] || new Set<string>();
+  const internalOverrides =
+    WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES[componentName] || new Set<string>();
   const typeOverrides = WEB_COMPONENT_EVENT_TYPE_OVERRIDES[componentName] || {};
 
   return rawEventNames
-    .filter((rawName) => !INTERNAL_EVENT_NAMES.has(rawName) && !internalOverrides.has(rawName))
+    .filter(
+      (rawName) => !INTERNAL_EVENT_NAMES.has(rawName) && !internalOverrides.has(rawName),
+    )
     .filter((rawName) => !rawName.includes("::") && !rawName.includes(":"))
     .map((rawName) => ({
       name: rawName,
@@ -2088,7 +2181,9 @@ function findReactWrapperForTag(tag: string, reactRoot: string): string | undefi
 
 function extractIntrinsicElementTag(content: string): string | undefined {
   // declare module "react" { ... interface IntrinsicElements { "goa-foo": ... } }
-  const match = content.match(/IntrinsicElements\s*\{[\s\S]*?["'](goa-[a-z0-9-]+)["']\s*:/);
+  const match = content.match(
+    /IntrinsicElements\s*\{[\s\S]*?["'](goa-[a-z0-9-]+)["']\s*:/,
+  );
   return match ? match[1] : undefined;
 }
 
@@ -2133,7 +2228,8 @@ function parseTypeAliasUnionValues(
   sourceFile: ts.SourceFile,
 ): string[] | undefined {
   for (const statement of sourceFile.statements) {
-    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName) continue;
+    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName)
+      continue;
     if (!ts.isUnionTypeNode(statement.type)) return undefined;
     const values = statement.type.types
       .map((member) =>
@@ -2154,7 +2250,8 @@ function findTypeLiteralMembers(
 ): Map<string, ts.PropertySignature> {
   const members = new Map<string, ts.PropertySignature>();
   for (const statement of sourceFile.statements) {
-    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName) continue;
+    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName)
+      continue;
     if (!ts.isTypeLiteralNode(statement.type)) break;
     for (const member of statement.type.members) {
       if (ts.isPropertySignature(member) && member.name && ts.isIdentifier(member.name)) {
@@ -2175,7 +2272,8 @@ interface NodeJSDocInfo {
 // Read a node's JSDoc via the AST: the description text, whether the node is
 // tagged @internal, and the text of each @param tag keyed by param name.
 function readNodeJSDoc(node: ts.Node): NodeJSDocInfo {
-  const collapse = (text: string | undefined): string => (text ?? "").replace(/\s+/g, " ").trim();
+  const collapse = (text: string | undefined): string =>
+    (text ?? "").replace(/\s+/g, " ").trim();
 
   let description = "";
   let internal = false;
@@ -2198,17 +2296,25 @@ function readNodeJSDoc(node: ts.Node): NodeJSDocInfo {
 
 // The public method list (and its docs order) is the exported namespace object,
 // e.g. `export const TemporaryNotification = { show, dismiss, setProgress }`.
-function findNamespaceMethodNames(namespace: string, sourceFile: ts.SourceFile): string[] {
+function findNamespaceMethodNames(
+  namespace: string,
+  sourceFile: ts.SourceFile,
+): string[] {
   for (const statement of sourceFile.statements) {
     if (!ts.isVariableStatement(statement)) continue;
     for (const declaration of statement.declarationList.declarations) {
-      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== namespace) continue;
-      if (!declaration.initializer || !ts.isObjectLiteralExpression(declaration.initializer)) {
+      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== namespace)
+        continue;
+      if (
+        !declaration.initializer ||
+        !ts.isObjectLiteralExpression(declaration.initializer)
+      ) {
         return [];
       }
       return declaration.initializer.properties
         .map((property) =>
-          (ts.isShorthandPropertyAssignment(property) || ts.isPropertyAssignment(property)) &&
+          (ts.isShorthandPropertyAssignment(property) ||
+            ts.isPropertyAssignment(property)) &&
           ts.isIdentifier(property.name)
             ? property.name.text
             : null,
@@ -2278,7 +2384,9 @@ function extractStaticMethods(componentName: string): ExtractedStaticMethod[] {
 
   const methodNames = findNamespaceMethodNames(config.namespace, sourceFile);
   if (methodNames.length === 0) {
-    console.warn(`  static methods: no exported object named ${config.namespace} in ${config.source}`);
+    console.warn(
+      `  static methods: no exported object named ${config.namespace} in ${config.source}`,
+    );
     return [];
   }
 
@@ -2367,7 +2475,11 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   }
 
   // 3. Final fallback: any svelte inside a directory matching the slug.
-  if (!svelteFilePath && fs.existsSync(componentPath) && fs.statSync(componentPath).isDirectory()) {
+  if (
+    !svelteFilePath &&
+    fs.existsSync(componentPath) &&
+    fs.statSync(componentPath).isDirectory()
+  ) {
     const files = fs.readdirSync(componentPath);
     const svelteFile = files.find((f) => f.endsWith(".svelte"));
     if (svelteFile) {
@@ -2412,12 +2524,17 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     const componentDir = path.dirname(svelteFilePath);
     const siblingFiles = fs
       .readdirSync(componentDir)
-      .filter((name) => name.endsWith(".svelte") && path.join(componentDir, name) !== svelteFilePath);
+      .filter(
+        (name) =>
+          name.endsWith(".svelte") && path.join(componentDir, name) !== svelteFilePath,
+      );
 
     for (const siblingFile of siblingFiles) {
       const siblingPath = path.join(componentDir, siblingFile);
       const siblingContent = fs.readFileSync(siblingPath, "utf-8");
-      const siblingEventNames = extractEvents(siblingContent).filter((eventName) => companionEvents.has(eventName));
+      const siblingEventNames = extractEvents(siblingContent).filter((eventName) =>
+        companionEvents.has(eventName),
+      );
       if (siblingEventNames.length > 0) {
         rawEventNames = [...rawEventNames, ...siblingEventNames];
         eventContent += `\n${siblingContent}`;
@@ -2428,8 +2545,18 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   }
   const slotNames = extractSlots(content);
   const wrapperComponentName = WRAPPER_COMPONENT_ALIASES[componentName] ?? componentName;
-  const reactWrapper = extractReactWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
-  const angularWrapper = extractAngularWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
+  const reactWrapper = extractReactWrapperApi(
+    componentName,
+    tagName,
+    slotNames,
+    wrapperComponentName,
+  );
+  const angularWrapper = extractAngularWrapperApi(
+    componentName,
+    tagName,
+    slotNames,
+    wrapperComponentName,
+  );
 
   // Default slot content is implied by usage examples and is intentionally omitted
   // from the API docs to reduce noise.
@@ -2446,7 +2573,11 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     ...(p.deprecated && { deprecated: true }),
   }));
 
-  let webComponentEvents = transformWebComponentEvents(componentName, rawEventNames, eventContent);
+  let webComponentEvents = transformWebComponentEvents(
+    componentName,
+    rawEventNames,
+    eventContent,
+  );
   if (componentName === "side-menu-group") {
     webComponentEvents = webComponentEvents.filter((event) => event.name !== "_open");
   }
@@ -2499,7 +2630,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   const webComponentSlots = createSlots("webComponents", undefined, false);
 
   let reactProps: ExtractedProp[] = reactWrapper.found ? [...reactWrapper.props] : [];
-  let angularProps: ExtractedProp[] = angularWrapper.found ? [...angularWrapper.props] : [];
+  let angularProps: ExtractedProp[] = angularWrapper.found
+    ? [...angularWrapper.props]
+    : [];
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
 
@@ -2519,7 +2652,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
   );
   webComponentProps = webComponentProps.filter(
-    (prop) => prop.name.toLowerCase() === "version" || !shouldSkipInternalProp(componentName, prop.name),
+    (prop) =>
+      prop.name.toLowerCase() === "version" ||
+      !shouldSkipInternalProp(componentName, prop.name),
   );
 
   reactProps = dedupeByName(reactProps).sort((a, b) => a.name.localeCompare(b.name));
@@ -2589,19 +2724,55 @@ function mergeWithExisting(
     ...next,
     frameworks: {
       react: {
-        props: mergeItemArray(fw.react.props, ex.react.props, `${next.componentSlug}.json [react props]`),
-        events: mergeItemArray(fw.react.events, ex.react.events, `${next.componentSlug}.json [react events]`),
-        slots: mergeItemArray(fw.react.slots, ex.react.slots, `${next.componentSlug}.json [react slots]`),
+        props: mergeItemArray(
+          fw.react.props,
+          ex.react.props,
+          `${next.componentSlug}.json [react props]`,
+        ),
+        events: mergeItemArray(
+          fw.react.events,
+          ex.react.events,
+          `${next.componentSlug}.json [react events]`,
+        ),
+        slots: mergeItemArray(
+          fw.react.slots,
+          ex.react.slots,
+          `${next.componentSlug}.json [react slots]`,
+        ),
       },
       angular: {
-        props: mergeItemArray(fw.angular.props, ex.angular.props, `${next.componentSlug}.json [angular props]`),
-        events: mergeItemArray(fw.angular.events, ex.angular.events, `${next.componentSlug}.json [angular events]`),
-        slots: mergeItemArray(fw.angular.slots, ex.angular.slots, `${next.componentSlug}.json [angular slots]`),
+        props: mergeItemArray(
+          fw.angular.props,
+          ex.angular.props,
+          `${next.componentSlug}.json [angular props]`,
+        ),
+        events: mergeItemArray(
+          fw.angular.events,
+          ex.angular.events,
+          `${next.componentSlug}.json [angular events]`,
+        ),
+        slots: mergeItemArray(
+          fw.angular.slots,
+          ex.angular.slots,
+          `${next.componentSlug}.json [angular slots]`,
+        ),
       },
       webComponents: {
-        props: mergeItemArray(fw.webComponents.props, ex.webComponents.props, `${next.componentSlug}.json [webComponents props]`),
-        events: mergeItemArray(fw.webComponents.events, ex.webComponents.events, `${next.componentSlug}.json [webComponents events]`),
-        slots: mergeItemArray(fw.webComponents.slots, ex.webComponents.slots, `${next.componentSlug}.json [webComponents slots]`),
+        props: mergeItemArray(
+          fw.webComponents.props,
+          ex.webComponents.props,
+          `${next.componentSlug}.json [webComponents props]`,
+        ),
+        events: mergeItemArray(
+          fw.webComponents.events,
+          ex.webComponents.events,
+          `${next.componentSlug}.json [webComponents events]`,
+        ),
+        slots: mergeItemArray(
+          fw.webComponents.slots,
+          ex.webComponents.slots,
+          `${next.componentSlug}.json [webComponents slots]`,
+        ),
       },
     },
   };
@@ -2620,7 +2791,9 @@ function saveComponentAPI(api: ExtractedComponentAPI): void {
   let merged = api;
   if (fs.existsSync(filePath)) {
     try {
-      const existing = JSON.parse(fs.readFileSync(filePath, "utf-8")) as ExtractedComponentAPI;
+      const existing = JSON.parse(
+        fs.readFileSync(filePath, "utf-8"),
+      ) as ExtractedComponentAPI;
       merged = mergeWithExisting(api, existing);
     } catch {
       // Malformed existing file — overwrite with fresh extraction
