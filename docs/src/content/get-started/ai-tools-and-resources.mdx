@@ -2,17 +2,16 @@
 id: ai-tools-and-resources
 title: AI tools and resources
 navLabel: Overview
-description: AI tools and resources to help you and your AI editor work better with the GoA Design System
+description: AI tools and resources to help you and your AI work better with the GoA Design System
 section: ai-tools-and-resources
 order: 1
 status: published
 ---
 import DropInCallout from "../../components/DropInCallout.astro";
-import { CodeSnippet } from "../../components/CodeSnippet";
 import { withBase } from "@/lib/base-url";
 
 <goa-text size="heading-xl" mt="none" mb="m">AI tools and resources</goa-text>
-<goa-text size="body-l" mt="none" mb="2xl">An overview of the AI tools available to help you and your AI editor work with the GoA Design System.</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">These tools help you and your AI work with the GoA Design System. Each tool serves a different purpose, so use them together depending on the task.</goa-text>
 
 <goa-text as="h2" id="ai-toolset" size="heading-m">AI toolset</goa-text>
 
@@ -27,19 +26,19 @@ import { withBase } from "@/lib/base-url";
     </thead>
     <tbody>
       <tr>
-        <td><a href={withBase("/get-started/ai-tools-and-resources/goa-design-system-mcp")}>GoA design system MCP</a></td>
+        <td><a href={withBase("/get-started/ai-tools-and-resources/goa-design-system-mcp")}>GoA Design System MCP</a></td>
         <td>Lookup tool. Your AI calls it on demand.</td>
         <td>Component APIs, examples, and guidance, like asking a reference librarian</td>
       </tr>
       <tr>
         <td><a href={withBase("/get-started/ai-tools-and-resources/skills")}>Skills</a></td>
-        <td>Skills that load when the work matches.</td>
-        <td>Layered instructions for using the design system in your work, like a playbook for the work at hand</td>
+        <td>Instructions that load when the work matches.</td>
+        <td>Layered instructions for using the Design System in your work, like a playbook for the work at hand</td>
       </tr>
       <tr>
-        <td><a href="#md-files">MD files</a></td>
+        <td><span style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: "0.375rem" }}><a href="#md-files">MD files</a><goa-badge version="2" type="default" icon="false" emphasis="subtle" content="Coming soon"></goa-badge></span></td>
         <td>Static reference. Pasted upfront, stays in your AI's session.</td>
-        <td>The full design system reference, like a textbook on the desk</td>
+        <td>The full Design System reference, like a textbook on the desk</td>
       </tr>
       <tr>
         <td><a href="#figma-mcp">Figma MCP</a> (external)</td>
@@ -51,25 +50,23 @@ import { withBase } from "@/lib/base-url";
 </goa-table>
 
 <goa-callout version="2" type="information" emphasis="low" heading="Use these tools together" mt="none" mb="2xl">
-  <goa-text size="body-m" mt="2xs" mb="none">Each tool serves a different purpose. They all read from the same content this site renders, so answers stay consistent. Use them in combination, depending on the task at hand.</goa-text>
+  <goa-text size="body-m" mt="2xs" mb="none">All tools read from the same content this site renders, so answers stay consistent no matter which one you use.</goa-text>
 </goa-callout>
 
-<goa-text as="h2" id="goa-design-system-mcp" size="heading-m">GoA design system MCP</goa-text>
-<p>Reach for it for instant lookup, or to surface details that would take longer to find by browsing.</p>
+<goa-text as="h2" id="goa-design-system-mcp" size="heading-m">GoA Design System MCP</goa-text>
+<p>Your AI pulls live Design System knowledge as it builds, so it uses the right components, the right props, and real examples instead of guessing.</p>
 <p><goa-link><a href={withBase("/get-started/ai-tools-and-resources/goa-design-system-mcp")}>View more</a></goa-link></p>
-<p><strong>How to connect</strong></p>
-<CodeSnippet language="javascript" showCopy client:visible code={`https://mcp.design.alberta.ca/mcp`} />
 
 <goa-text as="h2" id="skills" size="heading-m">Skills</goa-text>
-<p>Skills are the SKILL.md open standard: plain Markdown instructions your AI loads when the work matches. Most major AI tools read them, including Claude Code, Cursor, and Copilot.</p>
+<p>Plain Markdown instruction files give your AI a workflow to follow when the work matches, so it builds a GoA service with the right structure, templates, and patterns from the start.</p>
 <p><goa-link><a href={withBase("/get-started/ai-tools-and-resources/skills")}>View more</a></goa-link></p>
 
-<goa-text as="h2" id="md-files" size="heading-m">MD files</goa-text>
-<p>Useful when you want to give your AI broad design system context, include the reference in a project, or reach for the content offline.</p>
+<goa-text as="h2" id="md-files" size="heading-m">MD files <goa-badge version="2" type="default" icon="false" emphasis="subtle" ml="xs" content="Coming soon" style={{ verticalAlign: "middle" }}></goa-badge></goa-text>
+<p>Useful when you want to give your AI broad Design System context, include the reference in a project, or reach for the content offline.</p>
 <p><strong>How to access it:</strong> Per-framework downloadable bundles (React, Angular, Web Components), coming soon.</p>
 
 <goa-text as="h2" id="figma-mcp" size="heading-m">Figma MCP</goa-text>
-<p>Built and maintained by Figma. Pair it with the GoA design system MCP when work spans design and code, so your AI can bridge Figma designs to real coded components from the design system.</p>
+<p>Built and maintained by Figma. Pair it with the GoA Design System MCP when work spans design and code, so your AI can bridge Figma designs to real coded components from the Design System.</p>
 <p><strong>How to access it:</strong> <goa-link trailingicon="open"><a href="https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server" target="_blank">Figma's guide to the MCP server</a></goa-link></p>
 
 <DropInCallout />
