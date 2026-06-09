@@ -10,7 +10,9 @@
     "extract-api": "npx tsx src/scripts/extract-api.ts --all",
     "preview": "astro preview",
     "generate-previews": "npx tsx src/scripts/generate-preview-images.ts",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "npx tsx --test 'src/scripts/**/*.test.ts'",
+    "verify-bundle": "npx tsx src/scripts/content-generators/verify-bundle.ts"
   },
   "dependencies": {
     "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.8.0",

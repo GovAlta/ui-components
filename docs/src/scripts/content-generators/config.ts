@@ -42,3 +42,11 @@ export const collectionNames: CollectionName[] = [
   "get-started",
   "productTypes",
 ];
+
+// Components that exist only as web components (no React or Angular wrapper).
+// The bundle keeps them in the Web Components set but drops them from the React
+// and Angular sets, so an AI is not shown a component it cannot use in that
+// framework. The source carries no per-framework wrapper signal (a wrapper-less
+// component and a wrapped-but-undocumented one look identical in the extracted
+// API), so this set is curated. Verified 2026-06-05: focus-trap, scrollable.
+export const WEB_COMPONENT_ONLY = new Set<string>(["focus-trap", "scrollable"]);
