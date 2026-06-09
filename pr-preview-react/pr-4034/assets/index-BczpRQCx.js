@@ -43149,7 +43149,7 @@ function Xg(t, e, o) {
     o(11, b = "chevron-up");
   }
   function L() {
-    o(11, b = "chevron-down");
+    o(11, b = "chevron-down"), Ie(document.body, "goa:closePopover", { target: m });
   }
   function j(I) {
     p = [...p, I], Ie(I, "menu-button:init", { size: s });
@@ -46139,7 +46139,7 @@ function R3(t, e, o) {
     }
   }
   function ee(ie) {
-    ie.newState === "open" ? o(16, B = true) : ie.newState === "closed" ? o(16, B = false) : o(16, B = oe()), o(26, D = B ? "true" : "false"), B ? (Ie(H, "_open", {}, { bubbles: true }), requestAnimationFrame(Be), F && K()) : ((F || I) && te(), A == null || A.focus(), Ie(H, "_close", {}, { bubbles: true }));
+    ie.newState === "open" || ie.newState === "closed" && ie.oldState === "closed" ? o(16, B = true) : ie.newState === "closed" ? o(16, B = false) : o(16, B = oe()), o(26, D = B ? "true" : "false"), B ? (Ie(H, "_open", {}, { bubbles: true }), requestAnimationFrame(Be), F && K()) : ((F || I) && te(), A == null || A.focus(), Ie(H, "_close", {}, { bubbles: true }));
   }
   function re() {
     if (B && (S == null || S.hidePopover(), F)) {
@@ -63667,7 +63667,8 @@ function Bug3662Route() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, { mt: "l", mb: "l" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Test Cases" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Test Case #1" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "Two Menu Buttons" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { testId: "friends", text: "Friends", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Joey", action: "#joey" }),
@@ -63683,6 +63684,18 @@ function Bug3662Route() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Gunther", action: "#gunther" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Khan", action: "#khan" })
       ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Test Case #2" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "One Menu Button beside Date Picker" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: 'The DatePicker also fires the "goa:closePopover" event, and so it could cause the same issue.' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { testId: "coffees", text: "Coffees", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Starbucks", action: "#starbucks" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Second Cup", action: "#secondcup" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Tim Hortons", action: "#timhortons" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "The Columbian", action: "#columbian" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDatePicker, { testId: "datePicker1", name: "Picked Date" })
     ] })
   ] });
 }
