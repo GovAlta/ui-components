@@ -208,7 +208,7 @@
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
 
       // Store text content for CSS pseudo-element (prevents layout shift when font-weight changes)
-      if (variant === "segmented") {
+      if (variant === "segmented" || version === "2") {
         const textContent = headingEl.textContent?.trim() || "";
         if (textContent) {
           link.setAttribute("data-text", textContent);
@@ -763,6 +763,19 @@
         6px 6px 0 0
       );
     }
+  }
+
+  /* Prevent layout shift when bold font is applied to selected tab */
+  .v2:not(.segmented) :global([role="tab"][data-text]) {
+    flex-direction: column;
+  }
+
+  .v2:not(.segmented) :global([role="tab"][data-text]::before) {
+    content: attr(data-text);
+    font: var(--goa-tab-typography-selected);
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
   }
 
   /* ========================================
