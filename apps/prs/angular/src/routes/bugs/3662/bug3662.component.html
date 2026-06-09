@@ -1,0 +1,70 @@
+<div>
+  <goab-text tag="h1" mt="m">
+    Bug #3662: Menu button: closing the menu swallows the next click event
+  </goab-text>
+
+  <goab-block direction="column" gap="m">
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3662"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        When closing a menu button dropdown, the next click event on the page gets
+        swallowed. For example, if you click outside the menu to close it, clicking a
+        button immediately after doesn't register.
+      </goab-text>
+      <goab-text tag="p">
+        Refer to the GitHub issue for a video demonstration.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l" />
+
+  <goab-text tag="h2">Test Case #1</goab-text>
+  <goab-text tag="p">Two Menu Buttons</goab-text>
+
+  <goab-block direction="row">
+    <goab-menu-button testId="friends" text="Friends" (onAction)="handleAction($event)">
+      <goab-menu-action text="Joey" action="#joey" />
+      <goab-menu-action text="Chandler" action="#chandler" />
+      <goab-menu-action text="Ross" action="#ross" />
+      <goab-menu-action text="Rachel" action="#rachel" />
+      <goab-menu-action text="Monica" action="#monica" />
+      <goab-menu-action text="Phoebe" action="#phoebe" />
+    </goab-menu-button>
+    <goab-menu-button testId="enemies" text="Enemies" (onAction)="handleAction($event)">
+      <goab-menu-action text="Janice" action="#janice" />
+      <goab-menu-action text="Richard" action="#richard" />
+      <goab-menu-action text="Gunther" action="#gunther" />
+      <goab-menu-action text="Khan" action="#khan" />
+    </goab-menu-button>
+  </goab-block>
+
+  <goab-text tag="h2">Test Case #2</goab-text>
+  <goab-text tag="p">One Menu Button beside Date Picker</goab-text>
+  <goab-text tag="p">
+    The DatePicker also fires the "goa:closePopover" event, and so it could cause the same
+    issue.
+  </goab-text>
+  <goab-block direction="row">
+    <goab-menu-button testId="coffees" text="Coffees" (onAction)="handleAction($event)">
+      <goab-menu-action text="Starbucks" action="#starbucks" />
+      <goab-menu-action text="Second Cup" action="#secondcup" />
+      <goab-menu-action text="Tim Hortons" action="#timhortons" />
+      <goab-menu-action text="The Columbian" action="#columbian" />
+    </goab-menu-button>
+    <goab-date-picker
+      testId="datePicker1"
+      name="Picked Date"
+      (onChange)="handleChange($event)"
+    />
+  </goab-block>
+</div>
