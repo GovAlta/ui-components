@@ -12,6 +12,7 @@
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
   import { receive, dispatch, relay } from "../../common/utils";
+  import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -82,6 +83,12 @@
     addRelayListener();
     sendMountedMessage();
     showDeprecationWarnings();
+
+    if (width && !isValidDimension(width)) {
+      console.error(
+        "DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)",
+      );
+    }
   });
 
   function showDeprecationWarnings() {
@@ -266,7 +273,7 @@
         bind:this={_rootEl}
         tabindex="-1"
         data-testid="calendar-popover"
-        data-content-fits-width="true"
+        fitcontent="true"
         {testid}
         {mt}
         {mb}

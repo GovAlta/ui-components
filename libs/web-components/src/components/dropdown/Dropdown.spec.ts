@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
-import { describe, it } from "vitest";
+import { describe, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
@@ -1186,20 +1186,31 @@ describe("GoADropdown", () => {
         });
       });
 
-      it("should set popover max width to 100% for percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "75%",
-        });
+      it("should set popover width to the measured pixel width for percentage widths", async () => {
+        // A percentage on the top-layer popover would resolve against the viewport
+        // and overflow, so the component measures the rendered width and passes
+        // pixels instead. jsdom has no layout, so stub the rendered width.
+        const rectSpy = vi
+          .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+          .mockReturnValue({ width: 240 } as DOMRect);
 
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
+        try {
+          const result = render(GoADropdownWrapper, {
+            name: "test",
+            items: ["1", "2", "3"],
+            width: "75%",
+          });
 
-        await waitFor(() => {
+          const dropdownIcon = result.container.querySelector("goa-icon");
+          dropdownIcon && (await fireEvent.click(dropdownIcon));
+
           const popover = result.container.querySelector("goa-popover");
-          expect(popover?.getAttribute("width")).toBe("100%");
-        });
+          await waitFor(() => {
+            expect(popover?.getAttribute("width")).toBe("240px");
+          });
+        } finally {
+          rectSpy.mockRestore();
+        }
       });
     });
 
