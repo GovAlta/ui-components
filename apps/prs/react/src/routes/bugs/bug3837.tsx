@@ -35,12 +35,12 @@ export function Bug3837Route() {
 
       <GoabText tag="h2">Test Cases</GoabText>
 
-      <GoabText tag="h3">Test 1: V2 tabs (default variant)</GoabText>
+      <GoabText tag="h3">Test 1: String headings (default)</GoabText>
       <GoabText tag="p">
         Click between tabs and observe that the labels do not shift position. The active tab bold
         treatment should be preserved.
       </GoabText>
-      <GoabTabs version="2">
+      <GoabTabs>
         <GoabTab heading="Short">
           <GoabText tag="p">Short tab content</GoabText>
         </GoabTab>
@@ -55,12 +55,12 @@ export function Bug3837Route() {
         </GoabTab>
       </GoabTabs>
 
-      <GoabText tag="h3">Test 2: V2 tabs with similar-length labels</GoabText>
+      <GoabText tag="h3">Test 2: Similar-length string headings</GoabText>
       <GoabText tag="p">
         All tabs have similar-length labels to make any shift more visible. Verify no horizontal
         movement when switching tabs.
       </GoabText>
-      <GoabTabs version="2">
+      <GoabTabs>
         <GoabTab heading="Information">
           <GoabText tag="p">Information content</GoabText>
         </GoabTab>
@@ -72,19 +72,19 @@ export function Bug3837Route() {
         </GoabTab>
       </GoabTabs>
 
-      <GoabText tag="h3">Test 3: V1 tabs (should be unaffected)</GoabText>
+      <GoabText tag="h3">Test 3: Slot headings</GoabText>
       <GoabText tag="p">
-        V1 tabs are out of scope for this fix. Verify they still render correctly.
+        Tabs using the heading slot (ReactNode) rather than a string prop. Verify no shift occurs.
       </GoabText>
       <GoabTabs>
-        <GoabTab heading="Tab One">
-          <GoabText tag="p">Tab One content</GoabText>
+        <GoabTab heading={<span>Short</span>}>
+          <GoabText tag="p">Short tab content</GoabText>
         </GoabTab>
-        <GoabTab heading="Tab Two">
-          <GoabText tag="p">Tab Two content</GoabText>
+        <GoabTab heading={<span>Much longer label</span>}>
+          <GoabText tag="p">Longer tab content</GoabText>
         </GoabTab>
-        <GoabTab heading="Tab Three">
-          <GoabText tag="p">Tab Three content</GoabText>
+        <GoabTab heading={<span>Medium label</span>}>
+          <GoabText tag="p">Medium tab content</GoabText>
         </GoabTab>
       </GoabTabs>
     </div>
