@@ -34,3 +34,20 @@
     Medium tab content
   </goab-tab>
 </goab-tabs>
+
+<goab-text tag="h3">Test 4: Slot headings with badge</goab-text>
+<goab-text mb="m">Tabs with a badge alongside the label text in the slot. The ghost text only reserves space for the text portion, so a small shift may still occur here.</goab-text>
+<goab-tabs>
+  <goab-tab>
+    <span slot="heading">Notifications <goab-badge type="information" content="3" /></span>
+    Notifications content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">Much longer label <goab-badge type="important" content="12" /></span>
+    Longer tab content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">History</span>
+    History content
+  </goab-tab>
+</goab-tabs>
