@@ -43111,7 +43111,7 @@ function Xg(t, e, o) {
     ft(m, (I, A, B) => {
       switch (I) {
         case "click":
-          console.log(a, "onMount _rootEl received", I, A, B), N(A), B.stopPropagation();
+          N(A), B.stopPropagation();
           break;
         case "bind":
           j(A), B.stopPropagation();
@@ -43146,10 +43146,10 @@ function Xg(t, e, o) {
     });
   });
   function D() {
-    console.log(a, "open"), o(11, b = "chevron-up");
+    o(11, b = "chevron-up");
   }
   function L() {
-    console.log(a, "close -> dispatch goa:closePopover"), o(11, b = "chevron-down");
+    o(11, b = "chevron-down");
   }
   function j(I) {
     p = [...p, I], Ie(I, "menu-button:init", { size: s });
@@ -43163,10 +43163,10 @@ function Xg(t, e, o) {
     );
   }
   function N(I) {
-    console.log(a, "onAction", I), Ie(m, "_action", { action: I.action, size: I.size }, { bubbles: true }), L(), k = 0;
+    Ie(m, "_action", { action: I.action, size: I.size }, { bubbles: true }), L(), k = 0;
   }
   function W() {
-    console.log(a, "onClose"), L(), k = 0;
+    L(), k = 0;
   }
   function P(I) {
     de[I ? "unshift" : "push"](() => {
@@ -46057,7 +46057,7 @@ function R3(t, e, o) {
   }
   Te(() => {
     S == null || S.addEventListener("toggle", ee), A == null || A.addEventListener("keydown", se), H.addEventListener("close", (ie) => {
-      console.log(c, "close", ie), re(), ie.stopPropagation();
+      re(), ie.stopPropagation();
     }), U(), O(), window.addEventListener("resize", Be);
   }), mt(() => {
     (F || I) && te(), window.removeEventListener("resize", Be), window.removeEventListener("popstate", $, true);
@@ -46117,7 +46117,7 @@ function R3(t, e, o) {
   }
   function O() {
     document.body.addEventListener("goa:closePopover", (ie) => {
-      if (console.log(c, "goa:closePopover", "_isOpen", B, ie), !B)
+      if (!B)
         return;
       const { target: we } = ie.detail;
       we !== A && we && !ne(we) && re();
@@ -46139,10 +46139,10 @@ function R3(t, e, o) {
     }
   }
   function ee(ie) {
-    console.log(c, "handleNativeToggle", ie), ie.newState === "open" ? o(16, B = true) : ie.newState === "closed" ? o(16, B = false) : o(16, B = oe()), o(26, D = B ? "true" : "false"), B ? (Ie(H, "_open", {}, { bubbles: true }), requestAnimationFrame(Be), F && K()) : ((F || I) && te(), A == null || A.focus(), Ie(H, "_close", {}, { bubbles: true }));
+    ie.newState === "open" ? o(16, B = true) : ie.newState === "closed" ? o(16, B = false) : o(16, B = oe()), o(26, D = B ? "true" : "false"), B ? (Ie(H, "_open", {}, { bubbles: true }), requestAnimationFrame(Be), F && K()) : ((F || I) && te(), A == null || A.focus(), Ie(H, "_close", {}, { bubbles: true }));
   }
   function re() {
-    if (console.log(c, "closePopover"), B && (S == null || S.hidePopover(), F)) {
+    if (B && (S == null || S.hidePopover(), F)) {
       const ie = new ToggleEvent(
         "toggle",
         {
@@ -46155,7 +46155,7 @@ function R3(t, e, o) {
     }
   }
   function be(ie) {
-    console.log(c, "togglePopover", "_isOpen", B, "_needsManualPositioning", F, ie), ie.stopPropagation(), !(i || !S) && (B ? (S.hidePopover(), o(16, B = false)) : (F && Ie(document.body, "goa:closePopover", { target: A }), S.showPopover(), o(16, B = true), requestAnimationFrame(Be)));
+    ie.stopPropagation(), !(i || !S) && (B ? (S.hidePopover(), o(16, B = false)) : (F && Ie(document.body, "goa:closePopover", { target: A }), S.showPopover(), o(16, B = true), requestAnimationFrame(Be)));
   }
   function Be() {
     if (!B || !A || !S)
