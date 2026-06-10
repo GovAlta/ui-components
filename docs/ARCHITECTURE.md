@@ -85,6 +85,7 @@ When a commit stages a file that feeds a generator, the hook regenerates the out
   - `libs/web-components/src/components/**` (Svelte JSDoc, feeds `extract-api`)
   - `libs/react-components/src/lib/**` (React wrappers, feed `extract-api`)
   - `libs/angular-components/src/lib/components/**` (Angular wrappers, feed `extract-api`)
+  - `libs/common/src/lib/**` (shared types and imperative-API controllers, feed `extract-api`)
   - `docs/src/content/**` (MDX frontmatter, feeds `build:search-index`)
 - If none of those are staged, the hook does nothing.
 - If the regenerated output matches what you staged, the commit goes through with no new files to stage. The generators still run on every commit that touches a watched source; they are deterministic, so an already-fresh file comes back byte-identical.

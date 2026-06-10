@@ -13,6 +13,7 @@
 #
 # Covers:
 #   docs/generated/component-apis/*.json   from Svelte components + React/Angular wrappers
+#                                          + shared types and controllers (libs/common)
 #   docs/public/search-index.json          from docs/src/content/** (MDX frontmatter)
 #
 # To add a new generator, extend SOURCE_REGEX and OUTPUTS below and run it in the
@@ -28,10 +29,11 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 # Sources that feed a generator, and the output paths those generators own.
-# extract-api scans three libs roots: Svelte components (web-components/src/components),
-# React wrappers (react-components/src/lib), and Angular wrappers
-# (angular-components/src/lib/components). build:search-index scans MDX in docs/src/content.
-SOURCE_REGEX='^(libs/(web-components/src/components|react-components/src/lib|angular-components/src/lib/components)/|docs/src/content/)'
+# extract-api scans four libs roots: Svelte components (web-components/src/components),
+# React wrappers (react-components/src/lib), Angular wrappers
+# (angular-components/src/lib/components), and shared types plus imperative-API
+# controllers (common/src/lib). build:search-index scans MDX in docs/src/content.
+SOURCE_REGEX='^(libs/(web-components/src/components|react-components/src/lib|angular-components/src/lib/components|common/src/lib)/|docs/src/content/)'
 OUTPUTS=(docs/generated/component-apis docs/public/search-index.json)
 
 # 1. Only act when staged changes touch a generator source.
