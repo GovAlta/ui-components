@@ -45,11 +45,22 @@ export interface SubComponentApi {
   frameworks: FrameworkApiMap;
 }
 
+export type StaticMethodParam = Omit<PropDefinition, "default" | "deprecated" | "typeLabel">;
+
+export interface StaticMethod {
+  name: string;
+  signature: string;
+  returnType: string;
+  description: string;
+  params: StaticMethodParam[];
+}
+
 export interface ComponentApi {
   componentSlug: string;
   extractedFrom: string;
   frameworks: FrameworkApiMap;
   subComponents?: SubComponentApi[];
+  staticMethods?: StaticMethod[];
 }
 
 // Load all component API JSON files at build time using Vite glob import
