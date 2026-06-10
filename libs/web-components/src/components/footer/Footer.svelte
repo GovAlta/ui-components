@@ -85,8 +85,7 @@
             © {year} Government of Alberta
           </a>
         {:else if version === "2"}
-          <span>This is a Government of Alberta Digital Service</span>
-          <span class="goa-copyright">© {year} GoA</span>
+          <span class="goa-copyright">© {year} Government of Alberta</span>
         {/if}
       </div>
     </div>
