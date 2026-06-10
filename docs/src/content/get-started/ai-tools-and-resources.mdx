@@ -41,7 +41,7 @@ import { withBase } from "@/lib/base-url";
         <td>The full Design System reference, like a textbook on the desk</td>
       </tr>
       <tr>
-        <td><a href="#figma-mcp">Figma MCP</a> (external)</td>
+        <td><span style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: "0.375rem" }}><a href="#figma-mcp">Figma MCP</a><goa-badge version="2" type="default" icon="false" emphasis="subtle" content="External"></goa-badge></span></td>
         <td>Lookup tool. Your AI calls it on demand.</td>
         <td>Read a design in Figma to get the components, variables, and specs, like lifting measurements off a blueprint</td>
       </tr>
@@ -61,9 +61,12 @@ import { withBase } from "@/lib/base-url";
 <p>Plain Markdown instruction files give your AI a workflow to follow when the work matches, so it builds a GoA service with the right structure, templates, and patterns from the start.</p>
 <p><goa-link><a href={withBase("/get-started/ai-tools-and-resources/skills")}>View more</a></goa-link></p>
 
-<goa-text as="h2" id="md-files" size="heading-m">MD files <goa-badge version="2" type="default" icon="false" emphasis="subtle" ml="xs" content="Coming soon" style={{ verticalAlign: "middle" }}></goa-badge></goa-text>
+<div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "var(--goa-space-xs)", marginTop: "var(--goa-space-2xl)", marginBottom: "var(--goa-space-m)" }}>
+  <goa-text as="h2" id="md-files" size="heading-m" mt="none" mb="none">MD files</goa-text>
+  <goa-badge version="2" type="default" icon="false" emphasis="subtle" content="Coming soon"></goa-badge>
+</div>
 <p>Useful when you want to give your AI broad Design System context, include the reference in a project, or reach for the content offline.</p>
-<p><strong>How to access it:</strong> Per-framework downloadable bundles (React, Angular, Web Components), coming soon.</p>
+<p><strong>How to access it:</strong> Per-framework downloadable bundles (React, Angular, Web Components).</p>
 
 <goa-text as="h2" id="figma-mcp" size="heading-m">Figma MCP</goa-text>
 <p>Built and maintained by Figma. Pair it with the GoA Design System MCP when work spans design and code, so your AI can bridge Figma designs to real coded components from the Design System.</p>
