@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import ComponentPageLayout from '../../layouts/ComponentPageLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PropsTable from '../../components/PropsTable.astro';
+import StaticMethods from '../../components/StaticMethods.astro';
 import GuidanceGrid from '../../components/GuidanceGrid.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
 import ConfigurationPreview from '../../components/ConfigurationPreview';
@@ -113,6 +114,9 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
         {api ? (
           <>
             <PropsTable frameworks={api.frameworks} />
+            {api.staticMethods && api.staticMethods.length > 0 && (
+              <StaticMethods methods={api.staticMethods} />
+            )}
             {api.subComponents && api.subComponents.length > 0 && (
               api.subComponents.map((sub) => (
                 <div class="sub-component-section">
