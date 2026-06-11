@@ -113,7 +113,9 @@ jobs:
             echo "source and are overwritten on regeneration, so don't hand-edit these files."
             echo ""
             git status --short -- "${outputs[@]}"
+            git add --intent-to-add -- "${outputs[@]}"
             git diff --stat -- "${outputs[@]}"
+            git diff -- "${outputs[@]}"
             exit 1
           fi
 
