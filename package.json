@@ -16,6 +16,8 @@
     "docs:preview": "npm run --prefix astro preview",
     "docs:start": "npm run --prefix astro start",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
+    "postinstall": "npm install --prefix docs",
+    "prepare": "git config core.hooksPath .githooks || true",
     "pretest:pr": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",
     "serve:dev:angular": "nx run angular-dev:serve:development",
     "serve:dev:react": "nx run react-dev:serve:development",
