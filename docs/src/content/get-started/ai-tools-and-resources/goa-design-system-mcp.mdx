@@ -1,0 +1,253 @@
+---
+id: ai-tools-and-resources/goa-design-system-mcp
+title: GoA Design System MCP
+navLabel: Design System MCP
+description: A live lookup tool your AI uses for component APIs, examples, and guidance
+section: ai-tools-and-resources
+order: 2
+status: published
+---
+import DropInCallout from "../../../components/DropInCallout.astro";
+import { CodeSnippet } from "../../../components/CodeSnippet";
+import { CodeCopy } from "../../../components/CodeCopy";
+import { withBase } from "@/lib/base-url";
+
+<goa-text size="heading-xl" mt="none" mb="m">GoA Design System MCP</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">The live lookup tool your AI calls when it needs Design System component APIs, examples, or guidance.</goa-text>
+
+<goa-callout version="2" type="information" emphasis="low" heading="Quick start: Point your AI tool at this endpoint" mt="none" mb="m">
+  <CodeSnippet language="javascript" showCopy client:visible code={`https://mcp.design.alberta.ca/mcp`} />
+</goa-callout>
+<goa-text version="2" size="body-m" mt="s" mb="none"><goa-link version="2"><a href="#setup">View tool-specific setup</a></goa-link></goa-text>
+
+<goa-callout version="2" type="information" emphasis="low" mt="m" mb="l">
+  <goa-text version="2" size="body-s" mt="none" mb="none">The MCP is one tool in a larger AI toolset. For the overview of all available AI tools and how they fit together, see <a href={withBase("/get-started/ai-tools-and-resources")}>AI tools and resources</a>.</goa-text>
+</goa-callout>
+
+<goa-text as="h2" id="whats-included" size="heading-m" mt="2xl">What's included</goa-text>
+
+<p>Everything the MCP returns comes from the same content this site renders.</p>
+
+<goa-table version="2" width="100%" mb="2xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>What's in it</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Components</strong></td>
+        <td>The full GoA component library with props, variants, and accessibility notes. React, Angular, and Web Components.</td>
+      </tr>
+      <tr>
+        <td><strong>Examples</strong></td>
+        <td>Workspace and Public form product types, page patterns, section patterns, and smaller task examples.</td>
+      </tr>
+      <tr>
+        <td><strong>Guidance</strong></td>
+        <td>Do's, don'ts, and tips that apply across components. Accessibility grounded in WCAG 2.2 AA.</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<goa-text as="h2" id="what-can-you-ask" size="heading-m" mt="2xl">What can you ask?</goa-text>
+
+<p>Ask your AI in plain language. It calls the MCP when a component, example, or guidance answer fits the request.</p>
+
+<goa-table version="2" width="100%" mb="l">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>About a component</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"What props does the Table component have?"</span>
+            <CodeCopy client:only="react" code="What props does the Table component have?" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"How does FormItem handle error states?"</span>
+            <CodeCopy client:only="react" code="How does FormItem handle error states?" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"Which GoA component should I use for a card layout?"</span>
+            <CodeCopy client:only="react" code="Which GoA component should I use for a card layout?" />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<goa-table version="2" width="100%" mb="l">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>For an example or pattern</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"Find dashboard examples in the workspace product type"</span>
+            <CodeCopy client:only="react" code="Find dashboard examples in the workspace product type" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"Show me React examples for a question page"</span>
+            <CodeCopy client:only="react" code="Show me React examples for a question page" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"What's a good example of a filter bar?"</span>
+            <CodeCopy client:only="react" code="What's a good example of a filter bar?" />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<goa-table version="2" width="100%" mb="2xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>For guidance, do's, and don'ts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"What's the guidance for labelling buttons?"</span>
+            <CodeCopy client:only="react" code="What's the guidance for labelling buttons?" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"Show me the do's and don'ts for dropdowns"</span>
+            <CodeCopy client:only="react" code="Show me the do's and don'ts for dropdowns" />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+            <span>"What accessibility guidance applies to forms?"</span>
+            <CodeCopy client:only="react" code="What accessibility guidance applies to forms?" />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<goa-text as="h2" id="setup" size="heading-m" mt="2xl">Setup</goa-text>
+
+<p>Find your AI tool below to connect it. There's nothing to install.</p>
+
+<goa-callout version="2" type="important" emphasis="low" mt="m" mb="m">
+  <goa-text version="2" size="body-m" mt="none" mb="none">To verify your setup, restart your AI tool and ask "Look up the GoA Button component." You should get a response covering Button's props, variants, and usage.</goa-text>
+</goa-callout>
+
+<goa-text as="h4" size="heading-xs" mt="xl">Claude Code (CLI)</goa-text>
+
+<p><goa-link mt="s" trailingicon="open"><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener noreferrer">View Claude Code's MCP documentation</a></goa-link></p>
+
+<p>The fastest path is the <code>claude mcp add</code> command:</p>
+
+<CodeSnippet
+  language="javascript"
+  showCopy
+  client:visible
+  code={`claude mcp add --transport http goa-design-system https://mcp.design.alberta.ca/mcp --scope user`}
+/>
+
+<goa-text as="h4" size="heading-xs" mt="xl">Claude Desktop</goa-text>
+
+<p><goa-link mt="s" trailingicon="open"><a href="https://modelcontextprotocol.io/docs/develop/connect-local-servers" target="_blank" rel="noopener noreferrer">View Claude Desktop's MCP setup guide</a></goa-link></p>
+
+<p>Claude Desktop only supports local (stdio) MCP servers, so connect through the <code>mcp-remote</code> bridge. Edit the config file at:</p>
+
+<ul>
+  <li>Mac: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+  <li>Windows: <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+</ul>
+
+<CodeSnippet
+  language="json"
+  showCopy
+  client:visible
+  code={`{
+  "mcpServers": {
+    "goa-design-system": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.design.alberta.ca/mcp"]
+    }
+  }
+}`}
+/>
+
+<goa-text as="h4" size="heading-xs" mt="xl">Cursor</goa-text>
+
+<p><goa-link mt="s" trailingicon="open"><a href="https://cursor.com/docs/mcp" target="_blank" rel="noopener noreferrer">View Cursor's MCP documentation</a></goa-link></p>
+
+<p>Cursor supports remote HTTP MCP servers directly. Open <strong>Settings &gt; Tools &amp; MCP</strong> to add a server, or edit <code>~/.cursor/mcp.json</code> (global) or <code>.cursor/mcp.json</code> in your project:</p>
+
+<CodeSnippet
+  language="json"
+  showCopy
+  client:visible
+  code={`{
+  "mcpServers": {
+    "goa-design-system": {
+      "url": "https://mcp.design.alberta.ca/mcp"
+    }
+  }
+}`}
+/>
+
+<goa-text as="h4" size="heading-xs" mt="xl">ChatGPT</goa-text>
+
+<p><goa-link mt="s" trailingicon="open"><a href="https://help.openai.com/en/articles/12584461-developer-mode-apps-and-full-mcp-connectors-in-chatgpt-beta" target="_blank" rel="noopener noreferrer">View ChatGPT's MCP connectors guide</a></goa-link></p>
+
+<p>Custom apps are in beta and require a ChatGPT Plus or Pro subscription.</p>
+
+<ol>
+  <li>In ChatGPT, open <strong>Settings &gt; Apps &gt; Advanced settings</strong> and turn on <strong>Developer mode</strong>.</li>
+  <li>Select <strong>Add app</strong>. A New App form opens.</li>
+  <li>Enter a <strong>Name</strong> (for example, "GoA Design System").</li>
+  <li>Under <strong>Connection</strong>, select <strong>Server URL</strong> and paste the MCP endpoint URL: <CodeSnippet code="https://mcp.design.alberta.ca/mcp" language="javascript" showCopy client:visible /></li>
+  <li>Set <strong>Authentication</strong> to <strong>None</strong>.</li>
+  <li>Check <strong>I understand and want to continue</strong> to acknowledge the risk warning.</li>
+  <li>Save.</li>
+</ol>
+
+<goa-callout version="2" type="information" emphasis="low" mt="xl" mb="2xl">
+  <goa-text version="2" size="body-m" mt="none" mb="none">Using a different AI tool? If it supports remote MCP servers, paste the MCP endpoint URL into its config. For stdio-only tools, bridge through <code>npx mcp-remote &lt;URL&gt;</code>. <goa-link version="2" trailingicon="open"><a href="https://modelcontextprotocol.io/clients" target="_blank" rel="noopener noreferrer">View the list of MCP-compatible clients</a></goa-link></goa-text>
+</goa-callout>
+
+<DropInCallout />

@@ -124,10 +124,12 @@
   mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
 }
 
-pre {
+.code-snippet .code-block .code-container pre,
+.framework-switcher .code-block .code-container pre {
   margin: 0;
-  padding: var(--goa-space-m, 1rem);
-  overflow-x: auto;
+  padding: var(--goa-space-s, 0.75rem) var(--goa-space-m, 1rem);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 code {

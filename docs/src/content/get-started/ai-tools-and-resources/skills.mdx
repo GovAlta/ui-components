@@ -1,0 +1,50 @@
+---
+id: ai-tools-and-resources/skills
+title: Skills
+navLabel: Skills
+description: Plain Markdown instruction files that give your AI a workflow to follow, for building GoA services
+section: ai-tools-and-resources
+order: 3
+status: published
+---
+import DropInCallout from "../../../components/DropInCallout.astro";
+import { CodeSnippet } from "../../../components/CodeSnippet";
+import { withBase } from "@/lib/base-url";
+
+<goa-text size="heading-xl" mt="none" mb="m">Skills</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">Plain Markdown instruction files give your AI a workflow to follow when the work matches. They follow the open SKILL.md standard, so the same files work across Claude Code, Cursor, Copilot, and more.</goa-text>
+
+<goa-callout version="2" type="information" emphasis="low" mt="m" mb="l">
+  <goa-text version="2" size="body-s" mt="none" mb="none">Skills are one tool in a larger AI toolset. For the overview of all available AI tools and how they fit together, see <a href={withBase("/get-started/ai-tools-and-resources")}>AI tools and resources</a>.</goa-text>
+</goa-callout>
+
+<goa-text as="h2" id="available-skills" size="heading-m" mt="2xl">Available skills</goa-text>
+
+<goa-text size="heading-s" mt="l">using-goa-design-system</goa-text>
+<goa-text size="body-m">This skill identifies the right product type, page and section templates, and components for what you're building. Describe what you're working on in plain language (a public form or a case-management tool, for example), and it pulls the relevant structure and live component specs from the MCP.</goa-text>
+<goa-text size="body-m">It loads when you're scoping or building a screen, page, or feature, so your AI follows the Design System's structure from the start rather than guessing.</goa-text>
+<goa-text size="body-m"><strong>How to add it:</strong></goa-text>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill using-goa-design-system`} />
+<p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/using-goa-design-system" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
+
+<goa-text size="heading-s" mt="xl">content-design</goa-text>
+<goa-text size="body-m">This skill writes user-facing copy tailored to its reader (a citizen or a worker) because the same message requires a different approach for each audience.</goa-text>
+<goa-text size="body-m">It loads when you're working on the words in a service: labels, guidance, errors, empty states, and notifications.</goa-text>
+<goa-text size="body-m"><strong>How to add it:</strong></goa-text>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill content-design`} />
+<p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/content-design" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
+
+<goa-text as="h2" id="how-they-work" size="heading-m" mt="2xl">How they work</goa-text>
+<goa-text size="body-m">Each skill is a folder with a SKILL.md file plus any supporting notes. Your AI reads the short description at startup and loads the full instructions only when your request matches, so they add capability without crowding the context.</goa-text>
+<goa-text size="body-m">Because they follow the open Agent Skills standard, the same files work in Claude Code, Cursor, GitHub Copilot, and other tools that read the format.</goa-text>
+
+<goa-text as="h2" id="updates" size="heading-m" mt="2xl">Updates</goa-text>
+<goa-text size="body-m">Skills track the dev branch of the GoA Design System repository. To keep them current, run:</goa-text>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills update`} />
+<goa-text size="body-m" mt="m" mb="none">To update automatically, add <code>npx skills update -g -y</code> to a SessionStart hook in your AI tool and they refresh every session. You'll only get an update when a skill itself changes, not every time something else in the repo changes.</goa-text>
+
+<goa-callout version="2" type="information" emphasis="low" mt="xl" mb="2xl">
+  <goa-text version="2" size="body-m" mt="none" mb="none">Using a tool without the <code>skills</code> CLI? Clone a skill folder from the <goa-link version="2" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills" target="_blank" rel="noopener noreferrer">skills directory</a></goa-link> into your tool's skills folder, for example <code>~/.claude/skills</code>, <code>.cursor/skills</code>, or <code>.github/skills</code>.</goa-text>
+</goa-callout>
+
+<DropInCallout />
