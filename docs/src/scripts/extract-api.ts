@@ -2679,6 +2679,12 @@ function main() {
   console.log("\n" + "═".repeat(50));
   console.log(`Complete: ${successCount} succeeded, ${failCount} failed`);
   console.log(`Output: ${OUTPUT_PATH}\n`);
+
+  // Exit non-zero if any component failed to extract. Without this the process
+  // exits 0 on partial failure, leaving the failed component's committed JSON
+  // untouched, which the docs freshness check (and the pre-commit hook) would
+  // then see as a clean, in-sync diff while extraction is actually broken.
+  process.exitCode = failCount > 0 ? 1 : 0;
 }
 
 main();
