@@ -1,0 +1,36 @@
+---
+/**
+ * /release-notes - Release Notes Page (Brief 123)
+ *
+ * Uses the shared DocumentationPageLayout like other content pages.
+ * section="parent" => no false nav highlight (release-notes isn't a nav section).
+ * The month headings drive the layout's standard right-side table of contents.
+ */
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+import { ReleaseNotesFeed } from '../../components/ReleaseNotesFeed';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('release-notes');
+const releases = entries
+  .map((entry) => entry.data)
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const title = 'Release notes';
+const description =
+  'What changed in each release of the GoA Design System: new components, features, fixes, and documentation updates.';
+---
+
+<DocumentationPageLayout
+  title={title}
+  description={description}
+  section="parent"
+  tocQuery="goa-text[id][as='h2']"
+>
+  <goa-text as="h1" size="heading-xl" mt="none" mb="m">Release notes</goa-text>
+  <goa-text as="p" size="body-l" mt="none" mb="2xl">
+    What changed in each release of the GoA Design System. Each entry covers a
+    coordinated release across the web components, React, Angular, and common packages.
+  </goa-text>
+
+  <ReleaseNotesFeed client:load releases={releases} />
+</DocumentationPageLayout>

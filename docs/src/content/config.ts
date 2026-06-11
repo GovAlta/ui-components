@@ -274,6 +274,78 @@ const getStarted = defineCollection({
   }),
 });
 
+/**
+ * Release Notes Collection
+ * One entry per coordinated release, date-spined (not per-package). Each
+ * change has a `type` (breaking / addition / feature-change / fix /
+ * website) used to group changes under category headings within a
+ * release, in that priority order. The orthogonal `experimental` flag
+ * marks status (still gathering feedback) and shows an inline badge
+ * inside a low-emphasis information callout. Affected package versions
+ * are quiet metadata, listed only for the packages that actually changed.
+ *
+ * Deliberately loose, provisional schema for the v1 in-site mock (Brief 123).
+ * A `data` collection (not MDX) so changes stay structured. Finalized schema,
+ * history backfill, and GitHub scaffold automation are deferred to later PRs.
+ */
+const releaseNotes = defineCollection({
+  type: "data",
+  schema: z.object({
+    // Date-spine: ISO date of the coordinated release (newest sorts first).
+    date: z.string(),
+    // Optional one-line intro/context Dustin sometimes adds.
+    intro: z.string().optional(),
+    // Packages that actually changed this release (quiet version line, not badges).
+    versions: z.array(
+      z.object({
+        package: z.enum(["web-components", "react", "angular", "common"]),
+        version: z.string(),
+      }),
+    ),
+    // Changes grouped by `type` within each release (priority order:
+    // breaking -> addition -> feature-change -> fix -> website).
+    changes: z.array(
+      z.object({
+        title: z.string(),
+        // Category for grouping inside a release.
+        type: z.enum([
+          "breaking",
+          "addition",
+          "feature-change",
+          "fix",
+          "website",
+        ]),
+        detail: z.string().optional(),
+        // Optional sub-points (Claude/Notion-style bullets under a title).
+        bullets: z.array(z.string()).optional(),
+        // Component slug(s) this change touches -> quiet live links.
+        components: z.array(z.string()).optional(),
+        // Optional issue/PR reference for developers (number or URL).
+        issue: z.string().optional(),
+        // Doc / "learn more" links: internal docs (e.g. /get-started/...) or
+        // external URLs. Internal links navigate in-place; external open in a tab.
+        links: z
+          .array(z.object({ label: z.string(), href: z.string() }))
+          .optional(),
+        // Status flag: still gathering feedback. Shows an inline "Experimental"
+        // badge with the title, inside a low-emphasis information callout.
+        // Orthogonal to type (an experimental addition is type: "addition" +
+        // experimental: true).
+        experimental: z.boolean().optional(),
+        // Migration help for type: "breaking" changes: optional before/after
+        // snippets and/or a link to a fuller migration guide.
+        migration: z
+          .object({
+            before: z.string().optional(),
+            after: z.string().optional(),
+            link: z.string().optional(),
+          })
+          .optional(),
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   components,
   guidance,
@@ -281,4 +353,5 @@ export const collections = {
   foundations,
   productTypes,
   "get-started": getStarted,
+  "release-notes": releaseNotes,
 };

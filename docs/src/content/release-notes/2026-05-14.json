@@ -1,0 +1,21 @@
+{
+  "date": "2026-05-14",
+  "versions": [
+    { "package": "web-components", "version": "2.1.2" },
+    { "package": "react", "version": "7.1.2" }
+  ],
+  "changes": [
+    {
+      "title": "Tooltip clipping near scroll edges",
+      "type": "fix",
+      "detail": "Tooltips no longer clip at the edge of a scrolling container.",
+      "components": ["tooltip"]
+    },
+    {
+      "title": "Dropdown keyboard navigation",
+      "type": "fix",
+      "detail": "Arrow keys now move through filtered options in the correct order.",
+      "components": ["dropdown"]
+    }
+  ]
+}

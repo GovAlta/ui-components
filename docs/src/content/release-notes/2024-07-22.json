@@ -1,0 +1,14 @@
+{
+  "date": "2024-07-22",
+  "versions": [
+    { "package": "web-components", "version": "1.23.1" }
+  ],
+  "changes": [
+    {
+      "title": "App Header link alignment",
+      "type": "fix",
+      "detail": "Active header links are now vertically centered.",
+      "components": ["app-header"]
+    }
+  ]
+}

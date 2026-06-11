@@ -1,0 +1,49 @@
+{
+  "date": "2023-01-31",
+  "versions": [
+    { "package": "react", "version": "4.5.0" },
+    { "package": "web-components", "version": "1.5.0" }
+  ],
+  "changes": [
+    {
+      "title": "Stylesheet import path changed",
+      "type": "breaking",
+      "detail": "If you update web-components, your styles need a small change: remove @abgov/styles from your package.json, then point your stylesheet import at the web-components package instead.",
+      "migration": {
+        "before": "@import \"@abgov/styles/styles.esm.css\";",
+        "after": "@import \"@abgov/web-components/index.css\";"
+      }
+    },
+    {
+      "title": "Pagination component",
+      "type": "addition",
+      "detail": "A new Pagination component is now available.",
+      "components": ["pagination"]
+    },
+    {
+      "title": "Design tokens across the system",
+      "type": "feature-change",
+      "detail": "The whole design system now uses design tokens, so colour, font, and other value updates reach your team quickly and easily."
+    },
+    {
+      "title": "Input background colour",
+      "type": "feature-change",
+      "detail": "The background colour for input components is now white.",
+      "components": ["input"]
+    },
+    {
+      "title": "Dynamic dropdown items",
+      "type": "fix",
+      "detail": "Items populated dynamically now update correctly in the dropdown.",
+      "components": ["dropdown"]
+    },
+    {
+      "title": "Documentation updates",
+      "type": "website",
+      "bullets": [
+        "New Skeleton examples for line count and max width.",
+        "Added documentation on our supported browsers."
+      ]
+    }
+  ]
+}

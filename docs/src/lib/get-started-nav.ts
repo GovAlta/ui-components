@@ -63,6 +63,11 @@ export async function getGetStartedNav(): Promise<GetStartedNav> {
   const published = entries.filter((e) => e.data.status !== "deprecated");
 
   const topPages = bySection(published, "intro").map(entryToItem);
+  // Release notes lives in its own collection/page (/release-notes), not a
+  // get-started entry, so surface it in the Get Started nav right after
+  // "Start with the design system" (the /get-started landing).
+  const startIndex = topPages.findIndex((p) => p.url === "/get-started");
+  topPages.splice(startIndex + 1, 0, { label: "Release notes", url: "/release-notes" });
   const bottomPages = bySection(published, "appendix").map(entryToItem);
 
   const groups = GROUP_ORDER.filter((slug) =>

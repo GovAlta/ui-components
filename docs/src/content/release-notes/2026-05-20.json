@@ -1,0 +1,69 @@
+{
+  "date": "2026-05-20",
+  "versions": [
+    { "package": "web-components", "version": "2.2.0" },
+    { "package": "react", "version": "7.2.0" },
+    { "package": "angular", "version": "5.2.0" },
+    { "package": "common", "version": "2.2.0" }
+  ],
+  "changes": [
+    {
+      "title": "Dark mode",
+      "type": "addition",
+      "detail": "Components now support dark mode. This is experimental while we gather feedback. Try it in your service and share what you learn, it will help shape the production version.",
+      "experimental": true,
+      "issue": "3873",
+      "links": [
+        { "label": "Designing for dark mode", "href": "/get-started/designers/designing-for-dark-mode" },
+        { "label": "Dark mode theme for developers", "href": "/get-started/developers/dark-mode-theme" }
+      ]
+    },
+    {
+      "title": "Accordion actions slot and filled heading",
+      "type": "addition",
+      "detail": "Added support for an actions slot in the Accordion header, plus a new headingType property that can be set to \"filled\".",
+      "components": ["accordion"]
+    },
+    {
+      "title": "Badges in the Work Side Menu Item",
+      "type": "addition",
+      "detail": "Added a trailingContent slot so you can place badges in a work side menu item.",
+      "components": ["work-side-menu-item"],
+      "issue": "3814"
+    },
+    {
+      "title": "Consistent file upload validation",
+      "type": "fix",
+      "detail": "Invalid uploaded files now render consistently as FileUploadCard components, including their validation error states.",
+      "components": ["file-upload-card"]
+    },
+    {
+      "title": "Interactive components no longer close their parent",
+      "type": "fix",
+      "detail": "Fixed bubbling close events, so using a popover, date picker, dropdown, or drawer inside a parent component no longer closes the parent.",
+      "components": ["popover", "date-picker", "dropdown", "drawer"]
+    },
+    {
+      "title": "Temporary Notification progress indicators",
+      "type": "fix",
+      "detail": "Progress and indeterminate notification types now render their progress indicators correctly.",
+      "components": ["temporary-notification"]
+    },
+    {
+      "title": "Visual design refinements",
+      "type": "feature-change",
+      "detail": "Container, Drawer, and Dropdown were updated to better match the latest visual design.",
+      "components": ["container", "drawer", "dropdown"]
+    },
+    {
+      "title": "Documentation updates",
+      "type": "website",
+      "bullets": [
+        "Corrected all React and Angular property and event documentation.",
+        "Added documentation for the Notification Panel component.",
+        "Added a new \"Updating your product\" guide.",
+        "Fixed the Work Side Menu \"with user profile\" example to include the profile menu."
+      ]
+    }
+  ]
+}
