@@ -28,6 +28,7 @@
     toBoolean,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import { isValidDimension } from "../../common/validators";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -140,6 +141,12 @@
 
   $: calculateWidths(width, _options, _inputEl);
 
+  // Re-measure on open so the popover tracks the current rendered width after
+  // container resizes or layout that settled after mount.
+  $: if (_isMenuVisible && (width?.includes("%") || maxwidth?.includes("%"))) {
+    _popoverMaxWidth = getRenderedWidth();
+  }
+
   // TODO: Syed can you add a comment here describing what this does?
   $: {
     _error = toBoolean(error);
@@ -181,12 +188,11 @@
   ) {
     // Calculate the base width
     if (width) {
-      const unitPattern = /(px|%|ch|rem|em)$/; // Regex to detect valid units
-      if (unitPattern.test(width)) {
+      if (isValidDimension(width)) {
         _width = width; // Use the provided width with a valid unit
       } else {
         console.error(
-          "Dropdown width must be of an allowed unit. Falling back to `px`",
+          "Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`",
         );
         _width = `${width}px`; // Default to px if no unit is provided
       }
@@ -196,12 +202,17 @@
       _width = getLongestChildWidth(options); // Calculate based on the longest option
     }
 
-    // Set popover max width
     if (width?.includes("%") || maxwidth?.includes("%")) {
-      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
+      // cannot use anchor size because chrome/edge < 124, firefox < 146, safari, safari iOS < 26 not supported
+      _popoverMaxWidth = getRenderedWidth();
     } else {
       _popoverMaxWidth = _width;
     }
+  }
+
+  function getRenderedWidth(): string {
+    const renderedWidth = _rootEl?.getBoundingClientRect().width;
+    return renderedWidth ? `${renderedWidth}px` : _width;
   }
 
   function setupPopoverListeners() {

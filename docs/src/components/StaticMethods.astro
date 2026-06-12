@@ -1,0 +1,154 @@
+---
+/**
+ * StaticMethods - Documents imperative helper methods (e.g. TemporaryNotification.show)
+ * that are exposed as a static API rather than element props.
+ *
+ * Framework-agnostic: a single signature snippet plus a params table, rendered the
+ * same way regardless of the selected framework. Visual language matches PropsTable.
+ */
+import type { StaticMethod } from "../lib/content-queries";
+
+interface Props {
+  methods: StaticMethod[];
+}
+
+const { methods } = Astro.props;
+---
+
+{
+  methods.map((method) => (
+    <div class="api-section">
+      <div class="api-heading">
+        <h3 id={`method-${method.name}`}>{method.name}()</h3>
+      </div>
+
+      {method.description && <p class="static-method-description">{method.description}</p>}
+
+      <pre class="static-method-signature"><code>{method.signature}{method.returnType ? `: ${method.returnType}` : ""}</code></pre>
+
+      <goa-container version="2" type="interactive">
+        <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
+          {method.params.map((param) => (
+            <div class="prop-row" data-grid="row">
+              <div class="prop-cell prop-cell-name" data-grid="cell">
+                <span class="prop-name">{param.name}</span>
+                {param.required && (
+                  <goa-badge version="2" type="important" icon="false" content="Required" />
+                )}
+              </div>
+              <div class="prop-cell prop-cell-type" data-grid="cell">
+                <span class="prop-type">{param.type}</span>
+                {param.values && param.values.length > 0 && (
+                  <span class="prop-type-details">{param.values.join(" | ")}</span>
+                )}
+              </div>
+              {param.description && (
+                <div class="prop-cell prop-cell-description" data-grid="cell">
+                  {param.description}
+                </div>
+              )}
+            </div>
+          ))}
+        </goa-data-grid>
+      </goa-container>
+    </div>
+  ))
+}
+
+<style>
+  .api-section {
+    margin-bottom: var(--goa-space-xl);
+  }
+
+  .api-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-m);
+    margin-bottom: var(--goa-space-m);
+  }
+
+  .api-section h3 {
+    font: var(--goa-typography-heading-s);
+    margin-bottom: 0;
+    color: var(--goa-color-text-default);
+  }
+
+  .static-method-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin: 0 0 var(--goa-space-m);
+    max-width: 65ch;
+  }
+
+  .static-method-signature {
+    background: var(--goa-color-greyscale-100);
+    border-radius: var(--goa-border-radius-m);
+    padding: var(--goa-space-s) var(--goa-space-m);
+    margin: 0 0 var(--goa-space-m);
+    overflow-x: auto;
+  }
+
+  .static-method-signature code {
+    font: var(--goa-typography-number-s);
+    color: var(--goa-color-text-default);
+  }
+
+  .prop-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-m) 0;
+  }
+
+  .prop-row:first-child {
+    padding-top: 0;
+  }
+
+  .prop-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .prop-cell {
+    padding: var(--goa-space-2xs);
+    border-radius: var(--goa-border-radius-s);
+  }
+
+  .prop-cell-name {
+    display: flex;
+    align-items: baseline;
+    gap: var(--goa-space-xs);
+    margin-right: var(--goa-space-xs);
+  }
+
+  .prop-cell-name goa-badge {
+    margin-left: var(--goa-space-xs);
+    margin-right: var(--goa-space-xs);
+  }
+
+  .prop-cell-description {
+    flex-basis: 100%;
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-text-default);
+  }
+
+  .prop-name {
+    font: var(--goa-typography-number-s);
+    font-weight: var(--goa-font-weight-bold);
+    color: var(--goa-color-text-default);
+  }
+
+  .prop-type {
+    font: var(--goa-typography-number-s);
+    color: var(--goa-color-info-text-dark);
+  }
+
+  .prop-type-details {
+    display: block;
+    margin-top: var(--goa-space-3xs);
+    font: var(--goa-typography-body-xs);
+    color: var(--goa-color-greyscale-700);
+  }
+</style>

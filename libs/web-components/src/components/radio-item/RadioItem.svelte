@@ -346,10 +346,6 @@
     margin-top: -3px; /* V1: Optical centering - move text up */
     padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
   }
-  /* V2: Adjust for different line-height */
-  .radio.v2 .label {
-    margin-top: 1px; /* V2: Optical centering - slight downward adjustment */
-  }
 
   /* V2 compact: Use smaller gap */
   .radio.v2.compact .label {

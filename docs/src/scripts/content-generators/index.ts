@@ -9,6 +9,8 @@ import { loadFrameworkIdentifiers } from "./loaders/framework-identifiers";
 import { addComponentAliases, addExampleAliases } from "./transforms/aliases";
 import { linkGuidanceToComponents } from "./transforms/link-guidance";
 import { writeMcpJson } from "./outputs/mcp-json";
+import { writeMdBundle } from "./outputs/md-bundle";
+import { verifyBundle } from "./verify-bundle";
 import { runChecks } from "./checks";
 import { renderFindings } from "./checks/render";
 import type { AnyRecord, ComponentRecord } from "./types";
@@ -67,13 +69,30 @@ function main(): void {
   if (errorCount > 0) {
     process.stderr.write(
       `[content-generators] skipped output because of ${errorCount} ${errorCount === 1 ? "error" : "errors"}. ` +
-        `Existing files in docs/generated/mcp/ are unchanged.\n`,
+        `Existing files in docs/generated/ are unchanged.\n`,
     );
     process.exit(1);
   }
 
   // 5. Output.
   const result = writeMcpJson(records);
+  // Markdown bundle: one self-contained set per framework.
+  const mdResult = writeMdBundle(records);
+
+  // Validate the generated bundle. A regression here (leaked code placeholder,
+  // raw HTML outside fences, gutted code block, broken table, lost frontmatter,
+  // or drift from the MCP component set) fails the run instead of shipping.
+  const violations = verifyBundle();
+  if (violations.length > 0) {
+    process.stderr.write(
+      `[content-generators] md bundle failed validation (${violations.length} ${violations.length === 1 ? "issue" : "issues"}):\n`,
+    );
+    for (const v of violations) {
+      process.stderr.write(`  ${v.file}${v.line ? `:${v.line}` : ""} — ${v.message}\n`);
+    }
+    process.exit(1);
+  }
+
   const elapsed = Math.round(performance.now() - start);
 
   // 6. Report.
@@ -87,7 +106,7 @@ function main(): void {
   const examplesWithProductType = examples.filter((e) => e.productType).length;
 
   process.stdout.write(
-    `[content-generators] wrote ${result.written} records in ${elapsed}ms\n` +
+    `[content-generators] wrote ${result.written} records + ${mdResult.written} md files in ${elapsed}ms\n` +
       `  components:    ${components.length} (${withFw} with fw ids, ${withApi} with api, ${withAliases} with aliases, ${withGuidance} with linked guidance)\n` +
       `  examples:      ${examples.length} (${examplesWithAliases} with aliases, ${examplesWithProductType} with productType)\n` +
       `  guidance:      ${guidance.length}\n` +

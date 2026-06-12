@@ -55,3 +55,68 @@ jobs:
           if [ -d "./dist" ]; then
             npm run test:pr
           fi
+
+  docs-freshness:
+    name: Docs Freshness
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    env:
+      # The generators don't need browsers; skip the Playwright download in npm ci.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            docs/package-lock.json
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - run: npm ci
+
+      - name: Check committed docs generated files match source
+        shell: bash
+        run: |
+          # Regenerate the docs outputs from source. npm ci ran the root postinstall
+          # (npm install --prefix docs), so tsx and the docs deps are available here.
+          ( cd docs && npm run extract-api && npm run build:search-index )
+
+          # The committed generated files are the single source of truth for the docs
+          # build, so fail if regeneration changed a tracked file (drift) or produced a
+          # new untracked one (a component whose JSON was never committed). This mirrors
+          # the .githooks/pre-commit check so local and CI tell the same story.
+          outputs=(docs/generated/component-apis docs/public/search-index.json)
+          stale=0
+          if ! git diff --quiet -- "${outputs[@]}"; then stale=1; fi
+          if [ -n "$(git ls-files --others --exclude-standard -- "${outputs[@]}")" ]; then stale=1; fi
+
+          if [ "$stale" -ne 0 ]; then
+            echo "::error::Generated docs files are out of date."
+            echo "The committed files do not match what the generators produce from source."
+            echo ""
+            echo "To fix, from the repo root run:"
+            echo "    npm install"
+            echo "    cd docs && npm run extract-api && npm run build:search-index"
+            echo "then commit the updated files under:"
+            echo "    docs/generated/component-apis/   docs/public/search-index.json"
+            echo ""
+            echo "Note: extracted fields (types, JSDoc descriptions) come from the component"
+            echo "source and are overwritten on regeneration, so don't hand-edit these files."
+            echo ""
+            git status --short -- "${outputs[@]}"
+            git add --intent-to-add -- "${outputs[@]}"
+            git diff --stat -- "${outputs[@]}"
+            git diff -- "${outputs[@]}"
+            exit 1
+          fi
+
+          echo "Generated docs files are up to date."

@@ -94,9 +94,7 @@ function getInitialMenuState(): boolean {
 }
 
 const EMPTY_GET_STARTED_NAV: GetStartedNav = {
-  topPages: [],
-  groups: [],
-  bottomPages: [],
+  sections: [],
 };
 
 export function SiteNav({

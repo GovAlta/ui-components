@@ -1,0 +1,32 @@
+<goab-block direction="column" gap="l" mt="l">
+  <goab-text tag="h1" mt="none">Bug #3683: Input date/time vertical alignment</goab-text>
+  <goab-text tag="p">
+    The text value in date and time input types should be vertically centered in the
+    input box, matching how type=text renders. Compare each type below against the
+    reference text input.
+  </goab-text>
+
+  <goab-form-item label="Reference: type=text">
+    <goab-input name="text" type="text" [value]="textVal"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="type=date">
+    <goab-input name="date" type="date" [value]="dateVal"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="type=time">
+    <goab-input name="time" type="time" [value]="timeVal"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="type=datetime-local">
+    <goab-input name="datetime-local" type="datetime-local" [value]="datetimeVal"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="type=month">
+    <goab-input name="month" type="month" [value]="monthVal"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="type=week">
+    <goab-input name="week" type="week" [value]="weekVal"></goab-input>
+  </goab-form-item>
+</goab-block>

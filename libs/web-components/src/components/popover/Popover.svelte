@@ -63,6 +63,8 @@
   export let borderradius: string = "var(--goa-border-radius-m)";
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
+  /** @internal When true, the content sizes to its own width (fit-content) capped at maxwidth, instead of stretching to `width`. */
+  export let fitcontent: string = "false";
 
   // Private
   let _rootEl: HTMLElement;
@@ -82,6 +84,7 @@
   $: _disabled = toBoolean(disabled);
   $: _padded = toBoolean(padded);
   $: _filterableContext = toBoolean(filterablecontext);
+  $: _fitContent = toBoolean(fitcontent);
 
   $: syncPopoverOpenState(_popoverEl, open);
 
@@ -445,11 +448,13 @@
     class:use-anchor-based-positioning={!_needsManualPositioning}
     class:align-right={_alignment === "right"}
     style={styles(
-      position !== "right" && style("width", width),
+      position !== "right" && !_fitContent && style("width", width),
       style("min-width", minwidth),
       style(
         "max-width",
-        position !== "right" && width ? `max(${width}, ${maxwidth})` : maxwidth,
+        position !== "right" && width && !_fitContent
+          ? `max(${width}, ${maxwidth})`
+          : maxwidth,
       ),
       style("padding", _padded ? "var(--goa-space-m)" : "0"),
     )}

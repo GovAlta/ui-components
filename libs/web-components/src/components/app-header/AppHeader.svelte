@@ -1204,7 +1204,7 @@
   .v2.mobile .v2-service-name {
     font: var(--goa-app-header-typography-service-name-mobile);
     color: var(--goa-app-header-color-service-name);
-    margin-top: 5px; /* Visually center single-line service name with logo */
+    margin-top: 6px; /* Visually center single-line service name with logo */
   }
 
   .v2 .v2-secondary-text {

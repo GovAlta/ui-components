@@ -267,7 +267,15 @@ const getStarted = defineCollection({
     description: z.string().optional(),
     // Submenu placement. "intro" and "appendix" are top-level (above and below
     // the grouped sections); "designers" and "developers" are grouped.
-    section: z.enum(["intro", "designers", "developers", "appendix"]),
+    section: z.enum([
+      "intro",
+      "designers",
+      "developers",
+      "qa-testing",
+      "ai-tools-and-resources",
+      "contribute",
+      "out-of-support",
+    ]),
     // Sort order within section.
     order: z.number(),
     status: z.enum(["published", "draft", "deprecated"]).default("published"),

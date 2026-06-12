@@ -37,6 +37,23 @@ const DOCS_COMPONENT_CONTENT_PATH = path.join(
   "docs/src/content/components",
 );
 
+// Components that expose an imperative helper API (e.g. TemporaryNotification.show)
+// are documented from their controller source rather than from element props. Each
+// entry points at that controller file; the parsing lives in the "Static helper
+// methods" section below.
+interface StaticMethodSource {
+  source: string; // path to the controller source file, relative to the workspace root
+  namespace: string; // exported const whose object members are the public methods
+}
+
+const STATIC_METHOD_SOURCES: Record<string, StaticMethodSource> = {
+  "temporary-notification": {
+    source:
+      "libs/common/src/lib/temporary-notification-controller/temporary-notification-controller.ts",
+    namespace: "TemporaryNotification",
+  },
+};
+
 // =============================================================================
 // Output Types (matching content model spec)
 // =============================================================================
@@ -86,6 +103,23 @@ interface ExtractedComponentAPI {
       slots: ExtractedSlot[];
     };
   };
+  staticMethods?: ExtractedStaticMethod[];
+}
+
+interface ExtractedStaticMethodParam {
+  name: string;
+  type: string;
+  values?: string[]; // Allowed values for union types
+  required: boolean;
+  description: string;
+}
+
+interface ExtractedStaticMethod {
+  name: string; // e.g. "show"
+  signature: string; // e.g. "TemporaryNotification.show(message, options)"
+  returnType: string;
+  description: string;
+  params: ExtractedStaticMethodParam[];
 }
 
 // =============================================================================
@@ -2077,6 +2111,237 @@ function findSvelteDeclaringTag(tag: string): string | undefined {
 }
 
 // =============================================================================
+// Static helper methods (imperative APIs that are not element props)
+// =============================================================================
+
+// A few components expose an imperative helper (e.g. TemporaryNotification.show)
+// rather than, or alongside, element props. Everything rendered in the docs is
+// parsed from the controller source so it cannot drift: the method list comes
+// from the exported namespace object, signatures, params, and return types from
+// the function declarations, descriptions from their JSDoc (@param tags for
+// positional params), and option fields from the options type, where members
+// tagged @internal are omitted.
+
+// Resolve a same-file union type alias (e.g. GoabTemporaryNotificationType) to its
+// string-literal members, so a field typed as that alias can show its allowed values.
+function parseTypeAliasUnionValues(
+  typeName: string,
+  sourceFile: ts.SourceFile,
+): string[] | undefined {
+  for (const statement of sourceFile.statements) {
+    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName) continue;
+    if (!ts.isUnionTypeNode(statement.type)) return undefined;
+    const values = statement.type.types
+      .map((member) =>
+        ts.isLiteralTypeNode(member) && ts.isStringLiteral(member.literal)
+          ? member.literal.text
+          : null,
+      )
+      .filter((value): value is string => value !== null);
+    return values.length > 0 ? values : undefined;
+  }
+  return undefined;
+}
+
+// Read the property signatures of a `type X = { ... }` object-literal alias.
+function findTypeLiteralMembers(
+  typeName: string,
+  sourceFile: ts.SourceFile,
+): Map<string, ts.PropertySignature> {
+  const members = new Map<string, ts.PropertySignature>();
+  for (const statement of sourceFile.statements) {
+    if (!ts.isTypeAliasDeclaration(statement) || statement.name.text !== typeName) continue;
+    if (!ts.isTypeLiteralNode(statement.type)) break;
+    for (const member of statement.type.members) {
+      if (ts.isPropertySignature(member) && member.name && ts.isIdentifier(member.name)) {
+        members.set(member.name.text, member);
+      }
+    }
+    break;
+  }
+  return members;
+}
+
+interface NodeJSDocInfo {
+  description: string;
+  internal: boolean;
+  paramDocs: Map<string, string>;
+}
+
+// Read a node's JSDoc via the AST: the description text, whether the node is
+// tagged @internal, and the text of each @param tag keyed by param name.
+function readNodeJSDoc(node: ts.Node): NodeJSDocInfo {
+  const collapse = (text: string | undefined): string => (text ?? "").replace(/\s+/g, " ").trim();
+
+  let description = "";
+  let internal = false;
+  const paramDocs = new Map<string, string>();
+
+  for (const doc of ts.getJSDocCommentsAndTags(node)) {
+    if (ts.isJSDoc(doc)) {
+      const text = collapse(ts.getTextOfJSDocComment(doc.comment));
+      if (text) description = description ? `${description} ${text}` : text;
+    }
+  }
+  for (const tag of ts.getJSDocTags(node)) {
+    if (tag.tagName.text === "internal") internal = true;
+    if (ts.isJSDocParameterTag(tag) && ts.isIdentifier(tag.name)) {
+      paramDocs.set(tag.name.text, collapse(ts.getTextOfJSDocComment(tag.comment)));
+    }
+  }
+  return { description, internal, paramDocs };
+}
+
+// The public method list (and its docs order) is the exported namespace object,
+// e.g. `export const TemporaryNotification = { show, dismiss, setProgress }`.
+function findNamespaceMethodNames(namespace: string, sourceFile: ts.SourceFile): string[] {
+  for (const statement of sourceFile.statements) {
+    if (!ts.isVariableStatement(statement)) continue;
+    for (const declaration of statement.declarationList.declarations) {
+      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== namespace) continue;
+      if (!declaration.initializer || !ts.isObjectLiteralExpression(declaration.initializer)) {
+        return [];
+      }
+      return declaration.initializer.properties
+        .map((property) =>
+          (ts.isShorthandPropertyAssignment(property) || ts.isPropertyAssignment(property)) &&
+          ts.isIdentifier(property.name)
+            ? property.name.text
+            : null,
+        )
+        .filter((name): name is string => name !== null);
+    }
+  }
+  return [];
+}
+
+// Expand an options-bag parameter (typed `Partial<X>` or `X`, where X is an
+// object-literal type alias in the same file) into one row per public field,
+// in the field declaration order. Fields tagged @internal are omitted.
+function expandOptionsBagParam(
+  paramName: string,
+  param: ts.ParameterDeclaration,
+  sourceFile: ts.SourceFile,
+): ExtractedStaticMethodParam[] | undefined {
+  const typeNode = param.type;
+  if (!typeNode || !ts.isTypeReferenceNode(typeNode)) return undefined;
+
+  let aliasName = typeNode.typeName.getText(sourceFile);
+  let isPartial = false;
+  if (aliasName === "Partial" && typeNode.typeArguments?.length === 1) {
+    const inner = typeNode.typeArguments[0];
+    if (!ts.isTypeReferenceNode(inner)) return undefined;
+    aliasName = inner.typeName.getText(sourceFile);
+    isPartial = true;
+  }
+
+  const members = findTypeLiteralMembers(aliasName, sourceFile);
+  if (members.size === 0) return undefined;
+
+  // Every field is optional when the bag is a Partial, and also when the bag
+  // parameter itself can be omitted.
+  const bagOptional = Boolean(param.questionToken || param.initializer);
+
+  const optionParams: ExtractedStaticMethodParam[] = [];
+  for (const [field, member] of members) {
+    const doc = readNodeJSDoc(member);
+    if (doc.internal) continue;
+    const rawType = cleanType(member.type?.getText(sourceFile)?.trim() || "unknown");
+    const values = parseTypeAliasUnionValues(rawType, sourceFile);
+    optionParams.push({
+      name: `${paramName}.${field}`,
+      type: rawType,
+      ...(values ? { values } : {}),
+      required: isPartial || bagOptional ? false : !member.questionToken,
+      description: doc.description,
+    });
+  }
+  return optionParams;
+}
+
+function extractStaticMethods(componentName: string): ExtractedStaticMethod[] {
+  const config = STATIC_METHOD_SOURCES[componentName];
+  if (!config) return [];
+
+  const sourcePath = path.join(WORKSPACE_ROOT, config.source);
+  if (!fs.existsSync(sourcePath)) {
+    console.warn(`  static methods: source not found at ${config.source}`);
+    return [];
+  }
+
+  const content = fs.readFileSync(sourcePath, "utf-8");
+  const sourceFile = createTsSourceFile(sourcePath, content);
+
+  const methodNames = findNamespaceMethodNames(config.namespace, sourceFile);
+  if (methodNames.length === 0) {
+    console.warn(`  static methods: no exported object named ${config.namespace} in ${config.source}`);
+    return [];
+  }
+
+  const declaredFunctions = new Map<string, ts.FunctionDeclaration>();
+  for (const statement of sourceFile.statements) {
+    if (ts.isFunctionDeclaration(statement) && statement.name) {
+      declaredFunctions.set(statement.name.text, statement);
+    }
+  }
+
+  const methods: ExtractedStaticMethod[] = [];
+  for (const methodName of methodNames) {
+    const fn = declaredFunctions.get(methodName);
+    if (!fn) {
+      console.warn(
+        `  static methods: ${config.namespace}.${methodName} has no function declaration`,
+      );
+      continue;
+    }
+
+    const doc = readNodeJSDoc(fn);
+    // An @internal tag hides a method from the docs even when the namespace object exports it.
+    if (doc.internal) continue;
+
+    const params: ExtractedStaticMethodParam[] = [];
+    const signatureArgs: string[] = [];
+
+    for (const param of fn.parameters) {
+      if (!ts.isIdentifier(param.name)) continue;
+      const paramName = param.name.text;
+      signatureArgs.push(paramName);
+
+      const optionParams = expandOptionsBagParam(paramName, param, sourceFile);
+      if (optionParams) {
+        params.push(...optionParams);
+        continue;
+      }
+
+      const rawType = cleanType(param.type?.getText(sourceFile)?.trim() || "unknown");
+      const values = parseTypeAliasUnionValues(rawType, sourceFile);
+      const paramDescription = doc.paramDocs.get(paramName);
+      if (paramDescription === undefined) {
+        console.warn(
+          `  static methods: ${config.namespace}.${methodName} param "${paramName}" has no @param JSDoc`,
+        );
+      }
+      params.push({
+        name: paramName,
+        type: rawType,
+        ...(values ? { values } : {}),
+        required: !param.questionToken && !param.initializer,
+        description: paramDescription ?? "",
+      });
+    }
+
+    methods.push({
+      name: methodName,
+      signature: `${config.namespace}.${methodName}(${signatureArgs.join(", ")})`,
+      returnType: fn.type ? cleanType(fn.type.getText(sourceFile).trim()) : "void",
+      description: doc.description,
+      params,
+    });
+  }
+  return methods;
+}
+
+// =============================================================================
 // Main Extraction
 // =============================================================================
 
@@ -2265,6 +2530,8 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   // Relative path from workspace root
   const relativePath = path.relative(WORKSPACE_ROOT, svelteFilePath);
 
+  const staticMethods = extractStaticMethods(componentName);
+
   return {
     componentSlug: toKebabCase(componentName),
     extractedFrom: relativePath,
@@ -2285,6 +2552,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
         slots: webComponentSlots,
       },
     },
+    ...(staticMethods.length > 0 ? { staticMethods } : {}),
   };
 }
 
@@ -2411,6 +2679,12 @@ function main() {
   console.log("\n" + "═".repeat(50));
   console.log(`Complete: ${successCount} succeeded, ${failCount} failed`);
   console.log(`Output: ${OUTPUT_PATH}\n`);
+
+  // Exit non-zero if any component failed to extract. Without this the process
+  // exits 0 on partial failure, leaving the failed component's committed JSON
+  // untouched, which the docs freshness check (and the pre-commit hook) would
+  // then see as a clean, in-sync diff while extraction is actually broken.
+  process.exitCode = failCount > 0 ? 1 : 0;
 }
 
 main();
