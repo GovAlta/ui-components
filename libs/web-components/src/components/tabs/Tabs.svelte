@@ -351,7 +351,7 @@
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
         if (!skipFocus) {
-          el.focus();
+          el.focus({ preventScroll: true });
         }
       }
     });
