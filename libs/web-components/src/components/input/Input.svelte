@@ -572,6 +572,17 @@
     box-shadow: var(--goa-text-input-border-focus);
   }
 
+
+  /* V2: Vertically center date/time input labels in Safari */
+  .container.v2 input::-webkit-datetime-edit,
+  .container.v2 input::-webkit-date-and-time-value {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-block: 0;
+    margin: 0;
+  }
+
   /* type=range does not have an outline/box-shadow */
   .goa-input.type--range {
     border: none;
