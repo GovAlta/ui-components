@@ -1,0 +1,5 @@
+# Generated docs files: collapse by default in GitHub PR diffs (linguist-generated).
+# Deterministic build outputs (see docs/ARCHITECTURE.md). They stay fully diffable,
+# searchable, and in history; this only hides them by default in the Files Changed tab.
+docs/generated/** linguist-generated=true
+docs/public/search-index.json linguist-generated=true
