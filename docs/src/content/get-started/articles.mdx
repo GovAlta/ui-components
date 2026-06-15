@@ -1,0 +1,26 @@
+---
+id: articles
+title: Articles
+description: Perspectives on design and technology from inside government — exploring the craft of building digital services that truly work for Albertans
+section: intro
+order: 6
+status: published
+---
+import { withBase } from "@/lib/base-url";
+import CardLite from "../../components/CardLite.astro";
+
+<goa-text size="heading-xl" mt="none" mb="m">Articles</goa-text>
+<goa-text size="body-l" mt="none" mb="xl">Perspectives on design and technology from inside government — exploring the craft of building digital services that truly work for Albertans.</goa-text>
+
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "var(--goa-space-xl)" }}>
+  <CardLite
+    title="A two-phase migration: early adopter to production"
+    description="A two-person team joins the early adopter program and migrates twice — first to the experimental library, then to the production release. How they moved fast and what slowed them down."
+    linkTo={withBase(`/get-started/articles/two-phase-migration`)}
+  />
+  <CardLite
+    title="Parallel paths: migration alongside feature development"
+    description="A team of five running a migration while the product was still being built. How they managed the overlap, what coordination overhead looked like, and what they'd do differently."
+    linkTo={withBase(`/get-started/articles/parallel-paths-migration`)}
+  />
+</div>

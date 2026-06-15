@@ -233,13 +233,13 @@ const getStartedNav = await getGetStartedNav();
     margin-bottom: var(--goa-space-xs);
   }
 
-  /* Links */
-  .prose-content :global(a) {
+  /* Links — excludes card components that happen to use <a> as their root */
+  .prose-content :global(a:not(.card-lite):not(.related-card)) {
     color: var(--goa-color-interactive-default);
     text-decoration: underline;
   }
 
-  .prose-content :global(a:hover) {
+  .prose-content :global(a:not(.card-lite):not(.related-card):hover) {
     color: var(--goa-color-interactive-hover);
   }
 

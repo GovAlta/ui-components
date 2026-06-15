@@ -275,6 +275,7 @@ const getStarted = defineCollection({
       "ai-tools-and-resources",
       "contribute",
       "out-of-support",
+      "articles",
     ]),
     // Sort order within section.
     order: z.number(),

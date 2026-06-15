@@ -74,17 +74,17 @@ export async function getGetStartedNav(): Promise<GetStartedNav> {
   const entries = await getCollection("get-started");
   const published = entries.filter((e) => e.data.status !== "deprecated");
 
-  const sections: GetStartedNavSection[] = SECTION_ORDER
-    .filter((slug) => published.some((e) => e.data.section === slug))
-    .map((slug) => {
-      const isGrouped = slug in SECTION_NAMES;
-      return {
-        slug,
-        type: isGrouped ? "grouped" : "flat",
-        name: isGrouped ? SECTION_NAMES[slug] : undefined,
-        pages: bySection(published, slug).map(entryToItem),
-      };
-    });
+  const sections: GetStartedNavSection[] = SECTION_ORDER.filter((slug) =>
+    published.some((e) => e.data.section === slug),
+  ).map((slug) => {
+    const isGrouped = slug in SECTION_NAMES;
+    return {
+      slug,
+      type: isGrouped ? "grouped" : "flat",
+      name: isGrouped ? SECTION_NAMES[slug] : undefined,
+      pages: bySection(published, slug).map(entryToItem),
+    };
+  });
 
   return { sections };
 }
