@@ -1,0 +1,79 @@
+---
+/**
+ * RelatedArticles.astro
+ *
+ * Renders a "Related articles" section at the bottom of an article page.
+ * Matches the visual pattern of Related examples in the examples section.
+ */
+
+interface Article {
+  title: string;
+  url: string;
+}
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+---
+
+{articles.length > 0 && (
+  <section class="related-articles">
+    <h2>Related articles</h2>
+    <div class="related-grid">
+      {articles.map((article) => (
+        <a href={article.url} class="related-card">
+          <span class="related-title">{article.title}</span>
+          <span class="related-category">Migration</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-articles {
+    border-top: 1px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-xl) 0;
+    margin-top: var(--goa-space-xl);
+  }
+
+  .related-articles h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 var(--goa-space-m);
+    color: var(--goa-color-text-default);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--goa-space-m);
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-2xs);
+    padding: var(--goa-space-m);
+    background: var(--goa-color-greyscale-100);
+    border-radius: var(--goa-border-radius-m);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .related-card:hover {
+    background: var(--goa-color-greyscale-200);
+  }
+
+  .related-title {
+    font-weight: 500;
+    color: var(--goa-color-interactive-default);
+  }
+
+  .related-category {
+    font-size: 0.875rem;
+    color: var(--goa-color-text-secondary);
+  }
+</style>

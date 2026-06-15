@@ -2358,6 +2358,42 @@
   },
   {
     "type": "page",
+    "id": "parallel-paths-migration",
+    "title": "Parallel paths: migration alongside feature development",
+    "description": "How the Alberta Childcare Family Portal team managed a design system migration while actively building new features over approximately 2 months",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/parallel-paths-migration"
+  },
+  {
+    "type": "page",
+    "id": "two-phase-migration",
+    "title": "A two-phase migration: early adopter to production",
+    "description": "How the Caregiver Portal team joined the early adopter program and migrated a new product to the updated design system in 7–8 days across two phases",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/two-phase-migration"
+  },
+  {
+    "type": "page",
+    "id": "articles",
+    "title": "Articles",
+    "description": "Perspectives on design and technology from inside government — exploring the craft of building digital services that truly work for Albertans",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/articles"
+  },
+  {
+    "type": "page",
     "id": "automated-accessibility",
     "title": "Automated accessibility",
     "description": "Guidance on using automated accessibility testing tools effectively",
