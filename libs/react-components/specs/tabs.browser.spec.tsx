@@ -812,4 +812,55 @@ describe("Tabs Browser Tests", () => {
       expect(borderLeft).toBe("none");
     });
   });
+
+  // Placed last: this test scrolls the shared page far down to exercise the
+  // scroll-jump fix. Earlier tests rely on history/popstate timing that this
+  // scrolling perturbs, so keep it after them to avoid cross-test interference.
+  describe("bug-3665", () => {
+    it("should not change scroll position when switching tabs", async () => {
+      /**
+       * setCurrentTab() focused the selected tab, which triggered the browser's
+       * scroll-into-view and jumped the page. The fix passes { preventScroll: true }.
+       * With tall content above and below and the tabs only just in view, clicking a
+       * tab must leave window.scrollY unchanged.
+       */
+      const Component = () => {
+        return (
+          <>
+            <div style={{ height: "2000px" }}>Tall content above tabs</div>
+            <GoabTabs testId="test-tabs">
+              <GoabTab heading="Tab 1">Content 1</GoabTab>
+              <GoabTab heading="Tab 2">Content 2</GoabTab>
+            </GoabTabs>
+            <div style={{ height: "2000px" }}>Tall content below tabs</div>
+          </>
+        );
+      };
+
+      const { getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tablist.elements().length).toBe(2);
+      });
+
+      const tabs = tablist.elements();
+
+      // Scroll so the tab row sits just inside the bottom of the viewport.
+      const tabAbsoluteTop = tabs[0].getBoundingClientRect().top + window.scrollY;
+      window.scrollTo(0, tabAbsoluteTop - window.innerHeight + 30);
+
+      const scrollBeforeClick = window.scrollY;
+      expect(scrollBeforeClick).toBeGreaterThan(0);
+
+      // Switch tabs (native click does not auto-scroll the element into view).
+      tabs[1].click();
+
+      await vi.waitFor(() => {
+        expect(tabs[1].getAttribute("aria-selected")).toBe("true");
+      });
+
+      expect(window.scrollY).toBe(scrollBeforeClick);
+    });
+  });
 });
