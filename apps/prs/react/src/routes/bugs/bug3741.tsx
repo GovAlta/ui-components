@@ -6,8 +6,8 @@ import {
   GoabPagination,
   GoabSpacer,
   GoabTable,
+  GoabText,
 } from "@abgov/react-components";
-
 import type { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 
 interface User {
@@ -17,74 +17,22 @@ interface User {
   age: number;
 }
 
-function generateUsers(): User[] {
-  const firstNames = [
-    "Emma",
-    "Liam",
-    "Olivia",
-    "Noah",
-    "Ava",
-    "James",
-    "Sophia",
-    "William",
-    "Isabella",
-    "Oliver",
-    "Mia",
-    "Benjamin",
-    "Charlotte",
-    "Elijah",
-    "Amelia",
-    "Lucas",
-    "Harper",
-    "Mason",
-    "Evelyn",
-    "Logan",
-  ];
-  const lastNames = [
-    "Smith",
-    "Johnson",
-    "Williams",
-    "Brown",
-    "Jones",
-    "Garcia",
-    "Miller",
-    "Davis",
-    "Rodriguez",
-    "Martinez",
-    "Wilson",
-    "Anderson",
-    "Taylor",
-    "Thomas",
-    "Moore",
-    "Jackson",
-    "Martin",
-    "Lee",
-    "Thompson",
-    "White",
-  ];
-  const users: User[] = [];
-  for (let i = 1; i <= 100; i++) {
-    users.push({
-      id: `user-${i}`,
-      firstName: firstNames[(i - 1) % firstNames.length],
-      lastName: lastNames[(i - 1) % lastNames.length],
-      age: 20 + (i % 40),
-    });
-  }
-  return users;
-}
+const FIRST_NAMES = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver"];
+const LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez"];
 
-export function ShowNumberOfResultsPerPage() {
-  const [users] = useState<User[]>(() => generateUsers());
+const USERS: User[] = Array.from({ length: 100 }, (_, i) => ({
+  id: `user-${i + 1}`,
+  firstName: FIRST_NAMES[i % FIRST_NAMES.length],
+  lastName: LAST_NAMES[i % LAST_NAMES.length],
+  age: 20 + ((i + 1) % 40),
+}));
+
+export function Bug3741Route() {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(10);
 
   const offset = (page - 1) * perPage;
-  const pageUsers = users.slice(offset, offset + perPage);
-
-  function changePage(newPage: number) {
-    setPage(newPage);
-  }
+  const pageUsers = USERS.slice(offset, offset + perPage);
 
   function handlePerPageCountChangeEvent(event: GoabDropdownOnChangeDetail) {
     setPage(1);
@@ -92,7 +40,17 @@ export function ShowNumberOfResultsPerPage() {
   }
 
   return (
-    <>
+    <div>
+      <GoabText tag="h1" mt="m" mb="m">
+        Bug #3741: Pagination example not reproducible
+      </GoabText>
+      <GoabText tag="p" mb="l">
+        The "Show number of results per page" example uses a spacer with
+        hSpacing="fill" to push the pagination to the right edge. React always
+        rendered this correctly; this page is the control matching the Angular
+        fix (bugs/3741).
+      </GoabText>
+
       <GoabTable width="100%" mb="xl">
         <thead>
           <tr>
@@ -129,12 +87,14 @@ export function ShowNumberOfResultsPerPage() {
         </GoabBlock>
         <GoabSpacer hSpacing="fill" />
         <GoabPagination
-          itemCount={users.length}
+          itemCount={USERS.length}
           perPageCount={perPage}
           pageNumber={page}
-          onChange={(event) => changePage(event.page)}
+          onChange={(event) => setPage(event.page)}
         />
       </GoabBlock>
-    </>
+    </div>
   );
 }
+
+export default Bug3741Route;

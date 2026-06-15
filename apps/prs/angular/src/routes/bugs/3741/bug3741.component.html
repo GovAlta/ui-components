@@ -1,3 +1,11 @@
+<goab-text tag="h1" mt="m" mb="s">Bug 3741 - Pagination example not reproducible</goab-text>
+<goab-text mb="l">
+  The "Show number of results per page" example uses a spacer with
+  hSpacing="fill" to push the pagination controls to the right edge. In Angular
+  the spacer collapsed to zero width and the controls bunched on the left. After
+  the fix the spacer fills and the pagination sits flush right.
+</goab-text>
+
 <goab-table width="100%" mb="xl">
   <thead>
     <tr>
@@ -7,12 +15,12 @@
     </tr>
   </thead>
   <tbody>
-    @for (user of pageUsers; track $index) {
-    <tr>
-      <td>{{ user.firstName }}</td>
-      <td>{{ user.lastName }}</td>
-      <td>{{ user.age }}</td>
-    </tr>
+    @for (user of pageUsers; track user.id) {
+      <tr>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.age }}</td>
+      </tr>
     }
   </tbody>
 </goab-table>
@@ -32,14 +40,11 @@
     </goab-dropdown>
     <span style="width: 75px">per page</span>
   </goab-block>
-
   <goab-spacer hSpacing="fill"></goab-spacer>
-
   <goab-pagination
     [itemCount]="users.length"
     [perPageCount]="perPage"
     [pageNumber]="page"
     (onChange)="handlePageChange($event)"
-  >
-  </goab-pagination>
+  ></goab-pagination>
 </goab-block>
