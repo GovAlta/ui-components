@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { useSlots } from "vue";
+import { useSlots, withDefaults } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
@@ -16,7 +16,9 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  padded: true,
+});
 const wcProps = useWcProps(props, { 
   booleanProps: ["relative"],
   booleanPropsWithFalse: ["padded"],
