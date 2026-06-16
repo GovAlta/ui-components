@@ -48,7 +48,7 @@ jobs:
 
       - name: Release libs
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
 
