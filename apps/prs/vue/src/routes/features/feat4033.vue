@@ -3,11 +3,9 @@ import { ref } from "vue";
 import {
   GoabAccordion,
   GoabButton,
-  GoabContainer,
+  GoabPopover,
   GoabText,
   GoabBlock,
-  GoabDetails,
-  GoabCallout,
 } from "@abgov/vue-components";
 import type { GoabButtonType, GoabCalloutType } from "@abgov/ui-components-common";
 
@@ -35,14 +33,18 @@ const logEvent = (name: string) => {
     >This page demonstrates Vue wrapper components for testing and review.</GoabText
   >
   <GoabBlock gap="xl" direction="column" width="100%">
-    <GoabButton
-      v-for="type in buttonTypes"
-      :key="type"
-      :type="type"
-      @onClick="logEvent('Clicked ' + type + ' button')"
-    >
-      {{ type }} button
-    </GoabButton>
+    <GoabText tag="h2" size="heading-m">Basic component</GoabText>
+    <GoabBlock gap="m">
+      <GoabButton
+        v-for="type in buttonTypes"
+        :key="type"
+        :type="type"
+        @onClick="logEvent('Clicked ' + type + ' button')"
+      >
+        {{ type }} button
+      </GoabButton>
+    </GoabBlock>
+    <GoabText tag="h2" size="heading-m">Component with a named template</GoabText>
     <GoabAccordion heading="Accordion with actions">
       <template #actions>
         <GoabButton type="primary" size="compact"> View all </GoabButton>
@@ -50,25 +52,18 @@ const logEvent = (name: string) => {
       <GoabText mt="0" mb="0">This is the content of the accordion.</GoabText>
     </GoabAccordion>
 
-    <GoabContainer type="non-interactive" mb="m">
-      <GoabText mt="0" mb="0">Non-interactive content container</GoabText>
-    </GoabContainer>
-    <GoabContainer type="interactive">
-      <GoabText mt="0" mb="0">Interactive container</GoabText>
-    </GoabContainer>
-    <GoabDetails heading="Details">
-      <GoabText
-        >This content is revealed when the details component is expanded.</GoabText
-      >
-    </GoabDetails>
-    <GoabCallout
-      v-for="type in calloutTypes"
-      :key="type"
-      :type="type"
-      mb="m"
-      heading="Callout"
-    >
-      <GoabText mt="0" mb="0">{{ type }} callout</GoabText>
-    </GoabCallout>
+    <GoabText tag="h2" size="heading-m">Component with a boolean</GoabText>
+    <GoabPopover>
+      <template #target>
+        <GoabButton type="primary">Open popover with padding</GoabButton>
+      </template>
+      <GoabText mt="0" mb="0">This is the content of the popover.</GoabText>
+    </GoabPopover>
+    <GoabPopover :padded="false">
+      <template #target>
+        <GoabButton type="primary">Open popover without padding</GoabButton>
+      </template>
+      <GoabText mt="0" mb="0">This is the content of the popover.</GoabText>
+    </GoabPopover>
   </GoabBlock>
 </template>
