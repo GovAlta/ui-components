@@ -1,0 +1,30 @@
+<goab-text tag="h1" mt="m" mb="m">Bug 3665 - Tabs: page jumps when switching tabs</goab-text>
+<goab-text mb="l">
+  Switching tabs should not move the viewport. Previously setCurrentTab() called el.focus()
+  on the selected tab, which triggered the browser's scroll-into-view behavior and jumped the
+  page. Scroll down so the tabs are partially visible, then switch the framework tab. The page
+  should now stay in place.
+</goab-text>
+
+<!-- Tall spacer so the tabs sit below the fold and a jump would be obvious. -->
+<div style="height: 80vh; display: flex; align-items: flex-end;">
+  <goab-text>Scroll down to the tabs below.</goab-text>
+</div>
+
+<goab-tabs>
+  <goab-tab heading="React">
+    <div style="height: 60vh;">
+      <goab-text>React content. Switch to Angular or Web Components.</goab-text>
+    </div>
+  </goab-tab>
+  <goab-tab heading="Angular">
+    <div style="height: 60vh;">
+      <goab-text>Angular content. The page should not jump.</goab-text>
+    </div>
+  </goab-tab>
+  <goab-tab heading="Web Components">
+    <div style="height: 60vh;">
+      <goab-text>Web Components content. The page should not jump.</goab-text>
+    </div>
+  </goab-tab>
+</goab-tabs>

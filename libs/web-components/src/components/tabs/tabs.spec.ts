@@ -109,6 +109,24 @@ describe("Tabs", () => {
     });
   });
 
+  it("should focus the selected tab with preventScroll to avoid page jump", async () => {
+    const { container } = render(Tabs);
+
+    const tab2Link = (await waitFor(() => {
+      const link = container.querySelector("a#tab-2") as HTMLElement;
+      expect(link).toBeTruthy();
+      return link;
+    })) as HTMLElement;
+
+    const focusSpy = vi.spyOn(tab2Link, "focus");
+
+    await fireEvent.click(tab2Link);
+
+    await waitFor(() => {
+      expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+    });
+  });
+
   it("should select the last tab if the tab exceeds the number of tabs", async () => {
     const result = render(Tabs, { initialtab: 3 });
 
