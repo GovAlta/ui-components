@@ -23,6 +23,7 @@
       ],
       "@abgov/style": ["dist/libs/web-components/index.css"],
       "@abgov/ui-components-common": ["libs/common/src/index.ts"],
+      "@abgov/vue-components": ["libs/vue-components/src/index.ts"],
       "@abgov/web-components": ["dist/libs/web-components/index.js"]
     }
   },

@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 
 import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import react from "@vitejs/plugin-react";
+import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { playwright } from "@vitest/browser-playwright";
 
@@ -114,6 +115,31 @@ export default defineConfig({
               inline: [/@abgov\/ui-components-common/],
             },
           },
+        },
+      },
+      {
+        plugins: [
+          vue({
+            template: {
+              compilerOptions: {
+                isCustomElement: (tag) => tag.startsWith("goa-"),
+              },
+            },
+          }),
+        ],
+        resolve: {
+          alias: {
+            "@abgov/ui-components-common": resolve(
+              __dirname,
+              "./libs/common/src/index.ts",
+            ),
+          },
+        },
+        test: {
+          name: "vue-unit",
+          globals: true,
+          environment: "jsdom",
+          include: ["libs/vue-components/src/**/*.{test,spec}.ts"],
         },
       },
     ],
