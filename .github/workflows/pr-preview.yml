@@ -59,6 +59,12 @@ jobs:
           PREVIEW_BASE_ANGULAR: /ui-components/pr-preview-angular/pr-${{ github.event.number }}/
         run: npx nx run angular-prs:build:production --base-href=$PREVIEW_BASE_ANGULAR
 
+      - name: Build Vue playground
+        if: github.event.action != 'closed'
+        env:
+          PREVIEW_BASE_VUE: /ui-components/pr-preview-vue/pr-${{ github.event.number }}/
+        run: npx nx run vue-prs:build:production
+
       - name: Deploy docs preview
         uses: rossjrw/pr-preview-action@v1
         with:
@@ -83,6 +89,14 @@ jobs:
           umbrella-dir: pr-preview-angular
           action: auto
 
+      - name: Deploy Vue playground preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist/apps/prs/vue
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview-vue
+          action: auto
+
       - name: Post consolidated preview comment
         if: github.event.action != 'closed'
         uses: marocchino/sticky-pull-request-comment@v2
@@ -96,6 +110,7 @@ jobs:
             | Docs | https://govalta.github.io/ui-components/pr-preview/pr-${{ github.event.number }}/ |
             | React playground | https://govalta.github.io/ui-components/pr-preview-react/pr-${{ github.event.number }}/ |
             | Angular playground | https://govalta.github.io/ui-components/pr-preview-angular/pr-${{ github.event.number }}/ |
+            | Vue playground | https://govalta.github.io/ui-components/pr-preview-vue/pr-${{ github.event.number }}/ |
 
             Built from commit ${{ github.event.pull_request.head.sha }}. Previews are removed automatically when this PR closes.
 
