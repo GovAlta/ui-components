@@ -25,6 +25,7 @@
     "serve:docs": "nx run docs:serve",
     "serve:prs:angular": "node scripts/generate-angular-prs-route-manifest.js && nx run angular-prs:serve:development",
     "serve:prs:react": "nx run react-prs:serve:development",
+    "serve:prs:vue": "nx run vue-prs:serve:development",
     "serve:prs:web": "nx run web-prs:serve:development",
     "test:angular": "nx test angular-components",
     "test:browser": "vitest --run --project=*-browser",
@@ -82,10 +83,12 @@
     "@typescript-eslint/utils": "7.18.0",
     "@vitejs/plugin-react": "4.7.0",
     "@vitejs/plugin-react-swc": "3.11.0",
+    "@vitejs/plugin-vue": "^6.0.7",
     "@vitest/browser": "4.1.8",
     "@vitest/browser-playwright": "4.1.2",
     "@vitest/coverage-v8": "4.1.2",
     "@vitest/ui": "4.1.2",
+    "@vue/test-utils": "^2.4.11",
     "autoprefixer": "10.4.27",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
@@ -123,7 +126,9 @@
     "vite-plugin-dts": "4.5.4",
     "vitest": "4.1.2",
     "vitest-browser-react": "1.0.1",
-    "vitest-dom": "0.1.1"
+    "vitest-dom": "0.1.1",
+    "vue": "^3.5.35",
+    "vue-tsc": "^3.3.4"
   },
   "dependencies": {
     "@angular/animations": "21.2.6",
@@ -150,6 +155,7 @@
     "style-dictionary": "5.4.0",
     "svelte-routing": "2.13.0",
     "tslib": "2.8.1",
+    "vue-router": "^4.6.4",
     "zone.js": "0.16.1"
   },
   "overrides": {
