@@ -3,11 +3,7 @@ export { default as GoabAppHeader } from "./lib/app-header/app-header.vue";
 export { default as GoabAppHeaderMenu } from "./lib/app-header-menu/app-header-menu.vue";
 export { default as GoabBadge } from "./lib/badge/badge.vue";
 export { default as GoabButton } from "./lib/button/button.vue";
-export { default as GoabCard } from "./lib/card/card.vue";
-export { default as GoabCardActions } from "./lib/card/card-actions.vue";
-export { default as GoabCardContent } from "./lib/card/card-content.vue";
-export { default as GoabCardImage } from "./lib/card/card-image.vue";
-export { default as GoabCardGroup } from "./lib/card/card-group.vue";
+
 export { default as GoabDetails } from "./lib/details/details.vue";
 export { default as GoabDrawer } from "./lib/drawer/drawer.vue";
 export { default as GoabFilterChip } from "./lib/filter-chip/filter-chip.vue";
@@ -27,7 +23,7 @@ export { default as GoabTableSortHeader } from "./lib/table/table-sort-header.vu
 export { default as GoabTooltip } from "./lib/tooltip/tooltip.vue";
 export { default as GoabDivider } from "./lib/divider/divider.vue";
 export { default as GoabSkeleton } from "./lib/skeleton/skeleton.vue";
-export { default as GoabSpinner } from "./lib/spinner/spinner.vue";
+
 export { default as GoabLinearProgress } from "./lib/linear-progress/linear-progress.vue";
 export { default as GoabCircularProgress } from "./lib/circular-progress/circular-progress.vue";
 export { default as GoabPages } from "./lib/pages/pages.vue";
@@ -48,20 +44,19 @@ export { default as GoabDropdownItem } from "./lib/dropdown/dropdown-item.vue";
 export { default as GoabRadioGroup } from "./lib/radio-group/radio-group.vue";
 export { default as GoabRadioItem } from "./lib/radio/radio-item.vue";
 export { default as GoabFormItem } from "./lib/form-item/form-item.vue";
-export { default as GoabFormStepper } from "./lib/form-stepper/form-stepper.vue";
-export { default as GoabFormStep } from "./lib/form-step/form-step.vue";
+
 export { default as GoabButtonGroup } from "./lib/button-group/button-group.vue";
 export { default as GoabCalendar } from "./lib/calendar/calendar.vue";
 export { default as GoabSideMenu } from "./lib/side-menu/side-menu.vue";
 export { default as GoabSideMenuGroup } from "./lib/side-menu-group/side-menu-group.vue";
 export { default as GoabSideMenuHeading } from "./lib/side-menu-heading/side-menu-heading.vue";
 export { default as GoabCheckboxList } from "./lib/checkbox-list/checkbox-list.vue";
-export { default as GoabChip } from "./lib/chip/chip.vue";
+
 export { default as GoabDatePicker } from "./lib/date-picker/date-picker.vue";
 export { default as GoabFileUploadInput } from "./lib/file-upload-input/file-upload-input.vue";
 export { default as GoabFileUploadCard } from "./lib/file-upload-card/file-upload-card.vue";
 export { default as GoabLink } from "./lib/link/link.vue";
-export { default as GoabLinkButton } from "./lib/link-button/link-button.vue";
+
 export { default as GoabMenuButton } from "./lib/menu-button/menu-button.vue";
 export { default as GoabMenuAction } from "./lib/menu-button/menu-action.vue";
 export { default as GoabModal } from "./lib/modal/modal.vue";
