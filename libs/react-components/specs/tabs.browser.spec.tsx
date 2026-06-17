@@ -1,7 +1,6 @@
 import { render } from "vitest-browser-react";
 
 import { GoabTabs, GoabTab } from "../src";
-import { GoabTabs, GoabTab } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 import { GoabBadge } from "../src/lib/badge/badge";
@@ -810,6 +809,71 @@ describe("Tabs Browser Tests", () => {
       const tabsDiv = tabs.elements()[0].parentElement!;
       const borderLeft = getComputedStyle(tabsDiv).borderLeftStyle;
       expect(borderLeft).toBe("none");
+    });
+  });
+
+  describe("bug-3921", () => {
+    it("should keep segmented indicator aligned when a long heading wraps on resize", async () => {
+      // Wide enough that the long heading fits on a single line.
+      await page.viewport(1024, 600);
+
+      // Mirrors the playground: a long heading that wraps when the container narrows.
+      const Component = () => (
+        <GoabTabs variant="segmented" testId="test-tabs">
+          <GoabTab heading="Day">Daily view</GoabTab>
+          <GoabTab heading="Week">Weekly view</GoabTab>
+          <GoabTab heading="Month">Monthly view</GoabTab>
+          <GoabTab heading="Quarter">Quarterly view</GoabTab>
+          <GoabTab heading="Year">Yearly view</GoabTab>
+          <GoabTab heading="Custom reporting period with a very long heading">
+            Custom reporting period view
+          </GoabTab>
+          <GoabTab heading="Archive">Archived view</GoabTab>
+          <GoabTab heading="Forecast">Forecast view</GoabTab>
+        </GoabTabs>
+      );
+
+      const { getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tablist.elements().length).toBe(8);
+      });
+
+      const tabs = tablist.elements();
+      // Select the long-heading tab so its size changes when the heading wraps.
+      const longHeadingTab = tabs[5];
+      await longHeadingTab.click();
+
+      const tabsContainer = tabs[0].parentElement!;
+
+      const getIndicatorLeft = () =>
+        parseFloat(tabsContainer.style.getPropertyValue("--segmented-indicator-left"));
+      const getIndicatorWidth = () =>
+        parseFloat(tabsContainer.style.getPropertyValue("--segmented-indicator-width"));
+
+      await vi.waitFor(() => {
+        expect(getIndicatorWidth()).toBeGreaterThan(0);
+      });
+
+      const heightBeforeResize = longHeadingTab.getBoundingClientRect().height;
+
+      // Narrow the viewport so the long heading wraps to multiple lines,
+      // growing the tab's height and shifting its position.
+      await page.viewport(480, 600);
+
+      await vi.waitFor(() => {
+        // Confirm the heading actually wrapped, otherwise this would not
+        // exercise the dynamic-resize behavior the fix targets.
+        expect(longHeadingTab.getBoundingClientRect().height).toBeGreaterThan(
+          heightBeforeResize,
+        );
+
+        const containerRect = tabsContainer.getBoundingClientRect();
+        const tabRect = longHeadingTab.getBoundingClientRect();
+        expect(getIndicatorLeft()).toBeCloseTo(tabRect.left - containerRect.left - 1, 0);
+        expect(getIndicatorWidth()).toBeCloseTo(tabRect.width, 0);
+      });
     });
   });
 

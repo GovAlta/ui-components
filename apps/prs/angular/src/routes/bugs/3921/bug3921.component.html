@@ -1,0 +1,21 @@
+<h1>3921 - Segmented tab dynamic indicator</h1>
+<p>Resize the browser window. The active tab indicator background should follow the selected tab as the layout reflows.</p>
+
+<h2>Many tabs including a long heading</h2>
+<goab-tabs variant="segmented" testId="bug3921-tabs">
+  <goab-tab heading="Day">Daily view</goab-tab>
+  <goab-tab heading="Week">Weekly view</goab-tab>
+  <goab-tab heading="Month">Monthly view</goab-tab>
+  <goab-tab heading="Quarter">Quarterly view</goab-tab>
+  <goab-tab heading="Year">Yearly view</goab-tab>
+  <goab-tab heading="Custom reporting period with a very long heading">Custom reporting period view</goab-tab>
+  <goab-tab heading="Archive">Archived view</goab-tab>
+  <goab-tab heading="Forecast">Forecast view</goab-tab>
+</goab-tabs>
+
+<h2>Simple three-tab example</h2>
+<goab-tabs variant="segmented">
+  <goab-tab heading="Tab one">Content one</goab-tab>
+  <goab-tab heading="Tab two">Content two</goab-tab>
+  <goab-tab heading="Tab three">Content three</goab-tab>
+</goab-tabs>

@@ -36,6 +36,7 @@
   let _segmentedTransitionDuration: number = 0;
   let _previousTabIndex: number = 1;
   let _visibilityObserver: IntersectionObserver | null = null;
+  let _resizeObserver: ResizeObserver | null = null;
 
   const MIN_TRANSITION_DURATION = 200;
   const DURATION_PER_PIXEL = 0.2;
@@ -62,6 +63,10 @@
     if (_visibilityObserver) {
       _visibilityObserver.disconnect();
       _visibilityObserver = null;
+    }
+    if (_resizeObserver) {
+      _resizeObserver.disconnect();
+      _resizeObserver = null;
     }
   });
 
@@ -244,6 +249,16 @@
             }
           });
           _visibilityObserver.observe(_tabsEl);
+        }
+
+        // The indicator is positioned absolutely from a one-time measurement, so it
+        // drifts out of alignment when the tabs reflow (long heading wraps, window
+        // resize). Re-measure whenever the container's size changes.
+        if (_tabsEl && !_resizeObserver) {
+          _resizeObserver = new ResizeObserver(() => {
+            updateSegmentedIndicatorPosition({ withAnimation: false });
+          });
+          _resizeObserver.observe(_tabsEl);
         }
       });
     }
