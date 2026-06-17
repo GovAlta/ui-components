@@ -14,14 +14,8 @@ import {
   GoabButtonGroup,
   GoabCalendar,
   GoabCallout,
-  GoabCard,
-  GoabCardActions,
-  GoabCardContent,
-  GoabCardImage,
-  GoabCardGroup,
   GoabCheckbox,
   GoabCheckboxList,
-  GoabChip,
   GoabCircularProgress,
   GoabContainer,
   GoabDataGrid,
@@ -35,8 +29,6 @@ import {
   GoabFileUploadInput,
   GoabFilterChip,
   GoabFormItem,
-  GoabFormStep,
-  GoabFormStepper,
   GoabGrid,
   GoabHeroBanner,
   GoabIcon,
@@ -61,7 +53,6 @@ import {
   GoabSideMenuHeading,
   GoabSkeleton,
   GoabSpacer,
-  GoabSpinner,
   GoabTab,
   GoabTable,
   GoabTableSortHeader,
@@ -92,8 +83,6 @@ import {
   GoabFileUploadInputOnSelectFileDetail,
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
-  GoabFormStepStatus,
-  GoabFormStepperOnChangeDetail,
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
@@ -104,8 +93,6 @@ import {
   GoabRadioGroupOnChangeDetail,
   GoabSkeletonSize,
   GoabSkeletonType,
-  GoabSpinnerSize,
-  GoabSpinnerType,
   GoabTabsOnChangeDetail,
   GoabTextColor,
   GoabTextSize,
@@ -135,12 +122,9 @@ const DATE_PICKER_INPUTS: GoabDatePickerInputType[] = ["calendar", "input"];
 const DROPDOWN_MOUNT_TYPES: GoabDropdownItemMountType[] = ["append", "prepend", "reset"];
 const FILTER_CHIP_THEMES: GoabFilterChipTheme[] = ["outline", "filled"];
 const FORM_ITEM_LABEL_SIZES: GoabFormItemLabelSize[] = ["regular", "large"];
-const FORM_STEP_STATUSES: GoabFormStepStatus[] = ["not-started", "incomplete", "complete"];
 const ICON_BUTTON_VARIANTS: GoabIconButtonVariant[] = ["color", "nocolor", "dark", "light", "destructive"];
 const ICON_TYPES: GoabIconType[] = ["home", "alert", "checkmark-circle", "information-circle", "menu"];
 const POPOVER_POSITIONS: GoabPopoverPosition[] = ["auto", "above", "below"];
-const SPINNER_TYPES: GoabSpinnerType[] = ["infinite", "progress"];
-const SPINNER_SIZES: GoabSpinnerSize[] = ["small", "medium", "large", "xlarge"];
 const NOTIFICATION_TYPES: GoabNotificationType[] = ["information", "important", "emergency", "event"];
 const MODAL_CALLOUT_VARIANTS: GoabModalCalloutVariant[] = ["information", "important", "emergency", "success", "event"];
 const SKELETON_TYPES: GoabSkeletonType[] = ["text", "title", "text-small", "avatar", "header", "paragraph", "thumbnail", "card", "profile"];
@@ -171,12 +155,10 @@ const textareaValue = ref("Sample multiline text\nsecond line");
 const calendarSelectedDate = ref<string | undefined>();
 const paginationState = reactive({ page: 1, perPage: 10, total: 75 });
 const tabsState = ref(1);
-const formStepperState = ref(-1);
 const drawerState = reactive({ open: false, position: "right" as GoabDrawerPosition });
 const modalOpen = ref(false);
 const notificationDismissed = ref(false);
 const accordionLastToggle = ref<{ heading: string; open: boolean }>();
-const chipClicks = ref(0);
 const filterChipClicks = ref(0);
 const fileUploadCardEvents = ref<string[]>([]);
 const fileUploadInputFiles = ref<string[]>([]);
@@ -268,27 +250,6 @@ const badge = ref();
           </GoabOneColumnLayout>
         </GoabContainer>
 
-        <GoabContainer type="interactive" padding="relaxed">
-          <GoabText tag="h3" size="heading-s">Card image &amp; actions</GoabText>
-          <GoabCard>
-            <GoabCardImage src="https://picsum.photos/600/200?random=1" height="200" />
-            <GoabCardContent>
-              <GoabText tag="p" size="body-m">Card with image and actions slots.</GoabText>
-            </GoabCardContent>
-            <GoabCardActions>
-              <GoabButton type="secondary" @onClick="logEvent('card.action', { action: 'preview' })">Preview</GoabButton>
-              <GoabButton type="primary" @onClick="logEvent('card.action', { action: 'approve' })">Approve</GoabButton>
-            </GoabCardActions>
-          </GoabCard>
-          <GoabCardGroup>
-            <GoabCard>
-              <GoabCardContent><GoabText tag="p" size="body-m">Card in a group</GoabText></GoabCardContent>
-            </GoabCard>
-            <GoabCard>
-              <GoabCardContent><GoabText tag="p" size="body-m">Second card</GoabText></GoabCardContent>
-            </GoabCard>
-          </GoabCardGroup>
-        </GoabContainer>
 
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">Spacers &amp; Pages</GoabText>
@@ -388,15 +349,6 @@ const badge = ref();
           </GoabGrid>
         </GoabContainer>
 
-        <GoabContainer type="interactive" padding="relaxed">
-          <GoabText tag="h3" size="heading-s">Chips</GoabText>
-          <GoabBlock gap="m" direction="row" alignment="center">
-            <GoabChip content="Default chip" @onClick="chipClicks++; logEvent('chip.click', { label: 'default' })" />
-            <GoabChip content="Leading icon" leadingIcon="information-circle" iconTheme="filled" @onClick="chipClicks++; logEvent('chip.click', { label: 'leading icon' })" />
-            <GoabChip content="Deletable error" deletable error @onClick="chipClicks++; logEvent('chip.click', { label: 'deletable' })" />
-          </GoabBlock>
-          <GoabText tag="p" size="body-s">Clicks tracked: {{ chipClicks }}</GoabText>
-        </GoabContainer>
 
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">Filter chips</GoabText>
@@ -498,18 +450,6 @@ const badge = ref();
           </GoabGrid>
         </GoabContainer>
 
-        <GoabContainer type="interactive" padding="relaxed">
-          <GoabText tag="h3" size="heading-s">Form stepper</GoabText>
-          <GoabFormStepper :step="formStepperState" @onChange="(detail: GoabFormStepperOnChangeDetail) => { formStepperState = detail.step; logEvent('formStepper.change', detail); }">
-            <GoabFormStep v-for="(status, index) in FORM_STEP_STATUSES" :key="index" :text="'Step ' + (index + 1)" :status="status" />
-          </GoabFormStepper>
-          <GoabPages :current="formStepperState" mb="3xl">
-            <div>Page 1 content</div>
-            <div>Page 2 content</div>
-            <div>Page 3 content</div>
-          </GoabPages>
-          <GoabText tag="p" size="body-s" mt="s">Active step: {{ formStepperState }}</GoabText>
-        </GoabContainer>
       </GoabBlock>
     </GoabDetails>
 
@@ -565,10 +505,6 @@ const badge = ref();
               <GoabText tag="div" size="body-s" mt="xs">Linear Progress</GoabText>
               <GoabLinearProgress :progress="75" ariaLabel="Determinate" />
               <GoabLinearProgress ariaLabel="Indeterminate" />
-            </GoabBlock>
-            <GoabBlock direction="column" gap="xs">
-              <GoabText tag="span" size="body-m">Spinner</GoabText>
-              <GoabSpinner v-for="(type, index) in SPINNER_TYPES" :key="type + '-' + index" :type="type" :size="SPINNER_SIZES[index % SPINNER_SIZES.length]" />
             </GoabBlock>
             <GoabBlock direction="column" gap="xs">
               <GoabText tag="span" size="body-m">Skeletons</GoabText>
