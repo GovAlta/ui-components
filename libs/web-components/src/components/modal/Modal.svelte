@@ -43,15 +43,9 @@
   // *******
 
   let _rootEl: HTMLElement | null = null;
-  let _scrollPos: "top" | "middle" | "bottom" | null = "top";
-  let _scrollEl: HTMLElement | undefined;
-  let _headerEl: HTMLElement | undefined;
   let _isOpen: boolean = false;
-  let _actionsHeight: number;
   let _headingSlotHasContent = false;
   let _actionsSlotHasContent = false;
-  let _headerHeight: number;
-  let _edgeMargin: number = 128; //64px top edge + 64px bottom edge
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -80,12 +74,6 @@
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
   // DDIDS-1288
   $: setTimeout(() => (_isOpen = toBoolean(open)), 1);
-
-  // Show the shadow at the top of the content after scrolling down
-  $: if (_isOpen && _scrollEl) {
-    const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
-    _scrollPos = hasScroll ? "top" : null;
-  }
 
   $: _transitionTime =
     transition === "none" ? 0 : transition === "slow" ? 400 : 200;
@@ -188,25 +176,6 @@
         break;
     }
   };
-
-  function handleScroll(e: CustomEvent) {
-    const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
-    if (!_isOpen || !hasScroll) return;
-
-    // top
-    if (e.detail.scrollTop == 0) {
-      _scrollPos = "top";
-    } else if (
-      // bottom
-      Math.abs(
-        e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight,
-      ) < 1
-    ) {
-      _scrollPos = "bottom";
-    } else {
-      _scrollPos = "middle";
-    }
-  }
 </script>
 
 {#if _isOpen}
@@ -216,8 +185,8 @@
       in:fade={{ duration: _transitionTime }}
       out:fade={{ delay: _transitionTime, duration: _transitionTime }}
       data-testid={testid}
-      class={`modal ${_scrollPos ?? ""}`}
-      style={`--maxwidth: ${maxwidth}; --actions-height: ${_actionsHeight}px; --header-height: ${_headerHeight}`}
+      class="modal"
+      style={`--maxwidth: ${maxwidth}`}
       role="presentation"
       bind:this={_rootEl}
     >
@@ -244,70 +213,63 @@
           </div>
         {/if}
         <div class="content">
-          <header
-            bind:this={_headerEl}
-            class:has-content={_headerHasContent}
-            class:callout={calloutvariant !== null}
-            class={version === "2" && calloutvariant ? calloutvariant : ""}
-            bind:clientHeight={_headerHeight}
-          >
-            <div class="modal-heading-content">
-              {#if version === "2" && _iconType}
-                <goa-icon type={_iconType} size="medium" theme="filled" />
-              {/if}
-              <div
-                data-testid="modal-title"
-                class="modal-title"
-                id="goa-modal-heading"
-                aria-label={_headingExists ? undefined : "Modal"}
-              >
-                {#if heading}
-                  {heading}
-                {:else if $$slots.heading}
-                  <slot name="heading" />
-                {/if}
-              </div>
-            </div>
-            {#if _isClosable}
-              <div class="modal-close">
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <goa-icon-button
-                  size="medium"
-                  data-ignore-focus="true"
-                  data-testid="modal-close-button"
-                  arialabel="Close the modal"
-                  icon="close"
-                  theme="filled"
-                  on:click={close}
-                  variant="dark"
-                />
-              </div>
-            {/if}
-          </header>
-          <div data-testid="modal-content" class="modal-content">
-            <goa-scrollable
-              direction="vertical"
-              hpadding="var(--scrollable-padding)"
-              maxheight="calc(100vh - {_headerHeight}px - var(--goa-space-xl) - {_actionsHeight}px - {_edgeMargin}px)"
-              bind:this={_scrollEl}
-              on:_scroll={handleScroll}
+          <goa-scroll-panel>
+            <header
+              slot="header"
+              class:has-content={_headerHasContent}
+              class:callout={calloutvariant !== null}
+              class={version === "2" && calloutvariant ? calloutvariant : ""}
             >
+              <div class="modal-heading-content">
+                {#if version === "2" && _iconType}
+                  <goa-icon type={_iconType} size="medium" theme="filled" />
+                {/if}
+                <div
+                  data-testid="modal-title"
+                  class="modal-title"
+                  id="goa-modal-heading"
+                  aria-label={_headingExists ? undefined : "Modal"}
+                >
+                  {#if heading}
+                    {heading}
+                  {:else if $$slots.heading}
+                    <slot name="heading" />
+                  {/if}
+                </div>
+              </div>
+              {#if _isClosable}
+                <div class="modal-close">
+                  <!-- svelte-ignore a11y-click-events-have-key-events -->
+                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <goa-icon-button
+                    size="medium"
+                    data-ignore-focus="true"
+                    data-testid="modal-close-button"
+                    arialabel="Close the modal"
+                    icon="close"
+                    theme="filled"
+                    on:click={close}
+                    variant="dark"
+                  />
+                </div>
+              {/if}
+            </header>
+            <div data-testid="modal-content" class="modal-content">
               <slot name="content">
                 <slot />
               </slot>
-            </goa-scrollable>
-          </div>
-          <div
-            bind:clientHeight={_actionsHeight}
-            class="modal-actions"
-            class:empty-actions={!_actionsSlotHasContent}
-            data-testid="modal-actions"
-          >
-            {#if $$slots.actions}
-              <slot name="actions" />
-            {/if}
-          </div>
+            </div>
+            <div
+              slot="footer"
+              class="modal-actions"
+              class:empty-actions={!_actionsSlotHasContent}
+              data-testid="modal-actions"
+            >
+              {#if $$slots.actions}
+                <slot name="actions" />
+              {/if}
+            </div>
+          </goa-scroll-panel>
         </div>
       </div>
     </div>
@@ -444,16 +406,9 @@
     }
 
     .modal-content {
-      margin: var(--goa-modal-content-margin-mobile, 0 -1.5rem);
-      padding: var(--goa-modal-content-padding, 0);
+      margin: 0;
+      padding: 0 var(--goa-modal-scrollable-padding-mobile, var(--goa-space-m));
       box-shadow: none;
-    }
-
-    :host {
-      --scrollable-padding: var(
-        --goa-modal-scrollable-padding-mobile,
-        var(--goa-scrollable-padding-mobile)
-      );
     }
 
     /* V2 Mobile Overrides */
@@ -471,7 +426,7 @@
     .v2 .modal-content {
       padding: var(
         --goa-modal-content-padding-mobile,
-        var(--goa-space-l) var(--goa-space-m) var(--goa-space-xl)
+        var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl)
           var(--goa-space-m)
       );
     }
@@ -490,15 +445,16 @@
     }
 
     .modal-content {
-      margin: var(--goa-modal-content-margin, 0 -2rem);
-      padding: var(--goa-modal-content-padding, 0);
+      margin: 0;
+      padding: 0 var(--goa-modal-scrollable-padding-desktop, var(--goa-space-l));
       box-shadow: none;
     }
 
-    :host {
-      --scrollable-padding: var(
-        --goa-modal-scrollable-padding-desktop,
-        var(--goa-scrollable-padding-desktop)
+    .v2 .modal-content {
+      padding: var(
+        --goa-modal-content-padding-desktop,
+        var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl)
+          var(--goa-space-l)
       );
     }
   }
@@ -517,13 +473,32 @@
     border: none;
   }
 
+  /* Bound the pane so scroll-panel inside has a flex height context. 160px =
+     128px edge margin (64px top + 64px bottom) + 32px (matches the prior V1
+     maxheight calc's extra --goa-space-xl term), */
+  .modal-pane {
+    max-height: calc(100vh - 160px);
+    overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  goa-scroll-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
   .modal-content :global(::slotted(:last-child)) {
     margin-bottom: var(--goa-space-m) !important;
   }
-
   /* V2: Remove margins from slotted content to prevent spacing issues */
-  .v2 .modal-content :global(::slotted(*)) {
-    margin: 0 !important;
+  .v2 .modal-content :global(::slotted(:first-child)) {
+    margin-top: 0 !important;
   }
 
   .modal-title {
@@ -551,20 +526,6 @@
   /* V2: Empty actions should take no space */
   .v2 .modal-actions.empty-actions {
     padding: 0;
-  }
-
-  .modal.top .modal-content {
-    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
-  }
-
-  .modal.bottom .modal-content {
-    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3);
-  }
-
-  .modal.middle .modal-content {
-    box-shadow:
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
   }
 
   /* V2 Callout Styles */

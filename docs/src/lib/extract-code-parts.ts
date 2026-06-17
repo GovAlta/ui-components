@@ -290,6 +290,17 @@ export function extractAngularClassBody(tsCode: string): string | undefined {
   // If it's empty or just whitespace, return undefined
   if (!classBody.trim()) return undefined;
 
+  // Preserve any import statements that precede the class so the snippet shows
+  // where injected services and utilities come from, matching the React block
+  // (which renders its imports). The `export class` wrapper itself stays stripped.
+  const beforeClass = tsCode.slice(0, classMatch.index ?? 0);
+  const importMatches = beforeClass.match(
+    /^import\b[\s\S]*?from\s+["'][^"']+["'];?/gm,
+  );
+  if (importMatches?.length) {
+    return `${importMatches.join("\n")}\n\n${classBody}`;
+  }
+
   return classBody;
 }
 

@@ -1,4 +1,10 @@
-export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+export type FormStatus =
+  | "not-started"
+  | "cannot-start-yet"
+  | "in-progress"
+  | "submitted"
+  | "update-needed"
+  | "complete";
 
 export type FormState = {
   uuid: string;
@@ -25,14 +31,14 @@ export type FieldsetData =
 export const StateChangeEvent = "_stateChange";
 export type StateChangeRelayDetail =
   | {
-      type: "details";
-      data: FormState;
-    }
+    type: "details";
+    data: FormState;
+  }
   | {
-      id: string;
-      type: "list";
-      data: FormState[];
-    };
+    id: string;
+    type: "list";
+    data: FormState[];
+  };
 
 // ====
 // Form
@@ -142,7 +148,7 @@ export type FieldsetItemState = {
   value: string | number | Date;
   order: number;
   valueLabel?: string; // for radio/checkbox label to be able to display on summary page
-  labels? : string[]
+  labels?: string[];
 };
 
 export type FieldsetValidationRelayDetail = {
@@ -179,15 +185,15 @@ export type FormItemMountRelayDetail = {
 export const ExternalAlterDataMsg = "external::alter:state";
 export type ExternalAlterDataRelayDetail =
   | {
-      id: string;
-      operation: "remove";
-      index: number;
-    }
+    id: string;
+    operation: "remove";
+    index: number;
+  }
   | {
-      id: string;
-      operation: "edit";
-      index: number;
-    };
+    id: string;
+    operation: "edit";
+    index: number;
+  };
 
 export const ExternalContinueMsg = "external::continue";
 export type ExternalContinueRelayDetail = {
@@ -227,3 +233,27 @@ export const FormSummaryEditPageMsg = "form-summary::edit:page";
 export type FormSummaryEditPageRelayDetail = {
   id: string;
 };
+
+// ============
+// Scroll Panel
+// ============
+
+export const ScrollPanelStateChangeMsg = "scroll-panel:state-change";
+export type ScrollPanelStateChangeRelayDetail = {
+  state: "no-scroll" | "at-top" | "middle" | "at-bottom";
+  isScrollable: boolean;
+};
+
+// ==============
+// Work Side Menu
+// ==============
+
+// WorkSideMenu registers itself with its parent WorkspaceLayout so the layout's
+// mobile hamburger can open the slotted drawer.
+export const WorkSideMenuBindMsg = "work-side-menu:bind";
+export type WorkSideMenuBindRelayDetail = {
+  el: HTMLElement;
+};
+
+export const WorkSideMenuOpenMsg = "work-side-menu:open";
+export const WorkSideMenuCloseMsg = "work-side-menu:close";

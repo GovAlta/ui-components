@@ -1,0 +1,143 @@
+{
+  "componentSlug": "workspace-layout",
+  "extractedFrom": "libs/web-components/src/components/workspace-layout/WorkspaceLayout.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onScrollStateChange",
+          "type": "(detail: GoabWorkspaceLayoutOnScrollStateChangeDetail) => void",
+          "description": "Called whenever the internal scroll state changes (no-scroll → at-top → middle → at-bottom)",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "pageFooter",
+          "type": "ReactNode",
+          "description": "Content rendered in the sticky page footer region.",
+          "required": false
+        },
+        {
+          "name": "pageHeader",
+          "type": "ReactNode",
+          "description": "Content rendered in the sticky page header region.",
+          "required": false
+        },
+        {
+          "name": "pushDrawer",
+          "type": "ReactNode",
+          "description": "A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is.",
+          "required": false
+        },
+        {
+          "name": "sideMenu",
+          "type": "ReactNode",
+          "description": "Content rendered in the side navigation region (e.g. work-side-menu).",
+          "required": false
+        }
+      ]
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onScrollStateChange",
+          "type": "(event: GoabWorkspaceLayoutOnScrollStateChangeDetail) => void",
+          "description": "Emitted whenever the internal scroll state changes (no-scroll → at-top → middle → at-bottom).",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "pageFooter",
+          "type": "TemplateRef",
+          "description": "Content rendered in the sticky page footer region.",
+          "required": false
+        },
+        {
+          "name": "pageHeader",
+          "type": "TemplateRef",
+          "description": "Content rendered in the sticky page header region.",
+          "required": false
+        },
+        {
+          "name": "pushDrawer",
+          "type": "TemplateRef",
+          "description": "A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is.",
+          "required": false
+        },
+        {
+          "name": "sideMenu",
+          "type": "TemplateRef",
+          "description": "Content rendered in the side navigation region (e.g. work-side-menu).",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "_scrollStateChange",
+          "type": "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "page-footer",
+          "description": "Content rendered in the sticky page footer region.",
+          "required": false
+        },
+        {
+          "name": "page-header",
+          "description": "Content rendered in the sticky page header region.",
+          "required": false
+        },
+        {
+          "name": "push-drawer",
+          "description": "A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is.",
+          "required": false
+        },
+        {
+          "name": "side-menu",
+          "description": "Content rendered in the side navigation region (e.g. work-side-menu).",
+          "required": false
+        }
+      ]
+    }
+  }
+}

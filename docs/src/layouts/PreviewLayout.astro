@@ -23,6 +23,7 @@ interface Props {
   backLabel?: string;
   reactSourceUrl?: string;
   angularSourceUrl?: string;
+  figmaUrl?: string;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   backLabel = "Back to Examples",
   reactSourceUrl,
   angularSourceUrl,
+  figmaUrl,
 } = Astro.props;
 
 const resolvedBackUrl = withBase(backUrl);
@@ -73,6 +75,16 @@ const resolvedBackUrl = withBase(backUrl);
               size="small"
               arialabel="View Angular source on GitHub"
               onclick={`window.open('${angularSourceUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+        {figmaUrl && (
+          <goa-tooltip content="View in Figma" position="bottom">
+            <goa-icon-button
+              icon="logo-figma"
+              size="small"
+              arialabel="View in Figma"
+              onclick={`window.open('${figmaUrl}', '_blank')`}
             ></goa-icon-button>
           </goa-tooltip>
         )}
