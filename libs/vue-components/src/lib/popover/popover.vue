@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { useSlots, withDefaults } from "vue";
+import { useSlots } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {

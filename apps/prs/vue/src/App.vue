@@ -52,7 +52,7 @@ const handleSideMenuNavigate = (path: string) => {
             :url="baseUrl + route.path"
           />
         </GoabWorkSideMenuGroup>
-        <GoabWorkSideMenuGroup icon="file-text" heading="Docs">
+        <GoabWorkSideMenuGroup icon="book" heading="Docs">
           <GoabWorkSideMenuItem
             v-for="route in docsRouteDefinitions"
             :key="route.path"
