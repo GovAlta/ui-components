@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 06 May 2026 21:29:23 GMT
+ * Generated on Tue, 12 May 2026 20:39:31 GMT
  */
 
 :root {
@@ -609,12 +609,12 @@
   --goa-notification-banner-important-high-close-bg-hover: var(--goa-color-important-default);
   --goa-notification-banner-information-low-close-bg-hover: var(--goa-color-info-border);
   --goa-notification-banner-information-high-close-bg-hover: var(--goa-color-info-dark);
-  --goa-notification-banner-emergency-low-focus-border: 0 0 0 3px var(--goa-color-emergency-dark);
-  --goa-notification-banner-emergency-high-focus-border: 0 0 0 3px var(--goa-color-greyscale-white);
-  --goa-notification-banner-important-low-focus-border: 0 0 0 3px var(--goa-color-important-text-dark);
-  --goa-notification-banner-important-high-focus-border: 0 0 0 3px var(--goa-color-important-text-dark);
-  --goa-notification-banner-information-low-focus-border: 0 0 0 3px var(--goa-color-info-dark);
-  --goa-notification-banner-information-high-focus-border: 0 0 0 3px var(--goa-color-greyscale-white);
+  --goa-notification-banner-emergency-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-emergency-dark);
+  --goa-notification-banner-emergency-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-greyscale-white);
+  --goa-notification-banner-important-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-important-text-dark);
+  --goa-notification-banner-important-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-important-text-dark);
+  --goa-notification-banner-information-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-info-dark);
+  --goa-notification-banner-information-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-greyscale-white);
   --goa-notification-banner-emergency-low-color-border: var(--goa-color-emergency-border);
   --goa-notification-banner-emergency-low-color-icon: var(--goa-color-emergency-dark);
   --goa-notification-banner-emergency-low-color-text: var(--goa-color-emergency-dark);
@@ -889,7 +889,7 @@
   --goa-details-padding-left: var(--goa-space-xs);
   --goa-details-padding-bottom: var(--goa-space-xs);
   --goa-details-margin-bottom: var(--goa-space-xs);
-  --goa-details-focus-border: var(--goa-border-width-xl) solid var(--goa-color-interactive-focus);
+  --goa-details-focus-border: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   --goa-details-content-padding-top: var(--goa-space-s);
   --goa-details-content-padding-right: var(--goa-space-m);
   --goa-details-content-padding-bottom: var(--goa-space-s);

@@ -1,1 +1,0 @@
-import{K as t,ba as o}from"./chunk-VZTNVMJK.js";var c=(()=>{class e{constructor(){this.open=o(!1)}openDrawer(){this.open.set(!0)}closeDrawer(){this.open.set(!1)}static{this.\u0275fac=function(r){return new(r||e)}}static{this.\u0275prov=t({token:e,factory:e.\u0275fac,providedIn:"root"})}}return e})();export{c as a};
