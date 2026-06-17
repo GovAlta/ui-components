@@ -1,0 +1,135 @@
+<h2>Workspace layout</h2>
+<p>
+  Mirrors the documentation examples for <code>goab-workspace-layout</code>. Each
+  example is bounded to 600px so they stack on this page; in a real app the layout
+  fills the viewport.
+</p>
+
+<h3>Basic workspace</h3>
+<div class="wsl-demo">
+  <goab-workspace-layout [sideMenu]="basicSideMenu">
+    <div style="padding: 24px">
+      @for (n of rows; track n) {
+        <p>Case row {{ n }} — scroll this area while the side menu stays in place.</p>
+      }
+    </div>
+  </goab-workspace-layout>
+</div>
+<ng-template #basicSideMenu>
+  <goab-work-side-menu
+    heading="Workspace layout"
+    url="/"
+    [primaryContent]="basicMenuItems"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</ng-template>
+<ng-template #basicMenuItems>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
+</ng-template>
+
+<h3>Sticky header</h3>
+<div class="wsl-demo">
+  <goab-workspace-layout [sideMenu]="headerSideMenu" [pageHeader]="headerPageHeader">
+    <div style="padding: 24px">
+      @for (n of rows; track n) {
+        <p>Case row {{ n }} — scroll this area and the header stays pinned at the top.</p>
+      }
+    </div>
+  </goab-workspace-layout>
+</div>
+<ng-template #headerSideMenu>
+  <goab-work-side-menu
+    heading="Workspace layout"
+    url="/"
+    [primaryContent]="headerMenuItems"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</ng-template>
+<ng-template #headerMenuItems>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+<ng-template #headerPageHeader>
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+    <goab-text tag="h1" size="heading-m" mt="none" mb="none">My cases</goab-text>
+    <goab-button-group alignment="end">
+      <goab-button type="secondary" size="compact">Filter</goab-button>
+      <goab-button type="primary" size="compact">New case</goab-button>
+    </goab-button-group>
+  </div>
+</ng-template>
+
+<h3>Sticky footer</h3>
+<div class="wsl-demo">
+  <goab-workspace-layout [sideMenu]="footerSideMenu" [pageFooter]="footerPageFooter">
+    <div style="padding: 24px">
+      @for (n of rows; track n) {
+        <p>Case row {{ n }} — scroll this area and the footer stays pinned at the bottom.</p>
+      }
+    </div>
+  </goab-workspace-layout>
+</div>
+<ng-template #footerSideMenu>
+  <goab-work-side-menu
+    heading="Workspace layout"
+    url="/"
+    [primaryContent]="footerMenuItems"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</ng-template>
+<ng-template #footerMenuItems>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+<ng-template #footerPageFooter>
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+    <goab-text size="body-s" mt="none" mb="none">3 cases selected</goab-text>
+    <goab-button-group alignment="end">
+      <goab-button type="secondary" size="compact">Clear</goab-button>
+      <goab-button type="primary" size="compact">Export</goab-button>
+    </goab-button-group>
+  </div>
+</ng-template>
+
+<h3>Push drawer</h3>
+<div class="wsl-demo">
+  <goab-workspace-layout [sideMenu]="drawerSideMenu" [pushDrawer]="drawerTpl">
+    <div style="padding: 24px">
+      <goab-button size="compact" (onClick)="open = true">Open</goab-button>
+      @for (n of rows; track n) {
+        <p>
+          Case row {{ n }} — open the drawer and it appears beside this content,
+          narrowing it instead of covering it.
+        </p>
+      }
+    </div>
+  </goab-workspace-layout>
+</div>
+<ng-template #drawerSideMenu>
+  <goab-work-side-menu
+    heading="Workspace layout"
+    url="/"
+    [primaryContent]="drawerMenuItems"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</ng-template>
+<ng-template #drawerMenuItems>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+<ng-template #drawerTpl>
+  <goab-push-drawer heading="Case details" [open]="open" (onClose)="open = false">
+    <p>Details for the selected case appear here, beside the page content.</p>
+  </goab-push-drawer>
+</ng-template>
+
+<h3>Monitor scroll state</h3>
+<p>
+  The page header collapses its subtitle once content scrolls past the top, via
+  <code>GoabWorkspaceLayoutScrollStateService</code>.
+</p>
+<div class="wsl-demo">
+  <abgov-docs-wsl-scroll-monitor></abgov-docs-wsl-scroll-monitor>
+</div>

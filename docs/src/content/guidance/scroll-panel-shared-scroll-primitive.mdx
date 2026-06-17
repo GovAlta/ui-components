@@ -1,0 +1,22 @@
+---
+id: scroll-panel-shared-scroll-primitive
+type: info
+description: Scroll panel keeps a header and footer in place while the content between them scrolls.
+topic: usage
+tags:
+  - scroll
+  - layout
+appliesTo:
+  components:
+    - scroll-panel
+status: published
+---
+
+You usually will not add scroll panel yourself. It works inside several other components, giving each one the same scrolling and the same soft shadow when there is more to see:
+
+- [Modal](/components/modal) scrolls its content between the fixed heading and the buttons.
+- [Drawer](/components/drawer) and [push drawer](/components/push-drawer) scroll their content under a sticky header.
+- [Work side notification panel](/components/work-side-notification-panel) scrolls its list under the tabs.
+- [Work side menu](/components/work-side-menu) scrolls its navigation under a sticky heading.
+
+You can also use it on its own when you need a box whose content scrolls while a header or footer stays in place.

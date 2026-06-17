@@ -1,0 +1,55 @@
+.demo-header,
+.ws-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--goa-space-m);
+  padding: var(--goa-space-m) var(--goa-space-l);
+}
+
+.ws-header__actions {
+  display: flex;
+  gap: var(--goa-space-s);
+}
+
+.demo-body,
+.ws-body {
+  padding: var(--goa-space-m) var(--goa-space-l);
+}
+
+.ws-row {
+  padding: var(--goa-space-s) 0;
+  border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
+}
+
+.ws-row__title {
+  font-weight: var(--goa-font-weight-bold);
+}
+
+.ws-row__meta {
+  color: var(--goa-color-text-secondary);
+  font-size: var(--goa-font-size-2);
+}
+
+.demo-footer,
+.ws-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--goa-space-m);
+  padding: var(--goa-space-s) var(--goa-space-l);
+}
+
+.ws-footer__count {
+  color: var(--goa-color-text-secondary);
+}
+
+/* Test 6: bound the notification panel's width (panel itself is 710px tall by
+   default) and frame it so it visually stands apart from the surrounding page
+   content. */
+.notification-panel-stage {
+  width: 360px;
+  border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  border-radius: var(--goa-popover-border-radius);
+  overflow: hidden;
+}

@@ -15,7 +15,7 @@
     "verify-bundle": "npx tsx src/scripts/content-generators/verify-bundle.ts"
   },
   "dependencies": {
-    "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.8.0",
+    "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.9.0",
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
     "@abgov/web-components": "*",
