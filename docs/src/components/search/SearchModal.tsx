@@ -31,7 +31,7 @@ import {
   getFilteredOptions,
   type FilterOption,
 } from "./SearchFilterHints";
-import { getResultUrl } from "./search-utils";
+import { getResultUrl, SEARCH_OPEN_PARAM } from "./search-utils";
 import "./search.css";
 
 // ============================================================================
@@ -355,6 +355,24 @@ export function SearchModal() {
 
     window.addEventListener("goa-search-open", handleSearchOpen);
     return () => window.removeEventListener("goa-search-open", handleSearchOpen);
+  }, [openModal]);
+
+  /**
+   * Auto-open when arriving with the `?openSearch=1` marker (set by the side
+   * menu's "All" item). Self-checking on mount avoids any race with this
+   * client:only island's hydration. The param is stripped afterwards so a
+   * refresh or back navigation doesn't re-trigger it.
+   */
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get(SEARCH_OPEN_PARAM) === "1") {
+      openModal();
+      params.delete(SEARCH_OPEN_PARAM);
+      const qs = params.toString();
+      const cleanUrl =
+        window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash;
+      window.history.replaceState({}, "", cleanUrl);
+    }
   }, [openModal]);
 
   // Only render content when open - this is where lazy loading happens

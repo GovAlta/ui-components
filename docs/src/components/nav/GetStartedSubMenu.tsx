@@ -7,20 +7,20 @@
  * `getGetStartedNav()` in lib/get-started-nav.ts.
  */
 
-import { Fragment, type MouseEvent } from "react";
+import { Fragment } from "react";
 import {
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { AllHomeItem } from "./AllHomeItem";
 import { withBase } from "@/lib/base-url";
 import type { GetStartedNav, GetStartedNavSection } from "@/lib/get-started-nav";
 
 interface GetStartedSubMenuProps {
   isOpen: boolean;
   onToggle: () => void;
-  onBack: () => void;
   onExpandMenu?: () => void;
   currentUrl?: string;
   items: GetStartedNav;
@@ -29,17 +29,10 @@ interface GetStartedSubMenuProps {
 export function GetStartedSubMenu({
   isOpen,
   onToggle,
-  onBack,
   onExpandMenu,
   currentUrl,
   items,
 }: GetStartedSubMenuProps) {
-  const handleBackClick = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onBack();
-  };
-
   const renderSection = (section: GetStartedNavSection) => {
     if (section.type === "flat") {
       return (
@@ -72,10 +65,8 @@ export function GetStartedSubMenu({
 
   const primaryContent = (
     <>
-      {/* Back to parent menu */}
-      <div onClick={handleBackClick} style={{ cursor: "pointer" }}>
-        <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
-      </div>
+      {/* "All" navigates home and opens global search */}
+      <AllHomeItem />
 
       {items.sections.map(renderSection)}
     </>

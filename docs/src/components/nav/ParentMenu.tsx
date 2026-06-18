@@ -1,12 +1,12 @@
 /**
  * ParentMenu.tsx
  *
- * Parent-level navigation showing all main sections.
- * - Components, Get started, Foundations: opens submenu (has many pages)
- * - Tokens, Examples: direct navigation (single page each)
+ * Parent-level navigation showing all main sections. Every section links
+ * directly to its index page. The destination page's SiteNav then shows the
+ * relevant submenu (Components, Get started, Foundations) based on the URL;
+ * Tokens and Examples are single pages.
  */
 
-import React from "react";
 import { GoabWorkSideMenu, GoabWorkSideMenuItem } from "@abgov/react-components";
 import type { GoabIconType } from "@abgov/ui-components-common";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
@@ -23,7 +23,6 @@ export type MenuSection =
 interface ParentMenuProps {
   isOpen: boolean;
   onToggle: () => void;
-  onSelectSection: (section: MenuSection) => void;
   /** Currently active section (for highlighting) */
   currentSection?: MenuSection;
 }
@@ -33,15 +32,6 @@ interface TopLevelSection {
   label: string;
   icon: GoabIconType;
 }
-
-// Sections that navigate directly to a page (no submenu)
-const DIRECT_NAV_SECTIONS: Partial<Record<MenuSection, string>> = {
-  tokens: withBase("/tokens"),
-  examples: withBase("/examples"),
-};
-
-// Sections that open a submenu
-const SUBMENU_SECTIONS = ["components", "get-started", "foundations"] as const;
 
 // Main navigation sections
 const SECTIONS: TopLevelSection[] = [
@@ -55,69 +45,20 @@ const SECTIONS: TopLevelSection[] = [
 export function ParentMenu({
   isOpen,
   onToggle,
-  onSelectSection,
   currentSection,
 }: ParentMenuProps) {
-  // Handle click on submenu item - prevent navigation, open submenu instead
-  const handleSubmenuClick = (sectionId: MenuSection) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onSelectSection(sectionId);
-  };
-
-  // Primary content: Main navigation sections
+  // Every section links directly to its index page.
   const primaryContent = (
     <>
-      {SECTIONS.map((section) => {
-        const directUrl = DIRECT_NAV_SECTIONS[section.id];
-        const hasSubmenu = SUBMENU_SECTIONS.includes(
-          section.id as (typeof SUBMENU_SECTIONS)[number],
-        );
-        const isActive = currentSection === section.id;
-
-        if (directUrl) {
-          // Direct navigation - use url prop
-          return (
-            <GoabWorkSideMenuItem
-              key={section.id}
-              label={section.label}
-              icon={section.icon}
-              url={directUrl}
-              current={isActive}
-            />
-          );
-        }
-
-        if (hasSubmenu) {
-          // Opens submenu - use section URL when active for matching,
-          // otherwise use non-matching URL to prevent false positives on homepage
-          const submenuUrl = isActive ? withBase(`/${section.id}`) : "/__never_match__";
-          return (
-            <div
-              key={section.id}
-              onClick={handleSubmenuClick(section.id)}
-              style={{ cursor: "pointer" }}
-            >
-              <GoabWorkSideMenuItem
-                label={section.label}
-                icon={section.icon}
-                url={submenuUrl}
-                current={isActive}
-              />
-            </div>
-          );
-        } else {
-          // Placeholder sections - disabled for now
-          return (
-            <GoabWorkSideMenuItem
-              key={section.id}
-              label={section.label}
-              icon={section.icon}
-              onClick={() => onSelectSection(section.id)}
-            />
-          );
-        }
-      })}
+      {SECTIONS.map((section) => (
+        <GoabWorkSideMenuItem
+          key={section.id}
+          label={section.label}
+          icon={section.icon}
+          url={withBase(`/${section.id}`)}
+          current={currentSection === section.id}
+        />
+      ))}
     </>
   );
 
