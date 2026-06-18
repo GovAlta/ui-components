@@ -2,9 +2,8 @@
  * AllHomeItem.tsx
  *
  * The "All" item rendered at the top of every submenu (Components, Get started,
- * Foundations). It navigates to the home page and auto-opens global search,
- * so "All" means "you're searching the whole design system" rather than just
- * collapsing the menu.
+ * Foundations). It navigates back to the home page, where the hero search field
+ * is front and center, rather than just collapsing the menu.
  *
  * Wrapped-onClick + sentinel `url` mirrors the existing pattern in the submenus
  * (e.g. handleAllComponentsClick): the menu's onNavigate ignores `/__` paths, so
@@ -13,13 +12,13 @@
 
 import { type MouseEvent } from "react";
 import { GoabWorkSideMenuItem } from "@abgov/react-components";
-import { searchHomeUrl } from "../search/search-utils";
+import { withBase } from "@/lib/base-url";
 
 export function AllHomeItem() {
   const handleClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    window.location.href = searchHomeUrl();
+    window.location.href = withBase("/");
   };
 
   return (

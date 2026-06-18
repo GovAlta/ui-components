@@ -9,19 +9,6 @@
 import type { SearchFilter } from "./useSearch";
 import { withBase } from "@/lib/base-url";
 
-/**
- * URL query param that, when present on any page load, auto-opens the global
- * search modal. Used by the side menu's "All" item to land on the home page and
- * drop the user straight into global search. Named distinctly from the tokens
- * page's own `?search=` filter param to avoid collision.
- */
-export const SEARCH_OPEN_PARAM = "openSearch";
-
-/** Home URL that auto-opens global search on arrival. */
-export function searchHomeUrl(): string {
-  return withBase(`/?${SEARCH_OPEN_PARAM}=1`);
-}
-
 /** Build a URL for a search result or history item by type + slug. */
 export function getResultUrl(type: string, slug: string): string {
   if (type === "page") {
