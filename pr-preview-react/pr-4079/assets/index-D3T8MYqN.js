@@ -65544,10 +65544,8 @@ function Bug3964Route() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", children: "3964 - Input marked as touched when user tabs in" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "The reported bug is specific to the Angular wrappers, where tabbing into the field marked the reactive FormControl as touched too early. The fix moves markAsTouched to onBlur. React has no equivalent touched concept; these inputs are included so the components can be exercised in both playgrounds." })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Last name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "lastName", width: "100%", onChange: () => {
-    } }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Bio", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTextArea, { name: "bio", width: "100%", onChange: () => {
-    } }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Last name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "lastName", width: "100%" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Bio", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTextArea, { name: "bio", width: "100%" }) })
   ] });
 }
 const bug3964_route = {
