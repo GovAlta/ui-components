@@ -1,0 +1,1 @@
+const r="/ui-components/pr-preview/pr-4081/";function i(t){if(!t)return r;if(t.startsWith("http://")||t.startsWith("https://")||t.startsWith(r))return t;const s=t.startsWith("/")?t.slice(1):t;return`${r}${s}`}export{i as w};
