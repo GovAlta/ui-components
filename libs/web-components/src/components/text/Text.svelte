@@ -5,6 +5,7 @@
   export type TextElement = "span" | "div" | "p";
 
   type HeadingSize =
+    | "heading-2xl"
     | "heading-xl"
     | "heading-l"
     | "heading-m"
@@ -77,6 +78,8 @@
     }
 
     switch (effectiveSize) {
+      case "heading-2xl":
+        return "l";
       case "heading-xl":
         return "l";
       case "heading-l":
@@ -106,6 +109,7 @@
     }
 
     switch (effectiveSize) {
+      case "heading-2xl":
       case "heading-xl":
       case "heading-l":
       case "heading-m":
@@ -155,6 +159,13 @@
     margin: 0;
   }
 
+  .heading-2xl {
+    font: var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));
+    letter-spacing: var(
+      --goa-typography-heading-2xl-letter-spacing,
+      var(--goa-typography-heading-xl-letter-spacing)
+    );
+  }
   .heading-xl {
     font: var(--goa-typography-heading-xl);
     letter-spacing: var(--goa-typography-heading-xl-letter-spacing);
@@ -193,6 +204,13 @@
   }
 
   @media (--mobile) {
+    .heading-2xl {
+      font: var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));
+      letter-spacing: var(
+        --goa-typography-mobile-heading-2xl-letter-spacing,
+        var(--goa-typography-mobile-heading-xl-letter-spacing)
+      );
+    }
     .heading-xl {
       font: var(--goa-typography-mobile-heading-xl);
       letter-spacing: var(--goa-typography-mobile-heading-xl-letter-spacing);

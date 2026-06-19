@@ -223,8 +223,9 @@
         },
         {
           "name": "size",
-          "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
+          "type": "\"heading-2xl\" | \"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
           "values": [
+            "heading-2xl",
             "heading-xl",
             "heading-l",
             "heading-m",
