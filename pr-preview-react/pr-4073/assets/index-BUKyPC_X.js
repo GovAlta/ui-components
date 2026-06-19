@@ -51417,14 +51417,14 @@ function V5(t, e, o) {
       $.disabled ? (he.setAttribute("aria-disabled", "true"), he.addEventListener("click", (ye) => {
         ye.preventDefault(), ye.stopPropagation();
       })) : he.addEventListener("click", () => R(le + 1)), he.appendChild(ie), g == null || g.appendChild(he);
-    }), c === "segmented" && (requestAnimationFrame(() => {
+    }), c === "segmented" && requestAnimationFrame(() => {
       S({ withAnimation: false }), z === 0 && g && (j = new IntersectionObserver(($) => {
         var le;
         (le = $[0]) != null && le.isIntersecting && (S({ withAnimation: false }), j == null || j.disconnect(), j = null);
-      }), j.observe(g));
-    }), g && !O && (O = new ResizeObserver(() => {
-      S({ withAnimation: false });
-    }), O.observe(g)));
+      }), j.observe(g)), g && !O && (O = new ResizeObserver(() => {
+        S({ withAnimation: false });
+      }), O.observe(g));
+    });
   }
   function D() {
     u.addEventListener("focus", G, true);
