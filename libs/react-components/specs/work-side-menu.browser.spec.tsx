@@ -136,35 +136,26 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("menu");
       const menuItem = result.getByTestId("hover-item");
 
-      vi.useFakeTimers();
-      try {
-        await menuItem.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await menuItem.hover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Search");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Search");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      });
 
-        await menuItem.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await menuItem.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      });
     });
 
     it("should show and hide tooltip for group", async () => {
@@ -194,35 +185,26 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("menu");
       const group = result.getByTestId("hover-group");
 
-      vi.useFakeTimers();
-      try {
-        await group.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await group.hover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Applications");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Applications");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      });
 
-        await group.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await group.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      });
     });
 
     it("should show and hide tooltip for toggle button", async () => {
@@ -246,35 +228,26 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("work-side-menu");
       const toggle = result.getByTestId("toggle-menu");
 
-      vi.useFakeTimers();
-      try {
-        await toggle.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await toggle.hover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      });
 
-        await toggle.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await toggle.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        const tooltipEl = menu
+          .element()
+          .querySelector(".tooltip") as HTMLElement | null;
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      });
     });
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
