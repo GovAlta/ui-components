@@ -1,0 +1,71 @@
+<h1>3964 - Input marked as touched when user tabs in (Angular)</h1>
+<p>
+  Tab into a field and tab straight back out without typing: the required error should
+  appear, because the control was entered and then left. Tabbing in alone, or typing
+  without leaving, should NOT show the error. Before the fix, the error appeared as soon
+  as the field received focus.
+</p>
+
+<h2>Reactive form (FormControl)</h2>
+<form [formGroup]="form">
+  <goab-form-item label="Last name" [error]="lastNameError">
+    <goab-input
+      formControlName="lastName"
+      name="lastName"
+      width="100%"
+      [error]="!!lastNameError"
+    />
+  </goab-form-item>
+
+  <goab-form-item label="Bio" [error]="bioError">
+    <goab-textarea formControlName="bio" name="bio" width="100%" [error]="!!bioError" />
+  </goab-form-item>
+</form>
+
+<dl>
+  <dt>lastName.touched</dt>
+  <dd>{{ form.get("lastName")?.touched }}</dd>
+  <dt>bio.touched</dt>
+  <dd>{{ form.get("bio")?.touched }}</dd>
+</dl>
+
+<h2>Template-driven form (ngModel)</h2>
+<p>Same behavior should hold for the ngModel binding.</p>
+<form>
+  <goab-form-item
+    label="Last name"
+    [error]="
+      tdLastName.touched && tdLastName.invalid ? 'Enter a last name.' : undefined
+    "
+  >
+    <goab-input
+      name="ngModelLastName"
+      width="100%"
+      required
+      [(ngModel)]="ngModelLastName"
+      #tdLastName="ngModel"
+      [error]="tdLastName.touched && tdLastName.invalid"
+    />
+  </goab-form-item>
+
+  <goab-form-item
+    label="Bio"
+    [error]="tdBio.touched && tdBio.invalid ? 'Enter a bio.' : undefined"
+  >
+    <goab-textarea
+      name="ngModelBio"
+      width="100%"
+      required
+      [(ngModel)]="ngModelBio"
+      #tdBio="ngModel"
+      [error]="tdBio.touched && tdBio.invalid"
+    />
+  </goab-form-item>
+</form>
+
+<dl>
+  <dt>ngModelLastName.touched</dt>
+  <dd>{{ tdLastName.touched }}</dd>
+  <dt>ngModelBio.touched</dt>
+  <dd>{{ tdBio.touched }}</dd>
+</dl>

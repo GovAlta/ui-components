@@ -115,7 +115,6 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   _onChange(e: Event) {
     const detail = { ...(e as CustomEvent<GoabTextAreaOnChangeDetail>).detail, event: e };
     this.onChange.emit(detail);
-    this.markAsTouched();
     this.fcChange?.(detail.value);
   }
 
@@ -124,7 +123,6 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
       ...(e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail,
       event: e,
     };
-    this.markAsTouched();
     this.onKeyPress.emit(detail);
   }
 
