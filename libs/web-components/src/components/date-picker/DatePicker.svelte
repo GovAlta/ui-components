@@ -379,9 +379,10 @@
         <goa-input
           name="day"
           type="number"
+          class="no-spinner"
           testid="input-day"
           on:_change={onInputChange}
-          width="4ch"
+          width="2ch"
           value={_date.day || ""}
           min="1"
           max="31"
@@ -395,9 +396,10 @@
         <goa-input
           name="year"
           type="number"
+          class="no-spinner"
           testid="input-year"
           on:_change={onInputChange}
-          width="6ch"
+          width="4ch"
           value={_date.year || ""}
           min="1800"
           max="2200"

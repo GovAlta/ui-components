@@ -105,3 +105,49 @@ describe("placeholder property", () => {
     expect(monthInput?.getAttribute("value")).toBe("0");
   });
 });
+
+describe("day and year inputs", () => {
+  it("renders day and year as number inputs with the spinner hidden", async () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+    });
+
+    const dayInput = container.querySelector("[testid='input-day']");
+    const yearInput = container.querySelector("[testid='input-year']");
+
+    expect(dayInput?.getAttribute("type")).toBe("number");
+    expect(dayInput?.classList.contains("no-spinner")).toBe(true);
+    expect(yearInput?.getAttribute("type")).toBe("number");
+    expect(yearInput?.classList.contains("no-spinner")).toBe(true);
+  });
+
+  it("emits a string date value when typed digits form a valid date", async () => {
+    const { container } = render(DatePicker, { type: "input" });
+
+    const handler = vi.fn();
+    container.addEventListener("_change", handler);
+
+    const fields: Record<string, string> = {
+      year: "2025",
+      month: "6",
+      day: "15",
+    };
+    for (const [name, value] of Object.entries(fields)) {
+      const el = container.querySelector(`[testid='input-${name}']`);
+      el?.dispatchEvent(
+        new CustomEvent("_change", {
+          detail: { name, value },
+          bubbles: true,
+        }),
+      );
+    }
+
+    await waitFor(() => {
+      expect(handler).toHaveBeenCalled();
+    });
+
+    const { value } = handler.mock.calls.at(-1)[0].detail;
+    expect(typeof value).toBe("string");
+    expect(value).toBe("2025-06-15");
+  });
+});
