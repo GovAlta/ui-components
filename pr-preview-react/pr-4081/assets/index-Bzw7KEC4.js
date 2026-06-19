@@ -29097,8 +29097,8 @@ function su(t) {
         "version",
         /*version*/
         t[9]
-      ), m(B, "name", "day"), m(B, "type", "text"), m(B, "inputmode", "numeric"), m(B, "testid", "input-day"), m(B, "width", "4ch"), m(B, "value", J = /*_date*/
-      t[16].day || ""), m(
+      ), m(B, "name", "day"), m(B, "type", "text"), m(B, "inputmode", "numeric"), m(B, "testid", "input-day"), m(B, "width", "2ch"), m(B, "value", J = /*_date*/
+      t[16].day || ""), m(B, "min", "1"), m(B, "max", "31"), m(
         B,
         "error",
         /*error*/
@@ -29123,8 +29123,8 @@ function su(t) {
         "version",
         /*version*/
         t[9]
-      ), m(R, "name", "year"), m(R, "type", "text"), m(R, "inputmode", "numeric"), m(R, "testid", "input-year"), m(R, "width", "6ch"), m(R, "value", G = /*_date*/
-      t[16].year || ""), m(
+      ), m(R, "name", "year"), m(R, "type", "text"), m(R, "inputmode", "numeric"), m(R, "testid", "input-year"), m(R, "width", "4ch"), m(R, "value", G = /*_date*/
+      t[16].year || ""), m(R, "min", "1800"), m(R, "max", "2200"), m(
         R,
         "error",
         /*error*/
