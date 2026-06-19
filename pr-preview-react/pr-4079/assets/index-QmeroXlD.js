@@ -65538,27 +65538,6 @@ const __vite_glob_0_78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3932_route
 }, Symbol.toStringTag, { value: "Module" }));
-function Bug3964Route() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "grid", gap: "2rem", maxWidth: "30rem" }, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", children: "3964 - Input marked as touched when user tabs in" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "The reported bug is specific to the Angular wrappers, where tabbing into the field marked the reactive FormControl as touched too early. The fix moves markAsTouched to onBlur. React has no equivalent touched concept; these inputs are included so the components can be exercised in both playgrounds." })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Last name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabInput, { name: "lastName", width: "100%" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Bio", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTextArea, { name: "bio", width: "100%" }) })
-  ] });
-}
-const bug3964_route = {
-  type: "bug",
-  id: "3964",
-  path: "bugs/3964",
-  title: "Input touched on tab-in (Angular)",
-  component: Bug3964Route
-};
-const __vite_glob_0_79 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: bug3964_route
-}, Symbol.toStringTag, { value: "Module" }));
 function Bug4030Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", mb: "m", children: "Bug #4030: Footer copyright text" }),
@@ -65573,7 +65552,7 @@ const bug4030_route = {
   title: "Footer copyright text",
   component: Bug4030Route
 };
-const __vite_glob_0_80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_79 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: bug4030_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -65744,7 +65723,7 @@ const accordion_route = {
   title: "Accordion",
   component: DocsAccordionRoute
 };
-const __vite_glob_0_81 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: accordion_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -65809,7 +65788,7 @@ const appHeader_route = {
   title: "App Header",
   component: DocsAppHeaderRoute
 };
-const __vite_glob_0_82 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_81 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: appHeader_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -65979,7 +65958,7 @@ const badge_route = {
   title: "Badge",
   component: DocsBadgeRoute
 };
-const __vite_glob_0_83 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_82 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: badge_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66027,7 +66006,7 @@ const block_route = {
   title: "Block",
   component: DocsBlockRoute
 };
-const __vite_glob_0_84 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_83 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: block_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66088,7 +66067,7 @@ const buttonGroup_route = {
   title: "Button Group",
   component: DocsButtonGroupRoute
 };
-const __vite_glob_0_85 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_84 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: buttonGroup_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66165,7 +66144,7 @@ const button_route = {
   title: "Button",
   component: DocsButtonRoute
 };
-const __vite_glob_0_86 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_85 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: button_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66259,7 +66238,7 @@ const callout_route = {
   title: "Callout",
   component: DocsCalloutRoute
 };
-const __vite_glob_0_87 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_86 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: callout_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66323,7 +66302,7 @@ const checkboxList_route = {
   title: "Checkbox List",
   component: DocsCheckboxListRoute
 };
-const __vite_glob_0_88 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_87 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: checkboxList_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66487,7 +66466,7 @@ const checkbox_route = {
   title: "Checkbox",
   component: DocsCheckboxRoute
 };
-const __vite_glob_0_89 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_88 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: checkbox_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66510,7 +66489,7 @@ const circularProgress_route = {
   title: "Circular Progress",
   component: DocsCircularProgressRoute
 };
-const __vite_glob_0_90 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_89 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: circularProgress_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -66864,7 +66843,7 @@ const container_route = {
   title: "Container",
   component: DocsContainerRoute
 };
-const __vite_glob_0_91 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_90 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: container_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67103,7 +67082,7 @@ const dataGrid_route = {
   title: "DataGrid",
   component: DocsDataGridRoute
 };
-const __vite_glob_0_92 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_91 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: dataGrid_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67217,7 +67196,7 @@ const datePicker_route = {
   title: "Date Picker",
   component: DocsDatePickerRoute
 };
-const __vite_glob_0_93 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_92 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: datePicker_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67401,7 +67380,7 @@ const details_route = {
   title: "Details",
   component: DocsDetailsRoute
 };
-const __vite_glob_0_94 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_93 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: details_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67421,7 +67400,7 @@ const divider_route = {
   title: "Divider",
   component: DocsDividerRoute
 };
-const __vite_glob_0_95 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_94 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: divider_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67665,7 +67644,7 @@ const drawer_route = {
   title: "Drawer",
   component: DocsDrawerRoute
 };
-const __vite_glob_0_96 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_95 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: drawer_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -67933,7 +67912,7 @@ const dropdown_route = {
   title: "Dropdown",
   component: DocsDropdownRoute
 };
-const __vite_glob_0_97 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_96 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: dropdown_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68166,7 +68145,7 @@ const fileUploader_route = {
   title: "File Uploader",
   component: DocsFileUploaderRoute
 };
-const __vite_glob_0_98 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_97 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: fileUploader_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68280,7 +68259,7 @@ const filterChip_route = {
   title: "Filter Chip",
   component: DocsFilterChipRoute
 };
-const __vite_glob_0_99 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_98 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: filterChip_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68333,7 +68312,7 @@ const footer_route = {
   title: "Footer",
   component: DocsFooterRoute
 };
-const __vite_glob_0_100 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_99 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: footer_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68379,7 +68358,7 @@ const formItem_route = {
   title: "Form Item",
   component: DocsFormItemRoute
 };
-const __vite_glob_0_101 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_100 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: formItem_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68414,7 +68393,7 @@ const formStepper_route = {
   title: "Form Stepper",
   component: DocsFormStepperRoute
 };
-const __vite_glob_0_102 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_101 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: formStepper_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68460,7 +68439,7 @@ const grid_route = {
   title: "Grid",
   component: DocsGridRoute
 };
-const __vite_glob_0_103 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_102 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: grid_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68518,7 +68497,7 @@ const heroBanner_route = {
   title: "Hero Banner",
   component: DocsHeroBannerRoute
 };
-const __vite_glob_0_104 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_103 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: heroBanner_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68566,7 +68545,7 @@ const iconButton_route = {
   title: "Icon Button",
   component: DocsIconButtonRoute
 };
-const __vite_glob_0_105 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_104 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: iconButton_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68679,7 +68658,7 @@ const icon_route = {
   title: "Icon",
   component: DocsIconRoute
 };
-const __vite_glob_0_106 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_105 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: icon_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68822,7 +68801,7 @@ const input_route = {
   title: "Input",
   component: DocsInputRoute
 };
-const __vite_glob_0_107 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_106 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: input_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68850,7 +68829,7 @@ const linearProgress_route = {
   title: "Linear Progress",
   component: DocsLinearProgressRoute
 };
-const __vite_glob_0_108 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_107 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: linearProgress_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68891,7 +68870,7 @@ const link_route = {
   title: "Link",
   component: DocsLinkRoute
 };
-const __vite_glob_0_109 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_108 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: link_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -68989,7 +68968,7 @@ const menuButton_route = {
   title: "Menu Button",
   component: DocsMenuButtonRoute
 };
-const __vite_glob_0_110 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_109 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: menuButton_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69015,7 +68994,7 @@ const micrositeHeader_route = {
   title: "Microsite Header",
   component: DocsMicrositeHeaderRoute
 };
-const __vite_glob_0_111 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_110 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: micrositeHeader_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69177,7 +69156,7 @@ const modal_route = {
   title: "Modal",
   component: DocsModalRoute
 };
-const __vite_glob_0_112 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_111 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: modal_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69212,7 +69191,7 @@ const notification_route = {
   title: "Notification Banner",
   component: DocsNotificationRoute
 };
-const __vite_glob_0_113 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_112 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: notification_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69256,7 +69235,7 @@ const pageBlock_route = {
   title: "Page Block",
   component: DocsPageBlockRoute
 };
-const __vite_glob_0_114 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_113 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: pageBlock_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69362,7 +69341,7 @@ const pagination_route = {
   title: "Pagination",
   component: DocsPaginationRoute
 };
-const __vite_glob_0_115 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_114 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: pagination_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69389,7 +69368,7 @@ const popover_route = {
   title: "Popover",
   component: DocsPopoverRoute
 };
-const __vite_glob_0_116 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_115 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: popover_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69601,7 +69580,7 @@ const pushDrawer_route = {
   title: "Push Drawer",
   component: DocsPushDrawerRoute
 };
-const __vite_glob_0_117 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_116 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: pushDrawer_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69695,7 +69674,7 @@ const radioGroup_route = {
   title: "Radio Group",
   component: DocsRadioGroupRoute
 };
-const __vite_glob_0_118 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_117 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: radioGroup_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69738,7 +69717,7 @@ const sideMenu_route = {
   title: "Side Menu",
   component: DocsSideMenuRoute
 };
-const __vite_glob_0_119 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_118 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: sideMenu_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69830,7 +69809,7 @@ const skeleton_route = {
   title: "Skeleton",
   component: DocsSkeletonRoute
 };
-const __vite_glob_0_120 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_119 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: skeleton_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69891,7 +69870,7 @@ const spacer_route = {
   title: "Spacer",
   component: DocsSpacerRoute
 };
-const __vite_glob_0_121 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_120 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: spacer_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70701,7 +70680,7 @@ const table_route = {
   title: "Table",
   component: DocsTableRoute
 };
-const __vite_glob_0_122 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_121 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: table_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70763,7 +70742,7 @@ const tabs_route = {
   title: "Tabs",
   component: DocsTabsRoute
 };
-const __vite_glob_0_123 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_122 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: tabs_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70926,7 +70905,7 @@ const temporaryNotification_route = {
   title: "Temporary Notification",
   component: DocsTemporaryNotificationRoute
 };
-const __vite_glob_0_124 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_123 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: temporaryNotification_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70993,7 +70972,7 @@ const textArea_route = {
   title: "Text Area",
   component: DocsTextAreaRoute
 };
-const __vite_glob_0_125 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_124 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: textArea_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71238,7 +71217,7 @@ const text_route = {
   title: "Text",
   component: DocsTextRoute
 };
-const __vite_glob_0_126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_125 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: text_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71318,7 +71297,7 @@ const tooltip_route = {
   title: "Tooltip",
   component: DocsTooltipRoute
 };
-const __vite_glob_0_127 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: tooltip_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71469,7 +71448,7 @@ const workSideMenu_route = {
   title: "Work Side Menu",
   component: DocsWorkSideMenuRoute
 };
-const __vite_glob_0_128 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_127 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: workSideMenu_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71755,7 +71734,7 @@ const workSideNotificationPanel_route = {
   title: "Notification Panel",
   component: DocsWorkSideNotificationPanelRoute
 };
-const __vite_glob_0_129 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_128 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: workSideNotificationPanel_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72001,7 +71980,7 @@ const feat1383_route = {
   title: "Button Filled Icons",
   component: Feat1383Route
 };
-const __vite_glob_0_130 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_129 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1383_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72046,7 +72025,7 @@ const feat1547_route = {
   title: "Tooltip Multiline",
   component: Feat1547Route
 };
-const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_130 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1547_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72280,7 +72259,7 @@ const feat1813_route = {
   title: "DatePicker Width Properties",
   component: Feat1813Route
 };
-const __vite_glob_0_132 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1813_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72397,7 +72376,7 @@ const feat1908_route = {
   title: "Linear Progress",
   component: Feat1908Route
 };
-const __vite_glob_0_133 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_132 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1908_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72495,7 +72474,7 @@ const feat2054_route = {
   title: "MaxWidth Support",
   component: Feat2054Route
 };
-const __vite_glob_0_134 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_133 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2054_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72766,7 +72745,7 @@ const feat2267_route = {
   title: "Checkbox List",
   component: Feat2267Route
 };
-const __vite_glob_0_135 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_134 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2267_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72825,7 +72804,7 @@ const feat2328_route = {
   title: "Container Height Property",
   component: Feat2328Route
 };
-const __vite_glob_0_136 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_135 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2328_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72971,7 +72950,7 @@ const feat2361_route = {
   title: "Radio/Checkbox Clickable Area",
   component: Feat2361Route
 };
-const __vite_glob_0_137 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_136 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2361_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72989,7 +72968,7 @@ const feat2440_route = {
   title: "MenuButton Icon",
   component: Feat2440Route
 };
-const __vite_glob_0_138 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_137 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2440_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73203,7 +73182,7 @@ const feat2469_route = {
   title: "Push Drawer",
   component: Feat2469Route
 };
-const __vite_glob_0_139 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_138 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2469_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73286,7 +73265,7 @@ const feat2492_route = {
   title: "TextArea onBlur",
   component: Feat2492Route
 };
-const __vite_glob_0_140 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_139 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2492_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73674,7 +73653,7 @@ const feat2609_route = {
   title: "Data Table Base Component",
   component: Feat2609Route
 };
-const __vite_glob_0_141 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_140 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2609_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73727,7 +73706,7 @@ const feat2611TabsDisabled_route = {
   title: "Disabled Tab",
   component: Feat2611TabsDisabled
 };
-const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_141 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2611TabsDisabled_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74051,7 +74030,7 @@ const feat2611_route = {
   title: "Segmented Tab",
   component: Feat2611Route
 };
-const __vite_glob_0_143 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2611_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74136,7 +74115,7 @@ const feat2682_route = {
   title: "DatePicker Issues",
   component: Feat2682Route
 };
-const __vite_glob_0_144 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_143 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2682_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74312,7 +74291,7 @@ const feat2722_route = {
   title: "Input Text-Align",
   component: Feat2722Route
 };
-const __vite_glob_0_145 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_144 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2722_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74721,7 +74700,7 @@ const feat2730_route = {
   title: "Temporary Notification Controller",
   component: Feat2730Route
 };
-const __vite_glob_0_146 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_145 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2730_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74852,7 +74831,7 @@ const feat2829_route = {
   title: "Modal ARIA Live Region",
   component: Feat2829Route
 };
-const __vite_glob_0_147 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_146 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2829_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74922,7 +74901,7 @@ const feat2877_route = {
   title: "Badge Types and Custom Icon",
   component: Feat2877Route
 };
-const __vite_glob_0_148 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_147 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2877_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74979,7 +74958,7 @@ const feat2885NavigationTabs_route = {
   title: "Notification Center - Navigation Tabs",
   component: Feat2885NavigationTabsRoute
 };
-const __vite_glob_0_149 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_148 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2885NavigationTabs_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75375,7 +75354,7 @@ const feat2885_route = {
   title: "Notification Center",
   component: Feat2885Route
 };
-const __vite_glob_0_150 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_149 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2885_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75415,7 +75394,7 @@ const feat3102_route = {
   title: "Allow icon to be set on MenuButton",
   component: Feat3102Route
 };
-const __vite_glob_0_151 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_150 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3102_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75727,7 +75706,7 @@ const feat3137_route = {
   title: "Work Side Menu Group",
   component: Feat3137Route
 };
-const __vite_glob_0_152 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_151 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3137_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -76220,7 +76199,7 @@ const feat3229_route = {
   title: "V2 Menu Button vs size and icon-only",
   component: Feat3229Route
 };
-const __vite_glob_0_153 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_152 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3229_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -76901,7 +76880,7 @@ const feat3241_route = {
   title: "V2 Experimental Wrappers",
   component: Feat3241Route
 };
-const __vite_glob_0_154 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_153 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3241_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77020,7 +76999,7 @@ const feat3306_route = {
   title: "Custom slug value for tabs",
   component: Feat3306Route
 };
-const __vite_glob_0_155 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_154 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3306_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77162,7 +77141,7 @@ const feat3344_route = {
   title: "Table Multi-Sort",
   component: Feat3344Route
 };
-const __vite_glob_0_156 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_155 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3344_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77211,7 +77190,7 @@ const feat3370_route = {
   title: "Clear calendar day selection",
   component: Feat3370Route
 };
-const __vite_glob_0_157 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_156 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3370_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77267,7 +77246,7 @@ const feat3396_route = {
   title: "Text heading-2xs size",
   component: Feat3396Route
 };
-const __vite_glob_0_158 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_157 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3396_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77360,7 +77339,7 @@ const feat3398_route = {
   title: "Group open prop",
   component: Feat3398Route
 };
-const __vite_glob_0_159 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_158 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3398_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77397,7 +77376,7 @@ const feat3407SkipOnFocusTab_route = {
   title: "Skip Focus on Tab",
   component: Feat3407SkipOnFocusTabRoute
 };
-const __vite_glob_0_160 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_159 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3407SkipOnFocusTab_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77453,7 +77432,7 @@ const feat3407StackOnMobile_route = {
   title: "Tabs Orientation",
   component: Feat3407StackOnMobileRoute
 };
-const __vite_glob_0_161 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_160 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3407StackOnMobile_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -77813,7 +77792,7 @@ const feat3478_route = {
   title: "Popover API Rewrite",
   component: Feat3478Route
 };
-const __vite_glob_0_162 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_161 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3478_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78019,7 +77998,7 @@ const feat3504_route = {
   title: "Text Button Component",
   component: Feat3504TextButtonRoute
 };
-const __vite_glob_0_163 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_162 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3504_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78136,7 +78115,7 @@ const feat3529_route = {
   title: "Heading letter-spacing values",
   component: Feat3529Route
 };
-const __vite_glob_0_164 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_163 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3529_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78239,7 +78218,7 @@ const feat3544_route = {
   title: "Optional Side Menu Icons",
   component: Feat3544Route
 };
-const __vite_glob_0_165 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_164 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78594,7 +78573,7 @@ const feat3636_route = {
   title: "Accordion actions slot and list view variant",
   component: Feat3636Route
 };
-const __vite_glob_0_166 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_165 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3636_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78671,7 +78650,7 @@ const feat3814_route = {
   title: "Work Side Menu Trailing Slot",
   component: Feat3814Route
 };
-const __vite_glob_0_167 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_166 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3814_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78945,7 +78924,7 @@ const featV2Checkbox_route = {
   title: "V2 Checkbox Spacing",
   component: FeatV2CheckboxRoute
 };
-const __vite_glob_0_168 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_167 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: featV2Checkbox_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -78981,7 +78960,7 @@ const featV2Icons_route = {
   title: "header icons",
   component: FeatV2IconsRoute
 };
-const __vite_glob_0_169 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_168 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: featV2Icons_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -79065,97 +79044,96 @@ const routeModules = /* @__PURE__ */ Object.assign({
   "./routes/bugs/bug3892.route.ts": __vite_glob_0_76,
   "./routes/bugs/bug3921.route.ts": __vite_glob_0_77,
   "./routes/bugs/bug3932.route.ts": __vite_glob_0_78,
-  "./routes/bugs/bug3964.route.ts": __vite_glob_0_79,
-  "./routes/bugs/bug4030.route.ts": __vite_glob_0_80,
-  "./routes/docs/accordion.route.ts": __vite_glob_0_81,
-  "./routes/docs/app-header.route.ts": __vite_glob_0_82,
-  "./routes/docs/badge.route.ts": __vite_glob_0_83,
-  "./routes/docs/block.route.ts": __vite_glob_0_84,
-  "./routes/docs/button-group.route.ts": __vite_glob_0_85,
-  "./routes/docs/button.route.ts": __vite_glob_0_86,
-  "./routes/docs/callout.route.ts": __vite_glob_0_87,
-  "./routes/docs/checkbox-list.route.ts": __vite_glob_0_88,
-  "./routes/docs/checkbox.route.ts": __vite_glob_0_89,
-  "./routes/docs/circular-progress.route.ts": __vite_glob_0_90,
-  "./routes/docs/container.route.ts": __vite_glob_0_91,
-  "./routes/docs/data-grid.route.ts": __vite_glob_0_92,
-  "./routes/docs/date-picker.route.ts": __vite_glob_0_93,
-  "./routes/docs/details.route.ts": __vite_glob_0_94,
-  "./routes/docs/divider.route.ts": __vite_glob_0_95,
-  "./routes/docs/drawer.route.ts": __vite_glob_0_96,
-  "./routes/docs/dropdown.route.ts": __vite_glob_0_97,
-  "./routes/docs/file-uploader.route.ts": __vite_glob_0_98,
-  "./routes/docs/filter-chip.route.ts": __vite_glob_0_99,
-  "./routes/docs/footer.route.ts": __vite_glob_0_100,
-  "./routes/docs/form-item.route.ts": __vite_glob_0_101,
-  "./routes/docs/form-stepper.route.ts": __vite_glob_0_102,
-  "./routes/docs/grid.route.ts": __vite_glob_0_103,
-  "./routes/docs/hero-banner.route.ts": __vite_glob_0_104,
-  "./routes/docs/icon-button.route.ts": __vite_glob_0_105,
-  "./routes/docs/icon.route.ts": __vite_glob_0_106,
-  "./routes/docs/input.route.ts": __vite_glob_0_107,
-  "./routes/docs/linear-progress.route.ts": __vite_glob_0_108,
-  "./routes/docs/link.route.ts": __vite_glob_0_109,
-  "./routes/docs/menu-button.route.ts": __vite_glob_0_110,
-  "./routes/docs/microsite-header.route.ts": __vite_glob_0_111,
-  "./routes/docs/modal.route.ts": __vite_glob_0_112,
-  "./routes/docs/notification.route.ts": __vite_glob_0_113,
-  "./routes/docs/page-block.route.ts": __vite_glob_0_114,
-  "./routes/docs/pagination.route.ts": __vite_glob_0_115,
-  "./routes/docs/popover.route.ts": __vite_glob_0_116,
-  "./routes/docs/push-drawer.route.ts": __vite_glob_0_117,
-  "./routes/docs/radio-group.route.ts": __vite_glob_0_118,
-  "./routes/docs/side-menu.route.ts": __vite_glob_0_119,
-  "./routes/docs/skeleton.route.ts": __vite_glob_0_120,
-  "./routes/docs/spacer.route.ts": __vite_glob_0_121,
-  "./routes/docs/table.route.ts": __vite_glob_0_122,
-  "./routes/docs/tabs.route.ts": __vite_glob_0_123,
-  "./routes/docs/temporary-notification.route.ts": __vite_glob_0_124,
-  "./routes/docs/text-area.route.ts": __vite_glob_0_125,
-  "./routes/docs/text.route.ts": __vite_glob_0_126,
-  "./routes/docs/tooltip.route.ts": __vite_glob_0_127,
-  "./routes/docs/work-side-menu.route.ts": __vite_glob_0_128,
-  "./routes/docs/work-side-notification-panel.route.ts": __vite_glob_0_129,
-  "./routes/features/feat1383.route.ts": __vite_glob_0_130,
-  "./routes/features/feat1547.route.ts": __vite_glob_0_131,
-  "./routes/features/feat1813.route.ts": __vite_glob_0_132,
-  "./routes/features/feat1908.route.ts": __vite_glob_0_133,
-  "./routes/features/feat2054.route.ts": __vite_glob_0_134,
-  "./routes/features/feat2267.route.ts": __vite_glob_0_135,
-  "./routes/features/feat2328.route.ts": __vite_glob_0_136,
-  "./routes/features/feat2361.route.ts": __vite_glob_0_137,
-  "./routes/features/feat2440.route.ts": __vite_glob_0_138,
-  "./routes/features/feat2469.route.ts": __vite_glob_0_139,
-  "./routes/features/feat2492.route.ts": __vite_glob_0_140,
-  "./routes/features/feat2609.route.ts": __vite_glob_0_141,
-  "./routes/features/feat2611-tabs-disabled.route.ts": __vite_glob_0_142,
-  "./routes/features/feat2611.route.ts": __vite_glob_0_143,
-  "./routes/features/feat2682.route.ts": __vite_glob_0_144,
-  "./routes/features/feat2722.route.ts": __vite_glob_0_145,
-  "./routes/features/feat2730.route.ts": __vite_glob_0_146,
-  "./routes/features/feat2829.route.ts": __vite_glob_0_147,
-  "./routes/features/feat2877.route.ts": __vite_glob_0_148,
-  "./routes/features/feat2885-navigation-tabs.route.ts": __vite_glob_0_149,
-  "./routes/features/feat2885.route.ts": __vite_glob_0_150,
-  "./routes/features/feat3102.route.ts": __vite_glob_0_151,
-  "./routes/features/feat3137.route.ts": __vite_glob_0_152,
-  "./routes/features/feat3229.route.ts": __vite_glob_0_153,
-  "./routes/features/feat3241.route.ts": __vite_glob_0_154,
-  "./routes/features/feat3306.route.ts": __vite_glob_0_155,
-  "./routes/features/feat3344.route.ts": __vite_glob_0_156,
-  "./routes/features/feat3370.route.ts": __vite_glob_0_157,
-  "./routes/features/feat3396.route.ts": __vite_glob_0_158,
-  "./routes/features/feat3398.route.ts": __vite_glob_0_159,
-  "./routes/features/feat3407SkipOnFocusTab.route.ts": __vite_glob_0_160,
-  "./routes/features/feat3407StackOnMobile.route.ts": __vite_glob_0_161,
-  "./routes/features/feat3478.route.ts": __vite_glob_0_162,
-  "./routes/features/feat3504.route.ts": __vite_glob_0_163,
-  "./routes/features/feat3529.route.ts": __vite_glob_0_164,
-  "./routes/features/feat3544.route.ts": __vite_glob_0_165,
-  "./routes/features/feat3636.route.ts": __vite_glob_0_166,
-  "./routes/features/feat3814.route.ts": __vite_glob_0_167,
-  "./routes/features/featV2Checkbox.route.ts": __vite_glob_0_168,
-  "./routes/features/featV2Icons.route.ts": __vite_glob_0_169
+  "./routes/bugs/bug4030.route.ts": __vite_glob_0_79,
+  "./routes/docs/accordion.route.ts": __vite_glob_0_80,
+  "./routes/docs/app-header.route.ts": __vite_glob_0_81,
+  "./routes/docs/badge.route.ts": __vite_glob_0_82,
+  "./routes/docs/block.route.ts": __vite_glob_0_83,
+  "./routes/docs/button-group.route.ts": __vite_glob_0_84,
+  "./routes/docs/button.route.ts": __vite_glob_0_85,
+  "./routes/docs/callout.route.ts": __vite_glob_0_86,
+  "./routes/docs/checkbox-list.route.ts": __vite_glob_0_87,
+  "./routes/docs/checkbox.route.ts": __vite_glob_0_88,
+  "./routes/docs/circular-progress.route.ts": __vite_glob_0_89,
+  "./routes/docs/container.route.ts": __vite_glob_0_90,
+  "./routes/docs/data-grid.route.ts": __vite_glob_0_91,
+  "./routes/docs/date-picker.route.ts": __vite_glob_0_92,
+  "./routes/docs/details.route.ts": __vite_glob_0_93,
+  "./routes/docs/divider.route.ts": __vite_glob_0_94,
+  "./routes/docs/drawer.route.ts": __vite_glob_0_95,
+  "./routes/docs/dropdown.route.ts": __vite_glob_0_96,
+  "./routes/docs/file-uploader.route.ts": __vite_glob_0_97,
+  "./routes/docs/filter-chip.route.ts": __vite_glob_0_98,
+  "./routes/docs/footer.route.ts": __vite_glob_0_99,
+  "./routes/docs/form-item.route.ts": __vite_glob_0_100,
+  "./routes/docs/form-stepper.route.ts": __vite_glob_0_101,
+  "./routes/docs/grid.route.ts": __vite_glob_0_102,
+  "./routes/docs/hero-banner.route.ts": __vite_glob_0_103,
+  "./routes/docs/icon-button.route.ts": __vite_glob_0_104,
+  "./routes/docs/icon.route.ts": __vite_glob_0_105,
+  "./routes/docs/input.route.ts": __vite_glob_0_106,
+  "./routes/docs/linear-progress.route.ts": __vite_glob_0_107,
+  "./routes/docs/link.route.ts": __vite_glob_0_108,
+  "./routes/docs/menu-button.route.ts": __vite_glob_0_109,
+  "./routes/docs/microsite-header.route.ts": __vite_glob_0_110,
+  "./routes/docs/modal.route.ts": __vite_glob_0_111,
+  "./routes/docs/notification.route.ts": __vite_glob_0_112,
+  "./routes/docs/page-block.route.ts": __vite_glob_0_113,
+  "./routes/docs/pagination.route.ts": __vite_glob_0_114,
+  "./routes/docs/popover.route.ts": __vite_glob_0_115,
+  "./routes/docs/push-drawer.route.ts": __vite_glob_0_116,
+  "./routes/docs/radio-group.route.ts": __vite_glob_0_117,
+  "./routes/docs/side-menu.route.ts": __vite_glob_0_118,
+  "./routes/docs/skeleton.route.ts": __vite_glob_0_119,
+  "./routes/docs/spacer.route.ts": __vite_glob_0_120,
+  "./routes/docs/table.route.ts": __vite_glob_0_121,
+  "./routes/docs/tabs.route.ts": __vite_glob_0_122,
+  "./routes/docs/temporary-notification.route.ts": __vite_glob_0_123,
+  "./routes/docs/text-area.route.ts": __vite_glob_0_124,
+  "./routes/docs/text.route.ts": __vite_glob_0_125,
+  "./routes/docs/tooltip.route.ts": __vite_glob_0_126,
+  "./routes/docs/work-side-menu.route.ts": __vite_glob_0_127,
+  "./routes/docs/work-side-notification-panel.route.ts": __vite_glob_0_128,
+  "./routes/features/feat1383.route.ts": __vite_glob_0_129,
+  "./routes/features/feat1547.route.ts": __vite_glob_0_130,
+  "./routes/features/feat1813.route.ts": __vite_glob_0_131,
+  "./routes/features/feat1908.route.ts": __vite_glob_0_132,
+  "./routes/features/feat2054.route.ts": __vite_glob_0_133,
+  "./routes/features/feat2267.route.ts": __vite_glob_0_134,
+  "./routes/features/feat2328.route.ts": __vite_glob_0_135,
+  "./routes/features/feat2361.route.ts": __vite_glob_0_136,
+  "./routes/features/feat2440.route.ts": __vite_glob_0_137,
+  "./routes/features/feat2469.route.ts": __vite_glob_0_138,
+  "./routes/features/feat2492.route.ts": __vite_glob_0_139,
+  "./routes/features/feat2609.route.ts": __vite_glob_0_140,
+  "./routes/features/feat2611-tabs-disabled.route.ts": __vite_glob_0_141,
+  "./routes/features/feat2611.route.ts": __vite_glob_0_142,
+  "./routes/features/feat2682.route.ts": __vite_glob_0_143,
+  "./routes/features/feat2722.route.ts": __vite_glob_0_144,
+  "./routes/features/feat2730.route.ts": __vite_glob_0_145,
+  "./routes/features/feat2829.route.ts": __vite_glob_0_146,
+  "./routes/features/feat2877.route.ts": __vite_glob_0_147,
+  "./routes/features/feat2885-navigation-tabs.route.ts": __vite_glob_0_148,
+  "./routes/features/feat2885.route.ts": __vite_glob_0_149,
+  "./routes/features/feat3102.route.ts": __vite_glob_0_150,
+  "./routes/features/feat3137.route.ts": __vite_glob_0_151,
+  "./routes/features/feat3229.route.ts": __vite_glob_0_152,
+  "./routes/features/feat3241.route.ts": __vite_glob_0_153,
+  "./routes/features/feat3306.route.ts": __vite_glob_0_154,
+  "./routes/features/feat3344.route.ts": __vite_glob_0_155,
+  "./routes/features/feat3370.route.ts": __vite_glob_0_156,
+  "./routes/features/feat3396.route.ts": __vite_glob_0_157,
+  "./routes/features/feat3398.route.ts": __vite_glob_0_158,
+  "./routes/features/feat3407SkipOnFocusTab.route.ts": __vite_glob_0_159,
+  "./routes/features/feat3407StackOnMobile.route.ts": __vite_glob_0_160,
+  "./routes/features/feat3478.route.ts": __vite_glob_0_161,
+  "./routes/features/feat3504.route.ts": __vite_glob_0_162,
+  "./routes/features/feat3529.route.ts": __vite_glob_0_163,
+  "./routes/features/feat3544.route.ts": __vite_glob_0_164,
+  "./routes/features/feat3636.route.ts": __vite_glob_0_165,
+  "./routes/features/feat3814.route.ts": __vite_glob_0_166,
+  "./routes/features/featV2Checkbox.route.ts": __vite_glob_0_167,
+  "./routes/features/featV2Icons.route.ts": __vite_glob_0_168
 });
 const prRouteDefinitions = Object.values(routeModules).map((module) => module.default).sort((left, right) => {
   const idComparison = left.id.localeCompare(right.id, void 0, { numeric: true });
