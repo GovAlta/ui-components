@@ -1,9 +1,16 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTextArea } from "./textarea";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from "@angular/core";
 import { GoabTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 import { By } from "@angular/platform-browser";
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  NgModel,
+  ReactiveFormsModule,
+} from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -178,5 +185,110 @@ describe("GoABTextArea", () => {
       textareaComponent.writeValue(null);
       expect(textareaComponent.value).toBe(null);
     });
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabTextArea, ReactiveFormsModule],
+  template: `
+    <form [formGroup]="form">
+      <goab-textarea formControlName="bio" name="bio"></goab-textarea>
+    </form>
+  `,
+})
+class TestReactiveFormComponent {
+  form = new FormGroup({
+    bio: new FormControl(""),
+  });
+}
+
+describe("GoabTextArea reactive form touched state", () => {
+  let fixture: ComponentFixture<TestReactiveFormComponent>;
+  let component: TestReactiveFormComponent;
+  let el: HTMLElement;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestReactiveFormComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestReactiveFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    el = fixture.nativeElement.querySelector("goa-textarea");
+  }));
+
+  it("should not mark the control as touched on change", () => {
+    fireEvent(
+      el,
+      new CustomEvent("_change", { detail: { name: "bio", value: "hello" } }),
+    );
+    expect(component.form.get("bio")?.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on key press", () => {
+    fireEvent(el, new CustomEvent("_keyPress"));
+    expect(component.form.get("bio")?.touched).toBe(false);
+  });
+
+  it("should mark the control as touched on blur", () => {
+    fireEvent(el, new CustomEvent("_blur"));
+    expect(component.form.get("bio")?.touched).toBe(true);
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabTextArea, FormsModule],
+  template: `
+    <goab-textarea name="bio" [(ngModel)]="bio" #model="ngModel"></goab-textarea>
+  `,
+})
+class TestNgModelComponent {
+  bio = "";
+  @ViewChild("model") model!: NgModel;
+}
+
+describe("GoabTextArea template-driven form touched state", () => {
+  let fixture: ComponentFixture<TestNgModelComponent>;
+  let component: TestNgModelComponent;
+  let el: HTMLElement;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestNgModelComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestNgModelComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    el = fixture.nativeElement.querySelector("goa-textarea");
+  }));
+
+  it("should not mark the control as touched on change", () => {
+    fireEvent(
+      el,
+      new CustomEvent("_change", { detail: { name: "bio", value: "hello" } }),
+    );
+    expect(component.model.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on key press", () => {
+    fireEvent(el, new CustomEvent("_keyPress"));
+    expect(component.model.touched).toBe(false);
+  });
+
+  it("should mark the control as touched on blur", () => {
+    fireEvent(el, new CustomEvent("_blur"));
+    expect(component.model.touched).toBe(true);
   });
 });
