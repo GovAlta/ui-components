@@ -405,7 +405,7 @@ test("renderComponent labels the content-insertion section per framework", () =>
   assert.match(wcOut, /### Slots/, "Web components keep Slots");
 });
 
-test("componentsForTarget drops web-component-only components from React and Angular", () => {
+test("componentsForTarget drops web-component-only components from non-web-component frameworks", () => {
   const all = [
     componentFixture({ id: "button", name: "Button" }),
     componentFixture({ id: "focus-trap", name: "Focus Trap" }),

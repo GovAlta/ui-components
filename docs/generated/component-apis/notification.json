@@ -201,6 +201,95 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "arialive",
+          "type": "\"assertive\" | \"off\" | \"polite\"",
+          "typeLabel": "GoabNotificationAriaLiveType",
+          "values": [
+            "assertive",
+            "off",
+            "polite"
+          ],
+          "required": false,
+          "default": "polite",
+          "description": "Indicates how assistive technology should handle updates to the live region."
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, reduces padding for a more compact notification."
+        },
+        {
+          "name": "emphasis",
+          "type": "\"high\" | \"low\"",
+          "typeLabel": "GoabNotificationEmphasisType",
+          "values": [
+            "high",
+            "low"
+          ],
+          "required": false,
+          "default": "high",
+          "description": "Sets the visual prominence. 'high' for full background, 'filled' for medium."
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"emergency\" | \"important\" | \"information\" | \"event\"",
+          "typeLabel": "GoabNotificationType",
+          "values": [
+            "emergency",
+            "important",
+            "information",
+            "event"
+          ],
+          "required": false,
+          "default": "",
+          "description": "Define the context and colour of the notification."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_dismiss",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

@@ -43,6 +43,7 @@ function main(): void {
       webComponentTag: fw?.webComponentTag,
       reactClassName: fw?.reactClassName,
       angularSelector: fw?.angularSelector,
+      vueComponentName: fw?.vueComponentName,
       // Carry extra react class names as a starting point for aliases.
       aliases: fw && fw.reactClassNames.length > 1 ? fw.reactClassNames.slice(1) : [],
       api: apiBlob,

@@ -91,6 +91,45 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "horizontal-position",
+          "type": "\"left\" | \"center\" | \"right\"",
+          "values": [
+            "left",
+            "center",
+            "right"
+          ],
+          "required": false,
+          "default": "center",
+          "description": "Horizontal position of the notification container."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "vertical-position",
+          "type": "\"top\" | \"bottom\"",
+          "values": [
+            "top",
+            "bottom"
+          ],
+          "required": false,
+          "default": "bottom",
+          "description": "Vertical position of the notification container."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   },
   "staticMethods": [

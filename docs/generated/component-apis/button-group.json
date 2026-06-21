@@ -181,6 +181,79 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "\"start\" | \"end\" | \"center\"",
+          "typeLabel": "GoabButtonGroupButtonAlignment",
+          "values": [
+            "start",
+            "end",
+            "center"
+          ],
+          "required": false,
+          "default": "start",
+          "description": "Positions the button group in the page layout."
+        },
+        {
+          "name": "gap",
+          "type": "\"relaxed\" | \"compact\"",
+          "typeLabel": "GoabButtonGroupGap",
+          "values": [
+            "relaxed",
+            "compact"
+          ],
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the spacing between buttons in the button group."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

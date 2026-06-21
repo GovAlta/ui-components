@@ -1,0 +1,10 @@
+<template>
+  <goa-app-footer version="2" maxcontentwidth="100%">
+    <goa-app-footer-meta-section slot="meta">
+      <a href="#">Give feedback</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Privacy</a>
+      <a href="#">Contact us</a>
+    </goa-app-footer-meta-section>
+  </goa-app-footer>
+</template>

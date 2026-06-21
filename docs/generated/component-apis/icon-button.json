@@ -381,6 +381,149 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Action identifier passed in click events for event delegation patterns."
+        },
+        {
+          "name": "action-arg",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Single argument value passed with the action in click events."
+        },
+        {
+          "name": "action-args",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": "{}",
+          "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the aria-label of the button."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables the button."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Sets the icon."
+        },
+        {
+          "name": "inverted",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, inverts the icon colors for use on dark backgrounds."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "IconSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of button."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "theme",
+          "type": "IconTheme",
+          "required": false,
+          "default": "outline",
+          "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the title of the button."
+        },
+        {
+          "name": "variant",
+          "type": "\"color\" | \"nocolor\" | \"light\" | \"dark\" | \"destructive\"",
+          "typeLabel": "GoabIconButtonVariant",
+          "values": [
+            "color",
+            "nocolor",
+            "light",
+            "dark",
+            "destructive"
+          ],
+          "required": false,
+          "default": "color",
+          "description": "Styles the button to show color, light, dark or destructive action."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<{ event: Event }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

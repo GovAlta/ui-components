@@ -1,0 +1,7 @@
+<template>
+  <goa-button-group alignment="start">
+    <goa-button version="2" leadingicon="arrow-back">Go back</goa-button>
+    <goa-button version="2" trailingicon="arrow-forward">Continue</goa-button>
+    <goa-button version="2" type="secondary" leadingicon="add">Add item</goa-button>
+  </goa-button-group>
+</template>

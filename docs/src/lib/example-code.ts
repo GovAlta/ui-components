@@ -9,6 +9,7 @@ export interface ExampleCode {
     component?: string;
   };
   webComponents?: string;
+  vue?: string;
 }
 
 // Load all example code files at build time using Vite glob imports
@@ -26,6 +27,10 @@ const angularComponents = import.meta.glob<string>(
 );
 const webComponentFiles = import.meta.glob<string>(
   '../content/examples/*/web-components.html',
+  { eager: true, query: '?raw', import: 'default' }
+);
+const vueFiles = import.meta.glob<string>(
+  '../content/examples/*/vue.vue',
   { eager: true, query: '?raw', import: 'default' }
 );
 
@@ -56,6 +61,11 @@ for (const [path, content] of Object.entries(webComponentFiles)) {
   webComponentBySlug.set(getSlugFromPath(path), content);
 }
 
+const vueBySlug = new Map<string, string>();
+for (const [path, content] of Object.entries(vueFiles)) {
+  vueBySlug.set(getSlugFromPath(path), content);
+}
+
 /**
  * Get all code files for an example
  * @param exampleSlug - The example folder name (e.g., "button-with-icon")
@@ -80,6 +90,11 @@ export async function getExampleCode(exampleSlug: string): Promise<ExampleCode> 
   const webComponent = webComponentBySlug.get(exampleSlug);
   if (webComponent) {
     code.webComponents = webComponent;
+  }
+
+  const vue = vueBySlug.get(exampleSlug);
+  if (vue) {
+    code.vue = vue;
   }
 
   return code;

@@ -7,6 +7,7 @@ export interface FrameworkIdentifiers {
   webComponentTag?: string;
   reactClassName?: string;
   angularSelector?: string;
+  vueComponentName?: string;
   // All Goab class exports from the React wrapper file. First entry is the
   // canonical/primary name; the rest (rare in practice) ride along.
   reactClassNames: string[];
@@ -57,6 +58,7 @@ export function loadFrameworkIdentifiers(): Map<string, FrameworkIdentifiers> {
       reactClassName: pickReactClassName(tag, react?.classNames ?? []),
       reactClassNames: react?.classNames ?? [],
       angularSelector,
+      vueComponentName: tagToReactClassName(tag),
     });
   }
 

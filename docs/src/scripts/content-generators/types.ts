@@ -21,6 +21,7 @@ export interface ComponentRecord extends BaseRecord {
   webComponentTag?: string;
   reactClassName?: string;
   angularSelector?: string;
+  vueComponentName?: string;
   // Full API blob from generated/component-apis/*.json (minus componentSlug).
   // Contains per-framework props/events/slots. Consumers navigate it.
   api?: Record<string, unknown>;
@@ -48,6 +49,7 @@ export interface ExampleRecord extends BaseRecord {
   previewUrl?: string;
   reactSourceUrl?: string;
   angularSourceUrl?: string;
+  vueSourceUrl?: string;
   sourceUrl?: string;
   stackblitzUrl?: string;
 }

@@ -37,7 +37,7 @@ export interface FrameworkTarget {
   /** Frontmatter key for this framework's component identifier. */
   frontmatterKey: string;
   /** ComponentRecord field holding the identifier (e.g. `GoabButton`). */
-  identifierKey: "reactClassName" | "angularSelector" | "webComponentTag";
+  identifierKey: "reactClassName" | "angularSelector" | "webComponentTag" | "vueComponentName";
   /** Example source files to embed, in render order, with fence languages. */
   sources: { file: string; lang: string }[];
   /**
@@ -84,6 +84,17 @@ const FRAMEWORKS: FrameworkTarget[] = [
     // PreviewContainer has no webComponentsSourceUrl attribute, so the WC
     // bundle skips variant links rather than emit relative-only previews.
   },
+  {
+    id: "vue",
+    apiKey: "webComponents",
+    label: "Vue",
+    slotsLabel: "Slots",
+    frontmatterKey: "vue",
+    identifierKey: "vueComponentName",
+    sources: [{ file: "vue.vue", lang: "vue" }],
+    // PreviewContainer has no vueSourceUrl attribute, so the Vue bundle
+    // skips variant links rather than emit relative-only previews.
+  },
 ];
 
 // Mirrors ACCESSIBILITY_TOPICS in docs/src/lib/content-queries.ts (which drives
@@ -109,15 +120,16 @@ interface FrameworkApi {
   props?: ApiItem[];
   events?: ApiItem[];
   slots?: ApiItem[];
+  notes?: string[];
 }
 interface ApiBlob {
   frameworks?: Record<string, FrameworkApi>;
 }
 
 /**
- * Components for a framework's set. Web components carry the full set; React and
- * Angular drop the web-component-only utilities (no wrapper there), so an AI is
- * not shown a component it cannot use in that framework.
+ * Components for a framework's set. Web components carry the full set; other
+ * frameworks drop the web-component-only utilities (no wrapper there), so an AI
+ * is not shown a component it cannot use in that framework.
  */
 export function componentsForTarget(
   components: ComponentRecord[],
@@ -283,6 +295,14 @@ export function renderComponent(
     out.push("## Properties", "_No extracted API for this component._");
   }
 
+  // Vue-specific conventions (e.g. version="2", boolean handling)
+  if (target.id === "vue") {
+    const vueNotes = (c.api as ApiBlob | undefined)?.frameworks?.vue?.notes;
+    if (vueNotes?.length) {
+      out.push("## Notes", vueNotes.map((n) => `> ${n}`).join("\n"));
+    }
+  }
+
   // Examples (pointers to files in this same bundle)
   if (examples.length) {
     const lines = [...examples]
@@ -429,6 +449,8 @@ export function renderExample(
     links.push(`- Source: ${ex.reactSourceUrl}`);
   if (target.id === "angular" && ex.angularSourceUrl)
     links.push(`- Source: ${ex.angularSourceUrl}`);
+  if (target.id === "vue" && ex.vueSourceUrl)
+    links.push(`- Source: ${ex.vueSourceUrl}`);
   if (ex.sourceUrl) links.push(`- Source: ${ex.sourceUrl}`);
   if (ex.stackblitzUrl) links.push(`- StackBlitz: ${ex.stackblitzUrl}`);
   links.push(...variantLinks);
@@ -478,14 +500,25 @@ function variantSourceUrl(block: string, target: FrameworkTarget): string | unde
   if (target.variantSourceAttr) {
     return block.match(new RegExp(`${target.variantSourceAttr}="([^"]+)"`))?.[1];
   }
-  if (target.id !== "web-components") return undefined;
-  const reactUrl = block.match(/reactSourceUrl="([^"]+)"/)?.[1];
-  const rel = reactUrl?.match(/\/docs\/src\/content\/examples\/(.+)\/react\.tsx$/)?.[1];
-  if (!reactUrl || !rel) return undefined;
-  if (!fs.existsSync(path.join(paths.content.examples, rel, "web-components.html"))) {
-    return undefined;
+  if (target.id === "web-components") {
+    const reactUrl = block.match(/reactSourceUrl="([^"]+)"/)?.[1];
+    const rel = reactUrl?.match(/\/docs\/src\/content\/examples\/(.+)\/react\.tsx$/)?.[1];
+    if (!reactUrl || !rel) return undefined;
+    if (!fs.existsSync(path.join(paths.content.examples, rel, "web-components.html"))) {
+      return undefined;
+    }
+    return reactUrl.replace(/\/react\.tsx$/, "/web-components.html");
   }
-  return reactUrl.replace(/\/react\.tsx$/, "/web-components.html");
+  if (target.id === "vue") {
+    const reactUrl = block.match(/reactSourceUrl="([^"]+)"/)?.[1];
+    const rel = reactUrl?.match(/\/docs\/src\/content\/examples\/(.+)\/react\.tsx$/)?.[1];
+    if (!reactUrl || !rel) return undefined;
+    if (!fs.existsSync(path.join(paths.content.examples, rel, "vue.vue"))) {
+      return undefined;
+    }
+    return reactUrl.replace(/\/react\.tsx$/, "/vue.vue");
+  }
+  return undefined;
 }
 
 // --- Foundation --------------------------------------------------------------

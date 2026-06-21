@@ -53,8 +53,8 @@ test("verifyBundle flags a component-set mismatch in any framework, not just rea
   fs.mkdirSync(path.join(mcp, "components"), { recursive: true });
   fs.writeFileSync(path.join(mcp, "components", "a.json"), "{}");
   fs.writeFileSync(path.join(mcp, "components", "b.json"), "{}");
-  // react and web-components match the MCP; angular is missing a component.
-  for (const fw of ["react", "web-components"]) {
+  // react, vue, and web-components match the MCP; angular is missing a component.
+  for (const fw of ["react", "vue", "web-components"]) {
     fs.mkdirSync(path.join(dir, fw, "components"), { recursive: true });
     fs.writeFileSync(path.join(dir, fw, "components", "a.md"), "---\nid: a\n---\n\n# A\n");
     fs.writeFileSync(path.join(dir, fw, "components", "b.md"), "---\nid: b\n---\n\n# B\n");
@@ -121,14 +121,14 @@ test("verifyBundle catches raw inline-formatting tags leaking outside fences", (
   }
 });
 
-test("verifyBundle expects React and Angular to omit web-component-only components", () => {
+test("verifyBundle expects non-web-component frameworks to omit web-component-only components", () => {
   const dir = fixture();
   const mcp = path.join(dir, "mcp");
   fs.mkdirSync(path.join(mcp, "components"), { recursive: true });
   fs.writeFileSync(path.join(mcp, "components", "button.json"), "{}");
   fs.writeFileSync(path.join(mcp, "components", "focus-trap.json"), "{}");
-  // web-components carries the full MCP set; react and angular correctly omit
-  // the web-component-only focus-trap.
+  // web-components carries the full MCP set; react, angular, and vue correctly
+  // omit the web-component-only focus-trap.
   fs.mkdirSync(path.join(dir, "web-components", "components"), { recursive: true });
   fs.writeFileSync(
     path.join(dir, "web-components", "components", "button.md"),
@@ -138,7 +138,7 @@ test("verifyBundle expects React and Angular to omit web-component-only componen
     path.join(dir, "web-components", "components", "focus-trap.md"),
     "---\nid: focus-trap\n---\n\n# Focus Trap\n",
   );
-  for (const fw of ["react", "angular"]) {
+  for (const fw of ["react", "angular", "vue"]) {
     fs.mkdirSync(path.join(dir, fw, "components"), { recursive: true });
     fs.writeFileSync(
       path.join(dir, fw, "components", "button.md"),
@@ -148,6 +148,6 @@ test("verifyBundle expects React and Angular to omit web-component-only componen
   assert.deepEqual(
     verifyBundle(dir, mcp),
     [],
-    "omitting a web-component-only component from React/Angular is expected, not a divergence",
+    "omitting a web-component-only component from React/Angular/Vue is expected, not a divergence",
   );
 });

@@ -380,6 +380,145 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables the date picker."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Sets the input to an error state."
+        },
+        {
+          "name": "max",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Maximum date value allowed."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "min",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Minimum date value allowed."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Name of the date field."
+        },
+        {
+          "name": "size",
+          "type": "\"default\" | \"compact\"",
+          "values": [
+            "default",
+            "compact"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Sets the size of the date picker. 'compact' reduces height for dense layouts."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"calendar\" | \"input\"",
+          "values": [
+            "calendar",
+            "input"
+          ],
+          "required": false,
+          "default": "calendar",
+          "description": "Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Value of the calendar date."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the width of the date picker input."
+        }
+      ],
+      "events": [
+        {
+          "name": "_change",
+          "type": "CustomEvent<{ name: string; value: Date | string | null; valueStr: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

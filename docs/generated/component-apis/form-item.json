@@ -393,6 +393,153 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error text displayed under the form field. Leave blank to indicate a valid field."
+        },
+        {
+          "name": "helptext",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Help text displayed under the form field to provide additional explanation."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Creates a label for the form item."
+        },
+        {
+          "name": "labelsize",
+          "type": "\"compact\" | \"regular\" | \"large\"",
+          "typeLabel": "GoabFormItemLabelSizeType",
+          "values": [
+            "compact",
+            "regular",
+            "large"
+          ],
+          "required": false,
+          "default": "regular",
+          "description": "Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "none",
+          "description": "Sets the maximum width of the form item."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "blank",
+          "description": "Overrides the label value within the form-summary. For public-form use only."
+        },
+        {
+          "name": "requirement",
+          "type": "\"optional\" | \"required\"",
+          "typeLabel": "GoabFormItemRequirementType",
+          "values": [
+            "optional",
+            "required"
+          ],
+          "required": false,
+          "default": "",
+          "description": "Marks the field with an optional or required label indicator."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"text-input\" | \"textarea\" | \"checkbox-list\" | \"radio-group\"",
+          "typeLabel": "GoabFormItemInputType",
+          "values": [
+            "text-input",
+            "textarea",
+            "checkbox-list",
+            "radio-group"
+          ],
+          "required": false,
+          "default": "",
+          "description": "Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "typeLabel": "GoabFormItemVersionType",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "error",
+          "type": "slot",
+          "description": "Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or slot for custom error content.",
+          "required": false
+        },
+        {
+          "name": "helpText",
+          "type": "slot",
+          "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or slot for custom help content.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

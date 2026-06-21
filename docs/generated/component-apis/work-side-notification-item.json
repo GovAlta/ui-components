@@ -219,6 +219,99 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "priority",
+          "type": "\"normal\" | \"urgent\"",
+          "typeLabel": "GoabWorkSideNotificationItemPriority",
+          "values": [
+            "normal",
+            "urgent"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": ""
+        },
+        {
+          "name": "read-status",
+          "type": "\"read\" | \"unread\"",
+          "typeLabel": "GoabWorkSideNotificationItemReadStatu",
+          "values": [
+            "read",
+            "unread"
+          ],
+          "required": false,
+          "default": "unread",
+          "description": ""
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "type",
+          "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+          "typeLabel": "GoabWorkSideNotificationItemType",
+          "values": [
+            "default",
+            "success",
+            "critical",
+            "warning",
+            "info"
+          ],
+          "required": false,
+          "default": "default",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_notificationItemRead",
+          "type": "CustomEvent<{ el: unknown; readStatus: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

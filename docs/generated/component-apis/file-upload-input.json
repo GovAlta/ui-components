@@ -180,6 +180,67 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "accept",
+          "type": "string",
+          "required": false,
+          "default": "*",
+          "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
+        },
+        {
+          "name": "maxfilesize",
+          "type": "string",
+          "required": false,
+          "default": "5MB",
+          "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Defaults to 5MB. Files exceeding this will be rejected."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "\"dragdrop\" | \"button\"",
+          "values": [
+            "dragdrop",
+            "button"
+          ],
+          "required": false,
+          "default": "dragdrop",
+          "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_selectFile",
+          "type": "CustomEvent<{ file: File; event: Event }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

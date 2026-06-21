@@ -1,0 +1,26 @@
+<template>
+  <goa-one-column-layout>
+    <section slot="header">
+      <goa-app-header version="2" url="/" heading="Service name">
+        <a href="/login">Sign in</a>
+      </goa-app-header>
+    </section>
+    <goa-page-block width="704px">
+      <p>
+        <goa-skeleton type="header" size="4"></goa-skeleton>
+        <goa-skeleton type="text" size="1"></goa-skeleton>
+      </p>
+      <p>
+        <goa-skeleton type="header" size="4"></goa-skeleton>
+        <goa-skeleton type="text" size="1"></goa-skeleton>
+      </p>
+      <goa-grid min-child-width="30ch">
+        <goa-skeleton type="card" size="2"></goa-skeleton>
+        <goa-skeleton type="card" size="2"></goa-skeleton>
+      </goa-grid>
+    </goa-page-block>
+    <section slot="footer">
+      <goa-app-footer version="2"></goa-app-footer>
+    </section>
+  </goa-one-column-layout>
+</template>

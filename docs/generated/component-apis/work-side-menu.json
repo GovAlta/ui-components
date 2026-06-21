@@ -250,6 +250,93 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The application name displayed in the header."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Controls whether the side menu is expanded or collapsed."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+        },
+        {
+          "name": "user-name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "User's name displayed in the profile section."
+        },
+        {
+          "name": "user-secondary-text",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Secondary text displayed below the user's name, such as role or email."
+        }
+      ],
+      "events": [
+        {
+          "name": "_navigate",
+          "type": "CustomEvent<{ url: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_toggle",
+          "type": "CustomEvent<{ open: boolean }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "accountContent",
+          "type": "slot",
+          "description": "Content rendered in the account/profile slot.",
+          "required": false
+        },
+        {
+          "name": "primaryContent",
+          "type": "slot",
+          "description": "Content rendered in the primary navigation slot.",
+          "required": false
+        },
+        {
+          "name": "secondaryContent",
+          "type": "slot",
+          "description": "Content rendered in the secondary navigation slot.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

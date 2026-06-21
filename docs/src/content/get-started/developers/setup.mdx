@@ -2,7 +2,7 @@
 id: developers/setup
 title: Developer setup
 navLabel: Setup
-description: Set up Angular, React, or Web Components to use the GoA Design System
+description: Set up Angular, React, Vue, or Web Components to use the GoA Design System
 section: developers
 order: 2
 status: published
@@ -10,7 +10,7 @@ status: published
 import DropInCallout from "../../../components/DropInCallout.astro";
 
 <goa-text size="heading-xl" mt="none" mb="m">Developer setup</goa-text>
-<goa-text size="body-l" mt="none" mb="2xl">Set up the Government of Alberta Design System in Angular, React, or directly with Web Components.</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">Set up the Government of Alberta Design System in Angular, React, Vue, or directly with Web Components.</goa-text>
 
 <h2 id="angular">Angular UI components</h2>
 <goa-callout version="2" type="information" emphasis="low" mb="m">
@@ -123,6 +123,108 @@ npm i @abgov/design-tokens</code></pre>
 <pre><code>@import "@abgov/web-components/index.css";
 @import "@abgov/design-tokens/dist/tokens.css";</code></pre>
 
-<goa-divider mt="xl" mb="xl"></goa-divider>
+<div style="display: flex; gap: 1rem; align-items: baseline;">
+  <h2 id="vue">Vue UI components</h2>
+  <goa-badge version="2" type="important" emphasis="subtle" content="Experimental"></goa-badge>
+</div>
+<goa-callout version="2" type="information" emphasis="low" mb="m">
+  <goa-text version="2" size="body-m" mt="2xs" mb="none">Supported versions: 3</goa-text>
+</goa-callout>
+<goa-text version="2" size="body-m" mt="none" mb="m">
+  Vue 3 consumes the Government of Alberta web components directly. No Vue-specific
+  wrapper package is required.
+</goa-text>
+
+<goa-callout version="2" type="important" emphasis="low" mb="l">
+  <goa-text version="2" size="body-m" mt="2xs" mb="none">
+    Always set <code>version="2"</code> on components that support the <code>version</code> prop to enable Design System 2.0 styling.
+  </goa-text>
+</goa-callout>
+
+<h3 id="vue-step-1">1. Add dependencies</h3>
+<pre><code>npm i @abgov/web-components
+npm i @abgov/design-tokens</code></pre>
+
+<h3 id="vue-step-2">2. Link ionicons in index.html</h3>
+<goa-text version="2" size="body-m" mt="none" mb="m">
+  Add the following in the <code>head</code> element:
+</goa-text>
+<pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"&gt;&lt;/script&gt;
+&lt;script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"&gt;&lt;/script&gt;</code></pre>
+
+<h3 id="vue-step-3">3. Configure your Vue build tool and import the web components in src/main.ts</h3>
+<goa-text version="2" size="body-m" mt="none" mb="m">
+  Vite is shown below. Tell the Vue compiler to treat <code>goa-*</code> tags as custom elements,
+  then register the components:
+</goa-text>
+<pre><code>{`// vite.config.ts
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith("goa-"),
+        },
+      },
+    }),
+  ],
+});`}</code></pre>
+<pre><code>// src/main.ts
+import "@abgov/web-components";</code></pre>
+
+<h3 id="vue-step-4">4. Add the styles in src/assets/main.css</h3>
+<pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+
+<h4>Vue conventions</h4>
+
+<goa-text size="heading-xs">Prop naming</goa-text>
+<p>All props are lowercase kebab-case, matching the web component HTML attributes:</p>
+<table>
+  <thead>
+    <tr><th>React (camelCase)</th><th>Vue (kebab-case)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>testId</code></td><td><code>testid</code></td></tr>
+    <tr><td><code>helpText</code></td><td><code>helptext</code></td></tr>
+    <tr><td><code>labelSize</code></td><td><code>labelsize</code></td></tr>
+    <tr><td><code>maxWidth</code></td><td><code>maxwidth</code></td></tr>
+  </tbody>
+</table>
+
+<goa-text size="heading-xs">Boolean props</goa-text>
+<p>Pass booleans as <code>"true"</code> / <code>"false"</code> strings, not raw booleans:</p>
+<pre><code>{`<!-- Correct -->
+<goa-checkbox checked="true"></goa-checkbox>
+
+<!-- Incorrect — Vue will not pass the value to the web component -->
+<goa-checkbox :checked="true"></goa-checkbox>`}</code></pre>
+
+<goa-text size="heading-xs">Event binding</goa-text>
+<p>Listen for events using their underscore-prefixed names:</p>
+<table>
+  <thead>
+    <tr><th>React</th><th>Vue</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>onChange</code></td><td><code>@_change</code></td></tr>
+    <tr><td><code>onClick</code></td><td><code>@_click</code></td></tr>
+    <tr><td><code>onBlur</code></td><td><code>@_blur</code></td></tr>
+    <tr><td><code>onFocus</code></td><td><code>@_focus</code></td></tr>
+  </tbody>
+</table>
+
+<goa-text size="heading-xs">v-model</goa-text>
+<p>The <code>v-model</code> directive does not work with GoA web components. Use <code>:value</code> + <code>@_change</code> instead:</p>
+<pre><code>{`<!-- Correct -->
+<goa-input :value="name" @_change="(e) => name = e.detail.value"></goa-input>
+
+<!-- Incorrect — v-model does not bind to web component events -->
+<goa-input v-model="name"></goa-input>`}</code></pre>
+
+<goa-divider version="2" mt="xl" mb="xl"></goa-divider>
 
 <DropInCallout />

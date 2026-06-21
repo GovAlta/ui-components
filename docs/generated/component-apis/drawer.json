@@ -218,6 +218,94 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "close-button-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the close button and header."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The heading text displayed at the top of the drawer."
+        },
+        {
+          "name": "maxsize",
+          "type": "DrawerSize",
+          "required": false,
+          "default": null,
+          "description": "Sets max height on bottom position, sets width on left and right position."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether the drawer is open."
+        },
+        {
+          "name": "position",
+          "type": "DrawerPosition",
+          "required": false,
+          "default": null,
+          "description": "The position of the drawer."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "drawer",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "slot",
+          "description": "Action elements rendered in the drawer footer slot.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "slot",
+          "description": "The heading text displayed at the top of the drawer. Accepts a string or a slot for custom heading content.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

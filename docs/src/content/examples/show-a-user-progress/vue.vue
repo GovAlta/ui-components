@@ -1,0 +1,88 @@
+<template>
+  <goa-temp-notification-ctrl></goa-temp-notification-ctrl>
+  <goa-button version="2" type="tertiary" leadingicon="download" @_click="downloadReport">Download report</goa-button>
+</template>
+
+<script setup lang="ts">
+let currentUuid: string | null = null;
+
+function showNotification(message: string, opts: Record<string, unknown> = {}) {
+  const uuid = crypto.randomUUID();
+  document.body.dispatchEvent(
+    new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification",
+        data: { message, uuid, type: "basic", ...opts },
+      },
+    }),
+  );
+  return uuid;
+}
+
+function dismissNotification(uuid: string) {
+  document.body.dispatchEvent(
+    new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification:dismiss",
+        data: uuid,
+      },
+    }),
+  );
+}
+
+function setProgress(uuid: string, progress: number) {
+  document.body.dispatchEvent(
+    new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification:progress",
+        data: { uuid, progress },
+      },
+    }),
+  );
+}
+
+async function downloadReportAPI(notificationUuid: string) {
+  setProgress(notificationUuid, 25);
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  setProgress(notificationUuid, 50);
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  setProgress(notificationUuid, 75);
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  setProgress(notificationUuid, 100);
+}
+
+async function downloadReport() {
+  currentUuid = showNotification("Downloading report D-23459", {
+    type: "progress",
+    actionText: "Cancel",
+    action: () => {
+      dismissNotification(currentUuid!);
+    },
+  });
+
+  try {
+    await downloadReportAPI(currentUuid);
+    showNotification("Report downloaded", {
+      type: "success",
+      duration: "medium",
+      actionText: "View",
+      action: () => {
+        console.log("View report clicked!");
+      },
+      cancelUUID: currentUuid,
+    });
+  } catch (err) {
+    showNotification("Download failed", {
+      type: "failure",
+      duration: "medium",
+      cancelUUID: currentUuid,
+    });
+  }
+}
+</script>

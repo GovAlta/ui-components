@@ -238,6 +238,104 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "calloutvariant",
+          "type": "\"\"",
+          "required": false,
+          "default": null,
+          "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show close icon and allow clicking the background to close the modal."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The heading text displayed at the top of the modal."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "60ch",
+          "description": "Set the max allowed width of the modal."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Controls if modal is visible or not."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "modal",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "transition",
+          "type": "\"fast\" | \"slow\" | \"none\"",
+          "typeLabel": "GoabModalTransition",
+          "values": [
+            "fast",
+            "slow",
+            "none"
+          ],
+          "required": false,
+          "default": "none",
+          "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "typeLabel": "GoabModalVersionType",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "slot",
+          "description": "Content rendered in the modal's actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "slot",
+          "description": "The heading text displayed at the top of the modal.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

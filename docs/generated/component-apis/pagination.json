@@ -259,6 +259,107 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "itemcount",
+          "type": "number",
+          "required": true,
+          "default": null,
+          "description": "Total number of data items within all pages."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "m",
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "none",
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "none",
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "none",
+          "description": "Top margin."
+        },
+        {
+          "name": "pagenumber",
+          "type": "number",
+          "required": true,
+          "default": null,
+          "description": "The current page being viewed (non-zero based)."
+        },
+        {
+          "name": "perpagecount",
+          "type": "number",
+          "required": false,
+          "default": "10",
+          "description": "Number of data items shown per page."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "\"all\" | \"links-only\"",
+          "typeLabel": "GoabPaginationVariant",
+          "values": [
+            "all",
+            "links-only"
+          ],
+          "required": false,
+          "default": "all",
+          "description": "Controls which nav controls are visible."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_change",
+          "type": "CustomEvent<{ page: number }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

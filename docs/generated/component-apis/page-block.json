@@ -65,6 +65,33 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "\"full\" | string",
+          "values": [
+            "full",
+            "string"
+          ],
+          "required": false,
+          "default": "full",
+          "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

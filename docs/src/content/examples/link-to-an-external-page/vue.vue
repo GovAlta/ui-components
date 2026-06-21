@@ -1,0 +1,5 @@
+<template>
+  <goa-link trailingicon="open">
+    <a href="#external-url">External link</a>
+  </goa-link>
+</template>

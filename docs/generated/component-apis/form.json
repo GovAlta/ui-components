@@ -124,6 +124,42 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "[name] not set",
+          "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
+        },
+        {
+          "name": "status",
+          "type": "\"initializing\" | \"complete\"",
+          "values": [
+            "initializing",
+            "complete"
+          ],
+          "required": false,
+          "default": "complete",
+          "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+        }
+      ],
+      "events": [
+        {
+          "name": "_init",
+          "type": "CustomEvent<{ el: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

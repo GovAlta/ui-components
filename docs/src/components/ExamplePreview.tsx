@@ -208,6 +208,7 @@ export function ExamplePreview({
                   template: code.angular.template,
                 }
               : undefined,
+            vue: code.vue,
             webComponents: code.webComponents,
           }}
           maxHeight={codeMaxHeight}

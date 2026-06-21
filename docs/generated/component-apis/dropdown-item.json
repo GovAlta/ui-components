@@ -122,6 +122,48 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "filter",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text used to filter and match this item in typeahead search."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Display label for the dropdown item."
+        },
+        {
+          "name": "mount",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
+          "required": false,
+          "default": "reset",
+          "description": "Controls how the item is registered with the parent dropdown."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The value submitted when this item is selected."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

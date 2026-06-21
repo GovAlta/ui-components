@@ -73,7 +73,7 @@ interface ExtractedEvent {
   name: string;
   type: string;
   description: string; // Empty - filled by human content
-  frameworks: ("react" | "angular" | "webComponents")[];
+  frameworks: ("react" | "angular" | "webComponents" | "vue")[];
 }
 
 interface ExtractedSlot {
@@ -101,6 +101,12 @@ interface ExtractedComponentAPI {
       props: ExtractedProp[];
       events: ExtractedEvent[];
       slots: ExtractedSlot[];
+    };
+    vue: {
+      props: ExtractedProp[];
+      events: ExtractedEvent[];
+      slots: ExtractedSlot[];
+      notes?: string[];
     };
   };
   staticMethods?: ExtractedStaticMethod[];
@@ -2426,6 +2432,8 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   const wrapperComponentName = WRAPPER_COMPONENT_ALIASES[componentName] ?? componentName;
   const reactWrapper = extractReactWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
   const angularWrapper = extractAngularWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
+  // Vue reuses the web component API directly — no separate wrapper to parse.
+  const vueWrapper = { found: true } as const;
 
   // Default slot content is implied by usage examples and is intentionally omitted
   // from the API docs to reduce noise.
@@ -2464,7 +2472,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     Object.prototype.hasOwnProperty.call(slotRequired, name);
 
   const createSlots = (
-    framework: "react" | "angular" | "webComponents",
+    framework: "react" | "angular" | "webComponents" | "vue",
     type?: string,
     useAliasNames: boolean = true,
   ): ExtractedSlot[] =>
@@ -2479,7 +2487,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
         const description =
           framework === "angular"
             ? rawDescription.replace(/ReactNode/g, "ngTemplate")
-            : rawDescription;
+            : framework === "vue"
+              ? rawDescription.replace(/ReactNode/g, "slot")
+              : rawDescription;
         return {
           name: useAliasNames ? slotNameAliases[name] || name : name,
           type:
@@ -2493,9 +2503,11 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   const reactSlots = createSlots("react", "ReactNode", true);
   const angularSlots = createSlots("angular", "TemplateRef", true);
   const webComponentSlots = createSlots("webComponents", undefined, false);
+  const vueSlots = createSlots("vue", "slot", true);
 
   let reactProps: ExtractedProp[] = reactWrapper.found ? [...reactWrapper.props] : [];
   let angularProps: ExtractedProp[] = angularWrapper.found ? [...angularWrapper.props] : [];
+  let vueProps: ExtractedProp[] = [...webComponentProps];
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
 
@@ -2514,18 +2526,23 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       !shouldSkipInternalProp(componentName, prop.name) &&
       !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
   );
+  vueProps = vueProps.filter(
+    (prop) => prop.name.toLowerCase() === "version" || !shouldSkipInternalProp(componentName, prop.name),
+  );
   webComponentProps = webComponentProps.filter(
     (prop) => prop.name.toLowerCase() === "version" || !shouldSkipInternalProp(componentName, prop.name),
   );
 
   reactProps = dedupeByName(reactProps).sort((a, b) => a.name.localeCompare(b.name));
   angularProps = dedupeByName(angularProps).sort((a, b) => a.name.localeCompare(b.name));
+  vueProps = dedupeByName(vueProps).sort((a, b) => a.name.localeCompare(b.name));
 
   webComponentProps.sort((a, b) => a.name.localeCompare(b.name));
   webComponentEvents.sort((a, b) => a.name.localeCompare(b.name));
   reactSlots.sort((a, b) => a.name.localeCompare(b.name));
   angularSlots.sort((a, b) => a.name.localeCompare(b.name));
   webComponentSlots.sort((a, b) => a.name.localeCompare(b.name));
+  vueSlots.sort((a, b) => a.name.localeCompare(b.name));
 
   // Relative path from workspace root
   const relativePath = path.relative(WORKSPACE_ROOT, svelteFilePath);
@@ -2550,6 +2567,14 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
         props: webComponentProps,
         events: webComponentEvents,
         slots: webComponentSlots,
+      },
+      vue: {
+        props: vueProps,
+        events: webComponentEvents,
+        slots: vueSlots,
+        notes: [
+          'When using Vue, set version="2" on components that support the version prop to enable V2 styling.',
+        ],
       },
     },
     ...(staticMethods.length > 0 ? { staticMethods } : {}),
@@ -2598,6 +2623,12 @@ function mergeWithExisting(
         props: mergeItemArray(fw.webComponents.props, ex.webComponents.props, `${next.componentSlug}.json [webComponents props]`),
         events: mergeItemArray(fw.webComponents.events, ex.webComponents.events, `${next.componentSlug}.json [webComponents events]`),
         slots: mergeItemArray(fw.webComponents.slots, ex.webComponents.slots, `${next.componentSlug}.json [webComponents slots]`),
+      },
+      vue: {
+        props: mergeItemArray(fw.vue.props, ex.vue.props, `${next.componentSlug}.json [vue props]`),
+        events: mergeItemArray(fw.vue.events, ex.vue.events, `${next.componentSlug}.json [vue events]`),
+        slots: mergeItemArray(fw.vue.slots, ex.vue.slots, `${next.componentSlug}.json [vue slots]`),
+        notes: fw.vue.notes ?? ex.vue.notes,
       },
     },
   };

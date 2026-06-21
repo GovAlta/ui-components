@@ -1,0 +1,7 @@
+<template>
+  <goa-block gap="xs">
+    <goa-badge version="2" type="information" content="In progress"></goa-badge>
+    <goa-badge version="2" type="important" content="Priority"></goa-badge>
+    <goa-badge version="2" type="emergency" content="Past deadline"></goa-badge>
+  </goa-block>
+</template>

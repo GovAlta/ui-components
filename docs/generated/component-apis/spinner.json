@@ -123,6 +123,49 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "invert",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, inverts colors for use on dark backgrounds."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "Progress value (0-100). When >= 0, shows a progress spinner instead of infinite."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "values": [
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Sets the size of the spinner."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }
