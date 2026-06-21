@@ -39,7 +39,8 @@ const emit = defineEmits<{
   onChange: [detail: GoabDropdownOnChangeDetail];
 }>();
 
-const wcProps = useWcProps(props, {
+const { value: _value, ...rest } = props;
+const wcProps = useWcProps(rest, {
   booleanProps: ["disabled", "error", "filterable", "multiselect", "native", "relative"],
   renamedProps: { ariaLabel: "aria-label", ariaLabelledBy: "aria-labelledby" },
 });

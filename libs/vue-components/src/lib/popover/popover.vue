@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
-import { useSlots } from "vue";
+import { useSlots, onMounted } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
@@ -19,11 +19,17 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   padded: true,
 });
-const wcProps = useWcProps(props, { 
+const wcProps = useWcProps(props, {
   booleanProps: ["relative"],
   booleanPropsWithFalse: ["padded"],
 });
 const slots = useSlots();
+
+onMounted(() => {
+  if (!slots.target) {
+    console.warn("Popover: a `target` slot is required.");
+  }
+});
 </script>
 
 <template>
