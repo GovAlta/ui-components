@@ -146,6 +146,7 @@ located:</p></goa-text>
 <goa-callout version="2" type="information" emphasis="low" mb="m"><goa-text version="2" size="body-m" mt="2xs" mb="none">Supported versions: 3</goa-text></goa-callout>
 <goa-text version="2" size="body-m" mt="none" mb="m"><p>Vue 3 consumes the Government of Alberta web components directly. No Vue-specific
 wrapper package is required.</p></goa-text>
+<goa-callout version="2" type="important" emphasis="low" mb="l"><goa-text version="2" size="body-m" mt="2xs" mb="none"><p>Always set <code>version=“2”</code> on components that support the <code>version</code> prop to enable Design System 2.0 styling.</p></goa-text></goa-callout>
 <h3 id="vue-step-1">1. Add dependencies</h3>
 <pre><code>npm i @abgov/web-components
 npm i @abgov/design-tokens</code></pre>
@@ -176,7 +177,26 @@ import “@abgov/web-components”;</code></pre>
 <h3 id="vue-step-4">4. Add the styles in src/assets/main.css</h3>
 <pre><code>@import “@abgov/web-components/index.css”;
 @import “@abgov/design-tokens/dist/tokens.css”;</code></pre>
-<h4>Notes</h4>
-<ul><li>Pass booleans as <code>“true”</code> / <code>“false”</code> strings.</li><li>Listen for events using their underscore-prefixed names (e.g. <code>@_change</code>).</li><li>Set <code>version=“2”</code> on components that support the <code>version</code> prop to enable V2 styling.</li></ul>
+<h4>Vue conventions</h4>
+<goa-text size="heading-xs">Prop naming</goa-text>
+<p>All props are lowercase kebab-case, matching the web component HTML attributes:</p>
+<table><thead><tr><th>React (camelCase)</th><th>Vue (kebab-case)</th></tr></thead><tbody><tr><td><code>testId</code></td><td><code>testid</code></td></tr><tr><td><code>helpText</code></td><td><code>helptext</code></td></tr><tr><td><code>labelSize</code></td><td><code>labelsize</code></td></tr><tr><td><code>maxWidth</code></td><td><code>maxwidth</code></td></tr></tbody></table>
+<goa-text size="heading-xs">Boolean props</goa-text>
+<p>Pass booleans as <code>“true”</code> / <code>“false”</code> strings, not raw booleans:</p>
+<pre><code>&lt;!-- Correct --&gt;
+&lt;goa-checkbox checked=&quot;true&quot;&gt;&lt;/goa-checkbox&gt;
+
+&lt;!-- Incorrect — Vue will not pass the value to the web component --&gt;
+&lt;goa-checkbox :checked=&quot;true&quot;&gt;&lt;/goa-checkbox&gt;</code></pre>
+<goa-text size="heading-xs">Event binding</goa-text>
+<p>Listen for events using their underscore-prefixed names:</p>
+<table><thead><tr><th>React</th><th>Vue</th></tr></thead><tbody><tr><td><code>onChange</code></td><td><code>@_change</code></td></tr><tr><td><code>onClick</code></td><td><code>@_click</code></td></tr><tr><td><code>onBlur</code></td><td><code>@_blur</code></td></tr><tr><td><code>onFocus</code></td><td><code>@_focus</code></td></tr></tbody></table>
+<goa-text size="heading-xs">v-model</goa-text>
+<p>The <code>v-model</code> directive does not work with GoA web components. Use <code>:value</code> + <code>@_change</code> instead:</p>
+<pre><code>&lt;!-- Correct --&gt;
+&lt;goa-input :value=&quot;name&quot; @_change=&quot;(e) =&gt; name = e.detail.value&quot;&gt;&lt;/goa-input&gt;
+
+&lt;!-- Incorrect — v-model does not bind to web component events --&gt;
+&lt;goa-input v-model=&quot;name&quot;&gt;&lt;/goa-input&gt;</code></pre>
 <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
 <goa-callout version="2" type="information" emphasis="low" heading="Need help building a government service?" mt="2xl" mb="m"> <goa-text version="2" size="body-m" mt="2xs" mb="s">Join design system drop-in hours to:</goa-text> <ul style="margin-bottom: var(--goa-space-s);"> <li>Get feedback on your service</li> <li>Propose new components or patterns</li> <li>Suggest updates to existing resources</li> <li>Ask questions</li> <li>Share feedback</li> </ul> <goa-text version="2" size="body-s" color="secondary" mt="none" mb="none">Drop-in sessions are available to Government of Alberta product teams.</goa-text> <goa-link version="2" size="small" mt="s"> <a href="https://outlook.office365.com/book/BKGDesignsystemdropinhours@abgov.onmicrosoft.com/" target="_blank" rel="noopener noreferrer">Book time in drop-in hours</a> </goa-link> </goa-callout>  </article> <!-- Optional Table of Contents --> <aside class="toc-sidebar" data-astro-cid-gw4kcmq6> <div class="toc-sticky" data-astro-cid-gw4kcmq6> <astro-island uid="Z1jXgO9" component-url="/ui-components/pr-preview/pr-4084/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4084/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;h2[id], h3[id], goa-text[id][as=\&quot;h2\&quot;], goa-text[id][as=\&quot;h3\&quot;]&quot;],&quot;data-astro-cid-gw4kcmq6&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </div> </aside> </div> </div> </main> </div> </div>  </body></html> 
