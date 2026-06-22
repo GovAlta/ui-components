@@ -1,1 +1,0 @@
-import"./jsx-runtime.D_zvdyIk.js";import{r as a}from"./index.DeO6U63H.js";const n=t=>t.toLowerCase(),l=t=>t.replace(/([a-z])([A-Z])/g,"$1-$2").toLowerCase();function f(t,s=n){const e={};for(const[o,r]of Object.entries(t))r!==void 0&&(o.startsWith("data-")?e[o]=r:e[s(o)]=r);return e}a.createContext(null);export{l as k,n as l,f as t};
