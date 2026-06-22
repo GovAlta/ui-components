@@ -52299,13 +52299,13 @@ class X5 extends Le {
 }
 customElements.define("goa-temp-notification", je(X5, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
 function K5(t) {
-  De(t, "svelte-6yafr7", `h1, h2, h3, h4, h5{margin:0}.heading-2xl.svelte-6yafr7{font:var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));letter-spacing:var(
+  De(t, "svelte-1vqcgpo", `h1, h2, h3, h4, h5{margin:0}.heading-2xl.svelte-1vqcgpo{font:var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));letter-spacing:var(
       --goa-typography-heading-2xl-letter-spacing,
       var(--goa-typography-heading-xl-letter-spacing)
-    )}.heading-xl.svelte-6yafr7{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-6yafr7{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-6yafr7{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-6yafr7{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-6yafr7{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-6yafr7{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-6yafr7{font:var(--goa-typography-body-l)}.body-m.svelte-6yafr7{font:var(--goa-typography-body-m)}.body-s.svelte-6yafr7{font:var(--goa-typography-body-s)}.body-xs.svelte-6yafr7{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-2xl.svelte-6yafr7{font:var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));letter-spacing:var(
+    )}.heading-xl.svelte-1vqcgpo{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1vqcgpo{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1vqcgpo{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1vqcgpo{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1vqcgpo{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1vqcgpo{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1vqcgpo{font:var(--goa-typography-body-l)}.body-m.svelte-1vqcgpo{font:var(--goa-typography-body-m)}.body-s.svelte-1vqcgpo{font:var(--goa-typography-body-s)}.body-xs.svelte-1vqcgpo{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-2xl.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));letter-spacing:var(
         --goa-typography-mobile-heading-2xl-letter-spacing,
         var(--goa-typography-mobile-heading-xl-letter-spacing)
-      )}.heading-xl.svelte-6yafr7{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-6yafr7{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-6yafr7{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-6yafr7{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-6yafr7{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-6yafr7{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-6yafr7{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-6yafr7{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-6yafr7{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-6yafr7{font:var(--goa-typography-mobile-body-xs)}}`);
+      )}.heading-xl.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-xs)}}`);
 }
 function Go(t) {
   let e, o, i, n;
@@ -52324,7 +52324,7 @@ function Go(t) {
       class: o = Ge(
         /*effectiveSize*/
         t[7]
-      ) + " svelte-6yafr7"
+      ) + " svelte-1vqcgpo"
     },
     {
       style: i = dt(
@@ -52391,7 +52391,7 @@ function Go(t) {
         128 && o !== (o = Ge(
           /*effectiveSize*/
           d[7]
-        ) + " svelte-6yafr7")) && { class: o },
+        ) + " svelte-1vqcgpo")) && { class: o },
         (!n || s & /*color, maxWidth, _marginTop, mr, _marginBottom, ml*/
         126 && i !== (i = dt(
           He(
