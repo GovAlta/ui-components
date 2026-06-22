@@ -17640,7 +17640,7 @@ function ft(t) {
 function Xe(t) {
   return t ?? "";
 }
-function ni(t) {
+function ii(t) {
   return t && zt(t.destroy) ? t.destroy : Me;
 }
 function mi(t) {
@@ -17652,16 +17652,16 @@ function mi(t) {
   ];
 }
 const hs = typeof window < "u";
-let Bo = hs ? () => window.performance.now() : () => Date.now(), ri = hs ? (t) => requestAnimationFrame(t) : Me;
+let Bo = hs ? () => window.performance.now() : () => Date.now(), ni = hs ? (t) => requestAnimationFrame(t) : Me;
 const Qt = /* @__PURE__ */ new Set();
 function ms(t) {
   Qt.forEach((e) => {
     e.c(t) || (Qt.delete(e), e.f());
-  }), Qt.size !== 0 && ri(ms);
+  }), Qt.size !== 0 && ni(ms);
 }
 function Zo(t) {
   let e;
-  return Qt.size === 0 && ri(ms), {
+  return Qt.size === 0 && ni(ms), {
     promise: new Promise((o) => {
       Qt.add(e = { c: t, f: o });
     }),
@@ -17678,13 +17678,13 @@ function k(t, e) {
   t.appendChild(e);
 }
 function Ee(t, e, o) {
-  const i = li(t);
+  const i = ri(t);
   if (!i.getElementById(e)) {
     const n = C("style");
     n.id = e, n.textContent = o, bs(i, n);
   }
 }
-function li(t) {
+function ri(t) {
   if (!t) return document;
   const e = t.getRootNode ? t.getRootNode() : t.ownerDocument;
   return e && /** @type {ShadowRoot} */
@@ -17695,7 +17695,7 @@ function li(t) {
 }
 function M1(t) {
   const e = C("style");
-  return e.textContent = "/* empty */", bs(li(t), e), e.sheet;
+  return e.textContent = "/* empty */", bs(ri(t), e), e.sheet;
 }
 function bs(t, e) {
   return k(
@@ -17783,7 +17783,7 @@ function D1() {
   }
   return wo;
 }
-function ai(t, e) {
+function li(t, e) {
   getComputedStyle(t).position === "static" && (t.style.position = "relative");
   const i = C("iframe");
   i.setAttribute(
@@ -17841,7 +17841,7 @@ function Eo(t, e, o, i, n, r, l, a = 0) {
 `;
   }
   const s = d + `100% {${l(o, 1 - o)}}
-}`, f = `__svelte_${A1(s)}_${a}`, g = li(t), { stylesheet: v, rules: h } = Lo.get(g) || x1(g, t);
+}`, f = `__svelte_${A1(s)}_${a}`, g = ri(t), { stylesheet: v, rules: h } = Lo.get(g) || x1(g, t);
   h[f] || (h[f] = true, v.insertRule(`@keyframes ${f} ${s}`, v.cssRules.length));
   const b = t.style.animation || "";
   return t.style.animation = `${b ? `${b}, ` : ""}${f} ${i}ms linear ${n}ms 1 both`, No += 1, f;
@@ -17854,7 +17854,7 @@ function Do(t, e) {
   n && (t.style.animation = i.join(", "), No -= n, No || S1());
 }
 function S1() {
-  ri(() => {
+  ni(() => {
     No || (Lo.forEach((t) => {
       const { ownerNode: e } = t.stylesheet;
       e && I(e);
@@ -17882,9 +17882,9 @@ function bi(t, e) {
 const Ft = [], he = [];
 let Ut = [];
 const pi = [], _s = /* @__PURE__ */ Promise.resolve();
-let Ko = false;
+let Jo = false;
 function ks() {
-  Ko || (Ko = true, _s.then(y));
+  Jo || (Jo = true, _s.then(y));
 }
 function tt() {
   return ks(), _s;
@@ -17892,7 +17892,7 @@ function tt() {
 function at(t) {
   Ut.push(t);
 }
-const Uo = /* @__PURE__ */ new Set();
+const Qo = /* @__PURE__ */ new Set();
 let Zt = 0;
 function y() {
   if (Zt !== 0)
@@ -17910,13 +17910,13 @@ function y() {
     for (ao(null), Ft.length = 0, Zt = 0; he.length; ) he.pop()();
     for (let e = 0; e < Ut.length; e += 1) {
       const o = Ut[e];
-      Uo.has(o) || (Uo.add(o), o());
+      Qo.has(o) || (Qo.add(o), o());
     }
     Ut.length = 0;
   } while (Ft.length);
   for (; pi.length; )
     pi.pop()();
-  Ko = false, Uo.clear(), ao(t);
+  Jo = false, Qo.clear(), ao(t);
 }
 function O1(t) {
   if (t.fragment !== null) {
@@ -17930,7 +17930,7 @@ function q1(t) {
   Ut.forEach((i) => t.indexOf(i) === -1 ? e.push(i) : o.push(i)), o.forEach((i) => i()), Ut = e;
 }
 let no;
-function si() {
+function ai() {
   return no || (no = Promise.resolve(), no.then(() => {
     no = null;
   })), no;
@@ -17962,8 +17962,8 @@ function R(t, e, o, i) {
     }), t.o(e);
   } else i && i();
 }
-const ci = { duration: 0 };
-function $o(t, e, o) {
+const si = { duration: 0 };
+function Ko(t, e, o) {
   const i = { direction: "in" };
   let n = e(t, o, i), r = false, l, a, c = 0;
   function d() {
@@ -17976,7 +17976,7 @@ function $o(t, e, o) {
       easing: h = ho,
       tick: b = Me,
       css: w
-    } = n || ci;
+    } = n || si;
     w && (l = Eo(t, 0, 1, v, g, h, w, c++)), b(0, 1);
     const p = Bo() + g, _ = p + v;
     a && a.abort(), r = true, at(() => Pt(t, true, "start")), a = Zo((z) => {
@@ -17994,7 +17994,7 @@ function $o(t, e, o) {
   let f = false;
   return {
     start() {
-      f || (f = true, Do(t), zt(n) ? (n = n(i), si().then(s)) : s());
+      f || (f = true, Do(t), zt(n) ? (n = n(i), ai().then(s)) : s());
     },
     invalidate() {
       f = false;
@@ -18004,7 +18004,7 @@ function $o(t, e, o) {
     }
   };
 }
-function ei(t, e, o) {
+function $o(t, e, o) {
   const i = { direction: "out" };
   let n = e(t, o, i), r = true, l;
   const a = Lt;
@@ -18017,7 +18017,7 @@ function ei(t, e, o) {
       easing: g = ho,
       tick: v = Me,
       css: h
-    } = n || ci;
+    } = n || si;
     h && (l = Eo(t, 1, 0, f, s, g, h));
     const b = Bo() + s, w = b + f;
     at(() => Pt(t, false, "start")), "inert" in t && (c = /** @type {HTMLElement} */
@@ -18033,7 +18033,7 @@ function ei(t, e, o) {
       return r;
     });
   }
-  return zt(n) ? si().then(() => {
+  return zt(n) ? ai().then(() => {
     n = n(i), d();
   }) : d(), {
     end(s) {
@@ -18068,7 +18068,7 @@ function Io(t, e, o, i) {
       easing: p = ho,
       tick: _ = Me,
       css: z
-    } = r || ci, M = {
+    } = r || si, M = {
       start: Bo() + b,
       b: h
     };
@@ -18095,7 +18095,7 @@ function Io(t, e, o, i) {
   }
   return {
     run(h) {
-      zt(r) ? si().then(() => {
+      zt(r) ? ai().then(() => {
         r = r({ direction: h ? "in" : "out" }), v(h);
       }) : v(h);
     },
@@ -18596,7 +18596,7 @@ function so(t, e, o = 100) {
 function to(t) {
   t.querySelector("slot") || t.appendChild(document.createElement("slot"));
 }
-function di(t, e = 3e3) {
+function ci(t, e = 3e3) {
   const o = document.createElement("div");
   o.style.position = "absolute", o.style.width = "1px", o.style.height = "1px", o.style.padding = "0", o.style.margin = "-1px", o.style.overflow = "hidden", o.style.clipPath = "inset(50%)", o.style.whiteSpace = "nowrap", o.style.borderWidth = "0", o.style.opacity = "0", o.setAttribute("aria-live", "polite"), o.setAttribute("aria-atomic", "true"), document.body.appendChild(o), setTimeout(() => {
     o.textContent = t;
@@ -18882,7 +18882,7 @@ const ac = {
   const n = ac[t];
   return typeof n == "string" ? i = n : e === 1 ? i = n.one : i = n.other.replace("{{count}}", e.toString()), o != null && o.addSuffix ? o.comparison && o.comparison > 0 ? "in " + i : i + " ago" : i;
 };
-function Ro(t) {
+function Uo(t) {
   return (e = {}) => {
     const o = e.width ? String(e.width) : t.defaultWidth;
     return t.formats[o] || t.formats[t.defaultWidth];
@@ -18904,15 +18904,15 @@ const cc = {
   medium: "{{date}}, {{time}}",
   short: "{{date}}, {{time}}"
 }, fc = {
-  date: Ro({
+  date: Uo({
     formats: cc,
     defaultWidth: "full"
   }),
-  time: Ro({
+  time: Uo({
     formats: dc,
     defaultWidth: "full"
   }),
-  dateTime: Ro({
+  dateTime: Uo({
     formats: uc,
     defaultWidth: "full"
   })
@@ -26385,7 +26385,7 @@ class qd extends Ne {
   }
 }
 customElements.define("goa-card-image", Le(qd, { src: {}, height: {} }, [], [], true));
-const xo = "_stateChange", Zs = "form::reset:errors", So = "form::reset:form", Ys = "form::bind", Oo = "form::toggle:active", ui = "form::set:fieldset", Gt = "form::dispatch:state", Ws = "form::edit", Fs = "subform::bind", Hd = "subform::indexContinueToParent", Qs = "subform::indexContinueToSubForm", yt = "fieldset::reset:errors", Et = "fieldset::reset:fields", fi = "fieldset::submit", Us = "form-page:continue", qo = "form-page:back", Rs = "form=page::bind", Kt = "fieldset::bind", Ct = "fieldset::set:error", Ho = "fieldset::change", Dt = "fieldset::set:value", gi = "form-item::bind", Pd = "external::alter:state", ti = "external::continue", Vd = "external::set:error", Gs = "external::init:state", vt = "form-field::bind", Xs = "form-summary::bind", Js = "form-summary::edit:page", Ks = "scroll-panel:state-change", $s = "work-side-menu:bind", e1 = "work-side-menu:open", t1 = "work-side-menu:close";
+const xo = "_stateChange", Zs = "form::reset:errors", So = "form::reset:form", Ys = "form::bind", Oo = "form::toggle:active", di = "form::set:fieldset", Gt = "form::dispatch:state", Ws = "form::edit", Fs = "subform::bind", Hd = "subform::indexContinueToParent", Qs = "subform::indexContinueToSubForm", yt = "fieldset::reset:errors", Et = "fieldset::reset:fields", ui = "fieldset::submit", Us = "form-page:continue", qo = "form-page:back", Rs = "form=page::bind", Kt = "fieldset::bind", Ct = "fieldset::set:error", Ho = "fieldset::change", Dt = "fieldset::set:value", fi = "form-item::bind", Pd = "external::alter:state", ei = "external::continue", Vd = "external::set:error", Gs = "external::init:state", vt = "form-field::bind", Xs = "form-summary::bind", Js = "form-summary::edit:page", Ks = "scroll-panel:state-change", $s = "work-side-menu:bind", e1 = "work-side-menu:open", t1 = "work-side-menu:close";
 function Bd(t) {
   Ee(t, "svelte-s0nvap", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-s0nvap.svelte-s0nvap{display:flex;flex-direction:column;justify-content:flex-start;height:auto;min-height:0;padding:0}input[type="checkbox"].svelte-s0nvap.svelte-s0nvap{position:absolute;opacity:0;transform:scale(0);margin:0;cursor:pointer}input[type="checkbox"][disabled].svelte-s0nvap.svelte-s0nvap:hover{cursor:default}label.svelte-s0nvap.svelte-s0nvap{display:flex;cursor:pointer;align-self:flex-start}label.svelte-s0nvap:hover .container.svelte-s0nvap{border:var(--goa-checkbox-border-hover)}label.svelte-s0nvap:hover .container.selected.svelte-s0nvap{background-color:var(--goa-checkbox-color-bg-checked-hover);border:none}.text.svelte-s0nvap.svelte-s0nvap{padding-left:var(--goa-checkbox-gap);-webkit-user-select:none;-moz-user-select:none;user-select:none;font:var(--goa-checkbox-label-font-size);color:var(--goa-checkbox-color-label)}.description.svelte-s0nvap.svelte-s0nvap{font:var(--goa-checkbox-description-font-size);margin-left:calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap));margin-top:var(--goa-space-2xs)}.reveal.svelte-s0nvap.svelte-s0nvap{display:none;height:0}.reveal.visible.svelte-s0nvap.svelte-s0nvap{display:block;height:-moz-fit-content;height:fit-content}.reveal.visible.has-content.svelte-s0nvap.svelte-s0nvap{border-left:4px solid var(--goa-color-greyscale-200);padding:var(--goa-space-m);margin:var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);box-sizing:border-box}.container.svelte-s0nvap.svelte-s0nvap{position:relative;box-sizing:border-box;border:var(--goa-checkbox-border);border-radius:var(--goa-checkbox-border-radius);background-color:var(--goa-checkbox-color-bg);height:var(--goa-checkbox-size);width:var(--goa-checkbox-size);display:flex;justify-content:center;flex:0 0 auto}.container.svelte-s0nvap.svelte-s0nvap::before{content:"";position:absolute;width:44px;height:44px;top:50%;left:50%;transform:translate(-50%, -50%)}.container.svelte-s0nvap.svelte-s0nvap:hover{border:var(--goa-checkbox-border-hover)}.container.svelte-s0nvap svg.svelte-s0nvap{fill:var(--goa-checkbox-color-bg);margin:3px}.container.selected.svelte-s0nvap.svelte-s0nvap{background-color:var(--goa-checkbox-color-bg-checked);border:none}.container.selected.svelte-s0nvap.svelte-s0nvap:hover{background-color:var(--goa-checkbox-color-bg-checked-hover)}.error.svelte-s0nvap .container.svelte-s0nvap,.error.svelte-s0nvap .container.svelte-s0nvap:hover{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg);box-shadow:none}.error.svelte-s0nvap .container.selected.svelte-s0nvap,.error.svelte-s0nvap .container.selected.svelte-s0nvap:hover{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-s0nvap .container.svelte-s0nvap{border:var(--goa-checkbox-border-error)}label:hover.error.svelte-s0nvap .container.selected.svelte-s0nvap{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}.error.svelte-s0nvap .container svg.svelte-s0nvap{fill:var(--goa-checkbox-color-bg-checked-error);margin:1px}.error.svelte-s0nvap .container.svelte-s0nvap:has(:focus-visible){outline:none;box-shadow:0 0 0 3px var(--goa-color-interactive-focus)}.error.svelte-s0nvap .container.svelte-s0nvap:has(:focus-visible):hover{outline:none;border:var(--goa-checkbox-border-error)}.error.svelte-s0nvap .container.selected.svelte-s0nvap:has(:focus-visible):hover{outline:none;border:none;background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-s0nvap .container.selected.svelte-s0nvap:has(:focus-visible){outline:none;border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-s0nvap .container.svelte-s0nvap:has(:focus-visible){outline:none;border:var(--goa-checkbox-border-error)}.container.svelte-s0nvap.svelte-s0nvap:has(:focus-visible){outline:none;box-shadow:0 0 0 3px var(--goa-color-interactive-focus)}.container.svelte-s0nvap.svelte-s0nvap:has(:focus-visible):hover{outline:none;border:var(--goa-checkbox-border)}.container.selected.svelte-s0nvap.svelte-s0nvap:has(:focus-visible):hover{outline:none;border:none;background-color:var(--goa-checkbox-color-bg-checked)}label.svelte-s0nvap:hover .container.selected.svelte-s0nvap:has(:focus-visible){outline:none;border:none;background-color:var(--goa-checkbox-color-bg-checked)}label.svelte-s0nvap:hover .container.svelte-s0nvap:has(:focus-visible){outline:none;border:var(--goa-checkbox-border)}.disabled.svelte-s0nvap.svelte-s0nvap{cursor:default}.disabled.svelte-s0nvap .text.svelte-s0nvap{color:var(--goa-checkbox-color-label-disabled)}label.disabled.svelte-s0nvap+.description.svelte-s0nvap{color:var(--goa-checkbox-color-label-disabled);cursor:default}.disabled.svelte-s0nvap:not(.error) .container.svelte-s0nvap{border:var(--goa-checkbox-border-disabled);box-shadow:none}.disabled.svelte-s0nvap:not(.error) .container.selected.svelte-s0nvap{border:none;background-color:var(--goa-checkbox-color-bg-checked-disabled)}.disabled.error.svelte-s0nvap .container.selected.svelte-s0nvap{border:var(--goa-checkbox-border-disabled-error)}.disabled.error.svelte-s0nvap .container.svelte-s0nvap{border:var(--goa-checkbox-border-disabled-error)}label:hover.disabled.error.svelte-s0nvap .container.svelte-s0nvap{border:var(--goa-checkbox-border-disabled-error)}.disabled.error.svelte-s0nvap .container svg.svelte-s0nvap{fill:#f58185}.v2.svelte-s0nvap .container svg.svelte-s0nvap{margin:6px 3px}.v2.svelte-s0nvap .container.svelte-s0nvap:has(:focus-visible),.v2.svelte-s0nvap .container.svelte-s0nvap:has(:focus-visible):hover,.v2.svelte-s0nvap .container.selected.svelte-s0nvap:has(:focus-visible):hover,.v2.svelte-s0nvap label:hover .container.selected.svelte-s0nvap:has(:focus-visible),.v2.svelte-s0nvap label:hover .container.svelte-s0nvap:has(:focus-visible){outline:var(--goa-checkbox-border-focus);outline-offset:var(--goa-space-3xs);box-shadow:none}.v2.svelte-s0nvap .disabled:not(.error) .container.svelte-s0nvap:not(.selected){background:var(--goa-input-color-background-disabled);box-shadow:none}.v2.svelte-s0nvap .error .container.svelte-s0nvap,.v2.svelte-s0nvap .error .container.selected.svelte-s0nvap{background:var(--goa-input-color-background-error)}.v2.svelte-s0nvap .error:not(.disabled) .container.svelte-s0nvap:hover,.v2.svelte-s0nvap .error:not(.disabled) .container.selected.svelte-s0nvap:hover,.v2.svelte-s0nvap label:hover.error:not(.disabled) .container.svelte-s0nvap,.v2.svelte-s0nvap label:hover.error:not(.disabled) .container.selected.svelte-s0nvap{background:var(--goa-input-color-background-error-hover);border:var(--goa-checkbox-border-error-hover)}.v2.svelte-s0nvap .error:not(.disabled) .container:hover svg.svelte-s0nvap,.v2.svelte-s0nvap .error:not(.disabled) .container.selected:hover svg.svelte-s0nvap,.v2.svelte-s0nvap label:hover.error:not(.disabled) .container svg.svelte-s0nvap,.v2.svelte-s0nvap label:hover.error:not(.disabled) .container.selected svg.svelte-s0nvap{fill:var(--goa-checkbox-color-bg-checked-error-hover)}.v2.svelte-s0nvap .error .container svg.svelte-s0nvap{margin-top:5px}.v2.compact.svelte-s0nvap .text.svelte-s0nvap{padding-left:var(--goa-checkbox-gap-compact);font:var(--goa-checkbox-label-font-size-compact)}.compact.svelte-s0nvap .description.svelte-s0nvap{margin-left:calc(
       var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact)
@@ -26663,7 +26663,7 @@ max-width: ${/*maxwidth*/
       );
     },
     m(E, q) {
-      T(E, e, q), k(e, o), k(o, i), k(i, n), t[34](n), k(i, s), L && L.m(i, null), k(o, f), k(o, g), H && H.m(g, null), k(g, v), k(g, h), k(e, b), P && P.m(e, null), k(e, w), k(e, p), F && F.m(p, null), t[35](p), _ = ai(
+      T(E, e, q), k(e, o), k(o, i), k(i, n), t[34](n), k(i, s), L && L.m(i, null), k(o, f), k(o, g), H && H.m(g, null), k(g, v), k(g, h), k(e, b), P && P.m(e, null), k(e, w), k(e, p), F && F.m(p, null), t[35](p), _ = li(
         p,
         /*div2_elementresize_handler*/
         t[36].bind(p)
@@ -26926,7 +26926,7 @@ function Gd(t, e, o) {
         },
         bubbles: true
       }
-    )), d.reveal && !Ye && le(), d.reveal && Ye && E && M !== "" && di(M);
+    )), d.reveal && !Ye && le(), d.reveal && Ye && E && M !== "" && ci(M);
   }
   function we() {
     Ie(V, "help-text::announce", void 0, { bubbles: true });
@@ -27285,7 +27285,7 @@ function bn(t) {
   let e = t.getAttribute("name") || t.name || "";
   return e || (e = t.getAttribute("value") || t.value || ""), e;
 }
-function Go(t, e) {
+function Ro(t, e) {
   var n, r, l, a;
   const o = t.getAttribute("text"), i = (a = (l = (r = (n = t == null ? void 0 : t.shadowRoot) == null ? void 0 : n.querySelector) == null ? void 0 : r.call(n, ".text")) == null ? void 0 : l.textContent) == null ? void 0 : a.trim();
   return o || i || e;
@@ -27325,12 +27325,12 @@ function $d(t, e, o) {
     const X = N.find((re) => re.name === S);
     if (!X) {
       const be = U().find((Ze) => bn(Ze) === S);
-      return be ? Go(be, S) : S;
+      return be ? Ro(be, S) : S;
     }
     if (X.label)
       return X.label;
     const ie = (te = X.el.getRootNode()) == null ? void 0 : te.host;
-    return ie ? Go(ie, S) : S;
+    return ie ? Ro(ie, S) : S;
   }
   function P(S) {
     return !S || S.length === 0 ? [] : S.map((ie) => H(ie));
@@ -27381,7 +27381,7 @@ function $d(t, e, o) {
     const X = (we = S.el.getRootNode()) == null ? void 0 : we.host;
     if (!X || X.tagName.toLowerCase() !== "goa-checkbox")
       return;
-    const ie = Go(X, S.name);
+    const ie = Ro(X, S.name);
     N = [...N, { el: S.el, name: S.name, label: ie }], Q(S.el, S.name);
   }
   function $() {
@@ -27948,7 +27948,7 @@ function Po(t, { delay: e = 0, duration: o = 400, easing: i = ru, x: n = 0, y: r
 			opacity: ${c - s * w}`
   };
 }
-function vi(t, e) {
+function gi(t, e) {
   let o = false;
   function i() {
     return document.body.style.overflow !== "hidden";
@@ -28117,7 +28117,7 @@ function cu(t) {
       );
     },
     m(d, s) {
-      T(d, e, s), k(e, o), k(e, i), c && c.m(e, null), r = true, l || (a = ni(vi.call(null, e, { enable: true })), l = true);
+      T(d, e, s), k(e, o), k(e, i), c && c.m(e, null), r = true, l || (a = ii(gi.call(null, e, { enable: true })), l = true);
     },
     p(d, s) {
       (!r || s & /*spinnerSize*/
@@ -29128,7 +29128,7 @@ class Cu extends Ne {
 }
 customElements.define("goa-data-grid", Le(Cu, { keyboardIconVisibility: { type: "String", reflect: true, attribute: "keyboard-icon-visibility" }, keyboardNav: { type: "String", attribute: "keyboard-nav" }, keyboardIconPosition: { type: "String", reflect: true, attribute: "keyboard-icon-position" } }, ["default"], [], true));
 const zu = /^[1-9]+[0-9]*(px|em|rem|ch|vh|vw|%)$/;
-function Qo(t) {
+function vi(t) {
   return zu.test(t);
 }
 function Mu(t) {
@@ -29827,7 +29827,7 @@ function Du(t) {
 function Iu(t, e, o) {
   let i, { type: n = "calendar" } = e, { name: r = "" } = e, { value: l = "" } = e, { error: a = "false" } = e, { min: c = "" } = e, { max: d = "" } = e, { relative: s = "" } = e, { disabled: f = "false" } = e, { testid: g = "" } = e, { width: v = "" } = e, { size: h = "default" } = e, { version: b = "1" } = e, { mt: w = null } = e, { mr: p = null } = e, { mb: _ = null } = e, { ml: z = null } = e, M = Be(a), N, D, j = Ue.init();
   xe(async () => {
-    await tt(), V(l), L(), P(), x(), v && !Qo(v) && console.error("DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)");
+    await tt(), V(l), L(), P(), x(), v && !vi(v) && console.error("DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)");
   });
   function x() {
     s != "" && console.warn("Date Picker `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
@@ -29847,7 +29847,7 @@ function Iu(t, e, o) {
         case Et:
           H({ value: "" });
           break;
-        case gi:
+        case fi:
         case vt:
           K.stopPropagation();
           break;
@@ -30813,7 +30813,7 @@ function Ru(t) {
           /*close*/
           t[11]
         ),
-        ni(h = vi.call(null, r, { enable: (
+        ii(h = gi.call(null, r, { enable: (
           /*open*/
           t[1]
         ) }))
@@ -30955,7 +30955,7 @@ function Ru(t) {
     },
     i(L) {
       _ || (Y(N), Y(j, L), Y(x), L && at(() => {
-        _ && (w && w.end(1), b = $o(
+        _ && (w && w.end(1), b = Ko(
           r,
           Po,
           /*_flyParams*/
@@ -30964,7 +30964,7 @@ function Ru(t) {
       }), _ = true);
     },
     o(L) {
-      R(N), R(j, L), R(x), b && b.invalidate(), L && (w = ei(
+      R(N), R(j, L), R(x), b && b.invalidate(), L && (w = $o(
         r,
         Po,
         /*_flyParams*/
@@ -32068,7 +32068,7 @@ function s0(t, e, o) {
     to(G), Qe(), se(), pe(), le = l ? new f1(K) : new g1(K), Ye();
   });
   function Ze(ve, Se, Ke) {
-    ve ? Qo(ve) ? o(25, J = ve) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, J = `${ve}px`)) : z ? o(25, J = z) : o(25, J = _e(Se)), ve != null && ve.includes("%") || z != null && z.includes("%") ? o(26, Q = Ce()) : o(26, Q = J);
+    ve ? vi(ve) ? o(25, J = ve) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, J = `${ve}px`)) : z ? o(25, J = z) : o(25, J = _e(Se)), ve != null && ve.includes("%") || z != null && z.includes("%") ? o(26, Q = Ce()) : o(26, Q = J);
   }
   function Ce() {
     const ve = G == null ? void 0 : G.getBoundingClientRect().width;
@@ -34366,7 +34366,7 @@ function F0(t) {
       );
     },
     m(D, j) {
-      T(D, e, j), k(e, o), k(o, i), h && h.m(i, null), k(o, n), b && b.m(o, null), k(o, r), k(o, l), k(l, a), p && p.m(a, null), k(l, c), k(l, d), M && M.m(d, null), f = ai(
+      T(D, e, j), k(e, o), k(o, i), h && h.m(i, null), k(o, n), b && b.m(o, null), k(o, r), k(o, l), k(l, a), p && p.m(a, null), k(l, c), k(l, d), M && M.m(d, null), f = li(
         e,
         /*div5_elementresize_handler*/
         t[11].bind(e)
@@ -35091,13 +35091,13 @@ function af(t, e, o) {
   function v() {
     rt(a, (E, q, B) => {
       switch (E) {
-        case ui:
+        case di:
           p(q), B.stopPropagation();
           break;
         case Zs:
           _(), B.stopPropagation();
           break;
-        case gi:
+        case fi:
           z(q), B.stopPropagation();
           break;
         case vt:
@@ -35365,13 +35365,13 @@ function df(t, e, o) {
         case Xs:
           D(X);
           break;
-        case ti:
+        case ei:
           H(X);
           break;
         case Js:
           V(X);
           break;
-        case fi:
+        case ui:
           E();
           break;
         case Gs:
@@ -35529,7 +35529,7 @@ function df(t, e, o) {
     var S;
     for (const [X, ie] of Object.entries(f)) {
       const we = (S = p.form[X]) == null ? void 0 : S.data;
-      we && Ve(ie.el, ui, { name: X, value: we });
+      we && Ve(ie.el, di, { name: X, value: we });
     }
   }
   function ee(S) {
@@ -36031,7 +36031,7 @@ function bf(t, e, o) {
     N ? Ve(N, Us, { cancelled: Q }) : Ie(z, "_continue", null, { bubbles: true });
   }
   function E() {
-    F(), Ve(z, fi, null, { bubbles: true });
+    F(), Ve(z, ui, null, { bubbles: true });
   }
   function q(Q) {
     Ve(z, qo, null, { bubbles: true }), Q.stopPropagation();
@@ -36447,7 +36447,7 @@ function _f(t) {
   };
 }
 function kf(t) {
-  let e, o = Ge(Object.entries(oi(
+  let e, o = Ge(Object.entries(ti(
     /*_state*/
     t[2],
     /*page*/
@@ -36470,7 +36470,7 @@ function kf(t) {
     p(n, r) {
       if (r & /*isBlank, Object, getData, _state, formatValue, Array*/
       20) {
-        o = Ge(Object.entries(oi(
+        o = Ge(Object.entries(ti(
           /*_state*/
           n[2],
           /*page*/
@@ -36929,7 +36929,7 @@ function jf(t) {
   };
 }
 const Lf = /^\d{4}-\d{2}-\d{2}$/;
-function oi(t, e) {
+function ti(t, e) {
   var o, i;
   if (((i = (o = t.form[e]) == null ? void 0 : o.data) == null ? void 0 : i.type) === "details")
     return Object.entries(t.form[e].data.fieldsets || {}).sort((n, r) => n[1].order > r[1].order ? 1 : -1).reduce(
@@ -36946,7 +36946,7 @@ function Vo(t, e) {
         const l = r.history.reduce(
           (a, c) => (a = {
             ...a,
-            ...oi(r, c)
+            ...ti(r, c)
           }, a),
           {}
         );
@@ -37204,7 +37204,7 @@ function Af(t, e, o) {
         case Gt:
           L(O);
           break;
-        case ui:
+        case di:
           H(O);
           break;
         case qo:
@@ -37222,13 +37222,13 @@ function Af(t, e, o) {
         case Gs:
           N(O);
           break;
-        case ti:
-          Ve(d, ti, O);
+        case ei:
+          Ve(d, ei, O);
           break;
         case Pd:
           _(O);
           break;
-        case fi:
+        case ui:
           q(J);
           break;
       }
@@ -38231,7 +38231,7 @@ function Kf(t, e, o) {
   }
   function J() {
     const S = $ && j || D;
-    S && di(S);
+    S && ci(S);
   }
   function Q() {
     if (!E) return;
@@ -38248,7 +38248,7 @@ function Kf(t, e, o) {
   function K(S) {
     Ve(
       F,
-      gi,
+      fi,
       {
         id: S,
         label: P !== "blank" ? P : M,
@@ -43746,7 +43746,7 @@ function Ml(t) {
           /*close*/
           t[14]
         ),
-        ni(L = vi.call(null, o, { enable: (
+        ii(L = gi.call(null, o, { enable: (
           /*_isOpen*/
           t[6]
         ) }))
@@ -43837,7 +43837,7 @@ function Ml(t) {
     },
     i(K) {
       P || (Y(h), Y(G, K), Y(ee), K && at(() => {
-        P && (j && j.end(1), D = $o(r, Po, {
+        P && (j && j.end(1), D = Ko(r, Po, {
           duration: (
             /*_transitionTime*/
             t[12]
@@ -43845,14 +43845,14 @@ function Ml(t) {
           y: 200
         }), D.start());
       }), K && at(() => {
-        P && (H && H.end(1), U = $o(o, $t, { duration: (
+        P && (H && H.end(1), U = Ko(o, $t, { duration: (
           /*_transitionTime*/
           t[12]
         ) }), U.start());
       }), P = true);
     },
     o(K) {
-      R(h), R(G, K), R(ee), D && D.invalidate(), K && (j = ei(r, Po, {
+      R(h), R(G, K), R(ee), D && D.invalidate(), K && (j = $o(r, Po, {
         delay: (
           /*_transitionTime*/
           t[12]
@@ -43862,7 +43862,7 @@ function Ml(t) {
           t[12]
         ),
         y: -100
-      })), U && U.invalidate(), K && (H = ei(o, $t, {
+      })), U && U.invalidate(), K && (H = $o(o, $t, {
         delay: (
           /*_transitionTime*/
           t[12]
@@ -44836,7 +44836,7 @@ function X3(t, e, o) {
   const r = { full: "100%" };
   let { width: l = "full" } = e, { testid: a = "" } = e, { _width: c } = e;
   function d(s) {
-    return !!(["full"].includes(l) || Qo(s));
+    return !!(["full"].includes(l) || vi(s));
   }
   return xe(async () => {
     await tt(), d(l) || console.error("Invalid PageBlock width"), o(0, c = r[l] || l);
@@ -47375,7 +47375,7 @@ function S4(t) {
   `), u(e, "data-testid", "root"), u(e, "class", "container svelte-32bck6");
     },
     m(j, x) {
-      T(j, e, x), k(e, o), k(o, i), k(o, l), k(o, a), k(o, c), k(o, d), k(d, f), k(e, g), M && M.m(e, null), k(e, v), k(e, h), D && D.m(h, null), t[27](h), b = ai(
+      T(j, e, x), k(e, o), k(o, i), k(o, l), k(o, a), k(o, c), k(o, d), k(d, f), k(e, g), M && M.m(e, null), k(e, v), k(e, h), D && D.m(h, null), t[27](h), b = li(
         h,
         /*div1_elementresize_handler*/
         t[28].bind(h)
@@ -47587,7 +47587,7 @@ function O4(t, e, o) {
     });
   }
   function G() {
-    i || (Ie(x, "_radioItemChange", { value: s, label: g }, { bubbles: true }), d.reveal && r && _ && _ !== "" && di(_), !r && d.reveal && ee());
+    i || (Ie(x, "_radioItemChange", { value: s, label: g }, { bubbles: true }), d.reveal && r && _ && _ !== "" && ci(_), !r && d.reveal && ee());
   }
   function ee() {
     for (const X of U)
@@ -49750,13 +49750,13 @@ function j5(t, e = Me) {
 function ea(t) {
   return Object.prototype.toString.call(t) === "[object Date]";
 }
-function ii(t, e) {
+function oi(t, e) {
   if (t === e || t !== t) return () => t;
   const o = typeof t;
   if (o !== typeof e || Array.isArray(t) !== Array.isArray(e))
     throw new Error("Cannot interpolate values of different type");
   if (Array.isArray(t)) {
-    const i = e.map((n, r) => ii(t[r], n));
+    const i = e.map((n, r) => oi(t[r], n));
     return (n) => i.map((r) => r(n));
   }
   if (o === "object") {
@@ -49768,7 +49768,7 @@ function ii(t, e) {
     }
     const i = Object.keys(e), n = {};
     return i.forEach((r) => {
-      n[r] = ii(t[r], e[r]);
+      n[r] = oi(t[r], e[r]);
     }), (r) => {
       const l = {};
       return i.forEach((a) => {
@@ -49793,7 +49793,7 @@ function L5(t, e = {}) {
       delay: s = 0,
       duration: f = 400,
       easing: g = ho,
-      interpolate: v = ii
+      interpolate: v = oi
     } = co(co({}, e), a);
     if (f === 0)
       return c && (c.abort(), c = null), o.set(t = n), Promise.resolve();
@@ -50059,24 +50059,28 @@ class I5 extends Ne {
 }
 customElements.define("goa-spinner", Le(I5, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
 function T5(t) {
-  Ee(t, "svelte-1ra4v6q", `:host{display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;font-family:var(--goa-font-family-sans);width:100%;background-color:var(
+  Ee(t, "svelte-z1wj04", `:host{display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;font-family:var(--goa-font-family-sans);width:100%;height:100%;background-color:var(
       --goa-scroll-panel-color-bg,
       var(--goa-color-greyscale-white)
-    )}:host .svelte-1ra4v6q{box-sizing:border-box}.scroll-panel-header.svelte-1ra4v6q{flex:0 0 auto;background-color:var(
+    )}:host .svelte-z1wj04{box-sizing:border-box}.scroll-panel-header.svelte-z1wj04{flex:0 0 auto;background-color:var(
       --goa-scroll-panel-header-color-bg,
       var(--goa-color-greyscale-white)
-    );border-bottom:var(--goa-border-width-2xs) solid transparent;z-index:1;transition:box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
-      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive)}.scroll-panel-header--shadow.svelte-1ra4v6q{border-bottom-color:var(
+    );border-bottom:var(--goa-border-width-2xs) solid transparent;z-index:1;transition:box-shadow var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive)}.scroll-panel-header--shadow.svelte-z1wj04{border-bottom-color:var(
       --goa-scroll-panel-header-scroll-border,
       var(--goa-color-greyscale-150)
     );box-shadow:var(
       --goa-scroll-panel-header-scroll-shadow,
       var(--goa-shadow-shallow-below)
-    )}.scroll-panel-content.svelte-1ra4v6q{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;min-height:0}.scroll-panel-footer.svelte-1ra4v6q{flex:0 0 auto;background-color:var(
+    )}.scroll-panel-content.svelte-z1wj04{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:auto;min-height:0}.scroll-panel-footer.svelte-z1wj04{flex:0 0 auto;background-color:var(
       --goa-scroll-panel-footer-color-bg,
       var(--goa-color-greyscale-white)
-    );border-top:var(--goa-border-width-2xs) solid transparent;z-index:1;transition:box-shadow var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive),
-      border-color var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive)}.scroll-panel-footer--shadow.svelte-1ra4v6q{border-top-color:var(
+    );border-top:var(--goa-border-width-2xs) solid transparent;z-index:1;transition:box-shadow var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive),
+      border-color var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive)}.scroll-panel-footer--shadow.svelte-z1wj04{border-top-color:var(
       --goa-scroll-panel-footer-scroll-border,
       var(--goa-color-greyscale-150)
     );box-shadow:var(
@@ -50099,7 +50103,7 @@ function na(t) {
   );
   return {
     c() {
-      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-header svelte-1ra4v6q"), u(e, "aria-label", "Panel header"), A(
+      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-header svelte-z1wj04"), u(e, "aria-label", "Panel header"), A(
         e,
         "scroll-panel-header--shadow",
         /*_scrollState*/
@@ -50163,7 +50167,7 @@ function ra(t) {
   );
   return {
     c() {
-      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-footer svelte-1ra4v6q"), u(e, "aria-label", "Panel footer"), A(
+      e = C("section"), n && n.c(), u(e, "class", "scroll-panel-footer svelte-z1wj04"), u(e, "aria-label", "Panel footer"), A(
         e,
         "scroll-panel-footer--shadow",
         /*_scrollState*/
@@ -50234,7 +50238,7 @@ function S5(t) {
   );
   return {
     c() {
-      d && d.c(), e = W(), o = C("div"), f && f.c(), n = W(), g && g.c(), r = Je(), u(o, "class", "scroll-panel-content svelte-1ra4v6q"), u(o, "role", "region"), u(o, "aria-label", "Scrollable content"), u(o, "tabindex", "0"), u(o, "data-testid", i = /*testid*/
+      d && d.c(), e = W(), o = C("div"), f && f.c(), n = W(), g && g.c(), r = Je(), u(o, "class", "scroll-panel-content svelte-z1wj04"), u(o, "role", "region"), u(o, "aria-label", "Scrollable content"), u(o, "tabindex", "0"), u(o, "data-testid", i = /*testid*/
       t[0] || void 0);
     },
     m(v, h) {
@@ -50297,7 +50301,7 @@ function q5(t, e, o) {
   const r = ft(i);
   let { testid: l = "" } = e, { height: a = "100%" } = e, c = null, d = null, s = "no-scroll", f = false, g = null;
   xe(() => {
-    if (Qo(a) || console.error("ScrollPanel height must be a valid CSS dimension (e.g. 100%, 480px, 50vh)"), d) {
+    if (typeof CSS < "u" && typeof CSS.supports == "function" && !CSS.supports("height", a) && console.error(`ScrollPanel: "${a}" is not a valid CSS height; falling back to "100%".`), d) {
       const p = d.getRootNode();
       o(6, c = p instanceof ShadowRoot ? p.host : null), v(a), g = new ResizeObserver(() => b()), g.observe(d);
     }
@@ -52378,7 +52382,7 @@ customElements.define("goa-temp-notification", Le(_v, { message: { type: "String
 function kv(t) {
   Ee(t, "svelte-1yns3oj", "h1, h2, h3, h4, h5{margin:0}.heading-xl.svelte-1yns3oj{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-xl.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-body-xs)}}");
 }
-function Xo(t) {
+function Go(t) {
   let e, o, i, n;
   const r = (
     /*#slots*/
@@ -52503,7 +52507,7 @@ function yv(t) {
     t[0]
   ), o, i, n = (
     /*as*/
-    t[0] && Xo(t)
+    t[0] && Go(t)
   );
   return {
     c() {
@@ -52517,8 +52521,8 @@ function yv(t) {
         e,
         /*as*/
         r[0]
-      ) ? (n.d(1), n = Xo(r), e = /*as*/
-      r[0], n.c(), n.m(o.parentNode, o)) : n.p(r, l) : (n = Xo(r), e = /*as*/
+      ) ? (n.d(1), n = Go(r), e = /*as*/
+      r[0], n.c(), n.m(o.parentNode, o)) : n.p(r, l) : (n = Go(r), e = /*as*/
       r[0], n.c(), n.m(o.parentNode, o)) : e && (n.d(1), n = null, e = /*as*/
       r[0]);
     },
@@ -55712,7 +55716,7 @@ function I7(t) {
     t[2] ? "a" : "button"
   ), o, i, n = (
     /*url*/
-    (t[2] ? "a" : "button") && Jo(t)
+    (t[2] ? "a" : "button") && Xo(t)
   );
   return {
     c() {
@@ -55726,8 +55730,8 @@ function I7(t) {
         e,
         /*url*/
         r[2] ? "a" : "button"
-      ) ? (n.d(1), n = Jo(r), e = /*url*/
-      r[2] ? "a" : "button", n.c(), n.m(o.parentNode, o)) : n.p(r, l) : (n = Jo(r), e = /*url*/
+      ) ? (n.d(1), n = Xo(r), e = /*url*/
+      r[2] ? "a" : "button", n.c(), n.m(o.parentNode, o)) : n.p(r, l) : (n = Xo(r), e = /*url*/
       r[2] ? "a" : "button", n.c(), n.m(o.parentNode, o));
     },
     i(r) {
@@ -55917,7 +55921,7 @@ function Ba(t) {
     }
   };
 }
-function Jo(t) {
+function Xo(t) {
   let e, o, i, n, r, l, a, c, d, s, f, g = (
     /*icon*/
     t[5] && Pa(t)
@@ -78060,12 +78064,16 @@ function Feat3347Route() {
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, { mt: "l", mb: "l" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Validator repro: valid CSS height" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This uses a valid CSS height value. It should not log a ScrollPanel height error." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Validator case 1: valid calc() height (no error)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Passes ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: 'height="calc(20rem + 2rem)"' }),
+      ". The old regex validator rejected calc(), so this used to log a false console error. With CSS.supports it is accepted: no error logged, and the panel scrolls within its explicit height. Scroll to the bottom and keep scrolling with the pointer over the panel, the page scrolls next (no scroll trap)."
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabScrollPanel,
       {
-        height: "not-a-height",
+        height: "calc(20rem + 2rem)",
         testId: "panel-valid-calc-height",
         header: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: demoHeaderStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", size: "heading-s", mt: "none", mb: "none", children: "Valid calc() height" }) }),
         children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: demoBodyStyle, children: paragraphs.map((n) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -78075,6 +78083,29 @@ function Feat3347Route() {
         ] }, n)) })
       }
     ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, { mt: "l", mb: "l" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Validator case 2: invalid height (errors, falls back to 100%)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Passes ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: 'height="not-a-height"' }),
+      ". Open the console: it logs a ScrollPanel height error. Instead of collapsing to content height (an unscrollable block that swallowed page scroll), the host now falls back to",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "height: 100%" }),
+      ", so inside this 320px parent the panel is bounded and scrolls normally."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: "320px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabScrollPanel,
+      {
+        height: "not-a-height",
+        testId: "panel-invalid-height",
+        header: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: demoHeaderStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", size: "heading-s", mt: "none", mb: "none", children: "Invalid height (fallback)" }) }),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: demoBodyStyle, children: paragraphs.map((n) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Row ",
+          n,
+          " — body content inside an invalid-height panel."
+        ] }, n)) })
+      }
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, { mt: "l", mb: "l" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Test 7: Push Drawer (refactored to use goa-scroll-panel)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
