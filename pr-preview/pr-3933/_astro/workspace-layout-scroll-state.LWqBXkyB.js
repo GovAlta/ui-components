@@ -1,1 +1,0 @@
-import"./jsx-runtime.D_zvdyIk.js";import{r as o}from"./index.DeO6U63H.js";const t={NO_SCROLL:"no-scroll"};o.createContext(null);const a={scrollPosition:t.NO_SCROLL,isScrollable:!1},l=o.createContext(a);export{a as G,l as a};

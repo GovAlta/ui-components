@@ -734,6 +734,23 @@
     "slug": "work-side-notification-panel"
   },
   {
+    "type": "component",
+    "id": "workspace-layout",
+    "name": "Workspace Layout",
+    "description": "A full-page layout for workspace-style applications that wraps your content responsively.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "layout",
+      "workspace",
+      "side menu",
+      "sticky header",
+      "sticky footer",
+      "push drawer"
+    ],
+    "slug": "workspace-layout"
+  },
+  {
     "type": "example",
     "id": "add-a-filter-chip",
     "title": "Add a filter chip",
@@ -2336,31 +2353,6 @@
     ],
     "aliases": [],
     "slug": "workspace/index-page"
-  },
-  {
-    "type": "example",
-    "id": "workspace-layout",
-    "title": "Workspace Layout",
-    "description": "A full-page layout for workspace-style applications that wraps your content responsively.",
-    "status": "published",
-    "size": "page",
-    "productType": "workspace",
-    "tags": [
-      "layout",
-      "shell",
-      "workspace",
-      "sidebar",
-      "sticky header",
-      "sticky footer"
-    ],
-    "components": [
-      "workspace-layout",
-      "work-side-menu",
-      "table",
-      "push-drawer"
-    ],
-    "aliases": [],
-    "slug": "workspace-layout"
   },
   {
     "type": "page",
