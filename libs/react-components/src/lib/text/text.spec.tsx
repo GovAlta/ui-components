@@ -55,6 +55,13 @@ describe('GoabText', () => {
     expect(element?.getAttribute('mb')).toBe('l');
   });
 
+  it('should pass heading-2xl size through to the web component', () => {
+    const { container } = render(<GoabText size="heading-2xl">Largest heading</GoabText>);
+    const element = container.querySelector('goa-text');
+
+    expect(element?.getAttribute('size')).toBe('heading-2xl');
+  });
+
   it('should handle different tag values', () => {
     const cases = [
       { tag: 'p', name: 'paragraph' },

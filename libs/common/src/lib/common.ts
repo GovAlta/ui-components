@@ -1247,6 +1247,7 @@ export type GoabTextMaxWidth = string | "none";
 export type GoabTextHeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
 export type GoabTextTextElement = "span" | "div" | "p";
 export type GoabTextHeadingSize =
+  | "heading-2xl"
   | "heading-xl"
   | "heading-l"
   | "heading-m"
