@@ -39,7 +39,8 @@ export function Task2Form({
   const [wasReentry, setWasReentry] = useState(false);
 
   // Initialize form with outline and any existing state
-  const handleInit = (initFn: InitFunction) => {
+  const handleInit = (event: Event) => {
+    const initFn = (event as CustomEvent).detail as InitFunction;
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
     // In readOnly mode, always start on review page

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
-import { GoabPfSubform } from "@abgov/react-components";
+// GoabPfSubform export not on this branch yet; stubbed below so the demo can boot.
+// import { GoabPfSubform } from "@abgov/react-components";
 
 /**
  * Page 7: Dependants (Repeater with Subform)
@@ -103,15 +104,10 @@ export function Dependants({ dependants = [] }: DependantsProps) {
         )}
 
         <div ref={subformRef}>
-          <GoabPfSubform
-            formContent={<DependantForm />}
-            addButtonText="Add a dependant"
-            addButtonType="tertiary"
-            addButtonSize="compact"
-            addButtonIcon="add"
-            addHeading="Add a dependant"
-            editHeading="Edit dependant"
-          />
+          {/* GoabPfSubform stubbed until export lands on dev */}
+          <p style={{ color: "var(--goa-color-text-secondary)" }}>
+            [Dependants subform stubbed for demo]
+          </p>
         </div>
       </div>
     </>

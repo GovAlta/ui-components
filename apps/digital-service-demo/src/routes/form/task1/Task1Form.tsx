@@ -48,7 +48,8 @@ export function Task1Form({
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize form with outline and any existing state
-  const handleInit = (initFn: InitFunction) => {
+  const handleInit = (event: Event) => {
+    const initFn = (event as CustomEvent).detail as InitFunction;
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
     // In readOnly mode or re-entering a completed task, start on review page
