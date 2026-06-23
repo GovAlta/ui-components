@@ -65549,6 +65549,7 @@ const __vite_glob_0_78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug4027Route() {
   const [value, setValue] = reactExports.useState("2025-06-15");
+  const [comparisonValue, setComparisonValue] = reactExports.useState(42);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", mb: "m", children: "Bug #4027: Day and Year number inputs should hide the spinner arrows" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", mb: "l", children: 'The Day (DD) and Year (YYYY) fields in the input-type DatePicker stay as type="number" (numeric keypad on mobile, native validation), but the up/down spinner arrows are now hidden via CSS. Other type="number" inputs elsewhere keep their spinner buttons. The emitted value is unchanged.' }),
@@ -65564,7 +65565,17 @@ function Bug4027Route() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", mt: "l", children: [
       "Selected value: ",
       value || "(none)"
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", mt: "2xl", mb: "m", children: 'Comparison: plain type="number" input' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", mb: "l", children: "This is an unrelated GoabInputNumber. It should still show its up/down spinner arrows, confirming the fix above is scoped to DatePicker's Day and Year fields only." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabInputNumber,
+      {
+        name: "comparison-number",
+        value: comparisonValue,
+        onChange: (detail) => setComparisonValue(detail.value)
+      }
+    )
   ] });
 }
 const bug4027_route = {
