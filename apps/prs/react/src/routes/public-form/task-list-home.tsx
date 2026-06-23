@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { GoabText, GoabBadge, GoabCallout, GoabButton } from "@abgov/react-components";
 
@@ -9,6 +10,12 @@ type Section = { title: string; tasks: Task[]; locked?: boolean; lockedNote?: st
 // Statuses are illustrative, to show the badge states. Everything unlocked is a link
 // (free-jump); the last section is locked to demo that state too.
 const sections: Section[] = [
+  {
+    // A real multi-page task (an organized section with branching), to contrast
+    // with the single-page pattern demos below.
+    title: "Before you apply",
+    tasks: [{ slug: "eligibility", name: "Confirm your eligibility", status: "not-started" }],
+  },
   {
     title: "Question types",
     tasks: [
@@ -25,7 +32,8 @@ const sections: Section[] = [
     title: "Repeating questions",
     tasks: [
       { slug: "inline-list", name: "Inline list", status: "not-started" },
-      { slug: "modal-drawer", name: "Modal / drawer", status: "not-started" },
+      { slug: "modal-drawer", name: "Add in a modal", status: "not-started" },
+      { slug: "drawer", name: "Add in a drawer", status: "not-started" },
       { slug: "multi-step", name: "Multi-step entry", status: "not-started" },
       { slug: "new-page", name: "New page per item, with branches", status: "not-started" },
     ],
@@ -62,22 +70,33 @@ function SectionCard({ section, index }: { section: Section; index: number }) {
       {section.locked ? (
         <GoabText mt="none" mb="none" color="secondary">{section.lockedNote}</GoabText>
       ) : (
-        section.tasks.map((task, i) => (
-          <div
-            key={task.slug ?? task.name}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "var(--goa-space-m)",
-              padding: "var(--goa-space-s) 0",
-              borderTop: i > 0 ? "1px solid var(--goa-color-greyscale-100)" : "none",
-            }}
-          >
-            {task.slug ? <Link to={task.slug}>{task.name}</Link> : <span>{task.name}</span>}
-            <StatusBadge status={task.status} />
-          </div>
-        ))
+        section.tasks.map((task, i) => {
+          // Full-bleed clickable row: negative horizontal margin cancels the
+          // card's padding so the hover background spans the whole card width,
+          // and the whole row is the link target (click anywhere).
+          const rowStyle: CSSProperties = {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "var(--goa-space-m)",
+            padding: "var(--goa-space-m) var(--goa-space-xl)",
+            margin: "0 calc(-1 * var(--goa-space-xl))",
+            borderTop: i > 0 ? "1px solid var(--goa-color-greyscale-100)" : "none",
+            textDecoration: "none",
+            color: "inherit",
+          };
+          return task.slug ? (
+            <Link key={task.slug} to={task.slug} className="pf-task-row" style={rowStyle}>
+              <span className="pf-task-name">{task.name}</span>
+              <StatusBadge status={task.status} />
+            </Link>
+          ) : (
+            <div key={task.name} style={rowStyle}>
+              <span className="pf-task-name">{task.name}</span>
+              <StatusBadge status={task.status} />
+            </div>
+          );
+        })
       )}
     </div>
   );
@@ -86,6 +105,13 @@ function SectionCard({ section, index }: { section: Section; index: number }) {
 export function TaskListHome() {
   return (
     <div>
+      <style>{`
+        .pf-task-row { transition: background-color 0.12s ease; }
+        .pf-task-row:hover,
+        .pf-task-row:focus-visible { background-color: var(--goa-color-greyscale-100); }
+        .pf-task-row:hover .pf-task-name,
+        .pf-task-row:focus-visible .pf-task-name { text-decoration: underline; }
+      `}</style>
       <div
         style={{
           display: "flex",

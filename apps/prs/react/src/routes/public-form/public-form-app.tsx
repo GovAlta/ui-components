@@ -5,11 +5,23 @@ import {
   GoabMenuButton,
   GoabMenuAction,
   GoabAppFooter,
-  GoabAppFooterNavSection,
   GoabAppFooterMetaSection,
   GoabPageBlock,
 } from "@abgov/react-components";
 import { TaskListHome } from "./task-list-home";
+import { SingleQuestion } from "./examples/single-question";
+import { GroupedFields } from "./examples/grouped-fields";
+import { MultipleQuestions } from "./examples/multiple-questions";
+import { QuestionWithDetails } from "./examples/question-with-details";
+import { Reveal } from "./examples/reveal";
+import { EligibilityTask } from "./examples/eligibility-task";
+import { ContentBefore } from "./examples/content-before";
+import { FileUpload } from "./examples/file-upload";
+import { InlineList } from "./examples/inline-list";
+import { ModalDrawer } from "./examples/modal-drawer";
+import { MultiStep } from "./examples/multi-step";
+import { NewPageTask } from "./examples/new-page";
+import { DrawerExample } from "./examples/drawer";
 
 /**
  * Public form template gallery (Step 1 demo).
@@ -39,20 +51,33 @@ export function PublicFormApp() {
         <div style={{ paddingTop: "var(--goa-space-2xl)", paddingBottom: "var(--goa-space-3xl)" }}>
           <Routes>
             <Route path="/" element={<TaskListHome />} />
+            <Route path="single-question" element={<SingleQuestion />} />
+            <Route path="grouped-fields" element={<GroupedFields />} />
+            <Route path="multiple-questions" element={<MultipleQuestions />} />
+            <Route path="details" element={<QuestionWithDetails />} />
+            <Route path="reveal" element={<Reveal />} />
+            <Route path="content-before" element={<ContentBefore />} />
+            <Route path="file-upload" element={<FileUpload />} />
+            <Route path="inline-list" element={<InlineList />} />
+            <Route path="modal-drawer" element={<ModalDrawer />} />
+            <Route path="drawer" element={<DrawerExample />} />
+            <Route path="multi-step" element={<MultiStep />} />
+            <Route path="new-page/*" element={<NewPageTask />} />
+            <Route path="eligibility/*" element={<EligibilityTask />} />
           </Routes>
         </div>
       </GoabPageBlock>
 
       <section slot="footer">
-        <GoabAppFooter maxContentWidth="704px">
-          <GoabAppFooterNavSection>
+        {/* Links go in the meta section so they lay out horizontally (the nav
+            section stacks them in columns). The footer auto-adds the copyright.
+            No maxContentWidth, so it spans full width to match the header. */}
+        <GoabAppFooter>
+          <GoabAppFooterMetaSection>
             <a href="#">My profile</a>
             <a href="#">Accessibility</a>
             <a href="#">Privacy</a>
             <a href="#">Terms and conditions</a>
-          </GoabAppFooterNavSection>
-          <GoabAppFooterMetaSection>
-            This is a Government of Alberta Digital Service. &copy; 2026 GoA
           </GoabAppFooterMetaSection>
         </GoabAppFooter>
       </section>
