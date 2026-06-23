@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDatePicker } from "./date-picker";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { CalendarDate, Spacing } from "@abgov/ui-components-common";
+import { CalendarDate, GoabDatePickerSize, Spacing } from "@abgov/ui-components-common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { addMonths } from "date-fns";
 import { By } from "@angular/platform-browser";
@@ -17,6 +17,7 @@ import { fireEvent } from "@testing-library/dom";
       [min]="min"
       [max]="max"
       type="input"
+      [size]="size"
       [error]="error"
       [mt]="mt"
       [mb]="mb"
@@ -31,6 +32,7 @@ class TestDatePickerComponent {
   value?: Date | string;
   min?: Date | string;
   max?: Date | string;
+  size?: GoabDatePickerSize;
   error?: boolean;
   mt?: Spacing;
   mb?: Spacing;
@@ -60,6 +62,7 @@ describe("GoABDatePicker", () => {
     component.min = addMonths(value, -1);
     component.max = addMonths(value, 1);
     component.value = value;
+    component.size = "compact";
     component.error = true;
     component.mt = "l";
     component.mb = "m";
@@ -90,6 +93,7 @@ describe("GoABDatePicker", () => {
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("type")).toBe("input");
+    expect(el?.getAttribute("size")).toBe("compact");
   });
 
   it("should handle event", fakeAsync(() => {

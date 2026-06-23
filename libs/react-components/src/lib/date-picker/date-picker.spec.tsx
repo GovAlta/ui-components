@@ -89,4 +89,18 @@ describe("DatePicker", () => {
     const el = baseElement.querySelector("goa-date-picker");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
+
+  it("should pass the size attribute when set", () => {
+    const { baseElement } = render(
+      <DatePicker name="foo" size="compact" onChange={noop} />,
+    );
+    const el = baseElement.querySelector("goa-date-picker");
+    expect(el?.getAttribute("size")).toBe("compact");
+  });
+
+  it("should not set a size attribute by default", () => {
+    const { baseElement } = render(<DatePicker name="foo" onChange={noop} />);
+    const el = baseElement.querySelector("goa-date-picker");
+    expect(el?.getAttribute("size")).toBeNull();
+  });
 });
