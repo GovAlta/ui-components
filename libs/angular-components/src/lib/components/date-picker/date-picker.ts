@@ -2,6 +2,7 @@ import {
   CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
+  GoabDatePickerSize,
   Once,
 } from "@abgov/ui-components-common";
 import {
@@ -37,6 +38,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.type]="type"
       [attr.testid]="testId"
       [attr.width]="width"
+      [attr.size]="size"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -77,6 +79,8 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   @Input() relative?: boolean;
   /** Sets the width of the date picker input. */
   @Input() width?: string;
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. @default "default" */
+  @Input() size?: GoabDatePickerSize;
 
   /** Emits when the selected date changes. Emits the date picker change detail including name and value. */
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();

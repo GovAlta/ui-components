@@ -158,6 +158,8 @@ export type GoabDatePickerOnChangeDetail = {
 };
 export type GoabDatePickerInputType = "calendar" | "input";
 
+export type GoabDatePickerSize = "default" | "compact";
+
 export type GoabChipVariant = "filter";
 
 export type GoabChipTheme = "outline" | "filled";

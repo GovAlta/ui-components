@@ -1,0 +1,67 @@
+<h1>3815 - Date picker size prop</h1>
+<p>
+  GoabDatePicker now exposes a <code>size</code> prop ("default" | "compact") that
+  applies to both the calendar and input variants.
+</p>
+<p>
+  Known follow-up: when <code>type="input"</code> is used in a narrow container, the
+  three fields still overflow instead of staying on one line (see the last example).
+  The responsive fix is not part of this change.
+</p>
+
+<h2>Calendar variant sizes</h2>
+<goab-form-item label="Default size" mb="l">
+  <goab-date-picker name="calDefault" [value]="date" (onChange)="onDateChange($event)">
+  </goab-date-picker>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-date-picker
+    name="calCompact"
+    size="compact"
+    [value]="date"
+    (onChange)="onDateChange($event)"
+  >
+  </goab-date-picker>
+</goab-form-item>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Input variant sizes</h2>
+<goab-form-item label="Default size" mb="l">
+  <goab-date-picker
+    name="inputDefault"
+    type="input"
+    [value]="date"
+    (onChange)="onDateChange($event)"
+  >
+  </goab-date-picker>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-date-picker
+    name="inputCompact"
+    type="input"
+    size="compact"
+    [value]="date"
+    (onChange)="onDateChange($event)"
+  >
+  </goab-date-picker>
+</goab-form-item>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Input variant in a narrow container (known issue)</h2>
+<p>
+  Currently the three fields overflow the container. The responsive fix (keeping them
+  on one line) is a follow-up to this change.
+</p>
+<div style="width: 20rem; outline: 1px dashed var(--goa-color-greyscale-400)">
+  <goab-form-item label="Date of birth">
+    <goab-date-picker
+      name="inputNarrow"
+      type="input"
+      [value]="date"
+      (onChange)="onDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+</div>
