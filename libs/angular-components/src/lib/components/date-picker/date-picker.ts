@@ -4,6 +4,7 @@ import {
   GoabDatePickerOnBlurDetail,
   GoabDatePickerOnChangeDetail,
   GoabDatePickerOnFocusDetail,
+  GoabDatePickerSize,
   Once,
 } from "@abgov/ui-components-common";
 import {
@@ -17,7 +18,7 @@ import {
   HostListener,
   OnInit,
   ChangeDetectorRef,
-    inject,
+  inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -39,6 +40,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.type]="type"
       [attr.testid]="testId"
       [attr.width]="width"
+      [attr.size]="size"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -81,6 +83,8 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   @Input() relative?: boolean;
   /** Sets the width of the date picker input. */
   @Input() width?: string;
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. @default "default" */
+  @Input() size?: GoabDatePickerSize;
 
   /** Emits when the selected date changes. Emits the date picker change detail including name and value. */
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
@@ -126,7 +130,10 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   }
 
   _onFocus(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabDatePickerOnFocusDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabDatePickerOnFocusDetail>).detail,
+      event: e,
+    };
     this.onFocus.emit(detail);
   }
 
@@ -135,7 +142,6 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     this.markAsTouched();
     this.onBlur.emit(detail);
   }
-
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

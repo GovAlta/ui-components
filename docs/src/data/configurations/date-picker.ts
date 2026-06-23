@@ -208,34 +208,31 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </goa-form-item>`,
       },
     },
-    // TODO: Re-enable when GoabDatePicker exposes a `size` prop. The web
-    // component (goa-date-picker) does not currently support sizes; the
-    // snippet below is kept for reference only.
-    // {
-    //   id: "sizes",
-    //   name: "Sizes",
-    //   description: "Default and compact size variants",
-    //   code: {
-    //     react: `<GoabFormItem label="Default size" mb="l">
-    //   <GoabDatePicker name="sizeDefault" onChange={handleDateChange} />
-    // </GoabFormItem>
-    // <GoabFormItem label="Compact size" labelSize="compact" mb="l">
-    //   <GoabDatePicker name="sizeCompact" size="compact" onChange={handleDateChange} />
-    // </GoabFormItem>`,
-    //     angular: `<goab-form-item label="Default size" mb="l">
-    //   <goab-date-picker name="sizeDefault" (onChange)="handleDateChange($event)"></goab-date-picker>
-    // </goab-form-item>
-    // <goab-form-item label="Compact size" labelSize="compact" mb="l">
-    //   <goab-date-picker name="sizeCompact" size="compact" (onChange)="handleDateChange($event)"></goab-date-picker>
-    // </goab-form-item>`,
-    //     webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-    //   <goa-date-picker version="2" name="sizeDefault"></goa-date-picker>
-    // </goa-form-item>
-    // <goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-    //   <goa-date-picker version="2" name="sizeCompact" size="compact"></goa-date-picker>
-    // </goa-form-item>`,
-    //   },
-    // },
+    {
+      id: "sizes",
+      name: "Sizes",
+      description: "Default and compact size variants",
+      code: {
+        react: `<GoabFormItem label="Default size" mb="l">
+  <GoabDatePicker name="sizeDefault" onChange={handleDateChange} />
+</GoabFormItem>
+<GoabFormItem label="Compact size" labelSize="compact" mb="l">
+  <GoabDatePicker name="sizeCompact" size="compact" onChange={handleDateChange} />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Default size" mb="l">
+  <goab-date-picker name="sizeDefault" (onChange)="handleDateChange($event)"></goab-date-picker>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-date-picker name="sizeCompact" size="compact" (onChange)="handleDateChange($event)"></goab-date-picker>
+</goab-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
+  <goa-date-picker version="2" name="sizeDefault"></goa-date-picker>
+</goa-form-item>
+<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
+  <goa-date-picker version="2" name="sizeCompact" size="compact"></goa-date-picker>
+</goa-form-item>`,
+      },
+    },
     {
       id: "input-type",
       name: "Input type",
