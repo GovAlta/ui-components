@@ -36,7 +36,7 @@ export function PublicFormApp() {
   return (
     <GoabOneColumnLayout>
       <section slot="header">
-        <GoabAppHeader url="https://www.alberta.ca" heading="Service name" maxContentWidth="704px">
+        <GoabAppHeader url="/public-form" heading="Service name" maxContentWidth="704px">
           <div slot="utilities">
             <GoabMenuButton text="Edna Mode" type="tertiary" size="compact">
               <GoabMenuAction text="My profile" action="profile" />
