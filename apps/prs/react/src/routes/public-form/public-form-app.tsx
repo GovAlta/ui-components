@@ -22,6 +22,9 @@ import { ModalDrawer } from "./examples/modal-drawer";
 import { MultiStep } from "./examples/multi-step";
 import { NewPageTask } from "./examples/new-page";
 import { DrawerExample } from "./examples/drawer";
+import { ResultEligible } from "./examples/result-eligible";
+import { ResultNotEligible } from "./examples/result-not-eligible";
+import { ResultSubmitted } from "./examples/result-submitted";
 
 /**
  * Public form template gallery (Step 1 demo).
@@ -64,6 +67,9 @@ export function PublicFormApp() {
             <Route path="multi-step" element={<MultiStep />} />
             <Route path="new-page/*" element={<NewPageTask />} />
             <Route path="eligibility/*" element={<EligibilityTask />} />
+            <Route path="result-eligible" element={<ResultEligible />} />
+            <Route path="result-not-eligible" element={<ResultNotEligible />} />
+            <Route path="result-submitted" element={<ResultSubmitted />} />
           </Routes>
         </div>
       </GoabPageBlock>
