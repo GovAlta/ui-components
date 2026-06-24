@@ -1,3 +1,13 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + design-tokens/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
 <template>
   <goa-text as="h1" mt="none">Apply for a service</goa-text>
   <goa-callout version="2" type="important" emphasis="low" size="medium" heading="Application incomplete" mb="2xl" mt="xl" maxwidth="360px">

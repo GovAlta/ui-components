@@ -1,3 +1,13 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + design-tokens/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
 <template>
   <goa-form-item version="2" id="item-form-item" requirement="required" label="Name of item" helptext="Add an item to the dropdown list below">
     <goa-input version="2" id="item-input" name="item" @_change="onItemChange"></goa-input>

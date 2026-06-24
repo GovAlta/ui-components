@@ -1,3 +1,13 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + design-tokens/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
 <template>
   <form>
     <goa-form-item version="2" label="Do you have additional education expenses?" helptext="You can request funding for these now or at any time during your program." mb="m">
