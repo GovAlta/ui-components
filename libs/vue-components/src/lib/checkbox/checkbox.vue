@@ -19,7 +19,6 @@ interface Props {
   testId?: string;
   ariaLabel?: string;
   description?: string;
-  reveal?: boolean;
   revealAriaLabel?: string;
   maxWidth?: string;
   size?: GoabCheckboxSize;
@@ -29,15 +28,15 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  size: "default",
+});
 const emit = defineEmits<{
   onChange: [detail: GoabCheckboxOnChangeDetail];
-  onRevealChange: [detail: { name: string; value: unknown }];
 }>();
 
 const wcProps = useWcProps(props, {
-  booleanProps: ["checked", "indeterminate", "disabled", "error", "reveal"],
-  renamedProps: { ariaLabel: "aria-label" },
+  booleanProps: ["checked", "indeterminate", "disabled", "error"],
 });
 
 const valueAttr = computed(() => {
@@ -59,7 +58,6 @@ function onChange(e: Event) {
     :value="valueAttr"
     :description="typeof description === 'string' ? description : undefined"
     @_change="onChange"
-    @_revealChange="emit('onRevealChange', $event.detail)"
   >
     <slot />
     <span v-if="$slots.description" slot="description">

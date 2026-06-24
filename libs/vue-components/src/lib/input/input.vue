@@ -7,12 +7,14 @@ import type {
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
   GoabInputSize,
+  GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
   name: string;
+  type?: GoabInputType;
   value?: string;
   id?: string;
   debounce?: number;
@@ -22,7 +24,7 @@ interface Props {
   placeholder?: string;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
-  variant?: string;
+  variant?: "goa" | "bare";
   focused?: boolean;
   readonly?: boolean;
   error?: boolean;
@@ -30,9 +32,8 @@ interface Props {
   testId?: string;
   ariaLabel?: string;
   maxLength?: number;
-  handleTrailingIconClick?: boolean;
   trailingIconAriaLabel?: string;
-  textAlign?: string;
+  textAlign?: "left" | "right";
   size?: GoabInputSize;
   min?: number | string;
   max?: number | string;
@@ -43,7 +44,11 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  variant: "goa",
+  textAlign: "left",
+  size: "default",
+});
 const emit = defineEmits<{
   onChange: [detail: GoabInputOnChangeDetail<string>];
   onTrailingIconClick: [];
@@ -52,7 +57,7 @@ const emit = defineEmits<{
   onKeyPress: [detail: GoabInputOnKeyPressDetail<string>];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "readonly", "error", "focused", "handleTrailingIconClick"], renamedProps: { ariaLabel: "aria-label" } });
+const wcProps = useWcProps(props, { booleanProps: ["disabled", "readonly", "error", "focused"] });
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;

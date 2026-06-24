@@ -5,7 +5,9 @@ interface Props {
   heading?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  heading: "",
+});
 const wcProps = useWcProps(props);
 </script>
 

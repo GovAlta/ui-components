@@ -12,7 +12,7 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: "onInit", detail: Event): void;
   (e: "onComplete", detail: GoabFormState): void;
-  (e: "onStateChange", detail: unknown): void;
+  (e: "onStateChange", detail: GoabFormState): void;
 }>();
 
 const wcProps = useWcProps(props);

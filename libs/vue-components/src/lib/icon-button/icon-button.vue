@@ -26,7 +26,11 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  variant: "color",
+  size: "medium",
+  theme: "outline",
+});
 const emit = defineEmits<{
   onClick: [];
 }>();
@@ -34,7 +38,7 @@ const emit = defineEmits<{
 const wcProps = useWcProps(props, { 
   booleanProps: ["disabled"],
   jsonProps: ["actionArgs"],
-  renamedProps: { actionArg: "action-arg", actionArgs: "action-args", ariaLabel: "aria-label" },
+  renamedProps: { actionArg: "action-arg", actionArgs: "action-args" },
 });
 </script>
 

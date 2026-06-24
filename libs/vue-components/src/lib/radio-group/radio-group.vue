@@ -23,12 +23,14 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  size: "default",
+});
 const emit = defineEmits<{
   onChange: [detail: GoabRadioGroupOnChangeDetail];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"], renamedProps: { ariaLabel: "aria-label" } });
+const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"] });
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;

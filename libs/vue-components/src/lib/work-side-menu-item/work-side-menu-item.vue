@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import type { GoabWorkSideMenuItemType } from "@abgov/ui-components-common";
 import { useSlots } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
   label: string;
   url?: string;
-  badge?: string;
   current?: boolean;
   divider?: boolean;
   icon?: string;
   testId?: string;
-  type?: GoabWorkSideMenuItemType;
 }
 
 const props = defineProps<Props>();

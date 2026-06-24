@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GoabModalCalloutVariant, GoabModalTransition } from "@abgov/ui-components-common";
-import { useSlots } from "vue";
+import { useSlots, getCurrentInstance, computed } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
@@ -23,10 +23,14 @@ const wcProps = useWcProps(props, {
   booleanPropsWithFalse: ["open"],
 });
 const slots = useSlots();
+const instance = getCurrentInstance();
+const closable = computed(() =>
+  instance?.vnode.props?.onOnClose ? "true" : "false",
+);
 </script>
 
 <template>
-  <goa-modal v-bind="wcProps" closable="true" @_close="emit('onClose')">
+  <goa-modal v-bind="wcProps" :closable="closable" @_close="emit('onClose')">
     <div v-if="slots.heading" slot="heading">
       <slot name="heading" />
     </div>

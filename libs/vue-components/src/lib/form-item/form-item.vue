@@ -25,7 +25,9 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "",
+});
 const wcProps = useWcProps(props, { 
   renamedProps: { publicFormSummaryOrder: "public-form-summary-order" },
 });

@@ -8,7 +8,6 @@ interface Props {
   minWidth?: string;
   padded?: boolean;
   position?: GoabPopoverPosition;
-  relative?: boolean;
   testId?: string;
   mt?: Spacing;
   mr?: Spacing;
@@ -20,7 +19,6 @@ const props = withDefaults(defineProps<Props>(), {
   padded: true,
 });
 const wcProps = useWcProps(props, {
-  booleanProps: ["relative"],
   booleanPropsWithFalse: ["padded"],
 });
 const slots = useSlots();

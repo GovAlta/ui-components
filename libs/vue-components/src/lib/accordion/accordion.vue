@@ -26,7 +26,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-  onChange: [detail: { open: boolean }];
+  onChange: [open: boolean];
 }>();
 
 const wcProps = useWcProps(props, { 
@@ -37,7 +37,7 @@ const slots = useSlots();
 </script>
 
 <template>
-  <goa-accordion v-bind="wcProps" @_change="emit('onChange', $event.detail)">
+  <goa-accordion v-bind="wcProps" @_change="emit('onChange', $event.detail.open)">
     <div v-if="slots.headingContent" slot="headingcontent">
       <slot name="headingContent" />
     </div>

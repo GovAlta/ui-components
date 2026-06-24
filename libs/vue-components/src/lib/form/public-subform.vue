@@ -13,7 +13,11 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  id: "",
+  name: "",
+  continueMsg: "",
+});
 const emit = defineEmits<{
   (e: "onInit", detail: Event): void;
   (e: "onStateChange", detail: Event): void;

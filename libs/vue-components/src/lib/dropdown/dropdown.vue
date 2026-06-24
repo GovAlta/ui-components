@@ -27,22 +27,22 @@ interface Props {
   maxWidth?: string;
   autoComplete?: string;
   size?: GoabDropdownSize;
-  relative?: boolean;
   mt?: Spacing;
   mr?: Spacing;
   mb?: Spacing;
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  size: "default",
+});
 const emit = defineEmits<{
   onChange: [detail: GoabDropdownOnChangeDetail];
 }>();
 
 const { value: _value, ...rest } = props;
 const wcProps = useWcProps(rest, {
-  booleanProps: ["disabled", "error", "filterable", "multiselect", "native", "relative"],
-  renamedProps: { ariaLabel: "aria-label", ariaLabelledBy: "aria-labelledby" },
+  booleanProps: ["disabled", "error", "filterable", "multiselect", "native"],
 });
 
 const valueAttr = computed(() => {

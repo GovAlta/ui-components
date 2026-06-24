@@ -15,7 +15,10 @@ interface Props {
   testId?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "information",
+  emphasis: "high",
+});
 const emit = defineEmits<{
   onDismiss: [];
 }>();
