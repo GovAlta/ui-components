@@ -17,11 +17,11 @@ const emit = defineEmits<{
   onViewAll: [];
 }>();
 
-const wcProps = useWcProps(props);
+const wcProps = useWcProps(props, { renamedProps: { activeTab: "active-tab" } });
 </script>
 
 <template>
-  <goa-work-side-notification-panel v-bind="wcProps" :active-tab="activeTab" @_markAllRead="emit('onMarkAllRead')" @_viewAll="emit('onViewAll')">
+  <goa-work-side-notification-panel v-bind="wcProps" @_markAllRead="emit('onMarkAllRead')" @_viewAll="emit('onViewAll')">
     <slot />
   </goa-work-side-notification-panel>
 </template>

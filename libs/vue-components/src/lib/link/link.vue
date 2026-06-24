@@ -22,7 +22,10 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  color: "interactive",
+  size: "medium",
+});
 
 const wcProps = useWcProps(props, { 
   jsonProps: ["actionArgs"],

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Spacing } from "@abgov/ui-components-common";
+import type { GoabPublicFormPageButtonVisibility, Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
   heading?: string;
   sectionTitle?: string;
   actionButtonText?: string;
-  buttonVisibility?: string;
+  buttonVisibility?: GoabPublicFormPageButtonVisibility;
   mt?: Spacing;
   mr?: Spacing;
   mb?: Spacing;
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  heading: "",
+  sectionTitle: "",
+  actionButtonText: "",
   buttonVisibility: "hidden",
 });
 

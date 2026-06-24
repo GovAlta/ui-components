@@ -21,9 +21,9 @@ const emit = defineEmits<{
   onClick: [];
 }>();
 
-const wcProps = useWcProps(props);
+const wcProps = useWcProps(props, { renamedProps: { readStatus: "read-status" } });
 </script>
 
 <template>
-  <goa-work-side-notification-item v-bind="wcProps" :read-status="readStatus" @_click="emit('onClick')" />
+  <goa-work-side-notification-item v-bind="wcProps" @_click="emit('onClick')" />
 </template>

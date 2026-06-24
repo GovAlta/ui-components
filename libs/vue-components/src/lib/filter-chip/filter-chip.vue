@@ -15,7 +15,9 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  iconTheme: "outline",
+});
 const emit = defineEmits<{
   onClick: [];
 }>();

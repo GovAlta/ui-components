@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Spacing } from "@abgov/ui-components-common";
+import type { GoabPaginationOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-  onChange: [detail: { page: number }];
+  onChange: [detail: GoabPaginationOnChangeDetail];
 }>();
 
 const wcProps = useWcProps(props);

@@ -17,7 +17,13 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "information",
+  iconTheme: "outline",
+  size: "large",
+  ariaLive: "off",
+  emphasis: "medium",
+});
 const wcProps = useWcProps(props);
 </script>
 

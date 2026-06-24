@@ -20,8 +20,13 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props);
+
+function onChange(e: Event) {
+  const detail = (e as CustomEvent).detail;
+  emit("onChange", { name: props.name ?? "", value: detail.value });
+}
 </script>
 
 <template>
-  <goa-calendar v-bind="wcProps" @_change="emit('onChange', $event.detail)" />
+  <goa-calendar v-bind="wcProps" @_change="onChange" />
 </template>

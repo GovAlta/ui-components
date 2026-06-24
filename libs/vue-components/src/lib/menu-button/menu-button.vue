@@ -19,7 +19,9 @@ interface Props {
   testId?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "primary",
+});
 const emit = defineEmits<{
   onAction: [detail: GoabMenuButtonOnActionDetail];
 }>();

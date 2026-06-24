@@ -21,7 +21,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, { booleanProps: ["inverted"], renamedProps: { ariaLabel: "aria-label" } });
+const wcProps = useWcProps(props, { booleanProps: ["inverted"] });
 </script>
 
 <template>

@@ -8,7 +8,6 @@ interface Props {
   open?: boolean;
   heading?: string;
   maxSize?: GoabDrawerSize;
-  closeButtonVisibility?: "visible" | "hidden";
   testId?: string;
 }
 
@@ -19,7 +18,6 @@ const emit = defineEmits<{
 
 const wcProps = useWcProps(props, { 
   booleanProps: ["open"],
-  renamedProps: { closeButtonVisibility: "close-button-visibility" },
 });
 const slots = useSlots();
 </script>

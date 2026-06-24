@@ -3,13 +3,11 @@ import type { GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, Goa
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  as?: GoabTextTextElement | GoabTextHeadingElement;
   tag?: GoabTextTextElement | GoabTextHeadingElement;
   size?: GoabTextSize;
   maxWidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
   id?: string;
-  testId?: string;
   mt?: Spacing;
   mr?: Spacing;
   mb?: Spacing;
@@ -17,12 +15,12 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const { as, tag, ...rest } = props;
+const { tag, ...rest } = props;
 const wcProps = useWcProps(rest);
 </script>
 
 <template>
-  <goa-text :as="tag || as" v-bind="wcProps">
+  <goa-text :as="tag" v-bind="wcProps">
     <slot />
   </goa-text>
 </template>

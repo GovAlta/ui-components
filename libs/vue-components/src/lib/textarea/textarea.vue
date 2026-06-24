@@ -16,7 +16,7 @@ interface Props {
   placeholder?: string;
   rows?: number;
   error?: boolean;
-  readonly?: boolean;
+  readOnly?: boolean;
   disabled?: boolean;
   width?: string;
   maxWidth?: string;
@@ -39,7 +39,7 @@ const emit = defineEmits<{
   onBlur: [detail: GoabTextAreaOnBlurDetail];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["readonly", "disabled", "error"], renamedProps: { ariaLabel: "aria-label" } });
+const wcProps = useWcProps(props, { booleanProps: ["readOnly", "disabled", "error"] });
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;

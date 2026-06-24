@@ -27,7 +27,7 @@ const slots = useSlots();
 </script>
 
 <template>
-  <goa-radio-item v-bind="wcProps" :aria-label="ariaLabel" :revelarialabel="revealAriaLabel">
+  <goa-radio-item v-bind="wcProps">
     <div v-if="slots.description" slot="description">
       <slot name="description" />
     </div>

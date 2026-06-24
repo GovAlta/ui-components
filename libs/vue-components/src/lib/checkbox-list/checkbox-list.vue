@@ -16,7 +16,10 @@ interface Props {
   ml?: Spacing;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  value: () => [],
+  size: "default",
+});
 const emit = defineEmits<{
   onChange: [detail: GoabCheckboxListOnChangeDetail & { event: Event }];
 }>();

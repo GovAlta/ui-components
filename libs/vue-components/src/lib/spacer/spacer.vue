@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import type { Spacing } from "@abgov/ui-components-common";
+import type {
+  GoabSpacerHorizontalSpacing,
+  GoabSpacerVerticalSpacing,
+} from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  hSpacing?: GoabSpacerHorizontalSpacing;
+  vSpacing?: GoabSpacerVerticalSpacing;
   testId?: string;
-  mt?: Spacing;
-  mr?: Spacing;
-  mb?: Spacing;
-  ml?: Spacing;
 }
 
 const props = defineProps<Props>();
