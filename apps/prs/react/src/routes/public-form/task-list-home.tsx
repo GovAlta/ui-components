@@ -39,6 +39,14 @@ const sections: Section[] = [
     ],
   },
   {
+    title: "Result pages",
+    tasks: [
+      { slug: "result-eligible", name: "Eligible", status: "not-started" },
+      { slug: "result-not-eligible", name: "Not eligible", status: "not-started" },
+      { slug: "result-submitted", name: "Submitted", status: "not-started" },
+    ],
+  },
+  {
     title: "Locked example",
     locked: true,
     lockedNote: "You need to complete the previous section before you can start this task.",
