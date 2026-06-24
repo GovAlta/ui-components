@@ -16263,7 +16263,7 @@ function GoabDropdownMultiselect({
       testid: testId,
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledBy,
-      maxheight: maxHeight,
+      "max-height": maxHeight,
       width,
       size,
       "label-format": labelFormat ? labelFormat : void 0,
@@ -33834,9 +33834,9 @@ function u0(t) {
       ), f(v, "role", "none"), f(v, "class", "content svelte-prsnc4"), Ue(
         v,
         "max-height",
-        /*maxheight*/
+        /*maxHeight*/
         t[8]
-      ), Ue(v, "overflow-y", "auto"), h(i, "padded", "false"), h(i, "tabindex", "-1"), h(i, "filterablecontext", "true"), h(i, "open", b = mt(
+      ), h(i, "padded", "false"), h(i, "tabindex", "-1"), h(i, "filterablecontext", "true"), h(i, "open", b = mt(
         /*_isOpen*/
         t[22]
       )), h(
@@ -33939,11 +33939,11 @@ function u0(t) {
       ), /*showSelectAll*/
       E[11] && /*_options*/
       E[16].length > 0 ? F ? F.p(E, B) : (F = Xn(E), F.c(), F.m(v, m)) : F && (F.d(1), F = null), /*_options*/
-      E[16].length > 0 ? D ? D.p(E, B) : (D = Jn(E), D.c(), D.m(v, null)) : D && (D.d(1), D = null), (!_ || B[0] & /*maxheight*/
+      E[16].length > 0 ? D ? D.p(E, B) : (D = Jn(E), D.c(), D.m(v, null)) : D && (D.d(1), D = null), (!_ || B[0] & /*maxHeight*/
       256) && Ue(
         v,
         "max-height",
-        /*maxheight*/
+        /*maxHeight*/
         E[8]
       ), (!_ || B[0] & /*_isOpen*/
       4194304 && b !== (b = mt(
@@ -33998,7 +33998,7 @@ function f0(t, e, o = true) {
   return i = i.toLowerCase(), e = e.toLowerCase().trim(), o ? i.startsWith(e) || i.includes(" " + e) : i === e;
 }
 function g0(t, e, o) {
-  let i, n, r, l, a, c, d, s, { $$slots: u = {}, $$scope: g } = e, { name: v } = e, { value: m = [] } = e, { placeholder: b = "" } = e, { filterable: w = false } = e, { leadingIcon: p = null } = e, { disabled: _ = "false" } = e, { error: z = "false" } = e, { testid: M = "" } = e, { ariaLabel: I = "" } = e, { ariaLabelledBy: L = "" } = e, { maxheight: j = "276px" } = e, { width: P = "" } = e, { size: N = "default" } = e, { labelFormat: Y = "list" } = e, { showSelectAll: H = false } = e, { mt: O = null } = e, { mr: V = null } = e, { mb: F = null } = e, { ml: D = null } = e, E, B, X, Z, q = false, U = [], G = "", K = null;
+  let i, n, r, l, a, c, d, s, { $$slots: u = {}, $$scope: g } = e, { name: v } = e, { value: m = [] } = e, { placeholder: b = "" } = e, { filterable: w = false } = e, { leadingIcon: p = null } = e, { disabled: _ = "false" } = e, { error: z = "false" } = e, { testid: M = "" } = e, { ariaLabel: I = "" } = e, { ariaLabelledBy: L = "" } = e, { maxHeight: j = "276px" } = e, { width: P = "" } = e, { size: N = "default" } = e, { labelFormat: Y = "list" } = e, { showSelectAll: H = false } = e, { mt: O = null } = e, { mr: V = null } = e, { mb: F = null } = e, { ml: D = null } = e, E, B, X, Z, q = false, U = [], G = "", K = null;
   const te = `goa-dropdown-multiselect-content-${io()}`;
   let oe = "", be, x, R = -1;
   Se(async () => {
@@ -34179,7 +34179,7 @@ function g0(t, e, o) {
     });
   }
   return t.$$set = (ae) => {
-    "name" in ae && o(1, v = ae.name), "value" in ae && o(0, m = ae.value), "placeholder" in ae && o(2, b = ae.placeholder), "filterable" in ae && o(3, w = ae.filterable), "leadingIcon" in ae && o(4, p = ae.leadingIcon), "disabled" in ae && o(40, _ = ae.disabled), "error" in ae && o(41, z = ae.error), "testid" in ae && o(5, M = ae.testid), "ariaLabel" in ae && o(6, I = ae.ariaLabel), "ariaLabelledBy" in ae && o(7, L = ae.ariaLabelledBy), "maxheight" in ae && o(8, j = ae.maxheight), "width" in ae && o(9, P = ae.width), "size" in ae && o(10, N = ae.size), "labelFormat" in ae && o(42, Y = ae.labelFormat), "showSelectAll" in ae && o(11, H = ae.showSelectAll), "mt" in ae && o(12, O = ae.mt), "mr" in ae && o(13, V = ae.mr), "mb" in ae && o(14, F = ae.mb), "ml" in ae && o(15, D = ae.ml), "$$scope" in ae && o(44, g = ae.$$scope);
+    "name" in ae && o(1, v = ae.name), "value" in ae && o(0, m = ae.value), "placeholder" in ae && o(2, b = ae.placeholder), "filterable" in ae && o(3, w = ae.filterable), "leadingIcon" in ae && o(4, p = ae.leadingIcon), "disabled" in ae && o(40, _ = ae.disabled), "error" in ae && o(41, z = ae.error), "testid" in ae && o(5, M = ae.testid), "ariaLabel" in ae && o(6, I = ae.ariaLabel), "ariaLabelledBy" in ae && o(7, L = ae.ariaLabelledBy), "maxHeight" in ae && o(8, j = ae.maxHeight), "width" in ae && o(9, P = ae.width), "size" in ae && o(10, N = ae.size), "labelFormat" in ae && o(42, Y = ae.labelFormat), "showSelectAll" in ae && o(11, H = ae.showSelectAll), "mt" in ae && o(12, O = ae.mt), "mr" in ae && o(13, V = ae.mr), "mb" in ae && o(14, F = ae.mb), "ml" in ae && o(15, D = ae.ml), "$$scope" in ae && o(44, g = ae.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[1] & /*disabled*/
     512 && o(26, i = Ve(_)), t.$$.dirty[1] & /*error*/
@@ -34268,7 +34268,7 @@ class v0 extends Ne {
         testid: 5,
         ariaLabel: 6,
         ariaLabelledBy: 7,
-        maxheight: 8,
+        maxHeight: 8,
         width: 9,
         size: 10,
         labelFormat: 42,
@@ -34342,11 +34342,11 @@ class v0 extends Ne {
   set ariaLabelledBy(e) {
     this.$$set({ ariaLabelledBy: e }), y();
   }
-  get maxheight() {
+  get maxHeight() {
     return this.$$.ctx[8];
   }
-  set maxheight(e) {
-    this.$$set({ maxheight: e }), y();
+  set maxHeight(e) {
+    this.$$set({ maxHeight: e }), y();
   }
   get width() {
     return this.$$.ctx[9];
@@ -34397,7 +34397,7 @@ class v0 extends Ne {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-dropdown-multiselect", Le(v0, { name: {}, value: {}, placeholder: {}, filterable: { type: "Boolean" }, leadingIcon: { type: "String", attribute: "leading-icon", reflect: true }, disabled: {}, error: {}, testid: {}, ariaLabel: { type: "String", attribute: "aria-label", reflect: true }, ariaLabelledBy: { type: "String", attribute: "aria-labelledby", reflect: true }, maxheight: {}, width: {}, size: {}, labelFormat: { type: "String", attribute: "label-format", reflect: true }, showSelectAll: { type: "String", attribute: "show-select-all", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+customElements.define("goa-dropdown-multiselect", Le(v0, { name: {}, value: {}, placeholder: {}, filterable: { type: "Boolean" }, leadingIcon: { type: "String", attribute: "leading-icon", reflect: true }, disabled: {}, error: {}, testid: {}, ariaLabel: { type: "String", attribute: "aria-label", reflect: true }, ariaLabelledBy: { type: "String", attribute: "aria-labelledby", reflect: true }, maxHeight: { type: "String", attribute: "max-height", reflect: true }, width: {}, size: {}, labelFormat: { type: "String", attribute: "label-format", reflect: true }, showSelectAll: { type: "String", attribute: "show-select-all", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
 function h0(t) {
   Ee(t, "svelte-quhy4b", `#container.svelte-quhy4b{container:self / inline-size}.root.svelte-quhy4b{display:grid;padding:var(--goa-space-l);border:var(--goa-border-width-s) solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);margin:0.5rem 0;gap:1rem;align-items:center}.details.svelte-quhy4b{grid-area:details;display:flex;flex-direction:column;overflow-x:hidden}.actions.svelte-quhy4b{grid-area:action}@container self (min-width: 624px){.root.svelte-quhy4b{grid-template-columns:38px 1fr auto;grid-template-rows:auto;grid-template-areas:"icon details action"}.details.svelte-quhy4b{margin-left:0.5rem}}@container self (max-width: 623px){.root.svelte-quhy4b{grid-template-columns:38px auto;grid-template-rows:repeat(2, auto);grid-template-areas:"icon details"
         "action action"}.actions.svelte-quhy4b{display:flex;justify-content:center}}.root.error.svelte-quhy4b{border:var(--goa-border-width-m) solid var(--goa-color-interactive-error)}.fileicon.svelte-quhy4b{grid-area:icon;align-self:center}.filename.svelte-quhy4b{grid-area:filename;font-size:var(--goa-font-size-4);overflow-wrap:anywhere}.error-msg.svelte-quhy4b{display:flex;align-items:flex-start;margin-top:0.5rem;gap:var(--goa-space-2xs);color:var(--goa-color-interactive-error);font:var(--goa-typography-body-xs)}.timestamp.svelte-quhy4b,.filesize.svelte-quhy4b{color:var(--goa-color-greyscale-700);font:var(--goa-typography-body-s)}.progress.svelte-quhy4b{display:flex;align-items:center;font:var(--goa-typography-body-xs);gap:0.5rem}progress.svelte-quhy4b{flex:1 1 auto;-webkit-appearance:none;-moz-appearance:none;appearance:none;height:4px;border:none;border-radius:var(--goa-border-radius-m);background:var(--goa-color-greyscale-200);color:var(--goa-color-greyscale-700)}progress.svelte-quhy4b::-webkit-progress-value{background:var(--goa-color-interactive-default)}progress.svelte-quhy4b::-webkit-progress-bar{background:var(--goa-color-greyscale-200)}progress.svelte-quhy4b::-moz-progress-bar{background:var(--goa-color-interactive-default)}`);
