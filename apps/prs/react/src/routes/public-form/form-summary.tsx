@@ -57,8 +57,10 @@ export function FormSummary({ title, showUnanswered = true, children }: FormSumm
 type SummarySectionProps = {
   /** Optional group heading (the grey "Heading for group of questions"). */
   heading?: string;
-  /** Where the section's Change link goes. Omit for a read-only section (no Change link). */
+  /** Where the section's Change link goes (a route). Omit for a read-only section. */
   changeTo?: string;
+  /** Change as an action instead of a route (e.g. to enter a change-from-review flow). */
+  onChange?: () => void;
   /** Change link label. */
   changeLabel?: string;
   /** SummaryItem rows. */
@@ -69,6 +71,7 @@ type SummarySectionProps = {
 export function SummarySection({
   heading,
   changeTo,
+  onChange,
   changeLabel = "Change",
   children,
 }: SummarySectionProps) {
@@ -100,9 +103,26 @@ export function SummarySection({
           )}
           {children}
         </div>
-        {changeTo && (
+        {(changeTo || onChange) && (
           <GoabLink mt="none" mb="none">
-            <Link to={changeTo}>{changeLabel}</Link>
+            {onChange ? (
+              <a
+                role="button"
+                tabIndex={0}
+                style={{ cursor: "pointer" }}
+                onClick={onChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onChange();
+                  }
+                }}
+              >
+                {changeLabel}
+              </a>
+            ) : (
+              <Link to={changeTo!}>{changeLabel}</Link>
+            )}
           </GoabLink>
         )}
       </div>
