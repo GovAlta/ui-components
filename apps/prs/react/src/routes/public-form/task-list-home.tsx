@@ -51,6 +51,7 @@ const sections: Section[] = [
     tasks: [
       { slug: "review-editable", name: "Editable", status: "not-started" },
       { slug: "review-readonly", name: "Read-only", status: "not-started" },
+      { slug: "review-question-types", name: "Question types", status: "not-started" },
     ],
   },
   {
