@@ -47,6 +47,13 @@ const sections: Section[] = [
     ],
   },
   {
+    title: "Review pages",
+    tasks: [
+      { slug: "review-editable", name: "Editable", status: "not-started" },
+      { slug: "review-readonly", name: "Read-only", status: "not-started" },
+    ],
+  },
+  {
     title: "Locked example",
     locked: true,
     lockedNote: "You need to complete the previous section before you can start this task.",
