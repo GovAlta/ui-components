@@ -25,6 +25,8 @@ import { DrawerExample } from "./examples/drawer";
 import { ResultEligible } from "./examples/result-eligible";
 import { ResultNotEligible } from "./examples/result-not-eligible";
 import { ResultSubmitted } from "./examples/result-submitted";
+import { ReviewEditable } from "./examples/review-editable";
+import { ReviewReadonly } from "./examples/review-readonly";
 
 /**
  * Public form template gallery (Step 1 demo).
@@ -70,6 +72,8 @@ export function PublicFormApp() {
             <Route path="result-eligible" element={<ResultEligible />} />
             <Route path="result-not-eligible" element={<ResultNotEligible />} />
             <Route path="result-submitted" element={<ResultSubmitted />} />
+            <Route path="review-editable" element={<ReviewEditable />} />
+            <Route path="review-readonly" element={<ReviewReadonly />} />
           </Routes>
         </div>
       </GoabPageBlock>
