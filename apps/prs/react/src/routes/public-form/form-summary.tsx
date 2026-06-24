@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GoabText, GoabLink } from "@abgov/react-components";
 
@@ -11,31 +11,46 @@ import { GoabText, GoabLink } from "@abgov/react-components";
  *   SummaryItem    (= goab-summary-item)    one Q/A row: question + answer slot
  *
  * V1 = slots: each piece owns structure/spacing/layout, the consumer passes the
- * content in (children). No internal data management. Read-only vs editable falls
- * out of whether a SummarySection is given a change target.
- *
- * These mirror the parent/child shape of the task list (task-list -> task-list-item),
- * so the demo reads as the spec Vanessa hardens into web components in Step 2.
+ * content in (children). No internal data management. See review-page-spec.md (in
+ * the conductor) for how each question type maps onto these pieces and the decisions.
  */
+
+// showUnanswered is set on FormSummary and read by SummaryItem — the React analog
+// of a parent web-component attribute shared down via the GoA context store.
+const FormSummaryContext = createContext<{ showUnanswered: boolean }>({ showUnanswered: true });
+
+function isEmptyAnswer(children: ReactNode): boolean {
+  if (children == null || children === false || children === "") return true;
+  if (typeof children === "string") return children.trim() === "";
+  if (Array.isArray(children)) return children.length === 0;
+  return false;
+}
 
 type FormSummaryProps = {
   /** Section title (e.g. "My information"). Optional. */
   title?: string;
+  /**
+   * Whether unanswered optional questions render as "Not answered" (default) or
+   * are hidden. The author toggle from review-page-spec.md.
+   */
+  showUnanswered?: boolean;
   /** SummarySection cards. */
   children: ReactNode;
 };
 
 /** Top level: a titled group of summary sections. */
-export function FormSummary({ title, children }: FormSummaryProps) {
+export function FormSummary({ title, showUnanswered = true, children }: FormSummaryProps) {
   return (
-    <div style={{ marginBottom: "var(--goa-space-l)" }}>
-      {title && (
-        <GoabText tag="h2" mt="none" mb="s" color="secondary">
-          {title}
-        </GoabText>
-      )}
-      {children}
-    </div>
+    <FormSummaryContext.Provider value={{ showUnanswered }}>
+      <div style={{ marginBottom: "var(--goa-space-l)" }}>
+        {title && (
+          <GoabText tag="h2" mt="none" mb="s" color="secondary">
+            {title}
+          </GoabText>
+        )}
+        {children}
+      </div>
+    </FormSummaryContext.Provider>
   );
 }
 
@@ -98,12 +113,31 @@ export function SummarySection({
 type SummaryItemProps = {
   /** The question / field label (left column). */
   question: string;
-  /** The answer (right column) — text, a long paragraph, a file link, etc. The V1 slot. */
-  children: ReactNode;
+  /**
+   * Marks an optional question. When its answer is empty it renders "Not answered"
+   * (or is hidden if the FormSummary's showUnanswered is off). Empty secondary
+   * sub-fields are simply not passed in (developer-controlled), not marked optional.
+   */
+  optional?: boolean;
+  /** The answer (right column) — text, a long paragraph, a selected-options list, a file link. The V1 slot. */
+  children?: ReactNode;
 };
 
 /** One row inside a section: question on the left, answer (slot) on the right. */
-export function SummaryItem({ question, children }: SummaryItemProps) {
+export function SummaryItem({ question, optional, children }: SummaryItemProps) {
+  const { showUnanswered } = useContext(FormSummaryContext);
+  const empty = isEmptyAnswer(children);
+
+  // Optional + empty: hidden when the form turns unanswered display off; otherwise
+  // a muted "Not answered" so the user sees what they chose to skip.
+  if (optional && empty && !showUnanswered) return null;
+  const answer =
+    optional && empty ? (
+      <span style={{ color: "var(--goa-color-text-secondary)" }}>Not answered</span>
+    ) : (
+      children
+    );
+
   return (
     <div
       style={{
@@ -116,7 +150,7 @@ export function SummaryItem({ question, children }: SummaryItemProps) {
       <span style={{ flex: "0 0 40%" }}>
         <strong>{question}</strong>
       </span>
-      <span style={{ flex: 1 }}>{children}</span>
+      <span style={{ flex: 1 }}>{answer}</span>
     </div>
   );
 }

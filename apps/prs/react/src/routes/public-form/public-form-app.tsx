@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import {
   GoabOneColumnLayout,
   GoabAppHeader,
@@ -27,6 +28,20 @@ import { ResultNotEligible } from "./examples/result-not-eligible";
 import { ResultSubmitted } from "./examples/result-submitted";
 import { ReviewEditable } from "./examples/review-editable";
 import { ReviewReadonly } from "./examples/review-readonly";
+import { ReviewQuestionTypes } from "./examples/review-question-types";
+
+/**
+ * Reset scroll to the top on every route change. React Router keeps the previous
+ * page's scroll position otherwise, so navigating to a new page can land partway
+ * down it. (A real public-form template/CSS layer would own this.)
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 /**
  * Public form template gallery (Step 1 demo).
@@ -54,6 +69,7 @@ export function PublicFormApp() {
 
       <GoabPageBlock width="640px">
         <div style={{ paddingTop: "var(--goa-space-2xl)", paddingBottom: "var(--goa-space-3xl)" }}>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<TaskListHome />} />
             <Route path="single-question" element={<SingleQuestion />} />
@@ -74,6 +90,7 @@ export function PublicFormApp() {
             <Route path="result-submitted" element={<ResultSubmitted />} />
             <Route path="review-editable" element={<ReviewEditable />} />
             <Route path="review-readonly" element={<ReviewReadonly />} />
+            <Route path="review-question-types" element={<ReviewQuestionTypes />} />
           </Routes>
         </div>
       </GoabPageBlock>
