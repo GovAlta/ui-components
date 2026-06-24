@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoabFormItem, GoabCheckbox, GoabInput } from "@abgov/react-components";
+import { GoabFormItem, GoabCheckboxList, GoabCheckbox, GoabInput } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
 
 type Values = {
-  agreeCheck: boolean;
-  agreeTrue: boolean;
+  agreements: string[];
   legalName: string;
   signature: string;
 };
 
-const EMPTY: Values = { agreeCheck: false, agreeTrue: false, legalName: "", signature: "" };
+const EMPTY: Values = { agreements: [], legalName: "", signature: "" };
 
 const FOIP =
   "The personal information collected through this service is used to process your " +
@@ -21,7 +20,7 @@ const FOIP =
 
 function validate(v: Values): FieldError[] {
   const errors: FieldError[] = [];
-  if (!(v.agreeCheck && v.agreeTrue))
+  if (v.agreements.length < 2)
     errors.push({ fieldId: "agreements", text: "Select both statements to agree before continuing" });
   if (!v.legalName.trim())
     errors.push({ fieldId: "legalName", text: "Enter your full legal name" });
@@ -35,8 +34,9 @@ function validate(v: Values): FieldError[] {
  *
  * Explanatory / legal text before the inputs (the spec's consent example: a FOIP
  * statement, then agreement checkboxes, legal name, and signature). The FOIP
- * statement uses the FormSet `description` slot (content below the heading,
- * before the fields). Validates on submit.
+ * statement uses the FormSet `description` slot. The two consent statements are a
+ * GoabCheckboxList (a grouped multi-select), not standalone checkboxes. Validates
+ * on submit.
  */
 export function ContentBefore() {
   const navigate = useNavigate();
@@ -75,21 +75,23 @@ export function ContentBefore() {
           id="agreements"
           error={errorFor("agreements")}
         >
-          <GoabCheckbox
-            name="agreeCheck"
-            text="I consent to a background check being completed on me"
-            checked={values.agreeCheck}
+          <GoabCheckboxList
+            name="agreements"
+            value={values.agreements}
             error={has("agreements")}
-            onChange={(e) => update({ agreeCheck: e.checked })}
-          />
-          <GoabCheckbox
-            name="agreeTrue"
-            text="I confirm the information I have provided is true and accurate"
-            checked={values.agreeTrue}
-            error={has("agreements")}
-            mt="xs"
-            onChange={(e) => update({ agreeTrue: e.checked })}
-          />
+            onChange={(e) => update({ agreements: e.value })}
+          >
+            <GoabCheckbox
+              name="background-check"
+              value="background-check"
+              text="I consent to a background check being completed on me"
+            />
+            <GoabCheckbox
+              name="accurate"
+              value="accurate"
+              text="I confirm the information I have provided is true and accurate"
+            />
+          </GoabCheckboxList>
         </GoabFormItem>
 
         <GoabFormItem
