@@ -1,0 +1,39 @@
+<goab-text tag="h1" mt="m" mb="m">
+  Bug 3986 - GoabButton doesn't take 100% width inside GoabButtonGroup on mobile
+</goab-text>
+<goab-text mb="l">
+  GoabButton normally takes 100% width of the parent container on mobile. However, if
+  you place the button inside a GoabButtonGroup, it no longer takes up 100% width,
+  instead fitting to content. Resize the viewport below 624px wide to test.
+</goab-text>
+
+<goab-text tag="h2" mb="s">Test 1: ButtonGroup in normal flow</goab-text>
+<goab-button-group alignment="end" gap="relaxed" mb="l">
+  <goab-button type="secondary">Cancel</goab-button>
+  <goab-button type="primary">Confirm</goab-button>
+</goab-button-group>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2" mb="s">Test 2: ButtonGroup inside a flex row container</goab-text>
+<goab-text mb="s">
+  This was the main repro: a flex-row parent (a common page/footer layout) shrinks
+  GoabButtonGroup to its content width, so the buttons' 100% width was 100% of the
+  shrunk group, not the viewport. Buttons should still stack and take 100% width below
+  the mobile breakpoint.
+</goab-text>
+<div style="display: flex; flex-direction: row;">
+  <goab-button-group alignment="end" gap="relaxed">
+    <goab-button type="secondary">Cancel</goab-button>
+    <goab-button type="primary">Confirm</goab-button>
+  </goab-button-group>
+</div>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2" mb="s">Test 3: Three buttons, compact gap</goab-text>
+<goab-button-group alignment="start" gap="compact">
+  <goab-button type="primary">Primary</goab-button>
+  <goab-button type="secondary">Secondary</goab-button>
+  <goab-button type="tertiary">Tertiary</goab-button>
+</goab-button-group>
