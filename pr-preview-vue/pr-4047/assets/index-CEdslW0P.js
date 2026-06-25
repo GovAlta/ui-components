@@ -48310,11 +48310,11 @@ function useWcProps(props, options) {
     return result;
   });
 }
-const _hoisted_1$n = {
+const _hoisted_1$m = {
   key: 0,
   slot: "headingcontent"
 };
-const _hoisted_2$e = {
+const _hoisted_2$c = {
   key: 1,
   slot: "actions"
 };
@@ -48348,10 +48348,10 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("goa-accordion", mergeProps(unref(wcProps), {
         on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", $event.detail.open))
       }), [
-        unref(slots).headingContent ? (openBlock(), createElementBlock("div", _hoisted_1$n, [
+        unref(slots).headingContent ? (openBlock(), createElementBlock("div", _hoisted_1$m, [
           renderSlot(_ctx.$slots, "headingContent")
         ])) : createCommentVNode("", true),
-        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$e, [
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
           renderSlot(_ctx.$slots, "actions")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -48359,11 +48359,11 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$m = {
+const _hoisted_1$l = {
   key: 0,
   slot: "banner"
 };
-const _hoisted_2$d = {
+const _hoisted_2$b = {
   key: 1,
   slot: "phase"
 };
@@ -48400,10 +48400,10 @@ const _sfc_main$_ = /* @__PURE__ */ defineComponent({
           return (_a2 = props.onMenuClick) == null ? void 0 : _a2.call(props);
         })
       }), [
-        unref(slots).banner ? (openBlock(), createElementBlock("div", _hoisted_1$m, [
+        unref(slots).banner ? (openBlock(), createElementBlock("div", _hoisted_1$l, [
           renderSlot(_ctx.$slots, "banner")
         ])) : createCommentVNode("", true),
-        unref(slots).phase ? (openBlock(), createElementBlock("div", _hoisted_2$d, [
+        unref(slots).phase ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
           renderSlot(_ctx.$slots, "phase")
         ])) : createCommentVNode("", true),
         unref(slots).utilities ? (openBlock(), createElementBlock("div", _hoisted_3$5, [
@@ -48437,7 +48437,7 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$l = ["icon"];
+const _hoisted_1$k = ["icon"];
 const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "badge",
   props: {
@@ -48460,7 +48460,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-badge", mergeProps(unref(wcProps), { icon: iconAttr.value }), [
         renderSlot(_ctx.$slots, "default")
-      ], 16, _hoisted_1$l);
+      ], 16, _hoisted_1$k);
     };
   }
 });
@@ -48523,11 +48523,11 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$k = {
+const _hoisted_1$j = {
   key: 0,
   slot: "heading"
 };
-const _hoisted_2$c = {
+const _hoisted_2$a = {
   key: 1,
   slot: "actions"
 };
@@ -48552,10 +48552,10 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("goa-drawer", mergeProps(unref(wcProps), {
         on_close: _cache[0] || (_cache[0] = ($event) => emit2("onClose"))
       }), [
-        unref(slots).heading ? (openBlock(), createElementBlock("div", _hoisted_1$k, [
+        unref(slots).heading ? (openBlock(), createElementBlock("div", _hoisted_1$j, [
           renderSlot(_ctx.$slots, "heading")
         ])) : createCommentVNode("", true),
-        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$a, [
           renderSlot(_ctx.$slots, "actions")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -48589,14 +48589,6 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$j = {
-  key: 0,
-  slot: "nav"
-};
-const _hoisted_2$b = {
-  key: 1,
-  slot: "meta"
-};
 const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "app-footer",
   props: {
@@ -48607,15 +48599,8 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const wcProps = useWcProps(props);
-    const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-app-footer", normalizeProps(guardReactiveProps(unref(wcProps))), [
-        unref(slots).nav ? (openBlock(), createElementBlock("div", _hoisted_1$j, [
-          renderSlot(_ctx.$slots, "nav")
-        ])) : createCommentVNode("", true),
-        unref(slots).meta ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
-          renderSlot(_ctx.$slots, "meta")
-        ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
       ], 16);
     };
@@ -48688,7 +48673,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     type: {},
     size: {},
     theme: {},
-    inverted: { type: [String, Boolean] },
+    inverted: { type: Boolean },
     fillColor: {},
     opacity: {},
     title: {},
@@ -48885,8 +48870,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$f = ["sort-mode"];
-const _hoisted_2$a = { style: { "width": "100%" } };
+const _hoisted_1$f = { style: { "width": "100%" } };
 const _sfc_main$I = /* @__PURE__ */ defineComponent({
   __name: "table",
   props: {
@@ -48904,17 +48888,19 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["striped"] });
+    const wcProps = useWcProps(props, {
+      booleanProps: ["striped"],
+      renamedProps: { sortMode: "sort-mode" }
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-table", mergeProps(unref(wcProps), {
-        "sort-mode": __props.sortMode,
         on_sort: _cache[0] || (_cache[0] = ($event) => emit2("onSort", $event.detail)),
         on_multisort: _cache[1] || (_cache[1] = ($event) => emit2("onMultiSort", $event.detail))
       }), [
-        createBaseVNode("table", _hoisted_2$a, [
+        createBaseVNode("table", _hoisted_1$f, [
           renderSlot(_ctx.$slots, "default")
         ])
-      ], 16, _hoisted_1$f);
+      ], 16);
     };
   }
 });
@@ -49238,6 +49224,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     width: {},
     testId: {},
     ariaLabel: {},
+    ariaLabelledBy: {},
     maxLength: {},
     trailingIconAriaLabel: {},
     textAlign: { default: "left" },
@@ -49319,6 +49306,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "textarea",
   props: {
     name: {},
+    id: {},
     value: {},
     placeholder: {},
     rows: {},
@@ -49443,7 +49431,6 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     filterable: { type: Boolean },
     leadingIcon: {},
     maxHeight: {},
-    multiselect: { type: Boolean },
     native: { type: Boolean },
     placeholder: {},
     testId: {},
@@ -49462,7 +49449,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const emit2 = __emit;
     const { value: _value, ...rest } = props;
     const wcProps = useWcProps(rest, {
-      booleanProps: ["disabled", "error", "filterable", "multiselect", "native"]
+      booleanProps: ["disabled", "error", "filterable", "native"]
     });
     const valueAttr = computed(() => {
       if (typeof props.value === "undefined") return "";
@@ -49723,7 +49710,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-side-menu-heading", normalizeProps(guardReactiveProps(unref(wcProps))), [
         renderSlot(_ctx.$slots, "default"),
-        unref(slots).meta ? (openBlock(), createElementBlock("div", _hoisted_1$6, [
+        unref(slots).meta ? (openBlock(), createElementBlock("span", _hoisted_1$6, [
           renderSlot(_ctx.$slots, "meta")
         ])) : createCommentVNode("", true)
       ], 16);
@@ -49997,7 +49984,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tab", normalizeProps(guardReactiveProps(unref(wcProps))), [
-        unref(slots).heading ? (openBlock(), createElementBlock("div", _hoisted_1$4, [
+        unref(slots).heading ? (openBlock(), createElementBlock("span", _hoisted_1$4, [
           renderSlot(_ctx.$slots, "heading")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
