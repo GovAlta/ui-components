@@ -31,7 +31,7 @@ export function PublicFormLayout({
 }: PublicFormLayoutProps) {
   return (
     <>
-      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabLink leadingIcon="arrow-back" size="small" color="dark" mb="none">
         {onBack ? (
           <a
             role="button"
