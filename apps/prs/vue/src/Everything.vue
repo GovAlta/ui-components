@@ -147,7 +147,7 @@ const logEvent = (name: string, detail: unknown) => {
 const checkboxValue = ref(false);
 const checkboxListSelection = ref<string[]>([]);
 const dropdownSelection = ref<string | undefined>();
-const dropdownMultiSelection = ref<string[]>([]);
+const dropdownMountSelection = ref<string | undefined>();
 const selectedRadio = ref("option-1");
 const datePickerValue = ref("2025-05-15");
 const textInputValue = ref("Sample value");
@@ -309,8 +309,8 @@ const badge = ref();
               <GoabButton type="tertiary" @onClick="logEvent('button.click', { type: 'tertiary' })">Tertiary</GoabButton>
             </GoabButtonGroup>
             <GoabBlock gap="xs" direction="column">
-              <GoabLink action="primary" @onClick="logEvent('link.click', { action: 'primary' })">Primary link</GoabLink>
-              <GoabLink action="secondary" @onClick="logEvent('link.click', { action: 'secondary' })">Secondary link</GoabLink>
+              <GoabLink color="interactive" @click="logEvent('link.click', { color: 'interactive' })">Interactive link</GoabLink>
+                <GoabLink color="dark" @click="logEvent('link.click', { color: 'dark' })">Dark link</GoabLink>
             </GoabBlock>
           </GoabBlock>
         </GoabContainer>
@@ -415,8 +415,8 @@ const badge = ref();
                 <GoabDropdownItem value="mx" label="Mexico" />
               </GoabDropdown>
             </GoabFormItem>
-            <GoabFormItem label="Multi select">
-              <GoabDropdown name="mounts" placeholder="Select mounts" multiselect :value="dropdownMultiSelection" @onChange="(detail: GoabDropdownOnChangeDetail) => { dropdownSelection = detail.value; dropdownMultiSelection = detail.values || []; logEvent('dropdown.change', detail); }">
+            <GoabFormItem label="Mount types">
+              <GoabDropdown name="mounts" placeholder="Select mounts" :value="dropdownMountSelection" @onChange="(detail: GoabDropdownOnChangeDetail) => { dropdownMountSelection = detail.value; logEvent('dropdown.change', detail); }">
                 <GoabDropdownItem v-for="mount in DROPDOWN_MOUNT_TYPES" :key="mount" :value="mount" :label="mount" :mountType="mount" />
               </GoabDropdown>
             </GoabFormItem>
@@ -521,10 +521,10 @@ const badge = ref();
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">Accordion &amp; Tabs</GoabText>
           <GoabGrid minChildWidth="320px" gap="m">
-            <GoabAccordion heading="Accordion 1" headingSize="small" @onToggle="(open: boolean) => { accordionLastToggle = { heading: 'Accordion 1', open }; logEvent('accordion.change', { heading: 'Accordion 1', open }); }">
+            <GoabAccordion heading="Accordion 1" headingSize="small" @onChange="(open: boolean) => { accordionLastToggle = { heading: 'Accordion 1', open }; logEvent('accordion.change', { heading: 'Accordion 1', open }); }">
               <GoabText tag="p" size="body-m">Accordion content for small heading.</GoabText>
             </GoabAccordion>
-            <GoabAccordion heading="Accordion 2" headingSize="medium" open @onToggle="(open: boolean) => { accordionLastToggle = { heading: 'Accordion 2', open }; logEvent('accordion.change', { heading: 'Accordion 2', open }); }">
+            <GoabAccordion heading="Accordion 2" headingSize="medium" open @onChange="(open: boolean) => { accordionLastToggle = { heading: 'Accordion 2', open }; logEvent('accordion.change', { heading: 'Accordion 2', open }); }">
               <GoabText tag="p" size="body-m">Accordion content for medium heading.</GoabText>
             </GoabAccordion>
           </GoabGrid>
@@ -646,7 +646,7 @@ const badge = ref();
     <GoabContainer type="interactive" padding="relaxed">
       <GoabText tag="h2" size="heading-m">Feature Pages</GoabText>
       <GoabBlock gap="m" direction="row">
-        <GoabLink action="primary" @click="router.push('/features/4033')">
+        <GoabLink @click="router.push('/features/4033')">
           4033 Vue Wrappers Demo
         </GoabLink>
       </GoabBlock>
