@@ -11,7 +11,7 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { ErrorSummary, FieldError, useErrorSummaryFocus } from "../error-summary";
 import { Schema, required, minSelected, runSchema, useFormValidation } from "../validation";
 
 type Contact = { name: string; relationship: string; phone: string };
@@ -51,6 +51,7 @@ export function ModalDrawer() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [draft, setDraft] = useState<Contact>(EMPTY_CONTACT);
   const [modalErrors, setModalErrors] = useState<FieldError[]>([]);
+  const modalSummaryRef = useErrorSummaryFocus(modalErrors);
 
   const openAdd = () => {
     setEditingIndex(null);
@@ -161,7 +162,9 @@ export function ModalDrawer() {
           </GoabButtonGroup>
         }
       >
-        <GoabFormItem label="Full name" error={errorFor("name")}>
+        <ErrorSummary ref={modalSummaryRef} errors={modalErrors} />
+
+        <GoabFormItem label="Full name" id="name" error={errorFor("name")}>
           <GoabInput
             name="name"
             width="100%"
@@ -171,7 +174,7 @@ export function ModalDrawer() {
           />
         </GoabFormItem>
 
-        <GoabFormItem label="Relationship to you" mt="l" error={errorFor("relationship")}>
+        <GoabFormItem label="Relationship to you" id="relationship" mt="l" error={errorFor("relationship")}>
           <GoabDropdown
             name="relationship"
             error={has("relationship")}
@@ -184,7 +187,7 @@ export function ModalDrawer() {
           </GoabDropdown>
         </GoabFormItem>
 
-        <GoabFormItem label="Phone number" mt="l" helpText="Include the area code" error={errorFor("phone")}>
+        <GoabFormItem label="Phone number" id="phone" mt="l" helpText="Include the area code" error={errorFor("phone")}>
           <GoabInput
             name="phone"
             type="tel"

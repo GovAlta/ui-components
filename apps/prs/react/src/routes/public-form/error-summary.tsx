@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { GoabIcon, GoabText } from "@abgov/react-components";
 
 export type FieldError = {
@@ -108,3 +108,19 @@ export const ErrorSummary = forwardRef<HTMLDivElement, { errors: FieldError[] }>
     );
   },
 );
+
+/**
+ * Focus the error summary when it first appears (an empty -> non-empty transition),
+ * so keyboard and screen-reader users land on it after a failed submit. Returns the
+ * ref to put on <ErrorSummary>. Shared by FormSet and the modal/drawer item forms.
+ */
+export function useErrorSummaryFocus(errors: FieldError[]) {
+  const ref = useRef<HTMLDivElement>(null);
+  const had = useRef(false);
+  useEffect(() => {
+    const has = errors.length > 0;
+    if (has && !had.current) ref.current?.focus();
+    had.current = has;
+  }, [errors]);
+  return ref;
+}
