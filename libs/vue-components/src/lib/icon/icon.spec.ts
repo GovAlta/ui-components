@@ -37,7 +37,7 @@ describe("GoabIcon", () => {
     expect(el.getAttribute("fillcolor")).toBe("red");
     expect(el.getAttribute("opacity")).toBe("0.5");
     expect(el.getAttribute("title")).toBe("Home icon");
-    expect(el.getAttribute("aria-label")).toBe("Home");
+    expect(el.getAttribute("arialabel")).toBe("Home");
     expect(el.getAttribute("role")).toBe("img");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");

@@ -19,7 +19,7 @@ describe("GoabTextarea", () => {
         value: "textarea-value",
         rows: 10,
         placeholder: "textarea-placeholder",
-        readonly: true,
+        readOnly: true,
         disabled: true,
         error: true,
         countBy: "word",
@@ -39,6 +39,7 @@ describe("GoabTextarea", () => {
     expect(el.getAttribute("value")).toBe("textarea-value");
     expect(el.getAttribute("rows")).toBe("10");
     expect(el.getAttribute("placeholder")).toBe("textarea-placeholder");
+    expect(el.hasAttribute("readonly")).toBe(true);
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("error")).toBe("true");
     expect(el.getAttribute("countby")).toBe("word");

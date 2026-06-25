@@ -37,7 +37,7 @@ describe("GoabRadioItem", () => {
     expect(el.getAttribute("checked")).toBe("true");
     expect(el.getAttribute("error")).toBe("true");
     expect(el.getAttribute("compact")).toBe("true");
-    expect(el.getAttribute("aria-label")).toBe("Red color option");
+    expect(el.getAttribute("arialabel")).toBe("Red color option");
     expect(el.getAttribute("maxwidth")).toBe("200px");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");

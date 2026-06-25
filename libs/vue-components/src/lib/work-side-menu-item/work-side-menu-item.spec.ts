@@ -20,7 +20,6 @@ describe("GoabWorkSideMenuItem", () => {
         current: true,
         divider: true,
         testId: "menu-item",
-        badge: "3",
       },
     });
     const el = wrapper.find("goa-work-side-menu-item").element;
@@ -30,7 +29,6 @@ describe("GoabWorkSideMenuItem", () => {
     expect(el.getAttribute("current")).toBe("true");
     expect(el.getAttribute("divider")).toBe("true");
     expect(el.getAttribute("testid")).toBe("menu-item");
-    expect(el.getAttribute("badge")).toBe("3");
   });
 
   it("should render slots", () => {

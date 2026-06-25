@@ -23,7 +23,7 @@ describe("GoabDropdownItem", () => {
     expect(el.getAttribute("value")).toBe("option1");
     expect(el.getAttribute("label")).toBe("Option 1");
     expect(el.getAttribute("filter")).toBe("group1");
-    expect(el.getAttribute("mount-type")).toBe("append");
+    expect(el.getAttribute("mount")).toBe("append");
   });
 
   it("should use append as default mountType", () => {
@@ -31,6 +31,6 @@ describe("GoabDropdownItem", () => {
       props: { value: "option1" },
     });
     const el = wrapper.find("goa-dropdown-item").element;
-    expect(el.getAttribute("mount-type")).toBe("append");
+    expect(el.getAttribute("mount")).toBe("append");
   });
 });

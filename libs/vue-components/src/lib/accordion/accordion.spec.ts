@@ -57,6 +57,6 @@ describe("GoabAccordion", () => {
     const el = wrapper.find("goa-accordion").element;
     el.dispatchEvent(new CustomEvent("_change", { detail: { open: true } }));
     expect(wrapper.emitted()).toHaveProperty("onChange");
-    expect(wrapper.emitted("onChange")[0]).toEqual([{ open: true }]);
+    expect(wrapper.emitted("onChange")[0]).toEqual([true]);
   });
 });

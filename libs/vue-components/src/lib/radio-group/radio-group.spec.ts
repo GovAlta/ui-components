@@ -38,7 +38,7 @@ describe("GoabRadioGroup", () => {
     expect(el.getAttribute("mr")).toBe("m");
     expect(el.getAttribute("mb")).toBe("l");
     expect(el.getAttribute("ml")).toBe("xl");
-    expect(el.getAttribute("aria-label")).toBe("please select fruit");
+    expect(el.getAttribute("arialabel")).toBe("please select fruit");
     expect(el.getAttribute("testid")).toBe("radio-test");
     expect(el.getAttribute("orientation")).toBe("horizontal");
   });

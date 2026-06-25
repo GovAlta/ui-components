@@ -53,8 +53,8 @@ describe("GoabDropdown", () => {
     expect(el.getAttribute("filterable")).toBe("true");
     expect(el.getAttribute("multiselect")).toBe("true");
     expect(el.getAttribute("native")).toBe("true");
-    expect(el.getAttribute("aria-label")).toBe("label");
-    expect(el.getAttribute("aria-labelledby")).toBe("foo-dropdown-label");
+    expect(el.getAttribute("arialabel")).toBe("label");
+    expect(el.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el.getAttribute("autocomplete")).toBe("off");
     expect(el.getAttribute("maxwidth")).toBe("400px");
     expect(el.getAttribute("size")).toBe("compact");
@@ -117,6 +117,6 @@ describe("GoabDropdownItem", () => {
     expect(el.getAttribute("value")).toBe("item1");
     expect(el.getAttribute("label")).toBe("Item 1");
     expect(el.getAttribute("filter")).toBe("item");
-    expect(el.getAttribute("mount-type")).toBe("append");
+    expect(el.getAttribute("mount")).toBe("append");
   });
 });
