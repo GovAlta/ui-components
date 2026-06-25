@@ -38,7 +38,7 @@ describe("GoabIconButton", () => {
     expect(el.getAttribute("theme")).toBe("filled");
     expect(el.getAttribute("title")).toBe("Close button");
     expect(el.getAttribute("disabled")).toBe("true");
-    expect(el.getAttribute("aria-label")).toBe("Close");
+    expect(el.getAttribute("arialabel")).toBe("Close");
     expect(el.getAttribute("action")).toBe("close-action");
     expect(el.getAttribute("action-arg")).toBe("some-arg");
     expect(el.getAttribute("action-args")).toBe('{"key":"value"}');

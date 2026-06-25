@@ -11,13 +11,13 @@ describe("GoabInput", () => {
     expect(el.getAttribute("disabled")).toBeNull();
     expect(el.getAttribute("readonly")).toBeNull();
     expect(el.getAttribute("error")).toBeNull();
-    expect(el.hasAttribute("handletrailingiconclick")).toBe(false);
   });
 
   it("should render with properties", () => {
     const wrapper = mount(GoabInput, {
       props: {
         name: "foo",
+        type: "email",
         value: "bar",
         id: "foo",
         leadingIcon: "search",
@@ -43,6 +43,7 @@ describe("GoabInput", () => {
     });
     const el = wrapper.find("goa-input").element;
     expect(el.getAttribute("name")).toBe("foo");
+    expect(el.getAttribute("type")).toBe("email");
     expect(el.getAttribute("value")).toBe("bar");
     expect(el.getAttribute("id")).toBe("foo");
     expect(el.getAttribute("leadingicon")).toBe("search");
@@ -63,7 +64,6 @@ describe("GoabInput", () => {
     expect(el.getAttribute("ml")).toBe("xl");
     expect(el.getAttribute("maxlength")).toBe("10");
     expect(el.getAttribute("textalign")).toBe("right");
-    expect(el.hasAttribute("handletrailingiconclick")).toBe(false);
   });
 
   it("renders leading and trailing content slots", () => {

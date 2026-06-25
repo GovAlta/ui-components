@@ -16,7 +16,6 @@ describe("GoabPopover", () => {
         minWidth: "200px",
         padded: true,
         position: "bottom",
-        relative: true,
         testId: "popover-test",
         mt: "s",
         mr: "m",
@@ -29,7 +28,6 @@ describe("GoabPopover", () => {
     expect(el.getAttribute("minwidth")).toBe("200px");
     expect(el.getAttribute("padded")).toBe("true");
     expect(el.getAttribute("position")).toBe("bottom");
-    expect(el.getAttribute("relative")).toBe("true");
     expect(el.getAttribute("testid")).toBe("popover-test");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");

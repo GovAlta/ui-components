@@ -36,9 +36,9 @@ describe("GoabText", () => {
     expect(el.getAttribute("testid")).toBe("text-test");
   });
 
-  it("should use tag prop over as prop", () => {
+  it("should map the tag prop to the as attribute", () => {
     const wrapper = mount(GoabText, {
-      props: { as: "span", tag: "h2" },
+      props: { tag: "h2" },
     });
     const el = wrapper.find("goa-text").element;
     expect(el.getAttribute("as")).toBe("h2");

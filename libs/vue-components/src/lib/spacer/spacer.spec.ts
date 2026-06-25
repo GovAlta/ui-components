@@ -9,21 +9,17 @@ describe("GoabSpacer", () => {
     expect(el).toBeTruthy();
   });
 
-  it("should render margin properties", () => {
+  it("should render spacing properties", () => {
     const wrapper = mount(GoabSpacer, {
       props: {
-        mt: "s",
-        mr: "m",
-        mb: "l",
-        ml: "xl",
+        hSpacing: "m",
+        vSpacing: "l",
         testId: "spacer-test",
       },
     });
     const el = wrapper.find("goa-spacer").element;
-    expect(el.getAttribute("mt")).toBe("s");
-    expect(el.getAttribute("mr")).toBe("m");
-    expect(el.getAttribute("mb")).toBe("l");
-    expect(el.getAttribute("ml")).toBe("xl");
+    expect(el.getAttribute("hspacing")).toBe("m");
+    expect(el.getAttribute("vspacing")).toBe("l");
     expect(el.getAttribute("testid")).toBe("spacer-test");
   });
 });

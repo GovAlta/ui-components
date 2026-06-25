@@ -29,11 +29,10 @@ describe("GoabCalendar", () => {
   });
 
   it("responds to _change event", () => {
-    const wrapper = mount(GoabCalendar);
+    const wrapper = mount(GoabCalendar, { props: { name: "test" } });
     const el = wrapper.find("goa-calendar").element;
-    const detail = { value: "2024-06-15", name: "test" };
-    el.dispatchEvent(new CustomEvent("_change", { detail }));
+    el.dispatchEvent(new CustomEvent("_change", { detail: { value: "2024-06-15" } }));
     expect(wrapper.emitted()).toHaveProperty("onChange");
-    expect(wrapper.emitted("onChange")[0]).toEqual([detail]);
+    expect(wrapper.emitted("onChange")[0]).toEqual([{ name: "test", value: "2024-06-15" }]);
   });
 });
