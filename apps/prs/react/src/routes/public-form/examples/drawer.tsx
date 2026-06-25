@@ -12,6 +12,7 @@ import {
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
+import { Schema, required, pattern, minSelected, runSchema, useFormValidation } from "../validation";
 
 type Address = {
   street: string;
@@ -42,28 +43,24 @@ const PROVINCES: ReadonlyArray<[string, string]> = [
 
 const POSTAL_CODE = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
 
-function validateAddress(a: Address): FieldError[] {
-  const errors: FieldError[] = [];
-  if (!a.street.trim()) errors.push({ fieldId: "street", text: "Enter the street address" });
-  if (!a.city.trim()) errors.push({ fieldId: "city", text: "Enter the city or town" });
-  if (!a.province) errors.push({ fieldId: "province", text: "Select the province or territory" });
-  if (!POSTAL_CODE.test(a.postal.trim()))
-    errors.push({ fieldId: "postal", text: "Enter a valid postal code, such as T3R 8Y2" });
-  if (!a.years.trim()) errors.push({ fieldId: "years", text: "Enter how long you lived there" });
-  return errors;
-}
+const addressSchema: Schema = {
+  street: required("Enter the street address"),
+  city: required("Enter the city or town"),
+  province: required("Select the province or territory"),
+  postal: pattern(POSTAL_CODE, "Enter a valid postal code, such as T3R 8Y2"),
+  years: required("Enter how long you lived there"),
+};
+const pageSchema: Schema = { addresses: minSelected(1, "Add at least one previous address") };
 
 /**
- * Drawer variant of the add-in-an-overlay pattern: same as the modal version,
- * but in a full-height side drawer because the item has more fields (a previous
- * address: six fields vs the modal example's three). The modal-vs-drawer choice
- * is the spec's "size choice." Validates the item inside the overlay; the page
- * requires at least one item.
+ * Drawer variant of the add-in-an-overlay pattern: same as the modal version, but
+ * in a full-height side drawer because the item has more fields. Validates the
+ * item inside the overlay (runSchema); the page requires at least one item (the hook).
  */
 export function DrawerExample() {
   const navigate = useNavigate();
   const [addresses, setAddresses] = useState<Address[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema);
 
   const [open, setOpen] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -87,33 +84,32 @@ export function DrawerExample() {
   const updateDraft = (patch: Partial<Address>) => {
     const next = { ...draft, ...patch };
     setDraft(next);
-    if (drawerErrors.length > 0) setDrawerErrors(validateAddress(next));
+    if (drawerErrors.length > 0) setDrawerErrors(runSchema(addressSchema, next));
   };
 
   const save = () => {
-    const found = validateAddress(draft);
+    const found = runSchema(addressSchema, draft);
     setDrawerErrors(found);
     if (found.length > 0) return;
-    setAddresses((prev) =>
-      editingIndex === null ? [...prev, draft] : prev.map((a, i) => (i === editingIndex ? draft : a)),
-    );
+    const next =
+      editingIndex === null
+        ? [...addresses, draft]
+        : addresses.map((a, i) => (i === editingIndex ? draft : a));
+    setAddresses(next);
+    revalidate({ addresses: next });
     setOpen(false);
   };
 
-  const removeAddress = (i: number) => setAddresses((prev) => prev.filter((_, idx) => idx !== i));
+  const removeAddress = (i: number) => {
+    const next = addresses.filter((_, idx) => idx !== i);
+    setAddresses(next);
+    revalidate({ addresses: next });
+  };
 
   const errorFor = (id: string) => drawerErrors.find((e) => e.fieldId === id)?.text;
   const has = (id: string) => drawerErrors.some((e) => e.fieldId === id);
 
-  const pageErrors: FieldError[] =
-    submitted && addresses.length === 0
-      ? [{ fieldId: "addresses", text: "Add at least one previous address" }]
-      : [];
-
-  const handleContinue = () => {
-    setSubmitted(true);
-    if (addresses.length > 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ addresses }, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">

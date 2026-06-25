@@ -8,13 +8,13 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, required, useFormValidation } from "../validation";
 
 type UploadedFile = { name: string; size: number; type: string };
 
-function validate(file: UploadedFile | null): FieldError[] {
-  return file ? [] : [{ fieldId: "idDocument", text: "Upload a copy of your ID" }];
-}
+const schema: Schema = {
+  idDocument: required("Upload a copy of your ID"),
+};
 
 /**
  * File upload.
@@ -24,32 +24,26 @@ function validate(file: UploadedFile | null): FieldError[] {
  * action. Validates on submit (a file is required).
  *
  * Note: GoabFileUploadInput has no `error` prop, so the required-file error can
- * only surface via the form item message + summary, not a red dropzone. Minor
- * gap for Vanessa.
+ * only surface via the form item message + summary, not a red dropzone. Minor gap
+ * for Vanessa.
  */
 export function FileUpload() {
   const navigate = useNavigate();
   const [file, setFile] = useState<UploadedFile | null>(null);
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const handleSelect = (detail: { file: File }) => {
     const next = { name: detail.file.name, size: detail.file.size, type: detail.file.type };
     setFile(next);
-    if (submitted) setErrors(validate(next));
+    revalidate({ idDocument: next });
   };
 
   const handleDelete = () => {
     setFile(null);
-    if (submitted) setErrors(validate(null));
+    revalidate({ idDocument: null });
   };
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(file);
-    setErrors(found);
-    if (found.length === 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ idDocument: file }, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">

@@ -8,7 +8,7 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, required, when, useFormValidation } from "../validation";
 
 const METHODS: ReadonlyArray<{ value: string; label: string; field: string; type: "email" | "tel" }> = [
   { value: "email", label: "Email", field: "Email address", type: "email" },
@@ -16,61 +16,47 @@ const METHODS: ReadonlyArray<{ value: string; label: string; field: string; type
   { value: "text", label: "Text message", field: "Mobile phone number", type: "tel" },
 ];
 
-// Conditional validation: must pick a method, and the revealed field is required
-// only while it's shown. The fieldId is method-specific so the summary links to
-// whichever field is actually revealed.
-function validate(method: string, detail: string): FieldError[] {
-  if (!method)
-    return [{ fieldId: "contactMethod", text: "Select how you would like to be contacted" }];
-  if (!detail.trim()) {
-    const m = METHODS.find((x) => x.value === method);
-    return [
-      {
-        fieldId: `contactDetail-${method}`,
-        text: `Enter your ${m ? m.field.toLowerCase() : "contact details"}`,
-      },
-    ];
-  }
-  return [];
-}
+// Conditional rules: a method is required, and each revealed field is required only
+// while its method is selected (the `when` rule). The field id is method-specific,
+// so the summary links to whichever field is actually shown.
+const schema: Schema = {
+  contactMethod: required("Select how you would like to be contacted"),
+  "contactDetail-email": when((a) => a.contactMethod === "email", required("Enter your email address")),
+  "contactDetail-phone": when((a) => a.contactMethod === "phone", required("Enter your phone number")),
+  "contactDetail-text": when((a) => a.contactMethod === "text", required("Enter your mobile phone number")),
+};
+
+// The selected method's detail goes under its field id so the schema validates it.
+const valuesFor = (method: string, detail: string) => ({
+  contactMethod: method,
+  [`contactDetail-${method}`]: detail,
+});
 
 /**
  * Reveal: selecting an option reveals a follow-up input.
  *
  * Uses GoA's built-in `reveal` prop on GoabRadioItem (the canonical
  * reveal-input-based-on-a-selection example), which renders the connector line
- * natively. No custom CSS, unlike the old demo, which hand-built the reveal
- * because the public-form runtime broke the slot. Validates on submit, including
- * the revealed field while it's shown.
+ * natively. Validates on submit, including the revealed field while it's shown.
  */
 export function Reveal() {
   const navigate = useNavigate();
   const [method, setMethod] = useState("");
   const [detail, setDetail] = useState("");
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
-
-  const revalidate = (m: string, d: string) => {
-    if (submitted) setErrors(validate(m, d));
-  };
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const handleMethod = (value: string) => {
     setMethod(value);
     setDetail("");
-    revalidate(value, "");
+    revalidate(valuesFor(value, ""));
   };
 
   const handleDetail = (value: string) => {
     setDetail(value);
-    revalidate(method, value);
+    revalidate(valuesFor(method, value));
   };
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(method, detail);
-    setErrors(found);
-    if (found.length === 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit(valuesFor(method, detail), () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">

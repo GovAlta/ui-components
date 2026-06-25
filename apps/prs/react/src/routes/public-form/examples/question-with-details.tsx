@@ -8,7 +8,7 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, required, useFormValidation } from "../validation";
 
 const STATUSES: ReadonlyArray<[string, string]> = [
   ["single", "Single"],
@@ -19,35 +19,28 @@ const STATUSES: ReadonlyArray<[string, string]> = [
   ["widowed", "Widowed"],
 ];
 
-function validate(value: string): FieldError[] {
-  return value ? [] : [{ fieldId: "maritalStatus", text: "Select your marital status" }];
-}
+const schema: Schema = {
+  maritalStatus: required("Select your marital status"),
+};
 
 /**
  * Question with Details.
  *
  * A lone question (large label) plus a GoabDetails "show more" expander for
- * optional help, placed after the input (canonical help-details placement). The
- * Details keeps the page uncluttered for users who don't need the explanation.
+ * optional help, placed after the input (canonical help-details placement).
  * Validates on submit.
  */
 export function QuestionWithDetails() {
   const navigate = useNavigate();
   const [maritalStatus, setMaritalStatus] = useState("");
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const handleChange = (value: string) => {
     setMaritalStatus(value);
-    if (submitted) setErrors(validate(value));
+    revalidate({ maritalStatus: value });
   };
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(maritalStatus);
-    setErrors(found);
-    if (found.length === 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ maritalStatus }, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">
@@ -73,8 +66,8 @@ export function QuestionWithDetails() {
 
         <GoabDetails heading="How do I know my marital status?" mt="l">
           <p>
-            Your marital status is your legal relationship status. Choose the option that
-            best describes your current situation.
+            Your marital status is your legal relationship status. Choose the option that best
+            describes your current situation.
           </p>
           <ul>
             <li>
@@ -84,8 +77,8 @@ export function QuestionWithDetails() {
               <strong>Married:</strong> currently legally married
             </li>
             <li>
-              <strong>Common-law:</strong> living with a partner in a marriage-like
-              relationship for at least 12 months
+              <strong>Common-law:</strong> living with a partner in a marriage-like relationship for
+              at least 12 months
             </li>
             <li>
               <strong>Separated:</strong> legally married but living apart
