@@ -29,6 +29,7 @@ import { ResultSubmitted } from "./examples/result-submitted";
 import { ReviewEditable } from "./examples/review-editable";
 import { ReviewReadonly } from "./examples/review-readonly";
 import { ReviewQuestionTypes } from "./examples/review-question-types";
+import { ReviewChildrenSummary } from "./examples/review-children-summary";
 
 /**
  * Reset scroll to the top on every route change. React Router keeps the previous
@@ -91,6 +92,7 @@ export function PublicFormApp() {
             <Route path="review-editable" element={<ReviewEditable />} />
             <Route path="review-readonly" element={<ReviewReadonly />} />
             <Route path="review-question-types" element={<ReviewQuestionTypes />} />
+            <Route path="review-children" element={<ReviewChildrenSummary />} />
           </Routes>
         </div>
       </GoabPageBlock>

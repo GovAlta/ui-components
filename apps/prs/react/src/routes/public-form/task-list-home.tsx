@@ -52,6 +52,7 @@ const sections: Section[] = [
       { slug: "review-editable", name: "Editable", status: "not-started" },
       { slug: "review-readonly", name: "Read-only", status: "not-started" },
       { slug: "review-question-types", name: "Question types", status: "not-started" },
+      { slug: "review-children", name: "Repeating group", status: "not-started" },
     ],
   },
   {
