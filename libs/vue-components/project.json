@@ -16,6 +16,7 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/vue-components",
+        "project": "libs/vue-components/package.json",
         "entryFile": "libs/vue-components/src/index.ts"
       },
       "configurations": {
