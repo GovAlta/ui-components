@@ -9,7 +9,7 @@ export default defineConfig({
   cacheDir: "../../../node_modules/.vite/playground/vue",
 
   server: {
-    port: 4203,
+    port: 4204,
     host: "0.0.0.0",
   },
 

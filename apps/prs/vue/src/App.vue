@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRouter } from "vue-router";
 import {
   GoabAppFooter,
@@ -14,14 +13,8 @@ import { bugRouteDefinitions, featureRouteDefinitions, docsRouteDefinitions } fr
 
 const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
-const TOKEN_TOGGLE_URL = "#tokens";
-const tokenMode = ref<"v1" | "v2">("v2");
 
 const handleSideMenuNavigate = (path: string) => {
-  if (path === TOKEN_TOGGLE_URL) {
-    tokenMode.value = tokenMode.value === "v1" ? "v2" : "v1";
-    return;
-  }
   const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
   router.push(internal);
 };
@@ -64,13 +57,6 @@ const handleSideMenuNavigate = (path: string) => {
           icon="list"
           label="Everything"
           :url="baseUrl + 'everything'"
-        />
-      </template>
-      <template #secondary>
-        <GoabWorkSideMenuItem
-          icon="swap-horizontal"
-          :label="`Switch to ${tokenMode === 'v1' ? 'V2' : 'V1'} tokens`"
-          :url="TOKEN_TOGGLE_URL"
         />
       </template>
     </GoabWorkSideMenu>
