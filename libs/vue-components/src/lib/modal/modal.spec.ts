@@ -47,6 +47,20 @@ describe("GoabModal", () => {
     expect(wrapper.text()).toContain("Actions");
   });
 
+  it("sets closable to true when an onClose handler is provided", () => {
+    const wrapper = mount(GoabModal, {
+      props: { onOnClose: () => undefined },
+    });
+    const el = wrapper.find("goa-modal").element;
+    expect(el.getAttribute("closable")).toBe("true");
+  });
+
+  it("sets closable to false when no onClose handler is provided", () => {
+    const wrapper = mount(GoabModal);
+    const el = wrapper.find("goa-modal").element;
+    expect(el.getAttribute("closable")).toBe("false");
+  });
+
   it("responds to _close event", () => {
     const wrapper = mount(GoabModal);
     const el = wrapper.find("goa-modal").element;
