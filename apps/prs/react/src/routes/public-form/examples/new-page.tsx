@@ -10,6 +10,7 @@ import {
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
+import { Schema, required, minSelected, useFormValidation } from "../validation";
 
 const ROOT = "/public-form/new-page";
 
@@ -52,20 +53,14 @@ function YesNoStep({
   requiredError: string;
 }) {
   const navigate = useNavigate();
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation({ answer: required(requiredError) });
 
-  const validate = (v: string): FieldError[] => (v ? [] : [{ fieldId: "answer", text: requiredError }]);
   const handleChange = (v: string) => {
     onChange(v);
-    if (submitted) setErrors(validate(v));
+    revalidate({ answer: v });
   };
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(value);
-    setErrors(found);
-    if (found.length === 0) navigate(next(value));
-  };
+
+  const handleContinue = () => submit({ answer: value }, () => navigate(next(value)));
 
   return (
     <PublicFormLayout back={back}>
@@ -94,21 +89,16 @@ function YesNoStep({
 /** Sub-flow page 1: the child's name. */
 function NameStep({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const navigate = useNavigate();
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation({
+    name: required("Enter the child's full name"),
+  });
 
-  const validate = (v: string): FieldError[] =>
-    v.trim() ? [] : [{ fieldId: "name", text: "Enter the child's full name" }];
   const handleChange = (v: string) => {
     onChange(v);
-    if (submitted) setErrors(validate(v));
+    revalidate({ name: v });
   };
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(value);
-    setErrors(found);
-    if (found.length === 0) navigate(`${ROOT}/add/age`);
-  };
+
+  const handleContinue = () => submit({ name: value }, () => navigate(`${ROOT}/add/age`));
 
   return (
     <PublicFormLayout back={ROOT}>
@@ -223,21 +213,23 @@ function ChildrenList({
   );
 }
 
+const pageSchema: Schema = { children: minSelected(1, "Add at least one child") };
+
 /**
  * New page per item, with branches: the public form pattern itself, looped.
  *
  * "Add a child" walks a sub-flow of full pages (name -> 18-or-older -> [in
  * education, if 18+] -> confirm), branching on the age answer, then collects the
  * child into a list. Each page is a real route, so the browser back button and
- * state carry across the sub-flow (the team's feasibility stress-test). The added
- * children show as a list with Change / Remove, the loop reduced to a title.
+ * state carry across the sub-flow. The added children show as a list with
+ * Change / Remove, the loop reduced to a title.
  */
 export function NewPageTask() {
   const navigate = useNavigate();
   const [children, setChildren] = useState<Child[]>([]);
   const [draft, setDraft] = useState<Child>(EMPTY_CHILD);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema);
 
   const update = (patch: Partial<Child>) => setDraft((d) => ({ ...d, ...patch }));
 
@@ -253,25 +245,24 @@ export function NewPageTask() {
     navigate(`${ROOT}/add/name`);
   };
 
-  const removeChild = (i: number) => setChildren((prev) => prev.filter((_, idx) => idx !== i));
+  const removeChild = (i: number) => {
+    const next = children.filter((_, idx) => idx !== i);
+    setChildren(next);
+    revalidate({ children: next });
+  };
 
   const saveChild = () => {
-    setChildren((prev) =>
-      editingIndex === null ? [...prev, draft] : prev.map((c, i) => (i === editingIndex ? draft : c)),
-    );
+    const next =
+      editingIndex === null
+        ? [...children, draft]
+        : children.map((c, i) => (i === editingIndex ? draft : c));
+    setChildren(next);
+    revalidate({ children: next });
     setEditingIndex(null);
     navigate(ROOT);
   };
 
-  const pageErrors: FieldError[] =
-    submitted && children.length === 0
-      ? [{ fieldId: "children", text: "Add at least one child" }]
-      : [];
-
-  const handleContinue = () => {
-    setSubmitted(true);
-    if (children.length > 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ children }, () => navigate("/public-form"));
 
   return (
     <Routes>

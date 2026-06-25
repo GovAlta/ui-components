@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { GoabFormItem, GoabInput, GoabButton } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, useFormValidation } from "../validation";
 
-// At least one non-blank row required. A blank trailing row is fine (ignored on
-// save), so we only fail when nothing has been entered at all.
-function validate(rows: string[]): FieldError[] {
-  return rows.some((r) => r.trim())
-    ? []
-    : [{ fieldId: "dependant-0", text: "Enter at least one dependant" }];
-}
+// A collection rule: at least one non-blank row. Keyed to the first row so the
+// summary links there; the rule reads the whole list from `all`. (A blank trailing
+// row is fine, ignored on save.)
+const schema: Schema = {
+  "dependant-0": (_v, all) => {
+    const rows = (all.dependants as string[]) ?? [];
+    return rows.some((r) => typeof r === "string" && r.trim()) ? null : "Enter at least one dependant";
+  },
+};
 
 /**
  * Inline list: a single field repeated in identical rows ("+ Add another"), the
@@ -22,17 +24,12 @@ function validate(rows: string[]): FieldError[] {
 export function InlineList() {
   const navigate = useNavigate();
   const [rows, setRows] = useState<string[]>([""]);
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
-
-  const revalidate = (next: string[]) => {
-    if (submitted) setErrors(validate(next));
-  };
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const updateRow = (i: number, value: string) => {
     const next = rows.map((r, idx) => (idx === i ? value : r));
     setRows(next);
-    revalidate(next);
+    revalidate({ dependants: next });
   };
 
   const addRow = () => setRows([...rows, ""]);
@@ -40,18 +37,14 @@ export function InlineList() {
   const removeRow = (i: number) => {
     const next = rows.filter((_, idx) => idx !== i);
     setRows(next);
-    revalidate(next);
+    revalidate({ dependants: next });
   };
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(rows);
-    setErrors(found);
-    if (found.length === 0) {
+  const handleContinue = () =>
+    submit({ dependants: rows }, () => {
       // On save, blank rows are dropped (filter before submitting to a backend).
       navigate("/public-form");
-    }
-  };
+    });
 
   const firstError = errors.find((e) => e.fieldId === "dependant-0")?.text;
 

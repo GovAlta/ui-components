@@ -12,6 +12,7 @@ import {
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
+import { Schema, required, minSelected, runSchema, useFormValidation } from "../validation";
 
 type Contact = { name: string; relationship: string; phone: string };
 
@@ -19,31 +20,31 @@ const EMPTY_CONTACT: Contact = { name: "", relationship: "", phone: "" };
 
 const RELATIONSHIPS = ["Parent", "Spouse or partner", "Sibling", "Friend", "Other"];
 
-// Validates the item being added/edited inside the overlay.
-function validateContact(c: Contact): FieldError[] {
-  const errors: FieldError[] = [];
-  if (!c.name.trim()) errors.push({ fieldId: "name", text: "Enter a full name" });
-  if (!c.relationship) errors.push({ fieldId: "relationship", text: "Select a relationship" });
-
-  const digits = c.phone.replace(/\D/g, "");
-  if (!c.phone.trim()) errors.push({ fieldId: "phone", text: "Enter a phone number" });
-  else if (!(digits.length === 10 || (digits.length === 11 && digits.startsWith("1"))))
-    errors.push({ fieldId: "phone", text: "Enter a valid phone number, like 780 123 4567" });
-
-  return errors;
-}
+// The item rules (validated inside the overlay) and the page rule (at least one item).
+const contactSchema: Schema = {
+  name: required("Enter a full name"),
+  relationship: required("Select a relationship"),
+  phone: (v) => {
+    const s = typeof v === "string" ? v.trim() : "";
+    if (!s) return "Enter a phone number";
+    const digits = s.replace(/\D/g, "");
+    return digits.length === 10 || (digits.length === 11 && digits.startsWith("1"))
+      ? null
+      : "Enter a valid phone number, like 780 123 4567";
+  },
+};
+const pageSchema: Schema = { contacts: minSelected(1, "Add at least one emergency contact") };
 
 /**
  * Modal / drawer: multiple fields for one item, added in an overlay. Saved items
- * show as a list with Edit / Remove. Uses a modal here (a handful of fields, the
- * spec's modal-vs-drawer choice); the same pattern uses GoabDrawer when an item
- * has more fields. Validates the item inside the overlay; the page requires at
- * least one item on submit.
+ * show as a list with Edit / Remove. Validates the item inside the overlay
+ * (runSchema over the item rules); the page requires at least one item on submit
+ * (the validation hook).
  */
 export function ModalDrawer() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema);
 
   // Overlay state: which item (null = adding new), the working draft, its errors.
   const [open, setOpen] = useState(false);
@@ -69,33 +70,32 @@ export function ModalDrawer() {
     const next = { ...draft, ...patch };
     setDraft(next);
     // Re-validate live only after a failed save in the overlay.
-    if (modalErrors.length > 0) setModalErrors(validateContact(next));
+    if (modalErrors.length > 0) setModalErrors(runSchema(contactSchema, next));
   };
 
   const saveContact = () => {
-    const found = validateContact(draft);
+    const found = runSchema(contactSchema, draft);
     setModalErrors(found);
     if (found.length > 0) return;
-    setContacts((prev) =>
-      editingIndex === null ? [...prev, draft] : prev.map((c, i) => (i === editingIndex ? draft : c)),
-    );
+    const next =
+      editingIndex === null
+        ? [...contacts, draft]
+        : contacts.map((c, i) => (i === editingIndex ? draft : c));
+    setContacts(next);
+    revalidate({ contacts: next });
     setOpen(false);
   };
 
-  const removeContact = (i: number) => setContacts((prev) => prev.filter((_, idx) => idx !== i));
+  const removeContact = (i: number) => {
+    const next = contacts.filter((_, idx) => idx !== i);
+    setContacts(next);
+    revalidate({ contacts: next });
+  };
 
   const errorFor = (id: string) => modalErrors.find((e) => e.fieldId === id)?.text;
   const has = (id: string) => modalErrors.some((e) => e.fieldId === id);
 
-  const pageErrors: FieldError[] =
-    submitted && contacts.length === 0
-      ? [{ fieldId: "contacts", text: "Add at least one emergency contact" }]
-      : [];
-
-  const handleContinue = () => {
-    setSubmitted(true);
-    if (contacts.length > 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ contacts }, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">

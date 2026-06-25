@@ -10,6 +10,7 @@ import {
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
+import { required, runSchema } from "../validation";
 import { EligibilityReview } from "./eligibility-review";
 import { Ineligible } from "./ineligible";
 
@@ -199,7 +200,7 @@ function Question({
   const [submitted, setSubmitted] = useState(false);
 
   const validate = (v: string): FieldError[] =>
-    v && v.trim() ? [] : [{ fieldId: id, text: cfg.requiredError }];
+    runSchema({ [id]: required(cfg.requiredError) }, { [id]: v });
 
   const handleChange = (v: string) => {
     setDraft(v);

@@ -13,6 +13,7 @@ import {
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
 import { FieldError } from "../error-summary";
+import { Schema, required, pattern, minSelected, runSchema, useFormValidation } from "../validation";
 
 type Address = { street: string; city: string; province: string; postal: string };
 
@@ -36,31 +37,27 @@ const PROVINCES: ReadonlyArray<[string, string]> = [
 
 const POSTAL_CODE = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
 
-function validateStep1(a: Address): FieldError[] {
-  const errors: FieldError[] = [];
-  if (!a.street.trim()) errors.push({ fieldId: "street", text: "Enter the street address" });
-  if (!a.city.trim()) errors.push({ fieldId: "city", text: "Enter the city or town" });
-  return errors;
-}
-
-function validateStep2(a: Address): FieldError[] {
-  const errors: FieldError[] = [];
-  if (!a.province) errors.push({ fieldId: "province", text: "Select the province or territory" });
-  if (!POSTAL_CODE.test(a.postal.trim()))
-    errors.push({ fieldId: "postal", text: "Enter a valid postal code, such as T3R 8Y2" });
-  return errors;
-}
+// One schema per step (validated before advancing / saving), plus the page rule.
+const step1Schema: Schema = {
+  street: required("Enter the street address"),
+  city: required("Enter the city or town"),
+};
+const step2Schema: Schema = {
+  province: required("Select the province or territory"),
+  postal: pattern(POSTAL_CODE, "Enter a valid postal code, such as T3R 8Y2"),
+};
+const pageSchema: Schema = { addresses: minSelected(1, "Add at least one previous address") };
 
 /**
  * Multi-step entry: the same overlay-add pattern as modal/drawer, but the item's
- * fields are split across steps (Step 1 -> Next -> Step 2) with a step indicator
- * and Next/Back. Each step validates before advancing; the final step saves. Two
- * steps, by design. Saved items show in a list with Edit / Remove.
+ * fields are split across steps (Step 1 -> Next -> Step 2) with Next/Back. Each
+ * step validates before advancing (runSchema per step); the page requires at least
+ * one item (the hook).
  */
 export function MultiStep() {
   const navigate = useNavigate();
   const [addresses, setAddresses] = useState<Address[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema);
 
   const [open, setOpen] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -87,11 +84,12 @@ export function MultiStep() {
   const updateDraft = (patch: Partial<Address>) => {
     const next = { ...draft, ...patch };
     setDraft(next);
-    if (modalErrors.length > 0) setModalErrors(step === 1 ? validateStep1(next) : validateStep2(next));
+    if (modalErrors.length > 0)
+      setModalErrors(runSchema(step === 1 ? step1Schema : step2Schema, next));
   };
 
   const goNext = () => {
-    const found = validateStep1(draft);
+    const found = runSchema(step1Schema, draft);
     setModalErrors(found);
     if (found.length === 0) {
       setStep(2);
@@ -105,29 +103,28 @@ export function MultiStep() {
   };
 
   const save = () => {
-    const found = validateStep2(draft);
+    const found = runSchema(step2Schema, draft);
     setModalErrors(found);
     if (found.length > 0) return;
-    setAddresses((prev) =>
-      editingIndex === null ? [...prev, draft] : prev.map((a, i) => (i === editingIndex ? draft : a)),
-    );
+    const next =
+      editingIndex === null
+        ? [...addresses, draft]
+        : addresses.map((a, i) => (i === editingIndex ? draft : a));
+    setAddresses(next);
+    revalidate({ addresses: next });
     setOpen(false);
   };
 
-  const removeAddress = (i: number) => setAddresses((prev) => prev.filter((_, idx) => idx !== i));
+  const removeAddress = (i: number) => {
+    const next = addresses.filter((_, idx) => idx !== i);
+    setAddresses(next);
+    revalidate({ addresses: next });
+  };
 
   const errorFor = (id: string) => modalErrors.find((e) => e.fieldId === id)?.text;
   const has = (id: string) => modalErrors.some((e) => e.fieldId === id);
 
-  const pageErrors: FieldError[] =
-    submitted && addresses.length === 0
-      ? [{ fieldId: "addresses", text: "Add at least one previous address" }]
-      : [];
-
-  const handleContinue = () => {
-    setSubmitted(true);
-    if (addresses.length > 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit({ addresses }, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">
