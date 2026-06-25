@@ -8,7 +8,7 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, required, pattern, useFormValidation } from "../validation";
 
 const PROVINCES: ReadonlyArray<[string, string]> = [
   ["AB", "Alberta"],
@@ -38,54 +38,38 @@ type Values = {
 
 const EMPTY: Values = { street: "", suite: "", city: "", province: "", postal: "" };
 
-// Required-field + postal-format checks, in field order so the summary reads
-// top to bottom. Each error's fieldId matches a GoabFormItem id, which links
-// the summary entry to the field and drives the inline error.
-function validate(values: Values): FieldError[] {
-  const errors: FieldError[] = [];
-  if (!values.street.trim())
-    errors.push({ fieldId: "street", text: "Enter your street address" });
-  if (!values.city.trim())
-    errors.push({ fieldId: "city", text: "Enter your city or town" });
-  if (!values.province)
-    errors.push({ fieldId: "province", text: "Select your province or territory" });
-  if (!POSTAL_CODE.test(values.postal.trim()))
-    errors.push({ fieldId: "postal", text: "Enter a valid postal code, such as T3R 8Y2" });
-  return errors;
-}
+// Rules in field order, so the summary reads top to bottom. Suite is optional, so
+// it has no rule. The postal rule folds required + format into one message.
+const schema: Schema = {
+  street: required("Enter your street address"),
+  city: required("Enter your city or town"),
+  province: required("Select your province or territory"),
+  postal: pattern(POSTAL_CODE, "Enter a valid postal code, such as T3R 8Y2"),
+};
 
 /**
  * Grouped fields, one topic: a home address.
  *
- * Several inputs that make up one thing, grouped under one heading (the
- * goa-form-set "Multiple questions = True" shape: a section heading plus fields
- * with normal labels). Also the validation showcase: validates on Continue,
- * surfaces the error summary plus per-field inline errors, and live-clears each
- * error as it's fixed. Matches the "What is your address?" error-state screen
- * in Figma.
+ * Several inputs that make up one thing, grouped under one heading. Also the
+ * validation showcase: validates on Continue, surfaces the error summary plus
+ * per-field inline errors, and live-clears each error as it's fixed. Matches the
+ * "What is your address?" error-state screen in Figma.
  */
 export function GroupedFields() {
   const navigate = useNavigate();
   const [values, setValues] = useState<Values>(EMPTY);
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const set = (key: keyof Values) => (value: string) =>
     setValues((prev) => {
       const next = { ...prev, [key]: value };
-      // After the first submit, re-validate live so fixed fields clear as you go.
-      if (submitted) setErrors(validate(next));
+      revalidate(next);
       return next;
     });
 
   const errorFor = (fieldId: string) => errors.find((e) => e.fieldId === fieldId)?.text;
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(values);
-    setErrors(found);
-    if (found.length === 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit(values, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">

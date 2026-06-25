@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoabFormItem, GoabCheckboxList, GoabCheckbox, GoabInput } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { Schema, required, minSelected, useFormValidation } from "../validation";
 
 type Values = {
   agreements: string[];
@@ -18,16 +18,11 @@ const FOIP =
   "application. This collection is authorized under section 33(c) of the Freedom of " +
   "Information and Protection of Privacy Act.";
 
-function validate(v: Values): FieldError[] {
-  const errors: FieldError[] = [];
-  if (v.agreements.length < 2)
-    errors.push({ fieldId: "agreements", text: "Select both statements to agree before continuing" });
-  if (!v.legalName.trim())
-    errors.push({ fieldId: "legalName", text: "Enter your full legal name" });
-  if (!v.signature.trim())
-    errors.push({ fieldId: "signature", text: "Type your full name to sign" });
-  return errors;
-}
+const schema: Schema = {
+  agreements: minSelected(2, "Select both statements to agree before continuing"),
+  legalName: required("Enter your full legal name"),
+  signature: required("Type your full name to sign"),
+};
 
 /**
  * Content before the question.
@@ -41,25 +36,19 @@ function validate(v: Values): FieldError[] {
 export function ContentBefore() {
   const navigate = useNavigate();
   const [values, setValues] = useState<Values>(EMPTY);
-  const [errors, setErrors] = useState<FieldError[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const { errors, submit, revalidate } = useFormValidation(schema);
 
   const update = (patch: Partial<Values>) =>
     setValues((prev) => {
       const next = { ...prev, ...patch };
-      if (submitted) setErrors(validate(next));
+      revalidate(next);
       return next;
     });
 
   const errorFor = (id: string) => errors.find((e) => e.fieldId === id)?.text;
   const has = (id: string) => errors.some((e) => e.fieldId === id);
 
-  const handleContinue = () => {
-    setSubmitted(true);
-    const found = validate(values);
-    setErrors(found);
-    if (found.length === 0) navigate("/public-form");
-  };
+  const handleContinue = () => submit(values, () => navigate("/public-form"));
 
   return (
     <PublicFormLayout back="/public-form">
