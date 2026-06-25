@@ -16,8 +16,8 @@ const slots = useSlots();
 <template>
   <goa-side-menu-heading v-bind="wcProps">
     <slot />
-    <div v-if="slots.meta" slot="meta">
+    <span v-if="slots.meta" slot="meta">
       <slot name="meta" />
-    </div>
+    </span>
   </goa-side-menu-heading>
 </template>

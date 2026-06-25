@@ -14,7 +14,7 @@ describe("GoabAccordion", () => {
       props: {
         heading: "Accordion heading",
         open: true,
-        headingSize: "large",
+        headingSize: "medium",
         secondaryText: "Secondary text",
         maxWidth: "800px",
         iconPosition: "right",
@@ -29,7 +29,7 @@ describe("GoabAccordion", () => {
     const el = wrapper.find("goa-accordion").element;
     expect(el.getAttribute("heading")).toBe("Accordion heading");
     expect(el.getAttribute("open")).toBe("true");
-    expect(el.getAttribute("headingsize")).toBe("large");
+    expect(el.getAttribute("headingsize")).toBe("medium");
     expect(el.getAttribute("secondarytext")).toBe("Secondary text");
     expect(el.getAttribute("maxwidth")).toBe("800px");
     expect(el.getAttribute("iconposition")).toBe("right");
@@ -57,6 +57,6 @@ describe("GoabAccordion", () => {
     const el = wrapper.find("goa-accordion").element;
     el.dispatchEvent(new CustomEvent("_change", { detail: { open: true } }));
     expect(wrapper.emitted()).toHaveProperty("onChange");
-    expect(wrapper.emitted("onChange")[0]).toEqual([true]);
+    expect(wrapper.emitted("onChange")![0]).toEqual([true]);
   });
 });

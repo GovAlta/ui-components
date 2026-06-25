@@ -44,6 +44,6 @@ describe("GoabPagination", () => {
     const el = wrapper.find("goa-pagination").element;
     el.dispatchEvent(new CustomEvent("_change", { detail: { page: 2 } }));
     expect(wrapper.emitted()).toHaveProperty("onChange");
-    expect(wrapper.emitted("onChange")[0]).toEqual([{ page: 2 }]);
+    expect(wrapper.emitted("onChange")![0]).toEqual([{ page: 2 }]);
   });
 });

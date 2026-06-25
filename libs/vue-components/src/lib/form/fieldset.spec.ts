@@ -35,6 +35,6 @@ describe("GoabFieldset", () => {
     const detail = { el, state: {}, cancelled: false };
     el.dispatchEvent(new CustomEvent("_continue", { detail }));
     expect(wrapper.emitted()).toHaveProperty("onContinue");
-    expect(wrapper.emitted("onContinue")[0]).toEqual([detail]);
+    expect(wrapper.emitted("onContinue")![0]).toEqual([detail]);
   });
 });

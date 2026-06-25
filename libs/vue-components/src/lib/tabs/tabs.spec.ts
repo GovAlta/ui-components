@@ -13,17 +13,17 @@ describe("GoabTabs", () => {
       props: {
         initialTab: 1,
         testId: "tabs-test",
-        variant: "minimal",
-        orientation: "vertical",
-        navigation: "wrap",
+        variant: "segmented",
+        orientation: "horizontal",
+        navigation: "hash",
       },
     });
     const el = wrapper.find("goa-tabs").element;
     expect(el.getAttribute("initialtab")).toBe("1");
     expect(el.getAttribute("testid")).toBe("tabs-test");
-    expect(el.getAttribute("variant")).toBe("minimal");
-    expect(el.getAttribute("orientation")).toBe("vertical");
-    expect(el.getAttribute("navigation")).toBe("wrap");
+    expect(el.getAttribute("variant")).toBe("segmented");
+    expect(el.getAttribute("orientation")).toBe("horizontal");
+    expect(el.getAttribute("navigation")).toBe("hash");
   });
 
   it("should render content via default slot", () => {
@@ -39,6 +39,6 @@ describe("GoabTabs", () => {
     const detail = { selectedIndex: 2 };
     el.dispatchEvent(new CustomEvent("_change", { detail }));
     expect(wrapper.emitted()).toHaveProperty("onChange");
-    expect(wrapper.emitted("onChange")[0]).toEqual([detail]);
+    expect(wrapper.emitted("onChange")![0]).toEqual([detail]);
   });
 });

@@ -10,7 +10,6 @@ describe("GoabDropdown", () => {
     expect(el.getAttribute("disabled")).toBeNull();
     expect(el.getAttribute("error")).toBeNull();
     expect(el.getAttribute("filterable")).toBeNull();
-    expect(el.getAttribute("multiselect")).toBeNull();
     expect(el.getAttribute("native")).toBeNull();
   });
 
@@ -25,7 +24,6 @@ describe("GoabDropdown", () => {
         disabled: true,
         error: true,
         filterable: true,
-        multiselect: true,
         native: true,
         testId: "foo",
         id: "foo-dropdown",
@@ -51,7 +49,6 @@ describe("GoabDropdown", () => {
     expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("error")).toBe("true");
     expect(el.getAttribute("filterable")).toBe("true");
-    expect(el.getAttribute("multiselect")).toBe("true");
     expect(el.getAttribute("native")).toBe("true");
     expect(el.getAttribute("arialabel")).toBe("label");
     expect(el.getAttribute("arialabelledby")).toBe("foo-dropdown-label");

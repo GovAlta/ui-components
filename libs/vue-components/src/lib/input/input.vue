@@ -31,6 +31,7 @@ interface Props {
   width?: string;
   testId?: string;
   ariaLabel?: string;
+  ariaLabelledBy?: string;
   maxLength?: number;
   trailingIconAriaLabel?: string;
   textAlign?: "left" | "right";

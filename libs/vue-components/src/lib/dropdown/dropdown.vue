@@ -19,7 +19,6 @@ interface Props {
   filterable?: boolean;
   leadingIcon?: GoabIconType;
   maxHeight?: string;
-  multiselect?: boolean;
   native?: boolean;
   placeholder?: string;
   testId?: string;
@@ -42,7 +41,7 @@ const emit = defineEmits<{
 
 const { value: _value, ...rest } = props;
 const wcProps = useWcProps(rest, {
-  booleanProps: ["disabled", "error", "filterable", "multiselect", "native"],
+  booleanProps: ["disabled", "error", "filterable", "native"],
 });
 
 const valueAttr = computed(() => {

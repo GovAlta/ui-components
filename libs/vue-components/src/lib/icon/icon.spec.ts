@@ -54,9 +54,9 @@ describe("GoabIcon", () => {
     expect(el.hasAttribute("inverted")).toBe(false);
   });
 
-  it("should pass inverted string through", () => {
+  it("should pass inverted true through", () => {
     const wrapper = mount(GoabIcon, {
-      props: { type: "home", inverted: "true" },
+      props: { type: "home", inverted: true },
     });
     const el = wrapper.find("goa-icon").element;
     expect(el.getAttribute("inverted")).toBe("true");

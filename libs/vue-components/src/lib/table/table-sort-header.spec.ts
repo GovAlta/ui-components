@@ -12,13 +12,13 @@ describe("GoabTableSortHeader", () => {
     const wrapper = mount(GoabTableSortHeader, {
       props: {
         name: "column1",
-        direction: "ascending",
+        direction: "asc",
         sortOrder: 1,
       },
     });
     const el = wrapper.find("goa-table-sort-header").element;
     expect(el.getAttribute("name")).toBe("column1");
-    expect(el.getAttribute("direction")).toBe("ascending");
+    expect(el.getAttribute("direction")).toBe("asc");
     expect(el.getAttribute("sort-order")).toBe("1");
   });
 

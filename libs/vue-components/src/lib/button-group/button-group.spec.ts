@@ -14,7 +14,7 @@ describe("GoabButtonGroup", () => {
     const wrapper = mount(GoabButtonGroup, {
       props: {
         alignment: "end",
-        gap: "s",
+        gap: "compact",
         testId: "button-group-test",
         mt: "s",
         mr: "m",
@@ -24,7 +24,7 @@ describe("GoabButtonGroup", () => {
     });
     const el = wrapper.find("goa-button-group").element;
     expect(el.getAttribute("alignment")).toBe("end");
-    expect(el.getAttribute("gap")).toBe("s");
+    expect(el.getAttribute("gap")).toBe("compact");
     expect(el.getAttribute("testid")).toBe("button-group-test");
     expect(el.getAttribute("mt")).toBe("s");
     expect(el.getAttribute("mr")).toBe("m");

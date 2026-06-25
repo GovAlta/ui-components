@@ -12,7 +12,7 @@ describe("GoabText", () => {
     const wrapper = mount(GoabText, {
       props: {
         tag: "h1",
-        size: "large",
+        size: "heading-l",
         maxWidth: "65ch",
         color: "primary",
         id: "text-id",
@@ -25,7 +25,7 @@ describe("GoabText", () => {
     });
     const el = wrapper.find("goa-text").element;
     expect(el.getAttribute("as")).toBe("h1");
-    expect(el.getAttribute("size")).toBe("large");
+    expect(el.getAttribute("size")).toBe("heading-l");
     expect(el.getAttribute("maxwidth")).toBe("65ch");
     expect(el.getAttribute("color")).toBe("primary");
     expect(el.getAttribute("id")).toBe("text-id");
