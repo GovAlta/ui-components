@@ -50,6 +50,14 @@ export function Bug3893Route() {
           <GoabTextArea name="test" value="" />
         </GoabFormItem>
       </GoabBlock>
+
+      <GoabText tag="h3">Test 3 (fix): alignment=start, stretch=true, width=100%</GoabText>
+      <GoabBlock direction="column" alignment="start" stretch={true} minWidth="100%" width="100%">
+        <GoabText size="body-l" tag="div">Hello World</GoabText>
+        <GoabFormItem label="Test" maxWidth="100%">
+          <GoabTextArea name="test" value="" />
+        </GoabFormItem>
+      </GoabBlock>
     </div>
   );
 }

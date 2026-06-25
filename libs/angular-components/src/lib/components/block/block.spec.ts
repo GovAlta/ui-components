@@ -16,6 +16,7 @@ import { By } from "@angular/platform-browser";
       [gap]="gap"
       [direction]="direction"
       [alignment]="alignment"
+      [stretch]="stretch"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
@@ -30,6 +31,7 @@ class TestBlockComponent {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  stretch?: boolean;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -74,5 +76,17 @@ describe("GoABBlock", () => {
     expect(blockElement.getAttribute("mr")).toBe(component.mr);
     const blockContent = blockElement.querySelector("div");
     expect(blockContent.textContent).toContain("Block content");
+  });
+
+  it("should set the stretch attribute when stretch is true", () => {
+    component.stretch = true;
+    fixture.detectChanges();
+    const blockElement = fixture.debugElement.query(By.css("goa-block")).nativeElement;
+    expect(blockElement.getAttribute("stretch")).toBe("true");
+  });
+
+  it("should not set the stretch attribute by default", () => {
+    const blockElement = fixture.debugElement.query(By.css("goa-block")).nativeElement;
+    expect(blockElement.getAttribute("stretch")).toBeNull();
   });
 });

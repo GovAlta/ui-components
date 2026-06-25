@@ -31,6 +31,18 @@ describe("Block", () => {
     expect(el?.getAttribute("ml")).toBe("xl");
   });
 
+  it("should set the stretch attribute when stretch is true", () => {
+    const { container } = render(<GoabBlock stretch={true} />);
+    const el = container.querySelector("goa-block");
+    expect(el?.getAttribute("stretch")).toBe("true");
+  });
+
+  it("should not set the stretch attribute by default", () => {
+    const { container } = render(<GoabBlock />);
+    const el = container.querySelector("goa-block");
+    expect(el?.getAttribute("stretch")).toBeNull();
+  });
+
   it("should pass data-grid attributes", () => {
     const { container } = render(
       <GoabBlock
