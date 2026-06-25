@@ -33,7 +33,7 @@ describe("GoabPublicForm", () => {
     const detail = { uuid: "abc", form: {}, history: [], editting: "", status: "complete" };
     el.dispatchEvent(new CustomEvent("_complete", { detail }));
     expect(wrapper.emitted()).toHaveProperty("onComplete");
-    expect(wrapper.emitted("onComplete")[0]).toEqual([detail]);
+    expect(wrapper.emitted("onComplete")![0]).toEqual([detail]);
   });
 
   it("responds to _stateChange event with detail.data", () => {
@@ -41,6 +41,6 @@ describe("GoabPublicForm", () => {
     const el = wrapper.find("goa-public-form").element;
     el.dispatchEvent(new CustomEvent("_stateChange", { detail: { data: { id: "123" } } }));
     expect(wrapper.emitted()).toHaveProperty("onStateChange");
-    expect(wrapper.emitted("onStateChange")[0]).toEqual([{ id: "123" }]);
+    expect(wrapper.emitted("onStateChange")![0]).toEqual([{ id: "123" }]);
   });
 });

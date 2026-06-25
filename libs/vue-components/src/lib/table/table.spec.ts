@@ -48,7 +48,7 @@ describe("GoabTable", () => {
     const el = wrapper.find("goa-table").element;
     el.dispatchEvent(new CustomEvent("_sort", { detail: { sortBy: "name", sortDir: "asc" } }));
     expect(wrapper.emitted()).toHaveProperty("onSort");
-    expect(wrapper.emitted("onSort")[0]).toEqual([{ sortBy: "name", sortDir: "asc" }]);
+    expect(wrapper.emitted("onSort")![0]).toEqual([{ sortBy: "name", sortDir: "asc" }]);
   });
 
   it("responds to multisort event", () => {
@@ -58,7 +58,7 @@ describe("GoabTable", () => {
       new CustomEvent("_multisort", { detail: { sortBy: ["name", "age"], sortDir: ["asc", "desc"] } }),
     );
     expect(wrapper.emitted()).toHaveProperty("onMultiSort");
-    expect(wrapper.emitted("onMultiSort")[0]).toEqual([
+    expect(wrapper.emitted("onMultiSort")![0]).toEqual([
       { sortBy: ["name", "age"], sortDir: ["asc", "desc"] },
     ]);
   });

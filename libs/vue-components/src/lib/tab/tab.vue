@@ -16,9 +16,9 @@ const slots = useSlots();
 
 <template>
   <goa-tab v-bind="wcProps">
-    <div v-if="slots.heading" slot="heading">
+    <span v-if="slots.heading" slot="heading">
       <slot name="heading" />
-    </div>
+    </span>
     <slot />
   </goa-tab>
 </template>

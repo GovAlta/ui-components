@@ -73,7 +73,7 @@ describe("GoabWorkSideMenu", () => {
     const detail = { url: "/new-page" };
     el.dispatchEvent(new CustomEvent("_navigate", { detail }));
     expect(wrapper.emitted()).toHaveProperty("onNavigate");
-    expect(wrapper.emitted("onNavigate")[0]).toEqual([detail.url]);
+    expect(wrapper.emitted("onNavigate")![0]).toEqual([detail.url]);
   });
 
   it("should not set open when false", () => {

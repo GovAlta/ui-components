@@ -7,7 +7,7 @@ interface Props {
   type: GoabIconType | GoabIconOverridesType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
-  inverted?: string | boolean;
+  inverted?: boolean;
   fillColor?: string;
   opacity?: number;
   title?: string;

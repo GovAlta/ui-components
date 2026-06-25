@@ -8,10 +8,10 @@ import type {
   Spacing,
 } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
-import { computed } from "vue";
 
 interface Props {
   name: string;
+  id?: string;
   value?: string;
   placeholder?: string;
   rows?: number;

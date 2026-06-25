@@ -26,13 +26,15 @@ const emit = defineEmits<{
   onMultiSort: [detail: GoabTableOnMultiSortDetail];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["striped"] });
+const wcProps = useWcProps(props, {
+  booleanProps: ["striped"],
+  renamedProps: { sortMode: "sort-mode" },
+});
 </script>
 
 <template>
   <goa-table
     v-bind="wcProps"
-    :sort-mode="sortMode"
     @_sort="emit('onSort', $event.detail)"
     @_multisort="emit('onMultiSort', $event.detail)"
   >
