@@ -79529,7 +79529,7 @@ const __vite_glob_0_169 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3933/assets/tokens-D3WLids4.css";
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3933/assets/tokens-DvUBAKM-.css";
 function Feat3636Route() {
   reactExports.useEffect(() => {
     const link = document.createElement("link");
