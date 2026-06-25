@@ -1629,17 +1629,17 @@ html, body {
   padding: 0;
 }
 
-.app-layout[data-v-a9bc068e] {
+.app-layout[data-v-43e1543b] {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
-.main-wrapper[data-v-a9bc068e] {
+.main-wrapper[data-v-43e1543b] {
   flex: 1;
   height: 100%;
   width: 100%;
   overflow: auto;
 }
-.main[data-v-a9bc068e] {
+.main[data-v-43e1543b] {
   padding: var(--goa-space-2xl);
 }

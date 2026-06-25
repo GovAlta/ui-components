@@ -50301,18 +50301,12 @@ const docsRouteDefinitions = prRouteDefinitions.filter(
 const _hoisted_1$1 = { class: "app-layout" };
 const _hoisted_2$1 = { class: "main-wrapper" };
 const _hoisted_3$1 = { class: "main" };
-const TOKEN_TOGGLE_URL = "#tokens";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "App",
   setup(__props) {
     const router2 = useRouter();
     const baseUrl = "/ui-components/pr-preview-vue/pr-4047/";
-    const tokenMode = /* @__PURE__ */ ref("v2");
     const handleSideMenuNavigate = (path) => {
-      if (path === TOKEN_TOGGLE_URL) {
-        tokenMode.value = tokenMode.value === "v1" ? "v2" : "v1";
-        return;
-      }
       const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
       router2.push(internal);
     };
@@ -50377,13 +50371,6 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
               url: unref(baseUrl) + "everything"
             }, null, 8, ["url"])
           ]),
-          secondary: withCtx(() => [
-            createVNode(unref(_sfc_main$4), {
-              icon: "swap-horizontal",
-              label: `Switch to ${tokenMode.value === "v1" ? "V2" : "V1"} tokens`,
-              url: TOKEN_TOGGLE_URL
-            }, null, 8, ["label"])
-          ]),
           _: 1
         }, 8, ["url"]),
         createBaseVNode("div", _hoisted_2$1, [
@@ -50402,7 +50389,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const App = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a9bc068e"]]);
+const App = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-43e1543b"]]);
 const _hoisted_1 = { style: { "font-size": "12px", "white-space": "pre-wrap", "margin": "0" } };
 const _hoisted_2 = { style: { "width": "100%" } };
 const _hoisted_3 = { "data-grid": "cell" };
@@ -52633,7 +52620,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }
 });
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory("/ui-components/pr-preview-vue/pr-4047/"),
   routes: [
     {
       path: "/",
