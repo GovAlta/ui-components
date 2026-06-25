@@ -12,7 +12,7 @@ import {
 } from "@abgov/react-components";
 import { PublicFormLayout } from "../public-form-layout";
 import { FormSet } from "../form-set";
-import { FieldError } from "../error-summary";
+import { ErrorSummary, FieldError, useErrorSummaryFocus } from "../error-summary";
 import { Schema, required, pattern, minSelected, runSchema, useFormValidation } from "../validation";
 
 type Address = { street: string; city: string; province: string; postal: string };
@@ -64,6 +64,7 @@ export function MultiStep() {
   const [step, setStep] = useState<1 | 2>(1);
   const [draft, setDraft] = useState<Address>(EMPTY);
   const [modalErrors, setModalErrors] = useState<FieldError[]>([]);
+  const modalSummaryRef = useErrorSummaryFocus(modalErrors);
 
   const openAdd = () => {
     setEditingIndex(null);
@@ -207,9 +208,11 @@ export function MultiStep() {
           Step {step} of 2
         </GoabText>
 
+        <ErrorSummary ref={modalSummaryRef} errors={modalErrors} />
+
         {step === 1 ? (
           <>
-            <GoabFormItem label="Street address" error={errorFor("street")}>
+            <GoabFormItem label="Street address" id="street" error={errorFor("street")}>
               <GoabInput
                 name="street"
                 width="100%"
@@ -218,7 +221,7 @@ export function MultiStep() {
                 onChange={(e) => updateDraft({ street: e.value })}
               />
             </GoabFormItem>
-            <GoabFormItem label="City or town" mt="l" error={errorFor("city")}>
+            <GoabFormItem label="City or town" id="city" mt="l" error={errorFor("city")}>
               <GoabInput
                 name="city"
                 width="100%"
@@ -230,7 +233,7 @@ export function MultiStep() {
           </>
         ) : (
           <>
-            <GoabFormItem label="Province or territory" error={errorFor("province")}>
+            <GoabFormItem label="Province or territory" id="province" error={errorFor("province")}>
               <GoabDropdown
                 name="province"
                 error={has("province")}
@@ -242,7 +245,7 @@ export function MultiStep() {
                 ))}
               </GoabDropdown>
             </GoabFormItem>
-            <GoabFormItem label="Postal code" mt="l" error={errorFor("postal")}>
+            <GoabFormItem label="Postal code" id="postal" mt="l" error={errorFor("postal")}>
               <GoabInput
                 name="postal"
                 width="130px"

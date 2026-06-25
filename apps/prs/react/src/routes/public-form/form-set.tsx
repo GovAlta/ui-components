@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode } from "react";
 import { GoabText, GoabButton, GoabButtonGroup } from "@abgov/react-components";
-import { ErrorSummary, FieldError } from "./error-summary";
+import { ErrorSummary, FieldError, useErrorSummaryFocus } from "./error-summary";
 
 type FormSetProps = {
   /**
@@ -47,18 +47,9 @@ export function FormSet({
   onContinue,
   errors = [],
 }: FormSetProps) {
-  const summaryRef = useRef<HTMLDivElement>(null);
-  const hadErrors = useRef(false);
-
-  // Move focus to the summary only on an empty -> non-empty transition (a fresh
-  // failed submit), not while the user is live-clearing errors as they fix them.
-  useEffect(() => {
-    const hasErrors = errors.length > 0;
-    if (hasErrors && !hadErrors.current) {
-      summaryRef.current?.focus();
-    }
-    hadErrors.current = hasErrors;
-  }, [errors]);
+  // Focus the summary on a fresh failed submit (empty -> non-empty), not while the
+  // user is live-clearing errors as they fix them.
+  const summaryRef = useErrorSummaryFocus(errors);
 
   return (
     <>
