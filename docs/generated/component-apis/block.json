@@ -68,6 +68,13 @@
           "description": ""
         },
         {
+          "name": "stretch",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment."
+        },
+        {
           "name": "testId",
           "type": "string",
           "required": false,
@@ -149,6 +156,13 @@
           "required": false,
           "default": null,
           "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "stretch",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment."
         },
         {
           "name": "testId",
@@ -247,6 +261,13 @@
           "required": false,
           "default": null,
           "description": "Top margin."
+        },
+        {
+          "name": "stretch",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment."
         },
         {
           "name": "testid",
