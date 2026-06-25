@@ -50,6 +50,8 @@ describe("GoabAccordion", () => {
       },
     });
     expect(wrapper.text()).toContain("Body content");
+    expect(wrapper.text()).toContain("Heading slot content");
+    expect(wrapper.text()).toContain("Action buttons");
   });
 
   it("responds to events", () => {

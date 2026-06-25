@@ -48,6 +48,22 @@ describe("GoabMicrositeHeader", () => {
     expect(wrapper.text()).toContain("Custom version");
   });
 
+  it("sets hasfeedbackhandler when a handler is provided", () => {
+    const wrapper = mount(GoabMicrositeHeader, {
+      props: { type: "live", onFeedbackClick: vi.fn() },
+    });
+    const el = wrapper.find("goa-microsite-header").element;
+    expect(el.getAttribute("hasfeedbackhandler")).toBe("true");
+  });
+
+  it("does not set hasfeedbackhandler when no handler is provided", () => {
+    const wrapper = mount(GoabMicrositeHeader, {
+      props: { type: "live" },
+    });
+    const el = wrapper.find("goa-microsite-header").element;
+    expect(el.hasAttribute("hasfeedbackhandler")).toBe(false);
+  });
+
   it("responds to onFeedbackClick", () => {
     const fn = vi.fn();
     const wrapper = mount(GoabMicrositeHeader, {

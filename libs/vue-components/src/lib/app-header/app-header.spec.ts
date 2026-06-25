@@ -31,6 +31,35 @@ describe("GoabAppHeader", () => {
     expect(wrapper.text()).toContain("Header content");
   });
 
+  it("should render the named slots", () => {
+    const wrapper = mount(GoabAppHeader, {
+      slots: {
+        banner: "Banner content",
+        phase: "Phase content",
+        utilities: "Utilities content",
+        navigation: "Navigation content",
+      },
+    });
+    expect(wrapper.text()).toContain("Banner content");
+    expect(wrapper.text()).toContain("Phase content");
+    expect(wrapper.text()).toContain("Utilities content");
+    expect(wrapper.text()).toContain("Navigation content");
+  });
+
+  it("sets hasmenuclickhandler when a handler is provided", () => {
+    const wrapper = mount(GoabAppHeader, {
+      props: { onMenuClick: vi.fn() },
+    });
+    const el = wrapper.find("goa-app-header").element;
+    expect(el.getAttribute("hasmenuclickhandler")).toBe("true");
+  });
+
+  it("does not set hasmenuclickhandler when no handler is provided", () => {
+    const wrapper = mount(GoabAppHeader);
+    const el = wrapper.find("goa-app-header").element;
+    expect(el.hasAttribute("hasmenuclickhandler")).toBe(false);
+  });
+
   it("responds to onMenuClick", () => {
     const fn = vi.fn();
     const wrapper = mount(GoabAppHeader, {
