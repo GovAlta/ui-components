@@ -137,11 +137,11 @@ describe("WorkSideMenu", () => {
       const menuItem = result.getByTestId("hover-item");
 
       await menuItem.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(true);
         expect(tooltipEl?.textContent?.trim()).toBe("Search");
         expect(tooltipEl?.style.left).not.toBe("");
@@ -151,9 +151,6 @@ describe("WorkSideMenu", () => {
       await menuItem.unhover();
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(false);
       });
     });
@@ -186,11 +183,11 @@ describe("WorkSideMenu", () => {
       const group = result.getByTestId("hover-group");
 
       await group.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(true);
         expect(tooltipEl?.textContent?.trim()).toBe("Applications");
         expect(tooltipEl?.style.left).not.toBe("");
@@ -200,9 +197,6 @@ describe("WorkSideMenu", () => {
       await group.unhover();
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(false);
       });
     });
@@ -229,11 +223,11 @@ describe("WorkSideMenu", () => {
       const toggle = result.getByTestId("toggle-menu");
 
       await toggle.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(true);
         expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
         expect(tooltipEl?.style.left).not.toBe("");
@@ -243,9 +237,6 @@ describe("WorkSideMenu", () => {
       await toggle.unhover();
 
       await vi.waitFor(() => {
-        const tooltipEl = menu
-          .element()
-          .querySelector(".tooltip") as HTMLElement | null;
         expect(tooltipEl?.classList.contains("show")).toBe(false);
       });
     });
