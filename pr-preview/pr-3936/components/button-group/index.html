@@ -1556,185 +1556,7 @@ datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1yRtnV" prefix="r19" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm before navigating away&quot;],&quot;slug&quot;:[0,&quot;confirm-before-navigating-away&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmBeforeNavigatingAway() {\n  const [open, setOpen] = useState(false);\n\n  const handleChangeRoute = () =&gt; {\n    setOpen(false);\n    // In a real app, you would use your router&#39;s navigate function\n    // setTimeout(() =&gt; navigate(\&quot;/some-path\&quot;), 300);\n    console.log(\&quot;Navigating to new route...\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to change route?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={handleChangeRoute}&gt;\n              Change route\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      /&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onOpen()\&quot;&gt;Open&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Are you sure you want to change route?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onClose()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onChangeRoute()\&quot;\n        &gt;Change route&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { Router } from \&quot;@angular/router\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-before-navigating-away\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmBeforeNavigatingAwayComponent {\n  open = false;\n\n  constructor(private router: Router) {}\n\n  onOpen(): void {\n    this.open = true;\n  }\n\n  onClose(): void {\n    this.open = false;\n  }\n\n  onChangeRoute(): void {\n    this.open = false;\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; this.router.navigate([\&quot;/components\&quot;]), 0);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-btn\&quot;&gt;Open&lt;/goa-button&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;route-modal\&quot; heading=\&quot;Are you sure you want to change route?\&quot;&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;change-route-btn\&quot;\n        &gt;Change route&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;route-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const changeRouteBtn = document.getElementById(\&quot;change-route-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  changeRouteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; {\n      window.location.href = \&quot;/components\&quot;;\n    }, 300);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-before-navigating-away" class="example-title">Confirm before navigating away</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
-
-const handleChangeRoute = () =&gt; {
-  setOpen(false);
-  // In a real app, you would use your router&#x27;s navigate function
-  // setTimeout(() =&gt; navigate(&quot;/some-path&quot;), 300);
-  console.log(&quot;Navigating to new route...&quot;);
-};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;
-&lt;GoabModal
-  heading=&quot;Are you sure you want to change route?&quot;
-  open={open}
-  onClose={() =&gt; setOpen(false)}
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
-      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Cancel
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={handleChangeRoute}&gt;
-        Change route
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
-/&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
-import { Router } from &quot;@angular/router&quot;;
-
-open = false;
-
-constructor(private router: Router) {}
-
-onOpen(): void {
-  this.open = true;
-}
-
-onClose(): void {
-  this.open = false;
-}
-
-onChangeRoute(): void {
-  this.open = false;
-  // setTimeout will allow any modal transitions to be run
-  setTimeout(() =&gt; this.router.navigate([&quot;/components&quot;]), 0);
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onOpen()&quot;&gt;Open&lt;/goab-button&gt;
-&lt;goab-modal
-  [open]=&quot;open&quot;
-  heading=&quot;Are you sure you want to change route?&quot;
-  [actions]=&quot;actions&quot;
-&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;end&quot;&gt;
-      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;onClose()&quot;
-        &gt;Cancel&lt;/goab-button
-      &gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;onChangeRoute()&quot;
-        &gt;Change route&lt;/goab-button
-      &gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;route-modal&quot;);
-const openBtn = document.getElementById(&quot;open-btn&quot;);
-const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
-const changeRouteBtn = document.getElementById(&quot;change-route-btn&quot;);
-
-openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
-});
-
-cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-changeRouteBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-  // setTimeout will allow any modal transitions to be run
-  setTimeout(() =&gt; {
-    window.location.href = &quot;/components&quot;;
-  }, 300);
-});
-
-modal.addEventListener(&quot;_close&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-btn&quot;&gt;Open&lt;/goa-button&gt;
-&lt;goa-modal version=&quot;2&quot; id=&quot;route-modal&quot; heading=&quot;Are you sure you want to change route?&quot;&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;end&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;cancel-btn&quot;
-        &gt;Cancel&lt;/goa-button
-      &gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;change-route-btn&quot;
-        &gt;Change route&lt;/goa-button
-      &gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link,
-        .figma-link:visited {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="KTzLp" prefix="r20" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a destructive action&quot;],&quot;slug&quot;:[0,&quot;confirm-a-destructive-action&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmADestructiveAction() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Delete record\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to delete this record?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton\n              type=\&quot;primary\&quot;\n              variant=\&quot;destructive\&quot;\n              size=\&quot;compact\&quot;\n              onClick={() =&gt; setOpen(false)}\n            &gt;\n              Delete record\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Delete record&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Delete record&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-destructive-action\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmADestructiveActionComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;trash\&quot; id=\&quot;delete-btn\&quot;\n  &gt;Delete record&lt;/goa-button\n&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;delete-modal\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        id=\&quot;confirm-delete-btn\&quot;\n        &gt;Delete record&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;delete-modal\&quot;);\n  const deleteBtn = document.getElementById(\&quot;delete-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const confirmDeleteBtn = document.getElementById(\&quot;confirm-delete-btn\&quot;);\n\n  deleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmDeleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-destructive-action" class="example-title">Confirm a destructive action</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;trash&quot; onClick={() =&gt; setOpen(true)}&gt;
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="KTzLp" prefix="r19" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a destructive action&quot;],&quot;slug&quot;:[0,&quot;confirm-a-destructive-action&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmADestructiveAction() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Delete record\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to delete this record?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton\n              type=\&quot;primary\&quot;\n              variant=\&quot;destructive\&quot;\n              size=\&quot;compact\&quot;\n              onClick={() =&gt; setOpen(false)}\n            &gt;\n              Delete record\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;trash\&quot; (onClick)=\&quot;toggleModal()\&quot;\n  &gt;Delete record&lt;/goab-button\n&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        (onClick)=\&quot;toggleModal()\&quot;\n        &gt;Delete record&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-destructive-action\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmADestructiveActionComponent {\n  open = false;\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;trash\&quot; id=\&quot;delete-btn\&quot;\n  &gt;Delete record&lt;/goa-button\n&gt;\n&lt;goa-modal\n  version=\&quot;2\&quot;\n  id=\&quot;delete-modal\&quot;\n  heading=\&quot;Are you sure you want to delete this record?\&quot;\n&gt;\n  &lt;p&gt;This action cannot be undone.&lt;/p&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        type=\&quot;primary\&quot;\n        variant=\&quot;destructive\&quot;\n        size=\&quot;compact\&quot;\n        id=\&quot;confirm-delete-btn\&quot;\n        &gt;Delete record&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;delete-modal\&quot;);\n  const deleteBtn = document.getElementById(\&quot;delete-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const confirmDeleteBtn = document.getElementById(\&quot;confirm-delete-btn\&quot;);\n\n  deleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmDeleteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-destructive-action" class="example-title">Confirm a destructive action</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169783" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;trash&quot; onClick={() =&gt; setOpen(true)}&gt;
   Delete record
 &lt;/GoabButton&gt;
 &lt;GoabModal
@@ -1828,6 +1650,184 @@ modal.addEventListener(&quot;_close&quot;, () =&gt; {
         size=&quot;compact&quot;
         id=&quot;confirm-delete-btn&quot;
         &gt;Delete record&lt;/goa-button
+      &gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link,
+        .figma-link:visited {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1yRtnV" prefix="r20" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm before navigating away&quot;],&quot;slug&quot;:[0,&quot;confirm-before-navigating-away&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabButton, GoabButtonGroup, GoabModal } from \&quot;@abgov/react-components\&quot;;\n\nexport function ConfirmBeforeNavigatingAway() {\n  const [open, setOpen] = useState(false);\n\n  const handleChangeRoute = () =&gt; {\n    setOpen(false);\n    // In a real app, you would use your router&#39;s navigate function\n    // setTimeout(() =&gt; navigate(\&quot;/some-path\&quot;), 300);\n    console.log(\&quot;Navigating to new route...\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;\n      &lt;GoabModal\n        heading=\&quot;Are you sure you want to change route?\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={handleChangeRoute}&gt;\n              Change route\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      /&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onOpen()\&quot;&gt;Open&lt;/goab-button&gt;\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  heading=\&quot;Are you sure you want to change route?\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onClose()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;onChangeRoute()\&quot;\n        &gt;Change route&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { Router } from \&quot;@angular/router\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-before-navigating-away\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmBeforeNavigatingAwayComponent {\n  open = false;\n\n  constructor(private router: Router) {}\n\n  onOpen(): void {\n    this.open = true;\n  }\n\n  onClose(): void {\n    this.open = false;\n  }\n\n  onChangeRoute(): void {\n    this.open = false;\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; this.router.navigate([\&quot;/components\&quot;]), 0);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-btn\&quot;&gt;Open&lt;/goa-button&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;route-modal\&quot; heading=\&quot;Are you sure you want to change route?\&quot;&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;cancel-btn\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;change-route-btn\&quot;\n        &gt;Change route&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;route-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const changeRouteBtn = document.getElementById(\&quot;change-route-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  changeRouteBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n    // setTimeout will allow any modal transitions to be run\n    setTimeout(() =&gt; {\n      window.location.href = \&quot;/components\&quot;;\n    }, 300);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-before-navigating-away" class="example-title">Confirm before navigating away</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169736" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
+
+const handleChangeRoute = () =&gt; {
+  setOpen(false);
+  // In a real app, you would use your router&#x27;s navigate function
+  // setTimeout(() =&gt; navigate(&quot;/some-path&quot;), 300);
+  console.log(&quot;Navigating to new route...&quot;);
+};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Open&lt;/GoabButton&gt;
+&lt;GoabModal
+  heading=&quot;Are you sure you want to change route?&quot;
+  open={open}
+  onClose={() =&gt; setOpen(false)}
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Cancel
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={handleChangeRoute}&gt;
+        Change route
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
+/&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
+import { Router } from &quot;@angular/router&quot;;
+
+open = false;
+
+constructor(private router: Router) {}
+
+onOpen(): void {
+  this.open = true;
+}
+
+onClose(): void {
+  this.open = false;
+}
+
+onChangeRoute(): void {
+  this.open = false;
+  // setTimeout will allow any modal transitions to be run
+  setTimeout(() =&gt; this.router.navigate([&quot;/components&quot;]), 0);
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onOpen()&quot;&gt;Open&lt;/goab-button&gt;
+&lt;goab-modal
+  [open]=&quot;open&quot;
+  heading=&quot;Are you sure you want to change route?&quot;
+  [actions]=&quot;actions&quot;
+&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;onClose()&quot;
+        &gt;Cancel&lt;/goab-button
+      &gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;onChangeRoute()&quot;
+        &gt;Change route&lt;/goab-button
+      &gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;route-modal&quot;);
+const openBtn = document.getElementById(&quot;open-btn&quot;);
+const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
+const changeRouteBtn = document.getElementById(&quot;change-route-btn&quot;);
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+changeRouteBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+  // setTimeout will allow any modal transitions to be run
+  setTimeout(() =&gt; {
+    window.location.href = &quot;/components&quot;;
+  }, 300);
+});
+
+modal.addEventListener(&quot;_close&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-btn&quot;&gt;Open&lt;/goa-button&gt;
+&lt;goa-modal version=&quot;2&quot; id=&quot;route-modal&quot; heading=&quot;Are you sure you want to change route?&quot;&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;cancel-btn&quot;
+        &gt;Cancel&lt;/goa-button
+      &gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;change-route-btn&quot;
+        &gt;Change route&lt;/goa-button
       &gt;
     &lt;/goa-button-group&gt;
   &lt;/div&gt;
@@ -2270,7 +2270,13 @@ modal.addEventListener(&quot;_close&quot;, closeModal);</code></pre></div></div>
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="1iFD0R" prefix="r23" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Reset date picker field&quot;],&quot;slug&quot;:[0,&quot;reset-date-picker-field&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDatePicker,\n  GoabFormItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ResetDatePickerField() {\n  const [date, setDate] = useState&lt;Date | undefined&gt;();\n\n  const setNewDate = (value: Date | undefined) =&gt; {\n    setDate(value);\n  };\n\n  function setValue() {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    setDate(d);\n  }\n\n  function clearValue() {\n    setDate(undefined);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem label=\&quot;Date Picker\&quot;&gt;\n        &lt;GoabDatePicker\n          name=\&quot;item\&quot;\n          value={date}\n          onChange={(e) =&gt; setNewDate(e.value as Date)}\n          mb=\&quot;xl\&quot;\n        /&gt;\n      &lt;/GoabFormItem&gt;\n\n      &lt;GoabButtonGroup mt=\&quot;xs\&quot; alignment=\&quot;start\&quot;&gt;\n        &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;\n        &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;\n      &lt;/GoabButtonGroup&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Date Picker\&quot;&gt;\n  &lt;goab-date-picker (onChange)=\&quot;onChange($event)\&quot; name=\&quot;item\&quot; [value]=\&quot;item\&quot;&gt;\n  &lt;/goab-date-picker&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goab-button (onClick)=\&quot;setValue()\&quot;&gt;Set Value&lt;/goab-button&gt;\n  &lt;goab-button (onClick)=\&quot;clearValue()\&quot;&gt;Clear Value&lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-reset-date-picker-field\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ResetDatePickerFieldComponent {\n  item: Date | undefined = undefined;\n\n  onChange(event: GoabDatePickerOnChangeDetail): void {\n    this.item = event.valueStr ? new Date(event.valueStr) : undefined;\n  }\n\n  setValue(): void {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    this.item = d;\n  }\n\n  clearValue(): void {\n    this.item = undefined;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date Picker\&quot;&gt;\n  &lt;goa-date-picker version=\&quot;2\&quot; id=\&quot;date-picker\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-date-picker&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;set-value-btn\&quot;&gt;Set Value&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;clear-value-btn\&quot;&gt;Clear Value&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;script&gt;\n  const datePicker = document.getElementById(\&quot;date-picker\&quot;);\n  const setValueBtn = document.getElementById(\&quot;set-value-btn\&quot;);\n  const clearValueBtn = document.getElementById(\&quot;clear-value-btn\&quot;);\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Date changed:\&quot;, e.detail.value);\n  });\n\n  setValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    datePicker.setAttribute(\&quot;value\&quot;, d.toISOString());\n  });\n\n  clearValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    datePicker.removeAttribute(\&quot;value\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-reset-date-picker-field" class="example-title">Reset date picker field</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [date, setDate] = useState&lt;Date | undefined&gt;();
+      </style></div><!--astro:end--></astro-island>  </div> <article class="example-display" data-astro-cid-iocfgxgr> <div class="example-preview page-scale-preview" data-astro-cid-iocfgxgr> <h3 id="example-result-page" class="example-title page-scale-title" data-astro-cid-iocfgxgr>Result page</h3> <div class="preview-container" data-astro-cid-zrrfk47p><a href="/ui-components/pr-preview/pr-3936/examples/result-page/preview" class="preview-image-link" aria-label="Open live preview of Result page preview" data-astro-cid-zrrfk47p><img src="/ui-components/pr-preview/pr-3936/images/examples/result-page.png" alt="Result page preview" data-astro-cid-zrrfk47p><div class="preview-overlay" aria-hidden="true" data-astro-cid-zrrfk47p><span class="preview-overlay-label" data-astro-cid-zrrfk47p>
+See live preview
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-zrrfk47p><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" data-astro-cid-zrrfk47p></path><polyline points="15 3 21 3 21 9" data-astro-cid-zrrfk47p></polyline><line x1="10" y1="14" x2="21" y2="3" data-astro-cid-zrrfk47p></line></svg></span></div></a><div class="preview-actions" data-astro-cid-zrrfk47p><div class="preview-actions-left" data-astro-cid-zrrfk47p></div><div class="preview-actions-right" data-astro-cid-zrrfk47p><goa-button version="2" type="tertiary" size="compact" onclick="window.location.href='/ui-components/pr-preview/pr-3936/examples/result-page'" data-astro-cid-zrrfk47p="true">
+More info
+</goa-button><goa-button version="2" type="secondary" size="compact" leadingicon="eye" onclick="window.location.href='/ui-components/pr-preview/pr-3936/examples/result-page/preview'" data-astro-cid-zrrfk47p="true">
+Live preview
+</goa-button></div></div></div> </div> </article> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="1iFD0R" prefix="r23" component-url="/ui-components/pr-preview/pr-3936/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3936/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Reset date picker field&quot;],&quot;slug&quot;:[0,&quot;reset-date-picker-field&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDatePicker,\n  GoabFormItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ResetDatePickerField() {\n  const [date, setDate] = useState&lt;Date | undefined&gt;();\n\n  const setNewDate = (value: Date | undefined) =&gt; {\n    setDate(value);\n  };\n\n  function setValue() {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    setDate(d);\n  }\n\n  function clearValue() {\n    setDate(undefined);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem label=\&quot;Date Picker\&quot;&gt;\n        &lt;GoabDatePicker\n          name=\&quot;item\&quot;\n          value={date}\n          onChange={(e) =&gt; setNewDate(e.value as Date)}\n          mb=\&quot;xl\&quot;\n        /&gt;\n      &lt;/GoabFormItem&gt;\n\n      &lt;GoabButtonGroup mt=\&quot;xs\&quot; alignment=\&quot;start\&quot;&gt;\n        &lt;GoabButton onClick={setValue}&gt;Set Value&lt;/GoabButton&gt;\n        &lt;GoabButton onClick={clearValue}&gt;Clear Value&lt;/GoabButton&gt;\n      &lt;/GoabButtonGroup&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Date Picker\&quot;&gt;\n  &lt;goab-date-picker (onChange)=\&quot;onChange($event)\&quot; name=\&quot;item\&quot; [value]=\&quot;item\&quot;&gt;\n  &lt;/goab-date-picker&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goab-button (onClick)=\&quot;setValue()\&quot;&gt;Set Value&lt;/goab-button&gt;\n  &lt;goab-button (onClick)=\&quot;clearValue()\&quot;&gt;Clear Value&lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-reset-date-picker-field\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ResetDatePickerFieldComponent {\n  item: Date | undefined = undefined;\n\n  onChange(event: GoabDatePickerOnChangeDetail): void {\n    this.item = event.valueStr ? new Date(event.valueStr) : undefined;\n  }\n\n  setValue(): void {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    this.item = d;\n  }\n\n  clearValue(): void {\n    this.item = undefined;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date Picker\&quot;&gt;\n  &lt;goa-date-picker version=\&quot;2\&quot; id=\&quot;date-picker\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-date-picker&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; mt=\&quot;xs\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;set-value-btn\&quot;&gt;Set Value&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;clear-value-btn\&quot;&gt;Clear Value&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;script&gt;\n  const datePicker = document.getElementById(\&quot;date-picker\&quot;);\n  const setValueBtn = document.getElementById(\&quot;set-value-btn\&quot;);\n  const clearValueBtn = document.getElementById(\&quot;clear-value-btn\&quot;);\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Date changed:\&quot;, e.detail.value);\n  });\n\n  setValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    const d = new Date();\n    d.setDate(d.getDate() - 7);\n    datePicker.setAttribute(\&quot;value\&quot;, d.toISOString());\n  });\n\n  clearValueBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    datePicker.removeAttribute(\&quot;value\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-reset-date-picker-field" class="example-title">Reset date picker field</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [date, setDate] = useState&lt;Date | undefined&gt;();
 
 const setNewDate = (value: Date | undefined) =&gt; {
   setDate(value);
@@ -2430,13 +2436,7 @@ clearValueBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <article class="example-display" data-astro-cid-iocfgxgr> <div class="example-preview page-scale-preview" data-astro-cid-iocfgxgr> <h3 id="example-result-page" class="example-title page-scale-title" data-astro-cid-iocfgxgr>Result page</h3> <div class="preview-container" data-astro-cid-zrrfk47p><a href="/ui-components/pr-preview/pr-3936/examples/result-page/preview" class="preview-image-link" aria-label="Open live preview of Result page preview" data-astro-cid-zrrfk47p><img src="/ui-components/pr-preview/pr-3936/images/examples/result-page.png" alt="Result page preview" data-astro-cid-zrrfk47p><div class="preview-overlay" aria-hidden="true" data-astro-cid-zrrfk47p><span class="preview-overlay-label" data-astro-cid-zrrfk47p>
-See live preview
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-zrrfk47p><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" data-astro-cid-zrrfk47p></path><polyline points="15 3 21 3 21 9" data-astro-cid-zrrfk47p></polyline><line x1="10" y1="14" x2="21" y2="3" data-astro-cid-zrrfk47p></line></svg></span></div></a><div class="preview-actions" data-astro-cid-zrrfk47p><div class="preview-actions-left" data-astro-cid-zrrfk47p></div><div class="preview-actions-right" data-astro-cid-zrrfk47p><goa-button version="2" type="tertiary" size="compact" onclick="window.location.href='/ui-components/pr-preview/pr-3936/examples/result-page'" data-astro-cid-zrrfk47p="true">
-More info
-</goa-button><goa-button version="2" type="secondary" size="compact" leadingicon="eye" onclick="window.location.href='/ui-components/pr-preview/pr-3936/examples/result-page/preview'" data-astro-cid-zrrfk47p="true">
-Live preview
-</goa-button></div></div></div> </div> </article> <article class="example-display" data-astro-cid-iocfgxgr> <div class="example-preview page-scale-preview" data-astro-cid-iocfgxgr> <h3 id="example-review-page" class="example-title page-scale-title" data-astro-cid-iocfgxgr>Review page</h3> <div class="preview-container" data-astro-cid-zrrfk47p><a href="/ui-components/pr-preview/pr-3936/examples/review-page/preview" class="preview-image-link" aria-label="Open live preview of Review page preview" data-astro-cid-zrrfk47p><img src="/ui-components/pr-preview/pr-3936/images/examples/review-page.png" alt="Review page preview" data-astro-cid-zrrfk47p><div class="preview-overlay" aria-hidden="true" data-astro-cid-zrrfk47p><span class="preview-overlay-label" data-astro-cid-zrrfk47p>
+      </style></div><!--astro:end--></astro-island>  </div> <article class="example-display" data-astro-cid-iocfgxgr> <div class="example-preview page-scale-preview" data-astro-cid-iocfgxgr> <h3 id="example-review-page" class="example-title page-scale-title" data-astro-cid-iocfgxgr>Review page</h3> <div class="preview-container" data-astro-cid-zrrfk47p><a href="/ui-components/pr-preview/pr-3936/examples/review-page/preview" class="preview-image-link" aria-label="Open live preview of Review page preview" data-astro-cid-zrrfk47p><img src="/ui-components/pr-preview/pr-3936/images/examples/review-page.png" alt="Review page preview" data-astro-cid-zrrfk47p><div class="preview-overlay" aria-hidden="true" data-astro-cid-zrrfk47p><span class="preview-overlay-label" data-astro-cid-zrrfk47p>
 See live preview
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-zrrfk47p><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" data-astro-cid-zrrfk47p></path><polyline points="15 3 21 3 21 9" data-astro-cid-zrrfk47p></polyline><line x1="10" y1="14" x2="21" y2="3" data-astro-cid-zrrfk47p></line></svg></span></div></a><div class="preview-actions" data-astro-cid-zrrfk47p><div class="preview-actions-left" data-astro-cid-zrrfk47p></div><div class="preview-actions-right" data-astro-cid-zrrfk47p><goa-button version="2" type="tertiary" size="compact" onclick="window.location.href='/ui-components/pr-preview/pr-3936/examples/review-page'" data-astro-cid-zrrfk47p="true">
 More info
