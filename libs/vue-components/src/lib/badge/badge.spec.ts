@@ -57,6 +57,7 @@ describe("GoabBadge", () => {
 
   it("should render content via slot", () => {
     const wrapper = mount(GoabBadge, {
+      props: { type: "information" },
       slots: { default: "Slot content" },
     });
     expect(wrapper.text()).toContain("Slot content");

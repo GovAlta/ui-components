@@ -1,5 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi } from "vitest";
+import { h } from "vue";
 import GoabRadioGroup from "./radio-group.vue";
 
 describe("GoabRadioGroup", () => {
@@ -61,7 +62,9 @@ describe("GoabRadioGroup", () => {
   it("renders children via slot", () => {
     const wrapper = mount(GoabRadioGroup, {
       props: { name: "fruits" },
-      slots: { default: "<goa-radio-item label='Apples' value='apples' />" },
+      slots: {
+        default: () => h("goa-radio-item", { label: "Apples", value: "apples" }),
+      },
     });
     const el = wrapper.find("goa-radio-group").element;
     expect(el.querySelector("goa-radio-item")).toBeTruthy();
