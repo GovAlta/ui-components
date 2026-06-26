@@ -5,6 +5,11 @@ import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from ".
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
+// The tooltip uses a 300ms show/hide debounce. On contended CI runners that
+// timer can be delayed past waitFor's 1000ms default, so give the tooltip
+// assertions extra headroom to absorb the debounce plus event latency.
+const TOOLTIP_WAIT = { timeout: 3000 };
+
 describe("WorkSideMenu", () => {
   describe("Desktop viewport", () => {
     it("renders with slots", async () => {
@@ -146,13 +151,13 @@ describe("WorkSideMenu", () => {
         expect(tooltipEl?.textContent?.trim()).toBe("Search");
         expect(tooltipEl?.style.left).not.toBe("");
         expect(tooltipEl?.style.top).not.toBe("");
-      });
+      }, TOOLTIP_WAIT);
 
       await menuItem.unhover();
 
       await vi.waitFor(() => {
         expect(tooltipEl?.classList.contains("show")).toBe(false);
-      });
+      }, TOOLTIP_WAIT);
     });
 
     it("should show and hide tooltip for group", async () => {
@@ -192,13 +197,13 @@ describe("WorkSideMenu", () => {
         expect(tooltipEl?.textContent?.trim()).toBe("Applications");
         expect(tooltipEl?.style.left).not.toBe("");
         expect(tooltipEl?.style.top).not.toBe("");
-      });
+      }, TOOLTIP_WAIT);
 
       await group.unhover();
 
       await vi.waitFor(() => {
         expect(tooltipEl?.classList.contains("show")).toBe(false);
-      });
+      }, TOOLTIP_WAIT);
     });
 
     it("should show and hide tooltip for toggle button", async () => {
@@ -232,13 +237,13 @@ describe("WorkSideMenu", () => {
         expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
         expect(tooltipEl?.style.left).not.toBe("");
         expect(tooltipEl?.style.top).not.toBe("");
-      });
+      }, TOOLTIP_WAIT);
 
       await toggle.unhover();
 
       await vi.waitFor(() => {
         expect(tooltipEl?.classList.contains("show")).toBe(false);
-      });
+      }, TOOLTIP_WAIT);
     });
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
