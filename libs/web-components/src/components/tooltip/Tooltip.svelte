@@ -308,6 +308,12 @@
       return;
     }
 
+    // Clear any width/white-space set by a previous reconcile so the
+    // natural size for the current content is measured, not a size left
+    // over from earlier content (e.g. "Copy" -> "Copied").
+    _tooltipEl.style.width = "";
+    _tooltipEl.style.whiteSpace = "";
+
     // determine the bounding rectangle of the tooltip and target element
     let tooltipRect = _tooltipEl.getBoundingClientRect();
     const targetRect = _targetEl.getBoundingClientRect();
