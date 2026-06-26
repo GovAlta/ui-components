@@ -119,7 +119,7 @@ export const blockConfigurations: ComponentConfigurations = {
         react: `<GoabBlock alignment="start" mb="m" direction="column" width="100%">
   <GoabContainer type="non-interactive"><p>Without stretch: width is ignored</p></GoabContainer>
 </GoabBlock>
-<GoabBlock alignment="start" stretch direction="column" width="100%">
+<GoabBlock alignment="start" stretch={true} direction="column" width="100%">
   <GoabContainer type="non-interactive"><p>With stretch: fills the available width</p></GoabContainer>
 </GoabBlock>`,
         angular: `<goab-block alignment="start" mb="m" direction="column" width="100%">
