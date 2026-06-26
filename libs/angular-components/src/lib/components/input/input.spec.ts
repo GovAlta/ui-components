@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabInput } from "./input";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef, ViewChild } from "@angular/core";
 import {
   GoabIconType,
   GoabInputAutoCapitalize,
@@ -10,6 +10,13 @@ import {
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  NgModel,
+  ReactiveFormsModule,
+} from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -323,6 +330,121 @@ describe("GoABInput", () => {
       inputComponent.writeValue(null);
       expect(inputComponent.value).toBe(null);
     });
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabInput, ReactiveFormsModule],
+  template: `
+    <form [formGroup]="form">
+      <goab-input formControlName="lastName" name="lastName"></goab-input>
+    </form>
+  `,
+})
+class TestReactiveFormComponent {
+  form = new FormGroup({
+    lastName: new FormControl(""),
+  });
+}
+
+describe("GoabInput reactive form touched state", () => {
+  let fixture: ComponentFixture<TestReactiveFormComponent>;
+  let component: TestReactiveFormComponent;
+  let input: HTMLElement;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestReactiveFormComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestReactiveFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
+  }));
+
+  it("should not mark the control as touched on focus", () => {
+    fireEvent(input, new CustomEvent("_focus"));
+    expect(component.form.get("lastName")?.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on change", () => {
+    fireEvent(
+      input,
+      new CustomEvent("_change", { detail: { name: "lastName", value: "Doe" } }),
+    );
+    expect(component.form.get("lastName")?.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on key press", () => {
+    fireEvent(input, new CustomEvent("_keyPress"));
+    expect(component.form.get("lastName")?.touched).toBe(false);
+  });
+
+  it("should mark the control as touched on blur", () => {
+    fireEvent(input, new CustomEvent("_blur"));
+    expect(component.form.get("lastName")?.touched).toBe(true);
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabInput, FormsModule],
+  template: `
+    <goab-input name="lastName" [(ngModel)]="lastName" #model="ngModel"></goab-input>
+  `,
+})
+class TestNgModelComponent {
+  lastName = "";
+  @ViewChild("model") model!: NgModel;
+}
+
+describe("GoabInput template-driven form touched state", () => {
+  let fixture: ComponentFixture<TestNgModelComponent>;
+  let component: TestNgModelComponent;
+  let input: HTMLElement;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestNgModelComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestNgModelComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
+  }));
+
+  it("should not mark the control as touched on focus", () => {
+    fireEvent(input, new CustomEvent("_focus"));
+    expect(component.model.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on change", () => {
+    fireEvent(
+      input,
+      new CustomEvent("_change", { detail: { name: "lastName", value: "Doe" } }),
+    );
+    expect(component.model.touched).toBe(false);
+  });
+
+  it("should not mark the control as touched on key press", () => {
+    fireEvent(input, new CustomEvent("_keyPress"));
+    expect(component.model.touched).toBe(false);
+  });
+
+  it("should mark the control as touched on blur", () => {
+    fireEvent(input, new CustomEvent("_blur"));
+    expect(component.model.touched).toBe(true);
   });
 });
 

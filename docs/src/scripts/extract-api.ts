@@ -184,6 +184,10 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
   "file-upload-input": {
     _selectFile: "CustomEvent<{ file: File; event: Event }>",
   },
+  "workspace-layout": {
+    _scrollStateChange:
+      "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
+  },
 };
 const SLOT_TYPE_OVERRIDES: Record<
   string,

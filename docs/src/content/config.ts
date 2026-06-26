@@ -33,6 +33,9 @@ const components = defineCollection({
     // Visibility
     hidden: z.boolean().optional(), // Hide from navigation and public views
     subcomponent: z.boolean().optional(), // Show API on parent component page
+    hideTabs: z
+      .array(z.enum(["examples", "usage", "accessibility"]))
+      .optional(), // Hide specific tabs on this component's page
   }),
 });
 
@@ -275,6 +278,7 @@ const getStarted = defineCollection({
       "ai-tools-and-resources",
       "contribute",
       "out-of-support",
+      "articles",
     ]),
     // Sort order within section.
     order: z.number(),

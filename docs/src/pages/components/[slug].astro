@@ -32,6 +32,7 @@ export async function getStaticPaths() {
 
 const { component } = Astro.props;
 const { slug } = Astro.params;
+const hideTabs = component.data.hideTabs ?? [];
 const categoryLabel = component.data.category
   .split('-').map((w: string, i: number) => i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ');
 
@@ -147,6 +148,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
 
     <!-- Examples Tab -->
     <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation -->
+    {!hideTabs.includes('examples') && (
     <goa-tab heading="Examples">
       <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
@@ -163,8 +165,10 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
         )}
       </TabContentWrapper>
     </goa-tab>
+    )}
 
     <!-- Usage Guidelines Tab -->
+    {!hideTabs.includes('usage') && (
     <goa-tab heading="Usage guidelines">
       <TabContentWrapper tocQuery=".guidance-section .topic-heading">
         <GuidanceGrid
@@ -172,14 +176,18 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
           emptyMessage="No usage guidelines have been documented for this component yet."
         />
 
-        <!-- MDX Content (additional usage info) -->
+        <!-- MDX Content (additional usage info; only when the component has body content) -->
+        {component.body?.trim() && (
         <div class="mdx-content">
           <Content />
         </div>
+        )}
       </TabContentWrapper>
     </goa-tab>
+    )}
 
     <!-- Accessibility Tab -->
+    {!hideTabs.includes('accessibility') && (
     <goa-tab heading="Accessibility">
       <TabContentWrapper tocQuery=".guidance-section .topic-heading">
         <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch">
@@ -192,6 +200,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
         />
       </TabContentWrapper>
     </goa-tab>
+    )}
   </goa-tabs>
 
   {relatedComponents.length > 0 && (

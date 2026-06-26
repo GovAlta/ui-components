@@ -52,6 +52,66 @@ import FoundationsSupportCallout from "../../../components/FoundationsSupportCal
 
   <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
 
+  <h2 id="design-for-responsiveness">Design for responsiveness</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Layouts should adapt across screen sizes without losing clarity.
+  </goa-text>
+
+  <h3 id="breakpoints">Breakpoints</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Most GoA components handle responsive behaviour internally. Many components use
+    container queries rather than viewport media queries, so they respond to the size of
+    their container rather than the size of the window. A component placed in a narrow
+    sidebar adapts to that sidebar even on a wide screen.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    When you do need to think about screen size explicitly, the Design System uses 3
+    breakpoints:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li><strong>Mobile:</strong> under 624px. Phones and small devices.</li>
+      <li><strong>Tablet:</strong> 624px to 1023px. Tablets and medium devices.</li>
+      <li><strong>Desktop:</strong> 1024px and above. Desktop and larger screens.</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    These align with how the components adapt, so custom layouts built around GoA
+    components work together at the same breakpoints. On mobile in particular:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Buttons go full-width by default, and can be overridden</li>
+      <li>Form layouts stack labels above inputs</li>
+      <li>Navigation collapses</li>
+      <li>Block direction switches to column regardless of the direction prop</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="public-form-considerations">Public form considerations</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use a single-column layout to support a clear reading flow</li>
+      <li>Keep the main task and primary actions in a predictable location</li>
+      <li>Avoid adding secondary regions that compete for attention</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="workspace-considerations">Workspace considerations</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Keep the main content area as the focus</li>
+      <li>
+        Let supporting panels and secondary regions move below or hide as space becomes
+        limited
+      </li>
+      <li>Ensure secondary content is still easy to access</li>
+      <li>Maintain a clear and predictable page structure across screen sizes</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
   <h2 id="service-type">Service type</h2>
   <goa-text size="body-m" mt="none" mb="m">
     Choose a layout that matches the type of service you are building.
@@ -190,35 +250,6 @@ import FoundationsSupportCallout from "../../../components/FoundationsSupportCal
       <li>Use spacing tokens to add consistent space throughout the interface</li>
       <li>Use a single-column layout when it supports the task</li>
       <li>Start with an existing template before creating a custom structure</li>
-    </ul>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="design-for-responsiveness">Design for responsiveness</h2>
-  <goa-text size="body-m" mt="none" mb="m">
-    Layouts should adapt across screen sizes without losing clarity.
-  </goa-text>
-
-  <h3 id="public-form-considerations">Public form considerations</h3>
-  <goa-text size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Use a single-column layout to support a clear reading flow</li>
-      <li>Keep the main task and primary actions in a predictable location</li>
-      <li>Avoid adding secondary regions that compete for attention</li>
-    </ul>
-  </goa-text>
-
-  <h3 id="workspace-considerations">Workspace considerations</h3>
-  <goa-text size="body-m" mt="none" mb="none">
-    <ul>
-      <li>Keep the main content area as the focus</li>
-      <li>
-        Let supporting panels and secondary regions move below or hide as space becomes
-        limited
-      </li>
-      <li>Ensure secondary content is still easy to access</li>
-      <li>Maintain a clear and predictable page structure across screen sizes</li>
     </ul>
   </goa-text>
 

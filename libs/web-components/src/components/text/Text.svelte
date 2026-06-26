@@ -5,6 +5,7 @@
   export type TextElement = "span" | "div" | "p";
 
   type HeadingSize =
+    | "heading-2xl"
     | "heading-xl"
     | "heading-l"
     | "heading-m"
@@ -77,6 +78,8 @@
     }
 
     switch (effectiveSize) {
+      case "heading-2xl":
+        return "l";
       case "heading-xl":
         return "l";
       case "heading-l":
@@ -106,6 +109,7 @@
     }
 
     switch (effectiveSize) {
+      case "heading-2xl":
       case "heading-xl":
       case "heading-l":
       case "heading-m":
@@ -155,6 +159,20 @@
     margin: 0;
   }
 
+  /*
+   * heading-2xl (like heading-2xs) exists only in the V2 token set. When a
+   * consumer has only V1 tokens loaded the token is undefined, so it falls back
+   * to the nearest size that exists in V1 (heading-xl) rather than collapsing to
+   * unstyled text. Sizes that exist in both token sets (heading-xl through
+   * heading-xs) reference their token directly and need no fallback.
+   */
+  .heading-2xl {
+    font: var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));
+    letter-spacing: var(
+      --goa-typography-heading-2xl-letter-spacing,
+      var(--goa-typography-heading-xl-letter-spacing)
+    );
+  }
   .heading-xl {
     font: var(--goa-typography-heading-xl);
     letter-spacing: var(--goa-typography-heading-xl-letter-spacing);
@@ -193,6 +211,14 @@
   }
 
   @media (--mobile) {
+    /* V2-only size; falls back to the nearest V1 size. See the note on the desktop .heading-2xl rule above. */
+    .heading-2xl {
+      font: var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));
+      letter-spacing: var(
+        --goa-typography-mobile-heading-2xl-letter-spacing,
+        var(--goa-typography-mobile-heading-xl-letter-spacing)
+      );
+    }
     .heading-xl {
       font: var(--goa-typography-mobile-heading-xl);
       letter-spacing: var(--goa-typography-mobile-heading-xl-letter-spacing);

@@ -1,0 +1,53 @@
+<goab-text tag="h1" mt="m" mb="s">Bug 3837 - Tabs: label should not shift horizontally when selection changes</goab-text>
+<goab-text mb="m">
+  Click between tabs and observe that labels do not shift horizontally. The active tab bold treatment should be preserved.
+</goab-text>
+
+<goab-text tag="h3">Test 1: String headings (default)</goab-text>
+<goab-tabs>
+  <goab-tab heading="Short">Short tab content</goab-tab>
+  <goab-tab heading="Much longer label">Longer tab content</goab-tab>
+  <goab-tab heading="Medium label">Medium tab content</goab-tab>
+  <goab-tab heading="Another tab">Another tab content</goab-tab>
+</goab-tabs>
+
+<goab-text tag="h3">Test 2: Similar-length string headings</goab-text>
+<goab-tabs>
+  <goab-tab heading="Information">Information content</goab-tab>
+  <goab-tab heading="Documents">Documents content</goab-tab>
+  <goab-tab heading="History">History content</goab-tab>
+</goab-tabs>
+
+<goab-text tag="h3">Test 3: Slot headings</goab-text>
+<goab-text mb="m">Tabs using the heading slot rather than a string prop. Verify no shift occurs.</goab-text>
+<goab-tabs>
+  <goab-tab>
+    <span slot="heading">Short</span>
+    Short tab content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">Much longer label</span>
+    Longer tab content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">Medium label</span>
+    Medium tab content
+  </goab-tab>
+</goab-tabs>
+
+<goab-text tag="h3">Test 4: Slot headings with badge</goab-text>
+<goab-text mb="m">Tabs with a badge alongside the label text in the slot. The ghost text only reserves space for the text portion, so a small shift may still occur here.</goab-text>
+<goab-tabs>
+  <goab-tab>
+    <span slot="heading">Notifications <goab-badge type="information" content="3" /></span>
+    Notifications content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">Much longer label <goab-badge type="important" content="12" /></span>
+    Longer tab content
+  </goab-tab>
+  <goab-tab>
+    <span slot="heading">History</span>
+    History content
+  </goab-tab>
+</goab-tabs>

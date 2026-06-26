@@ -1,0 +1,71 @@
+---
+id: two-phase-migration
+title: "A two-phase migration: early adopter to production"
+description: How the Caregiver Portal team joined the early adopter program and migrated a new product to the updated design system in 7–8 days across two phases
+section: articles
+order: 1
+status: published
+---
+import { withBase } from "@/lib/base-url";
+import RelatedArticles from "../../../components/RelatedArticles.astro";
+
+<goa-text size="heading-xl" mt="none" mb="xl">A two-phase migration: early adopter to production</goa-text>
+
+<goa-text size="body-m" mt="none" mb="xl">The Caregiver Portal is a digital service that supports caregivers navigating child intervention processes. The team joined the early adopters program and migrated before the full release, then later migrated to the production version of the updated design system.</goa-text>
+
+<h2 id="migration-at-a-glance">Migration at a glance</h2>
+
+<div style={{ marginBottom: "var(--goa-space-xl)" }}>
+  <goa-table version="2" width="100%">
+    <table width="100%">
+      <tbody>
+        <tr>
+          <td style={{ width: "30%" }}><goa-text size="body-s" mt="none" mb="none"><strong>Migration type</strong></goa-text></td>
+          <td><goa-text size="body-s" mt="none" mb="none">New product</goa-text></td>
+        </tr>
+        <tr>
+          <td><goa-text size="body-s" mt="none" mb="none"><strong>Team</strong></goa-text></td>
+          <td><goa-text size="body-s" mt="none" mb="none">1 designer, 1 developer</goa-text></td>
+        </tr>
+        <tr>
+          <td><goa-text size="body-s" mt="none" mb="none"><strong>Timeline</strong></goa-text></td>
+          <td><goa-text size="body-s" mt="none" mb="none">7–8 days across two migration phases</goa-text></td>
+        </tr>
+        <tr>
+          <td><goa-text size="body-s" mt="none" mb="none"><strong>Product size</strong></goa-text></td>
+          <td><goa-text size="body-s" mt="none" mb="none">New product — small codebase</goa-text></td>
+        </tr>
+      </tbody>
+    </table>
+  </goa-table>
+</div>
+
+<h2 id="how-they-approached-it">How they approached it</h2>
+<goa-text size="body-m" mt="none" mb="m">The team migrated in two phases. The first move was from the legacy design system to the experimental library (Early adopter program), which took 2–3 days. The second phase, from the experimental library to the production release, took another 4–5 days.</goa-text>
+<goa-text size="body-m" mt="none" mb="m">The developer started with documentation, installed the correct packages, got the base implementation running, and then replaced custom styles with design tokens. Most of the time went into that last step. Some components had hundreds of lines of custom CSS to review and replace.</goa-text>
+<goa-text size="body-m" mt="none" mb="xl">The designer started working with the updated design system before the production release. Staying close to design system standards from the start reduced rework later.</goa-text>
+
+<h2 id="what-went-faster-than-expected">What went faster than expected</h2>
+<goa-text size="body-m" mt="none" mb="m">Tokens were easier and faster to implement than the team expected. Once the packages were in place, replacing values with tokens was straightforward. On the design side, pulling Figma components directly from the library removed a lot of manual design work.</goa-text>
+<goa-text size="body-m" mt="none" mb="xl">No major bugs were encountered. Most components just worked.</goa-text>
+
+<h2 id="what-took-more-time-than-expected">What took more time than expected</h2>
+<goa-text size="body-m" mt="none" mb="m">Initial setup — finding the right packages and getting everything configured — took longer than expected. Factor this into your planning, even if your team is comfortable with the tooling.</goa-text>
+<goa-text size="body-m" mt="none" mb="m">Cleaning up custom styles also took time. For a new product this was manageable, but teams with more accumulated custom code should expect this phase to take longer.</goa-text>
+<goa-text size="body-m" mt="none" mb="xl">A small number of component gaps required workarounds. The team needed to create a "data card" component manually, and certain components lack read-only states or the ability to be dismissed. Each gap required a design decision and, at times, extra implementation work.</goa-text>
+
+<h2 id="how-they-used-ai">How they used AI</h2>
+<goa-text size="body-m" mt="none" mb="m">The developer used GitHub Copilot throughout the migration and recommends it — with one condition: set it up with your environment and documentation before you start.</goa-text>
+<goa-text size="body-m" mt="none" mb="xl">In practice, Copilot identified custom code and styles and suggested alternative tokens based on the design system documentation. Overall it was helpful for both building and verifying, speeding up development significantly.</goa-text>
+
+<h2 id="what-theyd-tell-another-team">What they'd tell another team</h2>
+<ul>
+  <li>Check that your application is running on a modern version of Angular or React before you start. Older applications require more effort to migrate. Updating your framework version before migration will help reduce the overall effort.</li>
+  <li>Follow the documentation closely, replace old styles gradually, verify as you go, and set up AI tooling early to assist with the migration.</li>
+</ul>
+
+<RelatedArticles articles={[
+  { title: "Parallel paths: migration alongside feature development", url: withBase("/get-started/articles/parallel-paths-migration") }
+]} />
+
+<goa-link version="2" leadingicon="arrow-back"><a href={withBase(`/get-started/articles`)}>Back to articles</a></goa-link>

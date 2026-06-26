@@ -1,0 +1,126 @@
+name: Dev Release & Preview
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+concurrency:
+  group: dev-release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write # Required for OIDC
+
+jobs:
+  dev-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            docs/package-lock.json
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd docs && npm ci --legacy-peer-deps
+
+      # ---- Release libs to npm (dev prerelease channel) ----
+      - name: Get last successful commit
+        uses: nrwl/nx-set-shas@v4
+        id: last_successful_commit
+        with:
+          main-branch-name: ${{ github.ref_name }}
+
+      - name: Build libs
+        run: npm run build:prod
+
+      - name: Fix web-component lib README
+        run: cp libs/web-components/README.md dist/libs/web-components
+
+      - name: Release libs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
+
+      # ---- Build + deploy docs & playground previews to Pages ----
+      - name: Build docs
+        env:
+          PREVIEW_SITE: https://govalta.github.io
+          PREVIEW_BASE: /ui-components/dev/
+        run: npx nx run docs:build
+
+      - name: Build React playground
+        env:
+          PREVIEW_BASE_REACT: /ui-components/dev-react/
+        run: npx nx run react-prs:build:production
+
+      - name: Build Angular playground
+        env:
+          PREVIEW_BASE_ANGULAR: /ui-components/dev-angular/
+        run: npx nx run angular-prs:build:production --base-href=$PREVIEW_BASE_ANGULAR
+
+      # force: false => rebase onto the latest gh-pages instead of force-pushing,
+      # so a concurrent PR-preview deploy to a different folder is not clobbered.
+      # clean-exclude protects the sibling folders as a safety net.
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./dist/docs
+          target-folder: dev
+          force: false
+          attempt-limit: 5
+          clean: true
+          clean-exclude: |
+            pr-preview
+            pr-preview-react
+            pr-preview-angular
+            dev-react
+            dev-angular
+
+      - name: Deploy React playground
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./dist/apps/prs/react
+          target-folder: dev-react
+          force: false
+          attempt-limit: 5
+          clean: true
+          clean-exclude: |
+            pr-preview
+            pr-preview-react
+            pr-preview-angular
+            dev
+            dev-angular
+
+      - name: Deploy Angular playground
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./dist/apps/prs/angular/browser
+          target-folder: dev-angular
+          force: false
+          attempt-limit: 5
+          clean: true
+          clean-exclude: |
+            pr-preview
+            pr-preview-react
+            pr-preview-angular
+            dev
+            dev-react

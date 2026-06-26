@@ -1,0 +1,10 @@
+.wsl-demo {
+  margin-bottom: var(--goa-space-2xl, 3rem);
+}
+
+/* GoabWorkspaceLayout renders <goa-workspace-layout> at 100vh by default. Bound
+   each demo so they stack on this page; !important overrides the web component's
+   :host height rule. */
+.wsl-demo goa-workspace-layout {
+  height: 600px !important;
+}

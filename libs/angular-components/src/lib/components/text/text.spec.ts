@@ -58,6 +58,16 @@ describe("GoabText", () => {
     expect(element.getAttribute("ml")).toBe("xl");
   }));
 
+  it("should pass heading-2xl size through to the web component", fakeAsync(() => {
+    component.size = "heading-2xl";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector("goa-text");
+    expect(element.getAttribute("size")).toBe("heading-2xl");
+  }));
+
   it("should handle undefined properties", fakeAsync(() => {
     fixture.detectChanges();
     tick();

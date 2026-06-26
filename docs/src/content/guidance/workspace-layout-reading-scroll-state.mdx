@@ -1,0 +1,17 @@
+---
+id: workspace-layout-reading-scroll-state
+type: info
+description: Read the layout's scroll state to respond as people scroll, such as collapsing the header or recording when someone reaches the bottom of a list.
+topic: interaction
+tags:
+  - scroll
+  - interaction
+appliesTo:
+  components:
+    - workspace-layout
+status: published
+---
+
+The layout tracks how far the content has scrolled (at the top, in the middle, or at the bottom) and lets you read that to respond. Common uses are collapsing a tall header as people scroll down, showing a back to top button, or recording an analytics event when someone reaches the bottom of a long list.
+
+Read it with the `useGoabWorkspaceLayoutScrollState` hook in React, or the `GoabWorkspaceLayoutScrollStateService` in Angular. In web components, listen for the `_scrollStateChange` event. See the Properties tab for the full event payload.

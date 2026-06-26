@@ -28,6 +28,8 @@ export const textConfigurations: ComponentConfigurations = {
       description: "All heading text sizes",
       code: {
         react: `<GoabDivider mb="none" mt="none" />
+<GoabText size="heading-2xl">Heading 2XL</GoabText>
+<GoabDivider mb="none" mt="none" />
 <GoabText size="heading-xl">Heading XL</GoabText>
 <GoabDivider mb="none" mt="none" />
 <GoabText size="heading-l">Heading L</GoabText>
@@ -41,6 +43,8 @@ export const textConfigurations: ComponentConfigurations = {
 <GoabText size="heading-2xs">Heading 2XS</GoabText>
 <GoabDivider mb="none" mt="none" />`,
         angular: `<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-2xl">Heading 2XL</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
 <goab-text size="heading-xl">Heading XL</goab-text>
 <goab-divider mb="none" mt="none"></goab-divider>
 <goab-text size="heading-l">Heading L</goab-text>
@@ -54,6 +58,8 @@ export const textConfigurations: ComponentConfigurations = {
 <goab-text size="heading-2xs">Heading 2XS</goab-text>
 <goab-divider mb="none" mt="none"></goab-divider>`,
         webComponents: `<goa-divider mb="none" mt="none"></goa-divider>
+<goa-text size="heading-2xl">Heading 2XL</goa-text>
+<goa-divider mb="none" mt="none"></goa-divider>
 <goa-text size="heading-xl">Heading XL</goa-text>
 <goa-divider mb="none" mt="none"></goa-divider>
 <goa-text size="heading-l">Heading L</goa-text>

@@ -1,0 +1,15 @@
+---
+id: workspace-layout-host-at-viewport-root
+type: tip
+description: The workspace layout fills the viewport, so host it directly in the router outlet, not inside another scrolling container.
+topic: layout
+tags:
+  - layout
+  - workspace
+appliesTo:
+  components:
+    - workspace-layout
+status: published
+---
+
+The workspace layout fills the full height of the viewport and manages its own scrolling inside the content area. Place it directly in your router outlet or page root. If you nest it inside another element that scrolls, the sticky header and footer will not stay in place as expected.

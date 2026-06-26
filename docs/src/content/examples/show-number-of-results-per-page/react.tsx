@@ -119,6 +119,7 @@ export function ShowNumberOfResultsPerPage() {
             onChange={handlePerPageCountChangeEvent}
             value={perPage.toString()}
             width="9ch"
+            size="compact"
           >
             <GoabDropdownItem value="10" label="10" />
             <GoabDropdownItem value="20" label="20" />

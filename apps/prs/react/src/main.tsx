@@ -20,7 +20,6 @@ root.render(
             <Route path="everything" element={<EverythingRoute />} />
             {prRouteDefinitions.map((route) => {
               const Component = route.component;
-
               return <Route key={route.path} path={route.path} element={<Component />} />;
             })}
           </Route>

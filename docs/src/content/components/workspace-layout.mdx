@@ -1,0 +1,55 @@
+---
+name: Workspace Layout
+description: A full-page layout for workspace-style applications that wraps your content responsively.
+status: stable
+category: structure-and-navigation
+tags:
+  - layout
+  - workspace
+  - side menu
+  - sticky header
+  - sticky footer
+  - push drawer
+relatedComponents:
+  - scroll-panel
+  - work-side-menu
+  - drawer
+  - push-drawer
+hideTabs: [examples]
+---
+
+import { withBase } from "@/lib/base-url";
+
+The workspace layout is the shell for workspace-style applications such as case management tools, internal dashboards, and back-office apps. It gives you a side menu, a sticky header and footer, a scrollable content area, and an optional push drawer, all wired together and responsive out of the box.
+
+## Anatomy
+
+<img
+  src={withBase("/images/examples/workspace-layout-diagram.png")}
+  alt="Diagram of the workspace layout showing its pieces: a work side menu down the left, a sticky header with a heading and actions across the top, the page content in the centre, a sticky footer along the bottom, and a push drawer on the right."
+  style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc); margin: var(--goa-space-m, 1rem) 0; display: block;"
+/>
+
+### Work side menu
+
+The main navigation for the workspace, built with a [work side menu](/components/work-side-menu). It stays in place while the content scrolls. On narrow screens it hides and opens from the mobile hamburger menu.
+
+### Sticky header
+
+A header pinned to the top while the content scrolls. Use it for the page title, key actions, or a toolbar. A soft shadow appears under it once content scrolls past, so people can tell there is more above. It can also collapse as people scroll down.
+
+### Page content
+
+Your page content. The layout wraps it in a scrollable card and handles the spacing, so the header and footer stay in place while this area scrolls.
+
+### Sticky footer
+
+A footer pinned to the bottom while the content scrolls. Use it for a summary or contextual actions that should stay reachable, such as a bulk action bar that appears once rows are selected.
+
+### Push drawer
+
+An optional drawer that opens beside the page content instead of over it. Unlike a modal drawer, it narrows the content rather than covering it, so people can still interact with the main page content while the drawer is open.
+
+### Mobile hamburger menu
+
+At narrow screen widths the side menu hides to save space, and the layout adds a hamburger button that opens it. This comes with the layout, you do not wire it up yourself.

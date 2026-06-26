@@ -26,6 +26,14 @@ import {
   `,
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 /** Negative area between the components and the interface. */
 export class GoabSpacer implements OnInit {

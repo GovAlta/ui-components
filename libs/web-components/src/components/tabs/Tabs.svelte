@@ -36,6 +36,7 @@
   let _segmentedTransitionDuration: number = 0;
   let _previousTabIndex: number = 1;
   let _visibilityObserver: IntersectionObserver | null = null;
+  let _resizeObserver: ResizeObserver | null = null;
 
   const MIN_TRANSITION_DURATION = 200;
   const DURATION_PER_PIXEL = 0.2;
@@ -62,6 +63,10 @@
     if (_visibilityObserver) {
       _visibilityObserver.disconnect();
       _visibilityObserver = null;
+    }
+    if (_resizeObserver) {
+      _resizeObserver.disconnect();
+      _resizeObserver = null;
     }
   });
 
@@ -208,7 +213,7 @@
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
 
       // Store text content for CSS pseudo-element (prevents layout shift when font-weight changes)
-      if (variant === "segmented") {
+      if (variant === "segmented" || version === "2") {
         const textContent = headingEl.textContent?.trim() || "";
         if (textContent) {
           link.setAttribute("data-text", textContent);
@@ -244,6 +249,16 @@
             }
           });
           _visibilityObserver.observe(_tabsEl);
+        }
+
+        // The indicator is positioned absolutely from a one-time measurement, so it
+        // drifts out of alignment when the tabs reflow (long heading wraps, window
+        // resize). Re-measure whenever the container's size changes.
+        if (_tabsEl && !_resizeObserver) {
+          _resizeObserver = new ResizeObserver(() => {
+            updateSegmentedIndicatorPosition({ withAnimation: false });
+          });
+          _resizeObserver.observe(_tabsEl);
         }
       });
     }
@@ -351,7 +366,7 @@
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
         if (!skipFocus) {
-          el.focus();
+          el.focus({ preventScroll: true });
         }
       }
     });
@@ -763,6 +778,19 @@
         6px 6px 0 0
       );
     }
+  }
+
+  /* Prevent layout shift when bold font is applied to selected tab */
+  .v2:not(.segmented) :global([role="tab"][data-text]) {
+    flex-direction: column;
+  }
+
+  .v2:not(.segmented) :global([role="tab"][data-text]::before) {
+    content: attr(data-text);
+    font: var(--goa-tab-typography-selected);
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
   }
 
   /* ========================================

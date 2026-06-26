@@ -564,6 +564,23 @@
   },
   {
     "type": "component",
+    "id": "scroll-panel",
+    "name": "Scroll Panel",
+    "description": "A bounded container with sticky header and footer slots that scrolls its body content when it overflows.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "container",
+      "layout",
+      "scroll",
+      "sticky header",
+      "sticky footer",
+      "bounded"
+    ],
+    "slug": "scroll-panel"
+  },
+  {
+    "type": "component",
     "id": "side-menu",
     "name": "Side menu",
     "description": "A side navigation that helps the user navigate between pages.",
@@ -715,6 +732,23 @@
       "panel"
     ],
     "slug": "work-side-notification-panel"
+  },
+  {
+    "type": "component",
+    "id": "workspace-layout",
+    "name": "Workspace Layout",
+    "description": "A full-page layout for workspace-style applications that wraps your content responsively.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "layout",
+      "workspace",
+      "side menu",
+      "sticky header",
+      "sticky footer",
+      "push drawer"
+    ],
+    "slug": "workspace-layout"
   },
   {
     "type": "example",
@@ -2358,6 +2392,42 @@
   },
   {
     "type": "page",
+    "id": "parallel-paths-migration",
+    "title": "Parallel paths: migration alongside feature development",
+    "description": "How the Alberta Childcare Family Portal team managed a design system migration while actively building new features over approximately 2 months",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/parallel-paths-migration"
+  },
+  {
+    "type": "page",
+    "id": "two-phase-migration",
+    "title": "A two-phase migration: early adopter to production",
+    "description": "How the Caregiver Portal team joined the early adopter program and migrated a new product to the updated design system in 7–8 days across two phases",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "articles"
+    ],
+    "slug": "get-started/articles/two-phase-migration"
+  },
+  {
+    "type": "page",
+    "id": "articles",
+    "title": "Articles",
+    "description": "Perspectives on design and technology from inside government — exploring the craft of building digital services that truly work for Albertans",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/articles"
+  },
+  {
+    "type": "page",
     "id": "automated-accessibility",
     "title": "Automated accessibility",
     "description": "Guidance on using automated accessibility testing tools effectively",
@@ -2616,7 +2686,7 @@
     "type": "example",
     "id": "workspace",
     "title": "Workspace",
-    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.",
+    "description": "The workspace is a pattern for productivity-focused services that service delivery staff use as a daily tool to review information, manage records, and complete tasks. The design prioritizes efficiency and accuracy. The reference example is a starting point to adapt to your service's context, not a rigid template.",
     "status": "published",
     "size": "product",
     "tags": [
