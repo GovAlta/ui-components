@@ -12,6 +12,7 @@ export interface WCProps extends Margins {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  stretch?: string;
   "min-width"?: string;
   "max-width"?: string;
   width?: string;
@@ -35,6 +36,8 @@ export interface GoabBlockProps extends Margins, DataAttributes {
   direction?: GoabBlockDirection;
   /** Primary axis alignment of child components. @default "normal" */
   alignment?: GoabBlockAlignment;
+  /** When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. @default false */
+  stretch?: boolean;
   /** Sets the minimum width of the block container. */
   minWidth?: string;
   /** Sets the maximum width of the block container. */
@@ -48,8 +51,17 @@ export interface GoabBlockProps extends Margins, DataAttributes {
 }
 
 /** Group components into a block with consistent space between. */
-export function GoabBlock({ testId, children, ...rest }: GoabBlockProps) {
+export function GoabBlock({
+  testId,
+  stretch,
+  children,
+  ...rest
+}: GoabBlockProps) {
   const _props = transformProps<WCProps>({ testid: testId, ...rest }, kebab);
 
-  return <goa-block {..._props}>{children}</goa-block>;
+  return (
+    <goa-block {..._props} stretch={stretch ? "true" : undefined}>
+      {children}
+    </goa-block>
+  );
 }

@@ -112,6 +112,31 @@ export const blockConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "stretch",
+      name: "Stretch",
+      description: "Forcing children to fill the width despite alignment",
+      code: {
+        react: `<GoabBlock alignment="start" mb="m" direction="column" width="100%">
+  <GoabContainer type="non-interactive"><p>Without stretch: width is ignored</p></GoabContainer>
+</GoabBlock>
+<GoabBlock alignment="start" stretch={true} direction="column" width="100%">
+  <GoabContainer type="non-interactive"><p>With stretch: fills the available width</p></GoabContainer>
+</GoabBlock>`,
+        angular: `<goab-block alignment="start" mb="m" direction="column" width="100%">
+  <goab-container type="non-interactive"><p>Without stretch: width is ignored</p></goab-container>
+</goab-block>
+<goab-block alignment="start" [stretch]="true" direction="column" width="100%">
+  <goab-container type="non-interactive"><p>With stretch: fills the available width</p></goab-container>
+</goab-block>`,
+        webComponents: `<goa-block alignment="start" mb="m" direction="column" width="100%">
+  <goa-container type="non-interactive"><p>Without stretch: width is ignored</p></goa-container>
+</goa-block>
+<goa-block alignment="start" stretch="true" direction="column" width="100%">
+  <goa-container type="non-interactive"><p>With stretch: fills the available width</p></goa-container>
+</goa-block>`,
+      },
+    },
+    {
       id: "direction",
       name: "Direction",
       description: "Row and column layouts",

@@ -13,7 +13,7 @@
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { ensureSlotExists } from "../../common/utils";
-  import { style, styles } from "../../common/utils";
+  import { style, styles, toBoolean } from "../../common/utils";
 
   /** Spacing between items. Uses design system spacing tokens. */
   export let gap: Spacing = "m";
@@ -21,6 +21,8 @@
   export let direction: "row" | "column" = "row";
   /** Primary axis alignment of child components. */
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
+  /** When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. */
+  export let stretch: string = "false";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Sets the minimum width of the block container. */
@@ -38,6 +40,7 @@
         : alignment === "center"
           ? "center"
           : "normal";
+  $: isStretch = toBoolean(stretch);
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -64,6 +67,7 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
+  class:stretch={isStretch}
   style={styles(
     "display: flex",
     `gap: var(--goa-space-${gap})`,
@@ -77,3 +81,9 @@
 >
   <slot />
 </div>
+
+<style>
+  .stretch :global(::slotted(*)) {
+    align-self: stretch;
+  }
+</style>
