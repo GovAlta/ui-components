@@ -1,1 +1,0 @@
-import{j as s}from"./jsx-runtime.D_zvdyIk.js";import{t as p,l as a}from"./theme-context.DBIa_puq.js";function m({children:o,...r}){const t=p(r,a);return s.jsx("goa-button-group",{...t,children:o})}export{m as G};

@@ -54,6 +54,17 @@
         "subcomponent": {
           "type": "boolean"
         },
+        "hideTabs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "examples",
+              "usage",
+              "accessibility"
+            ]
+          }
+        },
         "$schema": {
           "type": "string"
         }
