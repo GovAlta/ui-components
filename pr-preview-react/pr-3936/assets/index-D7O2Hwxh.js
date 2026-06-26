@@ -33174,7 +33174,7 @@ class k0 extends xe {
 }
 customElements.define("goa-icon", Le(k0, { mt: {}, mr: {}, mb: {}, ml: {}, type: { type: "String", reflect: true }, size: {}, theme: {}, inverted: {}, fillcolor: {}, opacity: {}, title: {}, testid: {}, arialabel: {}, ariacontrols: {}, ariaexpanded: {}, role: {} }, [], [], true));
 function y0(t) {
-  De(t, "svelte-prsnc4", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-prsnc4.svelte-prsnc4{width:100%}.trigger.svelte-prsnc4.svelte-prsnc4{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-space-xs);width:100%;min-height:var(--goa-dropdown-multiselect-height, 56px);padding:0 var(--goa-dropdown-multiselect-padding-lr, var(--goa-space-s));box-shadow:var(
+  De(t, "svelte-z5z3yz", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-z5z3yz.svelte-z5z3yz{width:100%}.trigger.svelte-z5z3yz.svelte-z5z3yz{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-space-xs);width:100%;min-height:var(--goa-dropdown-multiselect-height, 56px);padding:0 var(--goa-dropdown-multiselect-padding-lr, var(--goa-space-s));box-shadow:var(
       --goa-dropdown-multiselect-border,
       inset 0 0 0 var(--goa-input-border-width-default)
         var(--goa-input-color-border-default)
@@ -33187,60 +33187,63 @@ function y0(t) {
     );transition:var(
       --goa-dropdown-multiselect-transition,
       box-shadow 0.05s ease-in
-    );cursor:pointer;outline:none;box-sizing:border-box}.trigger.svelte-prsnc4.svelte-prsnc4:hover{box-shadow:var(
+    );cursor:pointer;outline:none;box-sizing:border-box}.trigger.svelte-z5z3yz.svelte-z5z3yz:hover{box-shadow:var(
       --goa-dropdown-multiselect-border-hover,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-hover)
-    )}.trigger.compact.svelte-prsnc4.svelte-prsnc4{min-height:var(--goa-dropdown-multiselect-compact-height, 40px);padding:var(
+    )}.trigger.compact.svelte-z5z3yz.svelte-z5z3yz{min-height:var(--goa-dropdown-multiselect-compact-height, 40px);padding:var(
       --goa-dropdown-multiselect-compact-padding,
       0 var(--goa-space-s)
-    )}.trigger.svelte-prsnc4.svelte-prsnc4:focus-visible{box-shadow:var(
+    )}.trigger.svelte-z5z3yz.svelte-z5z3yz:focus-visible{box-shadow:var(
       --goa-dropdown-multiselect-border-focus,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-focus)
-    )}.trigger.error.svelte-prsnc4.svelte-prsnc4{box-shadow:var(
+    )}.trigger.error.svelte-z5z3yz.svelte-z5z3yz{box-shadow:var(
       --goa-dropdown-multiselect-border-error,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-error)
-    )}.trigger.error.svelte-prsnc4.svelte-prsnc4:hover{box-shadow:var(
+    )}.trigger.error.svelte-z5z3yz.svelte-z5z3yz:hover{box-shadow:var(
       --goa-dropdown-multiselect-border-error-hover,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-error-hover)
-    )}.trigger.disabled.svelte-prsnc4.svelte-prsnc4{box-shadow:var(
+    )}.trigger.disabled.svelte-z5z3yz.svelte-z5z3yz{box-shadow:var(
       --goa-dropdown-multiselect-border-disabled,
       inset 0 0 0 var(--goa-input-border-width-default)
         var(--goa-input-color-border-disabled)
     );background:var(
       --goa-dropdown-multiselect-color-bg-disabled,
       var(--goa-input-color-background-disabled)
-    );cursor:default}.value-display.svelte-prsnc4.svelte-prsnc4{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font:var(
+    );cursor:default}.value-display.svelte-z5z3yz.svelte-z5z3yz{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font:var(
       --goa-dropdown-multiselect-typography,
       var(--goa-typography-body-m)
     );color:var(
       --goa-dropdown-multiselect-color-text,
       var(--goa-input-color-text-default)
-    )}.disabled.svelte-prsnc4 .value-display.svelte-prsnc4{color:var(
+    )}.disabled.svelte-z5z3yz .value-display.svelte-z5z3yz{color:var(
       --goa-dropdown-multiselect-color-text-disabled,
       var(--goa-input-color-text-disabled)
-    )}.value-display.placeholder.svelte-prsnc4.svelte-prsnc4{color:var(
+    )}.value-display.placeholder.svelte-z5z3yz.svelte-z5z3yz{color:var(
       --goa-dropdown-multiselect-color-text-placeholder,
       var(--goa-input-color-text-default)
-    )}.filter-input.svelte-prsnc4.svelte-prsnc4{flex:1;border:none;outline:none;background:transparent;font:var(
+    )}.filter-input.svelte-z5z3yz.svelte-z5z3yz{flex:1;border:none;outline:none;background:transparent;font:var(
       --goa-dropdown-multiselect-typography,
       var(--goa-typography-body-m)
     );color:var(
       --goa-dropdown-multiselect-color-text,
       var(--goa-input-color-text-default)
-    );min-width:0;padding:0}.filter-input.svelte-prsnc4.svelte-prsnc4::-moz-placeholder{color:var(
+    );min-width:0;padding:0}.filter-input.svelte-z5z3yz.svelte-z5z3yz::-moz-placeholder{color:var(
       --goa-dropdown-multiselect-color-text-placeholder,
       var(--goa-input-color-text-default)
-    )}.filter-input.svelte-prsnc4.svelte-prsnc4::placeholder{color:var(
+    )}.filter-input.svelte-z5z3yz.svelte-z5z3yz::placeholder{color:var(
       --goa-dropdown-multiselect-color-text-placeholder,
       var(--goa-input-color-text-default)
-    )}.content.svelte-prsnc4.svelte-prsnc4{overflow-y:auto;padding:var(
+    )}.content.svelte-z5z3yz.svelte-z5z3yz{overflow-y:auto;padding:var(
       --goa-dropdown-multiselect-padding,
       var(--goa-space-m) var(--goa-space-s)
-    )}.select-all-divider.svelte-prsnc4.svelte-prsnc4{border:none;border-top:var(--goa-border-width-s) solid var(--goa-color-greyscale-200);margin:var(--goa-space-m) 0}`);
+    )}.select-all-divider.svelte-z5z3yz.svelte-z5z3yz{border:none;border-top:var(
+      --goa-dropdown-multiselect-divider,
+      var(--goa-border-width-s) solid var(--goa-color-greyscale-200)
+    );margin:var(--goa-space-m) 0}`);
 }
 function Gn(t, e, o) {
   const i = t.slice();
@@ -33293,7 +33296,7 @@ function C0(t) {
   ), i;
   return {
     c() {
-      e = C("span"), i = ae(o), u(e, "class", "value-display svelte-prsnc4"), A(e, "placeholder", !/*_hasValue*/
+      e = C("span"), i = ae(o), u(e, "class", "value-display svelte-z5z3yz"), A(e, "placeholder", !/*_hasValue*/
       t[31]);
     },
     m(n, l) {
@@ -33322,7 +33325,7 @@ function z0(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("input"), u(e, "class", "filter-input svelte-prsnc4"), u(e, "type", "text"), u(e, "placeholder", "Filter..."), u(e, "aria-label", "Filter options"), u(e, "autocomplete", "off"), u(e, "data-testid", o = /*testid*/
+      e = C("input"), u(e, "class", "filter-input svelte-z5z3yz"), u(e, "type", "text"), u(e, "placeholder", "Filter..."), u(e, "aria-label", "Filter options"), u(e, "autocomplete", "off"), u(e, "data-testid", o = /*testid*/
       t[5] ? `${/*testid*/
       t[5]}-filter-input` : void 0);
     },
@@ -33473,7 +33476,7 @@ function Jn(t) {
         "size",
         /*size*/
         t[10]
-      ), u(a, "class", "select-all-divider svelte-prsnc4");
+      ), u(a, "class", "select-all-divider svelte-z5z3yz");
     },
     m(s, f) {
       I(s, e, f), t[50](e), I(s, r, f), I(s, a, f), c || (d = ie(
@@ -33700,7 +33703,7 @@ function L0(t) {
   );
   return {
     c() {
-      e = C("div"), j && j.c(), o = Y(), i = C("goa-popover"), n = C("div"), l = C("div"), T && T.c(), r = Y(), P.c(), a = Y(), W.c(), g = Y(), v = C("div"), N && N.c(), h = Y(), q && q.c(), u(l, "class", "trigger svelte-prsnc4"), u(l, "role", "combobox"), u(l, "tabindex", c = /*isDisabled*/
+      e = C("div"), j && j.c(), o = Y(), i = C("goa-popover"), n = C("div"), l = C("div"), T && T.c(), r = Y(), P.c(), a = Y(), W.c(), g = Y(), v = C("div"), N && N.c(), h = Y(), q && q.c(), u(l, "class", "trigger svelte-z5z3yz"), u(l, "role", "combobox"), u(l, "tabindex", c = /*isDisabled*/
       t[26] ? -1 : 0), u(l, "aria-haspopup", "dialog"), u(
         l,
         "aria-expanded",
@@ -33735,7 +33738,7 @@ function L0(t) {
         /*_contentId*/
         t[33]
       ), u(v, "role", "dialog"), u(v, "aria-label", b = /*placeholder*/
-      t[2] || "Options"), u(v, "class", "content svelte-prsnc4"), Qe(
+      t[2] || "Options"), u(v, "class", "content svelte-z5z3yz"), Qe(
         v,
         "max-height",
         /*maxHeight*/
@@ -33751,7 +33754,7 @@ function L0(t) {
       ), m(i, "disabled", p = ft(
         /*isDisabled*/
         t[26]
-      )), u(e, "class", "root svelte-prsnc4"), u(e, "style", _ = st(Te(
+      )), u(e, "class", "root svelte-z5z3yz"), u(e, "style", _ = st(Te(
         /*mt*/
         t[12],
         /*mr*/
