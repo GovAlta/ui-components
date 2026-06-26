@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { useSlots } from "vue";
-const slots = useSlots();
+
+interface Slots {
+  default?: () => unknown;
+  /** Content rendered in the "footer" named slot. */
+  footer?: () => unknown;
+  /** Content rendered in the "header" named slot. */
+  header?: () => unknown;
+}
+
+const slots = useSlots() as Slots;
 </script>
 
 <template>

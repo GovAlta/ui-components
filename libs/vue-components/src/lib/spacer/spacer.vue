@@ -6,8 +6,11 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  /** Horizontal spacing. @default "none" */
   hSpacing?: GoabSpacerHorizontalSpacing;
+  /** Vertical spacing. @default "none" */
   vSpacing?: GoabSpacerVerticalSpacing;
+  /** Sets a data-testid attribute for automated testing.  @default "" */
   testId?: string;
 }
 

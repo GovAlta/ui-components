@@ -3,8 +3,11 @@ import type { GoabWorkSideNotificationActiveTabType } from "@abgov/ui-components
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  /** Sets the panel heading text. @default "Notifications" */
   heading?: string;
+  /** Sets the initially active tab. @default "unread" */
   activeTab?: GoabWorkSideNotificationActiveTabType;
+  /** Sets a data-testid attribute for automated testing.  @default "" */
   testId?: string;
 }
 
@@ -13,7 +16,9 @@ const props = withDefaults(defineProps<Props>(), {
   activeTab: "unread",
 });
 const emit = defineEmits<{
+  /** Callback fired when the "Mark all as read" button is clicked. */
   onMarkAllRead: [];
+  /** Callback fired when the "View all" button is clicked. */
   onViewAll: [];
 }>();
 
