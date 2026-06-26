@@ -4,7 +4,9 @@ import GoabCheckboxList from "./checkbox-list.vue";
 
 describe("GoabCheckboxList", () => {
   it("should render", () => {
-    const wrapper = mount(GoabCheckboxList);
+    const wrapper = mount(GoabCheckboxList, {
+      props: { name: "test" },
+    });
     expect(wrapper.find("goa-checkbox-list").element).toBeTruthy();
   });
 
@@ -24,6 +26,7 @@ describe("GoabCheckboxList", () => {
 
   it("should render content via default slot", () => {
     const wrapper = mount(GoabCheckboxList, {
+      props: { name: "test" },
       slots: { default: "Checkbox items" },
     });
     expect(wrapper.text()).toContain("Checkbox items");

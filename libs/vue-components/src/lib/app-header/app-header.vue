@@ -32,7 +32,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, { 
+const wcProps = useWcProps(props, {
   booleanProps: ["onMenuClick"],
   renamedProps: { onMenuClick: "hasmenuclickhandler" },
 });
