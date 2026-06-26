@@ -3,8 +3,11 @@ import type { GoabTableSortDirection, GoabTableSortOrder } from "@abgov/ui-compo
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  /** Column name identifier for sorting.  @default "" */
   name?: string;
+  /** Sets the sort direction indicator. @default "none" */
   direction?: GoabTableSortDirection;
+  /** Sort order number for multi-column sort display. Used for displaying priority numbers when multiple columns are sorted.  @default 0 */
   sortOrder?: GoabTableSortOrder;
 }
 

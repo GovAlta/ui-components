@@ -2,6 +2,7 @@
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  /** Sets the heading.  @default "" */
   heading?: string;
 }
 

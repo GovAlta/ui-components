@@ -2,14 +2,26 @@
 import { useSlots } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
+interface Slots {
+  default?: () => unknown;
+  /** Content rendered in the "footer" named slot. */
+  footer?: () => unknown;
+  /** Content rendered in the "header" named slot. */
+  header?: () => unknown;
+  /** Content rendered in the "nav" named slot. */
+  nav?: () => unknown;
+}
+
 interface Props {
+  /** Sets the width of the navigation column.  @default undefined */
   navColumnWidth?: string;
+  /** Sets the maximum width of the content area.  @default undefined */
   maxContentWidth?: string;
 }
 
 const props = defineProps<Props>();
 const wcProps = useWcProps(props);
-const slots = useSlots();
+const slots = useSlots() as Slots;
 </script>
 
 <template>

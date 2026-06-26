@@ -3,6 +3,7 @@ import type { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
+  /** Sets the status.  @default "cannot-start" */
   status?: GoabPublicFormTaskStatus;
 }
 
