@@ -61,6 +61,7 @@ export { default as GoabMenuButton } from "./lib/menu-button/menu-button.vue";
 export { default as GoabMenuAction } from "./lib/menu-button/menu-action.vue";
 export { default as GoabModal } from "./lib/modal/modal.vue";
 export { default as GoabPushDrawer } from "./lib/push-drawer/push-drawer.vue";
+export { default as GoabScrollPanel } from "./lib/scroll-panel/scroll-panel.vue";
 export { default as GoabTabs } from "./lib/tabs/tabs.vue";
 export { default as GoabTab } from "./lib/tab/tab.vue";
 export { default as GoabWorkSideMenu } from "./lib/work-side-menu/work-side-menu.vue";
@@ -69,6 +70,7 @@ export { default as GoabTemporaryNotificationCtrl } from "./lib/temporary-notifi
 export { default as GoabWorkSideMenuItem } from "./lib/work-side-menu-item/work-side-menu-item.vue";
 export { default as GoabWorkSideNotificationItem } from "./lib/work-side-notification-item/work-side-notification-item.vue";
 export { default as GoabWorkSideNotificationPanel } from "./lib/work-side-notification-panel/work-side-notification-panel.vue";
+export { default as GoabWorkspaceLayout } from "./lib/workspace-layout/workspace-layout.vue";
 export { default as GoabDataGrid } from "./lib/data-grid/data-grid.vue";
 export { default as GoabFieldset } from "./lib/form/fieldset.vue";
 export { default as GoabPublicForm } from "./lib/form/public-form.vue";
