@@ -54,6 +54,23 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

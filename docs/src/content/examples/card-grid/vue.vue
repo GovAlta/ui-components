@@ -1,0 +1,68 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-grid gap="xl" minchildwidth="320px">
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Waitlist submission</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Enter and maintain information about the households waiting for affordable housing
+        with your organization.
+      </goa-text>
+    </goa-container>
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Lodge assistance program</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Keep track of the individuals who are placed in lodges and may qualify for the Lodge
+        Assistance Program subsidy.
+      </goa-text>
+    </goa-container>
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Education Support</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Explore educational resources, enroll in courses, and track your academic progress
+        effortlessly.
+      </goa-text>
+    </goa-container>
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Social Assistance</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Learn about available support programs, apply for financial aid, and access
+        community resources.
+      </goa-text>
+    </goa-container>
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Employment Opportunity</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Search for job openings, access career development tools, and receive
+        employment-related updates.
+      </goa-text>
+    </goa-container>
+    <goa-container accent="thin" mb="none">
+      <goa-link size="large" mb="m">
+        <a href="#">Housing Assistance</a>
+      </goa-link>
+      <goa-text mt="none" mb="none">
+        Find affordable housing options, apply for housing subsidies, and report maintenance
+        issues seamlessly.
+      </goa-text>
+    </goa-container>
+  </goa-grid>
+</template>

@@ -253,6 +253,102 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The content of the tooltip."
+        },
+        {
+          "name": "halign",
+          "type": "\"left\" | \"right\" | \"center\"",
+          "typeLabel": "GoabTooltipAlignment",
+          "values": [
+            "left",
+            "right",
+            "center"
+          ],
+          "required": false,
+          "default": "center",
+          "description": "Horizontal alignment to the child element."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the maximum width of the tooltip. Must use 'px' unit."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "position",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "typeLabel": "GoabTooltipPosition",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "required": false,
+          "default": "top",
+          "description": "Position with respect to the child element."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "content",
+          "type": "slot",
+          "description": "The content of the tooltip. Accepts plain text or rich content.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

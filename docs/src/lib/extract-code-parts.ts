@@ -344,6 +344,36 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
 }
 
 // ============================================================================
+// Vue Extraction
+// ============================================================================
+
+export interface ExtractedVueCode {
+  /** JavaScript from <script setup> block */
+  javascript?: string;
+  /** HTML markup from <template> block */
+  html: string;
+}
+
+/**
+ * Extract parts from a Vue SFC file
+ */
+export function extractVueCode(vue: string): ExtractedVueCode {
+  let javascript: string | undefined;
+
+  // Extract <script setup> block
+  const scriptMatch = vue.match(/<script\s+setup[^>]*>([\s\S]*?)<\/script>/i);
+  if (scriptMatch) {
+    javascript = cleanIndentation(scriptMatch[1]);
+  }
+
+  // Extract <template> block
+  const templateMatch = vue.match(/<template>([\s\S]*?)<\/template>/i);
+  const html = templateMatch ? cleanIndentation(templateMatch[1].trim()) : cleanIndentation(vue.trim());
+
+  return { javascript, html };
+}
+
+// ============================================================================
 // Utilities
 // ============================================================================
 

@@ -82,6 +82,50 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "last",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether this is the last step in the form stepper. Affects styling when complete."
+        },
+        {
+          "name": "status",
+          "type": "\"complete\" | \"incomplete\" | \"not-started\"",
+          "values": [
+            "complete",
+            "incomplete",
+            "not-started"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<{ step: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

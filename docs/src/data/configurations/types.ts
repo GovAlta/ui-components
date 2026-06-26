@@ -6,7 +6,7 @@
  * can browse via dropdown selector.
  */
 
-export type Framework = "react" | "angular" | "webComponents";
+export type Framework = "react" | "angular" | "vue" | "webComponents";
 
 /**
  * React code example.
@@ -48,6 +48,19 @@ export interface WebComponentsExample {
 }
 
 /**
+ * Vue code example — same shape as WebComponents since Vue uses the web components
+ * directly with a <script setup> block instead of a raw <script>.
+ * - `js`: optional setup script
+ * - `css`: optional styles
+ * - `html`: required Vue template
+ */
+export interface VueExample {
+  js?: string;
+  css?: string;
+  html: string;
+}
+
+/**
  * A single configuration for a component.
  * Represents one option in the configuration dropdown.
  */
@@ -77,6 +90,7 @@ export interface ComponentConfiguration {
   code: {
     react: string | ReactExample;
     angular?: string | AngularExample | AngularExample[];
+    vue?: string | VueExample;
     webComponents: string | WebComponentsExample;
   };
 }

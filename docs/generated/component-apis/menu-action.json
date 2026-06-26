@@ -104,6 +104,44 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "default",
+          "description": "Action identifier included in the click event."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Display text for the menu action."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

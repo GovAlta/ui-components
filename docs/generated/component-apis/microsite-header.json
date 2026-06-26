@@ -224,6 +224,96 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "feedbackurl",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Url to feedback page that will be displayed when provided."
+        },
+        {
+          "name": "feedbackurltarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+          "values": [
+            "self",
+            "blank"
+          ],
+          "required": false,
+          "default": "blank",
+          "description": "For internal feedback urls sets target="
+        },
+        {
+          "name": "hasfeedbackhandler",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl."
+        },
+        {
+          "name": "headerurltarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+          "values": [
+            "self",
+            "blank"
+          ],
+          "required": false,
+          "default": "blank",
+          "description": "Sets the target attribute for the header link."
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area"
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"live\" | \"alpha\" | \"beta\"",
+          "typeLabel": "GoabMicrositeHeaderType",
+          "values": [
+            "live",
+            "alpha",
+            "beta"
+          ],
+          "required": true,
+          "default": null,
+          "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "App or service version displayed on the right side of the header."
+        }
+      ],
+      "events": [
+        {
+          "name": "_feedbackClick",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

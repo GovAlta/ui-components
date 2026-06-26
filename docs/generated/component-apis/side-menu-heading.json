@@ -93,6 +93,48 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "section-heading",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "slot",
+          "description": "Content rendered in the meta slot, displayed alongside the heading.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

@@ -1,0 +1,62 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-form-item version="2" label="How would you like to be contacted?" helptext="Select one option">
+    <goa-radio-group version="2" name="contactMethod">
+      <goa-radio-item value="email" label="Email">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Email address">
+            <goa-input version="2" name="email"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-radio-item>
+      <goa-radio-item value="phone" label="Phone">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Phone number">
+            <goa-input version="2" name="phone"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-radio-item>
+      <goa-radio-item value="text" label="Text message">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Mobile phone number">
+            <goa-input version="2" name="mobile"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-radio-item>
+    </goa-radio-group>
+  </goa-form-item>
+  <goa-form-item version="2" label="How would you like to be contacted?" mt="xl">
+    <goa-checkbox-list name="contactMethods">
+      <goa-checkbox version="2" name="emailContact" text="Email">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Email address">
+            <goa-input version="2" name="emailInput"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-checkbox>
+      <goa-checkbox version="2" name="phoneContact" text="Phone">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Phone number">
+            <goa-input version="2" name="phoneInput"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-checkbox>
+      <goa-checkbox version="2" name="textContact" text="Text message">
+        <div slot="reveal">
+          <goa-form-item version="2" label="Mobile phone number">
+            <goa-input version="2" name="mobileInput"></goa-input>
+          </goa-form-item>
+        </div>
+      </goa-checkbox>
+    </goa-checkbox-list>
+  </goa-form-item>
+</template>

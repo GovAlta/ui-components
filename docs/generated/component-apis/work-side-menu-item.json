@@ -183,6 +183,71 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, indicates this is the currently active menu item."
+        },
+        {
+          "name": "divider",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, displays a divider line above this menu item."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the menu item label."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The text label displayed for the menu item."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "popoverContent",
+          "type": "slot",
+          "description": "Content rendered inside the popover panel attached to this menu item.",
+          "required": false
+        },
+        {
+          "name": "trailingContent",
+          "type": "slot",
+          "description": "Content rendered after the label in the trailing area of the menu item.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

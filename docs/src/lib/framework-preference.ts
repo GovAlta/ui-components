@@ -1,11 +1,11 @@
 /**
  * Global Framework Preference
  *
- * Manages user's preferred framework (React, Angular, Web Components) site-wide.
+ * Manages user's preferred framework (React, Angular, Vue, Web Components) site-wide.
  * Uses localStorage for persistence and CustomEvents for cross-component sync.
  */
 
-export type Framework = 'react' | 'angular' | 'webComponents';
+export type Framework = 'react' | 'angular' | 'vue' | 'webComponents';
 
 const STORAGE_KEY = 'ds-framework-preference';
 const EVENT_NAME = 'framework-preference-change';
@@ -18,7 +18,7 @@ export function getFrameworkPreference(): Framework {
   if (typeof window === 'undefined') return DEFAULT_FRAMEWORK;
 
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'react' || stored === 'angular' || stored === 'webComponents') {
+  if (stored === 'react' || stored === 'angular' || stored === 'vue' || stored === 'webComponents') {
     return stored;
   }
   return DEFAULT_FRAMEWORK;

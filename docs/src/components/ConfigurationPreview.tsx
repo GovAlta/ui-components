@@ -201,6 +201,7 @@ export function ConfigurationPreview({
           frameworkCode={{
             react: selectedConfig.code.react,
             angular: selectedConfig.code.angular,
+            vue: selectedConfig.code.vue,
             webComponents: selectedConfig.code.webComponents,
           }}
           maxHeight={200}

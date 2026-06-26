@@ -282,6 +282,110 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Text label of the chip."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows an error state."
+        },
+        {
+          "name": "leadingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed at the start of the chip."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "secondarytext",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Secondary text displayed in a smaller size before the main content."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

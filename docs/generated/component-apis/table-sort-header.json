@@ -103,6 +103,57 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"asc\" | \"desc\" | \"none\"",
+          "values": [
+            "asc",
+            "desc",
+            "none"
+          ],
+          "required": false,
+          "default": "none",
+          "description": "Sets the sort direction indicator."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Column name identifier for sorting."
+        },
+        {
+          "name": "sort-order",
+          "type": "\"0\" | \"1\" | \"2\"",
+          "values": [
+            "0",
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "0",
+          "description": "Sort order number for multi-column sort display (\"1\", \"2\", etc)."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

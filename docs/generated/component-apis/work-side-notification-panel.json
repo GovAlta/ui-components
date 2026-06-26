@@ -139,6 +139,59 @@
         }
       ],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "active-tab",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "typeLabel": "GoabWorkSideNotificationPanelTabType",
+          "values": [
+            "unread",
+            "urgent",
+            "all"
+          ],
+          "required": false,
+          "default": "unread",
+          "description": ""
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "Notifications",
+          "description": ""
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "_markAllRead",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_viewAll",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

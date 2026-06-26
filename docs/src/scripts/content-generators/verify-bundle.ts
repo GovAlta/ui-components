@@ -165,8 +165,8 @@ export function verifyBundle(
   // generator's fixed set.
   const mcp = sortedIds(path.join(mcpDir, "components"), ".json");
   if (mcp.length) {
-    for (const framework of ["react", "angular", "web-components"]) {
-      // Web components carry the full MCP set. React and Angular drop the
+    for (const framework of ["react", "angular", "vue", "web-components"]) {
+      // Web components carry the full MCP set. Other frameworks drop the
       // web-component-only utilities (no wrapper there), so an AI isn't shown a
       // component it can't use in that framework.
       const expected =

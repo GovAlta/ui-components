@@ -89,6 +89,36 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The section heading displayed above the navigation links."
+        },
+        {
+          "name": "maxcolumncount",
+          "type": "number",
+          "required": false,
+          "default": "1",
+          "description": "Maximum number of columns to display links in on larger screens."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

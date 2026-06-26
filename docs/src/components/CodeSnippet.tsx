@@ -10,6 +10,7 @@ import {
   extractReactCode,
   extractAngularClassBody,
   extractWebComponentsCode,
+  extractVueCode,
 } from "../lib/extract-code-parts";
 import {
   getFrameworkPreference,
@@ -36,6 +37,7 @@ export type Language = "tsx" | "typescript" | "javascript" | "html" | "css";
 interface FrameworkCode {
   react?: string | ReactExample;
   angular?: string | AngularExample | AngularExample[];
+  vue?: string | WebComponentsExample;
   webComponents?: string | WebComponentsExample;
 }
 
@@ -58,6 +60,7 @@ interface CodeSnippetProps {
 const FRAMEWORK_LABELS: Record<Framework, string> = {
   react: "React",
   angular: "Angular",
+  vue: "Vue",
   webComponents: "Web Components",
 };
 
@@ -193,7 +196,7 @@ function SingleCodeBlock({
 // Main CodeSnippet Component
 // ============================================================================
 
-const VALID_FRAMEWORKS: Framework[] = ["react", "angular", "webComponents"];
+const VALID_FRAMEWORKS: Framework[] = ["react", "angular", "vue", "webComponents"];
 
 export function CodeSnippet({
   code,
@@ -331,6 +334,8 @@ export function CodeSnippet({
         return renderReactBlocks(frameworkCode.react);
       case "angular":
         return renderAngularBlocks(frameworkCode.angular);
+      case "vue":
+        return renderVueBlocks(frameworkCode.vue);
       case "webComponents":
         return renderWebComponentsBlocks(frameworkCode.webComponents);
       default:
@@ -449,6 +454,30 @@ export function CodeSnippet({
     );
   };
 
+  const renderVueBlocks = (vue?: string | WebComponentsExample) => {
+    if (!vue) return <div className="no-code">No Vue code available</div>;
+
+    // Object form: use fields directly
+    if (typeof vue !== "string") {
+      return (
+        <>
+          {vue.css && wrapCodeBlock(vue.css, "css", "css")}
+          {vue.js && wrapCodeBlock(vue.js, "javascript", "js")}
+          {wrapCodeBlock(vue.html, "html", "html")}
+        </>
+      );
+    }
+
+    // String form: parse via extractor (handles <template> and <script setup>)
+    const extracted = extractVueCode(vue);
+    return (
+      <>
+        {extracted.javascript && wrapCodeBlock(extracted.javascript, "javascript", "js")}
+        {wrapCodeBlock(extracted.html, "html", "html")}
+      </>
+    );
+  };
+
   // Helper to render code blocks for a specific framework
   const renderBlocksForFramework = (fw: Framework) => {
     if (!extractParts) {
@@ -469,6 +498,8 @@ export function CodeSnippet({
         return renderReactBlocks(frameworkCode.react);
       case "angular":
         return renderAngularBlocks(frameworkCode.angular);
+      case "vue":
+        return renderVueBlocks(frameworkCode.vue);
       case "webComponents":
         return renderWebComponentsBlocks(frameworkCode.webComponents);
       default:
@@ -536,6 +567,11 @@ function getFrameworkRawCode(frameworkCode: FrameworkCode, framework: Framework)
       // For array form (form patterns), show the first example's template
       if (Array.isArray(angular)) return angular[0]?.template ?? "";
       return angular.template;
+    }
+    case "vue": {
+      const vue = frameworkCode.vue;
+      if (!vue) return "";
+      return typeof vue === "string" ? vue : vue.html;
     }
     case "webComponents": {
       const wc = frameworkCode.webComponents;

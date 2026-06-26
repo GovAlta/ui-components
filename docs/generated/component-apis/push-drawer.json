@@ -165,6 +165,66 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": ""
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "492px",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "slot",
+          "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

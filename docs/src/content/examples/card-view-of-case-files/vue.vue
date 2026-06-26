@@ -1,0 +1,58 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-container mt="l">
+    <div class="case-file-row">
+      <goa-block direction="column" gap="2xs">
+        <goa-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2021/2022</goa-text>
+        <goa-text size="body-s" mt="none" mb="none">Submitted: April 23, 2023</goa-text>
+      </goa-block>
+      <goa-block direction="row" gap="l" alignment="center">
+        <goa-badge version="2" type="default" content="Not started"></goa-badge>
+        <goa-button version="2" type="tertiary" size="compact">Start</goa-button>
+      </goa-block>
+    </div>
+  </goa-container>
+  <goa-container>
+    <div class="case-file-row">
+      <goa-block direction="column" gap="2xs">
+        <goa-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2020/2021</goa-text>
+        <goa-text size="body-s" mt="none" mb="none">Submitted: April 9, 2022</goa-text>
+      </goa-block>
+      <goa-block direction="row" gap="l" alignment="center">
+        <goa-badge version="2" type="important" content="Information needed"></goa-badge>
+        <goa-button version="2" type="tertiary" size="compact">Edit</goa-button>
+      </goa-block>
+    </div>
+  </goa-container>
+  <goa-container>
+    <div class="case-file-row">
+      <goa-block direction="column" gap="2xs">
+        <goa-text size="heading-xs" mt="none" mb="2xs">Fiscal year: 2019/2020</goa-text>
+        <goa-text size="body-s" mt="none" mb="none">Submitted: April 14, 2021</goa-text>
+      </goa-block>
+      <goa-block direction="row" gap="l" alignment="center">
+        <goa-badge version="2" type="success" content="Approved"></goa-badge>
+        <goa-button version="2" type="tertiary" size="compact">View</goa-button>
+      </goa-block>
+    </div>
+  </goa-container>
+</template>
+
+<style>
+.case-file-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+</style>

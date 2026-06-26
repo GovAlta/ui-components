@@ -118,6 +118,48 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "keyboard-icon-position",
+          "type": "\"left\" | \"right\"",
+          "values": [
+            "left",
+            "right"
+          ],
+          "required": false,
+          "default": "left",
+          "description": "Position of the keyboard navigation indicator icon."
+        },
+        {
+          "name": "keyboard-icon-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the keyboard navigation indicator icon. Use \"visible\" to show or \"hidden\" to hide."
+        },
+        {
+          "name": "keyboard-nav",
+          "type": "\"layout\" | \"table\"",
+          "values": [
+            "layout",
+            "table"
+          ],
+          "required": false,
+          "default": "table",
+          "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

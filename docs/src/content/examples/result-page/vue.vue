@@ -1,0 +1,25 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-text as="h1" mt="none">You have completed the application</goa-text>
+  <goa-callout version="2" type="success" heading="Application submitted">
+    <goa-text size="body-m" mt="none" mb="s">You will receive a copy of the confirmation to the email name@email.com</goa-text>
+    <goa-text size="body-m" mt="none" mb="none">Your reference number is: <strong>1234ABC</strong></goa-text>
+  </goa-callout>
+  <goa-text as="h2" mt="xl" mb="m">What happens next</goa-text>
+  <goa-text size="body-m" mt="none" mb="s">We've sent your application to service name. They will contact you to confirm your registration.</goa-text>
+  <goa-text size="body-m" mt="none" mb="s">You can now close this window.</goa-text>
+  <goa-text size="body-m" mt="none" mb="s">What did you think of this service? <a href="#">Give feedback</a></goa-text>
+  <goa-text as="h2" mt="xl" mb="m">If you have questions about your application</goa-text>
+  <goa-text size="body-m" mt="none" mb="s">Contact the [ministry area].</goa-text>
+  <goa-text size="body-m" mt="none" mb="s">Email: <a href="mailto:information@gov.ab.ca">information@gov.ab.ca</a></goa-text>
+  <goa-text size="body-m" mt="none" mb="s">Phone: <a href="tel:7801234567">780 123 4567</a></goa-text>
+</template>

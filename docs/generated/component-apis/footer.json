@@ -132,6 +132,58 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The maximum width of the main content area"
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "https://alberta.ca",
+          "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "nav",
+          "description": "",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

@@ -1,0 +1,39 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-text as="h1" size="heading-l" mt="none" mb="m">Direct deposit information</goa-text>
+  <goa-text as="p" mb="xl">
+    Find this information on your bank's website or on your personal cheques. Contact your
+    bank if you can't find this information.
+  </goa-text>
+  <form>
+    <goa-form-item version="2" label="Bank or Institution number" helptext="3-4 digits in length">
+      <goa-input version="2" maxlength="4" name="bankNumber" id="bank-number-input" aria-label="bankNumber" width="88px" @_change="onChange('bank-number-input', $event)"></goa-input>
+    </goa-form-item>
+    <goa-form-item version="2" label="Branch or Transit number" helptext="5 digits in length" mt="l">
+      <goa-input version="2" maxlength="5" name="transitNumber" id="transit-number-input" aria-label="transitNumber" width="143px" @_change="onChange('transit-number-input', $event)"></goa-input>
+    </goa-form-item>
+    <goa-form-item version="2" label="Account number" helptext="3-12 digits in length" mt="l">
+      <goa-input version="2" maxlength="12" name="accountNumber" id="account-number-input" aria-label="accountNumber" @_change="onChange('account-number-input', $event)"></goa-input>
+    </goa-form-item>
+  </form>
+  <goa-details heading="Where can I find this information on a personal cheque?" mt="l">
+    <goa-text as="p" mb="m">Below is an example of where you can find the required bank information on a personal cheque.</goa-text>
+    <img src="https://design.alberta.ca/images/details-demo.jpg" alt="Cheque example" />
+  </goa-details>
+  <goa-button version="2" type="submit" mt="2xl">Save and continue</goa-button>
+</template>
+
+<script setup lang="ts">
+function onChange(id: string, e: CustomEvent) {
+  console.log(`${id}:`, e.detail.value);
+}
+</script>

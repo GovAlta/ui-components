@@ -117,6 +117,50 @@
           "required": false
         }
       ]
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": ""
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The text label for this tab. Can also use the heading slot for custom content."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether this tab is currently selected/active."
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "heading",
+          "type": "slot",
+          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "required": false
+        }
+      ],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

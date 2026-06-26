@@ -1,0 +1,78 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-grid minchildwidth="315px">
+    <goa-container accent="thin" type="non-interactive">
+      <goa-text size="heading-m" mt="none" mb="m">Appearance details</goa-text>
+      <goa-grid minchildwidth="200px" gap="m">
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-s" color="secondary" mt="none" mb="none">Accused name</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Doe, John Scott</goa-text>
+        </goa-block>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-s" color="secondary" mt="none" mb="none">Date of birth</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Mar 14, 2021</goa-text>
+        </goa-block>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-s" color="secondary" mt="none" mb="none">Court location</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Calgary</goa-text>
+        </goa-block>
+        <goa-block direction="column" gap="xs">
+          <goa-text size="body-s" color="secondary" mt="none" mb="none">Upcoming appearance date(s)</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">Sep 20, 2021</goa-text>
+        </goa-block>
+      </goa-grid>
+      <goa-text size="heading-xs" mt="l" mb="s">Docket number(s) &amp; charges</goa-text>
+      <goa-container type="non-interactive" padding="compact">
+        <goa-text size="heading-xs" mt="none" mb="xs">1) 12345678</goa-text>
+        <goa-text size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</goa-text>
+        <goa-text size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</goa-text>
+      </goa-container>
+      <goa-container type="non-interactive" padding="compact">
+        <goa-text size="heading-xs" mt="none" mb="xs">2) 12345678</goa-text>
+        <goa-text size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</goa-text>
+        <goa-text size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</goa-text>
+      </goa-container>
+    </goa-container>
+    <goa-container accent="thin" width="content">
+      <form>
+        <goa-text size="heading-m" mt="none" mb="m">Adjournment request</goa-text>
+        <goa-text size="body-m" mt="none" mb="none">
+          Keep track of the individuals who are placed in lodges and may qualify for the Lodge
+          Assistance Program subsidy.
+        </goa-text>
+        <goa-form-item version="2" label="Case history and new request" mt="l">
+          <goa-radio-group version="2" name="case" orientation="horizontal">
+            <goa-radio-item value="grant" label="Grant"></goa-radio-item>
+            <goa-radio-item value="deny" label="Deny"></goa-radio-item>
+          </goa-radio-group>
+        </goa-form-item>
+        <goa-form-item version="2" label="Reason to deny" mt="l">
+          <goa-dropdown version="2" name="reason" width="100%">
+            <goa-dropdown-item value="1" label="Incomplete Application"></goa-dropdown-item>
+            <goa-dropdown-item value="2" label="Eligibility Criteria Not Met"></goa-dropdown-item>
+            <goa-dropdown-item value="3" label="Documentation Verification Failure"></goa-dropdown-item>
+          </goa-dropdown>
+        </goa-form-item>
+        <goa-form-item version="2" label="Message" mt="l">
+          <goa-textarea version="2" name="message" rows="5" width="100%"></goa-textarea>
+        </goa-form-item>
+        <goa-button version="2" mt="xl" @_click="onConfirm">Confirm adjournment</goa-button>
+      </form>
+    </goa-container>
+  </goa-grid>
+</template>
+
+<script setup lang="ts">
+function onConfirm() {
+  console.log("Confirm clicked!");
+}
+</script>

@@ -119,6 +119,59 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The menu heading text displayed as the dropdown trigger."
+        },
+        {
+          "name": "leadingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "rootEl",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"primary\" | \"secondary\"",
+          "values": [
+            "primary",
+            "secondary"
+          ],
+          "required": false,
+          "default": "primary",
+          "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

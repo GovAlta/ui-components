@@ -1,0 +1,32 @@
+<!--
+Prerequisites:
+- npm install @abgov/web-components @abgov/design-tokens
+- Vite: isCustomElement for goa-* tags (see setup docs)
+- Import "@abgov/web-components" in main.ts
+- Import CSS: @abgov/web-components/index.css + /design-tokens/dist/tokens.css
+- Add ionicons CDN to index.html
+- Full guide: get-started/developers/setup
+-->
+
+<template>
+  <goa-app-footer version="2" maxcontentwidth="100%">
+    <goa-app-footer-nav-section slot="nav" maxcolumncount="1">
+      <a href="a.html">Arts and culture</a>
+      <a href="b.html">Education and training</a>
+      <a href="c.html">Family and social supports</a>
+      <a href="d.html">Housing and community</a>
+      <a href="e.html">Life events</a>
+      <a href="f.html">Business and economy</a>
+      <a href="g.html">Emergencies and public safety</a>
+      <a href="h.html">Government</a>
+      <a href="i.html">Jobs and employment</a>
+      <a href="j.html">Moving to Alberta</a>
+    </goa-app-footer-nav-section>
+    <goa-app-footer-meta-section slot="meta">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="using-alberta.html">Using Alberta.ca</a>
+    </goa-app-footer-meta-section>
+  </goa-app-footer>
+</template>

@@ -16,12 +16,12 @@ import DropInCallout from "../../../components/DropInCallout.astro";
 <p>
   The Design System is built on Web Components. Most component functionality lives in the core Web
   Components layer. Angular and React wrappers sit on top of that layer to make the components easier
-  to use in those frameworks.
+  to use in those frameworks. Vue consumes the Web Components directly, with no wrapper layer needed.
 </p>
-<p>
-  We use Svelte to author the components that are compiled to custom elements. You can use the Design
-  System through the core Web Components or through Angular and React wrappers.
-</p>
+  <p>
+    We use Svelte to author the components that are compiled to custom elements. You can use the Design
+    System through the core Web Components or through Angular and React wrappers.
+  </p>
 <img src={withBase(`/images/technologies.svg`)} alt="Diagram showing the technology layers: Svelte compiles to Web Components, which are wrapped by Angular and React" style={{ width: "100%", maxWidth: "700px", margin: "var(--goa-space-l) 0" }} />
 <goa-text as="h2" id="web-components" size="heading-m">Web Components</goa-text>
 <p>
@@ -98,4 +98,27 @@ import DropInCallout from "../../../components/DropInCallout.astro";
   <li>Enable integration within React applications</li>
 </ul>
 <p>The React application interacts with the wrapper, which renders the underlying Web Component.</p>
+<goa-text as="h2" id="vue" size="heading-m">Vue</goa-text>
+
+<goa-callout version="2" type="information" emphasis="low" mb="m">
+  <goa-text size="body-m" mt="2xs" mb="none">Supported versions: 3</goa-text>
+</goa-callout>
+
+<p>
+  <a href="https://vuejs.org/" target="_blank">Vue</a> is a progressive JavaScript framework
+  for building user interfaces. The Design System supports Vue by using the core Web Components
+  directly.
+</p>
+
+<goa-text size="heading-xs">How Web Components and Vue work together</goa-text>
+<p>
+  Vue applications use the core Web Components directly. Teams configure Vue to
+  recognise <code>goa-*</code> tags as custom elements. This approach:
+</p>
+<ul>
+  <li>Uses the same core components as other frameworks</li>
+  <li>Avoids wrapper-specific dependencies</li>
+  <li>Supports integration in Vue component templates</li>
+</ul>
+<p>The Vue application renders the underlying Web Component directly.</p>
 <DropInCallout />

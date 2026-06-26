@@ -142,6 +142,54 @@
       ],
       "events": [],
       "slots": []
+    },
+    "vue": {
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accessible label for the progress bar."
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "ID of the element that labels this progress bar."
+        },
+        {
+          "name": "percent-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the percentage text."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "notes": [
+        "When using Vue, set version=\"2\" on components that support the version prop to enable V2 styling."
+      ]
     }
   }
 }

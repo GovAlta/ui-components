@@ -2557,7 +2557,7 @@
     "type": "page",
     "id": "developers/setup",
     "title": "Developer setup",
-    "description": "Set up Angular, React, or Web Components to use the GoA Design System",
+    "description": "Set up Angular, React, Vue, or Web Components to use the GoA Design System",
     "status": "published",
     "category": "get started",
     "tags": [
