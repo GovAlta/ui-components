@@ -1,1 +1,0 @@
-import{j as s}from"./jsx-runtime.D_zvdyIk.js";import{t as p,l as a}from"./workspace-layout-scroll-state.Ch1khooy.js";function m({children:o,...r}){const t=p(r,a);return s.jsx("goa-button-group",{...t,children:o})}export{m as G};
