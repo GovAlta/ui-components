@@ -7,13 +7,13 @@ This folder contains the script to generate a FlexSearch-compatible index from t
 To generate or update the search index:
 
 ```bash
-npm run index:docs
+extract-api.ts
 ```
 
-This will:
-- Scan all `.md` and `.doc.md` files in `libs/web-components/src/components/`
-- Extract the title and content from each file
-- Generate a JSON index file at `docs/search-index.json`
+This script:
+- Scans all `.mdx` files
+- Extracts titles and content
+- Generates `docs/public/search-index.json`
 
 ## Output Format
 
