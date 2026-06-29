@@ -1,5 +1,6 @@
 import { render, waitFor } from "@testing-library/svelte";
 import GoAPushDrawer from "./PushDrawer.svelte";
+import PushDrawerWrapper from "./PushDrawerWrapper.test.svelte";
 import { it, describe, beforeEach, afterEach, vi, expect } from "vitest";
 
 describe("GoAPushDrawer", () => {
@@ -64,6 +65,42 @@ describe("GoAPushDrawer", () => {
 
       expect(drawer).toBeTruthy();
       expect(pushDrawerInternal).toBeNull();
+    });
+  });
+
+  it("forwards slotted heading content to goa-push-drawer-internal on desktop", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 1024,
+    });
+
+    const { container } = render(PushDrawerWrapper, {
+      props: { open: true },
+    });
+
+    const internal = container.querySelector("goa-push-drawer-internal");
+    await waitFor(() => {
+      const forwarded = internal?.querySelector('span[slot="heading"]');
+      expect(forwarded?.textContent).toContain("Custom Heading Content");
+    });
+  });
+
+  it("forwards slotted heading content to goa-drawer on mobile", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      writable: true,
+      configurable: true,
+      value: 1023,
+    });
+
+    const { container } = render(PushDrawerWrapper, {
+      props: { open: true },
+    });
+
+    const drawer = container.querySelector("goa-drawer");
+    await waitFor(() => {
+      const forwarded = drawer?.querySelector('span[slot="heading"]');
+      expect(forwarded?.textContent).toContain("Custom Heading Content");
     });
   });
 });

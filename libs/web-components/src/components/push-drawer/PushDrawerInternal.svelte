@@ -332,6 +332,12 @@
     font: var(--goa-push-drawer-heading-typography);
   }
 
+  /* V2: minimum separation so wide slotted heading content never butts
+     up against the close button */
+  .v2 .drawer-default-header {
+    column-gap: var(--goa-space-s);
+  }
+
   .drawer-actions {
     width: 100%;
     padding: var(--goa-push-drawer-actions-padding-top)
