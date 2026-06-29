@@ -308,6 +308,9 @@
       return;
     }
 
+    _tooltipEl.style.width = "";
+    _tooltipEl.style.whiteSpace = "";
+
     // determine the bounding rectangle of the tooltip and target element
     let tooltipRect = _tooltipEl.getBoundingClientRect();
     const targetRect = _targetEl.getBoundingClientRect();
