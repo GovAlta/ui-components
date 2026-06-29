@@ -416,59 +416,202 @@ cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="J0ukg" prefix="r27" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Ask a long answer question with a maximum word count&quot;],&quot;slug&quot;:[0,&quot;ask-a-long-answer-question-with-a-maximum-word-count&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabTextArea } from \&quot;@abgov/react-components\&quot;;\n\nexport function AskALongAnswerQuestionWithAMaximumWordCount() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  return (\n    &lt;GoabFormItem\n      label=\&quot;Provide more detail\&quot;\n      helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n    &gt;\n      &lt;GoabTextArea\n        name=\&quot;program\&quot;\n        onChange={(e) =&gt; setValue(e.value)}\n        value={value}\n        width=\&quot;100%\&quot;\n        rows={6}\n        maxCount={500}\n        countBy=\&quot;word\&quot;\n      /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item\n  label=\&quot;Provide more detail\&quot;\n  helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n&gt;\n  &lt;goab-textarea\n    name=\&quot;program\&quot;\n    [formControl]=\&quot;form.controls.program\&quot;\n    width=\&quot;100%\&quot;\n    [rows]=\&quot;6\&quot;\n    [maxCount]=\&quot;500\&quot;\n    countBy=\&quot;word\&quot;\n  &gt;\n  &lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-ask-a-long-answer-question\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AskALongAnswerQuestionComponent {\n  form!: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      program: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item\n  version=\&quot;2\&quot;\n  label=\&quot;Provide more detail\&quot;\n  helptext=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n&gt;\n  &lt;goa-textarea\n    version=\&quot;2\&quot;\n    name=\&quot;program\&quot;\n    id=\&quot;program-textarea\&quot;\n    width=\&quot;100%\&quot;\n    rows=\&quot;6\&quot;\n    maxcount=\&quot;500\&quot;\n    countby=\&quot;word\&quot;\n  &gt;\n  &lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  document.getElementById(\&quot;program-textarea\&quot;)?.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-ask-a-long-answer-question-with-a-maximum-word-count" class="example-title">Ask a long answer question with a maximum word count</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem
-  label=&quot;Provide more detail&quot;
-  helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2eg4Uh" prefix="r27" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add and edit lots of filters&quot;],&quot;slug&quot;:[0,&quot;add-and-edit-lots-of-filters&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabCheckbox,\n  GoabCheckboxList,\n  GoabDrawer,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddAndEditLotsOfFilters() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Filters&lt;/GoabButton&gt;\n      &lt;GoabDrawer\n        heading=\&quot;Filters\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        position=\&quot;right\&quot;\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;start\&quot;&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Apply filters\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabFormItem label=\&quot;Entry status\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;entryStatus\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;published\&quot; text=\&quot;Published\&quot; value=\&quot;published\&quot; /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;region\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;calgary\&quot; text=\&quot;Calgary\&quot; value=\&quot;calgary\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;central\&quot; text=\&quot;Central\&quot; value=\&quot;central\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;edmonton\&quot; text=\&quot;Edmonton\&quot; value=\&quot;edmonton\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot; /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;assignedTo\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Person 1\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Person 2\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup name=\&quot;dateTaken\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabRadioItem value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabDrawer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onClick()\&quot;&gt;Filters&lt;/goab-button&gt;\n&lt;goab-drawer\n  heading=\&quot;Filters\&quot;\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;onClose()\&quot;\n  position=\&quot;right\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-form-item label=\&quot;Entry status\&quot;&gt;\n    &lt;goab-checkbox-list name=\&quot;entryStatus\&quot; (onChange)=\&quot;onCheckboxChange($event)\&quot;&gt;\n      &lt;goab-checkbox name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;published\&quot; text=\&quot;Published\&quot; value=\&quot;published\&quot;&gt;&lt;/goab-checkbox&gt;\n    &lt;/goab-checkbox-list&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-checkbox-list name=\&quot;region\&quot; (onChange)=\&quot;onCheckboxChange($event)\&quot;&gt;\n      &lt;goab-checkbox name=\&quot;calgary\&quot; text=\&quot;Calgary\&quot; value=\&quot;calgary\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;central\&quot; text=\&quot;Central\&quot; value=\&quot;central\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;edmonton\&quot; text=\&quot;Edmonton\&quot; value=\&quot;edmonton\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot;&gt;&lt;/goab-checkbox&gt;\n    &lt;/goab-checkbox-list&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-dropdown\n      [value]=\&quot;assignedTo\&quot;\n      name=\&quot;assignedToData\&quot;\n      (onChange)=\&quot;onChangeAssignedTo($event)\&quot;\n    &gt;\n      &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Person 1\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Person 2\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group name=\&quot;dateTaken\&quot; (onChange)=\&quot;radioOnChange($event)\&quot;&gt;\n      &lt;goab-radio-item value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Apply filters&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-drawer&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-and-edit-lots-of-filters\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddAndEditLotsOfFiltersComponent {\n  open = false;\n  assignedTo = \&quot;\&quot;;\n  takenBy = \&quot;\&quot;;\n\n  onClick() {\n    this.open = true;\n  }\n\n  onClose() {\n    this.open = false;\n  }\n\n  radioOnChange(event: any) {\n    console.log(event);\n  }\n\n  onChangeAssignedTo(e: any) {\n    this.assignedTo = e.value as string;\n  }\n\n  closeDrawer() {\n    this.open = false;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-filters-btn\&quot;&gt;Filters&lt;/goa-button&gt;\n&lt;goa-drawer version=\&quot;2\&quot; id=\&quot;filters-drawer\&quot; heading=\&quot;Filters\&quot; position=\&quot;right\&quot;&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Entry status\&quot;&gt;\n    &lt;goa-checkbox-list name=\&quot;entryStatus\&quot;&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot;&gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;published\&quot;\n        text=\&quot;Published\&quot;\n        value=\&quot;published\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n    &lt;/goa-checkbox-list&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-checkbox-list name=\&quot;region\&quot;&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;calgary\&quot;\n        text=\&quot;Calgary\&quot;\n        value=\&quot;calgary\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;central\&quot;\n        text=\&quot;Central\&quot;\n        value=\&quot;central\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;edmonton\&quot;\n        text=\&quot;Edmonton\&quot;\n        value=\&quot;edmonton\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot;&gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot;&gt;&lt;/goa-checkbox&gt;\n    &lt;/goa-checkbox-list&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;assignedTo\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Person 1\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Person 2\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;dateTaken\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;apply-filters-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Apply filters&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-drawer&gt;\n\n&lt;script&gt;\n  const drawer = document.getElementById(\&quot;filters-drawer\&quot;);\n  const openBtn = document.getElementById(\&quot;open-filters-btn\&quot;);\n  const applyBtn = document.getElementById(\&quot;apply-filters-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  drawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  applyBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170251&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-and-edit-lots-of-filters" class="example-title">Add and edit lots of filters</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170251" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Filters&lt;/GoabButton&gt;
+&lt;GoabDrawer
+  heading=&quot;Filters&quot;
+  open={open}
+  onClose={() =&gt; setOpen(false)}
+  position=&quot;right&quot;
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;start&quot;&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Apply filters
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;tertiary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Cancel
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
 &gt;
-  &lt;GoabTextArea
-    name=&quot;program&quot;
-    onChange={(e) =&gt; setValue(e.value)}
-    value={value}
-    width=&quot;100%&quot;
-    rows={6}
-    maxCount={500}
-    countBy=&quot;word&quot;
-  /&gt;
-&lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
-import { FormBuilder, FormGroup } from &quot;@angular/forms&quot;;
+  &lt;GoabFormItem label=&quot;Entry status&quot;&gt;
+    &lt;GoabCheckboxList name=&quot;entryStatus&quot; onChange={() =&gt; {}}&gt;
+      &lt;GoabCheckbox name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot; /&gt;
+      &lt;GoabCheckbox name=&quot;published&quot; text=&quot;Published&quot; value=&quot;published&quot; /&gt;
+    &lt;/GoabCheckboxList&gt;
+  &lt;/GoabFormItem&gt;
+  &lt;GoabFormItem label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabCheckboxList name=&quot;region&quot; onChange={() =&gt; {}}&gt;
+      &lt;GoabCheckbox name=&quot;calgary&quot; text=&quot;Calgary&quot; value=&quot;calgary&quot; /&gt;
+      &lt;GoabCheckbox name=&quot;central&quot; text=&quot;Central&quot; value=&quot;central&quot; /&gt;
+      &lt;GoabCheckbox name=&quot;edmonton&quot; text=&quot;Edmonton&quot; value=&quot;edmonton&quot; /&gt;
+      &lt;GoabCheckbox name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot; /&gt;
+      &lt;GoabCheckbox name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot; /&gt;
+    &lt;/GoabCheckboxList&gt;
+  &lt;/GoabFormItem&gt;
+  &lt;GoabFormItem label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabDropdown name=&quot;assignedTo&quot; onChange={() =&gt; {}}&gt;
+      &lt;GoabDropdownItem value=&quot;1&quot; label=&quot;Person 1&quot; /&gt;
+      &lt;GoabDropdownItem value=&quot;2&quot; label=&quot;Person 2&quot; /&gt;
+    &lt;/GoabDropdown&gt;
+  &lt;/GoabFormItem&gt;
+  &lt;GoabFormItem label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabRadioGroup name=&quot;dateTaken&quot; onChange={() =&gt; {}}&gt;
+      &lt;GoabRadioItem value=&quot;24&quot; label=&quot;Last 24 hours&quot; /&gt;
+      &lt;GoabRadioItem value=&quot;72&quot; label=&quot;Last 72 hours&quot; /&gt;
+    &lt;/GoabRadioGroup&gt;
+  &lt;/GoabFormItem&gt;
+&lt;/GoabDrawer&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
 
-form!: FormGroup;
+open = false;
+assignedTo = &quot;&quot;;
+takenBy = &quot;&quot;;
 
-constructor(private fb: FormBuilder) {
-  this.form = this.fb.group({
-    program: [&quot;&quot;],
-  });
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item
-  label=&quot;Provide more detail&quot;
-  helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
+onClick() {
+  this.open = true;
+}
+
+onClose() {
+  this.open = false;
+}
+
+radioOnChange(event: any) {
+  console.log(event);
+}
+
+onChangeAssignedTo(e: any) {
+  this.assignedTo = e.value as string;
+}
+
+closeDrawer() {
+  this.open = false;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onClick()&quot;&gt;Filters&lt;/goab-button&gt;
+&lt;goab-drawer
+  heading=&quot;Filters&quot;
+  [open]=&quot;open&quot;
+  (onClose)=&quot;onClose()&quot;
+  position=&quot;right&quot;
+  [actions]=&quot;actions&quot;
 &gt;
-  &lt;goab-textarea
-    name=&quot;program&quot;
-    [formControl]=&quot;form.controls.program&quot;
-    width=&quot;100%&quot;
-    [rows]=&quot;6&quot;
-    [maxCount]=&quot;500&quot;
-    countBy=&quot;word&quot;
-  &gt;
-  &lt;/goab-textarea&gt;
-&lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.getElementById(&quot;program-textarea&quot;)?.addEventListener(&quot;_change&quot;, (e) =&gt; {
-  console.log(&quot;Value:&quot;, e.detail.value);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item
-  version=&quot;2&quot;
-  label=&quot;Provide more detail&quot;
-  helptext=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
-&gt;
-  &lt;goa-textarea
-    version=&quot;2&quot;
-    name=&quot;program&quot;
-    id=&quot;program-textarea&quot;
-    width=&quot;100%&quot;
-    rows=&quot;6&quot;
-    maxcount=&quot;500&quot;
-    countby=&quot;word&quot;
-  &gt;
-  &lt;/goa-textarea&gt;
-&lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+  &lt;goab-form-item label=&quot;Entry status&quot;&gt;
+    &lt;goab-checkbox-list name=&quot;entryStatus&quot; (onChange)=&quot;onCheckboxChange($event)&quot;&gt;
+      &lt;goab-checkbox name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot;&gt;&lt;/goab-checkbox&gt;
+      &lt;goab-checkbox name=&quot;published&quot; text=&quot;Published&quot; value=&quot;published&quot;&gt;&lt;/goab-checkbox&gt;
+    &lt;/goab-checkbox-list&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-checkbox-list name=&quot;region&quot; (onChange)=&quot;onCheckboxChange($event)&quot;&gt;
+      &lt;goab-checkbox name=&quot;calgary&quot; text=&quot;Calgary&quot; value=&quot;calgary&quot;&gt;&lt;/goab-checkbox&gt;
+      &lt;goab-checkbox name=&quot;central&quot; text=&quot;Central&quot; value=&quot;central&quot;&gt;&lt;/goab-checkbox&gt;
+      &lt;goab-checkbox name=&quot;edmonton&quot; text=&quot;Edmonton&quot; value=&quot;edmonton&quot;&gt;&lt;/goab-checkbox&gt;
+      &lt;goab-checkbox name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot;&gt;&lt;/goab-checkbox&gt;
+      &lt;goab-checkbox name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot;&gt;&lt;/goab-checkbox&gt;
+    &lt;/goab-checkbox-list&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-dropdown
+      [value]=&quot;assignedTo&quot;
+      name=&quot;assignedToData&quot;
+      (onChange)=&quot;onChangeAssignedTo($event)&quot;
+    &gt;
+      &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Person 1&quot;&gt;&lt;/goab-dropdown-item&gt;
+      &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Person 2&quot;&gt;&lt;/goab-dropdown-item&gt;
+    &lt;/goab-dropdown&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-radio-group name=&quot;dateTaken&quot; (onChange)=&quot;radioOnChange($event)&quot;&gt;
+      &lt;goab-radio-item value=&quot;24&quot; label=&quot;Last 24 hours&quot;&gt;&lt;/goab-radio-item&gt;
+      &lt;goab-radio-item value=&quot;72&quot; label=&quot;Last 72 hours&quot;&gt;&lt;/goab-radio-item&gt;
+    &lt;/goab-radio-group&gt;
+  &lt;/goab-form-item&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;start&quot;&gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;closeDrawer()&quot;
+        &gt;Apply filters&lt;/goab-button
+      &gt;
+      &lt;goab-button type=&quot;tertiary&quot; size=&quot;compact&quot; (onClick)=&quot;closeDrawer()&quot;
+        &gt;Cancel&lt;/goab-button
+      &gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-drawer&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const drawer = document.getElementById(&quot;filters-drawer&quot;);
+const openBtn = document.getElementById(&quot;open-filters-btn&quot;);
+const applyBtn = document.getElementById(&quot;apply-filters-btn&quot;);
+const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  drawer.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+drawer.addEventListener(&quot;_close&quot;, () =&gt; {
+  drawer.removeAttribute(&quot;open&quot;);
+});
+
+applyBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  drawer.removeAttribute(&quot;open&quot;);
+});
+
+cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  drawer.removeAttribute(&quot;open&quot;);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-filters-btn&quot;&gt;Filters&lt;/goa-button&gt;
+&lt;goa-drawer version=&quot;2&quot; id=&quot;filters-drawer&quot; heading=&quot;Filters&quot; position=&quot;right&quot;&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Entry status&quot;&gt;
+    &lt;goa-checkbox-list name=&quot;entryStatus&quot;&gt;
+      &lt;goa-checkbox version=&quot;2&quot; name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot;&gt;&lt;/goa-checkbox&gt;
+      &lt;goa-checkbox
+        version=&quot;2&quot;
+        name=&quot;published&quot;
+        text=&quot;Published&quot;
+        value=&quot;published&quot;
+      &gt;&lt;/goa-checkbox&gt;
+    &lt;/goa-checkbox-list&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-checkbox-list name=&quot;region&quot;&gt;
+      &lt;goa-checkbox
+        version=&quot;2&quot;
+        name=&quot;calgary&quot;
+        text=&quot;Calgary&quot;
+        value=&quot;calgary&quot;
+      &gt;&lt;/goa-checkbox&gt;
+      &lt;goa-checkbox
+        version=&quot;2&quot;
+        name=&quot;central&quot;
+        text=&quot;Central&quot;
+        value=&quot;central&quot;
+      &gt;&lt;/goa-checkbox&gt;
+      &lt;goa-checkbox
+        version=&quot;2&quot;
+        name=&quot;edmonton&quot;
+        text=&quot;Edmonton&quot;
+        value=&quot;edmonton&quot;
+      &gt;&lt;/goa-checkbox&gt;
+      &lt;goa-checkbox version=&quot;2&quot; name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot;&gt;&lt;/goa-checkbox&gt;
+      &lt;goa-checkbox version=&quot;2&quot; name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot;&gt;&lt;/goa-checkbox&gt;
+    &lt;/goa-checkbox-list&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-dropdown version=&quot;2&quot; name=&quot;assignedTo&quot;&gt;
+      &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Person 1&quot;&gt;&lt;/goa-dropdown-item&gt;
+      &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Person 2&quot;&gt;&lt;/goa-dropdown-item&gt;
+    &lt;/goa-dropdown&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-radio-group version=&quot;2&quot; name=&quot;dateTaken&quot;&gt;
+      &lt;goa-radio-item value=&quot;24&quot; label=&quot;Last 24 hours&quot;&gt;&lt;/goa-radio-item&gt;
+      &lt;goa-radio-item value=&quot;72&quot; label=&quot;Last 72 hours&quot;&gt;&lt;/goa-radio-item&gt;
+    &lt;/goa-radio-group&gt;
+  &lt;/goa-form-item&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;start&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;apply-filters-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
+        &gt;Apply filters&lt;/goa-button
+      &gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;cancel-btn&quot; type=&quot;tertiary&quot; size=&quot;compact&quot;
+        &gt;Cancel&lt;/goa-button
+      &gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-drawer&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
@@ -800,202 +943,59 @@ saveBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2eg4Uh" prefix="r29" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add and edit lots of filters&quot;],&quot;slug&quot;:[0,&quot;add-and-edit-lots-of-filters&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabCheckbox,\n  GoabCheckboxList,\n  GoabDrawer,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddAndEditLotsOfFilters() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Filters&lt;/GoabButton&gt;\n      &lt;GoabDrawer\n        heading=\&quot;Filters\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        position=\&quot;right\&quot;\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;start\&quot;&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Apply filters\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Cancel\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabFormItem label=\&quot;Entry status\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;entryStatus\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;published\&quot; text=\&quot;Published\&quot; value=\&quot;published\&quot; /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;region\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;calgary\&quot; text=\&quot;Calgary\&quot; value=\&quot;calgary\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;central\&quot; text=\&quot;Central\&quot; value=\&quot;central\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;edmonton\&quot; text=\&quot;Edmonton\&quot; value=\&quot;edmonton\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot; /&gt;\n            &lt;GoabCheckbox name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot; /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;assignedTo\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Person 1\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Person 2\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabRadioGroup name=\&quot;dateTaken\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabRadioItem value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabDrawer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;onClick()\&quot;&gt;Filters&lt;/goab-button&gt;\n&lt;goab-drawer\n  heading=\&quot;Filters\&quot;\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;onClose()\&quot;\n  position=\&quot;right\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-form-item label=\&quot;Entry status\&quot;&gt;\n    &lt;goab-checkbox-list name=\&quot;entryStatus\&quot; (onChange)=\&quot;onCheckboxChange($event)\&quot;&gt;\n      &lt;goab-checkbox name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;published\&quot; text=\&quot;Published\&quot; value=\&quot;published\&quot;&gt;&lt;/goab-checkbox&gt;\n    &lt;/goab-checkbox-list&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-checkbox-list name=\&quot;region\&quot; (onChange)=\&quot;onCheckboxChange($event)\&quot;&gt;\n      &lt;goab-checkbox name=\&quot;calgary\&quot; text=\&quot;Calgary\&quot; value=\&quot;calgary\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;central\&quot; text=\&quot;Central\&quot; value=\&quot;central\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;edmonton\&quot; text=\&quot;Edmonton\&quot; value=\&quot;edmonton\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot;&gt;&lt;/goab-checkbox&gt;\n      &lt;goab-checkbox name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot;&gt;&lt;/goab-checkbox&gt;\n    &lt;/goab-checkbox-list&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-dropdown\n      [value]=\&quot;assignedTo\&quot;\n      name=\&quot;assignedToData\&quot;\n      (onChange)=\&quot;onChangeAssignedTo($event)\&quot;\n    &gt;\n      &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Person 1\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Person 2\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-radio-group name=\&quot;dateTaken\&quot; (onChange)=\&quot;radioOnChange($event)\&quot;&gt;\n      &lt;goab-radio-item value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Apply filters&lt;/goab-button\n      &gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;closeDrawer()\&quot;\n        &gt;Cancel&lt;/goab-button\n      &gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-drawer&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-and-edit-lots-of-filters\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddAndEditLotsOfFiltersComponent {\n  open = false;\n  assignedTo = \&quot;\&quot;;\n  takenBy = \&quot;\&quot;;\n\n  onClick() {\n    this.open = true;\n  }\n\n  onClose() {\n    this.open = false;\n  }\n\n  radioOnChange(event: any) {\n    console.log(event);\n  }\n\n  onChangeAssignedTo(e: any) {\n    this.assignedTo = e.value as string;\n  }\n\n  closeDrawer() {\n    this.open = false;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-filters-btn\&quot;&gt;Filters&lt;/goa-button&gt;\n&lt;goa-drawer version=\&quot;2\&quot; id=\&quot;filters-drawer\&quot; heading=\&quot;Filters\&quot; position=\&quot;right\&quot;&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Entry status\&quot;&gt;\n    &lt;goa-checkbox-list name=\&quot;entryStatus\&quot;&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;draft\&quot; text=\&quot;Draft\&quot; value=\&quot;draft\&quot;&gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;published\&quot;\n        text=\&quot;Published\&quot;\n        value=\&quot;published\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n    &lt;/goa-checkbox-list&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Assigned to - Region\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-checkbox-list name=\&quot;region\&quot;&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;calgary\&quot;\n        text=\&quot;Calgary\&quot;\n        value=\&quot;calgary\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;central\&quot;\n        text=\&quot;Central\&quot;\n        value=\&quot;central\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox\n        version=\&quot;2\&quot;\n        name=\&quot;edmonton\&quot;\n        text=\&quot;Edmonton\&quot;\n        value=\&quot;edmonton\&quot;\n      &gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;north\&quot; text=\&quot;North\&quot; value=\&quot;north\&quot;&gt;&lt;/goa-checkbox&gt;\n      &lt;goa-checkbox version=\&quot;2\&quot; name=\&quot;south\&quot; text=\&quot;South\&quot; value=\&quot;south\&quot;&gt;&lt;/goa-checkbox&gt;\n    &lt;/goa-checkbox-list&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Assigned to\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;assignedTo\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Person 1\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Person 2\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Date taken\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;dateTaken\&quot;&gt;\n      &lt;goa-radio-item value=\&quot;24\&quot; label=\&quot;Last 24 hours\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;72\&quot; label=\&quot;Last 72 hours\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;start\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;apply-filters-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;\n        &gt;Apply filters&lt;/goa-button\n      &gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;\n        &gt;Cancel&lt;/goa-button\n      &gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-drawer&gt;\n\n&lt;script&gt;\n  const drawer = document.getElementById(\&quot;filters-drawer\&quot;);\n  const openBtn = document.getElementById(\&quot;open-filters-btn\&quot;);\n  const applyBtn = document.getElementById(\&quot;apply-filters-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  drawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  applyBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    drawer.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170251&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-and-edit-lots-of-filters" class="example-title">Add and edit lots of filters</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170251" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Filters&lt;/GoabButton&gt;
-&lt;GoabDrawer
-  heading=&quot;Filters&quot;
-  open={open}
-  onClose={() =&gt; setOpen(false)}
-  position=&quot;right&quot;
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;start&quot;&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Apply filters
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;tertiary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Cancel
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="J0ukg" prefix="r29" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Ask a long answer question with a maximum word count&quot;],&quot;slug&quot;:[0,&quot;ask-a-long-answer-question-with-a-maximum-word-count&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabTextArea } from \&quot;@abgov/react-components\&quot;;\n\nexport function AskALongAnswerQuestionWithAMaximumWordCount() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  return (\n    &lt;GoabFormItem\n      label=\&quot;Provide more detail\&quot;\n      helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n    &gt;\n      &lt;GoabTextArea\n        name=\&quot;program\&quot;\n        onChange={(e) =&gt; setValue(e.value)}\n        value={value}\n        width=\&quot;100%\&quot;\n        rows={6}\n        maxCount={500}\n        countBy=\&quot;word\&quot;\n      /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item\n  label=\&quot;Provide more detail\&quot;\n  helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n&gt;\n  &lt;goab-textarea\n    name=\&quot;program\&quot;\n    [formControl]=\&quot;form.controls.program\&quot;\n    width=\&quot;100%\&quot;\n    [rows]=\&quot;6\&quot;\n    [maxCount]=\&quot;500\&quot;\n    countBy=\&quot;word\&quot;\n  &gt;\n  &lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-ask-a-long-answer-question\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AskALongAnswerQuestionComponent {\n  form!: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      program: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item\n  version=\&quot;2\&quot;\n  label=\&quot;Provide more detail\&quot;\n  helptext=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n&gt;\n  &lt;goa-textarea\n    version=\&quot;2\&quot;\n    name=\&quot;program\&quot;\n    id=\&quot;program-textarea\&quot;\n    width=\&quot;100%\&quot;\n    rows=\&quot;6\&quot;\n    maxcount=\&quot;500\&quot;\n    countby=\&quot;word\&quot;\n  &gt;\n  &lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  document.getElementById(\&quot;program-textarea\&quot;)?.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-ask-a-long-answer-question-with-a-maximum-word-count" class="example-title">Ask a long answer question with a maximum word count</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem
+  label=&quot;Provide more detail&quot;
+  helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
 &gt;
-  &lt;GoabFormItem label=&quot;Entry status&quot;&gt;
-    &lt;GoabCheckboxList name=&quot;entryStatus&quot; onChange={() =&gt; {}}&gt;
-      &lt;GoabCheckbox name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot; /&gt;
-      &lt;GoabCheckbox name=&quot;published&quot; text=&quot;Published&quot; value=&quot;published&quot; /&gt;
-    &lt;/GoabCheckboxList&gt;
-  &lt;/GoabFormItem&gt;
-  &lt;GoabFormItem label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabCheckboxList name=&quot;region&quot; onChange={() =&gt; {}}&gt;
-      &lt;GoabCheckbox name=&quot;calgary&quot; text=&quot;Calgary&quot; value=&quot;calgary&quot; /&gt;
-      &lt;GoabCheckbox name=&quot;central&quot; text=&quot;Central&quot; value=&quot;central&quot; /&gt;
-      &lt;GoabCheckbox name=&quot;edmonton&quot; text=&quot;Edmonton&quot; value=&quot;edmonton&quot; /&gt;
-      &lt;GoabCheckbox name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot; /&gt;
-      &lt;GoabCheckbox name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot; /&gt;
-    &lt;/GoabCheckboxList&gt;
-  &lt;/GoabFormItem&gt;
-  &lt;GoabFormItem label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabDropdown name=&quot;assignedTo&quot; onChange={() =&gt; {}}&gt;
-      &lt;GoabDropdownItem value=&quot;1&quot; label=&quot;Person 1&quot; /&gt;
-      &lt;GoabDropdownItem value=&quot;2&quot; label=&quot;Person 2&quot; /&gt;
-    &lt;/GoabDropdown&gt;
-  &lt;/GoabFormItem&gt;
-  &lt;GoabFormItem label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabRadioGroup name=&quot;dateTaken&quot; onChange={() =&gt; {}}&gt;
-      &lt;GoabRadioItem value=&quot;24&quot; label=&quot;Last 24 hours&quot; /&gt;
-      &lt;GoabRadioItem value=&quot;72&quot; label=&quot;Last 72 hours&quot; /&gt;
-    &lt;/GoabRadioGroup&gt;
-  &lt;/GoabFormItem&gt;
-&lt;/GoabDrawer&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
+  &lt;GoabTextArea
+    name=&quot;program&quot;
+    onChange={(e) =&gt; setValue(e.value)}
+    value={value}
+    width=&quot;100%&quot;
+    rows={6}
+    maxCount={500}
+    countBy=&quot;word&quot;
+  /&gt;
+&lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
+import { FormBuilder, FormGroup } from &quot;@angular/forms&quot;;
 
-open = false;
-assignedTo = &quot;&quot;;
-takenBy = &quot;&quot;;
+form!: FormGroup;
 
-onClick() {
-  this.open = true;
-}
-
-onClose() {
-  this.open = false;
-}
-
-radioOnChange(event: any) {
-  console.log(event);
-}
-
-onChangeAssignedTo(e: any) {
-  this.assignedTo = e.value as string;
-}
-
-closeDrawer() {
-  this.open = false;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;onClick()&quot;&gt;Filters&lt;/goab-button&gt;
-&lt;goab-drawer
-  heading=&quot;Filters&quot;
-  [open]=&quot;open&quot;
-  (onClose)=&quot;onClose()&quot;
-  position=&quot;right&quot;
-  [actions]=&quot;actions&quot;
+constructor(private fb: FormBuilder) {
+  this.form = this.fb.group({
+    program: [&quot;&quot;],
+  });
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item
+  label=&quot;Provide more detail&quot;
+  helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
 &gt;
-  &lt;goab-form-item label=&quot;Entry status&quot;&gt;
-    &lt;goab-checkbox-list name=&quot;entryStatus&quot; (onChange)=&quot;onCheckboxChange($event)&quot;&gt;
-      &lt;goab-checkbox name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot;&gt;&lt;/goab-checkbox&gt;
-      &lt;goab-checkbox name=&quot;published&quot; text=&quot;Published&quot; value=&quot;published&quot;&gt;&lt;/goab-checkbox&gt;
-    &lt;/goab-checkbox-list&gt;
-  &lt;/goab-form-item&gt;
-  &lt;goab-form-item label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-checkbox-list name=&quot;region&quot; (onChange)=&quot;onCheckboxChange($event)&quot;&gt;
-      &lt;goab-checkbox name=&quot;calgary&quot; text=&quot;Calgary&quot; value=&quot;calgary&quot;&gt;&lt;/goab-checkbox&gt;
-      &lt;goab-checkbox name=&quot;central&quot; text=&quot;Central&quot; value=&quot;central&quot;&gt;&lt;/goab-checkbox&gt;
-      &lt;goab-checkbox name=&quot;edmonton&quot; text=&quot;Edmonton&quot; value=&quot;edmonton&quot;&gt;&lt;/goab-checkbox&gt;
-      &lt;goab-checkbox name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot;&gt;&lt;/goab-checkbox&gt;
-      &lt;goab-checkbox name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot;&gt;&lt;/goab-checkbox&gt;
-    &lt;/goab-checkbox-list&gt;
-  &lt;/goab-form-item&gt;
-  &lt;goab-form-item label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-dropdown
-      [value]=&quot;assignedTo&quot;
-      name=&quot;assignedToData&quot;
-      (onChange)=&quot;onChangeAssignedTo($event)&quot;
-    &gt;
-      &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Person 1&quot;&gt;&lt;/goab-dropdown-item&gt;
-      &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Person 2&quot;&gt;&lt;/goab-dropdown-item&gt;
-    &lt;/goab-dropdown&gt;
-  &lt;/goab-form-item&gt;
-  &lt;goab-form-item label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-radio-group name=&quot;dateTaken&quot; (onChange)=&quot;radioOnChange($event)&quot;&gt;
-      &lt;goab-radio-item value=&quot;24&quot; label=&quot;Last 24 hours&quot;&gt;&lt;/goab-radio-item&gt;
-      &lt;goab-radio-item value=&quot;72&quot; label=&quot;Last 72 hours&quot;&gt;&lt;/goab-radio-item&gt;
-    &lt;/goab-radio-group&gt;
-  &lt;/goab-form-item&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;start&quot;&gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;closeDrawer()&quot;
-        &gt;Apply filters&lt;/goab-button
-      &gt;
-      &lt;goab-button type=&quot;tertiary&quot; size=&quot;compact&quot; (onClick)=&quot;closeDrawer()&quot;
-        &gt;Cancel&lt;/goab-button
-      &gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-drawer&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const drawer = document.getElementById(&quot;filters-drawer&quot;);
-const openBtn = document.getElementById(&quot;open-filters-btn&quot;);
-const applyBtn = document.getElementById(&quot;apply-filters-btn&quot;);
-const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
-
-openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  drawer.setAttribute(&quot;open&quot;, &quot;true&quot;);
-});
-
-drawer.addEventListener(&quot;_close&quot;, () =&gt; {
-  drawer.removeAttribute(&quot;open&quot;);
-});
-
-applyBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  drawer.removeAttribute(&quot;open&quot;);
-});
-
-cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  drawer.removeAttribute(&quot;open&quot;);
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-filters-btn&quot;&gt;Filters&lt;/goa-button&gt;
-&lt;goa-drawer version=&quot;2&quot; id=&quot;filters-drawer&quot; heading=&quot;Filters&quot; position=&quot;right&quot;&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Entry status&quot;&gt;
-    &lt;goa-checkbox-list name=&quot;entryStatus&quot;&gt;
-      &lt;goa-checkbox version=&quot;2&quot; name=&quot;draft&quot; text=&quot;Draft&quot; value=&quot;draft&quot;&gt;&lt;/goa-checkbox&gt;
-      &lt;goa-checkbox
-        version=&quot;2&quot;
-        name=&quot;published&quot;
-        text=&quot;Published&quot;
-        value=&quot;published&quot;
-      &gt;&lt;/goa-checkbox&gt;
-    &lt;/goa-checkbox-list&gt;
-  &lt;/goa-form-item&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Assigned to - Region&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-checkbox-list name=&quot;region&quot;&gt;
-      &lt;goa-checkbox
-        version=&quot;2&quot;
-        name=&quot;calgary&quot;
-        text=&quot;Calgary&quot;
-        value=&quot;calgary&quot;
-      &gt;&lt;/goa-checkbox&gt;
-      &lt;goa-checkbox
-        version=&quot;2&quot;
-        name=&quot;central&quot;
-        text=&quot;Central&quot;
-        value=&quot;central&quot;
-      &gt;&lt;/goa-checkbox&gt;
-      &lt;goa-checkbox
-        version=&quot;2&quot;
-        name=&quot;edmonton&quot;
-        text=&quot;Edmonton&quot;
-        value=&quot;edmonton&quot;
-      &gt;&lt;/goa-checkbox&gt;
-      &lt;goa-checkbox version=&quot;2&quot; name=&quot;north&quot; text=&quot;North&quot; value=&quot;north&quot;&gt;&lt;/goa-checkbox&gt;
-      &lt;goa-checkbox version=&quot;2&quot; name=&quot;south&quot; text=&quot;South&quot; value=&quot;south&quot;&gt;&lt;/goa-checkbox&gt;
-    &lt;/goa-checkbox-list&gt;
-  &lt;/goa-form-item&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Assigned to&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-dropdown version=&quot;2&quot; name=&quot;assignedTo&quot;&gt;
-      &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Person 1&quot;&gt;&lt;/goa-dropdown-item&gt;
-      &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Person 2&quot;&gt;&lt;/goa-dropdown-item&gt;
-    &lt;/goa-dropdown&gt;
-  &lt;/goa-form-item&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Date taken&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-radio-group version=&quot;2&quot; name=&quot;dateTaken&quot;&gt;
-      &lt;goa-radio-item value=&quot;24&quot; label=&quot;Last 24 hours&quot;&gt;&lt;/goa-radio-item&gt;
-      &lt;goa-radio-item value=&quot;72&quot; label=&quot;Last 72 hours&quot;&gt;&lt;/goa-radio-item&gt;
-    &lt;/goa-radio-group&gt;
-  &lt;/goa-form-item&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;start&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;apply-filters-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;
-        &gt;Apply filters&lt;/goa-button
-      &gt;
-      &lt;goa-button version=&quot;2&quot; id=&quot;cancel-btn&quot; type=&quot;tertiary&quot; size=&quot;compact&quot;
-        &gt;Cancel&lt;/goa-button
-      &gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-drawer&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+  &lt;goab-textarea
+    name=&quot;program&quot;
+    [formControl]=&quot;form.controls.program&quot;
+    width=&quot;100%&quot;
+    [rows]=&quot;6&quot;
+    [maxCount]=&quot;500&quot;
+    countBy=&quot;word&quot;
+  &gt;
+  &lt;/goab-textarea&gt;
+&lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.getElementById(&quot;program-textarea&quot;)?.addEventListener(&quot;_change&quot;, (e) =&gt; {
+  console.log(&quot;Value:&quot;, e.detail.value);
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item
+  version=&quot;2&quot;
+  label=&quot;Provide more detail&quot;
+  helptext=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
+&gt;
+  &lt;goa-textarea
+    version=&quot;2&quot;
+    name=&quot;program&quot;
+    id=&quot;program-textarea&quot;
+    width=&quot;100%&quot;
+    rows=&quot;6&quot;
+    maxcount=&quot;500&quot;
+    countby=&quot;word&quot;
+  &gt;
+  &lt;/goa-textarea&gt;
+&lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
@@ -5406,148 +5406,7 @@ checkboxList.addEventListener(&quot;_change&quot;, (e) =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1yqB5p" prefix="r47" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Set a max width on a long radio item&quot;],&quot;slug&quot;:[0,&quot;set-a-max-width-on-a-long-radio-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabRadioGroup, GoabRadioItem } from \&quot;@abgov/react-components\&quot;;\nimport { GoabRadioGroupOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SetAMaxWidthOnALongRadioItem() {\n  const [selectOne, setSelectOne] = useState&lt;string&gt;(\&quot;1\&quot;);\n\n  return (\n    &lt;form&gt;\n      &lt;GoabFormItem label=\&quot;Select one option\&quot;&gt;\n        &lt;GoabRadioGroup\n          name=\&quot;selectOne\&quot;\n          value={selectOne}\n          onChange={(e: GoabRadioGroupOnChangeDetail) =&gt; setSelectOne(e.value)}\n        &gt;\n          &lt;GoabRadioItem\n            value=\&quot;1\&quot;\n            label=\&quot;Option one which has a very long label with lots of text\&quot;\n            maxWidth=\&quot;300px\&quot;\n          /&gt;\n          &lt;GoabRadioItem value=\&quot;2\&quot; label=\&quot;Option two\&quot; /&gt;\n          &lt;GoabRadioItem value=\&quot;3\&quot; label=\&quot;Option three\&quot; /&gt;\n        &lt;/GoabRadioGroup&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/form&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;form&gt;\n  &lt;goab-form-item label=\&quot;Select one option\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;selectOne\&quot;\n      [value]=\&quot;selectOne\&quot;\n      (onChange)=\&quot;onRadioChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item\n        value=\&quot;1\&quot;\n        label=\&quot;Option one which has a very long label with lots of text\&quot;\n        maxWidth=\&quot;300px\&quot;\n      &gt;\n      &lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;2\&quot; label=\&quot;Option two\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;3\&quot; label=\&quot;Option three\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n&lt;/form&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { GoabRadioGroupOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-set-a-max-width-on-a-long-radio-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SetAMaxWidthOnALongRadioItemComponent {\n  selectOne = \&quot;1\&quot;;\n\n  onRadioChange(event: GoabRadioGroupOnChangeDetail): void {\n    this.selectOne = event.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;form&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Select one option\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;selectOne\&quot; value=\&quot;1\&quot;&gt;\n      &lt;goa-radio-item\n        value=\&quot;1\&quot;\n        label=\&quot;Option one which has a very long label with lots of text\&quot;\n        max-width=\&quot;300px\&quot;\n      &gt;\n      &lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;2\&quot; label=\&quot;Option two\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;3\&quot; label=\&quot;Option three\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n&lt;/form&gt;\n\n&lt;script&gt;\n  document.querySelector(\&quot;goa-radio-group\&quot;).addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    e.target.value = e.detail.value;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-set-a-max-width-on-a-long-radio-item" class="example-title">Set a max width on a long radio item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [selectOne, setSelectOne] = useState&lt;string&gt;(&quot;1&quot;);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;form&gt;
-  &lt;GoabFormItem label=&quot;Select one option&quot;&gt;
-    &lt;GoabRadioGroup
-      name=&quot;selectOne&quot;
-      value={selectOne}
-      onChange={(e: GoabRadioGroupOnChangeDetail) =&gt; setSelectOne(e.value)}
-    &gt;
-      &lt;GoabRadioItem
-        value=&quot;1&quot;
-        label=&quot;Option one which has a very long label with lots of text&quot;
-        maxWidth=&quot;300px&quot;
-      /&gt;
-      &lt;GoabRadioItem value=&quot;2&quot; label=&quot;Option two&quot; /&gt;
-      &lt;GoabRadioItem value=&quot;3&quot; label=&quot;Option three&quot; /&gt;
-    &lt;/GoabRadioGroup&gt;
-  &lt;/GoabFormItem&gt;
-&lt;/form&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
-import { GoabRadioGroupOnChangeDetail } from &quot;@abgov/ui-components-common&quot;;
-
-selectOne = &quot;1&quot;;
-
-onRadioChange(event: GoabRadioGroupOnChangeDetail): void {
-  this.selectOne = event.value;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;form&gt;
-  &lt;goab-form-item label=&quot;Select one option&quot;&gt;
-    &lt;goab-radio-group
-      name=&quot;selectOne&quot;
-      [value]=&quot;selectOne&quot;
-      (onChange)=&quot;onRadioChange($event)&quot;
-    &gt;
-      &lt;goab-radio-item
-        value=&quot;1&quot;
-        label=&quot;Option one which has a very long label with lots of text&quot;
-        maxWidth=&quot;300px&quot;
-      &gt;
-      &lt;/goab-radio-item&gt;
-      &lt;goab-radio-item value=&quot;2&quot; label=&quot;Option two&quot;&gt;&lt;/goab-radio-item&gt;
-      &lt;goab-radio-item value=&quot;3&quot; label=&quot;Option three&quot;&gt;&lt;/goab-radio-item&gt;
-    &lt;/goab-radio-group&gt;
-  &lt;/goab-form-item&gt;
-&lt;/form&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.querySelector(&quot;goa-radio-group&quot;).addEventListener(&quot;_change&quot;, (e) =&gt; {
-  e.target.value = e.detail.value;
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;form&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Select one option&quot;&gt;
-    &lt;goa-radio-group version=&quot;2&quot; name=&quot;selectOne&quot; value=&quot;1&quot;&gt;
-      &lt;goa-radio-item
-        value=&quot;1&quot;
-        label=&quot;Option one which has a very long label with lots of text&quot;
-        max-width=&quot;300px&quot;
-      &gt;
-      &lt;/goa-radio-item&gt;
-      &lt;goa-radio-item value=&quot;2&quot; label=&quot;Option two&quot;&gt;&lt;/goa-radio-item&gt;
-      &lt;goa-radio-item value=&quot;3&quot; label=&quot;Option three&quot;&gt;&lt;/goa-radio-item&gt;
-    &lt;/goa-radio-group&gt;
-  &lt;/goa-form-item&gt;
-&lt;/form&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link,
-        .figma-link:visited {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1k4oua" prefix="r48" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Search&quot;],&quot;slug&quot;:[0,&quot;search&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabBlock, GoabButton, GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\n\nexport function Search() {\n  const [search, setSearch] = useState(\&quot;\&quot;);\n\n  const onClick = () =&gt; {\n    console.log(\&quot;search:\&quot;, search);\n  };\n\n  return (\n    &lt;form&gt;\n      &lt;GoabFormItem&gt;\n        &lt;GoabBlock gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n          &lt;GoabInput\n            type=\&quot;search\&quot;\n            name=\&quot;search\&quot;\n            value={search}\n            onChange={(e) =&gt; setSearch(e.value)}\n            leadingIcon=\&quot;search\&quot;\n          /&gt;\n          &lt;GoabButton type=\&quot;primary\&quot; onClick={onClick}&gt;\n            Search\n          &lt;/GoabButton&gt;\n        &lt;/GoabBlock&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/form&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;form [formGroup]=\&quot;form\&quot;&gt;\n  &lt;goab-form-item&gt;\n    &lt;goab-block gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n      &lt;goab-input\n        type=\&quot;search\&quot;\n        name=\&quot;search\&quot;\n        formControlName=\&quot;search\&quot;\n        leadingIcon=\&quot;search\&quot;\n      &gt;\n      &lt;/goab-input&gt;\n      &lt;goab-button type=\&quot;primary\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Search&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/goab-form-item&gt;\n&lt;/form&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-search\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SearchComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      search: [\&quot;\&quot;],\n    });\n  }\n\n  onClick(): void {\n    console.log(\&quot;search:\&quot;, this.form.controls[\&quot;search\&quot;].value);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;form&gt;\n  &lt;goa-form-item version=\&quot;2\&quot;&gt;\n    &lt;goa-block gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n      &lt;goa-input\n        version=\&quot;2\&quot;\n        id=\&quot;search-input\&quot;\n        type=\&quot;search\&quot;\n        name=\&quot;search\&quot;\n        leadingicon=\&quot;search\&quot;\n      &gt;\n      &lt;/goa-input&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;search-btn\&quot; type=\&quot;primary\&quot;&gt;Search&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/goa-form-item&gt;\n&lt;/form&gt;\n\n&lt;script&gt;\n  const searchInput = document.getElementById(\&quot;search-input\&quot;);\n  const searchBtn = document.getElementById(\&quot;search-btn\&quot;);\n  let searchValue = \&quot;\&quot;;\n\n  searchInput.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    searchValue = e.detail.value;\n  });\n\n  searchBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    console.log(\&quot;search:\&quot;, searchValue);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170522&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-search" class="example-title">Search</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170522" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [search, setSearch] = useState(&quot;&quot;);
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1k4oua" prefix="r47" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Search&quot;],&quot;slug&quot;:[0,&quot;search&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabBlock, GoabButton, GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\n\nexport function Search() {\n  const [search, setSearch] = useState(\&quot;\&quot;);\n\n  const onClick = () =&gt; {\n    console.log(\&quot;search:\&quot;, search);\n  };\n\n  return (\n    &lt;form&gt;\n      &lt;GoabFormItem&gt;\n        &lt;GoabBlock gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n          &lt;GoabInput\n            type=\&quot;search\&quot;\n            name=\&quot;search\&quot;\n            value={search}\n            onChange={(e) =&gt; setSearch(e.value)}\n            leadingIcon=\&quot;search\&quot;\n          /&gt;\n          &lt;GoabButton type=\&quot;primary\&quot; onClick={onClick}&gt;\n            Search\n          &lt;/GoabButton&gt;\n        &lt;/GoabBlock&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/form&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;form [formGroup]=\&quot;form\&quot;&gt;\n  &lt;goab-form-item&gt;\n    &lt;goab-block gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n      &lt;goab-input\n        type=\&quot;search\&quot;\n        name=\&quot;search\&quot;\n        formControlName=\&quot;search\&quot;\n        leadingIcon=\&quot;search\&quot;\n      &gt;\n      &lt;/goab-input&gt;\n      &lt;goab-button type=\&quot;primary\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Search&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/goab-form-item&gt;\n&lt;/form&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-search\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SearchComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      search: [\&quot;\&quot;],\n    });\n  }\n\n  onClick(): void {\n    console.log(\&quot;search:\&quot;, this.form.controls[\&quot;search\&quot;].value);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;form&gt;\n  &lt;goa-form-item version=\&quot;2\&quot;&gt;\n    &lt;goa-block gap=\&quot;xs\&quot; direction=\&quot;row\&quot;&gt;\n      &lt;goa-input\n        version=\&quot;2\&quot;\n        id=\&quot;search-input\&quot;\n        type=\&quot;search\&quot;\n        name=\&quot;search\&quot;\n        leadingicon=\&quot;search\&quot;\n      &gt;\n      &lt;/goa-input&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;search-btn\&quot; type=\&quot;primary\&quot;&gt;Search&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/goa-form-item&gt;\n&lt;/form&gt;\n\n&lt;script&gt;\n  const searchInput = document.getElementById(\&quot;search-input\&quot;);\n  const searchBtn = document.getElementById(\&quot;search-btn\&quot;);\n  let searchValue = \&quot;\&quot;;\n\n  searchInput.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    searchValue = e.detail.value;\n  });\n\n  searchBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    console.log(\&quot;search:\&quot;, searchValue);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170522&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-search" class="example-title">Search</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip><goa-tooltip content="View Figma component"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-170522" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View Figma component"><goa-icon type="logo-figma" size="small"></goa-icon></a></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [search, setSearch] = useState(&quot;&quot;);
 
 const onClick = () =&gt; {
   console.log(&quot;search:&quot;, search);
@@ -5702,18 +5561,159 @@ searchBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="1CKQJk" prefix="r49" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Slotted helper text in a form item&quot;],&quot;slug&quot;:[0,&quot;slotted-helper-text-in-a-form-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabInputOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SlottedHelperTextInAFormItem() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  const onChange = (detail: GoabInputOnChangeDetail) =&gt; {\n    setValue(detail.value);\n  };\n\n  const helpText = (\n    &lt;&gt;\n      &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;help text&lt;/b&gt;.\n    &lt;/&gt;\n  );\n\n  return (\n    &lt;GoabFormItem label=\&quot;First name\&quot; helpText={helpText}&gt;\n      &lt;GoabInput onChange={onChange} value={value} name=\&quot;item\&quot; /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;First name\&quot; [formGroup]=\&quot;form\&quot; [helpText]=\&quot;helpTextTemplate\&quot;&gt;\n  &lt;goab-input name=\&quot;item\&quot; formControlName=\&quot;item\&quot;&gt;&lt;/goab-input&gt;\n  &lt;ng-template #helpTextTemplate&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;help text&lt;/b&gt;.\n  &lt;/ng-template&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-slotted-helper-text-in-a-form-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SlottedHelperTextInAFormItemComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      item: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;First name\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-input&gt;\n  &lt;div slot=\&quot;helptext\&quot;&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;help text&lt;/b&gt;.\n  &lt;/div&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const input = document.querySelector(&#39;goa-input[name=\&quot;item\&quot;]&#39;);\n  input.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value changed:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-slotted-helper-text-in-a-form-item" class="example-title">Slotted helper text in a form item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="Z1yqB5p" prefix="r48" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Set a max width on a long radio item&quot;],&quot;slug&quot;:[0,&quot;set-a-max-width-on-a-long-radio-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabRadioGroup, GoabRadioItem } from \&quot;@abgov/react-components\&quot;;\nimport { GoabRadioGroupOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SetAMaxWidthOnALongRadioItem() {\n  const [selectOne, setSelectOne] = useState&lt;string&gt;(\&quot;1\&quot;);\n\n  return (\n    &lt;form&gt;\n      &lt;GoabFormItem label=\&quot;Select one option\&quot;&gt;\n        &lt;GoabRadioGroup\n          name=\&quot;selectOne\&quot;\n          value={selectOne}\n          onChange={(e: GoabRadioGroupOnChangeDetail) =&gt; setSelectOne(e.value)}\n        &gt;\n          &lt;GoabRadioItem\n            value=\&quot;1\&quot;\n            label=\&quot;Option one which has a very long label with lots of text\&quot;\n            maxWidth=\&quot;300px\&quot;\n          /&gt;\n          &lt;GoabRadioItem value=\&quot;2\&quot; label=\&quot;Option two\&quot; /&gt;\n          &lt;GoabRadioItem value=\&quot;3\&quot; label=\&quot;Option three\&quot; /&gt;\n        &lt;/GoabRadioGroup&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/form&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;form&gt;\n  &lt;goab-form-item label=\&quot;Select one option\&quot;&gt;\n    &lt;goab-radio-group\n      name=\&quot;selectOne\&quot;\n      [value]=\&quot;selectOne\&quot;\n      (onChange)=\&quot;onRadioChange($event)\&quot;\n    &gt;\n      &lt;goab-radio-item\n        value=\&quot;1\&quot;\n        label=\&quot;Option one which has a very long label with lots of text\&quot;\n        maxWidth=\&quot;300px\&quot;\n      &gt;\n      &lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;2\&quot; label=\&quot;Option two\&quot;&gt;&lt;/goab-radio-item&gt;\n      &lt;goab-radio-item value=\&quot;3\&quot; label=\&quot;Option three\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;/goab-radio-group&gt;\n  &lt;/goab-form-item&gt;\n&lt;/form&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { GoabRadioGroupOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-set-a-max-width-on-a-long-radio-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SetAMaxWidthOnALongRadioItemComponent {\n  selectOne = \&quot;1\&quot;;\n\n  onRadioChange(event: GoabRadioGroupOnChangeDetail): void {\n    this.selectOne = event.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;form&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Select one option\&quot;&gt;\n    &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;selectOne\&quot; value=\&quot;1\&quot;&gt;\n      &lt;goa-radio-item\n        value=\&quot;1\&quot;\n        label=\&quot;Option one which has a very long label with lots of text\&quot;\n        max-width=\&quot;300px\&quot;\n      &gt;\n      &lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;2\&quot; label=\&quot;Option two\&quot;&gt;&lt;/goa-radio-item&gt;\n      &lt;goa-radio-item value=\&quot;3\&quot; label=\&quot;Option three\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;/goa-radio-group&gt;\n  &lt;/goa-form-item&gt;\n&lt;/form&gt;\n\n&lt;script&gt;\n  document.querySelector(\&quot;goa-radio-group\&quot;).addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    e.target.value = e.detail.value;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-set-a-max-width-on-a-long-radio-item" class="example-title">Set a max width on a long radio item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [selectOne, setSelectOne] = useState&lt;string&gt;(&quot;1&quot;);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;form&gt;
+  &lt;GoabFormItem label=&quot;Select one option&quot;&gt;
+    &lt;GoabRadioGroup
+      name=&quot;selectOne&quot;
+      value={selectOne}
+      onChange={(e: GoabRadioGroupOnChangeDetail) =&gt; setSelectOne(e.value)}
+    &gt;
+      &lt;GoabRadioItem
+        value=&quot;1&quot;
+        label=&quot;Option one which has a very long label with lots of text&quot;
+        maxWidth=&quot;300px&quot;
+      /&gt;
+      &lt;GoabRadioItem value=&quot;2&quot; label=&quot;Option two&quot; /&gt;
+      &lt;GoabRadioItem value=&quot;3&quot; label=&quot;Option three&quot; /&gt;
+    &lt;/GoabRadioGroup&gt;
+  &lt;/GoabFormItem&gt;
+&lt;/form&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
+import { GoabRadioGroupOnChangeDetail } from &quot;@abgov/ui-components-common&quot;;
+
+selectOne = &quot;1&quot;;
+
+onRadioChange(event: GoabRadioGroupOnChangeDetail): void {
+  this.selectOne = event.value;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;form&gt;
+  &lt;goab-form-item label=&quot;Select one option&quot;&gt;
+    &lt;goab-radio-group
+      name=&quot;selectOne&quot;
+      [value]=&quot;selectOne&quot;
+      (onChange)=&quot;onRadioChange($event)&quot;
+    &gt;
+      &lt;goab-radio-item
+        value=&quot;1&quot;
+        label=&quot;Option one which has a very long label with lots of text&quot;
+        maxWidth=&quot;300px&quot;
+      &gt;
+      &lt;/goab-radio-item&gt;
+      &lt;goab-radio-item value=&quot;2&quot; label=&quot;Option two&quot;&gt;&lt;/goab-radio-item&gt;
+      &lt;goab-radio-item value=&quot;3&quot; label=&quot;Option three&quot;&gt;&lt;/goab-radio-item&gt;
+    &lt;/goab-radio-group&gt;
+  &lt;/goab-form-item&gt;
+&lt;/form&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.querySelector(&quot;goa-radio-group&quot;).addEventListener(&quot;_change&quot;, (e) =&gt; {
+  e.target.value = e.detail.value;
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;form&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Select one option&quot;&gt;
+    &lt;goa-radio-group version=&quot;2&quot; name=&quot;selectOne&quot; value=&quot;1&quot;&gt;
+      &lt;goa-radio-item
+        value=&quot;1&quot;
+        label=&quot;Option one which has a very long label with lots of text&quot;
+        max-width=&quot;300px&quot;
+      &gt;
+      &lt;/goa-radio-item&gt;
+      &lt;goa-radio-item value=&quot;2&quot; label=&quot;Option two&quot;&gt;&lt;/goa-radio-item&gt;
+      &lt;goa-radio-item value=&quot;3&quot; label=&quot;Option three&quot;&gt;&lt;/goa-radio-item&gt;
+    &lt;/goa-radio-group&gt;
+  &lt;/goa-form-item&gt;
+&lt;/form&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link,
+        .figma-link:visited {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2jyJVD" prefix="r49" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Slotted error text in a form item&quot;],&quot;slug&quot;:[0,&quot;slotted-error-text-in-a-form-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabInputOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SlottedErrorTextInAFormItem() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  const onChange = (detail: GoabInputOnChangeDetail) =&gt; {\n    setValue(detail.value);\n  };\n\n  const errorMessage = (\n    &lt;&gt;\n      &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;error text&lt;/b&gt;.\n    &lt;/&gt;\n  );\n\n  return (\n    &lt;GoabFormItem label=\&quot;First name\&quot; error={errorMessage}&gt;\n      &lt;GoabInput onChange={onChange} value={value} name=\&quot;item\&quot; error={true} /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;First name\&quot; [formGroup]=\&quot;form\&quot; [error]=\&quot;errorTemplate\&quot;&gt;\n  &lt;goab-input name=\&quot;item\&quot; formControlName=\&quot;item\&quot; [error]=\&quot;true\&quot;&gt;&lt;/goab-input&gt;\n  &lt;ng-template #errorTemplate&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;error text.&lt;/b&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-slotted-error-text-in-a-form-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SlottedErrorTextInAFormItemComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      item: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;First name\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; name=\&quot;item\&quot; error=\&quot;true\&quot;&gt;&lt;/goa-input&gt;\n  &lt;div slot=\&quot;error\&quot;&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;error text.&lt;/b&gt;\n  &lt;/div&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const input = document.querySelector(&#39;goa-input[name=\&quot;item\&quot;]&#39;);\n  input.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value changed:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-slotted-error-text-in-a-form-item" class="example-title">Slotted error text in a form item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);
 
 const onChange = (detail: GoabInputOnChangeDetail) =&gt; {
   setValue(detail.value);
 };
 
-const helpText = (
+const errorMessage = (
   &lt;&gt;
-    &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;help text&lt;/b&gt;.
+    &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;error text&lt;/b&gt;.
   &lt;/&gt;
-);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;First name&quot; helpText={helpText}&gt;
-  &lt;GoabInput onChange={onChange} value={value} name=&quot;item&quot; /&gt;
+);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;First name&quot; error={errorMessage}&gt;
+  &lt;GoabInput onChange={onChange} value={value} name=&quot;item&quot; error={true} /&gt;
 &lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
 import { FormBuilder, FormGroup } from &quot;@angular/forms&quot;;
 
@@ -5723,22 +5723,22 @@ constructor(private fb: FormBuilder) {
   this.form = this.fb.group({
     item: [&quot;&quot;],
   });
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;First name&quot; [formGroup]=&quot;form&quot; [helpText]=&quot;helpTextTemplate&quot;&gt;
-  &lt;goab-input name=&quot;item&quot; formControlName=&quot;item&quot;&gt;&lt;/goab-input&gt;
-  &lt;ng-template #helpTextTemplate&gt;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;First name&quot; [formGroup]=&quot;form&quot; [error]=&quot;errorTemplate&quot;&gt;
+  &lt;goab-input name=&quot;item&quot; formControlName=&quot;item&quot; [error]=&quot;true&quot;&gt;&lt;/goab-input&gt;
+  &lt;ng-template #errorTemplate&gt;
     &lt;span&gt;This is &lt;/span&gt;
     &lt;i&gt;slotted &lt;/i&gt;
-    &lt;b&gt;help text&lt;/b&gt;.
+    &lt;b&gt;error text.&lt;/b&gt;
   &lt;/ng-template&gt;
 &lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const input = document.querySelector(&#x27;goa-input[name=&quot;item&quot;]&#x27;);
 input.addEventListener(&quot;_change&quot;, (e) =&gt; {
   console.log(&quot;Value changed:&quot;, e.detail.value);
 });</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot; label=&quot;First name&quot;&gt;
-  &lt;goa-input version=&quot;2&quot; name=&quot;item&quot;&gt;&lt;/goa-input&gt;
-  &lt;div slot=&quot;helptext&quot;&gt;
+  &lt;goa-input version=&quot;2&quot; name=&quot;item&quot; error=&quot;true&quot;&gt;&lt;/goa-input&gt;
+  &lt;div slot=&quot;error&quot;&gt;
     &lt;span&gt;This is &lt;/span&gt;
     &lt;i&gt;slotted &lt;/i&gt;
-    &lt;b&gt;help text&lt;/b&gt;.
+    &lt;b&gt;error text.&lt;/b&gt;
   &lt;/div&gt;
 &lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
@@ -5826,18 +5826,18 @@ input.addEventListener(&quot;_change&quot;, (e) =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="2jyJVD" prefix="r50" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Slotted error text in a form item&quot;],&quot;slug&quot;:[0,&quot;slotted-error-text-in-a-form-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabInputOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SlottedErrorTextInAFormItem() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  const onChange = (detail: GoabInputOnChangeDetail) =&gt; {\n    setValue(detail.value);\n  };\n\n  const errorMessage = (\n    &lt;&gt;\n      &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;error text&lt;/b&gt;.\n    &lt;/&gt;\n  );\n\n  return (\n    &lt;GoabFormItem label=\&quot;First name\&quot; error={errorMessage}&gt;\n      &lt;GoabInput onChange={onChange} value={value} name=\&quot;item\&quot; error={true} /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;First name\&quot; [formGroup]=\&quot;form\&quot; [error]=\&quot;errorTemplate\&quot;&gt;\n  &lt;goab-input name=\&quot;item\&quot; formControlName=\&quot;item\&quot; [error]=\&quot;true\&quot;&gt;&lt;/goab-input&gt;\n  &lt;ng-template #errorTemplate&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;error text.&lt;/b&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-slotted-error-text-in-a-form-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SlottedErrorTextInAFormItemComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      item: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;First name\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; name=\&quot;item\&quot; error=\&quot;true\&quot;&gt;&lt;/goa-input&gt;\n  &lt;div slot=\&quot;error\&quot;&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;error text.&lt;/b&gt;\n  &lt;/div&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const input = document.querySelector(&#39;goa-input[name=\&quot;item\&quot;]&#39;);\n  input.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value changed:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-slotted-error-text-in-a-form-item" class="example-title">Slotted error text in a form item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);
+      </style></div><!--astro:end--></astro-island>  </div> <div class="example-display" data-astro-cid-5que57z2> <astro-island uid="1CKQJk" prefix="r50" component-url="/ui-components/pr-preview/pr-4100/_astro/ExamplePreview.CQNKb4ga.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Slotted helper text in a form item&quot;],&quot;slug&quot;:[0,&quot;slotted-helper-text-in-a-form-item&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabInput } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabInputOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function SlottedHelperTextInAFormItem() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  const onChange = (detail: GoabInputOnChangeDetail) =&gt; {\n    setValue(detail.value);\n  };\n\n  const helpText = (\n    &lt;&gt;\n      &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;help text&lt;/b&gt;.\n    &lt;/&gt;\n  );\n\n  return (\n    &lt;GoabFormItem label=\&quot;First name\&quot; helpText={helpText}&gt;\n      &lt;GoabInput onChange={onChange} value={value} name=\&quot;item\&quot; /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item label=\&quot;First name\&quot; [formGroup]=\&quot;form\&quot; [helpText]=\&quot;helpTextTemplate\&quot;&gt;\n  &lt;goab-input name=\&quot;item\&quot; formControlName=\&quot;item\&quot;&gt;&lt;/goab-input&gt;\n  &lt;ng-template #helpTextTemplate&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;help text&lt;/b&gt;.\n  &lt;/ng-template&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-slotted-helper-text-in-a-form-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class SlottedHelperTextInAFormItemComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      item: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;First name\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-input&gt;\n  &lt;div slot=\&quot;helptext\&quot;&gt;\n    &lt;span&gt;This is &lt;/span&gt;\n    &lt;i&gt;slotted &lt;/i&gt;\n    &lt;b&gt;help text&lt;/b&gt;.\n  &lt;/div&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const input = document.querySelector(&#39;goa-input[name=\&quot;item\&quot;]&#39;);\n  input.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value changed:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-5que57z2&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-slotted-helper-text-in-a-form-item" class="example-title">Slotted helper text in a form item</h3><div class="example-actions"><goa-tooltip content="Copy link"><button class="copy-link-button " aria-label="Copy link to this example"><goa-icon type="link" size="small"></goa-icon></button></goa-tooltip></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);
 
 const onChange = (detail: GoabInputOnChangeDetail) =&gt; {
   setValue(detail.value);
 };
 
-const errorMessage = (
+const helpText = (
   &lt;&gt;
-    &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;error text&lt;/b&gt;.
+    &lt;i&gt;This is &lt;/i&gt; slotted &lt;b&gt;help text&lt;/b&gt;.
   &lt;/&gt;
-);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;First name&quot; error={errorMessage}&gt;
-  &lt;GoabInput onChange={onChange} value={value} name=&quot;item&quot; error={true} /&gt;
+);</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem label=&quot;First name&quot; helpText={helpText}&gt;
+  &lt;GoabInput onChange={onChange} value={value} name=&quot;item&quot; /&gt;
 &lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">import { Component } from &quot;@angular/core&quot;;
 import { FormBuilder, FormGroup } from &quot;@angular/forms&quot;;
 
@@ -5847,22 +5847,22 @@ constructor(private fb: FormBuilder) {
   this.form = this.fb.group({
     item: [&quot;&quot;],
   });
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;First name&quot; [formGroup]=&quot;form&quot; [error]=&quot;errorTemplate&quot;&gt;
-  &lt;goab-input name=&quot;item&quot; formControlName=&quot;item&quot; [error]=&quot;true&quot;&gt;&lt;/goab-input&gt;
-  &lt;ng-template #errorTemplate&gt;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item label=&quot;First name&quot; [formGroup]=&quot;form&quot; [helpText]=&quot;helpTextTemplate&quot;&gt;
+  &lt;goab-input name=&quot;item&quot; formControlName=&quot;item&quot;&gt;&lt;/goab-input&gt;
+  &lt;ng-template #helpTextTemplate&gt;
     &lt;span&gt;This is &lt;/span&gt;
     &lt;i&gt;slotted &lt;/i&gt;
-    &lt;b&gt;error text.&lt;/b&gt;
+    &lt;b&gt;help text&lt;/b&gt;.
   &lt;/ng-template&gt;
 &lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const input = document.querySelector(&#x27;goa-input[name=&quot;item&quot;]&#x27;);
 input.addEventListener(&quot;_change&quot;, (e) =&gt; {
   console.log(&quot;Value changed:&quot;, e.detail.value);
 });</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot; label=&quot;First name&quot;&gt;
-  &lt;goa-input version=&quot;2&quot; name=&quot;item&quot; error=&quot;true&quot;&gt;&lt;/goa-input&gt;
-  &lt;div slot=&quot;error&quot;&gt;
+  &lt;goa-input version=&quot;2&quot; name=&quot;item&quot;&gt;&lt;/goa-input&gt;
+  &lt;div slot=&quot;helptext&quot;&gt;
     &lt;span&gt;This is &lt;/span&gt;
     &lt;i&gt;slotted &lt;/i&gt;
-    &lt;b&gt;error text.&lt;/b&gt;
+    &lt;b&gt;help text&lt;/b&gt;.
   &lt;/div&gt;
 &lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
@@ -6194,7 +6194,7 @@ addBtn.addEventListener(&quot;_click&quot;, () =&gt; {
           /* CodeSnippet handles its own styling */
         }
       </style></div><!--astro:end--></astro-island>  </div>  </div> </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2oNBCl" component-url="/ui-components/pr-preview/pr-4100/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.example-preview .example-title&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Usage Guidelines Tab --> <goa-tab heading="Usage guidelines" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <div class="guidance-grid-wrapper" data-astro-cid-dxwj2tab><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-other" class="topic-heading" data-astro-cid-dxwj2tab>Other</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Email address" helptext="We'll use this to contact you"><goa-input name="email" type="email" width="100%"></goa-input></goa-form-item> </div> 
-<p>The form item automatically associates the label with the input for screen readers, ensuring your form is accessible.</p></div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use a form item wrapper on all inputs to add a label, helper text, error message, and more.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-sizing" class="topic-heading" data-astro-cid-dxwj2tab>Sizing</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="tip" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab></div></div><div class="do-indicator" data-type="tip" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="tip" data-astro-cid-eyoetcf2><goa-icon version="2" type="information-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Tip</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use labelSize=&#39;large&#39; when you want the question to act as the heading on the page. This is often the right choice when there&#39;s only one question on a page, so you don&#39;t end up with a separate heading and a question saying the same thing.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-forms" class="topic-heading" data-astro-cid-dxwj2tab>Forms</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="dont" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label"><goa-textarea name="number" value="780" countby="character" maxcharcount="14"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="dont" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="dont" data-astro-cid-eyoetcf2><goa-icon version="2" type="close-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Don&#39;t</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Don&#39;t use the character counter for input fields where user entries typically have standard or predictable lengths.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Describe your situation"><goa-textarea name="situation" value="Lorem ipsum dolor sit ame" countby="character" maxcharcount="106"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use the character count only when there&#39;s a valid reason to limit the number of characters.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label" helptext="This is some helper text"><goa-textarea name="content" rows="3"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Make empty text areas as tall as the content they are expected to contain.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Text label (Optional)"><goa-textarea name="content" width="45ch"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Ensure that the text area width is no longer than 75 characters per line; ideal line length is 45-75 characters.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="dont" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label" helptext="This is some helper text"><goa-textarea name="oneline" rows="1"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="dont" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="dont" data-astro-cid-eyoetcf2><goa-icon version="2" type="close-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Don&#39;t</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Don&#39;t use a text area which is only one line high; instead, use text input if just one line is needed.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="What do you need funding for?"><goa-textarea name="funding" value="A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with" countby="word"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>If you suggest a specific length for an answer to a question, display a word count to help guide the user.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section></div>   </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2tEVBu" component-url="/ui-components/pr-preview/pr-4100/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.guidance-section .topic-heading&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Accessibility Tab --> <goa-tab heading="Accessibility" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch" data-astro-cid-ocziw4lk="true">
+<p>The form item automatically associates the label with the input for screen readers, ensuring your form is accessible.</p></div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use a form item wrapper on all inputs to add a label, helper text, error message, and more.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-sizing" class="topic-heading" data-astro-cid-dxwj2tab>Sizing</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="tip" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab></div></div><div class="do-indicator" data-type="tip" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="tip" data-astro-cid-eyoetcf2><goa-icon version="2" type="information-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Tip</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use labelSize=&#39;large&#39; when you want the question to act as the heading on the page. This is often the right choice when there&#39;s only one question on a page, so you don&#39;t end up with a separate heading and a question saying the same thing.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-forms" class="topic-heading" data-astro-cid-dxwj2tab>Forms</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="dont" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label"><goa-textarea name="number" value="780" countby="character" maxcharcount="14"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="dont" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="dont" data-astro-cid-eyoetcf2><goa-icon version="2" type="close-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Don&#39;t</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Don&#39;t use the character counter for input fields where user entries typically have standard or predictable lengths.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Describe your situation"><goa-textarea name="situation" value="Lorem ipsum dolor sit ame" countby="character" maxcharcount="106"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use the character count only when there&#39;s a valid reason to limit the number of characters.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Text label (Optional)"><goa-textarea name="content" width="45ch"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Ensure that the text area width is no longer than 75 characters per line; ideal line length is 45-75 characters.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label" helptext="This is some helper text"><goa-textarea name="content" rows="3"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Make empty text areas as tall as the content they are expected to contain.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="dont" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Input label" helptext="This is some helper text"><goa-textarea name="oneline" rows="1"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="dont" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="dont" data-astro-cid-eyoetcf2><goa-icon version="2" type="close-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Don&#39;t</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Don&#39;t use a text area which is only one line high; instead, use text input if just one line is needed.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="What do you need funding for?"><goa-textarea name="funding" value="A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with" countby="word"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>If you suggest a specific length for an answer to a question, display a word count to help guide the user.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section></div>   </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2tEVBu" component-url="/ui-components/pr-preview/pr-4100/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.guidance-section .topic-heading&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Accessibility Tab --> <goa-tab heading="Accessibility" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch" data-astro-cid-ocziw4lk="true">
 All GoA Design System components are built to meet <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" data-astro-cid-ocziw4lk>WCAG 2.2 AA</a> standards.
           The following guidelines provide additional context for accessible implementation.
 </goa-callout> <p class="empty-message" data-astro-cid-dxwj2tab>No accessibility-specific guidelines have been documented for this component yet.</p>  </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2tEVBu" component-url="/ui-components/pr-preview/pr-4100/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-4100/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.guidance-section .topic-heading&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> </goa-tabs> <section class="related-components" data-astro-cid-ocziw4lk> <h2 class="related-heading" data-astro-cid-ocziw4lk>Related components</h2> <div class="related-cards" data-astro-cid-ocziw4lk> <a href="/ui-components/pr-preview/pr-4100/components/checkbox-list" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/checkbox-group.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Checkbox list</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Checkbox list</span> <p class="related-card-description" data-astro-cid-ocziw4lk>A multiple selection input.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/checkbox" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/checkbox.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Checkbox</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Checkbox</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Let the user select one or more options.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/date-picker" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/date-picker.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Date picker</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Date picker</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Lets users select a date through a calendar without the need to manually type it in a field.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/dropdown" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/dropdown.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Dropdown</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Dropdown</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Present a list of options to the user to select from.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/file-upload-input" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/file-uploader.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>File uploader</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>File uploader</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Help users select and upload a file.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/input" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/text-input.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Input</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Input</span> <p class="related-card-description" data-astro-cid-ocziw4lk>A single-line field where users can input and edit text.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/radio-group" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/radio.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Radio</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Radio</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Allow users to select one option from a set.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/ui-components/pr-preview/pr-4100/components/text-area" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/ui-components/pr-preview/pr-4100/images/component-thumbnails/text-area.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Text area</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Text area</span> <p class="related-card-description" data-astro-cid-ocziw4lk>A multi-line field where users can input and edit text.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a> </div> </section> <goa-spacer version="2" vspacing="xl" data-astro-cid-ocziw4lk="true"></goa-spacer> <goa-divider version="2" data-astro-cid-ocziw4lk="true"></goa-divider> <goa-spacer version="2" vspacing="m" data-astro-cid-ocziw4lk="true"></goa-spacer> </div> <goa-link size="small" trailingicon="open" data-astro-cid-ocziw4lk="true"> <a href="https://v1.design.alberta.ca/components/form-item" target="_blank" rel="noopener noreferrer" data-astro-cid-ocziw4lk>View old component docs</a> </goa-link>  </div> </div> <div id="push-drawer-portal" data-astro-cid-asz6tkgw></div> </main> </div> </div>  </body></html>  
