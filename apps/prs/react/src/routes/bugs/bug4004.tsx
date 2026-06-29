@@ -11,6 +11,7 @@ import {
 export function Bug4004Route() {
   const [stringOpen, setStringOpen] = useState(false);
   const [slotOpen, setSlotOpen] = useState(false);
+  const [longOpen, setLongOpen] = useState(false);
 
   return (
     <div>
@@ -74,6 +75,34 @@ export function Bug4004Route() {
               <GoabButton onClick={() => setSlotOpen(false)}>Close</GoabButton>
             </GoabButtonGroup>
           }
+        >
+          <GoabText tag="p">Drawer body content.</GoabText>
+        </GoabPushDrawer>
+      </div>
+
+      <GoabText tag="h2" mt="2xl" mb="m">
+        Test 3: Long slotted heading (wrapping)
+      </GoabText>
+      <GoabText tag="p" mb="l">
+        When slotted heading content is longer than the available width, it should wrap
+        onto multiple lines while the close button stays pinned to the top right.
+      </GoabText>
+      <div style={{ display: "flex", minHeight: "320px" }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <GoabButton onClick={() => setLongOpen(true)}>
+            Open long heading
+          </GoabButton>
+        </div>
+        <GoabPushDrawer
+          open={longOpen}
+          width="320px"
+          heading={
+            <span>
+              A longer custom heading that should wrap onto multiple lines{" "}
+              <GoabBadge type="important" content="New" />
+            </span>
+          }
+          onClose={() => setLongOpen(false)}
         >
           <GoabText tag="p">Drawer body content.</GoabText>
         </GoabPushDrawer>

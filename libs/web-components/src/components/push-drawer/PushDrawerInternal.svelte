@@ -145,26 +145,28 @@
     <div id="goa-drawer-heading" slot="header" class="drawer-header">
       <div class="drawer-default-header">
         {#if heading || $$slots.heading}
-          {#if heading}
-            {#if version === "2"}
-              <goa-text
-                size={_scrollPos === "middle" || _scrollPos === "bottom"
-                  ? "heading-xs"
-                  : "heading-s"}
-                as="h3"
-                mt="2xs"
-                mb="none"
-              >
-                {heading}
-              </goa-text>
+          <div class="drawer-heading-content">
+            {#if heading}
+              {#if version === "2"}
+                <goa-text
+                  size={_scrollPos === "middle" || _scrollPos === "bottom"
+                    ? "heading-xs"
+                    : "heading-s"}
+                  as="h3"
+                  mt="2xs"
+                  mb="none"
+                >
+                  {heading}
+                </goa-text>
+              {:else}
+                <goa-text size="heading-m" as="h3" mt="none" mb="none">
+                  {heading}
+                </goa-text>
+              {/if}
             {:else}
-              <goa-text size="heading-m" as="h3" mt="none" mb="none">
-                {heading}
-              </goa-text>
+              <slot name="heading" />
             {/if}
-          {:else}
-            <slot name="heading" />
-          {/if}
+          </div>
         {/if}
 
         <goa-icon-button
@@ -333,9 +335,26 @@
   }
 
   /* V2: minimum separation so wide slotted heading content never butts
-     up against the close button */
+     up against the close button. Top-align so heading content that wraps
+     onto multiple lines flows downward while the close button stays
+     pinned top-right (matches the regular Drawer header). */
   .v2 .drawer-default-header {
+    align-items: flex-start;
     column-gap: var(--goa-space-s);
+  }
+
+  /* V2: let the heading content shrink so long content wraps onto the
+     next line instead of pushing the close button past the header's
+     right padding */
+  .v2 .drawer-heading-content {
+    min-width: 0;
+  }
+
+  /* V2: keep the close button at its intrinsic size, nudged to align with
+     the heading's first line (matches the regular Drawer) */
+  .v2 .drawer-default-header goa-icon-button {
+    flex-shrink: 0;
+    margin-top: -0.1875rem;
   }
 
   .drawer-actions {

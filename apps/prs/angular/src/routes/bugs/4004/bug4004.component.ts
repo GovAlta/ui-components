@@ -24,6 +24,7 @@ import {
 export class Bug4004Component {
   stringOpen = false;
   slotOpen = false;
+  longOpen = false;
 
   openString(): void {
     this.stringOpen = true;
@@ -39,5 +40,13 @@ export class Bug4004Component {
 
   closeSlot(): void {
     this.slotOpen = false;
+  }
+
+  openLong(): void {
+    this.longOpen = true;
+  }
+
+  closeLong(): void {
+    this.longOpen = false;
   }
 }

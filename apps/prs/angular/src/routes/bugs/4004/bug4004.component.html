@@ -42,11 +42,37 @@
   </goab-push-drawer>
 </div>
 
+<goab-text tag="h2" mt="2xl" mb="m">Test 3: Long slotted heading (wrapping)</goab-text>
+<goab-text mb="l">
+  When slotted heading content is longer than the available width, it should wrap onto
+  multiple lines while the close button stays pinned to the top right.
+</goab-text>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openLong()">Open long heading</goab-button>
+  </div>
+  <goab-push-drawer
+    [heading]="longHeading"
+    width="320px"
+    [open]="longOpen"
+    (onClose)="closeLong()"
+  >
+    <goab-text mt="none">Drawer body content.</goab-text>
+  </goab-push-drawer>
+</div>
+
 <ng-template #customHeading>
   <goab-block gap="s" alignment="center" direction="row">
     <span>Custom heading</span>
     <goab-badge type="important" content="New"></goab-badge>
   </goab-block>
+</ng-template>
+
+<ng-template #longHeading>
+  <span>
+    A longer custom heading that should wrap onto multiple lines
+    <goab-badge type="important" content="New"></goab-badge>
+  </span>
 </ng-template>
 
 <ng-template #slotActions>
