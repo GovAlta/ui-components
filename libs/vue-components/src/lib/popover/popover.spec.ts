@@ -59,7 +59,7 @@ describe("GoabPopover", () => {
   });
 
   it("should not warn when target slot is provided", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const warn = vi.spyOn(console, "warn").mockImplementation(vi.fn());
     mount(GoabPopover, {
       slots: { target: "Target" },
     });
@@ -69,7 +69,7 @@ describe("GoabPopover", () => {
   });
 
   it("should warn when target slot is missing", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const warn = vi.spyOn(console, "warn").mockImplementation(vi.fn());
     mount(GoabPopover);
     await nextTick();
     expect(warn).toHaveBeenCalledWith("Popover: a `target` slot is required.");
