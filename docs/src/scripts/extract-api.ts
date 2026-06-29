@@ -37,6 +37,10 @@ const DOCS_COMPONENT_CONTENT_PATH = path.join(
   "docs/src/content/components",
 );
 
+function toPosixPath(filePath: string): string {
+  return filePath.replace(/\\/g, "/");
+}
+
 // Components that expose an imperative helper API (e.g. TemporaryNotification.show)
 // are documented from their controller source rather than from element props. Each
 // entry points at that controller file; the parsing lives in the "Static helper
@@ -2667,7 +2671,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   webComponentSlots.sort((a, b) => a.name.localeCompare(b.name));
 
   // Relative path from workspace root
-  const relativePath = path.relative(WORKSPACE_ROOT, svelteFilePath);
+  const relativePath = toPosixPath(path.relative(WORKSPACE_ROOT, svelteFilePath));
 
   const staticMethods = extractStaticMethods(componentName);
 
@@ -2800,6 +2804,7 @@ function saveComponentAPI(api: ExtractedComponentAPI): void {
     }
   }
 
+  merged.extractedFrom = toPosixPath(merged.extractedFrom);
   fs.writeFileSync(filePath, JSON.stringify(merged, null, 2));
   console.log(`  Created: ${filePath}`);
 }
