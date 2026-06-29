@@ -487,6 +487,7 @@ export function CodeSnippet({
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
             orientation="horizontal"
+            navigation="none"
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
