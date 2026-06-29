@@ -598,6 +598,9 @@ describe("Tooltip Browser Tests", () => {
               Copy ID
             </GoabButton>
           </GoabTooltip>
+          <GoabButton testId="reset" onClick={() => setLabel("Copy")}>
+            Reset
+          </GoabButton>
         </div>
       );
     };
@@ -605,7 +608,10 @@ describe("Tooltip Browser Tests", () => {
     const result = render(<Component />);
     const container = result.getByTestId("container");
     const trigger = result.getByTestId("trigger");
+    const reset = result.getByTestId("reset");
     const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
+
+    await document.fonts.ready;
 
     vi.useFakeTimers();
     try {
@@ -645,6 +651,21 @@ describe("Tooltip Browser Tests", () => {
         // "Copied" is longer than "Copy", so the tooltip should grow to fit
         // it instead of keeping the narrower width measured for "Copy".
         expect(copiedWidth).toBeGreaterThan(copyWidth);
+      });
+
+      // Change back to the shorter content while the tooltip stays open.
+      await reset.click();
+
+      await vi.waitFor(() => {
+        expect(tooltipTextEl?.textContent?.trim()).toBe("Copy");
+      });
+
+      await vi.waitFor(() => {
+        const resetWidth = parseFloat(tooltipTextEl?.style.width ?? "0");
+        // The tooltip should shrink back down to fit "Copy" instead of
+        // keeping the wider width measured for "Copied".
+        expect(resetWidth).toBeLessThan(copiedWidth);
+        expect(resetWidth).toBe(copyWidth);
       });
     } finally {
       vi.useRealTimers();
