@@ -40,7 +40,7 @@ const slots = useSlots() as Slots;
 
 onMounted(() => {
   nextTick(() => {
-    const hasTargetContent = Boolean(slots.target?.().length);
+    const hasTargetContent = !!slots.target;
     if (!hasTargetContent) {
       console.warn("Popover: a `target` slot is required.");
     }
