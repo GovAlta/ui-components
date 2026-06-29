@@ -40,6 +40,7 @@ const wcProps = useWcProps(props, {
 const slots = useSlots() as Slots;
 const instance = getCurrentInstance();
 const closable = computed(() =>
+  // Vue prepends event names with "on" so we check for "onOnClose" instead of "onClose"
   instance?.vnode.props?.onOnClose ? "true" : "false",
 );
 </script>

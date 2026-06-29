@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import {
   GoabAccordion,
+  GoabBadge,
   GoabButton,
+  GoabModal,
   GoabPopover,
   GoabText,
   GoabBlock,
@@ -25,6 +27,9 @@ const logEvent = (name: string) => {
     ...eventLog.value,
   ].slice(0, 10);
 };
+
+const modalOpen = ref(false);
+const modalUnclosableOpen = ref(false);
 </script>
 
 <template>
@@ -65,5 +70,28 @@ const logEvent = (name: string) => {
       </template>
       <GoabText mt="0" mb="0">This is the content of the popover.</GoabText>
     </GoabPopover>
+    <GoabText tag="h2" size="heading-m">Component with icon</GoabText>
+    <GoabBlock gap="m">
+      <GoabBadge type="information" content="No icon" />
+      <GoabBadge type="success" :icon="true" content="Default icon" />
+      <GoabBadge type="important" iconType="airplane" content="Custom icon" />
+    </GoabBlock>
+
+    <GoabText tag="h2" size="heading-m">Component with optional event</GoabText>
+    <GoabButton @onClick="modalOpen = true">Open modal with onClose</GoabButton>
+    <GoabButton @onClick="modalUnclosableOpen = true">Open modal without onCLose</GoabButton>
+    <GoabModal :open="modalOpen" heading="Closable modal" @onClose="modalOpen = false">
+      <GoabText mt="0" mb="0"
+        >This modal has an <code>onClose</code> handler, so the close button and backdrop click are active.</GoabText
+      >
+    </GoabModal>
+    <GoabModal :open="modalUnclosableOpen" heading="Unclosable modal">
+      <GoabText mt="0" mb="0"
+        >This modal has NO <code>onClose</code> handler, so the close button and backdrop click are disabled.</GoabText
+      >
+      <template #actions>
+        <GoabButton type="primary" @onClick="modalUnclosableOpen = false">Close</GoabButton>
+      </template>
+    </GoabModal>
   </GoabBlock>
 </template>
