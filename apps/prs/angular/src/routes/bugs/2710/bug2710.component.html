@@ -1,0 +1,58 @@
+<goab-text tag="h1" mt="m">
+  Bug 2710 - Screen behind modal should not scroll when modal is open
+</goab-text>
+
+<goab-block>
+  <goab-link trailingIcon="open">
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/2710"
+      target="_blank"
+      rel="noopener"
+      >View on GitHub</a
+    >
+  </goab-link>
+
+  <goab-details heading="Issue Description">
+    <goab-text tag="p">
+      When the Modal is open the page behind it could still be scrolled. Opening
+      the modal should lock the body scroll (as the Drawer already does) and
+      restore it on close.
+    </goab-text>
+  </goab-details>
+</goab-block>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Test: body scroll lock</goab-text>
+<goab-text tag="p" mb="m">
+  Open the modal, then try to scroll the page. The background must not move
+  while the modal is open. Close it and the page scrolls again, with the scroll
+  position preserved.
+</goab-text>
+
+<goab-button type="primary" (onClick)="openModal()">Open modal</goab-button>
+
+<ng-template #modalActions>
+  <goab-button-group alignment="end">
+    <goab-button type="primary" (onClick)="closeModal()">Close</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-modal
+  heading="Scroll lock test"
+  [open]="open"
+  maxWidth="40ch"
+  [actions]="modalActions"
+  (onClose)="closeModal()"
+>
+  <goab-text tag="p">
+    Try scrolling the page now. The content behind this modal should stay put.
+  </goab-text>
+</goab-modal>
+
+@for (n of filler; track n) {
+  <goab-text tag="p">
+    Filler paragraph {{ n }} of {{ filler.length }} so the page is tall enough to
+    scroll behind the modal.
+  </goab-text>
+}

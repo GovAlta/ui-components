@@ -2,6 +2,7 @@ import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoAModal from "./Modal.svelte";
 import GoAModalWrapper from "./ModalWrapper.test.svelte";
 import { it, describe, expect, vi, afterEach } from "vitest";
+import { WorkspaceScrollLockMsg } from "../../types/relay-types";
 
 afterEach(cleanup);
 
@@ -112,6 +113,37 @@ describe("Modal Component", () => {
     await waitFor(() => {
       expect(el.queryByTestId("modal")).toBeFalsy();
     });
+  });
+
+  it("should lock body scroll when opened", async () => {
+    document.body.style.overflow = "";
+    const el = render(GoAModal, { open: "true" });
+
+    await waitFor(() => {
+      expect(el.queryByTestId("modal")).toBeTruthy();
+    });
+    expect(document.body.style.overflow).toBe("hidden");
+  });
+
+  it("should relay a scroll lock to an ancestor layout when opened", async () => {
+    const locks: boolean[] = [];
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.action === WorkspaceScrollLockMsg) {
+        locks.push(detail.data.locked);
+      }
+    };
+    document.addEventListener("msg", handler);
+
+    const el = render(GoAModal, { open: "true" });
+    await waitFor(() => {
+      expect(el.queryByTestId("modal")).toBeTruthy();
+    });
+    await waitFor(() => {
+      expect(locks).toContain(true);
+    });
+
+    document.removeEventListener("msg", handler);
   });
 
   it("should close on icon click when made to be closable", async () => {

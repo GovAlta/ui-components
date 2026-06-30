@@ -15,7 +15,15 @@
   import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import { dispatch, style, styles, typeValidator } from "../../common/utils";
+  import {
+    dispatch,
+    style,
+    styles,
+    typeValidator,
+    relay,
+    generateRandomId,
+  } from "../../common/utils";
+  import { WorkspaceScrollLockMsg } from "../../types/relay-types";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -47,6 +55,9 @@
 
   // element refs
   let _contentEl: HTMLElement | null = null;
+  let _rootEl: HTMLElement | null = null;
+  const _scrollLockId = generateRandomId();
+  let _scrollLocked = false;
 
   // computes the required absolute position offset to hide the drawer when not shown
   let _drawerSize: number;
@@ -56,6 +67,8 @@
   // Reactive
   // ========
   $: _showCloseButton = closeButtonVisibility !== "hidden";
+
+  $: syncScrollLock(open, _rootEl);
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
   $: _flyParams = {
     duration: 200,
@@ -96,11 +109,38 @@
 
   onDestroy(() => {
     window.removeEventListener("keydown", onInputKeyDown);
+    // Safety net: release the lock if the drawer is torn down while still open.
+    if (_scrollLocked && _rootEl) {
+      relay(
+        _rootEl,
+        WorkspaceScrollLockMsg,
+        { id: _scrollLockId, locked: false },
+        { bubbles: true },
+      );
+      _scrollLocked = false;
+    }
   });
 
   // *********
   // Functions
   // *********
+
+  // Tell an ancestor WorkspaceLayout to lock its scroll container while the
+  // drawer is open. The layout scrolls an inner element, so the drawer's own
+  // body scroll lock has no effect there. The .root element is always rendered,
+  // so it is a stable relay source for both the lock and unlock messages.
+  function syncScrollLock(isOpen: boolean, rootEl: HTMLElement | null) {
+    if (isOpen === _scrollLocked || !rootEl) {
+      return;
+    }
+    _scrollLocked = isOpen;
+    relay(
+      rootEl,
+      WorkspaceScrollLockMsg,
+      { id: _scrollLockId, locked: isOpen },
+      { bubbles: true },
+    );
+  }
 
   async function checkActionsSlotContent() {
     await tick();
@@ -127,6 +167,7 @@
 <goa-focus-trap {open} prevent-scroll-into-view={true}>
   <div
     class="root"
+    bind:this={_rootEl}
     style={style("pointer-events", open ? "auto" : "none")}
     data-testid={testid}
   >

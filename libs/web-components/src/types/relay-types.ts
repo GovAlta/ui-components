@@ -257,3 +257,14 @@ export type WorkSideMenuBindRelayDetail = {
 
 export const WorkSideMenuOpenMsg = "work-side-menu:open";
 export const WorkSideMenuCloseMsg = "work-side-menu:close";
+
+// Overlay components (Modal, Circular Progress, Drawer) tell their ancestor
+// WorkspaceLayout to lock its scroll container while they are open. The layout
+// scrolls an inner element in its shadow DOM rather than document.body, so the
+// components' own body scroll lock has no effect inside the layout. Each sender
+// includes a unique id so multiple overlays can hold the lock independently.
+export const WorkspaceScrollLockMsg = "workspace-layout:scroll-lock";
+export type WorkspaceScrollLockRelayDetail = {
+  id: string;
+  locked: boolean;
+};
