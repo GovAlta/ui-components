@@ -30,7 +30,7 @@ export function useWcProps<T extends Record<string, unknown>>(
       if (options?.booleanPropsWithFalse?.includes(key)) {
         result[attrName] = value ? "true" : "false";
       } else if (options?.booleanProps?.includes(key)) {
-        result[attrName] = value ? "true" : undefined;
+        if (value) result[attrName] = "true";
       } else if (options?.jsonProps?.includes(key)) {
         result[attrName] = JSON.stringify(value);
       } else {
