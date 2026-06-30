@@ -26,6 +26,17 @@
    * "100%" to resolve.
    */
   export let height: string = "100%";
+  /**
+   * The scroll direction of the panel.
+   * - "vertical" (default): header top, footer bottom, content scrolls vertically.
+   * - "horizontal": header left, footer right, content scrolls horizontally.
+   */
+  export let direction: "vertical" | "horizontal" = "vertical";
+  /**
+   * Sets the width of the container. Accepts any valid CSS width value.
+   * Defaults to "100%". In horizontal mode this creates the overflow constraint.
+   */
+  export let width: string = "100%";
 
   // *******
   // Private
@@ -64,18 +75,24 @@
   onMount(() => {
     if (
       typeof CSS !== "undefined" &&
-      typeof CSS.supports === "function" &&
-      !CSS.supports("height", height)
+      typeof CSS.supports === "function"
     ) {
-      console.error(
-        `ScrollPanel: "${height}" is not a valid CSS height; falling back to "100%".`,
-      );
+      if (!CSS.supports("height", height)) {
+        console.error(
+          `ScrollPanel: "${height}" is not a valid CSS height; falling back to "100%".`,
+        );
+      }
+      if (!CSS.supports("width", width)) {
+        console.error(
+          `ScrollPanel: "${width}" is not a valid CSS width; falling back to "100%".`,
+        );
+      }
     }
 
     if (_scrollEl) {
       const root = _scrollEl.getRootNode();
       _hostEl = root instanceof ShadowRoot ? (root.host as HTMLElement) : null;
-      setHostHeight(height);
+      setHostDimensions();
 
       // Re-measure when the viewport resizes, including when it goes from
       // hidden (height 0) to visible — e.g. a push drawer toggled via display.
@@ -92,11 +109,12 @@
   // *********
   // Functions
   // *********
-  function setHostHeight(h: string) {
+  function setHostDimensions() {
     if (!_scrollEl) return;
     const root = _scrollEl.getRootNode();
     if (root instanceof ShadowRoot) {
-      (root.host as HTMLElement).style.height = h;
+      (root.host as HTMLElement).style.height = height;
+      (root.host as HTMLElement).style.width = width;
     }
   }
 
@@ -135,9 +153,16 @@
 
   function updateScrollState() {
     if (!_scrollEl) return;
-    const { scrollTop, scrollHeight, clientHeight } = _scrollEl;
+    const isHorizontal = direction === "horizontal";
+    const scrollPos = isHorizontal ? _scrollEl.scrollLeft : _scrollEl.scrollTop;
+    const scrollSize = isHorizontal
+      ? _scrollEl.scrollWidth
+      : _scrollEl.scrollHeight;
+    const clientSize = isHorizontal
+      ? _scrollEl.clientWidth
+      : _scrollEl.clientHeight;
     applyScrollState(
-      calculateScrollState(scrollTop, scrollHeight, clientHeight, _scrollState),
+      calculateScrollState(scrollPos, scrollSize, clientSize, _scrollState),
     );
   }
 </script>
@@ -187,10 +212,15 @@
     width: 100%;
     /* Fallback height. JS sets an explicit inline height from the `height` prop */
     height: 100%;
+    min-height: 0;
     background-color: var(
       --goa-scroll-panel-color-bg,
       var(--goa-color-greyscale-white)
     );
+  }
+
+  :host([direction="horizontal"]) {
+    flex-direction: row;
   }
 
   :host * {
@@ -232,6 +262,18 @@
     );
   }
 
+  :host([direction="horizontal"]) .scroll-panel-header--shadow {
+    border-bottom-color: transparent;
+    border-right-color: var(
+      --goa-scroll-panel-header-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
+    box-shadow: var(
+      --goa-scroll-panel-header-scroll-shadow-h,
+      2px 0 4px rgba(0, 0, 0, 0.1)
+    );
+  }
+
   /* Scrollable content */
   .scroll-panel-content {
     flex: 1 1 auto;
@@ -240,6 +282,12 @@
     /* Let scroll chain to a scrollable ancestor (e.g. the workspace-layout card) once this panel reaches its own edge */
     overscroll-behavior: auto;
     min-height: 0;
+  }
+
+  :host([direction="horizontal"]) .scroll-panel-content {
+    overflow-y: hidden;
+    overflow-x: auto;
+    min-width: 0;
   }
 
   /* Footer — casts a drop shadow up onto the content when content is below it. */
@@ -268,6 +316,18 @@
     box-shadow: var(
       --goa-scroll-panel-footer-scroll-shadow,
       var(--goa-shadow-shallow-above)
+    );
+  }
+
+  :host([direction="horizontal"]) .scroll-panel-footer--shadow {
+    border-top-color: transparent;
+    border-left-color: var(
+      --goa-scroll-panel-footer-scroll-border,
+      var(--goa-color-greyscale-150)
+    );
+    box-shadow: var(
+      --goa-scroll-panel-footer-scroll-shadow-h,
+      -2px 0 4px rgba(0, 0, 0, 0.1)
     );
   }
 </style>

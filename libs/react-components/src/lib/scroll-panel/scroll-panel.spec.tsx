@@ -71,4 +71,21 @@ describe("ScrollPanel", () => {
     const el = container.querySelector("goa-scroll-panel");
     expect(el?.querySelector("[slot='footer']")).toBeNull();
   });
+
+  it("passes width prop to the web component", () => {
+    const { container } = render(
+      <GoabScrollPanel width="500px">Body content</GoabScrollPanel>,
+    );
+    const el = container.querySelector("goa-scroll-panel") as HTMLElement | null;
+    expect(el?.getAttribute("width")).toBe("500px");
+    expect(el?.style.width).toBe("500px");
+  });
+
+  it("passes direction prop to the web component", () => {
+    const { container } = render(
+      <GoabScrollPanel direction="horizontal">Body content</GoabScrollPanel>,
+    );
+    const el = container.querySelector("goa-scroll-panel") as HTMLElement | null;
+    expect(el?.getAttribute("direction")).toBe("horizontal");
+  });
 });

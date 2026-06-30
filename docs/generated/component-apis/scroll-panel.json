@@ -5,6 +5,17 @@
     "react": {
       "props": [
         {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The scroll direction of the panel. - \"vertical\" (default): header top, footer bottom, content scrolls vertically. - \"horizontal\": header left, footer right, content scrolls horizontally."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -17,6 +28,13 @@
           "required": false,
           "default": null,
           "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the width of the panel. Accepts any valid CSS width value. Defaults to \"100%\". In horizontal mode this creates the overflow constraint."
         }
       ],
       "events": [],
@@ -38,6 +56,17 @@
     "angular": {
       "props": [
         {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The scroll direction of the panel. \"vertical\" (default): header top, footer bottom, content scrolls vertically. \"horizontal\": header left, footer right, content scrolls horizontally."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -50,6 +79,13 @@
           "required": false,
           "default": null,
           "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the width of the panel. Accepts any valid CSS width value. Defaults to \"100%\". In horizontal mode this creates the overflow constraint."
         }
       ],
       "events": [],
@@ -71,6 +107,17 @@
     "webComponents": {
       "props": [
         {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "required": false,
+          "default": "vertical",
+          "description": "The scroll direction of the panel. - \"vertical\" (default): header top, footer bottom, content scrolls vertically. - \"horizontal\": header left, footer right, content scrolls horizontally."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -83,6 +130,13 @@
           "required": false,
           "default": "",
           "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Sets the width of the container. Accepts any valid CSS width value. Defaults to \"100%\". In horizontal mode this creates the overflow constraint."
         }
       ],
       "events": [],

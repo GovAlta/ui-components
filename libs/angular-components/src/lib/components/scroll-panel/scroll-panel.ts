@@ -16,8 +16,11 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `@if (isReady) {
     <goa-scroll-panel
       [attr.height]="height"
+      [attr.width]="width"
+      [attr.direction]="direction"
       [attr.testid]="testId"
       [style.height]="height"
+      [style.width]="width"
     >
       @if (header) {
         <div slot="header">
@@ -42,6 +45,17 @@ export class GoabScrollPanel implements OnInit {
    * The parent element must establish a height context for "100%" to resolve.
    */
   @Input() height?: string;
+  /**
+   * Sets the width of the panel. Accepts any valid CSS width value.
+   * Defaults to "100%". In horizontal mode this creates the overflow constraint.
+   */
+  @Input() width?: string;
+  /**
+   * The scroll direction of the panel.
+   * "vertical" (default): header top, footer bottom, content scrolls vertically.
+   * "horizontal": header left, footer right, content scrolls horizontally.
+   */
+  @Input() direction?: "vertical" | "horizontal";
   /** Template ref for the sticky header region. */
   @Input() header?: TemplateRef<unknown>;
   /** Template ref for the sticky footer region. */

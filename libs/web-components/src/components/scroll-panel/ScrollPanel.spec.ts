@@ -84,4 +84,37 @@ describe("GoA ScrollPanel", () => {
     );
     errorSpy.mockRestore();
   });
+
+  it("logs an error when CSS.supports rejects the width", () => {
+    cssSupports.mockReturnValue(false);
+    const errorSpy = vi.spyOn(console, "error").mockReturnValue(undefined);
+    render(GoAScrollPanel, {
+      testid: "panel-invalid-width",
+      width: "not-a-dimension",
+    });
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("not a valid CSS width"),
+    );
+    errorSpy.mockRestore();
+  });
+
+  it("renders with direction='horizontal'", async () => {
+    render(GoAScrollPanelWrapper, {
+      content: "Horizontal content",
+      direction: "horizontal",
+      width: "500px",
+    });
+    const content = document.querySelector(".body-content");
+    expect(content?.textContent).toContain("Horizontal content");
+  });
+
+  it("renders with width and height props", async () => {
+    const { findByTestId } = render(GoAScrollPanel, {
+      testid: "panel-with-dimensions",
+      width: "600px",
+      height: "300px",
+    });
+    const el = await findByTestId("panel-with-dimensions");
+    expect(el.getAttribute("role")).toBe("region");
+  });
 });

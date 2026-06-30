@@ -128,4 +128,94 @@ describe("ScrollPanel", () => {
     // The panel did not collapse to content height; it is bounded by the parent.
     expect(host.getBoundingClientRect().height).toBeLessThanOrEqual(400);
   });
+
+  it("keeps the header and footer pinned while content scrolls horizontally", async () => {
+    await page.viewport(1024, 768);
+
+    // Wide elements to force horizontal overflow.
+    const items = Array.from({ length: 20 }, (_, i) => i + 1);
+
+    const Component = () => (
+      <div style={{ width: "400px" }}>
+        <GoabScrollPanel
+          width="400px"
+          direction="horizontal"
+          header={<div data-testid="h-header">Left</div>}
+          footer={<div data-testid="h-footer">Right</div>}
+        >
+          <div style={{ display: "flex", gap: "1rem", width: "2000px" }}>
+            {items.map((n) => (
+              <span key={n} data-testid={`h-item-${n}`} style={{ flex: "0 0 auto", width: "80px" }}>
+                Item {n}
+              </span>
+            ))}
+          </div>
+        </GoabScrollPanel>
+      </div>
+    );
+
+    const result = render(<Component />);
+    const host = result.baseElement.querySelector(
+      "goa-scroll-panel",
+    ) as HTMLElement;
+
+    await vi.waitFor(() => {
+      const el = host.shadowRoot?.querySelector(
+        ".scroll-panel-content",
+      ) as HTMLElement | null;
+      expect(el && el.scrollWidth > el.clientWidth).toBe(true);
+    });
+
+    const scrollEl = host.shadowRoot!.querySelector(
+      ".scroll-panel-content",
+    ) as HTMLElement;
+
+    const header = result.getByTestId("h-header");
+    const footer = result.getByTestId("h-footer");
+    const firstItem = result.getByTestId("h-item-1");
+
+    const headerLeftBefore = header.element().getBoundingClientRect().left;
+    const footerRightBefore = footer.element().getBoundingClientRect().right;
+    const itemLeftBefore = firstItem.element().getBoundingClientRect().left;
+
+    // Scroll the content to the right.
+    scrollEl.scrollLeft = 300;
+    await vi.waitFor(() => {
+      expect(scrollEl.scrollLeft).toBeCloseTo(300, 0);
+      expect(firstItem.element().getBoundingClientRect().left).toBeCloseTo(
+        itemLeftBefore - 300,
+        0,
+      );
+    });
+
+    // Header and footer stayed pinned while content scrolled.
+    expect(header.element().getBoundingClientRect().left).toBeCloseTo(
+      headerLeftBefore,
+      0,
+    );
+    expect(footer.element().getBoundingClientRect().right).toBeCloseTo(
+      footerRightBefore,
+      0,
+    );
+
+    // Scroll back to the start.
+    scrollEl.scrollLeft = 0;
+    await vi.waitFor(() => {
+      expect(scrollEl.scrollLeft).toBeCloseTo(0, 0);
+      expect(firstItem.element().getBoundingClientRect().left).toBeCloseTo(
+        itemLeftBefore,
+        0,
+      );
+    });
+
+    // Header and footer remained pinned after scrolling back.
+    expect(header.element().getBoundingClientRect().left).toBeCloseTo(
+      headerLeftBefore,
+      0,
+    );
+    expect(footer.element().getBoundingClientRect().right).toBeCloseTo(
+      footerRightBefore,
+      0,
+    );
+  });
 });
