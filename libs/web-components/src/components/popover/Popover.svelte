@@ -534,10 +534,16 @@
 
   .popover-content.position-right {
     inset-block-start: unset;
-    inset-block-end: max(8px, anchor(bottom));
+    /* When menu item/ target of popover is nears the bottom of the screen, we will make sure 20px is the min gap between bottom of notification panel/popover to the screen
+when the viewport is high, we will make sure the right positioned popover or notification panel lower than the popover target or menu item 140px
+*/
+    inset-block-end: max(
+      20px,
+      calc(anchor(bottom) - var(--offset-bottom, 0px))
+    );
     inset-inline-start: anchor(right);
     --popover-translate-x: var(--offset-left, 8px);
-    --popover-translate-y: var(--offset-bottom, 0px);
+    --popover-translate-y: 0px;
     position-try-fallbacks: none;
   }
 
