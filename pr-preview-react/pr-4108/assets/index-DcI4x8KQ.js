@@ -27992,7 +27992,7 @@ function vi(t, e) {
   }
   function n() {
     o && (o = false, setTimeout(() => {
-      document.body.style.overflow = "", document.body.style.borderRight = "";
+      typeof document > "u" || (document.body.style.overflow = "", document.body.style.borderRight = "");
     }, 200));
   }
   function r() {
