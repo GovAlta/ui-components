@@ -34,10 +34,15 @@ const wcProps = useWcProps(props, {
   booleanProps: ["open"],
 });
 const slots = useSlots() as Slots;
+
+function onClose(e: Event) {
+  if (e.target !== e.currentTarget) return;
+  emit("onClose");
+}
 </script>
 
 <template>
-  <goa-drawer v-bind="wcProps" @_close="emit('onClose')">
+  <goa-drawer v-bind="wcProps" @_close="onClose">
     <div v-if="slots.heading" slot="heading">
       <slot name="heading" />
     </div>
