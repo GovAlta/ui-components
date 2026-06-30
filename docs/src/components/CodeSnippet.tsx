@@ -228,8 +228,10 @@ export function CodeSnippet({
     if (!goaTabs) return;
 
     const targetIndex = availableFrameworks.indexOf(framework);
-    const tabs = goaTabs.querySelectorAll('[role="tab"]');
-    const targetTab = tabs[targetIndex] as HTMLElement | undefined;
+    // The tab buttons render inside goa-tabs' own shadow root, so a plain
+    // querySelectorAll on the host always returns an empty list.
+    const tabs = goaTabs.shadowRoot?.querySelectorAll<HTMLElement>('[role="tab"]');
+    const targetTab = tabs?.[targetIndex];
     if (!targetTab) return;
 
     tabs.forEach((tab, i) => {
@@ -239,7 +241,10 @@ export function CodeSnippet({
 
     const tabContents = goaTabs.querySelectorAll("goa-tab");
     tabContents.forEach((content, i) => {
-      content.dispatchEvent(
+      // goa-tab listens for "tabs:set-open" on its own shadow-root section,
+      // not on the host element, so the event must be dispatched there.
+      const innerTarget = content.shadowRoot?.querySelector("section") ?? content;
+      innerTarget.dispatchEvent(
         new CustomEvent("tabs:set-open", {
           composed: true,
           detail: { open: i === targetIndex },
