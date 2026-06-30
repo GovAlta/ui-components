@@ -43,10 +43,15 @@ const closable = computed(() =>
   // Vue prepends event names with "on" so we check for "onOnClose" instead of "onClose"
   instance?.vnode.props?.onOnClose ? "true" : "false",
 );
+
+function onClose(e: Event) {
+  if (e.target !== e.currentTarget) return;
+  emit("onClose");
+}
 </script>
 
 <template>
-  <goa-modal v-bind="wcProps" :closable="closable" @_close="emit('onClose')">
+  <goa-modal v-bind="wcProps" :closable="closable" @_close="onClose">
     <div v-if="slots.heading" slot="heading">
       <slot name="heading" />
     </div>
