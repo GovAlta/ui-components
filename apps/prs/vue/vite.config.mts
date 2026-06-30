@@ -11,11 +11,13 @@ export default defineConfig({
   server: {
     port: 4204,
     host: "0.0.0.0",
+    historyApiFallback: true,
   },
 
   preview: {
     port: 4302,
     host: "localhost",
+    historyApiFallback: true,
   },
 
   plugins: [
