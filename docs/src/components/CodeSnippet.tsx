@@ -228,24 +228,25 @@ export function CodeSnippet({
     if (!goaTabs) return;
 
     const targetIndex = availableFrameworks.indexOf(framework);
-    const tabs = goaTabs.querySelectorAll('[role="tab"]');
-    const targetTab = tabs[targetIndex] as HTMLElement | undefined;
-    if (!targetTab) return;
+    // The tab buttons render inside goa-tabs' own shadow root, so a plain
+    // querySelectorAll on the host always returns an empty list.
+    const tabs = goaTabs.shadowRoot?.querySelectorAll<HTMLElement>('[role="tab"]');
+    const targetTab = tabs?.[targetIndex];
+    if (!targetTab || targetTab.getAttribute("aria-selected") === "true") return;
 
-    tabs.forEach((tab, i) => {
-      tab.setAttribute("aria-selected", i === targetIndex ? "true" : "false");
-      tab.setAttribute("tabindex", i === targetIndex ? "0" : "-1");
-    });
-
-    const tabContents = goaTabs.querySelectorAll("goa-tab");
-    tabContents.forEach((content, i) => {
-      content.dispatchEvent(
-        new CustomEvent("tabs:set-open", {
-          composed: true,
-          detail: { open: i === targetIndex },
-        }),
-      );
-    });
+    // Tab selection, panel visibility, and the segmented pill's position are
+    // all driven by Tabs.svelte's own internal click handler. Replicating
+    // those DOM mutations from outside missed pieces (the indicator stayed
+    // put, panels didn't toggle) because they're tracked by internal state
+    // this component can't reach. A real click reuses that logic wholesale.
+    // It also moves focus to the clicked tab, which would steal focus from
+    // wherever the user is reading for every other switcher on the page, so
+    // restore whatever was focused beforehand.
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    targetTab.click();
+    if (previouslyFocused && previouslyFocused !== targetTab && document.contains(previouslyFocused)) {
+      previouslyFocused.focus({ preventScroll: true });
+    }
   };
 
   useEffect(() => {
@@ -487,6 +488,7 @@ export function CodeSnippet({
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
             orientation="horizontal"
+            navigation="none"
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
