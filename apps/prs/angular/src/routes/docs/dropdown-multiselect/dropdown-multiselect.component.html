@@ -1,0 +1,151 @@
+<h2>Dropdown Multiselect</h2>
+
+<h3>Reactive forms (FormControl)</h3>
+
+<form [formGroup]="form">
+  <goab-form-item label="Select fruits" mb="l">
+    <goab-dropdown-multiselect name="fruits" formControlName="fruits" width="320px">
+      <goab-dropdown-item value="apple" label="Apple"></goab-dropdown-item>
+      <goab-dropdown-item value="banana" label="Banana"></goab-dropdown-item>
+      <goab-dropdown-item value="orange" label="Orange"></goab-dropdown-item>
+      <goab-dropdown-item value="pear" label="Pear"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>
+
+<h3>Simple dropdown multiselect with options</h3>
+
+<h4>Dropdown multiselect with placeholder text when no selection</h4>
+
+<form [formGroup]="form">
+  <goab-form-item label="Select services" mb="l">
+    <goab-dropdown-multiselect
+      name="services"
+      width="320px"
+      placeholder="Select one or more services"
+      formControlName="services"
+    >
+      <goab-dropdown-item value="health" label="Health benefits"></goab-dropdown-item>
+      <goab-dropdown-item value="income" label="Income support"></goab-dropdown-item>
+      <goab-dropdown-item value="housing" label="Housing support"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>
+
+<h3>Label Formatting</h3>
+
+<goab-form-item label="Select fruits" mb="l">
+  <goab-dropdown-multiselect name="fruits" width="320px" [labelFormat]="'count'">
+    <goab-dropdown-item value="apple" label="Apple"></goab-dropdown-item>
+    <goab-dropdown-item value="banana" label="Banana"></goab-dropdown-item>
+    <goab-dropdown-item value="orange" label="Orange"></goab-dropdown-item>
+    <goab-dropdown-item value="pear" label="Pear"></goab-dropdown-item>
+  </goab-dropdown-multiselect>
+</goab-form-item>
+
+<h3>With custom placeholder</h3>
+
+<form [formGroup]="form">
+  <goab-form-item label="Select services" mb="l">
+    <goab-dropdown-multiselect
+      name="services"
+      width="320px"
+      placeholder="Select one or more services"
+      formControlName="services"
+    >
+      <goab-dropdown-item value="health" label="Health benefits"></goab-dropdown-item>
+      <goab-dropdown-item value="income" label="Income support"></goab-dropdown-item>
+      <goab-dropdown-item value="housing" label="Housing support"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>
+
+<h3>Filterable</h3>
+
+<form [formGroup]="form">
+  <goab-form-item label="Which cities have you visited?" mb="l">
+    <goab-dropdown-multiselect
+      name="cities"
+      [filterable]="true"
+      maxHeight="400px"
+      width="320px"
+      formControlName="cities"
+    >
+      <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+      <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+      <goab-dropdown-item value="red-deer" label="Red Deer"></goab-dropdown-item>
+      <goab-dropdown-item value="lethbridge" label="Lethbridge"></goab-dropdown-item>
+      <goab-dropdown-item value="medicine-hat" label="Medicine Hat"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="grande-prairie"
+        label="Grande Prairie"
+      ></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>
+
+<h3>With select all</h3>
+
+<form [formGroup]="form">
+  <goab-form-item label="Select departments" mb="l">
+    <goab-dropdown-multiselect
+      name="departments"
+      [showSelectAll]="true"
+      formControlName="departments"
+      width="320px"
+    >
+      <goab-dropdown-item value="health" label="Health"></goab-dropdown-item>
+      <goab-dropdown-item value="education" label="Education"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="transportation"
+        label="Transportation"
+      ></goab-dropdown-item>
+      <goab-dropdown-item value="justice" label="Justice"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>
+
+<h3>Sizes and states</h3>
+
+<form [formGroup]="form">
+  <goab-form-item label="Default size" mb="l">
+    <goab-dropdown-multiselect
+      name="sizeDefault"
+      formControlName="sizeDefault"
+      width="320px"
+    >
+      <goab-dropdown-item value="draft" label="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="review" label="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="approved" label="Approved"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+  <goab-form-item label="Compact size" mb="l">
+    <goab-dropdown-multiselect
+      name="sizeCompact"
+      size="compact"
+      formControlName="sizeCompact"
+      width="320px"
+    >
+      <goab-dropdown-item value="draft" label="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="review" label="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="approved" label="Approved"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+  <goab-form-item label="Disabled" mb="l">
+    <goab-dropdown-multiselect name="disabled" formControlName="disabled" width="320px">
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+  <goab-form-item label="With error" error="Please select at least one option" mb="l">
+    <goab-dropdown-multiselect
+      name="error"
+      [error]="true"
+      formControlName="errorValue"
+      width="320px"
+    >
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+</form>

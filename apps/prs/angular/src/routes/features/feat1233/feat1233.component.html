@@ -1,0 +1,531 @@
+<main>
+  <goab-text tag="h1" mt="none">feat(#1233): DropdownMultiselect component</goab-text>
+  <goab-text>
+    A dropdown component that presents a CheckboxList for multiple selection. The trigger
+    displays a comma-separated summary of selected labels with ellipsis overflow.
+    Keyboard: ArrowDown/Enter/Space opens, Escape and Tab close.
+  </goab-text>
+
+  <goab-block direction="column" gap="xl">
+    <section>
+      <goab-text tag="h2">Basic usage</goab-text>
+      <goab-text
+        >Select items from the list. The trigger label updates as you select.</goab-text
+      >
+      <div style="max-width: 400px">
+        <goab-form-item label="Favourite fruit">
+          <goab-dropdown-multiselect
+            name="fruit-basic"
+            placeholder="Select fruit"
+            [value]="selected1"
+            (onChange)="onSelected1Change($event)"
+            testId="basic-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+            <goab-dropdown-item value="date" label="Date" />
+            <goab-dropdown-item value="elderberry" label="Elderberry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected: {{ selected1.length ? selected1.join(", ") : "(none)" }}</goab-text
+        >
+        <goab-button type="secondary" size="compact" mt="s" (onClick)="resetBasic()">
+          Reset
+        </goab-button>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Basic usage — Reactive form (FormControl)</goab-text>
+      <goab-text>Bound with formControlName inside a FormGroup.</goab-text>
+      <div style="max-width: 400px">
+        <form [formGroup]="form">
+          <goab-form-item label="Favourite fruit">
+            <goab-dropdown-multiselect
+              name="fruit-reactive"
+              placeholder="Select fruit"
+              formControlName="fruitsReactive"
+              testId="reactive-multiselect"
+            >
+              <goab-dropdown-item value="apple" label="Apple" />
+              <goab-dropdown-item value="banana" label="Banana" />
+              <goab-dropdown-item value="cherry" label="Cherry" />
+              <goab-dropdown-item value="date" label="Date" />
+              <goab-dropdown-item value="elderberry" label="Elderberry" />
+            </goab-dropdown-multiselect>
+          </goab-form-item>
+        </form>
+        <goab-text
+          >FormControl value: {{ form.get("fruitsReactive")?.value | json }}</goab-text
+        >
+        <goab-button type="secondary" size="compact" mt="s" (onClick)="resetReactive()">
+          Reset
+        </goab-button>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Basic usage — Template-driven (ngModel)</goab-text>
+      <goab-text>Two-way bound with [(ngModel)].</goab-text>
+      <div style="max-width: 400px">
+        <goab-form-item label="Favourite fruit">
+          <goab-dropdown-multiselect
+            name="fruit-ngmodel"
+            placeholder="Select fruit"
+            [(ngModel)]="fruitsNgModel"
+            [ngModelOptions]="{ standalone: true }"
+            testId="ngmodel-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+            <goab-dropdown-item value="date" label="Date" />
+            <goab-dropdown-item value="elderberry" label="Elderberry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text>ngModel value: {{ fruitsNgModel | json }}</goab-text>
+        <goab-button type="secondary" size="compact" mt="s" (onClick)="resetNgModel()">
+          Reset
+        </goab-button>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Ellipsis overflow</goab-text>
+      <goab-text>
+        When the selected labels exceed the trigger width, they truncate with an ellipsis.
+      </goab-text>
+      <div style="max-width: 250px">
+        <goab-dropdown-multiselect
+          name="nine-nine-characters"
+          placeholder="Best Brooklyn Nine-Nine characters"
+          [value]="brooklyn99Selected"
+          (onChange)="onBrooklyn99Change($event)"
+          testId="overflow-multiselect"
+        >
+          <goab-dropdown-item value="Andy Samberg" label="Jake Peralta" />
+          <goab-dropdown-item value="Stephanie Beatriz" label="Rosa Diaz" />
+          <goab-dropdown-item value="Terry Crews" label="Terry Jeffords" />
+          <goab-dropdown-item value="Melissa Fumero" label="Amy Santiago" />
+          <goab-dropdown-item value="Joe Lo Truglio" label="Charles Boyle" />
+          <goab-dropdown-item value="Chelsea Peretti" label="Gina Linetti" />
+          <goab-dropdown-item value="Andre Braugher" label="Raymond Holt" />
+          <goab-dropdown-item value="Michael Hitchcock" label="Dirk Blocker" />
+          <goab-dropdown-item value="Joel McKinnon Miller" label="Norm Scully" />
+        </goab-dropdown-multiselect>
+      </div>
+      <goab-text
+        >Selected:
+        {{
+          brooklyn99Selected.length ? brooklyn99Selected.join(", ") : "(none)"
+        }}</goab-text
+      >
+    </section>
+
+    <section>
+      <goab-text tag="h2">Truncate label</goab-text>
+      <goab-text>
+        When the selected labels exceed the trigger width, they truncate with an "n
+        selected" label.
+      </goab-text>
+      <div style="max-width: 250px">
+        <goab-dropdown-multiselect
+          name="nine-nine-characters"
+          placeholder="Best Brooklyn Nine-Nine characters"
+          [value]="brooklyn99Selected"
+          (onChange)="onBrooklyn99Change($event)"
+          testId="overflow-multiselect"
+          truncateLabel="true"
+        >
+          <goab-dropdown-item value="Andy Samberg" label="Jake Peralta" />
+          <goab-dropdown-item value="Stephanie Beatriz" label="Rosa Diaz" />
+          <goab-dropdown-item value="Terry Crews" label="Terry Jeffords" />
+          <goab-dropdown-item value="Melissa Fumero" label="Amy Santiago" />
+          <goab-dropdown-item value="Joe Lo Truglio" label="Charles Boyle" />
+          <goab-dropdown-item value="Chelsea Peretti" label="Gina Linetti" />
+          <goab-dropdown-item value="Andre Braugher" label="Raymond Holt" />
+          <goab-dropdown-item value="Michael Hitchcock" label="Dirk Blocker" />
+          <goab-dropdown-item value="Joel McKinnon Miller" label="Norm Scully" />
+        </goab-dropdown-multiselect>
+      </div>
+    </section>
+    <section>
+      <goab-text tag="h2">Controlled (pre-selected value)</goab-text>
+      <goab-text tag="p">(and leadingIcon)</goab-text>
+      <div style="max-width: 400px">
+        <goab-dropdown-multiselect
+          name="fruit-controlled"
+          placeholder="Select fruit"
+          leadingIcon="airplane"
+          [value]="selected2"
+          (onChange)="onSelected2Change($event)"
+          testId="controlled-multiselect"
+        >
+          <goab-dropdown-item value="apple" label="Apple" />
+          <goab-dropdown-item value="banana" label="Banana" />
+          <goab-dropdown-item value="cherry" label="Cherry" />
+        </goab-dropdown-multiselect>
+        <goab-text
+          >Selected: {{ selected2.length ? selected2.join(", ") : "(none)" }}</goab-text
+        >
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Controlled — Reactive form (FormControl)</goab-text>
+      <goab-text>Pre-seeded with ["apple", "banana"] via the FormControl.</goab-text>
+      <div style="max-width: 400px">
+        <form [formGroup]="form">
+          <goab-form-item label="Favourite fruit">
+            <goab-dropdown-multiselect
+              name="fruit-controlled-reactive"
+              placeholder="Select fruit"
+              formControlName="fruitsControlledReactive"
+              testId="controlled-reactive-multiselect"
+            >
+              <goab-dropdown-item value="apple" label="Apple" />
+              <goab-dropdown-item value="banana" label="Banana" />
+              <goab-dropdown-item value="cherry" label="Cherry" />
+            </goab-dropdown-multiselect>
+          </goab-form-item>
+        </form>
+        <goab-text
+          >FormControl value:
+          {{ form.get("fruitsControlledReactive")?.value | json }}</goab-text
+        >
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Controlled — Template-driven (ngModel)</goab-text>
+      <goab-text>Pre-seeded with ["apple", "banana"] via [(ngModel)].</goab-text>
+      <div style="max-width: 400px">
+        <goab-form-item label="Favourite fruit">
+          <goab-dropdown-multiselect
+            name="fruit-controlled-ngmodel"
+            placeholder="Select fruit"
+            [(ngModel)]="fruitsControlledNgModel"
+            [ngModelOptions]="{ standalone: true }"
+            testId="controlled-ngmodel-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text>ngModel value: {{ fruitsControlledNgModel | json }}</goab-text>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Disabled state</goab-text>
+      <div style="max-width: 400px">
+        <goab-dropdown-multiselect
+          name="fruit-disabled"
+          placeholder="Select fruit"
+          [disabled]="true"
+          [value]="['apple']"
+          testId="disabled-multiselect"
+        >
+          <goab-dropdown-item value="apple" label="Apple" />
+          <goab-dropdown-item value="banana" label="Banana" />
+        </goab-dropdown-multiselect>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Error state</goab-text>
+      <div style="max-width: 400px">
+        <goab-form-item
+          label="Required selection"
+          error="Please select at least one option."
+        >
+          <goab-dropdown-multiselect
+            name="fruit-error"
+            placeholder="Select fruit"
+            [error]="true"
+            testId="error-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Filterable</goab-text>
+      <goab-text>
+        Type in the trigger to filter options. Only options whose label starts with the
+        typed string are shown. Previously checked options remain selected even when
+        hidden. The filter clears when the dropdown closes.
+      </goab-text>
+      <div style="max-width: 400px">
+        <goab-form-item label="Province or territory">
+          <goab-dropdown-multiselect
+            name="provinces-filterable"
+            placeholder="Select provinces"
+            [filterable]="true"
+            [value]="selectedFilterable"
+            (onChange)="onFilterableChange($event)"
+            testId="filterable-multiselect"
+          >
+            <goab-dropdown-item value="ab" label="Alberta" />
+            <goab-dropdown-item value="bc" label="British Columbia" />
+            <goab-dropdown-item value="mb" label="Manitoba" />
+            <goab-dropdown-item value="nb" label="New Brunswick" />
+            <goab-dropdown-item value="nl" label="Newfoundland and Labrador" />
+            <goab-dropdown-item value="ns" label="Nova Scotia" />
+            <goab-dropdown-item value="on" label="Ontario" />
+            <goab-dropdown-item value="pe" label="Prince Edward Island" />
+            <goab-dropdown-item value="qc" label="Quebec" />
+            <goab-dropdown-item value="sk" label="Saskatchewan" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected:
+          {{
+            selectedFilterable.length ? selectedFilterable.join(", ") : "(none)"
+          }}</goab-text
+        >
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Show Select All</goab-text>
+      <goab-text>
+        The selectAll prop adds a "Select All" checkbox above the list. Checking it
+        selects every option. Unchecking clears all. It shows as indeterminate when some
+        (but not all) options are selected.
+      </goab-text>
+      <div style="max-width: 400px">
+        <goab-form-item label="Favourite fruit">
+          <goab-dropdown-multiselect
+            name="fruit-select-all"
+            placeholder="Select fruit"
+            [showSelectAll]="true"
+            [value]="selectedSelectAll"
+            (onChange)="onSelectAllChange($event)"
+            testId="select-all-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+            <goab-dropdown-item value="date" label="Date" />
+            <goab-dropdown-item value="elderberry" label="Elderberry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected:
+          {{
+            selectedSelectAll.length ? selectedSelectAll.join(", ") : "(none)"
+          }}</goab-text
+        >
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Compact size</goab-text>
+      <div style="max-width: 400px">
+        <goab-dropdown-multiselect
+          name="fruit-compact"
+          placeholder="Select fruit"
+          size="compact"
+          testId="compact-multiselect"
+        >
+          <goab-dropdown-item value="apple" label="Apple" />
+          <goab-dropdown-item value="banana" label="Banana" />
+          <goab-dropdown-item value="cherry" label="Cherry" />
+        </goab-dropdown-multiselect>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Percentage width (fill parent)</goab-text>
+      <goab-text>
+        With a percentage width the component sizes relative to its parent container (the
+        dashed box below is 600px wide). The popover panel should match the rendered
+        trigger width. Note: the parent must be block level (no inline goab-block wrapper)
+        or the percentage collapses to the trigger min-content.
+      </goab-text>
+      <div style="width: 600px; max-width: 100%; padding: 1rem; border: 1px dashed #888">
+        <goab-form-item label="100% of parent" mb="m">
+          <goab-dropdown-multiselect
+            name="fruit-width-full"
+            placeholder="Select fruit"
+            width="100%"
+            testId="width-full-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-form-item label="50% of parent">
+          <goab-dropdown-multiselect
+            name="fruit-width-half"
+            placeholder="Select fruit"
+            width="50%"
+            testId="width-half-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Dynamic options (async load)</goab-text>
+      <goab-text>
+        Options usually come from an API, not a static list. Here the options load after a
+        3 second delay. Open the dropdown before they load to see the empty state, then
+        watch the list populate. Use the buttons to add or remove options at runtime.
+      </goab-text>
+      <div style="max-width: 400px">
+        <goab-button-group alignment="start">
+          <goab-button type="secondary" (onClick)="addOption()">Add option</goab-button>
+          <goab-button type="secondary" (onClick)="removeLastOption()"
+            >Remove last option</goab-button
+          >
+        </goab-button-group>
+        <goab-form-item label="Fruit (loaded async)" mt="s">
+          <goab-dropdown-multiselect
+            name="fruit-async"
+            [placeholder]="asyncLoading ? 'Loading options...' : 'Select fruit'"
+            [value]="selectedAsync"
+            (onChange)="selectedAsync = $event.value"
+            testId="async-multiselect"
+          >
+            @for (o of asyncOptions; track o.value) {
+              <goab-dropdown-item [value]="o.value" [label]="o.label" />
+            }
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected:
+          {{ selectedAsync.length ? selectedAsync.join(", ") : "(none)" }}</goab-text
+        >
+      </div>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Filterable inside a modal</goab-text>
+      <goab-text>
+        Verifies that the filter input inside a modal receives focus, typing filters
+        options correctly, and that the popover renders above the modal overlay.
+      </goab-text>
+      <ng-template #filterableModalActions>
+        <goab-button-group alignment="end">
+          <goab-button type="secondary" (onClick)="filterableModalOpen = false">Cancel</goab-button>
+          <goab-button type="primary" (onClick)="filterableModalOpen = false">Confirm</goab-button>
+        </goab-button-group>
+      </ng-template>
+      <goab-button type="secondary" (onClick)="filterableModalOpen = true">Open modal</goab-button>
+      <goab-modal
+        [open]="filterableModalOpen"
+        heading="Select provinces"
+        [actions]="filterableModalActions"
+        [closable]="true"
+        (onClose)="filterableModalOpen = false"
+      >
+        <goab-form-item label="Province or territory">
+          <goab-dropdown-multiselect
+            name="provinces-in-modal"
+            placeholder="Select provinces"
+            [filterable]="true"
+            [value]="selectedFilterableInModal"
+            (onChange)="selectedFilterableInModal = $event.value"
+            testId="filterable-modal-multiselect"
+          >
+            <goab-dropdown-item value="ab" label="Alberta" />
+            <goab-dropdown-item value="bc" label="British Columbia" />
+            <goab-dropdown-item value="mb" label="Manitoba" />
+            <goab-dropdown-item value="nb" label="New Brunswick" />
+            <goab-dropdown-item value="nl" label="Newfoundland and Labrador" />
+            <goab-dropdown-item value="ns" label="Nova Scotia" />
+            <goab-dropdown-item value="on" label="Ontario" />
+            <goab-dropdown-item value="pe" label="Prince Edward Island" />
+            <goab-dropdown-item value="qc" label="Quebec" />
+            <goab-dropdown-item value="sk" label="Saskatchewan" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected:
+          {{
+            selectedFilterableInModal.length
+              ? selectedFilterableInModal.join(", ")
+              : "(none)"
+          }}</goab-text
+        >
+      </goab-modal>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Inside a modal</goab-text>
+      <goab-text>
+        Verifies the dropdown popover renders above the modal and that opening or
+        interacting with the dropdown does not close the modal.
+      </goab-text>
+      <ng-template #modalActions>
+        <goab-button-group alignment="end">
+          <goab-button type="secondary" (onClick)="modalOpen = false">Cancel</goab-button>
+          <goab-button type="primary" (onClick)="modalOpen = false">Confirm</goab-button>
+        </goab-button-group>
+      </ng-template>
+      <goab-button type="secondary" (onClick)="modalOpen = true">Open modal</goab-button>
+      <goab-modal
+        [open]="modalOpen"
+        heading="Select your fruit"
+        [actions]="modalActions"
+        [closable]="true"
+        (onClose)="modalOpen = false"
+      >
+        <goab-form-item label="Favourite fruit">
+          <goab-dropdown-multiselect
+            name="fruit-in-modal"
+            placeholder="Select fruit"
+            [value]="selectedInModal"
+            (onChange)="selectedInModal = $event.value"
+            testId="modal-multiselect"
+          >
+            <goab-dropdown-item value="apple" label="Apple" />
+            <goab-dropdown-item value="banana" label="Banana" />
+            <goab-dropdown-item value="cherry" label="Cherry" />
+            <goab-dropdown-item value="date" label="Date" />
+            <goab-dropdown-item value="elderberry" label="Elderberry" />
+          </goab-dropdown-multiselect>
+        </goab-form-item>
+        <goab-text
+          >Selected:
+          {{ selectedInModal.length ? selectedInModal.join(", ") : "(none)" }}</goab-text
+        >
+      </goab-modal>
+    </section>
+
+    <section>
+      <goab-text tag="h2">MaxHeight Test</goab-text>
+      <goab-text>
+        Make a long list of items to test the maxHeight of the dropdown. The dropdown
+        should scroll when the list exceeds the maxHeight.
+      </goab-text>
+      <goab-form-item label="Favourite fruit">
+        <goab-dropdown-multiselect
+          name="maxheight"
+          placeholder="Pick some numbers"
+          [value]="selectedInModal"
+          (onChange)="selectedInModal = $event.value"
+          testId="modal-maxheight"
+          maxHeight="500px"
+        >
+          @for (o of maxHeightOptions; track o.value) {
+            <goab-dropdown-item [value]="o.value" [label]="o.label" />
+          }
+        </goab-dropdown-multiselect>
+      </goab-form-item>
+    </section>
+  </goab-block>
+</main>
