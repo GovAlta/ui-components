@@ -61,8 +61,7 @@ const emit = defineEmits<{
   onChange: [detail: GoabDropdownOnChangeDetail];
 }>();
 
-const { value: _value, ...rest } = props;
-const wcProps = useWcProps(rest, {
+const wcProps = useWcProps(props, {
   booleanProps: ["disabled", "error", "filterable", "native"],
 });
 

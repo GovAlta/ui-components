@@ -24,12 +24,11 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const { tag, ...rest } = props;
-const wcProps = useWcProps(rest);
+const wcProps = useWcProps(props, { renamedProps: { tag: "as" } });
 </script>
 
 <template>
-  <goa-text :as="tag" v-bind="wcProps">
+  <goa-text v-bind="wcProps">
     <slot />
   </goa-text>
 </template>
