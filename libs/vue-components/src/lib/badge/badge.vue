@@ -16,8 +16,6 @@ interface Props {
   content?: string;
   /** Accessible label for screen readers.  @default "" */
   ariaLabel?: string;
-  /** @deprecated Use iconType instead.  @default null */
-  icon?: boolean;
   /** Icon type to display in the badge.  @default null */
   iconType?: GoabIconType;
   /** Sets the size of the badge. @default "medium" */
@@ -42,12 +40,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const wcProps = useWcProps(props);
-const iconAttr = computed(() => {
-  if (props.icon === true) {
-    return "true";
-  }
-  return props.iconType ? "true" : "false";
-});
+const iconAttr = computed(() => props.iconType ? "true" : "false");
 </script>
 
 <template>
