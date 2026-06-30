@@ -405,16 +405,6 @@
         {/if}
 
         {#if $$slots.account}
-          <div
-            class="account-menu"
-            role="presentation"
-            class:show={_showAccountMenu}
-            on:mouseleave={handleMouseLeave}
-            on:focusout={handleAccountFocusOut}
-          >
-            <slot name="account"></slot>
-          </div>
-
           <button
             class="profile"
             on:click={handleProfileClick}
@@ -439,6 +429,16 @@
               <goa-icon size="small" type="chevron-down" />
             </div>
           </button>
+
+          <div
+            class="account-menu"
+            role="presentation"
+            class:show={_showAccountMenu}
+            on:mouseleave={handleMouseLeave}
+            on:focusout={handleAccountFocusOut}
+          >
+            <slot name="account"></slot>
+          </div>
         {/if}
         <div class="toggle-menu">
           <button
@@ -668,10 +668,23 @@
     padding: var(--goa-space-2xs);
     position: fixed;
     left: var(--goa-space-s);
+    /* Fallback for browsers without CSS anchor positioning. Approximates the
+       profile button's top; the @supports line 679 aligns it exactly. */
     bottom: 140px;
     width: 256px;
     z-index: 2;
     transition: opacity 100ms ease-in-out;
+  }
+
+  @supports (anchor-name: --a) {
+    .profile {
+      anchor-name: --goa-work-side-menu-profile;
+    }
+
+    .account-menu {
+      position-anchor: --goa-work-side-menu-profile;
+      bottom: anchor(top);
+    }
   }
 
   .account-menu.show {
