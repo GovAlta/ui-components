@@ -7,7 +7,10 @@
     getSlottedChildren,
     typeValidator,
     toBoolean,
+    relay,
+    generateRandomId,
   } from "../../common/utils";
+  import { WorkspaceScrollLockMsg } from "../../types/relay-types";
   import { onDestroy, onMount, tick } from "svelte";
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
@@ -46,6 +49,9 @@
   let _isOpen: boolean = false;
   let _headingSlotHasContent = false;
   let _actionsSlotHasContent = false;
+  const _scrollLockId = generateRandomId();
+  let _scrollLocked = false;
+  let _hostEl: HTMLElement | null = null;
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -74,6 +80,8 @@
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
   // DDIDS-1288
   $: setTimeout(() => (_isOpen = toBoolean(open)), 1);
+
+  $: syncScrollLock(_isOpen, _rootEl);
 
   $: _transitionTime =
     transition === "none" ? 0 : transition === "slow" ? 400 : 200;
@@ -115,11 +123,42 @@
 
   onDestroy(() => {
     window.removeEventListener("keydown", onInputKeyDown);
+    // Safety net: release the lock if the modal is torn down while still open.
+    if (_scrollLocked && _hostEl) {
+      relay(
+        _hostEl,
+        WorkspaceScrollLockMsg,
+        { id: _scrollLockId, locked: false },
+        { bubbles: true },
+      );
+      _scrollLocked = false;
+    }
   });
 
   // *********
   // Functions
   // *********
+
+  // Tell an ancestor WorkspaceLayout to lock its scroll container while the modal
+  // is open. The layout scrolls an inner element, so the modal's own body scroll
+  // lock has no effect there. Relayed from _rootEl, which is present while open
+  // and during the closing flush, so the unlock still reaches the layout before
+  // the node leaves the DOM. The _scrollLocked guard skips the initial closed
+  // state and avoids duplicate messages.
+  function syncScrollLock(isOpen: boolean, rootEl: HTMLElement | null) {
+    const locked = isOpen && !!rootEl;
+    if (locked === _scrollLocked || !rootEl) {
+      return;
+    }
+    _scrollLocked = locked;
+    _hostEl = (rootEl.getRootNode() as ShadowRoot).host as HTMLElement;
+    relay(
+      rootEl,
+      WorkspaceScrollLockMsg,
+      { id: _scrollLockId, locked },
+      { bubbles: true },
+    );
+  }
 
   async function checkSlotsContent() {
     await tick();
@@ -283,14 +322,19 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
-    position: relative;
-    z-index: 99999;
   }
 
   :host * {
     box-sizing: border-box;
   }
 
+  /* z-index lives here (not on :host) so the stacking context it establishes is
+     rooted at a box already sized to the viewport. :host is in normal flow and
+     often collapses to ~0 size (it has no in-flow content of its own, just this
+     fixed child), and a stacking context rooted at a collapsed, off-viewport box
+     can fail to composite correctly over unrelated fixed/sticky content
+     elsewhere on the page (e.g. a WorkspaceLayout side menu). See #1528 for why
+     the modal needs to outrank other components' z-index. */
   .modal {
     font-family: var(--goa-font-family-sans);
     position: fixed;
@@ -300,7 +344,7 @@
     justify-content: center;
     height: 100vh;
     width: 100%;
-    z-index: 3;
+    z-index: 99999;
   }
 
   .modal-overlay {

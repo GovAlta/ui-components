@@ -17,6 +17,11 @@ export default function (_node: HTMLElement, opts: NoScrollOptions) {
     toggledScrolling = false;
     // need to perform on the next render cycle to allow the css transitions to take place
     setTimeout(() => {
+      // Guard against the document being torn down before the timer fires
+      // (e.g. test environment teardown or page navigation).
+      if (typeof document === "undefined") {
+        return;
+      }
       document.body.style.overflow = "";
       document.body.style.borderRight = "";
     }, 200);
@@ -56,13 +61,22 @@ export default function (_node: HTMLElement, opts: NoScrollOptions) {
     return scrollbarWidth;
   }
 
+  function toggleScrollbars(options: NoScrollOptions) {
+    if (options.enable) {
+      hideScrollbars();
+    } else {
+      resetScrollbars();
+    }
+  }
+
+  // Apply on mount. Svelte only calls update() on parameter change, so an
+  // element rendered already enabled (e.g. Modal mounted inside {#if open})
+  // would never lock the body scroll without this initial call.
+  toggleScrollbars(opts);
+
   return {
     update(options: NoScrollOptions) {
-      if (options.enable) {
-        hideScrollbars();
-      } else {
-        resetScrollbars();
-      }
+      toggleScrollbars(options);
     },
 
     destroy() {

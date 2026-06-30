@@ -13,6 +13,8 @@
     type WorkSideMenuBindRelayDetail,
     WorkSideMenuOpenMsg,
     WorkSideMenuCloseMsg,
+    WorkspaceScrollLockMsg,
+    type WorkspaceScrollLockRelayDetail,
   } from "../../types/relay-types";
 
   // ******
@@ -37,6 +39,9 @@
   let _resizeDebounceId: ReturnType<typeof setTimeout> | null = null;
   let _windowWidth = 0;
   let _workSideMenuRef: HTMLElement | null = null;
+  // Ids of overlay components (Modal, Circular Progress, Drawer) currently
+  // requesting a scroll lock. The card stays locked while any are active.
+  let _scrollLocks = new Set<string>();
 
   // Debounce ResizeObserver longer than the .card-container padding transition
   // (150ms) so state isn't recalculated mid-animation while clientHeight is
@@ -70,6 +75,8 @@
     relay(_workSideMenuRef, WorkSideMenuCloseMsg);
   }
 
+  $: applyScrollLock(_scrollLocks.size > 0);
+
   // *****
   // Hooks
   // *****
@@ -93,6 +100,14 @@
     receive(_rootEl, (action, data) => {
       if (action === WorkSideMenuBindMsg) {
         _workSideMenuRef = (data as WorkSideMenuBindRelayDetail).el;
+      } else if (action === WorkspaceScrollLockMsg) {
+        const { id, locked } = data as WorkspaceScrollLockRelayDetail;
+        if (locked) {
+          _scrollLocks.add(id);
+        } else {
+          _scrollLocks.delete(id);
+        }
+        _scrollLocks = _scrollLocks; // reassign so the reactive lock re-runs
       }
     });
   });
@@ -106,6 +121,29 @@
   // *********
   // Functions
   // *********
+
+  // Lock/unlock the inner scroll container while an overlay is open. The
+  // scrollbar width is reserved as padding so removing the scrollbar does not
+  // shift the content. On overlay scrollbars (e.g. macOS) the width is 0, so
+  // no padding is added and nothing shifts.
+  function applyScrollLock(locked: boolean) {
+    if (!_scrollEl) return;
+
+    if (locked) {
+      const computed = getComputedStyle(_scrollEl);
+      const borderX =
+        parseFloat(computed.borderLeftWidth) +
+        parseFloat(computed.borderRightWidth);
+      const scrollbarWidth =
+        _scrollEl.offsetWidth - _scrollEl.clientWidth - borderX;
+
+      _scrollEl.style.paddingRight = scrollbarWidth > 0 ? `${scrollbarWidth}px` : "";
+      _scrollEl.style.overflowY = "hidden";
+    } else {
+      _scrollEl.style.paddingRight = "";
+      _scrollEl.style.overflowY = "";
+    }
+  }
 
   function handleScroll() {
     if (_animationFrame) return;

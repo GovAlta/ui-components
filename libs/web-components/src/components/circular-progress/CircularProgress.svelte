@@ -2,10 +2,16 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import noScroll from "../../common/no-scroll";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    relay,
+    generateRandomId,
+  } from "../../common/utils";
+  import { WorkspaceScrollLockMsg } from "../../types/relay-types";
 
   // Validators
   const [Variants, validateVariant] = typeValidator(
@@ -40,6 +46,12 @@
   let spinnerSize: "large" | "xlarge";
   let fullscreen: boolean;
   let inline: boolean;
+  let _overlayEl: HTMLElement | null = null;
+  let _hostEl: HTMLElement | null = null;
+  const _scrollLockId = generateRandomId();
+  let _scrollLocked = false;
+
+  $: syncScrollLock(isVisible && fullscreen, _overlayEl);
 
   onMount(() => {
     validateVariant(variant);
@@ -48,6 +60,38 @@
     fullscreen = variant === "fullscreen";
     inline = variant === "inline";
   });
+
+  onDestroy(() => {
+    // Safety net: release the lock if torn down while still visible.
+    if (_scrollLocked && _hostEl) {
+      relay(
+        _hostEl,
+        WorkspaceScrollLockMsg,
+        { id: _scrollLockId, locked: false },
+        { bubbles: true },
+      );
+      _scrollLocked = false;
+    }
+  });
+
+  // Tell an ancestor WorkspaceLayout to lock its scroll container while the
+  // fullscreen loader is visible. The layout scrolls an inner element, so the
+  // loader's own body scroll lock has no effect there. Relayed from the overlay
+  // element, which is present while visible and during the fade-out flush, so
+  // the unlock still reaches the layout before the node leaves the DOM.
+  function syncScrollLock(locked: boolean, overlayEl: HTMLElement | null) {
+    if (locked === _scrollLocked || !overlayEl) {
+      return;
+    }
+    _scrollLocked = locked;
+    _hostEl = (overlayEl.getRootNode() as ShadowRoot).host as HTMLElement;
+    relay(
+      overlayEl,
+      WorkspaceScrollLockMsg,
+      { id: _scrollLockId, locked },
+      { bubbles: true },
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -56,6 +100,7 @@
     <div
       transition:fade={{ duration: 300 }}
       use:noScroll={{ enable: true }}
+      bind:this={_overlayEl}
       class:fullscreen
       data-testid={testid}
     >

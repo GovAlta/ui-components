@@ -1,7 +1,17 @@
-import { render } from "@testing-library/svelte";
+import { render, waitFor } from "@testing-library/svelte";
 import GoAWorkspaceLayoutWrapper from "./WorkspaceLayoutWrapper.test.svelte";
 import GoAWorkspaceLayout from "./WorkspaceLayout.svelte";
 import { beforeAll, describe, expect, it, vi } from "vitest";
+import { WorkspaceScrollLockMsg } from "../../types/relay-types";
+
+function relayScrollLock(root: ParentNode, id: string, locked: boolean) {
+  const shell = root.querySelector(".shell");
+  shell?.dispatchEvent(
+    new CustomEvent("msg", {
+      detail: { action: WorkspaceScrollLockMsg, data: { id, locked } },
+    }),
+  );
+}
 
 beforeAll(() => {
   class ResizeObserverMock {
@@ -54,6 +64,43 @@ describe("GoA WorkspaceLayout", () => {
     });
     const el = await findByTestId("ws-layout");
     expect(el).toBeTruthy();
+  });
+
+  it("locks the card scroll while an overlay holds a scroll lock", async () => {
+    const { container } = render(GoAWorkspaceLayout, {});
+    const card = container.querySelector(".card") as HTMLElement;
+
+    relayScrollLock(container, "modal-1", true);
+    await waitFor(() => {
+      expect(card.style.overflowY).toBe("hidden");
+    });
+
+    relayScrollLock(container, "modal-1", false);
+    await waitFor(() => {
+      expect(card.style.overflowY).toBe("");
+    });
+  });
+
+  it("keeps the card locked until every overlay releases its lock", async () => {
+    const { container } = render(GoAWorkspaceLayout, {});
+    const card = container.querySelector(".card") as HTMLElement;
+
+    relayScrollLock(container, "modal-1", true);
+    relayScrollLock(container, "loader-1", true);
+    await waitFor(() => {
+      expect(card.style.overflowY).toBe("hidden");
+    });
+
+    // One overlay closes; the other still holds the lock.
+    relayScrollLock(container, "modal-1", false);
+    await waitFor(() => {
+      expect(card.style.overflowY).toBe("hidden");
+    });
+
+    relayScrollLock(container, "loader-1", false);
+    await waitFor(() => {
+      expect(card.style.overflowY).toBe("");
+    });
   });
 
 });
