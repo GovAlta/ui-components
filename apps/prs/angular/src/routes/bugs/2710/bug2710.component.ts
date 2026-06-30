@@ -3,8 +3,10 @@ import {
   GoabBlock,
   GoabButton,
   GoabButtonGroup,
+  GoabCircularProgress,
   GoabDetails,
   GoabDivider,
+  GoabDrawer,
   GoabLink,
   GoabModal,
   GoabText,
@@ -18,22 +20,39 @@ import {
     GoabBlock,
     GoabButton,
     GoabButtonGroup,
+    GoabCircularProgress,
     GoabDetails,
     GoabDivider,
+    GoabDrawer,
     GoabLink,
     GoabModal,
     GoabText,
   ],
 })
 export class Bug2710Component {
-  open = false;
+  modalOpen = false;
+  drawerOpen = false;
+  progressVisible = false;
   filler = Array.from({ length: 60 }, (_, i) => i + 1);
 
   openModal() {
-    this.open = true;
+    this.modalOpen = true;
   }
 
   closeModal() {
-    this.open = false;
+    this.modalOpen = false;
+  }
+
+  openDrawer() {
+    this.drawerOpen = true;
+  }
+
+  closeDrawer() {
+    this.drawerOpen = false;
+  }
+
+  showProgress() {
+    this.progressVisible = true;
+    setTimeout(() => (this.progressVisible = false), 3000);
   }
 }

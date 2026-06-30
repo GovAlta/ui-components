@@ -15,15 +15,16 @@
   <goab-details heading="Issue Description">
     <goab-text tag="p">
       When the Modal is open the page behind it could still be scrolled. Opening
-      the modal should lock the body scroll (as the Drawer already does) and
-      restore it on close.
+      the modal should lock the background scroll and restore it on close.
+      Circular Progress (fullscreen) and Drawer shared the same underlying issue
+      and are covered here too.
     </goab-text>
   </goab-details>
 </goab-block>
 
 <goab-divider mt="l" mb="l"></goab-divider>
 
-<goab-text tag="h2">Test: body scroll lock</goab-text>
+<goab-text tag="h2">Test 1: Modal scroll lock</goab-text>
 <goab-text tag="p" mb="m">
   Open the modal, then try to scroll the page. The background must not move
   while the modal is open. Close it and the page scrolls again, with the scroll
@@ -40,7 +41,7 @@
 
 <goab-modal
   heading="Scroll lock test"
-  [open]="open"
+  [open]="modalOpen"
   maxWidth="40ch"
   [actions]="modalActions"
   (onClose)="closeModal()"
@@ -50,9 +51,56 @@
   </goab-text>
 </goab-modal>
 
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Test 2: Drawer scroll lock</goab-text>
+<goab-text tag="p" mb="m">
+  Open the drawer, then try to scroll the page behind it. The background must
+  not move while the drawer is open.
+</goab-text>
+
+<goab-button type="primary" (onClick)="openDrawer()">Open drawer</goab-button>
+
+<ng-template #drawerActions>
+  <goab-button-group alignment="end">
+    <goab-button type="primary" (onClick)="closeDrawer()">Close</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-drawer
+  position="right"
+  [open]="drawerOpen"
+  heading="Scroll lock test"
+  [actions]="drawerActions"
+  (onClose)="closeDrawer()"
+>
+  <goab-text tag="p">
+    Try scrolling the page now. The content behind this drawer should stay put.
+  </goab-text>
+</goab-drawer>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Test 3: Circular Progress (fullscreen) scroll lock</goab-text>
+<goab-text tag="p" mb="m">
+  Show the fullscreen loader, then try to scroll the page behind it. The
+  background must not move while it is visible. The loader has no close
+  affordance of its own, so it auto-hides after 3 seconds.
+</goab-text>
+
+<goab-button type="primary" (onClick)="showProgress()"
+  >Show fullscreen loader for 3s</goab-button
+>
+
+<goab-circular-progress
+  variant="fullscreen"
+  message="Loading..."
+  [visible]="progressVisible"
+></goab-circular-progress>
+
 @for (n of filler; track n) {
   <goab-text tag="p">
     Filler paragraph {{ n }} of {{ filler.length }} so the page is tall enough to
-    scroll behind the modal.
+    scroll behind the overlay.
   </goab-text>
 }
