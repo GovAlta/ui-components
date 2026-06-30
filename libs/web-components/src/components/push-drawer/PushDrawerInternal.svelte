@@ -145,26 +145,28 @@
     <div id="goa-drawer-heading" slot="header" class="drawer-header">
       <div class="drawer-default-header">
         {#if heading || $$slots.heading}
-          {#if heading}
-            {#if version === "2"}
-              <goa-text
-                size={_scrollPos === "middle" || _scrollPos === "bottom"
-                  ? "heading-xs"
-                  : "heading-s"}
-                as="h3"
-                mt="2xs"
-                mb="none"
-              >
-                {heading}
-              </goa-text>
+          <div class="drawer-heading-content">
+            {#if heading}
+              {#if version === "2"}
+                <goa-text
+                  size={_scrollPos === "middle" || _scrollPos === "bottom"
+                    ? "heading-xs"
+                    : "heading-s"}
+                  as="h3"
+                  mt="2xs"
+                  mb="none"
+                >
+                  {heading}
+                </goa-text>
+              {:else}
+                <goa-text size="heading-m" as="h3" mt="none" mb="none">
+                  {heading}
+                </goa-text>
+              {/if}
             {:else}
-              <goa-text size="heading-m" as="h3" mt="none" mb="none">
-                {heading}
-              </goa-text>
+              <slot name="heading" />
             {/if}
-          {:else}
-            <slot name="heading" />
-          {/if}
+          </div>
         {/if}
 
         <goa-icon-button
@@ -330,6 +332,20 @@
     display: flex;
     justify-content: space-between;
     font: var(--goa-push-drawer-heading-typography);
+  }
+
+  .v2 .drawer-default-header {
+    align-items: flex-start;
+    column-gap: var(--goa-space-s);
+  }
+
+  .v2 .drawer-heading-content {
+    min-width: 0;
+  }
+
+  .v2 .drawer-default-header goa-icon-button {
+    flex-shrink: 0;
+    margin-top: -0.1875rem;
   }
 
   .drawer-actions {
