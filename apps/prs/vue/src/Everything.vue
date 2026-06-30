@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import {
   GoabAccordion,
@@ -45,7 +45,6 @@ import {
   GoabPageBlock,
   GoabPages,
   GoabPagination,
-  GoabPopover,
   GoabRadioGroup,
   GoabRadioItem,
   GoabSideMenu,
@@ -86,17 +85,14 @@ import {
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
-  GoabModalCalloutVariant,
   GoabNotificationType,
   GoabPaginationOnChangeDetail,
-  GoabPopoverPosition,
   GoabRadioGroupOnChangeDetail,
   GoabSkeletonSize,
   GoabSkeletonType,
   GoabTabsOnChangeDetail,
   GoabTextColor,
   GoabTextSize,
-  GoabTooltipHorizontalAlignment,
   GoabTooltipPosition,
   GoabFilterChipTheme,
   GoabFormItemLabelSize,
@@ -124,13 +120,10 @@ const FILTER_CHIP_THEMES: GoabFilterChipTheme[] = ["outline", "filled"];
 const FORM_ITEM_LABEL_SIZES: GoabFormItemLabelSize[] = ["regular", "large"];
 const ICON_BUTTON_VARIANTS: GoabIconButtonVariant[] = ["color", "nocolor", "dark", "light", "destructive"];
 const ICON_TYPES: GoabIconType[] = ["home", "alert", "checkmark-circle", "information-circle", "menu"];
-const POPOVER_POSITIONS: GoabPopoverPosition[] = ["auto", "above", "below"];
 const NOTIFICATION_TYPES: GoabNotificationType[] = ["information", "important", "emergency", "event"];
-const MODAL_CALLOUT_VARIANTS: GoabModalCalloutVariant[] = ["information", "important", "emergency", "success", "event"];
 const SKELETON_TYPES: GoabSkeletonType[] = ["text", "title", "text-small", "avatar", "header", "paragraph", "thumbnail", "card", "profile"];
 const SKELETON_SIZES: GoabSkeletonSize[] = ["1", "2", "3", "4"];
 const TOOLTIP_POSITIONS: GoabTooltipPosition[] = ["top", "bottom", "left", "right"];
-const TOOLTIP_ALIGNMENTS: GoabTooltipHorizontalAlignment[] = ["left", "center", "right"];
 const TEXT_SIZES: GoabTextSize[] = ["heading-xl", "heading-l", "heading-m", "heading-s", "heading-xs", "body-l", "body-m", "body-s", "body-xs"];
 const TEXT_COLORS: GoabTextColor[] = ["primary", "secondary"];
 const TABLE_DATA = [
@@ -166,9 +159,6 @@ const headerMenuActivated = ref(false);
 const iconButtonClickCount = reactive<Record<string, number>>({ color: 0, nocolor: 0, dark: 0, light: 0, destructive: 0 });
 const textInputTrailingClicks = ref(0);
 const menuAction = ref<string | undefined>();
-
-const popoverTarget = ref();
-const badge = ref();
 </script>
 
 <template>
