@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { GoabAppHeader } from "./header";
+import { GoabAppHeader } from "./app-header";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
@@ -134,6 +134,92 @@ describe("GoabAppHeader", () => {
 
     const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
     expect(el.querySelector("a[href='#nav']")).toBeTruthy();
+  }));
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabAppHeader],
+  template: `
+    <ng-template #bannerRef><span>Banner content</span></ng-template>
+    <ng-template #phaseRef><span>Beta</span></ng-template>
+    <ng-template #navigationRef><a href="/home">Home</a></ng-template>
+    <ng-template #utilitiesRef><button>Account</button></ng-template>
+    <goab-app-header
+      heading="Test heading"
+      [banner]="bannerRef"
+      [phase]="phaseRef"
+      [navigation]="navigationRef"
+      [utilities]="utilitiesRef"
+    />
+  `,
+})
+class TestAppHeaderSlotsComponent {}
+
+@Component({
+  standalone: true,
+  imports: [GoabAppHeader],
+  template: `<goab-app-header heading="Test heading" />`,
+})
+class TestAppHeaderNoSlotsComponent {}
+
+describe("GoabAppHeader slot props (slots populated)", () => {
+  let fixture: ComponentFixture<TestAppHeaderSlotsComponent>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppHeader, TestAppHeaderSlotsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestAppHeaderSlotsComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should render banner prop into a div with slot='banner'", fakeAsync(() => {
+    const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
+    expect(el?.querySelector("[slot='banner']")?.innerHTML).toContain("Banner content");
+  }));
+
+  it("should render phase prop into a div with slot='phase'", fakeAsync(() => {
+    const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
+    expect(el?.querySelector("[slot='phase']")?.innerHTML).toContain("Beta");
+  }));
+
+  it("should render navigation prop into a div with slot='navigation'", fakeAsync(() => {
+    const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
+    expect(el?.querySelector("[slot='navigation']")?.innerHTML).toContain("Home");
+  }));
+
+  it("should render utilities prop into a div with slot='utilities'", fakeAsync(() => {
+    const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
+    expect(el?.querySelector("[slot='utilities']")?.innerHTML).toContain("Account");
+  }));
+});
+
+describe("GoabAppHeader slot props (slots empty)", () => {
+  let fixture: ComponentFixture<TestAppHeaderNoSlotsComponent>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppHeader, TestAppHeaderNoSlotsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestAppHeaderNoSlotsComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should not render slot divs when slot props are not provided", fakeAsync(() => {
+    const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
+    expect(el?.querySelector("[slot='banner']")).toBeNull();
+    expect(el?.querySelector("[slot='phase']")).toBeNull();
+    expect(el?.querySelector("[slot='navigation']")).toBeNull();
+    expect(el?.querySelector("[slot='utilities']")).toBeNull();
   }));
 });
 

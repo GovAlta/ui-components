@@ -17,22 +17,27 @@ export const appHeaderMenuConfigurations: ComponentConfigurations = {
       name: "Basic app header menu",
       description: "Navigation menu within AppHeader",
       code: {
-        react: `<GoabAppHeader heading="My Application">
-  <GoabAppHeaderMenu slotName="navigation" heading="Menu">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/reports">Reports</a>
-    <a href="/settings">Settings</a>
-  </GoabAppHeaderMenu>
-</GoabAppHeader>`,
-        angular: `<goab-app-header heading="My Application">
-  <goab-app-header-menu slot="navigation" heading="Menu">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/reports">Reports</a>
-    <a href="/settings">Settings</a>
-  </goab-app-header-menu>
-</goab-app-header>`,
+        react: `<GoabAppHeader
+  heading="My Application"
+  navigation={
+    <GoabAppHeaderMenu heading="Applications">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/reports">Reports</a>
+      <a href="/settings">Settings</a>
+    </GoabAppHeaderMenu>
+  }
+/>`,
+        angular: `<goab-app-header
+  heading="My Application"
+  [navigation]="navigationTemplate"
+></goab-app-header>
+<ng-template #navigationTemplate>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/reports">Reports</a>
+  <a href="/settings">Settings</a>
+</ng-template>`,
         webComponents: `<goa-app-header version="2" heading="My Application">
-  <goa-app-header-menu slot="navigation" version="2" heading="Menu">
+  <goa-app-header-menu slot="navigation" heading="Menu">
     <a href="/dashboard">Dashboard</a>
     <a href="/reports">Reports</a>
     <a href="/settings">Settings</a>

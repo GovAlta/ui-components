@@ -24,7 +24,7 @@ export interface GoabAppHeaderMenuProps extends DataAttributes {
   leadingIcon?: GoabIconType;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Slot name used to place this menu in the correct slot of the parent component. */
+  /** @deprecated Sets the slot name for the component. Deprecated: use AppHeader navigation prop instead. */
   slotName?: string;
   /** Content rendered inside the menu dropdown, typically navigation links. */
   children?: ReactNode;

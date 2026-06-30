@@ -19,13 +19,6 @@
           "description": "Icon displayed before the heading text."
         },
         {
-          "name": "slotName",
-          "type": "string",
-          "required": false,
-          "default": null,
-          "description": "Slot name used to place this menu in the correct slot of the parent component."
-        },
-        {
           "name": "testId",
           "type": "string",
           "required": false,
@@ -51,13 +44,6 @@
           "required": false,
           "default": null,
           "description": "Icon displayed before the heading text."
-        },
-        {
-          "name": "slotName",
-          "type": "string",
-          "required": false,
-          "default": null,
-          "description": "Sets the slot name for the component."
         },
         {
           "name": "testId",

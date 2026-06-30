@@ -30,7 +30,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "V2 only: Secondary text displayed under the service name."
+          "description": "Secondary text displayed under the service name."
         },
         {
           "name": "testId",
@@ -60,22 +60,26 @@
       "slots": [
         {
           "name": "banner",
-          "description": "",
+          "type": "ReactNode",
+          "description": "Banner content displayed above the header.",
           "required": false
         },
         {
           "name": "navigation",
-          "description": "",
+          "type": "ReactNode",
+          "description": "Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown.",
           "required": false
         },
         {
           "name": "phase",
-          "description": "",
+          "type": "ReactNode",
+          "description": "Phase badge content displayed beside the service name.",
           "required": false
         },
         {
           "name": "utilities",
-          "description": "",
+          "type": "ReactNode",
+          "description": "Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions.",
           "required": false
         }
       ]
@@ -108,7 +112,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "V2 only: Secondary text displayed under the service name."
+          "description": "Secondary text displayed under the service name."
         },
         {
           "name": "testId",
@@ -138,22 +142,26 @@
       "slots": [
         {
           "name": "banner",
-          "description": "",
+          "type": "TemplateRef",
+          "description": "Banner content displayed above the header.",
           "required": false
         },
         {
           "name": "navigation",
-          "description": "",
+          "type": "TemplateRef",
+          "description": "Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown.",
           "required": false
         },
         {
           "name": "phase",
-          "description": "",
+          "type": "TemplateRef",
+          "description": "Phase badge content displayed beside the service name.",
           "required": false
         },
         {
           "name": "utilities",
-          "description": "",
+          "type": "TemplateRef",
+          "description": "Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions.",
           "required": false
         }
       ]
@@ -193,7 +201,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "V2 only: Secondary text displayed under the service name."
+          "description": "Secondary text displayed under the service name."
         },
         {
           "name": "testid",
@@ -234,22 +242,22 @@
       "slots": [
         {
           "name": "banner",
-          "description": "",
+          "description": "Banner content displayed above the header.",
           "required": false
         },
         {
           "name": "navigation",
-          "description": "",
+          "description": "Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown.",
           "required": false
         },
         {
           "name": "phase",
-          "description": "",
+          "description": "Phase badge content displayed beside the service name.",
           "required": false
         },
         {
           "name": "utilities",
-          "description": "",
+          "description": "Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions.",
           "required": false
         }
       ]

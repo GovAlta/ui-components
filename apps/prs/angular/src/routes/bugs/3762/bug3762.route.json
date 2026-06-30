@@ -1,0 +1,6 @@
+{
+  "type": "bug",
+  "id": "3762",
+  "path": "bugs/3762",
+  "title": "AppHeader examples using slot property"
+}
