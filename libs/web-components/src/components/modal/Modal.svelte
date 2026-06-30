@@ -322,14 +322,19 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
-    position: relative;
-    z-index: 99999;
   }
 
   :host * {
     box-sizing: border-box;
   }
 
+  /* z-index lives here (not on :host) so the stacking context it establishes is
+     rooted at a box already sized to the viewport. :host is in normal flow and
+     often collapses to ~0 size (it has no in-flow content of its own, just this
+     fixed child), and a stacking context rooted at a collapsed, off-viewport box
+     can fail to composite correctly over unrelated fixed/sticky content
+     elsewhere on the page (e.g. a WorkspaceLayout side menu). See #1528 for why
+     the modal needs to outrank other components' z-index. */
   .modal {
     font-family: var(--goa-font-family-sans);
     position: fixed;
@@ -339,7 +344,7 @@
     justify-content: center;
     height: 100vh;
     width: 100%;
-    z-index: 3;
+    z-index: 99999;
   }
 
   .modal-overlay {
