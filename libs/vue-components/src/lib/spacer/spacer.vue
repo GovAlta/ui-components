@@ -1,0 +1,24 @@
+<script setup lang="ts">
+import type {
+  GoabSpacerHorizontalSpacing,
+  GoabSpacerVerticalSpacing,
+} from "@abgov/ui-components-common";
+import { useWcProps } from "../common/useWcProps";
+
+interface Props {
+  /** Horizontal spacing. @default "none" */
+  hSpacing?: GoabSpacerHorizontalSpacing;
+  /** Vertical spacing. @default "none" */
+  vSpacing?: GoabSpacerVerticalSpacing;
+  /** Sets a data-testid attribute for automated testing.  @default "" */
+  testId?: string;
+}
+
+const props = defineProps<Props>();
+
+const wcProps = useWcProps(props);
+</script>
+
+<template>
+  <goa-spacer v-bind="wcProps" />
+</template>

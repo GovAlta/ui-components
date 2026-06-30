@@ -1,0 +1,38 @@
+{
+  "extends": ["../../.eslintrc.json", "plugin:vue/recommended"],
+  "ignorePatterns": [
+    "!**/*",
+    "**/vite.config.*.timestamp*",
+    "**/vitest.config.*.timestamp*"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.vue"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.vue"],
+      "parser": "vue-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser"
+      },
+      "rules": {
+        "vue/multi-word-component-names": "off",
+        "vue/no-deprecated-slot-attribute": "off",
+        "vue/max-attributes-per-line": "off",
+        "vue/v-on-event-hyphenation": "off",
+        "vue/require-default-prop": "off",
+        "vue/require-v-for-key": "off",
+        "vue/singleline-html-element-content-newline": "off"
+      }
+    }
+  ]
+}

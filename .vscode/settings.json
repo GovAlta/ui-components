@@ -2,5 +2,8 @@
   "editor.formatOnSave": true,
   "editor.trimAutoWhitespace": true,
   "editor.tabSize": 2,
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
