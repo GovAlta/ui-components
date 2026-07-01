@@ -47,15 +47,10 @@
 
   // element refs
   let _contentEl: HTMLElement | null = null;
-  let _scrollEl: HTMLElement | null = null;
 
   // computes the required absolute position offset to hide the drawer when not shown
   let _drawerSize: number;
-  let _actionsHeight: number = 0;
-  let _headerHeight: number = 0;
   let _actionsSlotHasContent: boolean = false;
-  let _scrollableHeight: string = "";
-  let _scrollPos: "top" | "middle" | "bottom" | null = "top"; // to add the box-shadow to the drawer content
 
   // ========
   // Reactive
@@ -68,29 +63,9 @@
     y: position === "bottom" ? 200 : 0,
   };
 
-  // Add reactive statement for checking actions slot content (for class style and height calculations) and scroll position (for box-shadow)
+  // Recheck actions slot content when the drawer opens (drives the empty-actions class styling).
   $: if (open) {
     checkActionsSlotContent();
-    if (_scrollEl) {
-      const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
-      _scrollPos = hasScroll ? "top" : null;
-    }
-  }
-
-  // Add reactive statement for height calculations
-  $: if (open && _contentEl) {
-    updateHeights();
-  }
-
-  // V2: Check initial scroll state when drawer opens
-  $: if (open && version === "2" && _contentEl) {
-    tick().then(() => {
-      const drawerContent = _contentEl?.querySelector(".drawer-content");
-      if (drawerContent) {
-        const { scrollTop, scrollHeight, clientHeight } = drawerContent;
-        _scrollPos = calculateScrollPos(scrollTop, scrollHeight, clientHeight);
-      }
-    });
   }
 
   $: {
@@ -127,21 +102,9 @@
   // Functions
   // *********
 
-  // to set the scrollable height
-  function updateHeights() {
-    const headerEl = _contentEl?.querySelector(".header");
-    const actionsEl = _contentEl?.querySelector(".drawer-actions");
-
-    _headerHeight = headerEl?.clientHeight ?? 0;
-    _actionsHeight = actionsEl?.clientHeight ?? 0;
-    _scrollableHeight = scrollableHeight();
-  }
-
   async function checkActionsSlotContent() {
     await tick();
     _actionsSlotHasContent = !!$$slots.actions;
-    // Trigger height recalculation after checking slot content
-    updateHeights();
   }
 
   function close(e: Event) {
@@ -159,66 +122,11 @@
         break;
     }
   };
-
-  function scrollableHeight() {
-    // V2: Let flex container handle sizing
-    if (version === "2") return "100%";
-
-    const edgeMargin = 16; // box shadow top and bottom
-
-    // V1: Calculate available height by subtracting:
-    // - header height
-    // - actions height (if actions exist)
-    // - edge margins (for left/right) or drawer chrome (for bottom)
-    if (position === "bottom") {
-      return `calc(${maxsize} - ${_headerHeight}px - ${_actionsSlotHasContent ? _actionsHeight : 0}px)`;
-    }
-    return `calc(100vh - ${_headerHeight}px - ${_actionsSlotHasContent ? _actionsHeight : 0}px - ${edgeMargin}px)`;
-  }
-
-  // V1: handle scroll event from goa-scrollable to set _scrollPos for shadows
-  function handleScroll(e: CustomEvent) {
-    const hasScroll = e.detail.scrollHeight > e.detail.offsetHeight;
-    if (!open || !hasScroll) return;
-
-    if (e.detail.scrollTop == 0) {
-      _scrollPos = "top";
-    } else if (
-      Math.abs(
-        e.detail.scrollHeight - e.detail.scrollTop - e.detail.offsetHeight,
-      ) < 1
-    ) {
-      _scrollPos = "bottom";
-    } else {
-      _scrollPos = "middle";
-    }
-  }
-
-  // V2: handle scroll event from drawer-content to set _scrollPos for borders
-  function handleV2Scroll(e: Event) {
-    if (!open) return;
-    const target = e.target as HTMLElement;
-    const { scrollTop, scrollHeight, clientHeight } = target;
-    _scrollPos = calculateScrollPos(scrollTop, scrollHeight, clientHeight);
-  }
-
-  // Shared helper to calculate scroll position from scroll metrics
-  function calculateScrollPos(
-    scrollTop: number,
-    scrollHeight: number,
-    clientHeight: number,
-  ): "top" | "middle" | "bottom" | null {
-    const hasScroll = scrollHeight > clientHeight;
-    if (!hasScroll) return null;
-    if (scrollTop < 1) return "top";
-    if (Math.abs(scrollHeight - scrollTop - clientHeight) < 1) return "bottom";
-    return "middle";
-  }
 </script>
 
 <goa-focus-trap {open} prevent-scroll-into-view={true}>
   <div
-    class={`root ${_scrollPos ?? ""}`}
+    class="root"
     style={style("pointer-events", open ? "auto" : "none")}
     data-testid={testid}
   >
@@ -276,72 +184,55 @@
       data-first-focus="true"
       aria-labelledby={_showCloseButton ? "goa-drawer-heading" : undefined}
     >
-      <!-- Header -->
-      {#if _showCloseButton}
-        <div class="header" id="goa-drawer-heading">
-          {#if heading || $$slots.heading}
-            {#if heading}
-              {#if version === "2"}
-                <goa-text size="heading-s" as="h3" mt="3xs" mb="none"
-                  >{heading}</goa-text
-                >
+      <goa-scroll-panel>
+        {#if _showCloseButton}
+          <div slot="header" class="header" id="goa-drawer-heading">
+            {#if heading || $$slots.heading}
+              {#if heading}
+                {#if version === "2"}
+                  <goa-text size="heading-s" as="h3" mt="3xs" mb="none"
+                    >{heading}</goa-text
+                  >
+                {:else}
+                  <goa-text size="heading-m" as="h3" mt="none" mb="none"
+                    >{heading}</goa-text
+                  >
+                {/if}
               {:else}
-                <goa-text size="heading-m" as="h3" mt="none" mb="none"
-                  >{heading}</goa-text
-                >
+                <slot name="heading" />
               {/if}
-            {:else}
-              <slot name="heading" />
             {/if}
-          {/if}
 
-          <goa-icon-button
-            size="medium"
-            data-ignore-focus="true"
-            data-testid="drawer-close-button"
-            arialabel="Close the drawer"
-            variant="dark"
-            icon="close"
-            theme="filled"
-            on:click={close}
-          />
-        </div>
-      {/if}
+            <goa-icon-button
+              size="medium"
+              data-ignore-focus="true"
+              data-testid="drawer-close-button"
+              arialabel="Close the drawer"
+              variant="dark"
+              icon="close"
+              theme="filled"
+              on:click={close}
+            />
+          </div>
+        {/if}
 
-      <!-- Content -->
-      <div
-        data-testid="drawer-content"
-        class="drawer-content"
-        on:scroll={version === "2" ? handleV2Scroll : undefined}
-      >
-        {#if version === "1"}
-          <goa-scrollable
-            direction="vertical"
-            maxheight={_scrollableHeight}
-            on:_scroll={handleScroll}
-            bind:this={_scrollEl}
-          >
-            <div class="scroll-content">
-              <slot />
-            </div>
-          </goa-scrollable>
-        {:else}
+        <div data-testid="drawer-content" class="drawer-content">
           <div class="scroll-content">
             <slot />
           </div>
-        {/if}
-      </div>
+        </div>
 
-      <!-- Actions -->
-      {#if $$slots.actions}
-        <section
-          class="drawer-actions"
-          data-testid="drawer-actions"
-          class:empty-actions={!_actionsSlotHasContent}
-        >
-          <slot name="actions" />
-        </section>
-      {/if}
+        {#if $$slots.actions}
+          <section
+            slot="footer"
+            class="drawer-actions"
+            data-testid="drawer-actions"
+            class:empty-actions={!_actionsSlotHasContent}
+          >
+            <slot name="actions" />
+          </section>
+        {/if}
+      </goa-scroll-panel>
     </div>
   </div>
 </goa-focus-trap>
@@ -358,24 +249,10 @@
     transition: opacity 200ms ease-out;
   }
 
-  /* Shadow styles for scrollable content */
-  .root.top .drawer-content {
-    box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
-  }
-
-  .root.bottom .drawer-content {
-    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3);
-  }
-
-  .root.middle .drawer-content {
-    box-shadow:
-      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
-  }
-
-  /* V2: Remove scroll shadows (sticky elements provide visual feedback) */
-  .root .drawer.v2 .drawer-content {
-    box-shadow: none !important;
+  /* scroll-panel owns scroll mechanics and the sticky header/footer scroll cue (V1 + V2) */
+  .drawer goa-scroll-panel {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   /* Background overlay */
@@ -437,32 +314,9 @@
     margin-top: -0.1875rem;
   }
 
-  /* V2: Show header border when scrolled from top (middle or bottom position) */
-  .root.middle .drawer.v2 .header,
-  .root.bottom .drawer.v2 .header {
-    border-bottom: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-200);
-  }
-
-  /* Content styles */
-  .drawer-content {
-    box-shadow: none;
-    flex: 0 1 auto; /* Don't grow, but can shrink - keeps actions below content */
-    min-height: 0; /* Allow flexbox to shrink this element */
-    overflow: hidden; /* Contain the scrollable content */
-  }
-
-  /* V2: drawer-content scrolls and takes remaining space */
-  .v2.drawer-right .drawer-content,
-  .v2.drawer-left .drawer-content,
-  .v2.drawer-bottom .drawer-content {
-    flex: 1 1 auto; /* Take remaining space */
-    overflow-y: auto; /* V2 scrolls here, not via goa-scrollable */
-  }
-
   .scroll-content {
     padding: var(--goa-drawer-content-padding-vertical, var(--goa-space-l))
-      var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl));
+      var(--goa-drawer-content-padding-horizontal, var(--goa-space-l));
   }
 
   /* Remove margin-top from first child in content to prevent double spacing */
@@ -487,12 +341,6 @@
     flex: 0 0 auto; /* Don't grow or shrink */
     background-color: var(--goa-color-greyscale-white);
     border-top: none; /* Remove border by default */
-  }
-
-  /* V2: Show actions border when has overflow AND not at bottom (top or middle position) */
-  .root.top .drawer.v2 .drawer-actions,
-  .root.middle .drawer.v2 .drawer-actions {
-    border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
   }
 
   /* V2: Bottom drawer actions rounded corners */
@@ -553,8 +401,7 @@
 
   .drawer-right {
     right: var(--drawer-offset);
-    height: auto; /* Content-driven height */
-    min-height: 100vh; /* V1: Full height background */
+    height: 100vh; /* V1: bound to viewport so the scroll-panel scrolls internally */
     transform: translateX(100%);
     box-shadow: var(--goa-drawer-right-shadow);
   }
@@ -569,7 +416,6 @@
     top: var(--goa-drawer-offset, 0);
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
-    min-height: 0; /* Override V1 min-height */
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
     max-height: calc(100vh - 2 * var(--goa-drawer-offset, 0));
     overflow-y: hidden; /* No scroll on drawer itself */
@@ -590,17 +436,11 @@
     transform: translateX(0); /* Slide in */
   }
 
-  /* V2: When scrolled to bottom, add bottom constraint to lift drawer up */
-  .root.bottom .v2.drawer-right {
-    bottom: var(--goa-drawer-offset, 0);
-  }
-
   /* Left */
 
   .drawer-left {
     left: var(--drawer-offset);
-    height: auto; /* Content-driven height */
-    min-height: 100vh; /* V1: Full height background */
+    height: 100vh; /* V1: bound to viewport so the scroll-panel scrolls internally */
     transform: translateX(-100%);
     box-shadow: var(--goa-drawer-left-shadow);
   }
@@ -615,7 +455,6 @@
     top: var(--goa-drawer-offset, 0);
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
-    min-height: 0; /* Override V1 min-height */
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
     max-height: calc(100vh - 2 * var(--goa-drawer-offset, 0));
     overflow-y: hidden; /* No scroll on drawer itself */
@@ -634,10 +473,5 @@
   .v2.drawer-open-left {
     left: var(--goa-drawer-offset, 0);
     transform: translateX(0); /* Slide in */
-  }
-
-  /* V2: When scrolled to bottom, add bottom constraint to lift drawer up */
-  .root.bottom .v2.drawer-left {
-    bottom: var(--goa-drawer-offset, 0);
   }
 </style>

@@ -16,8 +16,15 @@
 />
 
 <script lang="ts">
-  import { dispatch, performOnce } from "../../common/utils";
+  import { dispatch, performOnce, relay, receive } from "../../common/utils";
   import { getMatchedLink } from "../../common/urls";
+  import { MOBILE_BP } from "../../common/breakpoints";
+  import {
+    WorkSideMenuBindMsg,
+    type WorkSideMenuBindRelayDetail,
+    WorkSideMenuOpenMsg,
+    WorkSideMenuCloseMsg,
+  } from "../../types/relay-types";
   import { onMount, onDestroy, tick } from "svelte";
 
   // ******
@@ -44,31 +51,30 @@
   // Private
   // *******
 
-  let _isScrolling = false;
-  let _atTop = true;
-  let _atBottom = false;
-  let _scrollTop = 0;
   let _showAccountMenu = false;
   let _showTooltip = false;
   let _menuItemWithOpenPopover: HTMLElement | null = null;
   let _mobilePopoverOpen = false;
+  let _windowWidth = 0;
 
-  let _menuEl: HTMLElement;
+  // ========
+  // Reactive
+  // ========
+
+  $: _isMobile = _windowWidth < MOBILE_BP;
+
   let _menuLinks: HTMLElement[] = [];
   let _containerEl: HTMLElement | undefined;
   let _rootEl: HTMLElement;
-  let _scrollEl: HTMLElement;
   let _toggleButtonEl: HTMLElement | undefined;
   let _tooltipEl: HTMLElement;
   let _tooltipLabel: string = "";
 
   let _bindTimeoutId: any;
-  let _resizeTimeoutId: any;
   let _mouseEnterTimeoutId: any;
   let _mouseLeaveTimeoutId: any;
 
   let observer: MutationObserver | null = null;
-  let _resizeObserver: ResizeObserver | null = null;
 
   const _logo =
     "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgZmlsbD0nbm9uZSc+PHJlY3Qgd2lkdGg9JzMxLjY5NScgaGVpZ2h0PSczMS42ODgnIHg9Jy4wMjgnIGZpbGw9JyMwMEI2RUQnIHJ4PSc0Jy8+PGcgY2xpcC1wYXRoPSd1cmwoI2EpJz48bWFzayBpZD0nYicgd2lkdGg9JzQ3JyBoZWlnaHQ9JzM5JyB4PSctMTEnIHk9Jy0yJyBtYXNrVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBzdHlsZT0nbWFzay10eXBlOmFscGhhJz48cGF0aCBmaWxsPScjNTQ1ODYwJyBkPSdNMjIuMDE3IDMxLjEwM2E2My40NyA2My40NyAwIDAgMS03LjIyLTMuMTY0IDUyLjQxIDUyLjQxIDAgMCAwIDYuMTk1LTIuNzI0IDQzLjE0OCA0My4xNDggMCAwIDAgMS4wMjMgNS44OW0xMy4yNy0yNC4zOTJjLTEuMDM0LS4xMy0uNDk3LjM0OC0uNzg1IDEuNy0xLjI0NiA1LjgzMi02LjA1IDEwLjAzNS0xMC44NzMgMTIuODU1LS41MDYtNi42NzgtLjMtMTQuMDkzLjk2Ny0xOC42MzYgMS4wNjktMy44MzYgMi4zNC0zLjEzMi43NjMtMy45MzgtMS42Ni0uODQ4LTMuNDQuMjczLTQuODgyIDMuMTNDMTkuMDMzIDQuNjggMTIuMzkzIDIwLjE5IDEuNzggMzAuNjY0Yy01LjQzIDUuMzYtMTAuMzQgMi42LTExLjMyMyAxLjc3NS0uOC0uNjctMS4wOTYuMzY1LS4xMDMgMS40MjYgNC4zOSA0LjcgMTAuODA1IDIuMDAzIDEzLjE0MS0uMzE0IDYuNDU1LTYuNDA1IDEzLjk2LTIwLjE5MyAxNi45OTYtMjYuMDQ0YTg5Ljg5IDg5Ljg5IDAgMCAwIC4yNDMgMTUuMjk0IDQ0LjY5IDQ0LjY5IDAgMCAxLTcuNjE5IDIuODg1Yy0xLjUwNC4zOTEtMi40MzUgMS0yLjQ2MiAxLjY5MS0uMDMuNzU4Ljk4IDEuMzk3IDIuNDQgMi4wODUgMi42IDEuMjI2IDEwLjIxNiA0Ljc5OCAxMi4wOTMgNS44NzggMS42MDYuOTI1IDIuMzkuMjA0IDIuODY2LS43OTYuNjIyLTEuMzAyLTEuMDgzLTIuMDU0LTIuNzM1LTIuNTQ1YTUwLjQ3IDUwLjQ3IDAgMCAxLTEuNDgtOC4zODVjMy44Ny0yLjM2NSA3LjY4Mi01LjUyIDkuODgtOS40NTJhMTguMDA0IDE4LjAwNCAwIDAgMCAxLjU2OC00LjM2NWMuMjMtLjkzNC4yOTMtMS45LjE4Ni0yLjg1NSAwIDAtLjAzLS4yMDktLjE4Ni0uMjI5Jy8+PC9tYXNrPjxnIG1hc2s9J3VybCgjYiknPjxyZWN0IHdpZHRoPSczMS42OTUnIGhlaWdodD0nMzEuNjk1JyB4PScuMDI4JyBmaWxsPScjZmZmJyByeD0nMy4wNDgnLz48L2c+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0nYSc+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMxLjk5MicgeT0nLjAwOCcgZmlsbD0nI2ZmZicgcng9JzQnLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=";
@@ -82,53 +88,43 @@
     addEventListeners();
     observer = watchPathChanges(setCurrentUrl);
 
-    if (typeof ResizeObserver !== "undefined") {
-      _resizeObserver = new ResizeObserver(() => {
-        _resizeTimeoutId = performOnce(_resizeTimeoutId, setMenuScrolling, 1);
-      });
-      if (_menuEl) _resizeObserver.observe(_menuEl);
-    }
+    // send this message to WorkspaceLayout component
+    relay<WorkSideMenuBindRelayDetail>(
+      _rootEl,
+      WorkSideMenuBindMsg,
+      { el: _rootEl },
+      { bubbles: true },
+    );
+    // if this WorkSideMenu is put under slot sideMenu of Workspace Layout, its open state should be synced with the WorkspaceLayout
+    receive(_rootEl, (action) => {
+      if (action === WorkSideMenuOpenMsg) {
+        open = true;
+      } else if (action === WorkSideMenuCloseMsg) {
+        open = false;
+      }
+    });
+
+    document.addEventListener("keydown", handleKeydown);
   });
 
   onDestroy(() => {
     removeEventListeners();
     observer?.disconnect();
-    _resizeObserver?.disconnect();
     clearTimeout(_bindTimeoutId);
-    clearTimeout(_resizeTimeoutId);
     clearTimeout(_mouseEnterTimeoutId);
     clearTimeout(_mouseLeaveTimeoutId);
+    document.removeEventListener("keydown", handleKeydown);
   });
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape" && _isMobile && open) {
+      dispatch(_rootEl, "_toggle", {}, { bubbles: true });
+    }
+  }
 
   // *********
   // Functions
   // *********
-
-  // Menu
-  function updateScrollPosition() {
-    const offsetHeight = _scrollEl?.clientHeight || 0;
-    const scrollHeight = _menuEl?.scrollHeight || 0;
-    _atTop = _scrollTop <= 1;
-    _atBottom = _scrollTop + offsetHeight >= scrollHeight - 1;
-  }
-
-  function setMenuScrolling() {
-    _isScrolling =
-      (_menuEl?.scrollHeight || 0) > (_scrollEl?.clientHeight || 0);
-    if (!_isScrolling) {
-      _atTop = true;
-      _atBottom = true;
-    } else {
-      updateScrollPosition();
-    }
-  }
-
-  function handleMenuScroll(e: Event) {
-    const detail = (e as CustomEvent).detail;
-    if (!detail) return;
-    _scrollTop = detail.scrollTop;
-    updateScrollPosition();
-  }
 
   function toggleMenu() {
     open = !open;
@@ -169,7 +165,6 @@
       _bindTimeoutId,
       () => {
         setCurrentUrl();
-        setMenuScrolling();
       },
       1,
     );
@@ -310,10 +305,6 @@
     closeAccountMenu();
   }
 
-  function handleWindowResize() {
-    setMenuScrolling();
-  }
-
   function watchPathChanges(action: () => void): MutationObserver {
     let currentLocation = document.location.href;
     const observer = new MutationObserver((_mutationList) => {
@@ -343,27 +334,22 @@
     _rootEl.addEventListener("keydown", handleMenuKeyDown); // arrow up/down.. only handled when users focus on the menu
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
     window.addEventListener("keydown", handleWindowKeyDown); // global Ctrl+[ shortcut, even we not focus on the menu
-    window.addEventListener("resize", handleWindowResize);
     _rootEl.addEventListener("_mobilePopoverOpen", onMobilePopoverOpen);
     _rootEl.addEventListener("_mobilePopoverClose", onMobilePopoverClose);
-    _scrollEl.addEventListener("_scroll", handleMenuScroll);
   }
 
   function removeEventListeners() {
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleWindowKeyDown);
-    window.removeEventListener("resize", handleWindowResize);
     document.body.removeEventListener("click", closeAccountMenu);
-    _scrollEl?.removeEventListener("_scroll", handleMenuScroll);
   }
 </script>
+
+<svelte:window bind:innerWidth={_windowWidth} />
 
 <div
   class="root"
   class:closed={!open}
-  class:scrolling={_isScrolling}
-  class:at-top={_atTop}
-  class:at-bottom={_atBottom}
   class:drawer-open={_mobilePopoverOpen}
   data-testid={testid}
   role="presentation"
@@ -376,104 +362,106 @@
     on:click={handleToggleClick}
   />
   <div class="container" bind:this={_containerEl}>
-    <header class="top-section">
-      {#if url}
-        <a href={url} class="header" role="menuitem" data-testid="url">
-          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
-          <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
-        </a>
-      {:else}
-        <div class="header">
-          <div role="img" aria-label="GoA Logo" class="logo" style="--logo-default: url({_logo});"></div>
-          <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
-        </div>
-      {/if}
-    </header>
-    <div class="scroll-area">
-      <goa-scrollable
-        vpadding="0"
-        hpadding="0"
-        maxheight="100%"
-        bind:this={_scrollEl}
+    <goa-scroll-panel>
+      <header slot="header" class="top-section">
+        {#if url}
+          <a href={url} class="header" role="menuitem" data-testid="url">
+            <div
+              role="img"
+              aria-label="GoA Logo"
+              class="logo"
+              style="--logo-default: url({_logo});"
+            ></div>
+            <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
+          </a>
+        {:else}
+          <div class="header">
+            <div
+              role="img"
+              aria-label="GoA Logo"
+              class="logo"
+              style="--logo-default: url({_logo});"
+            ></div>
+            <goa-text mt="0" mb="0" class="heading">{heading}</goa-text>
+          </div>
+        {/if}
+      </header>
+      <div
+        class="primary-menu"
+        role="presentation"
+        on:mouseleave={handleMouseLeave}
       >
-        <div
-          class="primary-menu"
-          role="presentation"
-          bind:this={_menuEl}
-          on:mouseleave={handleMouseLeave}
-        >
-          <slot name="primary"></slot>
-        </div>
-      </goa-scrollable>
-    </div>
-    <div class="bottom-section">
-      {#if $$slots.secondary}
-        <div
-          class="secondary-menu"
-          role="presentation"
-          on:mouseleave={handleMouseLeave}
-        >
-          <slot name="secondary"></slot>
-        </div>
-      {/if}
-
-      {#if $$slots.account}
-        <div
-          class="account-menu"
-          role="presentation"
-          class:show={_showAccountMenu}
-          on:mouseleave={handleMouseLeave}
-          on:focusout={handleAccountFocusOut}
-        >
-          <slot name="account"></slot>
-        </div>
-
-        <button
-          class="profile"
-          on:click={handleProfileClick}
-          on:focusout={handleAccountFocusOut}
-          aria-haspopup="true"
-          aria-expanded={_showAccountMenu}
-        >
-          <div class="profile-image">
-            <goa-icon
-              size="large"
-              type="person-circle"
-              fillcolor="var(--goa-color-greyscale-400)"
-              arialabel={userName}
-            />
-          </div>
-
-          <div class="profile-details">
-            <div class="profile-name">{userName}</div>
-            <div class="profile-secondary">{userSecondaryText}</div>
-          </div>
-          <div class="profile-chevron">
-            <goa-icon size="small" type="chevron-down" />
-          </div>
-        </button>
-      {/if}
-      <div class="toggle-menu">
-        <button
-          class="toggle-button"
-          data-testid="toggle-menu"
-          on:click={handleToggleClick}
-          on:mouseenter={handleToggleHover}
-          on:mouseleave={handleMouseLeave}
-          aria-label={open ? "Collapse menu" : "Expand menu"}
-          bind:this={_toggleButtonEl}
-        >
-          <goa-icon
-            size="small"
-            theme="outline"
-            type={open ? "arrow-start" : "arrow-end"}
-          />
-          <span class="toggle-button-label"
-            >{open ? "Collapse menu" : "Expand menu"}</span
-          >
-        </button>
+        <slot name="primary"></slot>
       </div>
-    </div>
+      <div slot="footer" class="bottom-section">
+        {#if $$slots.secondary}
+          <div
+            class="secondary-menu"
+            role="presentation"
+            on:mouseleave={handleMouseLeave}
+          >
+            <slot name="secondary"></slot>
+          </div>
+        {/if}
+
+        {#if $$slots.account}
+          <div
+            class="account-menu"
+            role="presentation"
+            class:show={_showAccountMenu}
+            on:mouseleave={handleMouseLeave}
+            on:focusout={handleAccountFocusOut}
+          >
+            <slot name="account"></slot>
+          </div>
+
+          <button
+            class="profile"
+            on:click={handleProfileClick}
+            on:focusout={handleAccountFocusOut}
+            aria-haspopup="true"
+            aria-expanded={_showAccountMenu}
+          >
+            <div class="profile-image">
+              <goa-icon
+                size="large"
+                type="person-circle"
+                fillcolor="var(--goa-color-greyscale-400)"
+                arialabel={userName}
+              />
+            </div>
+
+            <div class="profile-details">
+              <div class="profile-name">{userName}</div>
+              <div class="profile-secondary">{userSecondaryText}</div>
+            </div>
+            <div class="profile-chevron">
+              <goa-icon size="small" type="chevron-down" />
+            </div>
+          </button>
+        {/if}
+        <div class="toggle-menu">
+          <button
+            class="toggle-button"
+            data-testid="toggle-menu"
+            on:click={handleToggleClick}
+            on:mouseenter={handleToggleHover}
+            on:mouseleave={handleMouseLeave}
+            aria-label={open ? "Collapse menu" : "Expand menu"}
+            bind:this={_toggleButtonEl}
+          >
+            <goa-icon
+              size="small"
+              theme="outline"
+              type={open ? "arrow-start" : "arrow-end"}
+            />
+            <span class="toggle-button-label"
+              >{open ? "Collapse menu" : "Expand menu"}</span
+            >
+          </button>
+        </div>
+      </div>
+    </goa-scroll-panel>
     <div class="tooltip" bind:this={_tooltipEl} class:show={_showTooltip}>
       {_tooltipLabel}
     </div>
@@ -482,6 +470,11 @@
 
 <style>
   :host {
+    /* Render the host as a block element with an explicit height so the
+       internal layout can fill it. Defaults to 100vh (full-page shell);
+       consumers (e.g. GoabWorkspaceLayout) override via the CSS var. */
+    display: block;
+    height: var(--goa-work-side-menu-height, 100vh);
     --goa-popover-box-shadow: var(
       --goa-work-side-menu-popover-shadow,
       var(--goa-shadow-raised-light)
@@ -555,7 +548,7 @@
   .root {
     position: relative;
     z-index: 101;
-    height: var(--goa-work-side-menu-height, 100vh);
+    height: 100%; /* sized by :host via --goa-work-side-menu-height; this 100% keeps the bottom Collapse Menu always visible */
   }
 
   .background {
@@ -573,16 +566,21 @@
     transition: width 100ms ease-out;
   }
 
-  .scrolling .container {
-    width: calc(var(--goa-work-side-menu-width-open, 280px) + 1px);
-  }
-
   .closed .container {
     width: var(--goa-work-side-menu-width-closed, 72px);
   }
 
-  .closed.scrolling .container {
-    width: var(--goa-work-side-menu-width-closed, 72px);
+  /* scroll-panel fills the container and owns scroll + sticky header/footer borders */
+  goa-scroll-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    /* Scroll panel and its header/footer slots default to a white background,
+       which is correct inside modal/drawer/notification (white surfaces) but
+       wrong here: the side menu sits on the workspace's grey shell and should
+       let it show through, top to bottom. */
+    --goa-scroll-panel-color-bg: transparent;
+    --goa-scroll-panel-header-color-bg: transparent;
+    --goa-scroll-panel-footer-color-bg: transparent;
   }
 
   .header {
@@ -608,20 +606,6 @@
   a.header:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: 2px;
-  }
-
-  .top-section {
-    border-bottom: var(--goa-work-side-menu-top-section-border);
-    box-shadow: var(--goa-work-side-menu-top-section-shadow);
-    transition:
-      border-bottom-color var(--goa-work-side-menu-transition-duration-medium)
-        ease,
-      box-shadow var(--goa-work-side-menu-transition-duration-medium) ease;
-  }
-
-  .scrolling:not(.at-top) .top-section {
-    border-bottom: var(--goa-work-side-menu-top-section-border-scrolled);
-    box-shadow: var(--goa-work-side-menu-top-section-shadow-scrolled);
   }
 
   .logo {
@@ -651,18 +635,6 @@
     animation: none;
   }
 
- .scroll-area {
-    flex: 1 1 0;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .scroll-area goa-scrollable {
-    display: block;
-    /* 3px offsets goa-scrollable's internal bottom padding */
-    height: calc(100% - 3px);
-  }
-
   .primary-menu {
     padding: var(--goa-space-m) var(--goa-space-m) 0;
   }
@@ -672,16 +644,6 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    border-top: var(--goa-work-side-menu-bottom-section-border);
-    box-shadow: var(--goa-work-side-menu-bottom-section-shadow);
-    transition:
-      border-top-color var(--goa-work-side-menu-transition-duration-medium) ease,
-      box-shadow var(--goa-work-side-menu-transition-duration-medium) ease;
-  }
-
-  .scrolling:not(.at-bottom) .bottom-section {
-    border-top: var(--goa-work-side-menu-bottom-section-border-scrolled);
-    box-shadow: var(--goa-work-side-menu-bottom-section-shadow-scrolled);
   }
 
   .secondary-menu {
@@ -957,6 +919,15 @@
     }
     100% {
       visibility: visible;
+    }
+  }
+
+  @media (--mobile) {
+    :host {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 200; /* > burger menu z-index, < drawer and modal z-index */
     }
   }
 </style>

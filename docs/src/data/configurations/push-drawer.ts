@@ -114,6 +114,73 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "custom-heading",
+      name: "Custom heading",
+      description: "Push drawer with custom heading content, such as a status badge",
+      code: {
+        react: {
+          ts: reactDrawerSetup,
+          jsx: `<div style={{ display: "flex", minHeight: "320px" }}>
+  <div style={{ flex: 1, minWidth: 0 }}>
+    <GoabButton onClick={() => setIsOpen(true)}>Open push drawer</GoabButton>
+  </div>
+  <GoabPushDrawer
+    heading={
+      <GoabBlock gap="s" alignment="center" direction="row">
+        <span>Cases</span>
+        <GoabBadge type="success" content="Approved" />
+      </GoabBlock>
+    }
+    width="320px"
+    open={isOpen}
+    onClose={handleClose}
+  >
+    <GoabText size="body-m" mt="none">Applicant name</GoabText>
+    <GoabText size="body-m" mt="none">Jane Smith</GoabText>
+  </GoabPushDrawer>
+</div>`,
+        },
+        angular: {
+          ts: angularDrawerSetup,
+          template: `<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openDrawer()">Open push drawer</goab-button>
+  </div>
+  <goab-push-drawer
+    [heading]="customHeading"
+    width="320px"
+    [open]="isOpen"
+    (onClose)="handleClose()"
+  >
+    <goab-text size="body-m" mt="none">Applicant name</goab-text>
+    <goab-text size="body-m" mt="none">Jane Smith</goab-text>
+  </goab-push-drawer>
+</div>
+
+<ng-template #customHeading>
+  <goab-block gap="s" alignment="center" direction="row">
+    <span>Cases</span>
+    <goab-badge type="success" content="Approved"></goab-badge>
+  </goab-block>
+</ng-template>`,
+        },
+        webComponents: `<div style="display: flex; min-height: 320px;">
+  <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
+    <goa-button version="2" id="open-push-drawer">Open push drawer</goa-button>
+  </div>
+  <goa-push-drawer version="2" id="demo-push-drawer" width="320px">
+    <goa-block slot="heading" gap="s" alignment="center" direction="row">
+      <span>Cases</span>
+      <goa-badge version="2" type="success" content="Approved"></goa-badge>
+    </goa-block>
+    <goa-text size="body-m" mt="none">Applicant name</goa-text>
+    <goa-text size="body-m" mt="none">Jane Smith</goa-text>
+  </goa-push-drawer>
+</div>
+<script>${pushDrawerScript}</script>`,
+      },
+    },
+    {
       id: "custom-width",
       name: "Custom width",
       description: "Push drawer with a custom width",

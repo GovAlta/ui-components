@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { GoabMenuAction, GoabMenuButton } from "../src";
 
 describe("MenuButton", () => {
@@ -158,7 +158,11 @@ describe("GoabMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
+        <GoabMenuButton
+          leadingIcon="ellipsis-horizontal"
+          testId="icon-menu"
+          onAction={onAction}
+        >
           <GoabMenuAction text="View" action="view" />
           <GoabMenuAction text="Delete" action="delete" icon="trash" />
         </GoabMenuButton>
@@ -204,7 +208,12 @@ describe("GoabMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
+        <GoabMenuButton
+          leadingIcon="ellipsis-horizontal"
+          size="compact"
+          testId="icon-compact-menu"
+          onAction={onAction}
+        >
           <GoabMenuAction text="Assign" action="assign" />
           <GoabMenuAction text="Delete" action="delete" icon="trash" />
         </GoabMenuButton>
@@ -219,6 +228,46 @@ describe("GoabMenuButton", () => {
 
     await vi.waitFor(() => {
       expect(onAction).toHaveBeenCalledWith({ action: "assign" });
+    });
+  });
+
+  it("should open only one MenuButton at a time", async () => {
+    const Component = () => {
+      return (
+        <>
+          <GoabMenuButton text="Menu 1" testId="menu-1">
+            <GoabMenuAction text="Action 1" action="action1" testId="action-1" />
+          </GoabMenuButton>
+          <GoabMenuButton text="Menu 2" testId="menu-2">
+            <GoabMenuAction text="Action 2" action="action2" testId="action-2" />
+          </GoabMenuButton>
+        </>
+      );
+    };
+
+    const result = render(<Component />);
+    const menu1 = result.getByTestId("menu-1");
+    const menu2 = result.getByTestId("menu-2");
+
+    // Open first menu only
+    await menu1.click();
+    await vi.waitFor(() => {
+      expect(result.getByTestId("action-1")).toBeVisible();
+      expect(result.getByTestId("action-2")).not.toBeVisible();
+    });
+
+    // Open second menu, close the first
+    await menu2.click();
+    await vi.waitFor(() => {
+      expect(result.getByTestId("action-1")).not.toBeVisible();
+      expect(result.getByTestId("action-2")).toBeVisible();
+    });
+
+    // Open first menu, close the second
+    await menu1.click();
+    await vi.waitFor(() => {
+      expect(result.getByTestId("action-1")).toBeVisible();
+      expect(result.getByTestId("action-2")).not.toBeVisible();
     });
   });
 });

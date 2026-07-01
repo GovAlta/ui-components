@@ -444,16 +444,14 @@ describe("WorkSideMenu", () => {
       };
 
       const result = render(<Component />);
-      const menu = result.getByTestId("scroll-menu");
       const secondary = result.getByTestId("pinned-secondary");
 
       await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(true);
         expect(secondary).toBeVisible();
       });
     });
 
-    it("should show scroll indicators when overflow is triggered by expanding a group", async () => {
+    it("should keep the secondary menu visible when expanding a group overflows the menu", async () => {
       await page.viewport(1024, 500);
 
       const Component = () => {
@@ -497,21 +495,18 @@ describe("WorkSideMenu", () => {
       };
 
       const result = render(<Component />);
-      const menu = result.getByTestId("scroll-menu-dynamic");
       const group = result.getByTestId("expand-group");
 
-      // Initially no overflow — group is collapsed
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(false);
+      // Wait for the group to render, then expand it to trigger overflow
+      const summary = await vi.waitFor(() => {
+        const el = group.element().querySelector("summary");
+        expect(el).not.toBeNull();
+        return el as HTMLElement;
       });
+      await summary.click();
 
-      // Expand the group to trigger overflow
-      const summary = group.element().querySelector("summary");
-      await summary?.click();
-
-      // Scroll indicators should appear dynamically
+      // The pinned secondary item stays visible even when the content overflows
       await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(true);
         const secondary = result.getByTestId("pinned-secondary-dynamic");
         expect(secondary).toBeVisible();
       });

@@ -119,7 +119,7 @@
 
   function close() {
     _icon = "chevron-down";
-    dispatch(document.body, "goa:closePopover", { target: _rootEl });
+    dispatch(_blockEl, "close", { target: _rootEl }, { bubbles: true });
   }
 
   function onBind(button: HTMLElement) {
@@ -139,7 +139,12 @@
   }
 
   function onAction(action: MenuActionProps) {
-    dispatch(_rootEl, "_action", { action: action.action, size: action.size }, { bubbles: true });
+    dispatch(
+      _rootEl,
+      "_action",
+      { action: action.action, size: action.size },
+      { bubbles: true },
+    );
     close();
     _buttonIndex = 0;
   }

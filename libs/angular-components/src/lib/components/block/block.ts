@@ -9,6 +9,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  booleanAttribute,
   inject,
 } from "@angular/core";
 
@@ -24,6 +25,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.gap]="gap"
         [attr.direction]="direction"
         [attr.alignment]="alignment"
+        [attr.stretch]="stretch ? 'true' : undefined"
         [attr.width]="width"
         [attr.min-width]="minWidth"
         [attr.max-width]="maxWidth"
@@ -49,6 +51,8 @@ export class GoabBlock extends GoabBaseComponent implements OnInit {
   @Input() direction?: GoabBlockDirection;
   /** Sets the primary axis alignment of child components. */
   @Input() alignment?: GoabBlockAlignment;
+  /** When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. */
+  @Input({ transform: booleanAttribute }) stretch?: boolean;
   /** Sets the width of the block container. Defaults to max-content. */
   @Input() width?: string;
   /** Sets the minimum width of the block container. */

@@ -16,19 +16,21 @@ interface Props {
   previewUrl?: string;
   /** External demo URL — used by the "View demo" button. Opens in a new tab. */
   demoUrl?: string;
-  /** Drill-down sub-page URL — used by the "View more" button. Same tab. Pass a raw path; component applies withBase() internally. */
+  /** Drill-down sub-page URL — used by the "More info" button. Same tab. Pass a raw path; component applies withBase() internally. */
   moreUrl?: string;
   /** GitHub URL of the React source file or folder. Renders as a React icon button. */
   reactSourceUrl?: string;
   /** GitHub URL of the Angular source file or folder. Renders as an Angular icon button. */
   angularSourceUrl?: string;
+  /** Figma design URL. Renders as a Figma icon button that opens in a new tab. */
+  figmaUrl?: string;
   stackblitzUrl?: string;
 }
 
-const { image, alt = '', previewUrl, demoUrl, moreUrl, reactSourceUrl, angularSourceUrl, stackblitzUrl } = Astro.props;
+const { image, alt = '', previewUrl, demoUrl, moreUrl, reactSourceUrl, angularSourceUrl, figmaUrl, stackblitzUrl } = Astro.props;
 const resolvedPreviewUrl = previewUrl ? withBase(previewUrl) : undefined;
 const resolvedMoreUrl = moreUrl ? withBase(moreUrl) : undefined;
-const hasActions = Boolean(previewUrl || demoUrl || moreUrl || reactSourceUrl || angularSourceUrl || stackblitzUrl);
+const hasActions = Boolean(previewUrl || demoUrl || moreUrl || reactSourceUrl || angularSourceUrl || figmaUrl || stackblitzUrl);
 const hasImage = Boolean(image);
 const shouldRender = hasImage || hasActions;
 ---
@@ -82,6 +84,16 @@ const shouldRender = hasImage || hasActions;
             ></goa-icon-button>
           </goa-tooltip>
         )}
+        {figmaUrl && (
+          <goa-tooltip content="View in Figma" position="top">
+            <goa-icon-button
+              icon="logo-figma"
+              size="small"
+              arialabel="View in Figma"
+              onclick={`window.open('${figmaUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
         {stackblitzUrl && (
           <goa-tooltip content="Edit in StackBlitz" position="top">
             <goa-icon-button
@@ -96,7 +108,7 @@ const shouldRender = hasImage || hasActions;
       <div class="preview-actions-right">
         {moreUrl && (
           <goa-button version="2" type="tertiary" size="compact" onclick={`window.location.href='${resolvedMoreUrl}'`}>
-            View more
+            More info
           </goa-button>
         )}
         {demoUrl && (

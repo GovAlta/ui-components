@@ -1,0 +1,22 @@
+<goab-text tag="h1" mt="m" mb="s">Bug 4027 - DatePicker: day and year hide number spinner</goab-text>
+<goab-text mb="l">
+  The Day (DD) and Year (YYYY) fields in the input-type DatePicker stay as type="number"
+  (numeric keypad on mobile, native validation), but the up/down spinner arrows are now
+  hidden via CSS. Other type="number" inputs elsewhere keep their spinner buttons. The
+  emitted value is unchanged.
+</goab-text>
+
+<goab-date-picker name="dob" type="input" [value]="value" (onChange)="onChange($event)" />
+
+<goab-text mt="l">Selected value: {{ value || "(none)" }}</goab-text>
+
+<goab-text tag="h2" mt="2xl" mb="m">Comparison: plain type="number" input</goab-text>
+<goab-text mb="l">
+  This is an unrelated GoabInputNumber. It should still show its up/down spinner arrows,
+  confirming the fix above is scoped to DatePicker's Day and Year fields only.
+</goab-text>
+<goab-input-number
+  name="comparison-number"
+  [value]="comparisonValue"
+  (onChange)="onComparisonChange($event)"
+/>

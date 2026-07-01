@@ -1,0 +1,27 @@
+<h1>Push Drawer V2 — scroll-panel integration test</h1>
+<p>
+  The drawer on the right is rendered at the app shell level (the
+  <code>pushDrawer</code> slot of <code>goab-workspace-layout</code> in
+  <code>app.component.html</code>), not inside this page. Scroll inside it and watch the
+  outer chrome morph:
+</p>
+<ul>
+  <li>
+    <strong>No scroll</strong>: full chrome (16px margin all sides, all corners
+    rounded).
+  </li>
+  <li>
+    <strong>At top</strong>: bottom flush (margin-bottom: 0, bottom corners square).
+  </li>
+  <li>
+    <strong>Middle</strong>: both edges flush, all corners square, header + footer have
+    border.
+  </li>
+  <li><strong>At bottom</strong>: top flush (margin-top: 0, top corners square).</li>
+</ul>
+<p>
+  The heading "Push Drawer V2 test" should also collapse from <code>heading-s</code> →
+  <code>heading-xs</code> when scrolled past top.
+</p>
+
+<goab-button type="primary" (onClick)="openPushDrawer()">Open push drawer</goab-button>
