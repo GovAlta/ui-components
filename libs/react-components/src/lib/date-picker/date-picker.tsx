@@ -3,6 +3,7 @@ import {
   CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
+  GoabDatePickerSize,
   Margins,
   DataAttributes,
 } from "@abgov/ui-components-common";
@@ -19,6 +20,7 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
+  size?: string;
   version?: string;
 }
 
@@ -55,6 +57,8 @@ export interface GoabDatePickerProps extends Margins, DataAttributes {
   disabled?: boolean;
   /** Sets the width of the date picker input. */
   width?: string;
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. @default "default" */
+  size?: GoabDatePickerSize;
   /** Callback fired when the selected date changes. */
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }

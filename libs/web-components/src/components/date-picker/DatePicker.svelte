@@ -348,7 +348,7 @@
   {/if}
 {:else if type === "input"}
   <goa-form-item error={_error && error} bind:this={_rootEl} {version}>
-    <goa-block direction="row">
+    <goa-block direction="row" max-width="100%" gap={size === "compact" ? "s" : "m"}>
       <goa-form-item helptext="Month" {version}>
         <goa-dropdown
           name="month"
@@ -359,8 +359,10 @@
           disabled={isDisabled}
           {size}
           {version}
+          shrinktarget="true"
+          placeholdervalue="0"
         >
-          <goa-dropdown-item value="0" label="—Select a month—" />
+          <goa-dropdown-item value="0" label="—Select month—" />
           <goa-dropdown-item value="1" label="January" />
           <goa-dropdown-item value="2" label="February" />
           <goa-dropdown-item value="3" label="March" />
@@ -382,7 +384,7 @@
           class="no-spinner"
           testid="input-day"
           on:_change={onInputChange}
-          width="2ch"
+          width="1ch"
           value={_date.day || ""}
           min="1"
           max="31"
@@ -399,7 +401,7 @@
           class="no-spinner"
           testid="input-year"
           on:_change={onInputChange}
-          width="4ch"
+          width="3ch"
           value={_date.year || ""}
           min="1800"
           max="2200"
