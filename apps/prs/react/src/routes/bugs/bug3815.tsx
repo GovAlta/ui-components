@@ -24,9 +24,9 @@ export function Bug3815Route() {
         that applies to both the calendar and input variants.
       </GoabText>
       <GoabText tag="p" mb="l">
-        Known follow-up: when <code>type="input"</code> is used in a narrow
-        container, the three fields still overflow instead of staying on one line
-        (see the last example). The responsive fix is not part of this change.
+        When <code>type="input"</code> is used in a narrow container, the three
+        fields now stay on one line and shrink to fit instead of overflowing (see
+        the last example).
       </GoabText>
 
       <GoabText tag="h2" mb="s">
@@ -70,11 +70,12 @@ export function Bug3815Route() {
       <GoabDivider mt="l" mb="l" />
 
       <GoabText tag="h2" mb="s">
-        Input variant in a narrow container (known issue)
+        Input variant in a narrow container
       </GoabText>
       <GoabText tag="p" mb="m">
-        Currently the three fields overflow the container. The responsive fix
-        (keeping them on one line) is a follow-up to this change.
+        The three fields stay on one line and fit the container. The month field
+        shrinks; while empty its prompt collapses to just the chevron, and the
+        open menu keeps its full readable width.
       </GoabText>
       <div style={{ width: "20rem", outline: "1px dashed var(--goa-color-greyscale-400)" }}>
         <GoabFormItem label="Date of birth">

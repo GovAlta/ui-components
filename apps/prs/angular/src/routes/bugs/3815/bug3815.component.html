@@ -4,9 +4,8 @@
   applies to both the calendar and input variants.
 </p>
 <p>
-  Known follow-up: when <code>type="input"</code> is used in a narrow container, the
-  three fields still overflow instead of staying on one line (see the last example).
-  The responsive fix is not part of this change.
+  When <code>type="input"</code> is used in a narrow container, the three fields now
+  stay on one line and shrink to fit instead of overflowing (see the last example).
 </p>
 
 <h2>Calendar variant sizes</h2>
@@ -49,10 +48,11 @@
 
 <goab-divider mt="l" mb="l"></goab-divider>
 
-<h2>Input variant in a narrow container (known issue)</h2>
+<h2>Input variant in a narrow container</h2>
 <p>
-  Currently the three fields overflow the container. The responsive fix (keeping them
-  on one line) is a follow-up to this change.
+  The three fields stay on one line and fit the container. The month field shrinks;
+  while empty its prompt collapses to just the chevron, and the open menu keeps its
+  full readable width.
 </p>
 <div style="width: 20rem; outline: 1px dashed var(--goa-color-greyscale-400)">
   <goab-form-item label="Date of birth">

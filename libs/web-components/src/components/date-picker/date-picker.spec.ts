@@ -151,3 +151,32 @@ describe("day and year inputs", () => {
     expect(value).toBe("2025-06-15");
   });
 });
+
+describe("responsive input layout", () => {
+  it("enables shrinktarget and marks the placeholder sentinel on the month dropdown", async () => {
+    const { container } = render(DatePicker, { type: "input" });
+    const month = container.querySelector("[testid='input-month']");
+
+    expect(month?.getAttribute("shrinktarget")).toBe("true");
+    expect(month?.getAttribute("placeholdervalue")).toBe("0");
+  });
+
+  it("caps the input row to its container so the fields can shrink to fit", async () => {
+    const { container } = render(DatePicker, { type: "input" });
+    const block = container.querySelector("goa-block");
+
+    expect(block?.getAttribute("max-width")).toBe("100%");
+  });
+
+  it("uses a tighter row gap for the compact size", async () => {
+    const regular = render(DatePicker, { type: "input" });
+    expect(
+      regular.container.querySelector("goa-block")?.getAttribute("gap"),
+    ).toBe("m");
+
+    const compact = render(DatePicker, { type: "input", size: "compact" });
+    expect(
+      compact.container.querySelector("goa-block")?.getAttribute("gap"),
+    ).toBe("s");
+  });
+});

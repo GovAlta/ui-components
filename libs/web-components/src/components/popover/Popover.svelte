@@ -65,6 +65,8 @@
   export let filterablecontext: string = "false";
   /** @internal When true, the content sizes to its own width (fit-content) capped at maxwidth, instead of stretching to `width`. */
   export let fitcontent: string = "false";
+  /** @internal When true, the target (trigger) may shrink narrower than the menu: it fills its container up to `width` and ellipsizes, while the menu keeps `width`. Used by Dropdown for the date picker input layout. */
+  export let shrinktarget: string = "false";
 
   // Private
   let _rootEl: HTMLElement;
@@ -85,6 +87,7 @@
   $: _padded = toBoolean(padded);
   $: _filterableContext = toBoolean(filterablecontext);
   $: _fitContent = toBoolean(fitcontent);
+  $: _shrinkTarget = toBoolean(shrinktarget);
 
   $: syncPopoverOpenState(_popoverEl, open);
 
@@ -414,7 +417,9 @@
     style("--offset-right", hoffset),
     style("--focus-border-width", focusborderwidth),
     style("--border-radius", borderradius),
-    style("width", width),
+    _shrinkTarget && width
+      ? `width: 100%; max-width: ${width}; min-width: 0`
+      : style("width", width),
   )}
 >
   <button

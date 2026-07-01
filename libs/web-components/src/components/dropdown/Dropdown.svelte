@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -79,6 +79,10 @@
   export let size: "default" | "compact" = "default";
   /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
+  /** @internal When true, the dropdown input may shrink narrower than its menu so it fits a constrained row (e.g. the date picker input layout); the open menu keeps its width. */
+  export let shrinktarget: string = "false";
+  /** @internal The option value treated as an empty placeholder sentinel. While it is the selected value and the input has shrunk too narrow to read it (shrinktarget mode), its label is hidden so it does not render as truncated noise. Used by the date picker month field. */
+  export let placeholdervalue: string = "";
 
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
@@ -109,6 +113,8 @@
   let _inputEl: HTMLInputElement;
   let _eventHandler: EventHandler;
   let _popoverEl: HTMLElement;
+  let _promptTruncated = false;
+  let _resizeObserver: ResizeObserver | undefined;
 
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
@@ -127,6 +133,14 @@
   $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
   $: _filterable = toBoolean(filterable) && !_native;
+  $: _shrinkTarget = toBoolean(shrinktarget);
+  $: _isPlaceholderShown =
+    placeholdervalue !== "" && _selectedOption?.value === placeholdervalue;
+  // Re-check truncation when the shown value or placeholder state changes.
+  $: if (_inputEl && typeof requestAnimationFrame !== "undefined") {
+    void _isPlaceholderShown;
+    requestAnimationFrame(updatePromptTruncated);
+  }
 
   // To keep track of active descendant for the accessibility
   $: _activeDescendantId = _filteredOptions[_highlightedIndex]
@@ -175,6 +189,16 @@
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
     showDeprecationWarnings();
+
+    if (_shrinkTarget && _inputEl && typeof ResizeObserver !== "undefined") {
+      _resizeObserver = new ResizeObserver(() => updatePromptTruncated());
+      _resizeObserver.observe(_inputEl);
+      updatePromptTruncated();
+    }
+  });
+
+  onDestroy(() => {
+    _resizeObserver?.disconnect();
   });
 
   //
@@ -213,6 +237,17 @@
   function getRenderedWidth(): string {
     const renderedWidth = _rootEl?.getBoundingClientRect().width;
     return renderedWidth ? `${renderedWidth}px` : _width;
+  }
+
+  // The empty placeholder prompt (e.g. the date picker's "select a month") is
+  // hidden when shrinktarget mode has squeezed the input too narrow to read it,
+  // so it does not render as truncated noise. A real selection is unaffected.
+  function updatePromptTruncated() {
+    _promptTruncated =
+      _shrinkTarget &&
+      _isPlaceholderShown &&
+      !!_inputEl &&
+      _inputEl.scrollWidth > _inputEl.clientWidth + 1;
   }
 
   function setupPopoverListeners() {
@@ -774,6 +809,8 @@
   class:dropdown-native={_native}
   class:compact={size === "compact"}
   class:v2={version === "2"}
+  class:shrinktarget={_shrinkTarget}
+  class:prompt-truncated={_promptTruncated}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
@@ -825,6 +862,7 @@
       padded="false"
       tabindex="-1"
       filterablecontext={fromBoolean(_filterable)}
+      shrinktarget={shrinktarget}
     >
       <div
         slot="target"
@@ -999,6 +1037,32 @@
     .dropdown-input-group {
       width: var(--width, 100%);
     }
+  }
+
+  /* Shrink mode: the input fills its container up to --width and ellipsizes,
+     so it can sit in a constrained row (e.g. the date picker input). The open
+     menu keeps its width via goa-popover. */
+  .dropdown.shrinktarget {
+    width: 100%;
+    max-width: var(--width, 100%);
+    min-width: 0;
+  }
+
+  .dropdown.shrinktarget .dropdown-input-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dropdown.shrinktarget input {
+    min-width: 0;
+  }
+
+  /* When the empty placeholder prompt has shrunk too narrow to read, hide its
+     text so it does not render as truncated noise (e.g. "—.."). Toggled from JS
+     by measuring truncation; a real selection is unaffected and the field label
+     still names the control. */
+  .dropdown.shrinktarget.prompt-truncated input {
+    color: transparent;
   }
 
   .dropdown-icon--arrow,
