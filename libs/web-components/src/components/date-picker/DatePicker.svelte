@@ -377,7 +377,7 @@
           <goa-dropdown-item value="12" label="December" />
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext="Day (DD)" {version}>
+      <goa-form-item helptext={size === "compact" ? "Day" : "Day (DD)"} {version}>
         <goa-input
           name="day"
           type="number"
@@ -394,7 +394,7 @@
           {version}
         />
       </goa-form-item>
-      <goa-form-item helptext="Year (YYYY)" {version}>
+      <goa-form-item helptext={size === "compact" ? "Year" : "Year (YYYY)"} {version}>
         <goa-input
           name="year"
           type="number"
