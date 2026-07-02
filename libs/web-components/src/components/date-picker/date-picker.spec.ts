@@ -279,4 +279,16 @@ describe("invalid date handling (#3275)", () => {
     expect(dayInput?.getAttribute("value")).toBe("");
     expect(yearInput?.getAttribute("value")).toBe("");
   });
+
+  it("shortens the Day and Year helptext for the compact size only", async () => {
+    const regular = render(DatePicker, { type: "input" });
+    const regularItems = regular.container.querySelectorAll("goa-form-item");
+    expect(regularItems[2]?.getAttribute("helptext")).toBe("Day (DD)");
+    expect(regularItems[3]?.getAttribute("helptext")).toBe("Year (YYYY)");
+
+    const compact = render(DatePicker, { type: "input", size: "compact" });
+    const compactItems = compact.container.querySelectorAll("goa-form-item");
+    expect(compactItems[2]?.getAttribute("helptext")).toBe("Day");
+    expect(compactItems[3]?.getAttribute("helptext")).toBe("Year");
+  });
 });
