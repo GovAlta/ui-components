@@ -8,6 +8,7 @@
 
 import css from "./toc.module.css";
 import { useEffect, useState, useRef } from "react";
+import { getActiveTabHash } from "../lib/tab-hash";
 
 export type TOCItem = {
   title: string;
@@ -23,6 +24,7 @@ export function TableOfContents({ cssQuery }: TOCProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const containerRef = useRef<HTMLElement>(null);
+  const initialHashHandled = useRef(false);
 
   useEffect(() => {
     // Check if element is visible (not hidden by display:none or in hidden tab)
@@ -62,13 +64,64 @@ export function TableOfContents({ cssQuery }: TOCProps) {
     function updateHeadings() {
       const headings = queryHeadings();
       setItems(headings);
-      if (headings.length > 0) {
+      if (headings.length > 0 && initialHashHandled.current) {
         setActiveId(headings[0].id);
       }
     }
 
+    // On first load, honor a direct link to one of this TOC's own anchors.
+    // Tabs.svelte's built-in anchor scroll only handles a single hash segment,
+    // so it can't be relied on once multiple tabs contribute their own hash.
+    // The owning tab may still be hidden (goa-tabs activates it asynchronously),
+    // so retry briefly rather than giving up on the first check.
+    const hashSegments = window.location.hash.slice(1).split("#").filter(Boolean);
+    let hashRetryTimer: ReturnType<typeof setTimeout> | null = null;
+    const resettleTimers: ReturnType<typeof setTimeout>[] = [];
+
+    function tryResolveInitialHash(attempt = 0) {
+      if (hashSegments.length === 0) {
+        initialHashHandled.current = true;
+        updateHeadings();
+        return;
+      }
+
+      const candidate = Array.from(
+        document.querySelectorAll<HTMLElement>(cssQuery),
+      ).find((el) => {
+        const id = el.getAttribute("id");
+        return id && hashSegments.includes(id);
+      });
+
+      if (candidate && isVisible(candidate)) {
+        initialHashHandled.current = true;
+        updateHeadings();
+        setActiveId(candidate.id);
+        candidate.scrollIntoView({ behavior: "smooth" });
+
+        // Other examples on the page can still be hydrating (live component
+        // previews, syntax highlighting) and shift layout after this point,
+        // silently invalidating a scroll already in flight. Re-assert the
+        // position a couple more times while things settle.
+        [400, 900].forEach((delay) => {
+          resettleTimers.push(
+            setTimeout(() => candidate.scrollIntoView({ block: "start" }), delay),
+          );
+        });
+        return;
+      }
+
+      if (candidate && attempt < 20) {
+        hashRetryTimer = setTimeout(() => tryResolveInitialHash(attempt + 1), 100);
+        return;
+      }
+
+      // No matching anchor (or it never became visible) - fall back to default.
+      initialHashHandled.current = true;
+      updateHeadings();
+    }
+
     // Initial query with small delay for DOM to be ready
-    const timer = setTimeout(updateHeadings, 100);
+    const timer = setTimeout(tryResolveInitialHash, 100);
 
     // Listen for goa-tabs change events - re-query when tab becomes visible
     // goa-tabs dispatches "_change" with { tab: number } when switching tabs
@@ -113,6 +166,8 @@ export function TableOfContents({ cssQuery }: TOCProps) {
 
     return () => {
       clearTimeout(timer);
+      if (hashRetryTimer) clearTimeout(hashRetryTimer);
+      resettleTimers.forEach(clearTimeout);
       document.removeEventListener("_change", handleTabChange);
       document.removeEventListener("scroll", handleScroll);
     };
@@ -124,6 +179,14 @@ export function TableOfContents({ cssQuery }: TOCProps) {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
       setActiveId(id);
+
+      const tabHash = getActiveTabHash(e.currentTarget);
+      const newHash = tabHash ? `${tabHash}#${id}` : id;
+      history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}${window.location.search}#${newHash}`,
+      );
     }
   }
 
