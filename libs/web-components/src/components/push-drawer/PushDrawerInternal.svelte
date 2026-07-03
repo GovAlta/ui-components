@@ -120,9 +120,9 @@
       _scrollPos = null;
       return;
     }
-    if (detail.state === "at-top") _scrollPos = "top";
-    else if (detail.state === "at-bottom") _scrollPos = "bottom";
-    else if (detail.state === "middle") _scrollPos = "middle";
+    if (detail.verticalState === "at-top") _scrollPos = "top";
+    else if (detail.verticalState === "at-bottom") _scrollPos = "bottom";
+    else if (detail.verticalState === "middle") _scrollPos = "middle";
     else _scrollPos = null;
   }
 </script>

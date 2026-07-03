@@ -10,6 +10,7 @@ import { By } from "@angular/platform-browser";
     <goab-scroll-panel
       [height]="height"
       [testId]="testId"
+      [direction]="direction"
       [header]="header"
       [footer]="footer"
     >
@@ -26,6 +27,7 @@ import { By } from "@angular/platform-browser";
 class TestScrollPanelComponent {
   height?: string = "400px";
   testId?: string = "panel-test";
+  direction: "vertical" | "horizontal" | "both" = "horizontal";
 }
 
 describe("GoabScrollPanel", () => {
@@ -61,6 +63,11 @@ describe("GoabScrollPanel", () => {
   it("should set the testid attribute", () => {
     const el = fixture.debugElement.query(By.css("goa-scroll-panel"))?.nativeElement;
     expect(el?.getAttribute("testid")).toBe("panel-test");
+  });
+
+  it("should set the direction attribute", () => {
+    const el = fixture.debugElement.query(By.css("goa-scroll-panel"))?.nativeElement;
+    expect(el?.getAttribute("direction")).toBe("horizontal");
   });
 
   it("should render header slot content", () => {

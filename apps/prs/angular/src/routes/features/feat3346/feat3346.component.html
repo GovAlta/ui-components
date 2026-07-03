@@ -1,0 +1,411 @@
+<div class="page">
+  <goab-text as="h5" mb="xs" color="secondary" class="eyebrow">Feature 3346</goab-text>
+  <goab-text as="h1" mt="0" mb="0">Scroll Panel Direction Control</goab-text>
+  <goab-text mb="l">
+    This demonstrates the direction property on goab-scroll-panel.
+  </goab-text>
+
+  <goab-text as="h2" mt="0">
+    Within a fixed width container
+  </goab-text>
+
+  <div class="fixed-width-container">
+    <goab-scroll-panel [direction]="'horizontal'" [height]="'100%'">
+      <goab-table [striped]="true" [variant]="'normal'" [width]="'1940px'">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th>Last Modified</th>
+            <th>Assigned To</th>
+            <th>Priority</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Project Alpha</td>
+            <td>Initial project setup and configuration</td>
+            <td>Planning</td>
+            <td>Complete</td>
+            <td>2024-01-15</td>
+            <td>2024-01-20</td>
+            <td>John Smith</td>
+            <td>High</td>
+            <td>Engineering</td>
+            <td>Edmonton</td>
+            <td>On track for Q2 delivery</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Project Beta</td>
+            <td>Development phase implementation</td>
+            <td>Development</td>
+            <td>In Progress</td>
+            <td>2024-02-20</td>
+            <td>2024-03-10</td>
+            <td>Sarah Johnson</td>
+            <td>Medium</td>
+            <td>Product</td>
+            <td>Calgary</td>
+            <td>Needs review from stakeholders</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Project Gamma</td>
+            <td>Testing and quality assurance</td>
+            <td>Testing</td>
+            <td>Pending</td>
+            <td>2024-03-10</td>
+            <td>2024-03-15</td>
+            <td>Mike Chen</td>
+            <td>High</td>
+            <td>QA</td>
+            <td>Red Deer</td>
+            <td>Ready for QA</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Project Delta</td>
+            <td>User acceptance testing and feedback collection</td>
+            <td>UAT</td>
+            <td>Not Started</td>
+            <td>2024-04-01</td>
+            <td>-</td>
+            <td>Lisa Williams</td>
+            <td>Low</td>
+            <td>Product</td>
+            <td>Edmonton</td>
+            <td>Waiting for alpha release</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Project Epsilon</td>
+            <td>Documentation and training materials preparation</td>
+            <td>Documentation</td>
+            <td>In Progress</td>
+            <td>2024-03-01</td>
+            <td>2024-03-25</td>
+            <td>David Brown</td>
+            <td>Medium</td>
+            <td>Operations</td>
+            <td>Calgary</td>
+            <td>Draft in review</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Project Zeta</td>
+            <td>Deployment planning and environment setup</td>
+            <td>Deployment</td>
+            <td>Not Started</td>
+            <td>2024-04-15</td>
+            <td>-</td>
+            <td>Emma Davis</td>
+            <td>High</td>
+            <td>DevOps</td>
+            <td>Red Deer</td>
+            <td>Pending infrastructure approval</td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </goab-scroll-panel>
+  </div>
+
+  <goab-text as="h2">Scrolls both horizontally and vertically</goab-text>
+  <div class="vertical-scroll-container">
+    <ng-template #header>
+      <div class="header-content">
+        <goab-text as="h2" mt="0" mb="0">
+          Projects
+        </goab-text>
+      </div>
+    </ng-template>
+    <ng-template #footer>
+      <div class="footer-content">
+        <goab-button [type]="'tertiary'" [size]="'compact'">
+          Export projects
+        </goab-button>
+      </div>
+    </ng-template>
+    <goab-scroll-panel [direction]="'both'" [height]="'360px'" [header]="header" [footer]="footer">
+        <div class="inner-padding">
+          <goab-table [striped]="true" [variant]="'normal'" [width]="'1940px'">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Date Created</th>
+                <th>Last Modified</th>
+                <th>Assigned To</th>
+                <th>Priority</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Project Alpha</td>
+                <td>Initial project setup and configuration</td>
+                <td>Planning</td>
+                <td>Complete</td>
+                <td>2024-01-15</td>
+                <td>2024-01-20</td>
+                <td>John Smith</td>
+                <td>High</td>
+                <td>Engineering</td>
+                <td>Edmonton</td>
+                <td>On track for Q2 delivery</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Project Beta</td>
+                <td>Development phase implementation</td>
+                <td>Development</td>
+                <td>In Progress</td>
+                <td>2024-02-20</td>
+                <td>2024-03-10</td>
+                <td>Sarah Johnson</td>
+                <td>Medium</td>
+                <td>Product</td>
+                <td>Calgary</td>
+                <td>Needs review from stakeholders</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Project Gamma</td>
+                <td>Testing and quality assurance</td>
+                <td>Testing</td>
+                <td>Pending</td>
+                <td>2024-03-10</td>
+                <td>2024-03-15</td>
+                <td>Mike Chen</td>
+                <td>High</td>
+                <td>QA</td>
+                <td>Red Deer</td>
+                <td>Ready for QA</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Project Delta</td>
+                <td>User acceptance testing and feedback collection</td>
+                <td>UAT</td>
+                <td>Not Started</td>
+                <td>2024-04-01</td>
+                <td>-</td>
+                <td>Lisa Williams</td>
+                <td>Low</td>
+                <td>Product</td>
+                <td>Edmonton</td>
+                <td>Waiting for alpha release</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Project Epsilon</td>
+                <td>Documentation and training materials preparation</td>
+                <td>Documentation</td>
+                <td>In Progress</td>
+                <td>2024-03-01</td>
+                <td>2024-03-25</td>
+                <td>David Brown</td>
+                <td>Medium</td>
+                <td>Operations</td>
+                <td>Calgary</td>
+                <td>Draft in review</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Project Zeta</td>
+                <td>Deployment planning and environment setup</td>
+                <td>Deployment</td>
+                <td>Not Started</td>
+                <td>2024-04-15</td>
+                <td>-</td>
+                <td>Emma Davis</td>
+                <td>High</td>
+                <td>DevOps</td>
+                <td>Red Deer</td>
+                <td>Pending infrastructure approval</td>
+              </tr>
+            </tbody>
+          </goab-table>
+        </div>
+    </goab-scroll-panel>
+  </div>
+
+  <goab-text as="h2">Inside a flex row</goab-text>
+  <goab-text>
+    Both rows below are identical: a <code>display: flex</code> parent capped at 640px, with a fixed
+    160px sidebar beside a horizontal scroll panel. The only difference is
+    <code>min-width: 0</code> on the scroll panel host.
+  </goab-text>
+  <goab-text>
+    Without it the panel is a flex item with the default <code>min-width: auto</code>, so it refuses
+    to shrink below its content's min-content width. The host stretches to the full table width, the
+    row blows past its 640px cap, and horizontal scrolling never engages. The second row simulates
+    the proposed fix. A CSS grid column behaves the same way, for the same reason.
+  </goab-text>
+  <goab-text>
+    Note: in Angular the flex item is <code>goab-scroll-panel</code> (the wrapper's own host
+    element), with <code>goa-scroll-panel</code> nested inside it. So a <code>:host</code> fix in
+    ScrollPanel.svelte may not be sufficient here. The fixed row below sets
+    <code>min-width: 0</code> on both layers.
+  </goab-text>
+
+  <goab-text as="h3" mb="xs">
+    Broken: panel does not scroll, row overflows past 640px
+  </goab-text>
+  <div class="flex-row">
+    <div class="sidebar">Sidebar</div>
+    <goab-scroll-panel [direction]="'horizontal'" [height]="'100%'">
+      <ng-container *ngTemplateOutlet="wideTable"></ng-container>
+    </goab-scroll-panel>
+  </div>
+
+  <goab-text as="h3" mb="xs">
+    Fixed with min-width: 0: panel scrolls, row stays at 640px
+  </goab-text>
+  <div class="flex-row flex-row--fixed">
+    <div class="sidebar">Sidebar</div>
+    <goab-scroll-panel [direction]="'horizontal'" [height]="'100%'">
+      <ng-container *ngTemplateOutlet="wideTable"></ng-container>
+    </goab-scroll-panel>
+  </div>
+</div>
+
+<!-- Wide enough to overflow any of the 640px containers above. -->
+<ng-template #wideTable>
+  <goab-table [striped]="true" [variant]="'normal'" [width]="'1940px'">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Date Created</th>
+        <th>Last Modified</th>
+        <th>Assigned To</th>
+        <th>Priority</th>
+        <th>Department</th>
+        <th>Location</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Project Alpha</td>
+        <td>Initial project setup and configuration</td>
+        <td>Planning</td>
+        <td>Complete</td>
+        <td>2024-01-15</td>
+        <td>2024-01-20</td>
+        <td>John Smith</td>
+        <td>High</td>
+        <td>Engineering</td>
+        <td>Edmonton</td>
+        <td>On track for Q2 delivery</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Project Beta</td>
+        <td>Development phase implementation</td>
+        <td>Development</td>
+        <td>In Progress</td>
+        <td>2024-02-20</td>
+        <td>2024-03-10</td>
+        <td>Sarah Johnson</td>
+        <td>Medium</td>
+        <td>Product</td>
+        <td>Calgary</td>
+        <td>Needs review from stakeholders</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Project Gamma</td>
+        <td>Testing and quality assurance</td>
+        <td>Testing</td>
+        <td>Pending</td>
+        <td>2024-03-10</td>
+        <td>2024-03-15</td>
+        <td>Mike Chen</td>
+        <td>High</td>
+        <td>QA</td>
+        <td>Red Deer</td>
+        <td>Ready for QA</td>
+      </tr>
+    </tbody>
+  </goab-table>
+</ng-template>
+
+<style>
+  .page {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .fixed-width-container {
+    max-width: 640px;
+    overflow: hidden;
+  }
+
+  .vertical-scroll-container {
+    max-width: 640px;
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .header-content {
+    padding: 1rem 2rem;
+  }
+
+  .footer-content {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .inner-padding {
+    padding: 0 2rem;
+    min-width: fit-content;
+  }
+
+  .flex-row {
+    display: flex;
+    gap: 1rem;
+    max-width: 640px;
+    padding: 1rem;
+    border: 1px dashed var(--goa-color-interactive-default);
+  }
+
+  .flex-row .sidebar {
+    flex: 0 0 160px;
+    padding: 1rem;
+    background: var(--goa-color-greyscale-100);
+  }
+
+  /* Simulates the proposed fix. Both layers are set because in Angular the flex item is
+     goab-scroll-panel (the wrapper host), with goa-scroll-panel nested inside it. */
+  .flex-row--fixed goab-scroll-panel {
+    min-width: 0;
+  }
+
+  .flex-row--fixed ::ng-deep goa-scroll-panel {
+    min-width: 0;
+  }
+</style>

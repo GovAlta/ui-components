@@ -302,5 +302,51 @@ export const scrollPanelConfigurations: ComponentConfigurations = {
 </script>`,
       },
     },
+    {
+      id: "horizontal",
+      name: "Horizontal scrolling",
+      description:
+        "Set `direction=\"horizontal\"` to scroll the body sideways when its content is wider than the panel. Edge shadows appear on the left/right to indicate more content. Use `direction=\"both\"` to enable scrolling on both axes.",
+      code: {
+        react: {
+          ts: `const columns = Array.from({ length: 12 }, (_, i) => i + 1);`,
+          jsx: `<GoabScrollPanel height="200px" direction="horizontal">
+  <div style={{ display: "flex", gap: "16px", padding: "16px 24px" }}>
+    {columns.map((n) => (
+      <div key={n} style={{ flex: "0 0 200px" }}>
+        Column {n} — wide content that scrolls horizontally within the panel.
+        Notice the shadow on the leading/trailing edge indicating more content.
+      </div>
+    ))}
+  </div>
+</GoabScrollPanel>`,
+        },
+        angular: {
+          ts: `export class SomeComponent {
+  columns = Array.from({ length: 12 }, (_, i) => i + 1);
+}`,
+          template: `<goab-scroll-panel height="200px" direction="horizontal">
+  <div style="display: flex; gap: 16px; padding: 16px 24px">
+    @for (n of columns; track n) {
+      <div style="flex: 0 0 200px">
+        Column {{ n }} — wide content that scrolls horizontally within the panel.
+        Notice the shadow on the leading/trailing edge indicating more content.
+      </div>
+    }
+  </div>
+</goab-scroll-panel>`,
+        },
+        webComponents: `<goa-scroll-panel height="200px" direction="horizontal">
+  <div id="horizontal-body" style="display: flex; gap: 16px; padding: 16px 24px"></div>
+</goa-scroll-panel>
+<script>
+  document.getElementById("horizontal-body").innerHTML = Array.from(
+    { length: 12 },
+    (_, i) =>
+      \`<div style="flex: 0 0 200px">Column \${i + 1} — wide content that scrolls horizontally within the panel. Notice the shadow on the leading/trailing edge indicating more content.</div>\`,
+  ).join("");
+</script>`,
+      },
+    },
   ],
 };
