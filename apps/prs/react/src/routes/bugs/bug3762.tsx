@@ -66,18 +66,6 @@ const navigationSlot2 = (
   </>
 );
 
-const utilitiesSlot = (
-  <>
-    <GoabButton type="tertiary" size="compact">
-      Help
-    </GoabButton>
-    <GoabMenuButton text="John Smith" type="tertiary" size="compact">
-      <GoabMenuAction text="User settings" action="user-settings" />
-      <GoabMenuAction text="Sign out" action="sign-out" />
-    </GoabMenuButton>
-  </>
-);
-
 const bigUtilitiesSlot = (
   <>
     <GoabButton type="tertiary" size="compact">
