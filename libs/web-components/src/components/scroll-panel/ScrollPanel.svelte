@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { tick, onMount, onDestroy } from "svelte";
-  import { relay } from "../../common/utils";
+  import { relay, typeValidator } from "../../common/utils";
   import {
     ScrollPanelStateChangeMsg,
     type ScrollPanelStateChangeRelayDetail,
@@ -27,21 +27,54 @@
    */
   export let height: string = "100%";
 
+  /**
+   * The scroll direction(s). When content overflows, enables scrolling and shadow
+   * indicators for the specified direction(s). Defaults to "vertical".
+   */
+  export let direction: "vertical" | "horizontal" | "both" = "vertical";
+
   // *******
   // Private
   // *******
 
-  type ScrollState = "no-scroll" | "at-top" | "middle" | "at-bottom";
+  // Validators
+  const [, validateDirection] = typeValidator("Scroll panel direction", [
+    "vertical",
+    "horizontal",
+    "both",
+  ]);
+  $: validateDirection(direction);
+
+  // Internal edge state, shared by both axes. "at-start" is top/left,
+  // "at-end" is bottom/right depending on the axis.
+  type EdgeState = "no-scroll" | "at-start" | "middle" | "at-end";
+
+  // The public relay contract stays vertical-friendly, so map the internal
+  // vertical edge state to the emitted relay state values.
+  type RelayVerticalState = "no-scroll" | "at-top" | "middle" | "at-bottom";
+  const V_EDGE_TO_RELAY_STATE: Record<EdgeState, RelayVerticalState> = {
+    "no-scroll": "no-scroll",
+    "at-start": "at-top",
+    middle: "middle",
+    "at-end": "at-bottom",
+  };
 
   let _hostEl: HTMLElement | null = null;
   let _scrollEl: HTMLElement | null = null;
-  let _scrollState: ScrollState = "no-scroll";
-  let _isScrollable: boolean = false;
+  let _scrollStateV: EdgeState = "no-scroll";
+  let _scrollStateH: EdgeState = "no-scroll";
+  let _isVerticalScrollable: boolean = false;
+  let _isHorizontallyScrollable: boolean = false;
   let _resizeObserver: ResizeObserver | null = null;
 
-  // Once entered at-top/at-bottom, stay there until distance from the edge
+  // Derived: which directions are enabled based on the direction prop
+  $: _trackVertical = direction === "vertical" || direction === "both";
+  $: _trackHorizontal = direction === "horizontal" || direction === "both";
+
+  // Once entered at-start/at-end, stay there until distance from the edge
   // exceeds this threshold. Prevents jitter at the boundary when the scroll
-  // viewport is small or layout shifts near an edge by a few px.
+  // viewport is small or layout shifts near an edge by a few px. Applies to
+  // both axes.
   const EDGE_EXIT_THRESHOLD_PX = 20;
 
   // ========
@@ -52,8 +85,8 @@
       _hostEl,
       ScrollPanelStateChangeMsg,
       {
-        state: _scrollState,
-        isScrollable: _isScrollable,
+        verticalState: V_EDGE_TO_RELAY_STATE[_scrollStateV],
+        isScrollable: _isVerticalScrollable,
       },
     );
   }
@@ -101,52 +134,82 @@
   }
 
   function calculateScrollState(
-    scrollTop: number,
-    scrollHeight: number,
-    clientHeight: number,
-    prev: ScrollState,
-  ): { state: ScrollState; isScrollable: boolean } {
-    const isScrollable = scrollHeight > clientHeight;
+    scrollPos: number,
+    scrollSize: number,
+    clientSize: number,
+    prev: EdgeState,
+  ): { state: EdgeState; isScrollable: boolean } {
+    const isScrollable = scrollSize > clientSize;
     if (!isScrollable) return { state: "no-scroll", isScrollable: false };
 
-    const distFromTop = scrollTop;
-    const distFromBottom = scrollHeight - scrollTop - clientHeight;
+    const distFromStart = scrollPos;
+    const distFromEnd = scrollSize - scrollPos - clientSize;
 
     // Stay in current edge state until we've moved past the exit threshold
-    if (prev === "at-top" && distFromTop < EDGE_EXIT_THRESHOLD_PX) {
-      return { state: "at-top", isScrollable: true };
+    if (prev === "at-start" && distFromStart < EDGE_EXIT_THRESHOLD_PX) {
+      return { state: "at-start", isScrollable: true };
     }
-    if (prev === "at-bottom" && distFromBottom < EDGE_EXIT_THRESHOLD_PX) {
-      return { state: "at-bottom", isScrollable: true };
+    if (prev === "at-end" && distFromEnd < EDGE_EXIT_THRESHOLD_PX) {
+      return { state: "at-end", isScrollable: true };
     }
 
-    if (distFromTop < 1) return { state: "at-top", isScrollable: true };
-    if (distFromBottom < 1) return { state: "at-bottom", isScrollable: true };
+    if (distFromStart < 1) return { state: "at-start", isScrollable: true };
+    if (distFromEnd < 1) return { state: "at-end", isScrollable: true };
     return { state: "middle", isScrollable: true };
   }
 
-  function applyScrollState(next: {
-    state: ScrollState;
-    isScrollable: boolean;
-  }) {
-    if (next.state !== _scrollState) _scrollState = next.state;
-    if (next.isScrollable !== _isScrollable) _isScrollable = next.isScrollable;
+  function applyScrollState(
+    nextV: { state: EdgeState; isScrollable: boolean },
+    nextH: { state: EdgeState; isScrollable: boolean },
+  ) {
+    if (nextV.state !== _scrollStateV) _scrollStateV = nextV.state;
+    if (nextV.isScrollable !== _isVerticalScrollable) {
+      _isVerticalScrollable = nextV.isScrollable;
+    }
+    if (nextH.state !== _scrollStateH) _scrollStateH = nextH.state;
+    if (nextH.isScrollable !== _isHorizontallyScrollable) {
+      _isHorizontallyScrollable = nextH.isScrollable;
+    }
   }
 
   function updateScrollState() {
     if (!_scrollEl) return;
-    const { scrollTop, scrollHeight, clientHeight } = _scrollEl;
-    applyScrollState(
-      calculateScrollState(scrollTop, scrollHeight, clientHeight, _scrollState),
-    );
+    const {
+      scrollTop,
+      scrollHeight,
+      clientHeight,
+      scrollLeft,
+      scrollWidth,
+      clientWidth,
+    } = _scrollEl;
+
+    const resultV = _trackVertical
+      ? calculateScrollState(
+          scrollTop,
+          scrollHeight,
+          clientHeight,
+          _scrollStateV,
+        )
+      : { state: "no-scroll" as EdgeState, isScrollable: false };
+
+    const resultH = _trackHorizontal
+      ? calculateScrollState(
+          scrollLeft,
+          scrollWidth,
+          clientWidth,
+          _scrollStateH,
+        )
+      : { state: "no-scroll" as EdgeState, isScrollable: false };
+
+    applyScrollState(resultV, resultH);
   }
 </script>
 
 {#if $$slots.header}
   <section
     class="scroll-panel-header"
-    class:scroll-panel-header--shadow={_scrollState === "middle" ||
-      _scrollState === "at-bottom"}
+    class:scroll-panel-header--shadow={_scrollStateV === "middle" ||
+      _scrollStateV === "at-end"}
     aria-label="Panel header"
   >
     <slot name="header" />
@@ -154,22 +217,30 @@
 {/if}
 
 <div
-  class="scroll-panel-content"
-  bind:this={_scrollEl}
-  on:scroll={updateScrollState}
-  role="region"
-  aria-label="Scrollable content"
-  tabindex="0"
-  data-testid={testid || undefined}
+  class="scroll-panel-scroll-wrapper"
+  class:scroll-panel-scroll-wrapper--shadow-left={_trackHorizontal && _isHorizontallyScrollable && _scrollStateH !== "at-start"}
+  class:scroll-panel-scroll-wrapper--shadow-right={_trackHorizontal && _isHorizontallyScrollable && _scrollStateH !== "at-end"}
 >
-  <slot />
+  <div
+    class="scroll-panel-scroll-container"
+    class:scroll-panel-scroll-container--vertical={_trackVertical}
+    class:scroll-panel-scroll-container--horizontal={_trackHorizontal}
+    bind:this={_scrollEl}
+    on:scroll={updateScrollState}
+    role="region"
+    aria-label="Scrollable content"
+    tabindex={_trackVertical ? 0 : undefined}
+    data-testid={testid || undefined}
+  >
+    <slot />
+  </div>
 </div>
 
 {#if $$slots.footer}
   <section
     class="scroll-panel-footer"
-    class:scroll-panel-footer--shadow={_scrollState === "at-top" ||
-      _scrollState === "middle"}
+    class:scroll-panel-footer--shadow={_scrollStateV === "at-start" ||
+      _scrollStateV === "middle"}
     aria-label="Panel footer"
   >
     <slot name="footer" />
@@ -233,13 +304,74 @@
   }
 
   /* Scrollable content */
-  .scroll-panel-content {
+  .scroll-panel-scroll-wrapper {
     flex: 1 1 auto;
-    overflow-y: auto;
+    position: relative;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .scroll-panel-scroll-container {
+    overflow-y: hidden;
     overflow-x: hidden;
     /* Let scroll chain to a scrollable ancestor (e.g. the workspace-layout card) once this panel reaches its own edge */
     overscroll-behavior: auto;
     min-height: 0;
+    min-width: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .scroll-panel-scroll-container--vertical {
+    overflow-y: auto;
+    overflow-x: visible;
+  }
+
+  .scroll-panel-scroll-container--horizontal {
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .scroll-panel-scroll-wrapper::before,
+  .scroll-panel-scroll-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition:
+      opacity var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
+  }
+
+  .scroll-panel-scroll-wrapper::before {
+    left: 0;
+    width: 10px;
+    background: linear-gradient(
+      to right,
+      var(--goa-scroll-panel-content-shadow-horizontal, rgba(0, 0, 0, 0.1)),
+      transparent
+    );
+  }
+
+  .scroll-panel-scroll-wrapper::after {
+    right: 0;
+    width: 10px;
+    background: linear-gradient(
+      to left,
+      var(--goa-scroll-panel-content-shadow-horizontal, rgba(0, 0, 0, 0.1)),
+      transparent
+    );
+  }
+
+  .scroll-panel-scroll-wrapper--shadow-left::before {
+    opacity: 1;
+  }
+
+  .scroll-panel-scroll-wrapper--shadow-right::after {
+    opacity: 1;
   }
 
   /* Footer — casts a drop shadow up onto the content when content is below it. */

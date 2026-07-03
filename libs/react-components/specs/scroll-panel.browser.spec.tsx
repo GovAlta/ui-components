@@ -32,13 +32,13 @@ describe("ScrollPanel", () => {
     ) as HTMLElement;
     await vi.waitFor(() => {
       const el = host.shadowRoot?.querySelector(
-        ".scroll-panel-content",
+        ".scroll-panel-scroll-container",
       ) as HTMLElement | null;
       // Body must actually overflow, otherwise the test proves nothing.
       expect(el && el.scrollHeight > el.clientHeight).toBe(true);
     });
     const scrollEl = host.shadowRoot!.querySelector(
-      ".scroll-panel-content",
+      ".scroll-panel-scroll-container",
     ) as HTMLElement;
 
     const header = result.getByTestId("panel-header");
@@ -92,6 +92,74 @@ describe("ScrollPanel", () => {
     );
   });
 
+  it("scrolls horizontally and toggles edge shadows when direction is horizontal", async () => {
+    await page.viewport(600, 400);
+
+    const columns = Array.from({ length: 12 }, (_, i) => i + 1);
+
+    const Component = () => (
+      <div style={{ width: "400px" }}>
+        <GoabScrollPanel height="200px" direction="horizontal">
+          <div style={{ display: "flex", width: "1600px" }}>
+            {columns.map((n) => (
+              <div
+                key={n}
+                data-testid={`col-${n}`}
+                style={{ flex: "0 0 200px" }}
+              >
+                Column {n} — wide content that overflows the panel horizontally.
+              </div>
+            ))}
+          </div>
+        </GoabScrollPanel>
+      </div>
+    );
+
+    const result = render(<Component />);
+
+    const host = result.baseElement.querySelector(
+      "goa-scroll-panel",
+    ) as HTMLElement;
+
+    await vi.waitFor(() => {
+      const el = host.shadowRoot?.querySelector(
+        ".scroll-panel-scroll-container",
+      ) as HTMLElement | null;
+      // Content must actually overflow horizontally, otherwise the test proves nothing.
+      expect(el && el.scrollWidth > el.clientWidth).toBe(true);
+    });
+
+    const scrollEl = host.shadowRoot!.querySelector(
+      ".scroll-panel-scroll-container",
+    ) as HTMLElement;
+    const wrapper = host.shadowRoot!.querySelector(
+      ".scroll-panel-scroll-wrapper",
+    ) as HTMLElement;
+
+    // At the left edge: only the right shadow shows.
+    await vi.waitFor(() => {
+      expect(
+        wrapper.classList.contains("scroll-panel-scroll-wrapper--shadow-right"),
+      ).toBe(true);
+      expect(
+        wrapper.classList.contains("scroll-panel-scroll-wrapper--shadow-left"),
+      ).toBe(false);
+    });
+
+    // Scroll to the right edge.
+    scrollEl.scrollLeft = scrollEl.scrollWidth - scrollEl.clientWidth;
+    await vi.waitFor(() => {
+      expect(scrollEl.scrollLeft).toBeGreaterThan(0);
+      // At the right edge: only the left shadow shows.
+      expect(
+        wrapper.classList.contains("scroll-panel-scroll-wrapper--shadow-left"),
+      ).toBe(true);
+      expect(
+        wrapper.classList.contains("scroll-panel-scroll-wrapper--shadow-right"),
+      ).toBe(false);
+    });
+  });
+
   it("falls back to a usable height when given an invalid height value", async () => {
     await page.viewport(1024, 768);
 
@@ -120,7 +188,7 @@ describe("ScrollPanel", () => {
     // would grow to content height and be unscrollable.
     await vi.waitFor(() => {
       const el = host.shadowRoot?.querySelector(
-        ".scroll-panel-content",
+        ".scroll-panel-scroll-container",
       ) as HTMLElement | null;
       expect(el && el.scrollHeight > el.clientHeight).toBe(true);
     });

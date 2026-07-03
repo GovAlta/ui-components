@@ -1519,3 +1519,6 @@ export type GoabDropdownMultiselectOnChangeDetail = {
  * - count: Displays the number of selected items.
  */
 export type GoabDropdownMultiselectLabelFormatOptions = "list" | "count";
+
+// Scroll Panel
+export type GoabScrollPanelDirectionType = "vertical" | "horizontal" | "both";
