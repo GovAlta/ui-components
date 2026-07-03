@@ -151,15 +151,13 @@
   }
 
   function setDate(value: string) {
-    if (type === "calendar") {
-      if (value) {
-        _date = new CalendarDate(value);
-        if (!_date.isValid) {
-          _date = new CalendarDate(0);
-        }
-      } else {
+    if (value) {
+      _date = new CalendarDate(value);
+      if (!_date.isValid()) {
         _date = new CalendarDate(0);
       }
+    } else {
+      _date = new CalendarDate(0);
     }
   }
 
