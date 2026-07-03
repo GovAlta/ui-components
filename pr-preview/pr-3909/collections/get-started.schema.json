@@ -22,7 +22,11 @@
             "intro",
             "designers",
             "developers",
-            "appendix"
+            "qa-testing",
+            "ai-tools-and-resources",
+            "contribute",
+            "out-of-support",
+            "articles"
           ]
         },
         "order": {
