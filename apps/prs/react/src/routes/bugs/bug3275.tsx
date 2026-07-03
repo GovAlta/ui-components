@@ -7,13 +7,14 @@ import {
 import React, { useState } from "react";
 
 export function Bug3275Route() {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("2024-03-15");
 
   return (
     <div>
       <p>
         Select a value with the DatePicker and it should show in "Current value" below.
-        Changing the Month to "--select a month--" will clear the value.
+        Changing the Month to "—Select a month—" will clear the value. The buttons below
+        set/clear the value programmatically, and should update the month/day/year fields.
       </p>
 
       <GoabFormItem label="Date picker (input)" mb="xl">
@@ -26,16 +27,13 @@ export function Bug3275Route() {
       </GoabFormItem>
 
       <GoabButtonGroup alignment="start" mb="l">
+        <GoabButton size="compact" onClick={() => setInputValue("2024-03-15")}>
+          Set March 15
+        </GoabButton>
         <GoabButton size="compact" type="secondary" onClick={() => setInputValue("")}>
           Clear programmatically
         </GoabButton>
       </GoabButtonGroup>
-      <div>
-        <p>
-          <b>Note:</b> The button clears the value in the form but does not change the
-          DatePicker when <code>type=input</code>. Its just for testing.
-        </p>
-      </div>
 
       <div>
         Current value: <strong>{inputValue || '"" (empty)'}</strong>

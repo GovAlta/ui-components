@@ -151,3 +151,71 @@ describe("day and year inputs", () => {
     expect(value).toBe("2025-06-15");
   });
 });
+
+describe("programmatic value changes for input type (#3275)", () => {
+  it("populates month, day, and year from the initial value", async () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+      value: "2024-03-15",
+    });
+
+    const monthInput = container.querySelector("[testid='input-month']");
+    const dayInput = container.querySelector("[testid='input-day']");
+    const yearInput = container.querySelector("[testid='input-year']");
+
+    expect(monthInput?.getAttribute("value")).toBe("3");
+    expect(dayInput?.getAttribute("value")).toBe("15");
+    expect(yearInput?.getAttribute("value")).toBe("2024");
+  });
+
+  it("updates the fields when value is changed programmatically", async () => {
+    const { container, rerender } = render(DatePicker, {
+      type: "input",
+      value: "2024-03-15",
+    });
+
+    await rerender({ type: "input", value: "2025-11-02" });
+
+    const monthInput = container.querySelector("[testid='input-month']");
+    const dayInput = container.querySelector("[testid='input-day']");
+    const yearInput = container.querySelector("[testid='input-year']");
+
+    expect(monthInput?.getAttribute("value")).toBe("11");
+    expect(dayInput?.getAttribute("value")).toBe("2");
+    expect(yearInput?.getAttribute("value")).toBe("2025");
+  });
+
+  it("clears the fields when value is set to an empty string", async () => {
+    const { container, rerender } = render(DatePicker, {
+      type: "input",
+      value: "2024-03-15",
+    });
+
+    await rerender({ type: "input", value: "" });
+
+    const monthInput = container.querySelector("[testid='input-month']");
+    const dayInput = container.querySelector("[testid='input-day']");
+    const yearInput = container.querySelector("[testid='input-year']");
+
+    expect(monthInput?.getAttribute("value")).toBe("0");
+    expect(dayInput?.getAttribute("value")).toBe("");
+    expect(yearInput?.getAttribute("value")).toBe("");
+  });
+});
+
+describe("invalid date handling (#3275)", () => {
+  it("resets to blank when given a nonexistent calendar date", async () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+      value: "2025-02-31",
+    });
+
+    const monthInput = container.querySelector("[testid='input-month']");
+    const dayInput = container.querySelector("[testid='input-day']");
+    const yearInput = container.querySelector("[testid='input-year']");
+
+    expect(monthInput?.getAttribute("value")).toBe("0");
+    expect(dayInput?.getAttribute("value")).toBe("");
+    expect(yearInput?.getAttribute("value")).toBe("");
+  });
+});
