@@ -39,6 +39,30 @@
   </goab-app-header-menu>
 </ng-template>
 
+<ng-template #signedInUtilitiesSlot>
+  <goab-block alignment="center" direction="row" gap="m">
+    <goab-button type="tertiary" size="compact"> Help </goab-button>
+    <goab-menu-button
+      text="John Smith"
+      type="tertiary"
+      size="compact"
+      (action)="signOut()"
+    >
+      <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
+      <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
+    </goab-menu-button>
+  </goab-block>
+</ng-template>
+
+<ng-template #signedOutUtilitiesSlot>
+  <goab-block alignment="center" direction="row" gap="m">
+    <goab-button type="tertiary" size="compact"> Help </goab-button>
+    <goab-button type="tertiary" size="compact" leadingIcon="person" (click)="signIn()">
+      Sign in
+    </goab-button>
+  </goab-block>
+</ng-template>
+
 <ng-template #utilitiesTemplate>
   <goab-button type="tertiary" size="compact">Help</goab-button>
   <goab-menu-button text="John Smith" type="tertiary" size="compact">
@@ -73,7 +97,7 @@
     <goab-app-header
       heading="Example 1"
       [navigation]="navigationTemplate"
-      [utilities]="utilitiesTemplate"
+      [utilities]="isSignedIn ? signedInUtilitiesSlot : signedOutUtilitiesSlot"
       [phase]="phaseTemplate"
       [banner]="bannerTemplate"
     >

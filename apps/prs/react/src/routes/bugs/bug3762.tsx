@@ -15,6 +15,7 @@ import {
   GoabText,
   GoabBadge,
 } from "@abgov/react-components";
+import { useState } from "react";
 
 const heroActions = (
   <>
@@ -99,6 +100,41 @@ const bannerSlot = (
 );
 
 export function Bug3762Route() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const signedInUtilitiesSlot = (
+    <GoabBlock alignment="center" direction="row" gap="m">
+      <GoabButton type="tertiary" size="compact">
+        Help
+      </GoabButton>
+      <GoabMenuButton
+        text="John Smith"
+        type="tertiary"
+        size="compact"
+        onAction={() => setIsSignedIn(false)}
+      >
+        <GoabMenuAction text="User settings" action="user-settings" />
+        <GoabMenuAction text="Sign out" action="sign-out" />
+      </GoabMenuButton>
+    </GoabBlock>
+  );
+
+  const signedOutUtilitiesSlot = (
+    <GoabBlock alignment="center" direction="row" gap="m">
+      <GoabButton type="tertiary" size="compact">
+        Help
+      </GoabButton>
+      <GoabButton
+        type="tertiary"
+        size="compact"
+        leadingIcon="person"
+        onClick={() => setIsSignedIn(true)}
+      >
+        Sign in
+      </GoabButton>
+    </GoabBlock>
+  );
+
   return (
     <>
       <div>
@@ -112,7 +148,7 @@ export function Bug3762Route() {
           <GoabAppHeader
             heading="Example 1"
             navigation={navigationSlot}
-            utilities={utilitiesSlot}
+            utilities={isSignedIn ? signedInUtilitiesSlot : signedOutUtilitiesSlot}
             phase={<GoabBadge type="important" content="Service preview" />}
             banner={bannerSlot}
           ></GoabAppHeader>

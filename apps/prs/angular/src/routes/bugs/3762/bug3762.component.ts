@@ -39,4 +39,14 @@ import { Component } from "@angular/core";
     GoabText,
   ],
 })
-export class Bug3762Component {}
+export class Bug3762Component {
+  isSignedIn = false;
+
+  signIn = () => {
+    this.isSignedIn = true;
+  };
+
+  signOut = () => {
+    this.isSignedIn = false;
+  };
+}

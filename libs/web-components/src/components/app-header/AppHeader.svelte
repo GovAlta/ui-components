@@ -98,10 +98,6 @@
     // V2-specific initialization
     if (version === "2") {
       detectV2Slots();
-      if (!!_rootEl) {
-        unwrapNestedSlotContent(_rootEl, "utilities");
-      }
-
       detectUtilitiesItems();
 
       // Add click-outside handler for utilities menu
