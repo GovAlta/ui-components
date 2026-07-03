@@ -65936,7 +65936,7 @@ const bigUtilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExport
 const bannerSlot = /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "span", size: "body-xs", maxWidth: "100%", children: "v2.3.1 | PR Environment" });
 function Bug3762Route() {
   const [isSignedIn, setIsSignedIn] = reactExports.useState(false);
-  const signedInUtilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  const signedInUtilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { alignment: "center", direction: "row", gap: "m", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "Help" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       GoabMenuButton,
@@ -65952,7 +65952,7 @@ function Bug3762Route() {
       }
     )
   ] });
-  const signedOutUtilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  const signedOutUtilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { alignment: "center", direction: "row", gap: "m", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "Help" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabButton,
