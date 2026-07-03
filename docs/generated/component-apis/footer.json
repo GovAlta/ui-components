@@ -70,13 +70,11 @@
       "slots": [
         {
           "name": "meta",
-          "type": "GoabAppFooterMetaSection",
           "description": "",
           "required": false
         },
         {
           "name": "nav",
-          "type": "GoabAppFooterNavSection",
           "description": "",
           "required": false
         }
