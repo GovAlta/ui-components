@@ -29904,7 +29904,7 @@ function qu(t, e, o) {
     Be(L, vt, { name: r, el: D }, { bubbles: true, timeout: 5 });
   }
   function V(G) {
-    n === "calendar" && (G ? (o(16, j = new Ue(G)), j.isValid || o(16, j = new Ue(0))) : o(16, j = new Ue(0)));
+    G ? (o(16, j = new Ue(G)), j.isValid() || o(16, j = new Ue(0))) : o(16, j = new Ue(0));
   }
   function F(G) {
     o(16, j = new Ue(G.detail.value)), O(), E(), G.stopPropagation(), G.preventDefault();
@@ -62073,9 +62073,9 @@ const __vite_glob_0_36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   default: bug3273_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug3275Route() {
-  const [inputValue, setInputValue] = reactExports.useState("");
+  const [inputValue, setInputValue] = reactExports.useState("2024-03-15");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Select a value with the DatePicker and it should show in "Current value" below. Changing the Month to "--select a month--" will clear the value.' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Select a value with the DatePicker and it should show in "Current value" below. Changing the Month to "—Select a month—" will clear the value. The buttons below set/clear the value programmatically, and should update the month/day/year fields.' }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Date picker (input)", mb: "xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabDatePicker,
       {
@@ -62085,13 +62085,10 @@ function Bug3275Route() {
         onChange: (e) => setInputValue(e.valueStr ?? "")
       }
     ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { size: "compact", type: "secondary", onClick: () => setInputValue(""), children: "Clear programmatically" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("b", { children: "Note:" }),
-      " The button clears the value in the form but does not change the DatePicker when ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "type=input" }),
-      ". Its just for testing."
-    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabButtonGroup, { alignment: "start", mb: "l", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { size: "compact", onClick: () => setInputValue("2024-03-15"), children: "Set March 15" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { size: "compact", type: "secondary", onClick: () => setInputValue(""), children: "Clear programmatically" })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       "Current value: ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: inputValue || '"" (empty)' })
