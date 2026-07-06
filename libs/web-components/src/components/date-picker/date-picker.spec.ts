@@ -113,6 +113,10 @@ describe("focus and blur events", () => {
       onBlur();
     });
 
+    // DatePicker's onMount awaits `tick()` before wiring up focus tracking, so
+    // let that settle before focusing (a macrotask always runs after it).
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     popover.focus();
     await waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1);
@@ -135,6 +139,10 @@ describe("focus and blur events", () => {
     const onBlur = vi.fn();
     container?.addEventListener("_focus", onFocus);
     container?.addEventListener("_blur", onBlur);
+
+    // DatePicker's onMount awaits `tick()` before wiring up focus tracking, so
+    // let that settle before focusing (a macrotask always runs after it).
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     formItem.focus();
     await waitFor(() => {

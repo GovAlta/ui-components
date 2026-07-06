@@ -83,6 +83,7 @@
     addRelayListener();
     sendMountedMessage();
     showDeprecationWarnings();
+
     watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
@@ -95,6 +96,15 @@
       );
     }
   });
+
+  // The internal goa-input/goa-dropdown fields each dispatch their own _focus/_blur
+  // events. Those are composed (cross shadow boundaries) even without bubbling, so
+  // they would otherwise reach consumers alongside this component's own
+  // component-level _focus/_blur and double-fire them. Stop them at the source.
+  function stopInnerFocusEvent(e: Event) {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -296,6 +306,8 @@
           value={_date.format("MMMM d, yyyy")}
           {error}
           on:keydown={handleKeyDown}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
           {version}
@@ -334,6 +346,8 @@
         value={_date.format("MMMM d, yyyy")}
         {error}
         on:keydown={handleKeyDown}
+        on:_focus={stopInnerFocusEvent}
+        on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
         {version}
@@ -357,6 +371,8 @@
           name="month"
           testid="input-month"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           {error}
           value={_date.month + ""}
           disabled={isDisabled}
@@ -385,6 +401,8 @@
           class="no-spinner"
           testid="input-day"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           width="2ch"
           value={_date.day || ""}
           min="1"
@@ -402,6 +420,8 @@
           class="no-spinner"
           testid="input-year"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           width="4ch"
           value={_date.year || ""}
           min="1800"

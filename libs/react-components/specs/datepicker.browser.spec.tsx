@@ -231,6 +231,10 @@ describe("DatePicker", () => {
     const input = result.getByTestId("calendar-input");
     const outside = result.getByTestId("outside-input");
 
+    await vi.waitFor(() => {
+      expect(input.element()).toBeTruthy();
+    });
+
     (input.element() as HTMLInputElement).focus();
 
     await vi.waitFor(() => {

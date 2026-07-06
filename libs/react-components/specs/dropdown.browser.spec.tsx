@@ -380,6 +380,10 @@ describe("Dropdown", () => {
       const input = result.getByRole("combobox");
       const outside = result.getByTestId("outside-input");
 
+      await vi.waitFor(() => {
+        expect(input.element()).toBeTruthy();
+      });
+
       (input.element() as HTMLInputElement).focus();
 
       await vi.waitFor(() => {
