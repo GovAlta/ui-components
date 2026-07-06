@@ -98,6 +98,9 @@
     // V2-specific initialization
     if (version === "2") {
       detectV2Slots();
+      if (!!_rootEl) {
+        unwrapNestedSlotContent(_rootEl, "utilities");
+      }
       detectUtilitiesItems();
 
       // Add click-outside handler for utilities menu
@@ -129,7 +132,6 @@
 
   onDestroy(() => {
     window.removeEventListener("popstate", onRouteChange, true);
-    document.removeEventListener("click", handleClickOutside);
 
     // Clean up utilities check timeout
     if (_utilitiesCheckTimeout) {
@@ -303,25 +305,6 @@
       });
   }
 
-  // Handle click outside for utilities menu
-  function handleClickOutside(event: MouseEvent) {
-    if (!_utilitiesMenuOpen) return;
-
-    // Use composedPath to check clicks through shadow DOM
-    const path = event.composedPath();
-    const clickedInsideUtilities = path.some((el) => {
-      return (
-        el instanceof Element &&
-        (el.classList?.contains("v2-utilities-menu-button") ||
-          el.classList?.contains("v2-utilities-dropdown"))
-      );
-    });
-
-    if (!clickedInsideUtilities) {
-      _utilitiesMenuOpen = false;
-    }
-  }
-
   function addEventListeners() {
     if (!_rootEl) return;
 
@@ -486,25 +469,23 @@
           bind:this={_utilitiesPlaceholderEl}
         >
           {#if _showUtilitiesMenu}
-            <!-- 2+ items: Show compact Menu button -->
-            <button
-              class="v2-utilities-menu-button"
-              on:click={() => (_utilitiesMenuOpen = !_utilitiesMenuOpen)}
-              aria-expanded={_utilitiesMenuOpen}
-              aria-label="Utilities menu"
+            <goa-popover
+              on:_open={() => (_utilitiesMenuOpen = true)}
+              on:_close={() => (_utilitiesMenuOpen = false)}
             >
-              Menu
-              <goa-icon
-                type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"}
-                size="small"
-              />
-            </button>
-
-            {#if _utilitiesMenuOpen}
+              <goa-button
+                version="2"
+                slot="target"
+                trailingicon={_utilitiesMenuOpen
+                  ? "chevron-up"
+                  : "chevron-down"}
+                size="compact"
+                type="tertiary">Menu</goa-button
+              >
               <div class="v2-utilities-dropdown">
                 <slot name="utilities"></slot>
               </div>
-            {/if}
+            </goa-popover>
           {:else}
             <!-- 0-1 items: Show directly -->
             <slot name="utilities"></slot>
@@ -1283,21 +1264,6 @@
 
   /* V2 Utilities Dropdown */
   .v2 .v2-utilities-dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
-    right: 0;
-    min-width: 200px;
-    background: var(--goa-color-greyscale-white);
-    box-shadow:
-      0px 12px 16px -4px rgba(16, 29, 40, 0.08),
-      0px 4px 6px -2px rgba(16, 29, 40, 0.03);
-    border: 0.5px solid var(--goa-color-greyscale-150);
-    border-radius: 8px;
-    padding: 8px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
   }
 
   /* Style items inside the utilities dropdown - match app-header-menu styling */
@@ -1359,8 +1325,7 @@
     box-shadow: none !important;
 
     /* Spacing - match menu items */
-    padding: 12px 8px !important;
-    margin: 0 !important;
+    margin: 12px 8px !important;
 
     /* Border radius */
     border-radius: 6px !important;
