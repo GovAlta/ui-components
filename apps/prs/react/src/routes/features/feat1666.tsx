@@ -118,7 +118,7 @@ export function Feat1666Route() {
       </GoabDropdown>
 
       <GoabText tag="h3" mt="l">
-        Radio
+        Radio Group
       </GoabText>
       <GoabRadioGroup
         name="radio"
