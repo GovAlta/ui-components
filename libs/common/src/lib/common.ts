@@ -43,6 +43,22 @@ export type GoabCheckboxListOnChangeDetail = {
 };
 
 /**
+ * Provides details when the checkbox list receives or loses focus. Fires once when
+ * focus enters any of its checkboxes, and once when focus leaves all of them.
+ */
+export type GoabCheckboxListOnFocusDetail = {
+  /** The checkbox list name. */
+  name: string;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when the checkbox list loses focus.
+ */
+export type GoabCheckboxListOnBlurDetail = GoabCheckboxListOnFocusDetail;
+
+/**
  * Provides details when an input value changes.
  */
 export type GoabInputOnChangeDetail<T = string> = {

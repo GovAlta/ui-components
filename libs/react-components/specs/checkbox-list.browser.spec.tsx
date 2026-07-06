@@ -240,6 +240,57 @@ describe("CheckboxList", () => {
     expect(result.getByTestId("checkbox-list")).toBeTruthy();
   });
 
+  it("dispatches onFocus once across checkboxes and onBlur only once focus leaves the list", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const Component = () => (
+      <div>
+        <GoabCheckboxList
+          name="focus-list"
+          testId="focus-checkbox-list"
+          onFocus={onFocus}
+          onBlur={onBlur}
+        >
+          <GoabCheckbox name="option1" text="Option 1" testId="focus-checkbox-1" />
+          <GoabCheckbox name="option2" text="Option 2" testId="focus-checkbox-2" />
+        </GoabCheckboxList>
+        <input data-testid="outside-input" />
+      </div>
+    );
+
+    const result = render(<Component />);
+    const checkbox1 = result.getByTestId("focus-checkbox-1");
+    const checkbox2 = result.getByTestId("focus-checkbox-2");
+    const outside = result.getByTestId("outside-input");
+
+    await vi.waitFor(() => {
+      expect(checkbox1.element()).toBeTruthy();
+    });
+
+    (checkbox1.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(onFocus.mock.calls[0][0].name).toBe("focus-list");
+    });
+
+    // Moving focus between the list's own checkboxes should not re-fire onFocus or fire onBlur
+    (checkbox2.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    (outside.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur.mock.calls[0][0].name).toBe("focus-list");
+    });
+  });
+
   it("passes the browser event in change detail", async () => {
     const onChange = vi.fn();
 
