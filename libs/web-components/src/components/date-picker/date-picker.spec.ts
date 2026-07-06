@@ -95,6 +95,59 @@ describe("width property", () => {
   });
 });
 
+describe("focus and blur events", () => {
+  it("dispatches _focus when focus enters and _blur when focus leaves the calendar popover", async () => {
+    const name = "start-date";
+    const { container } = render(DatePicker, { name });
+
+    const popover = container.querySelector("goa-popover") as HTMLElement;
+
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    container?.addEventListener("_focus", (e: Event) => {
+      expect((e as CustomEvent).detail.name).toBe(name);
+      onFocus();
+    });
+    container?.addEventListener("_blur", (e: Event) => {
+      expect((e as CustomEvent).detail.name).toBe(name);
+      onBlur();
+    });
+
+    popover.focus();
+    await waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+    });
+
+    popover.blur();
+    await waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it("dispatches _focus and _blur for the input-type date picker", async () => {
+    const name = "start-date";
+    const { container } = render(DatePicker, { name, type: "input" });
+
+    const formItem = container.querySelector("goa-form-item") as HTMLElement;
+    formItem.tabIndex = -1;
+
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    container?.addEventListener("_focus", onFocus);
+    container?.addEventListener("_blur", onBlur);
+
+    formItem.focus();
+    await waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+    });
+
+    formItem.blur();
+    await waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+    });
+  });
+});
+
 describe("placeholder property", () => {
   it("defaults to the placeholder value", async () => {
     const { container } = render(DatePicker, {

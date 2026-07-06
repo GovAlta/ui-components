@@ -11,7 +11,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay } from "../../common/utils";
+  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -83,6 +83,11 @@
     addRelayListener();
     sendMountedMessage();
     showDeprecationWarnings();
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
 
     if (width && !isValidDimension(width)) {
       console.error(

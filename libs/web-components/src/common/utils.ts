@@ -590,6 +590,70 @@ function findFirstNodeOfShadowDOM(node: Node, reversed: boolean): Node | null {
   );
 }
 
+/**
+ * Resolves the actual focused element by descending through nested shadow roots,
+ * then checks whether it matches hostEl. Used to detect focus within a composite
+ * component (slotted children and/or nested custom elements), where the focused
+ * descendant isn't a direct child of hostEl in the plain DOM tree.
+ */
+export function isFocusWithin(hostEl: Element | null | undefined): boolean {
+  if (!hostEl) return false;
+
+  const start = document.activeElement;
+  if (!start) return false;
+
+  // Spec-compliant browsers retarget document.activeElement to the outermost
+  // shadow host, so descending through nested shadow roots reaches the actual
+  // focused element.
+  let descendant: Element | null = start;
+  while (descendant) {
+    if (descendant === hostEl || hostEl.contains(descendant)) return true;
+    descendant = descendant.shadowRoot?.activeElement ?? null;
+  }
+
+  // Some environments (e.g. jsdom) report the deep, un-retargeted focused
+  // element instead, so also walk up through shadow hosts from there.
+  let ancestor: Element | null = start;
+  while (ancestor) {
+    if (ancestor === hostEl || hostEl.contains(ancestor)) return true;
+    const root = ancestor.getRootNode();
+    ancestor = root instanceof ShadowRoot ? root.host : null;
+  }
+
+  return false;
+}
+
+/**
+ * Tracks whether focus is anywhere within a composite component (including slotted
+ * children and nested shadow DOM), invoking onEnter/onLeave once per transition.
+ * Attach to the component's root element; listeners auto-clean on element removal.
+ */
+export function watchFocusWithin(
+  rootEl: HTMLElement,
+  onEnter: (e: FocusEvent) => void,
+  onLeave: (e: FocusEvent) => void,
+) {
+  const hostEl = (rootEl.getRootNode() as ShadowRoot)?.host ?? rootEl;
+  let focused = false;
+
+  rootEl.addEventListener("focusin", (e) => {
+    if (!focused) {
+      focused = true;
+      onEnter(e as FocusEvent);
+    }
+  });
+
+  rootEl.addEventListener("focusout", (e) => {
+    const evt = e as FocusEvent;
+    setTimeout(() => {
+      if (focused && !isFocusWithin(hostEl)) {
+        focused = false;
+        onLeave(evt);
+      }
+    }, 0);
+  });
+}
+
 export function parseCssTimeToMilliseconds(
   timeValue: string,
   fallback = 100,

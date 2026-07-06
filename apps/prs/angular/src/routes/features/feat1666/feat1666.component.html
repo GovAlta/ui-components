@@ -1,0 +1,83 @@
+<goab-block direction="column" gap="l">
+  <h2>Feature #1666: Focus and Blur Events</h2>
+  <p>
+    Text Area, Radio, Checkbox, Dropdown, and Date Picker did not support onFocus and
+    onBlur events, unlike Input. This page demonstrates onFocus and onBlur firing for
+    each of those components. For Dropdown, Radio, and Date Picker (composite
+    components), onFocus fires once when focus enters any of their internal fields, and
+    onBlur fires once when focus leaves all of them.
+  </p>
+
+  <h3>Text Area</h3>
+  <goab-textarea
+    name="textarea"
+    testId="textarea"
+    placeholder="Focus and blur me"
+    (onFocus)="append('TextArea: onFocus')"
+    (onBlur)="append('TextArea: onBlur')"
+  ></goab-textarea>
+
+  <h3>Checkbox</h3>
+  <goab-checkbox
+    name="checkbox"
+    testId="checkbox"
+    text="Focus and blur me"
+    (onFocus)="append('Checkbox: onFocus')"
+    (onBlur)="append('Checkbox: onBlur')"
+  ></goab-checkbox>
+
+  <h3>Dropdown</h3>
+  <goab-dropdown
+    name="dropdown"
+    testId="dropdown"
+    placeholder="Focus and blur me"
+    (onFocus)="append('Dropdown: onFocus')"
+    (onBlur)="append('Dropdown: onBlur')"
+  >
+    <goab-dropdown-item name="dropdown" label="Red" value="red"></goab-dropdown-item>
+    <goab-dropdown-item name="dropdown" label="Blue" value="blue"></goab-dropdown-item>
+    <goab-dropdown-item name="dropdown" label="Green" value="green"></goab-dropdown-item>
+  </goab-dropdown>
+
+  <h3>Radio</h3>
+  <goab-radio-group
+    name="radio"
+    (onFocus)="append('Radio: onFocus')"
+    (onBlur)="append('Radio: onBlur')"
+  >
+    <goab-radio-item name="radio" value="option1" label="Option 1"></goab-radio-item>
+    <goab-radio-item name="radio" value="option2" label="Option 2"></goab-radio-item>
+  </goab-radio-group>
+
+  <h3>Date Picker (calendar)</h3>
+  <goab-date-picker
+    name="date-calendar"
+    testId="date-calendar"
+    (onFocus)="append('DatePicker (calendar): onFocus')"
+    (onBlur)="append('DatePicker (calendar): onBlur')"
+  ></goab-date-picker>
+
+  <h3>Date Picker (input)</h3>
+  <p>
+    Tab between the month/day/year fields to verify onFocus only fires once entering
+    the group, and onBlur only fires once leaving all three fields.
+  </p>
+  <goab-date-picker
+    type="input"
+    name="date-input"
+    testId="date-input"
+    (onFocus)="append('DatePicker (input): onFocus')"
+    (onBlur)="append('DatePicker (input): onBlur')"
+  ></goab-date-picker>
+
+  <h3>Event log</h3>
+  @if (log.length === 0) {
+    <p>Focus and blur the fields above to see events here.</p>
+  } @else {
+    <ul data-testid="event-log">
+      @for (entry of log; track entry) {
+        <li>{{ entry }}</li>
+      }
+    </ul>
+  }
+</goab-block>

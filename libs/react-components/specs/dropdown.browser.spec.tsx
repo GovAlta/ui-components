@@ -353,6 +353,48 @@ describe("Dropdown", () => {
       });
     });
 
+    it("dispatches onFocus and onBlur when focus enters and leaves the dropdown", async () => {
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+
+      const Component = () => {
+        return (
+          <div>
+            <GoabDropdown
+              name="favcolor"
+              testId="dropdown"
+              onChange={noop}
+              onFocus={onFocus}
+              onBlur={onBlur}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+            <input data-testid="outside-input" />
+          </div>
+        );
+      };
+
+      const result = render(<Component />);
+      const input = result.getByRole("combobox");
+      const outside = result.getByTestId("outside-input");
+
+      (input.element() as HTMLInputElement).focus();
+
+      await vi.waitFor(() => {
+        expect(onFocus).toHaveBeenCalledTimes(1);
+        expect(onFocus.mock.calls[0][0].name).toBe("favcolor");
+      });
+
+      (outside.element() as HTMLInputElement).focus();
+
+      await vi.waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur.mock.calls[0][0].name).toBe("favcolor");
+      });
+    });
+
     describe("Popover position", () => {
       it.skip("should display popover above when dropdown is at the bottom of the view port", async () => {
         const Component = () => {

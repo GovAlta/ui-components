@@ -128,6 +128,45 @@ describe("GoARadioGroup Component", () => {
     });
   });
 
+  describe("focus and blur events", () => {
+    it("dispatches _focus when focus enters and _blur when focus leaves the group", async () => {
+      const name = "favcolor";
+      const items = ["red", "blue", "orange"];
+      const result = render(GoARadioGroupWrapper, {
+        name,
+        value: "orange",
+        items,
+      });
+
+      const radioGroup = result.container.querySelector("goa-radio-group");
+      const radioItems = result.container.querySelectorAll("goa-radio-item");
+      const input = radioItems[0].shadowRoot?.querySelector(
+        "input",
+      ) as HTMLInputElement;
+
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+      radioGroup?.addEventListener("_focus", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onFocus();
+      });
+      radioGroup?.addEventListener("_blur", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onBlur();
+      });
+
+      input.focus();
+      await waitFor(() => {
+        expect(onFocus).toHaveBeenCalledTimes(1);
+      });
+
+      input.blur();
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoARadioGroup, {

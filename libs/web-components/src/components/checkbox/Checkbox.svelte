@@ -233,6 +233,21 @@
 
   function onFocus() {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+    dispatch(
+      _checkboxRef,
+      "_focus",
+      { name, value, checked: isChecked },
+      { bubbles: true },
+    );
+  }
+
+  function onBlur() {
+    dispatch(
+      _checkboxRef,
+      "_blur",
+      { name, value, checked: isChecked },
+      { bubbles: true },
+    );
   }
 
   /**
@@ -298,6 +313,7 @@ max-width: ${maxwidth};
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}
+        on:blur={onBlur}
       />
       {#if isIndeterminate && version === "2"}
         <svg

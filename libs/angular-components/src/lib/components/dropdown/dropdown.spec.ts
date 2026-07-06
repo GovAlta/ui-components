@@ -33,6 +33,8 @@ import { fireEvent } from "@testing-library/dom";
       [ariaLabelledBy]="ariaLabelledBy"
       [autoComplete]="autoComplete"
       (onChange)="onChange()"
+      (onFocus)="onFocus()"
+      (onBlur)="onBlur()"
     >
       <goab-dropdown-item [name]="name" label="Red" value="red"></goab-dropdown-item>
       <goab-dropdown-item [name]="name" label="Blue" value="blue"></goab-dropdown-item>
@@ -68,6 +70,14 @@ class TestDropdownComponent {
   autoComplete?: string;
 
   onChange() {
+    /** do nothing **/
+  }
+
+  onFocus() {
+    /** do nothing **/
+  }
+
+  onBlur() {
     /** do nothing **/
   }
 }
@@ -160,6 +170,19 @@ describe("GoABDropdown", () => {
     );
     expect(onChangeMock).toHaveBeenCalled();
   }));
+
+  it("should handle onFocus and onBlur events", () => {
+    const onFocusMock = jest.spyOn(component, "onFocus");
+    const onBlurMock = jest.spyOn(component, "onBlur");
+
+    const el = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+
+    fireEvent(el, new CustomEvent("_focus", { detail: { name: component.name } }));
+    expect(onFocusMock).toHaveBeenCalled();
+
+    fireEvent(el, new CustomEvent("_blur", { detail: { name: component.name } }));
+    expect(onBlurMock).toHaveBeenCalled();
+  });
 
   describe("writeValue", () => {
     it("should set value attribute when writeValue is called with a value", () => {
