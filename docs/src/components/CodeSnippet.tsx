@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { GoabButton, GoabTab, GoabTabs } from "@abgov/react-components";
 
 import hljs from "highlight.js/lib/core";
@@ -44,8 +44,6 @@ interface CodeSnippetProps {
   code?: string;
   /** Multiple framework code options (switcher mode) */
   frameworkCode?: FrameworkCode;
-  /** Initial framework when using frameworkCode */
-  initialFramework?: Framework;
   language?: Language;
   showCopy?: boolean;
   showLineNumbers?: boolean;
@@ -195,103 +193,71 @@ function SingleCodeBlock({
 
 const VALID_FRAMEWORKS: Framework[] = ["react", "angular", "webComponents"];
 
+function getSupportedFramework(
+  framework: Framework,
+  availableFrameworks: Framework[],
+): Framework {
+  if (availableFrameworks.length === 0) return framework;
+  if (availableFrameworks.includes(framework)) return framework;
+  return availableFrameworks[0];
+}
+
 export function CodeSnippet({
   code,
   frameworkCode,
-  initialFramework = "react",
   language = "tsx",
   showCopy = true,
   maxHeight,
   title,
   extractParts = true,
 }: CodeSnippetProps) {
-  // Initialize from global preference (falls back to initialFramework prop if not set)
-  const [selectedFramework, setSelectedFramework] = useState<Framework>(() => {
-    const stored = getFrameworkPreference();
-    return stored || initialFramework;
-  });
-  const tabsRef = useRef<HTMLDivElement>(null);
-
   // Determine if we're in framework switcher mode
   const hasFrameworkSwitcher = !!frameworkCode;
 
-  const availableFrameworks: Framework[] = hasFrameworkSwitcher
-    ? VALID_FRAMEWORKS.filter((k) => Boolean(frameworkCode[k]))
-    : [];
+  const availableFrameworks: Framework[] = useMemo(
+    () =>
+      hasFrameworkSwitcher
+        ? VALID_FRAMEWORKS.filter((k) => Boolean(frameworkCode[k]))
+        : [],
+    [
+      hasFrameworkSwitcher,
+      frameworkCode?.react,
+      frameworkCode?.angular,
+      frameworkCode?.webComponents,
+    ],
+  );
 
-  const syncGoaTabsSelection = (framework: Framework) => {
-    if (!tabsRef.current || availableFrameworks.length === 0 || !availableFrameworks.includes(framework)) {
-      return;
-    }
-
-    const goaTabs = tabsRef.current.querySelector("goa-tabs");
-    if (!goaTabs) return;
-
-    const targetIndex = availableFrameworks.indexOf(framework);
-    // The tab buttons render inside goa-tabs' own shadow root, so a plain
-    // querySelectorAll on the host always returns an empty list.
-    const tabs = goaTabs.shadowRoot?.querySelectorAll<HTMLElement>('[role="tab"]');
-    const targetTab = tabs?.[targetIndex];
-    if (!targetTab || targetTab.getAttribute("aria-selected") === "true") return;
-
-    // Tab selection, panel visibility, and the segmented pill's position are
-    // all driven by Tabs.svelte's own internal click handler. Replicating
-    // those DOM mutations from outside missed pieces (the indicator stayed
-    // put, panels didn't toggle) because they're tracked by internal state
-    // this component can't reach. A real click reuses that logic wholesale.
-    // It also moves focus to the clicked tab, which would steal focus from
-    // wherever the user is reading for every other switcher on the page, so
-    // restore whatever was focused beforehand.
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-    targetTab.click();
-    if (previouslyFocused && previouslyFocused !== targetTab && document.contains(previouslyFocused)) {
-      previouslyFocused.focus({ preventScroll: true });
-    }
-  };
+  const [selectedFramework, setSelectedFramework] = useState<Framework>(() =>
+    getSupportedFramework("react", availableFrameworks),
+  );
 
   useEffect(() => {
     const stored = getFrameworkPreference();
-    if (availableFrameworks.length > 0 && availableFrameworks.includes(stored)) {
-      setSelectedFramework(stored);
-      syncGoaTabsSelection(stored);
-    }
-  }, [availableFrameworks]);
+    setSelectedFramework(getSupportedFramework(stored, availableFrameworks));
 
-  // Subscribe to global framework preference changes from other components.
-  // Directly manipulate the tab DOM state without triggering focus or hash changes.
-  useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {
-      if (availableFrameworks.length === 0 || availableFrameworks.includes(framework)) {
-        setSelectedFramework(framework);
-        syncGoaTabsSelection(framework);
-      }
+      setSelectedFramework(getSupportedFramework(framework, availableFrameworks));
     });
   }, [availableFrameworks]);
 
   // Listen for native tab change events (user clicking a tab in THIS component).
   // Broadcasts the change to all other CodeSnippet instances on the page.
   // Note: GoA tabs are 1-indexed, so we subtract 1 to get the array index
-  useEffect(() => {
-    if (!tabsRef.current || availableFrameworks.length <= 1) return;
+  const handleTabChange = useCallback(
+    (detail: { tab: number }) => {
+      const frameworkIndex = detail.tab - 1;
+      const framework = availableFrameworks[frameworkIndex];
 
-    const handleTabChange = (e: Event) => {
-      const customEvent = e as CustomEvent<{ tab: number }>;
-      const tabIndex = customEvent.detail?.tab;
-      if (typeof tabIndex === "number") {
-        const frameworkIndex = tabIndex - 1; // GoA tabs are 1-indexed
-        if (availableFrameworks[frameworkIndex]) {
-          // Broadcast to all other components and persist to localStorage
-          setFrameworkPreference(availableFrameworks[frameworkIndex]);
-        }
+      if (framework && framework !== getFrameworkPreference()) {
+        // Broadcast to all other components and persist to localStorage
+        setFrameworkPreference(framework);
       }
-    };
+    },
+    [availableFrameworks],
+  );
 
-    const tabsElement = tabsRef.current.querySelector("goa-tabs");
-    if (tabsElement) {
-      tabsElement.addEventListener("_change", handleTabChange);
-      return () => tabsElement.removeEventListener("_change", handleTabChange);
-    }
-  }, [availableFrameworks]);
+  const selectedTabIndex = Math.max(availableFrameworks.indexOf(selectedFramework), 0);
+  const tabsKey = `${availableFrameworks.join("-")}-${selectedFramework}`;
 
   // Simple mode - single code block
   if (!hasFrameworkSwitcher) {
@@ -483,12 +449,14 @@ export function CodeSnippet({
         // Multiple frameworks - use tabs with content inside.
         // Renderers always emit per-block .code-snippet wrappers themselves,
         // so we don't add an outer wrap here.
-        <div className="framework-switcher" ref={tabsRef}>
+        <div className="framework-switcher">
           <GoabTabs
+            key={tabsKey}
             variant="segmented"
-            initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
+            initialTab={selectedTabIndex + 1}
             orientation="horizontal"
             navigation="none"
+            onChange={handleTabChange}
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
