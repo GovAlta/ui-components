@@ -7,6 +7,7 @@ import {
   GoabLink,
   GoabTextArea,
   GoabCheckbox,
+  GoabCheckboxList,
   GoabDropdown,
   GoabDropdownItem,
   GoabRadioGroup,
@@ -43,9 +44,11 @@ export function Feat1666Route() {
           <GoabText tag="p">
             Text Area, Radio, Checkbox, Dropdown, and Date Picker did not support
             onFocus and onBlur events, unlike Input. This page demonstrates onFocus and
-            onBlur firing for each of those components. For Dropdown, Radio, and Date
-            Picker (composite components), onFocus fires once when focus enters any of
-            their internal fields, and onBlur fires once when focus leaves all of them.
+            onBlur firing for each of those components, plus Checkbox List (same
+            composite shape as Radio Group, added on the same branch). For Dropdown,
+            Radio, Checkbox List, and Date Picker (composite components), onFocus fires
+            once when focus enters any of their internal fields, and onBlur fires once
+            when focus leaves all of them.
           </GoabText>
         </GoabDetails>
       </GoabBlock>
@@ -79,6 +82,22 @@ export function Feat1666Route() {
         onFocus={() => append("Checkbox: onFocus")}
         onBlur={() => append("Checkbox: onBlur")}
       />
+
+      <GoabText tag="h3" mt="l">
+        Checkbox List
+      </GoabText>
+      <GoabCheckboxList
+        name="checkbox-list"
+        testId="checkbox-list"
+        onChange={() => {
+          /* noop */
+        }}
+        onFocus={() => append("CheckboxList: onFocus")}
+        onBlur={() => append("CheckboxList: onBlur")}
+      >
+        <GoabCheckbox name="option1" text="Option 1" />
+        <GoabCheckbox name="option2" text="Option 2" />
+      </GoabCheckboxList>
 
       <GoabText tag="h3" mt="l">
         Dropdown

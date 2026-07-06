@@ -3,9 +3,10 @@
   <p>
     Text Area, Radio, Checkbox, Dropdown, and Date Picker did not support onFocus and
     onBlur events, unlike Input. This page demonstrates onFocus and onBlur firing for
-    each of those components. For Dropdown, Radio, and Date Picker (composite
-    components), onFocus fires once when focus enters any of their internal fields, and
-    onBlur fires once when focus leaves all of them.
+    each of those components, plus Checkbox List (same composite shape as Radio Group,
+    added on the same branch). For Dropdown, Radio, Checkbox List, and Date Picker
+    (composite components), onFocus fires once when focus enters any of their internal
+    fields, and onBlur fires once when focus leaves all of them.
   </p>
 
   <h3>Text Area</h3>
@@ -25,6 +26,17 @@
     (onFocus)="append('Checkbox: onFocus')"
     (onBlur)="append('Checkbox: onBlur')"
   ></goab-checkbox>
+
+  <h3>Checkbox List</h3>
+  <goab-checkbox-list
+    name="checkbox-list"
+    testId="checkbox-list"
+    (onFocus)="append('CheckboxList: onFocus')"
+    (onBlur)="append('CheckboxList: onBlur')"
+  >
+    <goab-checkbox name="option1" text="Option 1"></goab-checkbox>
+    <goab-checkbox name="option2" text="Option 2"></goab-checkbox>
+  </goab-checkbox-list>
 
   <h3>Dropdown</h3>
   <goab-dropdown
