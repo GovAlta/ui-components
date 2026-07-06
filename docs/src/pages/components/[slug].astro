@@ -25,7 +25,7 @@ import { getThumbnailPath } from '../../lib/component-thumbnails';
 export async function getStaticPaths() {
   const components = await getCollection('components');
   return components.map((component) => ({
-    params: { slug: component.slug },
+    params: { slug: component.data.slug || component.id },
     props: { component },
   }));
 }
@@ -207,7 +207,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
       <h2 class="related-heading">Related components</h2>
       <div class="related-cards">
         {relatedComponents.map((comp) => {
-          const compSlug = comp.data.slug || comp.slug;
+          const compSlug = comp.data.slug || comp.id;
           return (
             <a href={withBase(`/components/${compSlug}`)} class="related-card">
               <div class="related-card-thumbnail" aria-hidden="true">

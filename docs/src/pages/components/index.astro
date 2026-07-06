@@ -25,7 +25,7 @@ const sortedComponents = visibleComponents.sort((a, b) =>
 
 // Transform to the shape ComponentsGrid expects
 const components = sortedComponents.map(component => ({
-  slug: component.slug,
+  slug: component.data.slug || component.id,
   data: component.data,
 }));
 ---

@@ -35,12 +35,12 @@ export async function getStaticPaths() {
   return examples
     .filter(
       (e) =>
-        !e.slug.includes("/") &&
+        !e.id.includes("/") &&
         e.data.size !== "section" &&
-        slugsWithPreview.has(e.slug),
+        slugsWithPreview.has(e.data.slug || e.id),
     )
     .map((entry) => ({
-      params: { slug: entry.slug },
+      params: { slug: entry.data.slug || entry.id },
       props: { entry },
     }));
 }
