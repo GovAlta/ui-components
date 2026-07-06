@@ -73605,7 +73605,7 @@ function Feat1666Route() {
         ]
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", mt: "l", children: "Radio" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", mt: "l", children: "Radio Group" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       GoabRadioGroup,
       {
