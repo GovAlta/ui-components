@@ -203,6 +203,10 @@ const SLOT_TYPE_OVERRIDES: Record<
       nav: "GoabAppFooterNavSection",
       meta: "GoabAppFooterMetaSection",
     },
+    angular: {
+      nav: "TemplateRef",
+      meta: "TemplateRef",
+    },
     webComponents: {
       nav: "goa-app-footer-nav-section",
       meta: "goa-app-footer-meta-section",

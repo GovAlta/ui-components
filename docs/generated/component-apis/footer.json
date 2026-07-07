@@ -70,11 +70,13 @@
       "slots": [
         {
           "name": "meta",
+          "type": "TemplateRef",
           "description": "",
           "required": false
         },
         {
           "name": "nav",
+          "type": "TemplateRef",
           "description": "",
           "required": false
         }
