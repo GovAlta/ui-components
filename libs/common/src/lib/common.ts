@@ -15,8 +15,8 @@ export type GoabRadioGroupOnChangeDetail = {
 };
 
 /**
- * Provides details when the radio group receives or loses focus. Fires once when
- * focus enters any of its radio items, and once when focus leaves all of them.
+ * Provides details when the radio group receives focus. Fires once when focus
+ * enters any of its radio items.
  */
 export type GoabRadioGroupOnFocusDetail = {
   /** The radio group name. */
@@ -26,7 +26,8 @@ export type GoabRadioGroupOnFocusDetail = {
 };
 
 /**
- * Provides details when the radio group loses focus.
+ * Provides details when the radio group loses focus. Fires once when focus
+ * leaves all of its radio items.
  */
 export type GoabRadioGroupOnBlurDetail = GoabRadioGroupOnFocusDetail;
 
@@ -43,8 +44,8 @@ export type GoabCheckboxListOnChangeDetail = {
 };
 
 /**
- * Provides details when the checkbox list receives or loses focus. Fires once when
- * focus enters any of its checkboxes, and once when focus leaves all of them.
+ * Provides details when the checkbox list receives focus. Fires once when focus
+ * enters any of its checkboxes.
  */
 export type GoabCheckboxListOnFocusDetail = {
   /** The checkbox list name. */
@@ -54,7 +55,8 @@ export type GoabCheckboxListOnFocusDetail = {
 };
 
 /**
- * Provides details when the checkbox list loses focus.
+ * Provides details when the checkbox list loses focus. Fires once when focus
+ * leaves all of its checkboxes.
  */
 export type GoabCheckboxListOnBlurDetail = GoabCheckboxListOnFocusDetail;
 
@@ -174,7 +176,8 @@ export type GoabDropdownOnChangeDetail = {
 };
 
 /**
- * Provides details when the dropdown receives or loses focus.
+ * Provides details when the dropdown receives focus. Fires once when focus
+ * enters any of its internal fields.
  */
 export type GoabDropdownOnFocusDetail = {
   /** The dropdown name, when provided. */
@@ -184,7 +187,8 @@ export type GoabDropdownOnFocusDetail = {
 };
 
 /**
- * Provides details when the dropdown loses focus.
+ * Provides details when the dropdown loses focus. Fires once when focus
+ * leaves all of its internal fields.
  */
 export type GoabDropdownOnBlurDetail = GoabDropdownOnFocusDetail;
 
@@ -205,8 +209,8 @@ export type GoabDatePickerOnChangeDetail = {
 };
 
 /**
- * Provides details when the date picker receives or loses focus. Fires once when
- * focus enters any of its internal fields, and once when focus leaves all of them.
+ * Provides details when the date picker receives focus. Fires once when focus
+ * enters any of its internal fields.
  */
 export type GoabDatePickerOnFocusDetail = {
   /** The date picker name, when provided. */
@@ -216,7 +220,8 @@ export type GoabDatePickerOnFocusDetail = {
 };
 
 /**
- * Provides details when the date picker loses focus.
+ * Provides details when the date picker loses focus. Fires once when focus
+ * leaves all of its internal fields.
  */
 export type GoabDatePickerOnBlurDetail = GoabDatePickerOnFocusDetail;
 

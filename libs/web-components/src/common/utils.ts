@@ -591,10 +591,7 @@ function findFirstNodeOfShadowDOM(node: Node, reversed: boolean): Node | null {
 }
 
 /**
- * Resolves the actual focused element by descending through nested shadow roots,
- * then checks whether it matches hostEl. Used to detect focus within a composite
- * component (slotted children and/or nested custom elements), where the focused
- * descendant isn't a direct child of hostEl in the plain DOM tree.
+ * Returns true when focus is inside hostEl, including nested shadow DOM.
  */
 export function isFocusWithin(hostEl: Element | null | undefined): boolean {
   if (!hostEl) return false;
@@ -602,17 +599,14 @@ export function isFocusWithin(hostEl: Element | null | undefined): boolean {
   const start = document.activeElement;
   if (!start) return false;
 
-  // Spec-compliant browsers retarget document.activeElement to the outermost
-  // shadow host, so descending through nested shadow roots reaches the actual
-  // focused element.
+  // Browsers usually expose the outer shadow host as document.activeElement
   let descendant: Element | null = start;
   while (descendant) {
     if (descendant === hostEl || hostEl.contains(descendant)) return true;
     descendant = descendant.shadowRoot?.activeElement ?? null;
   }
 
-  // Some environments (e.g. jsdom) report the deep, un-retargeted focused
-  // element instead, so also walk up through shadow hosts from there.
+  // Test environments may expose the deep focused element instead
   let ancestor: Element | null = start;
   while (ancestor) {
     if (ancestor === hostEl || hostEl.contains(ancestor)) return true;
@@ -624,9 +618,7 @@ export function isFocusWithin(hostEl: Element | null | undefined): boolean {
 }
 
 /**
- * Tracks whether focus is anywhere within a composite component (including slotted
- * children and nested shadow DOM), invoking onEnter/onLeave once per transition.
- * Attach to the component's root element; listeners auto-clean on element removal.
+ * Calls onEnter/onLeave once as focus enters or leaves a composite component.
  */
 export function watchFocusWithin(
   rootEl: HTMLElement,

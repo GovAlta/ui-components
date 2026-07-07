@@ -97,10 +97,6 @@
     }
   });
 
-  // The internal goa-input/goa-dropdown fields each dispatch their own _focus/_blur
-  // events. Those are composed (cross shadow boundaries) even without bubbling, so
-  // they would otherwise reach consumers alongside this component's own
-  // component-level _focus/_blur and double-fire them. Stop them at the source.
   function stopInnerFocusEvent(e: Event) {
     e.stopPropagation();
     e.stopImmediatePropagation();

@@ -313,9 +313,6 @@
       }
     });
 
-    // Each child checkbox dispatches its own _focus/_blur. Stop those here so
-    // only this list's own component-level _focus/_blur (dispatched from
-    // _rootEl via watchFocusWithin) reaches consumers.
     _slotEl.addEventListener("_focus", (e: Event) => e.stopPropagation());
     _slotEl.addEventListener("_blur", (e: Event) => e.stopPropagation());
   }
