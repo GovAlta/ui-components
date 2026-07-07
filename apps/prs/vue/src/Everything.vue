@@ -120,7 +120,7 @@ const FILTER_CHIP_THEMES: GoabFilterChipTheme[] = ["outline", "filled"];
 const FORM_ITEM_LABEL_SIZES: GoabFormItemLabelSize[] = ["regular", "large"];
 const ICON_BUTTON_VARIANTS: GoabIconButtonVariant[] = ["color", "nocolor", "dark", "light", "destructive"];
 const ICON_TYPES: GoabIconType[] = ["home", "alert", "checkmark-circle", "information-circle", "menu"];
-const NOTIFICATION_TYPES: GoabNotificationType[] = ["information", "important", "emergency", "event"];
+const NOTIFICATION_TYPES: GoabNotificationType[] = ["information", "important", "emergency"];
 const SKELETON_TYPES: GoabSkeletonType[] = ["text", "title", "text-small", "avatar", "header", "paragraph", "thumbnail", "card", "profile"];
 const SKELETON_SIZES: GoabSkeletonSize[] = ["1", "2", "3", "4"];
 const TOOLTIP_POSITIONS: GoabTooltipPosition[] = ["top", "bottom", "left", "right"];
@@ -457,7 +457,7 @@ const menuAction = ref<string | undefined>();
 
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">Notifications</GoabText>
-          <GoabNotification v-for="type in NOTIFICATION_TYPES" :key="type" :type="type" maxContentWidth="480px" @onDismiss="notificationDismissed = true; logEvent('notification.dismiss', {})">
+          <GoabNotification v-for="type in NOTIFICATION_TYPES" :key="type" :type="type" @onDismiss="notificationDismissed = true; logEvent('notification.dismiss', {})">
             {{ type.charAt(0).toUpperCase() + type.slice(1) }} notification.
           </GoabNotification>
           <GoabText tag="p" size="body-s" mt="s">Dismissed: {{ notificationDismissed }}</GoabText>
