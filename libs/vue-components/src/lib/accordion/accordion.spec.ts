@@ -61,4 +61,24 @@ describe("GoabAccordion", () => {
     expect(wrapper.emitted()).toHaveProperty("onChange");
     expect(wrapper.emitted("onChange")![0]).toEqual([true]);
   });
+
+  it("should set open to false when open=false", () => {
+    const wrapper = mount(GoabAccordion, {
+      props: { open: false },
+    });
+    const el = wrapper.find("goa-accordion").element;
+    expect(el.getAttribute("open")).toBe("false");
+  });
+
+  it("should update open from true to false", async () => {
+    const wrapper = mount(GoabAccordion, {
+      props: { open: true },
+    });
+    const el = wrapper.find("goa-accordion").element;
+    expect(el.getAttribute("open")).toBe("true");
+
+    await wrapper.setProps({ open: false });
+
+    expect(el.getAttribute("open")).toBe("false");
+  });
 });

@@ -34,11 +34,23 @@ describe("GoabWorkSideMenuGroup", () => {
     expect(wrapper.text()).toContain("Menu items");
   });
 
-  it("should not set open when false", () => {
+  it("should set open to false when open=false", () => {
     const wrapper = mount(GoabWorkSideMenuGroup, {
       props: { heading: "Group", open: false },
     });
     const el = wrapper.find("goa-work-side-menu-group").element;
-    expect(el.hasAttribute("open")).toBe(false);
+    expect(el.getAttribute("open")).toBe("false");
+  });
+
+  it("should update open from true to false", async () => {
+    const wrapper = mount(GoabWorkSideMenuGroup, {
+      props: { heading: "Group", open: true },
+    });
+    const el = wrapper.find("goa-work-side-menu-group").element;
+    expect(el.getAttribute("open")).toBe("true");
+
+    await wrapper.setProps({ open: false });
+
+    expect(el.getAttribute("open")).toBe("false");
   });
 });

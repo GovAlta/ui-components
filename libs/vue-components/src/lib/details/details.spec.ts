@@ -42,4 +42,24 @@ describe("GoabDetails", () => {
     });
     expect(wrapper.text()).toContain("Details content");
   });
+
+  it("should set open to false when open=false", () => {
+    const wrapper = mount(GoabDetails, {
+      props: { heading: "Details heading", open: false },
+    });
+    const el = wrapper.find("goa-details").element;
+    expect(el.getAttribute("open")).toBe("false");
+  });
+
+  it("should update open from true to false", async () => {
+    const wrapper = mount(GoabDetails, {
+      props: { heading: "Details heading", open: true },
+    });
+    const el = wrapper.find("goa-details").element;
+    expect(el.getAttribute("open")).toBe("true");
+
+    await wrapper.setProps({ open: false });
+
+    expect(el.getAttribute("open")).toBe("false");
+  });
 });

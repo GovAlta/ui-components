@@ -35,8 +35,8 @@ const emit = defineEmits<{
   onNavigate: [path: string];
 }>();
 
-const wcProps = useWcProps(props, { 
-  booleanProps: ["open"],
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["open"],
   renamedProps: {
     userName: "user-name",
     userSecondaryText: "user-secondary-text",

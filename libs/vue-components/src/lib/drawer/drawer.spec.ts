@@ -49,4 +49,24 @@ describe("GoabDrawer", () => {
     el.dispatchEvent(new CustomEvent("_close"));
     expect(wrapper.emitted()).toHaveProperty("onClose");
   });
+
+  it("should set open to false when open=false", () => {
+    const wrapper = mount(GoabDrawer, {
+      props: { position: "right", open: false },
+    });
+    const el = wrapper.find("goa-drawer").element;
+    expect(el.getAttribute("open")).toBe("false");
+  });
+
+  it("should update open from true to false", async () => {
+    const wrapper = mount(GoabDrawer, {
+      props: { position: "right", open: true },
+    });
+    const el = wrapper.find("goa-drawer").element;
+    expect(el.getAttribute("open")).toBe("true");
+
+    await wrapper.setProps({ open: false });
+
+    expect(el.getAttribute("open")).toBe("false");
+  });
 });

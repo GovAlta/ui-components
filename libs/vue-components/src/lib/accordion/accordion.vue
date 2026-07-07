@@ -51,8 +51,8 @@ const emit = defineEmits<{
   onChange: [open: boolean];
 }>();
 
-const wcProps = useWcProps(props, { 
-  booleanProps: ["open"],
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["open"],
   renamedProps: { headingType: "heading-type" },
 });
 const slots = useSlots() as Slots;
