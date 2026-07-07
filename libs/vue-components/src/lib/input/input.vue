@@ -101,7 +101,10 @@ const emit = defineEmits<{
   onKeyPress: [detail: GoabInputOnKeyPressDetail<string>];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "readonly", "error", "focused"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["readonly", "error", "focused"],
+});
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;

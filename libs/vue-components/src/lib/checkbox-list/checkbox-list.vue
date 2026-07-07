@@ -36,7 +36,10 @@ const emit = defineEmits<{
   onChange: [detail: GoabCheckboxListOnChangeDetail & { event: Event }];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["error"],
+});
 </script>
 
 <template>

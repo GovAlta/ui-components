@@ -62,7 +62,7 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props, {
-  booleanProps: ["disabled", "error", "filterable", "native"],
+  booleanPropsWithFalse: ["disabled", "error", "filterable", "native"],
 });
 
 const valueAttr = computed(() => {

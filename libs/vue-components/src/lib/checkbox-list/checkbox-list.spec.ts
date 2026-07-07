@@ -14,14 +14,36 @@ describe("GoabCheckboxList", () => {
     const wrapper = mount(GoabCheckboxList, {
       props: {
         name: "fruits",
+        disabled: true,
         testId: "checkbox-list-test",
         mt: "s",
       },
     });
     const el = wrapper.find("goa-checkbox-list").element;
     expect(el.getAttribute("name")).toBe("fruits");
+    expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("testid")).toBe("checkbox-list-test");
     expect(el.getAttribute("mt")).toBe("s");
+  });
+
+  it("should set disabled to false when disabled=false", () => {
+    const wrapper = mount(GoabCheckboxList, {
+      props: { name: "fruits", disabled: false },
+    });
+    const el = wrapper.find("goa-checkbox-list").element;
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabCheckboxList, {
+      props: { name: "fruits", disabled: true },
+    });
+    const el = wrapper.find("goa-checkbox-list").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should render content via default slot", () => {

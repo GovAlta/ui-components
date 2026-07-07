@@ -45,15 +45,27 @@ describe("GoabRadioItem", () => {
     expect(el.getAttribute("ml")).toBe("xl");
   });
 
-  it("should not set boolean props when false", () => {
+  it("should set disabled to false and leave other boolean props unset when false", () => {
     const wrapper = mount(GoabRadioItem, {
       props: { disabled: false, checked: false, error: false, compact: false },
     });
     const el = wrapper.find("goa-radio-item").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
     expect(el.hasAttribute("checked")).toBe(false);
     expect(el.hasAttribute("error")).toBe(false);
     expect(el.hasAttribute("compact")).toBe(false);
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabRadioItem, {
+      props: { disabled: true },
+    });
+    const el = wrapper.find("goa-radio-item").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should render slots", () => {

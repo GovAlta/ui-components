@@ -63,7 +63,8 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props, {
-  booleanProps: ["checked", "indeterminate", "disabled", "error"],
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["checked", "indeterminate", "error"],
 });
 
 const valueAttr = computed(() => {

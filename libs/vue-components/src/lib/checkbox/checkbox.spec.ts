@@ -7,7 +7,7 @@ describe("GoabCheckbox", () => {
     const wrapper = mount(GoabCheckbox, { props: { name: "foo" } });
     const el = wrapper.find("goa-checkbox").element;
     expect(el.getAttribute("name")).toBe("foo");
-    expect(el.getAttribute("disabled")).toBeNull();
+    expect(el.getAttribute("disabled")).toBe("false");
     expect(el.getAttribute("checked")).toBeNull();
     expect(el.getAttribute("error")).toBeNull();
   });
@@ -109,12 +109,24 @@ describe("GoabCheckbox", () => {
     });
   });
 
-  it("should not set disabled when disabled=false", () => {
+  it("should set disabled to false when disabled=false", () => {
     const wrapper = mount(GoabCheckbox, {
       props: { name: "foo", disabled: false },
     });
     const el = wrapper.find("goa-checkbox").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabCheckbox, {
+      props: { name: "foo", disabled: true },
+    });
+    const el = wrapper.find("goa-checkbox").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should pass data-grid attributes", () => {

@@ -41,7 +41,10 @@ const emit = defineEmits<{
   onChange: [detail: GoabDatePickerOnChangeDetail & { event: Event }];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["error", "disabled"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["error"],
+});
 </script>
 
 <template>

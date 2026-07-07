@@ -44,7 +44,10 @@ const emit = defineEmits<{
   onChange: [detail: GoabRadioGroupOnChangeDetail];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["error"],
+});
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;

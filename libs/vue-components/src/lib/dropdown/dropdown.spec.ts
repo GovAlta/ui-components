@@ -7,10 +7,10 @@ describe("GoabDropdown", () => {
   it("should render", () => {
     const wrapper = mount(GoabDropdown);
     const el = wrapper.find("goa-dropdown").element;
-    expect(el.getAttribute("disabled")).toBeNull();
-    expect(el.getAttribute("error")).toBeNull();
-    expect(el.getAttribute("filterable")).toBeNull();
-    expect(el.getAttribute("native")).toBeNull();
+    expect(el.getAttribute("disabled")).toBe("false");
+    expect(el.getAttribute("error")).toBe("false");
+    expect(el.getAttribute("filterable")).toBe("false");
+    expect(el.getAttribute("native")).toBe("false");
   });
 
   it("should render with all props", () => {
@@ -80,12 +80,25 @@ describe("GoabDropdown", () => {
     });
   });
 
-  it("should not set disabled when disabled=false", () => {
+  it("should set disabled to false when disabled=false", () => {
     const wrapper = mount(GoabDropdown, {
       props: { disabled: false },
     });
     const el = wrapper.find("goa-dropdown").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabDropdown, {
+      props: { disabled: true },
+    });
+    const el = wrapper.find("goa-dropdown").element;
+
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should pass data-grid attributes", () => {

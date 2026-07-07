@@ -52,7 +52,7 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props, { 
-  booleanProps: ["disabled"],
+  booleanPropsWithFalse: ["disabled"],
   jsonProps: ["actionArgs"],
   renamedProps: { actionArg: "action-arg", actionArgs: "action-args" },
 });

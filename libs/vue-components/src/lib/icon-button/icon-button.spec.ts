@@ -65,4 +65,24 @@ describe("GoabIconButton", () => {
     el.dispatchEvent(new CustomEvent("_click"));
     expect(wrapper.emitted()).toHaveProperty("onClick");
   });
+
+  it("should set disabled to false when disabled=false", () => {
+    const wrapper = mount(GoabIconButton, {
+      props: { icon: "close", disabled: false },
+    });
+    const el = wrapper.find("goa-icon-button").element;
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabIconButton, {
+      props: { icon: "close", disabled: true },
+    });
+    const el = wrapper.find("goa-icon-button").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
 });

@@ -8,7 +8,7 @@ describe("GoabRadioGroup", () => {
     const wrapper = mount(GoabRadioGroup, { props: { name: "fruits" } });
     const el = wrapper.find("goa-radio-group").element;
     expect(el.getAttribute("name")).toBe("fruits");
-    expect(el.getAttribute("disabled")).toBeNull();
+    expect(el.getAttribute("disabled")).toBe("false");
     expect(el.getAttribute("error")).toBeNull();
   });
 
@@ -70,12 +70,24 @@ describe("GoabRadioGroup", () => {
     expect(el.querySelector("goa-radio-item")).toBeTruthy();
   });
 
-  it("should not set disabled when disabled=false", () => {
+  it("should set disabled to false when disabled=false", () => {
     const wrapper = mount(GoabRadioGroup, {
       props: { name: "fruits", disabled: false },
     });
     const el = wrapper.find("goa-radio-group").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabRadioGroup, {
+      props: { name: "fruits", disabled: true },
+    });
+    const el = wrapper.find("goa-radio-group").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should pass data-grid attributes", () => {

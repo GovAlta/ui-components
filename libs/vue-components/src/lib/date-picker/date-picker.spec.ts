@@ -15,6 +15,7 @@ describe("GoabDatePicker", () => {
         value: "2024-01-15",
         min: "2024-01-01",
         max: "2024-12-31",
+        disabled: true,
         testId: "date-picker-test",
         mt: "s",
       },
@@ -24,7 +25,28 @@ describe("GoabDatePicker", () => {
     expect(el.getAttribute("value")).toBe("2024-01-15");
     expect(el.getAttribute("min")).toBe("2024-01-01");
     expect(el.getAttribute("max")).toBe("2024-12-31");
+    expect(el.getAttribute("disabled")).toBe("true");
     expect(el.getAttribute("testid")).toBe("date-picker-test");
     expect(el.getAttribute("mt")).toBe("s");
+  });
+
+  it("should set disabled to false when disabled=false", () => {
+    const wrapper = mount(GoabDatePicker, {
+      props: { disabled: false },
+    });
+    const el = wrapper.find("goa-date-picker").element;
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabDatePicker, {
+      props: { disabled: true },
+    });
+    const el = wrapper.find("goa-date-picker").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 });

@@ -6,7 +6,7 @@ describe("GoabButton", () => {
   it("should render", () => {
     const wrapper = mount(GoabButton);
     const el = wrapper.find("goa-button").element;
-    expect(el.getAttribute("disabled")).toBeNull();
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should render the properties", () => {
@@ -59,12 +59,24 @@ describe("GoabButton", () => {
     expect(el.getAttribute("data-grid")).toBe("cell");
   });
 
-  it("should not set disabled when disabled=false", () => {
+  it("should set disabled to false when disabled=false", () => {
     const wrapper = mount(GoabButton, {
       props: { disabled: false },
     });
     const el = wrapper.find("goa-button").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabButton, {
+      props: { disabled: true },
+    });
+    const el = wrapper.find("goa-button").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   describe("size", () => {

@@ -45,7 +45,10 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, { booleanProps: ["disabled", "checked", "error", "compact"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["checked", "error", "compact"],
+});
 const slots = useSlots() as Slots;
 </script>
 

@@ -62,7 +62,10 @@ const emit = defineEmits<{
   onBlur: [detail: GoabTextAreaOnBlurDetail];
 }>();
 
-const wcProps = useWcProps(props, { booleanProps: ["readOnly", "disabled", "error"] });
+const wcProps = useWcProps(props, {
+  booleanPropsWithFalse: ["disabled"],
+  booleanProps: ["readOnly", "error"],
+});
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;

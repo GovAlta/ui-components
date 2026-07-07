@@ -8,7 +8,7 @@ describe("GoabTextarea", () => {
     const el = wrapper.find("goa-textarea").element;
     expect(el.getAttribute("name")).toBe("textarea-name");
     expect(el.getAttribute("readonly")).toBeNull();
-    expect(el.getAttribute("disabled")).toBeNull();
+    expect(el.getAttribute("disabled")).toBe("false");
     expect(el.getAttribute("error")).toBeNull();
   });
 
@@ -93,12 +93,24 @@ describe("GoabTextarea", () => {
     expect(wrapper.emitted("onBlur")).toBeTruthy();
   });
 
-  it("should not set disabled when disabled=false", () => {
+  it("should set disabled to false when disabled=false", () => {
     const wrapper = mount(GoabTextarea, {
       props: { name: "textarea-name", disabled: false },
     });
     const el = wrapper.find("goa-textarea").element;
-    expect(el.hasAttribute("disabled")).toBe(false);
+    expect(el.getAttribute("disabled")).toBe("false");
+  });
+
+  it("should update disabled from true to false", async () => {
+    const wrapper = mount(GoabTextarea, {
+      props: { name: "textarea-name", disabled: true },
+    });
+    const el = wrapper.find("goa-textarea").element;
+    expect(el.getAttribute("disabled")).toBe("true");
+
+    await wrapper.setProps({ disabled: false });
+
+    expect(el.getAttribute("disabled")).toBe("false");
   });
 
   it("should pass data-grid attributes", () => {
