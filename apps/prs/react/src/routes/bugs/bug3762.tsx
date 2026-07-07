@@ -91,7 +91,7 @@ export function Bug3762Route() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   const signedInUtilitiesSlot = (
-    <GoabBlock alignment="center" direction="row" gap="m">
+    <>
       <GoabButton type="tertiary" size="compact">
         Help
       </GoabButton>
@@ -104,14 +104,12 @@ export function Bug3762Route() {
         <GoabMenuAction text="User settings" action="user-settings" />
         <GoabMenuAction text="Sign out" action="sign-out" />
       </GoabMenuButton>
-    </GoabBlock>
+    </>
   );
 
   const signedOutUtilitiesSlot = (
-    <GoabBlock alignment="center" direction="row" gap="m">
-      <GoabButton type="tertiary" size="compact">
-        Help
-      </GoabButton>
+    <>
+      <a href="#">Help</a>
       <GoabButton
         type="tertiary"
         size="compact"
@@ -120,7 +118,7 @@ export function Bug3762Route() {
       >
         Sign in
       </GoabButton>
-    </GoabBlock>
+    </>
   );
 
   return (
@@ -128,213 +126,99 @@ export function Bug3762Route() {
       <div>
         <h1>3762 AppHeader examples using slot property</h1>
       </div>
-      <GoabContainer type="interactive" padding="relaxed">
-        <GoabText tag="h3" size="heading-s">
-          Site chrome
-        </GoabText>
-        <GoabOneColumnLayout>
-          <GoabAppHeader
-            heading="Example 1"
-            navigation={navigationSlot}
-            utilities={isSignedIn ? signedInUtilitiesSlot : signedOutUtilitiesSlot}
-            phase={<GoabBadge type="important" content="Service preview" />}
-            banner={bannerSlot}
-          ></GoabAppHeader>
-          <GoabHeroBanner
-            heading="Hero banner"
-            backgroundUrl="https://picsum.photos/1200/400?random=3"
-            actions={heroActions}
-          >
-            <GoabText tag="p" size="body-l">
-              Hero banner demonstrates background imagery and projected actions.
-            </GoabText>
-          </GoabHeroBanner>
-          <GoabBlock direction="row" gap="l" mt="m">
-            <GoabSideMenu>
-              <GoabSideMenuHeading>Menu heading</GoabSideMenuHeading>
-              <GoabSideMenuGroup heading="Group one">
-                <a href="#">Link A</a>
-                <a href="#">Link B</a>
-              </GoabSideMenuGroup>
-              <a href="#">Loose link</a>
-            </GoabSideMenu>
-            <GoabPageBlock width="full">
-              <GoabText tag="p" size="body-m">
-                Content area with side menu demonstrates layout wrappers.
-              </GoabText>
-            </GoabPageBlock>
-          </GoabBlock>
-        </GoabOneColumnLayout>
-      </GoabContainer>
+
+      <GoabText tag="h3" size="heading-s">
+        Site chrome
+      </GoabText>
+      <GoabAppHeader
+        testId="example-1"
+        heading="Example 1"
+        navigation={navigationSlot}
+        utilities={isSignedIn ? signedInUtilitiesSlot : signedOutUtilitiesSlot}
+        phase={<GoabBadge type="important" content="Service preview" />}
+        banner={bannerSlot}
+      ></GoabAppHeader>
 
       <hr />
 
       <div>
         <h1>3762 AppHeader examples using slot property and big Utilities</h1>
       </div>
-      <GoabContainer type="interactive" padding="relaxed">
-        <GoabText tag="h3" size="heading-s">
-          Site chrome
-        </GoabText>
-        <GoabOneColumnLayout>
-          <GoabAppHeader
-            heading="Example 2"
-            navigation={bigNavigationSlot}
-            utilities={bigUtilitiesSlot}
-            phase={<GoabBadge type="important" content="Service preview" />}
-            banner={bannerSlot}
-          ></GoabAppHeader>
-          <GoabHeroBanner
-            heading="Hero banner"
-            backgroundUrl="https://picsum.photos/1200/400?random=3"
-            actions={heroActions}
-          >
-            <GoabText tag="p" size="body-l">
-              Hero banner demonstrates background imagery and projected actions.
-            </GoabText>
-          </GoabHeroBanner>
-          <GoabBlock direction="row" gap="l" mt="m">
-            <GoabSideMenu>
-              <GoabSideMenuHeading>Menu heading</GoabSideMenuHeading>
-              <GoabSideMenuGroup heading="Group one">
-                <a href="#">Link A</a>
-                <a href="#">Link B</a>
-              </GoabSideMenuGroup>
-              <a href="#">Loose link</a>
-            </GoabSideMenu>
-            <GoabPageBlock width="full">
-              <GoabText tag="p" size="body-m">
-                Content area with side menu demonstrates layout wrappers.
-              </GoabText>
-            </GoabPageBlock>
-          </GoabBlock>
-        </GoabOneColumnLayout>
-      </GoabContainer>
+      <GoabText tag="h3" size="heading-s">
+        Site chrome
+      </GoabText>
+      <GoabAppHeader
+        testId="example-2-bigutils"
+        heading="Example 2"
+        navigation={bigNavigationSlot}
+        utilities={bigUtilitiesSlot}
+        phase={<GoabBadge type="important" content="Service preview" />}
+        banner={bannerSlot}
+      ></GoabAppHeader>
 
       <hr />
 
       <h1>AppHeader examples using slot property (Legacy)</h1>
       <p>Ensure the fix did not break old/legacy examples using slot</p>
-      <GoabContainer type="interactive" padding="relaxed">
-        <GoabText tag="h3" size="heading-s">
-          Site chrome
-        </GoabText>
-        <GoabOneColumnLayout>
-          <GoabAppHeader heading="Example 3">
-            <a href="#">Home</a>
-            <GoabAppHeaderMenu heading="Menu">
-              <a href="#">Item 1</a>
-              <a href="#">Item 2</a>
-            </GoabAppHeaderMenu>
-            <a slot="navigation" href="#">
-              Dashboard
-            </a>
-            <GoabAppHeaderMenu slotName="navigation" heading="Applications">
-              <a href="#">New application</a>
-              <a href="#">Active</a>
-              <a href="#">Archived</a>
-            </GoabAppHeaderMenu>
-            <a slot="navigation" href="#">
-              Reports
-            </a>
-            <a slot="navigation" href="#">
-              Settings
-            </a>
-            <div slot="utilities">
-              <GoabBlock alignment="center" direction="row" gap="m">
-                <GoabButton type="tertiary" size="compact">
-                  Help
-                </GoabButton>
-                <GoabMenuButton text="John Smith" type="tertiary" size="compact">
-                  <GoabMenuAction text="User settings" action="user-settings" />
-                  <GoabMenuAction text="Sign out" action="sign-out" />
-                </GoabMenuButton>
-              </GoabBlock>
-            </div>
-          </GoabAppHeader>
-          <GoabHeroBanner
-            heading="Hero banner"
-            backgroundUrl="https://picsum.photos/1200/400?random=3"
-            actions={heroActions}
-          >
-            <GoabText tag="p" size="body-l">
-              Hero banner demonstrates background imagery and projected actions.
-            </GoabText>
-          </GoabHeroBanner>
-          <GoabBlock direction="row" gap="l" mt="m">
-            <GoabSideMenu>
-              <GoabSideMenuHeading>Menu heading</GoabSideMenuHeading>
-              <GoabSideMenuGroup heading="Group one">
-                <a href="#">Link A</a>
-                <a href="#">Link B</a>
-              </GoabSideMenuGroup>
-              <a href="#">Loose link</a>
-            </GoabSideMenu>
-            <GoabPageBlock width="full">
-              <GoabText tag="p" size="body-m">
-                Content area with side menu demonstrates layout wrappers.
-              </GoabText>
-            </GoabPageBlock>
+
+      <GoabAppHeader heading="Example 3" utilities={bigUtilitiesSlot} banner={bannerSlot}>
+        <a href="#">Home</a>
+        <GoabAppHeaderMenu heading="Menu">
+          <a href="#">Item 1</a>
+          <a href="#">Item 2</a>
+        </GoabAppHeaderMenu>
+        <a slot="navigation" href="#">
+          Dashboard
+        </a>
+        <GoabAppHeaderMenu slotName="navigation" heading="Applications">
+          <a href="#">New application</a>
+          <a href="#">Active</a>
+          <a href="#">Archived</a>
+        </GoabAppHeaderMenu>
+        <a slot="navigation" href="#">
+          Reports
+        </a>
+        <a slot="navigation" href="#">
+          Settings
+        </a>
+        <div slot="utilities">
+          <GoabBlock alignment="center" direction="row" gap="m">
+            <GoabButton type="tertiary" size="compact">
+              Help
+            </GoabButton>
+            <GoabMenuButton text="John Smith" type="tertiary" size="compact">
+              <GoabMenuAction text="User settings" action="user-settings" />
+              <GoabMenuAction text="Sign out" action="sign-out" />
+            </GoabMenuButton>
           </GoabBlock>
-        </GoabOneColumnLayout>
-      </GoabContainer>
+        </div>
+      </GoabAppHeader>
 
       <hr />
 
       <h1>AppHeader examples using slot property (Legacy - big utilities)</h1>
       <p>Ensure the fix did not break old/legacy examples using slot</p>
-      <GoabContainer type="interactive" padding="relaxed">
-        <GoabText tag="h3" size="heading-s">
-          Site chrome
-        </GoabText>
-        <GoabOneColumnLayout>
-          <GoabAppHeader heading="Example 4">
-            <a slot="navigation" href="#">
-              Home
-            </a>
-            <div slot="utilities">
-              <GoabButton type="tertiary" size="compact">
-                Help
-              </GoabButton>
-            </div>
-            <div slot="utilities">
-              <GoabButton type="tertiary" size="compact">
-                Sign in
-              </GoabButton>
-            </div>
-            <div slot="utilities">
-              <GoabMenuButton text="John Smith" type="tertiary" size="compact">
-                <GoabMenuAction text="User settings" action="user-settings" />
-                <GoabMenuAction text="Sign out" action="sign-out" />
-              </GoabMenuButton>
-            </div>
-          </GoabAppHeader>
-          <GoabHeroBanner
-            heading="Hero banner"
-            backgroundUrl="https://picsum.photos/1200/400?random=3"
-            actions={heroActions}
-          >
-            <GoabText tag="p" size="body-l">
-              Hero banner demonstrates background imagery and projected actions.
-            </GoabText>
-          </GoabHeroBanner>
-          <GoabBlock direction="row" gap="l" mt="m">
-            <GoabSideMenu>
-              <GoabSideMenuHeading>Menu heading</GoabSideMenuHeading>
-              <GoabSideMenuGroup heading="Group one">
-                <a href="#">Link A</a>
-                <a href="#">Link B</a>
-              </GoabSideMenuGroup>
-              <a href="#">Loose link</a>
-            </GoabSideMenu>
-            <GoabPageBlock width="full">
-              <GoabText tag="p" size="body-m">
-                Content area with side menu demonstrates layout wrappers.
-              </GoabText>
-            </GoabPageBlock>
-          </GoabBlock>
-        </GoabOneColumnLayout>
-      </GoabContainer>
+      <GoabAppHeader heading="Example 4">
+        <a slot="navigation" href="#">
+          Home
+        </a>
+        <div slot="utilities">
+          <GoabButton type="tertiary" size="compact">
+            Help
+          </GoabButton>
+        </div>
+        <div slot="utilities">
+          <GoabButton type="tertiary" size="compact">
+            Sign in
+          </GoabButton>
+        </div>
+        <div slot="utilities">
+          <GoabMenuButton text="John Smith" type="tertiary" size="compact">
+            <GoabMenuAction text="User settings" action="user-settings" />
+            <GoabMenuAction text="Sign out" action="sign-out" />
+          </GoabMenuButton>
+        </div>
+      </GoabAppHeader>
 
       <h1>AppHeader example mixing slot and navigation prop</h1>
       <p>
@@ -345,18 +229,16 @@ export function Bug3762Route() {
         <strong>Expectation:</strong> The two should be combined, one should not overwrite
         the other.
       </p>
-      <GoabContainer type="interactive" padding="relaxed">
-        <GoabAppHeader heading="Combined Slot Test" navigation={navigationSlot2}>
-          <a slot="navigation" href="#">
-            Slot 1
-          </a>
-          <GoabAppHeaderMenu slotName="navigation" heading="Slot Navigation">
-            <a href="#">Slot Nav 1</a>
-            <a href="#">Slot Nav 2</a>
-            <a href="#">Slot Nav 3</a>
-          </GoabAppHeaderMenu>
-        </GoabAppHeader>
-      </GoabContainer>
+      <GoabAppHeader heading="Combined Slot Test" navigation={navigationSlot2}>
+        <a slot="navigation" href="#">
+          Slot 1
+        </a>
+        <GoabAppHeaderMenu slotName="navigation" heading="Slot Navigation">
+          <a href="#">Slot Nav 1</a>
+          <a href="#">Slot Nav 2</a>
+          <a href="#">Slot Nav 3</a>
+        </GoabAppHeaderMenu>
+      </GoabAppHeader>
     </>
   );
 }
