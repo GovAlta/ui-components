@@ -76,12 +76,12 @@ describe("GoabWorkSideMenu", () => {
     expect(wrapper.emitted("onNavigate")![0]).toEqual([detail.url]);
   });
 
-  it("should set open to false when open=false", () => {
+  it("should not set open when open=false", () => {
     const wrapper = mount(GoabWorkSideMenu, {
       props: { heading: "Menu", url: "/", open: false },
     });
     const el = wrapper.find("goa-work-side-menu").element;
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 
   it("should update open from true to false", async () => {
@@ -93,6 +93,6 @@ describe("GoabWorkSideMenu", () => {
 
     await wrapper.setProps({ open: false });
 
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 });

@@ -13,10 +13,7 @@ import {
   GoabText,
   GoabBlock,
 } from "@abgov/vue-components";
-import type {
-  GoabButtonType,
-  GoabCalloutType,
-} from "@abgov/ui-components-common";
+import type { GoabButtonType, GoabCalloutType } from "@abgov/ui-components-common";
 
 const buttonTypes: GoabButtonType[] = ["primary", "secondary", "tertiary", "text"];
 const calloutTypes: GoabCalloutType[] = [
@@ -42,13 +39,19 @@ const dropdownFilterable = ref(false);
 const dropdownCompact = ref(false);
 const dropdownSelection = ref("");
 const closeBubbleModalOpen = ref(false);
+const accordionOpen = ref(false);
+const accordionIconRight = ref(false);
+const paddedPopover = ref(true);
+const badgeIconVisible = ref(false);
+const closableModalOpen = ref(false);
+const nonClosableModalOpen = ref(false);
 </script>
 
 <template>
   <GoabText tag="h1" size="heading-l">Feature 4033: Vue Component Wrappers Demo</GoabText>
-  <GoabText tag="p" size="body-m"
-    >This page demonstrates Vue wrapper components for testing and review.</GoabText
-  >
+  <GoabText tag="p" size="body-m">
+    This page demonstrates Vue wrapper components for testing and review.
+  </GoabText>
   <GoabBlock gap="xl" direction="column" width="100%">
     <GoabText tag="h2" size="heading-m">Basic component</GoabText>
     <GoabBlock gap="m">
@@ -86,7 +89,7 @@ const closeBubbleModalOpen = ref(false);
     <GoabBlock gap="m">
       <GoabBadge type="information" content="No icon" />
       <GoabBadge type="success" :icon="true" content="Default icon" />
-      <GoabBadge type="important" iconType="airplane" content="Custom icon" />
+      <GoabBadge type="important" icon-type="airplane" content="Custom icon" />
     </GoabBlock>
 
     <GoabText tag="h2" size="heading-m">Dropdown reactive props</GoabText>
@@ -124,6 +127,75 @@ const closeBubbleModalOpen = ref(false);
       <GoabDropdownItem value="gamma" label="Gamma" />
     </GoabDropdown>
 
+    <GoabText tag="h2" size="heading-m">Boolean toggles playground</GoabText>
+    <GoabText tag="p" size="body-m">
+      Toggle these boolean props repeatedly to verify wrappers update both true and false
+      values on the underlying web components.
+    </GoabText>
+
+    <GoabText tag="h3" size="heading-s">1. Accordion open</GoabText>
+    <GoabButton type="secondary" @onClick="accordionOpen = !accordionOpen">
+      Open: {{ accordionOpen ? "true" : "false" }}
+    </GoabButton>
+    <GoabAccordion heading="Reactive accordion" :open="accordionOpen">
+      <GoabText mt="0" mb="0">Accordion content that responds to open.</GoabText>
+    </GoabAccordion>
+
+    <GoabText tag="h3" size="heading-s">2. Accordion icon position</GoabText>
+    <GoabButton type="secondary" @onClick="accordionIconRight = !accordionIconRight">
+      Icon on right: {{ accordionIconRight ? "true" : "false" }}
+    </GoabButton>
+    <GoabAccordion
+      heading="Accordion icon position"
+      :icon-position="accordionIconRight ? 'right' : 'left'"
+    >
+      <GoabText mt="0" mb="0">Toggle iconPosition between left and right.</GoabText>
+    </GoabAccordion>
+
+    <GoabText tag="h3" size="heading-s">3. Popover padded</GoabText>
+    <GoabButton type="secondary" @onClick="paddedPopover = !paddedPopover">
+      Padded: {{ paddedPopover ? "true" : "false" }}
+    </GoabButton>
+    <GoabPopover :padded="paddedPopover">
+      <template #target>
+        <GoabButton type="primary">Open reactive popover</GoabButton>
+      </template>
+      <GoabText mt="0" mb="0">Popover content with dynamic padding.</GoabText>
+    </GoabPopover>
+
+    <GoabText tag="h3" size="heading-s">4. Badge icon</GoabText>
+    <GoabButton type="secondary" @onClick="badgeIconVisible = !badgeIconVisible">
+      Icon: {{ badgeIconVisible ? "true" : "false" }}
+    </GoabButton>
+    <GoabBadge type="success" :icon="badgeIconVisible" content="Reactive badge icon" />
+
+    <GoabText tag="h3" size="heading-s">5. Modal open (closable)</GoabText>
+    <GoabButton type="secondary" @onClick="closableModalOpen = !closableModalOpen">
+      Open closable modal: {{ closableModalOpen ? "true" : "false" }}
+    </GoabButton>
+    <GoabModal
+      :open="closableModalOpen"
+      heading="Reactive closable modal"
+      @onClose="closableModalOpen = false"
+    >
+      <GoabText mt="0" mb="0">This modal has onClose and should close normally.</GoabText>
+    </GoabModal>
+
+    <GoabText tag="h3" size="heading-s">6. Modal open (no onClose)</GoabText>
+    <GoabButton type="secondary" @onClick="nonClosableModalOpen = !nonClosableModalOpen">
+      Open non-closable modal: {{ nonClosableModalOpen ? "true" : "false" }}
+    </GoabButton>
+    <GoabModal :open="nonClosableModalOpen" heading="Reactive non-closable modal">
+      <GoabText mt="0" mb="0">
+        This modal does not wire onClose. Toggle it with the button above.
+      </GoabText>
+      <template #actions>
+        <GoabButton type="primary" @onClick="nonClosableModalOpen = false">
+          Close
+        </GoabButton>
+      </template>
+    </GoabModal>
+
     <GoabText tag="h2" size="heading-m">Bubbled close events</GoabText>
     <GoabText tag="p" size="body-m">
       Open the modal, then open this menu button and choose an action. The menu button
@@ -144,8 +216,8 @@ const closeBubbleModalOpen = ref(false);
       "
     >
       <GoabText mt="0" mb="m">
-        Open this menu and select an action. The menu button should close its own
-        popover without closing this modal.
+        Open this menu and select an action. The menu button should close its own popover
+        without closing this modal.
       </GoabText>
       <GoabMenuButton text="More actions">
         <GoabMenuAction text="Download PDF" action="download-pdf" />
@@ -156,24 +228,24 @@ const closeBubbleModalOpen = ref(false);
 
     <GoabText tag="h2" size="heading-m">Component with optional event</GoabText>
     <GoabButton @onClick="modalOpen = true">Open modal with onClose</GoabButton>
-    <GoabButton @onClick="modalUnclosableOpen = true"
-      >Open modal without onClose</GoabButton
-    >
+    <GoabButton @onClick="modalUnclosableOpen = true">
+      Open modal without onClose
+    </GoabButton>
     <GoabModal :open="modalOpen" heading="Closable modal" @onClose="modalOpen = false">
-      <GoabText mt="0" mb="0"
-        >This modal has an <code>onClose</code> handler, so the close button and backdrop
-        click are active.</GoabText
-      >
+      <GoabText mt="0" mb="0">
+        This modal has an <code>onClose</code> handler, so the close button and backdrop
+        click are active.
+      </GoabText>
     </GoabModal>
     <GoabModal :open="modalUnclosableOpen" heading="Unclosable modal">
-      <GoabText mt="0" mb="0"
-        >This modal has NO <code>onClose</code> handler, so the close button and backdrop
-        click are disabled.</GoabText
-      >
+      <GoabText mt="0" mb="0">
+        This modal has NO <code>onClose</code> handler, so the close button and backdrop
+        click are disabled.
+      </GoabText>
       <template #actions>
-        <GoabButton type="primary" @onClick="modalUnclosableOpen = false"
-          >Close</GoabButton
-        >
+        <GoabButton type="primary" @onClick="modalUnclosableOpen = false">
+          Close
+        </GoabButton>
       </template>
     </GoabModal>
   </GoabBlock>

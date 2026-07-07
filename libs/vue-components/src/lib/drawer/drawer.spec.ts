@@ -50,12 +50,12 @@ describe("GoabDrawer", () => {
     expect(wrapper.emitted()).toHaveProperty("onClose");
   });
 
-  it("should set open to false when open=false", () => {
+  it("should not set open when open=false", () => {
     const wrapper = mount(GoabDrawer, {
       props: { position: "right", open: false },
     });
     const el = wrapper.find("goa-drawer").element;
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 
   it("should update open from true to false", async () => {
@@ -67,6 +67,6 @@ describe("GoabDrawer", () => {
 
     await wrapper.setProps({ open: false });
 
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 });

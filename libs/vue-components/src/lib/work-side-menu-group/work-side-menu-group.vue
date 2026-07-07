@@ -15,7 +15,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const wcProps = useWcProps(props, { booleanPropsWithFalse: ["open"] });
+const wcProps = useWcProps(props, { booleanProps: ["open"] });
 </script>
 
 <template>

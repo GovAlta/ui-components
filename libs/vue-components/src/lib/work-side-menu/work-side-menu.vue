@@ -36,7 +36,7 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props, {
-  booleanPropsWithFalse: ["open"],
+  booleanProps: ["open"],
   renamedProps: {
     userName: "user-name",
     userSecondaryText: "user-secondary-text",

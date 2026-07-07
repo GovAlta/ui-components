@@ -31,7 +31,7 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props, {
-  booleanPropsWithFalse: ["open"],
+  booleanProps: ["open"],
 });
 const slots = useSlots() as Slots;
 

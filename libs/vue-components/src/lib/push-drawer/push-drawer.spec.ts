@@ -24,12 +24,12 @@ describe("GoabPushDrawer", () => {
     expect(el.getAttribute("mt")).toBe("s");
   });
 
-  it("should set open to false when open=false", () => {
+  it("should not set open when open=false", () => {
     const wrapper = mount(GoabPushDrawer, {
       props: { open: false },
     });
     const el = wrapper.find("goa-push-drawer").element;
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 
   it("should update open from true to false", async () => {
@@ -41,7 +41,7 @@ describe("GoabPushDrawer", () => {
 
     await wrapper.setProps({ open: false });
 
-    expect(el.getAttribute("open")).toBe("false");
+    expect(el.hasAttribute("open")).toBe(false);
   });
 
   it("should render content via default slot", () => {
