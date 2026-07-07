@@ -7,7 +7,7 @@
  */
 
 import css from "./toc.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { getActiveTabHash } from "../lib/tab-hash";
 
 export type TOCItem = {
@@ -20,60 +20,62 @@ type TOCProps = {
   cssQuery: string;
 };
 
+// Check if element is visible (not hidden by display:none or in hidden tab)
+function isVisible(el: HTMLElement): boolean {
+  return el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0;
+}
+
+// Query headings matching cssQuery - only visible ones
+function queryHeadings(cssQuery: string): TOCItem[] {
+  const headings = document.querySelectorAll<HTMLHeadingElement>(cssQuery);
+  const result: TOCItem[] = [];
+
+  headings.forEach((el) => {
+    const id = el.getAttribute("id");
+    const title = el.textContent?.trim();
+
+    // For goa-text elements, read the "as" attribute for the heading level
+    const tagName =
+      el.tagName === "GOA-TEXT"
+        ? (el.getAttribute("as") || "h2").toUpperCase()
+        : el.tagName;
+
+    // Only include visible headings
+    if (id && title && isVisible(el)) {
+      result.push({
+        id,
+        title,
+        tagName,
+      });
+    }
+  });
+
+  return result;
+}
+
 export function TableOfContents({ cssQuery }: TOCProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const containerRef = useRef<HTMLElement>(null);
   const initialHashHandled = useRef(false);
 
+  // Re-query headings and default to the first one as active. Before the
+  // initial hash has been resolved, skip the default so it can't steal
+  // activation from the anchor that resolution is still trying to reach.
+  const refreshHeadings = useCallback(() => {
+    const headings = queryHeadings(cssQuery);
+    setItems(headings);
+    if (headings.length > 0 && initialHashHandled.current) {
+      setActiveId(headings[0].id);
+    }
+  }, [cssQuery]);
+
+  // On first load, honor a direct link to one of this TOC's own anchors.
+  // Tabs.svelte's built-in anchor scroll only handles a single hash segment,
+  // so it can't be relied on once multiple tabs contribute their own hash.
+  // The owning tab may still be hidden (goa-tabs activates it asynchronously),
+  // so retry briefly rather than giving up on the first check.
   useEffect(() => {
-    // Check if element is visible (not hidden by display:none or in hidden tab)
-    function isVisible(el: HTMLElement): boolean {
-      return el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0;
-    }
-
-    // Query headings - only visible ones
-    function queryHeadings(): TOCItem[] {
-      const headings = document.querySelectorAll<HTMLHeadingElement>(cssQuery);
-      const result: TOCItem[] = [];
-
-      headings.forEach((el) => {
-        const id = el.getAttribute("id");
-        const title = el.textContent?.trim();
-
-        // For goa-text elements, read the "as" attribute for the heading level
-        const tagName =
-          el.tagName === "GOA-TEXT"
-            ? (el.getAttribute("as") || "h2").toUpperCase()
-            : el.tagName;
-
-        // Only include visible headings
-        if (id && title && isVisible(el)) {
-          result.push({
-            id,
-            title,
-            tagName,
-          });
-        }
-      });
-
-      return result;
-    }
-
-    // Update items and set first as active
-    function updateHeadings() {
-      const headings = queryHeadings();
-      setItems(headings);
-      if (headings.length > 0 && initialHashHandled.current) {
-        setActiveId(headings[0].id);
-      }
-    }
-
-    // On first load, honor a direct link to one of this TOC's own anchors.
-    // Tabs.svelte's built-in anchor scroll only handles a single hash segment,
-    // so it can't be relied on once multiple tabs contribute their own hash.
-    // The owning tab may still be hidden (goa-tabs activates it asynchronously),
-    // so retry briefly rather than giving up on the first check.
     const hashSegments = window.location.hash.slice(1).split("#").filter(Boolean);
     let hashRetryTimer: ReturnType<typeof setTimeout> | null = null;
     const resettleTimers: ReturnType<typeof setTimeout>[] = [];
@@ -81,7 +83,7 @@ export function TableOfContents({ cssQuery }: TOCProps) {
     function tryResolveInitialHash(attempt = 0) {
       if (hashSegments.length === 0) {
         initialHashHandled.current = true;
-        updateHeadings();
+        refreshHeadings();
         return;
       }
 
@@ -94,7 +96,7 @@ export function TableOfContents({ cssQuery }: TOCProps) {
 
       if (candidate && isVisible(candidate)) {
         initialHashHandled.current = true;
-        updateHeadings();
+        refreshHeadings();
         setActiveId(candidate.id);
         candidate.scrollIntoView({ behavior: "smooth" });
 
@@ -117,22 +119,33 @@ export function TableOfContents({ cssQuery }: TOCProps) {
 
       // No matching anchor (or it never became visible) - fall back to default.
       initialHashHandled.current = true;
-      updateHeadings();
+      refreshHeadings();
     }
 
     // Initial query with small delay for DOM to be ready
     const timer = setTimeout(tryResolveInitialHash, 100);
 
-    // Listen for goa-tabs change events - re-query when tab becomes visible
-    // goa-tabs dispatches "_change" with { tab: number } when switching tabs
+    return () => {
+      clearTimeout(timer);
+      if (hashRetryTimer) clearTimeout(hashRetryTimer);
+      resettleTimers.forEach(clearTimeout);
+    };
+  }, [cssQuery, refreshHeadings]);
+
+  // goa-tabs dispatches "_change" with { tab: number } when switching tabs -
+  // re-query so the TOC reflects whichever tab just became visible.
+  useEffect(() => {
     function handleTabChange() {
       // Small delay to ensure tab content is visible after the event
-      setTimeout(updateHeadings, 50);
+      setTimeout(refreshHeadings, 50);
     }
 
     document.addEventListener("_change", handleTabChange);
+    return () => document.removeEventListener("_change", handleTabChange);
+  }, [refreshHeadings]);
 
-    // Update active heading on scroll - only check visible headings
+  // Highlight whichever visible heading is nearest the top of the viewport.
+  useEffect(() => {
     function handleScroll() {
       const headings = document.querySelectorAll<HTMLHeadingElement>(cssQuery);
       const visibleHeadings = Array.from(headings).filter(isVisible);
@@ -163,14 +176,7 @@ export function TableOfContents({ cssQuery }: TOCProps) {
     }
 
     document.addEventListener("scroll", handleScroll);
-
-    return () => {
-      clearTimeout(timer);
-      if (hashRetryTimer) clearTimeout(hashRetryTimer);
-      resettleTimers.forEach(clearTimeout);
-      document.removeEventListener("_change", handleTabChange);
-      document.removeEventListener("scroll", handleScroll);
-    };
+    return () => document.removeEventListener("scroll", handleScroll);
   }, [cssQuery]);
 
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
