@@ -49003,7 +49003,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["open"],
+      booleanPropsWithFalse: ["open"],
       renamedProps: { headingType: "heading-type" }
     });
     const slots = useSlots();
@@ -49154,7 +49154,7 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["disabled"],
+      booleanPropsWithFalse: ["disabled"],
       jsonProps: ["actionArgs"],
       renamedProps: { actionArg: "action-arg", actionArgs: "action-args" }
     });
@@ -49181,7 +49181,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanProps: ["open"] });
+    const wcProps = useWcProps(props, { booleanPropsWithFalse: ["open"] });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-details", normalizeProps(guardReactiveProps(unref(wcProps))), [
         renderSlot(_ctx.$slots, "default")
@@ -49211,7 +49211,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["open"]
+      booleanPropsWithFalse: ["open"]
     });
     const slots = useSlots();
     function onClose(e) {
@@ -49385,7 +49385,7 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["disabled"],
+      booleanPropsWithFalse: ["disabled"],
       jsonProps: ["actionArgs"],
       renamedProps: { actionArg: "action-arg", actionArgs: "action-args" }
     });
@@ -49912,7 +49912,10 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["disabled", "readonly", "error", "focused"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["readonly", "error", "focused"]
+    });
     function onChange(e) {
       const detail = e.detail;
       emit2("onChange", { ...detail, event: e });
@@ -49999,7 +50002,10 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["readOnly", "disabled", "error"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["readOnly", "error"]
+    });
     function onChange(e) {
       const detail = e.detail;
       emit2("onChange", { ...detail, event: e });
@@ -50057,7 +50063,8 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["checked", "indeterminate", "disabled", "error"]
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["checked", "indeterminate", "error"]
     });
     const valueAttr = computed(() => {
       if (typeof props.value === "boolean") {
@@ -50117,7 +50124,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["disabled", "error", "filterable", "native"]
+      booleanPropsWithFalse: ["disabled", "error", "filterable", "native"]
     });
     const valueAttr = computed(() => {
       if (typeof props.value === "undefined") return "";
@@ -50176,7 +50183,10 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["error"]
+    });
     function onChange(e) {
       const detail = e.detail;
       emit2("onChange", { ...detail, event: e });
@@ -50217,7 +50227,10 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanProps: ["disabled", "checked", "error", "compact"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["checked", "error", "compact"]
+    });
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-radio-item", normalizeProps(guardReactiveProps(unref(wcProps))), [
@@ -50404,7 +50417,10 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["disabled", "error"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["error"]
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-checkbox-list", mergeProps(unref(wcProps), {
         on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", { ...$event.detail, event: $event }))
@@ -50435,7 +50451,10 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
-    const wcProps = useWcProps(props, { booleanProps: ["error", "disabled"] });
+    const wcProps = useWcProps(props, {
+      booleanPropsWithFalse: ["disabled"],
+      booleanProps: ["error"]
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-date-picker", mergeProps(unref(wcProps), {
         on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", { ...$event.detail, event: $event }))
@@ -50655,7 +50674,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanProps: ["disabled"] });
+    const wcProps = useWcProps(props, { booleanPropsWithFalse: ["disabled"] });
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tab", normalizeProps(guardReactiveProps(unref(wcProps))), [
@@ -50694,7 +50713,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanProps: ["open"],
+      booleanPropsWithFalse: ["open"],
       renamedProps: {
         userName: "user-name",
         userSecondaryText: "user-secondary-text"
@@ -50729,7 +50748,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanProps: ["open"] });
+    const wcProps = useWcProps(props, { booleanPropsWithFalse: ["open"] });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-work-side-menu-group", normalizeProps(guardReactiveProps(unref(wcProps))), [
         renderSlot(_ctx.$slots, "default")
