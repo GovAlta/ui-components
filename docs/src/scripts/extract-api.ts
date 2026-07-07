@@ -199,18 +199,19 @@ const SLOT_TYPE_OVERRIDES: Record<
   Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
 > = {
   footer: {
-    react: {
-      nav: "GoabAppFooterNavSection",
-      meta: "GoabAppFooterMetaSection",
-    },
-    angular: {
-      nav: "TemplateRef",
-      meta: "TemplateRef",
-    },
     webComponents: {
       nav: "goa-app-footer-nav-section",
       meta: "goa-app-footer-meta-section",
     },
+  },
+};
+// Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
+// typed props/inputs in React and Angular. Documenting them as ReactNode/TemplateRef props
+// would be wrong since consumers never bind a value to them, they nest the sub-component instead.
+const SLOT_FRAMEWORK_EXCLUDES: Record<string, Partial<Record<"react" | "angular" | "webComponents", string[]>>> = {
+  footer: {
+    react: ["nav", "meta"],
+    angular: ["nav", "meta"],
   },
 };
 const ALLOW_INTERNAL_PROP_BY_COMPONENT: Record<string, Set<string>> = {
@@ -2607,6 +2608,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       .filter(
         (name) =>
           !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
+          !SLOT_FRAMEWORK_EXCLUDES[componentName]?.[framework]?.includes(name) &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
       .map((name) => {

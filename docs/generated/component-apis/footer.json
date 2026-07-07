@@ -27,20 +27,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "meta",
-          "type": "GoabAppFooterMetaSection",
-          "description": "",
-          "required": false
-        },
-        {
-          "name": "nav",
-          "type": "GoabAppFooterNavSection",
-          "description": "",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -67,20 +54,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "meta",
-          "type": "TemplateRef",
-          "description": "",
-          "required": false
-        },
-        {
-          "name": "nav",
-          "type": "TemplateRef",
-          "description": "",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
