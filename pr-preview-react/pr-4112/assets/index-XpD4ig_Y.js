@@ -20588,13 +20588,13 @@ function w2(t, e, o) {
     Z = true;
     const me = `${V.offsetHeight}px`, _e = `${F.offsetHeight}px`;
     $ && $.cancel();
-    const Fe = we(), $e = re();
+    const Fe = we(), Ke = re();
     $ = V.animate(
       {
         // Set the keyframes from the startHeight to endHeight
         height: [me, _e]
       },
-      { duration: Fe, easing: $e }
+      { duration: Fe, easing: Ke }
     ), $.onfinish = () => X(false), $.oncancel = () => Z = false;
   }
   function le() {
@@ -20604,13 +20604,13 @@ function w2(t, e, o) {
     q = true;
     const me = `${V.offsetHeight}px`, _e = `${F.offsetHeight + E.offsetHeight}px`;
     $ && $.cancel();
-    const Fe = we(), $e = te();
+    const Fe = we(), Ke = te();
     $ = V.animate(
       {
         // Set the keyframes from the startHeight to endHeight
         height: [me, _e]
       },
-      { duration: Fe, easing: $e }
+      { duration: Fe, easing: Ke }
     ), $.onfinish = () => X(true), $.oncancel = () => q = false, o(23, v = "true");
   }
   function X(me) {
@@ -22429,16 +22429,16 @@ function V2(t, e, o) {
     l && R.dispatchEvent(new CustomEvent("_menuClick", { composed: true, bubbles: true }));
   };
   function ee() {
-    var $e;
+    var Ke;
     if (!M) return;
-    const Fe = (($e = M.getRootNode().host) == null ? void 0 : $e.children) || [];
-    o(13, H = Array.from(Fe).some((et) => et.getAttribute("slot") === "banner")), o(14, P = Array.from(Fe).some((et) => et.getAttribute("slot") === "navigation"));
+    const Fe = ((Ke = M.getRootNode().host) == null ? void 0 : Ke.children) || [];
+    o(13, H = Array.from(Fe).some(($e) => $e.getAttribute("slot") === "banner")), o(14, P = Array.from(Fe).some(($e) => $e.getAttribute("slot") === "navigation"));
   }
   function K() {
-    var $e;
+    var Ke;
     if (!M || f !== "2") return;
-    const Fe = (($e = M.getRootNode().host) == null ? void 0 : $e.children) || [];
-    V = Array.from(Fe).filter((et) => et.getAttribute("slot") === "utilities"), F = V.length;
+    const Fe = ((Ke = M.getRootNode().host) == null ? void 0 : Ke.children) || [];
+    V = Array.from(Fe).filter(($e) => $e.getAttribute("slot") === "utilities"), F = V.length;
   }
   function le() {
     Z && clearTimeout(Z), Z = window.setTimeout(
@@ -22456,7 +22456,7 @@ function V2(t, e, o) {
           E !== false && o(15, E = false);
           return;
         }
-        const $e = Fe.offsetWidth, et = _e == null ? void 0 : _e.querySelector(".v2-logo-area"), nt = (et == null ? void 0 : et.offsetWidth) || (i ? 32 : 118), At = $e - nt - 200 - 96 - 48, Mt = _e == null ? void 0 : _e.querySelector('slot[name="utilities"]');
+        const Ke = Fe.offsetWidth, $e = _e == null ? void 0 : _e.querySelector(".v2-logo-area"), nt = ($e == null ? void 0 : $e.offsetWidth) || (i ? 32 : 118), At = Ke - nt - 200 - 96 - 48, Mt = _e == null ? void 0 : _e.querySelector('slot[name="utilities"]');
         let jt = 0;
         if (Mt) {
           const ot = Mt.assignedElements();
@@ -22477,19 +22477,19 @@ function V2(t, e, o) {
   }
   function X(_e) {
     if (!O) return;
-    _e.composedPath().some((et) => {
+    _e.composedPath().some(($e) => {
       var nt, gt;
-      return et instanceof Element && (((nt = et.classList) == null ? void 0 : nt.contains("v2-utilities-menu-button")) || ((gt = et.classList) == null ? void 0 : gt.contains("v2-utilities-dropdown")));
+      return $e instanceof Element && (((nt = $e.classList) == null ? void 0 : nt.contains("v2-utilities-menu-button")) || ((gt = $e.classList) == null ? void 0 : gt.contains("v2-utilities-dropdown")));
     }) || o(16, O = false);
   }
   function ie() {
     if (!M) return;
-    M.addEventListener("app-header-menu:mounted", ($e) => {
-      const et = $e.detail;
-      N = [...N, et], te();
+    M.addEventListener("app-header-menu:mounted", (Ke) => {
+      const $e = Ke.detail;
+      N = [...N, $e], te();
     });
     let _e = document.location.href;
-    new MutationObserver(($e) => {
+    new MutationObserver((Ke) => {
       Wo(document.location, _e) && (_e = document.location.href, we());
     }).observe(document.body, { childList: true, subtree: true }), window.addEventListener("popstate", we, true);
   }
@@ -22498,9 +22498,9 @@ function V2(t, e, o) {
   }
   function te() {
     let _e = [...S];
-    N.forEach(($e) => {
-      _e = [..._e, ...$e.links];
-    }), _e.forEach(($e) => $e.classList.remove("current"));
+    N.forEach((Ke) => {
+      _e = [..._e, ...Ke.links];
+    }), _e.forEach((Ke) => Ke.classList.remove("current"));
     const Fe = Fo(_e, window.location);
     Fe && Fe.classList.add("current"), re((Fe == null ? void 0 : Fe.getAttribute("href")) || "");
   }
@@ -22517,9 +22517,9 @@ function V2(t, e, o) {
     });
   }
   async function Ze() {
-    var $e;
+    var Ke;
     if (await tt(), !z) return false;
-    const _e = z == null ? void 0 : z.childNodes[0], Fe = ($e = _e == null ? void 0 : _e.assignedElements) == null ? void 0 : $e.call(_e);
+    const _e = z == null ? void 0 : z.childNodes[0], Fe = (Ke = _e == null ? void 0 : _e.assignedElements) == null ? void 0 : Ke.call(_e);
     return Fe ? Fe.length > 0 : [...z == null ? void 0 : z.querySelectorAll("a")].length > 0;
   }
   function Ce() {
@@ -28836,18 +28836,18 @@ function Lu(t, e, o) {
     });
     let oe = 0;
     se.forEach((Ae) => {
-      const Fe = En(Ae).filter((et) => {
-        const nt = et.getAttribute("data-grid");
+      const Fe = En(Ae).filter(($e) => {
+        const nt = $e.getAttribute("data-grid");
         return nt === "cell" || (nt == null ? void 0 : nt.startsWith("cell-"));
-      }).sort((et, nt) => {
-        const gt = et.getAttribute("data-grid") || "cell-0", pt = nt.getAttribute("data-grid") || "cell-0", It = gt === "cell" ? 0 : parseInt(gt.split("-")[1] || "0"), At = pt === "cell" ? 0 : parseInt(pt.split("-")[1] || "0");
+      }).sort(($e, nt) => {
+        const gt = $e.getAttribute("data-grid") || "cell-0", pt = nt.getAttribute("data-grid") || "cell-0", It = gt === "cell" ? 0 : parseInt(gt.split("-")[1] || "0"), At = pt === "cell" ? 0 : parseInt(pt.split("-")[1] || "0");
         return It - At;
-      }), $e = [];
-      Fe.forEach((et) => {
-        et.setAttribute("role", "gridcell"), oe === 0 && et.setAttribute("tabindex", "0"), oe++;
-        const nt = Ye(et);
-        nt.length > 0 && et.removeAttribute("tabindex"), $e.push({ cell: et, focusables: nt });
-      }), $e.length > 0 && s.push($e);
+      }), Ke = [];
+      Fe.forEach(($e) => {
+        $e.setAttribute("role", "gridcell"), oe === 0 && $e.setAttribute("tabindex", "0"), oe++;
+        const nt = Ye($e);
+        nt.length > 0 && $e.removeAttribute("tabindex"), Ke.push({ cell: $e, focusables: nt });
+      }), Ke.length > 0 && s.push(Ke);
     });
   }
   function j() {
@@ -32107,7 +32107,7 @@ function vf(t, e, o) {
   Se(() => {
     to(G), Qe(), se(), pe(), le = l ? new m1(K) : new b1(K), Ye();
   });
-  function Ze(ve, xe, Ke) {
+  function Ze(ve, xe, et) {
     ve ? vi(ve) ? o(25, J = ve) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, J = `${ve}px`)) : z ? o(25, J = z) : o(25, J = _e(xe)), ve != null && ve.includes("%") || z != null && z.includes("%") ? o(26, Q = Ce()) : o(26, Q = J);
   }
   function Ce() {
@@ -32125,7 +32125,7 @@ function vf(t, e, o) {
     R != "" && console.warn("Dropdown `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function Qe() {
-    rt(G, (ve, xe, Ke) => {
+    rt(G, (ve, xe, et) => {
       switch (ve) {
         case Dt:
           De(xe);
@@ -32184,8 +32184,8 @@ function vf(t, e, o) {
   }
   function _e(ve) {
     const xe = Math.max(...ve.map((St) => (`${St.label}` || `${St.value}` || "").length));
-    let Ke = Math.max(xe || 0, p.length) + 7;
-    return b && (Ke += 4), `${Ke}ch`;
+    let et = Math.max(xe || 0, p.length) + 7;
+    return b && (et += 4), `${et}ch`;
   }
   function Fe() {
     if (ie.length === 0) {
@@ -32197,19 +32197,19 @@ function vf(t, e, o) {
     if (ve >= 0)
       o(18, q = ve);
     else {
-      const xe = ie.findIndex((Ke) => ko(Ke, (K == null ? void 0 : K.value) || ""));
+      const xe = ie.findIndex((et) => ko(et, (K == null ? void 0 : K.value) || ""));
       xe >= 0 && o(18, q = xe);
     }
   }
-  function $e(ve) {
-    let xe = q + ve, Ke = ie != null && ie.length ? ie : B;
-    Ke.length !== 0 && (xe < 0 ? xe = l ? Ke.length - 1 : 0 : xe >= Ke.length && (xe = l ? 0 : Ke.length - 1), o(18, q = xe), et());
+  function Ke(ve) {
+    let xe = q + ve, et = ie != null && ie.length ? ie : B;
+    et.length !== 0 && (xe < 0 ? xe = l ? et.length - 1 : 0 : xe >= et.length && (xe = l ? 0 : et.length - 1), o(18, q = xe), $e());
   }
-  function et() {
+  function $e() {
     const ve = q, xe = ee == null ? void 0 : ee.querySelector(`li[data-index="${ve}"]`);
     if (!xe) return;
-    const Ke = xe.getBoundingClientRect(), St = ee.getBoundingClientRect();
-    Ke.top >= 0 && Ke.left >= 0 && Ke.bottom <= St.height && Ke.right <= St.width || xe.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const et = xe.getBoundingClientRect(), St = ee.getBoundingClientRect();
+    et.top >= 0 && et.left >= 0 && et.bottom <= St.height && et.right <= St.width || xe.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   function nt() {
     o(21, ie = l ? B.filter((ve) => ko(ve, (K == null ? void 0 : K.value) || "")) : B);
@@ -32219,7 +32219,7 @@ function vf(t, e, o) {
       async () => {
         nt(), o(17, Z = true), K == null || K.focus(), setTimeout(
           () => {
-            (K == null ? void 0 : K.value) === "" && $ && io(), Fe(), et();
+            (K == null ? void 0 : K.value) === "" && $ && io(), Fe(), $e();
           },
           0
         );
@@ -32247,7 +32247,7 @@ function vf(t, e, o) {
   function ke(ve) {
     if (i || !l || !(O === "test-autofill" || K.matches(":-webkit-autofill") || K.matches(":autofill"))) return;
     nt();
-    const Ke = (K == null ? void 0 : K.value) || "", Ot = Ke !== "" ? ie.find((C1) => ko(C1, Ke, false)) : null;
+    const et = (K == null ? void 0 : K.value) || "", Ot = et !== "" ? ie.find((C1) => ko(C1, et, false)) : null;
     $ || (Ot ? jt(Ot) : io()), setTimeout(
       () => {
         pt();
@@ -32268,8 +32268,8 @@ function vf(t, e, o) {
     io(), gt(), ve.stopPropagation();
   }
   function bo(ve) {
-    const xe = ve.currentTarget, Ke = B[xe.selectedIndex];
-    X = true, Mt(Ke);
+    const xe = ve.currentTarget, et = B[xe.selectedIndex];
+    X = true, Mt(et);
   }
   function io() {
     i || (o(29, a = void 0), o(18, q = -1), o(24, $ = void 0), X = true, nt(), At(""), It());
@@ -32285,18 +32285,18 @@ function vf(t, e, o) {
       io();
     }
     onEnter(xe) {
-      const Ke = ie[q];
-      Ke && (X = Ke.value !== ($ == null ? void 0 : $.value), Mt(Ke)), $ ? pt() : gt(), xe.stopPropagation();
+      const et = ie[q];
+      et && (X = et.value !== ($ == null ? void 0 : $.value), Mt(et)), $ ? pt() : gt(), xe.stopPropagation();
     }
-    onArrow(xe, Ke) {
-      Z || gt(), $e(Ke === "up" ? -1 : 1), xe.stopPropagation();
+    onArrow(xe, et) {
+      Z || gt(), Ke(et === "up" ? -1 : 1), xe.stopPropagation();
     }
     onTab(xe) {
-      const Ke = ie.find((St) => {
+      const et = ie.find((St) => {
         var Ot;
         return ((Ot = St.label) == null ? void 0 : Ot.toLowerCase()) === this.input.value.toLowerCase();
       });
-      Ke && Mt(Ke), pt();
+      et && Mt(et), pt();
     }
     onKeyUp(xe) {
       this.input.value === "" && $ && (o(24, $ = void 0), o(18, q = -1)), gt();
@@ -32340,14 +32340,14 @@ function vf(t, e, o) {
     }
     onEnter(xe) {
       if (Z) {
-        const Ke = ie[q];
-        Ke && Mt(Ke), pt();
+        const et = ie[q];
+        et && Mt(et), pt();
       } else
         gt();
       xe.preventDefault(), xe.stopPropagation();
     }
-    onArrow(xe, Ke) {
-      Z || gt(), $e(Ke === "up" ? -1 : 1), xe.preventDefault(), xe.stopPropagation();
+    onArrow(xe, et) {
+      Z || gt(), Ke(et === "up" ? -1 : 1), xe.preventDefault(), xe.stopPropagation();
     }
     handleKeyDown(xe) {
       switch (xe.key) {
@@ -41262,7 +41262,7 @@ function Kg(t, e, o) {
   ]), [g, v] = qe("Input auto capitalize", ["on", "off", "none", "sentences", "words", "characters"]), [h, b] = qe("Input text align", ["left", "right"]);
   let { type: w = "text" } = e, { name: p = "" } = e, { value: _ = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: L = "" } = e, { leadingicon: D = null } = e, { trailingicon: j = null } = e, { variant: S = "goa" } = e, { disabled: N = "false" } = e, { handletrailingiconclick: R = "false" } = e, { focused: H = "false" } = e, { readonly: P = "false" } = e, { error: V = "false" } = e, { testid: F = "" } = e, { width: E = "30ch" } = e, { arialabel: O = "" } = e, { arialabelledby: B = "" } = e, { min: $ = "" } = e, { max: Z = "" } = e, { step: q = 1 } = e, { prefix: J = "" } = e, { suffix: Q = "" } = e, { debounce: G = 0 } = e, { maxlength: ee = null } = e, { id: K = "" } = e, { mt: le = null } = e, { mr: x = null } = e, { mb: X = null } = e, { ml: ie = null } = e, { trailingiconarialabel: we = "" } = e, { textalign: te = "left" } = e, { size: re = "default" } = e, { version: be = "1" } = e, Ze = false, Ce = false, pe, Ye, Qe, ge = false, De = false, se = "", oe = "";
   Se(() => {
-    f(w), v(z), b(te), Ae(), At(), It(), $e();
+    f(w), v(z), b(te), Ae(), At(), It(), Ke();
     const { containerStyle: ke, inputWidth: ot } = Xg(E, w);
     o(32, se = ke), o(33, oe = ot);
   });
@@ -41293,10 +41293,10 @@ function Kg(t, e, o) {
   function Fe(ke) {
     Ie(Qe, "_change", { name: p, value: ke }, { bubbles: true });
   }
-  function $e() {
+  function Ke() {
     p && Be(Qe, vt, { name: p, el: Ye }, { bubbles: true, timeout: 10 });
   }
-  function et(ke) {
+  function $e(ke) {
     const ot = ke.target;
     ot && (r || (pe != null && clearTimeout(pe), pe = setTimeout(
       () => {
@@ -41418,7 +41418,7 @@ function Kg(t, e, o) {
     r,
     l,
     i,
-    et,
+    $e,
     nt,
     gt,
     pt,
@@ -45925,9 +45925,16 @@ function m5(t, e, o) {
   function ee() {
     if (!Z || !$ || !E) return;
     const oe = $.getBoundingClientRect(), Ae = E.getBoundingClientRect(), me = N ? parseFloat(N) : 0, _e = S ? parseFloat(S) : 3;
+    if (s === "right") {
+      const Ke = N ? parseFloat(N) : 8;
+      o(15, E.style.left = `${oe.right + Ke}px`, E);
+      const $e = S ? parseFloat(S) : 0, nt = Math.max(20, window.innerHeight - oe.bottom - $e);
+      o(15, E.style.top = `${window.innerHeight - nt - Ae.height}px`, E), o(15, E.style.transform = "", E);
+      return;
+    }
     if (s === "auto") {
-      const $e = oe.top, et = window.innerHeight - oe.bottom;
-      o(19, q = et < Ae.height && $e > et ? "above" : "below");
+      const Ke = oe.top, $e = window.innerHeight - oe.bottom;
+      o(19, q = $e < Ae.height && Ke > $e ? "above" : "below");
     }
     s === "above" || s === "auto" && q === "above" ? (o(15, E.style.top = `${oe.top - _e}px`, E), o(15, E.style.transform = "translateY(-100%)", E)) : (o(15, E.style.top = `${oe.bottom + _e}px`, E), o(15, E.style.transform = "", E)), J === "left" ? o(15, E.style.left = `${oe.left + me}px`, E) : o(15, E.style.left = `${oe.right - me - Ae.width}px`, E);
   }
