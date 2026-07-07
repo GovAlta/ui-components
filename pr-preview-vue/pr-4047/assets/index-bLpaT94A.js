@@ -49211,7 +49211,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanPropsWithFalse: ["open"]
+      booleanProps: ["open"]
     });
     const slots = useSlots();
     function onClose(e) {
@@ -50713,7 +50713,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props, {
-      booleanPropsWithFalse: ["open"],
+      booleanProps: ["open"],
       renamedProps: {
         userName: "user-name",
         userSecondaryText: "user-secondary-text"
@@ -50748,7 +50748,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanPropsWithFalse: ["open"] });
+    const wcProps = useWcProps(props, { booleanProps: ["open"] });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-work-side-menu-group", normalizeProps(guardReactiveProps(unref(wcProps))), [
         renderSlot(_ctx.$slots, "default")
