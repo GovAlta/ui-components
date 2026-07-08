@@ -194,24 +194,27 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// A slot override value of `null` hides the slot from that framework's docs entirely.
+// Used for slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection)
+// rather than typed props/inputs: documenting them as ReactNode/TemplateRef props would
+// be wrong since consumers never bind a value to them, they nest the sub-component instead.
 const SLOT_TYPE_OVERRIDES: Record<
   string,
-  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | null>>>
 > = {
   footer: {
+    react: {
+      nav: null,
+      meta: null,
+    },
+    angular: {
+      nav: null,
+      meta: null,
+    },
     webComponents: {
       nav: "goa-app-footer-nav-section",
       meta: "goa-app-footer-meta-section",
     },
-  },
-};
-// Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
-// typed props/inputs in React and Angular. Documenting them as ReactNode/TemplateRef props
-// would be wrong since consumers never bind a value to them, they nest the sub-component instead.
-const SLOT_FRAMEWORK_EXCLUDES: Record<string, Partial<Record<"react" | "angular" | "webComponents", string[]>>> = {
-  footer: {
-    react: ["nav", "meta"],
-    angular: ["nav", "meta"],
   },
 };
 const ALLOW_INTERNAL_PROP_BY_COMPONENT: Record<string, Set<string>> = {
@@ -2599,6 +2602,14 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     Boolean(slotNameAliases[name] || slotDescriptions[name]) ||
     Object.prototype.hasOwnProperty.call(slotRequired, name);
 
+  // `undefined` means no override configured (use the generic fallback below), `null` means
+  // hide the slot for this framework, any other string overrides the displayed type.
+  const getSlotOverride = (framework: "react" | "angular" | "webComponents", name: string): string | null | undefined => {
+    const frameworkOverrides = SLOT_TYPE_OVERRIDES[componentName]?.[framework];
+    if (!frameworkOverrides || !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)) return undefined;
+    return frameworkOverrides[name];
+  };
+
   const createSlots = (
     framework: "react" | "angular" | "webComponents",
     type?: string,
@@ -2608,7 +2619,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       .filter(
         (name) =>
           !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
-          !SLOT_FRAMEWORK_EXCLUDES[componentName]?.[framework]?.includes(name) &&
+          getSlotOverride(framework, name) !== null &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
       .map((name) => {
@@ -2619,9 +2630,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
             : rawDescription;
         return {
           name: useAliasNames ? slotNameAliases[name] || name : name,
-          type:
-            SLOT_TYPE_OVERRIDES[componentName]?.[framework]?.[name] ||
-            (type && hasWrapperSlotEvidence(name) ? type : undefined),
+          type: getSlotOverride(framework, name) ?? (type && hasWrapperSlotEvidence(name) ? type : undefined),
           description,
           required: slotRequired[name] || false,
         };
