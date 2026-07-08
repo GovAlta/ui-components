@@ -44,6 +44,20 @@ describe("GoabText", () => {
     expect(el.getAttribute("as")).toBe("h2");
   });
 
+  it("should react to prop updates", async () => {
+    const wrapper = mount(GoabText, {
+      props: { tag: "h2", color: "primary" },
+    });
+    const el = wrapper.find("goa-text").element;
+    expect(el.getAttribute("as")).toBe("h2");
+    expect(el.getAttribute("color")).toBe("primary");
+
+    await wrapper.setProps({ tag: "h3", color: "secondary" });
+
+    expect(el.getAttribute("as")).toBe("h3");
+    expect(el.getAttribute("color")).toBe("secondary");
+  });
+
   it("should render content via slot", () => {
     const wrapper = mount(GoabText, {
       slots: { default: "Text content" },

@@ -67,4 +67,15 @@ describe("GoabModal", () => {
     el.dispatchEvent(new CustomEvent("_close"));
     expect(wrapper.emitted()).toHaveProperty("onClose");
   });
+
+  it("ignores bubbled _close events from nested elements", () => {
+    const wrapper = mount(GoabModal);
+    const el = wrapper.find("goa-modal").element as HTMLElement;
+    const child = document.createElement("div");
+    el.appendChild(child);
+
+    child.dispatchEvent(new CustomEvent("_close", { bubbles: true }));
+
+    expect(wrapper.emitted("onClose")).toBeUndefined();
+  });
 });

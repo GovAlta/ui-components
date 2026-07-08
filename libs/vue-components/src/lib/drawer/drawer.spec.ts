@@ -50,6 +50,19 @@ describe("GoabDrawer", () => {
     expect(wrapper.emitted()).toHaveProperty("onClose");
   });
 
+  it("ignores bubbled _close events from nested elements", () => {
+    const wrapper = mount(GoabDrawer, {
+      props: { position: "right" },
+    });
+    const el = wrapper.find("goa-drawer").element as HTMLElement;
+    const child = document.createElement("div");
+    el.appendChild(child);
+
+    child.dispatchEvent(new CustomEvent("_close", { bubbles: true }));
+
+    expect(wrapper.emitted("onClose")).toBeUndefined();
+  });
+
   it("should not set open when open=false", () => {
     const wrapper = mount(GoabDrawer, {
       props: { position: "right", open: false },

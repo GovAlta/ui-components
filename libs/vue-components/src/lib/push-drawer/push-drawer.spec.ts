@@ -57,4 +57,15 @@ describe("GoabPushDrawer", () => {
     el.dispatchEvent(new CustomEvent("_close"));
     expect(wrapper.emitted()).toHaveProperty("onClose");
   });
+
+  it("ignores bubbled _close events from nested elements", () => {
+    const wrapper = mount(GoabPushDrawer);
+    const el = wrapper.find("goa-push-drawer").element as HTMLElement;
+    const child = document.createElement("div");
+    el.appendChild(child);
+
+    child.dispatchEvent(new CustomEvent("_close", { bubbles: true }));
+
+    expect(wrapper.emitted("onClose")).toBeUndefined();
+  });
 });

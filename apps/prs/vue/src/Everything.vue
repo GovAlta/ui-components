@@ -45,6 +45,7 @@ import {
   GoabPageBlock,
   GoabPages,
   GoabPagination,
+  GoabPopover,
   GoabRadioGroup,
   GoabRadioItem,
   GoabSideMenu,
@@ -483,6 +484,14 @@ const menuAction = ref<string | undefined>();
             <GoabTooltip v-for="pos in TOOLTIP_POSITIONS" :key="pos" :position="pos" content="Tooltip content" hAlign="center">
               <GoabButton type="secondary">Tooltip {{ pos }}</GoabButton>
             </GoabTooltip>
+            <GoabPopover position="below" maxWidth="320px">
+              <template #target>
+                <GoabButton type="tertiary">Popover target</GoabButton>
+              </template>
+              <GoabText tag="p" size="body-s" mb="none">
+                Popover content example.
+              </GoabText>
+            </GoabPopover>
           </GoabBlock>
         </GoabContainer>
 
