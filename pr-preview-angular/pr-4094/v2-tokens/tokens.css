@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 06 May 2026 21:29:23 GMT
+ * Generated on Wed, 24 Jun 2026 16:58:34 GMT
  */
 
 :root {
@@ -239,10 +239,6 @@
   --goa-work-side-menu-item-icon-display: flex;
   --goa-work-side-menu-group-item-min-height: 1.75rem;
   --goa-work-side-menu-group-padding: 0 0 0 0.75rem;
-  --goa-work-side-menu-bottom-section-shadow-scrolled: 0 -4px 6px -4px rgba(0, 0, 0, 0.1);
-  --goa-work-side-menu-bottom-section-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0);
-  --goa-work-side-menu-top-section-shadow-scrolled: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --goa-work-side-menu-top-section-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0);
   --goa-work-side-menu-logo: initial;
   --goa-work-side-menu-color-bg: transparent;
   --goa-work-side-menu-width-closed: 4.5rem;
@@ -274,6 +270,9 @@
   --goa-side-menu-item-focus-outline-offset: -3px;
   --goa-scrollable-padding-mobile: 1.5rem;
   --goa-scrollable-padding-desktop: 2rem;
+  --goa-scroll-panel-content-shadow-top-bottom: inset 0px 4px 8px -4px rgba(0,0,0,0.175), inset 0px -4px 8px -4px rgba(0,0,0,0.175);
+  --goa-scroll-panel-content-shadow-top: inset 0px 4px 8px -4px rgba(0,0,0,0.25);
+  --goa-scroll-panel-content-shadow-bottom: inset 0px -4px 8px -4px rgba(0,0,0,0.25);
   --goa-radio-label-color-disabled: #bab7b7;
   --goa-radio-inner-size: 16px;
   --goa-radio-inner-color-error-hover: #ba0000;
@@ -284,6 +283,7 @@
   --goa-notification-banner-padding-tb-compact: 0.9375rem;
   --goa-notification-banner-padding-tb: 1.4375rem;
   --goa-modal-content-wrapper-padding: 0;
+  --goa-modal-heading-border-bottom: none;
   --goa-modal-max-width: 480px;
   --goa-modal-content-margin-mobile: 0;
   --goa-modal-content-margin: 0;
@@ -440,6 +440,20 @@
   --goa-color-text-secondary: var(--goa-color-greyscale-600);
   --goa-color-text-default: var(--goa-color-greyscale-black);
   --goa-color-interactive-disabled: var(--goa-color-greyscale-300);
+  --goa-workspace-layout-mobile-header-padding-left: var(--goa-space-2xl);
+  --goa-workspace-layout-mobile-toggle-size: var(--goa-icon-size-xl);
+  --goa-workspace-layout-mobile-toggle-left: var(--goa-space-s);
+  --goa-workspace-layout-mobile-toggle-top: var(--goa-space-l);
+  --goa-workspace-layout-footer-scroll-shadow: var(--goa-shadow-shallow-above);
+  --goa-workspace-layout-footer-scroll-border-color: var(--goa-color-greyscale-200);
+  --goa-workspace-layout-footer-border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  --goa-workspace-layout-footer-bg-color: var(--goa-color-greyscale-white);
+  --goa-workspace-layout-header-scroll-shadow: var(--goa-shadow-shallow-below);
+  --goa-workspace-layout-header-scroll-border-color: var(--goa-color-greyscale-200);
+  --goa-workspace-layout-header-border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  --goa-workspace-layout-header-bg-color: var(--goa-color-greyscale-white);
+  --goa-workspace-layout-card-bg-color: var(--goa-color-greyscale-white);
+  --goa-workspace-layout-bg-color: var(--goa-color-greyscale-50);
   --goa-work-side-menu-item-text-color: var(--goa-color-greyscale-600);
   --goa-work-side-menu-item-padding: var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs) 0.625rem;
   --goa-work-side-menu-item-color-bg-hover: var(--goa-color-greyscale-100);
@@ -452,10 +466,6 @@
   --goa-work-side-menu-group-item-padding: var(--goa-space-2xs) var(--goa-space-xs);
   --goa-work-side-menu-group-margin: var(--goa-space-xs) 0 0.375rem 1.125rem;
   --goa-work-side-menu-group-border: var(--goa-border-width-xl) solid var(--goa-color-greyscale-100);
-  --goa-work-side-menu-bottom-section-border-scrolled: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-  --goa-work-side-menu-bottom-section-border: var(--goa-border-width-s) solid transparent;
-  --goa-work-side-menu-top-section-border-scrolled: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-  --goa-work-side-menu-top-section-border: var(--goa-border-width-s) solid transparent;
   --goa-work-side-menu-transition-duration-medium: var(--goa-motion-duration-medium-2);
   --goa-work-side-menu-mobile-bg: var(--goa-color-greyscale-50);
   --goa-work-side-menu-text-color: var(--goa-color-greyscale-600);
@@ -557,6 +567,13 @@
   --goa-side-menu-color-bg-menu-item-hover: var(--goa-color-greyscale-100);
   --goa-side-menu-color-bg: var(--goa-color-greyscale-white);
   --goa-side-menu-border-right: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
+  --goa-scroll-panel-footer-scroll-shadow: var(--goa-shadow-shallow-above);
+  --goa-scroll-panel-footer-scroll-border: var(--goa-color-greyscale-150);
+  --goa-scroll-panel-header-scroll-shadow: var(--goa-shadow-shallow-below);
+  --goa-scroll-panel-header-scroll-border: var(--goa-color-greyscale-150);
+  --goa-scroll-panel-footer-color-bg: var(--goa-color-greyscale-white);
+  --goa-scroll-panel-header-color-bg: var(--goa-color-greyscale-white);
+  --goa-scroll-panel-color-bg: var(--goa-color-greyscale-white);
   --goa-radio-reveal-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
   --goa-radio-reveal-padding: var(--goa-space-m) var(--goa-space-l);
   --goa-radio-reveal-margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 1px);
@@ -609,12 +626,12 @@
   --goa-notification-banner-important-high-close-bg-hover: var(--goa-color-important-default);
   --goa-notification-banner-information-low-close-bg-hover: var(--goa-color-info-border);
   --goa-notification-banner-information-high-close-bg-hover: var(--goa-color-info-dark);
-  --goa-notification-banner-emergency-low-focus-border: 0 0 0 3px var(--goa-color-emergency-dark);
-  --goa-notification-banner-emergency-high-focus-border: 0 0 0 3px var(--goa-color-greyscale-white);
-  --goa-notification-banner-important-low-focus-border: 0 0 0 3px var(--goa-color-important-text-dark);
-  --goa-notification-banner-important-high-focus-border: 0 0 0 3px var(--goa-color-important-text-dark);
-  --goa-notification-banner-information-low-focus-border: 0 0 0 3px var(--goa-color-info-dark);
-  --goa-notification-banner-information-high-focus-border: 0 0 0 3px var(--goa-color-greyscale-white);
+  --goa-notification-banner-emergency-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-emergency-dark);
+  --goa-notification-banner-emergency-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-greyscale-white);
+  --goa-notification-banner-important-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-important-text-dark);
+  --goa-notification-banner-important-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-important-text-dark);
+  --goa-notification-banner-information-low-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-info-dark);
+  --goa-notification-banner-information-high-focus-border: 0 0 0 var(--goa-border-width-l) var(--goa-color-greyscale-white);
   --goa-notification-banner-emergency-low-color-border: var(--goa-color-emergency-border);
   --goa-notification-banner-emergency-low-color-icon: var(--goa-color-emergency-dark);
   --goa-notification-banner-emergency-low-color-text: var(--goa-color-emergency-dark);
@@ -672,17 +689,17 @@
   --goa-modal-callout-information-icon: var(--goa-color-info-default);
   --goa-modal-callout-information-border: var(--goa-color-info-border);
   --goa-modal-callout-information-bg: var(--goa-color-info-light);
-  --goa-modal-actions-padding-mobile: 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m);
-  --goa-modal-content-padding-mobile: var(--goa-space-l) 0 var(--goa-space-xl) 0;
+  --goa-modal-actions-padding-mobile: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-m) var(--goa-space-m);
+  --goa-modal-content-padding-desktop: var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl) var(--goa-space-l);
+  --goa-modal-content-padding-mobile: var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m);
   --goa-modal-callout-heading-padding-mobile: var(--goa-space-m);
   --goa-modal-heading-padding-mobile: var(--goa-space-m);
   --goa-modal-callout-heading-padding: var(--goa-space-m) var(--goa-space-l);
   --goa-modal-scrollable-padding-mobile: var(--goa-space-m);
   --goa-modal-scrollable-padding-desktop: var(--goa-space-l);
-  --goa-modal-actions-padding: 0 var(--goa-space-xl) var(--goa-space-xl) var(--goa-space-xl);
-  --goa-modal-content-padding: var(--goa-space-l) 0 var(--goa-space-xl) 0;
+  --goa-modal-actions-padding: var(--goa-space-xs) var(--goa-space-xl) var(--goa-space-xl) var(--goa-space-xl);
+  --goa-modal-content-padding: var(--goa-space-xl) 0 var(--goa-space-xl) 0;
   --goa-modal-heading-padding: 20px var(--goa-space-l);
-  --goa-modal-heading-border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
   --goa-modal-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
   --goa-modal-color-bg: var(--goa-color-greyscale-white);
   --goa-modal-overlay-opacity: var(--goa-opacity-background-modal);
@@ -889,7 +906,7 @@
   --goa-details-padding-left: var(--goa-space-xs);
   --goa-details-padding-bottom: var(--goa-space-xs);
   --goa-details-margin-bottom: var(--goa-space-xs);
-  --goa-details-focus-border: var(--goa-border-width-xl) solid var(--goa-color-interactive-focus);
+  --goa-details-focus-border: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   --goa-details-content-padding-top: var(--goa-space-s);
   --goa-details-content-padding-right: var(--goa-space-m);
   --goa-details-content-padding-bottom: var(--goa-space-s);
@@ -1131,6 +1148,7 @@
   --goa-accordion-color-filled-bg-heading: var(--goa-color-greyscale-100);
   --goa-accordion-color-bg-heading: var(--goa-color-greyscale-white);
   --goa-input-color-text-default: var(--goa-color-text-default);
+  --goa-workspace-layout-mobile-toggle-color: var(--goa-color-text-default);
   --goa-work-side-menu-item-text-size: var(--goa-typography-body-s);
   --goa-work-side-menu-item-text-color-hover: var(--goa-color-text-default);
   --goa-work-side-menu-item-text-color-current: var(--goa-color-text-default);
