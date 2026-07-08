@@ -158,4 +158,22 @@ describe("GoabDropdown", () => {
     const el = baseElement.querySelector("goa-dropdown");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
+
+  it("should render children inside the dropdown item", () => {
+    const { baseElement } = render(
+      <GoabDropdown name="favColor" onChange={noop}>
+        <GoabDropdownItem value="red" label="Red">
+          <div data-testid="rich-red">
+            <strong>Red</strong>
+            <span>Warm color</span>
+          </div>
+        </GoabDropdownItem>
+      </GoabDropdown>,
+    );
+
+    const item = baseElement.querySelector("goa-dropdown-item");
+    const content = item?.querySelector("[data-testid=rich-red]");
+    expect(content?.textContent).toContain("Red");
+    expect(content?.textContent).toContain("Warm color");
+  });
 });

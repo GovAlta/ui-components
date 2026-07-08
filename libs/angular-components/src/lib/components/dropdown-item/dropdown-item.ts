@@ -20,6 +20,7 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
       [attr.name]="name"
       [attr.mount]="mountType"
     >
+      <ng-content />
     </goa-dropdown-item>
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -30,7 +31,7 @@ export class GoabDropdownItem implements OnInit {
 
   /** The value submitted when this item is selected. */
   @Input() value?: string;
-  /** Text used to filter and match this item in typeahead search. */
+  /** Additional text used to match this item in typeahead search, alongside the label. Defaults to the projected content's text. */
   @Input() filter?: string;
   /** Display label for the dropdown item. */
   @Input() label?: string;

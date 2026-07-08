@@ -4,6 +4,28 @@ import { GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
+// Slotted content's DOM parent stays in the light DOM even once assigned, so
+// closest("li") can't cross the shadow boundary into the menu. Item content
+// crosses two shadow boundaries (the item's own default slot, then the
+// dropdown's named option-{value} slot), so walk assignedSlot repeatedly,
+// hopping to each slot's shadow host, until the named option slot is found.
+function findAssignedSlot(el: Element | null): HTMLSlotElement | null {
+  let current: Element | null = el;
+  while (current) {
+    const slot = (current as HTMLElement).assignedSlot;
+    if (!slot) {
+      current = current.parentElement;
+      continue;
+    }
+    if (slot.getAttribute("name")?.startsWith("option-")) {
+      return slot;
+    }
+    const root = slot.getRootNode();
+    current = root instanceof ShadowRoot ? (root.host as Element) : null;
+  }
+  return null;
+}
+
 describe("Dropdown", () => {
   const noop = () => {
     // noop
@@ -87,6 +109,80 @@ describe("Dropdown", () => {
         expect(detail.name).toEqual("favcolor");
         expect(detail.value).toEqual("red");
         expect(detail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    describe("item slots", () => {
+      it("renders rich item content inside the menu and selects it", async () => {
+        const handleChange = vi.fn();
+
+        const Component = () => {
+          return (
+            <GoabDropdown name="rich" testId="dropdown" onChange={handleChange}>
+              <GoabDropdownItem value="red" label="Red">
+                <div data-testid="rich-red">
+                  <strong>Red</strong>
+                  <span>Warm color</span>
+                </div>
+              </GoabDropdownItem>
+              <GoabDropdownItem value="blue" label="Blue" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("dropdown");
+        await dropdown.click();
+
+        const richContent = result.getByTestId("rich-red");
+        await vi.waitFor(() => {
+          const slot = findAssignedSlot(richContent.element());
+          expect(slot).not.toBeNull();
+          expect(slot?.getAttribute("name")).toBe("option-red");
+          expect(slot?.closest("li")).not.toBeNull();
+          expect(richContent.element().textContent).toContain("Warm color");
+        });
+
+        const menuItem = result.getByTestId("dropdown-item-red");
+        await menuItem.click();
+
+        await vi.waitFor(() => {
+          expect(handleChange).toHaveBeenCalledTimes(1);
+          const detail = handleChange.mock.calls[0][0];
+          expect(detail.value).toEqual("red");
+          const inputField = result.getByRole("combobox").element() as HTMLInputElement;
+          expect(inputField.value).toBe("Red");
+        });
+      });
+
+      it("renders rich item content when nested inside another element (e.g. an Angular-style wrapper)", async () => {
+        // Reproduces the framework-wrapper case where the actual dropdown item
+        // custom element is not a direct child of the dropdown, but is nested
+        // one level deeper (as Angular's goab-dropdown-item does). Slot
+        // assignment must walk up to the correct direct-child ancestor.
+        const Component = () => {
+          return (
+            <GoabDropdown name="nested" testId="dropdown" onChange={noop}>
+              <div>
+                <GoabDropdownItem value="red" label="Red">
+                  <div data-testid="rich-red">Rich Red</div>
+                </GoabDropdownItem>
+              </div>
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("dropdown");
+        await dropdown.click();
+
+        const richContent = result.getByTestId("rich-red");
+        await vi.waitFor(() => {
+          const slot = findAssignedSlot(richContent.element());
+          expect(slot).not.toBeNull();
+          expect(slot?.getAttribute("name")).toBe("option-red");
+          expect(slot?.closest("li")).not.toBeNull();
+        });
       });
     });
 
