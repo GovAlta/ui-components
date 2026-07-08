@@ -31,7 +31,7 @@ export class GoabDropdownItem implements OnInit {
 
   /** The value submitted when this item is selected. */
   @Input() value?: string;
-  /** Additional text used to match this item in typeahead search, alongside the label. Defaults to the projected content's text. */
+  /** Rich item content. On selection, `label` is shown and `filter` defaults to the content's text. */
   @Input() filter?: string;
   /** Display label for the dropdown item. */
   @Input() label?: string;

@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Additional text used to match this item in typeahead search, alongside the label. Defaults to the children's text."
+          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
         },
         {
           "name": "label",
@@ -50,7 +50,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Additional text used to match this item in typeahead search, alongside the label. Defaults to the projected content's text."
+          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
         },
         {
           "name": "label",

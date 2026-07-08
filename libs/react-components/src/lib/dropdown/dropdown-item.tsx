@@ -25,7 +25,7 @@ export interface GoabDropdownItemProps {
   value: string;
   /** Display label for the dropdown item. */
   label?: string;
-  /** Additional text used to match this item in typeahead search, alongside the label. Defaults to the children's text. */
+  /** Rich item content. On selection, `label` is shown and `filter` defaults to the content's text. */
   filter?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;

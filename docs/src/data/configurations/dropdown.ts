@@ -455,6 +455,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabFormItem label="Assign to" mb="l">
   <GoabDropdown name="assignee" width="250px">
+
     <GoabDropdownItem value="sarah" label="Sarah Johnson">
       <GoabBlock direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
