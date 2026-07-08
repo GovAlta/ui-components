@@ -48958,6 +48958,10 @@ function useWcProps(props, options) {
     };
     for (const [key, value] of Object.entries(props)) {
       if (value === void 0) continue;
+      if (key.startsWith("data-")) {
+        result[key] = value;
+        continue;
+      }
       const customName = (_a2 = options == null ? void 0 : options.renamedProps) == null ? void 0 : _a2[key];
       const attrName = customName ?? transformFn(key);
       if ((_b = options == null ? void 0 : options.booleanPropsWithFalse) == null ? void 0 : _b.includes(key)) {
