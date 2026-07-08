@@ -45929,7 +45929,7 @@ function m5(t, e, o) {
       const Ke = N ? parseFloat(N) : 8;
       o(15, E.style.left = `${oe.right + Ke}px`, E);
       const $e = S ? parseFloat(S) : 0, nt = Math.max(20, window.innerHeight - oe.bottom - $e);
-      o(15, E.style.top = `${window.innerHeight - nt - Ae.height}px`, E), o(15, E.style.transform = "", E);
+      o(15, E.style.top = `${window.innerHeight - nt - Ae.height}px`, E), o(15, E.style.transform = "", E), o(15, E.style.translate = "0px", E);
       return;
     }
     if (s === "auto") {
