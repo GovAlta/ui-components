@@ -359,5 +359,26 @@ describe("WorkSideMenu with Popover", () => {
         }
       });
     });
+
+    it("should position the popover the hoffset distance right of the menu item", async () => {
+      await page.viewport(1024, 768);
+
+      const result = render(<NotificationMenuComponent />);
+
+      const notifMenuItem = result.getByTestId("work-space-side-menu-item-notification");
+      const panel = result.getByTestId("work-space-side-notification-panel");
+
+      await notifMenuItem.click();
+
+      await vi.waitFor(() => {
+        const targetRight = notifMenuItem.element().getBoundingClientRect().right;
+        const panelLeft = panel.element().getBoundingClientRect().left;
+        const gap = panelLeft - targetRight;
+        // hoffset is 36px; allow a few px of subpixel/border tolerance. Before
+        // the fix the fallback doubled it to ~72px.
+        expect(gap).toBeGreaterThanOrEqual(30);
+        expect(gap).toBeLessThanOrEqual(42);
+      });
+    });
   });
 });

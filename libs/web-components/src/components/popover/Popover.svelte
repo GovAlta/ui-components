@@ -148,6 +148,24 @@
     const xOffset = hoffset ? parseFloat(hoffset) : 0;
     const yOffset = voffset ? parseFloat(voffset) : 3;
 
+    // Right-positioned popovers/notification panels: mirror the CSS anchor rules
+    // in `.popover-content.position-right` for browsers without anchor positioning.
+    if (position === "right") {
+      // inset-inline-start: anchor(right) + translate-x (--offset-left, default 8px).
+      const rightXOffset = hoffset ? parseFloat(hoffset) : 8;
+      _popoverEl.style.left = `${targetRect.right + rightXOffset}px`;
+      // inset-block-end: max(20px, anchor(bottom) - --offset-bottom (default 0px)).
+      const rightYOffset = voffset ? parseFloat(voffset) : 0;
+      const bottomGap = Math.max(
+        20,
+        window.innerHeight - targetRect.bottom - rightYOffset,
+      );
+      _popoverEl.style.top = `${window.innerHeight - bottomGap - popoverRect.height}px`;
+      _popoverEl.style.transform = "";
+      _popoverEl.style.translate = "0px";
+      return;
+    }
+
     // Recalculate auto position based on current viewport space
     if (position === "auto") {
       const spaceAbove = targetRect.top;
@@ -534,10 +552,15 @@
 
   .popover-content.position-right {
     inset-block-start: unset;
-    inset-block-end: max(8px, anchor(bottom));
+    /* Keep right-positioned popovers at least 20px from the viewport bottom,
+       while preserving the configured bottom offset when there is room. */
+    inset-block-end: max(
+      20px,
+      calc(anchor(bottom) - var(--offset-bottom, 0px))
+    );
     inset-inline-start: anchor(right);
     --popover-translate-x: var(--offset-left, 8px);
-    --popover-translate-y: var(--offset-bottom, 0px);
+    --popover-translate-y: 0px;
     position-try-fallbacks: none;
   }
 
