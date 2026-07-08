@@ -53217,7 +53217,33 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 2
                             }, 1032, ["position"]);
-                          }), 64))
+                          }), 64)),
+                          createVNode(unref(_sfc_main$K), {
+                            position: "below",
+                            maxWidth: "320px"
+                          }, {
+                            target: withCtx(() => [
+                              createVNode(unref(_sfc_main$X), { type: "tertiary" }, {
+                                default: withCtx(() => [..._cache[79] || (_cache[79] = [
+                                  createTextVNode("Popover target", -1)
+                                ])]),
+                                _: 1
+                              })
+                            ]),
+                            default: withCtx(() => [
+                              createVNode(unref(_sfc_main$t), {
+                                tag: "p",
+                                size: "body-s",
+                                mb: "none"
+                              }, {
+                                default: withCtx(() => [..._cache[80] || (_cache[80] = [
+                                  createTextVNode(" Popover content example. ", -1)
+                                ])]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
                         ]),
                         _: 1
                       })
@@ -53233,7 +53259,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         tag: "h3",
                         size: "heading-s"
                       }, {
-                        default: withCtx(() => [..._cache[79] || (_cache[79] = [
+                        default: withCtx(() => [..._cache[81] || (_cache[81] = [
                           createTextVNode("Progress & Skeletons", -1)
                         ])]),
                         _: 1
@@ -53252,7 +53278,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "div",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[80] || (_cache[80] = [
+                                default: withCtx(() => [..._cache[82] || (_cache[82] = [
                                   createTextVNode("Circular progress", -1)
                                 ])]),
                                 _: 1
@@ -53270,7 +53296,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 size: "body-s",
                                 mt: "xs"
                               }, {
-                                default: withCtx(() => [..._cache[81] || (_cache[81] = [
+                                default: withCtx(() => [..._cache[83] || (_cache[83] = [
                                   createTextVNode("Linear Progress", -1)
                                 ])]),
                                 _: 1
@@ -53292,7 +53318,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "span",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[82] || (_cache[82] = [
+                                default: withCtx(() => [..._cache[84] || (_cache[84] = [
                                   createTextVNode("Skeletons", -1)
                                 ])]),
                                 _: 1
@@ -53340,7 +53366,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         tag: "h3",
                         size: "heading-s"
                       }, {
-                        default: withCtx(() => [..._cache[83] || (_cache[83] = [
+                        default: withCtx(() => [..._cache[85] || (_cache[85] = [
                           createTextVNode("Accordion & Tabs", -1)
                         ])]),
                         _: 1
@@ -53363,7 +53389,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[84] || (_cache[84] = [
+                                default: withCtx(() => [..._cache[86] || (_cache[86] = [
                                   createTextVNode("Accordion content for small heading.", -1)
                                 ])]),
                                 _: 1
@@ -53385,7 +53411,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[85] || (_cache[85] = [
+                                default: withCtx(() => [..._cache[87] || (_cache[87] = [
                                   createTextVNode("Accordion content for medium heading.", -1)
                                 ])]),
                                 _: 1
@@ -53423,7 +53449,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[86] || (_cache[86] = [
+                                default: withCtx(() => [..._cache[88] || (_cache[88] = [
                                   createTextVNode("Overview content.", -1)
                                 ])]),
                                 _: 1
@@ -53437,7 +53463,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[87] || (_cache[87] = [
+                                default: withCtx(() => [..._cache[89] || (_cache[89] = [
                                   createTextVNode("Details content.", -1)
                                 ])]),
                                 _: 1
@@ -53451,7 +53477,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-m"
                               }, {
-                                default: withCtx(() => [..._cache[88] || (_cache[88] = [
+                                default: withCtx(() => [..._cache[90] || (_cache[90] = [
                                   createTextVNode("Attachments content.", -1)
                                 ])]),
                                 _: 1
@@ -53484,7 +53510,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         tag: "h3",
                         size: "heading-s"
                       }, {
-                        default: withCtx(() => [..._cache[89] || (_cache[89] = [
+                        default: withCtx(() => [..._cache[91] || (_cache[91] = [
                           createTextVNode("Table & Pagination", -1)
                         ])]),
                         _: 1
@@ -53499,7 +53525,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               createBaseVNode("tr", null, [
                                 createBaseVNode("th", null, [
                                   createVNode(unref(_sfc_main$H), { name: "name" }, {
-                                    default: withCtx(() => [..._cache[90] || (_cache[90] = [
+                                    default: withCtx(() => [..._cache[92] || (_cache[92] = [
                                       createTextVNode("Name", -1)
                                     ])]),
                                     _: 1
@@ -53510,14 +53536,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                     name: "created",
                                     direction: "asc"
                                   }, {
-                                    default: withCtx(() => [..._cache[91] || (_cache[91] = [
+                                    default: withCtx(() => [..._cache[93] || (_cache[93] = [
                                       createTextVNode("Created", -1)
                                     ])]),
                                     _: 1
                                   })
                                 ]),
-                                _cache[92] || (_cache[92] = createBaseVNode("th", null, "Status", -1)),
-                                _cache[93] || (_cache[93] = createBaseVNode("th", null, "Progress", -1))
+                                _cache[94] || (_cache[94] = createBaseVNode("th", null, "Status", -1)),
+                                _cache[95] || (_cache[95] = createBaseVNode("th", null, "Progress", -1))
                               ])
                             ]),
                             createBaseVNode("tbody", null, [
@@ -53568,7 +53594,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         tag: "h3",
                         size: "heading-s"
                       }, {
-                        default: withCtx(() => [..._cache[94] || (_cache[94] = [
+                        default: withCtx(() => [..._cache[96] || (_cache[96] = [
                           createTextVNode("Data Grid", -1)
                         ])]),
                         _: 1
@@ -53578,7 +53604,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           createVNode(unref(_sfc_main$I), { width: "100%" }, {
                             default: withCtx(() => [
                               createBaseVNode("table", null, [
-                                _cache[95] || (_cache[95] = createBaseVNode("thead", null, [
+                                _cache[97] || (_cache[97] = createBaseVNode("thead", null, [
                                   createBaseVNode("tr", { "data-grid": "row" }, [
                                     createBaseVNode("th", { "data-grid": "cell" }, "Name"),
                                     createBaseVNode("th", { "data-grid": "cell" }, "Created"),
@@ -53623,7 +53649,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         tag: "h3",
                         size: "heading-s"
                       }, {
-                        default: withCtx(() => [..._cache[96] || (_cache[96] = [
+                        default: withCtx(() => [..._cache[98] || (_cache[98] = [
                           createTextVNode("Site chrome", -1)
                         ])]),
                         _: 1
@@ -53642,9 +53668,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             })
                           }, {
                             default: withCtx(() => [
-                              _cache[98] || (_cache[98] = createBaseVNode("a", { href: "#" }, "Home", -1)),
+                              _cache[100] || (_cache[100] = createBaseVNode("a", { href: "#" }, "Home", -1)),
                               createVNode(unref(_sfc_main$Z), { heading: "Menu" }, {
-                                default: withCtx(() => [..._cache[97] || (_cache[97] = [
+                                default: withCtx(() => [..._cache[99] || (_cache[99] = [
                                   createBaseVNode("a", { href: "#" }, "Item 1", -1),
                                   createBaseVNode("a", { href: "#" }, "Item 2", -1)
                                 ])]),
@@ -53659,13 +53685,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           }, {
                             actions: withCtx(() => [
                               createVNode(unref(_sfc_main$X), { type: "primary" }, {
-                                default: withCtx(() => [..._cache[100] || (_cache[100] = [
+                                default: withCtx(() => [..._cache[102] || (_cache[102] = [
                                   createTextVNode("Get started", -1)
                                 ])]),
                                 _: 1
                               }),
                               createVNode(unref(_sfc_main$X), { type: "secondary" }, {
-                                default: withCtx(() => [..._cache[101] || (_cache[101] = [
+                                default: withCtx(() => [..._cache[103] || (_cache[103] = [
                                   createTextVNode("Learn more", -1)
                                 ])]),
                                 _: 1
@@ -53676,7 +53702,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 tag: "p",
                                 size: "body-l"
                               }, {
-                                default: withCtx(() => [..._cache[99] || (_cache[99] = [
+                                default: withCtx(() => [..._cache[101] || (_cache[101] = [
                                   createTextVNode("Hero banner demonstrates background imagery.", -1)
                                 ])]),
                                 _: 1
@@ -53697,13 +53723,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                     icon: "home"
                                   }),
                                   createVNode(unref(_sfc_main$i), { heading: "Group one" }, {
-                                    default: withCtx(() => [..._cache[102] || (_cache[102] = [
+                                    default: withCtx(() => [..._cache[104] || (_cache[104] = [
                                       createBaseVNode("a", { href: "#" }, "Link A", -1),
                                       createBaseVNode("a", { href: "#" }, "Link B", -1)
                                     ])]),
                                     _: 1
                                   }),
-                                  _cache[103] || (_cache[103] = createBaseVNode("a", { href: "#" }, "Loose link", -1))
+                                  _cache[105] || (_cache[105] = createBaseVNode("a", { href: "#" }, "Loose link", -1))
                                 ]),
                                 _: 1
                               }),
@@ -53713,7 +53739,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                     tag: "p",
                                     size: "body-m"
                                   }, {
-                                    default: withCtx(() => [..._cache[104] || (_cache[104] = [
+                                    default: withCtx(() => [..._cache[106] || (_cache[106] = [
                                       createTextVNode("Content area with side menu.", -1)
                                     ])]),
                                     _: 1
@@ -53727,7 +53753,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           createVNode(unref(_sfc_main$T), { maxContentWidth: "100%" }, {
                             default: withCtx(() => [
                               createVNode(unref(_sfc_main$R), { heading: "Resources" }, {
-                                default: withCtx(() => [..._cache[105] || (_cache[105] = [
+                                default: withCtx(() => [..._cache[107] || (_cache[107] = [
                                   createBaseVNode("a", { href: "#" }, "Documentation", -1),
                                   createBaseVNode("a", { href: "#" }, "Support", -1)
                                 ])]),
@@ -53739,7 +53765,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                     tag: "p",
                                     size: "body-s"
                                   }, {
-                                    default: withCtx(() => [..._cache[106] || (_cache[106] = [
+                                    default: withCtx(() => [..._cache[108] || (_cache[108] = [
                                       createTextVNode("Copyright 2025 Government of Alberta", -1)
                                     ])]),
                                     _: 1
@@ -53785,7 +53811,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 tag: "h2",
                 size: "heading-m"
               }, {
-                default: withCtx(() => [..._cache[107] || (_cache[107] = [
+                default: withCtx(() => [..._cache[109] || (_cache[109] = [
                   createTextVNode("Feature Pages", -1)
                 ])]),
                 _: 1
@@ -53798,7 +53824,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   createVNode(unref(_sfc_main$c), {
                     onClick: _cache[30] || (_cache[30] = ($event) => unref(router2).push("/features/4033"))
                   }, {
-                    default: withCtx(() => [..._cache[108] || (_cache[108] = [
+                    default: withCtx(() => [..._cache[110] || (_cache[110] = [
                       createTextVNode(" 4033 Vue Wrappers Demo ", -1)
                     ])]),
                     _: 1
