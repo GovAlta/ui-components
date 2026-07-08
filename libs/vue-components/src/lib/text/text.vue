@@ -3,15 +3,15 @@ import type { GoabTextMaxWidth, GoabTextHeadingElement, GoabTextTextElement, Goa
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the tag.  @default undefined */
+  /** Sets the tag. */
   tag?: GoabTextTextElement | GoabTextHeadingElement;
-  /** Sets the size.  @default undefined */
+  /** Sets the size. */
   size?: GoabTextSize;
   /** Sets the max width.  @default "65ch" */
   maxWidth?: GoabTextMaxWidth;
   /** Sets the color.  @default "primary" */
   color?: GoabTextColor;
-  /** Sets the id.  @default undefined */
+  /** Sets the id. */
   id?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

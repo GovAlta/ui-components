@@ -17,19 +17,19 @@ interface Slots {
 }
 
 interface Props {
-  /** Sets the heading text.  @default "" */
+  /** Sets the heading text. */
   heading?: string;
   /** Sets the state of the accordion container open or closed.  @default "false" */
   open?: boolean;
   /** Sets the heading size of the accordion container heading. @default "small" */
   headingSize?: GoabAccordionHeadingSize;
-  /** Sets secondary text displayed alongside the heading.  @default "" */
+  /** Sets secondary text displayed alongside the heading. */
   secondaryText?: string;
-  /** Sets content rendered within the accordion heading, alongside the heading text.  @default undefined */
+  /** Sets content rendered within the accordion heading, alongside the heading text. */
   headingContent?: string;
   /** Sets the maximum width of the accordion. @default "none" */
   maxWidth?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the position of the expand/collapse icon. @default "left" */
   iconPosition?: GoabAccordionIconPosition;

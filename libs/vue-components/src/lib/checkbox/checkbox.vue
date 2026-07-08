@@ -16,9 +16,9 @@ interface Slots {
 }
 
 interface Props {
-  /** @required Unique name to identify the checkbox.  @default (required) */
+  /** @required Unique name to identify the checkbox. */
   name: string;
-  /** Sets a unique id for the checkbox element.  @default undefined */
+  /** Sets a unique id for the checkbox element. */
   id?: string;
   /** Marks the checkbox item as selected.  @default "false" */
   checked?: boolean;
@@ -28,17 +28,17 @@ interface Props {
   disabled?: boolean;
   /** Shows an error on the checkbox item.  @default "false" */
   error?: boolean;
-  /** Label shown beside the checkbox.  @default "" */
+  /** Label shown beside the checkbox. */
   text?: string;
-  /** The value binding.  @default "" */
+  /** The value binding. */
   value?: string | number | boolean;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name.  @default "" */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   ariaLabel?: string;
-  /** Additional description text displayed below the checkbox label.  @default "" */
+  /** Additional description text displayed below the checkbox label. */
   description?: string;
-  /** Text announced by screen readers when the reveal slot content is displayed.  @default "" */
+  /** Text announced by screen readers when the reveal slot content is displayed. */
   revealAriaLabel?: string;
   /** Sets the maximum width of the checkbox.  @default "none" */
   maxWidth?: string;

@@ -21,13 +21,13 @@ interface Slots {
 }
 
 interface Props {
-  /** Sets the name.  @default "" */
+  /** Sets the name. */
   name: string;
   /** Sets the type.  @default "text" */
   type?: GoabInputType;
-  /** Bound to the current value of the input field.  @default "" */
+  /** Bound to the current value of the input field. */
   value?: string;
-  /** Sets the id.  @default "" */
+  /** Sets the id. */
   id?: string;
   /** Sets the debounce.  @default 0 */
   debounce?: number;
@@ -35,9 +35,9 @@ interface Props {
   disabled?: boolean;
   /** Sets the auto capitalize.  @default "off" */
   autoCapitalize?: GoabAutoCapitalize;
-  /** Sets the auto complete.  @default "" */
+  /** Sets the auto complete. */
   autoComplete?: string;
-  /** Sets the placeholder.  @default "" */
+  /** Sets the placeholder. */
   placeholder?: string;
   /** Sets the leading icon.  @default null */
   leadingIcon?: GoabIconType;
@@ -53,23 +53,23 @@ interface Props {
   error?: boolean;
   /** Sets the width.  @default "30ch" */
   width?: string;
-  /** Sets the test id.  @default "" */
+  /** Sets the test id. */
   testId?: string;
-  /** Sets the aria label.  @default "" */
+  /** Sets the aria label. */
   ariaLabel?: string;
-  /** Sets the aria labelled by.  @default "" */
+  /** Sets the aria labelled by. */
   ariaLabelledBy?: string;
   /** Sets the max length.  @default null */
   maxLength?: number;
-  /** Sets the trailing icon aria label.  @default "" */
+  /** Sets the trailing icon aria label. */
   trailingIconAriaLabel?: string;
   /** Sets the text align.  @default "left" */
   textAlign?: "left" | "right";
   /** Sets the size.  @default "default" */
   size?: GoabInputSize;
-  /** Minimum value. Supports any number, or ISO 8601 format for date/datetime types.  @default "" */
+  /** Minimum value. Supports any number, or ISO 8601 format for date/datetime types. */
   min?: number | string;
-  /** Maximum value. Supports any number, or ISO 8601 format for date/datetime types.  @default "" */
+  /** Maximum value. Supports any number, or ISO 8601 format for date/datetime types. */
   max?: number | string;
   /** How much a number or date value should change by. @default 1 */
   step?: number;

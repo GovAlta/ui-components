@@ -3,15 +3,15 @@ import type { GoabCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-c
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Name identifier for the calendar, included in change events.  @default "" */
+  /** Name identifier for the calendar, included in change events. */
   name?: string;
-  /** The currently selected date value in YYYY-MM-DD format.  @default "" */
+  /** The currently selected date value in YYYY-MM-DD format. */
   value?: string;
-  /** The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past.  @default "" */
+  /** The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past. */
   min?: string;
-  /** The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future.  @default "" */
+  /** The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future. */
   max?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

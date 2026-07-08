@@ -9,21 +9,21 @@ import { useWcProps } from "../common/useWcProps";
 interface Props {
   /** Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. @default "calendar" */
   type?: GoabDatePickerInputType;
-  /** Name of the date field.  @default "" */
+  /** Name of the date field. */
   name?: string;
-  /** Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd).  @default "" */
+  /** Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd). */
   value?: string;
   /** Sets the input to an error state.  @default "false" */
   error?: boolean;
-  /** Minimum date value allowed.  @default "" */
+  /** Minimum date value allowed. */
   min?: string;
-  /** Maximum date value allowed.  @default "" */
+  /** Maximum date value allowed. */
   max?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Disables the date picker.  @default "false" */
   disabled?: boolean;
-  /** Sets the width of the date picker input.  @default "" */
+  /** Sets the width of the date picker input. */
   width?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

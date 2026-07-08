@@ -3,31 +3,31 @@ import type { GoabPublicFormPageButtonVisibility, GoabPublicFormPageStep, Spacin
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the id.  @default "" */
+  /** Sets the id. */
   id?: string;
-  /** Sets the heading.  @default undefined */
+  /** Sets the heading. */
   heading?: string;
-  /** Sets the sub heading.  @default undefined */
+  /** Sets the sub heading. */
   subHeading?: string;
-  /** Sets the summary heading.  @default undefined */
+  /** Sets the summary heading. */
   summaryHeading?: string;
-  /** Sets the section title.  @default undefined */
+  /** Sets the section title. */
   sectionTitle?: string;
-  /** Sets the back url.  @default undefined */
+  /** Sets the back url. */
   backUrl?: string;
-  /** Sets the type.  @default undefined */
+  /** Sets the type. */
   type?: GoabPublicFormPageStep;
-  /** Sets the button text.  @default undefined */
+  /** Sets the button text. */
   buttonText?: string;
-  /** Sets the button visibility.  @default undefined */
+  /** Sets the button visibility. */
   buttonVisibility?: GoabPublicFormPageButtonVisibility;
-  /** Sets the mt.  @default undefined */
+  /** Sets the mt. */
   mt?: Spacing;
-  /** Sets the mr.  @default undefined */
+  /** Sets the mr. */
   mr?: Spacing;
-  /** Sets the mb.  @default undefined */
+  /** Sets the mb. */
   mb?: Spacing;
-  /** Sets the ml.  @default undefined */
+  /** Sets the ml. */
   ml?: Spacing;
 }
 

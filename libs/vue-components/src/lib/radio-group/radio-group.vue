@@ -8,11 +8,11 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The name for the radio group. Used for accessibility and change events.  @default (required) */
+  /** @required The name for the radio group. Used for accessibility and change events. */
   name: string;
-  /** The currently selected value in the radio group.  @default undefined */
+  /** The currently selected value in the radio group. */
   value?: string;
-  /** The identifier for the radio group element.  @default undefined */
+  /** The identifier for the radio group element. */
   id?: string;
   /** Disables all radio items in the group.  @default "false" */
   disabled?: boolean;
@@ -20,11 +20,11 @@ interface Props {
   orientation?: GoabRadioGroupOrientation;
   /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts. @default "default" */
   size?: GoabRadioGroupSize;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Shows an error state on all radio items in the group.  @default "false" */
   error?: boolean;
-  /** Defines how the radio group will be announced by screen readers.  @default "" */
+  /** Defines how the radio group will be announced by screen readers. */
   ariaLabel?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

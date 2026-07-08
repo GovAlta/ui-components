@@ -3,13 +3,13 @@ import type { GoabIconType } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Display text for the menu action.  @default "" */
+  /** @required Display text for the menu action. */
   text: string;
   /** @required Action identifier included in the click event.  @default "default" */
   action: string;
-  /** Icon displayed before the text.  @default undefined */
+  /** Icon displayed before the text. */
   icon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

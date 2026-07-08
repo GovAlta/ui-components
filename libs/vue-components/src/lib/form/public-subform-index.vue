@@ -3,21 +3,21 @@ import type { GoabPublicFormPageButtonVisibility, Spacing } from "@abgov/ui-comp
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the heading.  @default "" */
+  /** Sets the heading. */
   heading?: string;
-  /** Sets the section title.  @default "" */
+  /** Sets the section title. */
   sectionTitle?: string;
-  /** Sets the action button text.  @default "" */
+  /** Sets the action button text. */
   actionButtonText?: string;
   /** Sets the button visibility.  @default "hidden" */
   buttonVisibility?: GoabPublicFormPageButtonVisibility;
-  /** Sets the mt.  @default undefined */
+  /** Sets the mt. */
   mt?: Spacing;
-  /** Sets the mr.  @default undefined */
+  /** Sets the mr. */
   mr?: Spacing;
-  /** Sets the mb.  @default undefined */
+  /** Sets the mb. */
   mb?: Spacing;
-  /** Sets the ml.  @default undefined */
+  /** Sets the ml. */
   ml?: Spacing;
 }
 

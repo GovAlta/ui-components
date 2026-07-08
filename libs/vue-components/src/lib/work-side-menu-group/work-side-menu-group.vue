@@ -3,11 +3,11 @@ import type { GoabIconType } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The text displayed in the group heading.  @default (required) */
+  /** @required The text displayed in the group heading. */
   heading: string;
-  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved.  @default undefined */
+  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved. */
   icon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Whether the group is open.  @default false */
   open?: boolean;

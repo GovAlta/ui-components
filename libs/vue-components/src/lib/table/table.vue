@@ -9,7 +9,7 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Width of the table. By default it will fit the enclosed content.  @default "" */
+  /** Width of the table. By default it will fit the enclosed content. */
   width?: string;
   /** Sort mode: "single" allows one column, "multi" allows up to 2 columns. @default "single" */
   sortMode?: GoabTableSortMode;
@@ -17,7 +17,7 @@ interface Props {
   variant?: GoabTableVariant;
   /** When true, alternates row background colors for improved readability.  @default "false" */
   striped?: boolean;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

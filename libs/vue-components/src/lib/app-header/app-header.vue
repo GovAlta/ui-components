@@ -15,19 +15,19 @@ interface Slots {
 }
 
 interface Props {
-  /** Set the service name to display in the app header.  @default "" */
+  /** Set the service name to display in the app header. */
   heading?: string;
-  /** V2 only: Secondary text displayed under the service name.  @default "" */
+  /** V2 only: Secondary text displayed under the service name. */
   secondaryText?: string;
-  /** Set the URL to link from the alberta.ca logo. A full url is required.  @default "" */
+  /** Set the URL to link from the alberta.ca logo. A full url is required. */
   url?: string;
-  /** Maximum width of the content area.  @default undefined */
+  /** Maximum width of the content area. */
   maxContentWidth?: string;
   /** Sets the breakpoint in px for the full menu to display.  @default TABLET_BP */
   fullMenuBreakpoint?: number;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu.  @default undefined */
+  /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
   onMenuClick?: () => void;
 }
 

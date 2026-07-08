@@ -3,13 +3,13 @@ import type { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The value submitted when this item is selected.  @default "" */
+  /** @required The value submitted when this item is selected. */
   value: string;
-  /** Display label for the dropdown item.  @default "" */
+  /** Display label for the dropdown item. */
   label?: string;
-  /** Text used to filter and match this item in typeahead search.  @default "" */
+  /** Text used to filter and match this item in typeahead search. */
   filter?: string;
-  /** Sets a data-testid attribute for automated testing.  @default undefined */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Controls how the item is registered with the parent dropdown.  @default "append" */
   mountType?: GoabDropdownItemMountType;

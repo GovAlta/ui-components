@@ -9,19 +9,19 @@ interface Slots {
 }
 
 interface Props {
-  /** @required Main heading text.  @default (required) */
+  /** @required Main heading text. */
   heading: string;
-  /** Background image url.  @default undefined */
+  /** Background image url. */
   backgroundUrl?: string;
-  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided.  @default undefined */
+  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
   minHeight?: string;
   /** Sets a data-testid attribute for automated testing.  @default "background" */
   testId?: string;
-  /** Maximum width of the content area. @default undefined */
+  /** Maximum width of the content area. @default "100%" */
   maxContentWidth?: string;
   /** Hero Banner background color when no background image is provided. @default "#f8f8f8" */
   backgroundColor?: string;
-  /** Text color within the hero banner.  @default "" */
+  /** Text color within the hero banner. */
   textColor?: string;
 }
 

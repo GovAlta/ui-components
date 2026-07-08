@@ -3,17 +3,17 @@ import type { GoabFilterChipTheme, GoabIconType, Spacing } from "@abgov/ui-compo
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Text label of the chip.  @default (required) */
+  /** @required Text label of the chip. */
   content: string;
   /** Theme style of the leading icon. @default "outline" */
   iconTheme?: GoabFilterChipTheme;
   /** Shows an error state.  @default "false" */
   error?: boolean;
-  /** Secondary text displayed in a smaller size before the main content.  @default "" */
+  /** Secondary text displayed in a smaller size before the main content. */
   secondaryText?: string;
   /** Icon displayed at the start of the chip.  @default null */
   leadingIcon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

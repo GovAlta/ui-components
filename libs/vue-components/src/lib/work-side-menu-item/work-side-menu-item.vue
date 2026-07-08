@@ -11,17 +11,17 @@ interface Slots {
 }
 
 interface Props {
-  /** @required The text label displayed for the menu item.  @default (required) */
+  /** @required The text label displayed for the menu item. */
   label: string;
-  /** The URL the menu item links to. When absent, renders as a button instead of a link.  @default "" */
+  /** The URL the menu item links to. When absent, renders as a button instead of a link. */
   url?: string;
   /** When true, indicates this is the currently active menu item.  @default false */
   current?: boolean;
   /** When true, displays a divider line above this menu item.  @default false */
   divider?: boolean;
-  /** Icon displayed before the menu item label.  @default undefined */
+  /** Icon displayed before the menu item label. */
   icon?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

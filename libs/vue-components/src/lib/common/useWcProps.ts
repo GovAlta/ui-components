@@ -24,6 +24,11 @@ export function useWcProps<T extends Record<string, unknown>>(
     for (const [key, value] of Object.entries(props)) {
       if (value === undefined) continue;
 
+      if (key.startsWith("data-")) {
+        result[key] = value;
+        continue;
+      }
+
       const customName = options?.renamedProps?.[key];
       const attrName = customName ?? transformFn(key);
 

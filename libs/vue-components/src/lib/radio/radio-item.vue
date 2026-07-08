@@ -12,15 +12,15 @@ interface Slots {
 }
 
 interface Props {
-  /** The name of the radio group. Inherited from the parent RadioGroup if not set.  @default "" */
+  /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
   name?: string;
-  /** The value of this radio option. Will be emitted when selected.  @default undefined */
+  /** The value of this radio option. Will be emitted when selected. */
   value?: string;
-  /** The display label for this radio option. Falls back to value if not provided.  @default "" */
+  /** The display label for this radio option. Falls back to value if not provided. */
   label?: string;
-  /** Additional description text displayed below the label.  @default "" */
+  /** Additional description text displayed below the label. */
   description?: string;
-  /** Text announced by screen readers when the reveal content is displayed.  @default "" */
+  /** Text announced by screen readers when the reveal content is displayed. */
   revealAriaLabel?: string;
   /** Sets the maximum width of this radio item.  @default "none" */
   maxWidth?: string;
@@ -30,9 +30,9 @@ interface Props {
   checked?: boolean;
   /** Shows an error state on this radio option.  @default "false" */
   error?: boolean;
-  /** Reduces spacing for dense layouts.  @default undefined */
+  /** Reduces spacing for dense layouts. */
   compact?: boolean;
-  /** Defines how this option will be announced by screen readers.  @default "" */
+  /** Defines how this option will be announced by screen readers. */
   ariaLabel?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

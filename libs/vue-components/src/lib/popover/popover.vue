@@ -12,7 +12,7 @@ interface Slots {
 interface Props {
   /** Sets the maximum width of the popover container. @default "320px" */
   maxWidth?: string;
-  /** Sets the minimum width of the popover container.  @default "" */
+  /** Sets the minimum width of the popover container. */
   minWidth?: string;
   /** Sets if the popover has padding. Use false when content needs to be flush with boundaries. @default true */
   padded?: boolean;

@@ -3,7 +3,7 @@ import type { Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

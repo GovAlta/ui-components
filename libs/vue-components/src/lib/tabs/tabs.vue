@@ -10,7 +10,7 @@ import { useWcProps } from "../common/useWcProps";
 interface Props {
   /** The initially active tab (1-based index). If not set, the first tab is active.  @default -1 */
   initialTab?: number;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Visual style variant. "segmented" shows pill-style tabs with animation. @default "default" */
   variant?: GoabTabsVariant;

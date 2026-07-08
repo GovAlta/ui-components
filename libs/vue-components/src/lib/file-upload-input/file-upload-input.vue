@@ -12,7 +12,7 @@ interface Props {
   accept?: string;
   /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. @default "5MB" */
   maxFileSize?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

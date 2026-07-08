@@ -6,7 +6,7 @@ interface Props {
   verticalPosition?: "top" | "bottom";
   /** Horizontal position of the notification container. @default "center" */
   horizontalPosition?: "left" | "center" | "right";
-  /** Sets a data-testid attribute for automated testing.  @default undefined */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

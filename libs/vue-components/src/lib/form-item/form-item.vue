@@ -16,23 +16,23 @@ interface Slots {
 }
 
 interface Props {
-  /** Creates a label for the form item.  @default "" */
+  /** Creates a label for the form item. */
   label?: string;
-  /** Marks the field with an optional or required label indicator.  @default "" */
+  /** Marks the field with an optional or required label indicator. */
   requirement?: GoabFormItemRequirement;
   /** Sets the label size. 'regular' for standard, 'large' for emphasis. @default "regular" */
   labelSize?: GoabFormItemLabelSize;
-  /** Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content.  @default "" */
+  /** Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. */
   helpText?: string;
-  /** Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content.  @default "" */
+  /** Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. */
   error?: string;
-  /** Sets the id attribute on the form item element.  @default undefined */
+  /** Sets the id attribute on the form item element. */
   id?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the maximum width of the form item. @default "none" */
   maxWidth?: string;
-  /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group.  @default "" */
+  /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   type?: GoabFormItemType;
   /** Overrides the label value within the form-summary to provide a shorter description. For public-form use only.  @default "blank" */
   name?: string;

@@ -3,11 +3,11 @@ import type { GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The heading text for the menu group.  @default (required) */
+  /** @required The heading text for the menu group. */
   heading: string;
   /** Icon displayed alongside the heading.  @default null */
   icon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

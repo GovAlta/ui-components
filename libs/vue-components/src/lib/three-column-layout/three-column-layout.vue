@@ -15,11 +15,11 @@ interface Slots {
 }
 
 interface Props {
-  /** Sets the width of the left column.  @default undefined */
+  /** Sets the width of the left column. */
   leftColumnWidth?: string;
-  /** Sets the width of the right column.  @default undefined */
+  /** Sets the width of the right column. */
   rightColumnWidth?: string;
-  /** Sets the maximum width of the content area.  @default undefined */
+  /** Sets the maximum width of the content area. */
   maxContentWidth?: string;
 }
 

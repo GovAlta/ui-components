@@ -18,7 +18,7 @@ interface Props {
    * @default "100%"
    */
   height?: string;
-  /** Sets a data-testid attribute for automated testing. @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

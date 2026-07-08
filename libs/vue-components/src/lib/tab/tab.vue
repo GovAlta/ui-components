@@ -9,11 +9,11 @@ interface Slots {
 }
 
 interface Props {
-  /** The text label for this tab. Can also pass React nodes for custom heading content.  @default "" */
+  /** The text label for this tab. Can also pass React nodes for custom heading content. */
   heading?: string;
   /** When true, disables the tab so it cannot be selected.  @default false */
   disabled?: boolean;
-  /** URL-friendly identifier for the tab, used for hash-based navigation.  @default "" */
+  /** URL-friendly identifier for the tab, used for hash-based navigation. */
   slug?: string;
 }
 

@@ -11,7 +11,7 @@ interface Props {
   alignment: GoabButtonGroupAlignment;
   /** Sets the spacing between buttons in the button group. @default "relaxed" */
   gap?: GoabButtonGroupGap;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

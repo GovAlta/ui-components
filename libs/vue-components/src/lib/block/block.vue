@@ -9,13 +9,13 @@ interface Props {
   direction?: GoabBlockDirection;
   /** Sets the alignment.  @default "normal" */
   alignment?: GoabBlockAlignment;
-  /** Sets the min width.  @default "" */
+  /** Sets the min width. */
   minWidth?: string;
-  /** Sets the max width.  @default "" */
+  /** Sets the max width. */
   maxWidth?: string;
-  /** Sets the width.  @default "" */
+  /** Sets the width. */
   width?: string;
-  /** Sets the test id.  @default "" */
+  /** Sets the test id. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

@@ -3,7 +3,7 @@ import type { GoabSkeletonSize, GoabSkeletonType, Spacing } from "@abgov/ui-comp
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Sets the skeleton shape to represent your content.  @default (required) */
+  /** @required Sets the skeleton shape to represent your content. */
   type: GoabSkeletonType;
   /** Size can affect either the height, width or both for different skeleton types. @default "1" */
   size?: GoabSkeletonSize;
@@ -11,7 +11,7 @@ interface Props {
   maxWidth?: string;
   /** Used within components that contain multiple lines. Currently only used in card skeleton type. @default 3 */
   lineCount?: number;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

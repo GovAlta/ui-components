@@ -9,7 +9,7 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Sets the icon.  @default (required) */
+  /** @required Sets the icon. */
   icon: GoabIconType;
   /** Sets the size of button. @default "medium" */
   size?: GoabIconSize;
@@ -17,19 +17,19 @@ interface Props {
   variant?: GoabIconButtonVariant;
   /** Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
   theme?: GoabIconTheme;
-  /** Sets the title of the button.  @default "" */
+  /** Sets the title of the button. */
   title?: string;
   /** Disables the button.  @default "false" */
   disabled?: boolean;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Sets the aria-label of the button.  @default "" */
+  /** Sets the aria-label of the button. */
   ariaLabel?: string;
-  /** Action identifier passed in click events for event delegation patterns.  @default "" */
+  /** Action identifier passed in click events for event delegation patterns. */
   action?: string;
   /** Multiple argument values passed with the action in click events.  @default {} */
   actionArgs?: Record<string, unknown>;
-  /** Single argument value passed with the action in click events.  @default "" */
+  /** Single argument value passed with the action in click events. */
   actionArg?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

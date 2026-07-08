@@ -12,7 +12,7 @@ interface Slots {
 }
 
 interface Props {
-  /** The heading text displayed at the top of the modal.  @default "" */
+  /** The heading text displayed at the top of the modal. */
   heading?: string;
   /** Set the max allowed width of the modal. @default "60ch" */
   maxWidth?: string;

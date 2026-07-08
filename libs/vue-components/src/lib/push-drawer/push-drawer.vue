@@ -11,13 +11,13 @@ interface Slots {
 }
 
 interface Props {
-  /** Sets the heading text or custom heading content.  @default "" */
+  /** Sets the heading text or custom heading content. */
   heading?: string;
   /** Controls the open/closed state of the push drawer.  @default false */
   open?: boolean;
   /** Sets the width of the push drawer panel. @default "492px" */
   width?: string;
-  /** Sets a data-testid attribute for automated testing.  @default undefined */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

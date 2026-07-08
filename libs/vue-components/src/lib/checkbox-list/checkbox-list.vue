@@ -3,7 +3,7 @@ import type { GoabCheckboxListOnChangeDetail, Spacing } from "@abgov/ui-componen
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The name for the checkbox list group. Used as group identifier in change events.  @default (required) */
+  /** @required The name for the checkbox list group. Used as group identifier in change events. */
   name: string;
   /** Array of currently selected checkbox values.  @default [] */
   value?: string[];
@@ -11,7 +11,7 @@ interface Props {
   disabled?: boolean;
   /** Shows an error state on all checkboxes in the list.  @default "false" */
   error?: boolean;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the maximum width of the checkbox list container.  @default "none" */
   maxWidth?: string;

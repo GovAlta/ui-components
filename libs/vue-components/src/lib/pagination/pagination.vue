@@ -3,15 +3,15 @@ import type { GoabPaginationOnChangeDetail, Spacing } from "@abgov/ui-components
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Total number of data items within all pages.  @default (required) */
+  /** @required Total number of data items within all pages. */
   itemCount: number;
-  /** @required The current page being viewed (non-zero based).  @default (required) */
+  /** @required The current page being viewed (non-zero based). */
   pageNumber: number;
   /** Number of data items shown per page. @default 10 */
   perPageCount?: number;
   /** Controls which nav controls are visible. @default "all" */
   variant?: "all" | "links-only";
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default "none" */
   mt?: Spacing;

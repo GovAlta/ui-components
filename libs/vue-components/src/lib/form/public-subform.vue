@@ -4,19 +4,19 @@ import type { Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the id.  @default "" */
+  /** Sets the id. */
   id?: string;
-  /** Sets the name.  @default "" */
+  /** Sets the name. */
   name?: string;
-  /** Sets the continue msg.  @default "" */
+  /** Sets the continue msg. */
   continueMsg?: string;
-  /** Sets the mt.  @default undefined */
+  /** Sets the mt. */
   mt?: Spacing;
-  /** Sets the mr.  @default undefined */
+  /** Sets the mr. */
   mr?: Spacing;
-  /** Sets the mb.  @default undefined */
+  /** Sets the mb. */
   mb?: Spacing;
-  /** Sets the ml.  @default undefined */
+  /** Sets the ml. */
   ml?: Spacing;
 }
 

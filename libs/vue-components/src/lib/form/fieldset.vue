@@ -3,9 +3,9 @@ import type { GoabFieldsetOnContinueDetail, GoabFormDispatchOn } from "@abgov/ui
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the id.  @default "" */
+  /** Sets the id. */
   id?: string;
-  /** Sets the section title.  @default undefined */
+  /** Sets the section title. */
   sectionTitle?: string;
   /** Sets the dispatch on.  @default "continue" */
   dispatchOn?: GoabFormDispatchOn;

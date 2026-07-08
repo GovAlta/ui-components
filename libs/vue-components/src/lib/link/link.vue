@@ -12,17 +12,17 @@ interface Props {
   leadingIcon?: GoabIconType;
   /** Icon displayed after the link text.  @default null */
   trailingIcon?: GoabIconType;
-  /** Custom action event name to dispatch when the link is clicked.  @default "" */
+  /** Custom action event name to dispatch when the link is clicked. */
   action?: string;
   /** Object of arguments to pass with the action event.  @default {} */
   actionArgs?: Record<string, unknown>;
-  /** Single argument to pass with the action event. Deprecated, use actionArgs instead.  @default "" */
+  /** Single argument to pass with the action event. Deprecated, use actionArgs instead. */
   actionArg?: string;
   /** Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. @default "interactive" */
   color?: GoabLinkColor;
   /** Sets the text size and corresponding icon size. @default "medium" */
   size?: GoabLinkSize;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

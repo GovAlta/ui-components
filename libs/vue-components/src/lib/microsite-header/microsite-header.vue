@@ -10,26 +10,26 @@ interface Slots {
 }
 
 interface Props {
-  /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges.  @default (required) */
+  /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   type: GoabServiceLevel;
-  /** App or service version displayed on the right side of the header.  @default "" */
+  /** App or service version displayed on the right side of the header. */
   version?: string;
-  /** URL to a feedback page displayed when provided.  @default "" */
+  /** URL to a feedback page displayed when provided. */
   feedbackUrl?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Maximum width of the content area. @default undefined */
+  /** Maximum width of the content area. @default "100%" */
   maxContentWidth?: string;
   /** Sets the target attribute for the feedback URL link. @default "blank" */
   feedbackUrlTarget?: GoabLinkTarget;
   /** Sets the target attribute for the header link. @default "blank" */
   headerUrlTarget?: GoabLinkTarget;
-  /** Callback fired when the feedback link is clicked, enables custom feedback handling.  @default undefined */
+  /** Callback fired when the feedback link is clicked, enables custom feedback handling. */
   onFeedbackClick?: () => void;
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, { 
+const wcProps = useWcProps(props, {
   booleanProps: ["onFeedbackClick"],
   renamedProps: { onFeedbackClick: "hasfeedbackhandler" },
 });

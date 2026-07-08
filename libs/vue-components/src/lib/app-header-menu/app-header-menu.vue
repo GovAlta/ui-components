@@ -3,13 +3,13 @@ import type { GoabIconType } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The menu heading text displayed as the dropdown trigger.  @default (required) */
+  /** @required The menu heading text displayed as the dropdown trigger. */
   heading: string;
-  /** Icon displayed before the heading text.  @default undefined */
+  /** Icon displayed before the heading text. */
   leadingIcon?: GoabIconType;
   /** Sets a data-testid attribute for automated testing.  @default "rootEl" */
   testId?: string;
-  /** Slot name used to place this menu in the correct slot of the parent component.  @default undefined */
+  /** Slot name used to place this menu in the correct slot of the parent component. */
   slotName?: string;
 }
 

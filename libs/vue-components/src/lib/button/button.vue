@@ -21,15 +21,15 @@ interface Props {
   leadingIcon?: GoabIconType;
   /** Icon displayed after the button text.  @default null */
   trailingIcon?: GoabIconType;
-  /** Sets a custom width for the button (e.g., "200px" or "100%").  @default "" */
+  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
   width?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Action identifier passed in click events for event delegation patterns.  @default "" */
+  /** Action identifier passed in click events for event delegation patterns. */
   action?: string;
   /** Multiple argument values passed with the action in click events.  @default {} */
   actionArgs?: Record<string, unknown>;
-  /** Single argument value passed with the action in click events.  @default "" */
+  /** Single argument value passed with the action in click events. */
   actionArg?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

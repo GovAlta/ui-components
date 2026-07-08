@@ -13,9 +13,9 @@ interface Slots {
 }
 
 interface Props {
-  /** Sets the width of the navigation column.  @default undefined */
+  /** Sets the width of the navigation column. */
   navColumnWidth?: string;
-  /** Sets the maximum width of the content area.  @default undefined */
+  /** Sets the maximum width of the content area. */
   maxContentWidth?: string;
 }
 

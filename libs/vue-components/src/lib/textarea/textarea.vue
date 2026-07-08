@@ -10,13 +10,13 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required Name of the input value that is received in the change event.  @default (required) */
+  /** @required Name of the input value that is received in the change event. */
   name: string;
-  /** Sets the id attribute on the textarea element.  @default undefined */
+  /** Sets the id attribute on the textarea element. */
   id?: string;
-  /** Bound to the current value of the textarea.  @default "" */
+  /** Bound to the current value of the textarea. */
   value?: string;
-  /** Text displayed within the textarea when no value is set.  @default "" */
+  /** Text displayed within the textarea when no value is set. */
   placeholder?: string;
   /** Sets the number of visible text rows. @default 3 */
   rows?: number;
@@ -30,15 +30,15 @@ interface Props {
   width?: string;
   /** Sets the maximum width of the text area. @default "60ch" */
   maxWidth?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name.  @default "" */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   ariaLabel?: string;
-  /** Counting interval for characters or words, specifying whether to count every character or word.  @default "" */
+  /** Counting interval for characters or words, specifying whether to count every character or word. */
   countBy?: GoabTextAreaCountBy;
   /** Maximum number of characters or words allowed.  @default -1 */
   maxCount?: number;
-  /** Specifies the autocomplete attribute for the textarea input.  @default "" */
+  /** Specifies the autocomplete attribute for the textarea input. */
   autoComplete?: string;
   /** Sets the visual size variant of the text area.  @default "default" */
   size?: GoabTextAreaSize;

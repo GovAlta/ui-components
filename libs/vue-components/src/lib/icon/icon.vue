@@ -4,7 +4,7 @@ import type { GoabIconOverridesType, GoabIconSize, GoabIconTheme, GoabIconType, 
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The icon type to display. See GoabIconType for available icons.  @default (required) */
+  /** @required The icon type to display. See GoabIconType for available icons. */
   type: GoabIconType | GoabIconOverridesType;
   /** Sets the size of the icon. Accepts numeric (1-6) or named sizes. @default "medium" */
   size?: GoabIconSize;
@@ -12,17 +12,17 @@ interface Props {
   theme?: GoabIconTheme;
   /** When true, inverts the icon colors for use on dark backgrounds.  @default "false" */
   inverted?: boolean;
-  /** Sets a custom fill color for the icon. Accepts any valid CSS color value.  @default "" */
+  /** Sets a custom fill color for the icon. Accepts any valid CSS color value. */
   fillColor?: string;
   /** Sets the opacity of the icon from 0 (transparent) to 1 (opaque). @default 1 */
   opacity?: number;
-  /** Adds an accessible title to the icon SVG. Used by screen readers.  @default "" */
+  /** Adds an accessible title to the icon SVG. Used by screen readers. */
   title?: string;
-  /** Defines how the icon will be announced by screen readers.  @default "" */
+  /** Defines how the icon will be announced by screen readers. */
   ariaLabel?: string;
   /** Sets the ARIA role for the icon. Use 'presentation' for decorative icons. @default "img" */
   role?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

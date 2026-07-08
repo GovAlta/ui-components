@@ -2,7 +2,7 @@
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

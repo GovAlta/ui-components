@@ -4,9 +4,9 @@ import type { GoabFormState, GoabPublicFormStatus } from "@abgov/ui-components-c
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Sets the status.  @default undefined */
+  /** Sets the status. */
   status?: GoabPublicFormStatus;
-  /** Sets the name.  @default undefined */
+  /** Sets the name. */
   name?: string;
 }
 

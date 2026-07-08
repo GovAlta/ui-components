@@ -3,7 +3,7 @@ import type { GoabCalloutAriaLive, GoabCalloutEmphasis, GoabCalloutIconTheme, Go
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** Callout heading text.  @default "" */
+  /** Callout heading text. */
   heading?: string;
   /** Sets the context and colour of the callout. @default "information" */
   type?: GoabCalloutType;
@@ -17,7 +17,7 @@ interface Props {
   maxWidth?: string;
   /** Indicates how assistive technology should handle updates to the live region. @default "off" */
   ariaLive?: GoabCalloutAriaLive;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

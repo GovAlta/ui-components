@@ -21,11 +21,11 @@ interface Props {
   width?: GoabContainerWidth;
   /** Sets the maximum width of the container.  @default "none" */
   maxWidth?: string;
-  /** Sets the minimum height of the container.  @default undefined */
+  /** Sets the minimum height of the container. */
   minHeight?: string;
-  /** Sets the maximum height of the container.  @default undefined */
+  /** Sets the maximum height of the container. */
   maxHeight?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

@@ -7,13 +7,13 @@ interface Props {
   variant?: GoabCircularProgressVariant;
   /** Sets the size of the progress indicator. @default "large" */
   size?: GoabCircularProgressSize;
-  /** Loading message displayed below the progress indicator.  @default "" */
+  /** Loading message displayed below the progress indicator. */
   message?: string;
   /** Controls visibility of the progress indicator, allowing a fade transition to be applied.  @default "false" */
   visible?: boolean;
   /** Sets the progress value (0–100). When omitted, an infinite spinner is shown.  @default -1 */
   progress?: number;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

@@ -13,15 +13,15 @@ interface Slots {
 }
 
 interface Props {
-  /** @required The application name displayed in the header.  @default (required) */
+  /** @required The application name displayed in the header. */
   heading: string;
-  /** @required URL for the header link. Clicking the logo/heading navigates to this URL.  @default (required) */
+  /** @required URL for the header link. Clicking the logo/heading navigates to this URL. */
   url: string;
-  /** User's name displayed in the profile section.  @default "" */
+  /** User's name displayed in the profile section. */
   userName?: string;
-  /** Secondary text displayed below the user's name, such as role or email.  @default "" */
+  /** Secondary text displayed below the user's name, such as role or email. */
   userSecondaryText?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Controls whether the side menu is expanded or collapsed.  @default false */
   open?: boolean;

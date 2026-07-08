@@ -9,15 +9,15 @@ import { useWcProps } from "../common/useWcProps";
 import { computed } from "vue";
 
 interface Props {
-  /** Identifier for the dropdown. Should be unique.  @default undefined */
+  /** Identifier for the dropdown. Should be unique. */
   name?: string;
-  /** The currently selected value(s) of the dropdown.  @default "" */
+  /** The currently selected value(s) of the dropdown. */
   value?: string | string[];
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name.  @default "" */
+  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   ariaLabel?: string;
-  /** The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label.  @default "" */
+  /** The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. */
   ariaLabelledBy?: string;
-  /** The id attribute for the dropdown element.  @default undefined */
+  /** The id attribute for the dropdown element. */
   id?: string;
   /** Disables the dropdown control.  @default "false" */
   disabled?: boolean;
@@ -31,15 +31,15 @@ interface Props {
   maxHeight?: string;
   /** When true, renders the native select HTML element.  @default "false" */
   native?: boolean;
-  /** The text displayed in the dropdown before a selection is made. Non-native only.  @default "" */
+  /** The text displayed in the dropdown before a selection is made. Non-native only. */
   placeholder?: string;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Overrides the autosized menu width. Non-native only.  @default "" */
+  /** Overrides the autosized menu width. Non-native only. */
   width?: string;
-  /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em).  @default "" */
+  /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
   maxWidth?: string;
-  /** Specifies the autocomplete attribute for the dropdown input. Native only.  @default "" */
+  /** Specifies the autocomplete attribute for the dropdown input. Native only. */
   autoComplete?: string;
   /** Sets the size of the dropdown. Compact reduces height for dense layouts.  @default "default" */
   size?: GoabDropdownSize;

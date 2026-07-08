@@ -12,13 +12,13 @@ interface Slots {
 interface Props {
   /** Position of the tooltip with respect to the child element. @default "top" */
   position?: GoabTooltipPosition;
-  /** The content of the tooltip. Accepts plain text or rich content.  @default "" */
+  /** The content of the tooltip. Accepts plain text or rich content. */
   content?: string;
   /** Horizontal alignment of the tooltip relative to the child element. @default "center" */
   hAlign?: GoabTooltipHorizontalAlignment;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Sets the maximum width of the tooltip. Must use 'px' unit.  @default "" */
+  /** Sets the maximum width of the tooltip. Must use 'px' unit. */
   maxWidth?: string;
   /** Sets the mt.  @default null */
   mt?: Spacing;

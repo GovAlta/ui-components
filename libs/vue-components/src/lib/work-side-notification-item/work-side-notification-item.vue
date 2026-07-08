@@ -7,19 +7,19 @@ import type {
 import { useWcProps } from "../common/useWcProps";
 
 interface Props {
-  /** @required The body text content of the notification card.  @default "" */
+  /** @required The body text content of the notification card. */
   description: string;
   /** Sets the visual type/style of the notification item. @default "default" */
   type?: GoabWorkSideNotificationItemType;
-  /** ISO timestamp string representing when the notification occurred.  @default "" */
+  /** ISO timestamp string representing when the notification occurred. */
   timestamp?: string;
-  /** Title text displayed in the notification card header.  @default "" */
+  /** Title text displayed in the notification card header. */
   title?: string;
   /** Indicates whether the notification has been read or is unread. @default "unread" */
   readStatus?: GoabWorkSideNotificationReadStatus;
   /** Sets the urgency level of the notification. @default "normal" */
   priority?: GoabWorkSideNotificationPriority;
-  /** Sets a data-testid attribute for automated testing.  @default "" */
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 
