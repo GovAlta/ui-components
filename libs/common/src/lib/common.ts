@@ -249,7 +249,7 @@ export type GoabCheckboxOnChangeDetail = {
 };
 
 /**
- * Provides details when a checkbox receives or loses focus.
+ * Provides details when a checkbox receives focus.
  */
 export type GoabCheckboxOnFocusDetail = {
   /** The checkbox name, when provided. */
