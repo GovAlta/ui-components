@@ -3,27 +3,37 @@ import { useState } from "react";
 import { GoabBadge, GoabButton } from "../src";
 import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { page, type Locator } from "@vitest/browser/context";
+import { page } from "@vitest/browser/context";
 
 // The tooltip uses a 300ms show/hide debounce. On contended CI runners that
 // timer can be delayed past waitFor's 1000ms default, so give the tooltip
 // assertions extra headroom to absorb the debounce plus event latency.
 const TOOLTIP_WAIT = { timeout: 3000 };
-
-// Re-drive real pointer movement instead of only waiting longer. Each attempt
-// moves off the target before hovering again, and the tooltip is re-queried on
-// every poll so retries can observe newly rendered or upgraded DOM.
 const TOOLTIP_TEST_TIMEOUT = 20000;
 const HOVER_ATTEMPTS = 3;
 
+// Real pointer hovers are not reliable here: CI headless Firefox can stop
+// delivering synthesized boundary events for many seconds at a time (#4130),
+// long enough to outlast any retry budget. Drive the tooltip by dispatching
+// mouseenter/mouseleave at the elements that own the component's listeners
+// instead, the same approach as tooltip.browser.spec.tsx. The dispatch is
+// retried because it is fire-and-forget: an event sent before the web
+// component has upgraded and attached its listeners is silently lost.
 async function waitForTooltipToShow(
-  target: Locator,
+  getHoverTarget: () => Element | null,
   getTooltip: () => HTMLElement | null,
   label: string,
 ) {
   for (let attempt = 1; ; attempt++) {
-    await target.unhover();
-    await target.hover();
+    // Wait for the web component to upgrade before dispatching: the target
+    // element doesn't exist until then (getHoverTarget throws or returns
+    // null). Dispatch exactly once per attempt — every mouseenter re-arms
+    // the component's 300ms show debounce, so dispatching inside a polling
+    // waitFor would push the tooltip out indefinitely.
+    await vi.waitFor(() => {
+      expect(getHoverTarget()).toBeTruthy();
+    }, TOOLTIP_WAIT);
+    getHoverTarget()?.dispatchEvent(new MouseEvent("mouseenter"));
     try {
       await vi.waitFor(() => {
         const tooltipEl = getTooltip();
@@ -37,6 +47,10 @@ async function waitForTooltipToShow(
       if (attempt === HOVER_ATTEMPTS) throw err;
     }
   }
+}
+
+function dispatchMouseLeave(el: Element | null) {
+  el?.dispatchEvent(new MouseEvent("mouseleave"));
 }
 
 describe("WorkSideMenu", () => {
@@ -172,9 +186,12 @@ describe("WorkSideMenu", () => {
       const getTooltip = () =>
         menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await waitForTooltipToShow(menuItem, getTooltip, "Search");
+      // The item's mouseenter listener lives on its root div, which carries
+      // the data-testid; the hide listener is on the menu's primary slot
+      // wrapper.
+      await waitForTooltipToShow(() => menuItem.element(), getTooltip, "Search");
 
-      await menuItem.unhover();
+      dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
 
       await vi.waitFor(() => {
         expect(getTooltip()?.classList.contains("show")).toBe(false);
@@ -210,9 +227,15 @@ describe("WorkSideMenu", () => {
       const getTooltip = () =>
         menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await waitForTooltipToShow(group, getTooltip, "Applications");
+      // The group's mouseenter listener lives on its inner details element;
+      // the hide listener is on the menu's primary slot wrapper.
+      await waitForTooltipToShow(
+        () => group.element().querySelector("details"),
+        getTooltip,
+        "Applications",
+      );
 
-      await group.unhover();
+      dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
 
       await vi.waitFor(() => {
         expect(getTooltip()?.classList.contains("show")).toBe(false);
@@ -242,9 +265,10 @@ describe("WorkSideMenu", () => {
       const getTooltip = () =>
         menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await waitForTooltipToShow(toggle, getTooltip, "Expand menu");
+      // The toggle button owns both its mouseenter and mouseleave listeners.
+      await waitForTooltipToShow(() => toggle.element(), getTooltip, "Expand menu");
 
-      await toggle.unhover();
+      dispatchMouseLeave(toggle.element());
 
       await vi.waitFor(() => {
         expect(getTooltip()?.classList.contains("show")).toBe(false);
