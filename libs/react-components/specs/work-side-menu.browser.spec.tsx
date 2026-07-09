@@ -25,11 +25,6 @@ async function waitForTooltipToShow(
   label: string,
 ) {
   for (let attempt = 1; ; attempt++) {
-    // Wait for the web component to upgrade before dispatching: the target
-    // element doesn't exist until then (getHoverTarget throws or returns
-    // null). Dispatch exactly once per attempt — every mouseenter re-arms
-    // the component's 300ms show debounce, so dispatching inside a polling
-    // waitFor would push the tooltip out indefinitely.
     await vi.waitFor(() => {
       expect(getHoverTarget()).toBeTruthy();
     }, TOOLTIP_WAIT);
