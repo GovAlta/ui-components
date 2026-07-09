@@ -1193,6 +1193,7 @@ export type GoabIconButtonVariant =
   | "dark"
   | "light"
   | "destructive";
+export type GoabIconButtonType = "default" | "tertiary";
 export type GoabIconVariant = "primary" | "secondary" | "tertiary";
 
 // Common

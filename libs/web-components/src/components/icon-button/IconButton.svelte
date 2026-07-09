@@ -23,7 +23,14 @@
     true,
   );
 
+  const [Types, validateType] = typeValidator(
+    "Icon Button Type",
+    ["default", "tertiary"],
+    true,
+  );
+
   type Variant = (typeof Variants)[number];
+  type IconButtonType = (typeof Types)[number];
 
   /** @required Sets the icon. */
   export let icon: GoAIconType;
@@ -35,6 +42,8 @@
   export let theme: IconTheme = "outline";
   /** Styles the button to show color, light, dark or destructive action. */
   export let variant: Variant = "color";
+  /** Sets the visual style of the button. */
+  export let type: IconButtonType = "default";
   /** Sets the title of the button. */
   export let title: string = "";
   /** Sets a data-testid attribute for automated testing. */
@@ -62,7 +71,7 @@
   export let actionArgs: Record<string, unknown> = {};
 
   // private
-  $: css = `${variant} ${isInverted ? "inverted" : ""}`;
+  $: css = `${type} ${variant} ${isInverted ? "inverted" : ""}`;
   $: isDisabled = toBoolean(disabled);
   $: isInverted = toBoolean(inverted);
 
@@ -80,6 +89,7 @@
 
   onMount(() => {
     validateVariant(variant);
+    validateType(type);
 
     if (variant == "nocolor") {
       console.warn(
@@ -170,10 +180,15 @@
       --goa-icon-button-border-radius,
       var(--goa-icon-button-medium-border-radius)
     );
+    /* Fallbacks preserve the pre-token values for v1 consumers — the motion
+       tokens only exist in the v2 tokens package. */
     transition:
-      background-color 0.2s ease-in-out,
-      color 0.2s ease-in-out,
-      transform 0.1s ease-in-out;
+      background-color var(--goa-motion-duration-short-4, 0.2s)
+        var(--goa-motion-curve-expressive, ease-in-out),
+      color var(--goa-motion-duration-short-4, 0.2s)
+        var(--goa-motion-curve-expressive, ease-in-out),
+      transform var(--goa-motion-duration-short-3, 0.1s)
+        var(--goa-motion-curve-expressive-transform, ease-in-out);
   }
 
   button:active {
@@ -193,15 +208,13 @@
     outline: none;
   }
 
+  /* No pointer-events: none here — the button must stay a pointer target for
+     the not-allowed cursor to show. Hover styling is suppressed per variant
+     with :not(:disabled); native disabled buttons fire no click events. */
   button:disabled {
-    pointer-events: none;
     transform: none;
-    cursor: default;
+    cursor: not-allowed;
     opacity: 1;
-  }
-
-  button:disabled:hover {
-    background-color: transparent;
   }
 
   /*  Type: color */
@@ -210,7 +223,7 @@
     fill: var(--goa-icon-button-default-color);
   }
 
-  .color:hover:not(:focus-visible) {
+  .color:hover:not(:focus-visible):not(:disabled) {
     color: var(--goa-icon-button-default-hover-color);
     fill: var(--goa-icon-button-default-hover-color);
     background-color: var(--goa-icon-button-default-hover-color-bg);
@@ -227,7 +240,7 @@
     fill: var(--goa-icon-button-dark-color);
   }
 
-  .dark:hover:not(:focus-visible),
+  .dark:hover:not(:focus-visible):not(:disabled),
   .dark:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
@@ -249,7 +262,7 @@
     fill: var(--goa-icon-button-dark-color);
   }
 
-  .nocolor:hover:not(:focus-visible),
+  .nocolor:hover:not(:focus-visible):not(:disabled),
   .nocolor:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
@@ -260,7 +273,7 @@
     fill: var(--goa-icon-button-destructive-color);
   }
 
-  .destructive:hover:not(:focus-visible),
+  .destructive:hover:not(:focus-visible):not(:disabled),
   .destructive:active {
     color: var(--goa-icon-button-destructive-hover-color);
     fill: var(--goa-icon-button-destructive-hover-color);
@@ -278,7 +291,7 @@
     fill: var(--goa-icon-button-light-color);
   }
 
-  .light:hover:not(:focus-visible),
+  .light:hover:not(:focus-visible):not(:disabled),
   .light:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
@@ -294,8 +307,41 @@
     fill: var(--goa-icon-button-light-color);
   }
 
-  .inverted:hover:not(:focus-visible),
+  .inverted:hover:not(:focus-visible):not(:disabled),
   .inverted:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
+  }
+
+  /*  Button type: tertiary. The border only shows at rest; hover, focus and
+      disabled fall back to the variant styling. An inset box-shadow is used
+      instead of a border so the button footprint is identical in all states. */
+  .tertiary {
+    box-shadow: inset 0 0 0
+      var(--goa-icon-button-tertiary-border-width, var(--goa-border-width-s))
+      var(--goa-icon-button-tertiary-border-color, var(--goa-color-greyscale-200));
+  }
+
+  .tertiary.destructive {
+    box-shadow: inset 0 0 0
+      var(--goa-icon-button-tertiary-border-width, var(--goa-border-width-s))
+      var(
+        --goa-icon-button-tertiary-destructive-border-color,
+        var(--goa-color-emergency-light)
+      );
+  }
+
+  .tertiary:hover:not(:focus-visible),
+  .tertiary:disabled {
+    box-shadow: none;
+  }
+
+  /* re-assert the focus ring: .tertiary.destructive above would otherwise
+     outrank button:focus-visible */
+  .tertiary:focus-visible {
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px)
+      var(
+        --goa-icon-button-focus-border-color,
+        var(--goa-color-interactive-focus)
+      );
   }
 </style>

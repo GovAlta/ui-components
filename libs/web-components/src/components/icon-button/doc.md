@@ -8,4 +8,6 @@ Use it like this:
 <goa-icon-button (_click)="onClick()" icon="close"></goa-icon-button>
 <goa-icon-button (_click)="onClick()" icon="refresh"></goa-icon-button>
 <goa-icon-button (_click)="onClick()" icon="play-back"></goa-icon-button>
+<goa-icon-button (_click)="onClick()" icon="close" type="tertiary"></goa-icon-button>
+<goa-icon-button (_click)="onClick()" icon="trash" type="tertiary" variant="destructive"></goa-icon-button>
 ```

@@ -1,4 +1,5 @@
 import {
+  GoabIconButtonType,
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconTheme,
@@ -14,6 +15,7 @@ interface WCProps extends Margins {
   size?: GoabIconSize;
   theme?: GoabIconTheme;
   variant?: GoabIconButtonVariant;
+  type?: GoabIconButtonType;
   title?: string;
   disabled?: string;
   arialabel?: string;
@@ -42,6 +44,8 @@ export interface GoabIconButtonProps extends Margins, DataAttributes {
   size?: GoabIconSize;
   /** Styles the button to show color, light, dark or destructive action. @default "color" */
   variant?: GoabIconButtonVariant;
+  /** Sets the visual style of the button. @default "default" */
+  type?: GoabIconButtonType;
   /** Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
   theme?: GoabIconTheme;
   /** Sets the title of the button. */
@@ -67,6 +71,7 @@ export interface GoabIconButtonProps extends Margins, DataAttributes {
 /** A compact button with an icon and no text. */
 export function GoabIconButton({
   variant = "color",
+  type = "default",
   size = "medium",
   theme = "outline",
   disabled,
@@ -78,7 +83,7 @@ export function GoabIconButton({
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>({ variant, size, theme, ...rest }, lowercase);
+  const _props = transformProps<WCProps>({ variant, type, size, theme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!ref.current) {

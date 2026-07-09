@@ -1,6 +1,9 @@
 import { render } from "@testing-library/react";
 import { GoabIconButton } from "./icon-button";
-import { GoabIconButtonVariant } from "@abgov/ui-components-common";
+import {
+  GoabIconButtonType,
+  GoabIconButtonVariant,
+} from "@abgov/ui-components-common";
 
 describe("GoabIconButton", () => {
   it("should render", () => {
@@ -35,7 +38,7 @@ describe("GoabIconButton", () => {
   });
 
   describe("Variants", () => {
-    (["color", "nocolor", "dark", "destructive"] as const).forEach(
+    (["color", "nocolor", "dark", "light", "destructive"] as const).forEach(
       (variant: GoabIconButtonVariant) => {
         it(`should render ${variant} variant`, async () => {
           const { container } = render(
@@ -48,6 +51,20 @@ describe("GoabIconButton", () => {
         });
       },
     );
+  });
+
+  describe("Types", () => {
+    (["default", "tertiary"] as const).forEach((type: GoabIconButtonType) => {
+      it(`should render ${type} type`, async () => {
+        const { container } = render(
+          <GoabIconButton type={type} icon="information" />,
+        );
+
+        const el = container.querySelector("goa-icon-button");
+        expect(el).toBeTruthy();
+        expect(el?.getAttribute("type")).toEqual(type);
+      });
+    });
   });
 
   it("should pass data-grid attributes", () => {

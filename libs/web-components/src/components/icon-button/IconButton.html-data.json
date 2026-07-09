@@ -45,6 +45,19 @@
       "default": "color"
     },
     {
+      "name": "type",
+      "description": "Sets the visual style of the button",
+      "values": [
+        {
+          "name": "default"
+        },
+        {
+          "name": "tertiary"
+        }
+      ],
+      "default": "default"
+    },
+    {
       "name": "title",
       "type": "string",
       "description": "Sets the title of the button"
