@@ -63,13 +63,18 @@
     validateRequired("GoaAppHeaderMenu", { heading });
     const hostElement = (_rootEl?.getRootNode() as ShadowRoot)
       ?.host as HTMLElement;
-    const inNavigationSlot = hostElement?.getAttribute("slot") === "navigation";
+    const slottedHostElement =
+      hostElement?.getAttribute("slot") === "navigation"
+        ? hostElement
+        : (hostElement?.closest('[slot="navigation"]') as HTMLElement | null);
+    const inNavigationSlot =
+      slottedHostElement?.getAttribute("slot") === "navigation";
 
     // Auto-detect version from parent AppHeader if not explicitly set
     // Uses property access because Svelte props aren't reflected as HTML attributes
     let effectiveVersion = version;
     if (version === "1" && inNavigationSlot) {
-      const parentAppHeader = hostElement?.closest(
+      const parentAppHeader = slottedHostElement?.closest(
         "goa-app-header",
       ) as HTMLElement & { version?: string };
       if (parentAppHeader?.version === "2") {

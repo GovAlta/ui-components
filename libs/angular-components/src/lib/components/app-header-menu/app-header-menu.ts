@@ -2,6 +2,7 @@ import { GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnInit,
@@ -26,6 +27,7 @@ import {
 /** Menu items within the app header. */
 export class GoabAppHeaderMenu implements OnInit {
   private cdr = inject(ChangeDetectorRef);
+  private el = inject(ElementRef<HTMLElement>);
 
   /** Icon displayed before the heading text. */
   @Input() leadingIcon?: GoabIconType;
@@ -33,12 +35,13 @@ export class GoabAppHeaderMenu implements OnInit {
   @Input() heading?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** Sets the slot name for the component. */
+  /** @deprecated Sets the slot name for the component. Deprecated: use AppHeader navigation TemplateRef instead. */
   @Input() slotName?: string;
 
   @HostBinding("attr.slot")
   get hostSlot(): string | null {
-    return this.slotName ?? null;
+    // Use the old slotName API if provided; otherwise don't erase an externally-applied slot attribute.
+    return this.slotName ?? this.el.nativeElement.getAttribute("slot");
   }
 
   isReady = false;
