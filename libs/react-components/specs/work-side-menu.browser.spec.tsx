@@ -12,13 +12,8 @@ const TOOLTIP_WAIT = { timeout: 3000 };
 const TOOLTIP_TEST_TIMEOUT = 20000;
 const HOVER_ATTEMPTS = 3;
 
-// Real pointer hovers are not reliable here: CI headless Firefox can stop
-// delivering synthesized boundary events for many seconds at a time (#4130),
-// long enough to outlast any retry budget. Drive the tooltip by dispatching
-// mouseenter/mouseleave at the elements that own the component's listeners
-// instead, the same approach as tooltip.browser.spec.tsx. The dispatch is
-// retried because it is fire-and-forget: an event sent before the web
-// component has upgraded and attached its listeners is silently lost.
+// Drive the component's hover handlers directly. This function verifies tooltip
+// behaviour after hover events, not browser pointer movement.
 async function waitForTooltipToShow(
   getHoverTarget: () => Element | null,
   getTooltip: () => HTMLElement | null,
@@ -153,122 +148,134 @@ describe("WorkSideMenu", () => {
       expect(menu.element().classList.contains("closed")).toBeFalsy();
     });
 
-    it("should show and hide tooltip for item", async () => {
-      await page.viewport(1024, 768);
+    it(
+      "should show and hide tooltip for item",
+      async () => {
+        await page.viewport(1024, 768);
 
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="menu"
-            primaryContent={
-              <GoabWorkSideMenuItem
-                icon="search"
-                label="Search"
-                url="/search"
-                testId="hover-item"
-              />
-            }
-            open={false}
-          />
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="menu"
+              primaryContent={
+                <GoabWorkSideMenuItem
+                  icon="search"
+                  label="Search"
+                  url="/search"
+                  testId="hover-item"
+                />
+              }
+              open={false}
+            />
+          );
+        };
+
+        const result = render(<Component />);
+        const menu = result.getByTestId("menu");
+        const menuItem = result.getByTestId("hover-item");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
+
+        // The item's mouseenter listener lives on its root div, which carries
+        // the data-testid; the hide listener is on the menu's primary slot
+        // wrapper.
+        await waitForTooltipToShow(() => menuItem.element(), getTooltip, "Search");
+
+        dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
+
+        await vi.waitFor(() => {
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
+
+    it(
+      "should show and hide tooltip for group",
+      async () => {
+        await page.viewport(1024, 768);
+
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="menu"
+              primaryContent={
+                <GoabWorkSideMenuGroup
+                  heading="Applications"
+                  icon="documents"
+                  testId="hover-group"
+                >
+                  <GoabWorkSideMenuItem label="In progress" url="/in-progress" />
+                </GoabWorkSideMenuGroup>
+              }
+              open={false}
+            />
+          );
+        };
+
+        const result = render(<Component />);
+        const menu = result.getByTestId("menu");
+        const group = result.getByTestId("hover-group");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
+
+        // The group's mouseenter listener lives on its inner details element;
+        // the hide listener is on the menu's primary slot wrapper.
+        await waitForTooltipToShow(
+          () => group.element().querySelector("details"),
+          getTooltip,
+          "Applications",
         );
-      };
 
-      const result = render(<Component />);
-      const menu = result.getByTestId("menu");
-      const menuItem = result.getByTestId("hover-item");
-      const getTooltip = () =>
-        menu.element().querySelector(".tooltip") as HTMLElement | null;
+        dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
 
-      // The item's mouseenter listener lives on its root div, which carries
-      // the data-testid; the hide listener is on the menu's primary slot
-      // wrapper.
-      await waitForTooltipToShow(() => menuItem.element(), getTooltip, "Search");
+        await vi.waitFor(() => {
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
 
-      dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
+    it(
+      "should show and hide tooltip for toggle button",
+      async () => {
+        await page.viewport(1024, 768);
 
-      await vi.waitFor(() => {
-        expect(getTooltip()?.classList.contains("show")).toBe(false);
-      }, TOOLTIP_WAIT);
-    }, TOOLTIP_TEST_TIMEOUT);
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="work-side-menu"
+              primaryContent={
+                <GoabWorkSideMenuItem icon="search" label="Search" url="/search" />
+              }
+              open={false}
+            />
+          );
+        };
 
-    it("should show and hide tooltip for group", async () => {
-      await page.viewport(1024, 768);
+        const result = render(<Component />);
+        const menu = result.getByTestId("work-side-menu");
+        const toggle = result.getByTestId("toggle-menu");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="menu"
-            primaryContent={
-              <GoabWorkSideMenuGroup
-                heading="Applications"
-                icon="documents"
-                testId="hover-group"
-              >
-                <GoabWorkSideMenuItem label="In progress" url="/in-progress" />
-              </GoabWorkSideMenuGroup>
-            }
-            open={false}
-          />
-        );
-      };
+        // The toggle button owns both its mouseenter and mouseleave listeners.
+        await waitForTooltipToShow(() => toggle.element(), getTooltip, "Expand menu");
 
-      const result = render(<Component />);
-      const menu = result.getByTestId("menu");
-      const group = result.getByTestId("hover-group");
-      const getTooltip = () =>
-        menu.element().querySelector(".tooltip") as HTMLElement | null;
+        dispatchMouseLeave(toggle.element());
 
-      // The group's mouseenter listener lives on its inner details element;
-      // the hide listener is on the menu's primary slot wrapper.
-      await waitForTooltipToShow(
-        () => group.element().querySelector("details"),
-        getTooltip,
-        "Applications",
-      );
-
-      dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
-
-      await vi.waitFor(() => {
-        expect(getTooltip()?.classList.contains("show")).toBe(false);
-      }, TOOLTIP_WAIT);
-    }, TOOLTIP_TEST_TIMEOUT);
-
-    it("should show and hide tooltip for toggle button", async () => {
-      await page.viewport(1024, 768);
-
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="work-side-menu"
-            primaryContent={
-              <GoabWorkSideMenuItem icon="search" label="Search" url="/search" />
-            }
-            open={false}
-          />
-        );
-      };
-
-      const result = render(<Component />);
-      const menu = result.getByTestId("work-side-menu");
-      const toggle = result.getByTestId("toggle-menu");
-      const getTooltip = () =>
-        menu.element().querySelector(".tooltip") as HTMLElement | null;
-
-      // The toggle button owns both its mouseenter and mouseleave listeners.
-      await waitForTooltipToShow(() => toggle.element(), getTooltip, "Expand menu");
-
-      dispatchMouseLeave(toggle.element());
-
-      await vi.waitFor(() => {
-        expect(getTooltip()?.classList.contains("show")).toBe(false);
-      }, TOOLTIP_WAIT);
-    }, TOOLTIP_TEST_TIMEOUT);
+        await vi.waitFor(() => {
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
       await page.viewport(1024, 768);
