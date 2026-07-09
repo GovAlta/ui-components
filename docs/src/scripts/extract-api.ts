@@ -194,22 +194,22 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
-// A slot override value of `null` hides the slot from that framework's docs entirely.
-// Used for slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection)
-// rather than typed props/inputs: documenting them as ReactNode/TemplateRef props would
-// be wrong since consumers never bind a value to them, they nest the sub-component instead.
+// Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
+// typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
+// consumers never bind a value to them, they nest the sub-component instead.
+const HIDE_SLOT = null;
 const SLOT_TYPE_OVERRIDES: Record<
   string,
-  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | null>>>
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | typeof HIDE_SLOT>>>
 > = {
   footer: {
     react: {
-      nav: null,
-      meta: null,
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     angular: {
-      nav: null,
-      meta: null,
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     webComponents: {
       nav: "goa-app-footer-nav-section",
@@ -2602,9 +2602,12 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     Boolean(slotNameAliases[name] || slotDescriptions[name]) ||
     Object.prototype.hasOwnProperty.call(slotRequired, name);
 
-  // `undefined` means no override configured (use the generic fallback below), `null` means
-  // hide the slot for this framework, any other string overrides the displayed type.
-  const getSlotOverride = (framework: "react" | "angular" | "webComponents", name: string): string | null | undefined => {
+  // `undefined` means no override configured, distinct from `HIDE_SLOT`: an absent key falls
+  // back to the generic type detection below, so this can't just be a `??` on the map lookup.
+  const getSlotOverride = (
+    framework: "react" | "angular" | "webComponents",
+    name: string,
+  ): string | typeof HIDE_SLOT | undefined => {
     const frameworkOverrides = SLOT_TYPE_OVERRIDES[componentName]?.[framework];
     if (!frameworkOverrides || !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)) return undefined;
     return frameworkOverrides[name];
@@ -2619,7 +2622,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       .filter(
         (name) =>
           !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
-          getSlotOverride(framework, name) !== null &&
+          getSlotOverride(framework, name) !== HIDE_SLOT &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
       .map((name) => {
