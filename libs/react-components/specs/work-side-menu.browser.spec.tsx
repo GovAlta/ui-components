@@ -10,16 +10,9 @@ import { page, type Locator } from "@vitest/browser/context";
 // assertions extra headroom to absorb the debounce plus event latency.
 const TOOLTIP_WAIT = { timeout: 3000 };
 
-// A single hover is not enough to guarantee the tooltip shows, and waiting
-// longer can't recover because waitFor never re-hovers. Two failure modes
-// were hit in CI (headless Firefox): the pointer move can land before the
-// component's hover listeners are attached, and a vitest retry re-renders
-// fresh DOM under a pointer that hasn't moved, so the browser never emits a
-// new mouseenter. Each attempt therefore unhovers first (unhover targets the
-// page body, forcing real pointer movement) before hovering again, and the
-// tooltip element is re-queried on every poll so a null captured before the
-// web component upgraded isn't held for the whole wait. The tooltip tests
-// get a generous per-test timeout to cover the retried hovers.
+// Re-drive real pointer movement instead of only waiting longer. Each attempt
+// moves off the target before hovering again, and the tooltip is re-queried on
+// every poll so retries can observe newly rendered or upgraded DOM.
 const TOOLTIP_TEST_TIMEOUT = 20000;
 const HOVER_ATTEMPTS = 3;
 
