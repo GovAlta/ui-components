@@ -1,4 +1,14 @@
-import { useEffect, useRef, type JSX } from "react";
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  type JSX,
+} from "react";
 import { DataAttributes } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -25,10 +35,26 @@ declare module "react" {
   }
 }
 
+function renderSlottedItems(children: ReactNode, slot: string): ReactNode {
+  return Children.map(children, (child) => {
+    if (!isValidElement(child)) {
+      return child;
+    }
+
+    if (child.type === Fragment) {
+      const fragment = child as ReactElement<{ children?: ReactNode }>;
+      return renderSlottedItems(fragment.props.children, slot);
+    }
+
+    // Creates a copy of the element but with the slot property applied
+    return cloneElement(child as ReactElement<{ slot?: string }>, { slot });
+  });
+}
+
 export interface GoabAppHeaderProps extends DataAttributes {
   /** Set the service name to display in the app header. */
   heading?: string;
-  /** V2 only: Secondary text displayed under the service name. */
+  /** Secondary text displayed under the service name. */
   secondaryText?: string;
   /** Set the URL to link from the alberta.ca logo. A full url is required. */
   url?: string;
@@ -37,11 +63,19 @@ export interface GoabAppHeaderProps extends DataAttributes {
   /** Sets the breakpoint in px for the full menu to display. */
   fullMenuBreakpoint?: number;
   /** Content rendered inside the app header, typically navigation links. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
   onMenuClick?: () => void;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Banner content displayed above the header. */
+  banner?: ReactNode;
+  /** Phase badge content displayed beside the service name. */
+  phase?: ReactNode;
+  /** Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown. */
+  navigation?: ReactNode;
+  /** Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions. */
+  utilities?: ReactNode;
 }
 
 /** Provide structure to help users find their way around the service. */
@@ -49,6 +83,10 @@ export function GoabAppHeader({
   onMenuClick,
   children,
   secondaryText,
+  banner,
+  phase,
+  navigation,
+  utilities,
   ...rest
 }: GoabAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
@@ -81,6 +119,10 @@ export function GoabAppHeader({
       version="2"
     >
       {children}
+      {banner && <div slot="banner">{banner}</div>}
+      {phase && <div slot="phase">{phase}</div>}
+      {navigation && renderSlottedItems(navigation, "navigation")}
+      {utilities && renderSlottedItems(utilities, "utilities")}
     </goa-app-header>
   );
 }
