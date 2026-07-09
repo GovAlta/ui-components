@@ -3,12 +3,48 @@ import { useState } from "react";
 import { GoabBadge, GoabButton } from "../src";
 import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { page } from "@vitest/browser/context";
+import { page, type Locator } from "@vitest/browser/context";
 
 // The tooltip uses a 300ms show/hide debounce. On contended CI runners that
 // timer can be delayed past waitFor's 1000ms default, so give the tooltip
 // assertions extra headroom to absorb the debounce plus event latency.
 const TOOLTIP_WAIT = { timeout: 3000 };
+
+// A single hover is not enough to guarantee the tooltip shows, and waiting
+// longer can't recover because waitFor never re-hovers. Two failure modes
+// were hit in CI (headless Firefox): the pointer move can land before the
+// component's hover listeners are attached, and a vitest retry re-renders
+// fresh DOM under a pointer that hasn't moved, so the browser never emits a
+// new mouseenter. Each attempt therefore unhovers first (unhover targets the
+// page body, forcing real pointer movement) before hovering again, and the
+// tooltip element is re-queried on every poll so a null captured before the
+// web component upgraded isn't held for the whole wait. The tooltip tests
+// get a generous per-test timeout to cover the retried hovers.
+const TOOLTIP_TEST_TIMEOUT = 20000;
+const HOVER_ATTEMPTS = 3;
+
+async function waitForTooltipToShow(
+  target: Locator,
+  getTooltip: () => HTMLElement | null,
+  label: string,
+) {
+  for (let attempt = 1; ; attempt++) {
+    await target.unhover();
+    await target.hover();
+    try {
+      await vi.waitFor(() => {
+        const tooltipEl = getTooltip();
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe(label);
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      }, TOOLTIP_WAIT);
+      return;
+    } catch (err) {
+      if (attempt === HOVER_ATTEMPTS) throw err;
+    }
+  }
+}
 
 describe("WorkSideMenu", () => {
   describe("Desktop viewport", () => {
@@ -140,25 +176,17 @@ describe("WorkSideMenu", () => {
       const result = render(<Component />);
       const menu = result.getByTestId("menu");
       const menuItem = result.getByTestId("hover-item");
+      const getTooltip = () =>
+        menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await menuItem.hover();
-      const tooltipEl = menu
-        .element()
-        .querySelector(".tooltip") as HTMLElement | null;
-
-      await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(true);
-        expect(tooltipEl?.textContent?.trim()).toBe("Search");
-        expect(tooltipEl?.style.left).not.toBe("");
-        expect(tooltipEl?.style.top).not.toBe("");
-      }, TOOLTIP_WAIT);
+      await waitForTooltipToShow(menuItem, getTooltip, "Search");
 
       await menuItem.unhover();
 
       await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(false);
+        expect(getTooltip()?.classList.contains("show")).toBe(false);
       }, TOOLTIP_WAIT);
-    });
+    }, TOOLTIP_TEST_TIMEOUT);
 
     it("should show and hide tooltip for group", async () => {
       await page.viewport(1024, 768);
@@ -186,25 +214,17 @@ describe("WorkSideMenu", () => {
       const result = render(<Component />);
       const menu = result.getByTestId("menu");
       const group = result.getByTestId("hover-group");
+      const getTooltip = () =>
+        menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await group.hover();
-      const tooltipEl = menu
-        .element()
-        .querySelector(".tooltip") as HTMLElement | null;
-
-      await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(true);
-        expect(tooltipEl?.textContent?.trim()).toBe("Applications");
-        expect(tooltipEl?.style.left).not.toBe("");
-        expect(tooltipEl?.style.top).not.toBe("");
-      }, TOOLTIP_WAIT);
+      await waitForTooltipToShow(group, getTooltip, "Applications");
 
       await group.unhover();
 
       await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(false);
+        expect(getTooltip()?.classList.contains("show")).toBe(false);
       }, TOOLTIP_WAIT);
-    });
+    }, TOOLTIP_TEST_TIMEOUT);
 
     it("should show and hide tooltip for toggle button", async () => {
       await page.viewport(1024, 768);
@@ -226,25 +246,17 @@ describe("WorkSideMenu", () => {
       const result = render(<Component />);
       const menu = result.getByTestId("work-side-menu");
       const toggle = result.getByTestId("toggle-menu");
+      const getTooltip = () =>
+        menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      await toggle.hover();
-      const tooltipEl = menu
-        .element()
-        .querySelector(".tooltip") as HTMLElement | null;
-
-      await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(true);
-        expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
-        expect(tooltipEl?.style.left).not.toBe("");
-        expect(tooltipEl?.style.top).not.toBe("");
-      }, TOOLTIP_WAIT);
+      await waitForTooltipToShow(toggle, getTooltip, "Expand menu");
 
       await toggle.unhover();
 
       await vi.waitFor(() => {
-        expect(tooltipEl?.classList.contains("show")).toBe(false);
+        expect(getTooltip()?.classList.contains("show")).toBe(false);
       }, TOOLTIP_WAIT);
-    });
+    }, TOOLTIP_TEST_TIMEOUT);
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
       await page.viewport(1024, 768);
