@@ -15,7 +15,7 @@ import {
   imports: [GoabButton, GoabButtonGroup, GoabDatePicker, GoabFormItem],
 })
 export class Bug3275Component {
-  inputValue = "";
+  inputValue = "2024-03-15";
 
   handleChange(detail: GoabDatePickerOnChangeDetail) {
     this.inputValue = detail.valueStr ?? "";

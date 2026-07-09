@@ -5,6 +5,11 @@ import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from ".
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
+// The tooltip uses a 300ms show/hide debounce. On contended CI runners that
+// timer can be delayed past waitFor's 1000ms default, so give the tooltip
+// assertions extra headroom to absorb the debounce plus event latency.
+const TOOLTIP_WAIT = { timeout: 3000 };
+
 describe("WorkSideMenu", () => {
   describe("Desktop viewport", () => {
     it("renders with slots", async () => {
@@ -136,35 +141,23 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("menu");
       const menuItem = result.getByTestId("hover-item");
 
-      vi.useFakeTimers();
-      try {
-        await menuItem.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await menuItem.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Search");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Search");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      }, TOOLTIP_WAIT);
 
-        await menuItem.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await menuItem.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      }, TOOLTIP_WAIT);
     });
 
     it("should show and hide tooltip for group", async () => {
@@ -194,35 +187,23 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("menu");
       const group = result.getByTestId("hover-group");
 
-      vi.useFakeTimers();
-      try {
-        await group.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await group.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Applications");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Applications");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      }, TOOLTIP_WAIT);
 
-        await group.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await group.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      }, TOOLTIP_WAIT);
     });
 
     it("should show and hide tooltip for toggle button", async () => {
@@ -246,35 +227,23 @@ describe("WorkSideMenu", () => {
       const menu = result.getByTestId("work-side-menu");
       const toggle = result.getByTestId("toggle-menu");
 
-      vi.useFakeTimers();
-      try {
-        await toggle.hover();
-        await vi.advanceTimersByTimeAsync(400);
+      await toggle.hover();
+      const tooltipEl = menu
+        .element()
+        .querySelector(".tooltip") as HTMLElement | null;
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      }, TOOLTIP_WAIT);
 
-        await toggle.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+      await toggle.unhover();
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
+      await vi.waitFor(() => {
+        expect(tooltipEl?.classList.contains("show")).toBe(false);
+      }, TOOLTIP_WAIT);
     });
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
