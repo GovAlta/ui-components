@@ -1,1 +1,0 @@
-import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{t as m,l as p}from"./workspace-layout-scroll-state.Ch1khooy.js";function g({actionArgs:r,actionArg:o,color:t="interactive",size:s="medium",children:a,...i}){const n=m({color:t,size:s,...i},p);return e.jsx("goa-link",{"action-arg":o,"action-args":JSON.stringify(r),...n,children:a})}export{g as G};
