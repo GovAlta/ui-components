@@ -10,11 +10,17 @@ import {
   GoabWorkSideMenuItem,
 } from "@abgov/vue-components";
 import { bugRouteDefinitions, featureRouteDefinitions, docsRouteDefinitions } from "./route-manifest";
+import { useTheme } from "./composables/useTheme";
 
 const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
+const { mode, isDark, toggle } = useTheme();
 
 const handleSideMenuNavigate = (path: string) => {
+  if (path === "#toggle-theme") {
+    toggle();
+    return;
+  }
   const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
   router.push(internal);
 };
@@ -28,6 +34,13 @@ const handleSideMenuNavigate = (path: string) => {
       :open="true"
       @onNavigate="handleSideMenuNavigate"
     >
+      <template #secondary>
+        <GoabWorkSideMenuItem
+          :icon="isDark ? 'sunny' : 'moon'"
+          :label="isDark ? 'Light mode' : 'Dark mode'"
+          url="#toggle-theme"
+        />
+      </template>
       <template #primary>
         <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
           <GoabWorkSideMenuItem
