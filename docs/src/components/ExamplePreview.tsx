@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from "react";
 import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
 import type { ExampleCode } from "../lib/example-code";
+import { getActiveTabHash } from "../lib/tab-hash";
 import DOMPurify from "dompurify";
 
 // Allow GoA web component custom elements through DOMPurify.
@@ -114,7 +115,9 @@ export function ExamplePreview({
   // Handle copy link
   const handleCopyLink = async () => {
     try {
-      const url = `${window.location.origin}${window.location.pathname}#${anchorId}`;
+      const tabHash = getActiveTabHash(previewRef.current);
+      const hash = tabHash ? `${tabHash}#${anchorId}` : anchorId;
+      const url = `${window.location.origin}${window.location.pathname}#${hash}`;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);

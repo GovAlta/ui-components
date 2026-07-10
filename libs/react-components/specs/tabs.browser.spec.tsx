@@ -460,6 +460,11 @@ describe("Tabs Browser Tests", () => {
     });
 
     it("should navigate to correct hash when clicking tab with slug", async () => {
+      // Start from a clean hash: a previous test's leftover hash is no
+      // longer silently wiped by clicking a tab (see fix for #3738), so it
+      // would otherwise still be sitting in the URL when this test starts.
+      window.history.pushState({}, "", "/test");
+
       const Component = () => {
         return (
           <GoabTabs testId="test-tabs">
@@ -568,6 +573,11 @@ describe("Tabs Browser Tests", () => {
     });
 
     it("should navigate correctly when clicking tab with component heading and slug", async () => {
+      // Start from a clean hash: a previous test's leftover hash is no
+      // longer silently wiped by clicking a tab (see fix for #3738), so it
+      // would otherwise still be sitting in the URL when this test starts.
+      window.history.pushState({}, "", "/test");
+
       const Component = () => {
         return (
           <GoabTabs testId="test-tabs">
