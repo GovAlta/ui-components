@@ -1651,17 +1651,17 @@ html, body {
   padding: 0;
 }
 
-.app-layout[data-v-43e1543b] {
+.app-layout[data-v-ee7691be] {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
-.main-wrapper[data-v-43e1543b] {
+.main-wrapper[data-v-ee7691be] {
   flex: 1;
   height: 100%;
   width: 100%;
   overflow: auto;
 }
-.main[data-v-43e1543b] {
+.main[data-v-ee7691be] {
   padding: var(--goa-space-2xl);
 }
