@@ -590,6 +590,62 @@ function findFirstNodeOfShadowDOM(node: Node, reversed: boolean): Node | null {
   );
 }
 
+/**
+ * Returns true when focus is inside hostEl, including nested shadow DOM.
+ */
+export function isFocusWithin(hostEl: Element | null | undefined): boolean {
+  if (!hostEl) return false;
+
+  const start = document.activeElement;
+  if (!start) return false;
+
+  // Browsers usually expose the outer shadow host as document.activeElement
+  let descendant: Element | null = start;
+  while (descendant) {
+    if (descendant === hostEl || hostEl.contains(descendant)) return true;
+    descendant = descendant.shadowRoot?.activeElement ?? null;
+  }
+
+  // Test environments may expose the deep focused element instead
+  let ancestor: Element | null = start;
+  while (ancestor) {
+    if (ancestor === hostEl || hostEl.contains(ancestor)) return true;
+    const root = ancestor.getRootNode();
+    ancestor = root instanceof ShadowRoot ? root.host : null;
+  }
+
+  return false;
+}
+
+/**
+ * Calls onEnter/onLeave once as focus enters or leaves a composite component.
+ */
+export function watchFocusWithin(
+  rootEl: HTMLElement,
+  onEnter: (e: FocusEvent) => void,
+  onLeave: (e: FocusEvent) => void,
+) {
+  const hostEl = (rootEl.getRootNode() as ShadowRoot)?.host ?? rootEl;
+  let focused = false;
+
+  rootEl.addEventListener("focusin", (e) => {
+    if (!focused) {
+      focused = true;
+      onEnter(e as FocusEvent);
+    }
+  });
+
+  rootEl.addEventListener("focusout", (e) => {
+    const evt = e as FocusEvent;
+    setTimeout(() => {
+      if (focused && !isFocusWithin(hostEl)) {
+        focused = false;
+        onLeave(evt);
+      }
+    }, 0);
+  });
+}
+
 export function parseCssTimeToMilliseconds(
   timeValue: string,
   fallback = 100,

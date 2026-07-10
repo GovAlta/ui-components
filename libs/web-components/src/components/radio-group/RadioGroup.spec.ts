@@ -128,6 +128,53 @@ describe("GoARadioGroup Component", () => {
     });
   });
 
+  describe("focus and blur events", () => {
+    it("dispatches _focus when focus enters and _blur when focus leaves the group", async () => {
+      const name = "favcolor";
+      const items = ["red", "blue", "orange"];
+      const result = render(GoARadioGroupWrapper, {
+        name,
+        value: "orange",
+        items,
+      });
+
+      const radioGroupDiv = result.container.querySelector(
+        "[role='radiogroup']",
+      ) as HTMLElement;
+
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+      radioGroupDiv.addEventListener("_focus", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onFocus();
+      });
+      radioGroupDiv.addEventListener("_blur", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onBlur();
+      });
+
+      // A real radio item's native input lives inside its own shadow DOM. In
+      // this render mode there is no shadow root at all, so simulate focus
+      // arriving on the group's root element directly (a real browser would
+      // deliver a composed, bubbling focusin/focusout here regardless).
+      await fireEvent(
+        radioGroupDiv,
+        new FocusEvent("focusin", { bubbles: true, composed: true }),
+      );
+      await waitFor(() => {
+        expect(onFocus).toHaveBeenCalledTimes(1);
+      });
+
+      await fireEvent(
+        radioGroupDiv,
+        new FocusEvent("focusout", { bubbles: true, composed: true }),
+      );
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoARadioGroup, {

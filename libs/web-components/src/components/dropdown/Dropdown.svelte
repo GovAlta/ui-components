@@ -26,6 +26,7 @@
     receive,
     relay,
     toBoolean,
+    watchFocusWithin,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { isValidDimension } from "../../common/validators";
@@ -170,6 +171,11 @@
     addRelayListener();
     sendMountedMessage();
     setupPopoverListeners();
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
 
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)

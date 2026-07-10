@@ -26,6 +26,8 @@ import { Spacing } from "@abgov/ui-components-common";
       [ml]="ml"
       [mr]="mr"
       (onChange)="onChange()"
+      (onFocus)="onFocus()"
+      (onBlur)="onBlur()"
     >
     </goab-checkbox>
   `,
@@ -45,6 +47,14 @@ class TestCheckboxComponent {
   mr?: Spacing;
 
   onChange() {
+    /* do nothing */
+  }
+
+  onFocus() {
+    /* do nothing */
+  }
+
+  onBlur() {
     /* do nothing */
   }
 }
@@ -108,6 +118,31 @@ describe("GoabCheckbox", () => {
     );
 
     expect(onChange).toHaveBeenCalled();
+  });
+
+  it("should handle onFocus and onBlur events", async () => {
+    const onFocus = jest.spyOn(component, "onFocus");
+    const onBlur = jest.spyOn(component, "onBlur");
+
+    const checkboxElement = fixture.debugElement.query(
+      By.css("goa-checkbox"),
+    ).nativeElement;
+
+    fireEvent(
+      checkboxElement,
+      new CustomEvent("_focus", {
+        detail: { name: "foo", value: "bar", checked: true },
+      }),
+    );
+    expect(onFocus).toHaveBeenCalled();
+
+    fireEvent(
+      checkboxElement,
+      new CustomEvent("_blur", {
+        detail: { name: "foo", value: "bar", checked: true },
+      }),
+    );
+    expect(onBlur).toHaveBeenCalled();
   });
 
   describe("writeValue", () => {

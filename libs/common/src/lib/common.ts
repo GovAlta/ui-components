@@ -15,6 +15,23 @@ export type GoabRadioGroupOnChangeDetail = {
 };
 
 /**
+ * Provides details when the radio group receives focus. Fires once when focus
+ * enters any of its radio items.
+ */
+export type GoabRadioGroupOnFocusDetail = {
+  /** The radio group name. */
+  name: string;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when the radio group loses focus. Fires once when focus
+ * leaves all of its radio items.
+ */
+export type GoabRadioGroupOnBlurDetail = GoabRadioGroupOnFocusDetail;
+
+/**
  * Provides details when a checkbox list value changes.
  */
 export type GoabCheckboxListOnChangeDetail = {
@@ -25,6 +42,23 @@ export type GoabCheckboxListOnChangeDetail = {
   /** The originating DOM event. */
   event: Event;
 };
+
+/**
+ * Provides details when the checkbox list receives focus. Fires once when focus
+ * enters any of its checkboxes.
+ */
+export type GoabCheckboxListOnFocusDetail = {
+  /** The checkbox list name. */
+  name: string;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when the checkbox list loses focus. Fires once when focus
+ * leaves all of its checkboxes.
+ */
+export type GoabCheckboxListOnBlurDetail = GoabCheckboxListOnFocusDetail;
 
 /**
  * Provides details when an input value changes.
@@ -142,6 +176,23 @@ export type GoabDropdownOnChangeDetail = {
 };
 
 /**
+ * Provides details when the dropdown receives focus. Fires once when focus
+ * enters any of its internal fields.
+ */
+export type GoabDropdownOnFocusDetail = {
+  /** The dropdown name, when provided. */
+  name?: string;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when the dropdown loses focus. Fires once when focus
+ * leaves all of its internal fields.
+ */
+export type GoabDropdownOnBlurDetail = GoabDropdownOnFocusDetail;
+
+/**
  * Provides details when a date picker value changes.
  */
 export type GoabDatePickerOnChangeDetail = {
@@ -156,6 +207,24 @@ export type GoabDatePickerOnChangeDetail = {
   /** The originating DOM event. */
   event: Event;
 };
+
+/**
+ * Provides details when the date picker receives focus. Fires once when focus
+ * enters any of its internal fields.
+ */
+export type GoabDatePickerOnFocusDetail = {
+  /** The date picker name, when provided. */
+  name?: string;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when the date picker loses focus. Fires once when focus
+ * leaves all of its internal fields.
+ */
+export type GoabDatePickerOnBlurDetail = GoabDatePickerOnFocusDetail;
+
 export type GoabDatePickerInputType = "calendar" | "input";
 
 export type GoabChipVariant = "filter";
@@ -178,6 +247,25 @@ export type GoabCheckboxOnChangeDetail = {
   /** The originating DOM event. */
   event: Event;
 };
+
+/**
+ * Provides details when a checkbox receives focus.
+ */
+export type GoabCheckboxOnFocusDetail = {
+  /** The checkbox name, when provided. */
+  name?: string;
+  /** The checkbox value, when provided. */
+  value?: string;
+  /** The checked state at the time of the event. */
+  checked: boolean;
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Provides details when a checkbox loses focus.
+ */
+export type GoabCheckboxOnBlurDetail = GoabCheckboxOnFocusDetail;
 
 /**
  * Provides details when a calendar value changes.
@@ -313,6 +401,11 @@ export type GoabTextAreaOnBlurDetail = {
   /** The originating DOM event. */
   event: Event;
 };
+
+/**
+ * Provides details when a textarea receives focus.
+ */
+export type GoabTextAreaOnFocusDetail = GoabTextAreaOnBlurDetail;
 
 // Tabs
 

@@ -1,5 +1,7 @@
 import {
+  GoabDropdownOnBlurDetail,
   GoabDropdownOnChangeDetail,
+  GoabDropdownOnFocusDetail,
   GoabDropdownSize,
   GoabIconType,
   Margins,
@@ -51,6 +53,10 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
   value?: string[] | string;
   /** Callback fired when the selected value changes. */
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
+  /** Callback fired when the dropdown receives focus. */
+  onFocus?: (detail: GoabDropdownOnFocusDetail) => void;
+  /** Callback fired when the dropdown loses focus. */
+  onBlur?: (detail: GoabDropdownOnBlurDetail) => void;
   /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   ariaLabel?: string;
   /** The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. */
@@ -103,6 +109,8 @@ function stringify(value: string | string[] | undefined): string {
 export function GoabDropdown({
   value,
   onChange,
+  onFocus,
+  onBlur,
   disabled,
   error,
   filterable,
@@ -126,15 +134,27 @@ export function GoabDropdown({
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
       onChange?.({ ...detail, event: e });
     };
+    const focusListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDropdownOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e });
+    };
+    const blurListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDropdownOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
     if (onChange) {
       current.addEventListener("_change", handler);
     }
+    current.addEventListener("_focus", focusListener);
+    current.addEventListener("_blur", blurListener);
     return () => {
       if (onChange) {
         current.removeEventListener("_change", handler);
       }
+      current.removeEventListener("_focus", focusListener);
+      current.removeEventListener("_blur", blurListener);
     };
-  }, [el, onChange]);
+  }, [el, onChange, onFocus, onBlur]);
 
   return (
     <goa-dropdown

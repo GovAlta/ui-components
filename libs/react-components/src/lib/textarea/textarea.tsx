@@ -3,6 +3,7 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
+  GoabTextAreaOnFocusDetail,
   GoabTextAreaSize,
   Margins,
   DataAttributes,
@@ -78,6 +79,8 @@ export interface GoabTextAreaProps extends Margins, DataAttributes {
   onChange?: (event: GoabTextAreaOnChangeDetail) => void;
   /** Callback fired when a key is pressed within the textarea. */
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
+  /** Callback fired when the textarea receives focus. */
+  onFocus?: (event: GoabTextAreaOnFocusDetail) => void;
   /** Callback fired when the textarea loses focus. */
   onBlur?: (event: GoabTextAreaOnBlurDetail) => void;
 }
@@ -89,6 +92,7 @@ export function GoabTextArea({
   error,
   onChange,
   onKeyPress,
+  onFocus,
   onBlur,
   ...rest
 }: GoabTextAreaProps): JSX.Element {
@@ -112,6 +116,11 @@ export function GoabTextArea({
       onKeyPress?.({ ...detail, event: e as Event });
     };
 
+    const focusListener = (e: unknown) => {
+      const detail = (e as CustomEvent<GoabTextAreaOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e as Event });
+    };
+
     const blurListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnBlurDetail>).detail;
       onBlur?.({ ...detail, event: e as Event });
@@ -119,14 +128,16 @@ export function GoabTextArea({
 
     current.addEventListener("_change", changeListener);
     current.addEventListener("_keyPress", keypressListener);
+    current.addEventListener("_focus", focusListener);
     current.addEventListener("_blur", blurListener);
 
     return () => {
       current.removeEventListener("_change", changeListener);
       current.removeEventListener("_keyPress", keypressListener);
+      current.removeEventListener("_focus", focusListener);
       current.removeEventListener("_blur", blurListener);
     };
-  }, [el, onChange, onKeyPress, onBlur]);
+  }, [el, onChange, onKeyPress, onFocus, onBlur]);
 
   return (
     <goa-textarea

@@ -158,9 +158,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabDropdownOnBlurDetail) => void",
+          "description": "Callback fired when the dropdown loses focus.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabDropdownOnChangeDetail) => void",
           "description": "Callback fired when the selected value changes.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(detail: GoabDropdownOnFocusDetail) => void",
+          "description": "Callback fired when the dropdown receives focus.",
           "frameworks": [
             "react"
           ]
@@ -324,9 +340,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabDropdownOnBlurDetail) => void",
+          "description": "Emits when the dropdown loses focus.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabDropdownOnChangeDetail) => void",
           "description": "Emits when the user selects a value from the dropdown. Emits a GoabDropdownOnChangeDetail object with the new value.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabDropdownOnFocusDetail) => void",
+          "description": "Emits when the dropdown receives focus.",
           "frameworks": [
             "angular"
           ]
@@ -499,8 +531,24 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name?: string; value?: string; event: Event }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
+          "type": "CustomEvent<{ name: string }>",
           "description": "",
           "frameworks": [
             "webComponents"

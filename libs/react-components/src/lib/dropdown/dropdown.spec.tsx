@@ -120,6 +120,35 @@ describe("GoabDropdown", () => {
     });
   });
 
+  it("should handle onFocus and onBlur events", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const { baseElement } = render(
+      <GoabDropdown name="favColor" onFocus={onFocus} onBlur={onBlur}>
+        <GoabDropdownItem name="favColor" label="Red" value="red" />
+      </GoabDropdown>,
+    );
+
+    const el = baseElement.querySelector("goa-dropdown");
+    expect(el).toBeTruthy();
+
+    el &&
+      fireEvent(el, new CustomEvent("_focus", { detail: { name: "favColor" } }));
+    await waitFor(() => {
+      expect(onFocus).toBeCalledWith(
+        expect.objectContaining({ name: "favColor", event: expect.any(Event) }),
+      );
+    });
+
+    el && fireEvent(el, new CustomEvent("_blur", { detail: { name: "favColor" } }));
+    await waitFor(() => {
+      expect(onBlur).toBeCalledWith(
+        expect.objectContaining({ name: "favColor", event: expect.any(Event) }),
+      );
+    });
+  });
+
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
       <GoabDropdown name="test" onChange={noop} data-grid="cell">

@@ -11,7 +11,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay } from "../../common/utils";
+  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -84,12 +84,23 @@
     sendMountedMessage();
     showDeprecationWarnings();
 
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
+
     if (width && !isValidDimension(width)) {
       console.error(
         "DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)",
       );
     }
   });
+
+  function stopInnerFocusEvent(e: Event) {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -291,6 +302,8 @@
           value={_date.format("MMMM d, yyyy")}
           {error}
           on:keydown={handleKeyDown}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
           {version}
@@ -329,6 +342,8 @@
         value={_date.format("MMMM d, yyyy")}
         {error}
         on:keydown={handleKeyDown}
+        on:_focus={stopInnerFocusEvent}
+        on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
         {version}
@@ -352,6 +367,8 @@
           name="month"
           testid="input-month"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           {error}
           value={_date.month + ""}
           disabled={isDisabled}
@@ -380,6 +397,8 @@
           class="no-spinner"
           testid="input-day"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           width="2ch"
           value={_date.day || ""}
           min="1"
@@ -397,6 +416,8 @@
           class="no-spinner"
           testid="input-year"
           on:_change={onInputChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
           width="4ch"
           value={_date.year || ""}
           min="1800"

@@ -142,9 +142,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabCheckboxOnBlurDetail) => void",
+          "description": "Callback fired when the checkbox loses focus.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabCheckboxOnChangeDetail) => void",
           "description": "Callback fired when the checkbox selection changes.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(detail: GoabCheckboxOnFocusDetail) => void",
+          "description": "Callback fired when the checkbox receives focus.",
           "frameworks": [
             "react"
           ]
@@ -305,9 +321,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabCheckboxOnBlurDetail) => void",
+          "description": "Emits when the checkbox loses focus.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabCheckboxOnChangeDetail) => void",
           "description": "Emits when the checkbox value changes. Emits the new checkbox state as a GoabCheckboxOnChangeDetail object.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabCheckboxOnFocusDetail) => void",
+          "description": "Emits when the checkbox receives focus.",
           "frameworks": [
             "angular"
           ]
@@ -471,8 +503,24 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string; value: string; checked: boolean }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name: string; checked: boolean; value: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
+          "type": "CustomEvent<{ name: string; value: string; checked: boolean }>",
           "description": "",
           "frameworks": [
             "webComponents"

@@ -1,5 +1,7 @@
 import {
+  GoabCheckboxOnBlurDetail,
   GoabCheckboxOnChangeDetail,
+  GoabCheckboxOnFocusDetail,
   GoabCheckboxSize,
 } from "@abgov/ui-components-common";
 import {
@@ -45,6 +47,8 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.ml]="ml"
       [attr.mr]="mr"
       (_change)="_onChange($event)"
+      (_focus)="_onFocus($event)"
+      (_blur)="_onBlur($event)"
     >
       <ng-content />
       <div slot="description">
@@ -110,6 +114,10 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
 
   /** Emits when the checkbox value changes. Emits the new checkbox state as a GoabCheckboxOnChangeDetail object. */
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();
+  /** Emits when the checkbox receives focus. */
+  @Output() onFocus = new EventEmitter<GoabCheckboxOnFocusDetail>();
+  /** Emits when the checkbox loses focus. */
+  @Output() onBlur = new EventEmitter<GoabCheckboxOnBlurDetail>();
 
   getDescriptionAsString(): string {
     return typeof this.description === "string" ? this.description : "";
@@ -127,6 +135,17 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabCheckboxOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabCheckboxOnBlurDetail>).detail, event: e };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 
   // Checkbox is a special case: it uses `checked` instead of `value`.

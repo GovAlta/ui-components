@@ -23,6 +23,8 @@ import { Spacing } from "@abgov/ui-components-common";
       [ml]="ml"
       [mr]="mr"
       (onChange)="onChange()"
+      (onFocus)="onFocus()"
+      (onBlur)="onBlur()"
     >
     </goab-checkbox-list>
   `,
@@ -41,6 +43,14 @@ class TestCheckboxListComponent {
   mr?: Spacing;
 
   onChange() {
+    /* do nothing */
+  }
+
+  onFocus() {
+    /* do nothing */
+  }
+
+  onBlur() {
     /* do nothing */
   }
 }
@@ -111,5 +121,20 @@ describe("GoabCheckboxList", () => {
     );
 
     expect(onChange).toHaveBeenCalled();
+  });
+
+  it("should handle onFocus and onBlur events", () => {
+    const onFocus = jest.spyOn(component, "onFocus");
+    const onBlur = jest.spyOn(component, "onBlur");
+
+    const el = fixture.debugElement.query(
+      By.css("goa-checkbox-list"),
+    ).nativeElement;
+
+    fireEvent(el, new CustomEvent("_focus", { detail: { name: "foo" } }));
+    expect(onFocus).toHaveBeenCalled();
+
+    fireEvent(el, new CustomEvent("_blur", { detail: { name: "foo" } }));
+    expect(onBlur).toHaveBeenCalled();
   });
 });

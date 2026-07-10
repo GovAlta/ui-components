@@ -492,6 +492,35 @@ describe("GoADropdown", () => {
     });
   });
 
+  describe("focus and blur events", () => {
+    it("dispatches _focus when focus enters and _blur when focus leaves the dropdown", async () => {
+      const result = render(GoADropdownWrapper, { name, value: "orange", items });
+      const dropdown = result.queryByTestId("favcolor-dropdown");
+      const inputField = dropdown?.querySelector("input") as HTMLInputElement;
+
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+      dropdown?.addEventListener("_focus", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onFocus();
+      });
+      dropdown?.addEventListener("_blur", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onBlur();
+      });
+
+      inputField.focus();
+      await waitFor(() => {
+        expect(onFocus).toHaveBeenCalledTimes(1);
+      });
+
+      inputField.blur();
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
   describe("disabled", () => {
     it("can be enabled", async () => {
       const result = render(GoADropdownWrapper, {

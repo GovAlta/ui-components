@@ -13,7 +13,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { receive, relay, toBoolean } from "../../common/utils";
+  import { dispatch, receive, relay, toBoolean, watchFocusWithin } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -75,6 +75,12 @@
     addRelayListener();
     addSlotEventListeners();
     sendMountedMessage();
+
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
 
     // Initialize after a tick to ensure DOM is ready
     _isInitialized = true;
@@ -306,6 +312,9 @@
         handleChildCheckboxChange(detail);
       }
     });
+
+    _slotEl.addEventListener("_focus", (e: Event) => e.stopPropagation());
+    _slotEl.addEventListener("_blur", (e: Event) => e.stopPropagation());
   }
 
   // Update the selected values array when an individual child changes.
