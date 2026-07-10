@@ -79,36 +79,4 @@ export function useTheme(defaultMode: GoabThemeMode = "light"): UseThemeReturn {
   };
 }
 
-/**
- * Theme provider component for Vue.
- * Wraps the app and provides theme context to all child components.
- */
-export interface GoabThemeProviderProps {
-  defaultMode?: GoabThemeMode;
-}
 
-export const GoabThemeProvider = {
-  name: "GoabThemeProvider",
-  props: {
-    defaultMode: {
-      type: String as () => GoabThemeMode,
-      default: "light",
-      validator: (value: string): boolean => {
-        return value === "light" || value === "dark";
-      },
-    },
-  },
-  setup(props: GoabThemeProviderProps, { slots }) {
-    const { mode, setMode, toggle } = useTheme(props.defaultMode);
-
-    // Provide theme context to child components
-    // In Vue 3, we can use provide/inject for this
-    // But for simplicity in this PR app, we'll just expose the functions
-    
-    return () => slots.default?.({
-      mode,
-      setMode,
-      toggle,
-    });
-  },
-};
