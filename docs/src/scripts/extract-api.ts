@@ -194,18 +194,22 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
+// typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
+// consumers never bind a value to them, they nest the sub-component instead.
+const HIDE_SLOT = null;
 const SLOT_TYPE_OVERRIDES: Record<
   string,
-  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | typeof HIDE_SLOT>>>
 > = {
   footer: {
     react: {
-      nav: "GoabAppFooterNavSection",
-      meta: "GoabAppFooterMetaSection",
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     angular: {
-      nav: "GoabAppFooterNavSection",
-      meta: "GoabAppFooterMetaSection",
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     webComponents: {
       nav: "goa-app-footer-nav-section",
@@ -2598,6 +2602,17 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     Boolean(slotNameAliases[name] || slotDescriptions[name]) ||
     Object.prototype.hasOwnProperty.call(slotRequired, name);
 
+  // `undefined` means no override configured, distinct from `HIDE_SLOT`: an absent key falls
+  // back to the generic type detection below, so this can't just be a `??` on the map lookup.
+  const getSlotOverride = (
+    framework: "react" | "angular" | "webComponents",
+    name: string,
+  ): string | typeof HIDE_SLOT | undefined => {
+    const frameworkOverrides = SLOT_TYPE_OVERRIDES[componentName]?.[framework];
+    if (!frameworkOverrides || !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)) return undefined;
+    return frameworkOverrides[name];
+  };
+
   const createSlots = (
     framework: "react" | "angular" | "webComponents",
     type?: string,
@@ -2607,6 +2622,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       .filter(
         (name) =>
           !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
+          getSlotOverride(framework, name) !== HIDE_SLOT &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
       .map((name) => {
@@ -2617,9 +2633,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
             : rawDescription;
         return {
           name: useAliasNames ? slotNameAliases[name] || name : name,
-          type:
-            SLOT_TYPE_OVERRIDES[componentName]?.[framework]?.[name] ||
-            (type && hasWrapperSlotEvidence(name) ? type : undefined),
+          type: getSlotOverride(framework, name) ?? (type && hasWrapperSlotEvidence(name) ? type : undefined),
           description,
           required: slotRequired[name] || false,
         };
