@@ -78904,6 +78904,68 @@ const __vite_glob_0_166 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: feat3344_route
 }, Symbol.toStringTag, { value: "Module" }));
+function WideTable() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabTable, { striped: true, variant: "normal", width: "1940px", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "ID" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Name" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Description" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Category" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Status" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Date Created" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Last Modified" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Assigned To" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Priority" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Department" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Location" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Notes" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("tbody", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "1" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Project Alpha" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Initial project setup and configuration" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Planning" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Complete" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-01-15" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-01-20" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "John Smith" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "High" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Engineering" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Edmonton" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "On track for Q2 delivery" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Project Beta" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Development phase implementation" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Development" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "In Progress" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-02-20" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-03-10" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Sarah Johnson" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Medium" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Product" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Calgary" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Needs review from stakeholders" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "3" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Project Gamma" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Testing and quality assurance" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Testing" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Pending" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-03-10" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "2024-03-15" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Mike Chen" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "High" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "QA" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Red Deer" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: "Ready for QA" })
+      ] })
+    ] })
+  ] });
+}
 function Feat3346Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
@@ -79173,7 +79235,55 @@ function Feat3346Route() {
               }
             )
           }
-        )
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", children: "Inside a flex row" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", children: [
+          "Both rows below are identical: a ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "display: flex" }),
+          " parent capped at 640px, with a fixed 160px sidebar beside a horizontal scroll panel. The only difference is",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "min-width: 0" }),
+          " on the ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "goa-scroll-panel" }),
+          " host."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", children: [
+          "Without it the panel is a flex item with the default ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "min-width: auto" }),
+          ", so it refuses to shrink below its content's min-content width. The host stretches to the full table width, the row blows past its 640px cap, and horizontal scrolling never engages. The second row simulates adding ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "min-width: 0" }),
+          " to ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: ":host" }),
+          " in ScrollPanel.svelte, which would fix this for every consumer. A CSS grid column behaves the same way, for the same reason."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .flex-row {
+          display: flex;
+          gap: 1rem;
+          max-width: 640px;
+          padding: 1rem;
+          border: 1px dashed var(--goa-color-interactive-default);
+        }
+        .flex-row .sidebar {
+          flex: 0 0 160px;
+          padding: 1rem;
+          background: var(--goa-color-greyscale-100);
+        }
+        /* Simulates the proposed fix: :host { min-width: 0 } */
+        .flex-row--fixed goa-scroll-panel {
+          min-width: 0;
+        }
+      ` }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", mb: "xs", children: "Broken: panel does not scroll, row overflows past 640px" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-row", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sidebar", children: "Sidebar" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabScrollPanel, { direction: "horizontal", height: "100%", children: /* @__PURE__ */ jsxRuntimeExports.jsx(WideTable, {}) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", mb: "xs", children: "Fixed with min-width: 0: panel scrolls, row stays at 640px" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-row flex-row--fixed", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "sidebar", children: "Sidebar" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabScrollPanel, { direction: "horizontal", height: "100%", children: /* @__PURE__ */ jsxRuntimeExports.jsx(WideTable, {}) })
+        ] })
       ]
     }
   );
