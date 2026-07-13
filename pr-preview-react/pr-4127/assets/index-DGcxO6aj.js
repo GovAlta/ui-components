@@ -73425,6 +73425,7 @@ function Feat1351Route() {
   const [basicValue, setBasicValue] = reactExports.useState();
   const [filterValue, setFilterValue] = reactExports.useState();
   const [mixedValue, setMixedValue] = reactExports.useState();
+  const [nativeValue, setNativeValue] = reactExports.useState();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", children: "Feat #1351: Dropdown item slot" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { children: [
@@ -73510,6 +73511,31 @@ function Feat1351Route() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", children: [
       "Selected value: ",
       mixedValue || "(none)"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", children: "Test 4: Native select with rich items" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "A native select cannot contain HTML, so slotted content is ignored and each option falls back to its label. The rich content must not leak into the page around the select." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabDropdown,
+      {
+        name: "native",
+        value: nativeValue,
+        native: true,
+        width: "360px",
+        onChange: (detail) => setNativeValue(detail.value),
+        children: people.map((person) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabDropdownItem,
+          {
+            value: person.value,
+            label: person.name,
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(PersonItem, { person })
+          },
+          person.value
+        ))
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", children: [
+      "Selected value: ",
+      nativeValue || "(none)"
     ] })
   ] });
 }
