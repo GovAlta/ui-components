@@ -4,12 +4,15 @@ import {
   GoabAccordion,
   GoabBadge,
   GoabButton,
+  GoabContainer,
   GoabDropdown,
   GoabDropdownItem,
   GoabMenuAction,
   GoabMenuButton,
   GoabModal,
   GoabPopover,
+  GoabTab,
+  GoabTabs,
   GoabText,
   GoabBlock,
 } from "@abgov/vue-components";
@@ -43,6 +46,7 @@ const accordionOpen = ref(false);
 const accordionIconRight = ref(false);
 const paddedPopover = ref(true);
 const badgeIconVisible = ref(false);
+const secondTabDisabled = ref(false);
 const closableModalOpen = ref(false);
 const nonClosableModalOpen = ref(false);
 </script>
@@ -71,6 +75,24 @@ const nonClosableModalOpen = ref(false);
       </template>
       <GoabText mt="0" mb="0">This is the content of the accordion.</GoabText>
     </GoabAccordion>
+
+    <GoabText tag="h2" size="heading-m">Container named slots</GoabText>
+    <GoabContainer type="interactive" accent="thick" padding="relaxed">
+      <template #title>
+        <GoabText tag="h3" size="heading-s" mt="0" mb="0">
+          Container title slot
+        </GoabText>
+      </template>
+      <GoabText mt="0" mb="0">
+        This is the default container body content. The title and action should render
+        in the container header, not in this body area.
+      </GoabText>
+      <template #actions>
+        <GoabButton type="secondary" size="compact">
+          Header action
+        </GoabButton>
+      </template>
+    </GoabContainer>
 
     <GoabText tag="h2" size="heading-m">Component with a boolean</GoabText>
     <GoabPopover>
@@ -169,7 +191,26 @@ const nonClosableModalOpen = ref(false);
     </GoabButton>
     <GoabBadge type="success" :icon="badgeIconVisible" content="Reactive badge icon" />
 
-    <GoabText tag="h3" size="heading-s">5. Modal open (closable)</GoabText>
+    <GoabText tag="h3" size="heading-s">5. Tab disabled false</GoabText>
+    <GoabText tag="p" size="body-m">
+      The second tab is bound to disabled={{ secondTabDisabled ? "true" : "false" }}.
+      When false, it should be selectable and should not be treated as disabled.
+    </GoabText>
+    <GoabButton type="secondary" @onClick="secondTabDisabled = !secondTabDisabled">
+      Second tab disabled: {{ secondTabDisabled ? "true" : "false" }}
+    </GoabButton>
+    <GoabTabs>
+      <GoabTab heading="First tab">
+        <GoabText mt="0" mb="0">First tab content.</GoabText>
+      </GoabTab>
+      <GoabTab heading="Second tab" :disabled="secondTabDisabled">
+        <GoabText mt="0" mb="0">
+          Second tab content. This should be reachable when disabled is false.
+        </GoabText>
+      </GoabTab>
+    </GoabTabs>
+
+    <GoabText tag="h3" size="heading-s">6. Modal open (closable)</GoabText>
     <GoabButton type="secondary" @onClick="closableModalOpen = !closableModalOpen">
       Open closable modal: {{ closableModalOpen ? "true" : "false" }}
     </GoabButton>
@@ -181,7 +222,7 @@ const nonClosableModalOpen = ref(false);
       <GoabText mt="0" mb="0">This modal has onClose and should close normally.</GoabText>
     </GoabModal>
 
-    <GoabText tag="h3" size="heading-s">6. Modal open (no onClose)</GoabText>
+    <GoabText tag="h3" size="heading-s">7. Modal open (no onClose)</GoabText>
     <GoabButton type="secondary" @onClick="nonClosableModalOpen = !nonClosableModalOpen">
       Open non-closable modal: {{ nonClosableModalOpen ? "true" : "false" }}
     </GoabButton>
