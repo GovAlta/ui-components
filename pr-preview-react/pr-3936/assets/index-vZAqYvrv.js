@@ -17865,14 +17865,14 @@ function C(t) {
 function ct(t) {
   return document.createElementNS("http://www.w3.org/2000/svg", t);
 }
-function ce(t) {
+function de(t) {
   return document.createTextNode(t);
 }
 function Y() {
-  return ce(" ");
+  return de(" ");
 }
 function et() {
-  return ce("");
+  return de("");
 }
 function oe(t, e, o, i) {
   return t.addEventListener(e, o, i), () => t.removeEventListener(e, o, i);
@@ -18620,7 +18620,7 @@ function st(...t) {
 function He(t, e) {
   return e ? `${t}: ${e}` : "";
 }
-function rt(t, e) {
+function at(t, e) {
   t || console.warn("receive() el is null | undefined");
   const o = (i) => {
     const n = i;
@@ -19448,7 +19448,7 @@ function td(t, e) {
   const o = ut(t), i = +_o(o, e) - +ed(o, e);
   return Math.round(i / Js) + 1;
 }
-function lt(t, e) {
+function rt(t, e) {
   const o = t < 0 ? "-" : "", i = Math.abs(t).toString().padStart(e, "0");
   return o + i;
 }
@@ -19456,16 +19456,16 @@ const Zt = {
   // Year
   y(t, e) {
     const o = t.getFullYear(), i = o > 0 ? o : 1 - o;
-    return lt(e === "yy" ? i % 100 : i, e.length);
+    return rt(e === "yy" ? i % 100 : i, e.length);
   },
   // Month
   M(t, e) {
     const o = t.getMonth();
-    return e === "M" ? String(o + 1) : lt(o + 1, 2);
+    return e === "M" ? String(o + 1) : rt(o + 1, 2);
   },
   // Day of the month
   d(t, e) {
-    return lt(t.getDate(), e.length);
+    return rt(t.getDate(), e.length);
   },
   // AM or PM
   a(t, e) {
@@ -19485,26 +19485,26 @@ const Zt = {
   },
   // Hour [1-12]
   h(t, e) {
-    return lt(t.getHours() % 12 || 12, e.length);
+    return rt(t.getHours() % 12 || 12, e.length);
   },
   // Hour [0-23]
   H(t, e) {
-    return lt(t.getHours(), e.length);
+    return rt(t.getHours(), e.length);
   },
   // Minute
   m(t, e) {
-    return lt(t.getMinutes(), e.length);
+    return rt(t.getMinutes(), e.length);
   },
   // Second
   s(t, e) {
-    return lt(t.getSeconds(), e.length);
+    return rt(t.getSeconds(), e.length);
   },
   // Fraction of second
   S(t, e) {
     const o = e.length, i = t.getMilliseconds(), n = Math.trunc(
       i * Math.pow(10, o - 3)
     );
-    return lt(n, e.length);
+    return rt(n, e.length);
   }
 }, Kt = {
   midnight: "midnight",
@@ -19545,14 +19545,14 @@ const Zt = {
     const n = $s(t, i), l = n > 0 ? n : 1 - n;
     if (e === "YY") {
       const r = l % 100;
-      return lt(r, 2);
+      return rt(r, 2);
     }
-    return e === "Yo" ? o.ordinalNumber(l, { unit: "year" }) : lt(l, e.length);
+    return e === "Yo" ? o.ordinalNumber(l, { unit: "year" }) : rt(l, e.length);
   },
   // ISO week-numbering year
   R: function(t, e) {
     const o = Ks(t);
-    return lt(o, e.length);
+    return rt(o, e.length);
   },
   // Extended year. This is a single number designating the year of this calendar system.
   // The main difference between `y` and `u` localizers are B.C. years:
@@ -19565,7 +19565,7 @@ const Zt = {
   // while `uu` pads single digit years to 2 characters and returns other years unchanged.
   u: function(t, e) {
     const o = t.getFullYear();
-    return lt(o, e.length);
+    return rt(o, e.length);
   },
   // Quarter
   Q: function(t, e, o) {
@@ -19576,7 +19576,7 @@ const Zt = {
         return String(i);
       // 01, 02, 03, 04
       case "QQ":
-        return lt(i, 2);
+        return rt(i, 2);
       // 1st, 2nd, 3rd, 4th
       case "Qo":
         return o.ordinalNumber(i, { unit: "quarter" });
@@ -19610,7 +19610,7 @@ const Zt = {
         return String(i);
       // 01, 02, 03, 04
       case "qq":
-        return lt(i, 2);
+        return rt(i, 2);
       // 1st, 2nd, 3rd, 4th
       case "qo":
         return o.ordinalNumber(i, { unit: "quarter" });
@@ -19672,7 +19672,7 @@ const Zt = {
         return String(i + 1);
       // 01, 02, ..., 12
       case "LL":
-        return lt(i + 1, 2);
+        return rt(i + 1, 2);
       // 1st, 2nd, ..., 12th
       case "Lo":
         return o.ordinalNumber(i + 1, { unit: "month" });
@@ -19697,12 +19697,12 @@ const Zt = {
   // Local week of year
   w: function(t, e, o, i) {
     const n = td(t, i);
-    return e === "wo" ? o.ordinalNumber(n, { unit: "week" }) : lt(n, e.length);
+    return e === "wo" ? o.ordinalNumber(n, { unit: "week" }) : rt(n, e.length);
   },
   // ISO week of year
   I: function(t, e, o) {
     const i = $c(t);
-    return e === "Io" ? o.ordinalNumber(i, { unit: "week" }) : lt(i, e.length);
+    return e === "Io" ? o.ordinalNumber(i, { unit: "week" }) : rt(i, e.length);
   },
   // Day of the month
   d: function(t, e, o) {
@@ -19711,7 +19711,7 @@ const Zt = {
   // Day of year
   D: function(t, e, o) {
     const i = Kc(t);
-    return e === "Do" ? o.ordinalNumber(i, { unit: "dayOfYear" }) : lt(i, e.length);
+    return e === "Do" ? o.ordinalNumber(i, { unit: "dayOfYear" }) : rt(i, e.length);
   },
   // Day of week
   E: function(t, e, o) {
@@ -19755,7 +19755,7 @@ const Zt = {
         return String(l);
       // Padded numerical value
       case "ee":
-        return lt(l, 2);
+        return rt(l, 2);
       // 1st, 2nd, ..., 7th
       case "eo":
         return o.ordinalNumber(l, { unit: "day" });
@@ -19794,7 +19794,7 @@ const Zt = {
         return String(l);
       // Padded numerical value
       case "cc":
-        return lt(l, e.length);
+        return rt(l, e.length);
       // 1st, 2nd, ..., 7th
       case "co":
         return o.ordinalNumber(l, { unit: "day" });
@@ -19833,7 +19833,7 @@ const Zt = {
         return String(n);
       // 02
       case "ii":
-        return lt(n, e.length);
+        return rt(n, e.length);
       // 2nd
       case "io":
         return o.ordinalNumber(n, { unit: "day" });
@@ -19961,12 +19961,12 @@ const Zt = {
   // Hour [0-11]
   K: function(t, e, o) {
     const i = t.getHours() % 12;
-    return e === "Ko" ? o.ordinalNumber(i, { unit: "hour" }) : lt(i, e.length);
+    return e === "Ko" ? o.ordinalNumber(i, { unit: "hour" }) : rt(i, e.length);
   },
   // Hour [1-24]
   k: function(t, e, o) {
     let i = t.getHours();
-    return i === 0 && (i = 24), e === "ko" ? o.ordinalNumber(i, { unit: "hour" }) : lt(i, e.length);
+    return i === 0 && (i = 24), e === "ko" ? o.ordinalNumber(i, { unit: "hour" }) : rt(i, e.length);
   },
   // Minute
   m: function(t, e, o) {
@@ -20061,23 +20061,23 @@ const Zt = {
   // Seconds timestamp
   t: function(t, e, o) {
     const i = Math.trunc(t.getTime() / 1e3);
-    return lt(i, e.length);
+    return rt(i, e.length);
   },
   // Milliseconds timestamp
   T: function(t, e, o) {
     const i = t.getTime();
-    return lt(i, e.length);
+    return rt(i, e.length);
   }
 };
 function Oi(t, e = "") {
   const o = t > 0 ? "-" : "+", i = Math.abs(t), n = Math.trunc(i / 60), l = i % 60;
-  return l === 0 ? o + String(n) : o + String(n) + e + lt(l, 2);
+  return l === 0 ? o + String(n) : o + String(n) + e + rt(l, 2);
 }
 function qi(t, e) {
-  return t % 60 === 0 ? (t > 0 ? "-" : "+") + lt(Math.abs(t) / 60, 2) : Wt(t, e);
+  return t % 60 === 0 ? (t > 0 ? "-" : "+") + rt(Math.abs(t) / 60, 2) : Wt(t, e);
 }
 function Wt(t, e = "") {
-  const o = t > 0 ? "-" : "+", i = Math.abs(t), n = lt(Math.trunc(i / 60), 2), l = lt(i % 60, 2);
+  const o = t > 0 ? "-" : "+", i = Math.abs(t), n = rt(Math.trunc(i / 60), 2), l = rt(i % 60, 2);
   return o + n + e + l;
 }
 const Hi = (t, e) => {
@@ -20372,7 +20372,7 @@ function Zi(t) {
   let e, o;
   return {
     c() {
-      e = C("span"), o = ce(
+      e = C("span"), o = de(
         /*secondarytext*/
         t[1]
       ), u(e, "class", "secondary-text svelte-1c7attz");
@@ -20504,7 +20504,7 @@ function jd(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("details"), i = C("summary"), P && P.c(), n = Y(), l = C("div"), r = C("span"), a = ce(
+      e = C("div"), o = C("details"), i = C("summary"), P && P.c(), n = Y(), l = C("div"), r = C("span"), a = de(
         /*heading*/
         t[0]
       ), s = Y(), B && B.c(), f = Y(), g = C("div"), E && E.c(), h = Y(), A && A.c(), b = Y(), H && H.c(), z = Y(), M = C("div"), Z && Z.c(), u(r, "class", c = "heading heading-" + /*headingsize*/
@@ -20818,7 +20818,7 @@ function Ld(t, e, o) {
       W = pe, o(16, W);
     });
   }
-  function se(pe) {
+  function ce(pe) {
     he[pe ? "unshift" : "push"](() => {
       E = pe, o(17, E);
     });
@@ -20873,7 +20873,7 @@ function Ld(t, e, o) {
     Fe,
     ae,
     Ie,
-    se,
+    ce,
     ie,
     Se
   ];
@@ -21660,7 +21660,7 @@ function Pd(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("div"), L && L.c(), i = Y(), n = C("div"), l = C("div"), x.c(), r = Y(), a = C("div"), c = C("div"), d = C("span"), f = ce(s), g = Y(), N && N.c(), v = Y(), h = C("div"), V && V.c(), b = Y(), w = C("div"), _.c(), z = Y(), E && E.c(), u(l, "class", "v2-logo-area svelte-187rckv"), u(d, "class", "v2-service-name svelte-187rckv"), u(c, "class", "v2-service-placeholder svelte-187rckv"), u(h, "class", "v2-phase-placeholder svelte-187rckv"), u(a, "class", "v2-service-phase-wrapper svelte-187rckv"), u(w, "class", "v2-utilities-placeholder svelte-187rckv"), u(n, "class", "v2-header-placeholder svelte-187rckv"), u(o, "class", "v2-structure svelte-187rckv"), u(e, "class", "container v2 svelte-187rckv"), u(
+      e = C("div"), o = C("div"), L && L.c(), i = Y(), n = C("div"), l = C("div"), x.c(), r = Y(), a = C("div"), c = C("div"), d = C("span"), f = de(s), g = Y(), N && N.c(), v = Y(), h = C("div"), V && V.c(), b = Y(), w = C("div"), _.c(), z = Y(), E && E.c(), u(l, "class", "v2-logo-area svelte-187rckv"), u(d, "class", "v2-service-name svelte-187rckv"), u(c, "class", "v2-service-placeholder svelte-187rckv"), u(h, "class", "v2-phase-placeholder svelte-187rckv"), u(a, "class", "v2-service-phase-wrapper svelte-187rckv"), u(w, "class", "v2-utilities-placeholder svelte-187rckv"), u(n, "class", "v2-header-placeholder svelte-187rckv"), u(o, "class", "v2-structure svelte-187rckv"), u(e, "class", "container v2 svelte-187rckv"), u(
         e,
         "data-testid",
         /*testid*/
@@ -21810,7 +21810,7 @@ function Ji(t) {
   let e, o;
   return {
     c() {
-      e = C("span"), o = ce(
+      e = C("span"), o = de(
         /*heading*/
         t[1]
       ), u(e, "data-testid", "title"), u(e, "class", "title svelte-187rckv");
@@ -21835,7 +21835,7 @@ function Ki(t) {
   let e, o;
   return {
     c() {
-      e = C("span"), o = ce(
+      e = C("span"), o = de(
         /*heading*/
         t[1]
       ), u(e, "data-testid", "title"), u(e, "class", "title svelte-187rckv");
@@ -21861,7 +21861,7 @@ function $i(t) {
   t[19] && en(t);
   return {
     c() {
-      e = C("div"), o = C("button"), i = ce(`Menu
+      e = C("div"), o = C("button"), i = de(`Menu
             `), r && r.c(), u(o, "data-testid", "menu-toggle"), u(o, "class", "svelte-187rckv"), S(
         o,
         "menu-open",
@@ -21933,7 +21933,7 @@ function tn(t) {
   );
   return {
     c() {
-      e = C("goa-popover"), o = C("div"), i = C("button"), n = ce(`Menu
+      e = C("goa-popover"), o = C("div"), i = C("button"), n = de(`Menu
               `), d && d.c(), l = Y(), s && s.c(), u(i, "data-testid", "menu-toggle"), u(i, "class", "svelte-187rckv"), S(
         i,
         "menu-open",
@@ -22272,7 +22272,7 @@ function sn(t) {
   let e, o;
   return {
     c() {
-      e = C("span"), o = ce(
+      e = C("span"), o = de(
         /*secondarytext*/
         t[2]
       ), u(e, "class", "v2-secondary-text svelte-187rckv");
@@ -22351,7 +22351,7 @@ function Wd(t) {
   );
   return {
     c() {
-      e = C("button"), o = ce(`Menu
+      e = C("button"), o = de(`Menu
               `), i = C("goa-icon"), l = Y(), s && s.c(), r = et(), m(i, "type", n = /*_utilitiesMenuOpen*/
       t[16] ? "chevron-up" : "chevron-down"), m(i, "size", "small"), m(i, "class", "svelte-187rckv"), u(e, "class", "v2-utilities-menu-button svelte-187rckv"), u(
         e,
@@ -22717,7 +22717,7 @@ function Rd(t, e, o) {
       Q = ke, o(12, Q);
     });
   }
-  function se(ke) {
+  function ce(ke) {
     he[ke ? "unshift" : "push"](() => {
       z = ke, o(8, z);
     });
@@ -22783,7 +22783,7 @@ function Rd(t, e, o) {
     Fe,
     ae,
     Ie,
-    se,
+    ce,
     ie,
     Se,
     pe,
@@ -22901,7 +22901,7 @@ function Jd(t) {
   );
   return {
     c() {
-      e = C("button"), w && w.c(), o = Y(), i = C("span"), n = ce(
+      e = C("button"), w && w.c(), o = Y(), i = C("span"), n = de(
         /*heading*/
         t[0]
       ), l = Y(), p && p.c(), r = Y(), a = C("goa-icon"), f = Y(), _ && _.c(), g = et(), u(i, "class", "heading svelte-mx9jmj"), m(a, "type", c = /*_open*/
@@ -22990,7 +22990,7 @@ function Kd(t) {
   );
   return {
     c() {
-      e = C("goa-popover"), o = C("button"), b && b.c(), i = Y(), n = ce(
+      e = C("goa-popover"), o = C("button"), b && b.c(), i = Y(), n = de(
         /*heading*/
         t[0]
       ), l = Y(), r = C("goa-icon"), s = Y(), f = C("div"), p && p.c(), m(r, "type", a = /*_open*/
@@ -23546,7 +23546,7 @@ function hn(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*content*/
         t[2]
       ), u(e, "class", "goa-badge-content svelte-hmah3t");
@@ -24908,7 +24908,7 @@ function Mn(t) {
   }
   return {
     c() {
-      e = C("button"), o = C("div"), n = ce(i), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", l = /*d*/
+      e = C("button"), o = C("div"), n = de(i), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", l = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "data-date", r = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "aria-label", a = /*d*/
       t[32].format("PPPP")), u(e, "data-day", c = /*d*/
@@ -24985,7 +24985,7 @@ function jn(t) {
   }
   return {
     c() {
-      e = C("button"), o = C("div"), n = ce(i), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", l = /*d*/
+      e = C("button"), o = C("div"), n = de(i), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", l = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "data-date", r = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "aria-label", a = /*d*/
       t[32].format("PPPP")), u(e, "data-day", c = /*d*/
@@ -25094,7 +25094,7 @@ function Ln(t) {
   }
   return {
     c() {
-      e = C("button"), o = C("div"), n = ce(i), l = Y(), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", r = /*d*/
+      e = C("button"), o = C("div"), n = de(i), l = Y(), u(o, "class", "day-num svelte-iko4fr"), u(o, "data-testid", "date"), u(e, "data-testid", r = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "data-date", a = /*d*/
       t[32].format("yyyy-MM-dd")), u(e, "aria-label", c = /*d*/
       t[32].format("PPPP")), u(e, "data-day", d = /*d*/
@@ -25809,7 +25809,7 @@ function N2(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("goa-icon"), n = Y(), l = C("h3"), r = ce(
+      e = C("div"), o = C("goa-icon"), n = Y(), l = C("h3"), r = de(
         /*heading*/
         t[6]
       ), a = Y(), c = C("div"), f && f.c(), m(
@@ -25883,7 +25883,7 @@ function Nn(t) {
   let e, o;
   return {
     c() {
-      e = C("h3"), o = ce(
+      e = C("h3"), o = de(
         /*heading*/
         t[6]
       ), u(e, "class", "svelte-vycrz9"), S(
@@ -26670,7 +26670,7 @@ function In(t) {
   );
   return {
     c() {
-      e = C("div"), r && r.c(), o = Y(), i = ce(
+      e = C("div"), r && r.c(), o = Y(), i = de(
         /*description*/
         t[6]
       ), u(e, "class", "description svelte-s0nvap"), u(
@@ -26776,7 +26776,7 @@ function au(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("label"), i = C("div"), n = C("input"), s = Y(), N && N.c(), f = Y(), g = C("div"), V && V.c(), v = Y(), h = ce(
+      e = C("div"), o = C("label"), i = C("div"), n = C("input"), s = Y(), N && N.c(), f = Y(), g = C("div"), V && V.c(), v = Y(), h = de(
         /*text*/
         t[3]
       ), b = Y(), P && P.c(), w = Y(), p = C("div"), W && W.c(), u(
@@ -27069,7 +27069,7 @@ function su(t, e, o) {
     P = h, o(19, H = `description_${s}`), j === "1" && o(1, Q ?? (Q = D === "compact" ? "s" : "m")), X(), G(), J();
   });
   function X() {
-    rt(B, (Ce, Fe) => {
+    at(B, (Ce, Fe) => {
       switch (Ce) {
         case Tt:
           O(Fe);
@@ -27093,7 +27093,7 @@ function su(t, e, o) {
     o(28, w = Ce.error ? "true" : "false");
   }
   function G() {
-    rt(E, (Ce, Fe) => {
+    at(E, (Ce, Fe) => {
       switch (Ce) {
         case bt:
           $(Fe);
@@ -27554,7 +27554,7 @@ function fu(t, e, o) {
     return !O || O.length === 0 ? [] : O.map((ne) => V(ne));
   }
   function B() {
-    rt(_, (O, J, ne) => {
+    at(_, (O, J, ne) => {
       switch (O) {
         case Tt:
           E(J);
@@ -27884,7 +27884,7 @@ function hu(t) {
   );
   return {
     c() {
-      e = C("div"), d && d.c(), o = Y(), i = C("div"), n = ce(
+      e = C("div"), d && d.c(), o = Y(), i = C("div"), n = de(
         /*content*/
         t[6]
       ), l = Y(), s && s.c(), u(i, "class", "text svelte-iobyv1"), u(
@@ -28385,7 +28385,7 @@ function On(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*message*/
         t[0]
       ), u(e, "class", "message svelte-ed9kjd");
@@ -28410,7 +28410,7 @@ function qn(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*message*/
         t[0]
       ), u(e, "class", "message");
@@ -29008,15 +29008,15 @@ function xu(t, e, o) {
     s = [];
     const ae = d.querySelector("slot");
     if (!ae) return;
-    const Ie = ae.assignedElements(), se = [];
+    const Ie = ae.assignedElements(), ce = [];
     Ie.forEach((Se) => {
       const ke = Yn(Se).filter((Ue) => Ue.getAttribute("data-grid") === "row");
-      se.push(...ke);
-    }), se.forEach((Se) => {
+      ce.push(...ke);
+    }), ce.forEach((Se) => {
       Se.setAttribute("role", "row");
     });
     let ie = 0;
-    se.forEach((Se) => {
+    ce.forEach((Se) => {
       const Ue = Yn(Se).filter((Xe) => {
         const nt = Xe.getAttribute("data-grid");
         return nt === "cell" || (nt == null ? void 0 : nt.startsWith("cell-"));
@@ -29045,8 +29045,8 @@ function xu(t, e, o) {
     M = true;
     const Ie = ae.target;
     if (!Ie || Ie.getAttribute("role") !== "gridcell" || L !== "keyboard") return;
-    const se = (ie = s[f]) == null ? void 0 : ie[g];
-    (se == null ? void 0 : se.cell) === Ie && se.focusables.length > 0 || $(Ie);
+    const ce = (ie = s[f]) == null ? void 0 : ie[g];
+    (ce == null ? void 0 : ce.cell) === Ie && ce.focusables.length > 0 || $(Ie);
   }
   function V(ae) {
     const Ie = ae.relatedTarget;
@@ -29069,25 +29069,25 @@ function xu(t, e, o) {
     if (!d) return;
     const ae = d.querySelector("slot");
     ae && (b = new MutationObserver((Ie) => {
-      let se = false;
+      let ce = false;
       for (const ie of Ie) {
         if (ie.type === "childList" && (ie.addedNodes.length > 0 || ie.removedNodes.length > 0)) {
-          se = true;
+          ce = true;
           break;
         }
         if (ie.type === "attributes" && ie.attributeName === "data-grid") {
-          se = true;
+          ce = true;
           break;
         }
         if (ie.type === "childList" && ie.target instanceof HTMLElement) {
           const Se = ie.target;
           if (Se.hasAttribute("data-grid") || Se.querySelector("[data-grid]")) {
-            se = true;
+            ce = true;
             break;
           }
         }
       }
-      se && H();
+      ce && H();
     }), ae.addEventListener("slotchange", E), A(ae));
   }
   function E() {
@@ -29095,8 +29095,8 @@ function xu(t, e, o) {
     ae && (A(ae), H());
   }
   function A(ae) {
-    ae.assignedElements().forEach((se) => {
-      se instanceof HTMLElement && (b == null || b.observe(se, {
+    ae.assignedElements().forEach((ce) => {
+      ce instanceof HTMLElement && (b == null || b.observe(ce, {
         childList: true,
         subtree: true,
         attributes: true,
@@ -29115,16 +29115,16 @@ function xu(t, e, o) {
     );
   }
   function ee() {
-    var Ie, se;
-    const ae = (se = (Ie = s[f]) == null ? void 0 : Ie[g]) == null ? void 0 : se.cell;
+    var Ie, ce;
+    const ae = (ce = (Ie = s[f]) == null ? void 0 : Ie[g]) == null ? void 0 : ce.cell;
     ae && (Fn(ae), ae.removeAttribute("tabindex"));
   }
-  function Z(ae, Ie, se, ie) {
+  function Z(ae, Ie, ce, ie) {
     if (!U(ae, Ie)) {
       v = -1, ie && te();
       return;
     }
-    f = ae, g = Ie, v = se, ie && G(ae, Ie);
+    f = ae, g = Ie, v = ce, ie && G(ae, Ie);
   }
   function q(ae) {
     if (ae.key === "Tab") {
@@ -29157,8 +29157,8 @@ function xu(t, e, o) {
     var ie;
     if (!U(ae, Ie)) return false;
     ee(), f = ae, g = Ie;
-    const se = (ie = s[ae][Ie]) == null ? void 0 : ie.cell;
-    return se == null || se.setAttribute("tabindex", "0"), h = se.matches("input") || se.querySelector("input") !== null, true;
+    const ce = (ie = s[ae][Ie]) == null ? void 0 : ie.cell;
+    return ce == null || ce.setAttribute("tabindex", "0"), h = ce.matches("input") || ce.querySelector("input") !== null, true;
   }
   function U(ae, Ie) {
     return ae >= 0 && Ie >= 0 && s && s.length > 0 && ae < s.length && Ie < s[ae].length;
@@ -29168,7 +29168,7 @@ function xu(t, e, o) {
       f = 0, g = 0, v = -1;
       return;
     }
-    const se = s[ae][Ie], ie = se.cell, Se = se.focusables || [];
+    const ce = s[ae][Ie], ie = ce.cell, Se = ce.focusables || [];
     o(2, p = true), Se.length === 0 ? (ie.setAttribute("tabindex", "0"), ie.focus(), v = -1) : ((v < 0 || v >= Se.length) && (v = 0), ie.removeAttribute("tabindex"), Fn(ie), setTimeout(
       () => {
         Se[v].focus();
@@ -29178,25 +29178,25 @@ function xu(t, e, o) {
   }
   function $(ae) {
     if (!ae || (ae.setAttribute("data-focused", ""), a !== "table")) return;
-    const Ie = f, se = g, ie = s.length - 1, Se = s[Ie] ? s[Ie].length - 1 : 0;
+    const Ie = f, ce = g, ie = s.length - 1, Se = s[Ie] ? s[Ie].length - 1 : 0;
     let pe = null;
-    Ie === 0 && se === 0 ? pe = "top-left" : Ie === 0 && se === Se ? pe = "top-right" : Ie === ie && se === 0 ? pe = "bottom-left" : Ie === ie && se === Se && (pe = "bottom-right"), pe && ae.setAttribute("data-focus-corner", pe);
+    Ie === 0 && ce === 0 ? pe = "top-left" : Ie === 0 && ce === Se ? pe = "top-right" : Ie === ie && ce === 0 ? pe = "bottom-left" : Ie === ie && ce === Se && (pe = "bottom-right"), pe && ae.setAttribute("data-focus-corner", pe);
   }
   function K() {
     const ae = f - 1;
     if (ae < 0 || !s[ae])
       return;
     let Ie = g;
-    const se = s[ae].length;
-    Ie >= se && (Ie = se - 1), G(ae, Ie);
+    const ce = s[ae].length;
+    Ie >= ce && (Ie = ce - 1), G(ae, Ie);
   }
   function le() {
     const ae = f + 1;
     if (!s[ae])
       return;
     let Ie = g;
-    const se = s[ae].length;
-    Ie >= se && (Ie = se - 1), G(ae, Ie);
+    const ce = s[ae].length;
+    Ie >= ce && (Ie = ce - 1), G(ae, Ie);
   }
   function O() {
     const ae = s[f] && s[f][g];
@@ -29244,16 +29244,16 @@ function xu(t, e, o) {
   function me(ae) {
     if (!s || s.length === 0) return null;
     for (let Ie = 0; Ie < s.length; Ie++)
-      for (let se = 0; se < s[Ie].length; se++)
-        if (s[Ie][se].cell === ae)
-          return { row: Ie, col: se };
+      for (let ce = 0; ce < s[Ie].length; ce++)
+        if (s[Ie][ce].cell === ae)
+          return { row: Ie, col: ce };
     return null;
   }
   function Ye(ae) {
     if (w = true, z) return;
-    const se = ae.target.closest('[role="gridcell"]');
-    if (!se) return;
-    const ie = me(se);
+    const ce = ae.target.closest('[role="gridcell"]');
+    if (!ce) return;
+    const ie = me(ce);
     ie && ((ie.row !== f || ie.col !== g) && (v = -1), G(ie.row, ie.col));
   }
   function _e(ae) {
@@ -29271,23 +29271,23 @@ function xu(t, e, o) {
       return;
     const Ie = ae.closest('[role="gridcell"]');
     if (!Ie) return;
-    const se = me(Ie);
-    if (se)
-      if (se.row !== f || se.col !== g)
-        v = -1, G(se.row, se.col);
+    const ce = me(Ie);
+    if (ce)
+      if (ce.row !== f || ce.col !== g)
+        v = -1, G(ce.row, ce.col);
       else {
-        const pe = s[se.row][se.col].focusables.indexOf(ae);
+        const pe = s[ce.row][ce.col].focusables.indexOf(ae);
         pe !== -1 && (v = pe);
       }
   }
   function Ce(ae) {
     const Ie = /* @__PURE__ */ new Set();
-    function se(ie) {
+    function ce(ie) {
       var Se;
       for (const pe of ie)
-        pe instanceof HTMLElement && pe.shadowRoot && (pe.hasAttribute("data-ignore-focus") || se([...((Se = pe.shadowRoot) == null ? void 0 : Se.childNodes) || []])), pe.hasChildNodes() && se(Array.from(pe.childNodes)), pe instanceof HTMLSlotElement && se([...pe.assignedNodes()]), Gs(pe) && pe !== ae && Su(pe) && Ie.add(pe);
+        pe instanceof HTMLElement && pe.shadowRoot && (pe.hasAttribute("data-ignore-focus") || ce([...((Se = pe.shadowRoot) == null ? void 0 : Se.childNodes) || []])), pe.hasChildNodes() && ce(Array.from(pe.childNodes)), pe instanceof HTMLSlotElement && ce([...pe.assignedNodes()]), Gs(pe) && pe !== ae && Su(pe) && Ie.add(pe);
     }
-    return se([ae]), Array.from(Ie);
+    return ce([ae]), Array.from(Ie);
   }
   function Fe(ae) {
     he[ae ? "unshift" : "push"](() => {
@@ -30067,7 +30067,7 @@ function Yu(t, e, o) {
     s != "" && console.warn("Date Picker `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function N() {
-    rt(D, (G, $, K) => {
+    at(D, (G, $, K) => {
       switch (G) {
         case Tt:
           V($);
@@ -30343,7 +30343,7 @@ function Uu(t) {
   );
   return {
     c() {
-      e = C("details"), o = C("summary"), i = C("goa-icon"), l = Y(), r = C("span"), a = ce(
+      e = C("details"), o = C("summary"), i = C("goa-icon"), l = Y(), r = C("span"), a = de(
         /*heading*/
         t[1]
       ), f = Y(), g = C("div"), M && M.c(), m(i, "mt", "1"), m(i, "mr", "2"), m(i, "type", "chevron-forward"), m(i, "fillcolor", n = /*_isMouseOver*/
@@ -30828,7 +30828,7 @@ function rf(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[3]
       ), m(e, "size", "heading-m"), m(e, "as", "h3"), m(e, "mt", "none"), m(e, "mb", "none"), m(e, "class", "svelte-io6750");
@@ -30853,7 +30853,7 @@ function af(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[3]
       ), m(e, "size", "heading-s"), m(e, "as", "h3"), m(e, "mt", "3xs"), m(e, "mb", "none"), m(e, "class", "svelte-io6750");
@@ -31381,7 +31381,7 @@ function ff(t, e, o) {
     );
   });
   function d() {
-    rt(a, (f, g) => {
+    at(a, (f, g) => {
       switch (f) {
         case "dropdown:bind":
           c = g.el;
@@ -32098,7 +32098,7 @@ function tl(t, e) {
     first: null,
     c() {
       var h, b;
-      o = C("li"), n = ce(i), l = Y(), u(o, "id", r = /*option*/
+      o = C("li"), n = de(i), l = Y(), u(o, "id", r = /*option*/
       e[85].value), u(o, "aria-selected", a = /*_selectedOption*/
       ((h = e[24]) == null ? void 0 : h.value) === /*option*/
       e[85].value), u(o, "class", "dropdown-item svelte-4fk67h"), u(o, "data-index", c = /*index*/
@@ -32165,7 +32165,7 @@ function ol(t) {
   ), i, n, l, r;
   return {
     c() {
-      e = C("option"), i = ce(o), n = Y(), e.selected = l = /*value*/
+      e = C("option"), i = de(o), n = Y(), e.selected = l = /*value*/
       t[0] === /*option*/
       t[85].value, e.__value = r = /*option*/
       t[85].value, no(e, e.__value), u(e, "class", "svelte-4fk67h");
@@ -32299,28 +32299,28 @@ const kf = (t) => t.preventDefault();
 function yf(t, e, o) {
   let i, n, l, r, a, { $$slots: c = {}, $$scope: d } = e, { name: s } = e, { arialabel: f = "" } = e, { arialabelledby: g = "" } = e, { value: v = "" } = e, { filterable: h = "false" } = e, { leadingicon: b = null } = e, { maxheight: w = "276px" } = e, { placeholder: p = "" } = e, { width: _ = "" } = e, { maxwidth: z = "" } = e, { disabled: M = "false" } = e, { error: L = "false" } = e, { multiselect: D = "false" } = e, { native: j = "false" } = e, { size: x = "default" } = e, { version: N = "1" } = e, { relative: Q = "" } = e, { mt: V = null } = e, { mr: P = null } = e, { mb: B = null } = e, { ml: W = null } = e, { autocomplete: E = "" } = e, { testid: A = "" } = e, H = [], ee, Z = false, q = -1, X, U, G, $, K, le, O, J = false, ne = [], we = [], te, re = Be(L), me = re;
   xe(() => {
-    Gt(G), Fe(), se(), Qe(), Qo(G, () => De(G, "_focus", { name: s }, { bubbles: true }), () => De(G, "_blur", { name: s }, { bubbles: true })), le = r ? new Jo(K) : new Ko(K), Ce();
+    Gt(G), Fe(), ce(), Qe(), Qo(G, () => De(G, "_focus", { name: s }, { bubbles: true }), () => De(G, "_blur", { name: s }, { bubbles: true })), le = r ? new Jo(K) : new Ko(K), Ce();
   });
-  function Ye(de, Oe, tt) {
-    de ? Ni(de) ? o(25, X = de) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, X = `${de}px`)) : z ? o(25, X = z) : o(25, X = ke(Oe)), de != null && de.includes("%") || z != null && z.includes("%") ? o(26, U = _e()) : o(26, U = X);
+  function Ye(se, Oe, tt) {
+    se ? Ni(se) ? o(25, X = se) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, X = `${se}px`)) : z ? o(25, X = z) : o(25, X = ke(Oe)), se != null && se.includes("%") || z != null && z.includes("%") ? o(26, U = _e()) : o(26, U = X);
   }
   function _e() {
-    const de = G == null ? void 0 : G.getBoundingClientRect().width;
-    return de ? `${de}px` : X;
+    const se = G == null ? void 0 : G.getBoundingClientRect().width;
+    return se ? `${se}px` : X;
   }
   function Qe() {
-    O == null || O.addEventListener("_open", (de) => {
+    O == null || O.addEventListener("_open", (se) => {
       o(17, Z = true);
-    }), O == null || O.addEventListener("_close", (de) => {
-      de.stopPropagation(), o(17, Z = false);
+    }), O == null || O.addEventListener("_close", (se) => {
+      se.stopPropagation(), o(17, Z = false);
     });
   }
   function Ce() {
     Q != "" && console.warn("Dropdown `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function Fe() {
-    rt(G, (de, Oe, tt) => {
-      switch (de) {
+    at(G, (se, Oe, tt) => {
+      switch (se) {
         case Tt:
           Ie(Oe);
           break;
@@ -32342,42 +32342,42 @@ function yf(t, e, o) {
       }
     });
   }
-  function ae(de) {
-    o(40, L = de.error ? "true" : "false");
+  function ae(se) {
+    o(40, L = se.error ? "true" : "false");
   }
-  function Ie(de) {
-    o(0, v = de.value), De(G, "_change", { name: s, value: v }, { bubbles: true });
+  function Ie(se) {
+    o(0, v = se.value), De(G, "_change", { name: s, value: v }, { bubbles: true });
   }
-  function se() {
+  function ce() {
     Ze(G, bt, { name: s, el: G }, { bubbles: true, timeout: 10 });
   }
-  function ie(de) {
-    switch (de.mountType) {
+  function ie(se) {
+    switch (se.mountType) {
       case "append":
-        o(16, H = [...H, de]);
+        o(16, H = [...H, se]);
         break;
       case "prepend":
-        o(16, H = [de, ...H]);
+        o(16, H = [se, ...H]);
         break;
       case "reset":
-        o(16, H = [...H, de]);
+        o(16, H = [...H, se]);
         break;
     }
-    Ze(de.el, "dropdown:bind", { el: G }), te && clearTimeout(te), te = setTimeout(
+    Ze(se.el, "dropdown:bind", { el: G }), te && clearTimeout(te), te = setTimeout(
       () => {
         nt(), l || (pe(), K && ee && Et());
       },
       1
     );
   }
-  function Se(de) {
-    o(16, H = H.filter((Oe) => Oe.value !== de.value)), nt();
+  function Se(se) {
+    o(16, H = H.filter((Oe) => Oe.value !== se.value)), nt();
   }
   function pe() {
-    o(24, ee = H.find((de) => de.value == we[0]));
+    o(24, ee = H.find((se) => se.value == we[0]));
   }
-  function ke(de) {
-    const Oe = Math.max(...de.map((Bt) => (`${Bt.label}` || `${Bt.value}` || "").length));
+  function ke(se) {
+    const Oe = Math.max(...se.map((Bt) => (`${Bt.label}` || `${Bt.value}` || "").length));
     let tt = Math.max(Oe || 0, p.length) + 7;
     return b && (tt += 4), `${tt}ch`;
   }
@@ -32387,26 +32387,26 @@ function yf(t, e, o) {
       return;
     }
     if (!(K != null && K.value) || K.value === "") return;
-    const de = ne.findIndex((Oe) => ho(Oe, (K == null ? void 0 : K.value) || "", false));
-    if (de >= 0)
-      o(18, q = de);
+    const se = ne.findIndex((Oe) => ho(Oe, (K == null ? void 0 : K.value) || "", false));
+    if (se >= 0)
+      o(18, q = se);
     else {
       const Oe = ne.findIndex((tt) => ho(tt, (K == null ? void 0 : K.value) || ""));
       Oe >= 0 && o(18, q = Oe);
     }
   }
-  function Ke(de) {
-    let Oe = q + de, tt = ne != null && ne.length ? ne : H;
+  function Ke(se) {
+    let Oe = q + se, tt = ne != null && ne.length ? ne : H;
     tt.length !== 0 && (Oe < 0 ? Oe = r ? tt.length - 1 : 0 : Oe >= tt.length && (Oe = r ? 0 : tt.length - 1), o(18, q = Oe), Xe());
   }
   function Xe() {
-    const de = q, Oe = $ == null ? void 0 : $.querySelector(`li[data-index="${de}"]`);
+    const se = q, Oe = $ == null ? void 0 : $.querySelector(`li[data-index="${se}"]`);
     if (!Oe) return;
     const tt = Oe.getBoundingClientRect(), Bt = $.getBoundingClientRect();
     tt.top >= 0 && tt.left >= 0 && tt.bottom <= Bt.height && tt.right <= Bt.width || Oe.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   function nt() {
-    o(21, ne = r ? H.filter((de) => ho(de, (K == null ? void 0 : K.value) || "")) : H);
+    o(21, ne = r ? H.filter((se) => ho(se, (K == null ? void 0 : K.value) || "")) : H);
   }
   function gt() {
     i || setTimeout(
@@ -32425,20 +32425,20 @@ function yf(t, e, o) {
     o(17, Z = false), r && Et();
   }
   function Et() {
-    const de = (ee == null ? void 0 : ee.label) || (ee == null ? void 0 : ee.value) || "";
-    o(20, K.value = de, K);
+    const se = (ee == null ? void 0 : ee.label) || (ee == null ? void 0 : ee.value) || "";
+    o(20, K.value = se, K);
   }
-  function yt(de) {
-    const Oe = n ? { name: s, values: [de, ...we] } : { name: s, value: de };
+  function yt(se) {
+    const Oe = n ? { name: s, values: [se, ...we] } : { name: s, value: se };
     J && (De(G, "_change", Oe, { bubbles: true }), J = false);
   }
-  function Ct(de) {
-    i || (J = de.value !== (ee == null ? void 0 : ee.value), o(24, ee = de), l || (nt(), Et(), o(18, q = -1), pt()), yt(de.value));
+  function Ct(se) {
+    i || (J = se.value !== (ee == null ? void 0 : ee.value), o(24, ee = se), l || (nt(), Et(), o(18, q = -1), pt()), yt(se.value));
   }
-  function zt(de) {
-    J = true, Ct(de);
+  function zt(se) {
+    J = true, Ct(se);
   }
-  function ye(de) {
+  function ye(se) {
     if (i || !r || !(A === "test-autofill" || K.matches(":-webkit-autofill") || K.matches(":autofill"))) return;
     nt();
     const tt = (K == null ? void 0 : K.value) || "", Yt = tt !== "" ? ne.find((D1) => ho(D1, tt, false)) : null;
@@ -32449,26 +32449,26 @@ function yf(t, e, o) {
       2
     );
   }
-  function it(de) {
-    i || (J = true, le.handleKeyUp(de));
+  function it(se) {
+    i || (J = true, le.handleKeyUp(se));
   }
-  function Pt(de) {
-    i || (J = true, le.handleKeyDown(de));
+  function Pt(se) {
+    i || (J = true, le.handleKeyDown(se));
   }
-  function qt(de) {
-    (de.key === "Enter" || de.key === " ") && (Ft(), gt(), de.stopPropagation());
+  function qt(se) {
+    (se.key === "Enter" || se.key === " ") && (Ft(), gt(), se.stopPropagation());
   }
-  function Vt(de) {
-    Ft(), gt(), de.stopPropagation();
+  function Vt(se) {
+    Ft(), gt(), se.stopPropagation();
   }
-  function Xt(de) {
-    const Oe = de.currentTarget, tt = H[Oe.selectedIndex];
+  function Xt(se) {
+    const Oe = se.currentTarget, tt = H[Oe.selectedIndex];
     J = true, Ct(tt);
   }
   function Ft() {
     i || (o(29, a = void 0), o(18, q = -1), o(24, ee = void 0), J = true, nt(), yt(""), Et());
   }
-  function Xo(de) {
+  function Xo(se) {
     De(G, "help-text::announce", void 0, { bubbles: true });
   }
   class Jo {
@@ -32571,31 +32571,31 @@ function yf(t, e, o) {
       }
     }
   }
-  function $o(de) {
-    he[de ? "unshift" : "push"](() => {
-      K = de, o(20, K);
+  function $o(se) {
+    he[se ? "unshift" : "push"](() => {
+      K = se, o(20, K);
     });
   }
-  const ei = (de, Oe) => {
-    zt(de), K == null || K.focus();
+  const ei = (se, Oe) => {
+    zt(se), K == null || K.focus();
   };
-  function ti(de) {
-    he[de ? "unshift" : "push"](() => {
-      $ = de, o(27, $);
+  function ti(se) {
+    he[se ? "unshift" : "push"](() => {
+      $ = se, o(27, $);
     });
   }
-  function be(de) {
-    he[de ? "unshift" : "push"](() => {
-      O = de, o(28, O);
+  function be(se) {
+    he[se ? "unshift" : "push"](() => {
+      O = se, o(28, O);
     });
   }
-  function at(de) {
-    he[de ? "unshift" : "push"](() => {
-      G = de, o(19, G);
+  function lt(se) {
+    he[se ? "unshift" : "push"](() => {
+      G = se, o(19, G);
     });
   }
-  return t.$$set = (de) => {
-    "name" in de && o(1, s = de.name), "arialabel" in de && o(2, f = de.arialabel), "arialabelledby" in de && o(3, g = de.arialabelledby), "value" in de && o(0, v = de.value), "filterable" in de && o(41, h = de.filterable), "leadingicon" in de && o(4, b = de.leadingicon), "maxheight" in de && o(5, w = de.maxheight), "placeholder" in de && o(6, p = de.placeholder), "width" in de && o(42, _ = de.width), "maxwidth" in de && o(43, z = de.maxwidth), "disabled" in de && o(7, M = de.disabled), "error" in de && o(40, L = de.error), "multiselect" in de && o(44, D = de.multiselect), "native" in de && o(45, j = de.native), "size" in de && o(8, x = de.size), "version" in de && o(9, N = de.version), "relative" in de && o(46, Q = de.relative), "mt" in de && o(10, V = de.mt), "mr" in de && o(11, P = de.mr), "mb" in de && o(12, B = de.mb), "ml" in de && o(13, W = de.ml), "autocomplete" in de && o(14, E = de.autocomplete), "testid" in de && o(15, A = de.testid), "$$scope" in de && o(48, d = de.$$scope);
+  return t.$$set = (se) => {
+    "name" in se && o(1, s = se.name), "arialabel" in se && o(2, f = se.arialabel), "arialabelledby" in se && o(3, g = se.arialabelledby), "value" in se && o(0, v = se.value), "filterable" in se && o(41, h = se.filterable), "leadingicon" in se && o(4, b = se.leadingicon), "maxheight" in se && o(5, w = se.maxheight), "placeholder" in se && o(6, p = se.placeholder), "width" in se && o(42, _ = se.width), "maxwidth" in se && o(43, z = se.maxwidth), "disabled" in se && o(7, M = se.disabled), "error" in se && o(40, L = se.error), "multiselect" in se && o(44, D = se.multiselect), "native" in se && o(45, j = se.native), "size" in se && o(8, x = se.size), "version" in se && o(9, N = se.version), "relative" in se && o(46, Q = se.relative), "mt" in se && o(10, V = se.mt), "mr" in se && o(11, P = se.mr), "mb" in se && o(12, B = se.mb), "ml" in se && o(13, W = se.ml), "autocomplete" in se && o(14, E = se.autocomplete), "testid" in se && o(15, A = se.testid), "$$scope" in se && o(48, d = se.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
     128 && o(30, i = Be(M)), t.$$.dirty[1] & /*multiselect*/
@@ -32666,7 +32666,7 @@ function yf(t, e, o) {
     ei,
     ti,
     be,
-    at
+    lt
   ];
 }
 class Cf extends Ne {
@@ -33467,7 +33467,7 @@ function Tf(t) {
   ), i;
   return {
     c() {
-      e = C("span"), i = ce(o), u(e, "class", "value-display svelte-z5z3yz"), S(e, "placeholder", !/*_hasValue*/
+      e = C("span"), i = de(o), u(e, "class", "value-display svelte-z5z3yz"), S(e, "placeholder", !/*_hasValue*/
       t[32]);
     },
     m(n, l) {
@@ -34112,32 +34112,32 @@ function qf(t, e, o) {
   }), ft(() => {
     le == null || le.disconnect();
   });
-  function _e(be, at) {
-    return B === "count" && be.length > 1 ? `${be.length} items` : be.map((de) => at[de] || de).join(", ");
+  function _e(be, lt) {
+    return B === "count" && be.length > 1 ? `${be.length} items` : be.map((se) => lt[se] || se).join(", ");
   }
   function Qe() {
     Z && o(27, K = `${Z.offsetWidth}px`);
   }
   function Ce() {
-    rt(Z, (be, at) => {
+    at(Z, (be, lt) => {
       switch (be) {
         case Tt:
-          se(at);
+          ce(lt);
           break;
         case Nt:
-          Ie(at);
+          Ie(lt);
           break;
         case Lt:
           o(1, D = false);
           break;
         case It:
-          se({ value: "" });
+          ce({ value: "" });
           break;
         case Ei:
-          Fe(at);
+          Fe(lt);
           break;
         case Di:
-          ae(at);
+          ae(lt);
           break;
       }
     });
@@ -34155,13 +34155,31 @@ function qf(t, e, o) {
     Ze(be.el, "dropdown:bind", { el: Z });
   }
   function ae(be) {
-    o(19, $ = $.filter((at) => at.value !== be.value)), p.includes(be.value) && (o(0, p = p.filter((at) => at !== be.value)), De(Z, "_change", { name: w, value: p }, { bubbles: true }));
+    o(19, $ = $.filter((lt) => lt.value !== be.value)), p.includes(be.value) && (o(0, p = p.filter((lt) => lt !== be.value)), De(
+      Z,
+      "_change",
+      {
+        name: w,
+        value: p,
+        labels: p.map((lt) => r[lt] || lt)
+      },
+      { bubbles: true }
+    ));
   }
   function Ie(be) {
     o(1, D = Be(be.error));
   }
-  function se(be) {
-    o(0, p = be.value), De(Z, "_change", { name: w, value: p }, { bubbles: true });
+  function ce(be) {
+    o(0, p = Array.from(be.value.toString())), De(
+      Z,
+      "_change",
+      {
+        name: w,
+        value: p,
+        labels: p.map((lt) => r[lt] || lt)
+      },
+      { bubbles: true }
+    );
   }
   function ie() {
     o(26, G = true), z && ot().then(() => setTimeout(yt, 0));
@@ -34201,11 +34219,11 @@ function qf(t, e, o) {
     return W && we ? [we, ...be] : be;
   }
   function Xe(be) {
-    const at = Ke();
-    if (at.length === 0) return;
-    const de = at[be];
-    if (!de) return;
-    const Oe = Ut([de]);
+    const lt = Ke();
+    if (lt.length === 0) return;
+    const se = lt[be];
+    if (!se) return;
+    const Oe = Ut([se]);
     Oe && (Oe.focus(), te = be);
   }
   function nt() {
@@ -34218,8 +34236,8 @@ function qf(t, e, o) {
   function pt() {
     const be = Ke();
     if (be.length === 0) return;
-    const at = Math.min(te + 1, be.length - 1);
-    Xe(at);
+    const lt = Math.min(te + 1, be.length - 1);
+    Xe(lt);
   }
   function Et() {
     if (z && te === 0) {
@@ -34237,15 +34255,33 @@ function qf(t, e, o) {
   }
   function zt(be) {
     be.stopPropagation();
-    const at = be.detail;
-    at && (o(0, p = at.checked ? c.map((de) => de.value) : []), De(Z, "_change", { name: w, value: p }, { bubbles: true }));
+    const lt = be.detail;
+    lt && (o(0, p = lt.checked ? c.map((se) => se.value) : []), De(
+      Z,
+      "_change",
+      {
+        name: w,
+        value: p,
+        labels: p.map((se) => r[se] || se)
+      },
+      { bubbles: true }
+    ));
   }
   function ye(be) {
     be.stopPropagation();
-    const at = be.detail;
-    if (!at) return;
-    const de = at.value || [];
-    o(0, p = de), De(Z, "_change", { name: w, value: p }, { bubbles: true });
+    const lt = be.detail;
+    if (!lt) return;
+    const se = lt.value || [];
+    o(0, p = se), De(
+      Z,
+      "_change",
+      {
+        name: w,
+        value: p,
+        labels: p.map((Oe) => r[Oe] || Oe)
+      },
+      { bubbles: true }
+    );
   }
   function it(be) {
     if (!L)
@@ -34277,8 +34313,8 @@ function qf(t, e, o) {
   function Pt() {
     Vt();
   }
-  function qt() {
-    Vt();
+  function qt(be) {
+    be.key !== "Enter" && be.key !== " " || (be.preventDefault(), be.stopPropagation(), Vt());
   }
   function Vt() {
     L || (o(20, J = ""), z && requestAnimationFrame(yt));
@@ -34594,7 +34630,7 @@ function cl(t) {
   ) + "", i;
   return {
     c() {
-      e = C("div"), i = ce(o), u(e, "class", "filesize svelte-quhy4b"), u(e, "data-testid", "filesize");
+      e = C("div"), i = de(o), u(e, "class", "filesize svelte-quhy4b"), u(e, "data-testid", "filesize");
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -34615,7 +34651,7 @@ function Zf(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("div"), o = C("goa-icon"), i = Y(), n = ce(
+      e = C("div"), o = C("goa-icon"), i = Y(), n = de(
         /*error*/
         t[3]
       ), m(o, "type", "warning"), m(o, "size", "small"), m(o, "theme", "filled"), u(e, "class", "error-msg svelte-quhy4b"), u(e, "data-testid", "error");
@@ -34658,7 +34694,7 @@ function Yf(t) {
   ) + "", l, r;
   return {
     c() {
-      e = C("div"), o = C("progress"), i = Y(), l = ce(n), r = ce("%"), o.value = /*progress*/
+      e = C("div"), o = C("progress"), i = Y(), l = de(n), r = de("%"), o.value = /*progress*/
       t[2], u(o, "max", "100"), u(o, "class", "svelte-quhy4b"), u(e, "class", "progress svelte-quhy4b"), u(e, "data-testid", "progress");
     },
     m(a, c) {
@@ -34682,7 +34718,7 @@ function Wf(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("goa-button"), o = ce("Cancel"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
+      e = C("goa-button"), o = de("Cancel"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
         e,
         "version",
         /*version*/
@@ -34715,7 +34751,7 @@ function Qf(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("goa-button"), o = ce("Remove"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
+      e = C("goa-button"), o = de("Remove"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
         e,
         "version",
         /*version*/
@@ -34748,7 +34784,7 @@ function Uf(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("goa-button"), o = ce("Cancel"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
+      e = C("goa-button"), o = de("Cancel"), m(e, "type", "tertiary"), m(e, "size", "compact"), m(
         e,
         "version",
         /*version*/
@@ -34821,7 +34857,7 @@ function Rf(t) {
   let M = z(t), L = M && M(t);
   return {
     c() {
-      e = C("div"), o = C("div"), h.c(), i = Y(), n = C("div"), l = C("div"), r = ce(
+      e = C("div"), o = C("div"), h.c(), i = Y(), n = C("div"), l = C("div"), r = de(
         /*filename*/
         t[0]
       ), a = Y(), b && b.c(), c = Y(), _ && _.c(), d = Y(), s = C("div"), L && L.c(), u(l, "class", "filename svelte-quhy4b"), u(l, "data-testid", "filename"), u(n, "class", "details svelte-quhy4b"), u(s, "class", "actions svelte-quhy4b"), u(s, "data-testid", "actions"), u(o, "data-testid", "root"), u(o, "class", f = $e(`root ${/*_status*/
@@ -35073,7 +35109,7 @@ function gl(t) {
   let e, o, i;
   return {
     c() {
-      e = C("em"), o = ce("Maximum file size is "), i = ce(
+      e = C("em"), o = de("Maximum file size is "), i = de(
         /*maxfilesize*/
         t[2]
       ), u(e, "class", "max-file-size svelte-5u7pbl"), u(e, "data-testid", "max-file-size");
@@ -35101,7 +35137,7 @@ function vl(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("goa-button"), i = ce("Choose file"), n = Y(), s && s.c(), l = Y(), r = C("input"), m(o, "type", "secondary"), m(
+      e = C("div"), o = C("goa-button"), i = de("Choose file"), n = Y(), s && s.c(), l = Y(), r = C("input"), m(o, "type", "secondary"), m(
         o,
         "version",
         /*version*/
@@ -35149,7 +35185,7 @@ function hl(t) {
   let e, o, i;
   return {
     c() {
-      e = C("em"), o = ce("Maximum file size is "), i = ce(
+      e = C("em"), o = de("Maximum file size is "), i = de(
         /*maxfilesize*/
         t[2]
       ), u(e, "class", "max-file-size svelte-5u7pbl"), u(e, "data-testid", "max-file-size");
@@ -35527,7 +35563,7 @@ function n0(t) {
   let e, o, i, n, l, r, a, c, d, s, f;
   return {
     c() {
-      e = C("div"), o = C("div"), i = ce(
+      e = C("div"), o = C("div"), i = de(
         /*content*/
         t[4]
       ), n = Y(), l = C("goa-icon"), u(o, "class", "text svelte-1bvk1wh"), m(l, "class", "delete-icon svelte-1bvk1wh"), m(l, "size", "medium"), m(l, "theme", r = /*_error*/
@@ -35668,7 +35704,7 @@ function l0(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("div"), v && v.c(), i = Y(), h && h.c(), n = Y(), l = C("div"), r = ce(
+      e = C("div"), o = C("div"), v && v.c(), i = Y(), h && h.c(), n = Y(), l = C("div"), r = de(
         /*content*/
         t[4]
       ), a = Y(), c = C("goa-icon-button"), u(l, "class", "text svelte-1bvk1wh"), u(o, "class", "label-container svelte-1bvk1wh"), m(c, "size", "3"), m(c, "icon", "close"), m(c, "arialabel", "Remove filter"), m(c, "variant", d = /*_error*/
@@ -35785,7 +35821,7 @@ function wl(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*secondarytext*/
         t[5]
       ), u(e, "class", "secondary-text svelte-1bvk1wh");
@@ -36160,10 +36196,10 @@ function b0(t) {
   return {
     c() {
       var s;
-      d.c(), e = Y(), o = C("a"), i = ce("© "), n = ce(
+      d.c(), e = Y(), o = C("a"), i = de("© "), n = de(
         /*year*/
         t[8]
-      ), l = ce(" Government of Alberta"), u(o, "tabindex", r = /*metaLinks*/
+      ), l = de(" Government of Alberta"), u(o, "tabindex", r = /*metaLinks*/
       ((s = t[6]) == null ? void 0 : s.length) > 0 || /*_clientWidth*/
       t[7] < Ht ? 0 : 1), u(o, "href", "https://alberta.ca"), u(o, "class", "goa-copyright svelte-1no55zq");
     },
@@ -36482,7 +36518,7 @@ function zl(t) {
   }
   return {
     c() {
-      e = C("li"), o = C("a"), n = ce(i), r = Y(), u(o, "href", l = /*child*/
+      e = C("li"), o = C("a"), n = de(i), r = Y(), u(o, "href", l = /*child*/
       t[7].href), u(o, "class", "svelte-1mjjlqh"), u(e, "class", "svelte-1mjjlqh");
     },
     m(s, f) {
@@ -36636,7 +36672,7 @@ function jl(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*heading*/
         t[0]
       ), i = Y(), n = C("goa-divider"), u(e, "class", "title svelte-1pgzvyp"), m(n, "mb", "l");
@@ -36664,7 +36700,7 @@ function Ll(t) {
   ), n, l;
   return {
     c() {
-      e = C("li"), o = C("a"), n = ce(i), u(o, "href", l = /*child*/
+      e = C("li"), o = C("a"), n = de(i), u(o, "href", l = /*child*/
       t[8].href), u(o, "class", "svelte-1pgzvyp"), u(e, "class", "svelte-1pgzvyp");
     },
     m(r, a) {
@@ -36926,7 +36962,7 @@ function Dl(t) {
   }
   return {
     c() {
-      e = C("li"), o = C("a"), n = ce(i), r = Y(), u(o, "class", "error svelte-97yoza"), u(o, "href", l = `#${/*key*/
+      e = C("li"), o = C("a"), n = de(i), r = Y(), u(o, "class", "error svelte-97yoza"), u(o, "href", l = `#${/*key*/
       t[28]}`), u(e, "class", "svelte-97yoza");
     },
     m(s, f) {
@@ -37017,7 +37053,7 @@ function x0(t, e, o) {
     j(), x(), v(), S0();
   });
   function v() {
-    rt(a, (E, A, H) => {
+    at(a, (E, A, H) => {
       switch (E) {
         case zi:
           p(A), H.stopPropagation();
@@ -37270,7 +37306,7 @@ function H0(t, e, o) {
     });
   }
   function z() {
-    rt(a, (O, J, ne) => {
+    at(a, (O, J, ne) => {
       switch (ne.stopPropagation(), O) {
         case io:
           M(J);
@@ -37563,7 +37599,7 @@ function V0(t) {
   let e, o;
   return {
     c() {
-      e = C("a"), o = ce("Back"), u(
+      e = C("a"), o = de("Back"), u(
         e,
         "href",
         /*backUrl*/
@@ -37626,7 +37662,7 @@ function Ol(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*sectionTitle*/
         t[4]
       ), m(e, "size", "body-l"), m(e, "mt", "none"), m(e, "mb", "xs"), m(e, "color", "secondary");
@@ -37651,7 +37687,7 @@ function ql(t) {
   let e, o, i;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[2]
       ), m(e, "as", "h2"), m(e, "size", "heading-l"), m(e, "mt", "none"), m(e, "mb", i = /*subHeading*/
@@ -37679,7 +37715,7 @@ function Hl(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*subHeading*/
         t[3]
       ), m(e, "size", "body-l"), m(e, "mt", "2xs"), m(e, "mb", "xl"), m(e, "color", "primary");
@@ -37760,7 +37796,7 @@ function Z0(t) {
   ), i, n, l;
   return {
     c() {
-      e = C("goa-button"), i = ce(o), m(e, "type", "primary");
+      e = C("goa-button"), i = de(o), m(e, "type", "primary");
     },
     m(r, a) {
       T(r, e, a), k(e, i), n || (l = oe(
@@ -37787,7 +37823,7 @@ function F0(t) {
   ), i, n, l;
   return {
     c() {
-      e = C("goa-button"), i = ce(o), m(e, "type", "primary");
+      e = C("goa-button"), i = de(o), m(e, "type", "primary");
     },
     m(r, a) {
       T(r, e, a), k(e, i), n || (l = oe(
@@ -37909,7 +37945,7 @@ function W0(t, e, o) {
     x(), Q();
   });
   function x() {
-    rt(M, (U, G, $) => {
+    at(M, (U, G, $) => {
       switch (U) {
         case Po:
           P(G), $.stopPropagation();
@@ -38161,7 +38197,7 @@ function Ul(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[0]
       ), m(e, "as", "h3"), m(e, "size", "heading-m"), m(e, "color", "secondary"), m(e, "mt", "none"), m(e, "mb", "s");
@@ -38284,7 +38320,7 @@ function Xl(t) {
   ), i;
   return {
     c() {
-      e = C("goa-text"), i = ce(o), m(e, "class", "heading svelte-uwie2c"), m(e, "color", "secondary"), m(e, "mt", "none"), m(e, "mb", "s");
+      e = C("goa-text"), i = de(o), m(e, "class", "heading svelte-uwie2c"), m(e, "color", "secondary"), m(e, "mt", "none"), m(e, "mb", "s");
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -38433,7 +38469,7 @@ function X0(t) {
   ), o;
   return {
     c() {
-      o = ce(e);
+      o = de(e);
     },
     m(i, n) {
       T(i, o, n);
@@ -38516,7 +38552,7 @@ function Kl(t) {
   ), i;
   return {
     c() {
-      e = C("div"), i = ce(o);
+      e = C("div"), i = de(o);
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -38553,7 +38589,7 @@ function $l(t) {
   let s = d(t, -1), f = s(t);
   return {
     c() {
-      e = C("tr"), o = C("td"), n = ce(i), l = Y(), r = C("td"), f.c(), c = Y(), u(o, "class", "label svelte-uwie2c"), u(r, "class", "value svelte-uwie2c"), S(r, "empty", ko(
+      e = C("tr"), o = C("td"), n = de(i), l = Y(), r = C("td"), f.c(), c = Y(), u(o, "class", "label svelte-uwie2c"), u(r, "class", "value svelte-uwie2c"), S(r, "empty", ko(
         /*data*/
         t[15].value
       )), u(e, "class", "svelte-uwie2c");
@@ -38662,7 +38698,7 @@ function K0(t) {
   ), o;
   return {
     c() {
-      o = ce(e);
+      o = de(e);
     },
     m(i, n) {
       T(i, o, n);
@@ -38745,7 +38781,7 @@ function or(t) {
   ), i;
   return {
     c() {
-      e = C("div"), i = ce(o);
+      e = C("div"), i = de(o);
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -38782,7 +38818,7 @@ function ir(t) {
   let s = d(t, -1), f = s(t);
   return {
     c() {
-      e = C("tr"), o = C("td"), n = ce(i), l = Y(), r = C("td"), f.c(), c = Y(), u(o, "class", "label svelte-uwie2c"), u(r, "class", "value svelte-uwie2c"), S(r, "empty", ko(
+      e = C("tr"), o = C("td"), n = de(i), l = Y(), r = C("td"), f.c(), c = Y(), u(o, "class", "label svelte-uwie2c"), u(r, "class", "value svelte-uwie2c"), S(r, "empty", ko(
         /*data*/
         t[15].value
       )), u(e, "class", "svelte-uwie2c");
@@ -38901,7 +38937,7 @@ function og(t, e, o) {
     });
   }
   function a() {
-    rt(n, (h, b, w) => {
+    at(n, (h, b, w) => {
       switch (h) {
         case io:
           c(b);
@@ -39127,7 +39163,7 @@ function ag(t, e, o) {
     );
   }
   function w() {
-    rt(s, (Z, q, X) => {
+    at(s, (Z, q, X) => {
       switch (X.stopPropagation(), Z) {
         case io:
           N(q);
@@ -39311,7 +39347,7 @@ function cg(t) {
   );
   return {
     c() {
-      e = C("goa-public-form-page"), o = C("div"), f && f.c(), i = Y(), n = C("goa-block"), l = C("goa-button"), r = ce(
+      e = C("goa-public-form-page"), o = C("div"), f && f.c(), i = Y(), n = C("goa-block"), l = C("goa-button"), r = de(
         /*actionButtonText*/
         t[2]
       ), m(l, "type", "secondary"), m(n, "direction", "column"), m(n, "gap", "3xl"), u(o, "data-bind", ""), m(e, "id", "index"), m(e, "type", "step"), m(
@@ -39400,7 +39436,7 @@ function dg(t, e, o) {
     f();
   });
   function f() {
-    rt(d, (h, b, w) => {
+    at(d, (h, b, w) => {
       switch (h) {
         case f1:
           s = b.el, w.stopPropagation();
@@ -39581,7 +39617,7 @@ function rr(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[0]
       ), m(e, "as", "h2"), m(e, "size", "heading-l"), m(e, "mt", "none"), m(e, "mb", "none");
@@ -39732,7 +39768,7 @@ function cr(t) {
   ), l, r = n && dr(t);
   return {
     c() {
-      e = C("label"), o = ce(
+      e = C("label"), o = de(
         /*label*/
         t[6]
       ), i = Y(), r && r.c(), u(e, "class", l = $e(`label ${/*labelsize*/
@@ -39766,10 +39802,10 @@ function dr(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("em"), o = ce("("), i = ce(
+      e = C("em"), o = de("("), i = de(
         /*requirement*/
         t[9]
-      ), n = ce(")"), u(e, "class", "svelte-1mx6roj");
+      ), n = de(")"), u(e, "class", "svelte-1mx6roj");
     },
     m(l, r) {
       T(l, e, r), k(e, o), k(e, i), k(e, n);
@@ -39902,7 +39938,7 @@ function Cg(t) {
   let e;
   return {
     c() {
-      e = ce(
+      e = de(
         /*error*/
         t[0]
       );
@@ -39984,7 +40020,7 @@ function zg(t) {
   let e;
   return {
     c() {
-      e = ce(
+      e = de(
         /*helptext*/
         t[8]
       );
@@ -40134,7 +40170,7 @@ function jg(t, e, o) {
   const r = ht(n), [a, c] = qe("Requirement type", ["optional", "required"], false), [d, s] = qe("Label size type", ["compact", "regular", "large"], false), [f, g] = qe("Version", ["1", "2"]), [v, h] = qe("Input type", ["", "text-input", "textarea", "checkbox-list", "radio-group"], false);
   let { mt: b = null } = e, { mr: w = null } = e, { mb: p = null } = e, { ml: _ = null } = e, { testid: z = "" } = e, { label: M = "" } = e, { labelsize: L = "regular" } = e, { helptext: D = "" } = e, { error: j = "" } = e, { requirement: x = "" } = e, { maxwidth: N = "none" } = e, { version: Q = "1" } = e, { type: V = "" } = e, { name: P = "blank" } = e, { publicFormSummaryOrder: B = 0 } = e, W, E, A = `error-${ro()}`, H = `helptext-${ro()}`, ee = false;
   xe(() => {
-    c(x), s(L), g(Q), h(V), rt(W, (O, J) => {
+    c(x), s(L), g(Q), h(V), at(W, (O, J) => {
       switch (O) {
         case bt:
           $(J);
@@ -40372,7 +40408,7 @@ function Eg(t) {
   ), i;
   return {
     c() {
-      e = C("div"), i = ce(o), u(e, "data-testid", "step-number"), u(e, "class", "step-number svelte-1d4fj1l");
+      e = C("div"), i = de(o), u(e, "data-testid", "step-number"), u(e, "class", "step-number svelte-1d4fj1l");
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -40507,7 +40543,7 @@ function xg(t) {
   );
   return {
     c() {
-      e = C("div"), w && w.c(), o = Y(), i = C("div"), z.c(), n = Y(), l = C("div"), r = C("div"), a = ce(
+      e = C("div"), w && w.c(), o = Y(), i = C("div"), z.c(), n = Y(), l = C("div"), r = C("div"), a = de(
         /*text*/
         t[1]
       ), c = Y(), M && M.c(), d = Y(), s = C("button"), u(i, "data-testid", "status"), u(i, "class", "status svelte-1d4fj1l"), u(r, "class", "text svelte-1d4fj1l"), u(r, "data-testid", "text"), u(l, "class", "details svelte-1d4fj1l"), u(s, "type", "button"), s.disabled = f = !/*_isEnabled*/
@@ -41408,7 +41444,7 @@ function t3(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("goa-page-block"), i = C("h1"), n = ce(
+      e = C("div"), o = C("goa-page-block"), i = C("h1"), n = de(
         /*heading*/
         t[1]
       ), l = Y(), r = C("div"), g && g.c(), a = Y(), c = C("div"), h && h.c(), u(i, "class", "svelte-1bs44ou"), u(r, "class", "goa-hero-banner-content svelte-1bs44ou"), u(r, "role", "note"), u(c, "class", "goa-hero-banner-actions svelte-1bs44ou"), m(o, "width", d = /*maxcontentwidth*/
@@ -42032,7 +42068,7 @@ function Mr(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*prefix*/
         t[15]
       ), u(e, "class", "prefix svelte-17rggnu");
@@ -42174,7 +42210,7 @@ function Er(t) {
   let e, o;
   return {
     c() {
-      e = C("span"), o = ce(
+      e = C("span"), o = de(
         /*suffix*/
         t[16]
       ), u(e, "class", "suffix svelte-17rggnu");
@@ -42650,14 +42686,14 @@ function v3(t, e, o) {
     "url",
     "week"
   ]), [g, v] = qe("Input auto capitalize", ["on", "off", "none", "sentences", "words", "characters"]), [h, b] = qe("Input text align", ["left", "right"]);
-  let { type: w = "text" } = e, { name: p = "" } = e, { value: _ = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: L = "" } = e, { leadingicon: D = null } = e, { trailingicon: j = null } = e, { variant: x = "goa" } = e, { disabled: N = "false" } = e, { handletrailingiconclick: Q = "false" } = e, { focused: V = "false" } = e, { readonly: P = "false" } = e, { error: B = "false" } = e, { testid: W = "" } = e, { width: E = "30ch" } = e, { arialabel: A = "" } = e, { arialabelledby: H = "" } = e, { min: ee = "" } = e, { max: Z = "" } = e, { step: q = 1 } = e, { prefix: X = "" } = e, { suffix: U = "" } = e, { debounce: G = 0 } = e, { maxlength: $ = null } = e, { id: K = "" } = e, { mt: le = null } = e, { mr: O = null } = e, { mb: J = null } = e, { ml: ne = null } = e, { trailingiconarialabel: we = "" } = e, { textalign: te = "left" } = e, { size: re = "default" } = e, { version: me = "1" } = e, Ye = false, _e = false, Qe, Ce, Fe, ae = false, Ie = false, se = "", ie = "";
+  let { type: w = "text" } = e, { name: p = "" } = e, { value: _ = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: L = "" } = e, { leadingicon: D = null } = e, { trailingicon: j = null } = e, { variant: x = "goa" } = e, { disabled: N = "false" } = e, { handletrailingiconclick: Q = "false" } = e, { focused: V = "false" } = e, { readonly: P = "false" } = e, { error: B = "false" } = e, { testid: W = "" } = e, { width: E = "30ch" } = e, { arialabel: A = "" } = e, { arialabelledby: H = "" } = e, { min: ee = "" } = e, { max: Z = "" } = e, { step: q = 1 } = e, { prefix: X = "" } = e, { suffix: U = "" } = e, { debounce: G = 0 } = e, { maxlength: $ = null } = e, { id: K = "" } = e, { mt: le = null } = e, { mr: O = null } = e, { mb: J = null } = e, { ml: ne = null } = e, { trailingiconarialabel: we = "" } = e, { textalign: te = "left" } = e, { size: re = "default" } = e, { version: me = "1" } = e, Ye = false, _e = false, Qe, Ce, Fe, ae = false, Ie = false, ce = "", ie = "";
   xe(() => {
     f(w), v(z), b(te), Se(), yt(), Et(), Ke();
     const { containerStyle: ye, inputWidth: it } = f3(E, w);
-    o(32, se = ye), o(33, ie = it);
+    o(32, ce = ye), o(33, ie = it);
   });
   function Se() {
-    rt(Ce, (ye, it) => {
+    at(Ce, (ye, it) => {
       switch (ye) {
         case Tt:
           ke(it);
@@ -42803,7 +42839,7 @@ function v3(t, e, o) {
     ae,
     Ye,
     _e,
-    se,
+    ce,
     ie,
     l,
     r,
@@ -43141,7 +43177,7 @@ function Ir(t) {
   t[4]}%`, i, n;
   return {
     c() {
-      e = C("span"), i = ce(o), u(e, "data-testid", n = /*testid*/
+      e = C("span"), i = de(o), u(e, "data-testid", n = /*testid*/
       t[0] + "-percentage"), u(e, "class", "percentage svelte-89qioz");
     },
     m(l, r) {
@@ -44096,7 +44132,7 @@ function I3(t) {
   );
   return {
     c() {
-      e = C("button"), a && a.c(), o = Y(), i = C("div"), n = ce(
+      e = C("button"), a && a.c(), o = Y(), i = C("div"), n = de(
         /*text*/
         t[0]
       ), u(i, "class", "text svelte-ydrovw"), u(
@@ -44240,7 +44276,7 @@ function x3(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-button"), o = ce(
+      e = C("goa-button"), o = de(
         /*text*/
         t[0]
       ), m(
@@ -44429,7 +44465,7 @@ function O3(t) {
 function q3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { text: l = "" } = e, { type: r = "primary" } = e, { testid: a = "" } = e, { leadingIcon: c = void 0 } = e, { maxWidth: d } = e, { size: s = "normal" } = e, { variant: f = "normal" } = e, { version: g = "1" } = e, { ariaLabel: v = "Open menu" } = e, h, b = "chevron-down", w, p = [], _ = 0, z, M = 0;
   xe(async () => {
-    rt(h, (E, A, H) => {
+    at(h, (E, A, H) => {
       switch (E) {
         case "click":
           N(A), H.stopPropagation();
@@ -44630,7 +44666,7 @@ function Hr(t) {
   let c = a(t), d = c && c(t);
   return {
     c() {
-      e = C("div"), o = ce("An official site of the "), i = C("a"), n = ce("Alberta Government"), r = Y(), d && d.c(), u(i, "href", "https://www.alberta.ca/index.aspx"), u(i, "target", l = `_${/*headerurltarget*/
+      e = C("div"), o = de("An official site of the "), i = C("a"), n = de("Alberta Government"), r = Y(), d && d.c(), u(i, "href", "https://www.alberta.ca/index.aspx"), u(i, "target", l = `_${/*headerurltarget*/
       t[4]}`), u(i, "class", "svelte-jd9tqh"), u(e, "data-testid", "type"), u(e, "class", "site-text svelte-jd9tqh");
     },
     m(s, f) {
@@ -44650,7 +44686,7 @@ function B3(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("span"), o = ce(`— help us improve it by giving
+      e = C("span"), o = de(`— help us improve it by giving
             
             `), i = C("a"), i.textContent = "feedback", u(i, "href", "#"), u(i, "class", "svelte-jd9tqh"), u(e, "data-testid", "feedback-click");
     },
@@ -44672,8 +44708,8 @@ function Z3(t) {
   let e, o, i, n, l, r;
   return {
     c() {
-      e = C("span"), o = ce(`— help us improve it by giving
-            `), i = C("span"), n = C("a"), l = ce("feedback"), u(
+      e = C("span"), o = de(`— help us improve it by giving
+            `), i = C("span"), n = C("a"), l = de("feedback"), u(
         n,
         "href",
         /*feedbackurl*/
@@ -44718,7 +44754,7 @@ function Pr(t) {
   let v = g(t), h = v && v(t);
   return {
     c() {
-      e = C("div"), i = ce(o), l = Y(), r = C("div"), a = ce("This is a new "), c = C("a"), d = ce("Alberta Government"), f = ce(`
+      e = C("div"), i = de(o), l = Y(), r = C("div"), a = de("This is a new "), c = C("a"), d = de("Alberta Government"), f = de(`
         service
 
         `), h && h.c(), u(e, "data-testid", "type"), u(e, "class", n = "service-type service-type--" + /*type*/
@@ -44748,7 +44784,7 @@ function F3(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("span"), o = ce(`— help us improve it by giving
+      e = C("span"), o = de(`— help us improve it by giving
             
             `), i = C("a"), i.textContent = "feedback", u(i, "href", "#"), u(i, "class", "svelte-jd9tqh"), u(e, "data-testid", "feedback-click");
     },
@@ -44770,8 +44806,8 @@ function Y3(t) {
   let e, o, i, n, l, r;
   return {
     c() {
-      e = C("span"), o = ce(`— help us improve it by giving
-            `), i = C("span"), n = C("a"), l = ce("feedback"), u(
+      e = C("span"), o = de(`— help us improve it by giving
+            `), i = C("span"), n = C("a"), l = de("feedback"), u(
         n,
         "href",
         /*feedbackurl*/
@@ -44854,7 +44890,7 @@ function W3(t) {
   let e;
   return {
     c() {
-      e = ce(
+      e = de(
         /*version*/
         t[1]
       );
@@ -45429,7 +45465,7 @@ function e5(t) {
   let e;
   return {
     c() {
-      e = ce(
+      e = de(
         /*heading*/
         t[1]
       );
@@ -46456,7 +46492,7 @@ function ea(t) {
   let g = f(t), v = g(t);
   return {
     c() {
-      e = C("goa-block"), o = C("span"), o.textContent = "Page", i = Y(), n = C("input"), l = Y(), v.c(), r = Y(), a = C("span"), c = ce("of "), s = ce(d), u(o, "class", "svelte-1jo81wv"), u(n, "type", "hidden"), u(a, "class", "svelte-1jo81wv"), m(e, "data-testid", "page-selector"), m(e, "alignment", "center"), m(e, "gap", "s");
+      e = C("goa-block"), o = C("span"), o.textContent = "Page", i = Y(), n = C("input"), l = Y(), v.c(), r = Y(), a = C("span"), c = de("of "), s = de(d), u(o, "class", "svelte-1jo81wv"), u(n, "type", "hidden"), u(a, "class", "svelte-1jo81wv"), m(e, "data-testid", "page-selector"), m(e, "alignment", "center"), m(e, "gap", "s");
     },
     m(h, b) {
       T(h, e, b), k(e, o), k(e, i), k(e, n), t[15](n), k(e, l), v.m(e, null), k(e, r), k(e, a), k(a, c), k(a, s);
@@ -46637,7 +46673,7 @@ function M5(t) {
   );
   return {
     c() {
-      e = C("goa-block"), o = C("div"), w && w.c(), i = Y(), n = C("goa-block"), l = C("goa-button"), r = ce("Previous"), d = Y(), s = C("goa-button"), f = ce("Next"), m(
+      e = C("goa-block"), o = C("div"), w && w.c(), i = Y(), n = C("goa-block"), l = C("goa-button"), r = de("Previous"), d = Y(), s = C("goa-button"), f = de("Next"), m(
         l,
         "version",
         /*version*/
@@ -47441,7 +47477,7 @@ function T5(t, e, o) {
       E = ie, o(15, E);
     });
   }
-  function se(ie) {
+  function ce(ie) {
     he[ie ? "unshift" : "push"](() => {
       W = ie, o(17, W);
     });
@@ -47494,7 +47530,7 @@ function T5(t, e, o) {
     a,
     ae,
     Ie,
-    se
+    ce
   ];
 }
 class A5 extends Ne {
@@ -47787,7 +47823,7 @@ function P5(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[2]
       ), m(e, "size", "heading-m"), m(e, "as", "h3"), m(e, "mt", "none"), m(e, "mb", "none"), m(e, "class", "svelte-11mfzt5");
@@ -47812,7 +47848,7 @@ function V5(t) {
   let e, o, i;
   return {
     c() {
-      e = C("goa-text"), o = ce(
+      e = C("goa-text"), o = de(
         /*heading*/
         t[2]
       ), m(e, "size", i = /*_scrollPos*/
@@ -48066,7 +48102,7 @@ function Z5(t, e, o) {
   const l = ht(i), [r, a] = qe("Version", ["1", "2"]);
   let { testid: c = void 0 } = e, { open: d = false } = e, { heading: s = "" } = e, { width: f = "492px" } = e, { version: g = "1" } = e, v = null, h = null, b = "initial", w = null, p = null, _ = false;
   xe(() => {
-    a(g), o(5, b = d ? "open" : "closed"), f.endsWith("%") && console.error("PushDrawer does not support percentage widths. Please use a fixed width instead."), h && rt(h, (x, N) => {
+    a(g), o(5, b = d ? "open" : "closed"), f.endsWith("%") && console.error("PushDrawer does not support percentage widths. Please use a fixed width instead."), h && at(h, (x, N) => {
       x === w1 && L(N);
     });
   }), ft(() => {
@@ -48790,7 +48826,7 @@ function pa(t) {
   );
   return {
     c() {
-      e = C("div"), a && a.c(), o = Y(), i = ce(
+      e = C("div"), a && a.c(), o = Y(), i = de(
         /*description*/
         t[1]
       ), u(e, "class", "description svelte-32bck6"), u(e, "id", n = `${/*name*/
@@ -48862,7 +48898,7 @@ function n4(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("label"), i = C("input"), r = Y(), a = C("div"), c = Y(), d = C("span"), f = ce(s), g = Y(), M && M.c(), v = Y(), h = C("div"), D && D.c(), u(i, "type", "radio"), u(
+      e = C("div"), o = C("label"), i = C("input"), r = Y(), a = C("div"), c = Y(), d = C("span"), f = de(s), g = Y(), M && M.c(), v = Y(), h = C("div"), D && D.c(), u(i, "type", "radio"), u(
         i,
         "name",
         /*name*/
@@ -49076,7 +49112,7 @@ function l4(t, e, o) {
     q(), X(), U(), W(), E();
   });
   function W() {
-    rt(x, (J, ne) => {
+    at(x, (J, ne) => {
       switch (J) {
         case bt:
           ee(ne);
@@ -49085,7 +49121,7 @@ function l4(t, e, o) {
     });
   }
   function E() {
-    rt(N, (J, ne) => {
+    at(N, (J, ne) => {
       switch (J) {
         case bt:
           Z(ne);
@@ -49460,7 +49496,7 @@ function c4(t, e, o) {
     }), Qo(P, () => De(P, "_focus", { name: v }, { bubbles: true }), () => De(P, "_blur", { name: v }, { bubbles: true }));
   });
   function E() {
-    rt(P, (K, le) => {
+    at(P, (K, le) => {
       switch (K) {
         case Tt:
           H(le);
@@ -50057,7 +50093,7 @@ function C4(t) {
   );
   return {
     c() {
-      e = C("div"), o = Y(), i = C("div"), n = C("a"), w && w.c(), l = Y(), r = ce(
+      e = C("div"), o = Y(), i = C("div"), n = C("a"), w && w.c(), l = Y(), r = de(
         /*heading*/
         t[1]
       ), a = Y(), c = C("div"), z.c(), s = Y(), f = C("div"), L && L.c(), u(c, "class", "trailing-icon svelte-10qscd5"), u(n, "href", d = `#${/*_slug*/
@@ -51954,7 +51990,7 @@ function dv(t) {
   );
   return {
     c() {
-      e = C("section"), o = C("div"), d && d.c(), i = Y(), n = ce(
+      e = C("section"), o = C("div"), d && d.c(), i = Y(), n = de(
         /*heading*/
         t[1]
       ), l = Y(), r = C("div"), f && f.c(), We(o, "display", "none"), u(r, "role", "tabpanel"), u(r, "class", "svelte-1ifx1we"), S(r, "hidden", !/*open*/
@@ -52633,7 +52669,7 @@ function Cv(t) {
   let g = f(t), v = g(t);
   return {
     c() {
-      e = C("button"), o = C("span"), s && s.c(), i = Y(), n = C("span"), l = C("span"), r = ce(
+      e = C("button"), o = C("span"), s && s.c(), i = Y(), n = C("span"), l = C("span"), r = de(
         /*sortOrder*/
         t[2]
       ), a = Y(), v.c(), u(l, "class", "sort-order svelte-6ea5q4"), S(l, "hidden", !/*sortOrder*/
@@ -53327,7 +53363,7 @@ function xv(t) {
   );
   return {
     c() {
-      e = C("div"), a && a.c(), o = Y(), i = C("span"), l = ce(n), u(i, "class", "sr-only svelte-saj8rn"), u(i, "role", "status"), u(i, "aria-live", r = /*_notification*/
+      e = C("div"), a && a.c(), o = Y(), i = C("span"), l = de(n), u(i, "class", "sr-only svelte-saj8rn"), u(i, "role", "status"), u(i, "aria-live", r = /*_notification*/
       t[3] ? (
         /*_notification*/
         t[3].type === "failure" ? "assertive" : "polite"
@@ -53436,7 +53472,7 @@ function xa(t) {
 }
 function Ov(t, e, o) {
   let { vPosition: i = "bottom" } = e, { hPosition: n = "center" } = e, { testid: l } = e, r = [], a, c;
-  xe(() => rt(window.document.body, (b, w, p) => {
+  xe(() => at(window.document.body, (b, w, p) => {
     switch (b) {
       case "goa:temp-notification":
         d(w);
@@ -53612,7 +53648,7 @@ function Ha(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("div"), o = C("goa-button"), i = ce(
+      e = C("div"), o = C("goa-button"), i = de(
         /*actionText*/
         t[4]
       ), m(o, "testid", "action"), m(o, "type", "tertiary"), m(o, "size", "compact"), m(o, "version", "2"), m(o, "variant", "inverse"), u(e, "class", "action svelte-lo4fef");
@@ -53729,7 +53765,7 @@ function Bv(t) {
   let v = g(t), h = v && v(t);
   return {
     c() {
-      e = C("div"), o = C("div"), d && d.c(), i = Y(), s && s.c(), n = Y(), l = C("span"), r = ce(
+      e = C("div"), o = C("div"), d && d.c(), i = Y(), s && s.c(), n = Y(), l = C("span"), r = de(
         /*message*/
         t[0]
       ), a = Y(), f && f.c(), c = Y(), h && h.c(), u(l, "class", "message svelte-lo4fef"), u(o, "class", "content svelte-lo4fef"), u(e, "class", "snackbar svelte-lo4fef"), u(
@@ -54339,7 +54375,7 @@ function Xv(t) {
   ) + "", l, r;
   return {
     c() {
-      o = ce(e), i = Y(), l = ce(n), r = ce(" remaining");
+      o = de(e), i = Y(), l = de(n), r = de(" remaining");
     },
     m(a, c) {
       T(a, o, c), T(a, i, c), T(a, l, c), T(a, r, c);
@@ -54376,7 +54412,7 @@ function Jv(t) {
   ) + "", l, r;
   return {
     c() {
-      o = ce(e), i = Y(), l = ce(n), r = ce(" too many");
+      o = de(e), i = Y(), l = de(n), r = de(" too many");
     },
     m(a, c) {
       T(a, o, c), T(a, i, c), T(a, l, c), T(a, r, c);
@@ -54408,10 +54444,10 @@ function Va(t) {
   ) + "", l;
   return {
     c() {
-      e = C("div"), o = ce(
+      e = C("div"), o = de(
         /*count*/
         t[20]
-      ), i = Y(), l = ce(n), u(e, "class", "counter svelte-np6t1");
+      ), i = Y(), l = de(n), u(e, "class", "counter svelte-np6t1");
     },
     m(r, a) {
       T(r, e, a), k(e, o), k(e, i), k(e, l);
@@ -54683,7 +54719,7 @@ function $v(t, e, o) {
     g && (re["max-width"] = g), Us(H, ":host", re);
   });
   function ee() {
-    rt(A, (te, re) => {
+    at(A, (te, re) => {
       switch (te) {
         case Tt:
           q(re);
@@ -55208,7 +55244,7 @@ function f7(t) {
   let e;
   return {
     c() {
-      e = ce(
+      e = de(
         /*content*/
         t[1]
       );
@@ -56253,7 +56289,7 @@ function T7(t) {
   ), i;
   return {
     c() {
-      e = C("div"), i = ce(o), u(e, "data-testid", "step-number"), u(e, "class", "step-number svelte-6d3t92");
+      e = C("div"), i = de(o), u(e, "data-testid", "step-number"), u(e, "class", "step-number svelte-6d3t92");
     },
     m(n, l) {
       T(n, e, l), k(e, i);
@@ -56287,7 +56323,7 @@ function Ka(t) {
   let e, o, i;
   return {
     c() {
-      e = C("div"), o = C("div"), i = ce(
+      e = C("div"), o = C("div"), i = de(
         /*text*/
         t[1]
       ), u(o, "class", "text svelte-6d3t92"), u(o, "data-testid", "text"), u(e, "class", "details svelte-6d3t92");
@@ -56596,7 +56632,7 @@ function B7(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("div"), o = C("div"), i = Y(), n = C("goa-text"), l = ce(
+      e = C("div"), o = C("div"), i = Y(), n = C("goa-text"), l = de(
         /*heading*/
         t[1]
       ), u(o, "role", "img"), u(o, "aria-label", "GoA Logo"), u(o, "class", "logo svelte-uv56cd"), We(o, "--logo-default", "url(" + L1 + ")"), m(n, "mt", "0"), m(n, "mb", "0"), m(n, "class", "heading svelte-uv56cd"), u(e, "class", "header svelte-uv56cd");
@@ -56621,7 +56657,7 @@ function Z7(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("a"), o = C("div"), i = Y(), n = C("goa-text"), l = ce(
+      e = C("a"), o = C("div"), i = Y(), n = C("goa-text"), l = de(
         /*heading*/
         t[1]
       ), u(o, "role", "img"), u(o, "aria-label", "GoA Logo"), u(o, "class", "logo svelte-uv56cd"), We(o, "--logo-default", "url(" + L1 + ")"), m(n, "mt", "0"), m(n, "mb", "0"), m(n, "class", "heading svelte-uv56cd"), u(
@@ -56723,10 +56759,10 @@ function is(t) {
   );
   return {
     c() {
-      e = C("button"), o = C("div"), i = C("goa-icon"), n = Y(), l = C("div"), r = C("div"), a = ce(
+      e = C("button"), o = C("div"), i = C("goa-icon"), n = Y(), l = C("div"), r = C("div"), a = de(
         /*userName*/
         t[4]
-      ), c = Y(), d = C("div"), s = ce(
+      ), c = Y(), d = C("div"), s = de(
         /*userSecondaryText*/
         t[5]
       ), f = Y(), g = C("div"), g.innerHTML = '<goa-icon size="small" type="chevron-down" class="svelte-uv56cd"></goa-icon>', v = Y(), h = C("div"), z && z.c(), m(i, "size", "large"), m(i, "type", "person-circle"), m(i, "fillcolor", "var(--goa-color-greyscale-400)"), m(
@@ -56869,7 +56905,7 @@ function F7(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("button"), i = Y(), n = C("div"), l = C("goa-scroll-panel"), r = C("header"), W.c(), a = Y(), c = C("div"), A && A.c(), d = Y(), s = C("div"), H && H.c(), f = Y(), ee && ee.c(), g = Y(), v = C("div"), h = C("button"), b = C("goa-icon"), p = Y(), _ = C("span"), M = ce(z), D = Y(), j = C("div"), x = ce(
+      e = C("div"), o = C("button"), i = Y(), n = C("div"), l = C("goa-scroll-panel"), r = C("header"), W.c(), a = Y(), c = C("div"), A && A.c(), d = Y(), s = C("div"), H && H.c(), f = Y(), ee && ee.c(), g = Y(), v = C("div"), h = C("button"), b = C("goa-icon"), p = Y(), _ = C("span"), M = de(z), D = Y(), j = C("div"), x = de(
         /*_tooltipLabel*/
         t[14]
       ), u(o, "class", "background svelte-uv56cd"), u(o, "aria-label", "Hide menu"), u(o, "data-testid", "work-side-menu-background"), u(r, "slot", "header"), u(r, "class", "top-section svelte-uv56cd"), u(c, "class", "primary-menu svelte-uv56cd"), u(c, "role", "presentation"), m(b, "size", "small"), m(b, "theme", "outline"), m(b, "type", w = /*open*/
@@ -57025,14 +57061,14 @@ function Q7(t, e, o) {
   const r = ht(n);
   let { heading: a } = e, { url: c } = e, { open: d = false } = e, { testid: s = "" } = e, { userName: f = "" } = e, { userSecondaryText: g = "" } = e, v = false, h = false, b = null, w = false, p = 0, _ = [], z, M, L, D, j = "", x, N, Q, V = null;
   xe(async () => {
-    await ot(), Ye(), V = W7($), Ze(M, _1, { el: M }, { bubbles: true }), rt(M, (se) => {
-      se === k1 ? o(0, d = true) : se === y1 && o(0, d = false);
+    await ot(), Ye(), V = W7($), Ze(M, _1, { el: M }, { bubbles: true }), at(M, (ce) => {
+      ce === k1 ? o(0, d = true) : ce === y1 && o(0, d = false);
     }), document.addEventListener("keydown", P);
   }), ft(() => {
     _e(), V == null || V.disconnect(), clearTimeout(x), clearTimeout(N), clearTimeout(Q), document.removeEventListener("keydown", P);
   });
-  function P(se) {
-    se.key === "Escape" && i && d && De(M, "_toggle", {}, { bubbles: true });
+  function P(ce) {
+    ce.key === "Escape" && i && d && De(M, "_toggle", {}, { bubbles: true });
   }
   function B() {
     o(0, d = !d), o(8, h = false);
@@ -57043,8 +57079,8 @@ function Q7(t, e, o) {
   function E() {
     o(9, w = false);
   }
-  function A(se) {
-    let ie = se.target, Se = Y7(ie);
+  function A(ce) {
+    let ie = ce.target, Se = Y7(ie);
     ie && Se && (_ = [..._, Se]), x = bo(
       x,
       () => {
@@ -57053,8 +57089,8 @@ function Q7(t, e, o) {
       1
     );
   }
-  function H(se, ie, Se) {
-    !d && se !== "account" && Se !== b ? (Z(ie, Se), ee()) : q();
+  function H(ce, ie, Se) {
+    !d && ce !== "account" && Se !== b ? (Z(ie, Se), ee()) : q();
   }
   function ee() {
     clearTimeout(N), clearTimeout(Q), N = setTimeout(
@@ -57064,10 +57100,10 @@ function Q7(t, e, o) {
       300
     );
   }
-  function Z(se, ie) {
+  function Z(ce, ie) {
     if (!z || !D) return;
     const Se = ie == null ? void 0 : ie.getBoundingClientRect(), pe = z.getBoundingClientRect(), ke = Se.top - pe.top + Se.height / 2, Ue = Se.right - pe.left;
-    o(13, D.style.top = `${ke}px`, D), o(13, D.style.left = `${Ue + 14}px`, D), o(14, j = se);
+    o(13, D.style.top = `${ke}px`, D), o(13, D.style.left = `${Ue + 14}px`, D), o(14, j = ce);
   }
   function q() {
     clearTimeout(N), clearTimeout(Q), Q = setTimeout(
@@ -57087,44 +57123,44 @@ function Q7(t, e, o) {
     v && (o(7, v = false), document.body.removeEventListener("click", G));
   }
   function $() {
-    const se = Go(_, window.location);
+    const ce = Go(_, window.location);
     _.forEach((ie) => {
-      De(ie, "_update", { current: se }, {});
+      De(ie, "_update", { current: ce }, {});
     });
   }
-  function K(se) {
+  function K(ce) {
     var pe;
-    let ie = (pe = se.target) == null ? void 0 : pe.parentElement, Se = (ie == null ? void 0 : ie.getAttribute("slot")) || "unknown";
-    H(Se, se.detail.label, se.detail.el);
+    let ie = (pe = ce.target) == null ? void 0 : pe.parentElement, Se = (ie == null ? void 0 : ie.getAttribute("slot")) || "unknown";
+    H(Se, ce.detail.label, ce.detail.el);
   }
   function le() {
     q();
   }
-  function O(se) {
-    b = se.detail.el, q();
+  function O(ce) {
+    b = ce.detail.el, q();
   }
   function J() {
     b = null;
   }
-  function ne(se) {
-    (se == null ? void 0 : se.key) === "[" && (se != null && se.ctrlKey) && De(M, "_toggle", {}, {});
+  function ne(ce) {
+    (ce == null ? void 0 : ce.key) === "[" && (ce != null && ce.ctrlKey) && De(M, "_toggle", {}, {});
   }
-  function we(se) {
-    switch (se == null ? void 0 : se.key) {
+  function we(ce) {
+    switch (ce == null ? void 0 : ce.key) {
       case "Escape":
         G();
         break;
     }
   }
-  function te(se) {
-    se.preventDefault(), se.stopPropagation(), v ? G() : U();
+  function te(ce) {
+    ce.preventDefault(), ce.stopPropagation(), v ? G() : U();
   }
-  function re(se) {
-    se.preventDefault(), G(), window.removeEventListener("click", G), De(M, "_toggle", {}, { bubbles: true });
+  function re(ce) {
+    ce.preventDefault(), G(), window.removeEventListener("click", G), De(M, "_toggle", {}, { bubbles: true });
   }
-  function me(se) {
+  function me(ce) {
     var Se, pe;
-    const ie = se.relatedTarget;
+    const ie = ce.relatedTarget;
     (Se = ie == null ? void 0 : ie.closest) != null && Se.call(ie, '[slot="account"]') || (pe = ie == null ? void 0 : ie.closest) != null && pe.call(ie, ".profile") || G();
   }
   function Ye() {
@@ -57138,28 +57174,28 @@ function Q7(t, e, o) {
   function Qe() {
     o(6, p = j1.innerWidth);
   }
-  function Ce(se) {
-    he[se ? "unshift" : "push"](() => {
-      L = se, o(12, L);
+  function Ce(ce) {
+    he[ce ? "unshift" : "push"](() => {
+      L = ce, o(12, L);
     });
   }
-  function Fe(se) {
-    he[se ? "unshift" : "push"](() => {
-      D = se, o(13, D);
+  function Fe(ce) {
+    he[ce ? "unshift" : "push"](() => {
+      D = ce, o(13, D);
     });
   }
-  function ae(se) {
-    he[se ? "unshift" : "push"](() => {
-      z = se, o(10, z);
+  function ae(ce) {
+    he[ce ? "unshift" : "push"](() => {
+      z = ce, o(10, z);
     });
   }
-  function Ie(se) {
-    he[se ? "unshift" : "push"](() => {
-      M = se, o(11, M);
+  function Ie(ce) {
+    he[ce ? "unshift" : "push"](() => {
+      M = ce, o(11, M);
     });
   }
-  return t.$$set = (se) => {
-    "heading" in se && o(1, a = se.heading), "url" in se && o(2, c = se.url), "open" in se && o(0, d = se.open), "testid" in se && o(3, s = se.testid), "userName" in se && o(4, f = se.userName), "userSecondaryText" in se && o(5, g = se.userSecondaryText), "$$scope" in se && o(21, l = se.$$scope);
+  return t.$$set = (ce) => {
+    "heading" in ce && o(1, a = ce.heading), "url" in ce && o(2, c = ce.url), "open" in ce && o(0, d = ce.open), "testid" in ce && o(3, s = ce.testid), "userName" in ce && o(4, f = ce.userName), "userSecondaryText" in ce && o(5, g = ce.userSecondaryText), "$$scope" in ce && o(21, l = ce.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*_windowWidth*/
     64 && (i = p < Ht);
@@ -57527,7 +57563,7 @@ function ri(t) {
       e = C(
         /*url*/
         t[2] ? "a" : "button"
-      ), g && g.c(), o = Y(), i = C("div"), n = ce(
+      ), g && g.c(), o = Y(), i = C("div"), n = de(
         /*label*/
         t[1]
       ), l = Y(), v && v.c(), r = Y(), h && h.c(), u(i, "class", "menu-item-label svelte-1qix1n1"), Eo(
@@ -57615,7 +57651,7 @@ function oh(t) {
   );
   return {
     c() {
-      e = C("goa-popover"), o = C("div"), h && h.c(), i = Y(), n = C("div"), l = ce(
+      e = C("goa-popover"), o = C("div"), h && h.c(), i = Y(), n = C("div"), l = de(
         /*label*/
         t[1]
       ), r = Y(), b && b.c(), a = Y(), w && w.c(), d = Y(), _ && _.c(), u(n, "class", "menu-item-label svelte-1qix1n1"), u(o, "slot", "target"), u(o, "class", "menu-item svelte-1qix1n1"), u(o, "role", "menuitem"), u(o, "aria-current", c = /*current*/
@@ -57718,7 +57754,7 @@ function ih(t) {
   );
   return {
     c() {
-      e = C("button"), v && v.c(), o = Y(), i = C("div"), n = ce(
+      e = C("button"), v && v.c(), o = Y(), i = C("div"), n = de(
         /*label*/
         t[1]
       ), l = Y(), h && h.c(), r = Y(), b && b.c(), c = Y(), d = C("div"), p && p.c(), u(i, "class", "menu-item-label svelte-1qix1n1"), u(e, "class", "menu-item svelte-1qix1n1"), u(e, "aria-current", a = /*current*/
@@ -58429,7 +58465,7 @@ function sh(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("details"), i = C("summary"), b && b.c(), n = Y(), l = C("span"), r = ce(
+      e = C("div"), o = C("details"), i = C("summary"), b && b.c(), n = Y(), l = C("span"), r = de(
         /*heading*/
         t[1]
       ), a = Y(), c = C("goa-icon"), d = Y(), s = C("div"), p && p.c(), u(l, "class", "label svelte-gm8g0b"), m(c, "class", "marker-icon svelte-gm8g0b"), m(c, "type", "chevron-forward"), m(c, "size", "small"), u(
@@ -58630,7 +58666,7 @@ function ks(t) {
   ), d, s;
   return {
     c() {
-      e = C("div"), o = C("img"), n = Y(), l = C("span"), l.textContent = "You're all caught up", r = Y(), a = C("span"), d = ce(c), u(o, "alt", ""), Rt(o.src, i = gh) || u(o, "src", i), u(o, "class", "svelte-xxnzja"), u(l, "class", "heading svelte-xxnzja"), u(a, "class", "subline svelte-xxnzja"), u(a, "data-testid", s = `empty-notifications-${/*testid*/
+      e = C("div"), o = C("img"), n = Y(), l = C("span"), l.textContent = "You're all caught up", r = Y(), a = C("span"), d = de(c), u(o, "alt", ""), Rt(o.src, i = gh) || u(o, "src", i), u(o, "class", "svelte-xxnzja"), u(l, "class", "heading svelte-xxnzja"), u(a, "class", "subline svelte-xxnzja"), u(a, "data-testid", s = `empty-notifications-${/*testid*/
       t[2]}`), u(e, "class", "empty svelte-xxnzja");
     },
     m(f, g) {
@@ -58674,12 +58710,12 @@ function fh(t) {
   );
   return {
     c() {
-      e = C("goa-scroll-panel"), o = C("div"), i = C("div"), n = C("goa-text"), l = ce(
+      e = C("goa-scroll-panel"), o = C("div"), i = C("div"), n = C("goa-text"), l = de(
         /*heading*/
         t[1]
-      ), r = Y(), a = C("goa-icon-button"), d = Y(), s = C("goa-tabs"), f = C("goa-tab"), g = C("span"), v = ce(`Unread
-          `), q && q.c(), h = Y(), b = C("goa-tab"), w = C("span"), p = ce(`Urgent
-          `), X && X.c(), _ = Y(), z = C("goa-tab"), z.innerHTML = '<span slot="heading" class="svelte-xxnzja">All</span>', M = Y(), U && U.c(), L = Y(), $ && $.c(), D = Y(), j = C("div"), x = C("goa-link-button"), N = ce("View all"), V = Y(), P = C("goa-link-button"), B = ce("Mark all as read"), m(n, "as", "h2"), m(n, "size", "heading-s"), m(n, "mt", "l"), m(n, "mb", "s"), m(n, "ml", "m"), m(n, "class", "svelte-xxnzja"), m(a, "icon", "close"), m(a, "size", "medium"), m(a, "variant", "dark"), m(a, "mr", "s"), m(a, "version", "2"), m(a, "testid", c = `close-${/*testid*/
+      ), r = Y(), a = C("goa-icon-button"), d = Y(), s = C("goa-tabs"), f = C("goa-tab"), g = C("span"), v = de(`Unread
+          `), q && q.c(), h = Y(), b = C("goa-tab"), w = C("span"), p = de(`Urgent
+          `), X && X.c(), _ = Y(), z = C("goa-tab"), z.innerHTML = '<span slot="heading" class="svelte-xxnzja">All</span>', M = Y(), U && U.c(), L = Y(), $ && $.c(), D = Y(), j = C("div"), x = C("goa-link-button"), N = de("View all"), V = Y(), P = C("goa-link-button"), B = de("Mark all as read"), m(n, "as", "h2"), m(n, "size", "heading-s"), m(n, "mt", "l"), m(n, "mb", "s"), m(n, "ml", "m"), m(n, "class", "svelte-xxnzja"), m(a, "icon", "close"), m(a, "size", "medium"), m(a, "variant", "dark"), m(a, "mr", "s"), m(a, "version", "2"), m(a, "testid", c = `close-${/*testid*/
       t[2]}`), m(a, "class", "svelte-xxnzja"), u(i, "class", "header svelte-xxnzja"), u(g, "slot", "heading"), u(g, "class", "svelte-xxnzja"), m(f, "class", "svelte-xxnzja"), u(w, "slot", "heading"), u(w, "class", "svelte-xxnzja"), m(b, "class", "svelte-xxnzja"), m(z, "class", "svelte-xxnzja"), m(s, "initialtab", "1"), m(s, "navigation", "none"), m(s, "version", "2"), m(s, "variant", "segmented"), m(s, "class", "svelte-xxnzja"), u(o, "slot", "header"), u(o, "class", "panel-header svelte-xxnzja"), m(x, "testid", Q = `view-all-${/*testid*/
       t[2]}`), m(x, "class", "svelte-xxnzja"), m(P, "disabled", W = /*_unreadCount*/
       t[3] === 0), m(P, "testid", E = `mark-all-as-read-${/*testid*/
@@ -58899,7 +58935,7 @@ function Cs(t) {
   let e, o;
   return {
     c() {
-      e = C("h4"), o = ce(
+      e = C("h4"), o = de(
         /*_dateGroupHeading*/
         t[6]
       ), u(e, "class", "date-header svelte-1bsy3n4"), S(e, "hidden", !/*_visible*/
@@ -58927,7 +58963,7 @@ function zs(t) {
   let e, o, i;
   return {
     c() {
-      e = C("h4"), o = ce(
+      e = C("h4"), o = de(
         /*title*/
         t[2]
       ), u(e, "class", "notification-title svelte-1bsy3n4"), u(e, "data-testid", i = `title-${/*testid*/
@@ -59017,7 +59053,7 @@ function _h(t) {
   let e, o, i, n, l, r, a, c;
   return {
     c() {
-      e = C("goa-tooltip"), o = C("div"), i = C("span"), l = Y(), r = C("p"), a = ce(
+      e = C("goa-tooltip"), o = C("div"), i = C("span"), l = Y(), r = C("p"), a = de(
         /*_transformTime*/
         t[7]
       ), u(i, "data-testid", n = `unread-dot-${/*testid*/
@@ -59073,7 +59109,7 @@ function js(t) {
   let e, o, i, n, l;
   return {
     c() {
-      e = C("div"), o = C("goa-text"), i = ce(
+      e = C("div"), o = C("goa-text"), i = de(
         /*description*/
         t[3]
       ), m(o, "as", "span"), m(o, "size", "body-s"), m(o, "color", n = /*_isUnread*/
@@ -59799,7 +59835,7 @@ function Ah(t, e, o) {
       for (let j = 0; j < d.children.length; j++)
         v.observe(d.children[j]);
     }
-    rt(c, (j, x) => {
+    at(c, (j, x) => {
       j === _1 && o(4, w = x.el);
     });
   }), ft(() => {
