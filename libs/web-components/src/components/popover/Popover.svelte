@@ -424,6 +424,7 @@
   data-testid={testid}
   style={styles(
     "display: inline-block",
+    "max-width: 100%",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -499,6 +500,7 @@
     cursor: pointer;
     display: block;
     height: 100%;
+    max-width: 100%;
     outline: none;
     border: none;
     padding: 0;

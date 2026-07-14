@@ -978,6 +978,7 @@
     background-color: var(--goa-dropdown-color-bg);
     cursor: pointer;
     width: 100%;
+    max-width: 100%;
   }
 
   .dropdown-input-group:hover {
@@ -1033,6 +1034,7 @@
     padding: var(--goa-dropdown-padding);
     background-color: transparent;
     width: 100%;
+    min-width: 0;
     flex: 1 1 auto;
     z-index: 1;
     text-overflow: ellipsis;

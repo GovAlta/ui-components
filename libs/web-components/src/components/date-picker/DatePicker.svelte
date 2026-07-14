@@ -11,7 +11,12 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
+  import {
+    receive,
+    dispatch,
+    relay,
+    watchFocusWithin,
+  } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -361,8 +366,8 @@
   {/if}
 {:else if type === "input"}
   <goa-form-item error={_error && error} bind:this={_rootEl} {version}>
-    <goa-block direction="row">
-      <goa-form-item helptext="Month" {version}>
+    <div class="date-input-row">
+      <goa-form-item helptext="Month" {version} class="month-field">
         <goa-dropdown
           name="month"
           testid="input-month"
@@ -390,7 +395,11 @@
           <goa-dropdown-item value="12" label="December" />
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext={size === "compact" ? "Day" : "Day (DD)"} {version}>
+      <goa-form-item
+        helptext={size === "compact" ? "Day" : "Day (DD)"}
+        {version}
+        class="day-field"
+      >
         <goa-input
           name="day"
           type="number"
@@ -409,7 +418,11 @@
           {version}
         />
       </goa-form-item>
-      <goa-form-item helptext={size === "compact" ? "Year" : "Year (YYYY)"} {version}>
+      <goa-form-item
+        helptext={size === "compact" ? "Year" : "Year (YYYY)"}
+        {version}
+        class="year-field"
+      >
         <goa-input
           name="year"
           type="number"
@@ -428,7 +441,7 @@
           {version}
         />
       </goa-form-item>
-    </goa-block>
+    </div>
   </goa-form-item>
 {/if}
 
@@ -438,5 +451,23 @@
     --goa-text-input-color-bg-readonly: var(--goa-text-input-color-bg);
     --goa-text-input-border-readonly: var(--goa-text-input-border);
     --goa-text-input-cursor-readonly: var(--goa-date-input-cursor);
+  }
+
+  .date-input-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--goa-space-m);
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .month-field {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .day-field,
+  .year-field {
+    flex: 0 0 auto;
   }
 </style>
