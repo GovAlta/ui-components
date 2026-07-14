@@ -2818,6 +2818,9 @@ const PublicInstanceProxyHandlers = {
 function useSlots() {
   return getContext().slots;
 }
+function useAttrs() {
+  return getContext().attrs;
+}
 function getContext(calledFunctionName) {
   const i = getCurrentInstance();
   return i.setupContext || (i.setupContext = createSetupContext(i));
@@ -49047,11 +49050,11 @@ function useWcProps(props, options) {
     return result;
   });
 }
-const _hoisted_1$l = {
+const _hoisted_1$m = {
   key: 0,
   slot: "headingcontent"
 };
-const _hoisted_2$c = {
+const _hoisted_2$d = {
   key: 1,
   slot: "actions"
 };
@@ -49085,10 +49088,10 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("goa-accordion", mergeProps(unref(wcProps), {
         on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", $event.detail.open))
       }), [
-        unref(slots).headingContent ? (openBlock(), createElementBlock("div", _hoisted_1$l, [
+        unref(slots).headingContent ? (openBlock(), createElementBlock("div", _hoisted_1$m, [
           renderSlot(_ctx.$slots, "headingContent")
         ])) : createCommentVNode("", true),
-        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$d, [
           renderSlot(_ctx.$slots, "actions")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -49096,11 +49099,11 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$k = {
+const _hoisted_1$l = {
   key: 0,
   slot: "banner"
 };
-const _hoisted_2$b = {
+const _hoisted_2$c = {
   key: 1,
   slot: "phase"
 };
@@ -49120,27 +49123,31 @@ const _sfc_main$_ = /* @__PURE__ */ defineComponent({
     url: {},
     maxContentWidth: {},
     fullMenuBreakpoint: {},
-    testId: {},
-    onMenuClick: { type: Function }
+    testId: {}
   },
-  setup(__props) {
+  emits: ["onMenuClick"],
+  setup(__props, { emit: __emit }) {
     const props = __props;
-    const wcProps = useWcProps(props, {
-      booleanProps: ["onMenuClick"],
-      renamedProps: { onMenuClick: "hasmenuclickhandler" }
-    });
+    const emit2 = __emit;
+    const attrs = useAttrs();
+    const hasMenuClickHandler = computed(
+      () => typeof attrs.onMenuClick !== "undefined"
+    );
+    const wcProps = useWcProps(props);
+    const computedWcProps = computed(() => ({
+      ...wcProps.value,
+      hasmenuclickhandler: hasMenuClickHandler.value ? "true" : "false"
+    }));
     const slots = useSlots();
+    function onMenuClick(e) {
+      emit2("onMenuClick");
+    }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("goa-app-header", mergeProps(unref(wcProps), {
-        "on:_menuClick": _cache[0] || (_cache[0] = ($event) => {
-          var _a2;
-          return (_a2 = props.onMenuClick) == null ? void 0 : _a2.call(props);
-        })
-      }), [
-        unref(slots).banner ? (openBlock(), createElementBlock("div", _hoisted_1$k, [
+      return openBlock(), createElementBlock("goa-app-header", mergeProps(computedWcProps.value, { "on:_menuClick": onMenuClick }), [
+        unref(slots).banner ? (openBlock(), createElementBlock("div", _hoisted_1$l, [
           renderSlot(_ctx.$slots, "banner")
         ])) : createCommentVNode("", true),
-        unref(slots).phase ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
+        unref(slots).phase ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
           renderSlot(_ctx.$slots, "phase")
         ])) : createCommentVNode("", true),
         unref(slots).utilities ? (openBlock(), createElementBlock("div", _hoisted_3$5, [
@@ -49174,7 +49181,7 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$j = ["icon", "icontype"];
+const _hoisted_1$k = ["icon", "icontype"];
 const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "badge",
   props: {
@@ -49200,7 +49207,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
         icontype: __props.iconType
       }), [
         renderSlot(_ctx.$slots, "default")
-      ], 16, _hoisted_1$j);
+      ], 16, _hoisted_1$k);
     };
   }
 });
@@ -49263,11 +49270,11 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$i = {
+const _hoisted_1$j = {
   key: 0,
   slot: "heading"
 };
-const _hoisted_2$a = {
+const _hoisted_2$b = {
   key: 1,
   slot: "actions"
 };
@@ -49294,10 +49301,10 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-drawer", mergeProps(unref(wcProps), { on_close: onClose }), [
-        unref(slots).heading ? (openBlock(), createElementBlock("div", _hoisted_1$i, [
+        unref(slots).heading ? (openBlock(), createElementBlock("div", _hoisted_1$j, [
           renderSlot(_ctx.$slots, "heading")
         ])) : createCommentVNode("", true),
-        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$a, [
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
           renderSlot(_ctx.$slots, "actions")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -49380,7 +49387,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$h = {
+const _hoisted_1$i = {
   key: 0,
   slot: "actions"
 };
@@ -49402,7 +49409,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-hero-banner", normalizeProps(guardReactiveProps(unref(wcProps))), [
         renderSlot(_ctx.$slots, "default"),
-        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_1$h, [
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_1$i, [
           renderSlot(_ctx.$slots, "actions")
         ])) : createCommentVNode("", true)
       ], 16);
@@ -49472,7 +49479,7 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$g = {
+const _hoisted_1$h = {
   key: 0,
   slot: "version"
 };
@@ -49485,25 +49492,29 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
     testId: {},
     maxContentWidth: {},
     feedbackUrlTarget: {},
-    headerUrlTarget: {},
-    onFeedbackClick: { type: Function }
+    headerUrlTarget: {}
   },
-  setup(__props) {
+  emits: ["onFeedbackClick"],
+  setup(__props, { emit: __emit }) {
     const props = __props;
-    const wcProps = useWcProps(props, {
-      booleanProps: ["onFeedbackClick"],
-      renamedProps: { onFeedbackClick: "hasfeedbackhandler" }
-    });
+    const emit2 = __emit;
+    const attrs = useAttrs();
+    const hasFeedbackClickHandler = computed(
+      () => typeof attrs.onFeedbackClick !== "undefined"
+    );
+    const wcProps = useWcProps(props);
+    const computedWcProps = computed(() => ({
+      ...wcProps.value,
+      hasfeedbackhandler: hasFeedbackClickHandler.value ? "true" : "false"
+    }));
     const slots = useSlots();
+    function onFeedbackClick(e) {
+      emit2("onFeedbackClick");
+    }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("goa-microsite-header", mergeProps(unref(wcProps), {
-        "on:_feedbackClick": _cache[0] || (_cache[0] = ($event) => {
-          var _a2;
-          return (_a2 = props.onFeedbackClick) == null ? void 0 : _a2.call(props);
-        })
-      }), [
+      return openBlock(), createElementBlock("goa-microsite-header", mergeProps(computedWcProps.value, { "on:_feedbackClick": onFeedbackClick }), [
         renderSlot(_ctx.$slots, "default"),
-        unref(slots).version ? (openBlock(), createElementBlock("div", _hoisted_1$g, [
+        unref(slots).version ? (openBlock(), createElementBlock("div", _hoisted_1$h, [
           renderSlot(_ctx.$slots, "version")
         ])) : createCommentVNode("", true)
       ], 16);
@@ -49559,7 +49570,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$f = {
+const _hoisted_1$g = {
   key: 0,
   slot: "target"
 };
@@ -49592,7 +49603,7 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-popover", normalizeProps(guardReactiveProps(unref(wcProps))), [
-        unref(slots).target ? (openBlock(), createElementBlock("div", _hoisted_1$f, [
+        unref(slots).target ? (openBlock(), createElementBlock("div", _hoisted_1$g, [
           renderSlot(_ctx.$slots, "target")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -49615,7 +49626,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$e = { style: { "width": "100%" } };
+const _hoisted_1$f = { style: { "width": "100%" } };
 const _sfc_main$I = /* @__PURE__ */ defineComponent({
   __name: "table",
   props: {
@@ -49642,7 +49653,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         on_sort: _cache[0] || (_cache[0] = ($event) => emit2("onSort", $event.detail)),
         on_multisort: _cache[1] || (_cache[1] = ($event) => emit2("onMultiSort", $event.detail))
       }), [
-        createBaseVNode("table", _hoisted_1$e, [
+        createBaseVNode("table", _hoisted_1$f, [
           renderSlot(_ctx.$slots, "default")
         ])
       ], 16);
@@ -49666,7 +49677,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$d = {
+const _hoisted_1$e = {
   key: 0,
   slot: "content"
 };
@@ -49689,7 +49700,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tooltip", normalizeProps(guardReactiveProps(unref(wcProps))), [
-        unref(slots).content ? (openBlock(), createElementBlock("div", _hoisted_1$d, [
+        unref(slots).content ? (openBlock(), createElementBlock("div", _hoisted_1$e, [
           renderSlot(_ctx.$slots, "content")
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
@@ -49818,6 +49829,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     gap: {},
     direction: {},
     alignment: {},
+    stretch: { type: Boolean },
     minWidth: {},
     maxWidth: {},
     width: {},
@@ -49831,6 +49843,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     const props = __props;
     const wcProps = useWcProps(props, {
       transform: "kebab",
+      booleanProps: ["stretch"],
       renamedProps: { testId: "testid" }
     });
     return (_ctx, _cache) => {
@@ -49840,6 +49853,14 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
+const _hoisted_1$d = {
+  key: 0,
+  slot: "title"
+};
+const _hoisted_2$a = {
+  key: 1,
+  slot: "actions"
+};
 const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "container",
   props: {
@@ -49859,11 +49880,16 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const wcProps = useWcProps(props);
+    const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-container", normalizeProps(guardReactiveProps(unref(wcProps))), [
-        renderSlot(_ctx.$slots, "title"),
-        renderSlot(_ctx.$slots, "default"),
-        renderSlot(_ctx.$slots, "actions")
+        unref(slots).title ? (openBlock(), createElementBlock("div", _hoisted_1$d, [
+          renderSlot(_ctx.$slots, "title")
+        ])) : createCommentVNode("", true),
+        unref(slots).actions ? (openBlock(), createElementBlock("div", _hoisted_2$a, [
+          renderSlot(_ctx.$slots, "actions")
+        ])) : createCommentVNode("", true),
+        renderSlot(_ctx.$slots, "default")
       ], 16);
     };
   }
@@ -49986,10 +50012,18 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     const props = __props;
     const emit2 = __emit;
+    const attrs = useAttrs();
+    const hasTrailingIconClickHandler = computed(
+      () => typeof attrs.onTrailingIconClick !== "undefined"
+    );
     const wcProps = useWcProps(props, {
       booleanPropsWithFalse: ["disabled"],
       booleanProps: ["readonly", "error", "focused"]
     });
+    const computedWcProps = computed(() => ({
+      ...wcProps.value,
+      handletrailingiconclick: hasTrailingIconClickHandler.value ? "true" : "false"
+    }));
     function onChange(e) {
       const detail = e.detail;
       emit2("onChange", { ...detail, event: e });
@@ -50007,7 +50041,7 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       emit2("onKeyPress", { ...detail, event: e });
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("goa-input", mergeProps(unref(wcProps), {
+      return openBlock(), createElementBlock("goa-input", mergeProps(computedWcProps.value, {
         on_change: onChange,
         "on:_trailingIconClick": _cache[0] || (_cache[0] = ($event) => emit2("onTrailingIconClick")),
         on_focus: onFocus,
@@ -50748,7 +50782,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const wcProps = useWcProps(props, { booleanPropsWithFalse: ["disabled"] });
+    const wcProps = useWcProps(props, { booleanProps: ["disabled"] });
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tab", normalizeProps(guardReactiveProps(unref(wcProps))), [
