@@ -18031,7 +18031,7 @@ let si = false;
 function Ys() {
   si || (si = true, Fs.then(y));
 }
-function tt() {
+function ot() {
   return Ys(), Fs;
 }
 function dt(t) {
@@ -21400,7 +21400,7 @@ function Id(t, e, o) {
     }), Q.observe(document.body, { childList: true, subtree: true }), window.addEventListener("popstate", N, true);
   }
   xe(async () => {
-    l === "2" && (w(), V(), await tt(), p(), o(6, g = true));
+    l === "2" && (w(), V(), await ot(), p(), o(6, g = true));
   }), ft(() => {
     l === "2" && (window.removeEventListener("popstate", N, true), Q && (Q.disconnect(), Q = null), v && (clearTimeout(v), v = null), M());
   });
@@ -22592,7 +22592,7 @@ function Rd(t, e, o) {
   const [d, s] = qe("Version", ["1", "2"]);
   let { version: f = "1" } = e, { heading: g = "" } = e, { secondarytext: v = "" } = e, { url: h = "" } = e, { testid: b = "" } = e, { maxcontentwidth: w = "" } = e, { fullmenubreakpoint: p = t1 } = e, { hasmenuclickhandler: _ = "false" } = e, z, M, L = window.innerWidth, D = false, j = false, x = [], N = [], Q, V = false, P = false, B = [], W = 0, E = false, A = false, H = null, ee = false, Z = null;
   xe(async () => {
-    s(f), f === "2" && ($(), K(), document.addEventListener("click", J), await tt(), H && W >= 2 && (await tt(), le(), o(27, ee = true))), O(), ne(), await tt(), te();
+    s(f), f === "2" && ($(), K(), document.addEventListener("click", J), await ot(), H && W >= 2 && (await ot(), le(), o(27, ee = true))), O(), ne(), await ot(), te();
   }), ft(() => {
     window.removeEventListener("popstate", we, true), document.removeEventListener("click", J), Z && clearTimeout(Z);
   });
@@ -22689,7 +22689,7 @@ function Rd(t, e, o) {
   }
   async function Ye() {
     var Ke;
-    if (await tt(), !z) return false;
+    if (await ot(), !z) return false;
     const ke = z == null ? void 0 : z.childNodes[0], Ue = (Ke = ke == null ? void 0 : ke.assignedElements) == null ? void 0 : Ke.call(ke);
     return Ue ? Ue.length > 0 : [...z == null ? void 0 : z.querySelectorAll("a")].length > 0;
   }
@@ -23340,10 +23340,10 @@ function e2(t, e, o) {
     H && H.classList.add("current"), o(10, b = !!H), j();
   }
   async function L() {
-    await tt(), g && (g.removeEventListener("_close", j), g.removeEventListener("_open", D), g.addEventListener("_close", j), g.addEventListener("_open", D));
+    await ot(), g && (g.removeEventListener("_close", j), g.removeEventListener("_open", D), g.addEventListener("_close", j), g.addEventListener("_open", D));
   }
   async function D() {
-    o(11, w = true), await tt(), v && v.addEventListener("click", j);
+    o(11, w = true), await ot(), v && v.addEventListener("click", j);
   }
   function j() {
     v && v.removeEventListener("click", j), setTimeout(
@@ -24491,7 +24491,7 @@ function m2(t, e, o) {
   const [a, c] = qe("Button type", ["primary", "submit", "secondary", "tertiary", "start", "text"], { required: true, deprecated: ["submit"] }), [d, s] = qe("Button size", ["normal", "compact"], { required: true }), [f, g] = qe("Button variant", ["normal", "destructive", "inverse", "dark"], { required: true }), [v, h] = qe("Button version", ["1", "2"], { required: true });
   let { type: b = "primary" } = e, { size: w = "normal" } = e, { variant: p = "normal" } = e, { disabled: _ = "false" } = e, { leadingicon: z = null } = e, { trailingicon: M = null } = e, { testid: L = "" } = e, { width: D = "" } = e, { version: j = "1" } = e, { mt: x = null } = e, { mr: N = null } = e, { mb: Q = null } = e, { ml: V = null } = e, { action: P = "" } = e, { actionArg: B = "" } = e, { actionArgs: W = {} } = e;
   xe(async () => {
-    await tt(), c(b), s(w), g(p), h(j), p === "dark" && b !== "text" && console.warn(`[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${b}".`);
+    await ot(), c(b), s(w), g(p), h(j), p === "dark" && b !== "text" && console.warn(`[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${b}".`);
   });
   function E(A) {
     i || (A.target && De(A.target, "_click", null, { bubbles: true }), P && De(A.target, P, B || W, { bubbles: true }));
@@ -25486,7 +25486,7 @@ function z2(t, e, o) {
     const Z = async (q, X) => {
       if (q.stopPropagation(), q.preventDefault(), X.isBefore(w) || X.isAfter(p))
         return;
-      X.isSameMonth(b) || N({ type: "date", value: X }), o(9, b = X), await tt();
+      X.isSameMonth(b) || N({ type: "date", value: X }), o(9, b = X), await ot();
       const U = x.querySelector(`[data-date="${X.toString()}"]`);
       U == null || U.focus();
     };
@@ -27511,7 +27511,7 @@ function ni(t, e) {
 function fu(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e, { name: r } = e, { value: a = [] } = e, { disabled: c = "false" } = e, { error: d = "false" } = e, { testid: s = "" } = e, { maxwidth: f = "none" } = e, { version: g = "1" } = e, { size: v = "default" } = e, { mt: h = null } = e, { mr: b = null } = e, { mb: w = null } = e, { ml: p = null } = e, _, z, M, L = [], D = false, j = /* @__PURE__ */ new Set();
   xe(async () => {
-    await tt(), x(a), B(), ee(), A(), Qo(_, () => De(_, "_focus", { name: r }, { bubbles: true }), () => De(_, "_blur", { name: r }, { bubbles: true })), D = true, q();
+    await ot(), x(a), B(), ee(), A(), Qo(_, () => De(_, "_focus", { name: r }, { bubbles: true }), () => De(_, "_blur", { name: r }, { bubbles: true })), D = true, q();
   });
   function x(O) {
     j.clear(), O && Array.isArray(O) && O.forEach((J) => j.add(J));
@@ -30061,7 +30061,7 @@ function St(t) {
 function Yu(t, e, o) {
   let i, { type: n = "calendar" } = e, { name: l = "" } = e, { value: r = "" } = e, { error: a = "false" } = e, { min: c = "" } = e, { max: d = "" } = e, { relative: s = "" } = e, { disabled: f = "false" } = e, { testid: g = "" } = e, { width: v = "" } = e, { size: h = "default" } = e, { version: b = "1" } = e, { mt: w = null } = e, { mr: p = null } = e, { mb: _ = null } = e, { ml: z = null } = e, M = Be(a), L, D, j = Re.init();
   xe(async () => {
-    await tt(), B(r), N(), P(), x(), Qo(D, () => De(D, "_focus", { name: l }, { bubbles: true }), () => De(D, "_blur", { name: l }, { bubbles: true })), v && !Ni(v) && console.error("DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)");
+    await ot(), B(r), N(), P(), x(), Qo(D, () => De(D, "_focus", { name: l }, { bubbles: true }), () => De(D, "_blur", { name: l }, { bubbles: true })), v && !Ni(v) && console.error("DatePicker width must be a valid CSS dimension (e.g. 50%, 320px, 16ch)");
   });
   function x() {
     s != "" && console.warn("Date Picker `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
@@ -30455,7 +30455,7 @@ function Uu(t) {
 function Ru(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e, { heading: r } = e, { maxwidth: a = "75ch" } = e, { mt: c = null } = e, { mr: d = null } = e, { mb: s = null } = e, { ml: f = null } = e, { open: g = "false" } = e, { testid: v = "" } = e, h = false, b, w = "";
   xe(async () => {
-    o(10, w = `details-${ro()}`), await tt(), uo("Details", { heading: r }), b.addEventListener("mouseover", () => {
+    o(10, w = `details-${ro()}`), await ot(), uo("Details", { heading: r }), b.addEventListener("mouseover", () => {
       o(8, h = true);
     }), b.addEventListener("mouseout", () => {
       o(8, h = false);
@@ -31217,12 +31217,12 @@ function cf(t, e, o) {
   const [h, b] = qe("Version", ["1", "2"]);
   let { version: w = "1" } = e, p = null, _, z = false;
   xe(async () => {
-    await tt(), b(w), d === "bottom" ? o(7, _ = (p == null ? void 0 : p.getBoundingClientRect().height) ?? 0) : o(7, _ = (p == null ? void 0 : p.getBoundingClientRect().width) ?? 0), window.addEventListener("keydown", D);
+    await ot(), b(w), d === "bottom" ? o(7, _ = (p == null ? void 0 : p.getBoundingClientRect().height) ?? 0) : o(7, _ = (p == null ? void 0 : p.getBoundingClientRect().width) ?? 0), window.addEventListener("keydown", D);
   }), ft(() => {
     window.removeEventListener("keydown", D);
   });
   async function M() {
-    await tt(), o(8, z = !!a.actions);
+    await ot(), o(8, z = !!a.actions);
   }
   function L(x) {
     c && De(p, "_close", {}, { bubbles: true }), x.stopPropagation();
@@ -32301,7 +32301,7 @@ function yf(t, e, o) {
   xe(() => {
     Gt(G), Fe(), se(), Qe(), Qo(G, () => De(G, "_focus", { name: s }, { bubbles: true }), () => De(G, "_blur", { name: s }, { bubbles: true })), le = r ? new Jo(K) : new Ko(K), Ce();
   });
-  function Ye(de, Oe, ot) {
+  function Ye(de, Oe, tt) {
     de ? Ni(de) ? o(25, X = de) : (console.error("Dropdown width must be a valid CSS dimension (e.g. 50%, 320px, 16ch). Falling back to `px`"), o(25, X = `${de}px`)) : z ? o(25, X = z) : o(25, X = ke(Oe)), de != null && de.includes("%") || z != null && z.includes("%") ? o(26, U = _e()) : o(26, U = X);
   }
   function _e() {
@@ -32319,7 +32319,7 @@ function yf(t, e, o) {
     Q != "" && console.warn("Dropdown `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function Fe() {
-    rt(G, (de, Oe, ot) => {
+    rt(G, (de, Oe, tt) => {
       switch (de) {
         case Tt:
           Ie(Oe);
@@ -32378,8 +32378,8 @@ function yf(t, e, o) {
   }
   function ke(de) {
     const Oe = Math.max(...de.map((Bt) => (`${Bt.label}` || `${Bt.value}` || "").length));
-    let ot = Math.max(Oe || 0, p.length) + 7;
-    return b && (ot += 4), `${ot}ch`;
+    let tt = Math.max(Oe || 0, p.length) + 7;
+    return b && (tt += 4), `${tt}ch`;
   }
   function Ue() {
     if (ne.length === 0) {
@@ -32391,19 +32391,19 @@ function yf(t, e, o) {
     if (de >= 0)
       o(18, q = de);
     else {
-      const Oe = ne.findIndex((ot) => ho(ot, (K == null ? void 0 : K.value) || ""));
+      const Oe = ne.findIndex((tt) => ho(tt, (K == null ? void 0 : K.value) || ""));
       Oe >= 0 && o(18, q = Oe);
     }
   }
   function Ke(de) {
-    let Oe = q + de, ot = ne != null && ne.length ? ne : H;
-    ot.length !== 0 && (Oe < 0 ? Oe = r ? ot.length - 1 : 0 : Oe >= ot.length && (Oe = r ? 0 : ot.length - 1), o(18, q = Oe), Xe());
+    let Oe = q + de, tt = ne != null && ne.length ? ne : H;
+    tt.length !== 0 && (Oe < 0 ? Oe = r ? tt.length - 1 : 0 : Oe >= tt.length && (Oe = r ? 0 : tt.length - 1), o(18, q = Oe), Xe());
   }
   function Xe() {
     const de = q, Oe = $ == null ? void 0 : $.querySelector(`li[data-index="${de}"]`);
     if (!Oe) return;
-    const ot = Oe.getBoundingClientRect(), Bt = $.getBoundingClientRect();
-    ot.top >= 0 && ot.left >= 0 && ot.bottom <= Bt.height && ot.right <= Bt.width || Oe.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const tt = Oe.getBoundingClientRect(), Bt = $.getBoundingClientRect();
+    tt.top >= 0 && tt.left >= 0 && tt.bottom <= Bt.height && tt.right <= Bt.width || Oe.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   function nt() {
     o(21, ne = r ? H.filter((de) => ho(de, (K == null ? void 0 : K.value) || "")) : H);
@@ -32441,7 +32441,7 @@ function yf(t, e, o) {
   function ye(de) {
     if (i || !r || !(A === "test-autofill" || K.matches(":-webkit-autofill") || K.matches(":autofill"))) return;
     nt();
-    const ot = (K == null ? void 0 : K.value) || "", Yt = ot !== "" ? ne.find((D1) => ho(D1, ot, false)) : null;
+    const tt = (K == null ? void 0 : K.value) || "", Yt = tt !== "" ? ne.find((D1) => ho(D1, tt, false)) : null;
     ee || (Yt ? zt(Yt) : Ft()), setTimeout(
       () => {
         pt();
@@ -32462,8 +32462,8 @@ function yf(t, e, o) {
     Ft(), gt(), de.stopPropagation();
   }
   function Xt(de) {
-    const Oe = de.currentTarget, ot = H[Oe.selectedIndex];
-    J = true, Ct(ot);
+    const Oe = de.currentTarget, tt = H[Oe.selectedIndex];
+    J = true, Ct(tt);
   }
   function Ft() {
     i || (o(29, a = void 0), o(18, q = -1), o(24, ee = void 0), J = true, nt(), yt(""), Et());
@@ -32479,18 +32479,18 @@ function yf(t, e, o) {
       Ft();
     }
     onEnter(Oe) {
-      const ot = ne[q];
-      ot && (J = ot.value !== (ee == null ? void 0 : ee.value), Ct(ot)), ee ? pt() : gt(), Oe.stopPropagation();
+      const tt = ne[q];
+      tt && (J = tt.value !== (ee == null ? void 0 : ee.value), Ct(tt)), ee ? pt() : gt(), Oe.stopPropagation();
     }
-    onArrow(Oe, ot) {
-      Z || gt(), Ke(ot === "up" ? -1 : 1), Oe.stopPropagation();
+    onArrow(Oe, tt) {
+      Z || gt(), Ke(tt === "up" ? -1 : 1), Oe.stopPropagation();
     }
     onTab(Oe) {
-      const ot = ne.find((Bt) => {
+      const tt = ne.find((Bt) => {
         var Yt;
         return ((Yt = Bt.label) == null ? void 0 : Yt.toLowerCase()) === this.input.value.toLowerCase();
       });
-      ot && Ct(ot), pt();
+      tt && Ct(tt), pt();
     }
     onKeyUp(Oe) {
       this.input.value === "" && ee && (o(24, ee = void 0), o(18, q = -1)), gt();
@@ -32534,14 +32534,14 @@ function yf(t, e, o) {
     }
     onEnter(Oe) {
       if (Z) {
-        const ot = ne[q];
-        ot && Ct(ot), pt();
+        const tt = ne[q];
+        tt && Ct(tt), pt();
       } else
         gt();
       Oe.preventDefault(), Oe.stopPropagation();
     }
-    onArrow(Oe, ot) {
-      Z || gt(), Ke(ot === "up" ? -1 : 1), Oe.preventDefault(), Oe.stopPropagation();
+    onArrow(Oe, tt) {
+      Z || gt(), Ke(tt === "up" ? -1 : 1), Oe.preventDefault(), Oe.stopPropagation();
     }
     handleKeyDown(Oe) {
       switch (Oe.key) {
@@ -34108,7 +34108,7 @@ function qf(t, e, o) {
   const O = `goa-dropdown-multiselect-content-${ro()}`;
   let J = "", ne, we, te = -1, re = false, me = false, Ye = D;
   xe(async () => {
-    await tt(), g(P), h(B), b(), uo("DropdownMultiselect", { name: w }), Gt(Z), Ce(), Qe(), Z && typeof ResizeObserver < "u" && (le = new ResizeObserver(Qe), le.observe(Z)), X == null || X.addEventListener("_open", ie), X == null || X.addEventListener("_close", Se);
+    await ot(), g(P), h(B), b(), uo("DropdownMultiselect", { name: w }), Gt(Z), Ce(), Qe(), Z && typeof ResizeObserver < "u" && (le = new ResizeObserver(Qe), le.observe(Z)), X == null || X.addEventListener("_open", ie), X == null || X.addEventListener("_close", Se);
   }), ft(() => {
     le == null || le.disconnect();
   });
@@ -34164,7 +34164,7 @@ function qf(t, e, o) {
     o(0, p = be.value), De(Z, "_change", { name: w, value: p }, { bubbles: true });
   }
   function ie() {
-    o(26, G = true), z ? tt().then(() => setTimeout(yt, 0)) : tt().then(() => setTimeout(nt, 0));
+    o(26, G = true), z && ot().then(() => setTimeout(yt, 0));
   }
   function Se() {
     o(26, G = false), z && o(20, J = ""), pe();
@@ -36033,7 +36033,7 @@ function d0(t) {
 function u0(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { open: l = false } = e, { preventScrollIntoView: r = false } = e, a, c, d, s, f = true;
   xe(async () => {
-    await tt(), a.addEventListener("focus", b, true), a.addEventListener("keydown", g, true), a.addEventListener("keyup", v, true), c = a.querySelector("[data-tab-boundry=start]"), d = a.querySelector("[data-tab-boundry=end]");
+    await ot(), a.addEventListener("focus", b, true), a.addEventListener("keydown", g, true), a.addEventListener("keyup", v, true), c = a.querySelector("[data-tab-boundry=start]"), d = a.querySelector("[data-tab-boundry=end]");
   });
   function g(p) {
     p.shiftKey && (s = true);
@@ -36385,7 +36385,7 @@ function k0(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { maxcontentwidth: l = "" } = e, { testid: r = "" } = e, { url: a = "https://alberta.ca" } = e, { version: c = "1" } = e, d, s, f, g;
   const v = /* @__PURE__ */ (/* @__PURE__ */ new Date()).getFullYear();
   xe(async () => {
-    await tt();
+    await ot();
     const w = d.querySelector("slot[name=nav]"), p = d.querySelector("slot[name=meta]");
     o(6, f = p == null ? void 0 : p.assignedElements()), o(5, s = w == null ? void 0 : w.assignedElements());
   });
@@ -36595,7 +36595,7 @@ function M0(t, e) {
 function j0(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { testid: l = "" } = e, r, a = [];
   xe(async () => {
-    if (await tt(), o(2, a = Ot(r)), !a.map((f) => f.hasAttribute("href")).reduce(
+    if (await ot(), o(2, a = Ot(r)), !a.map((f) => f.hasAttribute("href")).reduce(
       (f, g) => f && g,
       true
     )) {
@@ -36808,7 +36808,7 @@ function D0(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { heading: l = "" } = e, { maxcolumncount: r = 1 } = e, { testid: a = "" } = e, c, d = [];
   xe(async () => {
     var g;
-    if (await tt(), o(4, d = (g = c.querySelector("slot")) == null ? void 0 : g.assignedElements()), !d.map((v) => v.hasAttribute("href")).reduce(
+    if (await ot(), o(4, d = (g = c.querySelector("slot")) == null ? void 0 : g.assignedElements()), !d.map((v) => v.hasAttribute("href")).reduce(
       (v, h) => v && h,
       true
     )) {
@@ -40863,7 +40863,7 @@ function Pg(t) {
 function Vg(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { step: l = -1 } = e, { testid: r = "" } = e, { mt: a = null } = e, { mr: c = null } = e, { mb: d = null } = e, { ml: s = null } = e, f, g, v = [], h, b, w, p, _ = 0, z, M = 1, L = false, D, j;
   xe(async () => {
-    await tt(), w = +l == -1 ? "free" : "constrained", x(), j = P(), j.observe(f);
+    await ot(), w = +l == -1 ? "free" : "constrained", x(), j = P(), j.observe(f);
   }), ft(() => {
     window.removeEventListener("orientationchange", E), j == null || j.unobserve(f);
   });
@@ -45614,7 +45614,7 @@ function i5(t, e, o) {
     window.removeEventListener("keydown", H);
   });
   async function W() {
-    await tt(), o(19, D = !E(".modal-title", "heading")), o(10, j = !E(".modal-actions", "actions"));
+    await ot(), o(19, D = !E(".modal-title", "heading")), o(10, j = !E(".modal-actions", "actions"));
   }
   function E(Z, q) {
     var G, $;
@@ -46273,7 +46273,7 @@ function b5(t, e, o) {
     return !!(["full"].includes(r) || Ni(s));
   }
   return xe(async () => {
-    await tt(), d(r) || console.error("Invalid PageBlock width"), o(0, c = l[r] || r);
+    await ot(), d(r) || console.error("Invalid PageBlock width"), o(0, c = l[r] || r);
   }), t.$$set = (s) => {
     "width" in s && o(2, r = s.width), "testid" in s && o(1, a = s.testid), "_width" in s && o(0, c = s._width), "$$scope" in s && o(3, n = s.$$scope);
   }, [c, a, r, n, i];
@@ -46375,7 +46375,7 @@ function w5(t) {
 function _5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { current: l = 1 } = e, { mt: r = null } = e, { mr: a = null } = e, { mb: c = null } = e, { ml: d = null } = e, s;
   xe(async () => {
-    await tt(), f(l);
+    await ot(), f(l);
   });
   function f(v) {
     if (!s) return;
@@ -46765,7 +46765,7 @@ function j5(t, e, o) {
   const [n, l] = qe("Pagination variant", ["all", "links-only"]);
   let { version: r = "1" } = e, { pagenumber: a } = e, { itemcount: c } = e, { perpagecount: d = 10 } = e, { variant: s = "all" } = e, { testid: f = "" } = e, { mt: g = "none" } = e, { mr: v = "none" } = e, { mb: h = "m" } = e, { ml: b = "none" } = e, w, p;
   xe(async () => {
-    await tt(), uo("GoAPagination", { itemcount: c, pagenumber: a }), l(s);
+    await ot(), uo("GoAPagination", { itemcount: c, pagenumber: a }), l(s);
   });
   function _(N, Q) {
     var P;
@@ -49785,7 +49785,7 @@ function g4(t, e, o) {
     )), h.stopPropagation();
   }
   xe(async () => {
-    await tt(), o(6, d = f.offsetHeight), o(7, s = f.scrollHeight);
+    await ot(), o(6, d = f.offsetHeight), o(7, s = f.scrollHeight);
   });
   function v(h) {
     he[h ? "unshift" : "push"](() => {
@@ -50426,7 +50426,7 @@ function N4(t) {
 function E4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: l = "1" } = e, { testid: r = "" } = e, a, c = [], d = [], s = null;
   xe(async () => {
-    await tt(), f(), v(), b();
+    await ot(), f(), v(), b();
   }), ft(() => {
     w();
   });
@@ -51865,7 +51865,7 @@ function rv(t, e, o) {
       const p = d.getRootNode();
       o(6, c = p instanceof ShadowRoot ? p.host : null), v(a), g = new ResizeObserver(() => b()), g.observe(d);
     }
-    tt().then(() => b());
+    ot().then(() => b());
   }), ft(() => {
     g == null || g.disconnect();
   });
@@ -53136,7 +53136,7 @@ function Tv(t, e, o) {
       const me = new URL(te), _e = window.location.href.split("#").slice(1).filter((Fe) => !re.has(Fe)), Ce = [.../* @__PURE__ */ new Set([me.hash.substring(1), ..._e])].filter(Boolean).join("#");
       if (history.replaceState({}, "", me.pathname + me.search + (Ce ? "#" + Ce : "")), p) {
         const Fe = _e[0];
-        Fe && tt().then(() => {
+        Fe && ot().then(() => {
           const ae = document.getElementById(Fe) || document.querySelector(`[name="${Fe}"]`);
           ae && ae.scrollIntoView({ behavior: "smooth" });
         });
@@ -54179,7 +54179,7 @@ function Uv(t, e, o) {
     }
   }
   return xe(async () => {
-    await tt(), o(5, h = w()), o(6, b = p());
+    await ot(), o(5, h = w()), o(6, b = p());
   }), t.$$set = (_) => {
     "as" in _ && o(0, r = _.as), "maxWidth" in _ && o(1, a = _.maxWidth), "size" in _ && o(8, c = _.size), "color" in _ && o(2, d = _.color), "mt" in _ && o(9, s = _.mt), "mr" in _ && o(3, f = _.mr), "mb" in _ && o(10, g = _.mb), "ml" in _ && o(4, v = _.ml), "$$scope" in _ && o(11, l = _.$$scope);
   }, t.$$.update = () => {
@@ -55525,7 +55525,7 @@ function p7(t, e, o) {
     o(9, j.style.width = `${Math.ceil(Math.max(Fe - 32, 1))}px`, j), o(9, j.style.whiteSpace = ae ? "normal" : "nowrap", j);
   }
   async function $() {
-    if (await tt(), !j || !D || !x || !V)
+    if (await ot(), !j || !D || !x || !V)
       return;
     o(9, j.style.width = "", j), o(9, j.style.whiteSpace = "", j);
     let re = j.getBoundingClientRect();
@@ -56033,7 +56033,7 @@ function N7(t) {
 function E7(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e, { step: a = -1 } = e, { testid: c = "" } = e, { mt: d = null } = e, { mr: s = null } = e, { mb: f = null } = e, { ml: g = null } = e, { mobile: v = "false" } = e, { backgroundcolor: h = "inherit" } = e, b, w, p = [], _, z, M, L, D, j = 0, x, N = 1, Q = false, V, P;
   xe(async () => {
-    await tt(), L = +a == -1 ? "free" : "constrained", B(), P = H(), P.observe(b);
+    await ot(), L = +a == -1 ? "free" : "constrained", B(), P = H(), P.observe(b);
   }), ft(() => {
     window.removeEventListener("orientationchange", q), P.unobserve(b);
   });
@@ -57025,7 +57025,7 @@ function Q7(t, e, o) {
   const r = ht(n);
   let { heading: a } = e, { url: c } = e, { open: d = false } = e, { testid: s = "" } = e, { userName: f = "" } = e, { userSecondaryText: g = "" } = e, v = false, h = false, b = null, w = false, p = 0, _ = [], z, M, L, D, j = "", x, N, Q, V = null;
   xe(async () => {
-    await tt(), Ye(), V = W7($), Ze(M, _1, { el: M }, { bubbles: true }), rt(M, (se) => {
+    await ot(), Ye(), V = W7($), Ze(M, _1, { el: M }, { bubbles: true }), rt(M, (se) => {
       se === k1 ? o(0, d = true) : se === y1 && o(0, d = false);
     }), document.addEventListener("keydown", P);
   }), ft(() => {
@@ -57081,7 +57081,7 @@ function Q7(t, e, o) {
     d || !L || (Z("Expand menu", L), ee());
   }
   async function U() {
-    v || (o(7, v = true), await tt(), document.body.addEventListener("click", G));
+    v || (o(7, v = true), await ot(), document.body.addEventListener("click", G));
   }
   function G() {
     v && (o(7, v = false), document.body.removeEventListener("click", G));
@@ -58150,7 +58150,7 @@ function lh(t, e, o) {
   const s = ht(c);
   let { label: f } = e, { url: g = "" } = e, { badge: v = "" } = e, { current: h = false } = e, { divider: b = false } = e, { icon: w = void 0 } = e, { testid: p = "" } = e, { type: _ = "normal" } = e, z, M, L, D = null, j = [], x = false, N = window.innerWidth;
   xe(async () => {
-    await tt(), q(), De(z, "_mountItem", {}, { bubbles: true });
+    await ot(), q(), De(z, "_mountItem", {}, { bubbles: true });
   }), ft(() => {
     D && (document.removeEventListener("goa:work-side-notification-panel:closePopover", Z), D.remove(), D = null);
   });
