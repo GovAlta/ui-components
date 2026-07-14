@@ -11,20 +11,18 @@ This file is the source of truth for design system evolution terminology and ans
 
 Use one term per concept. Do not invent synonyms.
 
-| Concept | Use this term | Avoid | Notes |
-|---|---|---|---|
-| The design system as a product | Government of Alberta Design System | Alberta Design System | Shorthand: GoA Design System in formal or public content, "Design system" in internal team writing. Spell out the full name on first use in public-facing content |
-| The modernized system launching March 2026 | updated design system | DS 2.0, v2, new design system | |
-| The existing system being replaced | legacy design system | DS 1.0, old system, current design system | Avoid "current" entirely. Its meaning drifts: since the March 2026 launch, "current" points to the updated system, not the legacy one |
-| Revised global token set | tokens v2 | new tokens (when precision is needed) | |
-| Tokens scoped to a component | component tokens | per-component tokens | |
-| Framework-agnostic core elements | Web components | web parts | |
-| Framework bindings | wrappers | adapters, shims | Angular and React wrappers |
-| Reusable UI building blocks | components | widgets, controls | |
-| Reusable cross-screen solutions | patterns | flows | |
-| Opinionated starting points | templates | starters, boilerplates | |
-| Bug fixes only, no new features | limited support | partial support | |
-| The recommended upgrade period | migration window | upgrade window, transition period | March to September 2026 for active products |
+| Concept                          | Use this term                       | Avoid                                 | Notes                                                                                                                                                             |
+| -------------------------------- | ----------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The design system as a product   | Government of Alberta Design System | Alberta Design System                 | Shorthand: GoA Design System in formal or public content, "Design system" in internal team writing. Spell out the full name on first use in public-facing content |
+| Revised global token set         | tokens v2                           | new tokens (when precision is needed) |                                                                                                                                                                   |
+| Tokens scoped to a component     | component tokens                    | per-component tokens                  |                                                                                                                                                                   |
+| Framework-agnostic core elements | Web components                      | web parts                             |                                                                                                                                                                   |
+| Framework bindings               | wrappers                            | adapters, shims                       | Angular and React wrappers                                                                                                                                        |
+| Reusable UI building blocks      | components                          | widgets, controls                     |                                                                                                                                                                   |
+| Reusable cross-screen solutions  | patterns                            | flows                                 |                                                                                                                                                                   |
+| Opinionated starting points      | templates                           | starters, boilerplates                |                                                                                                                                                                   |
+| Bug fixes only, no new features  | limited support                     | partial support                       |                                                                                                                                                                   |
+| The recommended upgrade period   | migration window                    | upgrade window, transition period     | March to September 2026 for active products                                                                                                                       |
 
 ## Frequently asked questions
 
@@ -74,7 +72,7 @@ Functionally, yes. After March 2026, the legacy design system will receive bug a
 
 It depends on your current use of the design system and the number of customizations. Typical tasks include replacing deprecated components, adjusting spacing and typography, and updating custom code to align with the updated visual design.
 
-This is a significant update that involves effort across design, development, and testing. A migration guide will be available to teams before the official launch in March 2026 to smooth the update process.
+This is a significant update that involves effort across design, development, and testing. A migration guide is available to teams to smooth the update process at https://design.alberta.ca/get-started/developers/updating-your-product/.
 
 ### What we ask of teams
 

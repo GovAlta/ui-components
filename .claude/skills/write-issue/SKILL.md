@@ -53,7 +53,3 @@ gh api graphql -f query='
       issue { number issueType { name } } } }' \
   -f issue=<ISSUE_NODE_ID> -f type=<TYPE_NODE_ID>
 ```
-
-## 5. Style
-
-No em dashes or en dashes anywhere in the issue. Use periods, commas, or colons.
