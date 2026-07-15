@@ -50760,9 +50760,20 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const emit2 = __emit;
     const wcProps = useWcProps(props);
+    const tabChangeToken = /* @__PURE__ */ ref(0);
+    function handleTabDisabledChange() {
+      tabChangeToken.value++;
+    }
+    onMounted(() => {
+      window.addEventListener("tab:disabled-change", handleTabDisabledChange);
+    });
+    onUnmounted(() => {
+      window.removeEventListener("tab:disabled-change", handleTabDisabledChange);
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tabs", mergeProps(unref(wcProps), {
-        on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", $event.detail))
+        on_change: _cache[0] || (_cache[0] = ($event) => emit2("onChange", $event.detail)),
+        key: tabChangeToken.value
       }), [
         renderSlot(_ctx.$slots, "default")
       ], 16);
@@ -50782,8 +50793,20 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
+    const instance = getCurrentInstance();
     const wcProps = useWcProps(props, { booleanProps: ["disabled"] });
     const slots = useSlots();
+    watch(() => props.disabled, (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        const el2 = instance == null ? void 0 : instance.vnode.el;
+        if (el2 && el2.parentElement) {
+          el2.parentElement.dispatchEvent(new CustomEvent("tab:disabled-change", {
+            bubbles: true,
+            composed: true
+          }));
+        }
+      }
+    }, { immediate: false });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("goa-tab", normalizeProps(guardReactiveProps(unref(wcProps))), [
         unref(slots).heading ? (openBlock(), createElementBlock("span", _hoisted_1$4, [
