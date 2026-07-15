@@ -211,7 +211,7 @@ export async function getRelatedComponents(
 
   return allComponents.filter((c) => {
     if (c.data.hidden) return false;
-    const slug = c.data.slug || c.slug;
+    const slug = c.data.slug || c.id;
     return relatedSlugs.includes(slug);
   });
 }
@@ -229,7 +229,7 @@ export async function getSubcomponents(
   const results = [];
 
   for (const slug of relatedSlugs) {
-    const entry = allComponents.find((c) => (c.data.slug || c.slug) === slug);
+    const entry = allComponents.find((c) => (c.data.slug || c.id) === slug);
     if (!entry) {
       console.warn(`getSubcomponents: slug "${slug}" not found in components collection`);
       continue;

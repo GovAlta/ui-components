@@ -16,10 +16,10 @@ export async function getStaticPaths() {
   // Nested examples with a previewUrl: the page-detail route wires the
   // Live preview button here, and this route iframes the externally-hosted demo.
   const nested = examples.filter(
-    (e) => e.slug.includes('/') && e.data.size === 'page' && e.data.previewUrl,
+    (e) => e.id.includes('/') && e.data.size === 'page' && e.data.previewUrl,
   );
   return nested.map((entry) => {
-    const [family, page] = entry.slug.split('/');
+    const [family, page] = entry.id.split('/');
     return {
       params: { family, page },
       props: { entry },

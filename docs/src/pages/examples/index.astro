@@ -27,7 +27,7 @@ const allProductTypes = await getCollection('productTypes');
 const exampleEntries = allExamples
   .filter((example) => !example.data.hidden)
   .map(example => ({
-    slug: example.slug,
+    slug: example.data.slug || example.id,
     data: example.data,
     body: example.data.description || example.body,
   }));
@@ -35,7 +35,7 @@ const exampleEntries = allExamples
 // Synthesize a size:product card per productType. The slug matches the
 // /examples/[productType]/ route the [family] page handler already serves.
 const productTypeEntries = allProductTypes.map(productType => ({
-  slug: productType.slug,
+  slug: productType.id,
   data: {
     id: productType.data.id,
     title: productType.data.title,

@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   return entries.map((entry) => ({
     // The "index" entry maps to the collection root URL (/get-started).
     // Astro's [...slug] rest route accepts undefined for the parent path.
-    params: { slug: entry.slug === "index" ? undefined : entry.slug },
+    params: { slug: entry.id === "index" ? undefined : entry.id },
     props: { entry },
   }));
 }

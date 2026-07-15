@@ -1,6 +1,9 @@
 import { defineConfig } from "astro/config";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 import path from "node:path";
+
+const require = createRequire(import.meta.url);
 
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
@@ -103,6 +106,17 @@ export default defineConfig({
             workspaceRoot,
             "node_modules/@abgov/design-tokens-v2/dist",
           ),
+        },
+        // @astrojs/react registers its SSR renderer via the bare specifier
+        // "@astrojs/react/server.js", which Vite then externalizes for the
+        // prerender build instead of bundling it. Externalizing leaves the
+        // package's internal `astro:react:opts` virtual import unresolved,
+        // and Node crashes trying to load it directly at build time.
+        // Aliasing to the absolute file path makes Vite treat it as local
+        // source so it goes through the bundling pipeline like normal.
+        {
+          find: "@astrojs/react/server.js",
+          replacement: require.resolve("@astrojs/react/server.js"),
         },
       ],
       dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],

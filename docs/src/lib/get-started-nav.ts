@@ -52,12 +52,12 @@ const SECTION_NAMES: Record<string, string> = {
 };
 
 function entryToItem(entry: {
-  slug: string;
+  id: string;
   data: { title: string; navLabel?: string };
 }): GetStartedNavItem {
   return {
     label: entry.data.navLabel ?? entry.data.title,
-    url: entry.slug === "index" ? "/get-started" : `/get-started/${entry.slug}`,
+    url: entry.id === "index" ? "/get-started" : `/get-started/${entry.id}`,
   };
 }
 

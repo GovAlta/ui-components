@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 /**
  * Component Collection
@@ -6,7 +7,7 @@ import { defineCollection, z } from "astro:content";
  * API data is separate - extracted from code and lives in generated/component-apis/
  */
 const components = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/components" }),
   schema: z.object({
     // Identity
     name: z.string(),
@@ -45,7 +46,7 @@ const components = defineCollection({
  * These are first-class entities that relate to components via appliesTo
  */
 const guidance = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/guidance" }),
   schema: z.object({
     // Identity
     id: z.string(),
@@ -202,7 +203,7 @@ const productExample = examplesBase.extend({
 });
 
 const examples = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/examples" }),
   schema: z.discriminatedUnion("size", [
     interactionExample,
     sectionExample,
@@ -223,7 +224,7 @@ const examples = defineCollection({
  * Brief 110 will surface this collection at `/product-types/[slug]/`.
  */
 const productTypes = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/productTypes" }),
   schema: z.object({
     id: z.string(),
     title: z.string(),
@@ -243,7 +244,7 @@ const productTypes = defineCollection({
  * These are reference documents, not atomic items like guidance
  */
 const foundations = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/foundations" }),
   schema: z.object({
     id: z.string(),
     title: z.string(),
@@ -260,7 +261,7 @@ const foundations = defineCollection({
  * Entries flow to the docs site, MCP generator, and MD bundle.
  */
 const getStarted = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/get-started" }),
   schema: z.object({
     id: z.string(),
     title: z.string(),
