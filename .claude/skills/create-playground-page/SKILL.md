@@ -17,13 +17,10 @@ If not provided, ask the user whether this is a bug or a feature, and what the i
 
 Files live flat in `apps/prs/react/src/routes/bugs/` (or `features/`).
 
-1. Copy the route template: `cp apps/prs/react/src/routes/_TEMPLATE.tsx apps/prs/react/src/routes/bugs/bug{N}.tsx`
-2. Within the file update the `ISSUE_NUMBER`, `ISSUE_TYPE`, `ISSUE_TITLE`, `ISSUE_DESCRIPTION` (paste the description from the GitHub issue).
-3. Add test cases that demonstrate the fix or feature, and include every component affected by the change, not just the one named in the issue.
-4. Wire it up in `apps/prs/react/src/main.tsx`:
-   - add the import: `import { {Bug|Feat}{N}Route } from "./routes/bugs/{bug|feat}{N}";`
-   - add the route in numerical order: `<Route path="bugs/{N}" element={<{Bug|Feat}{N}Route />} />`
-5. Add the side-menu link in `apps/prs/react/src/app.tsx` inside the right `GoabSideMenuGroup`: `<Link to="/bugs/bug{N}">{N} {short name}</Link>`.
+1. Copy the route template: `cp apps/prs/react/src/routes/_TEMPLATE.tsx` to either `apps/prs/react/src/routes/bugs/bug{N}.tsx` or `apps/prs/react/src/routes/features/feat{N}.tsx`.
+2. Rename the component inside the file from `TemplateRoute` to `Bug{N}Route` or `Feat{N}Route`.
+3. Update header, GitHub link, and description
+4. Add component imports and sample test cases
 
 See `apps/prs/react/src/routes/README.md` for the canonical steps.
 
@@ -31,12 +28,12 @@ See `apps/prs/react/src/routes/README.md` for the canonical steps.
 
 Angular does NOT hand-wire routes in a main file. Each page is a folder with its own `.route.json`, and a build step regenerates the manifest.
 
-1. Create the folder `apps/prs/angular/src/routes/bugs/{N}/` with:
+1. Create the folder `apps/prs/angular/src/routes/bugs/bug{N}/` or `apps/prs/angular/src/routes/features/feat{N}/` with:
    - `bug{N}.component.ts`
    - `bug{N}.component.html`
-   - `bug{N}.route.json` with `{ "title": "...", "path": "bugs/{N}", "id": "{N}", "type": "bug" }`
+   - `bug{N}.route.json` with `{ "title": "...", "path": "bugs/bug{N}", "id": "{N}", "type": "bug" }`
 2. Copy an existing recent bug folder (for example `apps/prs/angular/src/routes/bugs/2547/`) as the pattern.
-3. The route manifest at `apps/prs/angular/src/app/generated/pr-route-manifest.generated.ts` is produced by `scripts/generate-angular-prs-route-manifest.js`. It runs as the `generate-route-manifest` target before build. Do not edit the generated file by hand. If your route does not appear, run the generate step (or a build) to regenerate it.
+3. Copy the same examples from the React steps.
 
 ## Verify before committing
 
