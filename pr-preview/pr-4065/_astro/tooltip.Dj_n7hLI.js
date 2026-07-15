@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.D_zvdyIk.js";import{t as p,l as a}from"./theme-context.DBIa_puq.js";function m({content:o,children:r,...i}){const n=p(i,a),s=typeof o=="string";return t.jsxs("goa-tooltip",{content:s?o:void 0,...n,children:[!s&&o&&t.jsx("div",{slot:"content",children:o}),r]})}export{m as G};

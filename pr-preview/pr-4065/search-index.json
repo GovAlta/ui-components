@@ -564,6 +564,23 @@
   },
   {
     "type": "component",
+    "id": "scroll-panel",
+    "name": "Scroll Panel",
+    "description": "A bounded container with sticky header and footer slots that scrolls its body content when it overflows.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "container",
+      "layout",
+      "scroll",
+      "sticky header",
+      "sticky footer",
+      "bounded"
+    ],
+    "slug": "scroll-panel"
+  },
+  {
+    "type": "component",
     "id": "side-menu",
     "name": "Side menu",
     "description": "A side navigation that helps the user navigate between pages.",
@@ -715,6 +732,23 @@
       "panel"
     ],
     "slug": "work-side-notification-panel"
+  },
+  {
+    "type": "component",
+    "id": "workspace-layout",
+    "name": "Workspace Layout",
+    "description": "A full-page layout for workspace-style applications that wraps your content responsively.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "layout",
+      "workspace",
+      "side menu",
+      "sticky header",
+      "sticky footer",
+      "push drawer"
+    ],
+    "slug": "workspace-layout"
   },
   {
     "type": "example",
@@ -2652,7 +2686,7 @@
     "type": "example",
     "id": "workspace",
     "title": "Workspace",
-    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.",
+    "description": "The workspace is a pattern for productivity-focused services that service delivery staff use as a daily tool to review information, manage records, and complete tasks. The design prioritizes efficiency and accuracy. The reference example is a starting point to adapt to your service's context, not a rigid template.",
     "status": "published",
     "size": "product",
     "tags": [
