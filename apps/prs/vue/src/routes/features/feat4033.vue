@@ -52,6 +52,7 @@ const closableModalOpen = ref(false);
 const nonClosableModalOpen = ref(false);
 const menuClickCount = ref(0);
 const showAppHeader = ref(true);
+const utilitiesClickCount = ref(0);
 </script>
 
 <template>
@@ -103,15 +104,16 @@ const showAppHeader = ref(true);
       being passed as a Vue event (@onMenuClick) rather than as a prop.
     </GoabText>
     <GoabBlock gap="m" direction="row" mb="m">
-      <GoabButton type="secondary" @onClick="menuClickCount = 0">
-        Reset counter
+      <GoabButton type="secondary" @onClick="() => { menuClickCount = 0; utilitiesClickCount = 0; }">
+        Reset counters
       </GoabButton>
       <GoabButton type="secondary" @onClick="showAppHeader = !showAppHeader">
         Toggle header: {{ showAppHeader ? 'hide' : 'show' }}
       </GoabButton>
     </GoabBlock>
     <GoabText tag="p" size="body-m" mb="m">
-      Menu click count: <strong>{{ menuClickCount }}</strong>
+      Menu button click count: <strong>{{ menuClickCount }}</strong> | 
+      Sign In button click count: <strong>{{ utilitiesClickCount }}</strong>
     </GoabText>
     <GoabAppHeader
       v-if="showAppHeader"
@@ -119,7 +121,7 @@ const showAppHeader = ref(true);
       @onMenuClick="menuClickCount++"
     >
       <template #utilities>
-        <GoabButton type="tertiary" size="compact" @onClick="logEvent('Utilities button clicked')">
+        <GoabButton type="tertiary" size="compact" @onClick="utilitiesClickCount++">
           Sign In
         </GoabButton>
       </template>
