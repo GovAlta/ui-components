@@ -451,11 +451,10 @@ export const dropdownConfigurations: ComponentConfigurations = {
     {
       id: "rich-item-content",
       name: "Rich item content",
-      description:
-        "Dropdown items containing formatted content instead of a plain label",
+      description: "Dropdown items containing formatted content instead of a plain label",
       code: {
         react: `<GoabFormItem label="Assign to" mb="l">
-  <GoabDropdown name="assignee">
+  <GoabDropdown name="assignee" width="250px">
     <GoabDropdownItem value="sarah" label="Sarah Johnson">
       <GoabBlock direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
@@ -485,7 +484,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
 }`,
             template: `<form [formGroup]="form">
   <goab-form-item label="Assign to" mb="l">
-    <goab-dropdown name="assignee" formControlName="assignee">
+    <goab-dropdown name="assignee" formControlName="assignee" width="250px">
       <goab-dropdown-item value="sarah" label="Sarah Johnson">
         <goab-block direction="column" gap="3xs">
           <strong>Sarah Johnson</strong>
@@ -519,6 +518,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name="assignee"
       [(ngModel)]="assignee"
       (onChange)="dropdownOnChange($event)"
+      width="250px"
     >
       <goab-dropdown-item value="sarah" label="Sarah Johnson">
         <goab-block direction="column" gap="3xs">
@@ -540,7 +540,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
           },
         ],
         webComponents: `<goa-form-item version="2" label="Assign to" mb="l">
-  <goa-dropdown version="2" name="assignee">
+  <goa-dropdown version="2" name="assignee" width="250px">
     <goa-dropdown-item value="sarah" label="Sarah Johnson">
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
