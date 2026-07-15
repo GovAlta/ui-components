@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
+import { computed, useSlots, useAttrs } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Slots {
@@ -27,20 +27,34 @@ interface Props {
   fullMenuBreakpoint?: number;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
-  onMenuClick?: () => void;
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, {
-  booleanProps: ["onMenuClick"],
-  renamedProps: { onMenuClick: "hasmenuclickhandler" },
-});
+const emit = defineEmits<{
+  /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
+  onMenuClick: [];
+}>();
+
+const attrs = useAttrs();
+const hasMenuClickHandler = computed(() => 
+  typeof attrs.onMenuClick !== "undefined"
+);
+
+const wcProps = useWcProps(props);
+const computedWcProps = computed(() => ({
+  ...wcProps.value,
+  hasmenuclickhandler: hasMenuClickHandler.value ? "true" : "false",
+}));
+
 const slots = useSlots() as Slots;
+
+function onMenuClick(e: Event) {
+  emit("onMenuClick");
+}
 </script>
 
 <template>
-  <goa-app-header v-bind="wcProps" @_menuClick="props.onMenuClick?.()">
+  <goa-app-header v-bind="computedWcProps" @_menuClick="onMenuClick">
     <div v-if="slots.banner" slot="banner">
       <slot name="banner" />
     </div>

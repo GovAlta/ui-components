@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
+import { computed, useSlots, useAttrs } from "vue";
 import type { GoabServiceLevel, GoabLinkTarget } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
 
@@ -24,20 +24,34 @@ interface Props {
   feedbackUrlTarget?: GoabLinkTarget;
   /** Sets the target attribute for the header link. @default "blank" */
   headerUrlTarget?: GoabLinkTarget;
-  /** Callback fired when the feedback link is clicked, enables custom feedback handling. */
-  onFeedbackClick?: () => void;
 }
 
 const props = defineProps<Props>();
-const wcProps = useWcProps(props, {
-  booleanProps: ["onFeedbackClick"],
-  renamedProps: { onFeedbackClick: "hasfeedbackhandler" },
-});
+const emit = defineEmits<{
+  /** Callback fired when the feedback link is clicked, enables custom feedback handling. */
+  onFeedbackClick: [];
+}>();
+
+const attrs = useAttrs();
+const hasFeedbackClickHandler = computed(() => 
+  typeof attrs.onFeedbackClick !== "undefined"
+);
+
+const wcProps = useWcProps(props);
+const computedWcProps = computed(() => ({
+  ...wcProps.value,
+  hasfeedbackhandler: hasFeedbackClickHandler.value ? "true" : "false",
+}));
+
 const slots = useSlots() as Slots;
+
+function onFeedbackClick(e: Event) {
+  emit("onFeedbackClick");
+}
 </script>
 
 <template>
-  <goa-microsite-header v-bind="wcProps" @_feedbackClick="props.onFeedbackClick?.()">
+  <goa-microsite-header v-bind="computedWcProps" @_feedbackClick="onFeedbackClick">
     <slot />
     <div v-if="slots.version" slot="version">
       <slot name="version" />

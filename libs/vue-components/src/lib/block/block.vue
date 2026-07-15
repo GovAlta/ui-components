@@ -9,6 +9,8 @@ interface Props {
   direction?: GoabBlockDirection;
   /** Sets the alignment.  @default "normal" */
   alignment?: GoabBlockAlignment;
+  /** When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment.  @default false */
+  stretch?: boolean;
   /** Sets the min width. */
   minWidth?: string;
   /** Sets the max width. */
@@ -30,6 +32,7 @@ interface Props {
 const props = defineProps<Props>();
 const wcProps = useWcProps(props, { 
   transform: "kebab",
+  booleanProps: ["stretch"],
   renamedProps: { testId: "testid" },
 });
 </script>

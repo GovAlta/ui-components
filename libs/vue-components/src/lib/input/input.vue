@@ -11,6 +11,7 @@ import type {
   Spacing,
 } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
+import { computed, useAttrs } from "vue";
 
 interface Slots {
   default?: () => unknown;
@@ -101,10 +102,21 @@ const emit = defineEmits<{
   onKeyPress: [detail: GoabInputOnKeyPressDetail<string>];
 }>();
 
+const attrs = useAttrs();
+const hasTrailingIconClickHandler = computed(() => 
+  typeof attrs.onTrailingIconClick !== "undefined"
+);
+
 const wcProps = useWcProps(props, {
   booleanPropsWithFalse: ["disabled"],
   booleanProps: ["readonly", "error", "focused"],
 });
+
+// Add handletrailingiconclick based on whether parent is listening for onTrailingIconClick
+const computedWcProps = computed(() => ({
+  ...wcProps.value,
+  handletrailingiconclick: hasTrailingIconClickHandler.value ? "true" : "false",
+}));
 
 function onChange(e: Event) {
   const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
@@ -129,7 +141,7 @@ function onKeyPress(e: Event) {
 
 <template>
   <goa-input
-    v-bind="wcProps"
+    v-bind="computedWcProps"
     @_change="onChange"
     @_trailingIconClick="emit('onTrailingIconClick')"
     @_focus="onFocus"

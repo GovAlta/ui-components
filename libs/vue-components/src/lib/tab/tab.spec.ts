@@ -36,12 +36,12 @@ describe("GoabTab", () => {
     expect(wrapper.text()).toContain("Tab content");
   });
 
-  it("should set disabled to false when disabled=false", () => {
+  it("should not set disabled attribute when disabled=false", () => {
     const wrapper = mount(GoabTab, {
       props: { heading: "Tab", disabled: false },
     });
     const el = wrapper.find("goa-tab").element;
-    expect(el.getAttribute("disabled")).toBe("false");
+    expect(el.getAttribute("disabled")).toBeNull();
   });
 
   it("should update disabled from true to false", async () => {
@@ -53,6 +53,6 @@ describe("GoabTab", () => {
 
     await wrapper.setProps({ disabled: false });
 
-    expect(el.getAttribute("disabled")).toBe("false");
+    expect(el.getAttribute("disabled")).toBeNull();
   });
 });

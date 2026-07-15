@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { GoabContainerAccent, GoabContainerPadding, GoabContainerType, GoabContainerWidth, Spacing } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
+import { useSlots } from "vue";
 
 interface Slots {
   default?: () => unknown;
@@ -39,12 +40,17 @@ interface Props {
 
 const props = defineProps<Props>();
 const wcProps = useWcProps(props);
+const slots = useSlots() as Slots;
 </script>
 
 <template>
   <goa-container v-bind="wcProps">
-    <slot name="title" />
+    <div v-if="slots.title" slot="title">
+      <slot name="title" />
+    </div>
+    <div v-if="slots.actions" slot="actions">
+      <slot name="actions" />
+    </div>
     <slot />
-    <slot name="actions" />
   </goa-container>
 </template>

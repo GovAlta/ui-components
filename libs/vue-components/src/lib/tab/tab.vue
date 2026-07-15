@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSlots } from "vue";
+import { useSlots, watch, onMounted, onUnmounted, getCurrentInstance } from "vue";
 import { useWcProps } from "../common/useWcProps";
 
 interface Slots {
@@ -18,9 +18,25 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const instance = getCurrentInstance();
 
-const wcProps = useWcProps(props, { booleanPropsWithFalse: ["disabled"] });
+const wcProps = useWcProps(props, { booleanProps: ["disabled"] });
 const slots = useSlots() as Slots;
+
+// Notify parent tabs component when disabled changes
+// This allows the web component to update its internal state
+watch(() => props.disabled, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    const el = instance?.vnode.el as HTMLElement | null;
+    if (el && el.parentElement) {
+      // Dispatch a custom event that the tabs component can listen for
+      el.parentElement.dispatchEvent(new CustomEvent("tab:disabled-change", {
+        bubbles: true,
+        composed: true,
+      }));
+    }
+  }
+}, { immediate: false });
 </script>
 
 <template>

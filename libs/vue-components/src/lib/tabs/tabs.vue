@@ -6,6 +6,7 @@ import type {
   GoabTabsVariant,
 } from "@abgov/ui-components-common";
 import { useWcProps } from "../common/useWcProps";
+import { ref, onMounted, onUnmounted } from "vue";
 
 interface Props {
   /** The initially active tab (1-based index). If not set, the first tab is active.  @default -1 */
@@ -27,10 +28,26 @@ const emit = defineEmits<{
 }>();
 
 const wcProps = useWcProps(props);
+const tabChangeToken = ref(0);
+
+// Listen for tab disabled changes and force a re-initialization
+// This works around the web component not reacting to dynamic tab property changes
+function handleTabDisabledChange() {
+  // Increment token to force re-render of tabs with updated tab properties
+  tabChangeToken.value++;
+}
+
+onMounted(() => {
+  window.addEventListener("tab:disabled-change", handleTabDisabledChange);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("tab:disabled-change", handleTabDisabledChange);
+});
 </script>
 
 <template>
-  <goa-tabs v-bind="wcProps" @_change="emit('onChange', $event.detail)">
+  <goa-tabs v-bind="wcProps" @_change="emit('onChange', $event.detail)" :key="tabChangeToken">
     <slot />
   </goa-tabs>
 </template>
