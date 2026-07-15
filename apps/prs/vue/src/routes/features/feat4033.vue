@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import {
   GoabAccordion,
+  GoabAppHeader,
   GoabBadge,
   GoabButton,
   GoabContainer,
@@ -49,6 +50,8 @@ const badgeIconVisible = ref(false);
 const secondTabDisabled = ref(false);
 const closableModalOpen = ref(false);
 const nonClosableModalOpen = ref(false);
+const menuClickCount = ref(0);
+const showAppHeader = ref(true);
 </script>
 
 <template>
@@ -93,6 +96,34 @@ const nonClosableModalOpen = ref(false);
         </GoabButton>
       </template>
     </GoabContainer>
+
+    <GoabText tag="h2" size="heading-m">App header with onMenuClick event</GoabText>
+    <GoabText tag="p" size="body-m">
+      Click the menu button to trigger the onMenuClick event. This demonstrates the event
+      being passed as a Vue event (@onMenuClick) rather than as a prop.
+    </GoabText>
+    <GoabBlock gap="m" direction="row" mb="m">
+      <GoabButton type="secondary" @onClick="menuClickCount = 0">
+        Reset counter
+      </GoabButton>
+      <GoabButton type="secondary" @onClick="showAppHeader = !showAppHeader">
+        Toggle header: {{ showAppHeader ? 'hide' : 'show' }}
+      </GoabButton>
+    </GoabBlock>
+    <GoabText tag="p" size="body-m" mb="m">
+      Menu click count: <strong>{{ menuClickCount }}</strong>
+    </GoabText>
+    <GoabAppHeader
+      v-if="showAppHeader"
+      heading="Vue App Header"
+      @onMenuClick="menuClickCount++"
+    >
+      <template #utilities>
+        <GoabButton type="tertiary" size="compact" @onClick="logEvent('Utilities button clicked')">
+          Sign In
+        </GoabButton>
+      </template>
+    </GoabAppHeader>
 
     <GoabText tag="h2" size="heading-m">Component with a boolean</GoabText>
     <GoabPopover>
