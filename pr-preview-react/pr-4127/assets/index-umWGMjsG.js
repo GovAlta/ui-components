@@ -32357,8 +32357,11 @@ function wf(t) {
 }
 function Co(t, e, o = true) {
   if (e.length === 0) return true;
-  let i = t.filter || t.label || t.value;
-  return i = i.toLowerCase(), e = e.toLowerCase().trim(), o ? i.startsWith(e) || i.includes(" " + e) : i === e;
+  const i = [t.filter, t.label || t.value].filter((n) => n !== "");
+  return e = e.toLowerCase().trim(), i.some((n) => {
+    const r = n.toLowerCase();
+    return o ? r.startsWith(e) || r.includes(" " + e) : r === e;
+  });
 }
 const _f = (t) => t.preventDefault();
 function kf(t, e, o) {
@@ -73492,7 +73495,7 @@ function Feat1351Route() {
       filterValue || "(none)"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", children: "Test 3: Mixed rich and label-only items, filter override" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: 'Plain label items work alongside rich items. The first item overrides its search text with the filter property ("preferred"): typing "preferred" matches it, typing "Sarah" does not.' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: 'Plain label items work alongside rich items. The first item overrides the search text of its slot content with the filter property ("preferred"): typing "preferred" matches it, and so does typing "Sarah", because the label is always searchable. Typing "Edmonton" does not match, because the filter property replaced the slot text.' }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       GoabDropdown,
       {
