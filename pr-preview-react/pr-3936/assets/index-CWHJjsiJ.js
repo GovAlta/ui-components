@@ -31367,8 +31367,13 @@ class uf extends Ne {
 customElements.define("goa-drawer", Le(uf, { open: { type: "Boolean", reflect: true }, position: {}, heading: {}, maxsize: {}, testid: {}, closeButtonVisibility: { type: "String", attribute: "close-button-visibility" }, version: {} }, ["heading", "default", "actions"], [], true));
 function po(t, e, o = true) {
   if (e.length === 0) return true;
-  let i = t.filter || t.label || t.value;
-  return i = i.toLowerCase(), e = e.toLowerCase().trim(), o ? i.startsWith(e) || i.includes(" " + e) : i === e;
+  const i = [t.filter, t.label || t.value].filter(
+    (n) => n !== ""
+  );
+  return e = e.toLowerCase().trim(), i.some((n) => {
+    const l = n.toLowerCase();
+    return o ? l.startsWith(e) || l.includes(" " + e) : l === e;
+  });
 }
 function ff(t) {
   let e, o;
