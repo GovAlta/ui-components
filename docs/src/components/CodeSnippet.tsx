@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback } from "react";
 import { GoabButton, GoabTab, GoabTabs } from "@abgov/react-components";
 
 import hljs from "highlight.js/lib/core";
@@ -30,6 +30,12 @@ hljs.registerLanguage("tsx", typescript);
 hljs.registerLanguage("html", xml);
 hljs.registerLanguage("css", css);
 hljs.registerLanguage("javascript", javascript);
+
+// useLayoutEffect warns during SSR (it can't run on the server). These islands
+// hydrate on the client where the layout timing matters, so fall back to
+// useEffect on the server to stay quiet while keeping pre-paint behavior client-side.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export type Language = "tsx" | "typescript" | "javascript" | "html" | "css";
 
@@ -231,9 +237,13 @@ export function CodeSnippet({
     getSupportedFramework("react", availableFrameworks),
   );
 
-  useEffect(() => {
-    const stored = getFrameworkPreference();
-    setSelectedFramework(getSupportedFramework(stored, availableFrameworks));
+  // Apply the saved preference in a layout effect (before the browser paints)
+  // rather than a passive effect (after paint). The key on GoabTabs remounts it
+  // when selectedFramework changes; doing that after paint flashed the default
+  // React tab for a frame before swapping. A layout effect lets the remount land
+  // in the same frame, so the saved framework is the first thing painted.
+  useIsomorphicLayoutEffect(() => {
+    setSelectedFramework(getSupportedFramework(getFrameworkPreference(), availableFrameworks));
 
     return subscribeToFrameworkPreference((framework) => {
       setSelectedFramework(getSupportedFramework(framework, availableFrameworks));
