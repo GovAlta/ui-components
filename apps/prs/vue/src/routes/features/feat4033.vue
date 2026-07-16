@@ -8,6 +8,7 @@ import {
   GoabContainer,
   GoabDropdown,
   GoabDropdownItem,
+  GoabInput,
   GoabMenuAction,
   GoabMenuButton,
   GoabModal,
@@ -53,6 +54,7 @@ const nonClosableModalOpen = ref(false);
 const menuClickCount = ref(0);
 const showAppHeader = ref(true);
 const utilitiesClickCount = ref(0);
+const trailingIconClickCount = ref(0);
 </script>
 
 <template>
@@ -126,6 +128,27 @@ const utilitiesClickCount = ref(0);
         </GoabButton>
       </template>
     </GoabAppHeader>
+
+    <GoabText tag="h2" size="heading-m">Input trailing icon event</GoabText>
+    <GoabText tag="p" size="body-m">
+      The trailing icon should be interactive when @onTrailingIconClick is provided.
+      Clicking it should increment the counter.
+    </GoabText>
+    <GoabBlock gap="m" direction="row" alignment="center">
+      <GoabInput
+        name="trailing-icon-input"
+        value="Click the trailing icon"
+        trailingIcon="close"
+        trailingIconAriaLabel="Clear input"
+        @onTrailingIconClick="trailingIconClickCount++"
+      />
+      <GoabButton type="secondary" @onClick="trailingIconClickCount = 0">
+        Reset
+      </GoabButton>
+    </GoabBlock>
+    <GoabText tag="p" size="body-m" mb="m">
+      Trailing icon click count: <strong>{{ trailingIconClickCount }}</strong>
+    </GoabText>
 
     <GoabText tag="h2" size="heading-m">Component with a boolean</GoabText>
     <GoabPopover>
