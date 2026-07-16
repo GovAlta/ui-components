@@ -1,0 +1,5 @@
+/* Global styles. Same three imports every GoA app needs: the compiled web
+   components CSS, plus the V2 design tokens (light + dark). */
+@import "../../../../dist/libs/web-components/index.css";
+@import "@abgov/design-tokens-v2/dist/tokens.css";
+@import "@abgov/design-tokens-v2/dist/dark-theme.css";

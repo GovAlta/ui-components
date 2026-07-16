@@ -30,6 +30,7 @@ import { ReviewEditable } from "./examples/review-editable";
 import { ReviewReadonly } from "./examples/review-readonly";
 import { ReviewQuestionTypes } from "./examples/review-question-types";
 import { ReviewChildrenSummary } from "./examples/review-children-summary";
+import { DemoApp } from "./demo/demo-app";
 
 /**
  * Reset scroll to the top on every route change. React Router keeps the previous
@@ -93,6 +94,7 @@ export function PublicFormApp() {
             <Route path="review-readonly" element={<ReviewReadonly />} />
             <Route path="review-question-types" element={<ReviewQuestionTypes />} />
             <Route path="review-children" element={<ReviewChildrenSummary />} />
+            <Route path="demo" element={<DemoApp />} />
           </Routes>
         </div>
       </GoabPageBlock>
