@@ -264,6 +264,20 @@
   },
   {
     "type": "component",
+    "id": "dropdown-multiselect",
+    "name": "Dropdown multiselect",
+    "description": "Present a list of options to the user to select multiple values from.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "inputs and actions",
+      "select",
+      "multiple select dropdown"
+    ],
+    "slug": "dropdown-multiselect"
+  },
+  {
+    "type": "component",
     "id": "dropdown",
     "name": "Dropdown",
     "description": "Present a list of options to the user to select from.",
