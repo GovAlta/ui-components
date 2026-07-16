@@ -306,6 +306,10 @@
     // send message back to child that contains a reference to this component
     relay(detail.el, "dropdown:bind", { el: _rootEl });
 
+    if (detail.hasSlotContent) {
+      assignOptionSlot(detail);
+    }
+
     // ensure bind only runs once for all children
     if (_bindTimeoutId) {
       clearTimeout(_bindTimeoutId);
@@ -320,6 +324,27 @@
         }
       }
     }, 1);
+  }
+
+  /**
+   * Assign the slot after mount. For wrapped items, apply the slot attribute
+   * to the wrapper element directly inside the dropdown.
+   * @param detail
+   */
+  function assignOptionSlot(detail: DropdownItemMountedRelayDetail) {
+    const dropdownRoot = _rootEl.getRootNode();
+    const itemRoot = detail.el.getRootNode();
+    if (!(dropdownRoot instanceof ShadowRoot) || !(itemRoot instanceof ShadowRoot)) {
+      return;
+    }
+
+    const dropdownHost = dropdownRoot.host;
+    let slotTarget: Element | null = itemRoot.host as Element;
+    while (slotTarget && slotTarget.parentElement !== dropdownHost) {
+      slotTarget = slotTarget.parentElement;
+    }
+
+    slotTarget?.setAttribute("slot", `option-${detail.value}`);
   }
 
   /**
@@ -353,7 +378,12 @@
     // set width to longest item
     const optionsWidth = Math.max(
       ...options.map((option: Option) => {
-        const label = `${option.label}` || `${option.value}` || "";
+        // slotted items fall back to their filter text, which carries the slot's text content
+        const label =
+          option.label ||
+          (option.hasSlotContent ? option.filter : "") ||
+          option.value ||
+          "";
         return label.length;
       }),
     );
@@ -471,19 +501,27 @@
     }
   }
 
+  // Match against the filter text and the text the user sees, which is the
+  // label, or the value when no label is set. Both are searched so that adding
+  // a filter supplies extra search terms rather than replacing the visible text.
   function isFilterMatch(option: Option, filter: string, partialMatch = true) {
     // empty string matches all
     if (filter.length === 0) return true;
 
-    let value = option.filter || option.label || option.value;
-    value = value.toLowerCase();
+    const targets = [option.filter, option.label || option.value].filter(
+      (target) => target !== "",
+    );
     filter = filter.toLowerCase().trim();
 
-    if (!partialMatch) {
-      return value === filter;
-    }
+    return targets.some((target) => {
+      const value = target.toLowerCase();
 
-    return value.startsWith(filter) || value.includes(" " + filter);
+      if (!partialMatch) {
+        return value === filter;
+      }
+
+      return value.startsWith(filter) || value.includes(" " + filter);
+    });
   }
 
   // update the value show to the user in the <input> element
@@ -940,7 +978,11 @@
               _inputEl?.focus();
             }}
           >
-            {option.label || option.value}
+            {#if option.hasSlotContent}
+              <svelte:element this={"slot"} name={`option-${option.value}`} />
+            {:else}
+              {option.label || option.value}
+            {/if}
           </li>
         {:else}
           {#if _filterable}

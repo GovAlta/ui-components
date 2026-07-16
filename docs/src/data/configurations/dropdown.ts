@@ -449,6 +449,268 @@ export const dropdownConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "rich-item-content",
+      name: "Rich item content",
+      description: "Dropdown items containing formatted content instead of a plain label",
+      code: {
+        react: `<GoabFormItem label="Assign to" mb="l">
+  <GoabDropdown name="assignee" width="250px">
+
+    <GoabDropdownItem value="sarah" label="Sarah Johnson">
+      <GoabBlock direction="column" gap="3xs">
+        <strong>Sarah Johnson</strong>
+        <span>Case worker &middot; Edmonton</span>
+        <GoabBadge type="success" content="Available" />
+      </GoabBlock>
+    </GoabDropdownItem>
+    <GoabDropdownItem value="michael" label="Michael Chen">
+      <GoabBlock direction="column" gap="3xs">
+        <strong>Michael Chen</strong>
+        <span>Supervisor &middot; Calgary</span>
+        <GoabBadge type="information" content="In a meeting" />
+      </GoabBlock>
+    </GoabDropdownItem>
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      assignee: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Assign to" mb="l">
+    <goab-dropdown name="assignee" formControlName="assignee" width="250px">
+      <goab-dropdown-item value="sarah" label="Sarah Johnson">
+        <goab-block direction="column" gap="3xs">
+          <strong>Sarah Johnson</strong>
+          <span>Case worker &middot; Edmonton</span>
+          <goab-badge type="success" content="Available"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+      <goab-dropdown-item value="michael" label="Michael Chen">
+        <goab-block direction="column" gap="3xs">
+          <strong>Michael Chen</strong>
+          <span>Supervisor &middot; Calgary</span>
+          <goab-badge type="information" content="In a meeting"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  assignee = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.assignee = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Assign to" mb="l">
+    <goab-dropdown
+      name="assignee"
+      [(ngModel)]="assignee"
+      (onChange)="dropdownOnChange($event)"
+      width="250px"
+    >
+      <goab-dropdown-item value="sarah" label="Sarah Johnson">
+        <goab-block direction="column" gap="3xs">
+          <strong>Sarah Johnson</strong>
+          <span>Case worker &middot; Edmonton</span>
+          <goab-badge type="success" content="Available"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+      <goab-dropdown-item value="michael" label="Michael Chen">
+        <goab-block direction="column" gap="3xs">
+          <strong>Michael Chen</strong>
+          <span>Supervisor &middot; Calgary</span>
+          <goab-badge type="information" content="In a meeting"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
+        webComponents: `<goa-form-item version="2" label="Assign to" mb="l">
+  <goa-dropdown version="2" name="assignee" width="250px">
+    <goa-dropdown-item value="sarah" label="Sarah Johnson">
+      <goa-block version="2" direction="column" gap="3xs">
+        <strong>Sarah Johnson</strong>
+        <span>Case worker &middot; Edmonton</span>
+        <goa-badge version="2" type="success" content="Available"></goa-badge>
+      </goa-block>
+    </goa-dropdown-item>
+    <goa-dropdown-item value="michael" label="Michael Chen">
+      <goa-block version="2" direction="column" gap="3xs">
+        <strong>Michael Chen</strong>
+        <span>Supervisor &middot; Calgary</span>
+        <goa-badge version="2" type="information" content="In a meeting"></goa-badge>
+      </goa-block>
+    </goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>`,
+      },
+    },
+    {
+      id: "filterable-rich-item-content",
+      name: "Filterable rich item content",
+      description:
+        "Rich item content that is searchable, using filter to add terms the text does not contain",
+      code: {
+        react: `<GoabFormItem label="Assign to" mb="l">
+  <GoabDropdown name="assignee" filterable leadingIcon="search">
+    <GoabDropdownItem
+      value="sarah"
+      label="Sarah Johnson"
+      filter="Sarah Johnson Case worker Edmonton Available"
+    >
+      <GoabBlock direction="column" gap="3xs">
+        <strong>Sarah Johnson</strong>
+        <span>Case worker &middot; Edmonton</span>
+        <GoabBadge type="success" content="Available" />
+      </GoabBlock>
+    </GoabDropdownItem>
+    <GoabDropdownItem
+      value="michael"
+      label="Michael Chen"
+      filter="Michael Chen Supervisor Calgary In a meeting"
+    >
+      <GoabBlock direction="column" gap="3xs">
+        <strong>Michael Chen</strong>
+        <span>Supervisor &middot; Calgary</span>
+        <GoabBadge type="information" content="In a meeting" />
+      </GoabBlock>
+    </GoabDropdownItem>
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      assignee: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Assign to" mb="l">
+    <goab-dropdown
+      name="assignee"
+      [filterable]="true"
+      leadingIcon="search"
+      formControlName="assignee"
+    >
+      <goab-dropdown-item
+        value="sarah"
+        label="Sarah Johnson"
+        filter="Sarah Johnson Case worker Edmonton Available"
+      >
+        <goab-block direction="column" gap="3xs">
+          <strong>Sarah Johnson</strong>
+          <span>Case worker &middot; Edmonton</span>
+          <goab-badge type="success" content="Available"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+      <goab-dropdown-item
+        value="michael"
+        label="Michael Chen"
+        filter="Michael Chen Supervisor Calgary In a meeting"
+      >
+        <goab-block direction="column" gap="3xs">
+          <strong>Michael Chen</strong>
+          <span>Supervisor &middot; Calgary</span>
+          <goab-badge type="information" content="In a meeting"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  assignee = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.assignee = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Assign to" mb="l">
+    <goab-dropdown
+      name="assignee"
+      [filterable]="true"
+      leadingIcon="search"
+      [(ngModel)]="assignee"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item
+        value="sarah"
+        label="Sarah Johnson"
+        filter="Sarah Johnson Case worker Edmonton Available"
+      >
+        <goab-block direction="column" gap="3xs">
+          <strong>Sarah Johnson</strong>
+          <span>Case worker &middot; Edmonton</span>
+          <goab-badge type="success" content="Available"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+      <goab-dropdown-item
+        value="michael"
+        label="Michael Chen"
+        filter="Michael Chen Supervisor Calgary In a meeting"
+      >
+        <goab-block direction="column" gap="3xs">
+          <strong>Michael Chen</strong>
+          <span>Supervisor &middot; Calgary</span>
+          <goab-badge type="information" content="In a meeting"></goab-badge>
+        </goab-block>
+      </goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
+        webComponents: `<goa-form-item version="2" label="Assign to" mb="l">
+  <goa-dropdown version="2" name="assignee" filterable leadingicon="search">
+    <goa-dropdown-item
+      value="sarah"
+      label="Sarah Johnson"
+      filter="Sarah Johnson Case worker Edmonton Available"
+    >
+      <goa-block version="2" direction="column" gap="3xs">
+        <strong>Sarah Johnson</strong>
+        <span>Case worker &middot; Edmonton</span>
+        <goa-badge version="2" type="success" content="Available"></goa-badge>
+      </goa-block>
+    </goa-dropdown-item>
+    <goa-dropdown-item
+      value="michael"
+      label="Michael Chen"
+      filter="Michael Chen Supervisor Calgary In a meeting"
+    >
+      <goa-block version="2" direction="column" gap="3xs">
+        <strong>Michael Chen</strong>
+        <span>Supervisor &middot; Calgary</span>
+        <goa-badge version="2" type="information" content="In a meeting"></goa-badge>
+      </goa-block>
+    </goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>`,
+      },
+    },
+    {
       id: "native",
       name: "Native",
       description: "Native HTML select element compared with custom dropdown",

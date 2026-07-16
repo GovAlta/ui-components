@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Text used to filter and match this item in typeahead search."
+          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
         },
         {
           "name": "label",
@@ -50,7 +50,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Text used to filter and match this item in typeahead search."
+          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
         },
         {
           "name": "label",
@@ -91,7 +91,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Text used to filter and match this item in typeahead search."
+          "description": "Additional text used to match this item in typeahead search, alongside the label. Defaults to the slotted content's text."
         },
         {
           "name": "label",

@@ -11,6 +11,7 @@
     filter: string;
     value: string;
     label: string;
+    hasSlotContent: boolean;
     mountType: DropdownItemMountType;
   }
   export type DropdownItemDestroyRelayDetail = {
@@ -23,6 +24,7 @@
     label: string;
     value: string;
     filter: string;
+    hasSlotContent: boolean;
     mountType: DropdownItemMountType;
   };
 </script>
@@ -33,7 +35,7 @@
 
   // Props
 
-  /** Text used to filter and match this item in typeahead search. */
+  /** Additional text used to match this item in typeahead search, alongside the label. Defaults to the slotted content's text. */
   export let filter: string = "";
   /** Display label for the dropdown item. */
   export let label: string = "";
@@ -48,13 +50,57 @@
   onMount(() => {
     addMessageListener();
 
+    const slotText = getSlotText();
+    const hasSlotContent = slotText !== "" || hasSlottedElements();
+
     relay<DropdownItemMountedRelayDetail>(
       _rootEl,
       DropdownItemMountedMsg,
-      { el: _rootEl, filter, value, label, mountType: mount },
+      {
+        el: _rootEl,
+        filter: filter || (hasSlotContent ? slotText : ""),
+        value,
+        label,
+        hasSlotContent,
+        mountType: mount,
+      },
       { bubbles: true, timeout: 10 },
       );
   });
+
+  // Use the slotted content's text as the default filter value. Separate text
+  // nodes with spaces so words in adjacent elements do not run together.
+  function getSlotText(): string {
+    const parts: string[] = [];
+    const collectText = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = (node.textContent ?? "").trim();
+        if (text !== "") {
+          parts.push(text);
+        }
+        return;
+      }
+      node.childNodes.forEach(collectText);
+    };
+    getSlottedNodes().forEach(collectText);
+    return parts.join(" ").replace(/\s+/g, " ");
+  }
+
+  function hasSlottedElements(): boolean {
+    return getSlottedNodes().some(
+      (node) => node.nodeType === Node.ELEMENT_NODE,
+    );
+  }
+
+  function getSlottedNodes(): Node[] {
+    const slotEl = _rootEl.querySelector("slot");
+    if (slotEl) {
+      return slotEl.assignedNodes({ flatten: true });
+    }
+    // for unit tests only: without a shadow DOM slotted content is rendered
+    // directly within the root element
+    return Array.from(_rootEl.childNodes);
+  }
 
   function addMessageListener() {
     receive(_rootEl, (action, data) => {
@@ -76,4 +122,6 @@
   });
 </script>
 
-<span bind:this={_rootEl} />
+<span bind:this={_rootEl}>
+  <slot />
+</span>
