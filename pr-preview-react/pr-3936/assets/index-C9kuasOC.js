@@ -33367,7 +33367,7 @@ class Df extends Ne {
 }
 customElements.define("goa-icon", Le(Df, { mt: {}, mr: {}, mb: {}, ml: {}, type: { type: "String", reflect: true }, size: {}, theme: {}, inverted: {}, fillcolor: {}, opacity: {}, title: {}, testid: {}, arialabel: {}, ariacontrols: {}, ariaexpanded: {}, role: {} }, [], [], true));
 function If(t) {
-  Te(t, "svelte-15epnty", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-15epnty.svelte-15epnty{width:100%}.trigger.svelte-15epnty.svelte-15epnty{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-space-xs);width:100%;min-height:var(--goa-dropdown-multiselect-height, 56px);padding:0 var(--goa-dropdown-multiselect-padding-lr, var(--goa-space-s));box-shadow:var(
+  Te(t, "svelte-11ubimr", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-11ubimr.svelte-11ubimr{width:100%}.trigger.svelte-11ubimr.svelte-11ubimr{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-space-xs);width:100%;min-height:var(--goa-dropdown-multiselect-height, 56px);padding:0 var(--goa-dropdown-multiselect-padding-lr, var(--goa-space-s));box-shadow:var(
       --goa-dropdown-multiselect-border,
       inset 0 0 0 var(--goa-input-border-width-default)
         var(--goa-input-color-border-default)
@@ -33383,60 +33383,63 @@ function If(t) {
     );transition:var(
       --goa-dropdown-multiselect-transition,
       box-shadow 0.05s ease-in
-    );cursor:pointer;outline:none;box-sizing:border-box}.trigger.svelte-15epnty.svelte-15epnty:hover{box-shadow:var(
+    );cursor:pointer;outline:none;box-sizing:border-box}.trigger.svelte-11ubimr.svelte-11ubimr:hover{box-shadow:var(
       --goa-dropdown-multiselect-border-hover,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-hover)
-    )}.trigger.compact.svelte-15epnty.svelte-15epnty{min-height:var(--goa-dropdown-multiselect-compact-height, 40px);padding:var(
+    )}.trigger.compact.svelte-11ubimr.svelte-11ubimr{min-height:var(--goa-dropdown-multiselect-compact-height, 40px);padding:var(
       --goa-dropdown-multiselect-compact-padding,
       0 var(--goa-space-s)
-    )}.trigger.svelte-15epnty.svelte-15epnty:focus-visible{box-shadow:var(
+    )}.trigger.svelte-11ubimr.svelte-11ubimr:focus-visible{box-shadow:var(
       --goa-dropdown-multiselect-border-focus,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-focus)
-    )}.trigger.error.svelte-15epnty.svelte-15epnty{box-shadow:var(
+    )}.trigger.error.svelte-11ubimr.svelte-11ubimr{box-shadow:var(
       --goa-dropdown-multiselect-border-error,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-error)
-    )}.trigger.error.svelte-15epnty.svelte-15epnty:hover{box-shadow:var(
+    )}.trigger.error.svelte-11ubimr.svelte-11ubimr:hover{box-shadow:var(
       --goa-dropdown-multiselect-border-error-hover,
       inset 0 0 0 var(--goa-input-border-width-focus)
         var(--goa-input-color-border-error-hover)
-    )}.trigger.disabled.svelte-15epnty.svelte-15epnty{box-shadow:var(
+    )}.trigger.disabled.svelte-11ubimr.svelte-11ubimr{box-shadow:var(
       --goa-dropdown-multiselect-border-disabled,
       inset 0 0 0 var(--goa-input-border-width-default)
         var(--goa-input-color-border-disabled)
     );background:var(
       --goa-dropdown-multiselect-color-bg-disabled,
       var(--goa-input-color-background-disabled)
-    );cursor:default}.value-display.svelte-15epnty.svelte-15epnty{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font:var(
-      --goa-dropdown-multiselect-typography,
-      var(--goa-typography-body-m)
     );color:var(
-      --goa-dropdown-multiselect-color-text,
-      var(--goa-input-color-text-default)
-    )}.disabled.svelte-15epnty .value-display.svelte-15epnty{color:var(
       --goa-dropdown-multiselect-color-text-disabled,
       var(--goa-input-color-text-disabled)
-    )}.value-display.placeholder.svelte-15epnty.svelte-15epnty{color:var(
-      --goa-dropdown-multiselect-color-text-placeholder,
-      var(--goa-input-color-text-default)
-    )}.filter-input.svelte-15epnty.svelte-15epnty{flex:1;border:none;outline:none;background:transparent;font:var(
+    );cursor:default}.value-display.svelte-11ubimr.svelte-11ubimr{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font:var(
       --goa-dropdown-multiselect-typography,
       var(--goa-typography-body-m)
     );color:var(
       --goa-dropdown-multiselect-color-text,
       var(--goa-input-color-text-default)
-    );min-width:0;padding:0}.filter-input.svelte-15epnty.svelte-15epnty::-moz-placeholder{color:var(
+    )}.disabled.svelte-11ubimr .value-display.svelte-11ubimr{color:var(
+      --goa-dropdown-multiselect-color-text-disabled,
+      var(--goa-input-color-text-disabled)
+    )}.value-display.placeholder.svelte-11ubimr.svelte-11ubimr{color:var(
       --goa-dropdown-multiselect-color-text-placeholder,
       var(--goa-input-color-text-default)
-    )}.filter-input.svelte-15epnty.svelte-15epnty::placeholder{color:var(
+    )}.filter-input.svelte-11ubimr.svelte-11ubimr{flex:1;border:none;outline:none;background:transparent;font:var(
+      --goa-dropdown-multiselect-typography,
+      var(--goa-typography-body-m)
+    );color:var(
+      --goa-dropdown-multiselect-color-text,
+      var(--goa-input-color-text-default)
+    );min-width:0;padding:0}.filter-input.svelte-11ubimr.svelte-11ubimr::-moz-placeholder{color:var(
       --goa-dropdown-multiselect-color-text-placeholder,
       var(--goa-input-color-text-default)
-    )}.content.svelte-15epnty.svelte-15epnty{overflow-y:auto;padding:var(
+    )}.filter-input.svelte-11ubimr.svelte-11ubimr::placeholder{color:var(
+      --goa-dropdown-multiselect-color-text-placeholder,
+      var(--goa-input-color-text-default)
+    )}.content.svelte-11ubimr.svelte-11ubimr{overflow-y:auto;padding:var(
       --goa-dropdown-multiselect-padding,
       var(--goa-space-m) var(--goa-space-s)
-    )}.select-all-divider.svelte-15epnty.svelte-15epnty{border:none;border-top:var(
+    )}.select-all-divider.svelte-11ubimr.svelte-11ubimr{border:none;border-top:var(
       --goa-dropdown-multiselect-divider,
       var(--goa-border-width-s) solid var(--goa-color-greyscale-200)
     );margin:var(--goa-space-m) 0}`);
@@ -33492,7 +33495,7 @@ function Tf(t) {
   ), i;
   return {
     c() {
-      e = C("span"), i = de(o), u(e, "class", "value-display svelte-15epnty"), S(e, "placeholder", !/*_hasValue*/
+      e = C("span"), i = de(o), u(e, "class", "value-display svelte-11ubimr"), S(e, "placeholder", !/*_hasValue*/
       t[32]);
     },
     m(n, l) {
@@ -33521,7 +33524,7 @@ function Af(t) {
   let e, o, i, n;
   return {
     c() {
-      e = C("input"), u(e, "class", "filter-input svelte-15epnty"), u(e, "type", "text"), u(e, "placeholder", "Filter..."), u(e, "aria-label", "Filter options"), u(e, "autocomplete", "off"), u(e, "data-testid", o = /*testid*/
+      e = C("input"), u(e, "class", "filter-input svelte-11ubimr"), u(e, "type", "text"), u(e, "placeholder", "Filter..."), u(e, "aria-label", "Filter options"), u(e, "autocomplete", "off"), u(e, "data-testid", o = /*testid*/
       t[7] ? `${/*testid*/
       t[7]}-filter-input` : void 0);
     },
@@ -33672,7 +33675,7 @@ function rl(t) {
         "size",
         /*size*/
         t[12]
-      ), u(a, "class", "select-all-divider svelte-15epnty");
+      ), u(a, "class", "select-all-divider svelte-11ubimr");
     },
     m(s, f) {
       T(s, e, f), t[51](e), T(s, r, f), T(s, a, f), c || (d = oe(
@@ -33901,7 +33904,7 @@ function Of(t) {
     c() {
       e = C("div"), D && D.c(), o = Y(), i = C("goa-popover"), n = C("div"), l = C("div"), j && j.c(), r = Y(), Q.c(), a = Y(), B.c(), v = Y(), h = C("div"), W && W.c(), b = Y(), E && E.c(), u(l, "data-testid", c = /*testid*/
       t[7] ? `${/*testid*/
-      t[7]}-trigger` : void 0), u(l, "class", "trigger svelte-15epnty"), u(l, "role", "combobox"), u(l, "tabindex", d = /*disabled*/
+      t[7]}-trigger` : void 0), u(l, "class", "trigger svelte-11ubimr"), u(l, "role", "combobox"), u(l, "tabindex", d = /*disabled*/
       t[6] ? -1 : 0), u(l, "aria-haspopup", "dialog"), u(
         l,
         "aria-expanded",
@@ -33936,7 +33939,7 @@ function Of(t) {
         /*_contentId*/
         t[33]
       ), u(h, "role", "dialog"), u(h, "aria-label", w = /*placeholder*/
-      t[3] || "Options"), u(h, "class", "content svelte-15epnty"), We(
+      t[3] || "Options"), u(h, "class", "content svelte-11ubimr"), We(
         h,
         "max-height",
         /*maxHeight*/
@@ -33956,7 +33959,7 @@ function Of(t) {
         "disabled",
         /*disabled*/
         t[6]
-      ), u(e, "class", "root svelte-15epnty"), u(e, "style", p = st(Ae(
+      ), u(e, "class", "root svelte-11ubimr"), u(e, "style", p = st(Ae(
         /*mt*/
         t[14],
         /*mr*/
