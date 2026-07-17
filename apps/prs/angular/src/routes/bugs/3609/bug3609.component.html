@@ -1,0 +1,50 @@
+<goab-text tag="h1" mt="m" mb="m">
+  Bug 3609 - Modal scroll area clipping and footer actions padding
+</goab-text>
+<goab-text tag="p" mb="l">
+  Open the modal. The scrollable content should not be clipped at the top or bottom,
+  and the Cancel / Save action buttons should have adequate padding between them and
+  the bottom edge of the pinned footer.
+</goab-text>
+
+<goab-button (onClick)="openModal()">Add another item</goab-button>
+
+<goab-modal
+  heading="Add a new item"
+  [open]="open"
+  (onClose)="closeModal()"
+  [actions]="modalActions"
+>
+  <goab-text tag="p" mt="none">Fill in the information to create a new item</goab-text>
+
+  <goab-form-item label="Type" mb="l">
+    <goab-dropdown name="type">
+      <goab-dropdown-item value="a" label="Type A"></goab-dropdown-item>
+      <goab-dropdown-item value="b" label="Type B"></goab-dropdown-item>
+      <goab-dropdown-item value="c" label="Type C"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+
+  <goab-form-item label="Name" mb="l">
+    <goab-input name="name"></goab-input>
+  </goab-form-item>
+
+  <goab-form-item label="Description" mb="l">
+    <goab-textarea name="description"></goab-textarea>
+  </goab-form-item>
+
+  <goab-form-item label="Notes" mb="l">
+    <goab-textarea name="notes"></goab-textarea>
+  </goab-form-item>
+
+  <goab-form-item label="Additional details" mb="none">
+    <goab-textarea name="details"></goab-textarea>
+  </goab-form-item>
+</goab-modal>
+
+<ng-template #modalActions>
+  <goab-button-group alignment="end">
+    <goab-button type="secondary" (onClick)="closeModal()">Cancel</goab-button>
+    <goab-button type="primary" (onClick)="closeModal()">Save new item</goab-button>
+  </goab-button-group>
+</ng-template>
