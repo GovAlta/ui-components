@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { GoabIconButton } from "./icon-button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
+  GoabIconButtonType,
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
@@ -18,6 +19,7 @@ import { fireEvent } from "@testing-library/dom";
       [icon]="icon"
       [disabled]="disabled"
       [variant]="variant"
+      [type]="type"
       [size]="size"
       [title]="title"
       [ariaLabel]="ariaLabel"
@@ -37,6 +39,7 @@ class TestIconButtonComponent {
   disabled?: boolean;
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
+  type?: GoabIconButtonType;
   title?: string;
   testId?: string;
   ariaLabel?: string;
@@ -66,6 +69,7 @@ describe("GoABIconButton", () => {
     component.disabled = true;
     component.size = "small";
     component.variant = "color";
+    component.type = "tertiary";
     component.title = "Information";
     component.testId = "foo";
     component.ariaLabel = "Information button";
@@ -84,6 +88,7 @@ describe("GoABIconButton", () => {
     expect(el?.getAttribute("icon")).toBe(component.icon);
     expect(el?.getAttribute("size")).toBe(component.size);
     expect(el?.getAttribute("variant")).toBe(component.variant);
+    expect(el?.getAttribute("type")).toBe(component.type);
     expect(el?.getAttribute("title")).toBe(component.title);
     expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);

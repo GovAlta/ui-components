@@ -103,6 +103,13 @@
           "description": "Sets the title of the button."
         },
         {
+          "name": "type",
+          "type": "GoabIconButtonType",
+          "required": false,
+          "default": "default",
+          "description": "Sets the visual style of the button."
+        },
+        {
           "name": "variant",
           "type": "GoabIconButtonVariant",
           "required": false,
@@ -221,6 +228,13 @@
           "required": false,
           "default": null,
           "description": "Sets the title of the button."
+        },
+        {
+          "name": "type",
+          "type": "GoabIconButtonType",
+          "required": false,
+          "default": "default",
+          "description": "Sets the visual style of the button."
         },
         {
           "name": "variant",
@@ -353,6 +367,18 @@
           "required": false,
           "default": "",
           "description": "Sets the title of the button."
+        },
+        {
+          "name": "type",
+          "type": "\"default\" | \"tertiary\"",
+          "typeLabel": "GoabIconButtonType",
+          "values": [
+            "default",
+            "tertiary"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Sets the visual style of the button."
         },
         {
           "name": "variant",

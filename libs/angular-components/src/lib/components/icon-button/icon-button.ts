@@ -1,4 +1,5 @@
 import {
+  GoabIconButtonType,
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconTheme,
@@ -28,6 +29,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.size]="size"
         [attr.theme]="theme"
         [attr.variant]="variant"
+        [attr.type]="type"
         [title]="title"
         [attr.arialabel]="ariaLabel"
         [attr.testid]="testId"
@@ -59,6 +61,8 @@ export class GoabIconButton extends GoabBaseComponent implements OnInit {
   @Input() size?: GoabIconSize = "medium";
   /** Styles the button to show color, light, dark or destructive action. */
   @Input() variant?: GoabIconButtonVariant;
+  /** Sets the visual style of the button. @default "default" */
+  @Input() type?: GoabIconButtonType;
   /** Sets the icon theme. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
   @Input() theme?: GoabIconTheme = "outline";
   /** Sets the title of the button. */
