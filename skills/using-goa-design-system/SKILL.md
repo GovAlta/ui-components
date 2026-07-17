@@ -9,8 +9,6 @@ description: Use when building or scoping a screen, page, or feature with the Go
 
 The GoA design system has a layered structure: **product types** (workspace, public-form) → **examples by size** (interaction, section, page, task, product) → **components**, **guidance atoms**, **tokens**. This skill navigates from a user-facing intent down to the right artifacts. The MCP tools (`goa-design-system:search`, `goa-design-system:get`) are the knowledge layer; this skill is the composition layer — it walks the layered structure, surfaces guidance, and confirms specs by reading entries with `goa-design-system:get`.
 
-**Prerequisite:** this skill drives the `goa-design-system` MCP (`search`, `get`) at every step. If it isn't connected, tell the user and point them to install it (Claude Code: `claude mcp add --transport http goa-design-system https://mcp.design.alberta.ca/mcp --scope user`). Without it, the skill can't navigate.
-
 ## When to use
 
 - A developer describes what they're building in user terms ("intake process", "case-management tool", "renewal form")
@@ -18,19 +16,20 @@ The GoA design system has a layered structure: **product types** (workspace, pub
 - A reviewer is checking whether a screen uses the right layered structure
 
 When NOT to use:
+
 - The developer already names a specific component (`goa-button`, `goa-form-item`) → go straight to MCP `goa-design-system:get`
 - Purely token math (sizing, color values) → `goa-design-system:get` the component to see its token references
 - A single guidance-atom question → `goa-design-system:search` and `goa-design-system:get` directly
 
 ## The layered structure
 
-| Layer | What it is | Examples |
-|---|---|---|
-| Product type | The kind of digital product the service is realized as (its own content collection) | `workspace` (worker), `public-form` (citizen) |
-| Example by size | Scale of artifact | `interaction` → `section` → `page` → `task` → `product` |
-| Components | Atomic UI building blocks | `goa-button`, `goa-form-item`, `goa-table` |
-| Guidance atoms | Do/don't/tip/warning/info linked to component + topic | "use goa-block for spacing, not goa-container" |
-| Tokens | Sizing, color, spacing values | `--goa-space-m`, `--goa-color-text-default` |
+| Layer           | What it is                                                                          | Examples                                                |
+| --------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Product type    | The kind of digital product the service is realized as (its own content collection) | `workspace` (worker), `public-form` (citizen)           |
+| Example by size | Scale of artifact                                                                   | `interaction` → `section` → `page` → `task` → `product` |
+| Components      | Atomic UI building blocks                                                           | `goa-button`, `goa-form-item`, `goa-table`              |
+| Guidance atoms  | Do/don't/tip/warning/info linked to component + topic                               | "use goa-block for spacing, not goa-container"          |
+| Tokens          | Sizing, color, spacing values                                                       | `--goa-space-m`, `--goa-color-text-default`             |
 
 Public services typically have two sides: a **citizen-facing** side (applying, renewing, checking) and a **worker-facing** side (processing, reviewing, managing). When the intent names one side, name it. When the intent could apply to either, name both. The product type follows from which side the developer is building for.
 
@@ -51,10 +50,10 @@ For full enumeration of sizes, product types, and aliases, see `taxonomy.md`.
 
 The MCP is intentionally narrow. Guidance and specs are not separate tools; the skill surfaces them by reading component and template entries with `goa-design-system:get`.
 
-| Tool | Use for |
-|---|---|
-| `goa-design-system:search` | Open-ended discovery across the layered structure; supports filters on `size`, `productType`, `status`, etc. |
-| `goa-design-system:get` | Fetching a known entity by ID, alias, or name. Returns the entry's full record — components, sources, props, token references, embedded guidance. |
+| Tool                       | Use for                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `goa-design-system:search` | Open-ended discovery across the layered structure; supports filters on `size`, `productType`, `status`, etc.                                      |
+| `goa-design-system:get`    | Fetching a known entity by ID, alias, or name. Returns the entry's full record — components, sources, props, token references, embedded guidance. |
 
 ## Decision calibration
 
@@ -74,7 +73,3 @@ For consequential choices that warrant team coordination (state-management archi
 - **Treating guidance atoms as optional.** They encode known failure modes; surface them before code, not after review.
 - **Returning "not found" on an old slug.** Old slugs live in the `aliases` array on entries; treat aliases as additional lookup keys. See `taxonomy.md` for examples.
 - **Pretending every job has a task entry.** Many do, but not all. When no task matches, surface the closest pages and name the gap, rather than approximating from a near-miss task.
-
-## Cross-references
-
-The MCP tools are documented by the design system MCP server. This skill **uses** them; it does not duplicate them.

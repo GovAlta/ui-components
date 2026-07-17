@@ -519,4 +519,3 @@ npm run build
 
 - **Wrapper-based extraction** — Extract React/Angular prop names from wrappers too, not just Svelte. Blocked on [#3361](https://github.com/GovAlta/ui-components/issues/3361).
 - **Automated example screenshots** — Generate preview images for the examples grid automatically.
-- **MCP JSON generation** — Generate the MCP server's knowledge base from the docs site content, closing the loop between docs and AI tooling.
