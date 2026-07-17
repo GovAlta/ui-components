@@ -26,16 +26,13 @@ When NOT to use:
 
 | Layer | What it is | Examples |
 |---|---|---|
-| Service type | What the user is trying to accomplish (Kate Tarling Common Service Types) | "Getting permission" (permit), "Requesting/sharing information" (case lookup), "Getting financial support" (benefit claim) |
 | Product type | The kind of digital product the service is realized as (its own content collection) | `workspace` (worker), `public-form` (citizen) |
 | Example by size | Scale of artifact | `interaction` → `section` → `page` → `task` → `product` |
 | Components | Atomic UI building blocks | `goa-button`, `goa-form-item`, `goa-table` |
 | Guidance atoms | Do/don't/tip/warning/info linked to component + topic | "use goa-block for spacing, not goa-container" |
 | Tokens | Sizing, color, spacing values | `--goa-space-m`, `--goa-color-text-default` |
 
-Service type is the vocabulary layer (Kate Tarling), not a schema layer yet. The skill leads with it when recognizable, then narrates the mapping to product type. See `taxonomy.md` for the full framework.
-
-Public services typically have two sides: one to **provide and manage** (worker), and one to **receive** (citizen). When the intent names one side, name it. When the intent could apply to either, name both. The product type follows from which side the developer is building for.
+Public services typically have two sides: a **citizen-facing** side (applying, renewing, checking) and a **worker-facing** side (processing, reviewing, managing). When the intent names one side, name it. When the intent could apply to either, name both. The product type follows from which side the developer is building for.
 
 `task` is the unit for a complete user job — between a single page and a full product. When an intent is task-shaped (a complete job the user is trying to do), look for it in the tasks collection before composing from pages and components alone.
 
@@ -43,13 +40,12 @@ For full enumeration of sizes, product types, and aliases, see `taxonomy.md`.
 
 ## Navigation pattern
 
-1. Read the intent. Recognize the **service type**: what is the user trying to accomplish in service terms? If recognizable, name it using Kate Tarling's Common Service Types vocabulary (see `taxonomy.md`): "Getting permission," "Requesting/sharing information," "Getting financial support," etc.
-2. Map the service type to a product type. Narrate the translation explicitly: "this is a [service type], most often expressed as a [productType] in the GoA system today." If the service doesn't map cleanly to today's product types (workspace, public-form), name the gap rather than forcing a fit.
-3. `goa-design-system:get` the product type from the productTypes collection to surface its summary, demo URL, and listed components.
-4. `goa-design-system:search` filtered by `size` and `productType` for sections, non-canonical pages, or filtered queries (step 3 already lists the canonical pages).
-5. For each template, `goa-design-system:get` the entry to surface its components, source URLs, preview, and embedded guidance. For each component, `goa-design-system:get` to confirm props, types, and token references before generating code.
-6. If a task entry matches the intent, surface it. If no task captures it, name the gap and offer the closest pages so the developer can compose the job themselves.
-7. Surface result and gotchas to the developer before generating code. Apply the Decision calibration principles below: name what was defaulted (transparency) and frame through the developer's lens.
+1. Read the intent. Determine which side of the service it's for — citizen-facing or worker-facing — and map to a product type: worker tools → `workspace`, citizen-facing form flows → `public-form` (see the routing table in `taxonomy.md`). If the intent doesn't map cleanly to today's product types, name the gap rather than forcing a fit.
+2. `goa-design-system:get` the product type from the productTypes collection to surface its summary, demo URL, and listed components.
+3. `goa-design-system:search` filtered by `size` and `productType` for sections, non-canonical pages, or filtered queries (step 2 already lists the canonical pages).
+4. For each template, `goa-design-system:get` the entry to surface its components, source URLs, preview, and embedded guidance. For each component, `goa-design-system:get` to confirm props, types, and token references before generating code.
+5. If a task entry matches the intent, surface it. If no task captures it, name the gap and offer the closest pages so the developer can compose the job themselves.
+6. Surface result and gotchas to the developer before generating code. Apply the Decision calibration principles below: name what was defaulted (transparency) and frame through the developer's lens.
 
 ## When to use which MCP tool
 
@@ -72,7 +68,6 @@ For consequential choices that warrant team coordination (state-management archi
 
 ## Common mistakes
 
-- **Skipping the service type.** Service language ("intake service", "permit application service") deserves explicit acknowledgment, not silent translation to product type. Name the service type, then narrate the mapping to product type.
 - **Skipping the product type layer.** Going straight to components produces correct-looking code that ignores the system's layered conventions.
 - **Asking for user type.** Don't. Derive from product type.
 - **Inventing tokens.** Always reference the actual token; never hardcode a value. If a value doesn't fit, use a component-level override; tokens themselves are referenced, not modified by teams.
