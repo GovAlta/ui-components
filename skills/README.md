@@ -2,7 +2,7 @@
 
 AI skills for building Government of Alberta services with the design system. Each one is a `SKILL.md` folder following the [Agent Skills open standard](https://agentskills.io), so it works across Claude Code, Cursor, GitHub Copilot, and other tools that read the format.
 
-A skill is plain-Markdown guidance your AI loads on its own when the work matches. It rides on top of the GoA design system MCP, which supplies the live component facts.
+A skill is plain-Markdown guidance your AI loads on its own when the work matches.
 
 ## Skills
 
@@ -22,7 +22,7 @@ npx skills add GovAlta/ui-components --skill using-goa-design-system
 npx skills add GovAlta/ui-components --skill content-design
 ```
 
-It loads on its own when your work matches. Pair it with the GoA design system MCP for the live component facts.
+It loads on its own when your work matches.
 
 ## Stay current
 

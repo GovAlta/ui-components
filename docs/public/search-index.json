@@ -2370,18 +2370,6 @@
   },
   {
     "type": "page",
-    "id": "ai-tools-and-resources/goa-design-system-mcp",
-    "title": "GoA Design System MCP",
-    "description": "A live lookup tool your AI uses for component APIs, examples, and guidance",
-    "status": "published",
-    "category": "get started",
-    "tags": [
-      "ai-tools-and-resources"
-    ],
-    "slug": "get-started/ai-tools-and-resources/goa-design-system-mcp"
-  },
-  {
-    "type": "page",
     "id": "ai-tools-and-resources/skills",
     "title": "Skills",
     "description": "Plain Markdown instruction files that give your AI a workflow to follow, for building GoA services",

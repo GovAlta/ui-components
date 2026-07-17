@@ -1,6 +1,6 @@
 # using-goa-design-system
 
-The skill that turns "I'm building X for users" into the right Government of Alberta product type, templates, and components. It is the "how should I approach this" layer. The GoA design system MCP is the "what is this" layer underneath it.
+The skill that turns "I'm building X for users" into the right Government of Alberta product type, templates, and components. It is the "how should I approach this" layer.
 
 ## In a sentence
 
@@ -52,7 +52,7 @@ Install it, pointed at our repo:
 npx skills add GovAlta/ui-components --skill using-goa-design-system
 ```
 
-Then describe what you are building in plain terms, and the skill loads on its own when the work matches. Run `npx skills update` to pull the latest. It works alongside the GoA design system MCP, which supplies the live component facts.
+Then describe what you are building in plain terms, and the skill loads on its own when the work matches. Run `npx skills update` to pull the latest.
 
 ## Good to know
 
