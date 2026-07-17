@@ -5,7 +5,7 @@ import {
   GoabAppFooter,
   GoabPublicFormPageLayout,
 } from "@abgov/react-components";
-import { TaskList } from "../routes/task-list";
+import { TaskList } from "./routes/task-list";
 
 /**
  * Reset scroll on every route change. React Router keeps the previous page's

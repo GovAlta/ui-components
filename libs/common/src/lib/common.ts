@@ -1331,7 +1331,11 @@ export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
 
 // Public form Task
-export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";
+export type GoabPublicFormTaskStatus =
+  | "completed"
+  | "not-started"
+  | "in-progress"
+  | "cannot-start";
 
 // Drawer
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;

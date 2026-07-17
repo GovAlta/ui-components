@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Before you start",
+    "tasks": [
+      { "slug": "eligibility", "name": "Eligibility questions", "status": "completed" },
+      { "slug": "terms", "name": "Read terms of use", "status": "completed" }
+    ]
+  },
+  {
+    "title": "Prepare application",
+    "tasks": [
+      {
+        "name": "Your contact details",
+        "status": "cannot-start",
+        "hint": "You need to complete the previous section before you can start this task."
+      },
+      { "name": "Your family", "status": "cannot-start" },
+      { "name": "Verify your identity", "status": "cannot-start" }
+    ]
+  },
+  {
+    "title": "Schedule service",
+    "tasks": [
+      { "name": "Receive email confirmation", "status": "cannot-start" },
+      { "name": "Choose date", "status": "cannot-start" },
+      { "name": "Pay service fee", "status": "cannot-start" }
+    ]
+  }
+]

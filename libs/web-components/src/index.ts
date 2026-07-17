@@ -42,6 +42,8 @@ export * from "./components/form/SubFormIndex.svelte";
 export * from "./components/form/Task.svelte";
 export * from "./components/form/TaskList.svelte";
 export * from "./components/public-form/PublicFormPageLayout.svelte";
+export * from "./components/public-form/PublicFormTaskSection.svelte";
+export * from "./components/public-form/PublicFormTaskItem.svelte";
 export * from "./components/form-item/FormItem.svelte";
 export * from "./components/form-step/FormStep.svelte";
 export * from "./components/form-stepper/FormStepper.svelte";
