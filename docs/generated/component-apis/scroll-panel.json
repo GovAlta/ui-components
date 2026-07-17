@@ -5,6 +5,13 @@
     "react": {
       "props": [
         {
+          "name": "direction",
+          "type": "GoabScrollPanelDirectionType",
+          "required": false,
+          "default": null,
+          "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -38,6 +45,13 @@
     "angular": {
       "props": [
         {
+          "name": "direction",
+          "type": "GoabScrollPanelDirectionType",
+          "required": false,
+          "default": "vertical",
+          "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."
+        },
+        {
           "name": "height",
           "type": "string",
           "required": false,
@@ -70,6 +84,18 @@
     },
     "webComponents": {
       "props": [
+        {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
+          "required": false,
+          "default": "vertical",
+          "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Defaults to \"vertical\"."
+        },
         {
           "name": "height",
           "type": "string",

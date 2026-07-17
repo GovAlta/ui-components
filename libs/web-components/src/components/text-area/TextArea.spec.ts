@@ -79,6 +79,28 @@ describe("GoATextArea", () => {
     });
   });
 
+  it("handles the focus event", async () => {
+    const onFocus = vi.fn();
+    const result = render(GoATextArea, {
+      name: "name",
+      value: "test value",
+      testid: "focus-test",
+    });
+
+    const textarea = result.queryByTestId("focus-test");
+    textarea.addEventListener("_focus", (e: CustomEvent) => {
+      expect(e.detail.name).toBe("name");
+      expect(e.detail.value).toBe("test value");
+      onFocus();
+    });
+
+    await fireEvent.focus(textarea);
+
+    await waitFor(() => {
+      expect(onFocus).toBeCalledTimes(1);
+    });
+  });
+
   it("handles the blur event", async () => {
     const onBlur = vi.fn();
     const result = render(GoATextArea, {

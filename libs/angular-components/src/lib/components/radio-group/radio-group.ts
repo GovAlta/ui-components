@@ -1,5 +1,7 @@
 import {
+  GoabRadioGroupOnBlurDetail,
   GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOnFocusDetail,
   GoabRadioGroupOrientation,
   GoabRadioGroupSize,
 } from "@abgov/ui-components-common";
@@ -40,6 +42,8 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.ml]="ml"
         [attr.mr]="mr"
         (_change)="_onChange($event)"
+        (_focus)="_onFocus($event)"
+        (_blur)="_onBlur($event)"
       >
         <ng-content />
       </goa-radio-group>
@@ -82,6 +86,10 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
 
   /** Emits when the selected radio item changes. Emits the name, value, and event of the selected item. */
   @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
+  /** Emits when focus enters any radio item in the group. */
+  @Output() onFocus = new EventEmitter<GoabRadioGroupOnFocusDetail>();
+  /** Emits when focus leaves all radio items in the group. */
+  @Output() onBlur = new EventEmitter<GoabRadioGroupOnBlurDetail>();
 
   _onChange(e: Event) {
     const detail = {
@@ -92,5 +100,16 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
     this.onChange.emit(detail);
 
     this.fcChange?.(detail.value);
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabRadioGroupOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabRadioGroupOnBlurDetail>).detail, event: e };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 }

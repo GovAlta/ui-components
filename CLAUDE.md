@@ -155,9 +155,7 @@ Follow the same structure as existing components. Each component needs:
 ```
 libs/web-components/src/components/[name]/
 ├── ComponentName.svelte         # Main implementation
-├── ComponentName.spec.ts        # Unit tests
-├── ComponentName.html-data.json # VS Code IntelliSense (optional)
-└── doc.md                       # Documentation (optional)
+└── ComponentName.spec.ts        # Unit tests
 ```
 
 **React Wrapper:**

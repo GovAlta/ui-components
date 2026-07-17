@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 interface WCProps {
@@ -25,12 +25,14 @@ export interface GoabDropdownItemProps {
   value: string;
   /** Display label for the dropdown item. */
   label?: string;
-  /** Text used to filter and match this item in typeahead search. */
+  /** Rich item content. On selection, `label` is shown and `filter` defaults to the content's text. */
   filter?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Controls how the item is registered with the parent dropdown. */
   mountType?: GoabDropdownItemMountType;
+  /** Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text. */
+  children?: ReactNode;
   /** @deprecated */
   name?: string;
 }
@@ -51,6 +53,7 @@ export function GoabDropdownItem({
   filter,
   name,
   mountType = "append",
+  children,
 }: GoabDropdownItemProps) {
   return (
     <goa-dropdown-item
@@ -59,6 +62,8 @@ export function GoabDropdownItem({
       filter={filter}
       name={name}
       mount={mountType}
-    />
+    >
+      {children}
+    </goa-dropdown-item>
   );
 }

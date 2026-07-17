@@ -98,9 +98,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabRadioGroupOnBlurDetail) => void",
+          "description": "Callback fired when focus leaves all radio items in the group.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabRadioGroupOnChangeDetail) => void",
           "description": "Callback fired when the selected radio item changes.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(detail: GoabRadioGroupOnFocusDetail) => void",
+          "description": "Callback fired when focus enters any radio item in the group.",
           "frameworks": [
             "react"
           ]
@@ -204,9 +220,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabRadioGroupOnBlurDetail) => void",
+          "description": "Emits when focus leaves all radio items in the group.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabRadioGroupOnChangeDetail) => void",
           "description": "Emits when the selected radio item changes. Emits the name, value, and event of the selected item.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabRadioGroupOnFocusDetail) => void",
+          "description": "Emits when focus enters any radio item in the group.",
           "frameworks": [
             "angular"
           ]
@@ -329,8 +361,24 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string; label: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
+          "type": "CustomEvent<{ name: string }>",
           "description": "",
           "frameworks": [
             "webComponents"

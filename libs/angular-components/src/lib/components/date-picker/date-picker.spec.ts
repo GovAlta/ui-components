@@ -23,6 +23,8 @@ import { fireEvent } from "@testing-library/dom";
       [ml]="ml"
       [mr]="mr"
       (onChange)="onChange()"
+      (onFocus)="onFocus()"
+      (onBlur)="onBlur()"
     ></goab-date-picker>
   `,
 })
@@ -38,6 +40,14 @@ class TestDatePickerComponent {
   mr?: Spacing;
 
   onChange() {
+    /* do nothing */
+  }
+
+  onFocus() {
+    /* do nothing */
+  }
+
+  onBlur() {
     /* do nothing */
   }
 }
@@ -104,5 +114,17 @@ describe("GoABDatePicker", () => {
     );
 
     expect(onChange).toHaveBeenCalled();
+  }));
+
+  it("should handle onFocus and onBlur events", fakeAsync(() => {
+    const onFocus = jest.spyOn(component, "onFocus");
+    const onBlur = jest.spyOn(component, "onBlur");
+    const el = fixture.debugElement.query(By.css("goa-date-picker")).nativeElement;
+
+    fireEvent(el, new CustomEvent("_focus", { detail: { name: component.name } }));
+    expect(onFocus).toHaveBeenCalled();
+
+    fireEvent(el, new CustomEvent("_blur", { detail: { name: component.name } }));
+    expect(onBlur).toHaveBeenCalled();
   }));
 });

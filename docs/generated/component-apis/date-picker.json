@@ -110,9 +110,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabDatePickerOnBlurDetail) => void",
+          "description": "Callback fired when focus leaves all of the date picker's internal fields.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabDatePickerOnChangeDetail) => void",
           "description": "Callback fired when the selected date changes.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(detail: GoabDatePickerOnFocusDetail) => void",
+          "description": "Callback fired when focus enters any of the date picker's internal fields.",
           "frameworks": [
             "react"
           ]
@@ -235,9 +251,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabDatePickerOnBlurDetail) => void",
+          "description": "Emits when focus leaves all of the date picker's internal fields.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabDatePickerOnChangeDetail) => void",
           "description": "Emits when the selected date changes. Emits the date picker change detail including name and value.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabDatePickerOnFocusDetail) => void",
+          "description": "Emits when focus enters any of the date picker's internal fields.",
           "frameworks": [
             "angular"
           ]
@@ -371,8 +403,24 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: Date | string | null; valueStr: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
+          "type": "CustomEvent<{ name: string }>",
           "description": "",
           "frameworks": [
             "webComponents"

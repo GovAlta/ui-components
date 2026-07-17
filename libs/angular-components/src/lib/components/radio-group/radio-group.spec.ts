@@ -34,6 +34,8 @@ interface RadioOption {
       [mb]="mb"
       [ml]="ml"
       (onChange)="onChange($event)"
+      (onFocus)="onFocus($event)"
+      (onBlur)="onBlur($event)"
     >
       @for (option of options; track option.value) {
         <goab-radio-item
@@ -71,6 +73,14 @@ class TestRadioGroupComponent {
   options: RadioOption[] = [];
 
   onChange(event: GoabRadioGroupOnChangeDetail) {
+    /** do nothing **/
+  }
+
+  onFocus() {
+    /** do nothing **/
+  }
+
+  onBlur() {
     /** do nothing **/
   }
 }
@@ -189,6 +199,18 @@ describe("GoABRadioGroup", () => {
         event: expect.any(Event),
       }),
     );
+  });
+
+  it("should handle onFocus and onBlur events", () => {
+    const onFocus = jest.spyOn(component, "onFocus");
+    const onBlur = jest.spyOn(component, "onBlur");
+
+    const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
+    fireEvent(radioGroup, new CustomEvent("_focus", { detail: { name: component.name } }));
+    expect(onFocus).toHaveBeenCalled();
+
+    fireEvent(radioGroup, new CustomEvent("_blur", { detail: { name: component.name } }));
+    expect(onBlur).toHaveBeenCalled();
   });
 
   describe("writeValue", () => {

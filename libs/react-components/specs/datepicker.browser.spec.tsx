@@ -209,6 +209,47 @@ describe("DatePicker", () => {
     });
   });
 
+  it("dispatches onFocus and onBlur when focus enters and leaves the calendar picker", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const Component = () => {
+      return (
+        <div>
+          <GoabDatePicker
+            name="event-date"
+            testId="date-picker"
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+          <input data-testid="outside-input" />
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const input = result.getByTestId("calendar-input");
+    const outside = result.getByTestId("outside-input");
+
+    await vi.waitFor(() => {
+      expect(input.element()).toBeTruthy();
+    });
+
+    (input.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(onFocus.mock.calls[0][0].name).toBe("event-date");
+    });
+
+    (outside.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur.mock.calls[0][0].name).toBe("event-date");
+    });
+  });
+
   describe("Width property", () => {
     it("applies custom width with px units", async () => {
       const Component = () => {
@@ -390,6 +431,51 @@ describe("Date Picker input type", () => {
       expect(rootElChangeHandler).toHaveBeenCalledWith("");
     });
     rootElChangeHandler.mockClear();
+  });
+
+  it("dispatches onFocus once across fields and onBlur only once focus leaves all of them", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const Component = () => {
+      return (
+        <div>
+          <GoabDatePicker
+            type="input"
+            name="datePickerInputType"
+            testId="datePicker"
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+          <input data-testid="outside-input" />
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const datePickerDay = result.getByTestId("input-day");
+    const datePickerYear = result.getByTestId("input-year");
+    const outside = result.getByTestId("outside-input");
+
+    await datePickerDay.click();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+    });
+
+    // Moving focus between the date picker's own fields should not re-fire onFocus or fire onBlur
+    (datePickerYear.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    (outside.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+    });
   });
 
   it("should have disabled property on input when disabled is true and type is input", async () => {

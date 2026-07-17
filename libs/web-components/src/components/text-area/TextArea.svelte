@@ -187,6 +187,12 @@
 
   function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+    dispatch(
+      _textareaEl,
+      "_focus",
+      { name, value: _textareaEl.value },
+      { bubbles: true },
+    );
   }
 
   function onBlur(_e: Event) {

@@ -37,9 +37,10 @@ describe("TextArea Browser Tests", () => {
     );
   });
 
-  it("passes the browser event on change, keypress, and blur details", async () => {
+  it("passes the browser event on change, keypress, focus, and blur details", async () => {
     const onChange = vi.fn();
     const onKeyPress = vi.fn();
+    const onFocus = vi.fn();
     const onBlur = vi.fn();
 
     const Component = () => {
@@ -50,6 +51,7 @@ describe("TextArea Browser Tests", () => {
             testId="test-textarea"
             onChange={onChange}
             onKeyPress={onKeyPress}
+            onFocus={onFocus}
             onBlur={onBlur}
           />
           <GoabInput
@@ -85,6 +87,11 @@ describe("TextArea Browser Tests", () => {
       expect(keyPressDetail.value).toBe("s");
       expect(keyPressDetail.key).toBe("s");
       expect(keyPressDetail.event).toBeInstanceOf(Event);
+
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      const focusDetail = onFocus.mock.calls[0][0];
+      expect(focusDetail.name).toBe("test-textarea");
+      expect(focusDetail.event).toBeInstanceOf(Event);
     });
 
     // Trigger blur by focusing on the input element

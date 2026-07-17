@@ -1,0 +1,58 @@
+<goab-block gap="m" direction="column">
+  <goab-text tag="h1" mt="m">
+    Bug #4009: Checkbox and radio item labels have inconsistent weight and color
+  </goab-text>
+
+  <goab-text tag="p">
+    The checkbox label and the radio item label rendered differently even though
+    they are the same kind of form control label. The checkbox had the right color
+    but regular weight, and the radio had the right medium weight but no color, so it
+    inherited the near black page default. After the fix both render in medium weight
+    and resolve their color through component tokens that point at the shared
+    secondary input text color.
+  </goab-text>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <goab-text tag="h3">Test 1: Default size, side by side</goab-text>
+  <goab-text tag="p">
+    The checkbox and radio item labels should be identical in weight (medium) and
+    color (secondary input text color).
+  </goab-text>
+  <goab-block gap="m" direction="column" mb="l">
+    <goab-checkbox name="default-checkbox" text="Checkbox label"></goab-checkbox>
+    <goab-radio-group name="default-radio">
+      <goab-radio-item value="option1" label="Radio item label"></goab-radio-item>
+    </goab-radio-group>
+  </goab-block>
+
+  <goab-text tag="h3">Test 2: Compact size</goab-text>
+  <goab-text tag="p">
+    The compact checkbox label keeps its smaller font size but stays medium weight.
+  </goab-text>
+  <goab-block gap="m" direction="column" mb="l">
+    <goab-checkbox
+      name="compact-checkbox"
+      size="compact"
+      text="Compact checkbox label"
+    ></goab-checkbox>
+  </goab-block>
+
+  <goab-text tag="h3">Test 3: Disabled state</goab-text>
+  <goab-text tag="p">
+    Disabled labels use their own disabled color token and are unaffected by this
+    change.
+  </goab-text>
+  <goab-block gap="m" direction="column">
+    <goab-checkbox
+      name="disabled-checkbox"
+      text="Disabled checkbox label"
+      [disabled]="true"
+    ></goab-checkbox>
+    <goab-radio-group name="disabled-radio" [disabled]="true">
+      <goab-radio-item value="option1" label="Disabled radio item label"></goab-radio-item>
+    </goab-radio-group>
+  </goab-block>
+</goab-block>

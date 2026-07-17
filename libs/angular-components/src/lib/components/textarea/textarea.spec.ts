@@ -32,6 +32,7 @@ import {
       [mb]="mb"
       [ml]="ml"
       (onChange)="onChange()"
+      (onFocus)="onFocus()"
       (onBlur)="onBlur()"
     ></goab-textarea>
   `,
@@ -55,6 +56,10 @@ class TestTextareaComponent {
   ml?: Spacing;
 
   onChange() {
+    /** do nothing **/
+  }
+
+  onFocus() {
     /** do nothing **/
   }
 
@@ -119,6 +124,20 @@ describe("GoABTextArea", () => {
     );
 
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("should dispatch onFocus", () => {
+    const onFocus = jest.spyOn(component, "onFocus");
+
+    const el = fixture.nativeElement.querySelector("goa-textarea");
+    fireEvent(
+      el,
+      new CustomEvent("_focus", {
+        detail: { name: "textarea-name", value: "test value" },
+      }),
+    );
+
+    expect(onFocus).toHaveBeenCalledTimes(1);
   });
 
   it("should dispatch onBlur", () => {

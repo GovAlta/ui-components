@@ -1,6 +1,8 @@
 import { useEffect, useRef, type JSX } from "react";
 import {
+  GoabRadioGroupOnBlurDetail,
   GoabRadioGroupOnChangeDetail,
+  GoabRadioGroupOnFocusDetail,
   GoabRadioGroupOrientation,
   GoabRadioGroupSize,
   Margins,
@@ -58,6 +60,10 @@ export interface GoabRadioGroupProps extends Margins, DataAttributes {
   children?: React.ReactNode;
   /** Callback fired when the selected radio item changes. */
   onChange?: (detail: GoabRadioGroupOnChangeDetail) => void;
+  /** Callback fired when focus enters any radio item in the group. */
+  onFocus?: (detail: GoabRadioGroupOnFocusDetail) => void;
+  /** Callback fired when focus leaves all radio items in the group. */
+  onBlur?: (detail: GoabRadioGroupOnBlurDetail) => void;
 }
 
 /** Allow users to select one option from a set. */
@@ -65,6 +71,8 @@ export function GoabRadioGroup({
   disabled,
   error,
   onChange,
+  onFocus,
+  onBlur,
   name,
   children,
   size = "default",
@@ -81,18 +89,30 @@ export function GoabRadioGroup({
       const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
       onChange?.({ ...detail, event: e });
     };
+    const focusListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabRadioGroupOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e });
+    };
+    const blurListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabRadioGroupOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
 
     const currentEl = el.current;
     if (onChange) {
       currentEl.addEventListener("_change", listener);
     }
+    currentEl.addEventListener("_focus", focusListener);
+    currentEl.addEventListener("_blur", blurListener);
 
     return () => {
       if (onChange) {
         currentEl.removeEventListener("_change", listener);
       }
+      currentEl.removeEventListener("_focus", focusListener);
+      currentEl.removeEventListener("_blur", blurListener);
     };
-  }, [name, onChange]);
+  }, [name, onChange, onFocus, onBlur]);
 
   return (
     <goa-radio-group

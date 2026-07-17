@@ -44,7 +44,7 @@ export async function getNavCategories(): Promise<NavCategory[]> {
     }
     grouped.get(cat)!.push({
       name: component.data.name,
-      slug: component.slug,
+      slug: component.data.slug || component.id,
     });
   }
 

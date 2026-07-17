@@ -1,4 +1,9 @@
-import { GoabCheckboxListOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import {
+  GoabCheckboxListOnBlurDetail,
+  GoabCheckboxListOnChangeDetail,
+  GoabCheckboxListOnFocusDetail,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {
@@ -41,6 +46,10 @@ export interface GoabCheckboxListProps extends Margins {
   children?: React.ReactNode;
   /** Callback fired when the selected values change. */
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
+  /** Callback fired when focus enters any checkbox in the list. */
+  onFocus?: (detail: GoabCheckboxListOnFocusDetail) => void;
+  /** Callback fired when focus leaves all checkboxes in the list. */
+  onBlur?: (detail: GoabCheckboxListOnBlurDetail) => void;
 }
 
 /** A multiple selection input. */
@@ -54,6 +63,8 @@ export function GoabCheckboxList({
   size = "default",
   children,
   onChange,
+  onFocus,
+  onBlur,
   mt,
   mr,
   mb,
@@ -69,13 +80,25 @@ export function GoabCheckboxList({
       const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
       onChange?.({ ...detail, event: e });
     };
+    const focusListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabCheckboxListOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e });
+    };
+    const blurListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabCheckboxListOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
 
     current.addEventListener("_change", listener);
+    current.addEventListener("_focus", focusListener);
+    current.addEventListener("_blur", blurListener);
 
     return () => {
       current.removeEventListener("_change", listener);
+      current.removeEventListener("_focus", focusListener);
+      current.removeEventListener("_blur", blurListener);
     };
-  }, [onChange]);
+  }, [onChange, onFocus, onBlur]);
 
   return (
     <goa-checkbox-list

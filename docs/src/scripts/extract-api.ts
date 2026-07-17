@@ -37,6 +37,10 @@ const DOCS_COMPONENT_CONTENT_PATH = path.join(
   "docs/src/content/components",
 );
 
+function toPosixPath(filePath: string): string {
+  return filePath.replace(/\\/g, "/");
+}
+
 // Components that expose an imperative helper API (e.g. TemporaryNotification.show)
 // are documented from their controller source rather than from element props. Each
 // entry points at that controller file; the parsing lives in the "Static helper
@@ -194,18 +198,22 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
+// typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
+// consumers never bind a value to them, they nest the sub-component instead.
+const HIDE_SLOT = null;
 const SLOT_TYPE_OVERRIDES: Record<
   string,
-  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | typeof HIDE_SLOT>>>
 > = {
   footer: {
     react: {
-      nav: "GoabAppFooterNavSection",
-      meta: "GoabAppFooterMetaSection",
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     angular: {
-      nav: "GoabAppFooterNavSection",
-      meta: "GoabAppFooterMetaSection",
+      nav: HIDE_SLOT,
+      meta: HIDE_SLOT,
     },
     webComponents: {
       nav: "goa-app-footer-nav-section",
@@ -2598,6 +2606,17 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     Boolean(slotNameAliases[name] || slotDescriptions[name]) ||
     Object.prototype.hasOwnProperty.call(slotRequired, name);
 
+  // `undefined` means no override configured, distinct from `HIDE_SLOT`: an absent key falls
+  // back to the generic type detection below, so this can't just be a `??` on the map lookup.
+  const getSlotOverride = (
+    framework: "react" | "angular" | "webComponents",
+    name: string,
+  ): string | typeof HIDE_SLOT | undefined => {
+    const frameworkOverrides = SLOT_TYPE_OVERRIDES[componentName]?.[framework];
+    if (!frameworkOverrides || !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)) return undefined;
+    return frameworkOverrides[name];
+  };
+
   const createSlots = (
     framework: "react" | "angular" | "webComponents",
     type?: string,
@@ -2607,6 +2626,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
       .filter(
         (name) =>
           !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
+          getSlotOverride(framework, name) !== HIDE_SLOT &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
       .map((name) => {
@@ -2617,9 +2637,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
             : rawDescription;
         return {
           name: useAliasNames ? slotNameAliases[name] || name : name,
-          type:
-            SLOT_TYPE_OVERRIDES[componentName]?.[framework]?.[name] ||
-            (type && hasWrapperSlotEvidence(name) ? type : undefined),
+          type: getSlotOverride(framework, name) ?? (type && hasWrapperSlotEvidence(name) ? type : undefined),
           description,
           required: slotRequired[name] || false,
         };
@@ -2667,7 +2685,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   webComponentSlots.sort((a, b) => a.name.localeCompare(b.name));
 
   // Relative path from workspace root
-  const relativePath = path.relative(WORKSPACE_ROOT, svelteFilePath);
+  const relativePath = toPosixPath(path.relative(WORKSPACE_ROOT, svelteFilePath));
 
   const staticMethods = extractStaticMethods(componentName);
 
@@ -2800,6 +2818,7 @@ function saveComponentAPI(api: ExtractedComponentAPI): void {
     }
   }
 
+  merged.extractedFrom = toPosixPath(merged.extractedFrom);
   fs.writeFileSync(filePath, JSON.stringify(merged, null, 2));
   console.log(`  Created: ${filePath}`);
 }

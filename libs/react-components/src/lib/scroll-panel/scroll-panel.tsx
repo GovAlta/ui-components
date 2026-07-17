@@ -1,9 +1,10 @@
-import { DataAttributes } from "@abgov/ui-components-common";
+import { DataAttributes, GoabScrollPanelDirectionType } from "@abgov/ui-components-common";
 import React, { ReactNode, type JSX } from "react";
 
 interface WCProps {
   height?: string;
   testid?: string;
+  direction?: string;
 }
 
 declare module "react" {
@@ -31,6 +32,12 @@ export interface GoabScrollPanelProps extends DataAttributes {
   height?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /**
+   * The scroll direction(s). When content overflows, enables scrolling and shadow
+   * indicators for the specified direction(s). Accepts "vertical", "horizontal", or "both".
+   * Defaults to "vertical".
+   */
+  direction?: GoabScrollPanelDirectionType;
 }
 
 export function GoabScrollPanel({
@@ -39,12 +46,19 @@ export function GoabScrollPanel({
   footer,
   height,
   testId,
+  direction = "vertical",
   ...rest
 }: GoabScrollPanelProps): JSX.Element {
   const hostStyle = height ? ({ height } as React.CSSProperties) : undefined;
 
   return (
-    <goa-scroll-panel height={height} testid={testId} style={hostStyle} {...rest}>
+    <goa-scroll-panel
+      height={height}
+      testid={testId}
+      direction={direction}
+      style={hostStyle}
+      {...rest}
+    >
       {header && <div slot="header">{header}</div>}
       {children}
       {footer && <div slot="footer">{footer}</div>}

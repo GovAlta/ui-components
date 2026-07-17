@@ -233,6 +233,21 @@
 
   function onFocus() {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+    dispatch(
+      _checkboxRef,
+      "_focus",
+      { name, value, checked: isChecked },
+      { bubbles: true },
+    );
+  }
+
+  function onBlur() {
+    dispatch(
+      _checkboxRef,
+      "_blur",
+      { name, value, checked: isChecked },
+      { bubbles: true },
+    );
   }
 
   /**
@@ -298,6 +313,7 @@ max-width: ${maxwidth};
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}
+        on:blur={onBlur}
       />
       {#if isIndeterminate && version === "2"}
         <svg
@@ -418,6 +434,9 @@ max-width: ${maxwidth};
     padding-left: var(--goa-checkbox-gap); /* Space between checkbox and text */
     user-select: none;
     font: var(--goa-checkbox-label-font-size);
+    /* The font shorthand resets weight to the token's default (regular), so set
+       medium explicitly to match the radio item label. */
+    font-weight: var(--goa-font-weight-medium);
     color: var(--goa-checkbox-color-label);
   }
 
@@ -635,6 +654,8 @@ max-width: ${maxwidth};
   .v2.compact .text {
     padding-left: var(--goa-checkbox-gap-compact);
     font: var(--goa-checkbox-label-font-size-compact);
+    /* The compact font shorthand also resets the weight, so restate medium. */
+    font-weight: var(--goa-font-weight-medium);
   }
 
   .compact .description {

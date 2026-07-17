@@ -9,11 +9,13 @@ import {
   GoabFormItem,
 } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { userEvent } from "@vitest/browser/context";
+import { page, userEvent } from "@vitest/browser/context";
 import { useState } from "react";
 
 describe("Modal", () => {
   it("should not auto-scroll to links at the bottom when modal with long content opens", async () => {
+    await page.viewport(1024, 500);
+
     const Component = () => {
       const [open, setOpen] = useState(false);
 
@@ -113,7 +115,7 @@ describe("Modal", () => {
       if (scrollPanelEl && scrollPanelEl.shadowRoot) {
         // Access the actual scrolling container within goa-scroll-panel
         const scrollContainer = scrollPanelEl.shadowRoot.querySelector(
-          ".scroll-panel-content",
+          ".scroll-panel-scroll-container",
         );
 
         if (scrollContainer) {

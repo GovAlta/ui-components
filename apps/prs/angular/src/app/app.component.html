@@ -4,9 +4,12 @@
       heading="Testing Playground"
       [url]="baseHref"
       [open]="true"
+      userName="Edna Mode"
+      userSecondaryText="edna.mode@gov.ab.ca"
       (onNavigate)="handleNavigate($event)"
       [primaryContent]="primaryTemplate"
       [secondaryContent]="tokenToggleTemplate"
+      [accountContent]="accountTemplate"
     />
   </ng-template>
   <ng-template #tokenToggleTemplate>
@@ -20,8 +23,47 @@
       [label]="theme.mode() === 'dark' ? 'Light mode' : 'Dark mode'"
       url="#toggle-theme"
     />
+    <goab-work-side-menu-item
+      icon="notifications"
+      label="Notifications"
+      url="#"
+      testId="work-space-side-menu-item-notification"
+      [trailingContent]="notificationBadgeTpl"
+      [popoverContent]="notificationsTpl"
+    />
   </ng-template>
 
+  <ng-template #notificationBadgeTpl>
+    <goab-badge type="success" [content]="notifications.length.toString()" />
+  </ng-template>
+
+  <ng-template #notificationsTpl>
+    <goab-work-side-notification-panel
+      testId="work-space-side-notification-panel"
+      heading="Notifications"
+      activeTab="unread"
+      (onMarkAllRead)="handleMarkAllRead()"
+      (onViewAll)="handleViewAll()"
+    >
+      @for (notif of notifications; track trackById($index, notif)) {
+        <goab-work-side-notification-item
+          [testId]="'noti-' + notif.id"
+          [title]="notif.title"
+          [description]="notif.description"
+          [timestamp]="notif.timestamp"
+          [type]="notif.type"
+          [readStatus]="notif.readStatus"
+          [priority]="notif.priority"
+          (onClick)="handleNotificationClick(notif.id)"
+        />
+      }
+    </goab-work-side-notification-panel>
+  </ng-template>
+
+  <ng-template #accountTemplate>
+    <goab-work-side-menu-item icon="settings" label="Settings" url="#" />
+    <goab-work-side-menu-item icon="log-out" label="Log out" url="#" />
+  </ng-template>
 
   <ng-template #primaryTemplate>
     <goab-work-side-menu-item

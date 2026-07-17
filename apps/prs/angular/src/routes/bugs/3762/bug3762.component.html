@@ -1,0 +1,152 @@
+<ng-template #heroActions>
+  <goab-button type="primary">Get started</goab-button>
+  <goab-button type="secondary">Secondary CTA</goab-button>
+</ng-template>
+
+<ng-template #bannerTemplate>
+  <goab-text tag="span" size="body-xs" maxWidth="100%">
+    v2.3.1 | PR Environment
+  </goab-text>
+</ng-template>
+
+<ng-template #phaseTemplate>
+  <goab-badge type="important" content="Service preview"></goab-badge>
+</ng-template>
+
+<ng-template #navigationTemplate>
+  <a href="#">Dashboard</a>
+  <goab-app-header-menu heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </goab-app-header-menu>
+  <a href="#">Help</a>
+</ng-template>
+
+<ng-template #largeNavigationTemplate>
+  <a href="#">Dashboard</a>
+  <goab-app-header-menu heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </goab-app-header-menu>
+  <a href="#">Reports</a>
+  <a href="#">Settings</a>
+  <a href="#">File</a>
+  <a href="#">Edit</a>
+  <a href="#">View</a>
+  <a href="#">Search</a>
+  <a href="#">Filter</a>
+  <a href="#">Help</a>
+</ng-template>
+
+<ng-template #signedInUtilitiesTemplate>
+  <goab-button type="tertiary" size="compact">Help</goab-button>
+  <goab-menu-button
+    text="John Smith"
+    type="tertiary"
+    size="compact"
+    (onAction)="signOut()"
+  >
+    <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
+    <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
+  </goab-menu-button>
+</ng-template>
+
+<ng-template #signedOutUtilitiesTemplate>
+  <goab-button type="tertiary" size="compact">Help</goab-button>
+  <goab-button type="tertiary" size="compact" leadingIcon="person" (onClick)="signIn()">
+    Sign in
+  </goab-button>
+</ng-template>
+
+<ng-template #largeUtilitiesTemplate>
+  <goab-button type="tertiary" size="compact">Help</goab-button>
+  <goab-button type="tertiary" size="compact" leadingIcon="person">Sign in</goab-button>
+  <goab-button type="tertiary" size="compact">User settings</goab-button>
+  <goab-button size="compact">Sign out</goab-button>
+</ng-template>
+
+<ng-template #pageContent>
+  <goab-hero-banner
+    heading="Hero banner"
+    backgroundUrl="https://picsum.photos/1200/400?random=3"
+    [actions]="heroActions"
+  >
+    <goab-text tag="p" size="body-l">
+      Hero banner demonstrates background imagery and projected actions.
+    </goab-text>
+  </goab-hero-banner>
+  <goab-block direction="row" gap="l" mt="m">
+    <goab-side-menu>
+      <goab-side-menu-heading>Menu heading</goab-side-menu-heading>
+      <goab-side-menu-group heading="Group one">
+        <a href="#">Link A</a>
+        <a href="#">Link B</a>
+      </goab-side-menu-group>
+      <a href="#">Loose link</a>
+    </goab-side-menu>
+    <goab-page-block width="full">
+      <goab-text tag="p" size="body-m">
+        Content area with side menu demonstrates layout wrappers.
+      </goab-text>
+    </goab-page-block>
+  </goab-block>
+</ng-template>
+
+<h1>3762 AppHeader named slot APIs</h1>
+<goab-container type="interactive" padding="relaxed">
+  <goab-text tag="h3" size="heading-s">Dynamic utilities</goab-text>
+  <goab-column-layout>
+    <goab-app-header
+      heading="Example 1"
+      [navigation]="navigationTemplate"
+      [utilities]="isSignedIn ? signedInUtilitiesTemplate : signedOutUtilitiesTemplate"
+      [phase]="phaseTemplate"
+      [banner]="bannerTemplate"
+    ></goab-app-header>
+    <ng-container [ngTemplateOutlet]="pageContent"></ng-container>
+  </goab-column-layout>
+</goab-container>
+
+<hr />
+
+<h1>AppHeader named slot APIs with overflow content</h1>
+<goab-container type="interactive" padding="relaxed">
+  <goab-text tag="h3" size="heading-s">Site chrome</goab-text>
+  <goab-column-layout>
+    <goab-app-header
+      heading="Example 2"
+      [navigation]="largeNavigationTemplate"
+      [utilities]="largeUtilitiesTemplate"
+      [phase]="phaseTemplate"
+      [banner]="bannerTemplate"
+    ></goab-app-header>
+    <ng-container [ngTemplateOutlet]="pageContent"></ng-container>
+  </goab-column-layout>
+</goab-container>
+
+<hr />
+
+<h1>Legacy direct slot usage</h1>
+<goab-container type="interactive" padding="relaxed">
+  <goab-app-header heading="Example 3">
+    <a slot="navigation" href="#">Dashboard</a>
+    <goab-app-header-menu slotName="navigation" heading="Applications">
+      <a href="#">New application</a>
+      <a href="#">Active</a>
+      <a href="#">Archived</a>
+    </goab-app-header-menu>
+    <a slot="navigation" href="#">Reports</a>
+    <goab-button slot="utilities" type="tertiary" size="compact">Help</goab-button>
+    <goab-menu-button
+      slot="utilities"
+      text="John Smith"
+      type="tertiary"
+      size="compact"
+    >
+      <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
+      <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
+    </goab-menu-button>
+  </goab-app-header>
+</goab-container>

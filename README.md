@@ -144,7 +144,7 @@ Import the styles in `src/styles.css`:
 
 ## Local development
 
-This repo uses Nx. The toolchain is pinned to Node `24.11.0` in [mise.toml](./mise.toml).
+This repo uses Nx
 
 Install dependencies:
 
@@ -152,20 +152,22 @@ Install dependencies:
 npm install
 ```
 
-Useful commands:
+Useful local commands:
 
 - `npm run serve:docs` to run the docs site locally.
-- `npm run dev:setup` to create the local dev app scaffold in `apps/dev`.
 - `npm run dev:watch` to rebuild `web-components` while developing against a preview app.
-- `npm run serve:dev:web` to run the web preview app.
-- `npm run serve:dev:react` to run the React preview app.
-- `npm run serve:dev:angular` to run the Angular preview app.
-- `npm run test:unit` to run unit tests.
-- `npm run test:headless` to run headless browser tests.
-- `npm run test:browser` to run browser-based tests.
+- `npm run serve:prs:react` to run the React preview app.
+- `npm run serve:prs:angular` to run the Angular preview app.
+- `npm run test:pr` to run all tests (unit, browser, etc...).
 - `npm run build` to build affected projects.
 - `npm run validate` to run the full validation pipeline.
 
+## Support and maintenance
+
+This repository is provided as-is. There is no guarantee of ongoing maintenance, support, compatibility updates, or responses to issues or pull requests.
+
+Point of contact: [Sheldon Bauld](sheldon.bauld@gov.ab.ca)
+
 ## License
 
-Apache-2.0
+MIT

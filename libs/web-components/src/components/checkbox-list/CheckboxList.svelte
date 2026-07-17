@@ -13,7 +13,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { receive, relay, toBoolean } from "../../common/utils";
+  import { dispatch, receive, relay, toBoolean, watchFocusWithin } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -75,6 +75,12 @@
     addRelayListener();
     addSlotEventListeners();
     sendMountedMessage();
+
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
 
     // Initialize after a tick to ensure DOM is ready
     _isInitialized = true;
@@ -277,7 +283,10 @@
    */
   function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
     const checkboxElement = (detail.el.getRootNode() as any)?.host;
-    if (!checkboxElement || checkboxElement.tagName.toLowerCase() !== "goa-checkbox") {
+    if (
+      !checkboxElement ||
+      checkboxElement.tagName.toLowerCase() !== "goa-checkbox"
+    ) {
       return;
     }
 
@@ -302,10 +311,21 @@
       const detail = customEvent.detail;
       e.stopPropagation();
 
-      if (detail && detail.value !== undefined) {
+      // Only react to real user check changes. Parent-to-child sync events
+      // from Checkbox.onSetValue dispatch _change without a `checked` field,
+      // and treating those as user actions creates a feedback loop that
+      // wipes out the selection.
+      if (
+        detail &&
+        detail.value !== undefined &&
+        typeof detail.checked === "boolean"
+      ) {
         handleChildCheckboxChange(detail);
       }
     });
+
+    _slotEl.addEventListener("_focus", (e: Event) => e.stopPropagation());
+    _slotEl.addEventListener("_blur", (e: Event) => e.stopPropagation());
   }
 
   // Update the selected values array when an individual child changes.
@@ -430,7 +450,12 @@
   data-testid={testid}
   on:focus={onFocus}
 >
-  <div bind:this={_slotEl} class="checkbox-container" class:v2={version === "2"} class:compact={size === "compact"}>
+  <div
+    bind:this={_slotEl}
+    class="checkbox-container"
+    class:v2={version === "2"}
+    class:compact={size === "compact"}
+  >
     <slot />
   </div>
 </div>

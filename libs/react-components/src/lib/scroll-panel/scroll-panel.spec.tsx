@@ -52,6 +52,22 @@ describe("ScrollPanel", () => {
     expect(el?.getAttribute("testid")).toBe("my-panel");
   });
 
+  it("defaults the direction attribute to vertical", () => {
+    const { container } = render(
+      <GoabScrollPanel>Body content</GoabScrollPanel>,
+    );
+    const el = container.querySelector("goa-scroll-panel");
+    expect(el?.getAttribute("direction")).toBe("vertical");
+  });
+
+  it("passes the direction prop to the web component", () => {
+    const { container } = render(
+      <GoabScrollPanel direction="horizontal">Body content</GoabScrollPanel>,
+    );
+    const el = container.querySelector("goa-scroll-panel");
+    expect(el?.getAttribute("direction")).toBe("horizontal");
+  });
+
   it("passes data attributes to the web component", () => {
     const { container } = render(
       <GoabScrollPanel data-testid="sp-test">Body content</GoabScrollPanel>,

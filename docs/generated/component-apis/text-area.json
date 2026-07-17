@@ -163,6 +163,14 @@
           ]
         },
         {
+          "name": "onFocus",
+          "type": "(event: GoabTextAreaOnFocusDetail) => void",
+          "description": "Callback fired when the textarea receives focus.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onKeyPress",
           "type": "(event: GoabTextAreaOnKeyPressDetail) => void",
           "description": "Callback fired when a key is pressed within the textarea.",
@@ -329,6 +337,14 @@
           "name": "onChange",
           "type": "(event: GoabTextAreaOnChangeDetail) => void",
           "description": "Emits when the textarea value changes. Emits the name and new value.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabTextAreaOnFocusDetail) => void",
+          "description": "Emits when the textarea receives focus. Emits the name and current value.",
           "frameworks": [
             "angular"
           ]
@@ -514,6 +530,14 @@
         },
         {
           "name": "_change",
+          "type": "CustomEvent<{ name: string; value: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
           "type": "CustomEvent<{ name: string; value: string }>",
           "description": "",
           "frameworks": [

@@ -16,14 +16,15 @@ interface Props {
 
 const { example, titleSize = 'small' } = Astro.props;
 const { data } = example;
-const code = await getExampleCode(example.slug);
+const slug = data.slug || example.id;
+const code = await getExampleCode(slug);
 ---
 
 <div class="example-display">
   <ExamplePreview
     client:load
     title={data.title}
-    slug={example.slug}
+    slug={slug}
     code={code}
     figmaUrl={data.figmaUrl}
     fullWidth={data.fullWidth}

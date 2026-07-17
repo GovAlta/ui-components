@@ -180,4 +180,38 @@ describe("Radio", () => {
       expect(detail.event).toBeInstanceOf(Event);
     });
   });
+
+  it("dispatches onFocus and onBlur when focus enters and leaves the radio group", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const result = render(
+      <div>
+        <GoabRadioGroup name="test" value="" onFocus={onFocus} onBlur={onBlur}>
+          <GoabRadioItem name="test" value="option1" label="Option 1" />
+        </GoabRadioGroup>
+        <input data-testid="outside-input" />
+      </div>,
+    );
+
+    const radioInput = result.getByTestId("radio-option-option1");
+    const outside = result.getByTestId("outside-input");
+    await vi.waitFor(() => {
+      expect(radioInput.element()).toBeTruthy();
+    });
+
+    (radioInput.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onFocus).toHaveBeenCalledTimes(1);
+      expect(onFocus.mock.calls[0][0].name).toBe("test");
+    });
+
+    (outside.element() as HTMLInputElement).focus();
+
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur.mock.calls[0][0].name).toBe("test");
+    });
+  });
 });

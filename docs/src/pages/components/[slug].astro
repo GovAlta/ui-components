@@ -25,7 +25,7 @@ import { getThumbnailPath } from '../../lib/component-thumbnails';
 export async function getStaticPaths() {
   const components = await getCollection('components');
   return components.map((component) => ({
-    params: { slug: component.slug },
+    params: { slug: component.data.slug || component.id },
     props: { component },
   }));
 }
@@ -147,9 +147,8 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     </goa-tab>
 
     <!-- Examples Tab -->
-    <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation -->
     {!hideTabs.includes('examples') && (
-    <goa-tab heading="Examples">
+    <goa-tab heading="Examples" slug="examples">
       <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
         {componentExamples.length > 0 ? (
@@ -208,7 +207,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
       <h2 class="related-heading">Related components</h2>
       <div class="related-cards">
         {relatedComponents.map((comp) => {
-          const compSlug = comp.data.slug || comp.slug;
+          const compSlug = comp.data.slug || comp.id;
           return (
             <a href={withBase(`/components/${compSlug}`)} class="related-card">
               <div class="related-card-thumbnail" aria-hidden="true">

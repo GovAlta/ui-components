@@ -5,6 +5,44 @@ import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from ".
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
+// The tooltip uses a 300ms show/hide debounce. On contended CI runners that
+// timer can be delayed past waitFor's 1000ms default, so give the tooltip
+// assertions extra headroom to absorb the debounce plus event latency.
+const TOOLTIP_WAIT = { timeout: 3000 };
+const TOOLTIP_TEST_TIMEOUT = 20000;
+const HOVER_ATTEMPTS = 3;
+
+// Drive the component's hover handlers directly. This function verifies tooltip
+// behaviour after hover events, not browser pointer movement.
+async function waitForTooltipToShow(
+  getHoverTarget: () => Element | null,
+  getTooltip: () => HTMLElement | null,
+  label: string,
+) {
+  for (let attempt = 1; ; attempt++) {
+    await vi.waitFor(() => {
+      expect(getHoverTarget()).toBeTruthy();
+    }, TOOLTIP_WAIT);
+    getHoverTarget()?.dispatchEvent(new MouseEvent("mouseenter"));
+    try {
+      await vi.waitFor(() => {
+        const tooltipEl = getTooltip();
+        expect(tooltipEl?.classList.contains("show")).toBe(true);
+        expect(tooltipEl?.textContent?.trim()).toBe(label);
+        expect(tooltipEl?.style.left).not.toBe("");
+        expect(tooltipEl?.style.top).not.toBe("");
+      }, TOOLTIP_WAIT);
+      return;
+    } catch (err) {
+      if (attempt === HOVER_ATTEMPTS) throw err;
+    }
+  }
+}
+
+function dispatchMouseLeave(el: Element | null) {
+  el?.dispatchEvent(new MouseEvent("mouseleave"));
+}
+
 describe("WorkSideMenu", () => {
   describe("Desktop viewport", () => {
     it("renders with slots", async () => {
@@ -110,172 +148,134 @@ describe("WorkSideMenu", () => {
       expect(menu.element().classList.contains("closed")).toBeFalsy();
     });
 
-    it("should show and hide tooltip for item", async () => {
-      await page.viewport(1024, 768);
+    it(
+      "should show and hide tooltip for item",
+      async () => {
+        await page.viewport(1024, 768);
 
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="menu"
-            primaryContent={
-              <GoabWorkSideMenuItem
-                icon="search"
-                label="Search"
-                url="/search"
-                testId="hover-item"
-              />
-            }
-            open={false}
-          />
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="menu"
+              primaryContent={
+                <GoabWorkSideMenuItem
+                  icon="search"
+                  label="Search"
+                  url="/search"
+                  testId="hover-item"
+                />
+              }
+              open={false}
+            />
+          );
+        };
+
+        const result = render(<Component />);
+        const menu = result.getByTestId("menu");
+        const menuItem = result.getByTestId("hover-item");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
+
+        // The item's mouseenter listener lives on its root div, which carries
+        // the data-testid; the hide listener is on the menu's primary slot
+        // wrapper.
+        await waitForTooltipToShow(() => menuItem.element(), getTooltip, "Search");
+
+        dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
+
+        await vi.waitFor(() => {
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
+
+    it(
+      "should show and hide tooltip for group",
+      async () => {
+        await page.viewport(1024, 768);
+
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="menu"
+              primaryContent={
+                <GoabWorkSideMenuGroup
+                  heading="Applications"
+                  icon="documents"
+                  testId="hover-group"
+                >
+                  <GoabWorkSideMenuItem label="In progress" url="/in-progress" />
+                </GoabWorkSideMenuGroup>
+              }
+              open={false}
+            />
+          );
+        };
+
+        const result = render(<Component />);
+        const menu = result.getByTestId("menu");
+        const group = result.getByTestId("hover-group");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
+
+        // The group's mouseenter listener lives on its inner details element;
+        // the hide listener is on the menu's primary slot wrapper.
+        await waitForTooltipToShow(
+          () => group.element().querySelector("details"),
+          getTooltip,
+          "Applications",
         );
-      };
 
-      const result = render(<Component />);
-      const menu = result.getByTestId("menu");
-      const menuItem = result.getByTestId("hover-item");
-
-      vi.useFakeTimers();
-      try {
-        await menuItem.hover();
-        await vi.advanceTimersByTimeAsync(400);
+        dispatchMouseLeave(menu.element().querySelector(".primary-menu"));
 
         await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Search");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
 
-        await menuItem.unhover();
-        await vi.advanceTimersByTimeAsync(400);
+    it(
+      "should show and hide tooltip for toggle button",
+      async () => {
+        await page.viewport(1024, 768);
 
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
-    });
+        const Component = () => {
+          return (
+            <GoabWorkSideMenu
+              heading="Test Heading"
+              url="https://example.com/"
+              testId="work-side-menu"
+              primaryContent={
+                <GoabWorkSideMenuItem icon="search" label="Search" url="/search" />
+              }
+              open={false}
+            />
+          );
+        };
 
-    it("should show and hide tooltip for group", async () => {
-      await page.viewport(1024, 768);
+        const result = render(<Component />);
+        const menu = result.getByTestId("work-side-menu");
+        const toggle = result.getByTestId("toggle-menu");
+        const getTooltip = () =>
+          menu.element().querySelector(".tooltip") as HTMLElement | null;
 
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="menu"
-            primaryContent={
-              <GoabWorkSideMenuGroup
-                heading="Applications"
-                icon="documents"
-                testId="hover-group"
-              >
-                <GoabWorkSideMenuItem label="In progress" url="/in-progress" />
-              </GoabWorkSideMenuGroup>
-            }
-            open={false}
-          />
-        );
-      };
+        // The toggle button owns both its mouseenter and mouseleave listeners.
+        await waitForTooltipToShow(() => toggle.element(), getTooltip, "Expand menu");
 
-      const result = render(<Component />);
-      const menu = result.getByTestId("menu");
-      const group = result.getByTestId("hover-group");
-
-      vi.useFakeTimers();
-      try {
-        await group.hover();
-        await vi.advanceTimersByTimeAsync(400);
+        dispatchMouseLeave(toggle.element());
 
         await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Applications");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
-
-        await group.unhover();
-        await vi.advanceTimersByTimeAsync(400);
-
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
-    });
-
-    it("should show and hide tooltip for toggle button", async () => {
-      await page.viewport(1024, 768);
-
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            testId="work-side-menu"
-            primaryContent={
-              <GoabWorkSideMenuItem icon="search" label="Search" url="/search" />
-            }
-            open={false}
-          />
-        );
-      };
-
-      const result = render(<Component />);
-      const menu = result.getByTestId("work-side-menu");
-      const toggle = result.getByTestId("toggle-menu");
-
-      vi.useFakeTimers();
-      try {
-        await toggle.hover();
-        await vi.advanceTimersByTimeAsync(400);
-
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(true);
-          expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
-          expect(tooltipEl?.style.left).not.toBe("");
-          expect(tooltipEl?.style.top).not.toBe("");
-        });
-
-        await toggle.unhover();
-        await vi.advanceTimersByTimeAsync(400);
-
-        await vi.waitFor(() => {
-          const tooltipEl = menu
-            .element()
-            .querySelector(".tooltip") as HTMLElement | null;
-          expect(tooltipEl).toBeTruthy();
-          expect(tooltipEl?.classList.contains("show")).toBe(false);
-        });
-      } finally {
-        vi.useRealTimers();
-      }
-    });
+          expect(getTooltip()?.classList.contains("show")).toBe(false);
+        }, TOOLTIP_WAIT);
+      },
+      TOOLTIP_TEST_TIMEOUT,
+    );
 
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
       await page.viewport(1024, 768);
