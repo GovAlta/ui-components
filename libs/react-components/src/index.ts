@@ -33,6 +33,7 @@ export * from "./lib/form/public-subform";
 export * from "./lib/form/public-subform-index";
 export * from "./lib/form/task";
 export * from "./lib/form/task-list";
+export * from "./lib/public-form/public-form-page-layout";
 export * from "./lib/form-item/form-item";
 export * from "./lib/form-step/form-step";
 export * from "./lib/form-stepper/form-stepper";
