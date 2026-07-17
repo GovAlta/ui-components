@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { GoabButton, GoabTab, GoabTabs } from "@abgov/react-components";
 
 import hljs from "highlight.js/lib/core";
@@ -30,12 +30,6 @@ hljs.registerLanguage("tsx", typescript);
 hljs.registerLanguage("html", xml);
 hljs.registerLanguage("css", css);
 hljs.registerLanguage("javascript", javascript);
-
-// useLayoutEffect warns during SSR (it can't run on the server). These islands
-// hydrate on the client where the layout timing matters, so fall back to
-// useEffect on the server to stay quiet while keeping pre-paint behavior client-side.
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export type Language = "tsx" | "typescript" | "javascript" | "html" | "css";
 
@@ -232,23 +226,40 @@ export function CodeSnippet({
       frameworkCode?.webComponents,
     ],
   );
+  const availableFrameworksKey = availableFrameworks.join("-");
+  const hasMultipleFrameworks = availableFrameworks.length > 1;
 
   const [selectedFramework, setSelectedFramework] = useState<Framework>(() =>
     getSupportedFramework("react", availableFrameworks),
   );
+  const [isFrameworkPreferenceReady, setIsFrameworkPreferenceReady] =
+    useState(!hasMultipleFrameworks);
+  const [tabsRevision, setTabsRevision] = useState(0);
+  // The clicked GoabTabs instance already changes itself internally. Only
+  // external preference changes need a remount to apply a new initialTab.
+  const localFrameworkChangeRef = useRef<Framework | null>(null);
 
-  // Apply the saved preference in a layout effect (before the browser paints)
-  // rather than a passive effect (after paint). The key on GoabTabs remounts it
-  // when selectedFramework changes; doing that after paint flashed the default
-  // React tab for a frame before swapping. A layout effect lets the remount land
-  // in the same frame, so the saved framework is the first thing painted.
-  useIsomorphicLayoutEffect(() => {
-    setSelectedFramework(getSupportedFramework(getFrameworkPreference(), availableFrameworks));
+  useEffect(() => {
+    const supportedFramework = getSupportedFramework(
+      getFrameworkPreference(),
+      availableFrameworks,
+    );
+
+    setSelectedFramework(supportedFramework);
+    setIsFrameworkPreferenceReady(true);
 
     return subscribeToFrameworkPreference((framework) => {
-      setSelectedFramework(getSupportedFramework(framework, availableFrameworks));
+      const supportedFramework = getSupportedFramework(framework, availableFrameworks);
+      setSelectedFramework(supportedFramework);
+
+      if (localFrameworkChangeRef.current === supportedFramework) {
+        localFrameworkChangeRef.current = null;
+        return;
+      }
+
+      setTabsRevision((revision) => revision + 1);
     });
-  }, [availableFrameworks]);
+  }, [availableFrameworksKey]);
 
   // Listen for native tab change events (user clicking a tab in THIS component).
   // Broadcasts the change to all other CodeSnippet instances on the page.
@@ -258,7 +269,12 @@ export function CodeSnippet({
       const frameworkIndex = detail.tab - 1;
       const framework = availableFrameworks[frameworkIndex];
 
+      if (framework) {
+        setSelectedFramework(framework);
+      }
+
       if (framework && framework !== getFrameworkPreference()) {
+        localFrameworkChangeRef.current = framework;
         // Broadcast to all other components and persist to localStorage
         setFrameworkPreference(framework);
       }
@@ -266,8 +282,9 @@ export function CodeSnippet({
     [availableFrameworks],
   );
 
-  const selectedTabIndex = Math.max(availableFrameworks.indexOf(selectedFramework), 0);
-  const tabsKey = `${availableFrameworks.join("-")}-${selectedFramework}`;
+  const selectedTabIndex = availableFrameworks.indexOf(selectedFramework);
+  const initialTab = (selectedTabIndex === -1 ? 0 : selectedTabIndex) + 1;
+  const tabsKey = `${availableFrameworksKey}-${tabsRevision}`;
 
   // Simple mode - single code block
   if (!hasFrameworkSwitcher) {
@@ -455,30 +472,30 @@ export function CodeSnippet({
 
   return (
     <div className="code-snippet-wrapper">
-      {availableFrameworks.length > 1 ? (
-        // Multiple frameworks - use tabs with content inside.
-        // Renderers always emit per-block .code-snippet wrappers themselves,
-        // so we don't add an outer wrap here.
-        <div className="framework-switcher">
-          <GoabTabs
-            key={tabsKey}
-            variant="segmented"
-            initialTab={selectedTabIndex + 1}
-            orientation="horizontal"
-            navigation="none"
-            onChange={handleTabChange}
-          >
-            {availableFrameworks.map((fw) => (
-              <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
-                {renderBlocksForFramework(fw)}
-              </GoabTab>
-            ))}
-          </GoabTabs>
-        </div>
-      ) : (
-        // Single framework - no tabs, renderer provides its own wrappers
-        renderFrameworkBlocks()
-      )}
+      {hasMultipleFrameworks
+        ? // Multiple frameworks - use tabs with content inside.
+          // Renderers always emit per-block .code-snippet wrappers themselves,
+          // so we don't add an outer wrap here.
+          isFrameworkPreferenceReady && (
+            <div className="framework-switcher">
+              <GoabTabs
+                key={tabsKey}
+                variant="segmented"
+                initialTab={initialTab}
+                orientation="horizontal"
+                navigation="none"
+                onChange={handleTabChange}
+              >
+                {availableFrameworks.map((fw) => (
+                  <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
+                    {renderBlocksForFramework(fw)}
+                  </GoabTab>
+                ))}
+              </GoabTabs>
+            </div>
+          )
+        : // Single framework - no tabs, renderer provides its own wrappers
+          renderFrameworkBlocks()}
     </div>
   );
 }
