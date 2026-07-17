@@ -6,19 +6,18 @@ The skill that turns "I'm building X for users" into the right Government of Alb
 
 For anyone building with the design system: tell your AI what you're making in plain terms ("a renewal form for citizens", "a case queue for workers") and it works out the right GoA product type, the matching page and section templates, and the exact components with their props and gotchas, before it writes any code.
 
-Under the hood: it is the composition layer to the MCP's knowledge layer. The MCP answers "what is this component"; this skill answers "I'm building this, how should I approach it," following the design system's service-first method so an AI tool uses our conventions by default.
+Under the hood: it is the composition layer to the MCP's knowledge layer. The MCP answers "what is this component"; this skill answers "I'm building this, how should I approach it," walking the design system's structure top-down so an AI tool uses our conventions by default.
 
 ## What it does
 
 When you describe what you're building in user-facing terms, the skill walks the design system's structure top-down instead of jumping to a component:
 
-1. Names the service type: what the user is trying to accomplish, in service language ("getting permission", "requesting information", "getting financial support"). This uses Kate Tarling's Common Service Types vocabulary.
-2. Maps that to a product type: workspace (worker-facing) or public-form (citizen-facing), saying the translation out loud, and naming a gap if it does not fit cleanly.
-3. Pulls the matching templates by size (interaction, section, page, task, product) from the MCP.
-4. Pulls each component's real props, token references, and embedded guidance (the do's and don'ts) from the MCP, before any code is written.
-5. Hands back the plan and the known gotchas first, names what it assumed, and flags decisions a person should make.
+1. Works out the product type: workspace (worker-facing) or public-form (citizen-facing), from which side of the service the intent describes, naming a gap if it does not fit cleanly.
+2. Pulls the matching templates by size (interaction, section, page, task, product) from the MCP.
+3. Pulls each component's real props, token references, and embedded guidance (the do's and don'ts) from the MCP, before any code is written.
+4. Hands back the plan and the known gotchas first, names what it assumed, and flags decisions a person should make.
 
-A guided descent: service, to product type, to template, to component, to tokens, with the MCP supplying the facts at each step.
+A guided descent: product type, to template, to component, to tokens, with the MCP supplying the facts at each step.
 
 ## How it works
 
@@ -26,7 +25,6 @@ The MCP is the knowledge layer (facts, through its `search` and `get` tools). Th
 
 The structure it walks:
 
-- Service type: what the user is trying to accomplish (vocabulary layer)
 - Product type: workspace (worker) or public-form (citizen)
 - Example by size: interaction, section, page, task, product
 - Components: the atomic UI building blocks
@@ -35,7 +33,7 @@ The structure it walks:
 
 ## What makes it distinctive
 
-- Service-first, not component-first. It establishes product type and template before reaching for a component, so the result follows the system's conventions instead of being correct-looking code that ignores them.
+- Structure-first, not component-first. It establishes product type and template before reaching for a component, so the result follows the system's conventions instead of being correct-looking code that ignores them.
 - Derives, does not interrogate. It infers worker-vs-citizen from the product type instead of asking.
 - Advisory and transparent. It names its defaults ("I'll scaffold in React, the same works in Angular") and escalates real decisions to people.
 - Same content, different lens. A designer gets design language; a developer gets technical language. It reframes, it does not withhold.
@@ -58,5 +56,4 @@ Then describe what you are building in plain terms, and the skill loads on its o
 
 ## Good to know
 
-- The service-type layer is vocabulary, not data yet. The skill leads with the Kate Tarling service types as a navigation lens; they are not a queryable layer in the MCP. As the service-mapping work formalizes them, the skill will get more opinionated about the building blocks each type expects.
 - The bundled `taxonomy.md` is a cache. It is a fast lookup of sizes, product types, and current templates, and it can drift from the docs site. The docs site and the MCP are the source of truth. Keep `taxonomy.md` in sync when product types or templates change.

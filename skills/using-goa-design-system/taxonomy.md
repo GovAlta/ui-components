@@ -7,7 +7,7 @@ A fast lookup for this skill. Treat the docs site as the source of truth; this f
 - Sizes
 - Product types
 - User type
-- Service types (vocabulary layer)
+- Intent → product type
 - Aliases (slugs)
 - Pages within each product (today)
 - What this file is NOT
@@ -49,33 +49,17 @@ Other product types (e.g. `error-pages`) may exist as example overviews without 
 
 This derivation replaces the previous `userType` field on examples.
 
-## Service types (vocabulary layer)
+## Intent → product type
 
-A service type names what a citizen or worker is trying to accomplish in service terms. The Kate Tarling "Common Service Types" framework names nine:
+A fast routing table from common intent shapes to the product type they usually land in. When neither fits, name the gap rather than forcing one.
 
-1. Registering, providing, or reporting information
-2. Requesting, sharing, or checking information
-3. Paying for something
-4. Getting financial support or claiming something
-5. Getting permission to do something
-6. Scheduling something
-7. Buying or ordering something
-8. Becoming something
-9. Protecting something
-
-**They are not modelled in the design system schema yet, but the skill leads with this framing.** When intent is recognizable in service-type terms, name it explicitly using this vocabulary as the first navigation step, then map to a `productType` as the next explicit step. When the framework is formalized in the schema (likely via a separate service-mapping data source), the skill will become more opinionated about expected building blocks per type.
-
-Map intent to productType:
-
-| Intent shape | Service type (informal) | Likely productType |
-|---|---|---|
-| "case management", "intake", "review and decide", "queue" | Requesting / sharing information; sometimes Getting permission | `workspace` |
-| "apply for X", "register for Y" | Getting permission, Becoming something | `public-form` |
-| "renew", "report status" | Registering / providing information | `public-form` |
-| "claim", "request support" | Getting financial support | `public-form` |
-| "schedule X", "book a Y" | Scheduling something | `public-form` (booking) or `workspace` (queue) |
-
-Don't promote service types into a structured field; use them as intent vocabulary until the framework is formally adopted in the schema.
+| Intent shape | Likely productType |
+|---|---|
+| "case management", "intake", "review and decide", "queue" | `workspace` |
+| "apply for X", "register for Y" | `public-form` |
+| "renew", "report status" | `public-form` |
+| "claim", "request support" | `public-form` |
+| "schedule X", "book a Y" | `public-form` (booking) or `workspace` (queue) |
 
 ## Aliases (slugs)
 
