@@ -12,9 +12,9 @@ A bounded container with sticky header and footer slots that scrolls its body co
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `direction` | GoabScrollPanelDirectionType | — | No | The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts "vertical", "horizontal", or "both". Defaults to "vertical". |
-| `height` | string | — | No | Sets the height of the panel. Accepts any valid CSS height value, including calc()/min()/clamp() and viewport units (e.g. "400px", "100%", "100vh", "calc(100vh - 4rem)"). Invalid values fall back to "100%". Defaults to "100%". The parent element must establish a height context for "100%" to resolve. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `direction` | GoabScrollPanelDirectionType | (none) | No | The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts "vertical", "horizontal", or "both". Defaults to "vertical". |
+| `height` | string | (none) | No | Sets the height of the panel. Accepts any valid CSS height value, including calc()/min()/clamp() and viewport units (e.g. "400px", "100%", "100vh", "calc(100vh - 4rem)"). Invalid values fall back to "100%". Defaults to "100%". The parent element must establish a height context for "100%" to resolve. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -32,8 +32,8 @@ A bounded container with sticky header and footer slots that scrolls its body co
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `direction` | GoabScrollPanelDirectionType | `vertical` | No | The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts "vertical", "horizontal", or "both". Defaults to "vertical". |
-| `height` | string | — | No | Sets the height of the panel. Accepts any valid CSS height value, including calc()/min()/clamp() and viewport units (e.g. "400px", "100%", "100vh", "calc(100vh - 4rem)"). Invalid values fall back to "100%". Defaults to "100%". The parent element must establish a height context for "100%" to resolve. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `height` | string | (none) | No | Sets the height of the panel. Accepts any valid CSS height value, including calc()/min()/clamp() and viewport units (e.g. "400px", "100%", "100vh", "calc(100vh - 4rem)"). Invalid values fall back to "100%". Defaults to "100%". The parent element must establish a height context for "100%" to resolve. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -52,9 +52,9 @@ Tag: `goa-scroll-panel`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `direction` | "vertical" | "horizontal" | "both" | `vertical` | No | The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Defaults to "vertical". |
+| `direction` | "vertical" \| "horizontal" \| "both" | `vertical` | No | The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Defaults to "vertical". |
 | `height` | string | `100%` | No | Sets the height of the container. Accepts any valid CSS height value, including calc()/min()/clamp() and viewport units (e.g. "400px", "100%", "100vh", "calc(100vh - 4rem)"). Invalid values fall back to "100%". Defaults to "100%". The parent element must establish a height context for "100%" to resolve. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -69,7 +69,7 @@ Tag: `goa-scroll-panel`
 
 ### Usage
 
-- ℹ️ **Note:** Scroll panel keeps a header and footer in place while the content between them scrolls.
+- **[Note]** Scroll panel keeps a header and footer in place while the content between them scrolls.
 
 ---
 

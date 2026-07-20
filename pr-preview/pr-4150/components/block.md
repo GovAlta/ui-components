@@ -15,15 +15,15 @@ Group components into a block with consistent space between.
 | `alignment` | GoabBlockAlignment | `normal` | No | Primary axis alignment of child components. |
 | `direction` | GoabBlockDirection | `row` | No | Stacking direction of child components. |
 | `gap` | Spacing | `m` | No | Spacing between items. Uses design system spacing tokens. |
-| `maxWidth` | string | — | No | Sets the maximum width of the block container. |
-| `mb` | Spacing | — | No |  |
-| `minWidth` | string | — | No | Sets the minimum width of the block container. |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the block container. |
+| `mb` | Spacing | (none) | No | (none) |
+| `minWidth` | string | (none) | No | Sets the minimum width of the block container. |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `stretch` | boolean | `false` | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `width` | string | — | No | Sets the width of the block container. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `width` | string | (none) | No | Sets the width of the block container. |
 
 ---
 
@@ -33,18 +33,18 @@ Group components into a block with consistent space between.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | GoabBlockAlignment | — | No | Sets the primary axis alignment of child components. |
-| `direction` | GoabBlockDirection | — | No | Sets the stacking direction of child components. |
-| `gap` | Spacing | — | No | Sets the spacing between items. Uses design system spacing tokens. |
-| `maxWidth` | string | — | No | Sets the maximum width of the block container. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `minWidth` | string | — | No | Sets the minimum width of the block container. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `stretch` | boolean | — | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `width` | string | — | No | Sets the width of the block container. Defaults to max-content. |
+| `alignment` | GoabBlockAlignment | (none) | No | Sets the primary axis alignment of child components. |
+| `direction` | GoabBlockDirection | (none) | No | Sets the stacking direction of child components. |
+| `gap` | Spacing | (none) | No | Sets the spacing between items. Uses design system spacing tokens. |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the block container. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `minWidth` | string | (none) | No | Sets the minimum width of the block container. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `stretch` | boolean | (none) | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `width` | string | (none) | No | Sets the width of the block container. Defaults to max-content. |
 
 ---
 
@@ -56,18 +56,18 @@ Tag: `goa-block`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | "center" | "start" | "end" | "normal" | `normal` | No | Primary axis alignment of child components. |
-| `direction` | "row" | "column" | `row` | No | Stacking direction of child components. |
+| `alignment` | "center" \| "start" \| "end" \| "normal" | `normal` | No | Primary axis alignment of child components. |
+| `direction` | "row" \| "column" | `row` | No | Stacking direction of child components. |
 | `gap` | Spacing | `m` | No | Spacing between items. Uses design system spacing tokens. |
-| `max-width` | string | — | No | Sets the maximum width of the block container. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `min-width` | string | — | No | Sets the minimum width of the block container. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
+| `max-width` | string | (none) | No | Sets the maximum width of the block container. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `min-width` | string | (none) | No | Sets the minimum width of the block container. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
 | `stretch` | boolean | `false` | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `width` | string | — | No | Sets the width of the block container. Defaults to max-content. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `width` | string | (none) | No | Sets the width of the block container. Defaults to max-content. |
 
 ---
 
@@ -75,8 +75,8 @@ Tag: `goa-block`
 
 ### Other
 
-- 💡 **Tip:** Use Block for general layout and spacing. Use ButtonGroup for semantically related action buttons.
-- ❌ **Don't:** Don't use a container for general page layout. Containers are for visual emphasis and grouping content.
+- **[Tip]** Use Block for general layout and spacing. Use ButtonGroup for semantically related action buttons.
+- **[Don't]** Don't use a container for general page layout. Containers are for visual emphasis and grouping content.
 
 ---
 

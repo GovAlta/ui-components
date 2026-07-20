@@ -13,14 +13,14 @@ Provides consistent sizing, spacing, and colour to written content.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `color` | GoabTextColor | `primary` | No | Sets the text colour. |
-| `id` | string | — | No | Sets the id attribute on the element. |
+| `id` | string | (none) | No | Sets the id attribute on the element. |
 | `maxWidth` | GoabTextMaxWidth | `65ch` | No | Sets the max width. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `size` | GoabTextSize | — | No | Overrides the text size. |
-| `tag` | GoabTextTextElement | GoabTextHeadingElement | — | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `size` | GoabTextSize | (none) | No | Overrides the text size. |
+| `tag` | GoabTextTextElement \| GoabTextHeadingElement | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
 
 ---
 
@@ -30,15 +30,15 @@ Provides consistent sizing, spacing, and colour to written content.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `color` | GoabTextColor | — | No | Sets the text colour. |
-| `id` | string | — | No | Sets the id attribute on the host element. |
-| `maxWidth` | GoabTextMaxWidth | — | No | Sets the max width. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `size` | GoabTextSize | — | No | Overrides the text size. |
-| `tag` | GoabTextTextElement | GoabTextHeadingElement | — | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
+| `color` | GoabTextColor | (none) | No | Sets the text colour. |
+| `id` | string | (none) | No | Sets the id attribute on the host element. |
+| `maxWidth` | GoabTextMaxWidth | (none) | No | Sets the max width. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `size` | GoabTextSize | (none) | No | Overrides the text size. |
+| `tag` | GoabTextTextElement \| GoabTextHeadingElement | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
 
 ---
 
@@ -50,14 +50,14 @@ Tag: `goa-text`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `as` | "span" | "div" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | `div` | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
-| `color` | "primary" | "secondary" | `primary` | No | Sets the text colour. |
-| `maxwidth` | string | "none" | `65ch` | No | Sets the max width. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `size` | "heading-2xl" | "heading-xl" | "heading-l" | "heading-m" | "heading-s" | "headi… | — | No | Overrides the text size. |
+| `as` | "span" \| "div" \| "p" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" | `div` | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
+| `color` | "primary" \| "secondary" | `primary` | No | Sets the text colour. |
+| `maxwidth` | string \| "none" | `65ch` | No | Sets the max width. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
 
 ---
 
@@ -65,7 +65,7 @@ Tag: `goa-text`
 
 ### Types
 
-- 💡 **Tip:** Use color='secondary' for supporting text that's less prominent than the main content.
+- **[Tip]** Use color='secondary' for supporting text that's less prominent than the main content.
 
 ---
 
@@ -73,7 +73,7 @@ Tag: `goa-text`
 
 ### Screen Readers
 
-- ⚠️ **Warning:** Use semantic heading tags (h1-h5) with GoabText for proper document structure and screen reader navigation.
+- **[Warning]** Use semantic heading tags (h1-h5) with GoabText for proper document structure and screen reader navigation.
 
 ---
 

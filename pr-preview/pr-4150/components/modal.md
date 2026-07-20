@@ -12,11 +12,11 @@ An overlay that appears in front of all other content, and requires a user to ta
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutVariant` | GoabModalCalloutVariant | — | No | Sets the context and colour of the callout modal. Required when used as a callout type. |
+| `calloutVariant` | GoabModalCalloutVariant | (none) | No | Sets the context and colour of the callout modal. Required when used as a callout type. |
 | `maxWidth` | string | `60ch` | No | Set the max allowed width of the modal. |
-| `open` | boolean | — | No | Controls if the modal is visible or not. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `transition` | GoabModalTransition | — | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
+| `open` | boolean | (none) | No | Controls if the modal is visible or not. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `transition` | GoabModalTransition | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
 
 ### Events
 
@@ -39,13 +39,13 @@ An overlay that appears in front of all other content, and requires a user to ta
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutVariant` | GoabModalCalloutVariant | — | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
+| `calloutVariant` | GoabModalCalloutVariant | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
 | `closable` | boolean | `false` | No | Show close icon and allow clicking the background to close the modal. |
-| `heading` | string | TemplateRef<any> | — | No | The heading text displayed at the top of the modal. |
-| `maxWidth` | string | — | No | Set the max allowed width of the modal. |
-| `open` | boolean | — | No | Controls if modal is visible or not. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `transition` | GoabModalTransition | — | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
+| `heading` | string \| TemplateRef<any> | (none) | No | The heading text displayed at the top of the modal. |
+| `maxWidth` | string | (none) | No | Set the max allowed width of the modal. |
+| `open` | boolean | (none) | No | Controls if modal is visible or not. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `transition` | GoabModalTransition | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
 
 ### Events
 
@@ -70,20 +70,19 @@ Tag: `goa-modal`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutvariant` | "" | — | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
+| `calloutvariant` | "" | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
 | `closable` | boolean | `false` | No | Show close icon and allow clicking the background to close the modal. |
-| `heading` | string | — | No | The heading text displayed at the top of the modal. |
+| `heading` | string | (none) | No | The heading text displayed at the top of the modal. |
 | `maxwidth` | string | `60ch` | No | Set the max allowed width of the modal. |
 | `open` | boolean | `false` | No | Controls if modal is visible or not. |
 | `testid` | string | `modal` | No | Sets a data-testid attribute for automated testing. |
-| `transition` | "fast" | "slow" | "none" | `none` | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `transition` | "fast" \| "slow" \| "none" | `none` | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_close` | CustomEvent |  |
+| `_close` | CustomEvent | (none) |
 
 ### Slots
 
@@ -98,23 +97,23 @@ Tag: `goa-modal`
 
 ### Content
 
-- ✅ **Do:** Use descriptive language in both modal content and button text to inform users of the resulting destructive action.
-- ✅ **Do:** Use a concise and descriptive modal title that spans less than one line.
-- ✅ **Do:** Use descriptive language in content and button text for destructive actions.
+- **[Do]** Use descriptive language in both modal content and button text to inform users of the resulting destructive action.
+- **[Do]** Use a concise and descriptive modal title that spans less than one line.
+- **[Do]** Use descriptive language in content and button text for destructive actions.
 
 ### Types
 
-- ✅ **Do:** Use the destructive button variant for actions that cannot be easily undone, like permanently deleting data or removing a user from a system.
-- ❌ **Don't:** Don't use a destructive button to trigger a confirmation. Reserve destructive styling for the final action inside the modal.
+- **[Do]** Use the destructive button variant for actions that cannot be easily undone, like permanently deleting data or removing a user from a system.
+- **[Don't]** Don't use a destructive button to trigger a confirmation. Reserve destructive styling for the final action inside the modal.
 
 ### Other
 
-- 💡 **Tip:** Use closable=false for critical confirmations where the user must choose an explicit action, not just dismiss the dialog.
+- **[Tip]** Use closable=false for critical confirmations where the user must choose an explicit action, not just dismiss the dialog.
 
 ### Interaction
 
-- ✅ **Do:** Use a destructive button to indicate the final destructive action.
-- ❌ **Don't:** Don't provide both action buttons and a close button on the same modal.
+- **[Do]** Use a destructive button to indicate the final destructive action.
+- **[Don't]** Don't provide both action buttons and a close button on the same modal.
 
 ---
 

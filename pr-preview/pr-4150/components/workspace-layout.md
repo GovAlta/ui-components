@@ -12,7 +12,7 @@ A full-page layout for workspace-style applications that wraps your content resp
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -37,7 +37,7 @@ A full-page layout for workspace-style applications that wraps your content resp
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ### Events
 
@@ -64,13 +64,13 @@ Tag: `goa-workspace-layout`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_scrollStateChange` | CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }> |  |
+| `_scrollStateChange` | CustomEvent<{ state: 'no-scroll' \| 'at-top' \| 'middle' \| 'at-bottom'; isScrollable: boolean }> | (none) |
 
 ### Slots
 
@@ -87,15 +87,15 @@ Tag: `goa-workspace-layout`
 
 ### Layout
 
-- 💡 **Tip:** The workspace layout fills the viewport, so host it directly in the router outlet, not inside another scrolling container.
+- **[Tip]** The workspace layout fills the viewport, so host it directly in the router outlet, not inside another scrolling container.
 
 ### Interaction
 
-- ℹ️ **Note:** Read the layout's scroll state to respond as people scroll, such as collapsing the header or recording when someone reaches the bottom of a list.
+- **[Note]** Read the layout's scroll state to respond as people scroll, such as collapsing the header or recording when someone reaches the bottom of a list.
 
 ### Usage
 
-- ✅ **Do:** Use the workspace layout for worker tools where pages share a side menu and people scroll long content while header and footer actions stay in reach.
+- **[Do]** Use the workspace layout for worker tools where pages share a side menu and people scroll long content while header and footer actions stay in reach.
 
 ---
 

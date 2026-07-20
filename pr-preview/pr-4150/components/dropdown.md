@@ -12,27 +12,27 @@ Present a list of options to the user to select from.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
-| `ariaLabelledBy` | string | — | No | The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. |
-| `autoComplete` | string | — | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
-| `disabled` | boolean | — | No | Disables the dropdown control. |
-| `error` | boolean | — | No | Shows an error state on the dropdown. |
-| `filterable` | boolean | — | No | When true, allows filtering options by typing into the input field. |
-| `id` | string | — | No | The id attribute for the dropdown element. |
-| `leadingIcon` | GoabIconType | — | No | Icon shown to the left of the dropdown input. |
+| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. |
+| `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
+| `disabled` | boolean | (none) | No | Disables the dropdown control. |
+| `error` | boolean | (none) | No | Shows an error state on the dropdown. |
+| `filterable` | boolean | (none) | No | When true, allows filtering options by typing into the input field. |
+| `id` | string | (none) | No | The id attribute for the dropdown element. |
+| `leadingIcon` | GoabIconType | (none) | No | Icon shown to the left of the dropdown input. |
 | `maxHeight` | string | `276px` | No | Maximum height of the dropdown menu. Non-native only. |
-| `maxWidth` | string | — | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `name` | string | — | No | Identifier for the dropdown. Should be unique. |
-| `native` | boolean | — | No | When true, renders the native select HTML element. |
-| `placeholder` | string | — | No | The text displayed in the dropdown before a selection is made. Non-native only. |
-| `size` | GoabDropdownSize | — | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `value` | string[] | string | — | No | The currently selected value(s) of the dropdown. |
-| `width` | string | — | No | Overrides the autosized menu width. Non-native only. |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
+| `native` | boolean | (none) | No | When true, renders the native select HTML element. |
+| `placeholder` | string | (none) | No | The text displayed in the dropdown before a selection is made. Non-native only. |
+| `size` | GoabDropdownSize | (none) | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `value` | string[] \| string | (none) | No | The currently selected value(s) of the dropdown. |
+| `width` | string | (none) | No | Overrides the autosized menu width. Non-native only. |
 
 ### Events
 
@@ -50,27 +50,27 @@ Present a list of options to the user to select from.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
-| `ariaLabelledBy` | string | — | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
-| `autoComplete` | string | — | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
-| `disabled` | boolean | — | No | Sets the disabled state for the control. |
-| `error` | boolean | — | No | Sets the error state for the control. |
-| `filterable` | boolean | — | No | When true the dropdown will have the ability to filter options by typing into the input field. |
-| `id` | string | — | No | Sets the id attribute of the underlying web component. |
-| `leadingIcon` | GoabIconType | — | No | Icon shown to the left of the dropdown input. |
-| `maxHeight` | string | — | No | Maximum height of the dropdown menu. Non-native only. |
-| `maxWidth` | string | — | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `name` | string | — | No | Identifier for the dropdown. Should be unique. |
-| `native` | boolean | — | No | When true will render the native select HTML element. |
-| `placeholder` | string | — | No | The text displayed for the dropdown before a selection is made. Non-native only. |
+| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
+| `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
+| `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
+| `error` | boolean | (none) | No | Sets the error state for the control. |
+| `filterable` | boolean | (none) | No | When true the dropdown will have the ability to filter options by typing into the input field. |
+| `id` | string | (none) | No | Sets the id attribute of the underlying web component. |
+| `leadingIcon` | GoabIconType | (none) | No | Icon shown to the left of the dropdown input. |
+| `maxHeight` | string | (none) | No | Maximum height of the dropdown menu. Non-native only. |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
+| `native` | boolean | (none) | No | When true will render the native select HTML element. |
+| `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
 | `size` | GoabDropdownSize | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `value` | string[] | string | — | No | Sets the control value used by Angular forms and one-way binding. |
-| `width` | string | — | No | Overrides the autosized menu width. Non-native only. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `value` | string[] \| string | (none) | No | Sets the control value used by Angular forms and one-way binding. |
+| `width` | string | (none) | No | Overrides the autosized menu width. Non-native only. |
 
 ### Events
 
@@ -90,35 +90,34 @@ Tag: `goa-dropdown`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | — | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
-| `arialabelledby` | string | — | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
-| `autocomplete` | string | — | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
+| `arialabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabelledby` | string | (none) | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
+| `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
 | `disabled` | boolean | `false` | No | Disable this control. |
 | `error` | boolean | `false` | No | Show an error state. |
 | `filterable` | boolean | `false` | No | When true the dropdown will have the ability to filter options by typing into the input field. |
-| `leadingicon` | GoabIconType | — | No | Icon shown to the left of the dropdown input. |
+| `leadingicon` | GoabIconType | (none) | No | Icon shown to the left of the dropdown input. |
 | `maxheight` | string | `276px` | No | Maximum height of the dropdown menu. Non-native only. |
-| `maxwidth` | string | — | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `name` | string | — | Yes | Identifier for the dropdown. Should be unique. |
+| `maxwidth` | string | (none) | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `name` | string | (none) | Yes | Identifier for the dropdown. Should be unique. |
 | `native` | boolean | `false` | No | When true will render the native select HTML element. |
-| `placeholder` | string | — | No | The text displayed for the dropdown before a selection is made. Non-native only. |
-| `size` | "default" | "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `value` | string | — | No | Stores the value of the item selected from the dropdown. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
-| `width` | string | — | No | Overrides the autosized menu width. Non-native only. |
+| `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `value` | string | (none) | No | Stores the value of the item selected from the dropdown. |
+| `width` | string | (none) | No | Overrides the autosized menu width. Non-native only. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> |  |
-| `_change` | CustomEvent<{ name?: string; value?: string; event: Event }> |  |
-| `_focus` | CustomEvent<{ name: string }> |  |
+| `_blur` | CustomEvent<{ name: string }> | (none) |
+| `_change` | CustomEvent<{ name?: string; value?: string; event: Event }> | (none) |
+| `_focus` | CustomEvent<{ name: string }> | (none) |
 
 ---
 
@@ -126,33 +125,33 @@ Tag: `goa-dropdown`
 
 ### States
 
-- ❌ **Don't:** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
+- **[Don't]** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
 
 ### Sizing
 
-- ✅ **Do:** Define dropdown widths based on the widest dropdown in the form.
-- ✅ **Do:** Use the default width for dropdowns. The dropdown automatically sets its width based on the length of the options.
+- **[Do]** Define dropdown widths based on the widest dropdown in the form.
+- **[Do]** Use the default width for dropdowns. The dropdown automatically sets its width based on the length of the options.
 
 ### Positioning
 
-- ❌ **Don't:** Don't allow the dropdown menu to hide below the viewport.
+- **[Don't]** Don't allow the dropdown menu to hide below the viewport.
 
 ### Content
 
-- ❌ **Don't:** Don't truncate labels. Longer labels should wrap to the next line.
-- ❌ **Don't:** Don't use placeholder text as a label
+- **[Don't]** Don't truncate labels. Longer labels should wrap to the next line.
+- **[Don't]** Don't use placeholder text as a label
 
 ### Interaction
 
-- 💡 **Tip:** A filterable dropdown searches an item's label and the text of its content, but not text rendered inside a nested component such as a Badge. Use the filter property to add those terms to the search.
+- **[Tip]** A filterable dropdown searches an item's label and the text of its content, but not text rendered inside a nested component such as a Badge. Use the filter property to add those terms to the search.
 
 ### Types
 
-- ⚠️ **Warning:** The native dropdown renders a native select element, which cannot contain HTML. Items with rich content fall back to their label, so set a label on every item that you also give content to.
+- **[Warning]** The native dropdown renders a native select element, which cannot contain HTML. Items with rich content fall back to their label, so set a label on every item that you also give content to.
 
 ### Other
 
-- ✅ **Do:** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
+- **[Do]** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
 
 ---
 
@@ -160,11 +159,11 @@ Tag: `goa-dropdown`
 
 ### Screen Readers
 
-- ⚠️ **Warning:** When a Dropdown is not wrapped in a FormItem, set ariaLabel to provide an accessible name. Without it, screen readers won't be able to identify the dropdown.
+- **[Warning]** When a Dropdown is not wrapped in a FormItem, set ariaLabel to provide an accessible name. Without it, screen readers won't be able to identify the dropdown.
 
 ### Accessibility
 
-- ⚠️ **Warning:** Don't put buttons, links, inputs, or other interactive elements in an item's content. Each item is a listbox option, so nested controls are not in the tab order and cannot be reached by keyboard, and clicking one selects the item instead of activating the control. Use text, icons, and badges instead.
+- **[Warning]** Don't put buttons, links, inputs, or other interactive elements in an item's content. Each item is a listbox option, so nested controls are not in the tab order and cannot be reached by keyboard, and clicking one selects the item instead of activating the control. Use text, icons, and badges instead.
 
 ---
 

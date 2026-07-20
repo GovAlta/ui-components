@@ -12,11 +12,11 @@ A panel that slides in from the side of the screen to display additional content
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | ReactNode | — | No | The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content. |
-| `maxSize` | GoabDrawerSize | — | No | Sets max height on bottom position, sets width on left and right position. |
-| `open` | boolean | — | No | Whether the drawer is open. |
-| `position` | GoabDrawerPosition | — | Yes | The position of the drawer. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `heading` | string \| ReactNode | (none) | No | The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content. |
+| `maxSize` | GoabDrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
+| `open` | boolean | (none) | No | Whether the drawer is open. |
+| `position` | GoabDrawerPosition | (none) | Yes | The position of the drawer. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -39,11 +39,11 @@ A panel that slides in from the side of the screen to display additional content
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | TemplateRef<any> | — | No | The heading text displayed at the top of the drawer. |
-| `maxSize` | GoabDrawerSize | — | No | Sets max height on bottom position, sets width on left and right position. |
-| `open` | boolean | — | Yes | Whether the drawer is open. |
-| `position` | GoabDrawerPosition | — | Yes | The position of the drawer. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `heading` | string \| TemplateRef<any> | (none) | No | The heading text displayed at the top of the drawer. |
+| `maxSize` | GoabDrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
+| `open` | boolean | (none) | Yes | Whether the drawer is open. |
+| `position` | GoabDrawerPosition | (none) | Yes | The position of the drawer. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -68,19 +68,18 @@ Tag: `goa-drawer`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `close-button-visibility` | "visible" | "hidden" | `visible` | No | Controls visibility of the close button and header. |
-| `heading` | string | — | No | The heading text displayed at the top of the drawer. |
-| `maxsize` | DrawerSize | — | No | Sets max height on bottom position, sets width on left and right position. |
+| `close-button-visibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the close button and header. |
+| `heading` | string | (none) | No | The heading text displayed at the top of the drawer. |
+| `maxsize` | DrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
 | `open` | boolean | `false` | No | Whether the drawer is open. |
-| `position` | DrawerPosition | — | No | The position of the drawer. |
+| `position` | DrawerPosition | (none) | No | The position of the drawer. |
 | `testid` | string | `drawer` | No | Sets a data-testid attribute for automated testing. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_close` | CustomEvent<void> |  |
+| `_close` | CustomEvent<void> | (none) |
 
 ### Slots
 
@@ -95,11 +94,11 @@ Tag: `goa-drawer`
 
 ### Types
 
-- 💡 **Tip:** Use position='right' for forms and detail panels. Use position='bottom' for mobile-friendly bottom sheets.
+- **[Tip]** Use position='right' for forms and detail panels. Use position='bottom' for mobile-friendly bottom sheets.
 
 ### Other
 
-- ❌ **Don't:** Don't use a push drawer for tasks that require the user's full attention. Use a regular drawer instead — it blocks interaction with the background and focuses the user on the task.
+- **[Don't]** Don't use a push drawer for tasks that require the user's full attention. Use a regular drawer instead — it blocks interaction with the background and focuses the user on the task.
 
 ---
 

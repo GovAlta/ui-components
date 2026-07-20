@@ -12,35 +12,35 @@ A single-line field where users can input and edit text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Sets the aria-label used by assistive technologies. |
-| `autoCapitalize` | GoabAutoCapitalize | — | No | Controls automatic capitalization behavior on supported mobile browsers. |
-| `autoComplete` | string | — | No | Sets the autocomplete attribute for the input element. |
-| `debounce` | number | — | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
-| `disabled` | boolean | — | No | Sets the input disabled state. |
-| `error` | boolean | — | No | Sets the error state styling. |
-| `focused` | boolean | — | No | Sets focus on initial render or controlled updates. |
-| `id` | string | — | No | Sets the id attribute of the input element. |
-| `leadingIcon` | GoabIconType | — | No | Sets the icon shown before the value. |
-| `max` | number | string | — | No | Maximum value. Supports any number, or ISO 8601 format for date/datetime types. |
-| `maxLength` | number | — | No | Sets the maximum number of characters. |
-| `mb` | Spacing | — | No |  |
-| `min` | number | string | — | No | Minimum value. Supports any number, or ISO 8601 format for date/datetime types. |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `name` | string | — | Yes | Name of input value that is received in event detail payloads. |
-| `placeholder` | string | — | No | Sets placeholder text when the input is empty. |
-| `readonly` | boolean | — | No | Sets the readonly state. |
+| `ariaLabel` | string | (none) | No | Sets the aria-label used by assistive technologies. |
+| `autoCapitalize` | GoabAutoCapitalize | (none) | No | Controls automatic capitalization behavior on supported mobile browsers. |
+| `autoComplete` | string | (none) | No | Sets the autocomplete attribute for the input element. |
+| `debounce` | number | (none) | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
+| `disabled` | boolean | (none) | No | Sets the input disabled state. |
+| `error` | boolean | (none) | No | Sets the error state styling. |
+| `focused` | boolean | (none) | No | Sets focus on initial render or controlled updates. |
+| `id` | string | (none) | No | Sets the id attribute of the input element. |
+| `leadingIcon` | GoabIconType | (none) | No | Sets the icon shown before the value. |
+| `max` | number \| string | (none) | No | Maximum value. Supports any number, or ISO 8601 format for date/datetime types. |
+| `maxLength` | number | (none) | No | Sets the maximum number of characters. |
+| `mb` | Spacing | (none) | No | (none) |
+| `min` | number \| string | (none) | No | Minimum value. Supports any number, or ISO 8601 format for date/datetime types. |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `name` | string | (none) | Yes | Name of input value that is received in event detail payloads. |
+| `placeholder` | string | (none) | No | Sets placeholder text when the input is empty. |
+| `readonly` | boolean | (none) | No | Sets the readonly state. |
 | `size` | GoabInputSize | `default` | No | Sets the input size. |
 | `step` | number | `1` | No | How much a number or date value should change by. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `textAlign` | "left" | "right" | `left` | No | Sets text alignment. |
-| `trailingIcon` | GoabIconType | — | No | Sets the icon shown after the value. |
-| `trailingIconAriaLabel` | string | — | No | Sets the aria-label for an interactive trailing icon. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `textAlign` | "left" \| "right" | `left` | No | Sets text alignment. |
+| `trailingIcon` | GoabIconType | (none) | No | Sets the icon shown after the value. |
+| `trailingIconAriaLabel` | string | (none) | No | Sets the aria-label for an interactive trailing icon. |
 | `type` | GoabInputType | `text` | No | Sets the type of the input field. |
-| `value` | string | — | No | Bound to the current value of the input field. |
-| `variant` | "goa" | "bare" | `goa` | No | Sets the visual style variant. |
-| `width` | string | — | No | Sets the width of the input field. |
+| `value` | string | (none) | No | Bound to the current value of the input field. |
+| `variant` | "goa" \| "bare" | `goa` | No | Sets the visual style variant. |
+| `width` | string | (none) | No | Sets the width of the input field. |
 
 ### Events
 
@@ -67,38 +67,38 @@ A single-line field where users can input and edit text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
-| `ariaLabelledBy` | string | — | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
-| `autoCapitalize` | GoabInputAutoCapitalize | — | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
-| `autoComplete` | string | — | No | Specifies the autocomplete attribute for the input field. |
-| `debounce` | number | — | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
-| `disabled` | boolean | — | No | Sets the disabled state for the control. |
-| `error` | boolean | — | No | Sets the error state for the control. |
-| `focused` | boolean | — | No | Sets the cursor focus to the input. |
-| `id` | string | — | No | Sets the id attribute of the underlying web component. |
-| `leadingContent` | string | TemplateRef<any> | — | No | Sets the leading content slot, accepting a string or template reference. |
-| `leadingIcon` | GoabIconType | — | No | Icon shown to the left of the text. |
-| `max` | string | number | — | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
-| `maxLength` | number | — | No | Sets the maximum number of characters (as UTF-16 code units) the user can enter into the input. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `min` | string | number | — | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `name` | string | — | No | Name of input value that is received in the onChange event. |
-| `placeholder` | string | — | No | Text displayed within the input when no value is set. |
-| `readonly` | boolean | — | No | Makes the input readonly. |
+| `ariaLabel` | string | (none) | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
+| `autoCapitalize` | GoabInputAutoCapitalize | (none) | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
+| `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the input field. |
+| `debounce` | number | (none) | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
+| `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
+| `error` | boolean | (none) | No | Sets the error state for the control. |
+| `focused` | boolean | (none) | No | Sets the cursor focus to the input. |
+| `id` | string | (none) | No | Sets the id attribute of the underlying web component. |
+| `leadingContent` | string \| TemplateRef<any> | (none) | No | Sets the leading content slot, accepting a string or template reference. |
+| `leadingIcon` | GoabIconType | (none) | No | Icon shown to the left of the text. |
+| `max` | string \| number | (none) | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
+| `maxLength` | number | (none) | No | Sets the maximum number of characters (as UTF-16 code units) the user can enter into the input. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `min` | string \| number | (none) | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `name` | string | (none) | No | Name of input value that is received in the onChange event. |
+| `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
+| `readonly` | boolean | (none) | No | Makes the input readonly. |
 | `size` | GoabInputSize | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
-| `step` | number | — | No | How much a number or date should change by. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `textAlign` | "left" | "right" | `left` | No | Sets the text alignment within the input field. |
-| `trailingContent` | string | TemplateRef<any> | — | No | Sets the trailing content slot, accepting a string or template reference. |
-| `trailingIcon` | GoabIconType | — | No | Icon shown to the right of the text. |
-| `trailingIconAriaLabel` | string | — | No | Aria label for the trailing icon. Use only when the trailing icon is interactive. |
+| `step` | number | (none) | No | How much a number or date should change by. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `textAlign` | "left" \| "right" | `left` | No | Sets the text alignment within the input field. |
+| `trailingContent` | string \| TemplateRef<any> | (none) | No | Sets the trailing content slot, accepting a string or template reference. |
+| `trailingIcon` | GoabIconType | (none) | No | Icon shown to the right of the text. |
+| `trailingIconAriaLabel` | string | (none) | No | Aria label for the trailing icon. Use only when the trailing icon is interactive. |
 | `type` | GoabInputType | `text` | No | Sets the type of the input field. |
-| `value` | string | — | No | Sets the control value used by Angular forms and one-way binding. |
-| `variant` | string | — | No | Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. |
-| `width` | string | — | No | Sets the width of the text input area. |
+| `value` | string | (none) | No | Sets the control value used by Angular forms and one-way binding. |
+| `variant` | string | (none) | No | Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. |
+| `width` | string | (none) | No | Sets the width of the text input area. |
 
 ### Events
 
@@ -127,48 +127,47 @@ Tag: `goa-input`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | — | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
-| `arialabelledby` | string | — | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
-| `autocapitalize` | "on" | "off" | "none" | "sentences" | "words" | "characters" | `off` | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
-| `autocomplete` | string | — | No | Specifies the autocomplete attribute for the input field. |
+| `arialabel` | string | (none) | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabelledby` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
+| `autocapitalize` | "on" \| "off" \| "none" \| "sentences" \| "words" \| "characters" | `off` | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
+| `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the input field. |
 | `debounce` | number | `0` | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
 | `disabled` | boolean | `false` | No | Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]. |
 | `error` | boolean | `false` | No | Sets the input to an error state. |
 | `focused` | boolean | `false` | No | Sets the cursor focus to the input. |
 | `handletrailingiconclick` | boolean | `false` | No | Flag that will result in an icon button component being rendered instead of an icon. |
-| `id` | string | — | No | Unique identifier for the input element. Used for label associations and accessibility. |
-| `leadingicon` | GoabIconType | — | No | Icon shown to the left of the text. |
-| `max` | string | — | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
-| `maxlength` | number | — | No | Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `min` | string | — | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `name` | string | — | No | Name of input value that is received in the onChange event. |
-| `placeholder` | string | — | No | Text displayed within the input when no value is set. |
+| `id` | string | (none) | No | Unique identifier for the input element. Used for label associations and accessibility. |
+| `leadingicon` | GoabIconType | (none) | No | Icon shown to the left of the text. |
+| `max` | string | (none) | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
+| `maxlength` | number | (none) | No | Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `min` | string | (none) | No | A string value that supports any number, or an ISO 8601 format if using the date or datetime type. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `name` | string | (none) | No | Name of input value that is received in the onChange event. |
+| `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | `false` | No | Makes the input readonly. |
-| `size` | "default" | "compact" | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
 | `step` | number | `1` | No | How much a number or date should change by. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `textalign` | "left" | "right" | `left` | No | Sets the text alignment within the input field. |
-| `trailingicon` | GoabIconType | — | No | Icon shown to the right of the text. |
-| `trailingiconarialabel` | string | — | No | Aria label for the trailing icon. Use only when the trailing icon is interactive. |
-| `type` | "text" | "number" | "password" | "email" | "date" | "datetime-local" | "month" … | `text` | No | Sets the type of the input field. |
-| `value` | string | — | No | Bound to value. |
-| `variant` | "goa" | "bare" | `goa` | No | Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `textalign` | "left" \| "right" | `left` | No | Sets the text alignment within the input field. |
+| `trailingicon` | GoabIconType | (none) | No | Icon shown to the right of the text. |
+| `trailingiconarialabel` | string | (none) | No | Aria label for the trailing icon. Use only when the trailing icon is interactive. |
+| `type` | "text" \| "number" \| "password" \| "email" \| "date" \| "datetime-local" \| "month" … | `text` | No | Sets the type of the input field. |
+| `value` | string | (none) | No | Bound to value. |
+| `variant` | "goa" \| "bare" | `goa` | No | Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. |
 | `width` | string | `30ch` | No | Sets the width of the text input area. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string; value: string }> |  |
-| `_change` | CustomEvent<{ name: string; value: string }> |  |
-| `_focus` | CustomEvent<{ name: string; value: string }> |  |
-| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> |  |
-| `_trailingIconClick` | CustomEvent |  |
+| `_blur` | CustomEvent<{ name: string; value: string }> | (none) |
+| `_change` | CustomEvent<{ name: string; value: string }> | (none) |
+| `_focus` | CustomEvent<{ name: string; value: string }> | (none) |
+| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> | (none) |
+| `_trailingIconClick` | CustomEvent | (none) |
 
 ### Slots
 
@@ -183,28 +182,28 @@ Tag: `goa-input`
 
 ### States
 
-- ❌ **Don't:** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
+- **[Don't]** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
 
 ### Other
 
-- ✅ **Do:** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
+- **[Do]** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
 
 ### Types
 
-- ✅ **Do:** Use the appropriate input type for your context to give a better experience.
-- ✅ **Do:** Use a text area to input content longer than a single line, such as descriptions, comments, or feedback.
+- **[Do]** Use the appropriate input type for your context to give a better experience.
+- **[Do]** Use a text area to input content longer than a single line, such as descriptions, comments, or feedback.
 
 ### Content
 
-- ❌ **Don't:** Don't use placeholder text as a label
+- **[Don't]** Don't use placeholder text as a label
 
 ### Sizing
 
-- ✅ **Do:** Size text inputs based on the expected content length to help users understand what information is needed.
+- **[Do]** Size text inputs based on the expected content length to help users understand what information is needed.
 
 ### Forms
 
-- ❌ **Don't:** Don't use a text area which is only one line high; instead, use text input if just one line is needed.
+- **[Don't]** Don't use a text area which is only one line high; instead, use text input if just one line is needed.
 
 ---
 

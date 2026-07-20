@@ -12,19 +12,19 @@ Allow users to select one option from a set.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the radio group will be announced by screen readers. |
-| `disabled` | boolean | — | No | Disables all radio items in the group. |
-| `error` | boolean | — | No | Shows an error state on all radio items in the group. |
-| `id` | string | — | No | The identifier for the radio group element. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `name` | string | — | Yes | The name for the radio group. Used for accessibility and change events. |
+| `ariaLabel` | string | (none) | No | Defines how the radio group will be announced by screen readers. |
+| `disabled` | boolean | (none) | No | Disables all radio items in the group. |
+| `error` | boolean | (none) | No | Shows an error state on all radio items in the group. |
+| `id` | string | (none) | No | The identifier for the radio group element. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `name` | string | (none) | Yes | The name for the radio group. Used for accessibility and change events. |
 | `orientation` | GoabRadioGroupOrientation | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
 | `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `value` | string | — | No | The currently selected value in the radio group. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `value` | string | (none) | No | The currently selected value in the radio group. |
 
 ### Events
 
@@ -42,19 +42,19 @@ Allow users to select one option from a set.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the radio group will be announced by screen readers. |
-| `disabled` | boolean | — | No | Sets the disabled state for the control. |
-| `error` | boolean | — | No | Sets the error state for the control. |
-| `id` | string | — | No | Sets the id attribute of the underlying web component. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `name` | string | — | No | The name for the radio group. Used for accessibility and change events. |
-| `orientation` | GoabRadioGroupOrientation | — | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
+| `ariaLabel` | string | (none) | No | Defines how the radio group will be announced by screen readers. |
+| `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
+| `error` | boolean | (none) | No | Sets the error state for the control. |
+| `id` | string | (none) | No | Sets the id attribute of the underlying web component. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. |
+| `orientation` | GoabRadioGroupOrientation | (none) | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
 | `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `value` | string | — | No | The currently selected value in the radio group. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `value` | string | (none) | No | The currently selected value in the radio group. |
 
 ### Events
 
@@ -74,27 +74,26 @@ Tag: `goa-radio-group`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | — | No | Defines how the radio group will be announced by screen readers. |
+| `arialabel` | string | (none) | No | Defines how the radio group will be announced by screen readers. |
 | `disabled` | boolean | `false` | No | Disables all radio items in the group. |
 | `error` | boolean | `false` | No | Shows an error state on all radio items in the group. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `name` | string | — | Yes | The name for the radio group. Used for accessibility and change events. |
-| `orientation` | "vertical" | "horizontal" | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
-| `size` | "default" | "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `value` | string | — | Yes | The currently selected value in the radio group. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `name` | string | (none) | Yes | The name for the radio group. Used for accessibility and change events. |
+| `orientation` | "vertical" \| "horizontal" | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `value` | string | (none) | Yes | The currently selected value in the radio group. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> |  |
-| `_change` | CustomEvent<{ name: string; value: string; label: string }> |  |
-| `_focus` | CustomEvent<{ name: string }> |  |
+| `_blur` | CustomEvent<{ name: string }> | (none) |
+| `_change` | CustomEvent<{ name: string; value: string; label: string }> | (none) |
+| `_focus` | CustomEvent<{ name: string }> | (none) |
 
 ---
 
@@ -102,31 +101,31 @@ Tag: `goa-radio-group`
 
 ### States
 
-- ❌ **Don't:** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
+- **[Don't]** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
 
 ### Other
 
-- ✅ **Do:** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
-- 💡 **Tip:** Use the reveal slot to show additional content when a radio option is selected, like a follow-up question or input field.
-- 💡 **Tip:** Always use RadioGroup as the parent for sets of RadioItem children. Don't try to build radio button sets manually.
+- **[Do]** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
+- **[Tip]** Use the reveal slot to show additional content when a radio option is selected, like a follow-up question or input field.
+- **[Tip]** Always use RadioGroup as the parent for sets of RadioItem children. Don't try to build radio button sets manually.
 
 ### Content
 
-- 💡 **Tip:** Use the description prop to add context on radio options where the label alone isn't enough to explain the choice.
-- ❌ **Don't:** Don't include a period after a radio label.
+- **[Tip]** Use the description prop to add context on radio options where the label alone isn't enough to explain the choice.
+- **[Don't]** Don't include a period after a radio label.
 
 ### Usage
 
-- ❌ **Don't:** Don't use radios when there are more than 7 options - use a dropdown instead.
+- **[Don't]** Don't use radios when there are more than 7 options - use a dropdown instead.
 
 ### Interaction
 
-- ❌ **Don't:** Don't nest multiple layers of conditionally revealed questions.
-- ❌ **Don't:** Don't preselect radio items - users might miss the question or submit the wrong answer.
+- **[Don't]** Don't nest multiple layers of conditionally revealed questions.
+- **[Don't]** Don't preselect radio items - users might miss the question or submit the wrong answer.
 
 ### Layout
 
-- ✅ **Do:** Consider horizontal listing when presenting 2-3 short options like Yes/No.
+- **[Do]** Consider horizontal listing when presenting 2-3 short options like Yes/No.
 
 ---
 
@@ -134,7 +133,7 @@ Tag: `goa-radio-group`
 
 ### Screen Readers
 
-- ⚠️ **Warning:** When using the reveal slot, set revealAriaLabel so screen readers announce the newly visible content.
+- **[Warning]** When using the reveal slot, set revealAriaLabel so screen readers announce the newly visible content.
 
 ---
 

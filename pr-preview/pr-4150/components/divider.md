@@ -12,11 +12,11 @@ Indicate a separation of layout, or to distinguish large chunks of information o
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -26,11 +26,11 @@ Indicate a separation of layout, or to distinguish large chunks of information o
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ---
 
@@ -42,11 +42,11 @@ Tag: `goa-divider`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 

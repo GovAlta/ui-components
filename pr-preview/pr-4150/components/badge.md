@@ -12,17 +12,17 @@ Small labels which hold small amounts of information, system feedback, or states
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Accessible label for screen readers. |
-| `content` | string | — | No | Text label of the badge. |
+| `ariaLabel` | string | (none) | No | Accessible label for screen readers. |
+| `content` | string | (none) | No | Text label of the badge. |
 | `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
-| `iconType` | GoabIconType | — | No | Icon type to display in the badge. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `iconType` | GoabIconType | (none) | No | Icon type to display in the badge. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | — | Yes | Sets the context and colour of the badge. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
 
 ---
 
@@ -32,17 +32,17 @@ Small labels which hold small amounts of information, system feedback, or states
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Sets the accessible label for screen readers. |
-| `content` | string | — | No | Sets the text label of the badge. |
+| `ariaLabel` | string | (none) | No | Sets the accessible label for screen readers. |
+| `content` | string | (none) | No | Sets the text label of the badge. |
 | `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
-| `iconType` | GoabIconType | — | No | Sets the icon type to display in the badge. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
+| `iconType` | GoabIconType | (none) | No | Sets the icon type to display in the badge. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | — | No | Sets the context and colour of the badge. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `type` | GoabBadgeType | (none) | No | Sets the context and colour of the badge. |
 
 ---
 
@@ -54,20 +54,19 @@ Tag: `goa-badge`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | — | No | Accessible label for screen readers. |
-| `content` | string | — | No | Text label of the badge. |
+| `arialabel` | string | (none) | No | Accessible label for screen readers. |
+| `content` | string | (none) | No | Text label of the badge. |
 | `emphasis` |  | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
-| `icontype` | GoabIconType | — | No | Icon type to display in the badge. |
-| `justify-content` | "center" | "flex-start" | "flex-end" | "space-between" | "" | — | No | justify-content value for the badge container. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `min-width` | string | — | No | min-width value for the badge container (e.g. "20px", "var(--goa-space-m)"). |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `size` | "medium" | "large" | `medium` | No | Sets the size of the badge. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | "information" | "important" | "emergency" | "success" | "dark" | "midtone" | "l… | — | Yes | Defines the context and colour of the badge. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `icontype` | GoabIconType | (none) | No | Icon type to display in the badge. |
+| `justify-content` | "center" \| "flex-start" \| "flex-end" \| "space-between" \| "" | (none) | No | justify-content value for the badge container. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `min-width` | string | (none) | No | min-width value for the badge container (e.g. "20px", "var(--goa-space-m)"). |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | "information" \| "important" \| "emergency" \| "success" \| "dark" \| "midtone" \| "l… | (none) | Yes | Defines the context and colour of the badge. |
 
 ---
 
@@ -75,21 +74,21 @@ Tag: `goa-badge`
 
 ### Other
 
-- ❌ **Don't:** Don't use a primary button to edit a badge.
-- ✅ **Do:** Use badges for information and organization, not interactivity.
-- ✅ **Do:** Use a tertiary button next to a badge if it needs to be manually updated.
+- **[Don't]** Don't use a primary button to edit a badge.
+- **[Do]** Use badges for information and organization, not interactivity.
+- **[Do]** Use a tertiary button next to a badge if it needs to be manually updated.
 
 ### Types
 
-- ❌ **Don't:** Don't style badges to look like buttons.
-- ❌ **Don't:** Don't use interactive colours. These are reserved for links, buttons, and other interactive elements.
-- ✅ **Do:** Match badge type to the status it represents
-- 💡 **Tip:** FilterChip is for removable filters that users can dismiss. For static labels or status indicators, use Badge instead.
+- **[Don't]** Don't style badges to look like buttons.
+- **[Don't]** Don't use interactive colours. These are reserved for links, buttons, and other interactive elements.
+- **[Do]** Match badge type to the status it represents
+- **[Tip]** FilterChip is for removable filters that users can dismiss. For static labels or status indicators, use Badge instead.
 
 ### Content
 
-- ✅ **Do:** Use sentence case for badge text. Capitalize the first word only.
-- ✅ **Do:** Use short, concise text in badges.
+- **[Do]** Use sentence case for badge text. Capitalize the first word only.
+- **[Do]** Use short, concise text in badges.
 
 ---
 
@@ -97,8 +96,8 @@ Tag: `goa-badge`
 
 ### Screen Readers
 
-- ❌ **Don't:** Don't use icon-only elements without an accessible label
-- ⚠️ **Warning:** When using an icon-only badge, ariaLabel is required so screen readers can identify it.
+- **[Don't]** Don't use icon-only elements without an accessible label
+- **[Warning]** When using an icon-only badge, ariaLabel is required so screen readers can identify it.
 
 ---
 

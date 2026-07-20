@@ -13,7 +13,7 @@ A notification that appears at the bottom of the screen.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `horizontalPosition` | SnackbarHorizontalPosition | `center` | No | Horizontal position of the notification container. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `verticalPosition` | SnackbarVerticalPosition | `bottom` | No | Vertical position of the notification container. |
 
 ---
@@ -25,7 +25,7 @@ A notification that appears at the bottom of the screen.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `horizontalPosition` | SnackbarHorizontalPosition | `center` | No | Horizontal position of the notification container. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `verticalPosition` | SnackbarVerticalPosition | `bottom` | No | Vertical position of the notification container. |
 
 ---
@@ -38,9 +38,9 @@ Tag: `goa-temporary-notification`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `horizontal-position` | "left" | "center" | "right" | `center` | No | Horizontal position of the notification container. |
-| `testid` | string | — | Yes | Sets a data-testid attribute for automated testing. |
-| `vertical-position` | "top" | "bottom" | `bottom` | No | Vertical position of the notification container. |
+| `horizontal-position` | "left" \| "center" \| "right" | `center` | No | Horizontal position of the notification container. |
+| `testid` | string | (none) | Yes | Sets a data-testid attribute for automated testing. |
+| `vertical-position` | "top" \| "bottom" | `bottom` | No | Vertical position of the notification container. |
 
 ---
 
@@ -56,7 +56,7 @@ Displays a temporary notification from your component. Returns the notification'
 |-----------|------|----------|-------------|
 | `message` | string | Yes | The message to display in the notification. |
 | `options.type` | GoabTemporaryNotificationType | No | The type of notification, which determines its styling and icon. Use "indeterminate" to show an animated progress bar while work of unknown length runs, or "progress" to show a progress bar you update with setProgress(). Defaults to "basic". |
-| `options.duration` | "long" | "medium" | "short" | number | No | How long the notification stays before it auto-dismisses: "short" (about 3 seconds), "medium" (about 4 seconds), "long" (about 6 seconds), or a number of milliseconds. Only "basic", "success", and "failure" notifications auto-dismiss (default "short"). "indeterminate" and "progress" notifications have no default duration and stay until you dismiss them. |
+| `options.duration` | "long" \| "medium" \| "short" \| number | No | How long the notification stays before it auto-dismisses: "short" (about 3 seconds), "medium" (about 4 seconds), "long" (about 6 seconds), or a number of milliseconds. Only "basic", "success", and "failure" notifications auto-dismiss (default "short"). "indeterminate" and "progress" notifications have no default duration and stay until you dismiss them. |
 | `options.actionText` | string | No | Text for an action button. When set, the notification shows a button the user can select. |
 | `options.action` | () => void | No | Function to run when the action button is selected. |
 | `options.cancelUUID` | string | No | UUID of an existing notification to cancel when this one is shown. |
@@ -88,8 +88,8 @@ Updates the progress shown on a progress notification, using the UUID that show(
 
 ### Types
 
-- 💡 **Tip:** For temporary toast-style messages, use TemporaryNotification instead of Notification. Notification stays on screen until dismissed.
-- ❌ **Don't:** Don't show critical errors that require user action in a temporary notification. They auto-dismiss and can be missed. Use Callout or Notification instead.
+- **[Tip]** For temporary toast-style messages, use TemporaryNotification instead of Notification. Notification stays on screen until dismissed.
+- **[Don't]** Don't show critical errors that require user action in a temporary notification. They auto-dismiss and can be missed. Use Callout or Notification instead.
 
 ---
 

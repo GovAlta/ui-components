@@ -12,12 +12,12 @@ Side menu variant for worker applications.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | — | Yes | The application name displayed in the header. |
-| `open` | boolean | — | No | Controls whether the side menu is expanded or collapsed. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
-| `userName` | string | — | No | User's name displayed in the profile section. |
-| `userSecondaryText` | string | — | No | Secondary text displayed below the user's name, such as role or email. |
+| `heading` | string | (none) | Yes | The application name displayed in the header. |
+| `open` | boolean | (none) | No | Controls whether the side menu is expanded or collapsed. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
+| `userName` | string | (none) | No | User's name displayed in the profile section. |
+| `userSecondaryText` | string | (none) | No | Secondary text displayed below the user's name, such as role or email. |
 
 ### Events
 
@@ -42,12 +42,12 @@ Side menu variant for worker applications.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | — | Yes | The application name displayed in the header. |
-| `open` | boolean | — | No | Controls whether the side menu is expanded or collapsed. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
-| `userName` | string | — | No | User's name displayed in the profile section. |
-| `userSecondaryText` | string | — | No | Secondary text displayed below the user's name, such as role or email. |
+| `heading` | string | (none) | Yes | The application name displayed in the header. |
+| `open` | boolean | (none) | No | Controls whether the side menu is expanded or collapsed. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
+| `userName` | string | (none) | No | User's name displayed in the profile section. |
+| `userSecondaryText` | string | (none) | No | Secondary text displayed below the user's name, such as role or email. |
 
 ### Events
 
@@ -74,19 +74,19 @@ Tag: `goa-work-side-menu`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | — | Yes | The application name displayed in the header. |
+| `heading` | string | (none) | Yes | The application name displayed in the header. |
 | `open` | boolean | `false` | No | Controls whether the side menu is expanded or collapsed. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
-| `user-name` | string | — | No | User's name displayed in the profile section. |
-| `user-secondary-text` | string | — | No | Secondary text displayed below the user's name, such as role or email. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | Yes | URL for the header link. Clicking the logo/heading navigates to this URL. |
+| `user-name` | string | (none) | No | User's name displayed in the profile section. |
+| `user-secondary-text` | string | (none) | No | Secondary text displayed below the user's name, such as role or email. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_navigate` | CustomEvent<{ url: string }> |  |
-| `_toggle` | CustomEvent<{ open: boolean }> |  |
+| `_navigate` | CustomEvent<{ url: string }> | (none) |
+| `_toggle` | CustomEvent<{ open: boolean }> | (none) |
 
 ### Slots
 
@@ -102,7 +102,7 @@ Tag: `goa-work-side-menu`
 
 ### Other
 
-- 💡 **Tip:** Use WorkSideMenu when the experience is in worker mode: a productive, power-user tool where users move through dense work efficiently. This isn't only about government staff. Some citizen-facing services are also worker mode, like a contractor who files permits daily. Don't use WorkSideMenu in simplified, guided experiences like public forms.
+- **[Tip]** Use WorkSideMenu when the experience is in worker mode: a productive, power-user tool where users move through dense work efficiently. This isn't only about government staff. Some citizen-facing services are also worker mode, like a contractor who files permits daily. Don't use WorkSideMenu in simplified, guided experiences like public forms.
 
 ---
 

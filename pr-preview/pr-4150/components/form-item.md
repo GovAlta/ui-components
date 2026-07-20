@@ -12,20 +12,20 @@ Wraps an input control with a text label, requirement label, helper text, and er
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `error` | string | React.ReactNode | — | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
-| `helpText` | string | React.ReactNode | — | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
-| `id` | string | — | No | Sets the id attribute on the form item element. |
-| `label` | string | — | No | Creates a label for the form item. |
+| `error` | string \| React.ReactNode | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
+| `helpText` | string \| React.ReactNode | (none) | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
+| `id` | string | (none) | No | Sets the id attribute on the form item element. |
+| `label` | string | (none) | No | Creates a label for the form item. |
 | `labelSize` | GoabFormItemLabelSize | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the form item. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `name` | string | — | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | — | No | Marks the field with an optional or required label indicator. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | — | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
+| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -42,20 +42,20 @@ Wraps an input control with a text label, requirement label, helper text, and er
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `error` | string | TemplateRef<any> | — | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
-| `helpText` | string | TemplateRef<any> | — | No | Help text displayed under the form field to provide additional explanation. |
-| `id` | string | — | No | Sets the id attribute on the form item element. |
-| `label` | string | — | No | Creates a label for the form item. |
-| `labelSize` | GoabFormItemLabelSize | — | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
-| `maxWidth` | string | — | No | Sets the maximum width of the form item. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `name` | string | — | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | — | No | Marks the field with an optional or required label indicator. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | — | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `error` | string \| TemplateRef<any> | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
+| `helpText` | string \| TemplateRef<any> | (none) | No | Help text displayed under the form field to provide additional explanation. |
+| `id` | string | (none) | No | Sets the id attribute on the form item element. |
+| `label` | string | (none) | No | Creates a label for the form item. |
+| `labelSize` | GoabFormItemLabelSize | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the form item. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
+| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -74,20 +74,19 @@ Tag: `goa-form-item`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `error` | string | — | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
-| `helptext` | string | — | No | Help text displayed under the form field to provide additional explanation. |
-| `label` | string | — | No | Creates a label for the form item. |
-| `labelsize` | "compact" | "regular" | "large" | `regular` | No | Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. |
+| `error` | string | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
+| `helptext` | string | (none) | No | Help text displayed under the form field to provide additional explanation. |
+| `label` | string | (none) | No | Creates a label for the form item. |
+| `labelsize` | "compact" \| "regular" \| "large" | `regular` | No | Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. |
 | `maxwidth` | string | `none` | No | Sets the maximum width of the form item. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
 | `name` | string | `blank` | No | Overrides the label value within the form-summary. For public-form use only. |
-| `requirement` | "optional" | "required" | — | No | Marks the field with an optional or required label indicator. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | "text-input" | "textarea" | "checkbox-list" | "radio-group" | — | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `requirement` | "optional" \| "required" | (none) | No | Marks the field with an optional or required label indicator. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | "text-input" \| "textarea" \| "checkbox-list" \| "radio-group" | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -102,20 +101,20 @@ Tag: `goa-form-item`
 
 ### Other
 
-- ✅ **Do:** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
+- **[Do]** Use a form item wrapper on all inputs to add a label, helper text, error message, and more.
 
 ### Sizing
 
-- 💡 **Tip:** Use labelSize='large' when you want the question to act as the heading on the page. This is often the right choice when there's only one question on a page, so you don't end up with a separate heading and a question saying the same thing.
+- **[Tip]** Use labelSize='large' when you want the question to act as the heading on the page. This is often the right choice when there's only one question on a page, so you don't end up with a separate heading and a question saying the same thing.
 
 ### Forms
 
-- ❌ **Don't:** Don't use the character counter for input fields where user entries typically have standard or predictable lengths.
-- ✅ **Do:** Use the character count only when there's a valid reason to limit the number of characters.
-- ✅ **Do:** Make empty text areas as tall as the content they are expected to contain.
-- ✅ **Do:** Ensure that the text area width is no longer than 75 characters per line; ideal line length is 45-75 characters.
-- ❌ **Don't:** Don't use a text area which is only one line high; instead, use text input if just one line is needed.
-- ✅ **Do:** If you suggest a specific length for an answer to a question, display a word count to help guide the user.
+- **[Don't]** Don't use the character counter for input fields where user entries typically have standard or predictable lengths.
+- **[Do]** Use the character count only when there's a valid reason to limit the number of characters.
+- **[Do]** Make empty text areas as tall as the content they are expected to contain.
+- **[Do]** Ensure that the text area width is no longer than 75 characters per line; ideal line length is 45-75 characters.
+- **[Don't]** Don't use a text area which is only one line high; instead, use text input if just one line is needed.
+- **[Do]** If you suggest a specific length for an answer to a question, display a word count to help guide the user.
 
 ---
 

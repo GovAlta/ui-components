@@ -13,12 +13,12 @@ A visual band of text, including an image and a call to action.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `backgroundColor` | string | `#f8f8f8` | No | Hero Banner background color when no background image is provided. |
-| `backgroundUrl` | string | — | No | Background image url. |
-| `heading` | string | — | Yes | Main heading text. |
+| `backgroundUrl` | string | (none) | No | Background image url. |
+| `heading` | string | (none) | Yes | Main heading text. |
 | `maxContentWidth` | string | `100%` | No | Maximum width of the content area. |
-| `minHeight` | string | — | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `textColor` | string | — | No | Text color within the hero banner. |
+| `minHeight` | string | (none) | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `textColor` | string | (none) | No | Text color within the hero banner. |
 
 ### Slots
 
@@ -34,13 +34,13 @@ A visual band of text, including an image and a call to action.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `backgroundColor` | string | — | No | Hero Banner background color when no background image is provided. |
-| `backgroundUrl` | string | — | No | Background image url. |
-| `heading` | string | — | No | Main heading text. |
-| `maxContentWidth` | string | — | No | Maximum width of the content area. |
-| `minHeight` | string | — | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `textColor` | string | — | No | Text color within the hero banner. |
+| `backgroundColor` | string | (none) | No | Hero Banner background color when no background image is provided. |
+| `backgroundUrl` | string | (none) | No | Background image url. |
+| `heading` | string | (none) | No | Main heading text. |
+| `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
+| `minHeight` | string | (none) | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `textColor` | string | (none) | No | Text color within the hero banner. |
 
 ### Slots
 
@@ -59,12 +59,12 @@ Tag: `goa-hero-banner`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `backgroundcolor` | string | `#f8f8f8` | No | Hero Banner background color when no background image is provided |
-| `backgroundurl` | string | — | Yes | Background image url |
-| `heading` | string | — | Yes | Main heading text |
+| `backgroundurl` | string | (none) | Yes | Background image url |
+| `heading` | string | (none) | Yes | Main heading text |
 | `maxcontentwidth` | string | `100%` | No | Maximum width of the content area |
-| `minheight` | string | — | Yes | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
+| `minheight` | string | (none) | Yes | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
 | `testid` | string | `background` | No | Sets a data-testid attribute for automated testing. |
-| `textcolor` | string | — | No | Text color within the hero banner. |
+| `textcolor` | string | (none) | No | Text color within the hero banner. |
 
 ### Slots
 
@@ -78,17 +78,17 @@ Tag: `goa-hero-banner`
 
 ### Interaction
 
-- ❌ **Don't:** Don't include a call-to-action link in a hero banner unless it is on the home page.
+- **[Don't]** Don't include a call-to-action link in a hero banner unless it is on the home page.
 
 ### Content
 
-- ❌ **Don't:** Don't select photos with focal points at the edges, as text overlays the imagery.
-- ❌ **Don't:** Don't use a photograph without first cropping and resizing to fit the hero banner.
-- ✅ **Do:** Select photos that place the subject matter or focal point in the center.
+- **[Don't]** Don't select photos with focal points at the edges, as text overlays the imagery.
+- **[Don't]** Don't use a photograph without first cropping and resizing to fit the hero banner.
+- **[Do]** Select photos that place the subject matter or focal point in the center.
 
 ### Performance
 
-- ✅ **Do:** Enable image optimization for desktop, tablet, and mobile to minimize loading times.
+- **[Do]** Enable image optimization for desktop, tablet, and mobile to minimize loading times.
 
 ---
 
@@ -96,7 +96,7 @@ Tag: `goa-hero-banner`
 
 ### Accessibility
 
-- ✅ **Do:** Ensure hero banner images are accessible by using descriptive alt text.
+- **[Do]** Ensure hero banner images are accessible by using descriptive alt text.
 
 ---
 

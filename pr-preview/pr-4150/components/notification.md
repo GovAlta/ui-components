@@ -13,11 +13,11 @@ Display important page level information or notifications.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLive` | GoabAriaLiveType | `polite` | No | Indicates how assistive technology should handle updates to the live region. |
-| `compact` | boolean | — | No | When true, reduces padding for a more compact notification. |
+| `compact` | boolean | (none) | No | When true, reduces padding for a more compact notification. |
 | `emphasis` | GoabNotificationEmphasis | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for a bordered style. |
 | `maxContentWidth` | string | `100%` | No | Maximum width of the content area. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabNotificationType | — | No | Define the context and colour of the notification. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | GoabNotificationType | (none) | No | Define the context and colour of the notification. |
 
 ### Events
 
@@ -33,11 +33,11 @@ Display important page level information or notifications.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLive` | GoabAriaLiveType | — | No | Indicates how assistive technology should handle updates to the live region. |
-| `compact` | boolean | — | No | When true, reduces padding for a more compact notification. |
+| `ariaLive` | GoabAriaLiveType | (none) | No | Indicates how assistive technology should handle updates to the live region. |
+| `compact` | boolean | (none) | No | When true, reduces padding for a more compact notification. |
 | `emphasis` | GoabNotificationEmphasis | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for medium. |
-| `maxContentWidth` | string | — | No | Maximum width of the content area. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | GoabNotificationType | `information` | No | Define the context and colour of the notification. |
 
 ### Events
@@ -56,19 +56,18 @@ Tag: `goa-notification`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialive` | "assertive" | "off" | "polite" | `polite` | No | Indicates how assistive technology should handle updates to the live region. |
+| `arialive` | "assertive" \| "off" \| "polite" | `polite` | No | Indicates how assistive technology should handle updates to the live region. |
 | `compact` | boolean | `false` | No | When true, reduces padding for a more compact notification. |
-| `emphasis` | "high" | "low" | `high` | No | Sets the visual prominence. 'high' for full background, 'filled' for medium. |
+| `emphasis` | "high" \| "low" | `high` | No | Sets the visual prominence. 'high' for full background, 'filled' for medium. |
 | `maxcontentwidth` | string | `100%` | No | Maximum width of the content area. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `type` | "emergency" | "important" | "information" | "event" | — | No | Define the context and colour of the notification. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `type` | "emergency" \| "important" \| "information" \| "event" | (none) | No | Define the context and colour of the notification. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_dismiss` | CustomEvent |  |
+| `_dismiss` | CustomEvent | (none) |
 
 ---
 
@@ -76,19 +75,19 @@ Tag: `goa-notification`
 
 ### Feedback
 
-- ✅ **Do:** Place your temporary notification above existing fixed position elements.
-- ✅ **Do:** Use a temporary notification to communicate actions that have just taken place to the user.
-- ❌ **Don't:** Never put critical actions or buttons inside a temporary notification as they will disappear automatically.
-- ✅ **Do:** Keep content short and concise.
-- ❌ **Don't:** Don't put critical actions for the user in a temporary notification as they automatically dismiss.
-- ✅ **Do:** End loading messages with an ellipsis to indicate that the action is ongoing.
-- ❌ **Don't:** Don't show multiple temporary notifications at the same time as it can overwhelm users before they time out.
-- ✅ **Do:** Only show one temporary notification at a time; subsequent ones appear after initial instances disappear.
-- ❌ **Don't:** Don't use a temporary notification for success states where important information is displayed for a user to reference since it will disappear.
+- **[Do]** Place your temporary notification above existing fixed position elements.
+- **[Do]** Use a temporary notification to communicate actions that have just taken place to the user.
+- **[Don't]** Never put critical actions or buttons inside a temporary notification as they will disappear automatically.
+- **[Do]** Keep content short and concise.
+- **[Don't]** Don't put critical actions for the user in a temporary notification as they automatically dismiss.
+- **[Do]** End loading messages with an ellipsis to indicate that the action is ongoing.
+- **[Don't]** Don't show multiple temporary notifications at the same time as it can overwhelm users before they time out.
+- **[Do]** Only show one temporary notification at a time; subsequent ones appear after initial instances disappear.
+- **[Don't]** Don't use a temporary notification for success states where important information is displayed for a user to reference since it will disappear.
 
 ### Types
 
-- 💡 **Tip:** For temporary toast-style messages, use TemporaryNotification instead of Notification. Notification stays on screen until dismissed.
+- **[Tip]** For temporary toast-style messages, use TemporaryNotification instead of Notification. Notification stays on screen until dismissed.
 
 ---
 

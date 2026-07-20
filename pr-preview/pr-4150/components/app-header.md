@@ -12,12 +12,12 @@ Provide structure to help users find their way around the service.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `fullMenuBreakpoint` | number | — | No | Sets the breakpoint in px for the full menu to display. |
-| `heading` | string | — | No | Set the service name to display in the app header. |
-| `maxContentWidth` | string | — | No | Maximum width of the content area. |
-| `secondaryText` | string | — | No | Secondary text displayed under the service name. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | No | Set the URL to link from the alberta.ca logo. A full url is required. |
+| `fullMenuBreakpoint` | number | (none) | No | Sets the breakpoint in px for the full menu to display. |
+| `heading` | string | (none) | No | Set the service name to display in the app header. |
+| `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
+| `secondaryText` | string | (none) | No | Secondary text displayed under the service name. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | No | Set the URL to link from the alberta.ca logo. A full url is required. |
 
 ### Events
 
@@ -42,12 +42,12 @@ Provide structure to help users find their way around the service.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `fullMenuBreakpoint` | number | — | No | Sets the breakpoint in px for the full menu to display. |
-| `heading` | string | — | No | Sets the service name to display in the app header. |
-| `maxContentWidth` | string | — | No | Maximum width of the content area. |
-| `secondaryText` | string | — | No | Secondary text displayed under the service name. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | No | Sets the URL to link from the alberta.ca logo. A full url is required. |
+| `fullMenuBreakpoint` | number | (none) | No | Sets the breakpoint in px for the full menu to display. |
+| `heading` | string | (none) | No | Sets the service name to display in the app header. |
+| `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
+| `secondaryText` | string | (none) | No | Secondary text displayed under the service name. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | No | Sets the URL to link from the alberta.ca logo. A full url is required. |
 
 ### Events
 
@@ -76,18 +76,17 @@ Tag: `goa-app-header`
 |------|------|---------|----------|-------------|
 | `fullmenubreakpoint` | number | `TABLET_BP` | No | Sets the breakpoint in px for the full menu to display. |
 | `hasmenuclickhandler` | boolean | `false` | No | When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling. |
-| `heading` | string | — | No | Set the service name to display in the app header. |
-| `maxcontentwidth` | string | — | No | Maximum width of the content area. |
-| `secondarytext` | string | — | No | V2 only: Secondary text displayed under the service name. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | No | Set the URL to link from the alberta.ca logo. A full url is required. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `heading` | string | (none) | No | Set the service name to display in the app header. |
+| `maxcontentwidth` | string | (none) | No | Maximum width of the content area. |
+| `secondarytext` | string | (none) | No | V2 only: Secondary text displayed under the service name. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | No | Set the URL to link from the alberta.ca logo. A full url is required. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_menuClick` | CustomEvent |  |
+| `_menuClick` | CustomEvent | (none) |
 
 ### Slots
 
@@ -104,11 +103,11 @@ Tag: `goa-app-header`
 
 ### Positioning
 
-- 💡 **Tip:** Use consistent maxContentWidth with your page layout so the header aligns with the content below it.
+- **[Tip]** Use consistent maxContentWidth with your page layout so the header aligns with the content below it.
 
 ### Content
 
-- ⚠️ **Warning:** Always provide a heading prop on AppHeader to identify your service. Without it, users won't know which service they're using.
+- **[Warning]** Always provide a heading prop on AppHeader to identify your service. Without it, users won't know which service they're using.
 
 ---
 

@@ -12,7 +12,7 @@ Full-width section with optional background.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | GoabPageBlockSize | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
 ---
@@ -23,8 +23,8 @@ Full-width section with optional background.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `width` | GoabPageBlockSize | — | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `width` | GoabPageBlockSize | (none) | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
 ---
 
@@ -36,8 +36,8 @@ Tag: `goa-page-block`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `width` | "full" | string | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `width` | "full" \| string | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
 ---
 
@@ -45,7 +45,7 @@ Tag: `goa-page-block`
 
 ### Other
 
-- 💡 **Tip:** GoabPageBlock with a width prop is one way to constrain main content within OneColumnLayout. It gives you a quick, consistent content width without having to handle that yourself.
+- **[Tip]** GoabPageBlock with a width prop is one way to constrain main content within OneColumnLayout. It gives you a quick, consistent content width without having to handle that yourself.
 
 ---
 

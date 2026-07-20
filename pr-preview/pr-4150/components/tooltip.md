@@ -12,15 +12,15 @@ A small popover that displays more information about an item.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | ReactNode | — | No | The content of the tooltip. Accepts plain text or rich content. |
+| `content` | string \| ReactNode | (none) | No | The content of the tooltip. Accepts plain text or rich content. |
 | `hAlign` | GoabTooltipHorizontalAlignment | `center` | No | Horizontal alignment of the tooltip relative to the child element. |
-| `maxWidth` | string | — | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `position` | GoabTooltipPosition | `top` | No | Position of the tooltip with respect to the child element. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -36,15 +36,15 @@ A small popover that displays more information about an item.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | TemplateRef<unknown> | — | No | The content of the tooltip. |
+| `content` | string \| TemplateRef<unknown> | (none) | No | The content of the tooltip. |
 | `hAlign` | GoabTooltipHorizontalAlignment | `center` | No | Horizontal alignment to the child element. |
-| `maxWidth` | string | — | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
+| `maxWidth` | string | (none) | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `position` | GoabTooltipPosition | `top` | No | Position with respect to the child element. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -62,15 +62,15 @@ Tag: `goa-tooltip`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | — | No | The content of the tooltip. |
-| `halign` | "left" | "right" | "center" | `center` | No | Horizontal alignment to the child element. |
-| `maxwidth` | string | — | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `position` | "top" | "bottom" | "left" | "right" | `top` | No | Position with respect to the child element. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `content` | string | (none) | No | The content of the tooltip. |
+| `halign` | "left" \| "right" \| "center" | `center` | No | Horizontal alignment to the child element. |
+| `maxwidth` | string | (none) | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `position` | "top" \| "bottom" \| "left" \| "right" | `top` | No | Position with respect to the child element. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Slots
 
@@ -84,17 +84,17 @@ Tag: `goa-tooltip`
 
 ### Other
 
-- ❌ **Don't:** Don't use tooltips to communicate essential information such as required field indicators, error messages, critical instructions, or information needed to complete a task.
-- ✅ **Do:** Use tooltips for additional context that enhances understanding, definitions of terms, or keyboard shortcuts.
+- **[Don't]** Don't use tooltips to communicate essential information such as required field indicators, error messages, critical instructions, or information needed to complete a task.
+- **[Do]** Use tooltips for additional context that enhances understanding, definitions of terms, or keyboard shortcuts.
 
 ### Feedback
 
-- ✅ **Do:** Use tooltips to describe an icon button and provide clarity on what the icon button will do.
-- ❌ **Don't:** Don't position a tooltip in a way that forces the user to scroll to view the tooltip content.
-- ❌ **Don't:** Don't use tooltips inconsistently; if one icon button has a tooltip, the rest of the icon buttons must also have tooltips.
-- ❌ **Don't:** Don't add more than 140 characters to a tooltip; for lengthy information use the details component.
-- ❌ **Don't:** Don't position a tooltip too far from the element.
-- ❌ **Don't:** Don't use tooltips for information that is vital to task completion.
+- **[Do]** Use tooltips to describe an icon button and provide clarity on what the icon button will do.
+- **[Don't]** Don't position a tooltip in a way that forces the user to scroll to view the tooltip content.
+- **[Don't]** Don't use tooltips inconsistently; if one icon button has a tooltip, the rest of the icon buttons must also have tooltips.
+- **[Don't]** Don't add more than 140 characters to a tooltip; for lengthy information use the details component.
+- **[Don't]** Don't position a tooltip too far from the element.
+- **[Don't]** Don't use tooltips for information that is vital to task completion.
 
 ---
 

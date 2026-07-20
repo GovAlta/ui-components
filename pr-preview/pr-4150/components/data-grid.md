@@ -12,9 +12,9 @@ Advanced table with sorting and selection.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `keyboardIconPosition` | "left" | "right" | `left` | No | Position of the keyboard navigation indicator icon. |
-| `keyboardIconVisibility` | "visible" | "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. |
-| `keyboardNav` | "layout" | "table" | — | Yes | Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. |
+| `keyboardIconPosition` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
+| `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. |
+| `keyboardNav` | "layout" \| "table" | (none) | Yes | Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. |
 
 ---
 
@@ -24,9 +24,9 @@ Advanced table with sorting and selection.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `keyboardIconPosition` | "left" | "right" | `left` | No | Position of the keyboard navigation indicator icon. |
-| `keyboardIconVisibility` | "visible" | "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
-| `keyboardNav` | "layout" | "table" | — | Yes | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
+| `keyboardIconPosition` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
+| `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
+| `keyboardNav` | "layout" \| "table" | (none) | Yes | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
 
 ---
 
@@ -38,9 +38,9 @@ Tag: `goa-data-grid`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `keyboard-icon-position` | "left" | "right" | `left` | No | Position of the keyboard navigation indicator icon. |
-| `keyboard-icon-visibility` | "visible" | "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
-| `keyboard-nav` | "layout" | "table" | `table` | No | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
+| `keyboard-icon-position` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
+| `keyboard-icon-visibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
+| `keyboard-nav` | "layout" \| "table" | `table` | No | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
 
 ---
 
@@ -48,7 +48,7 @@ Tag: `goa-data-grid`
 
 ### Keyboard
 
-- ✅ **Do:** Add data-grid attributes to rows and cells for keyboard navigation to work.
+- **[Do]** Add data-grid attributes to rows and cells for keyboard navigation to work.
 
 ---
 

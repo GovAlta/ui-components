@@ -12,15 +12,15 @@ A set of structured data that is easy for a user to scan, examine, and compare.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `sortMode` | GoabTableSortMode | `single` | No | Sort mode: "single" allows one column, "multi" allows up to 2 columns. |
-| `striped` | boolean | — | No | When true, alternates row background colors for improved readability. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `striped` | boolean | (none) | No | When true, alternates row background colors for improved readability. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `variant` | GoabTableVariant | `normal` | No | A relaxed variant of the table with more vertical padding for the cells. |
-| `width` | string | — | No | Width of the table. By default it will fit the enclosed content. |
+| `width` | string | (none) | No | Width of the table. By default it will fit the enclosed content. |
 
 ### Events
 
@@ -37,15 +37,15 @@ A set of structured data that is easy for a user to scan, examine, and compare.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `sortMode` | GoabTableSortMode | — | No | Sets sort mode: "single" allows one column, "multi" allows up to 2 columns. |
-| `striped` | boolean | — | No | When true, alternates row background colors for improved readability. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `variant` | GoabTableVariant | — | No | Sets a relaxed variant of the table with more vertical padding for the cells. |
-| `width` | string | — | No | Width of the table. By default it will fit the enclosed content. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `sortMode` | GoabTableSortMode | (none) | No | Sets sort mode: "single" allows one column, "multi" allows up to 2 columns. |
+| `striped` | boolean | (none) | No | When true, alternates row background colors for improved readability. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `variant` | GoabTableVariant | (none) | No | Sets a relaxed variant of the table with more vertical padding for the cells. |
+| `width` | string | (none) | No | Width of the table. By default it will fit the enclosed content. |
 
 ### Events
 
@@ -64,23 +64,22 @@ Tag: `goa-table`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `sort-mode` | "single" | "multi" | `single` | No | Sort mode: "single" allows one column, "multi" allows up to 2 columns. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `sort-mode` | "single" \| "multi" | `single` | No | Sort mode: "single" allows one column, "multi" allows up to 2 columns. |
 | `striped` | boolean | `false` | No | When true, alternates row background colors for improved readability. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `variant` | "normal" | "relaxed" | `normal` | No | A relaxed variant of the table with more vertical padding for the cells. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
-| `width` | string | — | No | Width of the table. By default it will fit the enclosed content. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `variant` | "normal" \| "relaxed" | `normal` | No | A relaxed variant of the table with more vertical padding for the cells. |
+| `width` | string | (none) | No | Width of the table. By default it will fit the enclosed content. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_multisort` | CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }> |  |
-| `_sort` | CustomEvent<{ sortBy: string; sortDir: number }> |  |
+| `_multisort` | CustomEvent<{ sorts: { column: string; direction: "asc" \| "desc" }[] }> | (none) |
+| `_sort` | CustomEvent<{ sortBy: string; sortDir: number }> | (none) |
 
 ---
 
@@ -88,7 +87,7 @@ Tag: `goa-table`
 
 ### Types
 
-- 💡 **Tip:** Use variant='relaxed' for tables with longer content that needs more breathing room between rows.
+- **[Tip]** Use variant='relaxed' for tables with longer content that needs more breathing room between rows.
 
 ---
 
@@ -96,7 +95,7 @@ Tag: `goa-table`
 
 ### Screen Readers
 
-- ✅ **Do:** Use proper semantic HTML table structure (thead, tbody, tr, th, td) for accessibility.
+- **[Do]** Use proper semantic HTML table structure (thead, tbody, tr, th, td) for accessibility.
 
 ---
 

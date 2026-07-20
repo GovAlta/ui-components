@@ -12,16 +12,16 @@ Allow the user to enter information, filter content, and make selections.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | — | Yes | Text label of the chip. |
-| `error` | boolean | — | No | Shows an error state. |
+| `content` | string | (none) | Yes | Text label of the chip. |
+| `error` | boolean | (none) | No | Shows an error state. |
 | `iconTheme` | GoabFilterChipTheme | `outline` | No | Theme style of the leading icon. |
-| `leadingIcon` | GoabIconType | — | No | Icon displayed at the start of the chip. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
-| `secondaryText` | string | — | No | Secondary text displayed in a smaller size before the main content. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `leadingIcon` | GoabIconType | (none) | No | Icon displayed at the start of the chip. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
+| `secondaryText` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -37,17 +37,17 @@ Allow the user to enter information, filter content, and make selections.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | — | No | Text label of the chip. |
-| `deletable` | boolean | — | No | Marks the chip as deletable. |
-| `error` | boolean | — | No | Shows an error state. |
-| `iconTheme` | GoabChipTheme | — | No | Sets the icon theme style for the filter chip. |
-| `leadingIcon` | GoabIconType | null | — | No | Icon displayed at the start of the chip. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `secondaryText` | string | — | No | Secondary text displayed in a smaller size before the main content. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `content` | string | (none) | No | Text label of the chip. |
+| `deletable` | boolean | (none) | No | Marks the chip as deletable. |
+| `error` | boolean | (none) | No | Shows an error state. |
+| `iconTheme` | GoabChipTheme | (none) | No | Sets the icon theme style for the filter chip. |
+| `leadingIcon` | GoabIconType \| null | (none) | No | Icon displayed at the start of the chip. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `secondaryText` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ### Events
 
@@ -65,23 +65,22 @@ Tag: `goa-filter-chip`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | — | No | Accessible label for the filter chip. Defaults to content with 'removable' suffix. |
-| `content` | string | — | Yes | Text label of the chip. |
+| `arialabel` | string | (none) | No | Accessible label for the filter chip. Defaults to content with 'removable' suffix. |
+| `content` | string | (none) | Yes | Text label of the chip. |
 | `error` | boolean | `false` | No | Shows an error state. |
-| `leadingicon` | GoabIconType | — | No | Icon displayed at the start of the chip. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
-| `secondarytext` | string | — | No | Secondary text displayed in a smaller size before the main content. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `leadingicon` | GoabIconType | (none) | No | Icon displayed at the start of the chip. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
+| `secondarytext` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent |  |
+| `_click` | CustomEvent | (none) |
 
 ---
 
@@ -89,7 +88,7 @@ Tag: `goa-filter-chip`
 
 ### Types
 
-- 💡 **Tip:** FilterChip is for removable filters that users can dismiss. For static labels or status indicators, use Badge instead.
+- **[Tip]** FilterChip is for removable filters that users can dismiss. For static labels or status indicators, use Badge instead.
 
 ---
 

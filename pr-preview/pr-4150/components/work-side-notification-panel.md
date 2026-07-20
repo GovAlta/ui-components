@@ -14,7 +14,7 @@ A notification center panel that displays notification items within a work side 
 |------|------|---------|----------|-------------|
 | `activeTab` | GoabWorkSideNotificationActiveTabType | `unread` | No | Sets the initially active tab. |
 | `heading` | string | `Notifications` | No | Sets the panel heading text. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -31,9 +31,9 @@ A notification center panel that displays notification items within a work side 
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `activeTab` | GoabWorkSideNotificationActiveTabType | — | No | Sets the initially active tab in the notification panel. |
-| `heading` | string | — | No | The heading text displayed at the top of the notification panel. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `activeTab` | GoabWorkSideNotificationActiveTabType | (none) | No | Sets the initially active tab in the notification panel. |
+| `heading` | string | (none) | No | The heading text displayed at the top of the notification panel. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
 
@@ -52,16 +52,16 @@ Tag: `goa-work-side-notification-panel`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `active-tab` | "unread" | "urgent" | "all" | `unread` | No |  |
-| `heading` | string | `Notifications` | No |  |
-| `testid` | string | — | No |  |
+| `active-tab` | "unread" \| "urgent" \| "all" | `unread` | No | (none) |
+| `heading` | string | `Notifications` | No | (none) |
+| `testid` | string | (none) | No | (none) |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_markAllRead` | CustomEvent<void> |  |
-| `_viewAll` | CustomEvent<void> |  |
+| `_markAllRead` | CustomEvent<void> | (none) |
+| `_viewAll` | CustomEvent<void> | (none) |
 
 ---
 

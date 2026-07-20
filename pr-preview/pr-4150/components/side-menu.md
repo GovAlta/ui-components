@@ -12,7 +12,7 @@ A side navigation that helps the user navigate between pages.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -22,7 +22,7 @@ A side navigation that helps the user navigate between pages.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -34,8 +34,7 @@ Tag: `goa-side-menu`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 

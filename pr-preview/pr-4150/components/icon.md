@@ -12,20 +12,20 @@ A simple and universal graphic symbol representing an action, object, or concept
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the icon will be announced by screen readers. |
-| `fillColor` | string | — | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
-| `inverted` | string | boolean | — | No | When true, inverts the icon colors for use on dark backgrounds. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `ariaLabel` | string | (none) | No | Defines how the icon will be announced by screen readers. |
+| `fillColor` | string | (none) | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
+| `inverted` | string \| boolean | (none) | No | When true, inverts the icon colors for use on dark backgrounds. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `opacity` | number | `1` | No | Sets the opacity of the icon from 0 (transparent) to 1 (opaque). |
 | `role` | string | `img` | No | Sets the ARIA role for the icon. Use 'presentation' for decorative icons. |
 | `size` | GoabIconSize | `medium` | No | Sets the size of the icon. Accepts numeric (1-6) or named sizes. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `theme` | GoabIconTheme | `outline` | No | Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. |
-| `title` | string | — | No | Adds an accessible title to the icon SVG. Used by screen readers. |
-| `type` | GoabIconType | GoabIconOverridesType | — | Yes | The icon type to display. See GoabIconType for available icons. |
+| `title` | string | (none) | No | Adds an accessible title to the icon SVG. Used by screen readers. |
+| `type` | GoabIconType \| GoabIconOverridesType | (none) | Yes | The icon type to display. See GoabIconType for available icons. |
 
 ---
 
@@ -35,20 +35,20 @@ A simple and universal graphic symbol representing an action, object, or concept
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Defines how the icon will be announced by screen readers. |
-| `fillColor` | string | — | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
-| `inverted` | boolean | — | No | When true, inverts the icon colors for use on dark backgrounds. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
-| `opacity` | number | — | No | Sets the opacity of the icon from 0 (transparent) to 1 (opaque). |
-| `role` | string | — | No | Sets the ARIA role for the icon. Use 'presentation' for decorative icons. |
+| `ariaLabel` | string | (none) | No | Defines how the icon will be announced by screen readers. |
+| `fillColor` | string | (none) | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
+| `inverted` | boolean | (none) | No | When true, inverts the icon colors for use on dark backgrounds. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `opacity` | number | (none) | No | Sets the opacity of the icon from 0 (transparent) to 1 (opaque). |
+| `role` | string | (none) | No | Sets the ARIA role for the icon. Use 'presentation' for decorative icons. |
 | `size` | GoabIconSize | `medium` | No | Sets the size of the icon. Accepts numeric (1-6) or named sizes. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
-| `theme` | GoabIconTheme | — | No | Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. |
-| `title` | string | — | No | Adds an accessible title to the icon SVG. Used by screen readers. |
-| `type` | GoabIconType | GoabIconOverridesType | — | Yes | The icon type to display. See GoabIconType for available icons. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
+| `theme` | GoabIconTheme | (none) | No | Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. |
+| `title` | string | (none) | No | Adds an accessible title to the icon SVG. Used by screen readers. |
+| `type` | GoabIconType \| GoabIconOverridesType | (none) | Yes | The icon type to display. See GoabIconType for available icons. |
 
 ---
 
@@ -60,22 +60,22 @@ Tag: `goa-icon`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariacontrols` | string | — | No | Identifies the element(s) whose contents or presence are controlled by this icon. |
-| `ariaexpanded` | string | — | No | Indicates whether the element controlled by this icon is expanded or collapsed. |
-| `arialabel` | string | — | No | Defines how the icon will be announced by screen readers. |
-| `fillcolor` | string | — | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
+| `ariacontrols` | string | (none) | No | Identifies the element(s) whose contents or presence are controlled by this icon. |
+| `ariaexpanded` | string | (none) | No | Indicates whether the element controlled by this icon is expanded or collapsed. |
+| `arialabel` | string | (none) | No | Defines how the icon will be announced by screen readers. |
+| `fillcolor` | string | (none) | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
 | `inverted` | boolean | `false` | No | When true, inverts the icon colors for use on dark backgrounds. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
 | `opacity` | number | `1` | No | Sets the opacity of the icon from 0 (transparent) to 1 (opaque). |
 | `role` | string | `img` | No | Sets the ARIA role for the icon. Defaults to 'img'. Use 'presentation' for decorative icons. |
-| `size` | "1" | "2" | "3" | "4" | "5" | "6" | "2xsmall" | "xsmall" | "small" | "medium" |… | `medium` | No | Sets the size of the icon. Accepts numeric (1-6) or named sizes. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `theme` | "outline" | "filled" | `outline` | No | Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. |
-| `title` | string | — | No | Adds an accessible title to the icon SVG. Used by screen readers. |
-| `type` | GoabIconType | — | Yes | The icon type to display. See GoAIconType for available icons. |
+| `size` | "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "2xsmall" \| "xsmall" \| "small" \| "medium" \|… | `medium` | No | Sets the size of the icon. Accepts numeric (1-6) or named sizes. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `theme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. |
+| `title` | string | (none) | No | Adds an accessible title to the icon SVG. Used by screen readers. |
+| `type` | GoabIconType | (none) | Yes | The icon type to display. See GoAIconType for available icons. |
 
 ---
 
@@ -83,7 +83,7 @@ Tag: `goa-icon`
 
 ### Screen Readers
 
-- ❌ **Don't:** Don't use icon-only elements without an accessible label
+- **[Don't]** Don't use icon-only elements without an accessible label
 
 ---
 

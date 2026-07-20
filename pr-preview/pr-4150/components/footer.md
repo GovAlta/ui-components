@@ -12,8 +12,8 @@ Provides information related your service at the bottom of every page.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `maxContentWidth` | string | — | No | The maximum width of the main content area. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `maxContentWidth` | string | (none) | No | The maximum width of the main content area. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `url` | string | `https://alberta.ca` | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
 
 ---
@@ -24,9 +24,9 @@ Provides information related your service at the bottom of every page.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `maxContentWidth` | string | — | No | The maximum width of the main content area. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | — | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
+| `maxContentWidth` | string | (none) | No | The maximum width of the main content area. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `url` | string | (none) | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
 
 ---
 
@@ -38,17 +38,16 @@ Tag: `goa-footer`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `maxcontentwidth` | string | — | No | The maximum width of the main content area |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `maxcontentwidth` | string | (none) | No | The maximum width of the main content area |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `url` | string | `https://alberta.ca` | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
-| `version` | "1" | "2" | `1` | No | Design system version for styling. |
 
 ### Slots
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `meta` | No |  |
-| `nav` | No |  |
+| `meta` | No | (none) |
+| `nav` | No | (none) |
 
 ---
 

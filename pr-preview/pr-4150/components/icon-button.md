@@ -12,20 +12,20 @@ A compact button with an icon and no text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `action` | string | — | No | Action identifier passed in click events for event delegation patterns. |
-| `actionArg` | string | — | No | Single argument value passed with the action in click events. |
-| `actionArgs` | Record<string, unknown> | — | No | Multiple argument values passed with the action in click events. |
-| `ariaLabel` | string | — | No | Sets the aria-label of the button. |
-| `disabled` | boolean | — | No | Disables the button. |
-| `icon` | GoabIconType | — | Yes | Sets the icon. |
-| `mb` | Spacing | — | No |  |
-| `ml` | Spacing | — | No |  |
-| `mr` | Spacing | — | No |  |
-| `mt` | Spacing | — | No |  |
+| `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
+| `actionArg` | string | (none) | No | Single argument value passed with the action in click events. |
+| `actionArgs` | Record<string, unknown> | (none) | No | Multiple argument values passed with the action in click events. |
+| `ariaLabel` | string | (none) | No | Sets the aria-label of the button. |
+| `disabled` | boolean | (none) | No | Disables the button. |
+| `icon` | GoabIconType | (none) | Yes | Sets the icon. |
+| `mb` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | (none) |
+| `mr` | Spacing | (none) | No | (none) |
+| `mt` | Spacing | (none) | No | (none) |
 | `size` | GoabIconSize | `medium` | No | Sets the size of button. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `theme` | GoabIconTheme | `outline` | No | Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. |
-| `title` | string | — | No | Sets the title of the button. |
+| `title` | string | (none) | No | Sets the title of the button. |
 | `type` | GoabIconButtonType | `default` | No | Sets the visual style of the button. |
 | `variant` | GoabIconButtonVariant | `color` | No | Styles the button to show color, light, dark or destructive action. |
 
@@ -43,22 +43,22 @@ A compact button with an icon and no text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `action` | string | — | No | Action identifier passed in click events for event delegation patterns. |
-| `actionArg` | string | — | No | Single argument value passed with the action in click events. |
-| `actionArgs` | Record<string, unknown> | — | No | Multiple argument values passed with the action in click events. |
-| `ariaLabel` | string | — | No | Sets the aria-label of the button. |
-| `disabled` | boolean | — | No | Disables the button. |
-| `icon` | GoabIconType | — | Yes | Sets the icon. |
-| `mb` | Spacing | — | No | Sets the bottom margin spacing token. |
-| `ml` | Spacing | — | No | Sets the left margin spacing token. |
-| `mr` | Spacing | — | No | Sets the right margin spacing token. |
-| `mt` | Spacing | — | No | Sets the top margin spacing token. |
+| `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
+| `actionArg` | string | (none) | No | Single argument value passed with the action in click events. |
+| `actionArgs` | Record<string, unknown> | (none) | No | Multiple argument values passed with the action in click events. |
+| `ariaLabel` | string | (none) | No | Sets the aria-label of the button. |
+| `disabled` | boolean | (none) | No | Disables the button. |
+| `icon` | GoabIconType | (none) | Yes | Sets the icon. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `size` | GoabIconSize | `medium` | No | Sets the size of button. |
-| `testId` | string | — | No | Sets the data-testid attribute for automated testing. |
+| `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `theme` | GoabIconTheme | `outline` | No | Sets the icon theme. "outline" for stroked icons, "filled" for solid icons. |
-| `title` | string | — | No | Sets the title of the button. |
+| `title` | string | (none) | No | Sets the title of the button. |
 | `type` | GoabIconButtonType | `default` | No | Sets the visual style of the button. |
-| `variant` | GoabIconButtonVariant | — | No | Styles the button to show color, light, dark or destructive action. |
+| `variant` | GoabIconButtonVariant | (none) | No | Styles the button to show color, light, dark or destructive action. |
 
 ### Events
 
@@ -76,29 +76,29 @@ Tag: `goa-icon-button`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `action` | string | — | No | Action identifier passed in click events for event delegation patterns. |
-| `action-arg` | string | — | No | Single argument value passed with the action in click events. |
+| `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
+| `action-arg` | string | (none) | No | Single argument value passed with the action in click events. |
 | `action-args` | Record<string, unknown> | `{}` | No | Multiple argument values passed with the action in click events. |
-| `arialabel` | string | — | No | Sets the aria-label of the button. |
+| `arialabel` | string | (none) | No | Sets the aria-label of the button. |
 | `disabled` | boolean | `false` | No | Disables the button. |
-| `icon` | GoabIconType | — | Yes | Sets the icon. |
+| `icon` | GoabIconType | (none) | Yes | Sets the icon. |
 | `inverted` | boolean | `false` | No | When true, inverts the icon colors for use on dark backgrounds. |
-| `mb` | Spacing | — | No | Bottom margin. |
-| `ml` | Spacing | — | No | Left margin. |
-| `mr` | Spacing | — | No | Right margin. |
-| `mt` | Spacing | — | No | Top margin. |
+| `mb` | Spacing | (none) | No | Bottom margin. |
+| `ml` | Spacing | (none) | No | Left margin. |
+| `mr` | Spacing | (none) | No | Right margin. |
+| `mt` | Spacing | (none) | No | Top margin. |
 | `size` | IconSize | `medium` | No | Sets the size of button. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `theme` | IconTheme | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
-| `title` | string | — | No | Sets the title of the button. |
-| `type` | "default" | "tertiary" | `default` | No | Sets the visual style of the button. |
-| `variant` | "color" | "nocolor" | "light" | "dark" | "destructive" | `color` | No | Styles the button to show color, light, dark or destructive action. |
+| `title` | string | (none) | No | Sets the title of the button. |
+| `type` | "default" \| "tertiary" | `default` | No | Sets the visual style of the button. |
+| `variant` | "color" \| "nocolor" \| "light" \| "dark" \| "destructive" | `color` | No | Styles the button to show color, light, dark or destructive action. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent<{ event: Event }> |  |
+| `_click` | CustomEvent<{ event: Event }> | (none) |
 
 ---
 
@@ -106,26 +106,26 @@ Tag: `goa-icon-button`
 
 ### States
 
-- ❌ **Don't:** Avoid using disabled buttons. They have poor contrast and can confuse users.
-- ❌ **Don't:** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
+- **[Don't]** Avoid using disabled buttons. They have poor contrast and can confuse users.
+- **[Don't]** Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
 
 ### Types
 
-- ❌ **Don't:** Don't use Button for simple navigation (use Link), toggling state (use Toggle or Checkbox), or minor utility functions (use Icon Button).
+- **[Don't]** Don't use Button for simple navigation (use Link), toggling state (use Toggle or Checkbox), or minor utility functions (use Icon Button).
 
 ### Positioning
 
-- ✅ **Do:** Use a button group when putting multiple buttons together.
+- **[Do]** Use a button group when putting multiple buttons together.
 
 ### Usage
 
-- ❌ **Don't:** Don't use icon buttons for actions that are not easily understood.
-- ✅ **Do:** Use icon buttons for universal actions such as closing a modal window.
+- **[Don't]** Don't use icon buttons for actions that are not easily understood.
+- **[Do]** Use icon buttons for universal actions such as closing a modal window.
 
 ### Feedback
 
-- ✅ **Do:** Use tooltips to describe an icon button and provide clarity on what the icon button will do.
-- ❌ **Don't:** Don't use tooltips inconsistently; if one icon button has a tooltip, the rest of the icon buttons must also have tooltips.
+- **[Do]** Use tooltips to describe an icon button and provide clarity on what the icon button will do.
+- **[Don't]** Don't use tooltips inconsistently; if one icon button has a tooltip, the rest of the icon buttons must also have tooltips.
 
 ---
 
@@ -133,16 +133,16 @@ Tag: `goa-icon-button`
 
 ### Screen Readers
 
-- ❌ **Don't:** Don't use icon-only elements without an accessible label
-- ✅ **Do:** Icon-only buttons must include a descriptive label for screen readers.
+- **[Don't]** Don't use icon-only elements without an accessible label
+- **[Do]** Icon-only buttons must include a descriptive label for screen readers.
 
 ### Focus
 
-- ❌ **Don't:** Don't focus on just the icon within a button. Focus the button as a whole.
+- **[Don't]** Don't focus on just the icon within a button. Focus the button as a whole.
 
 ### Accessibility
 
-- ✅ **Do:** Use a tooltip to clearly indicate an icon button's function when there's no visible label.
+- **[Do]** Use a tooltip to clearly indicate an icon button's function when there's no visible label.
 
 ---
 

@@ -12,11 +12,11 @@ Provide visual feedback to users while loading.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Accessible label for the progress bar. |
-| `ariaLabelledBy` | string | — | No | ID of the element that labels this progress bar. |
-| `percentVisibility` | "visible" | "hidden" | undefined | `visible` | No | Controls visibility of the percentage text. |
-| `progress` | number | null | — | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
-| `testId` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `ariaLabel` | string | (none) | No | Accessible label for the progress bar. |
+| `ariaLabelledBy` | string | (none) | No | ID of the element that labels this progress bar. |
+| `percentVisibility` | "visible" \| "hidden" \| undefined | `visible` | No | Controls visibility of the percentage text. |
+| `progress` | number \| null | (none) | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
+| `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -26,11 +26,11 @@ Provide visual feedback to users while loading.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | — | No | Accessible label for the progress bar. |
-| `ariaLabelledBy` | string | — | No | ID of the element that labels this progress bar. |
-| `percentVisibility` | "visible" | "hidden" | undefined | — | No | Controls visibility of the percentage text. |
-| `progress` | number | null | undefined | — | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `ariaLabel` | string | (none) | No | Accessible label for the progress bar. |
+| `ariaLabelledBy` | string | (none) | No | ID of the element that labels this progress bar. |
+| `percentVisibility` | "visible" \| "hidden" \| undefined | (none) | No | Controls visibility of the percentage text. |
+| `progress` | number \| null \| undefined | (none) | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -42,11 +42,11 @@ Tag: `goa-linear-progress`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `aria-label` | string | — | No | Accessible label for the progress bar. |
-| `aria-labelledby` | string | — | No | ID of the element that labels this progress bar. |
-| `percent-visibility` | "visible" | "hidden" | `visible` | No | Controls visibility of the percentage text. |
-| `progress` | number | — | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
-| `testid` | string | — | No | Sets a data-testid attribute for automated testing. |
+| `aria-label` | string | (none) | No | Accessible label for the progress bar. |
+| `aria-labelledby` | string | (none) | No | ID of the element that labels this progress bar. |
+| `percent-visibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the percentage text. |
+| `progress` | number | (none) | No | Progress value (0-100). When undefined, shows an indeterminate loading animation. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
 
@@ -54,7 +54,7 @@ Tag: `goa-linear-progress`
 
 ### States
 
-- ❌ **Don't:** Don't show a percentage for indeterminate progress. Showing '0%' when there's no known progress is confusing.
+- **[Don't]** Don't show a percentage for indeterminate progress. Showing '0%' when there's no known progress is confusing.
 
 ---
 
@@ -62,7 +62,7 @@ Tag: `goa-linear-progress`
 
 ### Screen Readers
 
-- ✅ **Do:** Provide accessible labels for LinearProgress
+- **[Do]** Provide accessible labels for LinearProgress
 
 ---
 
