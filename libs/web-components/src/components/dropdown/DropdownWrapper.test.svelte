@@ -18,7 +18,7 @@
   export let width: string = "";
   export let maxwidth: string = "";
   export let native: string = "false";
-  export let items: string[];
+  export let items: Array<string | number>;
   export let filterable: string = "false";
   export let autocomplete: string = 'on';
   export let testid: string = "";
