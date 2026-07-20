@@ -1240,6 +1240,18 @@ describe("GoADropdown", () => {
       });
     });
 
+    it("should calculate width from numeric options", async () => {
+      const result = render(GoADropdownWrapper, {
+        name: "test",
+        items: [1, 20, 100],
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 10ch");
+      });
+    });
+
     describe("Popover width behavior", () => {
       it("should set popover max width to min(_width, 100%) for non-percentage widths", async () => {
         const result = render(GoADropdownWrapper, {

@@ -388,7 +388,8 @@
           (option.hasSlotContent ? option.filter : "") ||
           option.value ||
           "";
-        return label.length;
+        // label is not guarenteed to be a string
+        return String(label).length;
       }),
     );
 
