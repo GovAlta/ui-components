@@ -106,6 +106,7 @@
   }
 
   .text {
+    color: var(--goa-color-text-default);
     padding-bottom: var(--font-valign-fix);
     width: 100%;
   }
