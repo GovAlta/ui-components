@@ -69844,7 +69844,7 @@ function DocsContainerRoute() {
       {
         type: "non-interactive",
         accent: "thick",
-        heading: "Upcoming important due dates",
+        title: "Upcoming important due dates",
         actions: /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabButton,
           {
@@ -69916,17 +69916,33 @@ function DocsContainerRoute() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabContainer, { accent: "thin", width: "content", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { size: "heading-m", mt: "none", mb: "m", children: "Adjournment request" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { size: "body-m", mt: "none", mb: "none", children: "Keep track of the individuals who are placed in lodges and may qualify for the Lodge Assistance Program subsidy." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Case history and new request", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabRadioGroup, { name: "case", orientation: "horizontal", onChange: () => {
-        }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "grant", label: "Grant" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "deny", label: "Deny" })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Reason to deny", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabDropdown, { name: "reason", width: "100%", onChange: () => {
-        }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "1", label: "Incomplete Application" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "2", label: "Eligibility Criteria Not Met" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "3", label: "Documentation Verification Failure" })
-        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Case history and new request", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          GoabRadioGroup,
+          {
+            name: "case",
+            orientation: "horizontal",
+            onChange: () => {
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "grant", label: "Grant" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "deny", label: "Deny" })
+            ]
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Reason to deny", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          GoabDropdown,
+          {
+            name: "reason",
+            width: "100%",
+            onChange: () => {
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "1", label: "Incomplete Application" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "2", label: "Eligibility Criteria Not Met" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: "3", label: "Documentation Verification Failure" })
+            ]
+          }
+        ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Message", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabTextArea,
           {
@@ -69938,8 +69954,15 @@ function DocsContainerRoute() {
             }
           }
         ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { mt: "xl", onClick: () => {
-        }, children: "Confirm adjournment" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabButton,
+          {
+            mt: "xl",
+            onClick: () => {
+            },
+            children: "Confirm adjournment"
+          }
+        )
       ] }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Show full date in a tooltip" }),
@@ -69948,7 +69971,7 @@ function DocsContainerRoute() {
       {
         type: "non-interactive",
         accent: "thick",
-        heading: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        title: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
           "Joan Smith",
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTooltip, { content: "Nov 23, 2023 at 10:35 am", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "span",
@@ -69970,7 +69993,7 @@ function DocsContainerRoute() {
       {
         type: "non-interactive",
         accent: "thick",
-        heading: "Heading",
+        title: "Heading",
         actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "important", content: "Priority" }),
         children: "Content"
       }
