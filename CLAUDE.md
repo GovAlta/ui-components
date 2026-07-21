@@ -282,7 +282,7 @@ Detailed standards for component authoring, styling, framework wrappers, testing
 |------------|--------|
 | `component-authoring.md` | Script ordering, props, events, lifecycle, naming |
 | `styling.md` | Tokens, V2 fallbacks, responsive, CSS patterns |
-| `framework-wrappers.md` | React and Angular wrapper templates |
+| `framework-wrappers.md` | The cross-framework rule (wrapper templates are in the `write-wrapper` skill) |
 | `testing.md` | Test tiers, enforced patterns, Angular testing |
 | `common-utilities.md` | Utility inventory, relay vs dispatch boundary |
 
