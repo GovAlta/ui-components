@@ -1,3 +1,8 @@
+---
+name: review-pr
+description: Use when reviewing a pull request in GovAlta/ui-components. Covers review scope, acceptance criteria, validating Goab / goab- / goa- component usage against the libraries, generated-file and documentation-migration checks, spotting unnecessary or technically wrong code, and the review output format.
+---
+
 # Testing Standards for PR Reviews
 
 Use this guide when reviewing pull requests in this repository. The goal is to verify that the PR meets its acceptance criteria, does not introduce regressions, and follows the standards already established by nearby code.
