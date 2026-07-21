@@ -63,42 +63,45 @@ goa-grid[data-astro-cid-wdnwltix] goa-container[data-astro-cid-wdnwltix]{margin:
 <goa-text size="body-l" mt="none" mb="2xl">Set up the Government of Alberta Design System in Angular, React, or directly with Web Components.</goa-text>
 <h2 id="angular">Angular UI components</h2>
 <goa-callout version="2" type="information" emphasis="low" mb="m"><goa-text size="body-m" mt="2xs" mb="none">Supported versions: 18, 19, 20, 21</goa-text></goa-callout>
-<goa-text size="body-m" mt="none" mb="m"><p>This is the web component library and utilizes Angular’s web component
-integration.</p></goa-text>
+<goa-text size="body-m" mt="none" mb="m"><p>This library contains standalone Angular components that wrap the Government of Alberta
+Web Components.</p></goa-text>
 <h3 id="angular-step-1">1. Add dependencies</h3>
 <pre><code>npm i @abgov/web-components
 npm i @abgov/angular-components
 npm i @abgov/ui-components-common
 npm i @abgov/design-tokens</code></pre>
-<h3 id="angular-step-2">2. Link ionicons in app/index.html</h3>
-<goa-text size="body-m" mt="none" mb="m"><p>Add the following in the <code>head</code> element:</p></goa-text>
+<h3 id="angular-step-2">2. Register the web components</h3>
+<goa-text size="body-m" mt="none" mb="m"><p>Import the underlying web components once in <code>src/main.ts</code>, before
+bootstrapping the application:</p></goa-text>
+<pre><code>import “@abgov/web-components”;</code></pre>
+<goa-text size="body-m" mt="none" mb="m"><p>Keep your existing <code>bootstrapApplication</code> call after this import.</p></goa-text>
+<h3 id="angular-step-3">3. Import wrapper components</h3>
+<goa-text size="body-m" mt="none" mb="m"><p>Import each standalone wrapper directly into the component that uses it:</p></goa-text>
+<pre><code>// src/app/app.ts
+import { Component } from &quot;@angular/core&quot;;
+import { GoabButton } from &quot;@abgov/angular-components&quot;;
+
+@Component({
+selector: &quot;app-root&quot;,
+standalone: true,
+imports: [GoabButton],
+template: &#39;&lt;goab-button type=&quot;primary&quot;&gt;Continue&lt;/goab-button&gt;&#39;,
+})
+export class App {}</code></pre>
+<goa-text size="body-m" mt="none" mb="m"><p><code>standalone: true</code> is shown explicitly for compatibility with Angular 18; it
+is the default in newer Angular versions.</p></goa-text>
+<goa-text size="body-m" mt="none" mb="m"><p>For an existing NgModule-based application, add each standalone wrapper component to
+that module’s <code>imports</code> array. <code>AngularComponentsModule</code> is only
+needed by applications that still use the legacy <code>goaValue</code>,
+<code>goaValueList</code>, or <code>goaChecked</code> form directives.</p></goa-text>
+<h3 id="angular-step-4">4. Add styles</h3>
+<goa-text size="body-m" mt="none" mb="m"><p>Import the component styles and design tokens in <code>src/styles.css</code>:</p></goa-text>
+<pre><code>@import &quot;@abgov/web-components/index.css&quot;;
+@import &quot;@abgov/design-tokens/dist/tokens.css&quot;;</code></pre>
+<h3 id="angular-step-5">5. Add icons</h3>
+<goa-text size="body-m" mt="none" mb="m"><p>Add Ionicons to the <code>head</code> element of <code>src/index.html</code>:</p></goa-text>
 <pre><code>&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js&quot;&gt;&lt;/script&gt;
 &lt;script nomodule src=&quot;https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js&quot;&gt;&lt;/script&gt;</code></pre>
-<h3 id="angular-step-3">3. Update src/app/app.module.ts</h3>
-<goa-text size="body-m" mt="none" mb="m"><p>Update <code>src/app/app.module.ts</code> as per the four steps below:</p></goa-text>
-<pre><code>// 1. Import the CUSTOM_ELEMENTS_SCHEMA
-import { CUSTOM_ELEMENTS_SCHEMA } from &quot;@angular/core&quot;;
-
-// 2. Import the libs
-import &quot;@abgov/web-components&quot;;
-import { AngularComponentsModule } from &quot;@abgov/angular-components&quot;;
-
-@NgModule({
-declarations: [AppComponent],
-imports: [
-	// 3. Add the needed imports
-	BrowserModule,
-	AngularComponentsModule,
-],
-providers: [],
-bootstrap: [AppComponent],
-// 4. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
-schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-export class AppModule {}</code></pre>
-<h3 id="angular-step-4">4. Add the styles link in src/styles.css</h3>
-<pre><code>@import “@abgov/web-components/index.css”;
-@import “@abgov/design-tokens/dist/tokens.css”;</code></pre>
 <goa-divider mt="xl" mb="xl"></goa-divider>
 <h2 id="react">React UI components</h2>
 <goa-callout version="2" type="information" emphasis="low" mb="m"><goa-text size="body-m" mt="2xs" mb="none">Supported versions: 17, 18, 19</goa-text></goa-callout>
