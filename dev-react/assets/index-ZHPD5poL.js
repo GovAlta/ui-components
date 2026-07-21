@@ -44296,8 +44296,8 @@ class S5 extends Ne {
 }
 customElements.define("goa-link-button", Le(S5, { color: {}, leadingicon: {}, trailingicon: {}, disabled: { type: "Boolean" }, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, action: { type: "String", attribute: "action", reflect: true }, actionArg: { type: "String", attribute: "action-arg", reflect: true }, actionArgs: { type: "Object", attribute: "action-args", reflect: true } }, ["default"], [], true));
 function A5(t) {
-  Ie(t, "svelte-ydrovw", `button.svelte-ydrovw{display:inline-flex;box-sizing:border-box;cursor:pointer;font:var(--goa-button-text);min-height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:4px var(--goa-button-padding-lr, var(--goa-space-s));gap:var(--goa-button-gap);align-items:center;width:100%;background:none;border:none;text-align:left;outline:none}button.compact.svelte-ydrovw{min-height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:4px var(--goa-button-padding-lr-compact, var(--goa-space-xs));gap:var(--goa-button-compact-gap)}button.svelte-ydrovw:focus-visible,button.svelte-ydrovw:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.svelte-ydrovw:focus-visible{box-shadow:0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus)}.text.svelte-ydrovw{padding-bottom:var(--font-valign-fix);width:100%}`);
+  Ie(t, "svelte-k2d52z", `button.svelte-k2d52z{display:inline-flex;box-sizing:border-box;cursor:pointer;font:var(--goa-button-text);min-height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:4px var(--goa-button-padding-lr, var(--goa-space-s));gap:var(--goa-button-gap);align-items:center;width:100%;background:none;border:none;text-align:left;outline:none}button.compact.svelte-k2d52z{min-height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:4px var(--goa-button-padding-lr-compact, var(--goa-space-xs));gap:var(--goa-button-compact-gap)}button.svelte-k2d52z:focus-visible,button.svelte-k2d52z:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.svelte-k2d52z:focus-visible{box-shadow:0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus)}.text.svelte-k2d52z{color:var(--goa-color-text-default);padding-bottom:var(--font-valign-fix);width:100%}`);
 }
 function Hr(t) {
   let e, o, i;
@@ -44343,12 +44343,12 @@ function x5(t) {
       e = C("button"), a && a.c(), o = Y(), i = C("div"), n = ce(
         /*text*/
         t[0]
-      ), u(i, "class", "text svelte-ydrovw"), u(
+      ), u(i, "class", "text svelte-k2d52z"), u(
         e,
         "data-testid",
         /*testid*/
         t[1]
-      ), u(e, "tabindex", "0"), u(e, "style", st(He("width", "100%"))), u(e, "class", "svelte-ydrovw"), A(
+      ), u(e, "tabindex", "0"), u(e, "style", st(He("width", "100%"))), u(e, "class", "svelte-k2d52z"), A(
         e,
         "compact",
         /*size*/
