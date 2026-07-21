@@ -6,7 +6,7 @@ Search and retrieve information from the Government of Alberta Design System's A
 
 This skill enables AI agents to discover and query the design system's component documentation through its AI-friendly endpoints:
 
-- **`/llms.txt`** - Complete index of all 60+ components and 70+ examples
+- **`/llms.txt`** - Complete index of all components and examples
 - **`/components/[slug].md`** - Full API documentation, usage guidance, and accessibility guidance for each component in clean markdown format
 
 Unlike scraping HTML pages, these endpoints return structured, machine-readable content specifically designed for AI consumption.
@@ -76,7 +76,7 @@ skills/component-search/
 Each component markdown includes:
 - Basic info (status, category, docs link)
 - Framework-specific APIs
-- Usage guidance (with ✅ Do / ❌ Don't / 💡 Tip / ⚠️ Warning / ℹ️ Note)
+- Usage guidance (with [Do] / [Don't] / [Tip] / [Warning] / [Note])
 - Accessibility guidance (same format)
 - Related examples
 - Related components
@@ -108,7 +108,7 @@ Each component markdown includes:
 ### Guidance Query
 **Input:** "What should I avoid when using Checkbox?"
 
-**Output:** All "❌ Don't:" entries from the Checkbox usage and accessibility guidance sections.
+**Output:** All "[Don't]" entries from the Checkbox usage and accessibility guidance sections.
 
 ### Search Query
 **Input:** "Find components for date selection"

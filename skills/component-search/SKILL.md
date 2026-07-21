@@ -74,7 +74,6 @@ Description of the component.
 ---
 
 ## React
-Tag: (none for React)
 
 ### Props
 | Prop | Type | Default | Required | Description |
@@ -114,19 +113,19 @@ Tag: `goa-{slug}`
 ## Usage guidance
 
 ### [Topic Name]
-- ✅ Do: Recommended practice
-- ❌ Don't: Anti-pattern to avoid
-- 💡 Tip: Helpful suggestion
-- ⚠️ Warning: Important caution
-- ℹ️ Note: Informational note
+- **[Do]** Recommended practice
+- **[Don't]** Anti-pattern to avoid
+- **[Tip]** Helpful suggestion
+- **[Warning]** Important caution
+- **[Note]** Informational note
 
 ---
 
 ## Accessibility guidance
 
 ### [Topic Name]
-- ✅ Do: ...
-- ❌ Don't: ...
+- **[Do]** ...
+- **[Don't]** ...
 
 ---
 
@@ -189,12 +188,12 @@ Tag: `goa-{slug}`
 
 **Action:**
 1. First, search the cached llms.txt descriptions for likely matches — avoid fetching full markdown unless the query cannot be resolved from descriptions alone
-2. For likely matches only (not all 70+ components):
+2. For likely matches only (not all components):
    - Fetch the component markdown (use cached versions if available)
    - Search the relevant section (props table, guidance, etc.) for the query term
 3. Return matching components with context about where the match was found
 
-> **Note:** Fetching all 70+ component markdown files in one agent turn is expensive and likely to exceed tool-call limits. Rely on llms.txt descriptions as a first-pass filter and only fetch full pages for strong matches.
+> **Note:** Fetching all component markdown files in one agent turn is expensive and likely to exceed tool-call limits. Rely on llms.txt descriptions as a first-pass filter and only fetch full pages for strong matches.
 
 ### 4. Example Search
 
@@ -263,15 +262,15 @@ Use markdown tables for tabular data:
 
 ### Guidance
 
-Preserve the emoji prefixes and formatting:
+Preserve the bracket prefixes and formatting:
 
 ```markdown
 ### Usage Guidance
 
 **Content**
-- ✅ **Do:** Use one word to explain the function (Save, Submit, Search)
-- ❌ **Don't:** Use all uppercase or all lowercase for button labels
-- 💡 **Tip:** Use descriptive verbs (Submit application, Save draft)
+- **[Do]** Use one word to explain the function (Save, Submit, Search)
+- **[Don't]** Use all uppercase or all lowercase for button labels
+- **[Tip]** Use descriptive verbs (Submit application, Save draft)
 ```
 
 ### Component Lists
@@ -396,11 +395,11 @@ Would you like to see the full API for any of these components?
 ## Button - Accessibility Guidance
 
 ### Screen Readers
-- ❌ **Don't:** Don't read the icon class or description for icon buttons with labels. Screen readers should read the button label only.
-- ✅ **Do:** Icon-only buttons must include a descriptive label for screen readers.
+- **[Don't]** Don't read the icon class or description for icon buttons with labels. Screen readers should read the button label only.
+- **[Do]** Icon-only buttons must include a descriptive label for screen readers.
 
 ### Focus
-- ❌ **Don't:** Don't focus on just the icon within a button. Focus the button as a whole.
+- **[Don't]** Don't focus on just the icon within a button. Focus the button as a whole.
 
 *See [Button accessibility docs](https://design.alberta.ca/components/button#accessibility) for more details.*
 ```
