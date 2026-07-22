@@ -525,6 +525,11 @@ describe("DatePicker calendar popover position", () => {
     const popoverContent = result.getByTestId("popover-content").first();
     const popoverTarget = result.getByTestId("popover-target").first();
 
+    // Wait for the popover to be mounted before clicking: on a slow run a click
+    // that lands before the popover's wiring is live does nothing.
+    await vi.waitFor(() => {
+      expect(popoverTarget).toBeVisible();
+    });
     await input.click();
 
     await vi.waitFor(() => {
@@ -553,6 +558,11 @@ describe("DatePicker calendar popover position", () => {
     const popoverContent = result.getByTestId("popover-content").first();
     const popoverTarget = result.getByTestId("popover-target").first();
 
+    // Wait for the popover to be mounted before clicking: on a slow run a click
+    // that lands before the popover's wiring is live does nothing.
+    await vi.waitFor(() => {
+      expect(popoverTarget).toBeVisible();
+    });
     await input.click();
 
     await vi.waitFor(() => {
