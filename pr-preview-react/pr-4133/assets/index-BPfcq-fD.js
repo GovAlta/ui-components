@@ -2016,7 +2016,7 @@ var aliases = /* @__PURE__ */ new Map([
 function sanitizeURL(url) {
   return isJavaScriptProtocol.test("" + url) ? "javascript:throw new Error('React has blocked a javascript: URL as a security precaution.')" : url;
 }
-function noop$1() {
+function noop$1$1() {
 }
 var currentReplayingEvent = null;
 function getEventTarget(nativeEvent) {
@@ -2946,7 +2946,7 @@ function prepareToHydrateHostInstance(fiber) {
       listenToNonDelegatedEvent("invalid", instance), initTextarea(instance, props.value, props.defaultValue, props.children);
   }
   type = props.children;
-  "string" !== typeof type && "number" !== typeof type && "bigint" !== typeof type || instance.textContent === "" + type || true === props.suppressHydrationWarning || checkForUnmatchedText(instance.textContent, type) ? (null != props.popover && (listenToNonDelegatedEvent("beforetoggle", instance), listenToNonDelegatedEvent("toggle", instance)), null != props.onScroll && listenToNonDelegatedEvent("scroll", instance), null != props.onScrollEnd && listenToNonDelegatedEvent("scrollend", instance), null != props.onClick && (instance.onclick = noop$1), instance = true) : instance = false;
+  "string" !== typeof type && "number" !== typeof type && "bigint" !== typeof type || instance.textContent === "" + type || true === props.suppressHydrationWarning || checkForUnmatchedText(instance.textContent, type) ? (null != props.popover && (listenToNonDelegatedEvent("beforetoggle", instance), listenToNonDelegatedEvent("toggle", instance)), null != props.onScroll && listenToNonDelegatedEvent("scroll", instance), null != props.onScrollEnd && listenToNonDelegatedEvent("scrollend", instance), null != props.onClick && (instance.onclick = noop$1$1), instance = true) : instance = false;
   instance || throwOnHydrationMismatch(fiber, true);
 }
 function popToNextHostParent(fiber) {
@@ -3252,14 +3252,14 @@ function isThenableResolved(thenable) {
 }
 function trackUsedThenable(thenableState2, thenable, index2) {
   index2 = thenableState2[index2];
-  void 0 === index2 ? thenableState2.push(thenable) : index2 !== thenable && (thenable.then(noop$1, noop$1), thenable = index2);
+  void 0 === index2 ? thenableState2.push(thenable) : index2 !== thenable && (thenable.then(noop$1$1, noop$1$1), thenable = index2);
   switch (thenable.status) {
     case "fulfilled":
       return thenable.value;
     case "rejected":
       throw thenableState2 = thenable.reason, checkIfUseWrappedInAsyncCatch(thenableState2), thenableState2;
     default:
-      if ("string" === typeof thenable.status) thenable.then(noop$1, noop$1);
+      if ("string" === typeof thenable.status) thenable.then(noop$1$1, noop$1$1);
       else {
         thenableState2 = workInProgressRoot;
         if (null !== thenableState2 && 100 < thenableState2.shellSuspendCounter)
@@ -7159,7 +7159,7 @@ function getHostSibling(fiber) {
 function insertOrAppendPlacementNodeIntoContainer(node, before, parent) {
   var tag = node.tag;
   if (5 === tag || 6 === tag)
-    node = node.stateNode, before ? (9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent).insertBefore(node, before) : (before = 9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent, before.appendChild(node), parent = parent._reactRootContainer, null !== parent && void 0 !== parent || null !== before.onclick || (before.onclick = noop$1));
+    node = node.stateNode, before ? (9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent).insertBefore(node, before) : (before = 9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent, before.appendChild(node), parent = parent._reactRootContainer, null !== parent && void 0 !== parent || null !== before.onclick || (before.onclick = noop$1$1));
   else if (4 !== tag && (27 === tag && isSingletonScope(node.type) && (parent = node.stateNode, before = null), node = node.child, null !== node))
     for (insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling; null !== node; )
       insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling;
@@ -8720,7 +8720,7 @@ function commitRootWhenReady(root2, finishedWork, recoverableErrors, transitions
       suspenseyImages: [],
       waitingForImages: true,
       waitingForViewTransition: false,
-      unsuspend: noop$1
+      unsuspend: noop$1$1
     };
     accumulateSuspenseyCommitOnFiber(
       finishedWork,
@@ -10282,7 +10282,7 @@ function setProp(domElement, tag, key, value, props, prevValue) {
       domElement.setAttribute(key, value);
       break;
     case "onClick":
-      null != value && (domElement.onclick = noop$1);
+      null != value && (domElement.onclick = noop$1$1);
       break;
     case "onScroll":
       null != value && listenToNonDelegatedEvent("scroll", domElement);
@@ -10491,7 +10491,7 @@ function setPropOnCustomElement(domElement, tag, key, value, props, prevValue) {
       null != value && listenToNonDelegatedEvent("scrollend", domElement);
       break;
     case "onClick":
-      null != value && (domElement.onclick = noop$1);
+      null != value && (domElement.onclick = noop$1$1);
       break;
     case "suppressContentEditableWarning":
     case "suppressHydrationWarning":
@@ -67410,7 +67410,7 @@ const __vite_glob_0_72 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3699_route
 }, Symbol.toStringTag, { value: "Module" }));
-const noop = () => void 0;
+const noop$1 = () => void 0;
 const menuShellStyle = {
   "--goa-work-side-menu-height": "26rem",
   display: "inline-block"
@@ -67470,7 +67470,7 @@ function Bug3735Route() {
         heading: "Offset tooltip demo",
         url: "/bugs/3735",
         open: false,
-        onNavigate: noop,
+        onNavigate: noop$1,
         primaryContent: renderPrimaryContent("offset")
       }
     ) })
@@ -68083,6 +68083,8 @@ const __vite_glob_0_80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 const ISSUE_NUMBER = "3860";
 const ISSUE_TITLE = "App Header Menu aligned to the left instead of the right";
+const noop = () => {
+};
 function PushRow({ children }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
@@ -68192,8 +68194,7 @@ function Bug3860Route() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(PushRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDatePicker, { name: "edge-date" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h4", mb: "xs", children: "Dropdown" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", mb: "xs", children: "Either way: the option list matches the input's width and stays anchored to it (a fixed-width list is never squeezed)." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(PushRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabDropdown, { name: "edge-color", width: "200px", onChange: () => {
-    }, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(PushRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabDropdown, { name: "edge-color", width: "200px", onChange: noop, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { label: "Red", value: "red" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { label: "Blue", value: "blue" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { label: "Green", value: "green" })
