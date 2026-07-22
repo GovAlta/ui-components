@@ -39,7 +39,8 @@ task matches one, read that skill's `SKILL.md` (in its own directory under
 ## Design system usage skills: `skills/`
 
 These help you build with the design system rather than change the repo itself.
-Some rely on the `goa-design-system` MCP tools.
+These rely on the `goa-design-system` MCP tools. If your tool does not have
+those tools configured, skip this section.
 
 - `using-goa-design-system` — go from a user-facing intent to the right
   components, guidance, and tokens.
