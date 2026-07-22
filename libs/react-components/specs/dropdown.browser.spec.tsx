@@ -580,6 +580,40 @@ describe("Dropdown", () => {
           expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
         });
       });
+
+      it("keeps the option list anchored to the input near the right edge of the screen", async () => {
+        await page.viewport(1280, 800);
+        const Component = () => (
+          <div style={{ position: "absolute", top: 0, left: "1050px" }}>
+            <GoabDropdown
+              name="edge"
+              testId="edge-dropdown"
+              width="200px"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+            </GoabDropdown>
+          </div>
+        );
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("edge-dropdown");
+        const popoverContent = result.getByTestId("popover-content");
+        const popoverTarget = result.getByTestId("popover-target");
+
+        await dropdown.click();
+
+        await vi.waitFor(() => {
+          expect(popoverContent).toBeVisible();
+          const content = popoverContent.element().getBoundingClientRect();
+          const target = popoverTarget.element().getBoundingClientRect();
+          // A fixed-width option list matches its input's width, so it can never be
+          // squeezed by the screen edge: it stays anchored to the input's left edge.
+          expect(Math.abs(content.left - target.left)).toBeLessThanOrEqual(2);
+          expect(Math.abs(content.width - target.width)).toBeLessThanOrEqual(2);
+        });
+      });
     })
   })
 

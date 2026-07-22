@@ -309,6 +309,46 @@ describe("Popover", () => {
     });
   });
 
+  it("should keep the popover left-aligned when there is enough space on the right", async () => {
+    const Component = () => {
+      return (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-start",
+            padding: "0.5rem",
+          }}
+        >
+          <GoabPopover
+            testId="popover-left-default"
+            target={<GoabButton testId={"target-left-default"}>Open popover</GoabButton>}
+          >
+            <div style={{ width: "300px" }}>
+              This popover has room on the right and should stay left aligned.
+            </div>
+          </GoabPopover>
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const target = result.getByTestId("target-left-default");
+    const popover = result.getByTestId("popover-left-default");
+    const popoverContent = popover.getByTestId("popover-content");
+
+    await target.click();
+
+    await vi.waitFor(() => {
+      expect(popoverContent).toBeVisible();
+      const targetRect = target.element().getBoundingClientRect();
+      const contentRect = popoverContent.element().getBoundingClientRect();
+
+      // The left edges of the popover content and target should be aligned (within a small tolerance)
+      expect(Math.abs(contentRect.left - targetRect.left)).toBeLessThanOrEqual(2);
+    });
+  });
+
   describe("Popover within a modal", () => {
     it("should open the popover within a modal even with long content", async () => {
       const Component = () => {
