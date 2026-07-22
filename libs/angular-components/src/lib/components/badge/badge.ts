@@ -26,7 +26,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.size]="size"
         [attr.emphasis]="emphasis"
         [attr.type]="type"
-        [attr.icon]="icon ? 'true' : 'false'"
+        [attr.icon]="showIcon ? 'true' : 'false'"
         [attr.icontype]="iconType"
         [attr.arialabel]="ariaLabel"
         [attr.content]="content"
@@ -57,7 +57,6 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabBadgeType;
   /** Sets the text label of the badge. */
   @Input() content?: string;
-  // Ensure boolean input; attribute only set when true so default behaviour is false
   /** @deprecated Use icontype instead. Includes an icon in the badge. */
   @Input({ transform: booleanAttribute }) icon?: boolean;
   /** Sets the icon type to display in the badge. */
@@ -71,6 +70,10 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
+
+  get showIcon(): boolean {
+    return this.icon ?? !!this.iconType;
+  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
