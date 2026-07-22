@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 import { GoabDatePicker } from "../src";
-import { expect, describe, it, vi } from "vitest";
-import { userEvent } from "@vitest/browser/context";
+import { expect, describe, it, vi, beforeAll } from "vitest";
+import { page, userEvent } from "@vitest/browser/context";
 import { format } from "date-fns";
 
 function getTodayDate(): Date {
@@ -502,6 +502,67 @@ describe("Date Picker input type", () => {
       expect(monthInput).toBeDisabled();
       expect(datePickerDay).toBeDisabled();
       expect(datePickerYear).toBeDisabled();
+    });
+  });
+});
+
+describe("DatePicker calendar popover position", () => {
+  beforeAll(async () => {
+    await page.viewport(1280, 800);
+  });
+
+  it("opens the calendar left-aligned when there is room on the right", async () => {
+    const Component = () => (
+      <div style={{ position: "absolute", top: 0, left: "100px" }}>
+        <GoabDatePicker testId="date-picker" value="2026-03-01" />
+      </div>
+    );
+
+    const result = render(<Component />);
+    const input = result.getByTestId("calendar-input");
+    // The calendar contains month/year dropdowns with their own nested popovers,
+    // so take the first (outermost) popover parts: the calendar's own.
+    const popoverContent = result.getByTestId("popover-content").first();
+    const popoverTarget = result.getByTestId("popover-target").first();
+
+    await input.click();
+
+    await vi.waitFor(() => {
+      expect(popoverContent).toBeVisible();
+      const content = popoverContent.element().getBoundingClientRect();
+      const target = popoverTarget.element().getBoundingClientRect();
+      // Left-aligned: the calendar opens at the input's left edge
+      expect(Math.abs(content.left - target.left)).toBeLessThanOrEqual(2);
+    });
+  });
+
+  it("opens the calendar right-aligned at full width when squeezed against the screen edge - issue 3860", async () => {
+    // Pin the date picker near the right edge (fully on screen). Left-aligned, the
+    // calendar would be clipped by the screen and forced narrow. It should open
+    // leftward instead, aligning its right edge to its trigger to keep full width.
+    const Component = () => (
+      <div style={{ position: "absolute", top: 0, left: "1000px" }}>
+        <GoabDatePicker testId="date-picker" value="2026-03-01" />
+      </div>
+    );
+
+    const result = render(<Component />);
+    const input = result.getByTestId("calendar-input");
+    // The calendar contains month/year dropdowns with their own nested popovers,
+    // so take the first (outermost) popover parts: the calendar's own.
+    const popoverContent = result.getByTestId("popover-content").first();
+    const popoverTarget = result.getByTestId("popover-target").first();
+
+    await input.click();
+
+    await vi.waitFor(() => {
+      expect(popoverContent).toBeVisible();
+      const content = popoverContent.element().getBoundingClientRect();
+      const target = popoverTarget.element().getBoundingClientRect();
+      // Right-aligned: the calendar's right edge meets its trigger's right edge and
+      // the calendar stays fully on screen at its natural width.
+      expect(Math.abs(content.right - target.right)).toBeLessThanOrEqual(5);
+      expect(content.right).toBeLessThanOrEqual(window.innerWidth);
     });
   });
 });

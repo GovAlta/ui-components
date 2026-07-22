@@ -2,14 +2,58 @@ import {
   GoabAppHeader,
   GoabAppHeaderMenu,
   GoabBlock,
+  GoabButton,
+  GoabDatePicker,
   GoabDetails,
   GoabDivider,
+  GoabDropdown,
+  GoabDropdownItem,
   GoabLink,
+  GoabMenuAction,
+  GoabMenuButton,
+  GoabPopover,
   GoabText,
 } from "@abgov/react-components";
+import type { ReactNode } from "react";
 
 const ISSUE_NUMBER = "3860";
 const ISSUE_TITLE = "App Header Menu aligned to the left instead of the right";
+
+// A draggable spacer sits before the component. Small spacer = room on the
+// right (normal alignment). Drag its corner wider (or narrow the window) to
+// push the component toward the screen edge and see its popover flip.
+function PushRow({ children }: { children: ReactNode }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.75rem",
+        marginBottom: "1.5rem",
+      }}
+    >
+      <div
+        style={{
+          resize: "horizontal",
+          overflow: "auto",
+          width: "320px",
+          minWidth: "48px",
+          maxWidth: "75vw",
+          flexShrink: 0,
+          border: "1px dashed #999",
+          borderRadius: "4px",
+          padding: "0.5rem",
+          color: "#666",
+          whiteSpace: "nowrap",
+          fontSize: "0.875rem",
+        }}
+      >
+        spacer: drag my corner to push →
+      </div>
+      <div style={{ flexShrink: 0 }}>{children}</div>
+    </div>
+  );
+}
 
 export function Bug3860Route() {
   return (
@@ -116,6 +160,75 @@ export function Bug3860Route() {
           <a href="#">Sign out</a>
         </GoabAppHeaderMenu>
       </GoabAppHeader>
+
+      <GoabDivider mt="l" mb="l" />
+
+      <GoabText tag="h3" mb="s">
+        Scenario: other Popover consumers, with room and against the edge
+      </GoabText>
+      <GoabText tag="p" mb="m">
+        The change lives in the shared Popover, which MenuButton, DatePicker, and
+        Dropdown also use. Each row starts with room on the right, so you can see the
+        normal alignment first. Drag the dashed spacer's corner (or narrow the
+        window) to push a component toward the screen edge and open it again to see
+        its popover flip. Shrink the spacer to get the normal alignment back.
+      </GoabText>
+
+      <GoabText tag="h4" mb="xs">
+        MenuButton
+      </GoabText>
+      <GoabText tag="p" mb="xs">
+        With room: the menu opens at the button's left edge. Against the edge: it
+        opens leftward (right-aligned to the button) at its full width.
+      </GoabText>
+      <PushRow>
+        <GoabMenuButton text="More">
+          <GoabMenuAction text="Organization settings and preferences" action="a1" />
+          <GoabMenuAction text="Notification preferences" action="a2" />
+          <GoabMenuAction text="Sign out" action="a3" />
+        </GoabMenuButton>
+      </PushRow>
+
+      <GoabText tag="h4" mb="xs">
+        DatePicker
+      </GoabText>
+      <GoabText tag="p" mb="xs">
+        With room: the calendar opens at the input's left edge. Against the edge: it
+        opens leftward at its full width.
+      </GoabText>
+      <PushRow>
+        <GoabDatePicker name="edge-date" />
+      </PushRow>
+
+      <GoabText tag="h4" mb="xs">
+        Dropdown
+      </GoabText>
+      <GoabText tag="p" mb="xs">
+        Either way: the option list matches the input's width and stays anchored to
+        it (a fixed-width list is never squeezed).
+      </GoabText>
+      <PushRow>
+        <GoabDropdown name="edge-color" width="200px" onChange={() => {}}>
+          <GoabDropdownItem label="Red" value="red" />
+          <GoabDropdownItem label="Blue" value="blue" />
+          <GoabDropdownItem label="Green" value="green" />
+        </GoabDropdown>
+      </PushRow>
+
+      <GoabText tag="h4" mb="xs">
+        Popover
+      </GoabText>
+      <GoabText tag="p" mb="xs">
+        With room: the popover stays left-aligned. Against the edge: it opens
+        leftward at its full width.
+      </GoabText>
+      <PushRow>
+        <GoabPopover target={<GoabButton type="secondary">Open popover</GoabButton>}>
+          <p style={{ width: "260px", margin: 0 }}>
+            This popover keeps its full width by opening toward the available space.
+          </p>
+        </GoabPopover>
+      </PushRow>
 
       {/* Room for the dropdown to open into view */}
       <div style={{ height: "24rem" }} />

@@ -1,0 +1,235 @@
+<div>
+  <goab-text tag="h1" mt="m" mb="m">
+    Bug #3860: App Header Menu aligned to the left instead of the right
+  </goab-text>
+
+  <goab-block gap="m" direction="column">
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3860"
+        target="_blank"
+        rel="noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue description">
+      <goab-text tag="p" mb="s">
+        When the App Header collapses to mobile size, overflowing navigation is collected
+        into a "More" menu (an AppHeaderMenu). Its popover anchors to the LEFT of the
+        button, so when the button sits near the right edge of the screen the menu is
+        squeezed into the remaining right-hand space and appears too narrow.
+      </goab-text>
+      <goab-text tag="p" mb="none">
+        Acceptance criteria: (1) the popover created by AppHeaderMenu can align to the
+        RIGHT of the button so it uses its full width; (2) right alignment only happens
+        when there isn't room to align left.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2" mb="s">The fix</goab-text>
+  <goab-text tag="p" mb="m">
+    The Popover's automatic right-align compared the space on the trigger's right against
+    the popover's already-squeezed width, so a menu clipped by the screen edge never
+    flipped. It now compares against the width the popover would take with room (its max
+    width), so it right-aligns whenever a left-aligned menu would otherwise be squeezed.
+  </goab-text>
+
+  <goab-text tag="h2" mb="s">How to reproduce</goab-text>
+  <goab-text tag="p" mb="xs">
+    Narrow the browser (around 700px, or use responsive/device mode) until several nav
+    items collapse into a <b>More</b> button near the right edge. Open it and watch where
+    the dropdown anchors.
+  </goab-text>
+  <ul style="margin-top: 0">
+    <li>
+      <goab-text tag="span">
+        <b>Fixed (expected):</b> the menu right-aligns to the button and stays fully on
+        screen.
+      </goab-text>
+    </li>
+    <li>
+      <goab-text tag="span">
+        <b>Bug:</b> the menu left-aligns and is squeezed or clipped at the right edge.
+      </goab-text>
+    </li>
+  </ul>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3" mb="s"
+    >Scenario: V2 App Header with overflowing navigation</goab-text
+  >
+  <goab-text tag="p" mb="m">
+    Seven navigation items plus an "Account" menu. At desktop width they sit inline; as
+    the window narrows they overflow into the "More" menu on the right.
+  </goab-text>
+
+  <goab-app-header heading="Service Portal" url="/">
+    <a slot="navigation" href="#">Dashboard</a>
+    <a slot="navigation" href="#">Applications</a>
+    <a slot="navigation" href="#">Reports</a>
+    <a slot="navigation" href="#">Notifications</a>
+    <a slot="navigation" href="#">Billing</a>
+    <a slot="navigation" href="#">Support</a>
+    <goab-app-header-menu slotName="navigation" heading="Account">
+      <a href="#">Profile</a>
+      <a href="#">Organization settings</a>
+      <a href="#">Sign out</a>
+    </goab-app-header-menu>
+  </goab-app-header>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3" mb="s"
+    >Scenario: other Popover consumers, with room and against the edge</goab-text
+  >
+  <goab-text tag="p" mb="m">
+    The change lives in the shared Popover, which MenuButton, DatePicker, and Dropdown
+    also use. Each row starts with room on the right, so you can see the normal alignment
+    first. Drag the dashed spacer's corner (or narrow the window) to push a component
+    toward the screen edge and open it again to see its popover flip. Shrink the spacer to
+    get the normal alignment back.
+  </goab-text>
+
+  <goab-text tag="h4" mb="xs">MenuButton</goab-text>
+  <goab-text tag="p" mb="xs">
+    With room: the menu opens at the button's left edge. Against the edge: it opens
+    leftward (right-aligned to the button) at its full width.
+  </goab-text>
+  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem">
+    <div
+      style="
+        resize: horizontal;
+        overflow: auto;
+        width: 320px;
+        min-width: 48px;
+        max-width: 75vw;
+        flex-shrink: 0;
+        border: 1px dashed #999;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: #666;
+        white-space: nowrap;
+        font-size: 0.875rem;
+      "
+    >
+      spacer: drag my corner to push →
+    </div>
+    <div style="flex-shrink: 0">
+      <goab-menu-button text="More">
+        <goab-menu-action
+          text="Organization settings and preferences"
+          action="a1"
+        ></goab-menu-action>
+        <goab-menu-action text="Notification preferences" action="a2"></goab-menu-action>
+        <goab-menu-action text="Sign out" action="a3"></goab-menu-action>
+      </goab-menu-button>
+    </div>
+  </div>
+
+  <goab-text tag="h4" mb="xs">DatePicker</goab-text>
+  <goab-text tag="p" mb="xs">
+    With room: the calendar opens at the input's left edge. Against the edge: it opens
+    leftward at its full width.
+  </goab-text>
+  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem">
+    <div
+      style="
+        resize: horizontal;
+        overflow: auto;
+        width: 320px;
+        min-width: 48px;
+        max-width: 75vw;
+        flex-shrink: 0;
+        border: 1px dashed #999;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: #666;
+        white-space: nowrap;
+        font-size: 0.875rem;
+      "
+    >
+      spacer: drag my corner to push →
+    </div>
+    <div style="flex-shrink: 0">
+      <goab-date-picker name="edge-date"></goab-date-picker>
+    </div>
+  </div>
+
+  <goab-text tag="h4" mb="xs">Dropdown</goab-text>
+  <goab-text tag="p" mb="xs">
+    Either way: the option list matches the input's width and stays anchored to it (a
+    fixed-width list is never squeezed).
+  </goab-text>
+  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem">
+    <div
+      style="
+        resize: horizontal;
+        overflow: auto;
+        width: 320px;
+        min-width: 48px;
+        max-width: 75vw;
+        flex-shrink: 0;
+        border: 1px dashed #999;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: #666;
+        white-space: nowrap;
+        font-size: 0.875rem;
+      "
+    >
+      spacer: drag my corner to push →
+    </div>
+    <div style="flex-shrink: 0">
+      <goab-dropdown name="edge-color" width="200px">
+        <goab-dropdown-item label="Red" value="red"></goab-dropdown-item>
+        <goab-dropdown-item label="Blue" value="blue"></goab-dropdown-item>
+        <goab-dropdown-item label="Green" value="green"></goab-dropdown-item>
+      </goab-dropdown>
+    </div>
+  </div>
+
+  <goab-text tag="h4" mb="xs">Popover</goab-text>
+  <goab-text tag="p" mb="xs">
+    With room: the popover stays left-aligned. Against the edge: it opens leftward at its
+    full width.
+  </goab-text>
+  <div style="display: flex; align-items: center; gap: 0.75rem">
+    <div
+      style="
+        resize: horizontal;
+        overflow: auto;
+        width: 320px;
+        min-width: 48px;
+        max-width: 75vw;
+        flex-shrink: 0;
+        border: 1px dashed #999;
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: #666;
+        white-space: nowrap;
+        font-size: 0.875rem;
+      "
+    >
+      spacer: drag my corner to push →
+    </div>
+    <div style="flex-shrink: 0">
+      <goab-popover [target]="popoverTarget">
+        <p style="width: 260px; margin: 0">
+          This popover keeps its full width by opening toward the available space.
+        </p>
+      </goab-popover>
+    </div>
+  </div>
+  <ng-template #popoverTarget>
+    <goab-button type="secondary">Open popover</goab-button>
+  </ng-template>
+
+  <!-- Room for the dropdown to open into view -->
+  <div style="height: 24rem"></div>
+</div>
