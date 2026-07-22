@@ -19,6 +19,9 @@ import type { ReactNode } from "react";
 const ISSUE_NUMBER = "3860";
 const ISSUE_TITLE = "App Header Menu aligned to the left instead of the right";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 // A draggable spacer sits before the component. Small spacer = room on the
 // right (normal alignment). Drag its corner wider (or narrow the window) to
 // push the component toward the screen edge and see its popover flip.
@@ -208,7 +211,7 @@ export function Bug3860Route() {
         it (a fixed-width list is never squeezed).
       </GoabText>
       <PushRow>
-        <GoabDropdown name="edge-color" width="200px" onChange={() => {}}>
+        <GoabDropdown name="edge-color" width="200px" onChange={noop}>
           <GoabDropdownItem label="Red" value="red" />
           <GoabDropdownItem label="Blue" value="blue" />
           <GoabDropdownItem label="Green" value="green" />
