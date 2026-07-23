@@ -34,6 +34,13 @@ import { withBase } from "@/lib/base-url";
 <CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill content-design`} />
 <p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/content-design" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
 
+<goa-text size="heading-s" mt="xl">component-search</goa-text>
+<goa-text size="body-m">This skill looks up component APIs, props, events, and usage or accessibility guidance from the Design System's AI-friendly Markdown endpoints (<code>llms.txt</code> and <code>/components/{"{slug}"}.md</code>).</goa-text>
+<goa-text size="body-m">It loads when you ask about a specific component's API or guidance, or want to find components for a purpose — for example "what components handle warnings?" or "show me React props for Button".</goa-text>
+<goa-text size="body-m"><strong>How to add it:</strong></goa-text>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill component-search`} />
+<p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/component-search" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
+
 <goa-text as="h2" id="how-they-work" size="heading-m" mt="2xl">How they work</goa-text>
 <goa-text size="body-m">Each skill is a folder with a SKILL.md file plus any supporting notes. Your AI reads the short description at startup and loads the full instructions only when your request matches, so they add capability without crowding the context.</goa-text>
 <goa-text size="body-m">Because they follow the open Agent Skills standard, the same files work in Claude Code, Cursor, GitHub Copilot, and other tools that read the format.</goa-text>
