@@ -36,7 +36,7 @@ When NOT to use:
 ### Step 1: Fetch the Master Index
 
 ```
-GET https://design.alberta.ca/llms.txt
+GET {Base URL}llms.txt
 ```
 
 This file contains the complete inventory organized into two sections:
@@ -155,8 +155,7 @@ Tag: `goa-{slug}`
    - Component name
    - Slug
    - Brief description
-   - Category (if available)
-3. Offer to fetch full details for specific matches
+3. Offer to fetch full details for specific matches (category is only available on the component's markdown page, not in the llms.txt index)
 
 ### 2. Detailed Component Lookup
 
@@ -170,7 +169,7 @@ Tag: `goa-{slug}`
 
 **Action:**
 1. Resolve component name to slug using the llms.txt index
-2. Fetch `https://design.alberta.ca/components/{slug}.md`
+2. Fetch `{Base URL}components/{slug}.md`
 3. Parse the markdown to extract the requested information:
    - For API questions: Extract the relevant framework section (React/Angular/Web Components)
    - For props/attributes: Extract and format the Props/Attributes table
@@ -236,7 +235,7 @@ Tag: `goa-{slug}`
 
 - If `llms.txt` is unavailable: "Cannot access design system index. The documentation may be temporarily unavailable."
 - If a component markdown file returns 404: "Component '[name]' not found in the design system."
-- If the site is down: "Design system documentation is currently unavailable at https://design.alberta.ca/"
+- If the site is down: "Design system documentation is currently unavailable at {Base URL}"
 - If parsing fails: "Unable to parse the component documentation. The format may have changed."
 
 ### Rate Limiting
@@ -287,7 +286,7 @@ Use bullet lists with links:
 
 ### Always Include
 
-- Links back to the full documentation: `https://design.alberta.ca/components/{slug}`
+- Links back to the full documentation: `{Base URL}components/{slug}`
 - The component's status (stable, experimental, deprecated)
 - The component's category for context
 
