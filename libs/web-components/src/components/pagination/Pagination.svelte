@@ -1,7 +1,7 @@
 <svelte:options customElement="goa-pagination" />
 
 <script lang="ts">
-  import type { Spacing } from "../../common/styling";
+  import { calculateMargin, type Spacing } from "../../common/styling";
   import { onMount, tick } from "svelte";
   import { typeValidator, validateRequired } from "../../common/utils";
 
@@ -103,7 +103,7 @@
   }
 </script>
 
-<goa-block id="root" {ml} {mr} {mb} {mt}>
+<div id="root" style={calculateMargin(mt, mr, mb, ml)}>
   <div class="controls" data-testid={testid}>
     {#if variant === "all"}
       <goa-block data-testid="page-selector" alignment="center" gap="s">
@@ -137,7 +137,7 @@
         <span>of {itemcount <= 0 ? "1" : _pageCount}</span>
       </goa-block>
     {/if}
-    <goa-block alignment="center" gap="l" data-testid="page-links">
+    <div class="page-links" data-testid="page-links">
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
@@ -146,7 +146,9 @@
         type="tertiary"
         size={version === "2" ? "compact" : "normal"}
         leadingicon="arrow-back"
-        disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}>Previous</goa-button>
+        disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}
+        >Previous</goa-button
+      >
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
@@ -155,12 +157,18 @@
         type="tertiary"
         size={version === "2" ? "compact" : "normal"}
         trailingicon="arrow-forward"
-        disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}>Next</goa-button>
-    </goa-block>
+        disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}
+        >Next</goa-button
+      >
+    </div>
   </div>
-</goa-block>
+</div>
 
 <style>
+  :host {
+    display: block;
+  }
+
   span {
     white-space: nowrap;
     font: var(--goa-pagination-text-size);
@@ -175,10 +183,22 @@
     width: 100%;
   }
 
+  .page-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--goa-space-l);
+    width: 100%;
+  }
+
   @media (--not-mobile) {
     .controls {
       flex-direction: row;
       justify-content: space-between;
+    }
+
+    .page-links {
+      width: auto;
     }
   }
 </style>
