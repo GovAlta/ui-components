@@ -57589,7 +57589,7 @@ class J7 extends Ne {
 customElements.define("goa-work-side-menu", Le(J7, { heading: { type: "String", reflect: true }, url: { type: "String", reflect: true }, open: { type: "Boolean", reflect: true }, testid: {}, userName: { type: "String", attribute: "user-name", reflect: true }, userSecondaryText: { type: "String", attribute: "user-secondary-text", reflect: true } }, ["primary", "secondary", "account"], [], true));
 const { window: D1 } = go;
 function K7(t) {
-  Ie(t, "svelte-1qix1n1", `:host .svelte-1qix1n1.svelte-1qix1n1{box-sizing:border-box}.root.svelte-1qix1n1.svelte-1qix1n1{container-type:inline-size;position:relative}.mobile-drawer-content.svelte-1qix1n1.svelte-1qix1n1{display:none}goa-popover.svelte-1qix1n1.svelte-1qix1n1{display:block;width:100%}.menu-item.svelte-1qix1n1.svelte-1qix1n1{position:relative;display:flex;gap:var(--goa-space-m);border-radius:var(
+  Ie(t, "svelte-lr3v1g", `:host .svelte-lr3v1g.svelte-lr3v1g{box-sizing:border-box}.root.svelte-lr3v1g.svelte-lr3v1g{container-type:inline-size;position:relative}.mobile-drawer-content.svelte-lr3v1g.svelte-lr3v1g{display:none}goa-popover.svelte-lr3v1g.svelte-lr3v1g{display:block;width:100%}.menu-item.svelte-lr3v1g.svelte-lr3v1g{position:relative;display:flex;gap:var(--goa-space-m);border-radius:var(
       --goa-work-side-menu-item-border-radius,
       var(--goa-border-radius-m)
     );text-decoration:none;align-items:flex-start;padding:var(
@@ -57599,26 +57599,26 @@ function K7(t) {
     );color:var(
       --goa-work-side-menu-item-text-color,
       var(--goa-color-greyscale-600)
-    );min-height:var(--goa-work-side-menu-item-min-height, 40px)}button.menu-item.svelte-1qix1n1.svelte-1qix1n1{border:none;width:100%;text-align:left;background-color:transparent}.menu-item.svelte-1qix1n1.svelte-1qix1n1:hover{background:var(
+    );min-height:var(--goa-work-side-menu-item-min-height, 40px)}button.menu-item.svelte-lr3v1g.svelte-lr3v1g{border:none;width:100%;text-align:left;background-color:transparent}.menu-item.svelte-lr3v1g.svelte-lr3v1g:hover{background:var(
       --goa-work-side-menu-item-color-bg-hover,
       var(--goa-color-greyscale-100)
     );color:var(
       --goa-work-side-menu-item-text-color-hover,
       var(--goa-color-text-default)
-    );cursor:pointer}.menu-item.svelte-1qix1n1.svelte-1qix1n1:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:2px}goa-icon.svelte-1qix1n1.svelte-1qix1n1{display:var(--goa-work-side-menu-item-icon-display, flex);margin-top:var(--goa-space-3xs)}.divider.svelte-1qix1n1.svelte-1qix1n1{padding-bottom:var(--goa-space-s);margin-bottom:var(--goa-space-xs);border-bottom:var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-200)}.menu-item-label.svelte-1qix1n1.svelte-1qix1n1{flex-grow:1;font:var(
+    );cursor:pointer}.menu-item.svelte-lr3v1g.svelte-lr3v1g:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:calc(0px - var(--goa-border-width-l))}goa-icon.svelte-lr3v1g.svelte-lr3v1g{display:var(--goa-work-side-menu-item-icon-display, flex);margin-top:var(--goa-space-3xs)}.divider.svelte-lr3v1g.svelte-lr3v1g{padding-bottom:var(--goa-space-s);margin-bottom:var(--goa-space-xs);border-bottom:var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200)}.menu-item-label.svelte-lr3v1g.svelte-lr3v1g{flex-grow:1;font:var(
       --goa-work-side-menu-item-text-size,
       var(--goa-typography-body-s)
-    );animation:svelte-1qix1n1-delayText 100ms}.current.svelte-1qix1n1.svelte-1qix1n1{background:var(
+    );animation:svelte-lr3v1g-delayText 100ms}.current.svelte-lr3v1g.svelte-lr3v1g{background:var(
       --goa-work-side-menu-item-color-bg-current,
       var(--goa-color-greyscale-100)
     );color:var(
       --goa-work-side-menu-item-text-color-current,
       var(--goa-color-text-default)
-    )}.current.svelte-1qix1n1 .menu-item-label.svelte-1qix1n1{font-weight:var(--goa-font-weight-semi-bold)}goa-badge.badge.svelte-1qix1n1.svelte-1qix1n1{--goa-badge-height:1.25rem;--goa-badge-padding:0 6px;--goa-badge-font-size:var(
+    )}.current.svelte-lr3v1g .menu-item-label.svelte-lr3v1g{font-weight:var(--goa-font-weight-semi-bold)}goa-badge.badge.svelte-lr3v1g.svelte-lr3v1g{--goa-badge-height:1.25rem;--goa-badge-padding:0 6px;--goa-badge-font-size:var(
       --goa-work-side-menu-item-badge-text-size,
       var(--goa-font-size-2)
-    );--goa-badge-border-radius:1.25rem;margin-top:var(--goa-space-3xs)}@container (max-width: 160px){.menu-item.svelte-1qix1n1.svelte-1qix1n1{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}.menu-item-label.svelte-1qix1n1.svelte-1qix1n1,.trailing-content-slot.svelte-1qix1n1.svelte-1qix1n1{display:none}goa-badge.badge.svelte-1qix1n1.svelte-1qix1n1{position:absolute;top:var(--goa-space-3xs);right:var(--goa-space-3xs);--goa-badge-height:var(--goa-space-m);--goa-badge-padding:0;--goa-badge-font-size:var(--goa-font-size-1)}goa-badge.badge.svelte-1qix1n1.svelte-1qix1n1:not(.alwaysvisible){--goa-badge-font-size:0}@keyframes svelte-1qix1n1-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}}`);
+    );--goa-badge-border-radius:1.25rem;margin-top:var(--goa-space-3xs)}@container (max-width: 160px){.menu-item.svelte-lr3v1g.svelte-lr3v1g{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}.menu-item-label.svelte-lr3v1g.svelte-lr3v1g,.trailing-content-slot.svelte-lr3v1g.svelte-lr3v1g{display:none}goa-badge.badge.svelte-lr3v1g.svelte-lr3v1g{position:absolute;top:var(--goa-space-3xs);right:var(--goa-space-3xs);--goa-badge-height:var(--goa-space-m);--goa-badge-padding:0;--goa-badge-font-size:var(--goa-font-size-1)}goa-badge.badge.svelte-lr3v1g.svelte-lr3v1g:not(.alwaysvisible){--goa-badge-font-size:0}@keyframes svelte-lr3v1g-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}}`);
 }
 const $7 = (t) => ({}), as = (t) => ({}), eh = (t) => ({}), ss = (t) => ({}), th = (t) => ({}), cs = (t) => ({}), oh = (t) => ({}), ds = (t) => ({}), ih = (t) => ({}), us = (t) => ({});
 function nh(t) {
@@ -57704,7 +57704,7 @@ function fs(t) {
         "arialabel",
         /*label*/
         t[1]
-      ), m(e, "class", "svelte-1qix1n1");
+      ), m(e, "class", "svelte-lr3v1g");
     },
     m(i, n) {
       I(i, e, n);
@@ -57745,7 +57745,7 @@ function gs(t) {
   );
   return {
     c() {
-      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-1qix1n1");
+      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-lr3v1g");
     },
     m(l, r) {
       I(l, e, r), n && n.m(e, null), o = true;
@@ -57786,7 +57786,7 @@ function vs(t) {
   let e;
   return {
     c() {
-      e = C("goa-badge"), m(e, "class", "badge svelte-1qix1n1"), m(
+      e = C("goa-badge"), m(e, "class", "badge svelte-lr3v1g"), m(
         e,
         "type",
         /*_badgeType*/
@@ -57843,7 +57843,7 @@ function ai(t) {
     /*badge*/
     t[3] && vs(t)
   ), b = [
-    { class: "menu-item svelte-1qix1n1" },
+    { class: "menu-item svelte-lr3v1g" },
     {
       "aria-current": a = /*current*/
       t[0] ? "page" : void 0
@@ -57865,7 +57865,7 @@ function ai(t) {
       ), g && g.c(), o = Y(), i = C("div"), n = de(
         /*label*/
         t[1]
-      ), l = Y(), v && v.c(), r = Y(), h && h.c(), u(i, "class", "menu-item-label svelte-1qix1n1"), ro(
+      ), l = Y(), v && v.c(), r = Y(), h && h.c(), u(i, "class", "menu-item-label svelte-lr3v1g"), ro(
         /*url*/
         t[2] ? "a" : "button"
       )(e, w), A(
@@ -57898,7 +57898,7 @@ function ai(t) {
         /*url*/
         p[2] ? "a" : "button"
       )(e, w = zi(b, [
-        { class: "menu-item svelte-1qix1n1" },
+        { class: "menu-item svelte-lr3v1g" },
         (!d || _[0] & /*current*/
         1 && a !== (a = /*current*/
         p[0] ? "page" : void 0)) && {
@@ -57953,14 +57953,14 @@ function rh(t) {
       e = C("goa-popover"), o = C("div"), h && h.c(), i = Y(), n = C("div"), l = de(
         /*label*/
         t[1]
-      ), r = Y(), b && b.c(), a = Y(), w && w.c(), d = Y(), _ && _.c(), u(n, "class", "menu-item-label svelte-1qix1n1"), u(o, "slot", "target"), u(o, "class", "menu-item svelte-1qix1n1"), u(o, "role", "menuitem"), u(o, "aria-current", c = /*current*/
+      ), r = Y(), b && b.c(), a = Y(), w && w.c(), d = Y(), _ && _.c(), u(n, "class", "menu-item-label svelte-lr3v1g"), u(o, "slot", "target"), u(o, "class", "menu-item svelte-lr3v1g"), u(o, "role", "menuitem"), u(o, "aria-current", c = /*current*/
       t[0] ? "page" : void 0), A(
         o,
         "current",
         /*current*/
         t[0]
       ), m(e, "position", "right"), m(e, "padded", "false"), m(e, "open", s = /*_popoverOpen*/
-      t[11] ? "true" : "false"), m(e, "width", "100%"), m(e, "minwidth", "500px"), m(e, "maxwidth", "500px"), m(e, "hoffset", "36px"), m(e, "voffset", "140px"), m(e, "class", "svelte-1qix1n1");
+      t[11] ? "true" : "false"), m(e, "width", "100%"), m(e, "minwidth", "500px"), m(e, "maxwidth", "500px"), m(e, "hoffset", "36px"), m(e, "voffset", "140px"), m(e, "class", "svelte-lr3v1g");
     },
     m(z, M) {
       I(z, e, M), k(e, o), h && h.m(o, null), k(o, i), k(o, n), k(n, l), k(o, r), b && b.m(o, null), k(o, a), w && w.m(o, null), t[28](o), k(e, d), _ && _.m(e, null), f = true, g || (v = [
@@ -58056,13 +58056,13 @@ function ah(t) {
       e = C("button"), v && v.c(), o = Y(), i = C("div"), n = de(
         /*label*/
         t[1]
-      ), l = Y(), h && h.c(), r = Y(), b && b.c(), c = Y(), d = C("div"), p && p.c(), u(i, "class", "menu-item-label svelte-1qix1n1"), u(e, "class", "menu-item svelte-1qix1n1"), u(e, "aria-current", a = /*current*/
+      ), l = Y(), h && h.c(), r = Y(), b && b.c(), c = Y(), d = C("div"), p && p.c(), u(i, "class", "menu-item-label svelte-lr3v1g"), u(e, "class", "menu-item svelte-lr3v1g"), u(e, "aria-current", a = /*current*/
       t[0] ? "page" : void 0), u(e, "role", "menuitem"), u(e, "tabindex", "0"), A(
         e,
         "current",
         /*current*/
         t[0]
-      ), u(d, "class", "mobile-drawer-content svelte-1qix1n1");
+      ), u(d, "class", "mobile-drawer-content svelte-lr3v1g");
     },
     m(_, z) {
       I(_, e, z), v && v.m(e, null), k(e, o), k(e, i), k(i, n), k(e, l), h && h.m(e, null), k(e, r), b && b.m(e, null), t[26](e), I(_, c, z), I(_, d, z), p && p.m(d, null), t[27](d), s = true, f || (g = oe(
@@ -58137,7 +58137,7 @@ function hs(t) {
         "arialabel",
         /*label*/
         t[1]
-      ), m(e, "class", "svelte-1qix1n1");
+      ), m(e, "class", "svelte-lr3v1g");
     },
     m(i, n) {
       I(i, e, n);
@@ -58178,7 +58178,7 @@ function ms(t) {
   );
   return {
     c() {
-      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-1qix1n1");
+      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-lr3v1g");
     },
     m(l, r) {
       I(l, e, r), n && n.m(e, null), o = true;
@@ -58219,7 +58219,7 @@ function bs(t) {
   let e;
   return {
     c() {
-      e = C("goa-badge"), m(e, "class", "badge svelte-1qix1n1"), m(
+      e = C("goa-badge"), m(e, "class", "badge svelte-lr3v1g"), m(
         e,
         "type",
         /*_badgeType*/
@@ -58280,7 +58280,7 @@ function ps(t) {
         "arialabel",
         /*label*/
         t[1]
-      ), m(e, "class", "svelte-1qix1n1");
+      ), m(e, "class", "svelte-lr3v1g");
     },
     m(i, n) {
       I(i, e, n);
@@ -58321,7 +58321,7 @@ function ws(t) {
   );
   return {
     c() {
-      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-1qix1n1");
+      e = C("div"), n && n.c(), u(e, "class", "trailing-content-slot svelte-lr3v1g");
     },
     m(l, r) {
       I(l, e, r), n && n.m(e, null), o = true;
@@ -58362,7 +58362,7 @@ function _s(t) {
   let e;
   return {
     c() {
-      e = C("goa-badge"), m(e, "class", "badge svelte-1qix1n1"), m(
+      e = C("goa-badge"), m(e, "class", "badge svelte-lr3v1g"), m(
         e,
         "type",
         /*_badgeType*/
@@ -58423,7 +58423,7 @@ function sh(t) {
   }
   return o = d(t), i = c[o] = a[o](t), {
     c() {
-      e = C("div"), i.c(), u(e, "class", "root svelte-1qix1n1"), u(e, "role", "presentation"), u(
+      e = C("div"), i.c(), u(e, "class", "root svelte-lr3v1g"), u(e, "role", "presentation"), u(
         e,
         "data-testid",
         /*testid*/
@@ -58677,7 +58677,7 @@ class dh extends Ne {
 }
 customElements.define("goa-work-side-menu-item", Le(dh, { label: {}, url: {}, badge: {}, current: { type: "Boolean" }, divider: { type: "Boolean" }, icon: {}, testid: {}, type: {} }, ["trailingContent", "popoverContent"], [], true));
 function uh(t) {
-  Ie(t, "svelte-gm8g0b", `:host .svelte-gm8g0b.svelte-gm8g0b{box-sizing:border-box}.root.svelte-gm8g0b.svelte-gm8g0b{container-type:inline-size;position:relative}summary.svelte-gm8g0b.svelte-gm8g0b{display:flex;cursor:pointer;list-style:none;gap:var(--goa-space-m);align-items:flex-start;border-radius:var(
+  Ie(t, "svelte-mzovxa", `:host .svelte-mzovxa.svelte-mzovxa{box-sizing:border-box}.root.svelte-mzovxa.svelte-mzovxa{container-type:inline-size;position:relative}summary.svelte-mzovxa.svelte-mzovxa{display:flex;cursor:pointer;list-style:none;gap:var(--goa-space-m);align-items:flex-start;border-radius:var(
       --goa-work-side-menu-item-border-radius,
       var(--goa-border-radius-m)
     );align-items:flex-start;padding:var(
@@ -58687,13 +58687,13 @@ function uh(t) {
     );color:var(
       --goa-work-side-menu-item-text-color,
       var(--goa-color-greyscale-600)
-    );min-height:var(--goa-work-side-menu-item-min-height, 40px)}summary.svelte-gm8g0b.svelte-gm8g0b::-webkit-details-marker{display:none}summary.svelte-gm8g0b.svelte-gm8g0b:hover,details[open].svelte-gm8g0b summary.svelte-gm8g0b{background:var(
+    );min-height:var(--goa-work-side-menu-item-min-height, 40px)}summary.svelte-mzovxa.svelte-mzovxa::-webkit-details-marker{display:none}summary.svelte-mzovxa.svelte-mzovxa:hover,details[open].svelte-mzovxa summary.svelte-mzovxa{background:var(
       --goa-work-side-menu-item-color-bg-hover,
       var(--goa-color-greyscale-100)
     );color:var(
       --goa-work-side-menu-item-text-color-hover,
       var(--goa-color-text-default)
-    )}details[open].svelte-gm8g0b .marker-icon.svelte-gm8g0b{transform:rotate(90deg)}summary.svelte-gm8g0b.svelte-gm8g0b:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:2px}summary.svelte-gm8g0b goa-icon.svelte-gm8g0b{margin-top:var(--goa-space-3xs)}.group.svelte-gm8g0b.svelte-gm8g0b{border-left:var(
+    )}details[open].svelte-mzovxa .marker-icon.svelte-mzovxa{transform:rotate(90deg)}summary.svelte-mzovxa.svelte-mzovxa:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:calc(0px - var(--goa-border-width-l))}summary.svelte-mzovxa goa-icon.svelte-mzovxa{margin-top:var(--goa-space-3xs)}.group.svelte-mzovxa.svelte-mzovxa{border-left:var(
       --goa-work-side-menu-group-border,
       var(--goa-border-width-xl) solid var(--goa-color-greyscale-100)
     );margin:var(
@@ -58708,13 +58708,13 @@ function uh(t) {
     );--goa-work-side-menu-item-text-size:var(
       --goa-work-side-menu-group-item-text-size,
       var(--goa-typography-body-xs)
-    )}.label.svelte-gm8g0b.svelte-gm8g0b{flex-grow:1;font:var(
+    )}.label.svelte-mzovxa.svelte-mzovxa{flex-grow:1;font:var(
       --goa-work-side-menu-item-text-size,
       var(--goa-typography-body-s)
-    );animation:svelte-gm8g0b-delayText 100ms}@container (max-width: 160px){.group.svelte-gm8g0b.svelte-gm8g0b,.label.svelte-gm8g0b.svelte-gm8g0b,.marker-icon.svelte-gm8g0b.svelte-gm8g0b{display:none}summary.svelte-gm8g0b.svelte-gm8g0b{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}details[open].svelte-gm8g0b summary.svelte-gm8g0b{background:transparent;color:var(
-      --goa-work-side-menu-item-text-color,
-      var(--goa-color-greyscale-600)
-    )}}@keyframes svelte-gm8g0b-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}`);
+    );animation:svelte-mzovxa-delayText 100ms}@container (max-width: 160px){.group.svelte-mzovxa.svelte-mzovxa,.label.svelte-mzovxa.svelte-mzovxa,.marker-icon.svelte-mzovxa.svelte-mzovxa{display:none}summary.svelte-mzovxa.svelte-mzovxa{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}details[open].svelte-mzovxa summary.svelte-mzovxa{background:transparent;color:var(
+        --goa-work-side-menu-item-text-color,
+        var(--goa-color-greyscale-600)
+      )}}@keyframes svelte-mzovxa-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}`);
 }
 function ks(t) {
   let e, o;
@@ -58726,7 +58726,7 @@ function ks(t) {
         /*icon*/
         t[2]
       ), m(e, "size", "small"), m(e, "theme", o = /*open*/
-      t[0] ? "filled" : "outline"), m(e, "class", "svelte-gm8g0b");
+      t[0] ? "filled" : "outline"), m(e, "class", "svelte-mzovxa");
     },
     m(i, n) {
       I(i, e, n);
@@ -58767,14 +58767,14 @@ function fh(t) {
       e = C("div"), o = C("details"), i = C("summary"), b && b.c(), n = Y(), l = C("span"), r = de(
         /*heading*/
         t[1]
-      ), a = Y(), c = C("goa-icon"), d = Y(), s = C("div"), p && p.c(), u(l, "class", "label svelte-gm8g0b"), m(c, "class", "marker-icon svelte-gm8g0b"), m(c, "type", "chevron-forward"), m(c, "size", "small"), u(
+      ), a = Y(), c = C("goa-icon"), d = Y(), s = C("div"), p && p.c(), u(l, "class", "label svelte-mzovxa"), m(c, "class", "marker-icon svelte-mzovxa"), m(c, "type", "chevron-forward"), m(c, "size", "small"), u(
         i,
         "aria-expanded",
         /*open*/
         t[0]
-      ), u(i, "class", "svelte-gm8g0b"), u(s, "class", "group svelte-gm8g0b"), u(s, "data-testid", "group"), o.open = /*open*/
+      ), u(i, "class", "svelte-mzovxa"), u(s, "class", "group svelte-mzovxa"), u(s, "data-testid", "group"), o.open = /*open*/
       t[0], u(o, "aria-label", f = /*open*/
-      t[0] ? "Close group" : "Open group"), u(o, "class", "svelte-gm8g0b"), u(e, "class", "root svelte-gm8g0b"), u(
+      t[0] ? "Close group" : "Open group"), u(o, "class", "svelte-mzovxa"), u(e, "class", "root svelte-mzovxa"), u(
         e,
         "data-testid",
         /*testid*/
