@@ -46677,7 +46677,7 @@ class j3 extends Ne {
 }
 customElements.define("goa-pages", Le(j3, { current: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
 function L3(t) {
-  Ie(t, "svelte-1jo81wv", "span.svelte-1jo81wv{white-space:nowrap;font:var(--goa-pagination-text-size);color:var(--goa-pagination-text-color)}.controls.svelte-1jo81wv{display:flex;gap:var(--goa-pagination-gap, 1rem);flex-direction:column;align-items:center;width:100%}@media(min-width: 624px){.controls.svelte-1jo81wv{flex-direction:row;justify-content:space-between}}");
+  Ie(t, "svelte-9vnays", ":host{display:block}span.svelte-9vnays{white-space:nowrap;font:var(--goa-pagination-text-size);color:var(--goa-pagination-text-color)}.controls.svelte-9vnays{display:flex;gap:var(--goa-pagination-gap, 1rem);flex-direction:column;align-items:center;width:100%}.page-links.svelte-9vnays{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-space-l);width:100%}@media(min-width: 624px){.controls.svelte-9vnays{flex-direction:row;justify-content:space-between}.page-links.svelte-9vnays{width:auto}}");
 }
 function ta(t, e, o) {
   const i = t.slice();
@@ -46700,7 +46700,7 @@ function oa(t) {
   let g = f(t), v = g(t);
   return {
     c() {
-      e = C("goa-block"), o = C("span"), o.textContent = "Page", i = Y(), n = C("input"), l = Y(), v.c(), r = Y(), a = C("span"), c = de("of "), s = de(d), u(o, "class", "svelte-1jo81wv"), u(n, "type", "hidden"), u(a, "class", "svelte-1jo81wv"), m(e, "data-testid", "page-selector"), m(e, "alignment", "center"), m(e, "gap", "s");
+      e = C("goa-block"), o = C("span"), o.textContent = "Page", i = Y(), n = C("input"), l = Y(), v.c(), r = Y(), a = C("span"), c = de("of "), s = de(d), u(o, "class", "svelte-9vnays"), u(n, "type", "hidden"), u(a, "class", "svelte-9vnays"), m(e, "data-testid", "page-selector"), m(e, "alignment", "center"), m(e, "gap", "s");
     },
     m(h, b) {
       I(h, e, b), k(e, o), k(e, i), k(e, n), t[15](n), k(e, l), v.m(e, null), k(e, r), k(e, a), k(a, c), k(a, s);
@@ -46875,13 +46875,13 @@ function na(t) {
   };
 }
 function D3(t) {
-  let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b, w = (
+  let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b, w, p = (
     /*variant*/
     t[3] === "all" && oa(t)
   );
   return {
     c() {
-      e = C("goa-block"), o = C("div"), w && w.c(), i = Y(), n = C("goa-block"), l = C("goa-button"), r = de("Previous"), d = Y(), s = C("goa-button"), f = de("Next"), m(
+      e = C("div"), o = C("div"), p && p.c(), i = Y(), n = C("div"), l = C("goa-button"), r = de("Previous"), d = Y(), s = C("goa-button"), f = de("Next"), m(
         l,
         "version",
         /*version*/
@@ -46898,35 +46898,24 @@ function D3(t) {
       t[1] === "2" ? "compact" : "normal"), m(s, "trailingicon", "arrow-forward"), m(s, "disabled", v = /*itemcount*/
       t[2] <= 0 || /*pagenumber*/
       t[0] >= /*_pageCount*/
-      t[9] ? "true" : "false"), m(n, "alignment", "center"), m(n, "gap", "l"), m(n, "data-testid", "page-links"), u(o, "class", "controls svelte-1jo81wv"), u(
+      t[9] ? "true" : "false"), u(n, "class", "page-links svelte-9vnays"), u(n, "data-testid", "page-links"), u(o, "class", "controls svelte-9vnays"), u(
         o,
         "data-testid",
         /*testid*/
         t[4]
-      ), m(e, "id", "root"), m(
-        e,
-        "ml",
+      ), u(e, "id", "root"), u(e, "style", h = Te(
+        /*mt*/
+        t[5],
+        /*mr*/
+        t[6],
+        /*mb*/
+        t[7],
         /*ml*/
         t[8]
-      ), m(
-        e,
-        "mr",
-        /*mr*/
-        t[6]
-      ), m(
-        e,
-        "mb",
-        /*mb*/
-        t[7]
-      ), m(
-        e,
-        "mt",
-        /*mt*/
-        t[5]
-      );
+      ));
     },
-    m(p, _) {
-      I(p, e, _), k(e, o), w && w.m(o, null), k(o, i), k(o, n), k(n, l), k(l, r), k(n, d), k(n, s), k(s, f), h || (b = [
+    m(_, z) {
+      I(_, e, z), k(e, o), p && p.m(o, null), k(o, i), k(o, n), k(n, l), k(l, r), k(n, d), k(n, s), k(s, f), b || (w = [
         oe(
           l,
           "click",
@@ -46939,68 +46928,54 @@ function D3(t) {
           /*click_handler_1*/
           t[19]
         )
-      ], h = true);
+      ], b = true);
     },
-    p(p, [_]) {
-      p[3] === "all" ? w ? w.p(p, _) : (w = oa(p), w.c(), w.m(o, i)) : w && (w.d(1), w = null), _ & /*version*/
+    p(_, [z]) {
+      _[3] === "all" ? p ? p.p(_, z) : (p = oa(_), p.c(), p.m(o, i)) : p && (p.d(1), p = null), z & /*version*/
       2 && m(
         l,
         "version",
         /*version*/
-        p[1]
-      ), _ & /*version*/
+        _[1]
+      ), z & /*version*/
       2 && a !== (a = /*version*/
-      p[1] === "2" ? "compact" : "normal") && m(l, "size", a), _ & /*itemcount, pagenumber*/
+      _[1] === "2" ? "compact" : "normal") && m(l, "size", a), z & /*itemcount, pagenumber*/
       5 && c !== (c = /*itemcount*/
-      p[2] <= 0 || /*pagenumber*/
-      p[0] <= 1 ? "true" : "false") && m(l, "disabled", c), _ & /*version*/
+      _[2] <= 0 || /*pagenumber*/
+      _[0] <= 1 ? "true" : "false") && m(l, "disabled", c), z & /*version*/
       2 && m(
         s,
         "version",
         /*version*/
-        p[1]
-      ), _ & /*version*/
+        _[1]
+      ), z & /*version*/
       2 && g !== (g = /*version*/
-      p[1] === "2" ? "compact" : "normal") && m(s, "size", g), _ & /*itemcount, pagenumber, _pageCount*/
+      _[1] === "2" ? "compact" : "normal") && m(s, "size", g), z & /*itemcount, pagenumber, _pageCount*/
       517 && v !== (v = /*itemcount*/
-      p[2] <= 0 || /*pagenumber*/
-      p[0] >= /*_pageCount*/
-      p[9] ? "true" : "false") && m(s, "disabled", v), _ & /*testid*/
+      _[2] <= 0 || /*pagenumber*/
+      _[0] >= /*_pageCount*/
+      _[9] ? "true" : "false") && m(s, "disabled", v), z & /*testid*/
       16 && u(
         o,
         "data-testid",
         /*testid*/
-        p[4]
-      ), _ & /*ml*/
-      256 && m(
-        e,
-        "ml",
-        /*ml*/
-        p[8]
-      ), _ & /*mr*/
-      64 && m(
-        e,
-        "mr",
-        /*mr*/
-        p[6]
-      ), _ & /*mb*/
-      128 && m(
-        e,
-        "mb",
-        /*mb*/
-        p[7]
-      ), _ & /*mt*/
-      32 && m(
-        e,
-        "mt",
+        _[4]
+      ), z & /*mt, mr, mb, ml*/
+      480 && h !== (h = Te(
         /*mt*/
-        p[5]
-      );
+        _[5],
+        /*mr*/
+        _[6],
+        /*mb*/
+        _[7],
+        /*ml*/
+        _[8]
+      )) && u(e, "style", h);
     },
     i: De,
     o: De,
-    d(p) {
-      p && q(e), w && w.d(), h = false, Ge(b);
+    d(_) {
+      _ && q(e), p && p.d(), b = false, Ge(w);
     }
   };
 }
@@ -54623,13 +54598,13 @@ function Za(t) {
       l[7] && /*count*/
       l[20] > /*maxcount*/
       l[8]
-    ) return t7;
+    ) return th;
     if (
       /*countby*/
       l[7] && /*count*/
       l[20] <= /*maxcount*/
       l[8]
-    ) return e7;
+    ) return eh;
   }
   let i = o(t), n = i && i(t);
   return {
@@ -54660,7 +54635,7 @@ function Za(t) {
     }
   };
 }
-function e7(t) {
+function eh(t) {
   let e = (
     /*maxcount*/
     t[8] - /*count*/
@@ -54697,7 +54672,7 @@ function e7(t) {
     }
   };
 }
-function t7(t) {
+function th(t) {
   let e = (
     /*count*/
     t[20] - /*maxcount*/
@@ -54770,7 +54745,7 @@ function Fa(t) {
     }
   };
 }
-function o7(t) {
+function oh(t) {
   let e, o, i, n, l, r, a, c, d, s, f = (
     /*maxcount*/
     t[8] > 0 && !/*isDisabled*/
@@ -55006,7 +54981,7 @@ function o7(t) {
     }
   };
 }
-function i7(t, e, o) {
+function ih(t, e, o) {
   let i, n, l, { name: r } = e, { value: a = "" } = e, { placeholder: c = "" } = e, { rows: d = 3 } = e, { testid: s = "" } = e, { width: f = "100%" } = e, { maxwidth: g = "60ch" } = e, { error: v = "false" } = e, { readonly: h = "false" } = e, { disabled: b = "false" } = e, { arialabel: w = "" } = e, { countby: p = "" } = e, { maxcount: _ = -1 } = e, { autocomplete: z = "" } = e;
   const [M, L] = Oe("Version", ["1", "2"]);
   let { version: D = "1" } = e;
@@ -55126,13 +55101,13 @@ function i7(t, e, o) {
     we
   ];
 }
-class n7 extends Ne {
+class nh extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      i7,
-      o7,
+      ih,
+      oh,
       Me,
       {
         name: 1,
@@ -55281,12 +55256,12 @@ class n7 extends Ne {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-textarea", Le(n7, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function l7(t) {
+customElements.define("goa-textarea", Le(nh, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
+function lh(t) {
   Ie(t, "svelte-q0l82d", ".svelte-q0l82d.svelte-q0l82d{box-sizing:border-box}.page.svelte-q0l82d.svelte-q0l82d{min-height:100vh;display:flex;flex-direction:column}.content.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;display:flex;flex-direction:column;gap:2rem}.header.svelte-q0l82d.svelte-q0l82d,.footer.svelte-q0l82d.svelte-q0l82d{flex:0 0 auto}main.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;padding:0 1rem}.nav.svelte-q0l82d.svelte-q0l82d{transition:transform 200ms ease-in-out;background-color:var(--goa-color-greyscale-white)}.nav.svelte-q0l82d>.svelte-q0l82d{display:block;padding:0.5rem 0}@media not (max-width: 623px){.page.svelte-q0l82d.svelte-q0l82d{gap:2rem}.content.svelte-q0l82d.svelte-q0l82d{display:flex;flex-direction:row;justify-content:center;width:min(var(--max-content-width), 100vw);margin:0 auto}.nav.svelte-q0l82d.svelte-q0l82d{padding:0 2rem;transform:translateX(0)}.nav.svelte-q0l82d.svelte-q0l82d:not(.side-menu){flex:0 0 var(--nav-column-width)}.nav.side-menu.svelte-q0l82d.svelte-q0l82d{flex:0 0 var(--side-menu-column-width)}main.svelte-q0l82d.svelte-q0l82d{padding-right:2rem}}@media(min-width: 1024px){main.svelte-q0l82d.svelte-q0l82d{padding-right:4.5rem}}");
 }
-const r7 = (t) => ({}), Wa = (t) => ({}), a7 = (t) => ({}), Ya = (t) => ({}), s7 = (t) => ({}), Qa = (t) => ({}), c7 = (t) => ({}), Ua = (t) => ({}), d7 = (t) => ({}), Ra = (t) => ({});
-function u7(t) {
+const rh = (t) => ({}), Wa = (t) => ({}), ah = (t) => ({}), Ya = (t) => ({}), sh = (t) => ({}), Qa = (t) => ({}), ch = (t) => ({}), Ua = (t) => ({}), dh = (t) => ({}), Ra = (t) => ({});
+function uh(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h;
   const b = (
     /*#slots*/
@@ -55370,7 +55345,7 @@ function u7(t) {
           /*$$scope*/
           V[3],
           O,
-          d7
+          dh
         ) : he(
           /*$$scope*/
           V[3]
@@ -55388,7 +55363,7 @@ function u7(t) {
           /*$$scope*/
           V[3],
           O,
-          c7
+          ch
         ) : he(
           /*$$scope*/
           V[3]
@@ -55424,7 +55399,7 @@ function u7(t) {
           /*$$scope*/
           V[3],
           O,
-          s7
+          sh
         ) : he(
           /*$$scope*/
           V[3]
@@ -55442,7 +55417,7 @@ function u7(t) {
           /*$$scope*/
           V[3],
           O,
-          a7
+          ah
         ) : he(
           /*$$scope*/
           V[3]
@@ -55460,7 +55435,7 @@ function u7(t) {
           /*$$scope*/
           V[3],
           O,
-          r7
+          rh
         ) : he(
           /*$$scope*/
           V[3]
@@ -55487,26 +55462,26 @@ function u7(t) {
     }
   };
 }
-function f7(t, e, o) {
+function fh(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { leftcolumnwidth: l } = e, { rightcolumnwidth: r } = e, { maxcontentwidth: a } = e;
   return t.$$set = (c) => {
     "leftcolumnwidth" in c && o(0, l = c.leftcolumnwidth), "rightcolumnwidth" in c && o(1, r = c.rightcolumnwidth), "maxcontentwidth" in c && o(2, a = c.maxcontentwidth), "$$scope" in c && o(3, n = c.$$scope);
   }, [l, r, a, n, i];
 }
-class g7 extends Ne {
+class gh extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      f7,
-      u7,
+      fh,
+      uh,
       Me,
       {
         leftcolumnwidth: 0,
         rightcolumnwidth: 1,
         maxcontentwidth: 2
       },
-      l7
+      lh
     );
   }
   get leftcolumnwidth() {
@@ -55528,9 +55503,9 @@ class g7 extends Ne {
     this.$$set({ maxcontentwidth: e }), y();
   }
 }
-customElements.define("goa-three-column-layout", Le(g7, { leftcolumnwidth: {}, rightcolumnwidth: {}, maxcontentwidth: {} }, ["header", "nav", "default", "sidebar", "side-menu", "footer"], [], true));
+customElements.define("goa-three-column-layout", Le(gh, { leftcolumnwidth: {}, rightcolumnwidth: {}, maxcontentwidth: {} }, ["header", "nav", "default", "sidebar", "side-menu", "footer"], [], true));
 const { window: L1 } = go;
-function v7(t) {
+function vh(t) {
   Ie(t, "svelte-1n36efl", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}.tooltip.svelte-1n36efl.svelte-1n36efl{position:relative;display:inline-flex;justify-content:center;align-items:center}.tooltip.svelte-1n36efl.svelte-1n36efl:focus-visible{outline:var(--goa-tooltip-border-focus);outline-offset:-4px;border-radius:8px}.tooltip-text.svelte-1n36efl.svelte-1n36efl{pointer-events:none;font:var(--goa-tooltip-text-size);background-color:var(--goa-tooltip-color-bg);color:var(--goa-tooltip-color-text);text-align:center;border-radius:var(--goa-tooltip-border-radius);position:fixed;z-index:9999;opacity:0;transition:opacity var(--goa-motion-duration-medium-2)
       var(--goa-motion-curve-productive);padding:var(--goa-tooltip-padding);text-align:left;white-space:nowrap;display:flex;flex-direction:column;overflow:visible;border-width:0}.show.tooltip-text.svelte-1n36efl.svelte-1n36efl{opacity:1}.use-manual-positioning.svelte-1n36efl .tooltip-text.svelte-1n36efl{position:fixed;z-index:9999;top:auto;bottom:auto;left:auto;right:auto}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.svelte-1n36efl{position-anchor:--goa-tooltip-target;margin:0;inset-block-start:anchor(bottom);inset-inline-start:anchor(left)}.tooltip-target.svelte-1n36efl.svelte-1n36efl{margin:var(--goa-tooltip-gap);height:auto;display:flex;cursor:pointer}.use-anchor-based-positioning.svelte-1n36efl .tooltip-target.svelte-1n36efl{anchor-name:--goa-tooltip-target}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.bottom.svelte-1n36efl{inset-block-start:anchor(bottom);inset-inline-start:anchor(center);translate:-50% var(--goa-space-s)}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.top.svelte-1n36efl{inset-block-start:anchor(top);inset-inline-start:anchor(center);translate:-50% calc(-100% - var(--goa-space-s))}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.right.svelte-1n36efl{inset-block-start:anchor(center);inset-inline-start:anchor(right);translate:var(--goa-space-s) -50%}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.left.svelte-1n36efl{inset-block-start:anchor(center);inset-inline-start:anchor(left);translate:calc(-100% - var(--goa-space-s)) -50%}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.bottom.align-right.svelte-1n36efl{inset-inline-start:anchor(left);translate:calc(var(--goa-space-m) * -1) var(--goa-space-s)}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.top.align-right.svelte-1n36efl{inset-inline-start:anchor(left);translate:calc(var(--goa-space-m) * -1) calc(-100% - var(--goa-space-s))}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.bottom.align-left.svelte-1n36efl{inset-inline-start:anchor(right);translate:calc(-100% + var(--goa-space-m)) var(--goa-space-s)}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.top.align-left.svelte-1n36efl{inset-inline-start:anchor(right);translate:calc(-100% + var(--goa-space-m)) calc(-100% - var(--goa-space-s))}@position-try --align-right-flipped-bottom{inset-inline-start:anchor(right);translate:calc(-100% + var(--goa-space-m)) var(--goa-space-s)}@position-try --align-right-flipped-top{inset-inline-start:anchor(right);translate:calc(-100% + var(--goa-space-m)) calc(-100% - var(--goa-space-s))}@position-try --align-left-flipped-bottom{inset-inline-start:anchor(left);translate:calc(var(--goa-space-m) * -1) var(--goa-space-s)}@position-try --align-left-flipped-top{inset-inline-start:anchor(left);translate:calc(var(--goa-space-m) * -1) calc(-100% - var(--goa-space-s))}.tooltip-text.bottom.svelte-1n36efl.svelte-1n36efl::before,.tooltip-text.top.svelte-1n36efl.svelte-1n36efl::before,.tooltip-text.left.svelte-1n36efl.svelte-1n36efl::before,.tooltip-text.right.svelte-1n36efl.svelte-1n36efl::before{content:"";position:absolute;border-style:solid}.tooltip-text.bottom.svelte-1n36efl.svelte-1n36efl::before{top:-9px;left:50%;border-width:0 10px 10px 10px;transform:translateX(-50%);border-color:transparent transparent var(--goa-tooltip-color-bg)
       transparent}.tooltip-text.top.svelte-1n36efl.svelte-1n36efl::before{bottom:-9px;left:50%;transform:translateX(-50%);border-width:10px 10px 0 10px;border-color:var(--goa-tooltip-color-bg) transparent transparent
@@ -55538,8 +55513,8 @@ function v7(t) {
       var(--goa-tooltip-color-bg)}.tooltip-text.right.svelte-1n36efl.svelte-1n36efl::before{top:50%;left:-9px;transform:translateY(-50%);border-width:10px 10px 10px 0;border-style:solid;border-color:transparent var(--goa-tooltip-color-bg) transparent
       transparent}.tooltip-text.bottom.align-left.svelte-1n36efl.svelte-1n36efl::before,.tooltip-text.top.align-left.svelte-1n36efl.svelte-1n36efl::before{left:calc(100% - (var(--target-width) + var(--goa-space-m)))}.tooltip-text.bottom.align-right.svelte-1n36efl.svelte-1n36efl::before,.tooltip-text.top.align-right.svelte-1n36efl.svelte-1n36efl::before{left:calc(var(--target-width) + var(--goa-space-m))}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.bottom.align-right.svelte-1n36efl::before,.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.top.align-right.svelte-1n36efl::before{left:calc(var(--target-width) + var(--goa-space-m))}.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.bottom.align-left.svelte-1n36efl::before,.use-anchor-based-positioning.svelte-1n36efl .tooltip-text.top.align-left.svelte-1n36efl::before{left:calc(100% - var(--target-width) - var(--goa-space-m))}`);
 }
-const h7 = (t) => ({}), Ga = (t) => ({});
-function m7(t) {
+const hh = (t) => ({}), Ga = (t) => ({});
+function mh(t) {
   let e;
   return {
     c() {
@@ -55566,7 +55541,7 @@ function m7(t) {
     }
   };
 }
-function b7(t) {
+function bh(t) {
   let e;
   const o = (
     /*#slots*/
@@ -55598,7 +55573,7 @@ function b7(t) {
           /*$$scope*/
           n[22],
           l,
-          h7
+          hh
         ) : he(
           /*$$scope*/
           n[22]
@@ -55617,7 +55592,7 @@ function b7(t) {
     }
   };
 }
-function p7(t) {
+function ph(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b;
   dt(
     /*onwindowresize*/
@@ -55632,7 +55607,7 @@ function p7(t) {
     /*$$scope*/
     t[22],
     null
-  ), _ = [b7, m7], z = [];
+  ), _ = [bh, mh], z = [];
   function M(L, D) {
     return (
       /*$$slots*/
@@ -55777,12 +55752,12 @@ function p7(t) {
     }
   };
 }
-const w7 = 12, Xa = 16;
-function _7(t, e, o, i, n, l) {
+const wh = 12, Xa = 16;
+function _h(t, e, o, i, n, l) {
   let r = t;
   return t === "bottom" && e.height > i ? r = "top" : t === "top" && e.height > o && (r = "bottom"), t === "right" && e.width > l ? r = "left" : t === "left" && e.width > n && (r = "right"), r;
 }
-function k7(t, e, o, i) {
+function kh(t, e, o, i) {
   const n = window.innerWidth, l = e.left + (e.width - o.width) / 2, r = e.left - i, a = e.right - o.width + i, c = (b) => b === "left" ? a : b === "right" ? r : l, d = (b) => {
     const w = b + o.width;
     return b < 0 || w > n;
@@ -55799,7 +55774,7 @@ function k7(t, e, o, i) {
   const v = s(a), h = s(r);
   return v <= h ? "left" : "right";
 }
-function y7(t, e, o) {
+function yh(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const l = ht(i);
   let { content: r = "" } = e, { testid: a = "" } = e, { position: c = "top" } = e, { halign: d = "center" } = e, { maxwidth: s = "" } = e, { mt: f = null } = e, { mr: g = null } = e, { mb: v = null } = e, { ml: h = null } = e;
@@ -55866,12 +55841,12 @@ function y7(t, e, o) {
     let le = j.getBoundingClientRect();
     const be = T.getBoundingClientRect(), Ye = be.top, ye = window.innerHeight - be.bottom, Ue = be.left, Ce = window.innerWidth - be.right;
     G(le, be, Ue, Ce), le = j.getBoundingClientRect();
-    const We = _7(c, le, Ye, ye, Ue, Ce), se = We === "top" || We === "bottom" ? k7(d, be, le, Xa) : "center";
+    const We = _h(c, le, Ye, ye, Ue, Ce), se = We === "top" || We === "bottom" ? kh(d, be, le, Xa) : "center";
     o(0, c = We), o(11, Q = se);
   }
   function K() {
     if (!V || !j || !T) return;
-    const le = T.getBoundingClientRect(), be = j.getBoundingClientRect(), Ye = w7, ye = Xa;
+    const le = T.getBoundingClientRect(), be = j.getBoundingClientRect(), Ye = wh, ye = Xa;
     c === "top" ? (o(9, j.style.top = `${le.top - be.height - Ye}px`, j), o(9, j.style.left = `${le.left + (le.width - be.width) / 2}px`, j)) : c === "bottom" ? (o(9, j.style.top = `${le.bottom + Ye}px`, j), o(9, j.style.left = `${le.left + (le.width - be.width) / 2}px`, j)) : c === "left" ? (o(9, j.style.top = `${le.top + (le.height - be.height) / 2}px`, j), o(9, j.style.left = `${le.left - be.width - Ye}px`, j)) : c === "right" && (o(9, j.style.top = `${le.top + (le.height - be.height) / 2}px`, j), o(9, j.style.left = `${le.right + Ye}px`, j)), (c === "top" || c === "bottom") && (Q === "left" ? o(9, j.style.left = `${le.right - be.width + ye}px`, j) : Q === "right" && o(9, j.style.left = `${le.left - ye}px`, j));
   }
   function ne() {
@@ -55937,13 +55912,13 @@ function y7(t, e, o) {
     te
   ];
 }
-class C7 extends Ne {
+class Ch extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      y7,
-      p7,
+      yh,
+      ph,
       Me,
       {
         content: 1,
@@ -55956,7 +55931,7 @@ class C7 extends Ne {
         mb: 5,
         ml: 6
       },
-      v7,
+      vh,
       [-1, -1]
     );
   }
@@ -56015,12 +55990,12 @@ class C7 extends Ne {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-tooltip", Le(C7, { content: {}, testid: {}, position: {}, halign: {}, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default", "content"], [], true));
-function z7(t) {
+customElements.define("goa-tooltip", Le(Ch, { content: {}, testid: {}, position: {}, halign: {}, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default", "content"], [], true));
+function zh(t) {
   Ie(t, "svelte-luwgzc", ".svelte-luwgzc.svelte-luwgzc{box-sizing:border-box}.page.svelte-luwgzc.svelte-luwgzc{min-height:100vh;display:flex;flex-direction:column}.content.svelte-luwgzc.svelte-luwgzc{flex:1 1 auto;display:flex;flex-direction:column;gap:2rem}.header.svelte-luwgzc.svelte-luwgzc,.footer.svelte-luwgzc.svelte-luwgzc{flex:0 0 auto}main.svelte-luwgzc.svelte-luwgzc{flex:1 1 auto;padding:0 1rem}.nav.svelte-luwgzc.svelte-luwgzc{padding:0;transition:transform 200ms ease-in-out;background-color:var(--goa-color-greyscale-white)}.nav.svelte-luwgzc>.svelte-luwgzc{display:block;padding:0.5rem 0}@media not (max-width: 623px){.page.svelte-luwgzc.svelte-luwgzc{gap:2rem}.content.svelte-luwgzc.svelte-luwgzc{display:flex;flex-direction:row;justify-content:center;width:min(var(--max-content-width), 100vw);margin:0 auto}.nav.svelte-luwgzc.svelte-luwgzc{padding:0 2rem;transform:translateX(0);flex:0 0 var(--nav-column-width)}main.svelte-luwgzc.svelte-luwgzc{padding-right:2rem}}@media(min-width: 1024px){main.svelte-luwgzc.svelte-luwgzc{padding-right:4.5rem}}");
 }
-const M7 = (t) => ({}), Ja = (t) => ({}), j7 = (t) => ({}), Ka = (t) => ({}), L7 = (t) => ({}), $a = (t) => ({});
-function N7(t) {
+const Mh = (t) => ({}), Ja = (t) => ({}), jh = (t) => ({}), Ka = (t) => ({}), Lh = (t) => ({}), $a = (t) => ({});
+function Nh(t) {
   let e, o, i, n, l, r, a, c, d, s, f;
   const g = (
     /*#slots*/
@@ -56084,7 +56059,7 @@ function N7(t) {
           /*$$scope*/
           M[2],
           L,
-          L7
+          Lh
         ) : he(
           /*$$scope*/
           M[2]
@@ -56102,7 +56077,7 @@ function N7(t) {
           /*$$scope*/
           M[2],
           L,
-          j7
+          jh
         ) : he(
           /*$$scope*/
           M[2]
@@ -56138,7 +56113,7 @@ function N7(t) {
           /*$$scope*/
           M[2],
           L,
-          M7
+          Mh
         ) : he(
           /*$$scope*/
           M[2]
@@ -56163,15 +56138,15 @@ function N7(t) {
     }
   };
 }
-function E7(t, e, o) {
+function Eh(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { navcolumnwidth: l = "" } = e, { maxcontentwidth: r = "" } = e;
   return t.$$set = (a) => {
     "navcolumnwidth" in a && o(0, l = a.navcolumnwidth), "maxcontentwidth" in a && o(1, r = a.maxcontentwidth), "$$scope" in a && o(2, n = a.$$scope);
   }, [l, r, n, i];
 }
-class D7 extends Ne {
+class Dh extends Ne {
   constructor(e) {
-    super(), je(this, e, E7, N7, Me, { navcolumnwidth: 0, maxcontentwidth: 1 }, z7);
+    super(), je(this, e, Eh, Nh, Me, { navcolumnwidth: 0, maxcontentwidth: 1 }, zh);
   }
   get navcolumnwidth() {
     return this.$$.ctx[0];
@@ -56186,8 +56161,8 @@ class D7 extends Ne {
     this.$$set({ maxcontentwidth: e }), y();
   }
 }
-customElements.define("goa-two-column-layout", Le(D7, { navcolumnwidth: {}, maxcontentwidth: {} }, ["header", "nav", "default", "footer"], [], true));
-function q7(t) {
+customElements.define("goa-two-column-layout", Le(Dh, { navcolumnwidth: {}, maxcontentwidth: {} }, ["header", "nav", "default", "footer"], [], true));
+function qh(t) {
   Ie(t, "svelte-vthlw2", `.goa-grid.svelte-vthlw2.svelte-vthlw2{display:grid;grid-template-columns:repeat(
         auto-fit,
         minmax(var(--min-child-width), 1fr)
@@ -56224,7 +56199,7 @@ function es(t) {
     }
   };
 }
-function I7(t) {
+function Ih(t) {
   let e, o, i, n, l, r, a, c;
   const d = (
     /*#slots*/
@@ -56365,7 +56340,7 @@ function I7(t) {
     }
   };
 }
-function T7(t, e, o) {
+function Th(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e, { step: a = -1 } = e, { testid: c = "" } = e, { mt: d = null } = e, { mr: s = null } = e, { mb: f = null } = e, { ml: g = null } = e, { mobile: v = "false" } = e, { backgroundcolor: h = "inherit" } = e, b, w, p = [], _, z, M, L, D, j = 0, T, E = 1, Q = false, V, O;
   Ae(async () => {
     await ot(), L = +a == -1 ? "free" : "constrained", B(), O = P(), O.observe(b);
@@ -56502,13 +56477,13 @@ function T7(t, e, o) {
     G
   ];
 }
-class S7 extends Ne {
+class Sh extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      T7,
-      I7,
+      Th,
+      Ih,
       Me,
       {
         step: 15,
@@ -56520,7 +56495,7 @@ class S7 extends Ne {
         mobile: 16,
         backgroundcolor: 17
       },
-      q7,
+      qh,
       [-1, -1]
     );
   }
@@ -56573,15 +56548,15 @@ class S7 extends Ne {
     this.$$set({ backgroundcolor: e }), y();
   }
 }
-customElements.define("goax-form-stepper", Le(S7, { step: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, mobile: {}, backgroundcolor: {} }, ["default"], [], true));
-function A7(t) {
+customElements.define("goax-form-stepper", Le(Sh, { step: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, mobile: {}, backgroundcolor: {} }, ["default"], [], true));
+function Ah(t) {
   Ie(t, "svelte-6d3t92", `input[type="checkbox"].svelte-6d3t92.svelte-6d3t92{position:absolute;left:-9999px}label.svelte-6d3t92.svelte-6d3t92{display:flex;box-sizing:border-box;height:100%;width:100%;padding:24px 12px 48px}label.mobile.svelte-6d3t92.svelte-6d3t92{padding-bottom:24px;justify-content:center;background-color:var(--background-color, inherit);padding-left:8px;padding-right:8px;max-width:-moz-fit-content;max-width:fit-content}label.desktop.svelte-6d3t92.svelte-6d3t92{text-align:center;flex-direction:column;align-items:center}label.desktop.svelte-6d3t92 .details.svelte-6d3t92{margin-top:24px}label.mobile.svelte-6d3t92.svelte-6d3t92{flex-direction:row;align-items:center;text-align:start}.status.svelte-6d3t92.svelte-6d3t92{flex:0 0 auto;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:999px;border:2px solid var(--goa-color-interactive-default);background:var(--goa-color-greyscale-white);height:2.5rem;width:2.5rem}.status.incomplete.svelte-6d3t92.svelte-6d3t92{background:var(--goa-color-greyscale-200);border:2px solid var(--goa-color-greyscale-200)}.status.current.svelte-6d3t92.svelte-6d3t92{background:var(--goa-color-greyscale-white);border:2px solid var(--goa-color-interactive-default)}.status.svelte-6d3t92>.svelte-6d3t92{fill:var(--fill-color, var(--goa-color-interactive-default));color:var(--fill-color, var(--goa-color-interactive-default))}[aria-current="step"].svelte-6d3t92 .text.svelte-6d3t92{font-weight:var(--goa-font-weight-bold)}[data-status="complete"].svelte-6d3t92 .status.svelte-6d3t92{background:var(--goa-color-interactive-default)}[aria-current="step"][data-status="complete"].svelte-6d3t92 .status.svelte-6d3t92{background:var(--goa-color-greyscale-white)}.step-number.svelte-6d3t92.svelte-6d3t92{margin-bottom:var(--font-valign-fix);font-weight:var(--goa-font-weight-bold);color:var(--goa-color-text-secondary)}.status.current.svelte-6d3t92 .step-number.svelte-6d3t92{color:var(--goa-color-interactive-default)}label.svelte-6d3t92:not(
       [data-status="complete"],
       [data-status="incomplete"],
       [aria-current="step"]
     ) .status.svelte-6d3t92{border-color:var(--goa-color-greyscale-500)}.text.svelte-6d3t92.svelte-6d3t92{font-size:16px;line-height:20px;font-weight:400}`);
 }
-function x7(t) {
+function xh(t) {
   let e, o = (
     /*childindex*/
     (t[3] || "") + ""
@@ -56603,7 +56578,7 @@ function x7(t) {
     }
   };
 }
-function O7(t) {
+function Oh(t) {
   let e;
   return {
     c() {
@@ -56643,12 +56618,12 @@ function ts(t) {
     }
   };
 }
-function H7(t) {
+function Hh(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g;
   function v(p, _) {
     return !/*current*/
     p[2] && /*status*/
-    p[0] === "complete" ? O7 : x7;
+    p[0] === "complete" ? Oh : xh;
   }
   let h = v(t), b = h(t), w = !/*_isMobile*/
   t[7] && ts(t);
@@ -56781,7 +56756,7 @@ function H7(t) {
     }
   };
 }
-function P7(t, e, o) {
+function Ph(t, e, o) {
   let i, { text: n } = e, { status: l = void 0 } = e, r = false, a = false, c, d = "", s, f, g, v;
   Ae(() => {
     s.addEventListener("form-stepper:resized", (_) => {
@@ -56854,9 +56829,9 @@ function P7(t, e, o) {
     p
   ];
 }
-class V7 extends Ne {
+class Vh extends Ne {
   constructor(e) {
-    super(), je(this, e, P7, H7, Me, { text: 1, status: 0 }, A7);
+    super(), je(this, e, Ph, Hh, Me, { text: 1, status: 0 }, Ah);
   }
   get text() {
     return this.$$.ctx[1];
@@ -56871,9 +56846,9 @@ class V7 extends Ne {
     this.$$set({ status: e }), y();
   }
 }
-customElements.define("goax-form-step", Le(V7, { text: {}, status: {} }, [], [], true));
+customElements.define("goax-form-step", Le(Vh, { text: {}, status: {} }, [], [], true));
 const { window: N1 } = go;
-function B7(t) {
+function Bh(t) {
   Ie(t, "svelte-uv56cd", `:host{display:block;height:var(--goa-work-side-menu-height, 100vh);--goa-popover-box-shadow:var(
       --goa-work-side-menu-popover-shadow,
       var(--goa-shadow-raised-light)
@@ -56926,8 +56901,8 @@ function B7(t) {
         var(--goa-color-greyscale-50)
       )}}@keyframes svelte-uv56cd-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}@keyframes svelte-uv56cd-delayVisibility{0%{visibility:hidden}99%{visibility:hidden}100%{visibility:visible}}@media(max-width: 623px){:host{position:fixed;top:0;left:0;z-index:200}}`);
 }
-const Z7 = (t) => ({}), os = (t) => ({}), F7 = (t) => ({}), is = (t) => ({}), W7 = (t) => ({}), ns = (t) => ({});
-function Y7(t) {
+const Zh = (t) => ({}), os = (t) => ({}), Fh = (t) => ({}), is = (t) => ({}), Wh = (t) => ({}), ns = (t) => ({});
+function Yh(t) {
   let e, o, i, n, l;
   return {
     c() {
@@ -56952,7 +56927,7 @@ function Y7(t) {
     }
   };
 }
-function Q7(t) {
+function Qh(t) {
   let e, o, i, n, l;
   return {
     c() {
@@ -57025,7 +57000,7 @@ function ls(t) {
           /*$$scope*/
           a[21],
           c,
-          F7
+          Fh
         ) : he(
           /*$$scope*/
           a[21]
@@ -57144,7 +57119,7 @@ function rs(t) {
           /*$$scope*/
           M[21],
           L,
-          Z7
+          Zh
         ) : he(
           /*$$scope*/
           M[21]
@@ -57169,7 +57144,7 @@ function rs(t) {
     }
   };
 }
-function U7(t) {
+function Uh(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b, w, p, _, z = (
     /*open*/
     t[0] ? "Collapse menu" : "Expand menu"
@@ -57181,7 +57156,7 @@ function U7(t) {
   function O(Z, H) {
     return (
       /*url*/
-      Z[2] ? Q7 : Y7
+      Z[2] ? Qh : Yh
     );
   }
   let B = O(t), W = B(t);
@@ -57280,7 +57255,7 @@ function U7(t) {
           /*$$scope*/
           Z[21],
           H,
-          W7
+          Wh
         ) : he(
           /*$$scope*/
           Z[21]
@@ -57339,7 +57314,7 @@ function U7(t) {
   };
 }
 const E1 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgZmlsbD0nbm9uZSc+PHJlY3Qgd2lkdGg9JzMxLjY5NScgaGVpZ2h0PSczMS42ODgnIHg9Jy4wMjgnIGZpbGw9JyMwMEI2RUQnIHJ4PSc0Jy8+PGcgY2xpcC1wYXRoPSd1cmwoI2EpJz48bWFzayBpZD0nYicgd2lkdGg9JzQ3JyBoZWlnaHQ9JzM5JyB4PSctMTEnIHk9Jy0yJyBtYXNrVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBzdHlsZT0nbWFzay10eXBlOmFscGhhJz48cGF0aCBmaWxsPScjNTQ1ODYwJyBkPSdNMjIuMDE3IDMxLjEwM2E2My40NyA2My40NyAwIDAgMS03LjIyLTMuMTY0IDUyLjQxIDUyLjQxIDAgMCAwIDYuMTk1LTIuNzI0IDQzLjE0OCA0My4xNDggMCAwIDAgMS4wMjMgNS44OW0xMy4yNy0yNC4zOTJjLTEuMDM0LS4xMy0uNDk3LjM0OC0uNzg1IDEuNy0xLjI0NiA1LjgzMi02LjA1IDEwLjAzNS0xMC44NzMgMTIuODU1LS41MDYtNi42NzgtLjMtMTQuMDkzLjk2Ny0xOC42MzYgMS4wNjktMy44MzYgMi4zNC0zLjEzMi43NjMtMy45MzgtMS42Ni0uODQ4LTMuNDQuMjczLTQuODgyIDMuMTNDMTkuMDMzIDQuNjggMTIuMzkzIDIwLjE5IDEuNzggMzAuNjY0Yy01LjQzIDUuMzYtMTAuMzQgMi42LTExLjMyMyAxLjc3NS0uOC0uNjctMS4wOTYuMzY1LS4xMDMgMS40MjYgNC4zOSA0LjcgMTAuODA1IDIuMDAzIDEzLjE0MS0uMzE0IDYuNDU1LTYuNDA1IDEzLjk2LTIwLjE5MyAxNi45OTYtMjYuMDQ0YTg5Ljg5IDg5Ljg5IDAgMCAwIC4yNDMgMTUuMjk0IDQ0LjY5IDQ0LjY5IDAgMCAxLTcuNjE5IDIuODg1Yy0xLjUwNC4zOTEtMi40MzUgMS0yLjQ2MiAxLjY5MS0uMDMuNzU4Ljk4IDEuMzk3IDIuNDQgMi4wODUgMi42IDEuMjI2IDEwLjIxNiA0Ljc5OCAxMi4wOTMgNS44NzggMS42MDYuOTI1IDIuMzkuMjA0IDIuODY2LS43OTYuNjIyLTEuMzAyLTEuMDgzLTIuMDU0LTIuNzM1LTIuNTQ1YTUwLjQ3IDUwLjQ3IDAgMCAxLTEuNDgtOC4zODVjMy44Ny0yLjM2NSA3LjY4Mi01LjUyIDkuODgtOS40NTJhMTguMDA0IDE4LjAwNCAwIDAgMCAxLjU2OC00LjM2NWMuMjMtLjkzNC4yOTMtMS45LjE4Ni0yLjg1NSAwIDAtLjAzLS4yMDktLjE4Ni0uMjI5Jy8+PC9tYXNrPjxnIG1hc2s9J3VybCgjYiknPjxyZWN0IHdpZHRoPSczMS42OTUnIGhlaWdodD0nMzEuNjk1JyB4PScuMDI4JyBmaWxsPScjZmZmJyByeD0nMy4wNDgnLz48L2c+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0nYSc+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMxLjk5MicgeT0nLjAwOCcgZmlsbD0nI2ZmZicgcng9JzQnLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=";
-function R7(t) {
+function Rh(t) {
   var e;
   if (t.tagName.includes("GOAB")) {
     const o = t.firstElementChild;
@@ -57348,19 +57323,19 @@ function R7(t) {
   }
   return (e = t == null ? void 0 : t.shadowRoot) == null ? void 0 : e.querySelector("a");
 }
-function G7(t) {
+function Gh(t) {
   let e = document.location.href;
   const o = new MutationObserver((i) => {
     e !== document.location.href && (e = document.location.href, t());
   });
   return o.observe(document.body, { childList: true, subtree: true }), o;
 }
-function X7(t, e, o) {
+function Xh(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e;
   const r = ht(n);
   let { heading: a } = e, { url: c } = e, { open: d = false } = e, { testid: s = "" } = e, { userName: f = "" } = e, { userSecondaryText: g = "" } = e, v = false, h = false, b = null, w = false, p = 0, _ = [], z, M, L, D, j = "", T, E, Q, V = null;
   Ae(async () => {
-    await ot(), Ye(), V = G7($), Fe(M, y1, { el: M }, { bubbles: true }), at(M, (ce) => {
+    await ot(), Ye(), V = Gh($), Fe(M, y1, { el: M }, { bubbles: true }), at(M, (ce) => {
       ce === C1 ? o(0, d = true) : ce === z1 && o(0, d = false);
     }), document.addEventListener("keydown", O);
   }), ft(() => {
@@ -57379,7 +57354,7 @@ function X7(t, e, o) {
     o(9, w = false);
   }
   function S(ce) {
-    let Se = ce.target, re = R7(Se);
+    let Se = ce.target, re = Rh(Se);
     Se && re && (_ = [..._, re]), T = _o(
       T,
       () => {
@@ -57529,13 +57504,13 @@ function X7(t, e, o) {
     qe
   ];
 }
-class J7 extends Ne {
+class Jh extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      X7,
-      U7,
+      Xh,
+      Uh,
       Me,
       {
         heading: 1,
@@ -57545,7 +57520,7 @@ class J7 extends Ne {
         userName: 4,
         userSecondaryText: 5
       },
-      B7,
+      Bh,
       [-1, -1]
     );
   }
@@ -57586,9 +57561,9 @@ class J7 extends Ne {
     this.$$set({ userSecondaryText: e }), y();
   }
 }
-customElements.define("goa-work-side-menu", Le(J7, { heading: { type: "String", reflect: true }, url: { type: "String", reflect: true }, open: { type: "Boolean", reflect: true }, testid: {}, userName: { type: "String", attribute: "user-name", reflect: true }, userSecondaryText: { type: "String", attribute: "user-secondary-text", reflect: true } }, ["primary", "secondary", "account"], [], true));
+customElements.define("goa-work-side-menu", Le(Jh, { heading: { type: "String", reflect: true }, url: { type: "String", reflect: true }, open: { type: "Boolean", reflect: true }, testid: {}, userName: { type: "String", attribute: "user-name", reflect: true }, userSecondaryText: { type: "String", attribute: "user-secondary-text", reflect: true } }, ["primary", "secondary", "account"], [], true));
 const { window: D1 } = go;
-function K7(t) {
+function Kh(t) {
   Ie(t, "svelte-lr3v1g", `:host .svelte-lr3v1g.svelte-lr3v1g{box-sizing:border-box}.root.svelte-lr3v1g.svelte-lr3v1g{container-type:inline-size;position:relative}.mobile-drawer-content.svelte-lr3v1g.svelte-lr3v1g{display:none}goa-popover.svelte-lr3v1g.svelte-lr3v1g{display:block;width:100%}.menu-item.svelte-lr3v1g.svelte-lr3v1g{position:relative;display:flex;gap:var(--goa-space-m);border-radius:var(
       --goa-work-side-menu-item-border-radius,
       var(--goa-border-radius-m)
@@ -57620,8 +57595,8 @@ function K7(t) {
       var(--goa-font-size-2)
     );--goa-badge-border-radius:1.25rem;margin-top:var(--goa-space-3xs)}@container (max-width: 160px){.menu-item.svelte-lr3v1g.svelte-lr3v1g{height:36px;margin:0;padding-left:calc(var(--goa-space-xs) + 2px)}.menu-item-label.svelte-lr3v1g.svelte-lr3v1g,.trailing-content-slot.svelte-lr3v1g.svelte-lr3v1g{display:none}goa-badge.badge.svelte-lr3v1g.svelte-lr3v1g{position:absolute;top:var(--goa-space-3xs);right:var(--goa-space-3xs);--goa-badge-height:var(--goa-space-m);--goa-badge-padding:0;--goa-badge-font-size:var(--goa-font-size-1)}goa-badge.badge.svelte-lr3v1g.svelte-lr3v1g:not(.alwaysvisible){--goa-badge-font-size:0}@keyframes svelte-lr3v1g-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}}`);
 }
-const $7 = (t) => ({}), as = (t) => ({}), eh = (t) => ({}), ss = (t) => ({}), th = (t) => ({}), cs = (t) => ({}), oh = (t) => ({}), ds = (t) => ({}), ih = (t) => ({}), us = (t) => ({});
-function nh(t) {
+const $h = (t) => ({}), as = (t) => ({}), e7 = (t) => ({}), ss = (t) => ({}), t7 = (t) => ({}), cs = (t) => ({}), o7 = (t) => ({}), ds = (t) => ({}), i7 = (t) => ({}), us = (t) => ({});
+function n7(t) {
   let e = (
     /*url*/
     t[2] ? "a" : "button"
@@ -57656,9 +57631,9 @@ function nh(t) {
     }
   };
 }
-function lh(t) {
+function l7(t) {
   let e, o, i, n;
-  const l = [ah, rh], r = [];
+  const l = [a7, r7], r = [];
   function a(c, d) {
     return (
       /*_isMobile*/
@@ -57763,7 +57738,7 @@ function gs(t) {
           /*$$scope*/
           l[23],
           r,
-          $7
+          $h
         ) : he(
           /*$$scope*/
           l[23]
@@ -57927,7 +57902,7 @@ function ai(t) {
     }
   };
 }
-function rh(t) {
+function r7(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h = (
     /*icon*/
     t[5] && hs(t)
@@ -58009,7 +57984,7 @@ function rh(t) {
           /*$$scope*/
           z[23],
           M,
-          eh
+          e7
         ) : he(
           /*$$scope*/
           z[23]
@@ -58030,7 +58005,7 @@ function rh(t) {
     }
   };
 }
-function ah(t) {
+function a7(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v = (
     /*icon*/
     t[5] && ps(t)
@@ -58103,7 +58078,7 @@ function ah(t) {
           /*$$scope*/
           _[23],
           z,
-          oh
+          o7
         ) : he(
           /*$$scope*/
           _[23]
@@ -58196,7 +58171,7 @@ function ms(t) {
           /*$$scope*/
           l[23],
           r,
-          th
+          t7
         ) : he(
           /*$$scope*/
           l[23]
@@ -58339,7 +58314,7 @@ function ws(t) {
           /*$$scope*/
           l[23],
           r,
-          ih
+          i7
         ) : he(
           /*$$scope*/
           l[23]
@@ -58408,13 +58383,13 @@ function _s(t) {
     }
   };
 }
-function sh(t) {
+function s7(t) {
   let e, o, i, n, l, r;
   dt(
     /*onwindowresize*/
     t[25]
   );
-  const a = [lh, nh], c = [];
+  const a = [l7, n7], c = [];
   function d(s, f) {
     return (
       /*_hasPopoverContent*/
@@ -58480,7 +58455,7 @@ function sh(t) {
     }
   };
 }
-function ch(t, e, o) {
+function c7(t, e, o) {
   let i, n, l, r, a, { $$slots: c = {}, $$scope: d } = e;
   const s = ht(c);
   let { label: f } = e, { url: g = "" } = e, { badge: v = "" } = e, { current: h = false } = e, { divider: b = false } = e, { icon: w = void 0 } = e, { testid: p = "" } = e, { type: _ = "normal" } = e, z, M, L, D = null, j = [], T = false, E = window.innerWidth;
@@ -58604,13 +58579,13 @@ function ch(t, e, o) {
     ne
   ];
 }
-class dh extends Ne {
+class d7 extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      ch,
-      sh,
+      c7,
+      s7,
       Me,
       {
         label: 1,
@@ -58622,7 +58597,7 @@ class dh extends Ne {
         testid: 6,
         type: 22
       },
-      K7,
+      Kh,
       [-1, -1]
     );
   }
@@ -58675,8 +58650,8 @@ class dh extends Ne {
     this.$$set({ type: e }), y();
   }
 }
-customElements.define("goa-work-side-menu-item", Le(dh, { label: {}, url: {}, badge: {}, current: { type: "Boolean" }, divider: { type: "Boolean" }, icon: {}, testid: {}, type: {} }, ["trailingContent", "popoverContent"], [], true));
-function uh(t) {
+customElements.define("goa-work-side-menu-item", Le(d7, { label: {}, url: {}, badge: {}, current: { type: "Boolean" }, divider: { type: "Boolean" }, icon: {}, testid: {}, type: {} }, ["trailingContent", "popoverContent"], [], true));
+function u7(t) {
   Ie(t, "svelte-mzovxa", `:host .svelte-mzovxa.svelte-mzovxa{box-sizing:border-box}.root.svelte-mzovxa.svelte-mzovxa{container-type:inline-size;position:relative}summary.svelte-mzovxa.svelte-mzovxa{display:flex;cursor:pointer;list-style:none;gap:var(--goa-space-m);align-items:flex-start;border-radius:var(
       --goa-work-side-menu-item-border-radius,
       var(--goa-border-radius-m)
@@ -58747,7 +58722,7 @@ function ks(t) {
     }
   };
 }
-function fh(t) {
+function f7(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b = (
     /*icon*/
     t[2] && ks(t)
@@ -58850,7 +58825,7 @@ function fh(t) {
     }
   };
 }
-function gh(t, e, o) {
+function g7(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { heading: l } = e, { icon: r = void 0 } = e, { testid: a = "" } = e, { open: c = false } = e, d;
   Ae(() => {
     d.addEventListener("_itemCurrent", s);
@@ -58882,9 +58857,9 @@ function gh(t, e, o) {
     v
   ];
 }
-class vh extends Ne {
+class v7 extends Ne {
   constructor(e) {
-    super(), je(this, e, gh, fh, Me, { heading: 1, icon: 2, testid: 3, open: 0 }, uh);
+    super(), je(this, e, g7, f7, Me, { heading: 1, icon: 2, testid: 3, open: 0 }, u7);
   }
   get heading() {
     return this.$$.ctx[1];
@@ -58911,8 +58886,8 @@ class vh extends Ne {
     this.$$set({ open: e }), y();
   }
 }
-customElements.define("goa-work-side-menu-group", Le(vh, { heading: {}, icon: {}, testid: {}, open: { type: "Boolean", reflect: true } }, ["default"], [], true));
-function hh(t) {
+customElements.define("goa-work-side-menu-group", Le(v7, { heading: {}, icon: {}, testid: {}, open: { type: "Boolean", reflect: true } }, ["default"], [], true));
+function h7(t) {
   Ie(t, "svelte-xxnzja", ":host{display:block;box-sizing:border-box;font-family:var(--goa-font-family-sans)}:host .svelte-xxnzja.svelte-xxnzja{box-sizing:border-box}.notification-panel.svelte-xxnzja.svelte-xxnzja{border-radius:var(--goa-popover-border-radius)}.panel-header.svelte-xxnzja.svelte-xxnzja{display:flex;flex-direction:column;padding-bottom:var(--goa-space-xs)}.header.svelte-xxnzja.svelte-xxnzja{display:flex;align-items:center;justify-content:space-between}goa-tabs.svelte-xxnzja.svelte-xxnzja{--goa-tabs-margin-bottom:0;padding-left:var(--goa-space-m);padding-right:var(--goa-space-m)}.footer.svelte-xxnzja.svelte-xxnzja{display:flex;justify-content:space-between;align-items:center;padding:var(--goa-space-m)}.empty.svelte-xxnzja.svelte-xxnzja{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--goa-space-2xl) var(--goa-space-m);text-align:center}.empty.svelte-xxnzja img.svelte-xxnzja{width:100px;height:78px;margin-bottom:var(--goa-space-l)}.empty.svelte-xxnzja .heading.svelte-xxnzja{font:var(--goa-typography-heading-xs);color:var(--goa-color-text-default);margin-bottom:var(--goa-space-xs)}.empty.svelte-xxnzja .subline.svelte-xxnzja{font:var(--goa-typography-body-s);color:var(--goa-color-text-secondary)}");
 }
 function ys(t) {
@@ -58965,7 +58940,7 @@ function zs(t) {
   ), d, s;
   return {
     c() {
-      e = C("div"), o = C("img"), n = Y(), l = C("span"), l.textContent = "You're all caught up", r = Y(), a = C("span"), d = de(c), u(o, "alt", ""), Gt(o.src, i = bh) || u(o, "src", i), u(o, "class", "svelte-xxnzja"), u(l, "class", "heading svelte-xxnzja"), u(a, "class", "subline svelte-xxnzja"), u(a, "data-testid", s = `empty-notifications-${/*testid*/
+      e = C("div"), o = C("img"), n = Y(), l = C("span"), l.textContent = "You're all caught up", r = Y(), a = C("span"), d = de(c), u(o, "alt", ""), Gt(o.src, i = b7) || u(o, "src", i), u(o, "class", "svelte-xxnzja"), u(l, "class", "heading svelte-xxnzja"), u(a, "class", "subline svelte-xxnzja"), u(a, "data-testid", s = `empty-notifications-${/*testid*/
       t[2]}`), u(e, "class", "empty svelte-xxnzja");
     },
     m(f, g) {
@@ -58986,7 +58961,7 @@ function zs(t) {
     }
   };
 }
-function mh(t) {
+function m7(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g, v, h, b, w, p, _, z, M, L, D, j, T, E, Q, V, O, B, W, N, S, P, ee, Z, H = (
     /*_unreadCount*/
     t[3] > 0 && ys(t)
@@ -59099,19 +59074,19 @@ function mh(t) {
     }
   };
 }
-const bh = "data:image/svg+xml,%3csvg%20width='100'%20height='78'%20viewBox='0%200%20100%2078'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M35.3916%2010.3377L89.7579%2019.1046C95.0394%2019.9563%2098.2025%2025.4482%2096.2887%2030.4439L78.9942%2075.591C78.846%2075.978%2078.5679%2076.2827%2078.2253%2076.469C77.9557%2076.7837%2077.6176%2076.7584%2077.1425%2076.651C77.1243%2076.648%2077.1061%2076.6447%2077.0879%2076.641L75.7496%2076.3725C76.3188%2076.4338%2076.7722%2076.5674%2077.1425%2076.651C77.5243%2076.7148%2077.9033%2076.6442%2078.2253%2076.469C78.2465%2076.4443%2078.2673%2076.4175%2078.2876%2076.3884C78.4498%2076.1572%2078.4664%2075.8597%2078.4317%2075.5794L73.4827%2035.6546C72.5591%2028.2041%2066.8211%2022.2617%2059.4075%2021.078L26.1553%2015.7688C27.5305%2011.9754%2031.4081%209.69529%2035.3916%2010.3377Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M95.5272%2022.3047C97.5167%2024.4198%2098.3017%2027.5943%2097.1683%2030.5801L80.0464%2075.6832C79.8681%2076.1528%2079.5193%2076.5121%2079.0948%2076.7125C78.7271%2076.9892%2078.301%2076.9332%2077.9393%2076.8551L77.9145%2076.8499C75.9533%2076.452%2077.424%2076.9001%2077.8885%2075.2938L78.5706%2073.3849L95.6772%2028.323C96.4561%2026.271%2096.3286%2024.1299%2095.5272%2022.3047Z'%20fill='black'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M19.7062%2014.8763L19.5582%2013.3068C18.999%207.37653%2014.5443%202.55192%208.67735%201.52252C4.33738%200.761031%200.48074%204.37732%200.961767%208.75726L6.59424%2060.0431C6.79604%2061.8806%208.17145%2063.3722%209.98658%2063.7221L76.1867%2076.4832C77.3099%2076.6997%2078.3181%2075.7589%2078.1797%2074.6235L73.4332%2035.6892C72.5207%2028.2049%2066.7506%2022.236%2059.3015%2021.0706L19.7062%2014.8763Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3c/svg%3e";
-function ph(t) {
+const b7 = "data:image/svg+xml,%3csvg%20width='100'%20height='78'%20viewBox='0%200%20100%2078'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M35.3916%2010.3377L89.7579%2019.1046C95.0394%2019.9563%2098.2025%2025.4482%2096.2887%2030.4439L78.9942%2075.591C78.846%2075.978%2078.5679%2076.2827%2078.2253%2076.469C77.9557%2076.7837%2077.6176%2076.7584%2077.1425%2076.651C77.1243%2076.648%2077.1061%2076.6447%2077.0879%2076.641L75.7496%2076.3725C76.3188%2076.4338%2076.7722%2076.5674%2077.1425%2076.651C77.5243%2076.7148%2077.9033%2076.6442%2078.2253%2076.469C78.2465%2076.4443%2078.2673%2076.4175%2078.2876%2076.3884C78.4498%2076.1572%2078.4664%2075.8597%2078.4317%2075.5794L73.4827%2035.6546C72.5591%2028.2041%2066.8211%2022.2617%2059.4075%2021.078L26.1553%2015.7688C27.5305%2011.9754%2031.4081%209.69529%2035.3916%2010.3377Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M95.5272%2022.3047C97.5167%2024.4198%2098.3017%2027.5943%2097.1683%2030.5801L80.0464%2075.6832C79.8681%2076.1528%2079.5193%2076.5121%2079.0948%2076.7125C78.7271%2076.9892%2078.301%2076.9332%2077.9393%2076.8551L77.9145%2076.8499C75.9533%2076.452%2077.424%2076.9001%2077.8885%2075.2938L78.5706%2073.3849L95.6772%2028.323C96.4561%2026.271%2096.3286%2024.1299%2095.5272%2022.3047Z'%20fill='black'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M19.7062%2014.8763L19.5582%2013.3068C18.999%207.37653%2014.5443%202.55192%208.67735%201.52252C4.33738%200.761031%200.48074%204.37732%200.961767%208.75726L6.59424%2060.0431C6.79604%2061.8806%208.17145%2063.3722%209.98658%2063.7221L76.1867%2076.4832C77.3099%2076.6997%2078.3181%2075.7589%2078.1797%2074.6235L73.4332%2035.6892C72.5207%2028.2049%2066.7506%2022.236%2059.3015%2021.0706L19.7062%2014.8763Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3c/svg%3e";
+function p7(t) {
   if (!t) return "";
   const e = new Date(t);
   return isNaN(e.getTime()) ? "" : `${e.getFullYear()}-${e.getMonth()}-${e.getDate()}`;
 }
-function wh(t, e) {
+function w7(t, e) {
   return e === "all" ? true : e === "unread" ? t.readStatus === "unread" : e === "urgent" ? t.priority === "urgent" : true;
 }
 function Ms(t, e) {
   t.dispatchEvent(new CustomEvent("notification-panel:dategroup", { detail: { dateGroup: e } }));
 }
-function _h(t, e, o) {
+function _7(t, e, o) {
   let i, n, l, { $$slots: r = {}, $$scope: a } = e;
   const [c, d] = Oe("WorkSideNotificationPanel activeTab", ["unread", "urgent", "all"], true);
   let { heading: s = "Notifications" } = e, { activeTab: f = "unread" } = e, { testid: g = "" } = e, v, h = [], b = /* @__PURE__ */ new Map(), w = null;
@@ -59158,8 +59133,8 @@ function _h(t, e, o) {
     }), b.clear(), [...h].sort((N, S) => {
       const P = N.timestamp ? new Date(N.timestamp).getTime() : 0;
       return (S.timestamp ? new Date(S.timestamp).getTime() : 0) - P;
-    }).filter((N) => wh(N, f)).forEach((N) => {
-      const S = ph(N.timestamp);
+    }).filter((N) => w7(N, f)).forEach((N) => {
+      const S = p7(N.timestamp);
       S && !b.has(S) && (b.set(S, N), Ms(N.el, j(N.timestamp)));
     });
   }
@@ -59203,9 +59178,9 @@ function _h(t, e, o) {
     O
   ];
 }
-class kh extends Ne {
+class k7 extends Ne {
   constructor(e) {
-    super(), je(this, e, _h, mh, Me, { heading: 1, activeTab: 0, testid: 2 }, hh);
+    super(), je(this, e, _7, m7, Me, { heading: 1, activeTab: 0, testid: 2 }, h7);
   }
   get heading() {
     return this.$$.ctx[1];
@@ -59226,8 +59201,8 @@ class kh extends Ne {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-work-side-notification-panel", Le(kh, { heading: {}, activeTab: { type: "String", attribute: "active-tab" }, testid: {} }, ["default"], [], true));
-function yh(t) {
+customElements.define("goa-work-side-notification-panel", Le(k7, { heading: {}, activeTab: { type: "String", attribute: "active-tab" }, testid: {} }, ["default"], [], true));
+function y7(t) {
   Ie(t, "svelte-1bsy3n4", ":host{display:block;box-sizing:border-box;width:100%}:host .svelte-1bsy3n4.svelte-1bsy3n4{box-sizing:border-box}.date-header.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-heading-2xs);color:var(--goa-color-greyscale-600);padding-left:var(--goa-space-m);margin-top:0;margin-bottom:0;padding-top:var(--goa-space-s);padding-bottom:var(--goa-space-s);border-bottom:1px solid var(--goa-color-greyscale-100)}.date-header.hidden.svelte-1bsy3n4.svelte-1bsy3n4{display:none}.card.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;flex-direction:column;gap:var(--goa-space-xs);padding:var(--goa-space-m) var(--goa-space-l);cursor:pointer;border:none;border-bottom:1px solid var(--goa-color-greyscale-100);background:white;width:100%;box-sizing:border-box;text-align:left;transition:background-color 0.2s ease}.card.svelte-1bsy3n4.svelte-1bsy3n4:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:-2px}.card.read.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-greyscale-50)}.card.read.svelte-1bsy3n4 .notification-title.svelte-1bsy3n4{color:var(--goa-color-greyscale-700)}.card.urgent.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-warning-background)}.card.urgent.read.svelte-1bsy3n4.svelte-1bsy3n4{background:var(--goa-color-greyscale-50)}.card.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:var(--goa-color-greyscale-100)}.card.hidden.svelte-1bsy3n4.svelte-1bsy3n4{display:none}.card.urgent.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:#f5ecdb}.card.urgent.read.svelte-1bsy3n4.svelte-1bsy3n4:hover{background:var(--goa-color-greyscale-100)}.top-row.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--goa-space-s);width:100%}.header-row.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;align-items:center;gap:var(--goa-space-xs);flex-wrap:wrap;flex:1;min-width:0}.notification-title.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-heading-2xs);color:var(--goa-color-text-default);margin:0}.badge-container.svelte-1bsy3n4.svelte-1bsy3n4{display:inline-flex;align-items:center;gap:var(--goa-space-3xs)}.description.svelte-1bsy3n4.svelte-1bsy3n4{font-size:var(--goa-font-size-2);color:var(--goa-color-greyscale-700);line-height:1.5;word-wrap:break-word}.timestamp-container.svelte-1bsy3n4.svelte-1bsy3n4{display:flex;align-items:center;gap:var(--goa-space-2xs);flex-shrink:0;margin-top:2px}.unread-dot.svelte-1bsy3n4.svelte-1bsy3n4{display:inline-block;width:12px;height:12px;border-radius:50%;background-color:var(--goa-color-success-default);flex-shrink:0;position:relative;top:-1px}.unread-dot.hidden.svelte-1bsy3n4.svelte-1bsy3n4{visibility:hidden}.timestamp.svelte-1bsy3n4.svelte-1bsy3n4{font:var(--goa-typography-body-xs);color:var(--goa-color-greyscale-600);white-space:nowrap;margin:0}@media(max-width: 624px){.card.svelte-1bsy3n4.svelte-1bsy3n4{padding:var(--goa-space-s) var(--goa-space-l)}.timestamp-container.svelte-1bsy3n4.svelte-1bsy3n4{flex-direction:column;align-items:flex-end;gap:var(--goa-space-3xs)}}");
 }
 function js(t) {
@@ -59328,7 +59303,7 @@ function Ns(t) {
     }
   };
 }
-function Ch(t) {
+function C7(t) {
   let e, o;
   return {
     c() {
@@ -59348,7 +59323,7 @@ function Ch(t) {
     }
   };
 }
-function zh(t) {
+function z7(t) {
   let e, o, i, n, l, r, a, c;
   return {
     c() {
@@ -59435,7 +59410,7 @@ function Es(t) {
     }
   };
 }
-function Mh(t) {
+function M7(t) {
   let e, o, i, n, l, r, a, c, d, s = (
     /*_dateGroupHeading*/
     t[6] && js(t)
@@ -59449,7 +59424,7 @@ function Mh(t) {
   function v(p, _) {
     return (
       /*timestamp*/
-      p[1] ? zh : Ch
+      p[1] ? z7 : C7
     );
   }
   let h = v(t), b = h(t), w = (
@@ -59517,7 +59492,7 @@ function Mh(t) {
     }
   };
 }
-function jh(t) {
+function j7(t) {
   switch (t) {
     case "info":
       return "information";
@@ -59531,12 +59506,12 @@ function jh(t) {
       return "";
   }
 }
-function Lh(t, e, o) {
+function L7(t, e, o) {
   let i;
   const [n, l] = Oe("WorkSideNotificationItem type", ["default", "success", "critical", "warning", "info"], true), [r, a] = Oe("WorkSideNotificationItem readStatus", ["read", "unread"], true), [c, d] = Oe("WorkSideNotificationItem priority", ["normal", "urgent"], true);
   let { type: s = "default" } = e, { timestamp: f = "" } = e, { title: g = "" } = e, { description: v = "" } = e, { readStatus: h = "unread" } = e, { priority: b = "normal" } = e, { testid: w = "" } = e, p, _ = "", z = "", M = "", L = true, D = "unread", j = false, T = "", E = false;
   Ae(() => {
-    l(s), a(h), d(b), o(10, j = b === "urgent"), o(11, T = jh(s)), o(12, E = s !== "default"), o(7, z = ic(f ? new Date(f) : null)), o(8, M = nc(f ? new Date(f) : null)), p.addEventListener("notification-panel:tabchange", Q), p.addEventListener("notification-panel:dategroup", V), Ee(
+    l(s), a(h), d(b), o(10, j = b === "urgent"), o(11, T = j7(s)), o(12, E = s !== "default"), o(7, z = ic(f ? new Date(f) : null)), o(8, M = nc(f ? new Date(f) : null)), p.addEventListener("notification-panel:tabchange", Q), p.addEventListener("notification-panel:dategroup", V), Ee(
       p,
       "notification-item:mounted",
       {
@@ -59604,13 +59579,13 @@ function Lh(t, e, o) {
     S
   ];
 }
-class Nh extends Ne {
+class N7 extends Ne {
   constructor(e) {
     super(), je(
       this,
       e,
-      Lh,
-      Mh,
+      L7,
+      M7,
       Me,
       {
         type: 0,
@@ -59621,7 +59596,7 @@ class Nh extends Ne {
         priority: 17,
         testid: 4
       },
-      yh
+      y7
     );
   }
   get type() {
@@ -59667,8 +59642,8 @@ class Nh extends Ne {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-work-side-notification-item", Le(Nh, { type: {}, timestamp: { reflect: true }, title: {}, description: {}, readStatus: { reflect: true, attribute: "read-status" }, priority: { reflect: true }, testid: {} }, [], [], true));
-function Eh(t) {
+customElements.define("goa-work-side-notification-item", Le(N7, { type: {}, timestamp: { reflect: true }, title: {}, description: {}, readStatus: { reflect: true, attribute: "read-status" }, priority: { reflect: true }, testid: {} }, [], [], true));
+function E7(t) {
   Ie(t, "svelte-1w1z5gl", `:host{display:block;width:100%;height:100vh;box-sizing:border-box;background-color:var(
       --goa-workspace-layout-bg-color,
       var(--goa-color-greyscale-50)
@@ -59719,7 +59694,7 @@ function Eh(t) {
       var(--goa-shadow-shallow-above)
     )}.content.svelte-1w1z5gl.svelte-1w1z5gl{flex:1 1 auto}.push-drawer-region.svelte-1w1z5gl.svelte-1w1z5gl{flex:0 0 auto;display:flex;align-items:stretch}@media(min-width: 624px){.shell.has-push-drawer.state-no-scroll.svelte-1w1z5gl .card-container.svelte-1w1z5gl,.shell.has-push-drawer.state-at-top.svelte-1w1z5gl .card-container.svelte-1w1z5gl,.shell.has-push-drawer.state-middle.svelte-1w1z5gl .card-container.svelte-1w1z5gl,.shell.has-push-drawer.state-at-bottom.svelte-1w1z5gl .card-container.svelte-1w1z5gl{padding-right:0}}`);
 }
-const Dh = (t) => ({}), Ds = (t) => ({}), qh = (t) => ({}), qs = (t) => ({}), Ih = (t) => ({}), Is = (t) => ({}), Th = (t) => ({}), Ts = (t) => ({});
+const D7 = (t) => ({}), Ds = (t) => ({}), q7 = (t) => ({}), qs = (t) => ({}), I7 = (t) => ({}), Is = (t) => ({}), T7 = (t) => ({}), Ts = (t) => ({});
 function Ss(t) {
   let e, o, i, n = (
     /*_workSideMenuRef*/
@@ -59755,7 +59730,7 @@ function Ss(t) {
           /*$$scope*/
           a[11],
           c,
-          Th
+          T7
         ) : he(
           /*$$scope*/
           a[11]
@@ -59826,7 +59801,7 @@ function xs(t) {
           /*$$scope*/
           l[11],
           r,
-          Ih
+          I7
         ) : he(
           /*$$scope*/
           l[11]
@@ -59877,7 +59852,7 @@ function Os(t) {
           /*$$scope*/
           l[11],
           r,
-          qh
+          q7
         ) : he(
           /*$$scope*/
           l[11]
@@ -59928,7 +59903,7 @@ function Hs(t) {
           /*$$scope*/
           l[11],
           r,
-          Dh
+          D7
         ) : he(
           /*$$scope*/
           l[11]
@@ -59947,7 +59922,7 @@ function Hs(t) {
     }
   };
 }
-function Sh(t) {
+function S7(t) {
   let e, o, i, n, l, r, a, c, d, s, f, g;
   dt(
     /*onwindowresize*/
@@ -60113,11 +60088,11 @@ function Sh(t) {
     }
   };
 }
-const Ah = 250, No = 5, Ps = 30, q1 = 1;
-function xh(t, e, o, i) {
+const A7 = 250, No = 5, Ps = 30, q1 = 1;
+function x7(t, e, o, i) {
   return t === "no-scroll" ? i <= q1 ? "no-scroll" : e <= No ? "at-top" : o <= No ? "at-bottom" : "middle" : i <= -100 ? "no-scroll" : t === "at-top" ? e > Ps ? "middle" : "at-top" : t === "at-bottom" ? o > Ps ? "middle" : "at-bottom" : e <= No ? "at-top" : o <= No ? "at-bottom" : "middle";
 }
-function Oh(t, e, o) {
+function O7(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e;
   const r = ht(n);
   let { testid: a = "" } = e, c, d = null, s = "no-scroll", f = false, g = null, v = null, h = null, b = 0, w = null;
@@ -60128,7 +60103,7 @@ function Oh(t, e, o) {
           () => {
             _(), h = null;
           },
-          Ah
+          A7
         );
       }), v.observe(d);
       for (let j = 0; j < d.children.length; j++)
@@ -60149,7 +60124,7 @@ function Oh(t, e, o) {
     if (!d) return;
     const { scrollTop: j, scrollHeight: T, clientHeight: E } = d, Q = T - E, V = T - j - E;
     f ? o(10, f = Q > -100) : o(10, f = Q > q1);
-    const O = xh(s, j, V, Q);
+    const O = x7(s, j, V, Q);
     O !== s && o(2, s = O);
   }
   function z() {
@@ -60202,9 +60177,9 @@ function Oh(t, e, o) {
     D
   ];
 }
-class Hh extends Ne {
+class H7 extends Ne {
   constructor(e) {
-    super(), je(this, e, Oh, Sh, Me, { testid: 0 }, Eh);
+    super(), je(this, e, O7, S7, Me, { testid: 0 }, E7);
   }
   get testid() {
     return this.$$.ctx[0];
@@ -60213,7 +60188,7 @@ class Hh extends Ne {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-workspace-layout", Le(Hh, { testid: {} }, ["side-menu", "page-header", "default", "page-footer", "push-drawer"], [], true));
+customElements.define("goa-workspace-layout", Le(H7, { testid: {} }, ["side-menu", "page-header", "default", "page-footer", "push-drawer"], [], true));
 function Bug2152Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Icons in Tooltip" }),
@@ -72685,8 +72660,50 @@ const __vite_glob_0_126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   default: pageBlock_route
 }, Symbol.toStringTag, { value: "Module" }));
 function generateUsers() {
-  const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
-  const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+  const firstNames = [
+    "Emma",
+    "Liam",
+    "Olivia",
+    "Noah",
+    "Ava",
+    "James",
+    "Sophia",
+    "William",
+    "Isabella",
+    "Oliver",
+    "Mia",
+    "Benjamin",
+    "Charlotte",
+    "Elijah",
+    "Amelia",
+    "Lucas",
+    "Harper",
+    "Mason",
+    "Evelyn",
+    "Logan"
+  ];
+  const lastNames = [
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Brown",
+    "Jones",
+    "Garcia",
+    "Miller",
+    "Davis",
+    "Rodriguez",
+    "Martinez",
+    "Wilson",
+    "Anderson",
+    "Taylor",
+    "Thomas",
+    "Moore",
+    "Jackson",
+    "Martin",
+    "Lee",
+    "Thompson",
+    "White"
+  ];
   const users = [];
   for (let i = 1; i <= 100; i++) {
     users.push({
@@ -72731,6 +72748,28 @@ function DocsPaginationRoute() {
         perPageCount: 10,
         variant: "links-only",
         onChange: (detail) => setSimplePage(detail.page)
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Simple Table" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabTable, { width: "100%", mb: "xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "First name" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Last name" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { children: "Age" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: pageUsers.map((u6) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: u6.firstName }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: u6.lastName }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { children: u6.age })
+      ] }, u6.id)) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabPagination,
+      {
+        pageNumber: simplePage,
+        itemCount: 50,
+        perPageCount: 10,
+        onChange: (detail) => setPage(detail.page)
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Examples" }),
