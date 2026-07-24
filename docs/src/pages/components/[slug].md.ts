@@ -19,6 +19,14 @@ import {
 } from "@/lib/content-queries";
 import { buildComponentMarkdown } from "@/lib/component-markdown";
 
+type Props = {
+  component: CollectionEntry<"components">;
+};
+
+type Params = {
+  slug: string;
+};
+
 export async function getStaticPaths() {
   const components = await getCollection("components");
   return components
@@ -29,17 +37,16 @@ export async function getStaticPaths() {
     }));
 }
 
-export const GET: APIRoute = async ({ params, props }) => {
+export const GET: APIRoute<Props, Params> = async ({ params, props }) => {
   const { slug } = params;
-  const { component } = props as { component: CollectionEntry<"components"> };
+  const { component } = props;
 
-  const [api, allGuidance, componentExamples, relatedComponents] =
-    await Promise.all([
-      getComponentApi(slug),
-      getGuidanceForComponent(slug),
-      getExamplesForComponent(slug),
-      getRelatedComponents(component.data.relatedComponents ?? []),
-    ]);
+  const [api, allGuidance, componentExamples, relatedComponents] = await Promise.all([
+    getComponentApi(slug),
+    getGuidanceForComponent(slug),
+    getExamplesForComponent(slug),
+    getRelatedComponents(component.data.relatedComponents ?? []),
+  ]);
 
   const { usage: usageGuidance, accessibility: accessibilityGuidance } =
     categorizeGuidance(allGuidance);
