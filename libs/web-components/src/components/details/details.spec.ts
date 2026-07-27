@@ -32,3 +32,28 @@ it('should render - with max width', async () => {
   const details = container.querySelector("details");
   expect(details?.getAttribute("style")).toContain("max-width: 480px;");
 });
+
+it("announces the content when expanded", async () => {
+  vitest.useFakeTimers();
+
+  try {
+    const { getByRole, queryByRole } = render(Details, {
+      heading: "The title",
+      open: "true",
+    });
+
+    await vitest.advanceTimersByTimeAsync(99);
+    expect(queryByRole("alert")).toBeNull();
+
+    await vitest.advanceTimersByTimeAsync(1);
+    expect(getByRole("alert")).toBeInTheDocument();
+  } finally {
+    vitest.useRealTimers();
+  }
+});
+
+it("does not announce the content when collapsed", async () => {
+  const { queryByRole } = render(Details, { heading: "The title" });
+
+  expect(queryByRole("alert")).toBeNull();
+});
