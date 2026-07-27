@@ -100,16 +100,23 @@ describe("Accordion", () => {
       expect(summary).toHaveAttribute("aria-expanded", "false");
     });
 
+    const content = summary.element().closest("details")?.querySelector(".content > div");
+
+    expect(content).not.toBeNull();
+    expect(content?.getAttribute("role")).toBeNull();
+
     await openButton.click();
 
     await vi.waitFor(() => {
       expect(summary).toHaveAttribute("aria-expanded", "true");
+      expect(content?.getAttribute("role")).toBe("alert");
     });
 
     await closeButton.click();
 
     await vi.waitFor(() => {
       expect(summary).toHaveAttribute("aria-expanded", "false");
+      expect(content?.getAttribute("role")).toBeNull();
     });
 
     await openButton.click();
