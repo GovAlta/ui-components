@@ -11,6 +11,17 @@ describe("GoabBadge", () => {
     expect(el?.getAttribute("icon")).toBe("false");
   });
 
+  it("should render ReactNode content in the content slot for version 2", () => {
+    const { container } = render(
+      <GoabBadge type="information" content={<strong>Rich content</strong>} />,
+    );
+
+    const el = container.querySelector("goa-badge");
+    const content = el?.querySelector("[slot=content]");
+    expect(el?.getAttribute("content")).toBeNull();
+    expect(content?.querySelector("strong")?.textContent).toBe("Rich content");
+  });
+
   it("should render the properties", () => {
     const { container } = render(
       <GoabBadge

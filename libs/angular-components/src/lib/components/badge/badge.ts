@@ -12,13 +12,16 @@ import {
   OnInit,
   ChangeDetectorRef,
   inject,
+  TemplateRef,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-badge",
+  imports: [NgTemplateOutlet],
   template: `
     @if (isReady) {
       <goa-badge
@@ -29,13 +32,18 @@ import { GoabBaseComponent } from "../base.component";
         [attr.icon]="showIcon ? 'true' : 'false'"
         [attr.icontype]="iconType"
         [attr.arialabel]="ariaLabel"
-        [attr.content]="content"
+        [attr.content]="getContentAsString()"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
         [attr.ml]="ml"
         [attr.mr]="mr"
       >
+        @if (getContentAsTemplate()) {
+          <div slot="content">
+            <ng-container [ngTemplateOutlet]="getContentAsTemplate()"></ng-container>
+          </div>
+        }
       </goa-badge>
     }
   `,
@@ -55,8 +63,8 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
 
   /** Sets the context and colour of the badge. */
   @Input() type?: GoabBadgeType;
-  /** Sets the text label of the badge. */
-  @Input() content?: string;
+  /** Sets the content displayed in the badge. Accepts a string or template for custom content. */
+  @Input() content?: string | TemplateRef<unknown>;
   /** @deprecated Use icontype instead. Includes an icon in the badge. */
   @Input({ transform: booleanAttribute }) icon?: boolean;
   /** Sets the icon type to display in the badge. */
@@ -73,6 +81,14 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
 
   get showIcon(): boolean {
     return this.icon ?? !!this.iconType;
+  }
+
+  getContentAsString(): string | undefined {
+    return typeof this.content === "string" ? this.content : undefined;
+  }
+
+  getContentAsTemplate(): TemplateRef<unknown> | null {
+    return this.content instanceof TemplateRef ? this.content : null;
   }
 
   ngOnInit(): void {

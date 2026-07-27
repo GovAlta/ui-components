@@ -6,7 +6,7 @@ import {
   GoabIconType,
   Margins,
 } from "@abgov/ui-components-common";
-import type { JSX } from "react";
+import type { JSX, ReactNode } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
@@ -35,8 +35,8 @@ export interface GoabBadgeProps extends Margins, DataAttributes {
   type: GoabBadgeType;
   /** @deprecated Use iconType instead. When true, displays an icon in the badge. */
   icon?: boolean;
-  /** Text label of the badge. */
-  content?: string;
+  /** Content displayed in the badge. Accepts a string or ReactNode for custom content. */
+  content?: ReactNode;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Accessible label for screen readers. */
@@ -69,6 +69,7 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
 
 /** Small labels which hold small amounts of information, system feedback, or states. */
 export function GoabBadge({
+  content,
   icon,
   iconType,
   size = "medium",
@@ -82,10 +83,15 @@ export function GoabBadge({
       // Handle icon display priority: explicit icon prop takes precedence over iconType
       icon={getIconValue(icon, iconType)}
       icontype={iconType}
+      content={typeof content === "string" ? content : undefined}
       {..._props}
       version="2"
       size={size}
       emphasis={emphasis}
-    />
+    >
+      {typeof content !== "string" && content != null && (
+        <div slot="content">{content}</div>
+      )}
+    </goa-badge>
   );
 }
