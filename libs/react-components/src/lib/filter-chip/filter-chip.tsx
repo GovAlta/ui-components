@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import {
   DataAttributes,
   GoabFilterChipTheme,
@@ -10,7 +10,8 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps extends Margins {
   icontheme: GoabFilterChipTheme;
   error?: string;
-  content: string;
+  content?: string;
+  arialabel?: string;
   secondarytext?: string;
   leadingicon?: GoabIconType;
   testid?: string;
@@ -30,8 +31,10 @@ declare module "react" {
 }
 
 export interface GoabFilterChipProps extends Margins, DataAttributes {
-  /** @required Text label of the chip. */
-  content: string;
+  /** @required Content displayed in the chip. Accepts a string or ReactNode for custom content. */
+  content: ReactNode;
+  /** Accessible content used to label the filter chip controls. */
+  ariaLabel?: string;
   /** Theme style of the leading icon. @default "outline" */
   iconTheme?: GoabFilterChipTheme;
   /** Shows an error state. */
@@ -48,6 +51,7 @@ export interface GoabFilterChipProps extends Margins, DataAttributes {
 
 /** Allow the user to enter information, filter content, and make selections. */
 export const GoabFilterChip = ({
+  content,
   iconTheme = "outline",
   error,
   onClick,
@@ -72,10 +76,15 @@ export const GoabFilterChip = ({
   return (
     <goa-filter-chip
       ref={el}
+      content={typeof content === "string" ? content : undefined}
       error={error ? "true" : undefined}
       version="2"
       {..._props}
-    />
+    >
+      {typeof content !== "string" && content != null && (
+        <div slot="content">{content}</div>
+      )}
+    </goa-filter-chip>
   );
 };
 
