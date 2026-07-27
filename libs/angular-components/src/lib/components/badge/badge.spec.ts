@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabBadge } from "./badge";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
 import { GoabBadgeType, GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
@@ -12,19 +12,22 @@ import { By } from "@angular/platform-browser";
       [type]="type"
       [icon]="icon"
       [iconType]="iconType"
-      [content]="content"
+      [content]="contentSlot ? contentTemplate : content"
       [ariaLabel]="ariaLabel"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
-    ></goab-badge>
+    >
+      <ng-template #contentTemplate><strong>Rich content</strong></ng-template>
+    </goab-badge>
   `,
 })
 class TestBadgeComponent {
   type?: GoabBadgeType;
-  content?: string;
+  content?: string | TemplateRef<unknown>;
+  contentSlot?: boolean;
   testId?: string;
   icon?: boolean;
   iconType?: GoabIconType;
@@ -89,6 +92,21 @@ describe("GoABBadge", () => {
     expect(badgeElement.getAttribute("mb")).toBe(component.mb);
     expect(badgeElement.getAttribute("ml")).toBe(component.ml);
     expect(badgeElement.getAttribute("mr")).toBe(component.mr);
+  }));
+
+  it("should render template content in the content slot for version 2", fakeAsync(() => {
+    fixture = TestBed.createComponent(TestBadgeComponent);
+    component = fixture.componentInstance;
+    component.type = "information";
+    component.contentSlot = true;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const badgeElement = fixture.debugElement.query(By.css("goa-badge")).nativeElement;
+    const content = badgeElement.querySelector("[slot='content']");
+    expect(badgeElement.getAttribute("content")).toBeNull();
+    expect(content.querySelector("strong").textContent).toContain("Rich content");
   }));
 
   it("should not set icon attribute by default (icon undefined)", fakeAsync(() => {

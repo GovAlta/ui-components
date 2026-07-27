@@ -89,7 +89,7 @@
   // Optional
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Text label of the badge. */
+  /** Content displayed in the badge. Use the content slot for custom HTML in version 2. */
   export let content: string = "";
   /** @deprecated Use icontype instead. Includes an icon in the badge. */
   export let icon: string = "";
@@ -121,7 +121,9 @@
   // private
   // Show icon unless explicitly disabled, when either icon=true or icontype is provided
   $: showIcon = icon !== "false" && (toBoolean(icon) || !!icontype);
-  $: showIconOnly = showIcon && !content;
+  $: _hasSlottedContent = version === "2" && !!$$slots.content;
+  $: _hasContent = !!content || _hasSlottedContent;
+  $: showIconOnly = showIcon && !_hasContent;
 
   $: _defaultIconType = {
     success: "checkmark-circle",
@@ -166,7 +168,7 @@
     validateEmphasisLevel(emphasis);
     validateVersion(version);
 
-    if (!showIcon && !content) {
+    if (!showIcon && !_hasContent) {
       console.warn(
         "GoabBadge must have either the content or icon property set",
       );
@@ -200,9 +202,13 @@
   {:else}
     <div class="goa-badge-no-icon"></div>
   {/if}
-  {#if content}
+  {#if _hasContent}
     <div class="goa-badge-content">
-      {content}
+      {#if _hasSlottedContent}
+        <slot name="content" />
+      {:else}
+        {content}
+      {/if}
     </div>
   {/if}
 </div>
