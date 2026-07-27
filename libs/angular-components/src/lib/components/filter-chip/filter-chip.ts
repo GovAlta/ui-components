@@ -9,19 +9,23 @@ import {
   OnInit,
   ChangeDetectorRef,
   inject,
+  TemplateRef,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-filter-chip",
+  imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-filter-chip
       [attr.version]="version"
       [attr.error]="error"
       [attr.icontheme]="iconTheme"
-      [attr.content]="content"
+      [attr.content]="getContentAsString()"
+      [attr.arialabel]="ariaLabel"
       [attr.secondarytext]="secondaryText"
       [attr.leadingicon]="leadingIcon"
       [attr.testid]="testId"
@@ -31,6 +35,11 @@ import { GoabBaseComponent } from "../base.component";
       [attr.mr]="mr"
       (_click)="_onClick()"
     >
+      @if (getContentAsTemplate()) {
+        <div slot="content">
+          <ng-container [ngTemplateOutlet]="getContentAsTemplate()"></ng-container>
+        </div>
+      }
       <ng-content />
     </goa-filter-chip>
   }`,
@@ -44,8 +53,10 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) error?: boolean;
   /** Marks the chip as deletable. */
   @Input({ transform: booleanAttribute }) deletable?: boolean;
-  /** Text label of the chip. */
-  @Input() content?: string = "";
+  /** Content displayed in the chip. Accepts a string or template for custom content. */
+  @Input() content?: string | TemplateRef<unknown> = "";
+  /** Accessible content used to label the filter chip controls. */
+  @Input() ariaLabel?: string;
   /** Sets the icon theme style for the filter chip. */
   @Input() iconTheme?: GoabChipTheme;
   /** Secondary text displayed in a smaller size before the main content. */
@@ -58,6 +69,14 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
+
+  getContentAsString(): string | undefined {
+    return typeof this.content === "string" ? this.content : undefined;
+  }
+
+  getContentAsTemplate(): TemplateRef<unknown> | null {
+    return this.content instanceof TemplateRef ? this.content : null;
+  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

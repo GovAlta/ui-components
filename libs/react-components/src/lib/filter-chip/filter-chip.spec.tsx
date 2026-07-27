@@ -11,12 +11,24 @@ describe("GoabFilterChip", () => {
     expect(el?.getAttribute("error")).toBeNull();
   });
 
+  it("should render ReactNode content in the content slot for version 2", () => {
+    const { container } = render(
+      <GoabFilterChip content={<strong>some filter chip</strong>} />,
+    );
+
+    const el = container.querySelector("goa-filter-chip");
+    const content = el?.querySelector("[slot=content]");
+    expect(el?.getAttribute("content")).toBeNull();
+    expect(content?.querySelector("strong")?.textContent).toBe("some filter chip");
+  });
+
   it("should bind all properties correctly", async () => {
     const { container } = render(
       <GoabFilterChip
         content="some filter chip"
         secondaryText="secondary text"
         leadingIcon="accessibility"
+        ariaLabel="Accessible filter"
         mt="s"
         mr="m"
         mb="l"
@@ -38,6 +50,7 @@ describe("GoabFilterChip", () => {
     expect(el?.getAttribute("icontheme")).toBe("filled");
     expect(el?.getAttribute("secondarytext")).toBe("secondary text");
     expect(el?.getAttribute("leadingicon")).toBe("accessibility");
+    expect(el?.getAttribute("arialabel")).toBe("Accessible filter");
     expect(el?.getAttribute("testid")).toBe("test-chip");
   });
 
