@@ -13,7 +13,6 @@ Small labels which hold small amounts of information, system feedback, or states
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible label for screen readers. |
-| `content` | string | (none) | No | Text label of the badge. |
 | `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Icon type to display in the badge. |
 | `mb` | Spacing | (none) | No | (none) |
@@ -24,6 +23,12 @@ Small labels which hold small amounts of information, system feedback, or states
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
 
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | No | Content displayed in the badge. Accepts a string or ReactNode for custom content. |
+
 ---
 
 ## Angular
@@ -33,7 +38,7 @@ Small labels which hold small amounts of information, system feedback, or states
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Sets the accessible label for screen readers. |
-| `content` | string | (none) | No | Sets the text label of the badge. |
+| `content` | string \| TemplateRef<unknown> | (none) | No | Sets the content displayed in the badge. Accepts a string or template for custom content. |
 | `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Sets the icon type to display in the badge. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
@@ -43,6 +48,12 @@ Small labels which hold small amounts of information, system feedback, or states
 | `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `type` | GoabBadgeType | (none) | No | Sets the context and colour of the badge. |
+
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | No | Content displayed in the badge. Accepts a string or ngTemplate for custom content. |
 
 ---
 
@@ -55,7 +66,7 @@ Tag: `goa-badge`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `arialabel` | string | (none) | No | Accessible label for screen readers. |
-| `content` | string | (none) | No | Text label of the badge. |
+| `content` | string | (none) | No | Content displayed in the badge. Use the content slot for custom HTML in version 2. |
 | `emphasis` |  | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `icontype` | GoabIconType | (none) | No | Icon type to display in the badge. |
 | `justify-content` | "center" \| "flex-start" \| "flex-end" \| "space-between" \| "" | (none) | No | justify-content value for the badge container. |
@@ -67,6 +78,12 @@ Tag: `goa-badge`
 | `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "information" \| "important" \| "emergency" \| "success" \| "dark" \| "midtone" \| "l… | (none) | Yes | Defines the context and colour of the badge. |
+
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | No | Content displayed in the badge. Accepts a string or ReactNode for custom content. |
 
 ---
 
