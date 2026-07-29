@@ -27,6 +27,17 @@
   <goab-tab heading="Third">Third tab content.</goab-tab>
 </goab-tabs>
 
+<h3>Activate a tab with a button</h3>
+<goab-button (onClick)="activateDetailsTab()">Open details</goab-button>
+<goab-tabs>
+  <goab-tab heading="Summary" slug="button-example-summary">
+    Summary content goes here.
+  </goab-tab>
+  <goab-tab heading="Details" slug="button-example-details">
+    Detailed information goes here.
+  </goab-tab>
+</goab-tabs>
+
 <h3>With badge in heading</h3>
 <goab-tabs>
   <goab-tab heading="Messages">
