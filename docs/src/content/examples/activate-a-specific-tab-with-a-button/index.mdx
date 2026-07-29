@@ -1,0 +1,32 @@
+---
+id: activate-a-specific-tab-with-a-button
+title: Activate a specific tab with a button
+size: interaction
+tags:
+  - tabs
+  - navigation
+  - button
+  - url-hash
+components:
+  - tabs
+  - tab
+  - button
+status: published
+---
+
+Activate a tab from a button by setting the URL hash—the part after `#`—to match the
+tab's `slug`.
+
+## When to use
+
+Use this pattern when:
+
+- An action needs to show related content in another tab on the same page
+- You want the active tab to have a link that users can bookmark or share
+
+## Considerations
+
+- Give each tab a unique and stable `slug`
+- Keep the default `navigation="hash"` setting
+- Use `initialTab` only to select a tab when the component first loads
+- Label the button so its destination is clear
