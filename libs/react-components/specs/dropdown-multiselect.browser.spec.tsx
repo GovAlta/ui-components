@@ -46,13 +46,16 @@ describe("DropdownMultiselect", () => {
     };
 
     const { getByTestId } = render(<Component />);
-    const host = getByTestId("dropdown-multiselect");
-
-    await userEvent.click(host);
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
     await vi.waitFor(() => {
-      const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-      expect(checkboxListDiv).not.toBeVisible();
+      expect(trigger).toBeVisible();
+      expect(trigger).toHaveAttribute("aria-disabled", "true");
+    });
+
+    await vi.waitFor(() => {
+      expect(checkboxList).not.toBeVisible();
     });
   });
 
@@ -71,13 +74,16 @@ describe("DropdownMultiselect", () => {
     };
 
     const { getByTestId } = render(<Component />);
-    const host = getByTestId("dropdown-multiselect");
-
-    await userEvent.click(host);
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
     await vi.waitFor(() => {
-      const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-      expect(checkboxListDiv).toBeVisible();
+      expect(trigger).toBeVisible();
+    });
+    await userEvent.click(trigger);
+
+    await vi.waitFor(() => {
+      expect(checkboxList).toBeVisible();
     });
   });
 
@@ -98,13 +104,13 @@ describe("DropdownMultiselect", () => {
 
     const { getByTestId } = render(<Component />);
     const before = getByTestId("before");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
-    before.element().focus();
+    await userEvent.click(before);
     await userEvent.tab();
 
     await vi.waitFor(() => {
-      const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-      expect(checkboxListDiv).toBeVisible();
+      expect(checkboxList).toBeVisible();
     });
   });
 
@@ -126,13 +132,13 @@ describe("DropdownMultiselect", () => {
 
     const { getByTestId } = render(<Component />);
     const before = getByTestId("before");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
-    before.element().focus();
+    await userEvent.click(before);
     await userEvent.tab();
 
     await vi.waitFor(() => {
-      const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-      expect(checkboxListDiv).not.toBeVisible();
+      expect(checkboxList).not.toBeVisible();
     });
   });
 
@@ -149,19 +155,22 @@ describe("DropdownMultiselect", () => {
     );
 
     const { getByTestId } = render(<Component />);
-    const host = getByTestId("dropdown-multiselect");
-
-    await userEvent.click(host);
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
     await vi.waitFor(() => {
-      expect(getByTestId("dropdown-multiselect-checkbox-list")).toBeVisible();
+      expect(trigger).toBeVisible();
+    });
+    await userEvent.click(trigger);
+
+    await vi.waitFor(() => {
+      expect(checkboxList).toBeVisible();
     });
 
     await userEvent.keyboard("{Escape}");
 
     await vi.waitFor(() => {
-      const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-      expect(checkboxListDiv).not.toBeVisible();
+      expect(checkboxList).not.toBeVisible();
     });
   });
 
@@ -183,13 +192,14 @@ describe("DropdownMultiselect", () => {
 
     const { getByTestId } = render(<Component />);
     const before = getByTestId("before");
+    const filterInput = getByTestId("dropdown-multiselect-filter-input");
 
-    before.element().focus();
+    await userEvent.click(before);
     await userEvent.tab();
 
-    const filterInput = await vi.waitFor(() =>
-      getByTestId("dropdown-multiselect-filter-input"),
-    );
+    await vi.waitFor(() => {
+      expect(filterInput).toBeVisible();
+    });
     const filterInputEl = filterInput.element() as HTMLInputElement;
     const host = (filterInputEl.getRootNode() as ShadowRoot).host as HTMLElement;
 
@@ -212,11 +222,14 @@ describe("DropdownMultiselect", () => {
     );
 
     const { getByTestId } = render(<Component />);
-    const host = getByTestId("dropdown-multiselect");
-
-    await userEvent.click(host);
-
+    const trigger = getByTestId("dropdown-multiselect-trigger");
     const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+    await vi.waitFor(() => {
+      expect(trigger).toBeVisible();
+    });
+    await userEvent.click(trigger);
+
     await vi.waitFor(() => {
       expect(renderedCheckboxNames(checkboxList.element() as HTMLElement)).toEqual([
         "apple",
@@ -241,13 +254,15 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
 
       await vi.waitFor(() => {
-        const filterInput = getByTestId("dropdown-multiselect-filter-input");
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
 
+      await vi.waitFor(() => {
         expect(filterInput).toBeVisible();
       });
     });
@@ -265,13 +280,16 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId, container } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
       await vi.waitFor(() => {
-        const checkboxListDiv = getByTestId("dropdown-multiselect-checkbox-list");
-        expect(checkboxListDiv).toBeVisible();
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(checkboxList).toBeVisible();
       });
 
       expect(
@@ -294,14 +312,18 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
-      const filterInput = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
 
       await userEvent.type(filterInput, "b");
 
@@ -326,14 +348,18 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
-      const filterInput = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
 
       await userEvent.type(filterInput, "A");
 
@@ -358,14 +384,18 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
-      const filterInput = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
 
       await userEvent.type(filterInput, "yellow");
 
@@ -398,11 +428,16 @@ describe("DropdownMultiselect", () => {
       };
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
+      const trigger = getByTestId("dropdown-multiselect-trigger");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
+      const selected = getByTestId("selected");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
       await vi.waitFor(() => {
         expect(renderedCheckboxNames(checkboxList.element() as HTMLElement)).toContain(
           "banana",
@@ -420,12 +455,12 @@ describe("DropdownMultiselect", () => {
       await userEvent.click(bananaLabel);
 
       await vi.waitFor(() => {
-        expect(getByTestId("selected").element().textContent).toBe("banana");
+        expect(selected.element().textContent).toBe("banana");
       });
 
-      const filterInput = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
 
       await userEvent.type(filterInput, "a");
 
@@ -435,7 +470,7 @@ describe("DropdownMultiselect", () => {
         ).not.toContain("banana");
       });
 
-      expect(getByTestId("selected").element().textContent).toBe("banana");
+      expect(selected.element().textContent).toBe("banana");
     });
 
     it("should restore all checkboxes when the filter is cleared", async () => {
@@ -452,14 +487,18 @@ describe("DropdownMultiselect", () => {
       );
 
       const { getByTestId } = render(<Component />);
-      const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
-      const filterInput = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
+      const trigger = getByTestId("dropdown-multiselect-trigger");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
 
       await userEvent.type(filterInput, "b");
 
@@ -481,45 +520,55 @@ describe("DropdownMultiselect", () => {
 
     it("should clear the filter when the dropdown closes", async () => {
       const Component = () => (
-        <GoabDropdownMultiselect
-          name="fruit"
-          testId="dropdown-multiselect"
-          placeholder="Select fruit"
-          filterable={true}
-        >
-          <GoabDropdownItem value="apple" label="Apple" />
-          <GoabDropdownItem value="banana" label="Banana" />
-        </GoabDropdownMultiselect>
+        <>
+          <GoabDropdownMultiselect
+            name="fruit"
+            testId="dropdown-multiselect"
+            placeholder="Select fruit"
+            filterable={true}
+          >
+            <GoabDropdownItem value="apple" label="Apple" />
+            <GoabDropdownItem value="banana" label="Banana" />
+          </GoabDropdownMultiselect>
+          <button data-testid="outside">Outside</button>
+        </>
       );
 
       const { getByTestId } = render(<Component />);
       const trigger = getByTestId("dropdown-multiselect-trigger");
-
-      await userEvent.click(trigger);
-
-      const filterInputBefore = await vi.waitFor(() =>
-        getByTestId("dropdown-multiselect-filter-input"),
-      );
-
-      await userEvent.type(filterInputBefore, "b");
-
-      await userEvent.keyboard("{Escape}");
+      const filterInput = getByTestId("dropdown-multiselect-filter-input");
+      const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+      const outside = getByTestId("outside");
 
       await vi.waitFor(() => {
-        const input = trigger
-          .element()
-          .querySelector("[data-testid='dropdown-multiselect-filter-input']");
-        expect(input).toBeNull();
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+      });
+
+      await userEvent.type(filterInput, "b");
+
+      await userEvent.tab();
+
+      await vi.waitFor(() => {
+        expect(checkboxList).not.toBeVisible();
+        expect(filterInput).not.toBeInTheDocument();
+      });
+
+      await userEvent.tab();
+      await vi.waitFor(() => {
+        expect(outside).toHaveFocus();
       });
 
       await userEvent.click(trigger);
 
-      const reopenedFilter = await vi.waitFor(() =>
-        trigger
-          .element()
-          .querySelector("[data-testid='dropdown-multiselect-filter-input']"),
-      );
-      expect((reopenedFilter as HTMLInputElement).value).toBe("");
+      await vi.waitFor(() => {
+        expect(filterInput).toBeVisible();
+        expect((filterInput.element() as HTMLInputElement).value).toBe("");
+      });
     });
   });
 
@@ -611,10 +660,14 @@ describe("DropdownMultiselect", () => {
 
       const { getByTestId } = render(<Component />);
       const host = getByTestId("dropdown-multiselect");
-
-      await userEvent.click(host);
-
+      const trigger = getByTestId("dropdown-multiselect-trigger");
       const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+
+      await vi.waitFor(() => {
+        expect(trigger).toBeVisible();
+      });
+      await userEvent.click(trigger);
+
       await vi.waitFor(() => {
         expect(renderedCheckboxNames(checkboxList.element() as HTMLElement)).toContain(
           "apple",
@@ -670,21 +723,28 @@ describe("DropdownMultiselect", () => {
     };
 
     const { getByTestId } = render(<Component />);
-    const host = getByTestId("dropdown-multiselect");
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const filterInput = getByTestId("dropdown-multiselect-filter-input");
+    const selectAllCheckbox = getByTestId("dropdown-multiselect-select-all");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
 
-    await userEvent.click(host);
+    await vi.waitFor(() => {
+      expect(trigger).toBeVisible();
+    });
+    await userEvent.click(trigger);
 
-    const filterInput = await vi.waitFor(() =>
-      getByTestId("dropdown-multiselect-filter-input"),
-    );
+    await vi.waitFor(() => {
+      expect(filterInput).toBeVisible();
+    });
 
     await userEvent.type(filterInput, "Stuff");
 
-    const selectAllCheckbox = getByTestId("dropdown-multiselect-select-all");
+    await vi.waitFor(() => {
+      expect(selectAllCheckbox).toBeVisible();
+    });
     await userEvent.click(selectAllCheckbox);
 
     await vi.waitFor(() => {
-      const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
       expect(renderedCheckboxNames(checkboxList.element() as HTMLElement)).toEqual([
         "Stuff1",
         "Stuff2",

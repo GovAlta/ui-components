@@ -4,11 +4,6 @@ import { expect, describe, it, vi, beforeAll } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 import { format } from "date-fns";
 
-function getTodayDate(): Date {
-  const today = new Date();
-  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
-}
-
 describe("DatePicker", () => {
   it("renders", async () => {
     const Component = () => {
@@ -16,10 +11,10 @@ describe("DatePicker", () => {
     };
 
     const result = render(<Component />);
+    const datePicker = result.getByTestId("date-picker");
 
     await vi.waitFor(() => {
-      const datePicker = result.getByTestId("date-picker");
-      expect(datePicker.element()).toBeTruthy();
+      expect(datePicker).toBeInTheDocument();
     });
   });
 
@@ -39,7 +34,7 @@ describe("DatePicker", () => {
   });
 
   it("shows an error state", async () => {
-    const value = getTodayDate();
+    const value = "2026-03-01";
 
     const Component = () => {
       return <GoabDatePicker testId="date-picker" value={value} error={true} />;
@@ -55,12 +50,17 @@ describe("DatePicker", () => {
 
   it("passes the browser event in change detail", async () => {
     const handleChange = vi.fn();
-    const selectedDate = new Date();
+    const selectedDate = new Date(2026, 2, 2);
     const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
     const Component = () => {
       return (
-        <GoabDatePicker name="event-date" testId="date-picker" onChange={handleChange} />
+        <GoabDatePicker
+          name="event-date"
+          testId="date-picker"
+          value="2026-03-01"
+          onChange={handleChange}
+        />
       );
     };
 
@@ -68,13 +68,16 @@ describe("DatePicker", () => {
     const input = result.getByTestId("calendar-input");
     const dateToSelect = result.getByTestId(formattedDate);
 
+    await vi.waitFor(() => {
+      expect(input).toBeVisible();
+    });
     await userEvent.click(input);
 
     await vi.waitFor(() => {
-      expect(dateToSelect.element()).toBeTruthy();
+      expect(dateToSelect).toBeVisible();
     });
 
-    await dateToSelect.click();
+    await userEvent.click(dateToSelect);
 
     await vi.waitFor(() => {
       expect(handleChange).toHaveBeenCalledTimes(1);
@@ -161,6 +164,9 @@ describe("DatePicker", () => {
         const result = render(<Component />);
         const input = result.getByTestId("calendar-input");
 
+        await vi.waitFor(() => {
+          expect(input).toBeVisible();
+        });
         await userEvent.type(input, key);
 
         await vi.waitFor(() => {
@@ -216,6 +222,7 @@ describe("DatePicker", () => {
     const Component = () => {
       return (
         <div>
+          <button data-testid="before">Before</button>
           <GoabDatePicker
             name="event-date"
             testId="date-picker"
@@ -228,21 +235,23 @@ describe("DatePicker", () => {
     };
 
     const result = render(<Component />);
+    const before = result.getByTestId("before");
     const input = result.getByTestId("calendar-input");
     const outside = result.getByTestId("outside-input");
 
     await vi.waitFor(() => {
-      expect(input.element()).toBeTruthy();
+      expect(input).toBeVisible();
     });
 
-    (input.element() as HTMLInputElement).focus();
+    await userEvent.click(before);
+    await userEvent.tab();
 
     await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1);
       expect(onFocus.mock.calls[0][0].name).toBe("event-date");
     });
 
-    (outside.element() as HTMLInputElement).focus();
+    await userEvent.click(outside);
 
     await vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalledTimes(1);
@@ -260,13 +269,8 @@ describe("DatePicker", () => {
       const input = result.getByTestId("calendar-input");
 
       await vi.waitFor(() => {
-        // Check the input element's computed style
-        const computedStyle = window.getComputedStyle(input.element());
-        const inputWidth = parseFloat(computedStyle.width);
-
-        // The width should be close to 400px (the underlying goa-input component handles the width)
-        expect(inputWidth).toBeGreaterThan(300);
-        expect(inputWidth).toBeLessThan(450);
+        const inputEl = input.element() as HTMLInputElement;
+        expect(inputEl.closest<HTMLElement>(".container")?.style.width).toBe("400px");
       });
     });
 
@@ -279,14 +283,7 @@ describe("DatePicker", () => {
       const input = result.getByTestId("calendar-input");
 
       await vi.waitFor(() => {
-        // Check computed width is applied (browser converts ch to px)
-        const computedStyle = window.getComputedStyle(input.element());
-        expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/);
-
-        // Should have a reasonable width for 25ch
-        const inputWidth = parseFloat(computedStyle.width);
-        expect(inputWidth).toBeGreaterThan(200);
-        expect(inputWidth).toBeLessThan(600);
+        expect((input.element() as HTMLInputElement).style.width).toBe("26ch");
       });
     });
 
@@ -299,13 +296,7 @@ describe("DatePicker", () => {
       const input = result.getByTestId("calendar-input");
 
       await vi.waitFor(() => {
-        // Default width should be 16ch - check computed width
-        const computedStyle = window.getComputedStyle(input.element());
-        const inputWidth = parseFloat(computedStyle.width);
-
-        // 16ch should be around 150-300px depending on font
-        expect(inputWidth).toBeGreaterThan(100);
-        expect(inputWidth).toBeLessThan(400);
+        expect((input.element() as HTMLInputElement).style.width).toBe("17ch");
       });
     });
 
@@ -322,20 +313,18 @@ describe("DatePicker", () => {
       const input = result.getByTestId("calendar-input");
 
       await vi.waitFor(() => {
-        // Check computed width
-        const computedStyle = window.getComputedStyle(input.element());
-        expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/);
+        const inputEl = input.element() as HTMLInputElement;
+        const inputHost = (inputEl.getRootNode() as ShadowRoot).host as HTMLElement;
+        const percentageWrapper = inputHost.parentElement?.parentElement;
 
-        // Should be a reasonable percentage of container
-        const inputWidth = parseFloat(computedStyle.width);
-        expect(inputWidth).toBeGreaterThan(50);
-        expect(inputWidth).toBeLessThan(800);
+        expect(percentageWrapper?.style.width).toBe("80%");
+        expect(inputEl.closest<HTMLElement>(".container")?.style.width).toBe("100%");
       });
     });
 
     it("maintains minimum width to ensure date display", async () => {
       const Component = () => {
-        return <GoabDatePicker testId="date-picker" width="20ch" value={new Date()} />;
+        return <GoabDatePicker testId="date-picker" width="20ch" value="2026-03-01" />;
       };
 
       const result = render(<Component />);
@@ -344,16 +333,8 @@ describe("DatePicker", () => {
       await vi.waitFor(() => {
         const inputEl = input.element() as HTMLInputElement;
 
-        // Check that date value is displayed
-        expect(inputEl.value).toBeTruthy();
-        expect(inputEl.value.length).toBeGreaterThan(0);
-
-        // Check width is applied
-        const computedStyle = window.getComputedStyle(inputEl);
-        const inputWidth = parseFloat(computedStyle.width);
-
-        // Should be wide enough to display date (20ch should be enough)
-        expect(inputWidth).toBeGreaterThan(150);
+        expect(inputEl.value).toBe("March 1, 2026");
+        expect(inputEl.style.width).toBe("21ch");
       });
     });
   });
@@ -375,6 +356,7 @@ describe("Date Picker input type", () => {
 
     const result = render(<Component />);
     const datePickerMonth = result.getByTestId("input-month");
+    const datePickerMonthJanuary = result.getByTestId("dropdown-item-1");
     const datePickerMonthMarch = result.getByTestId("dropdown-item-3");
     const datePickerDay = result.getByTestId("input-day");
     const datePickerYear = result.getByTestId("input-year");
@@ -386,10 +368,11 @@ describe("Date Picker input type", () => {
     });
 
     // Select month
-    await datePickerMonth.click();
-    await userEvent.keyboard("{ArrowDown}"); // First item is --select a month--
-    await userEvent.keyboard("{ArrowDown}"); // Second item is January
-    await userEvent.keyboard("{Enter}");
+    await userEvent.click(datePickerMonth);
+    await vi.waitFor(() => {
+      expect(datePickerMonthJanuary).toBeVisible();
+    });
+    await userEvent.click(datePickerMonthJanuary);
 
     // should be null because date is invalid
     await vi.waitFor(() => {
@@ -398,11 +381,14 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Input day
-    await datePickerDay.click();
+    await userEvent.click(datePickerDay);
     await userEvent.type(datePickerDay, "1");
 
     // Select month
     await userEvent.click(datePickerMonth);
+    await vi.waitFor(() => {
+      expect(datePickerMonthMarch).toBeVisible();
+    });
     await userEvent.click(datePickerMonthMarch);
 
     // should be null because date is still invalid
@@ -412,7 +398,7 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Input year
-    await datePickerYear.click();
+    await userEvent.click(datePickerYear);
     await userEvent.type(datePickerYear, "1999");
 
     // should not be null because date became valid
@@ -422,9 +408,7 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Clear day input
-    await datePickerDay.click();
-    await userEvent.keyboard("{ArrowRight}");
-    await userEvent.keyboard("{Backspace}");
+    await userEvent.clear(datePickerDay);
 
     // should be null because date became invalid
     await vi.waitFor(() => {
@@ -440,6 +424,7 @@ describe("Date Picker input type", () => {
     const Component = () => {
       return (
         <div>
+          <button data-testid="before-input">Before</button>
           <GoabDatePicker
             type="input"
             name="datePickerInputType"
@@ -452,26 +437,35 @@ describe("Date Picker input type", () => {
       );
     };
 
-    const result = render(<Component />);
-    const datePickerDay = result.getByTestId("input-day");
-    const datePickerYear = result.getByTestId("input-year");
-    const outside = result.getByTestId("outside-input");
+    render(<Component />);
+    const before = page.getByTestId("before-input");
+    const datePickerDay = page.getByTestId("input-day");
+    const datePickerYear = page.getByTestId("input-year");
+    const outside = page.getByTestId("outside-input");
 
-    await datePickerDay.click();
+    await vi.waitFor(() => {
+      expect(before).toBeVisible();
+      expect(datePickerDay).toBeVisible();
+      expect(datePickerYear).toBeVisible();
+    });
+
+    await userEvent.click(before);
+    await userEvent.tab();
 
     await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1);
     });
 
-    // Moving focus between the date picker's own fields should not re-fire onFocus or fire onBlur
-    (datePickerYear.element() as HTMLInputElement).focus();
+    // Moving focus between the date picker's own fields should not re-fire onFocus or fire onBlur.
+    await userEvent.click(datePickerDay);
+    await userEvent.click(datePickerYear);
 
     await vi.waitFor(() => {
       expect(onFocus).toHaveBeenCalledTimes(1);
       expect(onBlur).not.toHaveBeenCalled();
     });
 
-    (outside.element() as HTMLInputElement).focus();
+    await userEvent.click(outside);
 
     await vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalledTimes(1);
@@ -513,24 +507,28 @@ describe("DatePicker calendar popover position", () => {
 
   it("opens the calendar left-aligned when there is room on the right", async () => {
     const Component = () => (
-      <div style={{ position: "absolute", top: 0, left: "100px" }}>
+      <div
+        data-testid="left-alignment-case"
+        style={{ position: "absolute", top: 0, left: "100px" }}
+      >
         <GoabDatePicker testId="date-picker" value="2026-03-01" />
       </div>
     );
 
-    const result = render(<Component />);
-    const input = result.getByTestId("calendar-input");
+    render(<Component />);
+    const testCase = page.getByTestId("left-alignment-case");
+    const input = testCase.getByTestId("calendar-input");
     // The calendar contains month/year dropdowns with their own nested popovers,
     // so take the first (outermost) popover parts: the calendar's own.
-    const popoverContent = result.getByTestId("popover-content").first();
-    const popoverTarget = result.getByTestId("popover-target").first();
+    const popoverContent = testCase.getByTestId("popover-content").first();
+    const popoverTarget = testCase.getByTestId("popover-target").first();
 
     // Wait for the popover to be mounted before clicking: on a slow run a click
     // that lands before the popover's wiring is live does nothing.
     await vi.waitFor(() => {
       expect(popoverTarget).toBeVisible();
     });
-    await input.click();
+    await userEvent.click(input);
 
     await vi.waitFor(() => {
       expect(popoverContent).toBeVisible();
@@ -546,24 +544,28 @@ describe("DatePicker calendar popover position", () => {
     // calendar would be clipped by the screen and forced narrow. It should open
     // leftward instead, aligning its right edge to its trigger to keep full width.
     const Component = () => (
-      <div style={{ position: "absolute", top: 0, left: "1000px" }}>
+      <div
+        data-testid="right-alignment-case"
+        style={{ position: "absolute", top: 0, left: "1000px" }}
+      >
         <GoabDatePicker testId="date-picker" value="2026-03-01" />
       </div>
     );
 
-    const result = render(<Component />);
-    const input = result.getByTestId("calendar-input");
+    render(<Component />);
+    const testCase = page.getByTestId("right-alignment-case");
+    const input = testCase.getByTestId("calendar-input");
     // The calendar contains month/year dropdowns with their own nested popovers,
     // so take the first (outermost) popover parts: the calendar's own.
-    const popoverContent = result.getByTestId("popover-content").first();
-    const popoverTarget = result.getByTestId("popover-target").first();
+    const popoverContent = testCase.getByTestId("popover-content").first();
+    const popoverTarget = testCase.getByTestId("popover-target").first();
 
     // Wait for the popover to be mounted before clicking: on a slow run a click
     // that lands before the popover's wiring is live does nothing.
     await vi.waitFor(() => {
       expect(popoverTarget).toBeVisible();
     });
-    await input.click();
+    await userEvent.click(input);
 
     await vi.waitFor(() => {
       expect(popoverContent).toBeVisible();

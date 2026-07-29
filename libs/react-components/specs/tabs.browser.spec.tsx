@@ -463,7 +463,7 @@ describe("Tabs Browser Tests", () => {
       // Start from a clean hash: a previous test's leftover hash is no
       // longer silently wiped by clicking a tab (see fix for #3738), so it
       // would otherwise still be sitting in the URL when this test starts.
-      window.history.pushState({}, "", "/test");
+      window.history.replaceState({}, "", "/test");
 
       const Component = () => {
         return (
@@ -484,7 +484,9 @@ describe("Tabs Browser Tests", () => {
       });
 
       const secondTab = tablist.elements()[1];
-      await secondTab.click();
+      window.history.replaceState({}, "", "/test");
+      expect(window.location.hash).toBe("");
+      secondTab.click();
 
       // Hash should be the custom slug
       await vi.waitFor(() => {
@@ -576,7 +578,7 @@ describe("Tabs Browser Tests", () => {
       // Start from a clean hash: a previous test's leftover hash is no
       // longer silently wiped by clicking a tab (see fix for #3738), so it
       // would otherwise still be sitting in the URL when this test starts.
-      window.history.pushState({}, "", "/test");
+      window.history.replaceState({}, "", "/test");
 
       const Component = () => {
         return (
@@ -605,7 +607,9 @@ describe("Tabs Browser Tests", () => {
       });
 
       const secondTab = tabs.elements()[1];
-      await secondTab.click();
+      window.history.replaceState({}, "", "/test");
+      expect(window.location.hash).toBe("");
+      secondTab.click();
 
       // Hash should be the custom slug
       await vi.waitFor(() => {
