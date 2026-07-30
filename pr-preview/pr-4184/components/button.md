@@ -163,6 +163,7 @@ Tag: `goa-button`
 
 ## Examples
 
+- [Activate a specific tab with a button](/examples/activate-a-specific-tab-with-a-button)
 - [Add a filter chip](/examples/add-a-filter-chip)
 - [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
 - [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)

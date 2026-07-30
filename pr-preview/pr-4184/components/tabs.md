@@ -88,6 +88,7 @@ Tag: `goa-tabs`
 
 ## Examples
 
+- [Activate a specific tab with a button](/examples/activate-a-specific-tab-with-a-button)
 - [Set a specific tab to be active](/examples/set-a-specific-tab-to-be-active)
 - [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
 - [Index page](/examples/workspace/index-page): The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.
