@@ -10,7 +10,6 @@ import {
   GoabRadioItem,
   GoabText,
 } from "@abgov/react-components";
-import { Link } from "react-router-dom";
 
 const narrow: React.CSSProperties = { maxWidth: "20rem" };
 
@@ -28,11 +27,7 @@ export function Bug4140Route() {
     <GoabPageBlock width="full">
       <GoabOneColumnLayout>
         <GoabBlock direction="column" gap="l">
-          <goa-link mt={"xl"} leadingicon={"arrow-back"}>
-            <Link to="/">Back</Link>
-          </goa-link>
-
-          <GoabText tag="h1" size="heading-l" mb={"m"}>
+          <GoabText tag="h1" size="heading-l" mt={"xl"} mb={"m"}>
             Radio label vertical alignment
           </GoabText>
 
