@@ -69064,8 +69064,7 @@ function Bug4140Route() {
   const [wrappingDescribed, setWrappingDescribed] = reactExports.useState("deposit");
   const [compactWrapping, setCompactWrapping] = reactExports.useState("deposit");
   return /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabOneColumnLayout, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "column", gap: "l", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("goa-link", { mt: "xl", leadingicon: "arrow-back", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", children: "Back" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", size: "heading-l", mb: "m", children: "Radio label vertical alignment" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", size: "heading-l", mt: "xl", mb: "m", children: "Radio label vertical alignment" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { size: "body-m", children: "The radio label used to sit 3px too high, so it did not line up with the circle beside it. It was most noticeable at the compact size. Check that the label text looks vertically centred against the circle in every group below, and that it matches the checkbox list at the bottom." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", size: "heading-m", mt: "xl", mb: "m", children: "Default size" }),
