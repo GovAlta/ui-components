@@ -12,7 +12,7 @@ Allow the user to enter information, filter content, and make selections.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | (none) | Yes | Text label of the chip. |
+| `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
 | `error` | boolean | (none) | No | Shows an error state. |
 | `iconTheme` | GoabFilterChipTheme | `outline` | No | Theme style of the leading icon. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed at the start of the chip. |
@@ -29,6 +29,12 @@ Allow the user to enter information, filter content, and make selections.
 |-------|------|-------------|
 | `onClick` | () => void | Callback fired when the filter chip is clicked to remove it. |
 
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | Yes | Content displayed in the chip. Accepts a string or ReactNode for custom content. |
+
 ---
 
 ## Angular
@@ -37,7 +43,8 @@ Allow the user to enter information, filter content, and make selections.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `content` | string | (none) | No | Text label of the chip. |
+| `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
+| `content` | string \| TemplateRef<unknown> | (none) | No | Content displayed in the chip. Accepts a string or template for custom content. |
 | `deletable` | boolean | (none) | No | Marks the chip as deletable. |
 | `error` | boolean | (none) | No | Shows an error state. |
 | `iconTheme` | GoabChipTheme | (none) | No | Sets the icon theme style for the filter chip. |
@@ -55,6 +62,12 @@ Allow the user to enter information, filter content, and make selections.
 |-------|------|-------------|
 | `onClick` | () => void | Emits when the filter chip delete button is clicked. |
 
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | Yes | Content displayed in the chip. Accepts a string or ngTemplate for custom content. |
+
 ---
 
 ## Web Components
@@ -65,8 +78,8 @@ Tag: `goa-filter-chip`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | (none) | No | Accessible label for the filter chip. Defaults to content with 'removable' suffix. |
-| `content` | string | (none) | Yes | Text label of the chip. |
+| `arialabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
+| `content` | string | (none) | Yes | Content displayed in the chip. Use the content slot for custom HTML. |
 | `error` | boolean | `false` | No | Shows an error state. |
 | `leadingicon` | GoabIconType | (none) | No | Icon displayed at the start of the chip. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
@@ -81,6 +94,12 @@ Tag: `goa-filter-chip`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_click` | CustomEvent | (none) |
+
+### Slots
+
+| Slot | Required | Description |
+|------|----------|-------------|
+| `content` | Yes | Content displayed in the chip. Accepts a string or ReactNode for custom content. |
 
 ---
 
