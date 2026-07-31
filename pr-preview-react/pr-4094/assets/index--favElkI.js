@@ -85288,6 +85288,14 @@ function App() {
             label: "Everything",
             url: `${baseUrl}everything`
           }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabWorkSideMenuItem,
+          {
+            icon: "document-text",
+            label: "Public form",
+            url: `${baseUrl}public-form`
+          }
         )
       ] })
     }
