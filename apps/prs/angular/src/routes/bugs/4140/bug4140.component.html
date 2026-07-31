@@ -1,0 +1,182 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1" size="heading-l" mb="m">Radio label vertical alignment</goab-text>
+
+  <goab-text size="body-m">
+    The radio label used to sit 3px too high, so it did not line up with the circle beside it.
+    It was most noticeable at the compact size. Check that the label text looks vertically
+    centred against the circle in every group below, and that it matches the checkbox list at
+    the bottom.
+  </goab-text>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Default size</goab-text>
+  <goab-radio-group name="payment" [value]="payment">
+    <goab-radio-item value="deposit" label="Direct deposit"></goab-radio-item>
+    <goab-radio-item value="cheque" label="Cheque"></goab-radio-item>
+    <goab-radio-item value="card" label="Prepaid card"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Compact size</goab-text>
+  <goab-radio-group name="compactPayment" size="compact" [value]="compactPayment">
+    <goab-radio-item value="deposit" label="Direct deposit"></goab-radio-item>
+    <goab-radio-item value="cheque" label="Cheque"></goab-radio-item>
+    <goab-radio-item value="card" label="Prepaid card"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">With descriptions</goab-text>
+  <goab-radio-group name="described" [value]="described">
+    <goab-radio-item
+      value="deposit"
+      label="Direct deposit"
+      description="Funds arrive in 2 to 3 business days"></goab-radio-item>
+    <goab-radio-item
+      value="cheque"
+      label="Cheque"
+      description="Mailed to your address on file"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">With descriptions, compact</goab-text>
+  <goab-radio-group name="compactDescribed" size="compact" [value]="compactDescribed">
+    <goab-radio-item
+      value="deposit"
+      label="Direct deposit"
+      description="Funds arrive in 2 to 3 business days"></goab-radio-item>
+    <goab-radio-item
+      value="cheque"
+      label="Cheque"
+      description="Mailed to your address on file"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Some items with descriptions, some without
+  </goab-text>
+  <goab-radio-group name="mixed" [value]="mixed">
+    <goab-radio-item
+      value="deposit"
+      label="Direct deposit"
+      description="Funds arrive in 2 to 3 business days"></goab-radio-item>
+    <goab-radio-item value="cheque" label="Cheque"></goab-radio-item>
+    <goab-radio-item
+      value="card"
+      label="Prepaid card"
+      description="A card is mailed to your address on file"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Labels that wrap</goab-text>
+  <goab-text size="body-s" mb="m">
+    The circle stays at the top when the label wraps. Items with wrapping labels are 3px taller
+    than they were, which is the height their content actually needs.
+  </goab-text>
+  <div style="max-width: 20rem">
+    <goab-radio-group name="wrapping" [value]="wrapping">
+      <goab-radio-item
+        value="deposit"
+        label="Direct deposit into the account you have on file"></goab-radio-item>
+      <goab-radio-item
+        value="cheque"
+        label="A cheque mailed to your current mailing address"></goab-radio-item>
+      <goab-radio-item value="card" label="Prepaid card"></goab-radio-item>
+    </goab-radio-group>
+  </div>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Labels that wrap, with descriptions
+  </goab-text>
+  <div style="max-width: 20rem">
+    <goab-radio-group name="wrappingDescribed" [value]="wrappingDescribed">
+      <goab-radio-item
+        value="deposit"
+        label="Direct deposit into the account on file"
+        description="Funds arrive in two to three business days after approval"></goab-radio-item>
+      <goab-radio-item
+        value="cheque"
+        label="A cheque mailed to your address"
+        description="Allow ten business days for delivery by mail"></goab-radio-item>
+    </goab-radio-group>
+  </div>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Labels that wrap, compact, with descriptions
+  </goab-text>
+  <div style="max-width: 20rem">
+    <goab-radio-group name="compactWrapping" size="compact" [value]="compactWrapping">
+      <goab-radio-item
+        value="deposit"
+        label="Direct deposit into the account on file"
+        description="Funds arrive in two to three business days"></goab-radio-item>
+      <goab-radio-item
+        value="cheque"
+        label="A cheque mailed to your address"
+        description="Allow ten business days for delivery"></goab-radio-item>
+    </goab-radio-group>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Checkbox list, for comparison</goab-text>
+  <goab-text size="body-s" mb="m">
+    The radio labels should sit the same way against their circle as these labels do against
+    their box.
+  </goab-text>
+
+  <goab-checkbox-list name="cbDefault">
+    <goab-checkbox name="cbDeposit" text="Direct deposit"></goab-checkbox>
+    <goab-checkbox name="cbCheque" text="Cheque"></goab-checkbox>
+    <goab-checkbox name="cbCard" text="Prepaid card"></goab-checkbox>
+  </goab-checkbox-list>
+
+  <goab-text tag="h3" size="heading-s" mt="l" mb="m">Compact</goab-text>
+  <goab-checkbox-list name="cbCompact" size="compact">
+    <goab-checkbox name="cbcDeposit" size="compact" text="Direct deposit"></goab-checkbox>
+    <goab-checkbox name="cbcCheque" size="compact" text="Cheque"></goab-checkbox>
+    <goab-checkbox name="cbcCard" size="compact" text="Prepaid card"></goab-checkbox>
+  </goab-checkbox-list>
+
+  <goab-text tag="h3" size="heading-s" mt="l" mb="m">With descriptions</goab-text>
+  <goab-checkbox-list name="cbDescribed">
+    <goab-checkbox
+      name="cbdDeposit"
+      text="Direct deposit"
+      description="Funds arrive in 2 to 3 business days"></goab-checkbox>
+    <goab-checkbox
+      name="cbdCheque"
+      text="Cheque"
+      description="Mailed to your address on file"></goab-checkbox>
+  </goab-checkbox-list>
+
+  <goab-text tag="h3" size="heading-s" mt="l" mb="m">Labels that wrap</goab-text>
+  <div style="max-width: 20rem">
+    <goab-checkbox-list name="cbWrapping">
+      <goab-checkbox
+        name="cbwDeposit"
+        text="Direct deposit into the account you have on file"></goab-checkbox>
+      <goab-checkbox
+        name="cbwCheque"
+        text="A cheque mailed to your current mailing address"></goab-checkbox>
+    </goab-checkbox-list>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Disabled and error</goab-text>
+  <goab-radio-group name="disabledGroup" value="one" [disabled]="true">
+    <goab-radio-item
+      value="one"
+      label="Disabled"
+      description="With a description"></goab-radio-item>
+    <goab-radio-item value="two" label="Also disabled"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-radio-group name="errorGroup" value="one" [error]="true" mt="l" mb="2xl">
+    <goab-radio-item
+      value="one"
+      label="Error state"
+      description="With a description"></goab-radio-item>
+    <goab-radio-item value="two" label="Second item"></goab-radio-item>
+  </goab-radio-group>
+</goab-block>
