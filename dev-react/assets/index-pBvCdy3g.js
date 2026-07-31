@@ -74490,6 +74490,9 @@ const __vite_glob_0_135 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   default: table_route
 }, Symbol.toStringTag, { value: "Module" }));
 function DocsTabsRoute() {
+  const activateDetailsTab = () => {
+    window.location.hash = "button-example-details";
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Tabs" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic tabs" }),
@@ -74509,6 +74512,12 @@ function DocsTabsRoute() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTab, { heading: "First", children: "First tab content." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTab, { heading: "Second", children: "Second tab content (initially shown)." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTab, { heading: "Third", children: "Third tab content." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Activate a tab with a button" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { onClick: activateDetailsTab, children: "Open details" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabTabs, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTab, { heading: "Summary", slug: "button-example-summary", children: "Summary content goes here." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabTab, { heading: "Details", slug: "button-example-details", children: "Detailed information goes here." })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With badge in heading" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabTabs, { children: [
@@ -83992,7 +84001,7 @@ const __vite_glob_0_187 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/assets/tokens-DvUBAKM-.css";
+const v2TokensUrl = "/assets/tokens-CBPEJ9qh.css";
 function Feat3636Route() {
   reactExports.useEffect(() => {
     const link = document.createElement("link");

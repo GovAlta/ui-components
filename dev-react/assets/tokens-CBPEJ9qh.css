@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 24 Jun 2026 16:58:34 GMT
+ * Generated on Tue, 28 Jul 2026 23:57:40 GMT
  */
 
 :root {
@@ -270,6 +270,7 @@
   --goa-side-menu-item-focus-outline-offset: -3px;
   --goa-scrollable-padding-mobile: 1.5rem;
   --goa-scrollable-padding-desktop: 2rem;
+  --goa-scroll-panel-content-shadow-horizontal: rgba(0,0,0,0.1);
   --goa-scroll-panel-content-shadow-top-bottom: inset 0px 4px 8px -4px rgba(0,0,0,0.175), inset 0px -4px 8px -4px rgba(0,0,0,0.175);
   --goa-scroll-panel-content-shadow-top: inset 0px 4px 8px -4px rgba(0,0,0,0.25);
   --goa-scroll-panel-content-shadow-bottom: inset 0px -4px 8px -4px rgba(0,0,0,0.25);
@@ -319,6 +320,9 @@
   --goa-filter-chip-min-width: 56px;
   --goa-filter-chip-label-gap: 0.375rem;
   --goa-filter-chip-padding-vertical: 0.3125rem;
+  --goa-dropdown-multiselect-compact-height: 40px;
+  --goa-dropdown-multiselect-transition: box-shadow 0.05s ease-in;
+  --goa-dropdown-multiselect-height: 56px;
   --goa-dropdown-compact-height: 40px;
   --goa-dropdown-transition: box-shadow 0.05s ease-in;
   --goa-dropdown-height: 56px;
@@ -689,7 +693,7 @@
   --goa-modal-callout-information-icon: var(--goa-color-info-default);
   --goa-modal-callout-information-border: var(--goa-color-info-border);
   --goa-modal-callout-information-bg: var(--goa-color-info-light);
-  --goa-modal-actions-padding-mobile: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-m) var(--goa-space-m);
+  --goa-modal-actions-padding-mobile: var(--goa-space-m);
   --goa-modal-content-padding-desktop: var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl) var(--goa-space-l);
   --goa-modal-content-padding-mobile: var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m);
   --goa-modal-callout-heading-padding-mobile: var(--goa-space-m);
@@ -697,7 +701,7 @@
   --goa-modal-callout-heading-padding: var(--goa-space-m) var(--goa-space-l);
   --goa-modal-scrollable-padding-mobile: var(--goa-space-m);
   --goa-modal-scrollable-padding-desktop: var(--goa-space-l);
-  --goa-modal-actions-padding: var(--goa-space-xs) var(--goa-space-xl) var(--goa-space-xl) var(--goa-space-xl);
+  --goa-modal-actions-padding: var(--goa-space-l);
   --goa-modal-content-padding: var(--goa-space-xl) 0 var(--goa-space-xl) 0;
   --goa-modal-heading-padding: 20px var(--goa-space-l);
   --goa-modal-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
@@ -752,6 +756,9 @@
   --goa-text-input-space-btw-icon-text: var(--goa-space-xs);
   --goa-text-input-padding-lr: var(--goa-space-m);
   --goa-text-input-lt-content-color-bg: var(--goa-color-greyscale-150);
+  --goa-icon-button-tertiary-destructive-border-color: var(--goa-color-emergency-light);
+  --goa-icon-button-tertiary-border-color: var(--goa-color-greyscale-200);
+  --goa-icon-button-tertiary-border-width: var(--goa-border-width-s);
   --goa-icon-button-destructive-disabled-color: var(--goa-color-greyscale-500);
   --goa-icon-button-destructive-hover-color-bg: var(--goa-color-emergency-light);
   --goa-icon-button-destructive-hover-color: var(--goa-color-emergency-dark);
@@ -878,6 +885,20 @@
   --goa-file-upload-border-drag: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
   --goa-file-upload-border-active: var(--goa-border-width-m) solid var(--goa-color-interactive-hover);
   --goa-file-upload-border: var(--goa-border-width-m) dashed var(--goa-color-interactive-default);
+  --goa-dropdown-multiselect-divider: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  --goa-dropdown-multiselect-compact-item-padding: 0 var(--goa-space-xs);
+  --goa-dropdown-multiselect-compact-padding: 0 var(--goa-space-s);
+  --goa-dropdown-multiselect-menu-margin: var(--goa-space-xs);
+  --goa-dropdown-multiselect-space-icon-text: var(--goa-space-s);
+  --goa-dropdown-multiselect-padding-lr: var(--goa-space-s);
+  --goa-dropdown-multiselect-padding-vertical: var(--goa-space-m);
+  --goa-dropdown-multiselect-padding: var(--goa-space-m) var(--goa-space-s);
+  --goa-dropdown-multiselect-item-border-radius: var(--goa-border-radius-s);
+  --goa-dropdown-multiselect-item-padding: var(--goa-space-s) var(--goa-space-xs);
+  --goa-dropdown-multiselect-item-color-text-selected: var(--goa-color-greyscale-white);
+  --goa-dropdown-multiselect-item-color-bg-selected-hover: var(--goa-color-interactive-hover);
+  --goa-dropdown-multiselect-item-color-bg-selected: var(--goa-color-interactive-default);
+  --goa-dropdown-multiselect-item-color-bg-hover: var(--goa-color-greyscale-100);
   --goa-dropdown-compact-item-padding: 0 var(--goa-space-xs);
   --goa-dropdown-compact-padding: 0 var(--goa-space-s);
   --goa-dropdown-menu-margin: var(--goa-space-xs);
@@ -1258,6 +1279,29 @@
   --goa-filter-chip-text-color: var(--goa-color-text-default);
   --goa-file-upload-instruction-text: var(--goa-typography-body-m);
   --goa-file-upload-help-text: var(--goa-typography-body-s);
+  --goa-dropdown-multiselect-compact-item-typography: var(--goa-typography-body-s);
+  --goa-dropdown-multiselect-compact-typography: var(--goa-typography-body-s);
+  --goa-dropdown-multiselect-menu-border-radius: var(--goa-input-border-radius-input);
+  --goa-dropdown-multiselect-helper-typography: var(--goa-typography-body-xs);
+  --goa-dropdown-multiselect-label-typography: var(--goa-typography-body-m);
+  --goa-dropdown-multiselect-typography: var(--goa-typography-body-m);
+  --goa-dropdown-multiselect-item-color-text-selected-hover: var(--goa-color-text-light);
+  --goa-dropdown-multiselect-item-color-text-hover: var(--goa-color-text-default);
+  --goa-dropdown-multiselect-item-color-text-disabled: var(--goa-color-text-disabled);
+  --goa-dropdown-multiselect-item-color-text: var(--goa-color-text-secondary);
+  --goa-dropdown-multiselect-item-color-bg-disabled: var(--goa-input-color-background-disabled);
+  --goa-dropdown-multiselect-item-color-bg: var(--goa-input-color-background-default);
+  --goa-dropdown-multiselect-color-text-error: var(--goa-input-color-text-error);
+  --goa-dropdown-multiselect-color-text-disabled: var(--goa-input-color-text-disabled);
+  --goa-dropdown-multiselect-color-bg-disabled: var(--goa-input-color-background-disabled);
+  --goa-dropdown-multiselect-color-bg: var(--goa-input-color-background-default);
+  --goa-dropdown-multiselect-border-radius: var(--goa-input-border-radius-input);
+  --goa-dropdown-multiselect-border-error-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error-hover);
+  --goa-dropdown-multiselect-border-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-hover);
+  --goa-dropdown-multiselect-border-focus: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-focus);
+  --goa-dropdown-multiselect-border-error: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error);
+  --goa-dropdown-multiselect-border-disabled: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-disabled);
+  --goa-dropdown-multiselect-border: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-default);
   --goa-dropdown-compact-item-typography: var(--goa-typography-body-s);
   --goa-dropdown-compact-typography: var(--goa-typography-body-s);
   --goa-dropdown-menu-border-radius: var(--goa-input-border-radius-input);
@@ -1345,6 +1389,8 @@
   --goa-accordion-color-heading-hover: var(--goa-color-text-default);
   --goa-accordion-color-heading: var(--goa-color-text-default);
   --goa-text-input-color-text: var(--goa-input-color-text-default);
+  --goa-dropdown-multiselect-color-text-placeholder: var(--goa-input-color-text-default);
+  --goa-dropdown-multiselect-color-text: var(--goa-input-color-text-default);
   --goa-dropdown-color-text-placeholder: var(--goa-input-color-text-default);
   --goa-dropdown-color-text: var(--goa-input-color-text-default);
   --goa-date-input-day-color-text-hover: var(--goa-input-color-text-default);
