@@ -5,7 +5,7 @@ export function ShowStatusOnACard() {
     <GoabContainer
       type="non-interactive"
       accent="thick"
-      heading="Heading"
+      title="Heading"
       actions={<GoabBadge type="important" content="Priority" />}
     >
       Content

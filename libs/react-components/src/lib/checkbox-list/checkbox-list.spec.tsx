@@ -84,6 +84,38 @@ describe("GoabCheckboxList", () => {
     expect(onChangeStub).toBeCalled();
   });
 
+  it("should handle onFocus and onBlur events", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const props: CheckboxListProps = {
+      name: "foo",
+      onFocus,
+      onBlur,
+    };
+
+    render(<GoabCheckboxList {...props} />);
+    const checkboxList = document.querySelector("goa-checkbox-list");
+
+    checkboxList &&
+      fireEvent(
+        checkboxList,
+        new CustomEvent("_focus", { detail: { name: "foo" } }),
+      );
+    expect(onFocus).toBeCalledWith(
+      expect.objectContaining({ name: "foo", event: expect.any(Event) }),
+    );
+
+    checkboxList &&
+      fireEvent(
+        checkboxList,
+        new CustomEvent("_blur", { detail: { name: "foo" } }),
+      );
+    expect(onBlur).toBeCalledWith(
+      expect.objectContaining({ name: "foo", event: expect.any(Event) }),
+    );
+  });
+
   it("should render children", () => {
     render(
       <GoabCheckboxList name="foo">

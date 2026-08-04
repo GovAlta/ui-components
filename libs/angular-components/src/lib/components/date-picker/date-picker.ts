@@ -1,7 +1,9 @@
 import {
   CalendarDate,
   GoabDatePickerInputType,
+  GoabDatePickerOnBlurDetail,
   GoabDatePickerOnChangeDetail,
+  GoabDatePickerOnFocusDetail,
   Once,
 } from "@abgov/ui-components-common";
 import {
@@ -43,6 +45,8 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.mr]="mr"
       [attr.version]="version"
       (_change)="_onChange($event)"
+      (_focus)="_onFocus($event)"
+      (_blur)="_onBlur($event)"
     >
     </goa-date-picker>
   }`,
@@ -80,6 +84,10 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
 
   /** Emits when the selected date changes. Emits the date picker change detail including name and value. */
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
+  /** Emits when focus enters any of the date picker's internal fields. */
+  @Output() onFocus = new EventEmitter<GoabDatePickerOnFocusDetail>();
+  /** Emits when focus leaves all of the date picker's internal fields. */
+  @Output() onBlur = new EventEmitter<GoabDatePickerOnBlurDetail>();
 
   private once: Once = new Once();
 
@@ -115,6 +123,17 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.value);
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabDatePickerOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabDatePickerOnBlurDetail>).detail, event: e };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 
 

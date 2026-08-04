@@ -5,7 +5,7 @@
  * Takes guidance entries and renders them with appropriate do/don't styling.
  * Uses the DoDont component (ported from ui-components-docs).
  */
-import type { CollectionEntry } from 'astro:content';
+import { render, type CollectionEntry } from 'astro:content';
 import DoDont from './DoDont.astro';
 import Preview from './Preview.astro';
 import InfoCard from './InfoCard.astro';
@@ -39,7 +39,7 @@ const mdxComponents = { Preview, InfoCard };
           {infoItems.length > 0 && (
             <div class="guidance-info-items">
               {infoItems.map(async (item) => {
-                const { Content } = await item.render();
+                const { Content } = await render(item);
                 return (
                   <DoDont
                     type={item.data.type}
@@ -58,7 +58,7 @@ const mdxComponents = { Preview, InfoCard };
           {otherItems.length > 0 && (
             <div class="guidance-grid">
               {otherItems.map(async (item) => {
-                const { Content } = await item.render();
+                const { Content } = await render(item);
                 return (
                   <DoDont
                     type={item.data.type}

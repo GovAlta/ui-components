@@ -1,12 +1,14 @@
 <svelte:options customElement="goa-details" />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import {
     toBoolean,
     validateRequired,
     generateRandomId,
+    performOnce,
+    watch,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -30,8 +32,11 @@
   let _isMouseOver: boolean = false;
   let _summaryEl: HTMLElement;
   let _detailsId: string = "";
+  let _shouldAnnounce: boolean = false;
+  let _announcementTimeoutId: ReturnType<typeof setTimeout>;
 
   $: _isOpen = toBoolean(open);
+  $: watch(updateAnnouncement, [_isOpen]);
 
   onMount(async () => {
     _detailsId = `details-${generateRandomId()}`;
@@ -47,6 +52,18 @@
       _isMouseOver = false;
     });
   });
+
+  onDestroy(() => clearTimeout(_announcementTimeoutId));
+
+  function updateAnnouncement() {
+    _shouldAnnounce = false;
+    // Give Safari time to expose the expanded content before adding the alert role.
+    _announcementTimeoutId = performOnce(_announcementTimeoutId, () => {
+      if (_isOpen) {
+        _shouldAnnounce = true;
+      }
+    }, 100);
+  }
 </script>
 
 <details
@@ -79,7 +96,9 @@
     aria-labelledby={`${_detailsId}-heading`}
     id={`${_detailsId}-content`}
   >
-    <slot />
+    <div role={_shouldAnnounce ? "alert" : undefined}>
+      <slot />
+    </div>
   </div>
 </details>
 

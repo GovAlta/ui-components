@@ -39,4 +39,32 @@ describe("IconButton", () => {
       });
     });
   });
+
+  describe("Types", () => {
+    ["default", "tertiary"].forEach(type => {
+      it(`renders the ${type} type`, async () => {
+        const el = render(GoAIconButton, {
+          testid: "iconButton-test", icon: "ellipsis",
+          type: type,
+        });
+        const iconButton = await el.findByTestId("iconButton-test");
+
+        expect(iconButton).toBeTruthy();
+        expect(iconButton.className).toContain(`${type}`);
+      });
+    });
+
+    it("renders the tertiary type combined with a variant", async () => {
+      const el = render(GoAIconButton, {
+        testid: "iconButton-test", icon: "ellipsis",
+        type: "tertiary",
+        variant: "destructive",
+      });
+      const iconButton = await el.findByTestId("iconButton-test");
+
+      expect(iconButton).toBeTruthy();
+      expect(iconButton.className).toContain("tertiary");
+      expect(iconButton.className).toContain("destructive");
+    });
+  });
 })

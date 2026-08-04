@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
+import GoADropdownSlotWrapper from "./DropdownSlotWrapper.test.svelte";
 import { describe, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
@@ -424,6 +425,47 @@ describe("GoADropdown", () => {
           });
         },
       );
+
+      it.each`
+        query        | expectedOption | because
+        ${"alber"}   | ${"Alberta"}   | ${"an item without a label is matched by its value"}
+        ${"wild"}    | ${"ca-on"}     | ${"the filter property is matched"}
+        ${"ontar"}   | ${"ca-on"}     | ${"the label is matched alongside the filter property"}
+        ${"ca-"}     | ${null}        | ${"the value is not matched once a label is set"}
+        ${"zzz"}     | ${null}        | ${"unrelated text matches nothing"}
+      `(
+        `search for $query matches $expectedOption: $because`,
+        async ({ query, expectedOption }) => {
+          const result = render(GoADropdownSlotWrapper, {
+            name,
+            filterable: "true",
+            items: [
+              { value: "Alberta" },
+              { value: "ca-on", label: "Ontario", filter: "wild rose" },
+            ],
+          });
+
+          const input = result.getByTestId("input") as HTMLInputElement;
+          await fireEvent.focus(input);
+          await fireEvent.keyUp(input, { key: query[0] });
+          await fireEvent.input(input, { target: { value: query } });
+
+          await waitFor(() => {
+            const liElements = result.container.querySelectorAll("li");
+            expect(liElements.length).toBe(1);
+
+            if (expectedOption === null) {
+              expect(liElements[0].getAttribute("data-testid")).toBe(
+                "dropdown-item-not-found",
+              );
+            } else {
+              expect(liElements[0].getAttribute("data-value")).toBe(
+                expectedOption,
+              );
+            }
+          });
+        },
+      );
     });
 
     it("can be selected programmatically", async () => {
@@ -488,6 +530,35 @@ describe("GoADropdown", () => {
         );
         expect(liElements[0].getAttribute("class")).not.toContain("selected");
         expect(liElements.length).toBe(items.length);
+      });
+    });
+  });
+
+  describe("focus and blur events", () => {
+    it("dispatches _focus when focus enters and _blur when focus leaves the dropdown", async () => {
+      const result = render(GoADropdownWrapper, { name, value: "orange", items });
+      const dropdown = result.queryByTestId("favcolor-dropdown");
+      const inputField = dropdown?.querySelector("input") as HTMLInputElement;
+
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+      dropdown?.addEventListener("_focus", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onFocus();
+      });
+      dropdown?.addEventListener("_blur", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(name);
+        onBlur();
+      });
+
+      inputField.focus();
+      await waitFor(() => {
+        expect(onFocus).toHaveBeenCalledTimes(1);
+      });
+
+      inputField.blur();
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -1169,6 +1240,18 @@ describe("GoADropdown", () => {
       });
     });
 
+    it("should calculate width from numeric options", async () => {
+      const result = render(GoADropdownWrapper, {
+        name: "test",
+        items: [1, 20, 100],
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 10ch");
+      });
+    });
+
     describe("Popover width behavior", () => {
       it("should set popover max width to min(_width, 100%) for non-percentage widths", async () => {
         const result = render(GoADropdownWrapper, {
@@ -1281,6 +1364,146 @@ describe("GoADropdown", () => {
         const dropdown = result.container.querySelector(".dropdown");
         expect(dropdown?.getAttribute("style")).toContain("--width: 300px");
         expect(dropdown?.getAttribute("style")).not.toContain("--width: 500px");
+      });
+    });
+  });
+
+  describe("item slots", () => {
+    it("should render a named slot in the menu for items with slotted content", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        items: [
+          { value: "apple", label: "Apple", text: "Apple", meta: "In stock" },
+          { value: "plain", label: "Plain" },
+        ],
+      });
+
+      await waitFor(() => {
+        expect(result.container.querySelectorAll("li").length).toBe(2);
+      });
+
+      const richOption = result.getByTestId("dropdown-item-apple");
+      const plainOption = result.getByTestId("dropdown-item-plain");
+      expect(
+        richOption.querySelector("slot[name='option-apple']"),
+      ).not.toBeNull();
+      expect(richOption).toHaveTextContent("");
+      expect(plainOption.querySelector("slot")).toBeNull();
+      expect(plainOption).toHaveTextContent("Plain");
+    });
+
+    it("should filter items by the text of their slotted content", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        filterable: "true",
+        items: [
+          { value: "apple", label: "Apple", text: "Apple", meta: "Fruit" },
+          { value: "banana", label: "Banana", text: "Banana", meta: "Fruit" },
+        ],
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "b" });
+      await fireEvent.input(input, { target: { value: "ban" } });
+
+      await waitFor(() => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(1);
+        expect(liElements[0].getAttribute("data-value")).toBe("banana");
+      });
+    });
+
+    it("should keep text in adjacent slotted elements word-separated when filtering", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        filterable: "true",
+        items: [
+          { value: "apple", label: "Apple", text: "Apple", meta: "Orchard" },
+          { value: "banana", label: "Banana", text: "Banana", meta: "Tropics" },
+        ],
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "t" });
+      await fireEvent.input(input, { target: { value: "trop" } });
+
+      await waitFor(() => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(1);
+        expect(liElements[0].getAttribute("data-value")).toBe("banana");
+      });
+    });
+
+    it("should filter by the filter property over the slotted content text", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        filterable: "true",
+        items: [
+          { value: "apple", label: "Apple", filter: "alpha", text: "Orchard" },
+        ],
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "o" });
+      await fireEvent.input(input, { target: { value: "orch" } });
+
+      const notFoundOption = result.getByTestId("dropdown-item-not-found");
+      await waitFor(() => {
+        expect(notFoundOption).toHaveTextContent("No matches found");
+      });
+
+      await fireEvent.keyUp(input, { key: "a" });
+      await fireEvent.input(input, { target: { value: "alp" } });
+
+      await waitFor(() => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(1);
+        expect(liElements[0].getAttribute("data-value")).toBe("apple");
+      });
+    });
+
+    it("should filter by the label of an item that sets the filter property", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        filterable: "true",
+        items: [
+          { value: "apple", label: "Apple", filter: "alpha", text: "Orchard" },
+        ],
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "a" });
+      await fireEvent.input(input, { target: { value: "app" } });
+
+      await waitFor(() => {
+        const liElements = result.container.querySelectorAll("li");
+        expect(liElements.length).toBe(1);
+        expect(liElements[0].getAttribute("data-value")).toBe("apple");
+      });
+    });
+
+    it("should show the label in the input when a slotted item is selected", async () => {
+      const result = render(GoADropdownSlotWrapper, {
+        name,
+        items: [
+          { value: "apple", label: "Apple", text: "Apple", meta: "In stock" },
+        ],
+      });
+
+      await waitFor(() => {
+        expect(result.container.querySelectorAll("li").length).toBe(1);
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      const option = result.getByTestId("dropdown-item-apple");
+      await fireEvent.click(option);
+
+      await waitFor(() => {
+        expect(input.value).toBe("Apple");
       });
     });
   });

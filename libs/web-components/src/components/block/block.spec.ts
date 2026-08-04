@@ -25,3 +25,22 @@ it("it renders", async () => {
     "margin-left:var(--goa-space-xl)",
   );
 });
+
+it("applies the stretch class when stretch is true", async () => {
+  const { queryByTestId } = render(Block, {
+    testid: "block",
+    stretch: "true",
+  });
+
+  const el = queryByTestId("block");
+  expect(el?.classList.contains("stretch")).toBe(true);
+});
+
+it("does not apply the stretch class by default", async () => {
+  const { queryByTestId } = render(Block, {
+    testid: "block",
+  });
+
+  const el = queryByTestId("block");
+  expect(el?.classList.contains("stretch")).toBe(false);
+});

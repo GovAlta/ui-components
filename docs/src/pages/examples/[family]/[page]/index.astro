@@ -16,9 +16,9 @@ export async function getStaticPaths() {
   const examples = await getCollection('examples');
   // Nested page-scale entries whose slug is "<productType>/<page>". Today's
   // set: workspace/dashboard, workspace/index-page, workspace/case-detail.
-  const nested = examples.filter((e) => e.slug.includes('/') && e.data.size === 'page');
+  const nested = examples.filter((e) => e.id.includes('/') && e.data.size === 'page');
   return nested.map((entry) => {
-    const [family, page] = entry.slug.split('/');
+    const [family, page] = entry.id.split('/');
     return {
       params: { family, page },
       props: { entry },

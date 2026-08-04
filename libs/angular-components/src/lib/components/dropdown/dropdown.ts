@@ -1,5 +1,7 @@
 import {
+  GoabDropdownOnBlurDetail,
   GoabDropdownOnChangeDetail,
+  GoabDropdownOnFocusDetail,
   GoabDropdownSize,
   GoabIconType,
 } from "@abgov/ui-components-common";
@@ -53,6 +55,8 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.size]="size"
         [id]="id"
         (_change)="_onChange($event)"
+        (_focus)="_onFocus($event)"
+        (_blur)="_onBlur($event)"
       >
         <ng-content />
       </goa-dropdown>
@@ -101,6 +105,10 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Input() relative?: boolean;
   /** Emits when the user selects a value from the dropdown. Emits a GoabDropdownOnChangeDetail object with the new value. */
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
+  /** Emits when the dropdown receives focus. */
+  @Output() onFocus = new EventEmitter<GoabDropdownOnFocusDetail>();
+  /** Emits when the dropdown loses focus. */
+  @Output() onBlur = new EventEmitter<GoabDropdownOnBlurDetail>();
 
   isReady = false;
   version = "2";
@@ -122,5 +130,16 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
 
     this.markAsTouched();
     this.fcChange?.(detail.value || "");
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabDropdownOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabDropdownOnBlurDetail>).detail, event: e };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 }

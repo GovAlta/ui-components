@@ -32,7 +32,12 @@
   }
 
   function handleMouseEnter() {
-    dispatch(_rootEl, "_hoverItem", { el: _rootEl, label: heading }, { bubbles: true });
+    dispatch(
+      _rootEl,
+      "_hoverItem",
+      { el: _rootEl, label: heading },
+      { bubbles: true },
+    );
   }
 </script>
 
@@ -45,7 +50,11 @@
   >
     <summary aria-expanded={open}>
       {#if icon}
-        <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"} />
+        <goa-icon
+          type={icon}
+          size="small"
+          theme={open ? "filled" : "outline"}
+        />
       {/if}
       <span class="label">{heading}</span>
       <goa-icon class="marker-icon" type="chevron-forward" size="small" />
@@ -111,7 +120,7 @@
 
   summary:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: 2px;
+    outline-offset: calc(0px - var(--goa-border-width-l));
   }
   summary goa-icon {
     margin-top: var(--goa-space-3xs);
@@ -171,9 +180,9 @@
     details[open] summary {
       background: transparent;
       color: var(
-      --goa-work-side-menu-item-text-color,
-      var(--goa-color-greyscale-600)
-    );
+        --goa-work-side-menu-item-text-color,
+        var(--goa-color-greyscale-600)
+      );
     }
   }
 

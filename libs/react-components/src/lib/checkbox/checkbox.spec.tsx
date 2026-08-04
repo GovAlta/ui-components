@@ -148,6 +148,49 @@ describe("GoabCheckbox", () => {
     expect(onChangeStub).toBeCalled();
   });
 
+  it("should handle the onFocus and onBlur events", async function () {
+    const onFocusStub = vi.fn();
+    const onBlurStub = vi.fn();
+
+    const props: CheckboxProps = {
+      name: "foo",
+      value: "bar",
+      onFocus: ({ name, value, checked }) => {
+        expect(name).toBe("foo");
+        expect(value).toBe("bar");
+        expect(checked).toBeFalsy();
+        onFocusStub();
+      },
+      onBlur: ({ name, value, checked }) => {
+        expect(name).toBe("foo");
+        expect(value).toBe("bar");
+        expect(checked).toBeFalsy();
+        onBlurStub();
+      },
+    };
+
+    render(<GoabCheckbox {...props} />);
+    const checkbox = document.querySelector("goa-checkbox");
+
+    checkbox &&
+      fireEvent(
+        checkbox,
+        new CustomEvent("_focus", {
+          detail: { name: "foo", value: "bar", checked: false },
+        }),
+      );
+    expect(onFocusStub).toBeCalledTimes(1);
+
+    checkbox &&
+      fireEvent(
+        checkbox,
+        new CustomEvent("_blur", {
+          detail: { name: "foo", value: "bar", checked: false },
+        }),
+      );
+    expect(onBlurStub).toBeCalledTimes(1);
+  });
+
   it("should pass data-grid attributes", () => {
     render(
       <GoabCheckbox

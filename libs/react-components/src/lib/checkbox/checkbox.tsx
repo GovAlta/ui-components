@@ -1,6 +1,8 @@
 import {
   DataAttributes,
+  GoabCheckboxOnBlurDetail,
   GoabCheckboxOnChangeDetail,
+  GoabCheckboxOnFocusDetail,
   GoabCheckboxSize,
   Margins,
 } from "@abgov/ui-components-common";
@@ -74,6 +76,10 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
   size?: GoabCheckboxSize;
   /** Callback fired when the checkbox selection changes. */
   onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
+  /** Callback fired when the checkbox receives focus. */
+  onFocus?: (detail: GoabCheckboxOnFocusDetail) => void;
+  /** Callback fired when the checkbox loses focus. */
+  onBlur?: (detail: GoabCheckboxOnBlurDetail) => void;
 }
 
 // legacy
@@ -89,6 +95,8 @@ export function GoabCheckbox({
   description,
   reveal,
   onChange,
+  onFocus,
+  onBlur,
   name,
   children,
   size = "default",
@@ -107,13 +115,25 @@ export function GoabCheckbox({
       const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
       onChange?.({ ...detail, event: e });
     };
+    const focusListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabCheckboxOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e });
+    };
+    const blurListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabCheckboxOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
 
     current.addEventListener("_change", listener);
+    current.addEventListener("_focus", focusListener);
+    current.addEventListener("_blur", blurListener);
 
     return () => {
       current.removeEventListener("_change", listener);
+      current.removeEventListener("_focus", focusListener);
+      current.removeEventListener("_blur", blurListener);
     };
-  }, [name, onChange]);
+  }, [name, onChange, onFocus, onBlur]);
 
   return (
     <goa-checkbox

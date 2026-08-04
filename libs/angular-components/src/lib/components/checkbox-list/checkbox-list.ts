@@ -1,5 +1,7 @@
 import {
+  GoabCheckboxListOnBlurDetail,
   GoabCheckboxListOnChangeDetail,
+  GoabCheckboxListOnFocusDetail,
   GoabCheckboxSize,
 } from "@abgov/ui-components-common";
 import {
@@ -36,6 +38,8 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.ml]="ml"
       [attr.mr]="mr"
       (_change)="_onChange($event)"
+      (_focus)="_onFocus($event)"
+      (_blur)="_onBlur($event)"
     >
       <ng-content />
     </goa-checkbox-list>
@@ -77,6 +81,10 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
 
   /** Emits when a checkbox selection changes. Emits the change detail including name, value array, and event. */
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
+  /** Emits when focus enters any checkbox in the list. */
+  @Output() onFocus = new EventEmitter<GoabCheckboxListOnFocusDetail>();
+  /** Emits when focus leaves all checkboxes in the list. */
+  @Output() onBlur = new EventEmitter<GoabCheckboxListOnBlurDetail>();
 
   _onChange(e: Event) {
     const detail = {
@@ -91,6 +99,17 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
     // clone to ensure a new reference so the underlying web component updates
     this.value = [...selectedValues];
     this.fcChange?.([...selectedValues]);
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabCheckboxListOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabCheckboxListOnBlurDetail>).detail, event: e };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 
   // Simplified writeValue - expects array input directly

@@ -1,0 +1,33 @@
+<goab-text tag="h1" mt="m">Feature #2374: Badge rich content</goab-text>
+
+<goab-text tag="h3">1. Text content</goab-text>
+<goab-badge type="information" content="Text only"></goab-badge>
+
+<goab-text tag="h3">2. Bold text</goab-text>
+<goab-badge type="information" [content]="boldContent"></goab-badge>
+
+<goab-text tag="h3">3. Strikethrough text</goab-text>
+<goab-badge type="information" [content]="strikethroughContent"></goab-badge>
+
+<goab-text tag="h3">4. Underline text</goab-text>
+<goab-badge type="information" [content]="underlineContent"></goab-badge>
+
+<goab-text tag="h3">5. Text and badge</goab-text>
+<goab-badge type="information" [content]="badgeContent"></goab-badge>
+
+<ng-template #boldContent>
+  <strong>Bold text</strong>
+</ng-template>
+
+<ng-template #strikethroughContent>
+  <s>Strikethrough text</s>
+</ng-template>
+
+<ng-template #underlineContent>
+  <u>Underline text</u>
+</ng-template>
+
+<ng-template #badgeContent>
+  Application status
+  <goab-badge type="success" content="Active"></goab-badge>
+</ng-template>

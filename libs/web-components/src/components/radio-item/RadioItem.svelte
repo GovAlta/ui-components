@@ -343,8 +343,16 @@
 
   .label {
     font: var(--goa-radio-label);
-    margin-top: -3px; /* V1: Optical centering - move text up */
+    color: var(--goa-radio-color-label, var(--goa-input-color-text-secondary));
     padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
+  }
+
+  /* V1 only: the V1 label line-height (28px) is taller than the 24px radio
+     circle, so the text needs an optical nudge upward. In V2 the label
+     line-height matches the circle height, so no nudge is needed (this is
+     what the V2 checkbox already does). */
+  .radio:not(.v2) .label {
+    margin-top: -3px;
   }
 
   /* V2 compact: Use smaller gap */

@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import {
   GoabBadge,
+  GoabButton,
   GoabTab,
   GoabTabs,
   GoabText,
@@ -10,6 +11,10 @@ import {
   standalone: true,
   selector: "abgov-docs-tabs",
   templateUrl: "./tabs.component.html",
-  imports: [GoabBadge, GoabTab, GoabTabs, GoabText],
+  imports: [GoabBadge, GoabButton, GoabTab, GoabTabs, GoabText],
 })
-export class DocsTabsComponent {}
+export class DocsTabsComponent {
+  activateDetailsTab(): void {
+    window.location.hash = "button-example-details";
+  }
+}

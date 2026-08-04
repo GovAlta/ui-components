@@ -20,6 +20,7 @@ export * from "./lib/divider/divider";
 export * from "./lib/drawer/drawer";
 export * from "./lib/dropdown/dropdown";
 export * from "./lib/dropdown/dropdown-item";
+export * from "./lib/dropdown-multiselect/dropdown-multiselect";
 export * from "./lib/file-upload-card/file-upload-card";
 export * from "./lib/file-upload-input/file-upload-input";
 export * from "./lib/footer/footer";

@@ -21,7 +21,7 @@ import { withBase } from "@/lib/base-url";
 <goa-text as="h2" id="available-skills" size="heading-m" mt="2xl">Available skills</goa-text>
 
 <goa-text size="heading-s" mt="l">using-goa-design-system</goa-text>
-<goa-text size="body-m">This skill identifies the right product type, page and section templates, and components for what you're building. Describe what you're working on in plain language (a public form or a case-management tool, for example), and it pulls the relevant structure and live component specs from the MCP.</goa-text>
+<goa-text size="body-m">This skill identifies the right product type, page and section templates, and components for what you're building.</goa-text>
 <goa-text size="body-m">It loads when you're scoping or building a screen, page, or feature, so your AI follows the Design System's structure from the start rather than guessing.</goa-text>
 <goa-text size="body-m"><strong>How to add it:</strong></goa-text>
 <CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill using-goa-design-system`} />
@@ -33,6 +33,13 @@ import { withBase } from "@/lib/base-url";
 <goa-text size="body-m"><strong>How to add it:</strong></goa-text>
 <CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill content-design`} />
 <p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/content-design" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
+
+<goa-text size="heading-s" mt="xl">component-search</goa-text>
+<goa-text size="body-m">This skill looks up component APIs, props, events, and usage or accessibility guidance from the Design System's AI-friendly Markdown endpoints (<code>llms.txt</code> and <code>/components/{"{slug}"}.md</code>).</goa-text>
+<goa-text size="body-m">It loads when you ask about a specific component's API or guidance, or want to find components for a purpose — for example "what components handle warnings?" or "show me React props for Button".</goa-text>
+<goa-text size="body-m"><strong>How to add it:</strong></goa-text>
+<CodeSnippet language="bash" showCopy client:visible code={`npx skills add GovAlta/ui-components --skill component-search`} />
+<p><goa-link mt="s" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills/component-search" target="_blank" rel="noopener noreferrer">View on GitHub</a></goa-link></p>
 
 <goa-text as="h2" id="how-they-work" size="heading-m" mt="2xl">How they work</goa-text>
 <goa-text size="body-m">Each skill is a folder with a SKILL.md file plus any supporting notes. Your AI reads the short description at startup and loads the full instructions only when your request matches, so they add capability without crowding the context.</goa-text>

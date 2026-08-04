@@ -3,6 +3,7 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
+  GoabTextAreaOnFocusDetail,
   GoabTextAreaSize,
 } from "@abgov/ui-components-common";
 import {
@@ -52,6 +53,7 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.mr]="mr"
         (_change)="_onChange($event)"
         (_keyPress)="_onKeyPress($event)"
+        (_focus)="_onFocus($event)"
         (_blur)="_onBlur($event)"
       >
       </goa-textarea>
@@ -97,6 +99,8 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   /** Emits when a key is pressed in the textarea. Emits the name, value, and key. */
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
+  /** Emits when the textarea receives focus. Emits the name and current value. */
+  @Output() onFocus = new EventEmitter<GoabTextAreaOnFocusDetail>();
   /** Emits when the textarea loses focus. Emits the name and current value. */
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
@@ -124,6 +128,11 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
       event: e,
     };
     this.onKeyPress.emit(detail);
+  }
+
+  _onFocus(e: Event) {
+    const detail = { ...(e as CustomEvent<GoabTextAreaOnFocusDetail>).detail, event: e };
+    this.onFocus.emit(detail);
   }
 
   _onBlur(e: Event) {

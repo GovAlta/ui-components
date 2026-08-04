@@ -18,13 +18,13 @@ FlexSearch has been successfully integrated into the GoA UI Components documenta
 The search index is generated from all component documentation files:
 
 ```bash
-npm run index:docs
+extract-api.ts
 ```
 
 This script:
-- Scans all `.md` and `.doc.md` files in `libs/web-components/src/components/`
+- Scans all `.mdx` files
 - Extracts titles and content
-- Generates `docs/search-index.json` and `docs/public/search-index.json`
+- Generates `docs/public/search-index.json`
 
 ### 2. Search Component
 

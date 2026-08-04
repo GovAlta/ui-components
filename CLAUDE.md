@@ -155,9 +155,7 @@ Follow the same structure as existing components. Each component needs:
 ```
 libs/web-components/src/components/[name]/
 ├── ComponentName.svelte         # Main implementation
-├── ComponentName.spec.ts        # Unit tests
-├── ComponentName.html-data.json # VS Code IntelliSense (optional)
-└── doc.md                       # Documentation (optional)
+└── ComponentName.spec.ts        # Unit tests
 ```
 
 **React Wrapper:**
@@ -284,7 +282,7 @@ Detailed standards for component authoring, styling, framework wrappers, testing
 |------------|--------|
 | `component-authoring.md` | Script ordering, props, events, lifecycle, naming |
 | `styling.md` | Tokens, V2 fallbacks, responsive, CSS patterns |
-| `framework-wrappers.md` | React and Angular wrapper templates |
+| `framework-wrappers.md` | The cross-framework rule (wrapper templates are in the `write-wrapper` skill) |
 | `testing.md` | Test tiers, enforced patterns, Angular testing |
 | `common-utilities.md` | Utility inventory, relay vs dispatch boundary |
 

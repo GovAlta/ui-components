@@ -5,7 +5,7 @@ export function ShowFullDateInATooltip() {
     <GoabContainer
       type="non-interactive"
       accent="thick"
-      heading={
+      title={
         <span>
           Joan Smith
           <GoabTooltip content="Nov 23, 2023 at 10:35 am">

@@ -77,4 +77,15 @@
     padding: 3px 0; /* prevent button box shadow from being cut off */
     line-height: 100%;
   }
+
+  @media (--mobile) {
+    :host {
+      display: block;
+      width: 100%;
+    }
+    div {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
 </style>

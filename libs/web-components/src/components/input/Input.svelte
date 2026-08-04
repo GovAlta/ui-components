@@ -639,6 +639,18 @@
     text-overflow: initial;
   }
 
+  /* Hides the native number spinner. Scoped to .no-spinner (set internally by DatePicker)
+     so other type="number" inputs keep the increment/decrement buttons. */
+  :host(.no-spinner) input[type="number"]::-webkit-outer-spin-button,
+  :host(.no-spinner) input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  :host(.no-spinner) input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   .leading-icon + input {
     padding-left: var(--goa-text-input-space-btw-icon-text);
   }

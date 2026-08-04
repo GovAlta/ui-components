@@ -1,0 +1,35 @@
+<h3>Pagination with 5 pages</h3>
+<goab-pagination
+  [pageNumber]="basicPage"
+  [itemCount]="50"
+  [perPageCount]="10"
+  (onChange)="handleBasicPageChange($event)"
+>
+</goab-pagination>
+
+<h3>Pagination with 15 pages</h3>
+<goab-pagination
+  [pageNumber]="basicPage"
+  [itemCount]="150"
+  [perPageCount]="10"
+  (onChange)="handleBasicPageChange($event)"
+>
+</goab-pagination>
+
+<h3>Pagination with 105 pages</h3>
+<goab-pagination
+  [pageNumber]="basicPage"
+  [itemCount]="1050"
+  [perPageCount]="10"
+  (onChange)="handleBasicPageChange($event)"
+>
+</goab-pagination>
+
+<h3>Pagination with 1005 pages</h3>
+<goab-pagination
+  [pageNumber]="basicPage"
+  [itemCount]="10050"
+  [perPageCount]="10"
+  (onChange)="handleBasicPageChange($event)"
+>
+</goab-pagination>

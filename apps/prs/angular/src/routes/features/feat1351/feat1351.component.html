@@ -1,0 +1,104 @@
+<div>
+  <goab-text tag="h1" mt="m">Feat #1351: Dropdown item slot</goab-text>
+
+  <goab-block>
+    <goab-link trailingIcon="open">
+      <a href="https://github.com/GovAlta/ui-components/issues/1351" target="_blank" rel="noopener">
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        The ability to have a slot for Dropdown Items that can be filled with anything (HTML). This needs to be
+        supported for the filterable property (Combobox), where any/all text included in the slot is filterable.
+        Multiple line support, icon and badge to indicate status. The label property is shown in the input once an
+        item is selected.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <goab-text tag="h3">Test 1: Base dropdown with rich item content</goab-text>
+  <goab-text tag="p">
+    Each item renders multi-line content with a name, role, location and a status badge. Selecting an item shows its
+    label in the input.
+  </goab-text>
+  <goab-dropdown name="basic" [value]="basicValue" width="360px" (onChange)="onBasicChange($event)">
+    @for (person of people; track person.value) {
+      <goab-dropdown-item [value]="person.value" [label]="person.name">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+          <strong>{{ person.name }}</strong>
+          <span>{{ person.role }} &middot; {{ person.location }}</span>
+          <goab-badge [type]="person.status" [content]="person.statusText"></goab-badge>
+        </div>
+      </goab-dropdown-item>
+    }
+  </goab-dropdown>
+  <goab-text tag="p">Selected value: {{ basicValue || "(none)" }}</goab-text>
+
+  <goab-text tag="h3">Test 2: Filterable (combobox) with rich item content</goab-text>
+  <goab-text tag="p">
+    All text within the slot is filterable: try typing a name (Sarah), a role (Supervisor) or a location (Red Deer).
+    Text rendered inside a nested component's own shadow DOM (like the badge content) is not part of the slot text;
+    use the filter property to add extra search terms.
+  </goab-text>
+  <goab-dropdown
+    name="filterable"
+    [value]="filterValue"
+    [filterable]="true"
+    width="360px"
+    (onChange)="onFilterChange($event)"
+  >
+    @for (person of people; track person.value) {
+      <goab-dropdown-item [value]="person.value" [label]="person.name">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+          <strong>{{ person.name }}</strong>
+          <span>{{ person.role }} &middot; {{ person.location }}</span>
+          <goab-badge [type]="person.status" [content]="person.statusText"></goab-badge>
+        </div>
+      </goab-dropdown-item>
+    }
+  </goab-dropdown>
+  <goab-text tag="p">Selected value: {{ filterValue || "(none)" }}</goab-text>
+
+  <goab-text tag="h3">Test 3: Mixed rich and label-only items, filter override</goab-text>
+  <goab-text tag="p">
+    Plain label items work alongside rich items. The first item overrides the search text of its slot content with the
+    filter property ("preferred"): typing "preferred" matches it, and so does typing "Sarah", because the label is
+    always searchable. Typing "Edmonton" does not match, because the filter property replaced the slot text.
+  </goab-text>
+  <goab-dropdown name="mixed" [value]="mixedValue" [filterable]="true" width="360px" (onChange)="onMixedChange($event)">
+    <goab-dropdown-item value="sarah" label="Sarah Johnson" filter="preferred">
+      <div style="display: flex; flex-direction: column; gap: 0.25rem">
+        <strong>{{ people[0].name }}</strong>
+        <span>{{ people[0].role }} &middot; {{ people[0].location }}</span>
+        <goab-badge [type]="people[0].status" [content]="people[0].statusText"></goab-badge>
+      </div>
+    </goab-dropdown-item>
+    <goab-dropdown-item value="plain-1" label="Plain item one"></goab-dropdown-item>
+    <goab-dropdown-item value="plain-2" label="Plain item two"></goab-dropdown-item>
+  </goab-dropdown>
+  <goab-text tag="p">Selected value: {{ mixedValue || "(none)" }}</goab-text>
+
+  <goab-text tag="h3">Test 4: Native select with rich items</goab-text>
+  <goab-text tag="p">
+    A native select cannot contain HTML, so slotted content is ignored and each option falls back to its label. The
+    rich content must not leak into the page around the select.
+  </goab-text>
+  <goab-dropdown name="native" [value]="nativeValue" [native]="true" width="360px" (onChange)="onNativeChange($event)">
+    @for (person of people; track person.value) {
+      <goab-dropdown-item [value]="person.value" [label]="person.name">
+        <div style="display: flex; flex-direction: column; gap: 0.25rem">
+          <strong>{{ person.name }}</strong>
+          <span>{{ person.role }} &middot; {{ person.location }}</span>
+          <goab-badge [type]="person.status" [content]="person.statusText"></goab-badge>
+        </div>
+      </goab-dropdown-item>
+    }
+  </goab-dropdown>
+  <goab-text tag="p">Selected value: {{ nativeValue || "(none)" }}</goab-text>
+</div>

@@ -147,6 +147,42 @@ describe('GoACheckbox Component', () => {
       checkbox && await fireEvent.click(checkbox);
       expect(change).toBeCalledTimes(1);
     });
+
+    it("handles the focus event", async () => {
+      const el = await createElement({ value: "foobar" });
+      const checkbox = el.container.querySelector("input");
+      const focus = vi.fn();
+
+      checkbox?.addEventListener("_focus", (e: Event) => {
+        const detail = (e as CustomEvent).detail;
+        expect(detail.name).toBe("checkbox-test-name");
+        expect(detail.value).toBe("foobar");
+        focus();
+      });
+
+      checkbox && (await fireEvent.focus(checkbox));
+      await waitFor(() => {
+        expect(focus).toBeCalledTimes(1);
+      });
+    });
+
+    it("handles the blur event", async () => {
+      const el = await createElement({ value: "foobar" });
+      const checkbox = el.container.querySelector("input");
+      const blur = vi.fn();
+
+      checkbox?.addEventListener("_blur", (e: Event) => {
+        const detail = (e as CustomEvent).detail;
+        expect(detail.name).toBe("checkbox-test-name");
+        expect(detail.value).toBe("foobar");
+        blur();
+      });
+
+      checkbox && (await fireEvent.blur(checkbox));
+      await waitFor(() => {
+        expect(blur).toBeCalledTimes(1);
+      });
+    });
   });
 
   describe("Reveal slot", () => {

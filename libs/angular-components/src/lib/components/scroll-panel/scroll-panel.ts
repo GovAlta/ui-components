@@ -8,6 +8,7 @@ import {
   inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
+import { GoabScrollPanelDirectionType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import { NgTemplateOutlet } from "@angular/common";
     <goa-scroll-panel
       [attr.height]="height"
       [attr.testid]="testId"
+      [attr.direction]="direction"
       [style.height]="height"
     >
       @if (header) {
@@ -48,6 +50,12 @@ export class GoabScrollPanel implements OnInit {
   @Input() footer?: TemplateRef<unknown>;
   /** Sets the data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /**
+   * The scroll direction(s). When content overflows, enables scrolling and shadow
+   * indicators for the specified direction(s). Accepts "vertical", "horizontal", or "both".
+   * Defaults to "vertical".
+   */
+  @Input() direction: GoabScrollPanelDirectionType = "vertical";
 
   isReady = false;
 

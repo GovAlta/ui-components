@@ -1,0 +1,17 @@
+<goab-text tag="h1" mt="m" mb="m">Bug 3495 - Tooltip width issue when text changes</goab-text>
+<goab-text mb="l">
+  Clicking the copy button changes the tooltip content from "Copy" to "Copied" while
+  the tooltip stays open. Expected: the tooltip resizes to fit the new text. Actual
+  (before fix): the tooltip kept the narrower width measured for "Copy", squeezing the
+  "Copied" text.
+</goab-text>
+
+<goab-block gap="m" direction="row" alignment="center">
+  <goab-tooltip [content]="label()">
+    <goab-button type="tertiary" leadingIcon="copy" (onClick)="markCopied()">
+      456 789 0123
+    </goab-button>
+  </goab-tooltip>
+
+  <goab-button type="secondary" (onClick)="reset()">Reset tooltip text</goab-button>
+</goab-block>

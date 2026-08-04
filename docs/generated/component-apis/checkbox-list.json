@@ -88,9 +88,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabCheckboxListOnBlurDetail) => void",
+          "description": "Callback fired when focus leaves all checkboxes in the list.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabCheckboxListOnChangeDetail) => void",
           "description": "Callback fired when the selected values change.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(detail: GoabCheckboxListOnFocusDetail) => void",
+          "description": "Callback fired when focus enters any checkbox in the list.",
           "frameworks": [
             "react"
           ]
@@ -187,9 +203,25 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabCheckboxListOnBlurDetail) => void",
+          "description": "Emits when focus leaves all checkboxes in the list.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabCheckboxListOnChangeDetail) => void",
           "description": "Emits when a checkbox selection changes. Emits the change detail including name, value array, and event.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: GoabCheckboxListOnFocusDetail) => void",
+          "description": "Emits when focus enters any checkbox in the list.",
           "frameworks": [
             "angular"
           ]
@@ -298,8 +330,24 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string[]; labels: string[] }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_focus",
+          "type": "CustomEvent<{ name: string }>",
           "description": "",
           "frameworks": [
             "webComponents"

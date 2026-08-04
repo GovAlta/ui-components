@@ -1,0 +1,47 @@
+<goab-text tag="h1" mt="m">
+  Bug #3893: `alignment` property in GoabBlock breaks width
+</goab-text>
+
+<goab-block>
+  <goab-link trailingIcon="open">
+    <a href="https://github.com/GovAlta/ui-components/issues/3893" target="_blank" rel="noopener">
+      View on GitHub
+    </a>
+  </goab-link>
+
+  <goab-details heading="Issue Description">
+    <goab-text tag="p">
+      If you setup a GoabBlock component using the alignment property (doesn't seem to matter
+      the value you use), any width properties you set don't seem to matter, it just defaults
+      to an extremely small width.
+    </goab-text>
+  </goab-details>
+</goab-block>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Test Cases</goab-text>
+
+<goab-text tag="h3">Test 1: alignment=start, width=100%</goab-text>
+<goab-block direction="column" alignment="start" minWidth="100%" width="100%">
+  <goab-text size="body-l" tag="div">Hello World</goab-text>
+  <goab-form-item label="Test" maxWidth="100%">
+    <goab-textarea name="test"></goab-textarea>
+  </goab-form-item>
+</goab-block>
+
+<goab-text tag="h3">Test 2: alignment=normal (default), width=100%</goab-text>
+<goab-block direction="column" minWidth="100%" width="100%">
+  <goab-text size="body-l" tag="div">Hello World</goab-text>
+  <goab-form-item label="Test" maxWidth="100%">
+    <goab-textarea name="test"></goab-textarea>
+  </goab-form-item>
+</goab-block>
+
+<goab-text tag="h3">Test 3 (fix): alignment=start, stretch=true, width=100%</goab-text>
+<goab-block direction="column" alignment="start" [stretch]="true" minWidth="100%" width="100%">
+  <goab-text size="body-l" tag="div">Hello World</goab-text>
+  <goab-form-item label="Test" maxWidth="100%">
+    <goab-textarea name="test"></goab-textarea>
+  </goab-form-item>
+</goab-block>

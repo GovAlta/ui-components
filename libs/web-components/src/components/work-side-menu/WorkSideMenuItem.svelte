@@ -443,7 +443,7 @@
 
   .menu-item:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: 2px;
+    outline-offset: calc(0px - var(--goa-border-width-l));
   }
 
   goa-icon {

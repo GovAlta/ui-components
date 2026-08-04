@@ -227,7 +227,14 @@
           e.stopPropagation();
         });
       } else {
-        link.addEventListener("click", () => setCurrentTab(index + 1));
+        link.addEventListener("click", (e) => {
+          // Prevent the browser's own hash navigation from firing after this
+          // handler: it would set location.hash to only this tab's own slug,
+          // discarding any other hash segments setCurrentTab just merged in
+          // (a nested tabs' hash, or a content anchor like #example-x).
+          e.preventDefault();
+          setCurrentTab(index + 1);
+        });
       }
 
       link.appendChild(headingEl);
@@ -355,6 +362,7 @@
     }
 
     let currentLocation = "";
+    const ownHashes = new Set<string>();
 
     // send message to each tab to set visibility within
     [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map((el, index) => {
@@ -362,6 +370,12 @@
 
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
+
+      // Track every hash this tabs instance could produce, so its own
+      // previous hash can be told apart from hashes contributed elsewhere
+      // (a nested tabs' hash, or a content anchor).
+      const ownHash = (el as HTMLLinkElement).getAttribute("href")?.split("#")[1];
+      if (ownHash) ownHashes.add(ownHash);
 
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
@@ -388,9 +402,12 @@
     // update the browser's url with the new hash (skip when navigation is "none")
     if (currentLocation && navigation !== "none") {
       const url = new URL(currentLocation);
-      // to make sure we preserve multiple #, for example /#tab-1#example
+      // Preserve any hash segments that don't belong to this tabs instance
+      // (e.g. /#examples#example-x when a nested tabs or a content anchor
+      // contributed the other segment), replacing only this instance's own
+      // previous hash.
       const allHashes = window.location.href.split("#").slice(1);
-      const otherHashes = allHashes.filter((hash) => !hash.startsWith("tab-")); // #example
+      const otherHashes = allHashes.filter((hash) => !ownHashes.has(hash));
       const uniqHashes = [...new Set([url.hash.substring(1), ...otherHashes])];
       const newHash = uniqHashes.filter(Boolean).join("#");
 
@@ -822,7 +839,7 @@
     background: var(--goa-color-greyscale-white, #ffffff);
     border: var(--goa-border-width-s) solid
       var(--goa-color-greyscale-150, #dcdcdc);
-    border-radius: var(--goa-border-radius-xl);
+    border-radius: var(--goa-border-radius-m);
     pointer-events: none;
     z-index: 0;
     box-sizing: border-box;
@@ -839,7 +856,7 @@
     background: transparent;
     /* Override base border-bottom and border-left (mobile) */
     border: var(--goa-border-width-s) solid transparent;
-    border-radius: var(--goa-border-radius-xl);
+    border-radius: var(--goa-border-radius-m);
     min-height: 30px;
     padding: 0 var(--goa-space-s, 12px);
     /* Typography */

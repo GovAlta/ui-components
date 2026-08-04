@@ -73,6 +73,31 @@ export const iconButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "tertiary",
+      name: "Tertiary",
+      description: "Tertiary icon buttons with a border",
+      code: {
+        react: `<GoabIconButton icon="close" type="tertiary" ariaLabel="Close" />
+<GoabIconButton icon="close" type="tertiary" variant="dark" ariaLabel="Close" />
+<GoabIconButton icon="trash" type="tertiary" variant="destructive" ariaLabel="Delete" />
+<div style={{ backgroundColor: "var(--goa-color-greyscale-700)", padding: "var(--goa-space-l)", display: "inline-block", marginTop: "var(--goa-space-m)" }}>
+  <GoabIconButton icon="close" type="tertiary" variant="light" ariaLabel="Close" />
+</div>`,
+        angular: `<goab-icon-button icon="close" type="tertiary" ariaLabel="Close"></goab-icon-button>
+<goab-icon-button icon="close" type="tertiary" variant="dark" ariaLabel="Close"></goab-icon-button>
+<goab-icon-button icon="trash" type="tertiary" variant="destructive" ariaLabel="Delete"></goab-icon-button>
+<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-l); display: inline-block; margin-top: var(--goa-space-m);">
+  <goab-icon-button icon="close" type="tertiary" variant="light" ariaLabel="Close"></goab-icon-button>
+</div>`,
+        webComponents: `<goa-icon-button icon="close" type="tertiary" arialabel="Close"></goa-icon-button>
+<goa-icon-button icon="close" type="tertiary" variant="dark" arialabel="Close"></goa-icon-button>
+<goa-icon-button icon="trash" type="tertiary" variant="destructive" arialabel="Delete"></goa-icon-button>
+<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-l); display: inline-block; margin-top: var(--goa-space-m);">
+  <goa-icon-button icon="close" type="tertiary" variant="light" arialabel="Close"></goa-icon-button>
+</div>`,
+      },
+    },
+    {
       id: "icon-theme",
       name: "Icon theme",
       description: "Outline and filled icon styles",

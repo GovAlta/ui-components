@@ -23,9 +23,9 @@ import { isPageScale } from '../../lib/example-size';
 export async function getStaticPaths() {
   const examples = await getCollection('examples');
   return examples
-    .filter((example) => !example.slug.includes('/') && !example.data.hidden)
+    .filter((example) => !example.id.includes('/') && !example.data.hidden)
     .map((example) => ({
-      params: { slug: example.slug },
+      params: { slug: example.data.slug || example.id },
       props: { example },
     }));
 }
@@ -38,7 +38,7 @@ const { data } = example;
 const { Content } = await render(example);
 
 // Check if this example has code files
-const code = await getExampleCode(example.slug);
+const code = await getExampleCode(slug);
 const hasCode = !!(code.react || code.angular || code.webComponents);
 
 // Page-and-larger entries render with a PreviewContainer at the top instead
@@ -171,7 +171,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
         <h2>Related examples</h2>
         <div class="related-grid">
           {relatedExamples.map((related) => (
-            <a href={withBase(`/examples/${related.slug}`)} class="related-card">
+            <a href={withBase(`/examples/${related.data.slug || related.id}`)} class="related-card">
               <span class="related-title">{related.data.title}</span>
               <span class="related-category">{formatSize(related.data.size)}</span>
             </a>

@@ -2,7 +2,9 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   CalendarDate,
   GoabDatePickerInputType,
+  GoabDatePickerOnBlurDetail,
   GoabDatePickerOnChangeDetail,
+  GoabDatePickerOnFocusDetail,
   Margins,
   DataAttributes,
 } from "@abgov/ui-components-common";
@@ -57,6 +59,10 @@ export interface GoabDatePickerProps extends Margins, DataAttributes {
   width?: string;
   /** Callback fired when the selected date changes. */
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
+  /** Callback fired when focus enters any of the date picker's internal fields. */
+  onFocus?: (detail: GoabDatePickerOnFocusDetail) => void;
+  /** Callback fired when focus leaves all of the date picker's internal fields. */
+  onBlur?: (detail: GoabDatePickerOnBlurDetail) => void;
 }
 
 /** Lets users select a date through a calendar without the need to manually type it in a field. */
@@ -68,6 +74,8 @@ export function GoabDatePicker({
   disabled,
   relative,
   onChange,
+  onFocus,
+  onBlur,
   ...rest
 }: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
@@ -92,17 +100,29 @@ export function GoabDatePicker({
       const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
       onChange?.({ ...detail, event: e });
     };
+    const handleFocus = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDatePickerOnFocusDetail>).detail;
+      onFocus?.({ ...detail, event: e });
+    };
+    const handleBlur = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDatePickerOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
 
     if (onChange) {
       current.addEventListener("_change", handleChange);
     }
+    current.addEventListener("_focus", handleFocus);
+    current.addEventListener("_blur", handleBlur);
 
     return () => {
       if (onChange) {
         current.removeEventListener("_change", handleChange);
       }
+      current.removeEventListener("_focus", handleFocus);
+      current.removeEventListener("_blur", handleBlur);
     };
-  }, [onChange]);
+  }, [onChange, onFocus, onBlur]);
 
   const formatValue = (val: Date | string | undefined) => {
     if (!val) return "";

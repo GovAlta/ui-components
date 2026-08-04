@@ -70,4 +70,42 @@ describe("AppHeaderMenu", () => {
     });
     expect(result.getByTestId("menu-item-1").element().checkVisibility()).toBeTruthy();
   });
+
+  it("aligns the menu to the right of the trigger when it would be squeezed against the screen edge - issue 3860", async () => {
+    // Pin the menu near the right edge. Left-aligned, its popover would be clipped
+    // by the screen and forced narrow. It should instead open leftward, aligning
+    // its right edge to the trigger so it keeps its full width.
+    const Component = () => (
+      <div style={{ position: "absolute", top: 0, left: "1112px" }}>
+        <GoabAppHeaderMenu heading="Account" testId="account-menu">
+          <a href="#" data-testid="acct-item-1">
+            Organization settings and preferences
+          </a>
+          <a href="#" data-testid="acct-item-2">
+            Notification preferences
+          </a>
+          <a href="#" data-testid="acct-item-3">
+            Sign out
+          </a>
+        </GoabAppHeaderMenu>
+      </div>
+    );
+
+    const result = render(<Component />);
+    await result.getByText("Account").click();
+
+    const popoverContent = result.getByTestId("popover-content");
+    await vi.waitFor(() => {
+      expect(popoverContent.element().checkVisibility()).toBeTruthy();
+    });
+
+    const popoverTarget = result.getByTestId("popover-target");
+    await vi.waitFor(() => {
+      const content = popoverContent.element().getBoundingClientRect();
+      const target = popoverTarget.element().getBoundingClientRect();
+      // Right-aligned: the menu's right edge meets the trigger's right edge, so it
+      // opens leftward into the available space instead of clipping at the screen edge.
+      expect(Math.abs(content.right - target.right)).toBeLessThan(5);
+    });
+  });
 });

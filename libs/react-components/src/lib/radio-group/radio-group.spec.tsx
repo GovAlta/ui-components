@@ -274,6 +274,36 @@ describe("GoabRadioGroup", () => {
     });
   });
 
+  it("should handle onFocus and onBlur events", async () => {
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    const { container } = render(
+      <GoabRadioGroup name="fruits" onChange={noop} onFocus={onFocus} onBlur={onBlur}>
+        <GoabRadioItem name="fruits" value="apples">
+          Apples
+        </GoabRadioItem>
+      </GoabRadioGroup>,
+    );
+
+    const radioGroup = container.querySelector("goa-radio-group");
+
+    radioGroup &&
+      fireEvent(radioGroup, new CustomEvent("_focus", { detail: { name: "fruits" } }));
+    await waitFor(() => {
+      expect(onFocus).toBeCalledWith(
+        expect.objectContaining({ name: "fruits", event: expect.any(Event) }),
+      );
+    });
+
+    radioGroup &&
+      fireEvent(radioGroup, new CustomEvent("_blur", { detail: { name: "fruits" } }));
+    await waitFor(() => {
+      expect(onBlur).toBeCalledWith(
+        expect.objectContaining({ name: "fruits", event: expect.any(Event) }),
+      );
+    });
+  });
+
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
       <GoabRadioGroup

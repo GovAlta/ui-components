@@ -1,5 +1,6 @@
 import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
+import { useState } from "react";
 
 import { GoabTooltip, GoabButton } from "../src";
 import { expect, describe, it, vi } from "vitest";
@@ -579,6 +580,92 @@ describe("Tooltip Browser Tests", () => {
 
         expect(renderedWidth).toBeGreaterThan(200);
         expect(renderedWidth).toBeLessThanOrEqual(401);
+      });
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("should resize to fit content that changes while the tooltip is visible", async () => {
+    await page.viewport(1280, 800);
+
+    const Component = () => {
+      const [label, setLabel] = useState("Copy");
+      return (
+        <div data-testid="container">
+          <GoabTooltip content={label} testId="test-tooltip">
+            <GoabButton testId="trigger" onClick={() => setLabel("Copied")}>
+              Copy ID
+            </GoabButton>
+          </GoabTooltip>
+          <GoabButton testId="reset" onClick={() => setLabel("Copy")}>
+            Reset
+          </GoabButton>
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const container = result.getByTestId("container");
+    const trigger = result.getByTestId("trigger");
+    const reset = result.getByTestId("reset");
+    const host = container.element().querySelector("goa-tooltip") as HTMLElement | null;
+
+    await document.fonts.ready;
+
+    vi.useFakeTimers();
+    try {
+      expect(host).toBeTruthy();
+
+      await vi.waitFor(() => {
+        const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+        expect(hoverTarget).toBeTruthy();
+      });
+
+      const hoverTarget = host?.shadowRoot?.querySelector<HTMLElement>(".tooltip");
+      hoverTarget?.dispatchEvent(new MouseEvent("mouseenter"));
+
+      await vi.advanceTimersByTimeAsync(350);
+
+      const tooltipTextEl = host?.shadowRoot?.querySelector(
+        ".tooltip-text",
+      ) as HTMLElement | null;
+
+      await vi.waitFor(() => {
+        expect(tooltipTextEl?.classList.contains("show")).toBe(true);
+      });
+
+      const copyWidth = parseFloat(tooltipTextEl?.style.width ?? "0");
+
+      // Change the content while the tooltip stays open, simulating
+      // the Copy -> Copied transition after clicking a copy button.
+      await trigger.click();
+
+      await vi.waitFor(() => {
+        expect(tooltipTextEl?.textContent?.trim()).toBe("Copied");
+      });
+
+      let copiedWidth = 0;
+      await vi.waitFor(() => {
+        copiedWidth = parseFloat(tooltipTextEl?.style.width ?? "0");
+        // "Copied" is longer than "Copy", so the tooltip should grow to fit
+        // it instead of keeping the narrower width measured for "Copy".
+        expect(copiedWidth).toBeGreaterThan(copyWidth);
+      });
+
+      // Change back to the shorter content while the tooltip stays open.
+      await reset.click();
+
+      await vi.waitFor(() => {
+        expect(tooltipTextEl?.textContent?.trim()).toBe("Copy");
+      });
+
+      await vi.waitFor(() => {
+        const resetWidth = parseFloat(tooltipTextEl?.style.width ?? "0");
+        // The tooltip should shrink back down to fit "Copy" instead of
+        // keeping the wider width measured for "Copied".
+        expect(resetWidth).toBeLessThan(copiedWidth);
+        expect(resetWidth).toBe(copyWidth);
       });
     } finally {
       vi.useRealTimers();

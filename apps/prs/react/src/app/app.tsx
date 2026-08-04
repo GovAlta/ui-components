@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
+  GoabBadge,
   GoabButton,
   GoabButtonGroup,
   GoabPushDrawer,
@@ -8,6 +9,8 @@ import {
   GoabWorkSideMenu,
   GoabWorkSideMenuGroup,
   GoabWorkSideMenuItem,
+  GoabWorkSideNotificationItem,
+  GoabWorkSideNotificationPanel,
   useTheme,
   GoabWorkspaceLayout,
   useGoabWorkspaceLayoutScrollState,
@@ -31,6 +34,59 @@ import {
 
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
+
+interface NotificationData {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  type: "info" | "success" | "warning" | "critical";
+  readStatus: "read" | "unread";
+  priority: "normal" | "urgent";
+}
+
+function createSampleNotifications(): NotificationData[] {
+  const now = Date.now();
+  const minutesAgo = (mins: number) => new Date(now - mins * 60 * 1000).toISOString();
+  return [
+    {
+      id: "1",
+      title: "New case assigned",
+      description: "Case #12345 has been assigned to you for review.",
+      timestamp: minutesAgo(5),
+      type: "info",
+      readStatus: "unread",
+      priority: "normal",
+    },
+    {
+      id: "2",
+      title: "Document uploaded",
+      description: "A new document was uploaded to Case #12340.",
+      timestamp: minutesAgo(30),
+      type: "success",
+      readStatus: "unread",
+      priority: "normal",
+    },
+    {
+      id: "3",
+      title: "System maintenance",
+      description: "Scheduled maintenance tonight at 11 PM MST.",
+      timestamp: minutesAgo(60),
+      type: "critical",
+      readStatus: "unread",
+      priority: "urgent",
+    },
+    {
+      id: "4",
+      title: "Deadline approaching",
+      description: "Case #12300 deadline is in 24 hours.",
+      timestamp: minutesAgo(60 * 26),
+      type: "warning",
+      readStatus: "read",
+      priority: "urgent",
+    },
+  ];
+}
 
 /** Outlet context shape exposed to routes rendered inside App. */
 export interface AppOutletContext {
@@ -62,12 +118,7 @@ function PlaygroundPageHeader() {
         width: "100%",
       }}
     >
-      <GoabText
-        tag="h1"
-        size={pinned ? "heading-s" : "heading-m"}
-        mt="none"
-        mb="none"
-      >
+      <GoabText tag="h1" size={pinned ? "heading-s" : "heading-m"} mt="none" mb="none">
         Testing Playground
       </GoabText>
       <GoabButtonGroup alignment="end" gap={pinned ? "compact" : "relaxed"}>
@@ -128,11 +179,38 @@ export function App() {
     navigate(internal);
   };
 
+  // Sample notifications to populate the position-right panel for #4110.
+  const [notifications, setNotifications] = useState<NotificationData[]>(() =>
+    createSampleNotifications(),
+  );
+
+  const handleNotificationClick = (id: string) => {
+    setNotifications((prev) =>
+      prev.map((notif) =>
+        notif.id === id && notif.readStatus === "unread"
+          ? { ...notif, readStatus: "read" as const }
+          : notif,
+      ),
+    );
+  };
+
+  const handleMarkAllRead = () => {
+    setNotifications((prev) =>
+      prev.map((notif) => ({ ...notif, readStatus: "read" as const })),
+    );
+  };
+
+  const handleViewAll = () => {
+    console.log("View all notifications");
+  };
+
   const sideMenu = (
     <GoabWorkSideMenu
       heading="Testing Playground"
       url={baseUrl}
       open={true}
+      userName="Edna Mode"
+      userSecondaryText="edna.mode@gov.ab.ca"
       onNavigate={handleSideMenuNavigate}
       secondaryContent={
         <>
@@ -146,6 +224,44 @@ export function App() {
             label={isDark ? "Light mode" : "Dark mode"}
             url="#toggle-theme"
           />
+          <GoabWorkSideMenuItem
+            icon="notifications"
+            label="Notifications"
+            url="#"
+            trailingContent={
+              <GoabBadge type="success" content={`${notifications.length}`} />
+            }
+            testId="work-space-side-menu-item-notification"
+            popoverContent={
+              <GoabWorkSideNotificationPanel
+                testId="work-space-side-notification-panel"
+                heading="Notifications"
+                activeTab="unread"
+                onMarkAllRead={handleMarkAllRead}
+                onViewAll={handleViewAll}
+              >
+                {notifications.map((notif) => (
+                  <GoabWorkSideNotificationItem
+                    key={notif.id}
+                    testId={`noti-${notif.id}`}
+                    title={notif.title}
+                    description={notif.description}
+                    timestamp={notif.timestamp}
+                    type={notif.type}
+                    readStatus={notif.readStatus}
+                    priority={notif.priority}
+                    onClick={() => handleNotificationClick(notif.id)}
+                  />
+                ))}
+              </GoabWorkSideNotificationPanel>
+            }
+          />
+        </>
+      }
+      accountContent={
+        <>
+          <GoabWorkSideMenuItem icon="settings" label="Settings" url="#" />
+          <GoabWorkSideMenuItem icon="log-out" label="Log out" url="#" />
         </>
       }
       primaryContent={
@@ -219,24 +335,25 @@ export function App() {
     </div>
   );
 
-  const pushDrawer = isPushDrawerRoute || pushDrawerOpen ? (
-    <GoabPushDrawer
-      testId="push-drawer-v2"
-      heading="Push Drawer V2 test"
-      open={pushDrawerOpen}
-      width="492px"
-      actions={pushDrawerActions}
-      onClose={closePushDrawer}
-    >
-      {pushDrawerTestParagraphs.map((n) => (
-        <p key={n}>
-          Paragraph {n} — Push Drawer V2 now uses goa-scroll-panel internally. Verify
-          header sticky + actions sticky + content scrolls + outer chrome morphs
-          (margins/radius/height) as scroll state changes between top / middle / bottom.
-        </p>
-      ))}
-    </GoabPushDrawer>
-  ) : undefined;
+  const pushDrawer =
+    isPushDrawerRoute || pushDrawerOpen ? (
+      <GoabPushDrawer
+        testId="push-drawer-v2"
+        heading="Push Drawer V2 test"
+        open={pushDrawerOpen}
+        width="492px"
+        actions={pushDrawerActions}
+        onClose={closePushDrawer}
+      >
+        {pushDrawerTestParagraphs.map((n) => (
+          <p key={n}>
+            Paragraph {n} — Push Drawer V2 now uses goa-scroll-panel internally. Verify
+            header sticky + actions sticky + content scrolls + outer chrome morphs
+            (margins/radius/height) as scroll state changes between top / middle / bottom.
+          </p>
+        ))}
+      </GoabPushDrawer>
+    ) : undefined;
 
   return (
     <GoabWorkspaceLayout

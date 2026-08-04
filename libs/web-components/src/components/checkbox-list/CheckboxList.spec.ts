@@ -107,6 +107,34 @@ describe("GoACheckboxList", () => {
 
       expect(announceSpy).toHaveBeenCalled();
     });
+
+    it("dispatches _focus when focus enters and _blur when focus leaves the list", async () => {
+      const { queryByTestId } = render(CheckboxList, defaultProps);
+
+      const checkboxList = queryByTestId("checkbox-list");
+      const onFocus = vi.fn();
+      const onBlur = vi.fn();
+      checkboxList?.addEventListener("_focus", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(defaultProps.name);
+        onFocus();
+      });
+      checkboxList?.addEventListener("_blur", (e: Event) => {
+        expect((e as CustomEvent).detail.name).toBe(defaultProps.name);
+        onBlur();
+      });
+
+      // CheckboxList's onMount awaits `tick()` before wiring up focus tracking,
+      // so retry the dispatch until the listener has been attached.
+      await waitFor(() => {
+        checkboxList?.dispatchEvent(new FocusEvent("focusin", { bubbles: true, composed: true }));
+        expect(onFocus).toHaveBeenCalledTimes(1);
+      });
+
+      checkboxList?.dispatchEvent(new FocusEvent("focusout", { bubbles: true, composed: true }));
+      await waitFor(() => {
+        expect(onBlur).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 
   describe("Child checkbox management", () => {

@@ -53,6 +53,12 @@
           "type": "ReactNode",
           "description": "Content rendered in the actions slot, typically action buttons.",
           "required": false
+        },
+        {
+          "name": "heading",
+          "type": "ReactNode",
+          "description": "Sets the heading text or custom heading content.",
+          "required": false
         }
       ]
     },
@@ -106,6 +112,12 @@
           "name": "actions",
           "type": "TemplateRef",
           "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "TemplateRef",
+          "description": "Sets the heading text or custom heading content.",
           "required": false
         }
       ]
@@ -162,6 +174,11 @@
         {
           "name": "actions",
           "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "description": "Sets the heading text or custom heading content.",
           "required": false
         }
       ]

@@ -46,10 +46,30 @@ describe("Accordion", () => {
   });
 
   it("should not expand the container when open prop is not set", async () => {
-    const { container } = render(Accordion, { heading: "Title" });
+    const { container, queryByRole } = render(Accordion, { heading: "Title" });
     const details = container.querySelector("details");
     expect(details).toBeTruthy();
     expect(details?.getAttribute("open")).toBeNull();
+    expect(queryByRole("alert")).toBeNull();
+  });
+
+  it("announces the content when expanded", async () => {
+    vitest.useFakeTimers();
+
+    try {
+      const { getByRole, queryByRole } = render(Accordion, {
+        heading: "Title",
+        open: "true",
+      });
+
+      await vitest.advanceTimersByTimeAsync(99);
+      expect(queryByRole("alert")).toBeNull();
+
+      await vitest.advanceTimersByTimeAsync(1);
+      expect(getByRole("alert")).toBeInTheDocument();
+    } finally {
+      vitest.useRealTimers();
+    }
   });
 
   // Although this test passes, it doesn't fail with the `position: relative` fix is removed.

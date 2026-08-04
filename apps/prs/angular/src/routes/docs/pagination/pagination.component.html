@@ -5,7 +5,8 @@
   [pageNumber]="basicPage"
   [itemCount]="100"
   [perPageCount]="10"
-  (onChange)="handleBasicPageChange($event)">
+  (onChange)="handleBasicPageChange($event)"
+>
 </goab-pagination>
 
 <h3>Simple</h3>
@@ -14,7 +15,35 @@
   [itemCount]="50"
   [perPageCount]="10"
   variant="links-only"
-  (onChange)="handleSimplePageChange($event)">
+  (onChange)="handleSimplePageChange($event)"
+>
+</goab-pagination>
+
+<h3>Simple Table</h3>
+<goab-table width="100%" mb="xl">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of pageUsers; track user.id) {
+      <tr>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.age }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+<goab-pagination
+  [pageNumber]="simplePage"
+  [itemCount]="50"
+  [perPageCount]="10"
+  (onChange)="handlePageChange($event)"
+>
 </goab-pagination>
 
 <h2>Examples</h2>
@@ -46,7 +75,8 @@
       size="compact"
       (onChange)="handlePerPageCountChangeEvent($event)"
       [value]="perPage.toString()"
-      width="9ch">
+      width="9ch"
+    >
       <goab-dropdown-item value="10" label="10"></goab-dropdown-item>
       <goab-dropdown-item value="20" label="20"></goab-dropdown-item>
       <goab-dropdown-item value="30" label="30"></goab-dropdown-item>
@@ -60,6 +90,7 @@
     [itemCount]="users.length"
     [perPageCount]="perPage"
     [pageNumber]="page"
-    (onChange)="handlePageChange($event)">
+    (onChange)="handlePageChange($event)"
+  >
   </goab-pagination>
 </goab-block>

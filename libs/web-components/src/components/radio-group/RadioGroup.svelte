@@ -8,6 +8,7 @@
     dispatch,
     receive,
     relay,
+    watchFocusWithin,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
@@ -118,6 +119,12 @@
       const detail = (e as CustomEvent).detail;
       onChange(detail.value, detail.label);
     });
+
+    watchFocusWithin(
+      _rootEl,
+      () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
+      () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+    );
   });
 
   // Functions

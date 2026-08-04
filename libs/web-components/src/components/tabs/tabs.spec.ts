@@ -274,4 +274,53 @@ describe("Tabs", () => {
       expect(tab1Link.getAttribute("aria-selected")).toBe("true");
     });
   });
+
+  it("should replace its own previous hash instead of accumulating it when navigating by keyboard", async () => {
+    // A mouse click on the next tab also triggers the browser's native anchor
+    // navigation, which happens to overwrite any accumulated hash anyway.
+    // Keyboard navigation calls setCurrentTab() directly with no such
+    // navigation, so it's the interaction that actually exposes this bug.
+    const SlugTabs = await import("./TabsWrapperWithSlug.test.svelte");
+    const { container } = render(SlugTabs.default);
+
+    await waitFor(() => {
+      expect(container.querySelector("a#tab-1")).toBeTruthy();
+    });
+
+    const tab1Link = container.querySelector("a#tab-1") as HTMLElement;
+
+    await fireEvent.click(tab1Link);
+    await waitFor(() => expect(window.location.hash).toBe("#review-pending"));
+
+    tab1Link.focus();
+    await fireEvent.keyDown(tab1Link, { key: "ArrowRight" });
+
+    await waitFor(() => {
+      // Neither slug starts with "tab-", so the old filter would have kept
+      // "review-pending" around as if it were an unrelated content anchor.
+      expect(window.location.hash).toBe("#complete");
+    });
+  });
+
+  it("should preserve an unrelated hash segment when switching tabs", async () => {
+    window.history.pushState({}, "", "/test#complete#some-content-anchor");
+
+    const SlugTabs = await import("./TabsWrapperWithSlug.test.svelte");
+    const { container } = render(SlugTabs.default);
+
+    await waitFor(() => {
+      const tab2Link = container.querySelector("a#tab-2") as HTMLElement;
+      expect(tab2Link?.getAttribute("aria-selected")).toBe("true");
+    });
+
+    const tab1Link = container.querySelector("a#tab-1") as HTMLElement;
+    await fireEvent.click(tab1Link);
+
+    await waitFor(() => {
+      // The browser's own anchor navigation must not be left to fire here:
+      // it would replace the whole hash with just "#review-pending" and
+      // silently drop "some-content-anchor".
+      expect(window.location.hash).toBe("#review-pending#some-content-anchor");
+    });
+  });
 });

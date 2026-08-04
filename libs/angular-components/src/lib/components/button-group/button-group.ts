@@ -33,6 +33,13 @@ import { GoabBaseComponent } from "../base.component";
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 /** Display multiple related actions stacked or in a horizontal row to help with arrangement and spacing. */
 export class GoabButtonGroup extends GoabBaseComponent implements OnInit {

@@ -116,6 +116,29 @@ describe("GoABadgeComponent", () => {
   });
 
   describe("V2 Emphasis", () => {
+    it("should render HTML content in the content slot for version 2", async () => {
+      const badge = document.createElement("goa-badge");
+      badge.setAttribute("type", "information");
+      badge.setAttribute("version", "2");
+      badge.setAttribute("icon", "true");
+      badge.innerHTML =
+        '<span slot="content"><strong>Rich content</strong></span>';
+      document.body.appendChild(badge);
+      await Promise.resolve();
+
+      const root = badge.shadowRoot?.querySelector(".goa-badge");
+      const contentSlot = badge.shadowRoot?.querySelector<HTMLSlotElement>(
+        'slot[name="content"]',
+      );
+      const content = contentSlot?.assignedElements()[0];
+
+      expect(content?.querySelector("strong")).toHaveTextContent(
+        "Rich content",
+      );
+      expect(root).not.toHaveClass("icon-only");
+      badge.remove();
+    });
+
     it(`should apply strong emphasis class in v2`, async () => {
       const baseElement = render(GoABadge, {
         testid: "badge-test",

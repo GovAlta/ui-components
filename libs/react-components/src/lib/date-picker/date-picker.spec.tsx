@@ -82,6 +82,30 @@ describe("DatePicker", () => {
     });
   });
 
+  it("should handle onFocus and onBlur events", async () => {
+    const name = "foo";
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+
+    const { baseElement } = render(
+      <DatePicker name={name} onChange={noop} onFocus={onFocus} onBlur={onBlur} />,
+    );
+
+    const el = baseElement.querySelector("goa-date-picker");
+
+    el?.dispatchEvent(
+      new CustomEvent("_focus", { composed: true, bubbles: true, detail: { name } }),
+    );
+    expect(onFocus).toHaveBeenCalledTimes(1);
+    expect(onFocus).toBeCalledWith({ name, event: expect.any(Event) });
+
+    el?.dispatchEvent(
+      new CustomEvent("_blur", { composed: true, bubbles: true, detail: { name } }),
+    );
+    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toBeCalledWith({ name, event: expect.any(Event) });
+  });
+
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
       <DatePicker name="test" onChange={noop} data-grid="cell" />,

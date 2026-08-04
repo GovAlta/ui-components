@@ -44,6 +44,11 @@
     {heading}
     {version}
   >
+    {#if $$slots.heading}
+      <span slot="heading">
+        <slot name="heading" />
+      </span>
+    {/if}
     {#if $$slots.actions}
       <span slot="actions">
         <slot name="actions" />
@@ -60,6 +65,11 @@
     {heading}
     {version}
   >
+    {#if $$slots.heading}
+      <span slot="heading">
+        <slot name="heading" />
+      </span>
+    {/if}
     {#if $$slots.actions}
       <span slot="actions">
         <slot name="actions" />

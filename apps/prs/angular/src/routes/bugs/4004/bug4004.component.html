@@ -1,0 +1,82 @@
+<goab-text tag="h1" mt="m" mb="s">Bug 4004 - PushDrawer heading doesn't work with slotted content</goab-text>
+<goab-text mb="l">
+  The PushDrawer documents support for slotted content in the heading, but only string
+  headings rendered. PushDrawer.svelte forwarded heading only as a prop and never
+  forwarded the heading slot to its internal drawer. Both drawers should now render custom
+  slotted heading content.
+</goab-text>
+
+<goab-text tag="h2" mt="2xl" mb="m">Test 1: String heading (control)</goab-text>
+<goab-text mb="l">A plain string heading should still render as before.</goab-text>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openString()">Open string heading</goab-button>
+  </div>
+  <goab-push-drawer
+    heading="Plain string heading"
+    width="320px"
+    [open]="stringOpen"
+    (onClose)="closeString()"
+  >
+    <goab-text mt="none">Drawer body content.</goab-text>
+  </goab-push-drawer>
+</div>
+
+<goab-text tag="h2" mt="2xl" mb="m">Test 2: Slotted heading content</goab-text>
+<goab-text mb="l">
+  Passing a template as the heading should render the custom content (here, text plus a
+  badge). Before the fix this rendered nothing.
+</goab-text>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openSlot()">Open slotted heading</goab-button>
+  </div>
+  <goab-push-drawer
+    [heading]="customHeading"
+    width="320px"
+    [open]="slotOpen"
+    (onClose)="closeSlot()"
+    [actions]="slotActions"
+  >
+    <goab-text mt="none">Drawer body content.</goab-text>
+  </goab-push-drawer>
+</div>
+
+<goab-text tag="h2" mt="2xl" mb="m">Test 3: Long slotted heading (wrapping)</goab-text>
+<goab-text mb="l">
+  When slotted heading content is longer than the available width, it should wrap onto
+  multiple lines while the close button stays pinned to the top right.
+</goab-text>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openLong()">Open long heading</goab-button>
+  </div>
+  <goab-push-drawer
+    [heading]="longHeading"
+    width="320px"
+    [open]="longOpen"
+    (onClose)="closeLong()"
+  >
+    <goab-text mt="none">Drawer body content.</goab-text>
+  </goab-push-drawer>
+</div>
+
+<ng-template #customHeading>
+  <goab-block gap="s" alignment="center" direction="row">
+    <span>Custom heading</span>
+    <goab-badge type="important" content="New"></goab-badge>
+  </goab-block>
+</ng-template>
+
+<ng-template #longHeading>
+  <span>
+    A longer custom heading that should wrap onto multiple lines
+    <goab-badge type="important" content="New"></goab-badge>
+  </span>
+</ng-template>
+
+<ng-template #slotActions>
+  <goab-button-group alignment="start">
+    <goab-button (onClick)="closeSlot()">Close</goab-button>
+  </goab-button-group>
+</ng-template>

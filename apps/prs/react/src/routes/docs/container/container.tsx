@@ -323,7 +323,7 @@ export function DocsContainerRoute() {
       <GoabContainer
         type="non-interactive"
         accent="thick"
-        heading="Upcoming important due dates"
+        title="Upcoming important due dates"
         actions={
           <GoabButton
             type="tertiary"
@@ -440,14 +440,26 @@ export function DocsContainerRoute() {
             </GoabText>
 
             <GoabFormItem label="Case history and new request" mt="l">
-              <GoabRadioGroup name="case" orientation="horizontal" onChange={() => { /* no-op */ }}>
+              <GoabRadioGroup
+                name="case"
+                orientation="horizontal"
+                onChange={() => {
+                  /* no-op */
+                }}
+              >
                 <GoabRadioItem value="grant" label="Grant" />
                 <GoabRadioItem value="deny" label="Deny" />
               </GoabRadioGroup>
             </GoabFormItem>
 
             <GoabFormItem label="Reason to deny" mt="l">
-              <GoabDropdown name="reason" width="100%" onChange={() => { /* no-op */ }}>
+              <GoabDropdown
+                name="reason"
+                width="100%"
+                onChange={() => {
+                  /* no-op */
+                }}
+              >
                 <GoabDropdownItem value="1" label="Incomplete Application" />
                 <GoabDropdownItem value="2" label="Eligibility Criteria Not Met" />
                 <GoabDropdownItem value="3" label="Documentation Verification Failure" />
@@ -460,11 +472,18 @@ export function DocsContainerRoute() {
                 rows={5}
                 width="100%"
                 value=""
-                onChange={() => { /* no-op */ }}
+                onChange={() => {
+                  /* no-op */
+                }}
               />
             </GoabFormItem>
 
-            <GoabButton mt="xl" onClick={() => { /* no-op */ }}>
+            <GoabButton
+              mt="xl"
+              onClick={() => {
+                /* no-op */
+              }}
+            >
               Confirm adjournment
             </GoabButton>
           </form>
@@ -475,7 +494,7 @@ export function DocsContainerRoute() {
       <GoabContainer
         type="non-interactive"
         accent="thick"
-        heading={
+        title={
           <span>
             Joan Smith
             <GoabTooltip content="Nov 23, 2023 at 10:35 am">
@@ -500,7 +519,7 @@ export function DocsContainerRoute() {
       <GoabContainer
         type="non-interactive"
         accent="thick"
-        heading="Heading"
+        title="Heading"
         actions={<GoabBadge type="important" content="Priority" />}
       >
         Content
@@ -518,14 +537,20 @@ export function DocsContainerRoute() {
                 if (e.key === "Enter" && e.value.trim()) {
                   setTypedChips([...typedChips, e.value.trim()]);
                   setTimeout(() => setInputValue(""), 0);
-                } else if (e.key === "Backspace" && !e.value.trim() && typedChips.length > 0) {
+                } else if (
+                  e.key === "Backspace" &&
+                  !e.value.trim() &&
+                  typedChips.length > 0
+                ) {
                   setTypedChips(typedChips.slice(0, -1));
                 }
               }}
               width="100%"
             />
           </div>
-          <GoabButton type="secondary" onClick={addChip}>Add</GoabButton>
+          <GoabButton type="secondary" onClick={addChip}>
+            Add
+          </GoabButton>
         </GoabBlock>
       </GoabFormItem>
       <div>

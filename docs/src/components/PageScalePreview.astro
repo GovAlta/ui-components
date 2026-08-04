@@ -30,21 +30,22 @@ const pageData = data as typeof data & PageShape;
 // (question-page, error-pages) have no flat /examples/{slug}/preview route;
 // "View more" carries the user to the canonical page where each variant has
 // its own preview button.
-const code = await getExampleCode(example.slug);
+const slug = data.slug || example.id;
+const code = await getExampleCode(slug);
 const previewUrl =
-  pageData.previewUrl ?? (code.react ? `/examples/${example.slug}/preview` : undefined);
+  pageData.previewUrl ?? (code.react ? `/examples/${slug}/preview` : undefined);
 ---
 
 <article class="example-display">
   <div class="example-preview page-scale-preview">
-    <h3 id={`example-${example.slug}`} class="example-title page-scale-title">{data.title}</h3>
+    <h3 id={`example-${slug}`} class="example-title page-scale-title">{data.title}</h3>
     <PreviewContainer
       image={pageData.previewImage}
       alt={`${data.title} preview`}
       previewUrl={previewUrl}
       reactSourceUrl={pageData.reactSourceUrl}
       angularSourceUrl={pageData.angularSourceUrl}
-      moreUrl={`/examples/${example.slug}`}
+      moreUrl={`/examples/${slug}`}
     />
   </div>
 </article>
