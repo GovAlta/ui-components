@@ -1,9 +1,11 @@
-<svelte:options customElement={{
-  tag: "goa-icon",
-  props: {
-    type: { type: "String", reflect: true }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-icon",
+    props: {
+      type: { type: "String", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts" context="module">
   export type IconSize =
@@ -591,6 +593,8 @@
   export let ariacontrols: string = "";
   /** Indicates whether the element controlled by this icon is expanded or collapsed. */
   export let ariaexpanded: string = "";
+  /** Sets whether the icon is hidden from assistive technologies. */
+  export let ariahidden: string = "false";
   /** Sets the ARIA role for the icon. Defaults to 'img'. Use 'presentation' for decorative icons. */
   export let role: string = "img";
 
@@ -600,10 +604,12 @@
 
   $: _isInverted = toBoolean(inverted);
   $: _ariaExpanded = toBoolean(ariaexpanded);
-  $: ({ iconType: _iconType, iconTheme: _iconTheme, name: _iconName } = parseProperties(
-    type,
-    theme
-  ));
+  $: _ariaHidden = toBoolean(ariahidden);
+  $: ({
+    iconType: _iconType,
+    iconTheme: _iconTheme,
+    name: _iconName,
+  } = parseProperties(type, theme));
   // Private
 
   const _iconOverrides: Record<
@@ -705,7 +711,7 @@
 
   function parseProperties(
     type: GoAIconType | GoAIconOverridesType | GoAIconTypeWithTheme,
-    fallbackTheme: IconTheme
+    fallbackTheme: IconTheme,
   ) {
     const [iconType, maybeTheme] = type.split(":");
     const iconTheme =
@@ -720,21 +726,22 @@
     return {
       iconType: iconType as GoAIconType | GoAIconOverridesType,
       iconTheme,
-      name
+      name,
     };
   }
 </script>
 
 <div
-  role={role}
+  {role}
   aria-label={arialabel}
   aria-controls={ariacontrols}
   aria-expanded={_ariaExpanded}
+  aria-hidden={_ariaHidden || undefined}
   class={`goa-icon goa-icon--${size}`}
   class:inverted={_isInverted}
   data-testid={testid}
   data-type={_iconType || type}
-  title={title}
+  {title}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     ${style("--fill-color", fillcolor)};
@@ -744,9 +751,8 @@
   {#if _iconType}
     {#if _iconType in _iconOverrides}
       <div class="icon-override">
-        {@html
-          _iconOverrides[`${_iconType}-${_iconTheme}`] ||
-            _iconOverrides[_iconType]}
+        {@html _iconOverrides[`${_iconType}-${_iconTheme}`] ||
+          _iconOverrides[_iconType]}
       </div>
     {:else}
       <ion-icon name={_iconName} />

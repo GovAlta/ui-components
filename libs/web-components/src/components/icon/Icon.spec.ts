@@ -21,6 +21,17 @@ describe("Icon", () => {
       expect(icon).toHaveStyle("margin-bottom:var(--goa-space-l)");
       expect(icon).toHaveStyle("margin-left:var(--goa-space-xl)");
       expect(icon.getAttribute("role")).toBe("img");
+      expect(icon.getAttribute("aria-hidden")).toBeNull();
+    });
+    it("should omit aria-hidden when ariahidden is false", async () => {
+      const baseElement = render(GoAIcon, {
+        testid: "icon-test",
+        type: "ellipse",
+        ariahidden: "false",
+      });
+      const icon = await baseElement.findByTestId("icon-test");
+
+      expect(icon.getAttribute("aria-hidden")).toBeNull();
     });
     it("should render the goa-icon with accessibility add-ons attribute accordingly", async () => {
       const baseElement = render(GoAIcon, {
@@ -30,12 +41,14 @@ describe("Icon", () => {
         arialabel: "Clear input",
         ariacontrols: "menuId",
         ariaexpanded: "true",
+        ariahidden: "true",
       });
       const icon = await baseElement.findByTestId("icon-test");
       expect(icon.getAttribute("role")).toBe("button");
       expect(icon.getAttribute("aria-label")).toBe("Clear input");
       expect(icon.getAttribute("aria-controls")).toBe("menuId");
       expect(icon.getAttribute("aria-expanded")).toBe("true");
+      expect(icon.getAttribute("aria-hidden")).toBe("true");
     });
     it(`should change icon's role to be 'img' and add aria-label so the screen reader can read, when aria-label is set`, async () => {
       const baseElement = render(GoAIcon, {

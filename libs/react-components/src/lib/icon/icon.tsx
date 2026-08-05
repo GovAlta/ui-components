@@ -39,6 +39,8 @@ export interface GoabIconProps extends Margins, DataAttributes {
   title?: string;
   /** Defines how the icon will be announced by screen readers. */
   ariaLabel?: string;
+  /** Sets whether the icon is hidden from assistive technologies. @default false */
+  ariaHidden?: boolean;
   /** Sets the ARIA role for the icon. Use 'presentation' for decorative icons. @default "img" */
   role?: string;
   /** Sets a data-testid attribute for automated testing. */
@@ -54,12 +56,13 @@ interface WCProps extends Margins {
   opacity?: number;
   title?: string;
   arialabel?: string;
+  ariahidden?: string;
   role?: string;
   testid?: string;
 }
 
 /** A simple and universal graphic symbol representing an action, object, or concept to help guide the user. */
-export function GoabIcon({ inverted, ...rest }: GoabIconProps): JSX.Element {
+export function GoabIcon({ inverted, ariaHidden, ...rest }: GoabIconProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
@@ -67,6 +70,7 @@ export function GoabIcon({ inverted, ...rest }: GoabIconProps): JSX.Element {
       inverted={
         typeof inverted === "boolean" ? (inverted ? "true" : undefined) : inverted
       }
+      ariahidden={ariaHidden ? "true" : undefined}
       {..._props}
     />
   );
