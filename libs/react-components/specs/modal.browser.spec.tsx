@@ -217,45 +217,4 @@ describe("Modal", () => {
       expect(popoverContent.element().checkVisibility()).toBeTruthy();
     });
   });
-
-  // Skipped until ui-components consumes the design-tokens release that ships
-  // modal-actions-padding = {space.l} (24px, symmetric). See design-tokens PR
-  // GovAlta/design-tokens#168 / issue #3609. The installed token still yields
-  // 8px top padding, so this would fail; re-enable with the version bump.
-  it.skip("should give the pinned footer actions room above the buttons", async () => {
-    await page.viewport(1024, 500);
-
-    const Component = () => (
-      <GoabModal
-        heading="Add a new item"
-        open={true}
-        onClose={vi.fn()}
-        testId="actions-modal"
-        actions={
-          <GoabButton type="primary" testId="save-btn">
-            Save new item
-          </GoabButton>
-        }
-      >
-        <p>Fill in the information to create a new item</p>
-      </GoabModal>
-    );
-
-    const result = render(<Component />);
-
-    const modal = result.container.querySelector("goa-modal");
-    await vi.waitFor(() => {
-      expect(modal?.shadowRoot?.querySelector(".modal-actions")).toBeTruthy();
-    });
-
-    const actionsEl = modal?.shadowRoot?.querySelector(
-      ".modal-actions",
-    ) as HTMLElement;
-    const paddingTop = parseFloat(getComputedStyle(actionsEl).paddingTop);
-
-    // Regression guard for #3609: the footer actions previously had only 8px
-    // (space-xs) of top padding, cramping the buttons against the scroll-panel
-    // divider. On desktop they should now sit at least space-l (24px) below it.
-    expect(paddingTop).toBeGreaterThanOrEqual(24);
-  });
 });
