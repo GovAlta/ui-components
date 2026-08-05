@@ -49,6 +49,7 @@
   --goa-drawer-overlay-color: rgba(0, 0, 0, 0.6);
   --goa-drawer-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3), 0 8px 40px 0 rgba(0, 0, 0, 0.4);
   --goa-dropdown-color-bg: var(--goa-color-surface-input);
+  --goa-dropdown-multiselect-color-bg: var(--goa-color-surface-input);
   --goa-file-upload-color-bg-focus: #252d35;
   --goa-file-upload-color-bg-hover: #252d35;
   --goa-footer-color-text: #909090;
@@ -79,6 +80,7 @@
   --goa-scroll-panel-content-shadow-bottom: inset 0px -4px 8px -4px rgba(0,0,0,0.5);
   --goa-scroll-panel-content-shadow-top: inset 0px 4px 8px -4px rgba(0,0,0,0.5);
   --goa-scroll-panel-content-shadow-top-bottom: inset 0px 4px 8px -4px rgba(0,0,0,0.4), inset 0px -4px 8px -4px rgba(0,0,0,0.4);
+  --goa-scroll-panel-content-shadow-horizontal: rgba(0,0,0,0.4);
   --goa-table-color-bg-heading-hover: var(--goa-color-surface-heading-hover);
   --goa-table-color-bg-heading: var(--goa-color-surface-heading);
   --goa-table-color-bg-data: var(--goa-color-surface-table-data);
