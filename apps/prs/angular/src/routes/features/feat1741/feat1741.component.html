@@ -1,0 +1,23 @@
+<goab-text tag="h1" mt="m">Feature #1741: Icon aria-hidden label</goab-text>
+
+<goab-text tag="h2">Test Cases</goab-text>
+
+<goab-text tag="p">
+  Test both icons with a screen reader. The 1st one has ariaLabel set to "Applicaton saved
+  icon" and it shouldn't be read. The second one has ariaLabel set to "Important
+  information" and it should be read.
+</goab-text>
+
+<goab-text tag="h3">Test 1: Decorative icon is hidden</goab-text>
+
+<goab-block direction="row" alignment="center">
+  <goab-icon
+    type="checkmark-circle"
+    [ariaHidden]="true"
+    ariaLabel="Application saved icon"
+  />
+  <span>Application saved</span>
+</goab-block>
+
+<goab-text tag="h3">Test 2: Default icon remains accessible</goab-text>
+<goab-icon type="information-circle" ariaLabel="Important information" />
