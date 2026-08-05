@@ -1,0 +1,184 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1" size="heading-l" mb="m">Dropdown text colour hierarchy</goab-text>
+
+  <goab-text size="body-m">
+    The dropdown used to paint its placeholder in the darkest text colour and its menu options
+    in a lighter grey, so an empty field looked filled and the options looked like the least
+    important thing on screen. That weighting is now the other way round.
+  </goab-text>
+
+  <goab-text size="body-m">
+    Two things to look for. The placeholder should look lighter than the text around it, and it
+    should match the placeholder in the text input and text area. Open a menu and the options
+    should be the darkest text in the component, darker than the placeholder sitting above them.
+  </goab-text>
+
+  <goab-text size="body-s">
+    Use the theme toggle in the nav to check both light and dark mode. The fix carries into dark
+    mode on its own, because these tokens resolve through greyscale values that the dark theme
+    already overrides.
+  </goab-text>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Empty fields, all four together</goab-text>
+  <goab-text size="body-m" mb="m">
+    Every placeholder here should look the same weight. Before the fix the two dropdowns were
+    noticeably darker than the text input and text area.
+  </goab-text>
+
+  <div style="max-width: 20rem">
+    <goab-block direction="column" gap="m">
+      <goab-form-item label="Dropdown">
+        <goab-dropdown
+          name="emptyCity"
+          [value]="emptyCity"
+          (onChange)="onEmptyCityChange($event)"
+        >
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+          <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+          <goab-dropdown-item value="red-deer" label="Red Deer"></goab-dropdown-item>
+          <goab-dropdown-item value="lethbridge" label="Lethbridge"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+
+      <goab-form-item label="Dropdown multiselect">
+        <goab-dropdown-multiselect
+          name="cities"
+          placeholder="—Select—"
+          [value]="cities"
+          (onChange)="onCitiesChange($event)"
+        >
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+          <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+          <goab-dropdown-item value="red-deer" label="Red Deer"></goab-dropdown-item>
+          <goab-dropdown-item value="lethbridge" label="Lethbridge"></goab-dropdown-item>
+        </goab-dropdown-multiselect>
+      </goab-form-item>
+
+      <goab-form-item label="Text input">
+        <goab-input name="note" placeholder="—Select—" [value]="note"></goab-input>
+      </goab-form-item>
+
+      <goab-form-item label="Text area">
+        <goab-textarea name="comments" placeholder="—Select—" [value]="comments"></goab-textarea>
+      </goab-form-item>
+    </goab-block>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">An empty field beside a filled one</goab-text>
+  <goab-text size="body-m" mb="m">
+    This is the point of the change. Scanning a long form, an empty field should be obviously
+    empty. Before the fix both of these rendered in the same near black.
+  </goab-text>
+
+  <div style="max-width: 20rem">
+    <goab-block direction="column" gap="m">
+      <goab-form-item label="Nothing chosen yet">
+        <goab-dropdown name="emptyCompare" value="">
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+          <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+
+      <goab-form-item label="Something chosen">
+        <goab-dropdown
+          name="filledCity"
+          [value]="filledCity"
+          (onChange)="onFilledCityChange($event)"
+        >
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+          <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+    </goab-block>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">Open the menu</goab-text>
+  <goab-text size="body-m" mb="m">
+    Open this one and compare the options against the placeholder still visible in the field. The
+    options should be the darker of the two. Hover and selected states are unchanged and still
+    carry their own background colour, so they should read exactly as they did before.
+  </goab-text>
+
+  <div style="max-width: 20rem">
+    <goab-form-item label="City">
+      <goab-dropdown name="openCity" [value]="openCity" (onChange)="onOpenCityChange($event)">
+        <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+        <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+        <goab-dropdown-item value="red-deer" label="Red Deer"></goab-dropdown-item>
+        <goab-dropdown-item value="lethbridge" label="Lethbridge"></goab-dropdown-item>
+        <goab-dropdown-item value="medicine-hat" label="Medicine Hat"></goab-dropdown-item>
+        <goab-dropdown-item value="grande-prairie" label="Grande Prairie"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Multiselect options are deliberately unchanged
+  </goab-text>
+  <goab-text size="body-m" mb="m">
+    Only the placeholder changed on this one. Its options are checkbox elements, so their text
+    comes from the checkbox label colour, which is already near black. Matching the dropdown
+    exactly would mean repainting every checkbox in the system for a very small difference, so
+    the two are not identical on purpose. Open it and the option text should look the same as it
+    always has.
+  </goab-text>
+
+  <div style="max-width: 20rem">
+    <goab-form-item label="Cities">
+      <goab-dropdown-multiselect
+        name="citiesOpen"
+        placeholder="—Select—"
+        [value]="cities"
+        (onChange)="onCitiesChange($event)"
+      >
+        <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+        <goab-dropdown-item value="calgary" label="Calgary"></goab-dropdown-item>
+        <goab-dropdown-item value="red-deer" label="Red Deer"></goab-dropdown-item>
+        <goab-dropdown-item value="lethbridge" label="Lethbridge"></goab-dropdown-item>
+      </goab-dropdown-multiselect>
+    </goab-form-item>
+  </div>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">States that should not have moved</goab-text>
+  <goab-text size="body-m" mb="m">
+    Disabled and error text use their own tokens and were not touched. These are here to confirm
+    nothing drifted.
+  </goab-text>
+
+  <div style="max-width: 20rem">
+    <goab-block direction="column" gap="m" mb="2xl">
+      <goab-form-item label="Disabled">
+        <goab-dropdown name="disabledCity" value="" [disabled]="true">
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+
+      <goab-form-item label="Error">
+        <goab-dropdown name="errorCity" value="" [error]="true">
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+
+      <goab-form-item label="Multiselect, disabled">
+        <goab-dropdown-multiselect
+          name="disabledCities"
+          placeholder="—Select—"
+          [value]="[]"
+          [disabled]="true"
+        >
+          <goab-dropdown-item value="edmonton" label="Edmonton"></goab-dropdown-item>
+        </goab-dropdown-multiselect>
+      </goab-form-item>
+    </goab-block>
+  </div>
+</goab-block>
