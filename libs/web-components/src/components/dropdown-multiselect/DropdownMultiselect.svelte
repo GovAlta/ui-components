@@ -784,7 +784,7 @@
   .value-display.placeholder {
     color: var(
       --goa-dropdown-multiselect-color-text-placeholder,
-      var(--goa-input-color-text-default)
+      var(--goa-input-color-text-placeholder)
     );
   }
 
@@ -808,7 +808,7 @@
   .filter-input::placeholder {
     color: var(
       --goa-dropdown-multiselect-color-text-placeholder,
-      var(--goa-input-color-text-default)
+      var(--goa-input-color-text-placeholder)
     );
   }
 
