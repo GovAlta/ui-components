@@ -1,11 +1,16 @@
 import {
   GoabBadge,
+  GoabButton,
   GoabTab,
   GoabTabs,
   GoabText,
 } from "@abgov/react-components";
 
 export function DocsTabsRoute() {
+  const activateDetailsTab = () => {
+    window.location.hash = "button-example-details";
+  };
+
   return (
     <div>
       <h2>Tabs</h2>
@@ -35,6 +40,17 @@ export function DocsTabsRoute() {
         <GoabTab heading="First">First tab content.</GoabTab>
         <GoabTab heading="Second">Second tab content (initially shown).</GoabTab>
         <GoabTab heading="Third">Third tab content.</GoabTab>
+      </GoabTabs>
+
+      <h3>Activate a tab with a button</h3>
+      <GoabButton onClick={activateDetailsTab}>Open details</GoabButton>
+      <GoabTabs>
+        <GoabTab heading="Summary" slug="button-example-summary">
+          Summary content goes here.
+        </GoabTab>
+        <GoabTab heading="Details" slug="button-example-details">
+          Detailed information goes here.
+        </GoabTab>
       </GoabTabs>
 
       <h3>With badge in heading</h3>

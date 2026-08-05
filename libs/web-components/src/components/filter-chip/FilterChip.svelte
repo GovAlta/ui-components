@@ -19,15 +19,15 @@
   // Props
   /** Shows an error state. */
   export let error: string = "false";
-  /** @required Text label of the chip. */
-  export let content: string;
+  /** @required Content displayed in the chip. Use the content slot for custom HTML. */
+  export let content: string = "";
   /** Secondary text displayed in a smaller size before the main content. */
   export let secondarytext: string = "";
   /** Icon displayed at the start of the chip. */
   export let leadingicon: GoAIconType | null = null;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Accessible label for the filter chip. Defaults to content with 'removable' suffix. */
+  /** Accessible content used to label the filter chip controls. */
   export let ariaLabel: string = "";
   /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
@@ -39,14 +39,21 @@
   let _hovering: boolean = false;
   let _focused: boolean = false;
   let _error: boolean;
+  let _slottedContent: string = "";
 
   // Reactive declarations
   $: _error = toBoolean(error);
+  $: accessibleContent = ariaLabel || content || _slottedContent;
   $: chipAriaLabel = ariaLabel || `${content}, removable`;
+  $: removeFilterAriaLabel = accessibleContent
+    ? `Remove filter: ${accessibleContent}`
+    : "Remove filter";
 
   // Event handlers
   function onDelete(e: Event) {
-    el.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
+    el.dispatchEvent(
+      new CustomEvent("_click", { composed: true, bubbles: true }),
+    );
     e.stopPropagation();
   }
 
@@ -55,6 +62,16 @@
       onDelete(e);
       e.preventDefault();
     }
+  }
+
+  function handleContentSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    _slottedContent = slot
+      .assignedNodes({ flatten: true })
+      .map((node) => node.textContent || "")
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 </script>
 
@@ -66,7 +83,6 @@
     class="v2 chip"
     class:error={_error}
     role="presentation"
-    aria-label={chipAriaLabel}
     style={calculateMargin(mt, mr, mb, ml)}
   >
     <div class="label-container">
@@ -85,15 +101,19 @@
           {secondarytext}
         </div>
       {/if}
-      <div class="text">
-        {content}
+      <div class="text" on:slotchange={handleContentSlotChange}>
+        {#if $$slots.content}
+          <slot name="content" />
+        {:else}
+          {content}
+        {/if}
       </div>
     </div>
     <goa-icon-button
       size="3"
       icon="close"
       on:_click={onDelete}
-      arialabel="Remove filter"
+      arialabel={removeFilterAriaLabel}
       variant={_error ? "destructive" : "dark"}
       testid="delete-button"
     >
@@ -137,7 +157,10 @@
   .chip {
     display: inline-flex;
     align-items: center;
-    background-color: var(--goa-filter-chip-bg-color, var(--goa-color-greyscale-white));
+    background-color: var(
+      --goa-filter-chip-bg-color,
+      var(--goa-color-greyscale-white)
+    );
     border-radius: var(--goa-filter-chip-border-radius, 1rem);
     border: var(
       --goa-filter-chip-border,
@@ -180,7 +203,10 @@
       --goa-filter-chip-border-color-error,
       var(--goa-color-emergency-default)
     );
-    color: var(--goa-filter-chip-text-color-error, var(--goa-color-emergency-default));
+    color: var(
+      --goa-filter-chip-text-color-error,
+      var(--goa-color-emergency-default)
+    );
   }
 
   .chip:not(.v2).error:hover {
@@ -201,7 +227,10 @@
   }
 
   .text {
-    line-height: var(--goa-filter-chip-line-height, var(--goa-line-height-2)); /* 24px */
+    line-height: var(
+      --goa-filter-chip-line-height,
+      var(--goa-line-height-2)
+    ); /* 24px */
     padding-top: 0;
     display: flex;
     align-items: center;

@@ -9,7 +9,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import {
     typeValidator,
@@ -19,6 +19,8 @@
     ensureSlotExists,
     dispatch,
     parseCssTimeToMilliseconds,
+    performOnce,
+    watch,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
   import { Once } from "@abgov/ui-components-common";
@@ -85,6 +87,8 @@
   let _slotEl: HTMLElement;
   let _headingSlotChildren: Element[] = [];
   let _accordionId: string = "";
+  let _shouldAnnounce: boolean = false;
+  let _announcementTimeoutId: ReturnType<typeof setTimeout>;
 
   // Store the animation object (so we can cancel it if needed)
   let _animation: Animation | null = null;
@@ -98,6 +102,7 @@
   // Reactive
 
   $: isOpen = toBoolean(open);
+  $: watch(updateAnnouncement, [isOpen]);
 
   // Functions
 
@@ -112,6 +117,8 @@
     _accordionId = `accordion-${generateRandomId()}`;
   });
 
+  onDestroy(() => clearTimeout(_announcementTimeoutId));
+
   function getHeadingChildren(): Element[] {
     if (_titleEl) {
       const slot = _titleEl.querySelector("slot") as HTMLSlotElement;
@@ -122,6 +129,16 @@
       }
     }
     return [];
+  }
+
+  function updateAnnouncement() {
+    _shouldAnnounce = false;
+    // Give Safari time to expose the expanded content before adding the alert role.
+    _announcementTimeoutId = performOnce(_announcementTimeoutId, () => {
+      if (isOpen) {
+        _shouldAnnounce = true;
+      }
+    }, 100);
   }
 
   function dispatchChangeEvent(accordionIsOpen: boolean) {
@@ -371,7 +388,9 @@
       aria-labelledby={`${_accordionId}-heading`}
       id={`${_accordionId}-content`}
     >
-      <slot />
+      <div role={_shouldAnnounce ? "alert" : undefined}>
+        <slot />
+      </div>
     </div>
   </details>
 </div>

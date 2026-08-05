@@ -1,31 +1,60 @@
 # React UI Components
 
-![npm (scoped)](https://img.shields.io/npm/v/@abgov/react-components?color=%230081a2&label=react-components&style=flat-square)
+[![npm version](https://img.shields.io/npm/v/@abgov/react-components?color=%230081a2&label=react-components&style=flat-square)](https://www.npmjs.com/package/@abgov/react-components)
 
-This library contains react components from the Government of Alberta.
+React wrappers for the Government of Alberta Design System web components.
+
+Supported React versions: 17, 18, and 19.
+
+## Install
 
 ```bash
-npm i @abgov/react-components
-npm i @abgov/web-components
+npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
 ```
 
-### Icons
+## Register the web components
 
-Link ionicons in app/index.html
-Add the following to the head element
+Import the underlying web components once in your application entry point, such as
+`src/main.tsx`:
 
-```html
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+```typescript
+import "@abgov/web-components";
 ```
 
-### Styles
+## Add styles
 
-Import the web-component styles in the `src/index.css` file
+Import the component styles and design tokens in your main stylesheet, such as
+`src/index.css`:
 
 ```css
 @import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";
 ```
----
 
-[Visit Design System](https://design.alberta.ca)
+## Add icons
+
+Add Ionicons to the `<head>` of `index.html`:
+
+```html
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+></script>
+```
+
+## Use a component
+
+```tsx
+import { GoabButton } from "@abgov/react-components";
+
+export function App() {
+  return <GoabButton type="primary">Continue</GoabButton>;
+}
+```
+
+See the [developer setup guide](https://design.alberta.ca/get-started/developers/setup/) and
+[Government of Alberta Design System](https://design.alberta.ca) for more information.

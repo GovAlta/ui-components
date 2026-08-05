@@ -43,7 +43,7 @@ export function DisplayUserInformation() {
       <GoabContainer
         type="non-interactive"
         accent="thick"
-        heading="Upcoming important due dates"
+        title="Upcoming important due dates"
         actions={
           <GoabButton
             type="tertiary"

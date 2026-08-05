@@ -839,7 +839,7 @@
     background: var(--goa-color-greyscale-white, #ffffff);
     border: var(--goa-border-width-s) solid
       var(--goa-color-greyscale-150, #dcdcdc);
-    border-radius: var(--goa-border-radius-xl);
+    border-radius: var(--goa-border-radius-m);
     pointer-events: none;
     z-index: 0;
     box-sizing: border-box;
@@ -856,7 +856,7 @@
     background: transparent;
     /* Override base border-bottom and border-left (mobile) */
     border: var(--goa-border-width-s) solid transparent;
-    border-radius: var(--goa-border-radius-xl);
+    border-radius: var(--goa-border-radius-m);
     min-height: 30px;
     padding: 0 var(--goa-space-s, 12px);
     /* Typography */

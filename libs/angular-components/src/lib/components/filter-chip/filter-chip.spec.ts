@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
 import { GoabChipTheme, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
@@ -12,7 +12,8 @@ import { GoabFilterChip } from "./filter-chip";
     <goab-filter-chip
       [error]="error"
       [iconTheme]="iconTheme"
-      [content]="content"
+      [content]="contentSlot ? contentTemplate : content"
+      [ariaLabel]="ariaLabel"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
@@ -20,12 +21,17 @@ import { GoabFilterChip } from "./filter-chip";
       [mr]="mr"
       (onClick)="onClick()"
     >
+      <ng-template #contentTemplate>
+        <strong>some filter chip template</strong>
+      </ng-template>
     </goab-filter-chip>
   `,
 })
 class TestFilterChipComponent {
   error?: boolean;
-  content?: string;
+  content?: string | TemplateRef<unknown>;
+  contentSlot?: boolean;
+  ariaLabel?: string;
   iconTheme?: GoabChipTheme;
   testId?: string;
   mt?: Spacing;
@@ -52,6 +58,7 @@ describe("GoabFilterChip", () => {
 
     component.error = true;
     component.content = "some chip";
+    component.ariaLabel = "Accessible filter";
     component.testId = "chip-test";
     component.iconTheme = "filled";
     component.mt = "s";
@@ -69,12 +76,27 @@ describe("GoabFilterChip", () => {
     ).nativeElement;
     expect(chipElement.getAttribute("error")).toBe(`${component.error}`);
     expect(chipElement.getAttribute("content")).toBe(component.content);
+    expect(chipElement.getAttribute("arialabel")).toBe(component.ariaLabel);
     expect(chipElement.getAttribute("icontheme")).toBe(`${component.iconTheme}`);
     expect(chipElement.getAttribute("testid")).toBe(component.testId);
     expect(chipElement.getAttribute("mt")).toBe(component.mt);
     expect(chipElement.getAttribute("mr")).toBe(component.mr);
     expect(chipElement.getAttribute("mb")).toBe(component.mb);
     expect(chipElement.getAttribute("ml")).toBe(component.ml);
+  });
+
+  it("should render template content in the content slot for version 2", () => {
+    component.contentSlot = true;
+    fixture.detectChanges();
+
+    const chipElement = fixture.debugElement.query(
+      By.css("goa-filter-chip"),
+    ).nativeElement;
+    const content = chipElement.querySelector("[slot='content']");
+    expect(chipElement.getAttribute("content")).toBeNull();
+    expect(content.querySelector("strong").textContent).toContain(
+      "some filter chip template",
+    );
   });
 
   it("should allow to handle delete event", fakeAsync(() => {

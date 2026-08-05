@@ -20,8 +20,50 @@ interface User {
 }
 
 function generateUsers(): User[] {
-  const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
-  const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+  const firstNames = [
+    "Emma",
+    "Liam",
+    "Olivia",
+    "Noah",
+    "Ava",
+    "James",
+    "Sophia",
+    "William",
+    "Isabella",
+    "Oliver",
+    "Mia",
+    "Benjamin",
+    "Charlotte",
+    "Elijah",
+    "Amelia",
+    "Lucas",
+    "Harper",
+    "Mason",
+    "Evelyn",
+    "Logan",
+  ];
+  const lastNames = [
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Brown",
+    "Jones",
+    "Garcia",
+    "Miller",
+    "Davis",
+    "Rodriguez",
+    "Martinez",
+    "Wilson",
+    "Anderson",
+    "Taylor",
+    "Thomas",
+    "Moore",
+    "Jackson",
+    "Martin",
+    "Lee",
+    "Thompson",
+    "White",
+  ];
   const users: User[] = [];
   for (let i = 1; i <= 100; i++) {
     users.push({
@@ -70,6 +112,32 @@ export function DocsPaginationRoute() {
         perPageCount={10}
         variant="links-only"
         onChange={(detail: GoabPaginationOnChangeDetail) => setSimplePage(detail.page)}
+      />
+
+      <h3>Simple Table</h3>
+      <GoabTable width="100%" mb="xl">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pageUsers.map((u) => (
+            <tr key={u.id}>
+              <td>{u.firstName}</td>
+              <td>{u.lastName}</td>
+              <td>{u.age}</td>
+            </tr>
+          ))}
+        </tbody>
+      </GoabTable>
+      <GoabPagination
+        pageNumber={simplePage}
+        itemCount={50}
+        perPageCount={10}
+        onChange={(detail: GoabPaginationOnChangeDetail) => setPage(detail.page)}
       />
 
       <h2>Examples</h2>

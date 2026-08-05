@@ -1,0 +1,33 @@
+<goab-text tag="h1" mt="m">Feature #1514: FilterChip rich content</goab-text>
+
+<goab-text tag="h3">1. Text content</goab-text>
+<goab-filter-chip content="Text only" />
+
+<goab-text tag="h3">2. Bold text</goab-text>
+<goab-filter-chip [content]="boldContent" />
+
+<goab-text tag="h3">3. Strikethrough text</goab-text>
+<goab-filter-chip [content]="strikethroughContent" />
+
+<goab-text tag="h3">4. Underline text</goab-text>
+<goab-filter-chip [content]="underlineContent" />
+
+<goab-text tag="h3">5. Text and badge</goab-text>
+<goab-filter-chip [content]="badgeContent" />
+
+<ng-template #boldContent>
+  <strong>Bold text</strong>
+</ng-template>
+
+<ng-template #strikethroughContent>
+  <s>Strikethrough text</s>
+</ng-template>
+
+<ng-template #underlineContent>
+  <u>Underline text</u>
+</ng-template>
+
+<ng-template #badgeContent>
+  Application status
+  <goab-badge type="success" content="Active"></goab-badge>
+</ng-template>

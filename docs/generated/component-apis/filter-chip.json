@@ -5,11 +5,11 @@
     "react": {
       "props": [
         {
-          "name": "content",
+          "name": "ariaLabel",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Text label of the chip."
+          "description": "Accessible content used to label the filter chip controls."
         },
         {
           "name": "error",
@@ -85,16 +85,34 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "description": "Content displayed in the chip. Accepts a string or ReactNode for custom content.",
+          "required": true
+        }
+      ]
     },
     "angular": {
       "props": [
         {
-          "name": "content",
+          "name": "ariaLabel",
           "type": "string",
           "required": false,
+          "default": null,
+          "description": "Accessible content used to label the filter chip controls."
+        },
+        {
+          "name": "content",
+          "type": "string | TemplateRef<unknown>",
+          "values": [
+            "string",
+            "TemplateRef<unknown>"
+          ],
+          "required": false,
           "default": "",
-          "description": "Text label of the chip."
+          "description": "Content displayed in the chip. Accepts a string or template for custom content."
         },
         {
           "name": "deletable",
@@ -180,7 +198,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "type": "TemplateRef",
+          "description": "Content displayed in the chip. Accepts a string or ngTemplate for custom content.",
+          "required": true
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -189,14 +214,14 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
+          "description": "Accessible content used to label the filter chip controls."
         },
         {
           "name": "content",
           "type": "string",
           "required": true,
-          "default": null,
-          "description": "Text label of the chip."
+          "default": "",
+          "description": "Content displayed in the chip. Use the content slot for custom HTML."
         },
         {
           "name": "error",
@@ -281,7 +306,13 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "description": "Content displayed in the chip. Accepts a string or ReactNode for custom content.",
+          "required": true
+        }
+      ]
     }
   }
 }

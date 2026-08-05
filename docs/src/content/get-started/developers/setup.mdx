@@ -17,51 +17,65 @@ import DropInCallout from "../../../components/DropInCallout.astro";
   <goa-text size="body-m" mt="2xs" mb="none">Supported versions: 18, 19, 20, 21</goa-text>
 </goa-callout>
 <goa-text size="body-m" mt="none" mb="m">
-  This is the web component library and utilizes Angular&apos;s web component
-  integration.
+  This library contains standalone Angular components that wrap the Government of Alberta
+  Web Components.
 </goa-text>
 
 <h3 id="angular-step-1">1. Add dependencies</h3>
-<pre><code>npm i @abgov/web-components
+<pre><code>{`npm i @abgov/web-components
 npm i @abgov/angular-components
 npm i @abgov/ui-components-common
-npm i @abgov/design-tokens</code></pre>
+npm i @abgov/design-tokens`}</code></pre>
 
-<h3 id="angular-step-2">2. Link ionicons in app/index.html</h3>
+<h3 id="angular-step-2">2. Register the web components</h3>
 <goa-text size="body-m" mt="none" mb="m">
-  Add the following in the <code>head</code> element:
+  Import the underlying web components once in <code>src/main.ts</code>, before
+  bootstrapping the application:
+</goa-text>
+<pre><code>import "@abgov/web-components";</code></pre>
+<goa-text size="body-m" mt="none" mb="m">
+  Keep your existing <code>bootstrapApplication</code> call after this import.
+</goa-text>
+
+<h3 id="angular-step-3">3. Import wrapper components</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Import each standalone wrapper directly into the component that uses it:
+</goa-text>
+<pre><code>{`// src/app/app.ts
+import { Component } from "@angular/core";
+import { GoabButton } from "@abgov/angular-components";
+
+@Component({
+  selector: "app-root",
+  standalone: true,
+  imports: [GoabButton],
+  template: '<goab-button type="primary">Continue</goab-button>',
+})
+export class App {}`}</code></pre>
+<goa-text size="body-m" mt="none" mb="m">
+  <code>standalone: true</code> is shown explicitly for compatibility with Angular 18; it
+  is the default in newer Angular versions.
+</goa-text>
+<goa-text size="body-m" mt="none" mb="m">
+  For an existing NgModule-based application, add each standalone wrapper component to
+  that module&apos;s <code>imports</code> array. <code>AngularComponentsModule</code> is only
+  needed by applications that still use the legacy <code>goaValue</code>,
+  <code>goaValueList</code>, or <code>goaChecked</code> form directives.
+</goa-text>
+
+<h3 id="angular-step-4">4. Add styles</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Import the component styles and design tokens in <code>src/styles.css</code>:
+</goa-text>
+<pre><code>{`@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";`}</code></pre>
+
+<h3 id="angular-step-5">5. Add icons</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Add Ionicons to the <code>head</code> element of <code>src/index.html</code>:
 </goa-text>
 <pre><code>{`<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>`}</code></pre>
-
-<h3 id="angular-step-3">3. Update src/app/app.module.ts</h3>
-<goa-text size="body-m" mt="none" mb="m">
-  Update <code>src/app/app.module.ts</code> as per the four steps below:
-</goa-text>
-<pre><code>{`// 1. Import the CUSTOM_ELEMENTS_SCHEMA
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-
-// 2. Import the libs
-import "@abgov/web-components";
-import { AngularComponentsModule } from "@abgov/angular-components";
-
-@NgModule({
-	declarations: [AppComponent],
-	imports: [
-		// 3. Add the needed imports
-		BrowserModule,
-		AngularComponentsModule,
-	],
-	providers: [],
-	bootstrap: [AppComponent],
-	// 4. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
-	})
-export class AppModule {}`}</code></pre>
-
-<h3 id="angular-step-4">4. Add the styles link in src/styles.css</h3>
-<pre><code>@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
 
 <goa-divider mt="xl" mb="xl"></goa-divider>
 

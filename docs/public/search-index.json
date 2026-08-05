@@ -766,6 +766,27 @@
   },
   {
     "type": "example",
+    "id": "activate-a-specific-tab-with-a-button",
+    "title": "Activate a specific tab with a button",
+    "description": "Activate a tab from a button by setting the URL hash—the part after `#`—to match the tab's `slug`.",
+    "status": "published",
+    "size": "interaction",
+    "tags": [
+      "tabs",
+      "navigation",
+      "button",
+      "url-hash"
+    ],
+    "components": [
+      "tabs",
+      "tab",
+      "button"
+    ],
+    "aliases": [],
+    "slug": "activate-a-specific-tab-with-a-button"
+  },
+  {
+    "type": "example",
     "id": "add-a-filter-chip",
     "title": "Add a filter chip",
     "description": "Allow users to apply filters using selectable chips, which visually represent active filters and can be removed to update results dynamically.",

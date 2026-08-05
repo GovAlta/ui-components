@@ -12,13 +12,6 @@
           "description": "Accessible label for screen readers."
         },
         {
-          "name": "content",
-          "type": "string",
-          "required": false,
-          "default": null,
-          "description": "Text label of the badge."
-        },
-        {
           "name": "emphasis",
           "type": "GoabBadgeEmphasis",
           "required": false,
@@ -83,7 +76,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "description": "Content displayed in the badge. Accepts a string or ReactNode for custom content.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -96,10 +96,14 @@
         },
         {
           "name": "content",
-          "type": "string",
+          "type": "string | TemplateRef<unknown>",
+          "values": [
+            "string",
+            "TemplateRef<unknown>"
+          ],
           "required": false,
           "default": null,
-          "description": "Sets the text label of the badge."
+          "description": "Sets the content displayed in the badge. Accepts a string or template for custom content."
         },
         {
           "name": "emphasis",
@@ -166,7 +170,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "type": "TemplateRef",
+          "description": "Content displayed in the badge. Accepts a string or ngTemplate for custom content.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -182,7 +193,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Text label of the badge."
+          "description": "Content displayed in the badge. Use the content slot for custom HTML in version 2."
         },
         {
           "name": "emphasis",
@@ -328,7 +339,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "content",
+          "description": "Content displayed in the badge. Accepts a string or ReactNode for custom content.",
+          "required": false
+        }
+      ]
     }
   }
 }

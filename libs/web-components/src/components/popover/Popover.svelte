@@ -407,15 +407,32 @@
       return;
     }
 
+    // A fit-content popover shrinks to the space on the trigger's right when the
+    // trigger sits near the screen edge, so its measured width understates the
+    // width it actually wants — comparing that squeezed width against itself never
+    // flips. Compare against the width it would take with room (its max width).
+    const intendedWidth = getIntendedWidth(popoverRect.width);
+
     const spaceRight = window.innerWidth - targetRect.left;
-    if (
-      spaceRight < popoverRect.width &&
-      targetRect.right > popoverRect.width
-    ) {
+    if (spaceRight < intendedWidth && targetRect.right > intendedWidth) {
       _alignment = "right";
     } else {
       _alignment = "left";
     }
+  }
+
+  // The width the popover would occupy if it had room. A fixed-width popover keeps
+  // its width; a fit-content one can grow up to its configured max width. Reads the
+  // computed max-width rather than resizing the live popover, which must not be
+  // mutated while it is open in the top layer.
+  function getIntendedWidth(measuredWidth: number): number {
+    if ((!!width && !_fitContent) || !_popoverEl) {
+      return measuredWidth;
+    }
+    const maxWidthPx = parseFloat(getComputedStyle(_popoverEl).maxWidth);
+    return Number.isNaN(maxWidthPx)
+      ? measuredWidth
+      : Math.max(measuredWidth, maxWidthPx);
   }
 </script>
 
