@@ -185,15 +185,11 @@
   function sendMountedMessage() {
     if (!name) return;
 
-    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)
-      ?.host as HTMLElement;
-    const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
-
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
       { name, el: _rootEl },
-      { bubbles: !fromCheckboxList, timeout: 10 },
+      { bubbles: true, timeout: 10 },
     );
   }
 

@@ -1,0 +1,65 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1" size="heading-l" mb="m">
+    Bug #4201: Disabled radio groups with Angular forms
+  </goab-text>
+
+  <goab-text tag="h2" size="heading-m" mb="m">
+    1. Template-driven form using [disabled] property
+  </goab-text>
+  <goab-text size="body-m">
+    The component input supplies the disabled state while ngModel supplies the value.
+  </goab-text>
+  <goab-radio-group
+    name="templateDrivenDisabled"
+    [(ngModel)]="templateDrivenValue"
+    [disabled]="true"
+  >
+    <goab-radio-item value="one" label="Option one"></goab-radio-item>
+    <goab-radio-item value="two" label="Option two"></goab-radio-item>
+  </goab-radio-group>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mb="m">
+    2. Reactive form disabled via FormControl
+  </goab-text>
+  <goab-text tag="p">
+    The FormControl is created with disabled: true. The component has no disabled input.
+  </goab-text>
+  <goab-radio-group name="formControlDisabled" [formControl]="formControlDisabled">
+    <goab-radio-item value="one" label="Option one"></goab-radio-item>
+    <goab-radio-item value="two" label="Option two"></goab-radio-item>
+  </goab-radio-group>
+  <goab-text size="body-s">
+    FormControl disabled: {{ formControlDisabled.disabled }}
+  </goab-text>
+
+  <goab-divider></goab-divider>
+
+  <goab-text tag="h2" size="heading-m" mb="m">
+    3. Reactive form disabled using [disabled] property
+  </goab-text>
+  <goab-text tag="p">
+    The FormControl remains enabled while the disabled state is supplied directly to the
+    component. This is the option that didn't work prior to this bug.
+  </goab-text>
+  <goab-text tag="p">
+    This is technically the incorrect way of doing it and shouldn't be used. It's been
+    fixed though because some people will inevitably do it this way.
+  </goab-text>
+  <goab-text tag="p">
+    It's incorrect because while it disables the component in the UI, it doesn't disable
+    it to Angular, so Angular will still present the value in any FormGroup values.
+  </goab-text>
+  <goab-radio-group
+    name="componentDisabled"
+    [formControl]="componentDisabled"
+    [disabled]="true"
+  >
+    <goab-radio-item value="one" label="Option one"></goab-radio-item>
+    <goab-radio-item value="two" label="Option two"></goab-radio-item>
+  </goab-radio-group>
+  <goab-text size="body-s">
+    FormControl disabled: {{ componentDisabled.disabled }} (expected: false)
+  </goab-text>
+</goab-block>

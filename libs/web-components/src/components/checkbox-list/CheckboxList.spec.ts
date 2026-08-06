@@ -83,14 +83,58 @@ describe("GoACheckboxList", () => {
       expect(container.querySelector(".root")).toBeTruthy();
     });
 
-    it("should handle disabled state", async () => {
-      const { container } = render(CheckboxList, {
+    it("should update child checkboxes when disabled changes", async () => {
+      const result = render(CheckboxList, defaultProps);
+      const checkboxContainer = result.container.querySelector(".checkbox-container");
+      const checkbox = document.createElement("goa-checkbox");
+      const slot = document.createElement("slot");
+      vi.spyOn(slot, "assignedElements").mockReturnValue([checkbox]);
+      checkboxContainer?.appendChild(slot);
+
+      expect(checkbox.hasAttribute("disabled")).toBe(false);
+
+      await result.rerender({
         ...defaultProps,
         disabled: "true",
       });
 
-      // When disabled, child checkboxes should also be disabled
-      expect(container).toBeTruthy();
+      await waitFor(() => {
+        expect(checkbox.getAttribute("disabled")).toBe("true");
+      });
+
+      await result.rerender({
+        ...defaultProps,
+        disabled: "false",
+      });
+
+      await waitFor(() => {
+        expect(checkbox.hasAttribute("disabled")).toBe(false);
+      });
+    });
+
+    it("should disable a child checkbox that mounts after the list", async () => {
+      const result = render(CheckboxList, defaultProps);
+      const checkboxContainer = result.container.querySelector(".checkbox-container");
+      const checkbox = document.createElement("goa-checkbox");
+      const checkboxRoot = document.createElement("div");
+      checkbox.attachShadow({ mode: "open" }).appendChild(checkboxRoot);
+      checkboxContainer?.appendChild(checkbox);
+
+      await result.rerender({
+        ...defaultProps,
+        disabled: "true",
+      });
+
+      relay<FormFieldMountRelayDetail>(
+        checkboxRoot,
+        FormFieldMountMsg,
+        { name: "option1", el: checkboxRoot },
+        { bubbles: true },
+      );
+
+      await waitFor(() => {
+        expect(checkbox.getAttribute("disabled")).toBe("true");
+      });
     });
   });
 
