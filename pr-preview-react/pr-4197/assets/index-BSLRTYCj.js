@@ -33255,13 +33255,13 @@ function qf(t) {
   };
 }
 function Hf(t) {
-  let e, o, i, n, r = (
+  let e, o, i, n, r, l = (
     /*_iconType*/
     t[13] && lr(t)
   );
   return {
     c() {
-      e = C("div"), r && r.c(), u(
+      e = C("div"), l && l.c(), u(
         e,
         "role",
         /*role*/
@@ -33281,25 +33281,21 @@ function Hf(t) {
         "aria-expanded",
         /*_ariaExpanded*/
         t[17]
-      ), u(
-        e,
-        "aria-hidden",
-        /*_ariaHidden*/
-        t[16]
-      ), u(e, "class", o = et(`goa-icon goa-icon--${/*size*/
+      ), u(e, "aria-hidden", o = /*_ariaHidden*/
+      t[16] || void 0), u(e, "class", i = et(`goa-icon goa-icon--${/*size*/
       t[5]}`) + " svelte-1wzvott"), u(
         e,
         "data-testid",
         /*testid*/
         t[9]
-      ), u(e, "data-type", i = /*_iconType*/
+      ), u(e, "data-type", n = /*_iconType*/
       t[13] || /*type*/
       t[4]), u(
         e,
         "title",
         /*title*/
         t[8]
-      ), u(e, "style", n = `
+      ), u(e, "style", r = `
     ${Se(
         /*mt*/
         t[0],
@@ -33327,91 +33323,87 @@ function Hf(t) {
         t[18]
       );
     },
-    m(l, a) {
-      T(l, e, a), r && r.m(e, null);
+    m(a, c) {
+      T(a, e, c), l && l.m(e, null);
     },
-    p(l, [a]) {
-      l[13] ? r ? r.p(l, a) : (r = lr(l), r.c(), r.m(e, null)) : r && (r.d(1), r = null), a & /*role*/
+    p(a, [c]) {
+      a[13] ? l ? l.p(a, c) : (l = lr(a), l.c(), l.m(e, null)) : l && (l.d(1), l = null), c & /*role*/
       4096 && u(
         e,
         "role",
         /*role*/
-        l[12]
-      ), a & /*arialabel*/
+        a[12]
+      ), c & /*arialabel*/
       1024 && u(
         e,
         "aria-label",
         /*arialabel*/
-        l[10]
-      ), a & /*ariacontrols*/
+        a[10]
+      ), c & /*ariacontrols*/
       2048 && u(
         e,
         "aria-controls",
         /*ariacontrols*/
-        l[11]
-      ), a & /*_ariaExpanded*/
+        a[11]
+      ), c & /*_ariaExpanded*/
       131072 && u(
         e,
         "aria-expanded",
         /*_ariaExpanded*/
-        l[17]
-      ), a & /*_ariaHidden*/
-      65536 && u(
-        e,
-        "aria-hidden",
-        /*_ariaHidden*/
-        l[16]
-      ), a & /*size*/
-      32 && o !== (o = et(`goa-icon goa-icon--${/*size*/
-      l[5]}`) + " svelte-1wzvott") && u(e, "class", o), a & /*testid*/
+        a[17]
+      ), c & /*_ariaHidden*/
+      65536 && o !== (o = /*_ariaHidden*/
+      a[16] || void 0) && u(e, "aria-hidden", o), c & /*size*/
+      32 && i !== (i = et(`goa-icon goa-icon--${/*size*/
+      a[5]}`) + " svelte-1wzvott") && u(e, "class", i), c & /*testid*/
       512 && u(
         e,
         "data-testid",
         /*testid*/
-        l[9]
-      ), a & /*_iconType, type*/
-      8208 && i !== (i = /*_iconType*/
-      l[13] || /*type*/
-      l[4]) && u(e, "data-type", i), a & /*title*/
+        a[9]
+      ), c & /*_iconType, type*/
+      8208 && n !== (n = /*_iconType*/
+      a[13] || /*type*/
+      a[4]) && u(e, "data-type", n), c & /*title*/
       256 && u(
         e,
         "title",
         /*title*/
-        l[8]
-      ), a & /*mt, mr, mb, ml, fillcolor, opacity*/
-      207 && n !== (n = `
+        a[8]
+      ), c & /*mt, mr, mb, ml, fillcolor, opacity*/
+      207 && r !== (r = `
     ${Se(
         /*mt*/
-        l[0],
+        a[0],
         /*mr*/
-        l[1],
+        a[1],
         /*mb*/
-        l[2],
+        a[2],
         /*ml*/
-        l[3]
+        a[3]
       )}
     ${Be(
         "--fill-color",
         /*fillcolor*/
-        l[6]
+        a[6]
       )};
     ${Be(
         "--opacity",
         /*opacity*/
-        l[7]
+        a[7]
       )};
-  `) && u(e, "style", n), a & /*size, _isInverted*/
+  `) && u(e, "style", r), c & /*size, _isInverted*/
       262176 && S(
         e,
         "inverted",
         /*_isInverted*/
-        l[18]
+        a[18]
       );
     },
     i: Ee,
     o: Ee,
-    d(l) {
-      l && I(e), r && r.d();
+    d(a) {
+      a && I(e), l && l.d();
     }
   };
 }
