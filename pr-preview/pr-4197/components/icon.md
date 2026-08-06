@@ -64,7 +64,7 @@ Tag: `goa-icon`
 |------|------|---------|----------|-------------|
 | `ariacontrols` | string | (none) | No | Identifies the element(s) whose contents or presence are controlled by this icon. |
 | `ariaexpanded` | string | (none) | No | Indicates whether the element controlled by this icon is expanded or collapsed. |
-| `ariahidden` | boolean | `false` | No | Sets whether the icon is hidden from assistive technologies. @default "false" |
+| `ariahidden` | boolean | `false` | No | Sets whether the icon is hidden from assistive technologies. |
 | `arialabel` | string | (none) | No | Defines how the icon will be announced by screen readers. |
 | `fillcolor` | string | (none) | No | Sets a custom fill color for the icon. Accepts any valid CSS color value. |
 | `inverted` | boolean | `false` | No | When true, inverts the icon colors for use on dark backgrounds. |
