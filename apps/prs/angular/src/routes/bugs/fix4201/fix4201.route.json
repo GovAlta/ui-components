@@ -1,0 +1,6 @@
+{
+  "type": "bug",
+  "id": "4201",
+  "path": "bugs/fix4201",
+  "title": "Disabled state with Angular forms"
+}

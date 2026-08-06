@@ -86,15 +86,15 @@ export abstract class GoabControlValueAccessor
 {
   /** Sets the id attribute of the underlying web component. */
   @Input() id?: string;
-  // supports disabled="true" instead of [disabled]="true"
-  /** Sets the disabled state for the control. */
-  @Input({ transform: booleanAttribute }) public disabled?: boolean;
   // supports error="true" instead of [error]="true"
   /** Sets the error state for the control. */
   @Input({ transform: booleanAttribute }) public error?: boolean;
   // this should be unknown (not string) as it might be an integer or a date or a boolean
   /** Sets the control value used by Angular forms and one-way binding. */
   @Input() value?: unknown | null | undefined;
+
+  private inputDisabled = false;
+  private formControlDisabled = false;
 
   // implement ControlValueAccessor
 
@@ -175,11 +175,25 @@ export abstract class GoabControlValueAccessor
   }
 
   /**
+   * Sets the disabled state for the control.
+   *
+   * @param isDisabled - A boolean indicating whether the component should be disabled.
+   */
+  @Input({ transform: booleanAttribute })
+  public set disabled(isDisabled: boolean | undefined) {
+    this.inputDisabled = isDisabled ?? false;
+  }
+
+  get disabled(): boolean {
+    return this.inputDisabled || this.formControlDisabled;
+  }
+
+  /**
    * Sets the disabled state of the component.
    *
    * @param isDisabled - A boolean indicating whether the component should be disabled.
    */
-  public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+  public setDisabledState?(value: boolean): void {
+    this.formControlDisabled = value;
   }
 }

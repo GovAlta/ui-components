@@ -64,7 +64,10 @@
 
   // Reactive bindings
   $: isDisabled = toBoolean(disabled);
-  $: updateState(value, error);
+  $: {
+    isDisabled;
+    updateState(value, error);
+  }
 
   onMount(async () => {
     await tick();
@@ -237,7 +240,9 @@
           onSetValue({ name, value: [] });
           break;
         case FormFieldMountMsg:
-          onChildCheckboxMount(data as FormFieldMountRelayDetail);
+          if (onChildCheckboxMount(data as FormFieldMountRelayDetail)) {
+            event.stopPropagation();
+          }
           break;
       }
     });
@@ -281,13 +286,13 @@
    * Register a newly mounted child checkbox that belongs to this list.
    * Also synchronizes its state and applies child-level styles.
    */
-  function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
+  function onChildCheckboxMount(detail: FormFieldMountRelayDetail): boolean {
     const checkboxElement = (detail.el.getRootNode() as any)?.host;
     if (
       !checkboxElement ||
       checkboxElement.tagName.toLowerCase() !== "goa-checkbox"
     ) {
-      return;
+      return false;
     }
 
     // Capture label
@@ -297,6 +302,7 @@
       { el: detail.el, name: detail.name, label },
     ];
     updateChildCheckboxState(detail.el, detail.name);
+    return true;
   }
 
   /**
