@@ -12832,13 +12832,13 @@ function explodeOptionalSegments(path) {
   if (segments.length === 0) return [];
   let [first, ...rest] = segments;
   let isOptional = first.endsWith("?");
-  let required = first.replace(/\?$/, "");
+  let required2 = first.replace(/\?$/, "");
   if (rest.length === 0) {
-    return isOptional ? [required, ""] : [required];
+    return isOptional ? [required2, ""] : [required2];
   }
   let restExploded = explodeOptionalSegments(rest.join("/"));
   let result = [];
-  result.push(...restExploded.map((subpath) => subpath === "" ? required : [required, subpath].join("/")));
+  result.push(...restExploded.map((subpath) => subpath === "" ? required2 : [required2, subpath].join("/")));
   if (isOptional) {
     result.push(...restExploded);
   }
@@ -12913,15 +12913,15 @@ function matchRouteBranch(branch, pathname, allowPartial) {
   }
   return matches;
 }
-function matchPath(pattern, pathname) {
-  if (typeof pattern === "string") {
-    pattern = {
-      path: pattern,
+function matchPath(pattern2, pathname) {
+  if (typeof pattern2 === "string") {
+    pattern2 = {
+      path: pattern2,
       caseSensitive: false,
       end: true
     };
   }
-  let [matcher, compiledParams] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+  let [matcher, compiledParams] = compilePath(pattern2.path, pattern2.caseSensitive, pattern2.end);
   let match2 = pathname.match(matcher);
   if (!match2) return null;
   let matchedPathname = match2[0];
@@ -12948,7 +12948,7 @@ function matchPath(pattern, pathname) {
     params,
     pathname: matchedPathname,
     pathnameBase,
-    pattern
+    pattern: pattern2
   };
 }
 function compilePath(path, caseSensitive, end) {
@@ -13585,6 +13585,34 @@ function warningOnce(key, cond, message2) {
 function logV6DeprecationWarnings(renderFuture, routerFuture) {
   if ((renderFuture == null ? void 0 : renderFuture.v7_startTransition) === void 0) ;
   if ((renderFuture == null ? void 0 : renderFuture.v7_relativeSplatPath) === void 0 && true) ;
+}
+function Navigate(_ref4) {
+  let {
+    to: to2,
+    replace: replace2,
+    state,
+    relative
+  } = _ref4;
+  !useInRouterContext() ? invariant(false) : void 0;
+  let {
+    future,
+    static: isStatic
+  } = reactExports.useContext(NavigationContext);
+  let {
+    matches
+  } = reactExports.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let navigate2 = useNavigate();
+  let path = resolveTo(to2, getResolveToMatches(matches, future.v7_relativeSplatPath), locationPathname, relative === "path");
+  let jsonPath = JSON.stringify(path);
+  reactExports.useEffect(() => navigate2(JSON.parse(jsonPath), {
+    replace: replace2,
+    state,
+    relative
+  }), [navigate2, jsonPath, relative, replace2, state]);
+  return null;
 }
 function Outlet(props) {
   return useOutlet(props.context);
@@ -14855,9 +14883,9 @@ function buildMatchFn(args) {
     }
     const matchedString = matchResult[0];
     const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
-    const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : (
+    const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern2) => pattern2.test(matchedString)) : (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
-      findKey(parsePatterns, (pattern) => pattern.test(matchedString))
+      findKey(parsePatterns, (pattern2) => pattern2.test(matchedString))
     );
     let value;
     value = args.valueCallback ? args.valueCallback(key) : key;
@@ -15782,8 +15810,8 @@ function formatTimezone(offset, delimiter = "") {
   const minutes = addLeadingZeros(absOffset % 60, 2);
   return sign + hours + delimiter + minutes;
 }
-const dateLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
+const dateLongFormatter = (pattern2, formatLong2) => {
+  switch (pattern2) {
     case "P":
       return formatLong2.date({ width: "short" });
     case "PP":
@@ -15795,8 +15823,8 @@ const dateLongFormatter = (pattern, formatLong2) => {
       return formatLong2.date({ width: "full" });
   }
 };
-const timeLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
+const timeLongFormatter = (pattern2, formatLong2) => {
+  switch (pattern2) {
     case "p":
       return formatLong2.time({ width: "short" });
     case "pp":
@@ -15808,12 +15836,12 @@ const timeLongFormatter = (pattern, formatLong2) => {
       return formatLong2.time({ width: "full" });
   }
 };
-const dateTimeLongFormatter = (pattern, formatLong2) => {
-  const matchResult = pattern.match(/(P+)(p+)?/) || [];
+const dateTimeLongFormatter = (pattern2, formatLong2) => {
+  const matchResult = pattern2.match(/(P+)(p+)?/) || [];
   const datePattern = matchResult[1];
   const timePattern = matchResult[2];
   if (!timePattern) {
-    return dateLongFormatter(pattern, formatLong2);
+    return dateLongFormatter(pattern2, formatLong2);
   }
   let dateTimeFormat;
   switch (datePattern) {
@@ -85597,6 +85625,14 @@ function App() {
             label: "Everything",
             url: `${baseUrl}everything`
           }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabWorkSideMenuItem,
+          {
+            icon: "document-text",
+            label: "Public form",
+            url: `${baseUrl}public-form`
+          }
         )
       ] })
     }
@@ -87044,7 +87080,7 @@ function EverythingRoute() {
       ] })
     ] })
   ] }) });
-  const sections = [
+  const sections2 = [
     eventLogSection,
     layoutSection,
     buttonsSection,
@@ -87056,7 +87092,7 @@ function EverythingRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { gap: "xl", direction: "column", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", size: "heading-l", children: "All Components - React Component Showcase" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", size: "body-m", children: "This route mirrors the Angular manual test to verify every component and event handler in the React wrappers." }),
-    sections.map((section, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: section }, index2))
+    sections2.map((section, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: section }, index2))
   ] });
 }
 function onChange(tabIndex) {
@@ -92496,10 +92532,2312 @@ function EverythingBRoute() {
     ] })
   ] });
 }
+const sections = [
+  {
+    // A real multi-page task (an organized section with branching), to contrast
+    // with the single-page pattern demos below.
+    title: "Before you apply",
+    tasks: [{ slug: "eligibility", name: "Confirm your eligibility", status: "not-started" }]
+  },
+  {
+    title: "Question types",
+    tasks: [
+      { slug: "single-question", name: "Single question", status: "completed" },
+      { slug: "multiple-questions", name: "Multiple questions on a page", status: "completed" },
+      { slug: "details", name: "Question with Details", status: "in-progress" },
+      { slug: "grouped-fields", name: "Grouped fields, one topic", status: "not-started" },
+      { slug: "reveal", name: "Reveal", status: "not-started" },
+      { slug: "content-before", name: "Content before the question", status: "not-started" },
+      { slug: "file-upload", name: "File upload", status: "not-started" }
+    ]
+  },
+  {
+    title: "Repeating questions",
+    tasks: [
+      { slug: "inline-list", name: "Inline list", status: "not-started" },
+      { slug: "modal-drawer", name: "Add in a modal", status: "not-started" },
+      { slug: "drawer", name: "Add in a drawer", status: "not-started" },
+      { slug: "multi-step", name: "Multi-step entry", status: "not-started" },
+      { slug: "new-page", name: "New page per item, with branches", status: "not-started" }
+    ]
+  },
+  {
+    title: "Result pages",
+    tasks: [
+      { slug: "result-eligible", name: "Eligible", status: "not-started" },
+      { slug: "result-not-eligible", name: "Not eligible", status: "not-started" },
+      { slug: "result-submitted", name: "Submitted", status: "not-started" }
+    ]
+  },
+  {
+    title: "Review pages",
+    tasks: [
+      { slug: "review-editable", name: "Editable", status: "not-started" },
+      { slug: "review-readonly", name: "Read-only", status: "not-started" },
+      { slug: "review-question-types", name: "Question types", status: "not-started" },
+      { slug: "review-children", name: "Repeating group", status: "not-started" }
+    ]
+  },
+  {
+    title: "Locked example",
+    locked: true,
+    lockedNote: "You need to complete the previous section before you can start this task.",
+    tasks: []
+  }
+];
+function StatusBadge({ status }) {
+  if (status === "completed") return /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Completed" });
+  if (status === "in-progress") return /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "important", content: "In progress" });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "information", content: "Not started" });
+}
+function SectionCard({ section, index: index2 }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      style: {
+        border: "1px solid var(--goa-color-greyscale-200)",
+        borderRadius: "var(--goa-border-radius-xl)",
+        padding: "var(--goa-space-l) var(--goa-space-xl)",
+        marginBottom: "var(--goa-space-l)"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "h2", mt: "none", mb: section.locked ? "xs" : "s", children: [
+          index2,
+          ". ",
+          section.title
+        ] }),
+        section.locked ? /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "none", color: "secondary", children: section.lockedNote }) : section.tasks.map((task, i) => {
+          const rowStyle = {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "var(--goa-space-m)",
+            padding: "var(--goa-space-m) var(--goa-space-xl)",
+            margin: "0 calc(-1 * var(--goa-space-xl))",
+            borderTop: i > 0 ? "1px solid var(--goa-color-greyscale-100)" : "none",
+            textDecoration: "none",
+            color: "inherit"
+          };
+          return task.slug ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: task.slug, className: "pf-task-row", style: rowStyle, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "pf-task-name", children: task.name }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: task.status })
+          ] }, task.slug) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: rowStyle, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "pf-task-name", children: task.name }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: task.status })
+          ] }, task.name);
+        })
+      ]
+    }
+  );
+}
+function TaskListHome() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        .pf-task-row { transition: background-color 0.12s ease; }
+        .pf-task-row:hover,
+        .pf-task-row:focus-visible { background-color: var(--goa-color-greyscale-100); }
+        .pf-task-row:hover .pf-task-name,
+        .pf-task-row:focus-visible .pf-task-name { text-decoration: underline; }
+      ` }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--goa-space-s)",
+          marginBottom: "var(--goa-space-2xs)"
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "none", children: "Apply for a [service]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "information", content: "Draft" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "xs", mb: "xl", color: "secondary", children: "Your progress is saved automatically. You can return to complete this application at any time." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabCallout, { type: "information", heading: "2 sections left to complete", mb: "xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: "var(--goa-space-xs)", color: "var(--goa-color-text-secondary)" }, children: "You have completed 1 of 3 sections" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "single-question", children: "Continue" })
+    ] }),
+    sections.map((section, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(SectionCard, { section, index: i + 1 }, section.title)),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "l", mb: "s", color: "secondary", children: "Complete all sections above to submit your application." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", disabled: true, children: "Submit application" })
+  ] });
+}
+function PublicFormLayout({
+  back = "/public-form",
+  backLabel = "Back",
+  onBack,
+  children
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { leadingIcon: "arrow-back", size: "small", color: "dark", mb: "none", children: onBack ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "a",
+      {
+        role: "button",
+        tabIndex: 0,
+        style: { cursor: "pointer" },
+        onClick: onBack,
+        onKeyDown: (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onBack();
+          }
+        },
+        children: backLabel
+      }
+    ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: back, children: backLabel }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginTop: "var(--goa-space-xl)" }, children })
+  ] });
+}
+const FOCUSABLE = "input, select, textarea, button, [tabindex]:not([tabindex='-1'])";
+function findFocusable(node) {
+  for (const child of Array.from(node.children)) {
+    const el2 = child;
+    if (el2.matches(FOCUSABLE)) return el2;
+    const inLight = findFocusable(el2);
+    if (inLight) return inLight;
+    if (el2.shadowRoot) {
+      const inShadow = findFocusable(el2.shadowRoot);
+      if (inShadow) return inShadow;
+    }
+  }
+  return null;
+}
+const ErrorSummary = reactExports.forwardRef(
+  function ErrorSummary2({ errors }, ref) {
+    if (errors.length === 0) return null;
+    const jumpToField = (fieldId) => (e) => {
+      var _a2;
+      e.preventDefault();
+      const formItem = document.getElementById(fieldId);
+      if (!formItem) return;
+      formItem.scrollIntoView({ behavior: "smooth", block: "center" });
+      (_a2 = findFocusable(formItem)) == null ? void 0 : _a2.focus({ preventScroll: true });
+    };
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        ref,
+        tabIndex: -1,
+        role: "alert",
+        "aria-labelledby": "error-summary-title",
+        style: {
+          backgroundColor: "var(--goa-color-emergency-background)",
+          border: "1px solid var(--goa-color-emergency-default)",
+          borderRadius: "var(--goa-border-radius-m)",
+          padding: "var(--goa-space-l)",
+          marginBottom: "var(--goa-space-xl)"
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--goa-space-xs)",
+                marginBottom: "var(--goa-space-s)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GoabIcon,
+                  {
+                    type: "warning",
+                    theme: "filled",
+                    fillColor: "var(--goa-color-emergency-default)",
+                    ariaLabel: ""
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { id: "error-summary-title", tag: "h2", size: "heading-s", mt: "none", mb: "none", children: "There is a problem" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { style: { margin: 0, paddingLeft: "var(--goa-space-l)" }, children: errors.map((err) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: { marginBottom: "var(--goa-space-2xs)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "a",
+            {
+              href: `#${err.fieldId}`,
+              onClick: jumpToField(err.fieldId),
+              style: {
+                color: "var(--goa-color-emergency-dark)",
+                textDecoration: "underline"
+              },
+              children: err.text
+            }
+          ) }, err.fieldId)) })
+        ]
+      }
+    );
+  }
+);
+function useErrorSummaryFocus(errors) {
+  const ref = reactExports.useRef(null);
+  const had = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    var _a2;
+    const has = errors.length > 0;
+    if (has && !had.current) (_a2 = ref.current) == null ? void 0 : _a2.focus();
+    had.current = has;
+  }, [errors]);
+  return ref;
+}
+function FormSet({
+  heading,
+  description,
+  children,
+  continueLabel = "Continue",
+  onContinue,
+  errors = []
+}) {
+  const summaryRef = useErrorSummaryFocus(errors);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    heading && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: description ? "m" : "xl", children: heading }),
+    heading && description && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "xl", children: description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorSummary, { ref: summaryRef, errors }),
+    children,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", mt: "2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: onContinue, children: continueLabel }) })
+  ] });
+}
+const required = (message2) => (v) => {
+  if (typeof v === "string") return v.trim() ? null : message2;
+  if (Array.isArray(v)) return v.length ? null : message2;
+  return v ? null : message2;
+};
+const minSelected = (n, message2) => (v) => Array.isArray(v) && v.length >= n ? null : message2;
+const pattern = (re, message2) => (v) => typeof v === "string" && re.test(v.trim()) ? null : message2;
+const when = (predicate, rule) => (v, all) => predicate(all) ? rule(v, all) : null;
+function runSchema(schema2, values) {
+  const errors = [];
+  for (const [fieldId, rule] of Object.entries(schema2)) {
+    const message2 = rule(values[fieldId], values);
+    if (message2) errors.push({ fieldId, text: message2 });
+  }
+  return errors;
+}
+function useFormValidation(schema2) {
+  const [errors, setErrors] = reactExports.useState([]);
+  const [submitted, setSubmitted] = reactExports.useState(false);
+  const submit = (values, onValid) => {
+    setSubmitted(true);
+    const found = runSchema(schema2, values);
+    setErrors(found);
+    if (found.length === 0) onValid();
+  };
+  const revalidate = (values) => {
+    if (submitted) setErrors(runSchema(schema2, values));
+  };
+  return { errors, submit, revalidate };
+}
+function todayISO() {
+  const now2 = /* @__PURE__ */ new Date();
+  const mm = String(now2.getMonth() + 1).padStart(2, "0");
+  const dd2 = String(now2.getDate()).padStart(2, "0");
+  return `${now2.getFullYear()}-${mm}-${dd2}`;
+}
+const schema$7 = {
+  dateOfBirth: (v) => {
+    const s = typeof v === "string" ? v.trim() : "";
+    if (!s) return "Enter a valid date of birth";
+    if (s > todayISO()) return "Date of birth must be in the past";
+    return null;
+  }
+};
+function SingleQuestion() {
+  var _a2;
+  const navigate2 = useNavigate();
+  const [dateOfBirth, setDateOfBirth] = reactExports.useState("");
+  const { errors, submit, revalidate } = useFormValidation(schema$7);
+  const handleChange = (value) => {
+    setDateOfBirth(value);
+    revalidate({ dateOfBirth: value });
+  };
+  const handleContinue = () => submit({ dateOfBirth }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FormSet, { onContinue: handleContinue, errors, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    GoabFormItem,
+    {
+      label: "What is your date of birth?",
+      labelSize: "large",
+      helpText: "For example, March 27 2007",
+      id: "dateOfBirth",
+      error: (_a2 = errors.find((e) => e.fieldId === "dateOfBirth")) == null ? void 0 : _a2.text,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        GoabDatePicker,
+        {
+          name: "dateOfBirth",
+          type: "input",
+          max: /* @__PURE__ */ new Date(),
+          error: errors.some((e) => e.fieldId === "dateOfBirth"),
+          value: dateOfBirth,
+          onChange: (detail) => handleChange(detail.valueStr)
+        }
+      )
+    }
+  ) }) });
+}
+const PROVINCES$2 = [
+  ["AB", "Alberta"],
+  ["BC", "British Columbia"],
+  ["MB", "Manitoba"],
+  ["NB", "New Brunswick"],
+  ["NL", "Newfoundland and Labrador"],
+  ["NS", "Nova Scotia"],
+  ["NT", "Northwest Territories"],
+  ["NU", "Nunavut"],
+  ["ON", "Ontario"],
+  ["PE", "Prince Edward Island"],
+  ["QC", "Quebec"],
+  ["SK", "Saskatchewan"],
+  ["YT", "Yukon"]
+];
+const POSTAL_CODE$2 = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
+const EMPTY$4 = { street: "", suite: "", city: "", province: "", postal: "" };
+const schema$6 = {
+  street: required("Enter your street address"),
+  city: required("Enter your city or town"),
+  province: required("Select your province or territory"),
+  postal: pattern(POSTAL_CODE$2, "Enter a valid postal code, such as T3R 8Y2")
+};
+function GroupedFields() {
+  const navigate2 = useNavigate();
+  const [values, setValues] = reactExports.useState(EMPTY$4);
+  const { errors, submit, revalidate } = useFormValidation(schema$6);
+  const set = (key) => (value) => setValues((prev) => {
+    const next = { ...prev, [key]: value };
+    revalidate(next);
+    return next;
+  });
+  const errorFor = (fieldId) => {
+    var _a2;
+    return (_a2 = errors.find((e) => e.fieldId === fieldId)) == null ? void 0 : _a2.text;
+  };
+  const handleContinue = () => submit(values, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    FormSet,
+    {
+      heading: "What is your address?",
+      continueLabel: "Save and continue",
+      onContinue: handleContinue,
+      errors,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Street address", id: "street", error: errorFor("street"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: "street",
+            ariaLabel: "Street address",
+            width: "100%",
+            error: !!errorFor("street"),
+            value: values.street,
+            onChange: (e) => set("street")(e.value)
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Suite or unit number", id: "suite", requirement: "optional", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: "suite",
+            ariaLabel: "Suite or unit number",
+            width: "100%",
+            value: values.suite,
+            onChange: (e) => set("suite")(e.value)
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "City or town", id: "city", error: errorFor("city"), mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: "city",
+            ariaLabel: "City or town",
+            width: "100%",
+            error: !!errorFor("city"),
+            value: values.city,
+            onChange: (e) => set("city")(e.value)
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: {
+              display: "flex",
+              gap: "var(--goa-space-l)",
+              flexWrap: "wrap",
+              marginTop: "var(--goa-space-l)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "fit-content" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                GoabFormItem,
+                {
+                  label: "Province or territory",
+                  id: "province",
+                  error: errorFor("province"),
+                  mt: "none",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GoabDropdown,
+                    {
+                      name: "province",
+                      ariaLabel: "Province or territory",
+                      error: !!errorFor("province"),
+                      value: values.province,
+                      onChange: (e) => set("province")(e.value ?? ""),
+                      children: PROVINCES$2.map(([value, label]) => /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value, label }, value))
+                    }
+                  )
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "130px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Postal code", id: "postal", error: errorFor("postal"), mt: "none", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                GoabInput,
+                {
+                  name: "postal",
+                  ariaLabel: "Postal code",
+                  width: "100%",
+                  error: !!errorFor("postal"),
+                  value: values.postal,
+                  onChange: (e) => set("postal")(e.value)
+                }
+              ) }) })
+            ]
+          }
+        )
+      ]
+    }
+  ) });
+}
+const EMPTY$3 = { fullName: "", phone: "" };
+const schema$5 = {
+  fullName: required("Enter your full name"),
+  phone: (v) => {
+    const s = typeof v === "string" ? v.trim() : "";
+    if (!s) return "Enter your phone number";
+    const digits = s.replace(/\D/g, "");
+    return digits.length === 10 || digits.length === 11 && digits.startsWith("1") ? null : "Enter a valid phone number, like 780 123 4567";
+  }
+};
+function MultipleQuestions() {
+  const navigate2 = useNavigate();
+  const [values, setValues] = reactExports.useState(EMPTY$3);
+  const { errors, submit, revalidate } = useFormValidation(schema$5);
+  const set = (key) => (value) => setValues((prev) => {
+    const next = { ...prev, [key]: value };
+    revalidate(next);
+    return next;
+  });
+  const errorFor = (fieldId) => {
+    var _a2;
+    return (_a2 = errors.find((e) => e.fieldId === fieldId)) == null ? void 0 : _a2.text;
+  };
+  const handleContinue = () => submit(values, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(FormSet, { heading: "Your contact details", onContinue: handleContinue, errors, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabFormItem,
+      {
+        label: "Full name",
+        id: "fullName",
+        helpText: "Include any middle names",
+        error: errorFor("fullName"),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: "fullName",
+            ariaLabel: "Full name",
+            width: "100%",
+            error: !!errorFor("fullName"),
+            value: values.fullName,
+            onChange: (e) => set("fullName")(e.value)
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabFormItem,
+      {
+        label: "Phone number",
+        id: "phone",
+        helpText: "Include the area code",
+        error: errorFor("phone"),
+        mt: "l",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: "phone",
+            type: "tel",
+            ariaLabel: "Phone number",
+            width: "320px",
+            error: !!errorFor("phone"),
+            value: values.phone,
+            onChange: (e) => set("phone")(e.value)
+          }
+        )
+      }
+    )
+  ] }) });
+}
+const STATUSES = [
+  ["single", "Single"],
+  ["married", "Married"],
+  ["common-law", "Common-law"],
+  ["separated", "Separated"],
+  ["divorced", "Divorced"],
+  ["widowed", "Widowed"]
+];
+const schema$4 = {
+  maritalStatus: required("Select your marital status")
+};
+function QuestionWithDetails() {
+  var _a2;
+  const navigate2 = useNavigate();
+  const [maritalStatus, setMaritalStatus] = reactExports.useState("");
+  const { errors, submit, revalidate } = useFormValidation(schema$4);
+  const handleChange = (value) => {
+    setMaritalStatus(value);
+    revalidate({ maritalStatus: value });
+  };
+  const handleContinue = () => submit({ maritalStatus }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(FormSet, { onContinue: handleContinue, errors, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabFormItem,
+      {
+        label: "What is your marital status?",
+        labelSize: "large",
+        id: "maritalStatus",
+        error: (_a2 = errors.find((e) => e.fieldId === "maritalStatus")) == null ? void 0 : _a2.text,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabDropdown,
+          {
+            name: "maritalStatus",
+            ariaLabel: "Marital status",
+            error: errors.some((e) => e.fieldId === "maritalStatus"),
+            value: maritalStatus,
+            onChange: (e) => handleChange(e.value ?? ""),
+            children: STATUSES.map(([value, label]) => /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value, label }, value))
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabDetails, { heading: "How do I know my marital status?", mt: "l", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Your marital status is your legal relationship status. Choose the option that best describes your current situation." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Single:" }),
+          " never been legally married"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Married:" }),
+          " currently legally married"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Common-law:" }),
+          " living with a partner in a marriage-like relationship for at least 12 months"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Separated:" }),
+          " legally married but living apart"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Divorced:" }),
+          " legally ended a marriage"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Widowed:" }),
+          " your spouse or partner has died"
+        ] })
+      ] })
+    ] })
+  ] }) });
+}
+const METHODS = [
+  { value: "email", label: "Email", field: "Email address", type: "email" },
+  { value: "phone", label: "Phone", field: "Phone number", type: "tel" },
+  { value: "text", label: "Text message", field: "Mobile phone number", type: "tel" }
+];
+const schema$3 = {
+  contactMethod: required("Select how you would like to be contacted"),
+  "contactDetail-email": when((a) => a.contactMethod === "email", required("Enter your email address")),
+  "contactDetail-phone": when((a) => a.contactMethod === "phone", required("Enter your phone number")),
+  "contactDetail-text": when((a) => a.contactMethod === "text", required("Enter your mobile phone number"))
+};
+const valuesFor = (method, detail) => ({
+  contactMethod: method,
+  [`contactDetail-${method}`]: detail
+});
+function Reveal() {
+  var _a2;
+  const navigate2 = useNavigate();
+  const [method, setMethod] = reactExports.useState("");
+  const [detail, setDetail] = reactExports.useState("");
+  const { errors, submit, revalidate } = useFormValidation(schema$3);
+  const handleMethod = (value) => {
+    setMethod(value);
+    setDetail("");
+    revalidate(valuesFor(value, ""));
+  };
+  const handleDetail = (value) => {
+    setDetail(value);
+    revalidate(valuesFor(method, value));
+  };
+  const handleContinue = () => submit(valuesFor(method, detail), () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FormSet, { onContinue: handleContinue, errors, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    GoabFormItem,
+    {
+      label: "How would you like to be contacted?",
+      labelSize: "large",
+      id: "contactMethod",
+      error: (_a2 = errors.find((e) => e.fieldId === "contactMethod")) == null ? void 0 : _a2.text,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioGroup, { name: "contactMethod", value: method, onChange: (e) => handleMethod(e.value), children: METHODS.map((m6) => {
+        var _a3;
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabRadioItem,
+          {
+            value: m6.value,
+            label: m6.label,
+            reveal: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabFormItem,
+              {
+                label: m6.field,
+                id: `contactDetail-${m6.value}`,
+                error: (_a3 = errors.find((e) => e.fieldId === `contactDetail-${m6.value}`)) == null ? void 0 : _a3.text,
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GoabInput,
+                  {
+                    name: m6.value,
+                    type: m6.type,
+                    ariaLabel: m6.field,
+                    width: "320px",
+                    error: errors.some((e) => e.fieldId === `contactDetail-${m6.value}`),
+                    value: detail,
+                    onChange: (e) => handleDetail(e.value)
+                  }
+                )
+              }
+            )
+          },
+          m6.value
+        );
+      }) })
+    }
+  ) }) });
+}
+const FormSummaryContext = reactExports.createContext({ showUnanswered: true });
+function isEmptyAnswer(children) {
+  if (children == null || children === false || children === "") return true;
+  if (typeof children === "string") return children.trim() === "";
+  if (Array.isArray(children)) return children.length === 0;
+  return false;
+}
+function FormSummary({ title, showUnanswered = true, children }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummaryContext.Provider, { value: { showUnanswered }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginBottom: "var(--goa-space-l)" }, children: [
+    title && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", mt: "none", mb: "s", color: "secondary", children: title }),
+    children
+  ] }) });
+}
+function SummarySection({
+  heading,
+  changeTo,
+  onChange: onChange2,
+  changeLabel = "Change",
+  children
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      style: {
+        border: "1px solid var(--goa-color-greyscale-200)",
+        borderRadius: "var(--goa-border-radius-xl)",
+        padding: "var(--goa-space-m) var(--goa-space-l)",
+        marginBottom: "var(--goa-space-m)"
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: "var(--goa-space-l)", alignItems: "flex-start" }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: 1 }, children: [
+          heading && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "span",
+            {
+              style: {
+                display: "block",
+                color: "var(--goa-color-text-secondary)",
+                marginBottom: "var(--goa-space-xs)"
+              },
+              children: heading
+            }
+          ),
+          children
+        ] }),
+        (changeTo || onChange2) && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { mt: "none", mb: "none", children: onChange2 ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "a",
+          {
+            role: "button",
+            tabIndex: 0,
+            style: { cursor: "pointer" },
+            onClick: onChange2,
+            onKeyDown: (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onChange2();
+              }
+            },
+            children: changeLabel
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: changeTo, children: changeLabel }) })
+      ] })
+    }
+  );
+}
+function SummaryItem({ question, optional, children }) {
+  const { showUnanswered } = reactExports.useContext(FormSummaryContext);
+  const empty = isEmptyAnswer(children);
+  if (optional && empty && !showUnanswered) return null;
+  const answer = optional && empty ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "var(--goa-color-text-secondary)" }, children: "Not answered" }) : children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        gap: "var(--goa-space-l)",
+        alignItems: "baseline",
+        padding: "var(--goa-space-xs) 0"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { flex: "0 0 40%" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: question }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { flex: 1 }, children: answer })
+      ]
+    }
+  );
+}
+const ROOT$3 = "/public-form/eligibility";
+const yesNo$1 = (v) => v === "yes" ? "Yes" : v === "no" ? "No" : "Not answered";
+function EligibilityReview({
+  answers,
+  onChange: onChange2
+}) {
+  const navigate2 = useNavigate();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: `${ROOT$3}/benefits`, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "xl", children: "Check your answers" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { onChange: () => onChange2("age"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Are you 18 or older?", children: yesNo$1(answers.age) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { onChange: () => onChange2("residency"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Do you live in Alberta?", children: yesNo$1(answers.residency) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { onChange: () => onChange2("benefits"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Are you receiving other benefits?", children: yesNo$1(answers.benefits) }) }),
+    answers.benefits === "yes" && /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { onChange: () => onChange2("benefits-detail"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Which benefits are you receiving?", children: answers["benefits-detail"] || "Not answered" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", mt: "2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: () => navigate2("/public-form"), children: "Save and continue" }) })
+  ] });
+}
+function ResultsPage({
+  heading,
+  status,
+  statusHeading,
+  statusBody,
+  children,
+  actions
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "xl", children: heading }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabCallout, { type: status, heading: statusHeading, mb: "none", children: statusBody }),
+    children,
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginTop: "var(--goa-space-2xl)" }, children: actions })
+  ] });
+}
+function ResultContactSection() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", mt: "xl", mb: "s", children: "If you have questions about your application" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "s", children: "Contact the [ministry area]." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { mt: "none", mb: "2xs", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Email:" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:information@gov.ab.ca", children: "information@gov.ab.ca" }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { mt: "none", mb: "none", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone:" }),
+      " 780 123 4567"
+    ] })
+  ] });
+}
+const ROOT$2 = "/public-form/eligibility";
+function Ineligible() {
+  const navigate2 = useNavigate();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ResultsPage,
+    {
+      heading: "You are not eligible to apply",
+      status: "important",
+      statusHeading: "Based on your answers, you do not meet the eligibility criteria",
+      statusBody: "You can go back and change your answers if you think this is a mistake.",
+      actions: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabButtonGroup, { alignment: "start", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: () => navigate2(`${ROOT$2}/age`), children: "Go back and change your answers" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", onClick: () => navigate2("/public-form"), children: "Back to Alberta.ca" })
+      ] }),
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultContactSection, {})
+    }
+  );
+}
+const ROOT$1 = "/public-form/eligibility";
+const NEXT = {
+  age: (a) => a.age === "yes" ? "residency" : "ineligible",
+  residency: (a) => a.residency === "yes" ? "benefits" : "ineligible",
+  benefits: (a) => a.benefits === "yes" ? "benefits-detail" : "review",
+  "benefits-detail": () => "review"
+};
+const STEPS = {
+  age: {
+    heading: "Are you 18 or older?",
+    requiredError: "Select yes if you are 18 or older",
+    field: "yesno",
+    back: "/public-form"
+  },
+  residency: {
+    heading: "Do you live in Alberta?",
+    requiredError: "Select yes if you live in Alberta",
+    field: "yesno",
+    back: `${ROOT$1}/age`
+  },
+  benefits: {
+    heading: "Are you receiving other benefits?",
+    requiredError: "Select yes if you are receiving other benefits",
+    field: "yesno",
+    back: `${ROOT$1}/residency`
+  },
+  "benefits-detail": {
+    heading: "Which benefits are you receiving?",
+    requiredError: "Enter the benefits you receive",
+    field: "text",
+    back: `${ROOT$1}/benefits`
+  }
+};
+const isOutcome = (s) => s === "review" || s === "ineligible";
+const isAnswered = (id2, a) => Boolean(a[id2] && a[id2] !== "");
+function resolveNext(from, a) {
+  let cur = NEXT[from](a);
+  while (!isOutcome(cur)) {
+    if (!isAnswered(cur, a)) return { question: cur };
+    cur = NEXT[cur](a);
+  }
+  return { outcome: cur };
+}
+function reachable(a) {
+  const set = /* @__PURE__ */ new Set();
+  let cur = "age";
+  while (!isOutcome(cur)) {
+    set.add(cur);
+    if (!isAnswered(cur, a)) break;
+    cur = NEXT[cur](a);
+  }
+  return set;
+}
+function remainingNew(from, a) {
+  let cur = from;
+  let n = 0;
+  while (!isOutcome(cur)) {
+    if (!isAnswered(cur, a)) n++;
+    cur = NEXT[cur](a);
+  }
+  return n;
+}
+function EligibilityTask() {
+  const navigate2 = useNavigate();
+  const [answers, setAnswers] = reactExports.useState({});
+  const [change, setChange] = reactExports.useState(null);
+  const startChange = (step) => {
+    setChange({ entry: step, snapshot: answers });
+    navigate2(`${ROOT$1}/${step}`);
+  };
+  const cancelChange = () => {
+    if (change) setAnswers(change.snapshot);
+    setChange(null);
+    navigate2(`${ROOT$1}/review`);
+  };
+  const save = (step, value) => {
+    const updated = { ...answers, [step]: value };
+    const keep = reachable(updated);
+    const pruned = {};
+    Object.keys(updated).forEach((k6) => {
+      if (keep.has(k6)) pruned[k6] = updated[k6];
+    });
+    setAnswers(pruned);
+    const next = resolveNext(step, pruned);
+    if ("outcome" in next) {
+      setChange(null);
+      navigate2(next.outcome === "review" ? `${ROOT$1}/review` : `${ROOT$1}/ineligible`);
+    } else {
+      navigate2(`${ROOT$1}/${next.question}`);
+    }
+  };
+  const renderStep = (id2) => {
+    const inChange = change !== null;
+    const isRewalk = inChange && id2 !== change.entry;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Question,
+      {
+        id: id2,
+        value: answers[id2] ?? "",
+        inChange,
+        calloutCount: isRewalk ? remainingNew(id2, answers) : 0,
+        onSave: (v) => save(id2, v),
+        onCancel: cancelChange
+      },
+      id2
+    );
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "age", replace: true }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "age", element: renderStep("age") }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "residency", element: renderStep("residency") }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "benefits", element: renderStep("benefits") }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "benefits-detail", element: renderStep("benefits-detail") }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "review", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EligibilityReview, { answers, onChange: startChange }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "ineligible", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Ineligible, {}) })
+  ] });
+}
+function Question({
+  id: id2,
+  value,
+  inChange,
+  calloutCount,
+  onSave,
+  onCancel
+}) {
+  var _a2;
+  const cfg = STEPS[id2];
+  const [draft, setDraft] = reactExports.useState(value);
+  const [errors, setErrors] = reactExports.useState([]);
+  const [submitted, setSubmitted] = reactExports.useState(false);
+  const validate = (v) => runSchema({ [id2]: required(cfg.requiredError) }, { [id2]: v });
+  const handleChange = (v) => {
+    setDraft(v);
+    if (submitted) setErrors(validate(v));
+  };
+  const handleSave = () => {
+    setSubmitted(true);
+    const found = validate(draft);
+    setErrors(found);
+    if (found.length === 0) onSave(draft);
+  };
+  const layoutProps = inChange ? { backLabel: "Back to review", onBack: onCancel } : { back: cfg.back };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { ...layoutProps, children: [
+    calloutCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabCallout, { type: "important", heading: "You changed an answer", mb: "l", children: [
+      "Based on your change, there ",
+      calloutCount === 1 ? "is" : "are",
+      " ",
+      calloutCount,
+      " more",
+      " ",
+      calloutCount === 1 ? "question" : "questions",
+      " to confirm."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSet, { onContinue: handleSave, continueLabel: "Save and continue", errors, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabFormItem,
+      {
+        label: cfg.heading,
+        labelSize: "large",
+        id: id2,
+        error: (_a2 = errors.find((e) => e.fieldId === id2)) == null ? void 0 : _a2.text,
+        children: cfg.field === "yesno" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          GoabRadioGroup,
+          {
+            name: id2,
+            ariaLabel: cfg.heading,
+            value: draft,
+            onChange: (e) => handleChange(e.value),
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "yes", label: "Yes" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "no", label: "No" })
+            ]
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabInput,
+          {
+            name: id2,
+            value: draft,
+            width: "100%",
+            onChange: (e) => handleChange(e.value)
+          }
+        )
+      }
+    ) })
+  ] });
+}
+const EMPTY$2 = { agreements: [], legalName: "", signature: "" };
+const FOIP = "The personal information collected through this service is used to process your application. This collection is authorized under section 33(c) of the Freedom of Information and Protection of Privacy Act.";
+const schema$2 = {
+  agreements: minSelected(2, "Select both statements to agree before continuing"),
+  legalName: required("Enter your full legal name"),
+  signature: required("Type your full name to sign")
+};
+function ContentBefore() {
+  const navigate2 = useNavigate();
+  const [values, setValues] = reactExports.useState(EMPTY$2);
+  const { errors, submit, revalidate } = useFormValidation(schema$2);
+  const update = (patch) => setValues((prev) => {
+    const next = { ...prev, ...patch };
+    revalidate(next);
+    return next;
+  });
+  const errorFor = (id2) => {
+    var _a2;
+    return (_a2 = errors.find((e) => e.fieldId === id2)) == null ? void 0 : _a2.text;
+  };
+  const has = (id2) => errors.some((e) => e.fieldId === id2);
+  const handleContinue = () => submit(values, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    FormSet,
+    {
+      heading: "Confirm and sign",
+      description: FOIP,
+      continueLabel: "Save and continue",
+      onContinue: handleContinue,
+      errors,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabFormItem,
+          {
+            label: "Read and agree to the following statements",
+            id: "agreements",
+            error: errorFor("agreements"),
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              GoabCheckboxList,
+              {
+                name: "agreements",
+                value: values.agreements,
+                error: has("agreements"),
+                onChange: (e) => update({ agreements: e.value }),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GoabCheckbox,
+                    {
+                      name: "background-check",
+                      value: "background-check",
+                      text: "I consent to a background check being completed on me"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GoabCheckbox,
+                    {
+                      name: "accurate",
+                      value: "accurate",
+                      text: "I confirm the information I have provided is true and accurate"
+                    }
+                  )
+                ]
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabFormItem,
+          {
+            label: "Full legal name",
+            helpText: "As it appears on your ID",
+            id: "legalName",
+            error: errorFor("legalName"),
+            mt: "l",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabInput,
+              {
+                name: "legalName",
+                ariaLabel: "Full legal name",
+                width: "100%",
+                error: has("legalName"),
+                value: values.legalName,
+                onChange: (e) => update({ legalName: e.value })
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabFormItem,
+          {
+            label: "Signature",
+            helpText: "Type your full name as your electronic signature",
+            id: "signature",
+            error: errorFor("signature"),
+            mt: "l",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabInput,
+              {
+                name: "signature",
+                ariaLabel: "Signature",
+                width: "100%",
+                error: has("signature"),
+                value: values.signature,
+                onChange: (e) => update({ signature: e.value })
+              }
+            )
+          }
+        )
+      ]
+    }
+  ) });
+}
+const schema$1 = {
+  idDocument: required("Upload a copy of your ID")
+};
+function FileUpload() {
+  var _a2;
+  const navigate2 = useNavigate();
+  const [file, setFile] = reactExports.useState(null);
+  const { errors, submit, revalidate } = useFormValidation(schema$1);
+  const handleSelect = (detail) => {
+    const next = { name: detail.file.name, size: detail.file.size, type: detail.file.type };
+    setFile(next);
+    revalidate({ idDocument: next });
+  };
+  const handleDelete = () => {
+    setFile(null);
+    revalidate({ idDocument: null });
+  };
+  const handleContinue = () => submit({ idDocument: file }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    FormSet,
+    {
+      heading: "Upload your ID",
+      continueLabel: "Save and continue",
+      onContinue: handleContinue,
+      errors,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabFormItem,
+          {
+            label: "",
+            id: "idDocument",
+            helpText: "Maximum file size is 10MB. Accepted formats: JPG, PNG, PDF",
+            error: (_a2 = errors.find((e) => e.fieldId === "idDocument")) == null ? void 0 : _a2.text,
+            children: file ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabFileUploadCard,
+              {
+                filename: file.name,
+                size: file.size,
+                type: file.type,
+                onDelete: handleDelete
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabFileUploadInput,
+              {
+                variant: "dragdrop",
+                accept: ".jpg,.jpeg,.png,.pdf",
+                maxFileSize: "10MB",
+                onSelectFile: handleSelect
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabDetails, { heading: "What can I use as ID?", mt: "l", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You can upload any government-issued photo ID, such as:" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Driver's licence" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Passport" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Provincial ID card" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Permanent resident card" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Make sure the image is clear and all the text is readable." })
+        ] })
+      ]
+    }
+  ) });
+}
+const schema = {
+  "dependant-0": (_v2, all) => {
+    const rows2 = all.dependants ?? [];
+    return rows2.some((r) => typeof r === "string" && r.trim()) ? null : "Enter at least one dependant";
+  }
+};
+function InlineList() {
+  var _a2;
+  const navigate2 = useNavigate();
+  const [rows2, setRows] = reactExports.useState([""]);
+  const { errors, submit, revalidate } = useFormValidation(schema);
+  const updateRow = (i, value) => {
+    const next = rows2.map((r, idx) => idx === i ? value : r);
+    setRows(next);
+    revalidate({ dependants: next });
+  };
+  const addRow = () => setRows([...rows2, ""]);
+  const removeRow = (i) => {
+    const next = rows2.filter((_, idx) => idx !== i);
+    setRows(next);
+    revalidate({ dependants: next });
+  };
+  const handleContinue = () => submit({ dependants: rows2 }, () => {
+    navigate2("/public-form");
+  });
+  const firstError = (_a2 = errors.find((e) => e.fieldId === "dependant-0")) == null ? void 0 : _a2.text;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    FormSet,
+    {
+      heading: "Your dependants",
+      description: "Add the full name of each dependant under 18 in your care.",
+      continueLabel: "Save and continue",
+      onContinue: handleContinue,
+      errors,
+      children: [
+        rows2.map((value, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabFormItem,
+          {
+            label: `Dependant ${i + 1}`,
+            id: `dependant-${i}`,
+            error: i === 0 ? firstError : void 0,
+            mt: i > 0 ? "m" : void 0,
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "var(--goa-space-m)" }, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                GoabInput,
+                {
+                  name: `dependant-${i}`,
+                  ariaLabel: `Dependant ${i + 1} full name`,
+                  width: "100%",
+                  error: i === 0 && !!firstError,
+                  value,
+                  onChange: (e) => updateRow(i, e.value)
+                }
+              ) }),
+              rows2.length > 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", onClick: () => removeRow(i), children: "Remove" })
+            ] })
+          },
+          i
+        )),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", leadingIcon: "add", mt: "m", onClick: addRow, children: "Add another dependant" })
+      ]
+    }
+  ) });
+}
+const EMPTY_CONTACT = { name: "", relationship: "", phone: "" };
+const RELATIONSHIPS = ["Parent", "Spouse or partner", "Sibling", "Friend", "Other"];
+const contactSchema = {
+  name: required("Enter a full name"),
+  relationship: required("Select a relationship"),
+  phone: (v) => {
+    const s = typeof v === "string" ? v.trim() : "";
+    if (!s) return "Enter a phone number";
+    const digits = s.replace(/\D/g, "");
+    return digits.length === 10 || digits.length === 11 && digits.startsWith("1") ? null : "Enter a valid phone number, like 780 123 4567";
+  }
+};
+const pageSchema$3 = { contacts: minSelected(1, "Add at least one emergency contact") };
+function ModalDrawer() {
+  const navigate2 = useNavigate();
+  const [contacts, setContacts] = reactExports.useState([]);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema$3);
+  const [open, setOpen] = reactExports.useState(false);
+  const [editingIndex, setEditingIndex] = reactExports.useState(null);
+  const [draft, setDraft] = reactExports.useState(EMPTY_CONTACT);
+  const [modalErrors, setModalErrors] = reactExports.useState([]);
+  const modalSummaryRef = useErrorSummaryFocus(modalErrors);
+  const openAdd = () => {
+    setEditingIndex(null);
+    setDraft(EMPTY_CONTACT);
+    setModalErrors([]);
+    setOpen(true);
+  };
+  const openEdit = (i) => {
+    setEditingIndex(i);
+    setDraft(contacts[i]);
+    setModalErrors([]);
+    setOpen(true);
+  };
+  const updateDraft = (patch) => {
+    const next = { ...draft, ...patch };
+    setDraft(next);
+    if (modalErrors.length > 0) setModalErrors(runSchema(contactSchema, next));
+  };
+  const saveContact = () => {
+    const found = runSchema(contactSchema, draft);
+    setModalErrors(found);
+    if (found.length > 0) return;
+    const next = editingIndex === null ? [...contacts, draft] : contacts.map((c, i) => i === editingIndex ? draft : c);
+    setContacts(next);
+    revalidate({ contacts: next });
+    setOpen(false);
+  };
+  const removeContact = (i) => {
+    const next = contacts.filter((_, idx) => idx !== i);
+    setContacts(next);
+    revalidate({ contacts: next });
+  };
+  const errorFor = (id2) => {
+    var _a2;
+    return (_a2 = modalErrors.find((e) => e.fieldId === id2)) == null ? void 0 : _a2.text;
+  };
+  const has = (id2) => modalErrors.some((e) => e.fieldId === id2);
+  const handleContinue = () => submit({ contacts }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      FormSet,
+      {
+        heading: "Emergency contacts",
+        description: "Add at least one person we can contact in an emergency.",
+        continueLabel: "Save and continue",
+        onContinue: handleContinue,
+        errors: pageErrors,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "contacts", children: [
+          contacts.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: "var(--goa-space-l)" }, children: contacts.map((c, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "var(--goa-space-m)",
+                padding: "var(--goa-space-m) 0",
+                borderTop: "1px solid var(--goa-color-greyscale-200)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: 700 }, children: c.name }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "var(--goa-color-text-secondary)" }, children: [
+                    c.relationship,
+                    " · ",
+                    c.phone
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: "var(--goa-space-m)", flexShrink: 0 }, children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => openEdit(i), children: "Edit" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => removeContact(i), children: "Remove" })
+                ] })
+              ]
+            },
+            i
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", leadingIcon: "add", onClick: openAdd, children: contacts.length === 0 ? "Add an emergency contact" : "Add another contact" })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      GoabModal,
+      {
+        heading: editingIndex === null ? "Add an emergency contact" : "Edit emergency contact",
+        open,
+        onClose: () => setOpen(false),
+        actions: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabButtonGroup, { alignment: "end", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => setOpen(false), children: "Cancel" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", size: "compact", onClick: saveContact, children: editingIndex === null ? "Add contact" : "Save changes" })
+        ] }),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorSummary, { ref: modalSummaryRef, errors: modalErrors }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Full name", id: "name", error: errorFor("name"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "name",
+              width: "100%",
+              error: has("name"),
+              value: draft.name,
+              onChange: (e) => updateDraft({ name: e.value })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Relationship to you", id: "relationship", mt: "l", error: errorFor("relationship"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabDropdown,
+            {
+              name: "relationship",
+              error: has("relationship"),
+              value: draft.relationship,
+              onChange: (e) => updateDraft({ relationship: e.value ?? "" }),
+              children: RELATIONSHIPS.map((r) => /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value: r, label: r }, r))
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Phone number", id: "phone", mt: "l", helpText: "Include the area code", error: errorFor("phone"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "phone",
+              type: "tel",
+              width: "100%",
+              error: has("phone"),
+              value: draft.phone,
+              onChange: (e) => updateDraft({ phone: e.value })
+            }
+          ) })
+        ]
+      }
+    )
+  ] });
+}
+const EMPTY$1 = { street: "", city: "", province: "", postal: "" };
+const PROVINCES$1 = [
+  ["AB", "Alberta"],
+  ["BC", "British Columbia"],
+  ["MB", "Manitoba"],
+  ["NB", "New Brunswick"],
+  ["NL", "Newfoundland and Labrador"],
+  ["NS", "Nova Scotia"],
+  ["NT", "Northwest Territories"],
+  ["NU", "Nunavut"],
+  ["ON", "Ontario"],
+  ["PE", "Prince Edward Island"],
+  ["QC", "Quebec"],
+  ["SK", "Saskatchewan"],
+  ["YT", "Yukon"]
+];
+const POSTAL_CODE$1 = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
+const step1Schema = {
+  street: required("Enter the street address"),
+  city: required("Enter the city or town")
+};
+const step2Schema = {
+  province: required("Select the province or territory"),
+  postal: pattern(POSTAL_CODE$1, "Enter a valid postal code, such as T3R 8Y2")
+};
+const pageSchema$2 = { addresses: minSelected(1, "Add at least one previous address") };
+function MultiStep() {
+  const navigate2 = useNavigate();
+  const [addresses, setAddresses] = reactExports.useState([]);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema$2);
+  const [open, setOpen] = reactExports.useState(false);
+  const [editingIndex, setEditingIndex] = reactExports.useState(null);
+  const [step, setStep] = reactExports.useState(1);
+  const [draft, setDraft] = reactExports.useState(EMPTY$1);
+  const [modalErrors, setModalErrors] = reactExports.useState([]);
+  const modalSummaryRef = useErrorSummaryFocus(modalErrors);
+  const openAdd = () => {
+    setEditingIndex(null);
+    setDraft(EMPTY$1);
+    setStep(1);
+    setModalErrors([]);
+    setOpen(true);
+  };
+  const openEdit = (i) => {
+    setEditingIndex(i);
+    setDraft(addresses[i]);
+    setStep(1);
+    setModalErrors([]);
+    setOpen(true);
+  };
+  const updateDraft = (patch) => {
+    const next = { ...draft, ...patch };
+    setDraft(next);
+    if (modalErrors.length > 0)
+      setModalErrors(runSchema(step === 1 ? step1Schema : step2Schema, next));
+  };
+  const goNext = () => {
+    const found = runSchema(step1Schema, draft);
+    setModalErrors(found);
+    if (found.length === 0) {
+      setStep(2);
+      setModalErrors([]);
+    }
+  };
+  const goBack = () => {
+    setStep(1);
+    setModalErrors([]);
+  };
+  const save = () => {
+    const found = runSchema(step2Schema, draft);
+    setModalErrors(found);
+    if (found.length > 0) return;
+    const next = editingIndex === null ? [...addresses, draft] : addresses.map((a, i) => i === editingIndex ? draft : a);
+    setAddresses(next);
+    revalidate({ addresses: next });
+    setOpen(false);
+  };
+  const removeAddress = (i) => {
+    const next = addresses.filter((_, idx) => idx !== i);
+    setAddresses(next);
+    revalidate({ addresses: next });
+  };
+  const errorFor = (id2) => {
+    var _a2;
+    return (_a2 = modalErrors.find((e) => e.fieldId === id2)) == null ? void 0 : _a2.text;
+  };
+  const has = (id2) => modalErrors.some((e) => e.fieldId === id2);
+  const handleContinue = () => submit({ addresses }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      FormSet,
+      {
+        heading: "Previous addresses",
+        description: "Add any addresses you have lived at in the past 5 years.",
+        continueLabel: "Save and continue",
+        onContinue: handleContinue,
+        errors: pageErrors,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "addresses", children: [
+          addresses.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: "var(--goa-space-l)" }, children: addresses.map((a, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "var(--goa-space-m)",
+                padding: "var(--goa-space-m) 0",
+                borderTop: "1px solid var(--goa-color-greyscale-200)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: 700 }, children: a.street }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "var(--goa-color-text-secondary)" }, children: [
+                    a.city,
+                    ", ",
+                    a.province,
+                    " ",
+                    a.postal
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: "var(--goa-space-m)", flexShrink: 0 }, children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => openEdit(i), children: "Edit" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => removeAddress(i), children: "Remove" })
+                ] })
+              ]
+            },
+            i
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", leadingIcon: "add", onClick: openAdd, children: addresses.length === 0 ? "Add a previous address" : "Add another address" })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      GoabModal,
+      {
+        heading: editingIndex === null ? "Add a previous address" : "Edit previous address",
+        open,
+        onClose: () => setOpen(false),
+        actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "end", children: step === 1 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => setOpen(false), children: "Cancel" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", size: "compact", onClick: goNext, children: "Next" })
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: goBack, children: "Back" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", size: "compact", onClick: save, children: editingIndex === null ? "Add address" : "Save changes" })
+        ] }) }),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { size: "body-s", color: "secondary", mt: "none", mb: "m", children: [
+            "Step ",
+            step,
+            " of 2"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorSummary, { ref: modalSummaryRef, errors: modalErrors }),
+          step === 1 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Street address", id: "street", error: errorFor("street"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabInput,
+              {
+                name: "street",
+                width: "100%",
+                error: has("street"),
+                value: draft.street,
+                onChange: (e) => updateDraft({ street: e.value })
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "City or town", id: "city", mt: "l", error: errorFor("city"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabInput,
+              {
+                name: "city",
+                width: "100%",
+                error: has("city"),
+                value: draft.city,
+                onChange: (e) => updateDraft({ city: e.value })
+              }
+            ) })
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Province or territory", id: "province", error: errorFor("province"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabDropdown,
+              {
+                name: "province",
+                error: has("province"),
+                value: draft.province,
+                onChange: (e) => updateDraft({ province: e.value ?? "" }),
+                children: PROVINCES$1.map(([value, label]) => /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value, label }, value))
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Postal code", id: "postal", mt: "l", error: errorFor("postal"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabInput,
+              {
+                name: "postal",
+                width: "130px",
+                error: has("postal"),
+                value: draft.postal,
+                onChange: (e) => updateDraft({ postal: e.value })
+              }
+            ) })
+          ] })
+        ]
+      }
+    )
+  ] });
+}
+const ROOT = "/public-form/new-page";
+const EMPTY_CHILD = { name: "", isAdult: "", inEducation: "" };
+const yesNo = (v) => v === "yes" ? "Yes" : v === "no" ? "No" : "Not answered";
+function SummaryRow({ label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        gap: "var(--goa-space-m)",
+        padding: "var(--goa-space-s) 0",
+        borderTop: "1px solid var(--goa-color-greyscale-200)"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "var(--goa-color-text-secondary)" }, children: label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { flex: 1 }, children: value })
+      ]
+    }
+  );
+}
+function YesNoStep({
+  heading,
+  back,
+  value,
+  onChange: onChange2,
+  next,
+  requiredError
+}) {
+  var _a2;
+  const navigate2 = useNavigate();
+  const { errors, submit, revalidate } = useFormValidation({ answer: required(requiredError) });
+  const handleChange = (v) => {
+    onChange2(v);
+    revalidate({ answer: v });
+  };
+  const handleContinue = () => submit({ answer: value }, () => navigate2(next(value)));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back, children: /* @__PURE__ */ jsxRuntimeExports.jsx(FormSet, { onContinue: handleContinue, errors, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    GoabFormItem,
+    {
+      label: heading,
+      labelSize: "large",
+      id: "answer",
+      error: (_a2 = errors.find((e) => e.fieldId === "answer")) == null ? void 0 : _a2.text,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        GoabRadioGroup,
+        {
+          name: "answer",
+          ariaLabel: heading,
+          value,
+          onChange: (e) => handleChange(e.value),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "yes", label: "Yes" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabRadioItem, { value: "no", label: "No" })
+          ]
+        }
+      )
+    }
+  ) }) });
+}
+function NameStep({ value, onChange: onChange2 }) {
+  var _a2;
+  const navigate2 = useNavigate();
+  const { errors, submit, revalidate } = useFormValidation({
+    name: required("Enter the child's full name")
+  });
+  const handleChange = (v) => {
+    onChange2(v);
+    revalidate({ name: v });
+  };
+  const handleContinue = () => submit({ name: value }, () => navigate2(`${ROOT}/add/age`));
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: ROOT, children: /* @__PURE__ */ jsxRuntimeExports.jsx(FormSet, { onContinue: handleContinue, errors, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    GoabFormItem,
+    {
+      label: "What is the child's full name?",
+      labelSize: "large",
+      id: "name",
+      error: (_a2 = errors.find((e) => e.fieldId === "name")) == null ? void 0 : _a2.text,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        GoabInput,
+        {
+          name: "name",
+          width: "100%",
+          error: errors.some((e) => e.fieldId === "name"),
+          value,
+          onChange: (e) => handleChange(e.value)
+        }
+      )
+    }
+  ) }) });
+}
+function ConfirmStep({ draft, editing, onAdd }) {
+  const back = draft.isAdult === "yes" ? `${ROOT}/add/education` : `${ROOT}/add/age`;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    FormSet,
+    {
+      heading: `Check ${draft.name || "the child"}'s details`,
+      continueLabel: editing ? "Save changes" : "Continue",
+      onContinue: onAdd,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryRow, { label: "Name", value: draft.name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryRow, { label: "18 or older", value: yesNo(draft.isAdult) }),
+        draft.isAdult === "yes" && /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryRow, { label: "In full-time education", value: yesNo(draft.inEducation) })
+      ] })
+    }
+  ) });
+}
+function ChildrenList({
+  items,
+  onAdd,
+  onEdit,
+  onRemove,
+  errors,
+  onContinue
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormLayout, { back: "/public-form", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    FormSet,
+    {
+      heading: "Your children",
+      description: "Add each child who lives with you.",
+      continueLabel: "Save and continue",
+      onContinue,
+      errors,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "children", children: [
+        items.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: "var(--goa-space-l)" }, children: items.map((c, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: "var(--goa-space-m)",
+              padding: "var(--goa-space-m) 0",
+              borderTop: "1px solid var(--goa-color-greyscale-200)"
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: 700 }, children: c.name }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "var(--goa-color-text-secondary)" }, children: [
+                  "18 or older: ",
+                  yesNo(c.isAdult),
+                  c.isAdult === "yes" ? ` · In education: ${yesNo(c.inEducation)}` : ""
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: "var(--goa-space-m)", flexShrink: 0 }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => onEdit(i), children: "Change" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => onRemove(i), children: "Remove" })
+              ] })
+            ]
+          },
+          i
+        )) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", leadingIcon: "add", onClick: onAdd, children: items.length === 0 ? "Add a child" : "Add another child" })
+      ] })
+    }
+  ) });
+}
+const pageSchema$1 = { children: minSelected(1, "Add at least one child") };
+function NewPageTask() {
+  const navigate2 = useNavigate();
+  const [children, setChildren] = reactExports.useState([]);
+  const [draft, setDraft] = reactExports.useState(EMPTY_CHILD);
+  const [editingIndex, setEditingIndex] = reactExports.useState(null);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema$1);
+  const update = (patch) => setDraft((d) => ({ ...d, ...patch }));
+  const startAdd = () => {
+    setDraft(EMPTY_CHILD);
+    setEditingIndex(null);
+    navigate2(`${ROOT}/add/name`);
+  };
+  const startEdit = (i) => {
+    setDraft(children[i]);
+    setEditingIndex(i);
+    navigate2(`${ROOT}/add/name`);
+  };
+  const removeChild = (i) => {
+    const next = children.filter((_, idx) => idx !== i);
+    setChildren(next);
+    revalidate({ children: next });
+  };
+  const saveChild = () => {
+    const next = editingIndex === null ? [...children, draft] : children.map((c, i) => i === editingIndex ? draft : c);
+    setChildren(next);
+    revalidate({ children: next });
+    setEditingIndex(null);
+    navigate2(ROOT);
+  };
+  const handleContinue = () => submit({ children }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Route,
+      {
+        index: true,
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          ChildrenList,
+          {
+            items: children,
+            onAdd: startAdd,
+            onEdit: startEdit,
+            onRemove: removeChild,
+            errors: pageErrors,
+            onContinue: handleContinue
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Route,
+      {
+        path: "add/name",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(NameStep, { value: draft.name, onChange: (v) => update({ name: v }) })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Route,
+      {
+        path: "add/age",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          YesNoStep,
+          {
+            heading: "Is the child 18 or older?",
+            back: `${ROOT}/add/name`,
+            value: draft.isAdult,
+            onChange: (v) => update({ isAdult: v }),
+            next: (v) => v === "yes" ? `${ROOT}/add/education` : `${ROOT}/add/confirm`,
+            requiredError: "Select yes if the child is 18 or older"
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Route,
+      {
+        path: "add/education",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          YesNoStep,
+          {
+            heading: "Is the child in full-time education?",
+            back: `${ROOT}/add/age`,
+            value: draft.inEducation,
+            onChange: (v) => update({ inEducation: v }),
+            next: () => `${ROOT}/add/confirm`,
+            requiredError: "Select yes if the child is in full-time education"
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Route,
+      {
+        path: "add/confirm",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(ConfirmStep, { draft, editing: editingIndex !== null, onAdd: saveChild })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: ROOT, replace: true }) })
+  ] });
+}
+const EMPTY = { street: "", suite: "", city: "", province: "", postal: "", years: "" };
+const PROVINCES = [
+  ["AB", "Alberta"],
+  ["BC", "British Columbia"],
+  ["MB", "Manitoba"],
+  ["NB", "New Brunswick"],
+  ["NL", "Newfoundland and Labrador"],
+  ["NS", "Nova Scotia"],
+  ["NT", "Northwest Territories"],
+  ["NU", "Nunavut"],
+  ["ON", "Ontario"],
+  ["PE", "Prince Edward Island"],
+  ["QC", "Quebec"],
+  ["SK", "Saskatchewan"],
+  ["YT", "Yukon"]
+];
+const POSTAL_CODE = /^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$/;
+const addressSchema = {
+  street: required("Enter the street address"),
+  city: required("Enter the city or town"),
+  province: required("Select the province or territory"),
+  postal: pattern(POSTAL_CODE, "Enter a valid postal code, such as T3R 8Y2"),
+  years: required("Enter how long you lived there")
+};
+const pageSchema = { addresses: minSelected(1, "Add at least one previous address") };
+function DrawerExample() {
+  const navigate2 = useNavigate();
+  const [addresses, setAddresses] = reactExports.useState([]);
+  const { errors: pageErrors, submit, revalidate } = useFormValidation(pageSchema);
+  const [open, setOpen] = reactExports.useState(false);
+  const [editingIndex, setEditingIndex] = reactExports.useState(null);
+  const [draft, setDraft] = reactExports.useState(EMPTY);
+  const [drawerErrors, setDrawerErrors] = reactExports.useState([]);
+  const drawerSummaryRef = useErrorSummaryFocus(drawerErrors);
+  const openAdd = () => {
+    setEditingIndex(null);
+    setDraft(EMPTY);
+    setDrawerErrors([]);
+    setOpen(true);
+  };
+  const openEdit = (i) => {
+    setEditingIndex(i);
+    setDraft(addresses[i]);
+    setDrawerErrors([]);
+    setOpen(true);
+  };
+  const updateDraft = (patch) => {
+    const next = { ...draft, ...patch };
+    setDraft(next);
+    if (drawerErrors.length > 0) setDrawerErrors(runSchema(addressSchema, next));
+  };
+  const save = () => {
+    const found = runSchema(addressSchema, draft);
+    setDrawerErrors(found);
+    if (found.length > 0) return;
+    const next = editingIndex === null ? [...addresses, draft] : addresses.map((a, i) => i === editingIndex ? draft : a);
+    setAddresses(next);
+    revalidate({ addresses: next });
+    setOpen(false);
+  };
+  const removeAddress = (i) => {
+    const next = addresses.filter((_, idx) => idx !== i);
+    setAddresses(next);
+    revalidate({ addresses: next });
+  };
+  const errorFor = (id2) => {
+    var _a2;
+    return (_a2 = drawerErrors.find((e) => e.fieldId === id2)) == null ? void 0 : _a2.text;
+  };
+  const has = (id2) => drawerErrors.some((e) => e.fieldId === id2);
+  const handleContinue = () => submit({ addresses }, () => navigate2("/public-form"));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      FormSet,
+      {
+        heading: "Previous addresses",
+        description: "Add any addresses you have lived at in the past 5 years.",
+        continueLabel: "Save and continue",
+        onContinue: handleContinue,
+        errors: pageErrors,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "addresses", children: [
+          addresses.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: "var(--goa-space-l)" }, children: addresses.map((a, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "var(--goa-space-m)",
+                padding: "var(--goa-space-m) 0",
+                borderTop: "1px solid var(--goa-color-greyscale-200)"
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontWeight: 700 }, children: a.street }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "var(--goa-color-text-secondary)" }, children: [
+                    a.city,
+                    ", ",
+                    a.province,
+                    " ",
+                    a.postal,
+                    " · ",
+                    a.years
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: "var(--goa-space-m)", flexShrink: 0 }, children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => openEdit(i), children: "Edit" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => removeAddress(i), children: "Remove" })
+                ] })
+              ]
+            },
+            i
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", leadingIcon: "add", onClick: openAdd, children: addresses.length === 0 ? "Add a previous address" : "Add another address" })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      GoabDrawer,
+      {
+        position: "right",
+        open,
+        onClose: () => setOpen(false),
+        heading: editingIndex === null ? "Add a previous address" : "Edit previous address",
+        actions: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabButtonGroup, { alignment: "end", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", onClick: () => setOpen(false), children: "Cancel" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", size: "compact", onClick: save, children: editingIndex === null ? "Add address" : "Save changes" })
+        ] }),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorSummary, { ref: drawerSummaryRef, errors: drawerErrors }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Street address", id: "street", error: errorFor("street"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "street",
+              width: "100%",
+              error: has("street"),
+              value: draft.street,
+              onChange: (e) => updateDraft({ street: e.value })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Suite or unit number", requirement: "optional", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "suite",
+              width: "100%",
+              value: draft.suite,
+              onChange: (e) => updateDraft({ suite: e.value })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "City or town", id: "city", mt: "l", error: errorFor("city"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "city",
+              width: "100%",
+              error: has("city"),
+              value: draft.city,
+              onChange: (e) => updateDraft({ city: e.value })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Province or territory", id: "province", mt: "l", error: errorFor("province"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabDropdown,
+            {
+              name: "province",
+              width: "100%",
+              error: has("province"),
+              value: draft.province,
+              onChange: (e) => updateDraft({ province: e.value ?? "" }),
+              children: PROVINCES.map(([value, label]) => /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDropdownItem, { value, label }, value))
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Postal code", id: "postal", mt: "l", error: errorFor("postal"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabInput,
+            {
+              name: "postal",
+              width: "130px",
+              error: has("postal"),
+              value: draft.postal,
+              onChange: (e) => updateDraft({ postal: e.value })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabFormItem,
+            {
+              label: "How long did you live here?",
+              id: "years",
+              mt: "l",
+              helpText: "For example, 2 years",
+              error: errorFor("years"),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                GoabInput,
+                {
+                  name: "years",
+                  width: "200px",
+                  error: has("years"),
+                  value: draft.years,
+                  onChange: (e) => updateDraft({ years: e.value })
+                }
+              )
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+function ResultEligible() {
+  const navigate2 = useNavigate();
+  const home = () => navigate2("/public-form");
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ResultsPage,
+    {
+      heading: "You are eligible for this service",
+      status: "success",
+      statusHeading: "You are eligible for this service",
+      statusBody: "Based on your answers, you can apply for this service.",
+      actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", onClick: home, children: "Continue your application" }) }),
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultContactSection, {})
+    }
+  );
+}
+function ResultNotEligible() {
+  const navigate2 = useNavigate();
+  const home = () => navigate2("/public-form");
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ResultsPage,
+    {
+      heading: "You are not eligible for this service",
+      status: "important",
+      statusHeading: "You must live in Alberta to be eligible for this service",
+      statusBody: "Contact us if you think this does not apply to you.",
+      actions: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabButtonGroup, { alignment: "start", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: home, children: "Return to my applications" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", onClick: home, children: "Back to Alberta.ca" })
+      ] }),
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultContactSection, {})
+    }
+  );
+}
+function ResultSubmitted() {
+  const navigate2 = useNavigate();
+  const home = () => navigate2("/public-form");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    ResultsPage,
+    {
+      heading: "You have submitted your application",
+      status: "success",
+      statusHeading: "Application submitted",
+      statusBody: "We've received your application.",
+      actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", onClick: home, children: "Back to Alberta.ca" }) }),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h2", mt: "xl", mb: "s", children: "What happens next" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "s", children: "We've sent your application for review. You will be contacted by email if we need any more information from you. You can now close this window." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { mt: "none", mb: "none", children: [
+          "What did you think of this service?",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Give feedback" }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ResultContactSection, {})
+      ]
+    }
+  );
+}
+function ReviewEditable() {
+  const navigate2 = useNavigate();
+  const [confirmed, setConfirmed] = reactExports.useState(false);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "xl", children: "Review your answers" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(FormSummary, { title: "My information", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Personal details", changeTo: "/public-form/multiple-questions", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Full name", children: "Jane Smith" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Date of birth", children: "1 January 1990" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { changeTo: "/public-form/single-question", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Phone number", children: "780 123 4567" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Your situation", changeTo: "/public-form/reveal", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Are you a current resident?", children: "Yes" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Tell us more", children: "Lorem ipsum dolor sit amet consectetur. Ultricies at aliquet tellus diam. Odio velit aenean nec at venenatis pretium. Eget dui aliquam sit pharetra duis arcu." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { changeTo: "/public-form/file-upload", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Proof of address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "utility-bill.pdf" }) }) }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummary, { title: "My family", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Dependants", changeTo: "/public-form/inline-list", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Number of children", children: "2" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Names", children: "Alex Smith, Sam Smith" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabCheckbox,
+      {
+        name: "confirm",
+        text: "I confirm that the information above is correct",
+        checked: confirmed,
+        onChange: (e) => setConfirmed(e.checked),
+        mt: "l",
+        mb: "xl"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: () => navigate2("/public-form"), children: "Save and continue" }) })
+  ] });
+}
+function ReviewReadonly() {
+  const navigate2 = useNavigate();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "xl", children: "Review your answers" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(FormSummary, { title: "My information", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Personal details", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Full name", children: "Jane Smith" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Date of birth", children: "1 January 1990" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Phone number", children: "780 123 4567" }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummary, { title: "My family", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Dependants", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Number of children", children: "2" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Names", children: "Alex Smith, Sam Smith" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", mt: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", leadingIcon: "arrow-back", onClick: () => navigate2("/public-form"), children: "Back to all tasks" }) })
+  ] });
+}
+function ReviewQuestionTypes() {
+  const [showUnanswered, setShowUnanswered] = reactExports.useState(true);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "m", children: "Review your answers" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "xl", color: "secondary", children: "How different question types read on the summary. Use the toggle to show or hide unanswered optional questions." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabCheckbox,
+      {
+        name: "show-unanswered",
+        text: "Show unanswered optional questions",
+        checked: showUnanswered,
+        onChange: (e) => setShowUnanswered(e.checked),
+        mb: "xl"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummary, { title: "Documents", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Which documents did you use?", changeTo: "/public-form/grouped-fields", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(SummaryItem, { question: "Documents used", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Tax return" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Paystub" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Other(s)" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "What other documents?", children: "A separation agreement" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Document year", children: "2020" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummary, { title: "Authorized representative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { changeTo: "/public-form/multiple-questions", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Name", children: "Bruno Mars" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Relationship to you", children: "Parent" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Primary phone", children: "+1 555 199 9761" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Primary phone extension", children: "1234" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Email", children: "bruno@example.com" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormSummary, { title: "Optional questions", showUnanswered, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { changeTo: "/public-form/single-question", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Preferred name", optional: true, children: "Jay" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Middle name", optional: true })
+    ] }) })
+  ] });
+}
+function ChildrenSummary({
+  title,
+  items,
+  emptyText = "None added",
+  onChange: onChange2,
+  changeTo,
+  changeLabel
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(SummarySection, { heading: title, onChange: onChange2, changeTo, changeLabel, children: items.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "var(--goa-color-text-secondary)" }, children: emptyText }) : items.map((it) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { padding: "var(--goa-space-2xs) 0" }, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: it.label }) }),
+    it.detail != null && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { color: "var(--goa-color-text-secondary)" }, children: it.detail })
+  ] }, it.id)) });
+}
+function ReviewChildrenSummary() {
+  const navigate2 = useNavigate();
+  const home = () => navigate2("/public-form");
+  const contacts = [
+    { id: "1", label: "Thomas Jeffery", detail: "Sibling · 1 (780) 935-8312" },
+    { id: "2", label: "Sam Smith", detail: "Friend · +1 780 555 0142" }
+  ];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PublicFormLayout, { back: "/public-form", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "none", mb: "m", children: "Review your answers" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { mt: "none", mb: "xl", color: "secondary", children: "A repeating group collapses to each item's key field, with one Change back to the page where the items were added." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(SummarySection, { heading: "Personal details", onChange: home, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Full name", children: "Jane Smith" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SummaryItem, { question: "Date of birth", children: "1 January 1990" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ChildrenSummary,
+      {
+        title: "Emergency contacts",
+        items: contacts,
+        onChange: () => navigate2("/public-form/modal-drawer")
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButtonGroup, { alignment: "start", mt: "2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "primary", onClick: home, children: "Save and continue" }) })
+  ] });
+}
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  reactExports.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+function PublicFormApp() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "header", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/public-form", heading: "Service name", maxContentWidth: "704px", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "utilities", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { text: "Edna Mode", type: "tertiary", size: "compact", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "My profile", action: "profile" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Settings", action: "settings" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
+    ] }) }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "640px", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { paddingTop: "var(--goa-space-2xl)", paddingBottom: "var(--goa-space-3xl)" }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollToTop, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TaskListHome, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "single-question", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SingleQuestion, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "grouped-fields", element: /* @__PURE__ */ jsxRuntimeExports.jsx(GroupedFields, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "multiple-questions", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MultipleQuestions, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "details", element: /* @__PURE__ */ jsxRuntimeExports.jsx(QuestionWithDetails, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "reveal", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Reveal, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "content-before", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ContentBefore, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "file-upload", element: /* @__PURE__ */ jsxRuntimeExports.jsx(FileUpload, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "inline-list", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InlineList, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "modal-drawer", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ModalDrawer, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "drawer", element: /* @__PURE__ */ jsxRuntimeExports.jsx(DrawerExample, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "multi-step", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MultiStep, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "new-page/*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NewPageTask, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "eligibility/*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EligibilityTask, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "result-eligible", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultEligible, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "result-not-eligible", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultNotEligible, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "result-submitted", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ResultSubmitted, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "review-editable", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewEditable, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "review-readonly", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewReadonly, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "review-question-types", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewQuestionTypes, {}) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "review-children", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewChildrenSummary, {}) })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "footer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterMetaSection, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "My profile" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Accessibility" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Privacy" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Terms and conditions" })
+    ] }) }) })
+  ] });
+}
 const root = clientExports.createRoot(document.getElementById("root"));
 root.render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { basename: "/", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabThemeProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/everything/b", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EverythingBRoute, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/public-form/*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(PublicFormApp, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "everything", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EverythingRoute, {}) }),
       prRouteDefinitions.map((route) => {
