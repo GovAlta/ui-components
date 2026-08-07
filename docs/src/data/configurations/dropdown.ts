@@ -449,6 +449,50 @@ export const dropdownConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "custom-no-results",
+      name: "Custom no-results text",
+      description: "Filterable dropdown with a custom message when no options match",
+      code: {
+        react: `<GoabFormItem label="Program" mb="l">
+  <GoabDropdown
+    name="program"
+    filterable
+    noResults="No programs found"
+    placeholder="Select a program"
+  >
+    <GoabDropdownItem value="Child care" />
+    <GoabDropdownItem value="Education" />
+    <GoabDropdownItem value="Health" />
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Program" mb="l">
+  <goab-dropdown
+    name="program"
+    [filterable]="true"
+    noResults="No programs found"
+    placeholder="Select a program"
+  >
+    <goab-dropdown-item value="Child care"></goab-dropdown-item>
+    <goab-dropdown-item value="Education"></goab-dropdown-item>
+    <goab-dropdown-item value="Health"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Program" mb="l">
+  <goa-dropdown
+    version="2"
+    name="program"
+    filterable
+    noresults="No programs found"
+    placeholder="Select a program"
+  >
+    <goa-dropdown-item value="Child care"></goa-dropdown-item>
+    <goa-dropdown-item value="Education"></goa-dropdown-item>
+    <goa-dropdown-item value="Health"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>`,
+      },
+    },
+    {
       id: "rich-item-content",
       name: "Rich item content",
       description: "Dropdown items containing formatted content instead of a plain label",

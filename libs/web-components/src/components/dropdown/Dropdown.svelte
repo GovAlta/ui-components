@@ -65,6 +65,8 @@
   export let maxheight: string = "276px";
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
+  /** Sets the text displayed when filtering returns no results. */
+  export let noresults: string = "No matches found";
   /** Overrides the autosized menu width. Non-native only. */
   export let width: string = "";
   /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
@@ -969,7 +971,7 @@
         {:else}
           {#if _filterable}
             <li class="dropdown-item" data-testid="dropdown-item-not-found">
-              No matches found
+              {noresults}
             </li>
           {/if}
         {/each}

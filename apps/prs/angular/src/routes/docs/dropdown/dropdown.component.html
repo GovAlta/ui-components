@@ -55,6 +55,20 @@
   </goab-dropdown>
 </goab-form-item>
 
+<h3>Custom no-results text</h3>
+<goab-form-item label="Program" mb="l">
+  <goab-dropdown
+    name="program"
+    [filterable]="true"
+    noResults="No programs found"
+    placeholder="Select a program"
+  >
+    <goab-dropdown-item value="Child care"></goab-dropdown-item>
+    <goab-dropdown-item value="Education"></goab-dropdown-item>
+    <goab-dropdown-item value="Health"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+
 <h3>Native</h3>
 <goab-form-item label="Custom dropdown" mb="l">
   <goab-dropdown name="custom">

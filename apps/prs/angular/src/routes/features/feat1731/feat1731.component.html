@@ -1,0 +1,43 @@
+<goab-text tag="h1" mt="none"> Feature #1731: Custom dropdown no-results text </goab-text>
+
+<goab-text tag="p">
+  Filterable dropdowns can use the noResults property to provide an empty-state message
+  that matches the service context.
+</goab-text>
+
+<goab-text tag="h2">Custom no-results text</goab-text>
+<goab-text tag="p">
+  Open the dropdown and enter a value such as “xyz”. The empty state should read “No
+  programs found”.
+</goab-text>
+<goab-form-item label="Program">
+  <goab-dropdown
+    name="custom-no-results"
+    [filterable]="true"
+    noResults="No programs found"
+    placeholder="Select a program"
+    width="20rem"
+  >
+    <goab-dropdown-item value="child-care" label="Child care" />
+    <goab-dropdown-item value="education" label="Education" />
+    <goab-dropdown-item value="health" label="Health" />
+  </goab-dropdown>
+</goab-form-item>
+
+<goab-text tag="h2">Default no-results text</goab-text>
+<goab-text tag="p">
+  Open the dropdown and enter a value such as “xyz”. Without noResults, the empty state
+  should continue to read “No matches found”.
+</goab-text>
+<goab-form-item label="Program">
+  <goab-dropdown
+    name="default-no-results"
+    [filterable]="true"
+    placeholder="Select a program"
+    width="20rem"
+  >
+    <goab-dropdown-item value="child-care" label="Child care" />
+    <goab-dropdown-item value="education" label="Education" />
+    <goab-dropdown-item value="health" label="Health" />
+  </goab-dropdown>
+</goab-form-item>

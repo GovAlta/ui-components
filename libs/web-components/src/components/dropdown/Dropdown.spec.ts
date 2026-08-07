@@ -339,6 +339,25 @@ describe("GoADropdown", () => {
       });
     });
 
+    it("should display the configured no results text", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        filterable: true,
+        noresults: "Nothing found",
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await fireEvent.focus(input);
+      await fireEvent.keyUp(input, { key: "z" });
+      await fireEvent.input(input, { target: { value: "z" } });
+
+      const notFoundOption = result.getByTestId("dropdown-item-not-found");
+      await waitFor(() => {
+        expect(notFoundOption).toHaveTextContent("Nothing found");
+      });
+    });
+
     // Pasting from clipboard into input simulates browser autofill/autocomplete
     it("select option value after paste from clipboard (only if there is no previously selected value)", async () => {
       const result = render(GoADropdownWrapper, {
