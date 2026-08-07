@@ -88,7 +88,7 @@
   }
 
   li:not(:last-child) {
-    margin-bottom: var(--goa-space-s);
+    margin-bottom: var(--goa-space-m);
   }
 
   @media not (--mobile) {
