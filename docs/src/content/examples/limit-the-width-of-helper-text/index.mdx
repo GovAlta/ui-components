@@ -1,0 +1,29 @@
+---
+id: limit-the-width-of-helper-text
+title: Limit the width of helper text
+size: interaction
+tags:
+  - form
+  - form-item
+  - helper-text
+  - text
+components:
+  - form-item
+  - input
+  - text
+status: published
+previewImage: /images/examples/limit-the-width-of-helper-text.webp
+---
+
+Use the Text component in the Form item help text slot to limit the line length of helper text.
+
+## When to use
+
+Use this pattern when longer helper text stretches too far across the page and becomes difficult to read.
+
+## Considerations
+
+- Set the Text component's `maxWidth` property with a valid CSS width, such as `40ch`
+- Use a character-based width such as `ch` to keep lines at a readable length
+- Keep helper text concise and relevant to the field
+- Make sure the helper text remains available to assistive technologies through the Form item help text slot

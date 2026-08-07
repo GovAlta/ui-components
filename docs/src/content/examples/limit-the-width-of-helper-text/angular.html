@@ -1,0 +1,9 @@
+<goab-form-item label="Legal name" [formGroup]="form" [helpText]="helpTextTemplate">
+  <goab-input name="legalName" formControlName="legalName"></goab-input>
+  <ng-template #helpTextTemplate>
+    <goab-text maxWidth="30ch" mt="none" mb="none">
+      Enter your full legal name exactly as it appears on your government-issued
+      identification.
+    </goab-text>
+  </ng-template>
+</goab-form-item>
