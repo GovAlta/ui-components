@@ -46,6 +46,7 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.mt]="mt"
         [attr.multiselect]="multiselect"
         [attr.native]="native"
+        [attr.noresults]="noResults"
         [attr.placeholder]="placeholder"
         [attr.testid]="testId"
         [attr.width]="width"
@@ -91,6 +92,8 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Input({ transform: booleanAttribute }) multiselect?: boolean;
   /** When true will render the native select HTML element. */
   @Input({ transform: booleanAttribute }) native?: boolean;
+  /** Sets the text displayed when filtering returns no results. @default "No matches found" */
+  @Input() noResults?: string;
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   @Input() placeholder?: string;
   /** Overrides the autosized menu width. Non-native only. */
