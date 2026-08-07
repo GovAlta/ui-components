@@ -299,6 +299,13 @@ export function App() {
             label="Everything"
             url={`${baseUrl}everything`}
           />
+          {/* Opens full page, outside this shell, since the examples are whole
+              public form pages with their own layout. Browser back returns here. */}
+          <GoabWorkSideMenuItem
+            icon="document-text"
+            label="Public form"
+            url={`${baseUrl}public-form`}
+          />
         </>
       }
     />
