@@ -107,7 +107,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [
@@ -227,7 +227,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [
@@ -386,7 +386,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [

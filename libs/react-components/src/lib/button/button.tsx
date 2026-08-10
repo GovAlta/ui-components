@@ -29,9 +29,9 @@ declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "goa-button": WCProps &
-      React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -49,7 +49,7 @@ export interface GoabButtonProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   /** Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
-  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
+  /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   width?: string;
   /** Callback fired when the button is clicked. */
   onClick?: () => void;
