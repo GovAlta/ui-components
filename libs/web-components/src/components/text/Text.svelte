@@ -16,6 +16,7 @@
   type BodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 
   export type Size = HeadingSize | BodySize;
+  export type TextColor = "primary" | "secondary" | "light" | "disabled";
 </script>
 
 <script lang="ts">
@@ -30,8 +31,8 @@
   export let maxWidth: string | "none" = "65ch";
   /** Overrides the text size. */
   export let size: Size | undefined = undefined;
-  /** Sets the text colour. */
-  export let color: "primary" | "secondary" = "primary";
+  /** Sets the text colour to primary, secondary, light, or disabled. */
+  export let color: TextColor = "primary";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -48,7 +49,9 @@
   /**
    * Returns a default size based on the heading tag when size is not explicitly set
    */
-  function getDefaultSizeForTag(tag: TextElement | HeadingElement): Size | undefined {
+  function getDefaultSizeForTag(
+    tag: TextElement | HeadingElement,
+  ): Size | undefined {
     switch (tag) {
       case "h1":
         return "heading-xl";
@@ -145,7 +148,7 @@
       "color",
       color === "primary"
         ? "var(--goa-color-text-default)"
-        : "var(--goa-color-text-secondary)",
+        : `var(--goa-color-text-${color})`,
     ),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
     calculateMargin(_marginTop, mr, _marginBottom, ml),
@@ -213,7 +216,10 @@
   @media (--mobile) {
     /* V2-only size; falls back to the nearest V1 size. See the note on the desktop .heading-2xl rule above. */
     .heading-2xl {
-      font: var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));
+      font: var(
+        --goa-typography-mobile-heading-2xl,
+        var(--goa-typography-mobile-heading-xl)
+      );
       letter-spacing: var(
         --goa-typography-mobile-heading-2xl-letter-spacing,
         var(--goa-typography-mobile-heading-xl-letter-spacing)
@@ -240,7 +246,10 @@
       letter-spacing: var(--goa-typography-mobile-heading-xs-letter-spacing);
     }
     .heading-2xs {
-      font: var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));
+      font: var(
+        --goa-typography-mobile-heading-2xs,
+        var(--goa-typography-mobile-heading-xs)
+      );
       letter-spacing: var(--goa-typography-mobile-heading-2xs-letter-spacing);
     }
     .body-l {

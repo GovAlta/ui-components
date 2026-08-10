@@ -1350,7 +1350,7 @@ export type GoabTextHeadingSize =
   | "heading-2xs";
 export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
-export type GoabTextColor = "primary" | "secondary";
+export type GoabTextColor = "primary" | "secondary" | "light" | "disabled";
 
 // Simple Form
 export type GoabFormField = {

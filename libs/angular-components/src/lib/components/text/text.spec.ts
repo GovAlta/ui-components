@@ -68,6 +68,19 @@ describe("GoabText", () => {
     expect(element.getAttribute("size")).toBe("heading-2xl");
   }));
 
+  it.each(["light", "disabled"] as const)(
+    "should pass the %s color through to the web component",
+    fakeAsync((color) => {
+      component.color = color;
+      fixture.detectChanges();
+      tick();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector("goa-text");
+      expect(element.getAttribute("color")).toBe(color);
+    }),
+  );
+
   it("should handle undefined properties", fakeAsync(() => {
     fixture.detectChanges();
     tick();
