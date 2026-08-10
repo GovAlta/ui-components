@@ -65,7 +65,7 @@ export class GoabButton extends GoabBaseComponent implements OnInit {
   @Input() leadingIcon?: GoabIconType;
   /** Icon displayed after the button text. */
   @Input() trailingIcon?: GoabIconType;
-  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
+  /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   @Input() width?: string;
   /** Action identifier passed in click events for event delegation patterns. */
   @Input() action?: string;
