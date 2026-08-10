@@ -1,11 +1,77 @@
 import { render } from "vitest-browser-react";
-import { page } from "@vitest/browser/context";
+import { page, userEvent } from "@vitest/browser/context";
 import { useState } from "react";
 
 import { GoabTooltip, GoabButton } from "../src";
 import { expect, describe, it, vi } from "vitest";
 
 describe("Tooltip Browser Tests", () => {
+  it("focuses an interactive trigger and shows its tooltip with one tab", async () => {
+    const onClick = vi.fn();
+    const Component = () => (
+      <div data-testid="container">
+        <button data-testid="before">Before</button>
+        <GoabTooltip content="This is a tooltip">
+          <GoabButton testId="trigger" onClick={onClick}>
+            Tooltip trigger
+          </GoabButton>
+        </GoabTooltip>
+        <button data-testid="after">After</button>
+      </div>
+    );
+
+    const result = render(<Component />);
+    const container = result.getByTestId("container");
+    const before = result.getByTestId("before");
+    const trigger = result.getByTestId("trigger");
+    const after = result.getByTestId("after");
+    const tooltipHost = container.element().querySelector("goa-tooltip") as HTMLElement;
+    const triggerHost = tooltipHost.querySelector("goa-button") as HTMLElement;
+
+    await vi.waitFor(() => {
+      expect(tooltipHost.shadowRoot).not.toBeNull();
+    });
+
+    const tooltipContainer = tooltipHost.shadowRoot?.querySelector(".tooltip");
+    const tooltipText = tooltipHost.shadowRoot?.querySelector(".tooltip-text");
+
+    await vi.waitFor(() => {
+      expect(tooltipContainer).not.toHaveAttribute("tabindex");
+    });
+
+    before.element().focus();
+    await userEvent.keyboard("{Tab}");
+
+    expect(triggerHost).toHaveFocus();
+    expect(triggerHost.shadowRoot?.activeElement).toBe(trigger.element());
+    expect(trigger.element()).toHaveAccessibleDescription("This is a tooltip");
+    await vi.waitFor(() => {
+      expect(tooltipText).toHaveAttribute("aria-hidden", "false");
+    });
+
+    await userEvent.keyboard("{Enter}");
+    expect(onClick).toHaveBeenCalledOnce();
+
+    await userEvent.tab();
+
+    expect(after).toHaveFocus();
+    await vi.waitFor(() => {
+      expect(tooltipText).toHaveAttribute("aria-hidden", "true");
+    });
+
+    await userEvent.tab({ shift: true });
+
+    expect(triggerHost).toHaveFocus();
+    expect(triggerHost.shadowRoot?.activeElement).toBe(trigger.element());
+    await vi.waitFor(() => {
+      expect(tooltipText).toHaveAttribute("aria-hidden", "false");
+    });
+
+    await userEvent.tab({ shift: true });
+
+    expect(before).toHaveFocus();
+  });
+
   it("should render tooltip component", async () => {
     const Component = () => {
       return (
