@@ -51,6 +51,18 @@ it("shows and hides tooltip on mouseenter/mouseleave", async () => {
   }
 });
 
+it("describes the focused trigger with the tooltip content", async () => {
+  const { container } = render(Tooltip, { content: "Tooltip description" });
+  const tooltipContainer = container.querySelector(".tooltip") as HTMLElement;
+  const target = container.querySelector(".tooltip-target") as HTMLElement;
+  vi.spyOn(target, "matches").mockReturnValue(true);
+
+  await fireEvent.focusIn(target);
+
+  expect(tooltipContainer.getAttribute("tabindex")).toBeNull();
+  expect(target.getAttribute("aria-description")).toBe("Tooltip description");
+});
+
 it("validates the props", async () => {
   const mock = vi.spyOn(console, "error").mockImplementation(() => {
     /* do nothing */
@@ -166,7 +178,7 @@ it("should render tooltip with maxwidth property", async () => {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     maxwidth: "300px",
   });
-    const tooltipContainer = container.querySelector(".tooltip");
+  const tooltipContainer = container.querySelector(".tooltip");
   const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
 
   expect(tooltipContainer).toBeTruthy();
