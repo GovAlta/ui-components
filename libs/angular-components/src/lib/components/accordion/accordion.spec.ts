@@ -46,6 +46,13 @@ class TestAccordionComponent {
 })
 class TestAccordionWithActionsComponent {}
 
+@Component({
+  standalone: true,
+  imports: [GoabAccordion],
+  template: ` <goab-accordion heading="Title">test content</goab-accordion> `,
+})
+class TestAccordionWithoutHeadingContentComponent {}
+
 describe("GoabAccordion", () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let component: TestAccordionComponent;
@@ -84,6 +91,27 @@ describe("GoabAccordion", () => {
     const headingContent = accordionElement.querySelector("[slot='headingcontent']");
     expect(headingContent.textContent).toContain("This is the headingcontent");
   });
+});
+
+describe("GoabAccordion heading content slot", () => {
+  it("should not render the slot when heading content is not supplied", fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAccordion, TestAccordionWithoutHeadingContentComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestAccordionWithoutHeadingContentComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const accordionElement = fixture.debugElement.query(
+      By.css("goa-accordion"),
+    ).nativeElement;
+    const headingContent = accordionElement.querySelector("[slot='headingcontent']");
+
+    expect(headingContent).toBeNull();
+  }));
 });
 
 describe("GoabAccordion actions slot", () => {

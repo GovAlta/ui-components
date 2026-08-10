@@ -74,7 +74,7 @@
   export let ml: Spacing = null;
   /** Sets the position of the expand/collapse icon. */
   export let iconposition: IconPosition = "left";
-  /** Sets the accordion style variant. @default "normal" */
+  /** Sets the accordion style variant. */
   export let headingType: AccordionHeadingType = "normal";
 
   // Private
@@ -134,11 +134,15 @@
   function updateAnnouncement() {
     _shouldAnnounce = false;
     // Give Safari time to expose the expanded content before adding the alert role.
-    _announcementTimeoutId = performOnce(_announcementTimeoutId, () => {
-      if (isOpen) {
-        _shouldAnnounce = true;
-      }
-    }, 100);
+    _announcementTimeoutId = performOnce(
+      _announcementTimeoutId,
+      () => {
+        if (isOpen) {
+          _shouldAnnounce = true;
+        }
+      },
+      100,
+    );
   }
 
   function dispatchChangeEvent(accordionIsOpen: boolean) {
@@ -354,14 +358,16 @@
         {#if secondarytext}
           <span class="secondary-text">{secondarytext}</span>
         {/if}
-        <!-- svelte-ignore a11y-click-events-have-key-events because the enter and space handlers are blocked too-->
-        <div
-          class="heading-content"
-          class:heading-content-top={_headingSlotChildren.length}
-          on:click|stopPropagation
-        >
-          <slot name="headingcontent" />
-        </div>
+        {#if $$slots.headingcontent}
+          <!-- svelte-ignore a11y-click-events-have-key-events because the enter and space handlers are blocked too-->
+          <div
+            class="heading-content"
+            class:heading-content-top={_headingSlotChildren.length}
+            on:click|stopPropagation
+          >
+            <slot name="headingcontent" />
+          </div>
+        {/if}
       </div>
 
       <!-- svelte-ignore a11y-click-events-have-key-events -->
