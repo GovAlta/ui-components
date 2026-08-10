@@ -47,9 +47,9 @@ export class GoabText implements OnInit {
   @Input() tag?: GoabTextTextElement | GoabTextHeadingElement;
   /** Overrides the text size. */
   @Input() size?: GoabTextSize;
-  /** Sets the max width. */
+  /** Sets the max width. @default "65ch" */
   @Input() maxWidth?: GoabTextMaxWidth;
-  /** Sets the text colour. */
+  /** Sets the text colour to primary, secondary, light, or disabled. @default "primary" */
   @Input() color?: GoabTextColor;
   /** Sets the id attribute on the host element. */
   @Input() id?: string;

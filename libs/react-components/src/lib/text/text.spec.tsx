@@ -62,6 +62,16 @@ describe('GoabText', () => {
     expect(element?.getAttribute('size')).toBe('heading-2xl');
   });
 
+  it.each(["light", "disabled"] as const)(
+    "should pass the %s color through to the web component",
+    (color) => {
+      const { container } = render(<GoabText color={color}>Content</GoabText>);
+      const element = container.querySelector("goa-text");
+
+      expect(element?.getAttribute("color")).toBe(color);
+    },
+  );
+
   it('should handle different tag values', () => {
     const cases = [
       { tag: 'p', name: 'paragraph' },

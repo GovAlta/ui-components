@@ -9,7 +9,7 @@
           "type": "GoabTextColor",
           "required": false,
           "default": "primary",
-          "description": "Sets the text colour."
+          "description": "Sets the text colour to primary, secondary, light, or disabled."
         },
         {
           "name": "id",
@@ -81,8 +81,8 @@
           "name": "color",
           "type": "GoabTextColor",
           "required": false,
-          "default": null,
-          "description": "Sets the text colour."
+          "default": "primary",
+          "description": "Sets the text colour to primary, secondary, light, or disabled."
         },
         {
           "name": "id",
@@ -95,7 +95,7 @@
           "name": "maxWidth",
           "type": "GoabTextMaxWidth",
           "required": false,
-          "default": null,
+          "default": "65ch",
           "description": "Sets the max width."
         },
         {
@@ -169,14 +169,16 @@
         },
         {
           "name": "color",
-          "type": "\"primary\" | \"secondary\"",
+          "type": "\"primary\" | \"secondary\" | \"light\" | \"disabled\"",
           "values": [
             "primary",
-            "secondary"
+            "secondary",
+            "light",
+            "disabled"
           ],
           "required": false,
           "default": "primary",
-          "description": "Sets the text colour."
+          "description": "Sets the text colour to primary, secondary, light, or disabled."
         },
         {
           "name": "maxwidth",
