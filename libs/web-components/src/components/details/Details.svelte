@@ -58,11 +58,15 @@
   function updateAnnouncement() {
     _shouldAnnounce = false;
     // Give Safari time to expose the expanded content before adding the alert role.
-    _announcementTimeoutId = performOnce(_announcementTimeoutId, () => {
-      if (_isOpen) {
-        _shouldAnnounce = true;
-      }
-    }, 100);
+    _announcementTimeoutId = performOnce(
+      _announcementTimeoutId,
+      () => {
+        if (_isOpen) {
+          _shouldAnnounce = true;
+        }
+      },
+      100,
+    );
   }
 </script>
 
@@ -167,7 +171,7 @@
     padding-bottom: var(--goa-details-content-padding-bottom);
     padding-right: var(--goa-details-content-padding-right);
     margin-left: var(--goa-details-content-margin-left);
-    margin-top: var(--goa-details-margin-bottom);
+    margin-top: var(--goa-details-margin-top);
     margin-bottom: var(--goa-details-margin-bottom);
   }
   .content :global(::slotted(p:last-child)) {
