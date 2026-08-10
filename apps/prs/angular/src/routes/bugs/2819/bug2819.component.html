@@ -1,0 +1,24 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">Bug #2819: Accordion heading content container</goab-text>
+  <goab-text tag="p">
+    The heading content container should only render when heading content is supplied.
+  </goab-text>
+
+  <goab-divider />
+
+  <goab-text tag="h2">No heading content</goab-text>
+  <goab-accordion heading="Application requirements">
+    This accordion does not have heading content. Inspect the heading to confirm that it
+    does not contain a heading content container.
+  </goab-accordion>
+
+  <goab-text tag="h2">With heading content</goab-text>
+  <goab-accordion heading="Application requirements" [headingContent]="headingContent">
+    This accordion has heading content. The Updated badge should appear beside the
+    heading.
+  </goab-accordion>
+
+  <ng-template #headingContent>
+    <goab-badge type="information" content="Updated" />
+  </ng-template>
+</goab-block>

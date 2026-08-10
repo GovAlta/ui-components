@@ -127,28 +127,28 @@
           "name": "headingSize",
           "type": "GoabAccordionHeadingSize",
           "required": false,
-          "default": null,
+          "default": "small",
           "description": "Sets the heading size of the accordion container heading."
         },
         {
           "name": "headingType",
           "type": "GoabAccordionHeadingType",
           "required": false,
-          "default": null,
+          "default": "normal",
           "description": "Sets the accordion style variant."
         },
         {
           "name": "iconPosition",
           "type": "GoabAccordionIconPosition",
           "required": false,
-          "default": null,
+          "default": "left",
           "description": "Sets the position of the expand/collapse icon."
         },
         {
           "name": "maxWidth",
           "type": "string",
           "required": false,
-          "default": null,
+          "default": "none",
           "description": "Sets the maximum width of the accordion."
         },
         {
@@ -245,7 +245,7 @@
           ],
           "required": false,
           "default": "normal",
-          "description": "Sets the accordion style variant. @default \"normal\""
+          "description": "Sets the accordion style variant."
         },
         {
           "name": "headingsize",
