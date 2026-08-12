@@ -2,6 +2,7 @@ import {
   GoabAppFooter,
   GoabAppFooterMetaSection,
   GoabAppFooterNavSection,
+  GoabLink,
 } from "@abgov/react-components";
 
 export function DocsFooterRoute() {
@@ -49,6 +50,22 @@ export function DocsFooterRoute() {
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms of use</a>
           <a href="/accessibility">Accessibility</a>
+        </GoabAppFooterMetaSection>
+      </GoabAppFooter>
+
+      <h3>With links</h3>
+      <GoabAppFooter>
+        <GoabAppFooterNavSection heading="Services">
+          <a href="/apply">Apply online</a>
+          <GoabLink trailingIcon="open">
+            <a href="https://www.alberta.ca/services">All services</a>
+          </GoabLink>
+        </GoabAppFooterNavSection>
+        <GoabAppFooterMetaSection>
+          <a href="/privacy">Privacy</a>
+          <GoabLink>
+            <a href="/accessibility">Accessibility</a>
+          </GoabLink>
         </GoabAppFooterMetaSection>
       </GoabAppFooter>
     </div>
