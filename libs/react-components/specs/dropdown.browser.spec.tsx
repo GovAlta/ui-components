@@ -703,6 +703,32 @@ describe("Dropdown", () => {
       })
     });
 
+    it("preserves text selection when Shift+Home and Shift+End are pressed", async () => {
+      const Component = () => (
+        <GoabDropdown name="favcolor" onChange={noop} filterable={true}>
+          <GoabDropdownItem label="Red" value="red" />
+          <GoabDropdownItem label="Blue" value="blue" />
+          <GoabDropdownItem label="Green" value="green" />
+        </GoabDropdown>
+      );
+
+      const result = render(<Component />);
+      const filter = result.getByTestId("input");
+
+      await userEvent.type(filter, "Green");
+      const input = filter.element() as HTMLInputElement;
+
+      input.setSelectionRange(2, 2);
+      await userEvent.keyboard("{Shift>}{Home}{/Shift}");
+      expect(input.selectionStart).toBe(0);
+      expect(input.selectionEnd).toBe(2);
+
+      input.setSelectionRange(2, 2);
+      await userEvent.keyboard("{Shift>}{End}{/Shift}");
+      expect(input.selectionStart).toBe(2);
+      expect(input.selectionEnd).toBe(input.value.length);
+    });
+
     it("clears the input and opens the menu when the clear icon is clicked", async () => {
       // Setup
 
