@@ -30513,7 +30513,7 @@ class ef extends Ne {
 }
 customElements.define("goa-date-picker", Le(ef, { type: {}, name: {}, value: {}, error: { attribute: "error", type: "String", reflect: true }, min: {}, max: {}, relative: {}, disabled: {}, testid: {}, width: {}, size: {}, version: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
 function tf(t) {
-  Te(t, "svelte-42rndf", ":host{font-family:var(--goa-font-family-sans)}details.svelte-42rndf.svelte-42rndf{position:relative}details.svelte-42rndf ::slotted(*){font:var(--goa-details-content-typography, var(--goa-typography-body-m))}details[open].svelte-42rndf goa-icon.svelte-42rndf{transform:translateX(-1px) translateY(-0px) rotate(90deg);margin-top:var(--goa-space-2xs)}details.svelte-42rndf summary.svelte-42rndf::-webkit-details-marker{display:none}summary.svelte-42rndf.svelte-42rndf{padding-top:var(--goa-details-padding-top);padding-right:var(--goa-details-padding-right);padding-left:var(--goa-details-padding-left);padding-bottom:var(--goa-details-padding-bottom);cursor:pointer;list-style:none;display:flex;align-items:flex-start;border-radius:var(--goa-details-border-radius);width:var(--goa-details-heading-width, auto)}summary.svelte-42rndf.svelte-42rndf:focus-visible{outline:var(--goa-details-focus-border);color:var(--goa-color-interactive-hover)}summary.svelte-42rndf.svelte-42rndf:focus-visible,summary.svelte-42rndf.svelte-42rndf:active{border-radius:var(--goa-details-border-radius);color:var(--goa-details-color-text-hover);background-color:var(--goa-details-color-bg-hover)}summary.svelte-42rndf.svelte-42rndf:hover{background-color:var(--goa-details-color-bg-hover)}summary.svelte-42rndf span.svelte-42rndf{margin-left:var(--goa-space-xl);-webkit-text-decoration:var(--goa-details-text-decoration);text-decoration:var(--goa-details-text-decoration);color:var(--goa-details-color-text);font:var(--goa-details-typography)}summary.svelte-42rndf:hover span.svelte-42rndf{color:var(--goa-details-color-text-hover)}.content.svelte-42rndf.svelte-42rndf{border-left:var(--goa-details-content-left-border);padding-left:var(--goa-details-content-padding-left);padding-top:var(--goa-details-content-padding-top);padding-bottom:var(--goa-details-content-padding-bottom);padding-right:var(--goa-details-content-padding-right);margin-left:var(--goa-details-content-margin-left);margin-top:var(--goa-details-margin-bottom);margin-bottom:var(--goa-details-margin-bottom)}.content.svelte-42rndf ::slotted(p:last-child){margin-bottom:0 !important}goa-icon.svelte-42rndf.svelte-42rndf{position:absolute}");
+  Te(t, "svelte-1p5pau9", ":host{font-family:var(--goa-font-family-sans)}details.svelte-1p5pau9.svelte-1p5pau9{position:relative}details.svelte-1p5pau9 ::slotted(*){font:var(--goa-details-content-typography, var(--goa-typography-body-m))}details[open].svelte-1p5pau9 goa-icon.svelte-1p5pau9{transform:translateX(-1px) translateY(-0px) rotate(90deg);margin-top:var(--goa-space-2xs)}details.svelte-1p5pau9 summary.svelte-1p5pau9::-webkit-details-marker{display:none}summary.svelte-1p5pau9.svelte-1p5pau9{padding-top:var(--goa-details-padding-top);padding-right:var(--goa-details-padding-right);padding-left:var(--goa-details-padding-left);padding-bottom:var(--goa-details-padding-bottom);cursor:pointer;list-style:none;display:flex;align-items:flex-start;border-radius:var(--goa-details-border-radius);width:var(--goa-details-heading-width, auto)}summary.svelte-1p5pau9.svelte-1p5pau9:focus-visible{outline:var(--goa-details-focus-border);color:var(--goa-color-interactive-hover)}summary.svelte-1p5pau9.svelte-1p5pau9:focus-visible,summary.svelte-1p5pau9.svelte-1p5pau9:active{border-radius:var(--goa-details-border-radius);color:var(--goa-details-color-text-hover);background-color:var(--goa-details-color-bg-hover)}summary.svelte-1p5pau9.svelte-1p5pau9:hover{background-color:var(--goa-details-color-bg-hover)}summary.svelte-1p5pau9 span.svelte-1p5pau9{margin-left:var(--goa-space-xl);-webkit-text-decoration:var(--goa-details-text-decoration);text-decoration:var(--goa-details-text-decoration);color:var(--goa-details-color-text);font:var(--goa-details-typography)}summary.svelte-1p5pau9:hover span.svelte-1p5pau9{color:var(--goa-details-color-text-hover)}.content.svelte-1p5pau9.svelte-1p5pau9{border-left:var(--goa-details-content-left-border);padding-left:var(--goa-details-content-padding-left);padding-top:var(--goa-details-content-padding-top);padding-bottom:var(--goa-details-content-padding-bottom);padding-right:var(--goa-details-content-padding-right);margin-left:var(--goa-details-content-margin-left);margin-top:var(--goa-details-margin-top);margin-bottom:var(--goa-details-margin-bottom)}.content.svelte-1p5pau9 ::slotted(p:last-child){margin-bottom:0 !important}goa-icon.svelte-1p5pau9.svelte-1p5pau9{position:absolute}");
 }
 function of(t) {
   let e, o, i, n, r, l, a, c, d, s, f, g, v, h, b, w, p, _, z, M;
@@ -30533,11 +30533,11 @@ function of(t) {
         /*heading*/
         t[1]
       ), f = Q(), g = C("div"), v = C("div"), L && L.c(), m(i, "mt", "1"), m(i, "mr", "2"), m(i, "type", "chevron-forward"), m(i, "fillcolor", n = /*_isMouseOver*/
-      t[9] ? "var(--goa-details-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-details-icon-color, var(--goa-color-interactive-default))"), m(i, "class", "svelte-42rndf"), u(l, "id", c = `${/*_detailsId*/
-      t[11]}-heading`), u(l, "class", "svelte-42rndf"), u(o, "aria-expanded", d = /*open*/
+      t[9] ? "var(--goa-details-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-details-icon-color, var(--goa-color-interactive-default))"), m(i, "class", "svelte-1p5pau9"), u(l, "id", c = `${/*_detailsId*/
+      t[11]}-heading`), u(l, "class", "svelte-1p5pau9"), u(o, "aria-expanded", d = /*open*/
       t[0] === "true"), u(o, "aria-controls", s = `${/*_detailsId*/
-      t[11]}-content`), u(o, "class", "svelte-42rndf"), u(v, "role", h = /*_shouldAnnounce*/
-      t[12] ? "alert" : void 0), u(g, "class", "content svelte-42rndf"), u(g, "role", "region"), u(g, "aria-labelledby", b = `${/*_detailsId*/
+      t[11]}-content`), u(o, "class", "svelte-1p5pau9"), u(v, "role", h = /*_shouldAnnounce*/
+      t[12] ? "alert" : void 0), u(g, "class", "content svelte-1p5pau9"), u(g, "role", "region"), u(g, "aria-labelledby", b = `${/*_detailsId*/
       t[11]}-heading`), u(g, "id", w = `${/*_detailsId*/
       t[11]}-content`), e.open = /*_isOpen*/
       t[8], u(e, "style", p = `
@@ -30558,7 +30558,7 @@ function of(t) {
         "data-testid",
         /*testid*/
         t[7]
-      ), u(e, "class", "svelte-42rndf");
+      ), u(e, "class", "svelte-1p5pau9");
     },
     m(j, D) {
       T(j, e, D), k(e, o), k(o, i), k(o, r), k(o, l), k(l, a), t[15](o), k(e, f), k(e, g), k(g, v), L && L.m(v, null), _ = true, z || (M = ie(
@@ -84481,7 +84481,7 @@ const __vite_glob_0_191 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/assets/tokens-CBPEJ9qh.css";
+const v2TokensUrl = "/assets/tokens-B4R2uguY.css";
 function Feat3636Route() {
   reactExports.useEffect(() => {
     const link = document.createElement("link");
