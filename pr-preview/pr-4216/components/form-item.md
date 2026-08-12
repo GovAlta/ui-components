@@ -137,6 +137,7 @@ Tag: `goa-form-item`
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Include a link in the helper text of an option](/examples/include-a-link-in-the-helper-text-of-an-option)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
+- [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
 - [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reset date picker field](/examples/reset-date-picker-field)
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
