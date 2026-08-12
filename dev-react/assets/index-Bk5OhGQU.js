@@ -54579,13 +54579,19 @@ class i7 extends Ne {
 }
 customElements.define("goa-temp-notification", Le(i7, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
 function n7(t) {
-  Te(t, "svelte-1vqcgpo", `h1, h2, h3, h4, h5{margin:0}.heading-2xl.svelte-1vqcgpo{font:var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));letter-spacing:var(
+  Te(t, "svelte-1np6r5o", `h1, h2, h3, h4, h5{margin:0}.heading-2xl.svelte-1np6r5o{font:var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));letter-spacing:var(
       --goa-typography-heading-2xl-letter-spacing,
       var(--goa-typography-heading-xl-letter-spacing)
-    )}.heading-xl.svelte-1vqcgpo{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1vqcgpo{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1vqcgpo{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1vqcgpo{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1vqcgpo{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1vqcgpo{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1vqcgpo{font:var(--goa-typography-body-l)}.body-m.svelte-1vqcgpo{font:var(--goa-typography-body-m)}.body-s.svelte-1vqcgpo{font:var(--goa-typography-body-s)}.body-xs.svelte-1vqcgpo{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-2xl.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-2xl, var(--goa-typography-mobile-heading-xl));letter-spacing:var(
+    )}.heading-xl.svelte-1np6r5o{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1np6r5o{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1np6r5o{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1np6r5o{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1np6r5o{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1np6r5o{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1np6r5o{font:var(--goa-typography-body-l)}.body-m.svelte-1np6r5o{font:var(--goa-typography-body-m)}.body-s.svelte-1np6r5o{font:var(--goa-typography-body-s)}.body-xs.svelte-1np6r5o{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-2xl.svelte-1np6r5o{font:var(
+        --goa-typography-mobile-heading-2xl,
+        var(--goa-typography-mobile-heading-xl)
+      );letter-spacing:var(
         --goa-typography-mobile-heading-2xl-letter-spacing,
         var(--goa-typography-mobile-heading-xl-letter-spacing)
-      )}.heading-xl.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1vqcgpo{font:var(--goa-typography-mobile-body-xs)}}`);
+      )}.heading-xl.svelte-1np6r5o{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1np6r5o{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1np6r5o{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1np6r5o{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1np6r5o{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1np6r5o{font:var(
+        --goa-typography-mobile-heading-2xs,
+        var(--goa-typography-mobile-heading-xs)
+      );letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1np6r5o{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1np6r5o{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1np6r5o{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1np6r5o{font:var(--goa-typography-mobile-body-xs)}}`);
 }
 function ai(t) {
   let e, o, i, n;
@@ -54604,14 +54610,15 @@ function ai(t) {
       class: o = et(
         /*effectiveSize*/
         t[7]
-      ) + " svelte-1vqcgpo"
+      ) + " svelte-1np6r5o"
     },
     {
       style: i = st(
         Be(
           "color",
           /*color*/
-          t[2] === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"
+          t[2] === "primary" ? "var(--goa-color-text-default)" : `var(--goa-color-text-${/*color*/
+          t[2]})`
         ),
         /*maxWidth*/
         t[1] === "none" ? "" : `max-width: ${/*maxWidth*/
@@ -54671,13 +54678,14 @@ function ai(t) {
         128 && o !== (o = et(
           /*effectiveSize*/
           d[7]
-        ) + " svelte-1vqcgpo")) && { class: o },
+        ) + " svelte-1np6r5o")) && { class: o },
         (!n || s & /*color, maxWidth, _marginTop, mr, _marginBottom, ml*/
         126 && i !== (i = st(
           Be(
             "color",
             /*color*/
-            d[2] === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"
+            d[2] === "primary" ? "var(--goa-color-text-default)" : `var(--goa-color-text-${/*color*/
+            d[2]})`
           ),
           /*maxWidth*/
           d[1] === "none" ? "" : `max-width: ${/*maxWidth*/
@@ -75279,8 +75287,10 @@ function DocsTextRoute() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { size: "body-xs", children: "Body extra small text" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDivider, { mb: "none", mt: "none" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Color" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "primary", mt: "none", mb: "none", children: "Primary color text (default)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "secondary", mb: "none", children: "Secondary color text" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "primary", mt: "none", mb: "none", children: "Primary colour text (default)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "secondary", mb: "none", children: "Secondary colour text" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "disabled", mb: "none", children: "Disabled colour text" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { backgroundColor: "var(--goa-color-greyscale-700)", padding: "var(--goa-space-m)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { color: "light", mt: "none", mb: "none", children: "Light colour text" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Examples" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Ask a user for an address" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { size: "heading-l", mt: "none", mb: "xl", children: "What is your address?" }),
