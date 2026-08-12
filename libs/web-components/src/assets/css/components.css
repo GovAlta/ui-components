@@ -33,6 +33,31 @@ goa-app-header-menu a:first-of-type {
   box-shadow: none;
 }
 
+/* GoAAppFooter */
+/** needed to override a, a:visited at reset.css */
+goa-app-footer-nav-section > a,
+goa-app-footer-nav-section > a:visited,
+goa-app-footer-meta-section > a,
+goa-app-footer-meta-section > a:visited {
+  color: var(--goa-footer-color-links);
+  cursor: pointer;
+}
+
+goa-app-footer-nav-section > a:hover,
+goa-app-footer-meta-section > a:hover {
+  color: var(--goa-footer-color-links-hover);
+}
+
+goa-app-footer-nav-section > a:focus-visible,
+goa-app-footer-meta-section > a:focus-visible {
+  outline: var(--goa-footer-link-focus);
+  border-radius: var(--goa-footer-link-focus-border-radius);
+}
+
+goa-app-footer-meta-section > a {
+  white-space: nowrap;
+}
+
 /* Table */
 
 goa-table table {
@@ -51,9 +76,18 @@ goa-table.sticky thead {
 
 goa-table td {
   font: var(--goa-typography-body-m);
-  padding: var(--goa-table-padding-data, var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs));
-  background-color: var(--goa-table-color-bg-data, var(--goa-color-greyscale-white));
-  border-bottom: var(--goa-table-data-border, 1px solid var(--goa-color-greyscale-200));
+  padding: var(
+    --goa-table-padding-data,
+    var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs)
+  );
+  background-color: var(
+    --goa-table-color-bg-data,
+    var(--goa-color-greyscale-white)
+  );
+  border-bottom: var(
+    --goa-table-data-border,
+    1px solid var(--goa-color-greyscale-200)
+  );
   vertical-align: top;
   box-sizing: border-box;
   min-height: var(--goa-table-height-data, var(--goa-space-2xl));
@@ -76,15 +110,24 @@ goa-table[variant="relaxed"] td {
 }
 
 goa-table thead th {
-  background-color: var(--goa-table-color-bg-heading, var(--goa-color-greyscale-white));
+  background-color: var(
+    --goa-table-color-bg-heading,
+    var(--goa-color-greyscale-white)
+  );
   color: var(--goa-table-color-heading, var(--goa-color-greyscale-600));
   font: var(--goa-table-typography-heading, var(--goa-typography-heading-s));
-  padding: var(--goa-table-padding-heading, var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs));
+  padding: var(
+    --goa-table-padding-heading,
+    var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs)
+  );
   text-align: left;
-  border-bottom: var(--goa-table-heading-border, 2px solid var(--goa-color-greyscale-600));
+  border-bottom: var(
+    --goa-table-heading-border,
+    2px solid var(--goa-color-greyscale-600)
+  );
   vertical-align: bottom;
   min-height: var(--goa-table-height-heading, 56px);
-  }
+}
 
 .goa-table-number-column {
   font: var(--goa-typography-number-m);
@@ -96,12 +139,18 @@ goa-table thead th {
 }
 
 goa-table thead th:has(goa-table-sort-header) {
-	padding: 0;
+  padding: 0;
 }
 
 goa-table thead th:has(goa-table-sort-header):hover {
-	background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-100));
-	color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
+  background-color: var(
+    --goa-table-color-bg-heading-hover,
+    var(--goa-color-greyscale-100)
+  );
+  color: var(
+    --goa-table-color-heading-hover,
+    var(--goa-color-interactive-hover)
+  );
 }
 
 goa-table tfoot td {
@@ -120,16 +169,25 @@ goa-table[version="2"] thead th:last-child:not(:has(goa-table-sort-header)) {
 }
 
 /* Headers with TableSortHeader - override token padding for button inside (all variants) */
-goa-table[version="2"] thead th:first-child:has(goa-table-sort-header):not(:last-child) {
-  --goa-table-padding-heading: 18px var(--goa-space-m) var(--goa-space-m) var(--goa-space-l);
+goa-table[version="2"]
+  thead
+  th:first-child:has(goa-table-sort-header):not(:last-child) {
+  --goa-table-padding-heading: 18px var(--goa-space-m) var(--goa-space-m)
+    var(--goa-space-l);
 }
 
-goa-table[version="2"] thead th:last-child:has(goa-table-sort-header):not(:first-child) {
-  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m) var(--goa-space-m);
+goa-table[version="2"]
+  thead
+  th:last-child:has(goa-table-sort-header):not(:first-child) {
+  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m)
+    var(--goa-space-m);
 }
 
-goa-table[version="2"] thead th:first-child:last-child:has(goa-table-sort-header) {
-  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m) var(--goa-space-l);
+goa-table[version="2"]
+  thead
+  th:first-child:last-child:has(goa-table-sort-header) {
+  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m)
+    var(--goa-space-l);
 }
 
 /* Data and footer cells */
@@ -143,7 +201,6 @@ goa-table[version="2"] tfoot td:last-child {
   padding-right: var(--goa-space-l, 24px);
 }
 
-
 /* DataGrid keyboard focus ring on table cells.
    goa-data-grid signals focus via [data-focused] / [data-focus-corner]
    attributes so the visual styling lives with the table. The :focus rule
@@ -156,7 +213,8 @@ goa-table th:focus {
 
 goa-table td[data-focused],
 goa-table th[data-focused] {
-  outline: var(--goa-border-width-l, 0.1875rem) solid var(--goa-color-interactive-focus);
+  outline: var(--goa-border-width-l, 0.1875rem) solid
+    var(--goa-color-interactive-focus);
   /* Inset so the outline stays visible on edge cells inside the table's
      overflow: hidden container. */
   outline-offset: -0.1875rem;
@@ -186,16 +244,22 @@ goa-data-grid [role="gridcell"]:not(td):not(th):focus {
 }
 
 goa-data-grid [role="gridcell"]:not(td):not(th)[data-focused] {
-  outline: var(--goa-border-width-l, 0.1875rem) solid var(--goa-color-interactive-focus);
+  outline: var(--goa-border-width-l, 0.1875rem) solid
+    var(--goa-color-interactive-focus);
   outline-offset: 0.125rem;
 }
-
 
 /* Normal Variant Cell Types */
 
 goa-table td.goa-table-cell--text {
-  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
-  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-top: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
 }
 
 goa-table td.goa-table-cell--checkbox,
@@ -212,8 +276,14 @@ goa-table td.goa-table-cell--form-field {
 }
 
 goa-table td.goa-table-cell--badge {
-  padding-top: var(--goa-table-padding-cell-badge, var(--goa-space-s)) !important;
-  padding-bottom: var(--goa-table-padding-cell-badge, var(--goa-space-s)) !important;
+  padding-top: var(
+    --goa-table-padding-cell-badge,
+    var(--goa-space-s)
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-badge,
+    var(--goa-space-s)
+  ) !important;
 }
 
 /* Alignment helper classes */
@@ -230,8 +300,14 @@ goa-table th.goa-table-cell--numeric goa-table-sort-header {
 }
 
 goa-table td.goa-table-cell--numeric {
-  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
-  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-top: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
 }
 
 goa-table td.goa-table-cell--actions {
@@ -242,8 +318,14 @@ goa-table td.goa-table-cell--actions {
 }
 
 goa-table td.goa-table-cell--text-supporting {
-  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
-  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-top: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-text,
+    var(--goa-space-s)
+  ) !important;
 }
 
 /* Relaxed variant overrides for alignment/layout classes */
@@ -255,12 +337,21 @@ goa-table[variant="relaxed"] td.goa-table-cell--numeric {
 
 goa-table[variant="relaxed"] td.goa-table-cell--actions {
   padding-top: var(--goa-table-padding-cell-actions-relaxed, 14px) !important;
-  padding-bottom: var(--goa-table-padding-cell-actions-relaxed, 14px) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-actions-relaxed,
+    14px
+  ) !important;
 }
 
 goa-table[variant="relaxed"] td.goa-table-cell--text-supporting {
-  padding-top: var(--goa-table-padding-cell-text-supporting-relaxed, 8px) !important;
-  padding-bottom: var(--goa-table-padding-cell-text-supporting-relaxed, 8px) !important;
+  padding-top: var(
+    --goa-table-padding-cell-text-supporting-relaxed,
+    8px
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-text-supporting-relaxed,
+    8px
+  ) !important;
 }
 
 /* Relaxed Variant Cell Types */
@@ -272,12 +363,21 @@ goa-table[variant="relaxed"] td.goa-table-cell--text {
 
 goa-table[variant="relaxed"] td.goa-table-cell--checkbox {
   padding-top: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
-  padding-bottom: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-checkbox-relaxed,
+    10px
+  ) !important;
 }
 
 goa-table[variant="relaxed"] td.goa-table-cell--form-field {
-  padding-top: var(--goa-table-padding-cell-form-field-relaxed, 11px) !important;
-  padding-bottom: var(--goa-table-padding-cell-form-field-relaxed, 11px) !important;
+  padding-top: var(
+    --goa-table-padding-cell-form-field-relaxed,
+    11px
+  ) !important;
+  padding-bottom: var(
+    --goa-table-padding-cell-form-field-relaxed,
+    11px
+  ) !important;
 }
 
 goa-table[variant="relaxed"] td.goa-table-cell--badge {

@@ -145,5 +145,48 @@ export const footerConfigurations: ComponentConfigurations = {
 </goa-app-footer>`,
       },
     },
+    {
+      id: "with-links",
+      name: "With links",
+      description: "Footer sections with standard links and link components",
+      code: {
+        react: `<GoabAppFooter>
+  <GoabAppFooterNavSection heading="Services">
+    <a href="/apply">Apply online</a>
+    <GoabLink trailingIcon="open">
+      <a href="https://www.alberta.ca/services">All services</a>
+    </GoabLink>
+  </GoabAppFooterNavSection>
+  <GoabAppFooterMetaSection>
+    <a href="/privacy">Privacy</a>
+    <GoabLink><a href="/accessibility">Accessibility</a></GoabLink>
+  </GoabAppFooterMetaSection>
+</GoabAppFooter>`,
+        angular: `<goab-app-footer>
+  <goab-app-footer-nav-section slot="nav" heading="Services">
+    <a href="/apply">Apply online</a>
+    <goab-link trailingIcon="open">
+      <a href="https://www.alberta.ca/services">All services</a>
+    </goab-link>
+  </goab-app-footer-nav-section>
+  <goab-app-footer-meta-section slot="meta">
+    <a href="/privacy">Privacy</a>
+    <goab-link><a href="/accessibility">Accessibility</a></goab-link>
+  </goab-app-footer-meta-section>
+</goab-app-footer>`,
+        webComponents: `<goa-app-footer version="2">
+  <goa-app-footer-nav-section slot="nav" heading="Services">
+    <a href="/apply">Apply online</a>
+    <goa-link trailingicon="open">
+      <a href="https://www.alberta.ca/services">All services</a>
+    </goa-link>
+  </goa-app-footer-nav-section>
+  <goa-app-footer-meta-section slot="meta">
+    <a href="/privacy">Privacy</a>
+    <goa-link><a href="/accessibility">Accessibility</a></goa-link>
+  </goa-app-footer-meta-section>
+</goa-app-footer>`,
+      },
+    },
   ],
 };
