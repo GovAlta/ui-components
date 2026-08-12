@@ -28,6 +28,7 @@ Present a list of options to the user to select from.
 | `mt` | Spacing | (none) | No | (none) |
 | `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
 | `native` | boolean | (none) | No | When true, renders the native select HTML element. |
+| `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed in the dropdown before a selection is made. Non-native only. |
 | `size` | GoabDropdownSize | (none) | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -66,6 +67,7 @@ Present a list of options to the user to select from.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
 | `native` | boolean | (none) | No | When true will render the native select HTML element. |
+| `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
 | `size` | GoabDropdownSize | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
@@ -105,6 +107,7 @@ Tag: `goa-dropdown`
 | `mt` | Spacing | (none) | No | Top margin. |
 | `name` | string | (none) | Yes | Identifier for the dropdown. Should be unique. |
 | `native` | boolean | `false` | No | When true will render the native select HTML element. |
+| `noresults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
