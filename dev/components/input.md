@@ -218,6 +218,7 @@ Tag: `goa-input`
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
 - [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
 - [Filter data in a table](/examples/filter-data-in-a-table)
+- [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
 - [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
 - [Search](/examples/search)
