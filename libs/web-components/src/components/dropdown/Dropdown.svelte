@@ -704,13 +704,8 @@
           this.onArrow(e, "down");
           break;
         case "Home":
-          this.input.setSelectionRange(0, 0);
-          break;
         case "End":
-          this.input.setSelectionRange(
-            this.input.value.length,
-            this.input.value.length,
-          );
+          // Allow the input to position the caret or extend the text selection.
           break;
         case "Tab":
           // ignore tab
