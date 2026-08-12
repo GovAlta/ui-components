@@ -47,10 +47,10 @@ Let users show and hide sections of related content on a page.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `heading` | string | (none) | No | Sets the heading text. |
-| `headingSize` | GoabAccordionHeadingSize | (none) | No | Sets the heading size of the accordion container heading. |
-| `headingType` | GoabAccordionHeadingType | (none) | No | Sets the accordion style variant. |
-| `iconPosition` | GoabAccordionIconPosition | (none) | No | Sets the position of the expand/collapse icon. |
-| `maxWidth` | string | (none) | No | Sets the maximum width of the accordion. |
+| `headingSize` | GoabAccordionHeadingSize | `small` | No | Sets the heading size of the accordion container heading. |
+| `headingType` | GoabAccordionHeadingType | `normal` | No | Sets the accordion style variant. |
+| `iconPosition` | GoabAccordionIconPosition | `left` | No | Sets the position of the expand/collapse icon. |
+| `maxWidth` | string | `none` | No | Sets the maximum width of the accordion. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
@@ -83,7 +83,7 @@ Tag: `goa-accordion`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `heading` | string | (none) | Yes | Sets the heading text. |
-| `heading-type` | "normal" \| "filled" | `normal` | No | Sets the accordion style variant. @default "normal" |
+| `heading-type` | "normal" \| "filled" | `normal` | No | Sets the accordion style variant. |
 | `headingsize` | "small" \| "medium" | `small` | No | Sets the heading size of the accordion container heading. |
 | `iconposition` | "left" \| "right" | `left` | No | Sets the position of the expand/collapse icon. |
 | `id` | string | (none) | No | Unique identifier for the accordion. |
