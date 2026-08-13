@@ -365,7 +365,7 @@ const [sin, setSin] = useState<string>("");`,
     {
       id: "leading-trailing-content",
       name: "With leading or trailing content",
-      description: "Inputs with text content before or after the input field",
+      description: "Inputs with text or slotted content before or after the input field",
       code: {
         react: {
           ts: `const [price, setPrice] = useState<string>("");
@@ -386,6 +386,26 @@ const [weight, setWeight] = useState<string>("");`,
     type="number"
     width="10ch"
     trailingContent="kg"
+    value={weight}
+    onChange={(detail) => setWeight(detail.value)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Price with rich leading content" mb="l">
+  <GoabInput
+    name="priceWithSlot"
+    type="number"
+    width="10ch"
+    leadingContent={<strong>CAD</strong>}
+    value={price}
+    onChange={(detail) => setPrice(detail.value)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Weight with rich trailing content" mb="l">
+  <GoabInput
+    name="weightWithSlot"
+    type="number"
+    width="10ch"
+    trailingContent={<abbr title="pounds">lb</abbr>}
     value={weight}
     onChange={(detail) => setWeight(detail.value)}
   />
@@ -422,6 +442,26 @@ const [weight, setWeight] = useState<string>("");`,
       formControlName="weight"
     ></goab-input>
   </goab-form-item>
+  <ng-template #leadingContent><strong>CAD</strong></ng-template>
+  <goab-form-item label="Price with rich leading content" mb="l">
+    <goab-input
+      name="priceWithSlot"
+      type="number"
+      width="10ch"
+      [leadingContent]="leadingContent"
+      formControlName="price"
+    ></goab-input>
+  </goab-form-item>
+  <ng-template #trailingContent><abbr title="pounds">lb</abbr></ng-template>
+  <goab-form-item label="Weight with rich trailing content" mb="l">
+    <goab-input
+      name="weightWithSlot"
+      type="number"
+      width="10ch"
+      [trailingContent]="trailingContent"
+      formControlName="weight"
+    ></goab-input>
+  </goab-form-item>
 </form>`,
           },
           {
@@ -449,6 +489,26 @@ const [weight, setWeight] = useState<string>("");`,
       [(ngModel)]="weight"
     ></goab-input>
   </goab-form-item>
+  <ng-template #leadingContent><strong>CAD</strong></ng-template>
+  <goab-form-item label="Price with rich leading content" mb="l">
+    <goab-input
+      name="priceWithSlot"
+      type="number"
+      width="10ch"
+      [leadingContent]="leadingContent"
+      [(ngModel)]="price"
+    ></goab-input>
+  </goab-form-item>
+  <ng-template #trailingContent><abbr title="pounds">lb</abbr></ng-template>
+  <goab-form-item label="Weight with rich trailing content" mb="l">
+    <goab-input
+      name="weightWithSlot"
+      type="number"
+      width="10ch"
+      [trailingContent]="trailingContent"
+      [(ngModel)]="weight"
+    ></goab-input>
+  </goab-form-item>
 </form>`,
           },
         ],
@@ -460,6 +520,16 @@ const [weight, setWeight] = useState<string>("");`,
 <goa-form-item version="2" label="Weight" mb="l">
   <goa-input version="2" name="weight" type="number" width="10ch">
     <div slot="trailingContent">kg</div>
+  </goa-input>
+</goa-form-item>
+<goa-form-item version="2" label="Price with rich leading content" mb="l">
+  <goa-input version="2" name="priceWithSlot" type="number" width="10ch">
+    <div slot="leadingContent"><strong>CAD</strong></div>
+  </goa-input>
+</goa-form-item>
+<goa-form-item version="2" label="Weight with rich trailing content" mb="l">
+  <goa-input version="2" name="weightWithSlot" type="number" width="10ch">
+    <div slot="trailingContent"><abbr title="pounds">lb</abbr></div>
   </goa-input>
 </goa-form-item>`,
       },
