@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 28 Jul 2026 23:57:40 GMT
+ * Generated on Tue, 11 Aug 2026 22:39:13 GMT
  */
 
 :root {
@@ -30,7 +30,7 @@
   --goa-letter-spacing-mobile-l: -0.078125rem;
   --goa-letter-spacing-mobile-m: -0.0625rem;
   --goa-letter-spacing-mobile-s: -0.046875rem;
-  --goa-letter-spacing-mobile-xs: -0.046875rem;
+  --goa-letter-spacing-mobile-xs: -0.03125rem;
   --goa-letter-spacing-mobile-2xs: -0.03125rem;
   --goa-letter-spacing-mobile-3xs: -0.03125rem;
   --goa-letter-spacing-2xl: -0.09375rem;
@@ -38,7 +38,7 @@
   --goa-letter-spacing-l: -0.078125rem;
   --goa-letter-spacing-m: -0.0625rem;
   --goa-letter-spacing-s: -0.046875rem;
-  --goa-letter-spacing-xs: -0.046875rem;
+  --goa-letter-spacing-xs: -0.03125rem;
   --goa-letter-spacing-2xs: -0.03125rem;
   --goa-letter-spacing-3xs: -0.03125rem;
   --goa-font-weight-bold: 700;
@@ -290,6 +290,7 @@
   --goa-modal-content-margin: 0;
   --goa-modal-pane-width: 90%;
   --goa-modal-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1), 0px 8px 40px 0px rgba(0,0,0,0.2);
+  --goa-modal-overlay-color: #000000;
   --goa-modal-content-gap-small-screen: 0;
   --goa-modal-content-gap: 0;
   --goa-link-color-light-visited: #9D8EBB;
@@ -709,7 +710,6 @@
   --goa-modal-overlay-opacity: var(--goa-opacity-background-modal);
   --goa-modal-padding-small-screen: var(--goa-space-l);
   --goa-modal-padding: var(--goa-space-xl);
-  --goa-modal-overlay-color: var(--goa-color-greyscale-black);
   --goa-modal-header-typography: var(--goa-font-weight-semi-bold) var(--goa-font-size-4)/var(--goa-line-height-4) var(--goa-font-family-sans);
   --goa-modal-callout-bar-padding-small-screen: var(--goa-space-s) var(--goa-space-s) var(--goa-space-s) var(--goa-space-l);
   --goa-modal-callout-bar-padding: var(--goa-space-xl);
@@ -926,6 +926,7 @@
   --goa-details-padding-right: var(--goa-space-s);
   --goa-details-padding-left: var(--goa-space-xs);
   --goa-details-padding-bottom: var(--goa-space-xs);
+  --goa-details-margin-top: var(--goa-space-2xs);
   --goa-details-margin-bottom: var(--goa-space-xs);
   --goa-details-focus-border: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   --goa-details-content-padding-top: var(--goa-space-s);
@@ -1190,7 +1191,7 @@
   --goa-text-area-border-radius: var(--goa-input-border-radius-input);
   --goa-text-area-border-hover: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-hover);
   --goa-text-area-border-focus: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-focus);
-  --goa-text-area-border-error: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-error);
+  --goa-text-area-border-error: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error);
   --goa-text-area-border-disabled: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-disabled);
   --goa-text-area-border: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-default);
   --goa-temporary-notification-typography: var(--goa-typography-body-m);
@@ -1239,7 +1240,7 @@
   --goa-text-input-border-radius: var(--goa-input-border-radius-input);
   --goa-text-input-border-hover: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-hover);
   --goa-text-input-border-focus: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-focus);
-  --goa-text-input-border-error: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-error);
+  --goa-text-input-border-error: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error);
   --goa-text-input-border-disabled: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-disabled);
   --goa-text-input-border: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-default);
   --goa-icon-button-default-disabled-color: var(--goa-color-interactive-disabled);
@@ -1292,12 +1293,13 @@
   --goa-dropdown-multiselect-item-color-bg-disabled: var(--goa-input-color-background-disabled);
   --goa-dropdown-multiselect-item-color-bg: var(--goa-input-color-background-default);
   --goa-dropdown-multiselect-color-text-error: var(--goa-input-color-text-error);
+  --goa-dropdown-multiselect-color-text-placeholder: var(--goa-input-color-text-placeholder);
   --goa-dropdown-multiselect-color-text-disabled: var(--goa-input-color-text-disabled);
   --goa-dropdown-multiselect-color-bg-disabled: var(--goa-input-color-background-disabled);
   --goa-dropdown-multiselect-color-bg: var(--goa-input-color-background-default);
   --goa-dropdown-multiselect-border-radius: var(--goa-input-border-radius-input);
   --goa-dropdown-multiselect-border-error-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error-hover);
-  --goa-dropdown-multiselect-border-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-hover);
+  --goa-dropdown-multiselect-border-hover: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-hover);
   --goa-dropdown-multiselect-border-focus: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-focus);
   --goa-dropdown-multiselect-border-error: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error);
   --goa-dropdown-multiselect-border-disabled: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-disabled);
@@ -1311,17 +1313,18 @@
   --goa-dropdown-item-color-text-selected-hover: var(--goa-color-text-light);
   --goa-dropdown-item-color-text-hover: var(--goa-color-text-default);
   --goa-dropdown-item-color-text-disabled: var(--goa-color-text-disabled);
-  --goa-dropdown-item-color-text: var(--goa-color-text-secondary);
+  --goa-dropdown-item-color-text: var(--goa-color-text-default);
   --goa-dropdown-item-color-bg-disabled: var(--goa-input-color-background-disabled);
   --goa-dropdown-item-color-bg: var(--goa-input-color-background-default);
   --goa-dropdown-color-text-error: var(--goa-input-color-text-error);
+  --goa-dropdown-color-text-placeholder: var(--goa-input-color-text-placeholder);
   --goa-dropdown-color-text-disabled: var(--goa-input-color-text-disabled);
   --goa-dropdown-color-bg-error: var(--goa-input-color-background-error);
   --goa-dropdown-color-bg-disabled: var(--goa-input-color-background-disabled);
   --goa-dropdown-color-bg: var(--goa-input-color-background-default);
   --goa-dropdown-border-radius: var(--goa-input-border-radius-input);
   --goa-dropdown-border-error-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error-hover);
-  --goa-dropdown-border-hover: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-hover);
+  --goa-dropdown-border-hover: inset 0 0 0 var(--goa-input-border-width-hover) var(--goa-input-color-border-hover);
   --goa-dropdown-border-focus: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-focus);
   --goa-dropdown-border-error: inset 0 0 0 var(--goa-input-border-width-focus) var(--goa-input-color-border-error);
   --goa-dropdown-border-disabled: inset 0 0 0 var(--goa-input-border-width-default) var(--goa-input-color-border-disabled);
@@ -1389,9 +1392,7 @@
   --goa-accordion-color-heading-hover: var(--goa-color-text-default);
   --goa-accordion-color-heading: var(--goa-color-text-default);
   --goa-text-input-color-text: var(--goa-input-color-text-default);
-  --goa-dropdown-multiselect-color-text-placeholder: var(--goa-input-color-text-default);
   --goa-dropdown-multiselect-color-text: var(--goa-input-color-text-default);
-  --goa-dropdown-color-text-placeholder: var(--goa-input-color-text-default);
   --goa-dropdown-color-text: var(--goa-input-color-text-default);
   --goa-date-input-day-color-text-hover: var(--goa-input-color-text-default);
   --goa-date-input-day-color-text: var(--goa-input-color-text-default);
