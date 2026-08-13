@@ -99,6 +99,7 @@
 - [Hide and show many sections of information](/examples/hide-and-show-many-sections-of-information)
 - [Include a link in the helper text of an option](/examples/include-a-link-in-the-helper-text-of-an-option)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
+- [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
 - [Link the user to give feedback to the service](/examples/link-the-user-to-give-feedback-to-the-service)
 - [Link to an external page](/examples/link-to-an-external-page)
 - [Notify the user of a future service outage](/examples/notify-the-user-of-a-future-service-outage)

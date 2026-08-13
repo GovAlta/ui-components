@@ -26,7 +26,7 @@ Carry out an important action or navigate to another page.
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
 | `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
 | `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
-| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px" or "100%"). |
+| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
 
@@ -56,7 +56,7 @@ Carry out an important action or navigate to another page.
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
 | `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
 | `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
-| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px" or "100%"). |
+| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
 
@@ -88,7 +88,7 @@ Tag: `goa-button`
 | `trailingicon` | GoabIconType | (none) | No | Icon displayed after the button text. |
 | `type` | "primary" \| "submit" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
 | `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
-| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px" or "100%"). |
+| `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
 
