@@ -572,7 +572,6 @@
     box-shadow: var(--goa-text-input-border-focus);
   }
 
-
   /* V2: Vertically center date/time input labels in Safari */
   .container.v2 input::-webkit-datetime-edit,
   .container.v2 input::-webkit-date-and-time-value {
@@ -725,8 +724,9 @@
   }
 
   /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2.goa-input:not(.error)::has(
-      input:read-only:not(:disabled):not(:focus-visible):not(:hover)
+  .container.v2
+    .goa-input:not(.error):has(
+      input:read-only:not(:disabled):not(:focus-visible)
     ) {
     box-shadow: var(--goa-text-input-border-readonly);
   }
