@@ -11,7 +11,12 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
+  import {
+    receive,
+    dispatch,
+    relay,
+    watchFocusWithin,
+  } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -438,5 +443,13 @@
     --goa-text-input-color-bg-readonly: var(--goa-text-input-color-bg);
     --goa-text-input-border-readonly: var(--goa-text-input-border);
     --goa-text-input-cursor-readonly: var(--goa-date-input-cursor);
+  }
+
+  .calendar-input:hover {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-hover);
+  }
+
+  .calendar-input:focus-within {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-focus);
   }
 </style>
