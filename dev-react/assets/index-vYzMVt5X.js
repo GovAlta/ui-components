@@ -32886,10 +32886,7 @@ function xf(t, e, o) {
           this.onArrow(qe, "down");
           break;
         case "Home":
-          this.input.setSelectionRange(0, 0);
-          break;
         case "End":
-          this.input.setSelectionRange(this.input.value.length, this.input.value.length);
           break;
         case "Tab":
           break;
