@@ -37116,7 +37116,7 @@ class H0 extends Ne {
 }
 customElements.define("goa-app-footer-meta-section", Le(H0, { testid: {} }, ["default"], [], true));
 function P0(t) {
-  Te(t, "svelte-1yb581n", ":host{flex:auto}.title.svelte-1yb581n{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing);padding-bottom:var(--goa-space-m);color:var(--goa-color-greyscale-800)}.links.svelte-1yb581n{display:flex;flex-direction:column}.links.svelte-1yb581n ::slotted(a),.links.svelte-1yb581n ::slotted(goa-link),.links.svelte-1yb581n ::slotted(goab-link){display:block}.links.svelte-1yb581n ::slotted(a:not(:last-child)),.links.svelte-1yb581n ::slotted(goa-link:not(:last-child)),.links.svelte-1yb581n ::slotted(goab-link:not(:last-child)){margin-bottom:var(--goa-space-s)}@media not (max-width: 623px){.title.svelte-1yb581n{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing);padding-bottom:var(--goa-space-l)}}@media(min-width: 624px) and (max-width: 1023px){.links.svelte-1yb581n{display:var(--narrow-display-type);-moz-column-count:var(--narrow-column-count);column-count:var(--narrow-column-count)}}@media(min-width: 1024px){.links.svelte-1yb581n{display:var(--wide-display-type);-moz-column-count:var(--wide-column-count);column-count:var(--wide-column-count)}}.links.svelte-1yb581n ::slotted(goa-link),.links.svelte-1yb581n ::slotted(goab-link){--goa-link-color-interactive-default:var(--goa-footer-color-links);--goa-link-color-interactive-hover:var(--goa-footer-color-links-hover);--goa-link-color-interactive-visited:var(--goa-footer-color-links);--goa-link-border-focus:var(--goa-footer-link-focus);--goa-link-border-radius-focus:var(--goa-footer-link-focus-border-radius);--goa-link-focus-offset:0}");
+  Te(t, "svelte-ovm591", ":host{flex:auto}.title.svelte-ovm591{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing);padding-bottom:var(--goa-space-m);color:var(--goa-color-greyscale-800)}.links.svelte-ovm591{display:flex;flex-direction:column}.links.svelte-ovm591 ::slotted(a),.links.svelte-ovm591 ::slotted(goa-link),.links.svelte-ovm591 ::slotted(goab-link){display:block}.links.svelte-ovm591 ::slotted(a:not(:last-child)),.links.svelte-ovm591 ::slotted(goa-link:not(:last-child)),.links.svelte-ovm591 ::slotted(goab-link:not(:last-child)){margin-bottom:var(--goa-space-m)}@media not (max-width: 623px){.title.svelte-ovm591{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing);padding-bottom:var(--goa-space-l)}}@media(min-width: 624px) and (max-width: 1023px){.links.svelte-ovm591{display:var(--narrow-display-type);-moz-column-count:var(--narrow-column-count);column-count:var(--narrow-column-count)}}@media(min-width: 1024px){.links.svelte-ovm591{display:var(--wide-display-type);-moz-column-count:var(--wide-column-count);column-count:var(--wide-column-count)}}.links.svelte-ovm591 ::slotted(goa-link),.links.svelte-ovm591 ::slotted(goab-link){--goa-link-color-interactive-default:var(--goa-footer-color-links);--goa-link-color-interactive-hover:var(--goa-footer-color-links-hover);--goa-link-color-interactive-visited:var(--goa-footer-color-links);--goa-link-border-focus:var(--goa-footer-link-focus);--goa-link-border-radius-focus:var(--goa-footer-link-focus-border-radius);--goa-link-focus-offset:0}");
 }
 function Er(t) {
   let e, o, i, n;
@@ -37125,7 +37125,7 @@ function Er(t) {
       e = C("div"), o = ce(
         /*heading*/
         t[0]
-      ), i = Q(), n = C("goa-divider"), u(e, "class", "title svelte-1yb581n"), m(n, "mb", "l");
+      ), i = Q(), n = C("goa-divider"), u(e, "class", "title svelte-ovm591"), m(n, "mb", "l");
     },
     m(r, l) {
       T(r, e, l), k(e, o), T(r, i, l), T(r, n, l);
@@ -37160,7 +37160,7 @@ function V0(t) {
   );
   return {
     c() {
-      e = C("section"), l && l.c(), o = Q(), i = C("div"), c && c.c(), u(i, "class", "links svelte-1yb581n"), u(i, "style", n = `
+      e = C("section"), l && l.c(), o = Q(), i = C("div"), c && c.c(), u(i, "class", "links svelte-ovm591"), u(i, "style", n = `
       --narrow-display-type: ${Math.ceil(
         /*maxcolumncount*/
         t[1] / 2
