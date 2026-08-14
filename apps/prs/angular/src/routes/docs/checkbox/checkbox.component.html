@@ -28,20 +28,48 @@
 <goab-checkbox
   name="newsletter"
   text="Subscribe to newsletter"
-  description="Receive weekly updates about new features">
+  description="Receive weekly updates about new features"
+>
 </goab-checkbox>
 
 <h3>Indeterminate</h3>
-<goab-checkbox name="selectAll" text="Select all items" [indeterminate]="true"></goab-checkbox>
+<goab-checkbox
+  name="selectAll"
+  text="Select all items"
+  [indeterminate]="true"
+></goab-checkbox>
 
 <h3>Sizes</h3>
 <goab-checkbox name="default" text="Default size checkbox" mb="m"></goab-checkbox>
 <goab-checkbox name="compact" text="Compact size checkbox" size="compact"></goab-checkbox>
 
 <h3>States</h3>
-<goab-checkbox name="disabled" text="Cannot be changed" [disabled]="true" mb="m"></goab-checkbox>
-<goab-checkbox name="disabledChecked" text="Checked and disabled" [checked]="true" [disabled]="true" mb="m"></goab-checkbox>
-<goab-checkbox name="terms" text="Accept terms and conditions" [error]="true"></goab-checkbox>
+<goab-checkbox
+  name="disabled"
+  text="Cannot be changed"
+  [disabled]="true"
+  mb="m"
+></goab-checkbox>
+<goab-checkbox
+  name="disabledChecked"
+  text="Checked and disabled"
+  [checked]="true"
+  [disabled]="true"
+  mb="m"
+></goab-checkbox>
+<goab-checkbox
+  name="disabledCheckedError"
+  text="Checked, disabled and error"
+  [checked]="true"
+  [disabled]="true"
+  [error]="true"
+  mb="m"
+></goab-checkbox>
+<goab-checkbox
+  name="terms"
+  text="Accept terms and conditions"
+  [error]="true"
+></goab-checkbox>
 
 <h2>Examples</h2>
 
@@ -52,7 +80,8 @@
       name="email"
       text="Email"
       value="email"
-      [description]="descriptionTemplate">
+      [description]="descriptionTemplate"
+    >
       <ng-template #descriptionTemplate>
         <span>Help text with a <a href="#">link</a>.</span>
       </ng-template>
@@ -64,7 +93,10 @@
 
 <h3>Reveal input based on a selection</h3>
 <form [formGroup]="revealForm">
-  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+  <goab-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
     <goab-radio-group name="contactMethod" formControlName="contactMethod">
       <goab-radio-item label="Email" value="email" [reveal]="emailReveal">
         <ng-template #emailReveal>
@@ -106,7 +138,12 @@
           </goab-form-item>
         </ng-template>
       </goab-checkbox>
-      <goab-checkbox name="text" text="Text message" value="text" [reveal]="checkTextReveal">
+      <goab-checkbox
+        name="text"
+        text="Text message"
+        value="text"
+        [reveal]="checkTextReveal"
+      >
         <ng-template #checkTextReveal>
           <goab-form-item label="Mobile phone number">
             <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
@@ -120,11 +157,13 @@
 <h3>Select one or more from a list of options</h3>
 <goab-form-item
   label="How would you like to be contacted?"
-  helpText="Choose all that apply">
+  helpText="Choose all that apply"
+>
   <goab-checkbox-list
     name="contactPreferences"
     [value]="selectedOptions"
-    (onChange)="onSelectionChange($event)">
+    (onChange)="onSelectionChange($event)"
+  >
     <goab-checkbox name="email" text="Email" value="email"></goab-checkbox>
     <goab-checkbox name="phone" text="Phone" value="phone"></goab-checkbox>
     <goab-checkbox name="text" text="Text message" value="text"></goab-checkbox>

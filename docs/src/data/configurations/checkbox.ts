@@ -259,6 +259,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabCheckbox name="disabled" text="Cannot be changed" disabled mb="m" />
 <GoabCheckbox name="disabledChecked" text="Checked and disabled" checked disabled mb="m" />
+<GoabCheckbox name="disabledCheckedError" text="Checked, disabled and error" checked disabled error mb="m" />
 <GoabCheckbox name="terms" text="Accept terms and conditions" error />`,
         angular: [
           {
@@ -269,6 +270,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
     this.form = this.fb.group({
       disabled: [{ value: false, disabled: true }],
       disabledChecked: [{ value: true, disabled: true }],
+      disabledCheckedError: [{ value: true, disabled: true }],
       terms: [false],
     });
   }
@@ -289,6 +291,14 @@ export const checkboxConfigurations: ComponentConfigurations = {
   >
   </goab-checkbox>
   <goab-checkbox
+    name="disabledCheckedError"
+    text="Checked, disabled and error"
+    formControlName="disabledCheckedError"
+    [error]="true"
+    mb="m"
+  >
+  </goab-checkbox>
+  <goab-checkbox
     name="terms"
     text="Accept terms and conditions"
     formControlName="terms"
@@ -302,6 +312,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
             ts: `export class SomeOtherComponent {
   disabledItem = false;
   disabledCheckedItem = true;
+  disabledCheckedErrorItem = true;
   terms = false;
 
   checkboxOnChange(event: GoabCheckboxOnChangeDetail) {
@@ -326,6 +337,15 @@ export const checkboxConfigurations: ComponentConfigurations = {
   >
   </goab-checkbox>
   <goab-checkbox
+    name="disabledCheckedError"
+    text="Checked, disabled and error"
+    [disabled]="true"
+    [error]="true"
+    [(ngModel)]="disabledCheckedErrorItem"
+    mb="m"
+  >
+  </goab-checkbox>
+  <goab-checkbox
     name="terms"
     text="Accept terms and conditions"
     [error]="true"
@@ -338,6 +358,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
         ],
         webComponents: `<goa-checkbox version="2" name="disabled" text="Cannot be changed" disabled mb="m"></goa-checkbox>
 <goa-checkbox version="2" name="disabledChecked" text="Checked and disabled" checked disabled mb="m"></goa-checkbox>
+<goa-checkbox version="2" name="disabledCheckedError" text="Checked, disabled and error" checked disabled error mb="m"></goa-checkbox>
 <goa-checkbox version="2" name="terms" text="Accept terms and conditions" error></goa-checkbox>`,
       },
     },
