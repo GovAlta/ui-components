@@ -600,7 +600,7 @@ max-width: ${maxwidth};
     border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container svg {
-    fill: #f58185;
+    fill: var(--goa-checkbox-color-bg-checked-error-disabled);
   }
 
   /* Version 2 */
