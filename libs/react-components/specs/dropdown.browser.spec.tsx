@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 
-import { GoabDropdown, GoabDropdownItem } from "../src";
+import { GoabAccordion, GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
@@ -415,6 +415,48 @@ describe("Dropdown", () => {
           const dropdownWidth = parseFloat(computedStyle.width);
           expect(dropdownWidth).toBeGreaterThan(200); // Should be substantial width
           expect(dropdownWidth).toBeLessThan(600); // But not too large
+        });
+      });
+
+      it("keeps the input width aligned when nested in a query container", async () => {
+        const Component = () => (
+          <GoabAccordion heading="Dropdown container" open>
+            <GoabDropdown
+              name="page"
+              testId="nested-dropdown"
+              size="compact"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="1" value="1" />
+              <GoabDropdownItem label="10" value="10" />
+            </GoabDropdown>
+          </GoabAccordion>
+        );
+
+        render(<Component />);
+        await vi.waitFor(() => {
+          expect(
+            document.querySelector("goa-dropdown"),
+          ).not.toBeNull();
+        });
+
+        const dropdownHost = document.querySelector<HTMLElement>("goa-dropdown");
+        const dropdown = dropdownHost?.shadowRoot?.querySelector<HTMLElement>(
+          '[data-testid="nested-dropdown"]',
+        );
+        const inputGroup = dropdownHost?.shadowRoot?.querySelector<HTMLElement>(
+          ".dropdown-input-group",
+        );
+
+        if (!dropdown || !inputGroup) {
+          throw new Error("Dropdown internals were not rendered");
+        }
+
+        await vi.waitFor(() => {
+          expect(inputGroup.getBoundingClientRect().width).toBeCloseTo(
+            dropdown.getBoundingClientRect().width,
+            0,
+          );
         });
       });
 
