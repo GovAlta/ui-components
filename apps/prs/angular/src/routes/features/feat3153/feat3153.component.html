@@ -1,0 +1,32 @@
+<goab-text tag="h1" mt="m">Feature #3153: Button aria label</goab-text>
+
+<goab-link trailingIcon="open">
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/3153"
+    target="_blank"
+    rel="noopener"
+  >
+    View on GitHub
+  </a>
+</goab-link>
+
+<goab-text tag="p">
+  Button supports an optional ariaLabel that replaces the accessible name while preserving
+  the visible button text.
+</goab-text>
+
+<goab-divider mt="l" mb="l" />
+
+<goab-text tag="h2">Test cases</goab-text>
+
+<goab-text tag="h3">With ariaLabel</goab-text>
+<goab-text tag="p"
+  >A screen reader should announce “Remove Jane Smith, button.”</goab-text
+>
+<goab-button ariaLabel="Remove Jane Smith">Remove</goab-button>
+
+<goab-text tag="h3" mt="l">Without ariaLabel</goab-text>
+<goab-text tag="p"
+  >A screen reader should announce the visible text: “Remove, button.”</goab-text
+>
+<goab-button>Remove</goab-button>

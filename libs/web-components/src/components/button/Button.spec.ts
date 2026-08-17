@@ -150,4 +150,23 @@ describe("GoAButtonComponent", () => {
       expect(button.style.getPropertyValue("--width")).toBe("");
     });
   });
+
+  describe("aria label", () => {
+    it("should set aria-label when arialabel is provided", async () => {
+      const result = render(GoAButton, {
+        testid: "button-test",
+        arialabel: "Remove Jane Smith",
+      });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.getAttribute("aria-label")).toBe("Remove Jane Smith");
+    });
+
+    it("should not set aria-label when arialabel is not provided", async () => {
+      const result = render(GoAButton, { testid: "button-test" });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.hasAttribute("aria-label")).toBe(false);
+    });
+  });
 });
