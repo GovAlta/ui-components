@@ -17,30 +17,36 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
       name: "Basic side menu heading",
       description: "Section heading within SideMenu",
       code: {
-        react: `<GoabSideMenu>
-  <GoabSideMenuHeading>Main Menu</GoabSideMenuHeading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</GoabSideMenu>`,
-        angular: `<goab-side-menu>
-  <goab-side-menu-heading>Main Menu</goab-side-menu-heading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <goab-side-menu-heading>Settings</goab-side-menu-heading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</goab-side-menu>`,
-        webComponents: `<goa-side-menu version="2">
-  <goa-side-menu-heading version="2">Main Menu</goa-side-menu-heading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <goa-side-menu-heading version="2">Settings</goa-side-menu-heading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</goa-side-menu>`,
+        react: `<nav>
+  <GoabSideMenu>
+    <GoabSideMenuHeading>Main Menu</GoabSideMenuHeading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </GoabSideMenu>
+</nav>`,
+        angular: `<nav>
+  <goab-side-menu>
+    <goab-side-menu-heading>Main Menu</goab-side-menu-heading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <goab-side-menu-heading>Settings</goab-side-menu-heading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </goab-side-menu>
+</nav>`,
+        webComponents: `<nav>
+  <goa-side-menu version="2">
+    <goa-side-menu-heading version="2">Main Menu</goa-side-menu-heading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <goa-side-menu-heading version="2">Settings</goa-side-menu-heading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </goa-side-menu>
+</nav>`,
       },
     },
     {
@@ -48,30 +54,36 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
       name: "With icon",
       description: "Section headings with icons",
       code: {
-        react: `<GoabSideMenu>
-  <GoabSideMenuHeading icon="grid">Navigation</GoabSideMenuHeading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <GoabSideMenuHeading icon="settings">Configuration</GoabSideMenuHeading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</GoabSideMenu>`,
-        angular: `<goab-side-menu>
-  <goab-side-menu-heading icon="grid">Navigation</goab-side-menu-heading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <goab-side-menu-heading icon="settings">Configuration</goab-side-menu-heading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</goab-side-menu>`,
-        webComponents: `<goa-side-menu version="2">
-  <goa-side-menu-heading version="2" icon="grid">Navigation</goa-side-menu-heading>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/reports">Reports</a>
-  <goa-side-menu-heading version="2" icon="settings">Configuration</goa-side-menu-heading>
-  <a href="/profile">Profile</a>
-  <a href="/preferences">Preferences</a>
-</goa-side-menu>`,
+        react: `<nav>
+  <GoabSideMenu>
+    <GoabSideMenuHeading icon="grid">Navigation</GoabSideMenuHeading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <GoabSideMenuHeading icon="settings">Configuration</GoabSideMenuHeading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </GoabSideMenu>
+</nav>`,
+        angular: `<nav>
+  <goab-side-menu>
+    <goab-side-menu-heading icon="grid">Navigation</goab-side-menu-heading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <goab-side-menu-heading icon="settings">Configuration</goab-side-menu-heading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </goab-side-menu>
+</nav>`,
+        webComponents: `<nav>
+  <goa-side-menu version="2">
+    <goa-side-menu-heading version="2" icon="grid">Navigation</goa-side-menu-heading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <goa-side-menu-heading version="2" icon="settings">Configuration</goa-side-menu-heading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </goa-side-menu>
+</nav>`,
       },
     },
   ],

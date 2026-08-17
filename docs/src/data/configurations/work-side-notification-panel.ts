@@ -67,41 +67,43 @@ const handleClick = (id: string) => {
     items.map((item) => (item.id === id ? { ...item, readStatus: "read" } : item)),
   );
 };`,
-          jsx: `<GoabWorkSideMenu
-  heading="My Application"
-  url="/"
-  onNavigate={(path: string) => navigate(path)}
-  primaryContent={
-    <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-    </>
-  }
-  secondaryContent={
-    <GoabWorkSideMenuItem
-      icon="notifications"
-      label="Notifications"
-      badge="2"
-      type="success"
-      popoverContent={
-        <GoabWorkSideNotificationPanel
-          heading="Notifications"
-          activeTab="unread"
-          onMarkAllRead={handleMarkAllRead}
-          onViewAll={handleViewAll}
-        >
-          {items.map(({ id, ...item }) => (
-            <GoabWorkSideNotificationItem
-              key={id}
-              {...item}
-              onClick={() => handleClick(id)}
-            />
-          ))}
-        </GoabWorkSideNotificationPanel>
-      }
-    />
-  }
-/>`,
+          jsx: `<nav>
+  <GoabWorkSideMenu
+    heading="My Application"
+    url="/"
+    onNavigate={(path: string) => navigate(path)}
+    primaryContent={
+      <>
+        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      </>
+    }
+    secondaryContent={
+      <GoabWorkSideMenuItem
+        icon="notifications"
+        label="Notifications"
+        badge="2"
+        type="success"
+        popoverContent={
+          <GoabWorkSideNotificationPanel
+            heading="Notifications"
+            activeTab="unread"
+            onMarkAllRead={handleMarkAllRead}
+            onViewAll={handleViewAll}
+          >
+            {items.map(({ id, ...item }) => (
+              <GoabWorkSideNotificationItem
+                key={id}
+                {...item}
+                onClick={() => handleClick(id)}
+              />
+            ))}
+          </GoabWorkSideNotificationPanel>
+        }
+      />
+    }
+  />
+</nav>`,
         },
         angular: {
           ts: `interface NotificationItem {
@@ -159,13 +161,15 @@ export class SomeOtherComponent {
     );
   }
 }`,
-          template: `<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  [primaryContent]="primaryTpl"
-  [secondaryContent]="secondaryTpl"
-  (onNavigate)="handleNavigate($event)"
-></goab-work-side-menu>
+          template: `<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    [primaryContent]="primaryTpl"
+    [secondaryContent]="secondaryTpl"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</nav>
 
 <ng-template #primaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -204,38 +208,40 @@ export class SomeOtherComponent {
 </ng-template>`,
         },
         webComponents: {
-          html: `<goa-work-side-menu heading="My Application" url="/" open="true">
-  <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="2" type="success">
-    <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="unread">
-      <goa-work-side-notification-item
-        title="New case assigned"
-        description="Case #12345 has been assigned to you for review."
-        timestamp="2025-03-15T10:30:00Z"
-        type="info"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Document uploaded"
-        description="A new document was uploaded to Case #12340."
-        timestamp="2025-03-15T09:15:00Z"
-        type="default"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Case resolved"
-        description="Case #12330 has been marked as resolved."
-        timestamp="2025-03-14T16:00:00Z"
-        type="success"
-        read-status="read"
-        priority="normal"
-      ></goa-work-side-notification-item>
-    </goa-work-side-notification-panel>
-  </goa-work-side-menu-item>
-</goa-work-side-menu>`,
+          html: `<nav>
+  <goa-work-side-menu heading="My Application" url="/" open="true">
+    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="2" type="success">
+      <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="unread">
+        <goa-work-side-notification-item
+          title="New case assigned"
+          description="Case #12345 has been assigned to you for review."
+          timestamp="2025-03-15T10:30:00Z"
+          type="info"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Document uploaded"
+          description="A new document was uploaded to Case #12340."
+          timestamp="2025-03-15T09:15:00Z"
+          type="default"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Case resolved"
+          description="Case #12330 has been marked as resolved."
+          timestamp="2025-03-14T16:00:00Z"
+          type="success"
+          read-status="read"
+          priority="normal"
+        ></goa-work-side-notification-item>
+      </goa-work-side-notification-panel>
+    </goa-work-side-menu-item>
+  </goa-work-side-menu>
+</nav>`,
           js: `const panel = container.querySelector("goa-work-side-notification-panel");
 const items = container.querySelectorAll("goa-work-side-notification-item");
 
@@ -306,41 +312,43 @@ const handleClick = (id: string) => {
     items.map((item) => (item.id === id ? { ...item, readStatus: "read" } : item)),
   );
 };`,
-          jsx: `<GoabWorkSideMenu
-  heading="My Application"
-  url="/"
-  onNavigate={(path: string) => navigate(path)}
-  primaryContent={
-    <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-    </>
-  }
-  secondaryContent={
-    <GoabWorkSideMenuItem
-      icon="notifications"
-      label="Notifications"
-      badge="2"
-      type="emergency"
-      popoverContent={
-        <GoabWorkSideNotificationPanel
-          heading="Notifications"
-          activeTab="urgent"
-          onMarkAllRead={handleMarkAllRead}
-          onViewAll={handleViewAll}
-        >
-          {items.map(({ id, ...item }) => (
-            <GoabWorkSideNotificationItem
-              key={id}
-              {...item}
-              onClick={() => handleClick(id)}
-            />
-          ))}
-        </GoabWorkSideNotificationPanel>
-      }
-    />
-  }
-/>`,
+          jsx: `<nav>
+  <GoabWorkSideMenu
+    heading="My Application"
+    url="/"
+    onNavigate={(path: string) => navigate(path)}
+    primaryContent={
+      <>
+        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      </>
+    }
+    secondaryContent={
+      <GoabWorkSideMenuItem
+        icon="notifications"
+        label="Notifications"
+        badge="2"
+        type="emergency"
+        popoverContent={
+          <GoabWorkSideNotificationPanel
+            heading="Notifications"
+            activeTab="urgent"
+            onMarkAllRead={handleMarkAllRead}
+            onViewAll={handleViewAll}
+          >
+            {items.map(({ id, ...item }) => (
+              <GoabWorkSideNotificationItem
+                key={id}
+                {...item}
+                onClick={() => handleClick(id)}
+              />
+            ))}
+          </GoabWorkSideNotificationPanel>
+        }
+      />
+    }
+  />
+</nav>`,
         },
         angular: {
           ts: `interface NotificationItem {
@@ -398,13 +406,15 @@ export class SomeOtherComponent {
     );
   }
 }`,
-          template: `<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  [primaryContent]="primaryTpl"
-  [secondaryContent]="secondaryTpl"
-  (onNavigate)="handleNavigate($event)"
-></goab-work-side-menu>
+          template: `<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    [primaryContent]="primaryTpl"
+    [secondaryContent]="secondaryTpl"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</nav>
 
 <ng-template #primaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -443,38 +453,40 @@ export class SomeOtherComponent {
 </ng-template>`,
         },
         webComponents: {
-          html: `<goa-work-side-menu heading="My Application" url="/" open="true">
-  <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="2" type="emergency">
-    <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="urgent">
-      <goa-work-side-notification-item
-        title="System maintenance"
-        description="Scheduled maintenance tonight at 11 PM. All services will be unavailable."
-        timestamp="2025-03-15T14:00:00Z"
-        type="critical"
-        read-status="unread"
-        priority="urgent"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Deadline approaching"
-        description="Case #12345 response is due in 2 hours."
-        timestamp="2025-03-15T12:00:00Z"
-        type="warning"
-        read-status="unread"
-        priority="urgent"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="New comment on case"
-        description="A team member commented on Case #12340."
-        timestamp="2025-03-15T11:00:00Z"
-        type="default"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-    </goa-work-side-notification-panel>
-  </goa-work-side-menu-item>
-</goa-work-side-menu>`,
+          html: `<nav>
+  <goa-work-side-menu heading="My Application" url="/" open="true">
+    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="2" type="emergency">
+      <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="urgent">
+        <goa-work-side-notification-item
+          title="System maintenance"
+          description="Scheduled maintenance tonight at 11 PM. All services will be unavailable."
+          timestamp="2025-03-15T14:00:00Z"
+          type="critical"
+          read-status="unread"
+          priority="urgent"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Deadline approaching"
+          description="Case #12345 response is due in 2 hours."
+          timestamp="2025-03-15T12:00:00Z"
+          type="warning"
+          read-status="unread"
+          priority="urgent"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="New comment on case"
+          description="A team member commented on Case #12340."
+          timestamp="2025-03-15T11:00:00Z"
+          type="default"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+      </goa-work-side-notification-panel>
+    </goa-work-side-menu-item>
+  </goa-work-side-menu>
+</nav>`,
           js: `const panel = container.querySelector("goa-work-side-notification-panel");
 const items = container.querySelectorAll("goa-work-side-notification-item");
 
@@ -563,38 +575,40 @@ const handleClick = (id: string) => {
     items.map((item) => (item.id === id ? { ...item, readStatus: "read" } : item)),
   );
 };`,
-          jsx: `<GoabWorkSideMenu
-  heading="My Application"
-  url="/"
-  onNavigate={(path: string) => navigate(path)}
-  primaryContent={
-    <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-  }
-  secondaryContent={
-    <GoabWorkSideMenuItem
-      icon="notifications"
-      label="Notifications"
-      badge="5"
-      type="success"
-      popoverContent={
-        <GoabWorkSideNotificationPanel
-          heading="Notifications"
-          activeTab="all"
-          onMarkAllRead={handleMarkAllRead}
-          onViewAll={handleViewAll}
-        >
-          {items.map(({ id, ...item }) => (
-            <GoabWorkSideNotificationItem
-              key={id}
-              {...item}
-              onClick={() => handleClick(id)}
-            />
-          ))}
-        </GoabWorkSideNotificationPanel>
-      }
-    />
-  }
-/>`,
+          jsx: `<nav>
+  <GoabWorkSideMenu
+    heading="My Application"
+    url="/"
+    onNavigate={(path: string) => navigate(path)}
+    primaryContent={
+      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+    }
+    secondaryContent={
+      <GoabWorkSideMenuItem
+        icon="notifications"
+        label="Notifications"
+        badge="5"
+        type="success"
+        popoverContent={
+          <GoabWorkSideNotificationPanel
+            heading="Notifications"
+            activeTab="all"
+            onMarkAllRead={handleMarkAllRead}
+            onViewAll={handleViewAll}
+          >
+            {items.map(({ id, ...item }) => (
+              <GoabWorkSideNotificationItem
+                key={id}
+                {...item}
+                onClick={() => handleClick(id)}
+              />
+            ))}
+          </GoabWorkSideNotificationPanel>
+        }
+      />
+    }
+  />
+</nav>`,
         },
         angular: {
           ts: `interface NotificationItem {
@@ -670,13 +684,15 @@ export class SomeOtherComponent {
     );
   }
 }`,
-          template: `<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  [primaryContent]="primaryTpl"
-  [secondaryContent]="secondaryTpl"
-  (onNavigate)="handleNavigate($event)"
-></goab-work-side-menu>
+          template: `<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    [primaryContent]="primaryTpl"
+    [secondaryContent]="secondaryTpl"
+    (onNavigate)="handleNavigate($event)"
+  ></goab-work-side-menu>
+</nav>
 
 <ng-template #primaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -714,53 +730,55 @@ export class SomeOtherComponent {
 </ng-template>`,
         },
         webComponents: {
-          html: `<goa-work-side-menu heading="My Application" url="/" open="true">
-  <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-  <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="5" type="success">
-    <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="all">
-      <goa-work-side-notification-item
-        title="New comment on case"
-        description="A team member commented on Case #12340."
-        timestamp="2025-03-15T10:00:00Z"
-        type="default"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Case #12345 assigned"
-        description="Case #12345 has been assigned to you for review."
-        timestamp="2025-03-15T09:00:00Z"
-        type="info"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Case resolved"
-        description="Case #12330 has been marked as resolved."
-        timestamp="2025-03-15T08:00:00Z"
-        type="success"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="Deadline approaching"
-        description="Case #12345 response is due in 2 hours."
-        timestamp="2025-03-15T07:00:00Z"
-        type="warning"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-      <goa-work-side-notification-item
-        title="System maintenance"
-        description="Scheduled maintenance tonight at 11 PM. All services will be unavailable."
-        timestamp="2025-03-15T06:00:00Z"
-        type="critical"
-        read-status="unread"
-        priority="normal"
-      ></goa-work-side-notification-item>
-    </goa-work-side-notification-panel>
-  </goa-work-side-menu-item>
-</goa-work-side-menu>`,
+          html: `<nav>
+  <goa-work-side-menu heading="My Application" url="/" open="true">
+    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+    <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="5" type="success">
+      <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="all">
+        <goa-work-side-notification-item
+          title="New comment on case"
+          description="A team member commented on Case #12340."
+          timestamp="2025-03-15T10:00:00Z"
+          type="default"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Case #12345 assigned"
+          description="Case #12345 has been assigned to you for review."
+          timestamp="2025-03-15T09:00:00Z"
+          type="info"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Case resolved"
+          description="Case #12330 has been marked as resolved."
+          timestamp="2025-03-15T08:00:00Z"
+          type="success"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="Deadline approaching"
+          description="Case #12345 response is due in 2 hours."
+          timestamp="2025-03-15T07:00:00Z"
+          type="warning"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+        <goa-work-side-notification-item
+          title="System maintenance"
+          description="Scheduled maintenance tonight at 11 PM. All services will be unavailable."
+          timestamp="2025-03-15T06:00:00Z"
+          type="critical"
+          read-status="unread"
+          priority="normal"
+        ></goa-work-side-notification-item>
+      </goa-work-side-notification-panel>
+    </goa-work-side-menu-item>
+  </goa-work-side-menu>
+</nav>`,
           js: `const panel = container.querySelector("goa-work-side-notification-panel");
 const items = container.querySelectorAll("goa-work-side-notification-item");
 
