@@ -24,8 +24,6 @@
 
   /** Icon displayed before the heading text. */
   export let leadingicon: GoAIconType;
-  /** The menu style variant. Primary uses bold text, secondary uses regular weight. */
-  export let type: "primary" | "secondary" = "primary";
   /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** Sets a data-testid attribute for automated testing. */
@@ -207,7 +205,6 @@
     >
       <button
         slot="target"
-        class={type}
         class:open={_open}
         class:current={_hasCurrentLink}
         class:v2-nav={_isV2Navigation}
@@ -235,7 +232,6 @@
     <button
       class:open={_open}
       on:click={toggleMenu}
-      class={type}
       class:v2-nav={_isV2Navigation}
     >
       {#if leadingicon}
@@ -483,9 +479,6 @@
     button[slot="target"] {
       font-weight: var(--goa-font-weight-bold);
       white-space: nowrap;
-    }
-    button.secondary {
-      font-weight: var(--goa-font-weight-regular);
     }
     button.open {
       background-color: var(--goa-app-header-color-bg-menu-button-focus);
