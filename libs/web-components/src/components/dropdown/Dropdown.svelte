@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -227,6 +227,10 @@
   function setupPopoverListeners() {
     _popoverEl?.addEventListener("_open", (e) => {
       _isMenuVisible = true;
+      if (_filterable) {
+        // Queue input focus after the popover focus trap has handled opening.
+        tick().then(() => setTimeout(() => _inputEl?.focus(), 0));
+      }
     });
 
     _popoverEl?.addEventListener("_close", (e) => {

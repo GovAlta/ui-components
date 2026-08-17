@@ -618,6 +618,39 @@ describe("Dropdown", () => {
   })
 
   describe("Filterable Dropdown", () => {
+    it("focuses the input when the caret opens the menu", async () => {
+      const Component = () => (
+        <GoabDropdown name="favcolor" onChange={noop} filterable={true}>
+          <GoabDropdownItem label="Red" value="red" />
+          <GoabDropdownItem label="Blue" value="blue" />
+          <GoabDropdownItem label="Green" value="green" />
+        </GoabDropdown>
+      );
+
+      const result = render(<Component />);
+      const caret = result.getByTestId("chevron");
+      const input = result.getByRole("combobox");
+
+      await vi.waitFor(() => {
+        expect(input).toBeVisible();
+      });
+
+      const inputEl = input.element() as HTMLInputElement;
+
+      await caret.click();
+
+      await vi.waitFor(() => {
+        expect(inputEl.getAttribute("aria-expanded")).toBe("true");
+        expect(inputEl.matches(":focus")).toBe(true);
+      });
+
+      await userEvent.keyboard("B");
+
+      await vi.waitFor(() => {
+        expect(inputEl.value).toBe("B");
+      });
+    });
+
     it("should render with the default props", async () => {
       // Setup
       const Component = () => {
