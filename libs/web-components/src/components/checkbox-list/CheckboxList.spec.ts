@@ -136,6 +136,37 @@ describe("GoACheckboxList", () => {
         expect(checkbox.getAttribute("disabled")).toBe("true");
       });
     });
+
+    it("should apply and clear errors on a child checkbox", async () => {
+      const result = render(CheckboxList, {
+        ...defaultProps,
+        error: "true",
+      });
+      const checkboxContainer = result.container.querySelector(".checkbox-container");
+      const checkbox = document.createElement("goa-checkbox");
+      const checkboxRoot = document.createElement("div");
+      checkbox.attachShadow({ mode: "open" }).appendChild(checkboxRoot);
+      checkboxContainer?.appendChild(checkbox);
+
+      await waitFor(() => {
+        relay<FormFieldMountRelayDetail>(
+          checkboxRoot,
+          FormFieldMountMsg,
+          { name: "option1", el: checkboxRoot },
+          { bubbles: true },
+        );
+        expect(checkbox.getAttribute("error")).toBe("true");
+      });
+
+      await result.rerender({
+        ...defaultProps,
+        error: "false",
+      });
+
+      await waitFor(() => {
+        expect(checkbox.hasAttribute("error")).toBe(false);
+      });
+    });
   });
 
   describe("Events", () => {

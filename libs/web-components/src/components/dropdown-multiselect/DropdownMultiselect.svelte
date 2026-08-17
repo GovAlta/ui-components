@@ -147,7 +147,6 @@
   let _focusedIndex = -1;
   let _isTriggerMouseDown = false;
   let _skipNextTriggerFocusOpen = false;
-  let _prevError = error;
 
   // Reactive
   $: value = Array.isArray(value) ? value : [];
@@ -169,14 +168,6 @@
     filterable && _filterText.trim()
       ? _options.filter((o) => isFilterMatch(o, _filterText))
       : _options;
-
-  // When the error state changes, dispatch error::change to notify the fieldset
-  $: {
-    if (error !== _prevError) {
-      dispatch(_rootEl, "error::change", { isError: error }, { bubbles: true });
-      _prevError = error;
-    }
-  }
 
   onMount(async () => {
     await tick();

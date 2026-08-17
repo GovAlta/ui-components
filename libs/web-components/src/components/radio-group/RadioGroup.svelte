@@ -70,7 +70,6 @@
 
   // Private
   let _error = toBoolean(error);
-  let _prevError = _error;
 
   // Reactive
 
@@ -88,15 +87,6 @@
 
   $: {
     _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
     bindOptions();
   }
 

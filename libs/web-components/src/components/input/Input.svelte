@@ -141,7 +141,6 @@
   let _inputEl: HTMLInputElement;
   let _rootEl: HTMLElement;
   let _error = false;
-  let _prevError = false;
   // separate styles for input and input's container
   let _containerStyle = "";
   let _inputWidth = "";
@@ -154,18 +153,7 @@
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
   $: isDisabled = toBoolean(disabled);
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
