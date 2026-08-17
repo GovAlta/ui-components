@@ -1022,12 +1022,6 @@
     box-shadow: var(--goa-dropdown-border-error);
   }
 
-  @container not (--mobile) {
-    .dropdown-input-group {
-      width: var(--width, 100%);
-    }
-  }
-
   .dropdown-icon--arrow,
   .dropdown-icon--clear {
     padding-right: var(--goa-dropdown-space-icon-text);
