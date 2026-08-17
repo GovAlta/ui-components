@@ -121,7 +121,6 @@
   let _bindTimeoutId: any;
 
   let _error = toBoolean(error);
-  let _prevError = _error;
 
   //
   // Reactive
@@ -151,19 +150,7 @@
     _popoverMaxWidth = getRenderedWidth();
   }
 
-  // TODO: Syed can you add a comment here describing what this does?
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
 
   //
   // Hooks

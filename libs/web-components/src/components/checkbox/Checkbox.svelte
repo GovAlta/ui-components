@@ -73,23 +73,11 @@
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
   let _error: boolean;
-  let _prevError: boolean;
   let _revealSlotHeight: number = 0;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = toBoolean(indeterminate);
   $: if (_checkboxRef) {

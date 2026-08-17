@@ -98,11 +98,11 @@
   let _inputEl: HTMLElement;
   let _errorId = `error-${generateRandomId()}`;
   let _helpTextId = `helptext-${generateRandomId()}`;
-  let _hasError = false;
 
   // Computed: Error icon size based on form item size
   // Compact: xsmall (16px), Regular/Large: small (18px)
   $: errorIconSize = labelsize === 'compact' ? 'xsmall' : 'small';
+  $: updateAriaDescribedBy(Boolean(error));
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -125,7 +125,6 @@
     });
 
     _rootEl?.addEventListener("form-field::bind", handleInputMounted);
-    _rootEl?.addEventListener("error::change", handleErrorChange);
     _rootEl?.addEventListener("help-text::announce", handleAnnounceHelperText);
   });
 
@@ -145,29 +144,21 @@
       requirement === "required" ? "true" : "false",
     );
 
-    updateAriaDescribedBy();
-  }
-
-  function handleErrorChange(e: Event) {
-    const ce = e as CustomEvent<{ isError: boolean }>;
-    if (_hasError !== ce.detail.isError) {
-      _hasError = ce.detail.isError;
-      updateAriaDescribedBy();
-    }
+    updateAriaDescribedBy(Boolean(error));
   }
 
   function handleAnnounceHelperText() {
-    const message = _hasError ? error || helptext : helptext;
+    const message = error || helptext;
     if (message) {
       announceToScreenReader(message);
     }
   }
 
-  function updateAriaDescribedBy() {
+  function updateAriaDescribedBy(hasError: boolean) {
     if (!_inputEl) return;
 
     let describedBy = [];
-    if (_hasError || $$slots.error) describedBy.push(_errorId);
+    if (hasError || $$slots.error) describedBy.push(_errorId);
     if (helptext || $$slots.helptext) describedBy.push(_helpTextId);
 
     if (describedBy.length > 0) {

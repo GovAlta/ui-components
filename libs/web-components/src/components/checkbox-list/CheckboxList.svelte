@@ -102,7 +102,7 @@
 
   /**
    * Synchronize component when external props change.
-   * - Emits error change events and propagates to children
+   * - Propagates error changes to children
    * - Syncs checkbox values after initialization
    */
   function updateState(newValue: string[], newError: string) {
@@ -114,15 +114,7 @@
     // Handle error state changes
     const currentError = toBoolean(newError);
     if (currentError !== _error) {
-      _rootEl?.dispatchEvent(
-        new CustomEvent("error::change", {
-          detail: { isError: currentError },
-          bubbles: true,
-          composed: true,
-        }),
-      );
       _error = currentError;
-      updateChildCheckboxesError();
     }
 
     // Sync Set when value changes externally (not from internal changes)
@@ -416,20 +408,13 @@
       } else {
         containerElement.removeAttribute("disabled");
       }
-    }
-  }
 
-  /** Propagate error state to all children via the relay bus. */
-  function updateChildCheckboxesError() {
-    for (const rec of _childRecords) {
       if (_error) {
-        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+        containerElement.setAttribute("error", "true");
       } else {
-        relay(rec.el, FieldsetResetErrorsMsg);
+        containerElement.removeAttribute("error");
       }
     }
-
-    updateSlottedCheckboxesState();
   }
 
   // Announce help text for screen readers when the group receives focus.
