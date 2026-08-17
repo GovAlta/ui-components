@@ -188,112 +188,118 @@ export function DocsWorkSideNotificationPanelRoute() {
       <h2>Notification panel</h2>
 
       <h3>Basic notification panel</h3>
-      <GoabWorkSideMenu
-        heading="My Application"
-        url="/"
-        onNavigate={(path: string) => navigate(path)}
-        primaryContent={
-          <>
-            <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-            <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-          </>
-        }
-        secondaryContent={
-          <GoabWorkSideMenuItem
-            icon="notifications"
-            label="Notifications"
-            badge="2"
-            type="success"
-            popoverContent={
-              <GoabWorkSideNotificationPanel
-                heading="Notifications"
-                activeTab="unread"
-                onMarkAllRead={() => handleMarkAllBasicNotificationsRead()}
-                onViewAll={() => handleViewAllBasicNotifications()}
-              >
-                {basicItems.map(({ id, ...item }) => (
-                  <GoabWorkSideNotificationItem
-                    key={id}
-                    {...item}
-                    onClick={() => handleClickBasicNotification(id)}
-                  />
-                ))}
-              </GoabWorkSideNotificationPanel>
-            }
-          />
-        }
-      />
+      <nav>
+        <GoabWorkSideMenu
+          heading="My Application"
+          url="/"
+          onNavigate={(path: string) => navigate(path)}
+          primaryContent={
+            <>
+              <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+              <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+            </>
+          }
+          secondaryContent={
+            <GoabWorkSideMenuItem
+              icon="notifications"
+              label="Notifications"
+              badge="2"
+              type="success"
+              popoverContent={
+                <GoabWorkSideNotificationPanel
+                  heading="Notifications"
+                  activeTab="unread"
+                  onMarkAllRead={() => handleMarkAllBasicNotificationsRead()}
+                  onViewAll={() => handleViewAllBasicNotifications()}
+                >
+                  {basicItems.map(({ id, ...item }) => (
+                    <GoabWorkSideNotificationItem
+                      key={id}
+                      {...item}
+                      onClick={() => handleClickBasicNotification(id)}
+                    />
+                  ))}
+                </GoabWorkSideNotificationPanel>
+              }
+            />
+          }
+        />
+      </nav>
 
       <h3>With urgent notifications</h3>
-      <GoabWorkSideMenu
-        heading="My Application"
-        url="/"
-        onNavigate={(path: string) => navigate(path)}
-        primaryContent={
-          <>
-            <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-            <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-          </>
-        }
-        secondaryContent={
-          <GoabWorkSideMenuItem
-            icon="notifications"
-            label="Notifications"
-            badge="2"
-            type="emergency"
-            popoverContent={
-              <GoabWorkSideNotificationPanel
-                heading="Notifications"
-                activeTab="urgent"
-                onMarkAllRead={() => handleMarkAllUrgentNotificationsRead()}
-                onViewAll={() => handleViewAllUrgentNotifications()}
-              >
-                {urgentItems.map(({ id, ...item }) => (
-                  <GoabWorkSideNotificationItem
-                    key={id}
-                    {...item}
-                    onClick={() => handleClickUrgentNotification(id)}
-                  />
-                ))}
-              </GoabWorkSideNotificationPanel>
-            }
-          />
-        }
-      />
+      <nav>
+        <GoabWorkSideMenu
+          heading="My Application"
+          url="/"
+          onNavigate={(path: string) => navigate(path)}
+          primaryContent={
+            <>
+              <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+              <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+            </>
+          }
+          secondaryContent={
+            <GoabWorkSideMenuItem
+              icon="notifications"
+              label="Notifications"
+              badge="2"
+              type="emergency"
+              popoverContent={
+                <GoabWorkSideNotificationPanel
+                  heading="Notifications"
+                  activeTab="urgent"
+                  onMarkAllRead={() => handleMarkAllUrgentNotificationsRead()}
+                  onViewAll={() => handleViewAllUrgentNotifications()}
+                >
+                  {urgentItems.map(({ id, ...item }) => (
+                    <GoabWorkSideNotificationItem
+                      key={id}
+                      {...item}
+                      onClick={() => handleClickUrgentNotification(id)}
+                    />
+                  ))}
+                </GoabWorkSideNotificationPanel>
+              }
+            />
+          }
+        />
+      </nav>
 
       <h3>Notification type badges</h3>
-      <GoabWorkSideMenu
-        heading="My Application"
-        url="/"
-        onNavigate={(path: string) => navigate(path)}
-        primaryContent={
-          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        }
-        secondaryContent={
-          <GoabWorkSideMenuItem
-            icon="notifications"
-            label="Notifications"
-            badge="5"
-            type="success"
-            popoverContent={
-              <GoabWorkSideNotificationPanel
-                heading="Notifications"
-                activeTab="all"
-                onMarkAllRead={() => handleMarkAllNotificationTypesRead()}
-                onViewAll={() => handleViewAllNotificationTypes()}
-              >
-                {allTypeItems.map(({ id, ...item }) => (
-                  <GoabWorkSideNotificationItem
-                    key={id}
-                    {...item}
-                    onClick={() => handleClickNotificationType(id)}
-                  />
-                ))}
-              </GoabWorkSideNotificationPanel>
-            }
-          />
-        }
-      />
+      <nav>
+        <GoabWorkSideMenu
+          heading="My Application"
+          url="/"
+          onNavigate={(path: string) => navigate(path)}
+          primaryContent={
+            <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          }
+          secondaryContent={
+            <GoabWorkSideMenuItem
+              icon="notifications"
+              label="Notifications"
+              badge="5"
+              type="success"
+              popoverContent={
+                <GoabWorkSideNotificationPanel
+                  heading="Notifications"
+                  activeTab="all"
+                  onMarkAllRead={() => handleMarkAllNotificationTypesRead()}
+                  onViewAll={() => handleViewAllNotificationTypes()}
+                >
+                  {allTypeItems.map(({ id, ...item }) => (
+                    <GoabWorkSideNotificationItem
+                      key={id}
+                      {...item}
+                      onClick={() => handleClickNotificationType(id)}
+                    />
+                  ))}
+                </GoabWorkSideNotificationPanel>
+              }
+            />
+          }
+        />
+      </nav>
     </div>
   );
 }

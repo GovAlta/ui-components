@@ -1,13 +1,15 @@
 <h2>Notification panel</h2>
 
 <h3>Basic notification panel</h3>
-<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  (onNavigate)="handleNavigate($event)"
-  [primaryContent]="basicPrimaryTpl"
-  [secondaryContent]="basicSecondaryTpl">
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="basicPrimaryTpl"
+    [secondaryContent]="basicSecondaryTpl">
+  </goab-work-side-menu>
+</nav>
 
 <ng-template #basicPrimaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -45,13 +47,15 @@
 </ng-template>
 
 <h3>With urgent notifications</h3>
-<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  (onNavigate)="handleNavigate($event)"
-  [primaryContent]="urgentPrimaryTpl"
-  [secondaryContent]="urgentSecondaryTpl">
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="urgentPrimaryTpl"
+    [secondaryContent]="urgentSecondaryTpl">
+  </goab-work-side-menu>
+</nav>
 
 <ng-template #urgentPrimaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -89,13 +93,15 @@
 </ng-template>
 
 <h3>Notification type badges</h3>
-<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  (onNavigate)="handleNavigate($event)"
-  [primaryContent]="typesPrimaryTpl"
-  [secondaryContent]="typesSecondaryTpl">
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="typesPrimaryTpl"
+    [secondaryContent]="typesSecondaryTpl">
+  </goab-work-side-menu>
+</nav>
 
 <ng-template #typesPrimaryTpl>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>

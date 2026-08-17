@@ -17,20 +17,24 @@ export const appHeaderMenuConfigurations: ComponentConfigurations = {
       name: "Basic app header menu",
       description: "Navigation menu within AppHeader",
       code: {
-        react: `<GoabAppHeader
-  heading="My Application"
-  navigation={
-    <GoabAppHeaderMenu heading="Applications">
-      <a href="/dashboard">Dashboard</a>
-      <a href="/reports">Reports</a>
-      <a href="/settings">Settings</a>
-    </GoabAppHeaderMenu>
-  }
-/>`,
-        angular: `<goab-app-header
-  heading="My Application"
-  [navigation]="navigationTemplate"
-></goab-app-header>
+        react: `<header>
+  <GoabAppHeader
+    heading="My Application"
+    navigation={
+      <GoabAppHeaderMenu heading="Applications">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/reports">Reports</a>
+        <a href="/settings">Settings</a>
+      </GoabAppHeaderMenu>
+    }
+  />
+</header>`,
+        angular: `<header>
+  <goab-app-header
+    heading="My Application"
+    [navigation]="navigationTemplate"
+  ></goab-app-header>
+</header>
 <ng-template #navigationTemplate>
   <goab-app-header-menu heading="Applications">
     <a href="/dashboard">Dashboard</a>
@@ -38,13 +42,15 @@ export const appHeaderMenuConfigurations: ComponentConfigurations = {
     <a href="/settings">Settings</a>
   </goab-app-header-menu>
 </ng-template>`,
-        webComponents: `<goa-app-header version="2" heading="My Application">
-  <goa-app-header-menu slot="navigation" version="2" heading="Menu">
-    <a href="/dashboard">Dashboard</a>
-    <a href="/reports">Reports</a>
-    <a href="/settings">Settings</a>
-  </goa-app-header-menu>
-</goa-app-header>`,
+        webComponents: `<header>
+  <goa-app-header version="2" heading="My Application">
+    <goa-app-header-menu slot="navigation" version="2" heading="Menu">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/reports">Reports</a>
+      <a href="/settings">Settings</a>
+    </goa-app-header-menu>
+  </goa-app-header>
+</header>`,
       },
     },
   ],

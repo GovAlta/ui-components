@@ -11,38 +11,44 @@ export function DocsSideMenuRoute() {
 
       <h3>Basic side menu</h3>
       <div style={{ width: "200px" }}>
-        <GoabSideMenu>
-          <a href="/overview">Overview</a>
-          <a href="/details">Details</a>
-          <a href="/settings">Settings</a>
-        </GoabSideMenu>
+        <nav>
+          <GoabSideMenu>
+            <a href="/overview">Overview</a>
+            <a href="/details">Details</a>
+            <a href="/settings">Settings</a>
+          </GoabSideMenu>
+        </nav>
       </div>
 
       <h3>With sections</h3>
       <div style={{ width: "200px" }}>
-        <GoabSideMenu>
-          <GoabSideMenuHeading>Main</GoabSideMenuHeading>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/reports">Reports</a>
-          <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
-          <a href="/profile">Profile</a>
-          <a href="/preferences">Preferences</a>
-        </GoabSideMenu>
+        <nav>
+          <GoabSideMenu>
+            <GoabSideMenuHeading>Main</GoabSideMenuHeading>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Reports</a>
+            <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
+            <a href="/profile">Profile</a>
+            <a href="/preferences">Preferences</a>
+          </GoabSideMenu>
+        </nav>
       </div>
 
       <h3>With groups</h3>
       <div style={{ width: "200px" }}>
-        <GoabSideMenu>
-          <GoabSideMenuGroup heading="Applications">
-            <a href="/apps/active">Active</a>
-            <a href="/apps/pending">Pending</a>
-            <a href="/apps/archived">Archived</a>
-          </GoabSideMenuGroup>
-          <GoabSideMenuGroup heading="Reports">
-            <a href="/reports/monthly">Monthly</a>
-            <a href="/reports/annual">Annual</a>
-          </GoabSideMenuGroup>
-        </GoabSideMenu>
+        <nav>
+          <GoabSideMenu>
+            <GoabSideMenuGroup heading="Applications">
+              <a href="/apps/active">Active</a>
+              <a href="/apps/pending">Pending</a>
+              <a href="/apps/archived">Archived</a>
+            </GoabSideMenuGroup>
+            <GoabSideMenuGroup heading="Reports">
+              <a href="/reports/monthly">Monthly</a>
+              <a href="/reports/annual">Annual</a>
+            </GoabSideMenuGroup>
+          </GoabSideMenu>
+        </nav>
       </div>
     </div>
   );
