@@ -68,6 +68,9 @@
   /** Icon displayed after the button text. */
   export let trailingicon: GoAIconType | null = null;
 
+  /** Sets the accessible name. Include the visible button text in the value. */
+  export let arialabel: string | undefined = undefined;
+
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
@@ -149,6 +152,7 @@
   on:click={clickHandler}
   data-testid={testid}
   type={type === "submit" ? type : "button"}
+  aria-label={arialabel || undefined}
 >
   {#if type === "start"}
     <span class="text">

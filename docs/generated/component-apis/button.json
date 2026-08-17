@@ -26,6 +26,13 @@
           "description": "Multiple argument values passed with the action in click events."
         },
         {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -146,6 +153,13 @@
           "description": "Multiple argument values passed with the action in click events."
         },
         {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -264,6 +278,13 @@
           "required": false,
           "default": "{}",
           "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
         },
         {
           "name": "disabled",
