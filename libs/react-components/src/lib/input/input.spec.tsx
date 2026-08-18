@@ -53,6 +53,7 @@ describe("GoabInput", () => {
       // TODO: remove deprecated property or fix spec failure
       // prefix: "foo",
       suffix: "bar",
+      ariaLabelledBy: "input-label",
       testId: testId,
       debounce: 1000,
       mt: "s",
@@ -87,6 +88,7 @@ describe("GoabInput", () => {
     // TODO: remove deprecated property or fix spec failure
     // expect(input?.getAttribute("prefix")).toBe("foo");
     expect(input?.getAttribute("suffix")).toBe("bar");
+    expect(input?.getAttribute("arialabelledby")).toBe("input-label");
     expect(input?.getAttribute("testid")).toBe(testId);
     expect(input?.getAttribute("debounce")).toBe("1000");
     expect(input?.getAttribute("mt")).toBe("s");
