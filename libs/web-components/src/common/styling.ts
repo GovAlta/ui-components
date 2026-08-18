@@ -55,7 +55,7 @@ const conversions: Record<string, TShirtSpacing> = {
  * Allow for 0-10 values to be used along side the existing Spacing values
  */
 function convertSpacing(size: Spacing): Spacing {
-  if (!size) return "none";
+  if (size === null) return null;
   if (!Number.isInteger(+size)) {
     return size;
   }
@@ -85,10 +85,10 @@ export function calculateMargin(
   ml = convertSpacing(ml);
   mr = convertSpacing(mr);
   return [
-    mt && mt !== "none" && `margin-top:var(--goa-space-${mt});` || "",
-    mr && mr !== "none" && `margin-right:var(--goa-space-${mr});` || "",
-    mb && mb !== "none" && `margin-bottom:var(--goa-space-${mb});` || "",
-    ml && ml !== "none" && `margin-left:var(--goa-space-${ml});` || "",
+    mt ? `margin-top:var(--goa-space-${mt});` : "",
+    mr ? `margin-right:var(--goa-space-${mr});` : "",
+    mb ? `margin-bottom:var(--goa-space-${mb});` : "",
+    ml ? `margin-left:var(--goa-space-${ml});` : "",
   ].join(" ").trim();
 }
 
