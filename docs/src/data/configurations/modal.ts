@@ -155,7 +155,7 @@ export const modalConfigurations: ComponentConfigurations = {
         },
         angular: {
           ts: angularModalSetup,
-          template: `<goab-modal heading="Information" [open]="isOpen" [closable]="true" (onClose)="handleClose()">
+          template: `<goab-modal heading="Information" [open]="isOpen" (onClose)="handleClose()">
   <p>You can close this modal with the X button or by clicking the backdrop.</p>
 </goab-modal>`,
         },
@@ -248,7 +248,7 @@ export const modalConfigurations: ComponentConfigurations = {
         },
         angular: {
           ts: angularModalSetup,
-          template: `<goab-modal heading="New features available" [open]="isOpen" [closable]="true" calloutVariant="information" (onClose)="handleClose()">
+          template: `<goab-modal heading="New features available" [open]="isOpen" calloutVariant="information" (onClose)="handleClose()">
   <p>We have updated the application with new features. Review the changes to get started.</p>
 </goab-modal>`,
         },
@@ -272,7 +272,7 @@ export const modalConfigurations: ComponentConfigurations = {
         },
         angular: {
           ts: angularModalSetup,
-          template: `<goab-modal heading="Application submitted" [open]="isOpen" [closable]="true" calloutVariant="success" (onClose)="handleClose()">
+          template: `<goab-modal heading="Application submitted" [open]="isOpen" calloutVariant="success" (onClose)="handleClose()">
   <p>Your application has been successfully submitted. You will receive a confirmation email shortly.</p>
 </goab-modal>`,
         },
@@ -296,7 +296,7 @@ export const modalConfigurations: ComponentConfigurations = {
         },
         angular: {
           ts: angularModalSetup,
-          template: `<goab-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (onClose)="handleClose()">
+          template: `<goab-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" (onClose)="handleClose()">
   <p>This modal has a wider maximum width for more content.</p>
 </goab-modal>`,
         },

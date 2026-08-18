@@ -75,13 +75,6 @@
           "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
         },
         {
-          "name": "closable",
-          "type": "boolean",
-          "required": false,
-          "default": "false",
-          "description": "Show close icon and allow clicking the background to close the modal."
-        },
-        {
           "name": "heading",
           "type": "string | TemplateRef<any>",
           "values": [
