@@ -36,13 +36,13 @@
   export let type: "calendar" | "input" = "calendar";
   /** Name of the date field. */
   export let name: string = "";
-  /** Value of the calendar date. */
+  /** Sets the calendar date as an ISO date string (yyyy-mm-dd). */
   export let value: string = "";
   /** Sets the input to an error state. */
   export let error: string = "false";
-  /** Minimum date value allowed. */
+  /** Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). */
   export let min: string = "";
-  /** Maximum date value allowed. */
+  /** Sets the latest allowed date as an ISO date string (yyyy-mm-dd). */
   export let max: string = "";
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";

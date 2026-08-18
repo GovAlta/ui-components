@@ -6,16 +6,14 @@ import type { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
   templateUrl: "./angular.html",
 })
 export class ResetDatePickerFieldComponent {
-  item: Date | undefined = undefined;
+  item: string | undefined;
 
   onChange(event: GoabDatePickerOnChangeDetail): void {
-    this.item = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.item = event.valueStr || undefined;
   }
 
   setValue(): void {
-    const d = new Date();
-    d.setDate(d.getDate() - 7);
-    this.item = d;
+    this.item = "2024-01-15";
   }
 
   clearValue(): void {
