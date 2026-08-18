@@ -36,6 +36,7 @@ interface WCProps extends Margins {
   prefix?: string;
   suffix?: string;
   arialabel?: string;
+  arialabelledby?: string;
   testid?: string;
   textalign?: string;
   size?: GoabInputSize;
@@ -102,6 +103,8 @@ interface BaseProps extends Margins, DataAttributes {
   testId?: string;
   /** Sets the aria-label used by assistive technologies. */
   ariaLabel?: string;
+  /** The aria-labelledby attribute identifies the element (or elements) that labels the input */
+  ariaLabelledBy?: string;
   /** Sets content in the leading slot. */
   leadingContent?: React.ReactNode;
   /** Sets content in the trailing slot. */
