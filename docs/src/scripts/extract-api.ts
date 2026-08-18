@@ -198,6 +198,25 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// Keep backward-compatible wrapper types in source while documenting only the
+// preferred public input types. Date picker still accepts Date values at runtime.
+const PROP_TYPE_OVERRIDES: Record<
+  string,
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+> = {
+  "date-picker": {
+    react: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+    angular: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+  },
+};
 // Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
 // typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
 // consumers never bind a value to them, they nest the sub-component instead.
@@ -282,6 +301,24 @@ function specializeAngularValuePropFromReact(
 
   angularValueProp.type = reactValueProp.type;
   angularValueProp.values = reactValueProp.values;
+}
+
+function applyPropTypeOverrides(
+  componentName: string,
+  framework: "react" | "angular" | "webComponents",
+  props: ExtractedProp[],
+): void {
+  const overrides = PROP_TYPE_OVERRIDES[componentName]?.[framework];
+  if (!overrides) return;
+
+  for (const prop of props) {
+    const type = overrides[prop.name];
+    if (!type) continue;
+
+    prop.type = type;
+    delete prop.typeLabel;
+    delete prop.values;
+  }
 }
 
 // =============================================================================
@@ -2680,6 +2717,10 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     : [];
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
+
+  applyPropTypeOverrides(componentName, "react", reactProps);
+  applyPropTypeOverrides(componentName, "angular", angularProps);
+  applyPropTypeOverrides(componentName, "webComponents", webComponentProps);
 
   const webComponentVersionProp = webComponentProps.find(
     (prop) => prop.name.toLowerCase() === "version",

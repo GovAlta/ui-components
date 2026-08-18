@@ -7,21 +7,19 @@ import {
 } from "@abgov/react-components";
 
 export function DocsDatePickerRoute() {
-  const [date, setDate] = useState<Date | undefined>();
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date("2024-01-15"));
-  const [appointment, setAppointment] = useState<Date | undefined>();
-  const [incident, setIncident] = useState<Date | undefined>();
-  const [birthday, setBirthday] = useState<Date | undefined>();
-  const [errorDate, setErrorDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<string | undefined>();
+  const [startDate, setStartDate] = useState<string | undefined>("2024-01-15");
+  const [appointment, setAppointment] = useState<string | undefined>();
+  const [incident, setIncident] = useState<string | undefined>();
+  const [birthday, setBirthday] = useState<string | undefined>();
+  const [errorDate, setErrorDate] = useState<string | undefined>();
 
   // Examples
-  const [exampleBirthday, setExampleBirthday] = useState<Date | undefined>();
-  const [resetDate, setResetDate] = useState<Date | undefined>();
+  const [exampleBirthday, setExampleBirthday] = useState<string | undefined>();
+  const [resetDate, setResetDate] = useState<string | undefined>();
 
   const setValue = () => {
-    const d = new Date();
-    d.setDate(d.getDate() - 7);
-    setResetDate(d);
+    setResetDate("2024-01-15");
   };
 
   const clearValue = () => setResetDate(undefined);
@@ -35,7 +33,7 @@ export function DocsDatePickerRoute() {
         <GoabDatePicker
           name="date"
           value={date}
-          onChange={(detail) => setDate(detail.value)}
+          onChange={(detail) => setDate(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 
@@ -44,18 +42,22 @@ export function DocsDatePickerRoute() {
         <GoabDatePicker
           name="startDate"
           value={startDate}
-          onChange={(detail) => setStartDate(detail.value)}
+          onChange={(detail) => setStartDate(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 
       <h3>With date range</h3>
-      <GoabFormItem label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
+      <GoabFormItem
+        label="Appointment date"
+        helpText="Select a date within the next 7 days"
+        mb="l"
+      >
         <GoabDatePicker
           name="appointment"
           min="2024-03-01"
           max="2024-03-07"
           value={appointment}
-          onChange={(detail) => setAppointment(detail.value)}
+          onChange={(detail) => setAppointment(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 
@@ -65,7 +67,7 @@ export function DocsDatePickerRoute() {
           name="incident"
           type="calendar"
           value={incident}
-          onChange={(detail) => setIncident(detail.value)}
+          onChange={(detail) => setIncident(detail.valueStr || undefined)}
         />
       </GoabFormItem>
       <GoabFormItem label="What is your birthday?" mb="l">
@@ -73,20 +75,20 @@ export function DocsDatePickerRoute() {
           name="birthday"
           type="input"
           value={birthday}
-          onChange={(detail) => setBirthday(detail.value)}
+          onChange={(detail) => setBirthday(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 
       <h3>States</h3>
       <GoabFormItem label="Locked date" mb="l">
-        <GoabDatePicker name="locked" value={new Date("2024-01-01")} disabled />
+        <GoabDatePicker name="locked" value="2024-01-01" disabled />
       </GoabFormItem>
       <GoabFormItem label="Date with error" error="Please select a valid date" mb="l">
         <GoabDatePicker
           name="error"
           error
           value={errorDate}
-          onChange={(detail) => setErrorDate(detail.value)}
+          onChange={(detail) => setErrorDate(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 
@@ -98,7 +100,7 @@ export function DocsDatePickerRoute() {
           name="birthdate"
           type="input"
           value={exampleBirthday}
-          onChange={(e) => setExampleBirthday(e.value)}
+          onChange={(e) => setExampleBirthday(e.valueStr || undefined)}
         />
       </GoabFormItem>
 
@@ -107,7 +109,7 @@ export function DocsDatePickerRoute() {
         <GoabDatePicker
           name="item"
           value={resetDate}
-          onChange={(e) => setResetDate(e.value as Date)}
+          onChange={(e) => setResetDate(e.valueStr || undefined)}
           mb="xl"
         />
       </GoabFormItem>

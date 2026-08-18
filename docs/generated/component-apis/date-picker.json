@@ -20,14 +20,10 @@
         },
         {
           "name": "max",
-          "type": "Date | string",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Maximum date value allowed."
+          "description": "Sets the latest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "mb",
@@ -38,14 +34,10 @@
         },
         {
           "name": "min",
-          "type": "Date | string",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Minimum date value allowed."
+          "description": "Sets the earliest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "ml",
@@ -91,14 +83,10 @@
         },
         {
           "name": "value",
-          "type": "Date | string | undefined",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd)."
+          "description": "Sets the calendar date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "width",
@@ -161,14 +149,10 @@
         },
         {
           "name": "max",
-          "type": "Date | string",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets the maximum date value allowed."
+          "description": "Sets the latest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "mb",
@@ -179,14 +163,10 @@
         },
         {
           "name": "min",
-          "type": "Date | string",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets the minimum date value allowed."
+          "description": "Sets the earliest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "ml",
@@ -232,14 +212,10 @@
         },
         {
           "name": "value",
-          "type": "Date | string | null | undefined",
-          "values": [
-            "Date",
-            "string"
-          ],
+          "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets the value of the calendar date."
+          "description": "Sets the calendar date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "width",
@@ -298,7 +274,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Maximum date value allowed."
+          "description": "Sets the latest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "mb",
@@ -313,7 +289,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Minimum date value allowed."
+          "description": "Sets the earliest allowed date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "ml",
@@ -380,7 +356,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Value of the calendar date."
+          "description": "Sets the calendar date as an ISO date string (yyyy-mm-dd)."
         },
         {
           "name": "version",
