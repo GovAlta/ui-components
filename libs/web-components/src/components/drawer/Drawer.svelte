@@ -57,6 +57,14 @@
   // ========
   $: _showCloseButton = closeButtonVisibility !== "hidden";
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
+  $: _scrollPanelMaxHeight =
+    version === "2"
+      ? position === "bottom"
+        ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
+        : position === "left" || position === "right"
+          ? "calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px))"
+          : undefined
+      : undefined;
   $: _flyParams = {
     duration: 200,
     x: position === "right" ? 200 : position === "left" ? -200 : 0,
@@ -148,7 +156,7 @@
           position === "bottom"
             ? "unset"
             : version === "2"
-              ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))`
+              ? `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
               : `min(${maxsize}, 100vw)`,
         ),
         style(
@@ -156,14 +164,14 @@
           position === "bottom"
             ? "100%"
             : version === "2"
-              ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))`
+              ? `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
               : `min(${maxsize}, 100vw)`,
         ),
         style(
           "max-height",
           position === "bottom"
             ? version === "2"
-              ? `min(${maxsize}, calc(100vh - 2 * var(--goa-drawer-offset, 0)))`
+              ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
               : `min(${maxsize}, 100vh)`
             : undefined,
         ),
@@ -184,7 +192,7 @@
       data-first-focus="true"
       aria-labelledby={_showCloseButton ? "goa-drawer-heading" : undefined}
     >
-      <goa-scroll-panel>
+      <goa-scroll-panel maxheight={_scrollPanelMaxHeight}>
         {#if _showCloseButton}
           <div slot="header" class="header" id="goa-drawer-heading">
             {#if heading || $$slots.heading}
@@ -417,7 +425,9 @@
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
-    max-height: calc(100vh - 2 * var(--goa-drawer-offset, 0));
+    max-height: calc(
+      100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)
+    );
     overflow-y: hidden; /* No scroll on drawer itself */
     border-radius: var(--goa-drawer-border-radius, 24px);
     box-shadow: var(--goa-drawer-shadow);
@@ -456,7 +466,9 @@
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
-    max-height: calc(100vh - 2 * var(--goa-drawer-offset, 0));
+    max-height: calc(
+      100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)
+    );
     overflow-y: hidden; /* No scroll on drawer itself */
     border-radius: var(--goa-drawer-border-radius, 24px);
     box-shadow: var(--goa-drawer-shadow);
