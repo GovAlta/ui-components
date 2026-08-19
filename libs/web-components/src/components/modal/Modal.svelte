@@ -213,7 +213,7 @@
           </div>
         {/if}
         <div class="content">
-          <goa-scroll-panel>
+          <goa-scroll-panel maxheight="calc(100vh - 10rem)">
             <header
               slot="header"
               class:has-content={_headerHasContent}
@@ -471,11 +471,11 @@
     border: none;
   }
 
-  /* Bound the pane so scroll-panel inside has a flex height context. 160px =
-     128px edge margin (64px top + 64px bottom) + 32px (matches the prior V1
+  /* Bound the pane so scroll-panel inside has a flex height context. 10rem =
+     8rem edge margin (4rem top + 4rem bottom) + 2rem (matches the prior V1
      maxheight calc's extra --goa-space-xl term), */
   .modal-pane {
-    max-height: calc(100vh - 160px);
+    max-height: calc(100vh - 10rem);
     overflow: hidden;
   }
 
