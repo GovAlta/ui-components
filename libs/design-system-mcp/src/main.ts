@@ -352,10 +352,10 @@ function buildGetNext(
     );
   } else if (collection === 'examples') {
     if (
-      Array.isArray(data.relatedPatterns) &&
-      data.relatedPatterns.length > 0
+      Array.isArray(data.relatedExamples) &&
+      data.relatedExamples.length > 0
     ) {
-      suggested_calls.push(`get({ id: '${data.relatedPatterns[0]}' })`);
+      suggested_calls.push(`get({ id: '${data.relatedExamples[0]}' })`);
     }
   }
 
@@ -365,11 +365,13 @@ function buildGetNext(
 /**
  * Build the related block for a get response.
  *
- * For components: relatedComponents and relatedExamples are read directly;
- * guidance ids on the component are resolved against the guidance collection
- * and returned as lightweight summaries so an agent can act without a
- * second round-trip per atom.
- * For examples: components are reverse-looked-up; relatedPatterns surface as examples.
+ * For components: relatedComponents are read directly; examples are
+ * reverse-looked-up from each example's own components list; guidance ids on
+ * the component are resolved against the guidance collection and returned as
+ * lightweight summaries so an agent can act without a second round-trip per
+ * atom.
+ * For examples: components are read directly; relatedExamples surface as
+ * sibling examples.
  */
 function buildGetRelated(
   collection: string,
@@ -392,9 +394,9 @@ function buildGetRelated(
         components.push({ id: cid }),
       );
     }
-    if (Array.isArray(data.relatedExamples)) {
-      data.relatedExamples.forEach((eid: string) => examples.push({ id: eid }));
-    }
+    dataLoader
+      .getExamplesForComponent(id)
+      .forEach((eid) => examples.push({ id: eid }));
     if (Array.isArray(data.relatedGuidance)) {
       for (const gid of data.relatedGuidance) {
         const entry = resolveGuidanceSummary(gid, dataLoader);
@@ -402,11 +404,11 @@ function buildGetRelated(
       }
     }
   } else if (collection === 'examples') {
-    dataLoader
-      .findComponentsRelatedToExample(id)
-      .forEach((cid) => components.push({ id: cid }));
-    if (Array.isArray(data.relatedPatterns)) {
-      data.relatedPatterns.forEach((pid: string) => examples.push({ id: pid }));
+    if (Array.isArray(data.components)) {
+      data.components.forEach((cid: string) => components.push({ id: cid }));
+    }
+    if (Array.isArray(data.relatedExamples)) {
+      data.relatedExamples.forEach((eid: string) => examples.push({ id: eid }));
     }
   }
 

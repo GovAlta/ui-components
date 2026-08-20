@@ -86,6 +86,7 @@ export interface SearchOptions {
 export class DataLoader {
   private index = new InvertedIndex();
   private aliasMap = new Map<string, string>(); // lowercase alias -> canonical id
+  private examplesByComponent = new Map<string, string[]>(); // canonical component id -> example ids
   private initialized = false;
 
   async initialize(): Promise<void> {
@@ -102,6 +103,8 @@ export class DataLoader {
     await this.loadFolder(join(dataDir, 'foundations'), 'foundation');
     await this.loadFolder(join(dataDir, 'get-started'), 'get-started');
     await this.loadFolder(join(dataDir, 'productTypes'), 'productType');
+
+    this.buildComponentExampleIndex();
 
     this.initialized = true;
 
@@ -225,20 +228,13 @@ export class DataLoader {
   }
 
   /**
-   * Find component IDs that list this example in their relatedExamples field.
-   * Reverse lookup: examples don't list their components directly, but
-   * components list the examples that use them.
+   * Example ids that use a component, from the reverse index built at load
+   * time. Accepts the component name in any form (see normalizeComponentId).
    */
-  findComponentsRelatedToExample(exampleId: string): string[] {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const components = this.index.getItemsByType('component' as any);
-    return components
-      .filter(
-        (c) =>
-          Array.isArray(c.data.relatedExamples) &&
-          c.data.relatedExamples.includes(exampleId),
-      )
-      .map((c) => c.id);
+  getExamplesForComponent(componentId: string): string[] {
+    return (
+      this.examplesByComponent.get(this.normalizeComponentId(componentId)) ?? []
+    );
   }
 
   /**
@@ -379,6 +375,30 @@ export class DataLoader {
   }
 
   // Private methods
+
+  /**
+   * Build the component -> examples reverse index from each example's
+   * `components` list (the generator records the relationship on the example
+   * side only). Runs once, after all folders are loaded, so alias
+   * registration is complete before ids are normalized.
+   */
+  private buildComponentExampleIndex(): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const examples = this.index.getItemsByType('example' as any);
+    for (const example of examples) {
+      if (!Array.isArray(example.data.components)) continue;
+      for (const ref of example.data.components) {
+        if (typeof ref !== 'string' || ref.length === 0) continue;
+        const componentId = this.normalizeComponentId(ref);
+        const list = this.examplesByComponent.get(componentId);
+        if (!list) {
+          this.examplesByComponent.set(componentId, [example.id]);
+        } else if (!list.includes(example.id)) {
+          list.push(example.id);
+        }
+      }
+    }
+  }
 
   /**
    * Load one collection. Every collection is required: a folder only goes
