@@ -17,6 +17,7 @@ export interface ComponentRecord extends BaseRecord {
   relatedComponents: string[];
   figmaUrl?: string;
   subcomponent?: boolean;
+  internal?: boolean;
   webComponentTag?: string;
   reactClassName?: string;
   angularSelector?: string;

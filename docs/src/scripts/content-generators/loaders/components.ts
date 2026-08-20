@@ -25,6 +25,7 @@ export function loadComponents(): ComponentRecord[] {
       relatedComponents: asStringArray(data.relatedComponents),
       figmaUrl: asString(data.figmaUrl),
       subcomponent: data.subcomponent === true ? true : undefined,
+      internal: data.internal === true ? true : undefined,
       body: body.trim(),
     });
   }
