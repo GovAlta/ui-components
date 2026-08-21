@@ -69638,20 +69638,20 @@ function DocsAppHeaderRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "App header" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic app header" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { heading: "My Application" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { heading: "My Application" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With home link" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { heading: "My Application", url: "/" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { heading: "My Application", url: "/" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With secondary text" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAppHeader,
       {
         heading: "My Application",
         secondaryText: "Supporting information",
         url: "/"
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With utilities" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAppHeader,
       {
         heading: "My Application",
@@ -69661,18 +69661,18 @@ function DocsAppHeaderRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", leadingIcon: "person", children: "Sign in" })
         ] })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With phase badge" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAppHeader,
       {
         heading: "My Application",
         url: "/",
         phase: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "important", content: "Service preview" })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Internal testing banner" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAppHeader,
       {
         heading: "My Application",
@@ -69690,9 +69690,9 @@ function DocsAppHeaderRoute() {
           }
         )
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With navigation" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAppHeader,
       {
         heading: "Service Portal",
@@ -69712,7 +69712,7 @@ function DocsAppHeaderRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
         ] })
       }
-    )
+    ) })
   ] });
 }
 const appHeader_route = {
@@ -72409,15 +72409,15 @@ function DocsFooterRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Footer" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic footer" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With meta section" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterMetaSection, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterMetaSection, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/privacy", children: "Privacy" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/terms", children: "Terms of use" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/accessibility", children: "Accessibility" })
-    ] }) }),
+    ] }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With navigation" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterNavSection, { heading: "Services", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/apply", children: "Apply online" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/renew", children: "Renew" }),
@@ -72427,9 +72427,9 @@ function DocsFooterRoute() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/help", children: "Help center" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/feedback", children: "Feedback" })
       ] })
-    ] }),
+    ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With meta and nav sections" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterNavSection, { heading: "Services", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/apply", children: "Apply online" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/renew", children: "Renew" }),
@@ -72444,9 +72444,9 @@ function DocsFooterRoute() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/terms", children: "Terms of use" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/accessibility", children: "Accessibility" })
       ] })
-    ] }),
+    ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With links" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooter, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppFooterNavSection, { heading: "Services", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/apply", children: "Apply online" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { trailingIcon: "open", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.alberta.ca/services", children: "All services" }) })
@@ -72455,7 +72455,7 @@ function DocsFooterRoute() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/privacy", children: "Privacy" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabLink, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/accessibility", children: "Accessibility" }) })
       ] })
-    ] })
+    ] }) })
   ] });
 }
 const footer_route = {
@@ -73362,7 +73362,7 @@ function DocsPageBlockRoute() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Examples" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic page layout" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "header", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/", heading: "Service name", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/login", children: "Sign in" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "header", children: /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/", heading: "Service name", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/login", children: "Sign in" }) }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabPageBlock, { width: "704px", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSkeleton, { type: "header", size: "4" }),
@@ -73377,7 +73377,7 @@ function DocsPageBlockRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSkeleton, { type: "card", size: "2" })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "footer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "footer", children: /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}) }) })
     ] })
   ] });
 }
@@ -73985,22 +73985,22 @@ function DocsSideMenuRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Side menu" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic side menu" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/overview", children: "Overview" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/details", children: "Details" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/settings", children: "Settings" })
-    ] }) }),
+    ] }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With sections" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSideMenuHeading, { children: "Main" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/dashboard", children: "Dashboard" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/reports", children: "Reports" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSideMenuHeading, { children: "Settings" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/profile", children: "Profile" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/preferences", children: "Preferences" })
-    ] }) }),
+    ] }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With groups" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: "200px" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenu, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabSideMenuGroup, { heading: "Applications", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/apps/active", children: "Active" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/apps/pending", children: "Pending" }),
@@ -74010,7 +74010,7 @@ function DocsSideMenuRoute() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/reports/monthly", children: "Monthly" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/reports/annual", children: "Annual" })
       ] })
-    ] }) })
+    ] }) }) })
   ] });
 }
 const sideMenu_route = {
@@ -74055,7 +74055,7 @@ function DocsSkeletonRoute() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Examples" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic page layout" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "header", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/", heading: "Service name", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/login", children: "Sign in" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "header", children: /* @__PURE__ */ jsxRuntimeExports.jsx("header", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/", heading: "Service name", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/login", children: "Sign in" }) }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabPageBlock, { width: "704px", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSkeleton, { type: "header", size: "4" }),
@@ -74070,7 +74070,7 @@ function DocsSkeletonRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabSkeleton, { type: "card", size: "2" })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "footer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { slot: "footer", children: /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppFooter, {}) }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Form stepper with controlled navigation" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabFormStepper, { step, onChange: (event) => setStep(event.step), children: [
@@ -75631,7 +75631,7 @@ function DocsWorkSideMenuRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Work side menu" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic work side menu" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -75644,9 +75644,9 @@ function DocsWorkSideMenuRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "settings", label: "Admin", url: "/admin" })
         ] })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With user profile" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -75659,9 +75659,9 @@ function DocsWorkSideMenuRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
         ] })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With groups" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -75678,9 +75678,9 @@ function DocsWorkSideMenuRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
         ] })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Secondary menu" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "Case Management",
@@ -75696,9 +75696,9 @@ function DocsWorkSideMenuRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Payments", url: "/cases/123/payments" })
         ] })
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With notifications" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -75752,7 +75752,7 @@ function DocsWorkSideMenuRoute() {
           }
         ) })
       }
-    )
+    ) })
   ] });
 }
 const workSideMenu_route = {
@@ -75926,7 +75926,7 @@ function DocsWorkSideNotificationPanelRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Notification panel" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic notification panel" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -75963,9 +75963,9 @@ function DocsWorkSideNotificationPanelRoute() {
           }
         )
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With urgent notifications" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -76002,9 +76002,9 @@ function DocsWorkSideNotificationPanelRoute() {
           }
         )
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Notification type badges" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabWorkSideMenu,
       {
         heading: "My Application",
@@ -76038,7 +76038,7 @@ function DocsWorkSideNotificationPanelRoute() {
           }
         )
       }
-    )
+    ) })
   ] });
 }
 const workSideNotificationPanel_route = {
@@ -76057,7 +76057,7 @@ const scrollRows = Array.from({ length: 20 }, (_, i) => i + 1);
 function navigate(path) {
   console.log("navigate", path);
 }
-const sideMenu = /* @__PURE__ */ jsxRuntimeExports.jsx(
+const sideMenu = /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
   GoabWorkSideMenu,
   {
     heading: "Workspace layout",
@@ -76068,7 +76068,7 @@ const sideMenu = /* @__PURE__ */ jsxRuntimeExports.jsx(
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
     ] })
   }
-);
+) });
 const pageHeader = /* @__PURE__ */ jsxRuntimeExports.jsxs(
   "div",
   {
