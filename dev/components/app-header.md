@@ -109,6 +109,10 @@ Tag: `goa-app-header`
 
 - **[Warning]** Always provide a heading prop on AppHeader to identify your service. Without it, users won't know which service they're using.
 
+### Other
+
+- **[Do]** Use the one column layout to ensure consistent page structure, proper header/footer placement, and responsive behavior.
+
 ---
 
 ## Examples
