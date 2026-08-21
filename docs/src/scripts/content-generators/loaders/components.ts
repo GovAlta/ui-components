@@ -24,8 +24,8 @@ export function loadComponents(): ComponentRecord[] {
       aliases: [],
       relatedComponents: asStringArray(data.relatedComponents),
       figmaUrl: asString(data.figmaUrl),
-      hidden: data.hidden === true ? true : undefined,
       subcomponent: data.subcomponent === true ? true : undefined,
+      internal: data.internal === true ? true : undefined,
       body: body.trim(),
     });
   }
