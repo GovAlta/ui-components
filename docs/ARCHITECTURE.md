@@ -150,6 +150,7 @@ relatedComponents: [button-group, icon-button]
 figmaUrl: https://www.figma.com/...
 hidden: true # optional — hide from nav (used for subcomponents, deprecated, internal)
 subcomponent: true # optional — show API on parent component page
+internal: true # optional — rendered inside other components, not for direct use (included in the generated data)
 hideTabs: [examples] # optional, hide tabs on this page (examples, usage, accessibility); Properties always shows
 ---
 ```
@@ -157,6 +158,8 @@ hideTabs: [examples] # optional, hide tabs on this page (examples, usage, access
 The MDX body is usually empty. Any content you add appears at the bottom of the "Usage guidelines" tab.
 
 **Subcomponents:** Some components are children that developers compose with a parent (e.g., Tab inside Tabs, Footer Nav Section inside Footer). These have `hidden: true` (not in nav) and `subcomponent: true` (API shown on parent page). The parent discovers subcomponents via its `relatedComponents` array. See "Add a subcomponent" below for how this works.
+
+**Internal components:** A few components exist only to be rendered inside other components (Calendar inside DatePicker, Focus Trap inside Modal and Drawer, Spinner inside Circular Progress). These have `hidden: true` and `internal: true`. Unlike `hidden`, which is a docs site concern, `internal` travels into the generated MCP and Markdown data so AI tools know these components are not for direct use.
 
 ### Guidance (`src/content/guidance/*.mdx`)
 
