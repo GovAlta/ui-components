@@ -40,7 +40,6 @@ An overlay that appears in front of all other content, and requires a user to ta
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `calloutVariant` | GoabModalCalloutVariant | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
-| `closable` | boolean | `false` | No | Show close icon and allow clicking the background to close the modal. |
 | `heading` | string \| TemplateRef<any> | (none) | No | The heading text displayed at the top of the modal. |
 | `maxWidth` | string | (none) | No | Set the max allowed width of the modal. |
 | `open` | boolean | (none) | No | Controls if modal is visible or not. |
