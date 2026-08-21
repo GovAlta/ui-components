@@ -9,6 +9,7 @@ export function AskForBirthday() {
       <GoabDatePicker
         name="birthdate"
         type="input"
+        max={new Date()}
         value={birthdate}
         onChange={(e) => setBirthdate(e.value)}
       />
