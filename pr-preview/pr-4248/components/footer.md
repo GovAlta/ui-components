@@ -51,6 +51,19 @@ Tag: `goa-footer`
 
 ---
 
+## Usage guidance
+
+### Other
+
+- **[Don't]** Don't customize the links in the footer.
+- **[Do]** Use the one column layout to ensure consistent page structure, proper header/footer placement, and responsive behavior.
+
+### Positioning
+
+- **[Don't]** Don't show white space below the footer. Extend the footer background to the bottom of the page.
+
+---
+
 ## Examples
 
 - [Basic page layout](/examples/basic-page-layout)
