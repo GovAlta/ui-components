@@ -13,6 +13,7 @@ A single-line field where users can input and edit text.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Sets the aria-label used by assistive technologies. |
+| `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input |
 | `autoCapitalize` | GoabAutoCapitalize | (none) | No | Controls automatic capitalization behavior on supported mobile browsers. |
 | `autoComplete` | string | (none) | No | Sets the autocomplete attribute for the input element. |
 | `debounce` | number | (none) | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
