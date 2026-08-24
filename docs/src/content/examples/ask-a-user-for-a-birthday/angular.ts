@@ -7,7 +7,6 @@ import type { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 })
 export class AskForBirthdayComponent {
   birthdate: Date | undefined;
-  maxDate = new Date();
 
   onDateChange(event: GoabDatePickerOnChangeDetail): void {
     this.birthdate = event.valueStr ? new Date(event.valueStr) : undefined;

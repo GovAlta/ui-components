@@ -9,7 +9,6 @@
 
 <script>
   const datePicker = document.getElementById("birthdate");
-  datePicker.setAttribute("max", new Date().toISOString().split("T")[0]);
   datePicker.addEventListener("_change", (e) => {
     console.log("Selected date:", e.detail.value);
   });
