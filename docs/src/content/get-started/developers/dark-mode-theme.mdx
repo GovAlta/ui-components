@@ -22,9 +22,9 @@ import { withBase } from "@/lib/base-url";
 
 <goa-callout version="2" type="information" emphasis="low" mb="2xl">
   <span style="color: var(--goa-color-text-default)">
-    Theme switching requires <code>@abgov/design-tokens</code> version <strong>2.8.0</strong> or
-    higher with the dark theme stylesheet imported. See <a href={withBase('/get-started/developers/setup')}>Setup</a>
-    for installation steps.
+    Dark theme styles are included in <code>@abgov/web-components/index.css</code>. If you
+    completed the <a href={withBase('/get-started/developers/setup')}>developer setup</a>,
+    you do not need another package or stylesheet.
   </span>
 </goa-callout>
 
@@ -61,8 +61,7 @@ import { withBase } from "@/lib/base-url";
 <pre><code>{`// main.tsx
 import { GoabThemeProvider } from "@abgov/react-components";
 import { BrowserRouter } from "react-router-dom";
-import "@abgov/design-tokens/dist/tokens.css";
-import "@abgov/design-tokens/dist/dark-theme.css";
+import "@abgov/web-components/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -123,13 +122,12 @@ interface GoabThemeProviderProps {
   The Angular package exposes a root-provided service backed by a Signal.
 </goa-text>
 
-<h3 id="angular-step-1">1. Import the dark theme stylesheet</h3>
+<h3 id="angular-step-1">1. Add the component stylesheet</h3>
 <goa-text size="body-m" mt="none" mb="m">
-  Add the import to your global stylesheet (typically <code>src/styles.css</code>):
+  The component stylesheet includes the dark theme styles. If you completed the developer
+  setup, you already have this import in your global stylesheet:
 </goa-text>
-<pre><code>@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
-@import "@abgov/design-tokens/dist/dark-theme.css";</code></pre>
+<pre><code>@import "@abgov/web-components/index.css";</code></pre>
 
 <h3 id="angular-step-2">2. Inject GoabThemeService</h3>
 <goa-text size="body-m" mt="none" mb="m">
@@ -223,37 +221,13 @@ class GoabThemeService {
 </goa-callout>
 
 <goa-text size="body-m" mt="none" mb="m">
-  The simplest setup imports only <code>tokens.css</code> and uses
-  <code>{`var(--goa-*)`}</code> everywhere — every token automatically participates
-  in theme switching, and there is one syntax to remember.
+  The Web Components stylesheet provides CSS custom properties. Use
+  <code>{`var(--goa-*)`}</code> for values that should respond to theme switching.
 </goa-text>
-<pre><code>{`@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
-@import "@abgov/design-tokens/dist/dark-theme.css";`}</code></pre>
+<pre><code>@import "@abgov/web-components/index.css";</code></pre>
 <pre><code>{`.my-card {
   background: var(--goa-color-surface-card);
   font-family: var(--goa-font-family-sans);
   padding: var(--goa-space-m);
   transition-duration: var(--goa-motion-duration-medium-2);
-}`}</code></pre>
-
-<h3 id="scss-sass-vars">When you need Sass variables</h3>
-<goa-text size="body-m" mt="none" mb="m">
-  Some workflows need Sass arithmetic, mixins, or functions over token values
-  (for example <code>{`$goa-space-m * 2`}</code>). In that case, import
-  <code>tokens.scss</code> alongside the CSS files and use <code>{`$goa-*`}</code>
-  for compile-time values only — never for colors, surfaces, or anything that
-  should flip with theme.
-</goa-text>
-<pre><code>{`@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
-@import "@abgov/design-tokens/dist/dark-theme.css";
-@import "@abgov/design-tokens/dist/tokens.scss";`}</code></pre>
-<pre><code>{`.my-card {
-  // Theme-responsive — must use var()
-  background: var(--goa-color-surface-card);
-
-  // Compile-time only — Sass arithmetic OK
-  padding: $goa-space-m * 2;
-  border-radius: $goa-border-radius-m;
 }`}</code></pre>
