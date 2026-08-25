@@ -70846,11 +70846,15 @@ const __vite_glob_0_109 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function DocsContainerRoute() {
   const [open, setOpen] = reactExports.useState(false);
-  const [effectiveDate, setEffectiveDate] = reactExports.useState(/* @__PURE__ */ new Date());
+  const today = /* @__PURE__ */ new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const [effectiveDate, setEffectiveDate] = reactExports.useState(`${year}-${month}-${day}`);
   const [typedChips, setTypedChips] = reactExports.useState([]);
   const [inputValue, setInputValue] = reactExports.useState("");
   const onChangeEffectiveDate = (detail) => {
-    setEffectiveDate(detail.value);
+    setEffectiveDate(detail.valueStr);
   };
   const addChip = () => {
     if (inputValue.trim()) {
@@ -71462,7 +71466,7 @@ const __vite_glob_0_111 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function DocsDatePickerRoute() {
   const [date, setDate] = reactExports.useState();
-  const [startDate, setStartDate] = reactExports.useState(/* @__PURE__ */ new Date("2024-01-15"));
+  const [startDate, setStartDate] = reactExports.useState("2024-01-15");
   const [appointment, setAppointment] = reactExports.useState();
   const [incident, setIncident] = reactExports.useState();
   const [birthday, setBirthday] = reactExports.useState();
@@ -71470,9 +71474,7 @@ function DocsDatePickerRoute() {
   const [exampleBirthday, setExampleBirthday] = reactExports.useState();
   const [resetDate, setResetDate] = reactExports.useState();
   const setValue = () => {
-    const d = /* @__PURE__ */ new Date();
-    d.setDate(d.getDate() - 7);
-    setResetDate(d);
+    setResetDate("2024-01-15");
   };
   const clearValue = () => setResetDate(void 0);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -71483,7 +71485,7 @@ function DocsDatePickerRoute() {
       {
         name: "date",
         value: date,
-        onChange: (detail) => setDate(detail.value)
+        onChange: (detail) => setDate(detail.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With initial value" }),
@@ -71492,20 +71494,28 @@ function DocsDatePickerRoute() {
       {
         name: "startDate",
         value: startDate,
-        onChange: (detail) => setStartDate(detail.value)
+        onChange: (detail) => setStartDate(detail.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With date range" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Appointment date", helpText: "Select a date within the next 7 days", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      GoabDatePicker,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabFormItem,
       {
-        name: "appointment",
-        min: "2024-03-01",
-        max: "2024-03-07",
-        value: appointment,
-        onChange: (detail) => setAppointment(detail.value)
+        label: "Appointment date",
+        helpText: "Select a date within the next 7 days",
+        mb: "l",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabDatePicker,
+          {
+            name: "appointment",
+            min: "2024-03-01",
+            max: "2024-03-07",
+            value: appointment,
+            onChange: (detail) => setAppointment(detail.valueStr || void 0)
+          }
+        )
       }
-    ) }),
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Input type" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "What day was the incident?", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabDatePicker,
@@ -71513,7 +71523,7 @@ function DocsDatePickerRoute() {
         name: "incident",
         type: "calendar",
         value: incident,
-        onChange: (detail) => setIncident(detail.value)
+        onChange: (detail) => setIncident(detail.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "What is your birthday?", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -71522,18 +71532,18 @@ function DocsDatePickerRoute() {
         name: "birthday",
         type: "input",
         value: birthday,
-        onChange: (detail) => setBirthday(detail.value)
+        onChange: (detail) => setBirthday(detail.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "States" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Locked date", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDatePicker, { name: "locked", value: /* @__PURE__ */ new Date("2024-01-01"), disabled: true }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Locked date", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDatePicker, { name: "locked", value: "2024-01-01", disabled: true }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Date with error", error: "Please select a valid date", mb: "l", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabDatePicker,
       {
         name: "error",
         error: true,
         value: errorDate,
-        onChange: (detail) => setErrorDate(detail.value)
+        onChange: (detail) => setErrorDate(detail.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Examples" }),
@@ -71544,7 +71554,7 @@ function DocsDatePickerRoute() {
         name: "birthdate",
         type: "input",
         value: exampleBirthday,
-        onChange: (e) => setExampleBirthday(e.value)
+        onChange: (e) => setExampleBirthday(e.valueStr || void 0)
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Reset date picker field" }),
@@ -71553,7 +71563,7 @@ function DocsDatePickerRoute() {
       {
         name: "item",
         value: resetDate,
-        onChange: (e) => setResetDate(e.value),
+        onChange: (e) => setResetDate(e.valueStr || void 0),
         mb: "xl"
       }
     ) }),
@@ -71942,7 +71952,7 @@ function DocsDrawerRoute() {
           ) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabFormItem, { label: "Start date", mt: "l", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabDatePicker, { onChange: () => {
-            }, value: /* @__PURE__ */ new Date("2022-09-01") }),
+            }, value: "2022-09-01" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               GoabCheckbox,
               {
