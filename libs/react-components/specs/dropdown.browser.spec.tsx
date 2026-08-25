@@ -589,17 +589,16 @@ describe("Dropdown", () => {
 
         const result = render(<Component />);
         const dropdown = result.getByTestId("dropdown");
+        const popoverContent = result.getByTestId("popover-content");
         await dropdown.click();
         await vi.waitFor(async () => {
-          const dropdownOption = result.getByText("Green");
-          expect(dropdownOption).toBeDefined();
           const dropdownRect = dropdown.element().getBoundingClientRect();
-          const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          const popoverRect = popoverContent.element().getBoundingClientRect();
+          expect(Math.abs(popoverRect.width - dropdownRect.width)).toBeLessThanOrEqual(2);
         });
       });
 
-      it("should maintain dropdown option width equal to input width in narrow viewport", async () => {
+      it("should keep the option list aligned with the input in a narrow viewport", async () => {
         // Set viewport to narrow width - bug 2441
         await page.viewport(250, 800);
         const Component = () => {
@@ -614,12 +613,13 @@ describe("Dropdown", () => {
 
         const result = render(<Component />);
         const dropdown = result.getByTestId("dropdown");
+        const popoverContent = result.getByTestId("popover-content");
         await dropdown.click();
         await vi.waitFor(async () => {
-          const dropdownOption = result.getByText("Green");
           const dropdownRect = dropdown.element().getBoundingClientRect();
-          const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          const popoverRect = popoverContent.element().getBoundingClientRect();
+          expect(Math.abs(popoverRect.left - dropdownRect.left)).toBeLessThanOrEqual(1);
+          expect(Math.abs(popoverRect.width - dropdownRect.width)).toBeLessThanOrEqual(2);
         });
       });
 

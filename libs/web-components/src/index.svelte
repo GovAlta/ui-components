@@ -6,4 +6,5 @@
   import "./assets/css/variables.css";
   import "./assets/css/components.css";
   import "@abgov/design-tokens/dist/tokens.css";
+  import "@abgov/design-tokens/dist/dark-theme.css";
 </script>
