@@ -23,14 +23,6 @@ import {
   docsRouteDefinitions,
   featureRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
-import {
-  applyTokenVersion,
-  resolveTokenVersion,
-  TokenVersion,
-} from "./token-version/token-version";
-
-// Sentinel URL handled by handleNavigate to toggle tokens instead of routing.
-const TOKEN_TOGGLE_URL = "#tokens";
 
 interface NotificationData {
   id: string;
@@ -71,8 +63,6 @@ export class AppComponent {
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
   readonly baseHref = inject(LocationStrategy).getBaseHref();
-  readonly tokenToggleUrl = TOKEN_TOGGLE_URL;
-  tokenMode: TokenVersion = resolveTokenVersion();
   readonly pushDrawerParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
 
   // Sample notifications for the work-side-menu notification panel (#4110 test).
@@ -168,11 +158,6 @@ export class AppComponent {
   }
 
   handleNavigate(path: string): void {
-    if (path === TOKEN_TOGGLE_URL) {
-      this.tokenMode = this.tokenMode === "v1" ? "v2" : "v1";
-      applyTokenVersion(this.tokenMode);
-      return;
-    }
     if (path === "#toggle-theme") {
       this.theme.toggle();
       return;
