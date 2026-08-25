@@ -96,17 +96,12 @@ export class DataLoader {
 
     const dataDir = resolveDataDir();
 
-    // The last argument marks a collection as required. Components, examples
-    // and guidance are the server's core knowledge: if one of those folders is
-    // missing the package shipped broken and must say so. The rest are
-    // supplementary, and the generator only creates a folder when its
-    // collection has at least one record, so their absence is legitimate.
-    await this.loadFolder(join(dataDir, 'components'), 'component', true);
-    await this.loadFolder(join(dataDir, 'examples'), 'example', true);
-    await this.loadFolder(join(dataDir, 'guidance'), 'guidance', true);
-    await this.loadFolder(join(dataDir, 'foundations'), 'foundation', false);
-    await this.loadFolder(join(dataDir, 'get-started'), 'get-started', false);
-    await this.loadFolder(join(dataDir, 'productTypes'), 'productType', false);
+    await this.loadFolder(join(dataDir, 'components'), 'component');
+    await this.loadFolder(join(dataDir, 'examples'), 'example');
+    await this.loadFolder(join(dataDir, 'guidance'), 'guidance');
+    await this.loadFolder(join(dataDir, 'foundations'), 'foundation');
+    await this.loadFolder(join(dataDir, 'get-started'), 'get-started');
+    await this.loadFolder(join(dataDir, 'productTypes'), 'productType');
 
     this.initialized = true;
 
@@ -385,23 +380,18 @@ export class DataLoader {
 
   // Private methods
 
-  private async loadFolder(
-    folderPath: string,
-    type: string,
-    required: boolean,
-  ): Promise<void> {
-    // Read the folder outside the per-file try so a file-level throw below
-    // propagates to the caller instead of being caught here.
+  /**
+   * Load one collection. Every collection is required: a folder only goes
+   * missing if the data was built or packaged wrong, and a server that
+   * answers without part of its knowledge is worse than one that refuses to
+   * start. The folder read sits outside the per-file try below so a
+   * file-level failure propagates to the caller instead of being caught here.
+   */
+  private async loadFolder(folderPath: string, type: string): Promise<void> {
     let files: string[];
     try {
       files = await readdir(folderPath);
     } catch (err) {
-      if (!required) {
-        process.stderr.write(
-          `[design-system-mcp] Optional data folder not found, skipping: ${folderPath}\n`,
-        );
-        return;
-      }
       const message = err instanceof Error ? err.message : String(err);
       throw new Error(
         `Unable to load required data folder '${folderPath}': ${message}`,
