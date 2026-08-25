@@ -96,12 +96,17 @@ export class DataLoader {
 
     const dataDir = resolveDataDir();
 
-    await this.loadFolder(join(dataDir, 'components'), 'component');
-    await this.loadFolder(join(dataDir, 'examples'), 'example');
-    await this.loadFolder(join(dataDir, 'guidance'), 'guidance');
-    await this.loadFolder(join(dataDir, 'foundations'), 'foundation');
-    await this.loadFolder(join(dataDir, 'get-started'), 'get-started');
-    await this.loadFolder(join(dataDir, 'productTypes'), 'productType');
+    // The last argument marks a collection as required. Components, examples
+    // and guidance are the server's core knowledge: if one of those folders is
+    // missing the package shipped broken and must say so. The rest are
+    // supplementary, and the generator only creates a folder when its
+    // collection has at least one record, so their absence is legitimate.
+    await this.loadFolder(join(dataDir, 'components'), 'component', true);
+    await this.loadFolder(join(dataDir, 'examples'), 'example', true);
+    await this.loadFolder(join(dataDir, 'guidance'), 'guidance', true);
+    await this.loadFolder(join(dataDir, 'foundations'), 'foundation', false);
+    await this.loadFolder(join(dataDir, 'get-started'), 'get-started', false);
+    await this.loadFolder(join(dataDir, 'productTypes'), 'productType', false);
 
     this.initialized = true;
 
@@ -380,54 +385,73 @@ export class DataLoader {
 
   // Private methods
 
-  private async loadFolder(folderPath: string, type: string): Promise<void> {
+  private async loadFolder(
+    folderPath: string,
+    type: string,
+    required: boolean,
+  ): Promise<void> {
+    // Read the folder outside the per-file try so a file-level throw below
+    // propagates to the caller instead of being caught here.
+    let files: string[];
     try {
-      const files = await readdir(folderPath);
+      files = await readdir(folderPath);
+    } catch (err) {
+      if (!required) {
+        process.stderr.write(
+          `[design-system-mcp] Optional data folder not found, skipping: ${folderPath}\n`,
+        );
+        return;
+      }
+      const message = err instanceof Error ? err.message : String(err);
+      throw new Error(
+        `Unable to load required data folder '${folderPath}': ${message}`,
+      );
+    }
 
-      for (const file of files) {
-        if (!file.endsWith('.json')) continue;
+    for (const file of files) {
+      if (!file.endsWith('.json')) continue;
 
-        try {
-          const filePath = join(folderPath, file);
-          const content = await readFile(filePath, 'utf8');
-          const data = JSON.parse(content);
+      const filePath = join(folderPath, file);
+      try {
+        const content = await readFile(filePath, 'utf8');
+        const data = JSON.parse(content);
 
-          // Prefer the explicit `id` field (new flat-shape data). Fall back to
-          // legacy id-bearing fields, then the filename (with __ unflattened
-          // back to / so nested ids like get-started/designers/* round-trip).
-          const id =
-            data.id ||
-            data.componentName?.toLowerCase() ||
-            data.patternId ||
-            data.conceptId ||
-            data.exampleId ||
-            file.replace(/\.json$/, '').replace(/__/g, '/');
+        // Prefer the explicit `id` field (new flat-shape data). Fall back to
+        // legacy id-bearing fields, then the filename (with __ unflattened
+        // back to / so nested ids like get-started/designers/* round-trip).
+        const id =
+          data.id ||
+          data.componentName?.toLowerCase() ||
+          data.patternId ||
+          data.conceptId ||
+          data.exampleId ||
+          file.replace(/\.json$/, '').replace(/__/g, '/');
 
-          const indexed: IndexedItem = {
-            id,
-            type: type as IndexedItem['type'],
-            data,
-            searchableText: createSearchableText(data),
-            tags: extractTags(data),
-            category: data.category,
-          };
+        const indexed: IndexedItem = {
+          id,
+          type: type as IndexedItem['type'],
+          data,
+          searchableText: createSearchableText(data),
+          tags: extractTags(data),
+          category: data.category,
+        };
 
-          this.index.addItem(indexed);
+        this.index.addItem(indexed);
 
-          // Register aliases for `get` lookups.
-          if (Array.isArray(data.aliases)) {
-            for (const alias of data.aliases) {
-              if (typeof alias === 'string' && alias.length > 0) {
-                this.aliasMap.set(alias.toLowerCase(), id);
-              }
+        // Register aliases for `get` lookups.
+        if (Array.isArray(data.aliases)) {
+          for (const alias of data.aliases) {
+            if (typeof alias === 'string' && alias.length > 0) {
+              this.aliasMap.set(alias.toLowerCase(), id);
             }
           }
-        } catch {
-          // Skip invalid files silently
         }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        throw new Error(
+          `Unable to load data file '${filePath}': ${message}`,
+        );
       }
-    } catch {
-      // Folder doesn't exist - that's okay
     }
   }
 
