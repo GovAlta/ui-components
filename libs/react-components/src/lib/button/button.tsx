@@ -22,7 +22,6 @@ interface WCProps extends Margins {
   action?: string;
   actionArgs?: string;
   actionArg?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -108,7 +107,6 @@ export function GoabButton({
       action-args={JSON.stringify(actionArgs)}
       arialabel={ariaLabel || undefined}
       {..._props}
-      version="2"
     >
       {children}
     </goa-button>

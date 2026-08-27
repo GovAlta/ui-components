@@ -27,7 +27,7 @@ export const popoverConfigurations: ComponentConfigurations = {
   <goab-text mt="none" mb="none">Popover content goes here. It can contain any content.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover>
-  <goa-button version="2" slot="target">Open popover</goa-button>
+  <goa-button slot="target">Open popover</goa-button>
   <goa-text mt="none" mb="none">Popover content goes here. It can contain any content.</goa-text>
 </goa-popover>`,
       },
@@ -59,15 +59,15 @@ export const popoverConfigurations: ComponentConfigurations = {
   <goab-text mt="none" mb="none">Automatically positions based on available space.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover position="above">
-  <goa-button version="2" slot="target">Above</goa-button>
+  <goa-button slot="target">Above</goa-button>
   <goa-text mt="none" mb="none">Content positioned above the trigger.</goa-text>
 </goa-popover>
 <goa-popover position="below">
-  <goa-button version="2" slot="target">Below</goa-button>
+  <goa-button slot="target">Below</goa-button>
   <goa-text mt="none" mb="none">Content positioned below the trigger.</goa-text>
 </goa-popover>
 <goa-popover position="auto">
-  <goa-button version="2" slot="target">Auto</goa-button>
+  <goa-button slot="target">Auto</goa-button>
   <goa-text mt="none" mb="none">Automatically positions based on available space.</goa-text>
 </goa-popover>`,
       },
@@ -92,11 +92,11 @@ export const popoverConfigurations: ComponentConfigurations = {
   <goab-text mt="none" mb="none">Content flush with popover boundaries.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover padded>
-  <goa-button version="2" slot="target">Padded</goa-button>
+  <goa-button slot="target">Padded</goa-button>
   <goa-text mt="none" mb="none">Content with padding applied.</goa-text>
 </goa-popover>
 <goa-popover padded="false">
-  <goa-button version="2" slot="target">No padding</goa-button>
+  <goa-button slot="target">No padding</goa-button>
   <goa-text mt="none" mb="none">Content flush with popover boundaries.</goa-text>
 </goa-popover>`,
       },
@@ -114,7 +114,7 @@ export const popoverConfigurations: ComponentConfigurations = {
   <goab-text mt="none" mb="none">This popover has a maximum width of 300 pixels to control content width.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover maxwidth="300px">
-  <goa-button version="2" slot="target">More info</goa-button>
+  <goa-button slot="target">More info</goa-button>
   <goa-text mt="none" mb="none">This popover has a maximum width of 300 pixels to control content width.</goa-text>
 </goa-popover>`,
       },

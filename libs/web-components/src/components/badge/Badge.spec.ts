@@ -115,11 +115,10 @@ describe("GoABadgeComponent", () => {
     });
   });
 
-  describe("V2 Emphasis", () => {
-    it("should render HTML content in the content slot for version 2", async () => {
+  describe("Emphasis", () => {
+    it("should render HTML content in the content slot", async () => {
       const badge = document.createElement("goa-badge");
       badge.setAttribute("type", "information");
-      badge.setAttribute("version", "2");
       badge.setAttribute("icon", "true");
       badge.innerHTML =
         '<span slot="content"><strong>Rich content</strong></span>';
@@ -139,31 +138,27 @@ describe("GoABadgeComponent", () => {
       badge.remove();
     });
 
-    it(`should apply strong emphasis class in v2`, async () => {
+    it(`should apply strong emphasis class`, async () => {
       const baseElement = render(GoABadge, {
         testid: "badge-test",
         type: "information",
         content: "Strong",
-        version: "2",
         emphasis: "strong",
       });
       const badge = await baseElement.findByTestId("badge-test");
 
-      expect(badge).toHaveClass("v2");
       expect(badge).toHaveClass("badge-strong");
     });
 
-    it(`should apply subtle emphasis class in v2`, async () => {
+    it(`should apply subtle emphasis class`, async () => {
       const baseElement = render(GoABadge, {
         testid: "badge-test",
         type: "information",
         content: "Subtle",
-        version: "2",
         emphasis: "subtle",
       });
       const badge = await baseElement.findByTestId("badge-test");
 
-      expect(badge).toHaveClass("v2");
       expect(badge).toHaveClass("badge-subtle");
     });
   });

@@ -15,7 +15,6 @@ interface WCProps extends Margins {
   secondarytext?: string;
   leadingicon?: GoabIconType;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -78,7 +77,6 @@ export const GoabFilterChip = ({
       ref={el}
       content={typeof content === "string" ? content : undefined}
       error={error ? "true" : undefined}
-      version="2"
       {..._props}
     >
       {typeof content !== "string" && content != null && (

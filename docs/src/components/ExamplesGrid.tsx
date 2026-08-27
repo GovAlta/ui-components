@@ -574,7 +574,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           {/* Metadata badges */}
           <div className="example-card-badges">
             <goa-badge
-              version="2"
               type={getSizeBadgeType(example.data.size)}
               content={formatSize(example.data.size)}
               emphasis="subtle"
@@ -582,7 +581,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             />
             {example.data.productType && (
               <goa-badge
-                version="2"
                 type={getProductTypeBadgeType(example.data.productType)}
                 content={formatProductType(example.data.productType)}
                 emphasis="subtle"
@@ -592,7 +590,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             {example.data.tags?.slice(0, 3).map((tag) => (
               <goa-badge
                 key={tag}
-                version="2"
                 type="default"
                 content={tag.replace(/-/g, " ")}
                 emphasis="subtle"
@@ -620,7 +617,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getSizeBadgeType(example.data.size)}
             content={formatSize(example.data.size)}
             emphasis="subtle"
@@ -630,7 +626,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         <td>
           {example.data.productType && (
             <goa-badge
-              version="2"
               type={getProductTypeBadgeType(example.data.productType)}
               content={formatProductType(example.data.productType)}
               emphasis="subtle"
@@ -643,7 +638,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             {example.data.tags?.slice(0, 3).map((tag) => (
               <goa-badge
                 key={tag}
-                version="2"
                 type="default"
                 content={tag}
                 emphasis="subtle"
@@ -944,7 +938,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                               />
                               <strong>{group.label}</strong>
                               <goa-badge
-                                version="2"
                                 type="default"
                                 content={String(group.examples.length)}
                                 emphasis="subtle"
@@ -982,7 +975,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   />
                   <strong>{group.label}</strong>
                   <goa-badge
-                    version="2"
                     type="dark"
                     content={String(group.examples.length)}
                     emphasis="subtle"

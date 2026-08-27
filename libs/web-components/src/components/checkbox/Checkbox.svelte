@@ -53,8 +53,6 @@
   export let maxwidth: string = "none";
   /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -91,10 +89,6 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
-
-    // V1: preserve backwards-compatible auto-margin
-    // V2: parent controls spacing, no auto-margin
-    if (version === "1") mb ??= size === "compact" ? "s" : "m";
 
     addRelayListener();
     addRevealSlotListener();
@@ -267,7 +261,6 @@
 <div
   bind:this={_rootEl}
   class="root"
-  class:v2={version === "2"}
   class:compact={size === "compact"}
   style={`
 ${calculateMargin(mt, mr, mb, ml)}
@@ -299,7 +292,7 @@ max-width: ${maxwidth};
         on:focus={onFocus}
         on:blur={onBlur}
       />
-      {#if isIndeterminate && version === "2"}
+      {#if isIndeterminate}
         <svg
           id="dashmark"
           data-testid="dashmark"
@@ -311,16 +304,7 @@ max-width: ${maxwidth};
         >
           <rect x="0" y="0" width="18" height="3" rx="1.4" />
         </svg>
-      {:else if isIndeterminate}
-        <svg
-          id="dashmark"
-          data-testid="dashmark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 15 2"
-        >
-          <rect width="15" height="2" />
-        </svg>
-      {:else if isChecked && version === "2"}
+      {:else if isChecked}
         <svg
           id="checkmark"
           data-testid="checkmark"
@@ -332,15 +316,6 @@ max-width: ${maxwidth};
           <path
             d="M5.51566 11.2519L1.06114 6.46813C0.812955 6.20493 0.812955 5.77653 1.06114 5.51053L1.96095 4.55433C2.20913 4.29113 2.61258 4.29113 2.86076 4.55433L5.9662 7.90313L12.8885 0.448132C13.1367 0.184932 13.5402 0.184932 13.7884 0.448132L14.6882 1.40573C14.9363 1.66893 14.9363 2.09873 14.6882 2.36053L6.41548 11.2519C6.16729 11.5151 5.76384 11.5151 5.51566 11.2519Z"
           />
-        </svg>
-      {:else if isChecked}
-        <svg
-          id="checkmark"
-          data-testid="checkmark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 12.18"
-        >
-          <path d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z" />
         </svg>
       {/if}
     </div>
@@ -474,7 +449,7 @@ max-width: ${maxwidth};
   }
   .container svg {
     fill: var(--goa-checkbox-color-bg);
-    margin: 3px;
+    margin: 6px 3px;
   }
   .container.selected {
     background-color: var(--goa-checkbox-color-bg-checked);
@@ -505,7 +480,7 @@ max-width: ${maxwidth};
   }
   .error .container svg {
     fill: var(--goa-checkbox-color-bg-checked-error);
-    margin: 1px;
+    margin: 5px 3px 6px;
   }
 
   /* Focus + Error Container */
@@ -591,51 +566,41 @@ max-width: ${maxwidth};
     fill: var(--goa-checkbox-color-bg-checked-error-disabled);
   }
 
-  /* Version 2 */
-
-  .v2 .container svg {
-    margin: 6px 3px;
-  }
-
-  .v2 .container:has(:focus-visible),
-  .v2 .container:has(:focus-visible):hover,
-  .v2 .container.selected:has(:focus-visible):hover,
-  .v2 label:hover .container.selected:has(:focus-visible),
-  .v2 label:hover .container:has(:focus-visible) {
+  .container:has(:focus-visible),
+  .container:has(:focus-visible):hover,
+  .container.selected:has(:focus-visible):hover,
+  label:hover .container.selected:has(:focus-visible),
+  label:hover .container:has(:focus-visible) {
     outline: var(--goa-checkbox-border-focus);
     outline-offset: var(--goa-space-3xs);
     box-shadow: none;
   }
-  .v2 .disabled:not(.error) .container:not(.selected) {
+  .disabled:not(.error) .container:not(.selected) {
     background: var(--goa-input-color-background-disabled);
     box-shadow: none;
   }
 
-  .v2 .error .container,
-  .v2 .error .container.selected {
+  .error .container,
+  .error .container.selected {
     background: var(--goa-input-color-background-error);
   }
 
-  .v2 .error:not(.disabled) .container:hover,
-  .v2 .error:not(.disabled) .container.selected:hover,
-  .v2 label:hover.error:not(.disabled) .container,
-  .v2 label:hover.error:not(.disabled) .container.selected {
+  .error:not(.disabled) .container:hover,
+  .error:not(.disabled) .container.selected:hover,
+  label:hover.error:not(.disabled) .container,
+  label:hover.error:not(.disabled) .container.selected {
     background: var(--goa-input-color-background-error-hover);
     border: var(--goa-checkbox-border-error-hover);
   }
 
-  .v2 .error:not(.disabled) .container:hover svg,
-  .v2 .error:not(.disabled) .container.selected:hover svg,
-  .v2 label:hover.error:not(.disabled) .container svg,
-  .v2 label:hover.error:not(.disabled) .container.selected svg {
+  .error:not(.disabled) .container:hover svg,
+  .error:not(.disabled) .container.selected:hover svg,
+  label:hover.error:not(.disabled) .container svg,
+  label:hover.error:not(.disabled) .container.selected svg {
     fill: var(--goa-checkbox-color-bg-checked-error-hover);
   }
 
-  .v2 .error .container svg {
-    margin-top: 5px;
-  }
-
-  .v2.compact .text {
+  .compact .text {
     padding-left: var(--goa-checkbox-gap-compact);
     font: var(--goa-checkbox-label-font-size-compact);
     /* The compact font shorthand also resets the weight, so restate medium. */

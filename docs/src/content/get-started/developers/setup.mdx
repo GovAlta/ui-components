@@ -137,4 +137,32 @@ npm i @abgov/ui-components-common</code></pre>
 
 <goa-divider mt="xl" mb="xl"></goa-divider>
 
+<h2 id="sass-variables">Use Sass variables</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  The Web Components stylesheet includes the design tokens and dark theme overrides. You
+  only need to install the design tokens package if you want to use its Sass variables
+  directly in your own styles.
+</goa-text>
+
+<h3 id="sass-step-1">1. Add the design tokens package</h3>
+<pre><code>npm i @abgov/design-tokens</code></pre>
+
+<h3 id="sass-step-2">2. Import the Sass variables</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Import the variables into the Sass file where you need them:
+</goa-text>
+<pre><code>@use "@abgov/design-tokens/dist/tokens" as *;</code></pre>
+<pre><code>{`.my-card {
+  padding: $goa-space-m * 2;
+  border-radius: $goa-border-radius-m;
+}`}</code></pre>
+
+<goa-callout version="2" type="important" emphasis="low" mb="xl">
+  <span style="color: var(--goa-color-text-default)">
+    Sass variables are set when your styles compile and cannot change with the active
+    theme. Use CSS custom properties such as <code>{`var(--goa-*)`}</code> for colours,
+    surfaces, and other values that need to switch between light and dark themes.
+  </span>
+</goa-callout>
+
 <DropInCallout />

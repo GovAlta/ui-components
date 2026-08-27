@@ -149,7 +149,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     <!-- Examples Tab -->
     {!hideTabs.includes('examples') && (
     <goa-tab heading="Examples" slug="examples">
-      <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
+      <span slot="heading">Examples <goa-badge type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
         {componentExamples.length > 0 ? (
           <div class="examples-list">
@@ -221,7 +221,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
                   <p class="related-card-description">{comp.data.description}</p>
                 )}
                 <div class="related-card-badge">
-                  <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
+                  <goa-badge type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
                 </div>
               </div>
             </a>

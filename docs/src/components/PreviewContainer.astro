@@ -107,17 +107,17 @@ const shouldRender = hasImage || hasActions;
       </div>
       <div class="preview-actions-right">
         {moreUrl && (
-          <goa-button version="2" type="tertiary" size="compact" onclick={`window.location.href='${resolvedMoreUrl}'`}>
+          <goa-button type="tertiary" size="compact" onclick={`window.location.href='${resolvedMoreUrl}'`}>
             More info
           </goa-button>
         )}
         {demoUrl && (
-          <goa-button version="2" type="tertiary" size="compact" onclick={`window.open('${demoUrl}', '_blank')`}>
+          <goa-button type="tertiary" size="compact" onclick={`window.open('${demoUrl}', '_blank')`}>
             View demo
           </goa-button>
         )}
         {previewUrl && (
-          <goa-button version="2" type="secondary" size="compact" leadingicon="eye" onclick={`window.location.href='${resolvedPreviewUrl}'`}>
+          <goa-button type="secondary" size="compact" leadingicon="eye" onclick={`window.location.href='${resolvedPreviewUrl}'`}>
             Live preview
           </goa-button>
         )}

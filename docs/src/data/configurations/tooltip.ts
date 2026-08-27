@@ -24,7 +24,7 @@ export const tooltipConfigurations: ComponentConfigurations = {
   <goab-button>Hover me</goab-button>
 </goab-tooltip>`,
         webComponents: `<goa-tooltip content="Additional information about this item">
-  <goa-button version="2">Hover me</goa-button>
+  <goa-button>Hover me</goa-button>
 </goa-tooltip>`,
       },
     },
@@ -58,16 +58,16 @@ export const tooltipConfigurations: ComponentConfigurations = {
   <goab-button>Right</goab-button>
 </goab-tooltip>`,
         webComponents: `<goa-tooltip content="Top tooltip" position="top">
-  <goa-button version="2">Top</goa-button>
+  <goa-button>Top</goa-button>
 </goa-tooltip>
 <goa-tooltip content="Bottom tooltip" position="bottom">
-  <goa-button version="2">Bottom</goa-button>
+  <goa-button>Bottom</goa-button>
 </goa-tooltip>
 <goa-tooltip content="Left tooltip" position="left">
-  <goa-button version="2">Left</goa-button>
+  <goa-button>Left</goa-button>
 </goa-tooltip>
 <goa-tooltip content="Right tooltip" position="right">
-  <goa-button version="2">Right</goa-button>
+  <goa-button>Right</goa-button>
 </goa-tooltip>`,
       },
     },
@@ -111,13 +111,13 @@ export const tooltipConfigurations: ComponentConfigurations = {
   <goab-button>Right</goab-button>
 </goab-tooltip>`,
         webComponents: `<goa-tooltip content="Left aligned tooltip" halign="left">
-  <goa-button version="2">Left</goa-button>
+  <goa-button>Left</goa-button>
 </goa-tooltip>
 <goa-tooltip content="Center aligned tooltip" halign="center">
-  <goa-button version="2">Center</goa-button>
+  <goa-button>Center</goa-button>
 </goa-tooltip>
 <goa-tooltip content="Right aligned tooltip" halign="right">
-  <goa-button version="2">Right</goa-button>
+  <goa-button>Right</goa-button>
 </goa-tooltip>`,
       },
     },

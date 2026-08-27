@@ -80,11 +80,11 @@ export const checkboxListConfigurations: ComponentConfigurations = {
           },
         ],
         webComponents: `<goa-form-item version="2" label="Select interests" mb="l">
-  <goa-checkbox-list version="2" name="interests">
-    <goa-checkbox version="2" name="sports" text="Sports"></goa-checkbox>
-    <goa-checkbox version="2" name="music" text="Music"></goa-checkbox>
-    <goa-checkbox version="2" name="travel" text="Travel"></goa-checkbox>
-    <goa-checkbox version="2" name="reading" text="Reading"></goa-checkbox>
+  <goa-checkbox-list name="interests">
+    <goa-checkbox name="sports" text="Sports"></goa-checkbox>
+    <goa-checkbox name="music" text="Music"></goa-checkbox>
+    <goa-checkbox name="travel" text="Travel"></goa-checkbox>
+    <goa-checkbox name="reading" text="Reading"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>`,
       },
@@ -178,10 +178,10 @@ export const checkboxListConfigurations: ComponentConfigurations = {
           },
         ],
         webComponents: `<goa-form-item version="2" label="Which services do you need?" mb="l">
-  <goa-checkbox-list version="2" name="services">
-    <goa-checkbox version="2" name="health" text="Health benefits" description="Coverage for prescriptions, dental, and vision"></goa-checkbox>
-    <goa-checkbox version="2" name="income" text="Income support" description="Financial assistance for basic living costs"></goa-checkbox>
-    <goa-checkbox version="2" name="housing" text="Housing assistance" description="Help finding and affording a place to live"></goa-checkbox>
+  <goa-checkbox-list name="services">
+    <goa-checkbox name="health" text="Health benefits" description="Coverage for prescriptions, dental, and vision"></goa-checkbox>
+    <goa-checkbox name="income" text="Income support" description="Financial assistance for basic living costs"></goa-checkbox>
+    <goa-checkbox name="housing" text="Housing assistance" description="Help finding and affording a place to live"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>`,
       },
@@ -297,10 +297,10 @@ const [otherDetails, setOtherDetails] = useState("");
           },
         ],
         webComponents: `<goa-form-item version="2" label="How did you hear about this program?" mb="l">
-  <goa-checkbox-list version="2" name="referral">
-    <goa-checkbox version="2" name="website" text="Government website"></goa-checkbox>
-    <goa-checkbox version="2" name="friend" text="Friend or family member"></goa-checkbox>
-    <goa-checkbox version="2" name="other" text="Other, please specify">
+  <goa-checkbox-list name="referral">
+    <goa-checkbox name="website" text="Government website"></goa-checkbox>
+    <goa-checkbox name="friend" text="Friend or family member"></goa-checkbox>
+    <goa-checkbox name="other" text="Other, please specify">
       <div slot="reveal">
         <goa-form-item version="2" label="Please describe" mb="l">
           <goa-textarea version="2" name="otherDetails"></goa-textarea>
@@ -437,17 +437,17 @@ const [sizeCompact, setSizeCompact] = useState<string[]>([]);
           },
         ],
         webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-  <goa-checkbox-list version="2" name="sizeDefault">
-    <goa-checkbox version="2" name="opt1" text="Option 1"></goa-checkbox>
-    <goa-checkbox version="2" name="opt2" text="Option 2"></goa-checkbox>
-    <goa-checkbox version="2" name="opt3" text="Option 3"></goa-checkbox>
+  <goa-checkbox-list name="sizeDefault">
+    <goa-checkbox name="opt1" text="Option 1"></goa-checkbox>
+    <goa-checkbox name="opt2" text="Option 2"></goa-checkbox>
+    <goa-checkbox name="opt3" text="Option 3"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>
 <goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-  <goa-checkbox-list version="2" name="sizeCompact" size="compact">
-    <goa-checkbox version="2" name="opt1c" text="Option 1" size="compact"></goa-checkbox>
-    <goa-checkbox version="2" name="opt2c" text="Option 2" size="compact"></goa-checkbox>
-    <goa-checkbox version="2" name="opt3c" text="Option 3" size="compact"></goa-checkbox>
+  <goa-checkbox-list name="sizeCompact" size="compact">
+    <goa-checkbox name="opt1c" text="Option 1" size="compact"></goa-checkbox>
+    <goa-checkbox name="opt2c" text="Option 2" size="compact"></goa-checkbox>
+    <goa-checkbox name="opt3c" text="Option 3" size="compact"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>`,
       },
@@ -554,16 +554,16 @@ const [sizeCompact, setSizeCompact] = useState<string[]>([]);
           },
         ],
         webComponents: `<goa-form-item version="2" label="Disabled list" mb="l">
-  <goa-checkbox-list version="2" name="disabled" disabled>
-    <goa-checkbox version="2" name="d1" text="Option 1"></goa-checkbox>
-    <goa-checkbox version="2" name="d2" text="Option 2"></goa-checkbox>
+  <goa-checkbox-list name="disabled" disabled>
+    <goa-checkbox name="d1" text="Option 1"></goa-checkbox>
+    <goa-checkbox name="d2" text="Option 2"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>
 <goa-form-item version="2" label="Select at least one" error="Please select at least one option" mb="l">
-  <goa-checkbox-list version="2" name="required" error>
-    <goa-checkbox version="2" name="e1" text="Option 1"></goa-checkbox>
-    <goa-checkbox version="2" name="e2" text="Option 2"></goa-checkbox>
-    <goa-checkbox version="2" name="e3" text="Option 3"></goa-checkbox>
+  <goa-checkbox-list name="required" error>
+    <goa-checkbox name="e1" text="Option 1"></goa-checkbox>
+    <goa-checkbox name="e2" text="Option 2"></goa-checkbox>
+    <goa-checkbox name="e3" text="Option 3"></goa-checkbox>
   </goa-checkbox-list>
 </goa-form-item>`,
       },

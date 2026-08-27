@@ -28,7 +28,7 @@ const isDisabled = !linkTo;
     <goa-text version="2" size="body-m" mt="none" mb="xs">
       <span class="card-description">{description}</span>
     </goa-text>
-    <goa-badge version="2" type="default" content="Coming soon" icon="false" emphasis="subtle" mt="s"></goa-badge>
+    <goa-badge type="default" content="Coming soon" icon="false" emphasis="subtle" mt="s"></goa-badge>
   </div>
 ) : (
   <a href={linkTo} class="card-lite" {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}>

@@ -757,7 +757,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               />
             </div>
             <goa-badge
-              version="2"
               type={getCategoryBadgeType(token.category)}
               content={formatCategory(token.category)}
               emphasis="subtle"
@@ -783,7 +782,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getCategoryBadgeType(token.category)}
             content={formatCategory(token.category)}
             emphasis="subtle"

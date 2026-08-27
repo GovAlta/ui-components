@@ -566,7 +566,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           {/* Category badge only - status shown in table view */}
           <div className="component-card-badges">
             <goa-badge
-              version="2"
               type={getCategoryBadgeType(component.data.category)}
               content={formatCategory(component.data.category)}
               emphasis="subtle"
@@ -593,7 +592,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getCategoryBadgeType(component.data.category)}
             content={formatCategory(component.data.category)}
             emphasis="subtle"
@@ -602,7 +600,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getStatusBadgeType(component.data.status)}
             content={formatStatus(component.data.status)}
             emphasis="subtle"
@@ -871,7 +868,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                               />
                               <strong>{group.label}</strong>
                               <goa-badge
-                                version="2"
                                 type="default"
                                 content={String(group.components.length)}
                                 emphasis="subtle"
@@ -909,7 +905,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   />
                   <strong>{group.label}</strong>
                   <goa-badge
-                    version="2"
                     type="dark"
                     content={String(group.components.length)}
                     emphasis="subtle"

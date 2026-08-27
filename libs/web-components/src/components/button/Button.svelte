@@ -38,17 +38,10 @@
     ["normal", "destructive", "inverse", "dark"],
     { required: true },
   );
-  const [Versions, validateVersion] = typeValidator(
-    "Button version",
-    ["1", "2"],
-    { required: true },
-  );
-
   // Types
   type ButtonType = (typeof Types)[number];
   type Size = (typeof Sizes)[number];
   type Variant = (typeof Variants)[number];
-  type Version = (typeof Versions)[number];
 
   /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. */
   export let type: ButtonType = "primary";
@@ -76,9 +69,6 @@
 
   /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   export let width: string = "";
-
-  /** @internal Design system version for styling. */
-  export let version: Version = "1";
 
   /** Sets the top margin using design system spacing tokens. */
   export let mt: Spacing = null;
@@ -116,7 +106,6 @@
     validateType(type);
     validateSize(size);
     validateVariant(variant);
-    validateVersion(version);
 
     if (variant === "dark" && type !== "text") {
       console.warn(
@@ -146,7 +135,6 @@
 
 <button
   class="{type} {size} {variant}"
-  class:v2={version === "2"}
   style={styles(calculateMargin(mt, mr, mb, ml), style("--width", width))}
   disabled={isDisabled}
   on:click={clickHandler}
@@ -168,7 +156,7 @@
     {#if leadingicon}
       <goa-icon
         id="leading-icon"
-        size={version === "2" && size === "normal" ? "4" : "3"}
+        size={size === "normal" ? "4" : "3"}
         type={leadingicon}
         inverted={isButtonDark}
       />
@@ -179,7 +167,7 @@
     {#if trailingicon}
       <goa-icon
         id="trailing-icon"
-        size={version === "2" && size === "normal" ? "4" : "3"}
+        size={size === "normal" ? "4" : "3"}
         type={trailingicon}
         inverted={isButtonDark}
       />
@@ -226,7 +214,7 @@
       width: 100%;
       display: flex;
     }
-    button.v2 {
+    button {
       width: var(--width, 100%);
     }
     button.tertiary {
@@ -414,65 +402,64 @@
     opacity: 0.5;
   }
 
-  /* Version 2 */
-  button.v2:focus-visible {
+  button:focus-visible {
     box-shadow: none;
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: var(--goa-button-outline-offset);
   }
 
-  button.v2:disabled {
+  button:disabled {
     opacity: 1;
   }
 
-  button.v2.primary:disabled {
+  button.primary:disabled {
     background-color: var(--goa-button-primary-disabled-color-bg);
   }
 
-  button.v2.secondary.destructive {
+  button.secondary.destructive {
     background-color: var(--goa-button-secondary-destructive-color-bg);
   }
 
-  button.v2.secondary.destructive:hover {
+  button.secondary.destructive:hover {
     background-color: var(--goa-button-secondary-destructive-hover-color-bg);
   }
 
-  button.v2.secondary:disabled {
+  button.secondary:disabled {
     color: var(--goa-button-secondary-disabled-color-text);
     background-color: var(--goa-button-secondary-disabled-color-bg);
   }
 
-  button.v2.tertiary:hover {
+  button.tertiary:hover {
     border: var(--goa-button-tertiary-hover-border);
   }
 
-  button.v2.tertiary.inverse {
+  button.tertiary.inverse {
     border: var(--goa-button-tertiary-inverse-border);
   }
 
-  button.v2.tertiary.inverse:hover {
+  button.tertiary.inverse:hover {
     border: var(--goa-button-tertiary-inverse-hover-border);
   }
 
-  button.v2.tertiary.destructive {
+  button.tertiary.destructive {
     border-color: var(--goa-button-tertiary-destructive-color-border);
   }
 
-  button.v2.tertiary.destructive:hover {
+  button.tertiary.destructive:hover {
     border: var(--goa-button-tertiary-destructive-hover-border);
   }
 
-  button.v2.tertiary:disabled {
+  button.tertiary:disabled {
     color: var(--goa-button-tertiary-disabled-color-text);
     border-color: var(--goa-button-tertiary-disabled-color-border);
   }
 
-  button.v2 .text {
+  button .text {
     padding-bottom: 0;
   }
 
   /* Text */
-  button.v2.text {
+  button.text {
     border: none;
     background-color: transparent;
     color: var(--goa-button-text-color-text);
@@ -483,63 +470,63 @@
     letter-spacing: var(--goa-button-text-letter-spacing);
     border-radius: var(--goa-button-text-border-radius);
   }
-  button.v2.text:hover {
+  button.text:hover {
     color: var(--goa-button-text-hover-color-text);
     background-color: transparent;
   }
-  button.v2.text:focus-visible {
+  button.text:focus-visible {
     color: var(--goa-button-text-focus-color-text);
     background-color: transparent;
   }
-  button.v2.text:focus:not(:focus-visible) {
+  button.text:focus:not(:focus-visible) {
     box-shadow: none;
   }
 
-  button.v2.text.compact {
+  button.text.compact {
     font: var(--goa-button-text-compact-font);
     letter-spacing: var(--goa-button-text-compact-letter-spacing);
   }
 
   /* Destructive Text */
-  button.v2.text.destructive {
+  button.text.destructive {
     color: var(--goa-button-text-destructive-color-text);
   }
-  button.v2.text.destructive:hover {
+  button.text.destructive:hover {
     color: var(--goa-button-text-destructive-hover-color-text);
   }
-  button.v2.text.destructive:focus-visible {
+  button.text.destructive:focus-visible {
     color: var(--goa-button-text-destructive-focus-color-text);
   }
 
   /* Inverse Text */
-  button.v2.text.inverse {
+  button.text.inverse {
     color: var(--goa-button-text-inverse-color-text);
   }
-  button.v2.text.inverse:hover {
+  button.text.inverse:hover {
     color: var(--goa-button-text-inverse-hover-color-text);
   }
-  button.v2.text.inverse:focus-visible {
+  button.text.inverse:focus-visible {
     color: var(--goa-button-text-inverse-focus-color-text);
   }
 
   /* Dark Text */
-  button.v2.text.dark {
+  button.text.dark {
     color: var(--goa-button-text-dark-color-text);
   }
-  button.v2.text.dark:hover {
+  button.text.dark:hover {
     color: var(--goa-button-text-dark-hover-color-text);
   }
-  button.v2.text.dark:focus-visible {
+  button.text.dark:focus-visible {
     color: var(--goa-button-text-dark-focus-color-text);
   }
 
   /* Disabled Text */
 
-  button.v2.text:disabled {
+  button.text:disabled {
     color: var(--goa-button-text-disabled-color-text);
     text-decoration: var(--goa-button-text-disabled-text-decoration);
   }
-  button.v2.text.compact:disabled {
+  button.text.compact:disabled {
     color: var(--goa-button-text-compact-disabled-color-text);
     text-decoration: var(--goa-button-text-compact-disabled-text-decoration);
   }

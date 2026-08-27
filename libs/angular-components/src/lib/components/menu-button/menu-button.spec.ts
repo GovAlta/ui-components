@@ -66,7 +66,6 @@ describe("GoabMenuButton", () => {
     expect(menuButtonElement.getAttribute("type")).toBe("primary");
     expect(menuButtonElement.getAttribute("leading-icon")).toBe("alarm");
     expect(menuButtonElement.getAttribute("testid")).toBe("test-menu-button");
-    expect(menuButtonElement.getAttribute("version")).toBe("2");
   });
 
   it("should render with leading icon", () => {

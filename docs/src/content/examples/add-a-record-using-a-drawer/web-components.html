@@ -1,4 +1,4 @@
-<goa-button version="2" id="open-drawer-btn" leadingicon="add">Add Record</goa-button>
+<goa-button id="open-drawer-btn" leadingicon="add">Add Record</goa-button>
 <goa-drawer
   version="2"
   id="record-drawer"
@@ -33,7 +33,6 @@
   <goa-form-item version="2" label="Start date" mt="l">
     <goa-date-picker version="2"></goa-date-picker>
     <goa-checkbox
-      version="2"
       name="startDateApproximate"
       text="Approximate date"
       value="y"
@@ -48,10 +47,10 @@
   </goa-form-item>
   <div slot="actions">
     <goa-button-group alignment="start">
-      <goa-button version="2" id="add-record-btn" type="primary" size="compact"
+      <goa-button id="add-record-btn" type="primary" size="compact"
         >Add record</goa-button
       >
-      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact"
+      <goa-button id="cancel-btn" type="tertiary" size="compact"
         >Cancel</goa-button
       >
     </goa-button-group>

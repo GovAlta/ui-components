@@ -590,14 +590,14 @@ export const dropdownConfigurations: ComponentConfigurations = {
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
         <span>Case worker &middot; Edmonton</span>
-        <goa-badge version="2" type="success" content="Available"></goa-badge>
+        <goa-badge type="success" content="Available"></goa-badge>
       </goa-block>
     </goa-dropdown-item>
     <goa-dropdown-item value="michael" label="Michael Chen">
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Michael Chen</strong>
         <span>Supervisor &middot; Calgary</span>
-        <goa-badge version="2" type="information" content="In a meeting"></goa-badge>
+        <goa-badge type="information" content="In a meeting"></goa-badge>
       </goa-block>
     </goa-dropdown-item>
   </goa-dropdown>
@@ -736,7 +736,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
         <span>Case worker &middot; Edmonton</span>
-        <goa-badge version="2" type="success" content="Available"></goa-badge>
+        <goa-badge type="success" content="Available"></goa-badge>
       </goa-block>
     </goa-dropdown-item>
     <goa-dropdown-item
@@ -747,7 +747,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Michael Chen</strong>
         <span>Supervisor &middot; Calgary</span>
-        <goa-badge version="2" type="information" content="In a meeting"></goa-badge>
+        <goa-badge type="information" content="In a meeting"></goa-badge>
       </goa-block>
     </goa-dropdown-item>
   </goa-dropdown>

@@ -19,7 +19,7 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabButton>Submit</GoabButton>`,
         angular: `<goab-button>Submit</goab-button>`,
-        webComponents: `<goa-button version="2">Submit</goa-button>`,
+        webComponents: `<goa-button>Submit</goa-button>`,
       },
     },
     {
@@ -33,9 +33,9 @@ export const buttonConfigurations: ComponentConfigurations = {
         angular: `<goab-button type="primary">Primary</goab-button>
 <goab-button type="secondary">Secondary</goab-button>
 <goab-button type="tertiary">Tertiary</goab-button>`,
-        webComponents: `<goa-button version="2" type="primary">Primary</goa-button>
-<goa-button version="2" type="secondary">Secondary</goa-button>
-<goa-button version="2" type="tertiary">Tertiary</goa-button>`,
+        webComponents: `<goa-button type="primary">Primary</goa-button>
+<goa-button type="secondary">Secondary</goa-button>
+<goa-button type="tertiary">Tertiary</goa-button>`,
       },
     },
     {
@@ -47,8 +47,8 @@ export const buttonConfigurations: ComponentConfigurations = {
 <GoabButton size="compact">Compact</GoabButton>`,
         angular: `<goab-button size="normal">Normal</goab-button>
 <goab-button size="compact">Compact</goab-button>`,
-        webComponents: `<goa-button version="2" size="normal">Normal</goa-button>
-<goa-button version="2" size="compact">Compact</goa-button>`,
+        webComponents: `<goa-button size="normal">Normal</goa-button>
+<goa-button size="compact">Compact</goa-button>`,
       },
     },
     {
@@ -62,9 +62,9 @@ export const buttonConfigurations: ComponentConfigurations = {
         angular: `<div><goab-button leadingIcon="add" mb="m">Add item</goab-button></div>
 <div><goab-button trailingIcon="arrow-forward" mb="m">Next</goab-button></div>
 <div><goab-button leadingIcon="pencil">Edit</goab-button></div>`,
-        webComponents: `<div><goa-button version="2" leadingicon="add" mb="m">Add item</goa-button></div>
-<div><goa-button version="2" trailingicon="arrow-forward" mb="m">Next</goa-button></div>
-<div><goa-button version="2" leadingicon="pencil">Edit</goa-button></div>`,
+        webComponents: `<div><goa-button leadingicon="add" mb="m">Add item</goa-button></div>
+<div><goa-button trailingicon="arrow-forward" mb="m">Next</goa-button></div>
+<div><goa-button leadingicon="pencil">Edit</goa-button></div>`,
       },
     },
     {
@@ -78,9 +78,9 @@ export const buttonConfigurations: ComponentConfigurations = {
         angular: `<goab-button variant="destructive">Primary destructive</goab-button>
 <goab-button variant="destructive" type="secondary">Secondary destructive</goab-button>
 <goab-button variant="destructive" type="tertiary">Tertiary destructive</goab-button>`,
-        webComponents: `<goa-button version="2" variant="destructive">Primary destructive</goa-button>
-<goa-button version="2" variant="destructive" type="secondary">Secondary destructive</goa-button>
-<goa-button version="2" variant="destructive" type="tertiary">Tertiary destructive</goa-button>`,
+        webComponents: `<goa-button variant="destructive">Primary destructive</goa-button>
+<goa-button variant="destructive" type="secondary">Secondary destructive</goa-button>
+<goa-button variant="destructive" type="tertiary">Tertiary destructive</goa-button>`,
       },
     },
     {
@@ -99,9 +99,9 @@ export const buttonConfigurations: ComponentConfigurations = {
   <goab-button variant="inverse" type="tertiary">Tertiary inverse</goab-button>
 </div>`,
         webComponents: `<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-l);">
-  <goa-button version="2" variant="inverse">Primary inverse</goa-button>
-  <goa-button version="2" variant="inverse" type="secondary">Secondary inverse</goa-button>
-  <goa-button version="2" variant="inverse" type="tertiary">Tertiary inverse</goa-button>
+  <goa-button variant="inverse">Primary inverse</goa-button>
+  <goa-button variant="inverse" type="secondary">Secondary inverse</goa-button>
+  <goa-button variant="inverse" type="tertiary">Tertiary inverse</goa-button>
 </div>`,
       },
     },
@@ -116,9 +116,9 @@ export const buttonConfigurations: ComponentConfigurations = {
         angular: `<goab-button disabled="true">Disabled primary</goab-button>
 <goab-button type="secondary" disabled="true">Disabled secondary</goab-button>
 <goab-button type="tertiary" disabled="true">Disabled tertiary</goab-button>`,
-        webComponents: `<goa-button version="2" disabled>Disabled primary</goa-button>
-<goa-button version="2" type="secondary" disabled>Disabled secondary</goa-button>
-<goa-button version="2" type="tertiary" disabled>Disabled tertiary</goa-button>`,
+        webComponents: `<goa-button disabled>Disabled primary</goa-button>
+<goa-button type="secondary" disabled>Disabled secondary</goa-button>
+<goa-button type="tertiary" disabled>Disabled tertiary</goa-button>`,
       },
     },
   ],

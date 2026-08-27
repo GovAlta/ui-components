@@ -683,7 +683,7 @@ describe("Dropdown", () => {
 
       await vi.waitFor(() => {
         expect(inputEl.getAttribute("aria-expanded")).toBe("true");
-        expect(inputEl.matches(":focus")).toBe(true);
+        expect((inputEl.getRootNode() as ShadowRoot).activeElement).toBe(inputEl);
       });
 
       await userEvent.keyboard("B");

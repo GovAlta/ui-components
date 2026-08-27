@@ -37,7 +37,6 @@ interface WCProps extends Margins {
   maxwidth?: string;
   testid?: string;
   size?: GoabCheckboxSize;
-  version?: string;
 }
 
 /* eslint-disable-next-line */
@@ -146,7 +145,6 @@ export function GoabCheckbox({
       disabled={disabled ? "true" : undefined}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
       description={typeof description === "string" ? description : undefined}
-      version="2"
     >
       {children}
       {typeof description !== "string" && description && (

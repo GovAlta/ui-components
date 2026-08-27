@@ -129,7 +129,7 @@ export const tabsConfigurations: ComponentConfigurations = {
     <goa-text>Your messages will appear here.</goa-text>
   </goa-tab>
   <goa-tab>
-    <span slot="heading">Notifications <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="3"></goa-badge></span>
+    <span slot="heading">Notifications <goa-badge type="default" emphasis="subtle" icon="false" content="3"></goa-badge></span>
     <goa-text>You have 3 unread notifications.</goa-text>
   </goa-tab>
   <goa-tab heading="Settings">
