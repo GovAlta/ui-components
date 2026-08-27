@@ -34,8 +34,8 @@ export const heroBannerConfigurations: ComponentConfigurations = {
         webComponents: `<goa-hero-banner heading="Start your application">
   <p>Apply for government services quickly and easily online.</p>
   <goa-button-group alignment="start" mt="l">
-    <goa-button version="2">Get started</goa-button>
-    <goa-button version="2" type="secondary">Learn more</goa-button>
+    <goa-button>Get started</goa-button>
+    <goa-button type="secondary">Learn more</goa-button>
   </goa-button-group>
 </goa-hero-banner>`,
       },

@@ -27,7 +27,6 @@ import { GoabControlValueAccessor } from "../base.component";
   template: `@if (isReady) {
     <goa-checkbox
       #goaComponentRef
-      [attr.version]="version"
       [attr.name]="name"
       [checked]="checked"
       [disabled]="disabled"
@@ -76,7 +75,6 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
 
 
   ngOnInit(): void {

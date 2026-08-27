@@ -47,7 +47,7 @@ export const filterChipConfigurations: ComponentConfigurations = {
           ts: angularToggleSetup,
           template: `<goab-filter-chip content="Active" (onClick)="handleToggle()"></goab-filter-chip>`,
         },
-        webComponents: `<goa-filter-chip version="2" content="Active"></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Active"></goa-filter-chip>`,
       },
     },
     {
@@ -69,10 +69,10 @@ export const filterChipConfigurations: ComponentConfigurations = {
 <goab-filter-chip content="Pending" (onClick)="setFilter('pending')"></goab-filter-chip>
 <goab-filter-chip content="Completed" (onClick)="setFilter('completed')"></goab-filter-chip>`,
         },
-        webComponents: `<goa-filter-chip version="2" content="All"></goa-filter-chip>
-<goa-filter-chip version="2" content="Active"></goa-filter-chip>
-<goa-filter-chip version="2" content="Pending"></goa-filter-chip>
-<goa-filter-chip version="2" content="Completed"></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="All"></goa-filter-chip>
+<goa-filter-chip content="Active"></goa-filter-chip>
+<goa-filter-chip content="Pending"></goa-filter-chip>
+<goa-filter-chip content="Completed"></goa-filter-chip>`,
       },
     },
     {
@@ -90,8 +90,8 @@ export const filterChipConfigurations: ComponentConfigurations = {
           template: `<goab-filter-chip content="Edmonton" secondaryText="City:" (onClick)="handleToggle()"></goab-filter-chip>
 <goab-filter-chip content="Calgary" secondaryText="City:" (onClick)="handleToggle()"></goab-filter-chip>`,
         },
-        webComponents: `<goa-filter-chip version="2" content="Edmonton" secondarytext="City:"></goa-filter-chip>
-<goa-filter-chip version="2" content="Calgary" secondarytext="City:"></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Edmonton" secondarytext="City:"></goa-filter-chip>
+<goa-filter-chip content="Calgary" secondarytext="City:"></goa-filter-chip>`,
       },
     },
     {
@@ -109,8 +109,8 @@ export const filterChipConfigurations: ComponentConfigurations = {
           template: `<goab-filter-chip content="Documents" leadingIcon="document" (onClick)="handleToggle()"></goab-filter-chip>
 <goab-filter-chip content="Sort" leadingIcon="arrow-up" (onClick)="handleToggle()"></goab-filter-chip>`,
         },
-        webComponents: `<goa-filter-chip version="2" content="Documents" leadingicon="document"></goa-filter-chip>
-<goa-filter-chip version="2" content="Sort" leadingicon="arrow-up"></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Documents" leadingicon="document"></goa-filter-chip>
+<goa-filter-chip content="Sort" leadingicon="arrow-up"></goa-filter-chip>`,
       },
     },
     {
@@ -120,7 +120,7 @@ export const filterChipConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabFilterChip content="Invalid filter" error />`,
         angular: `<goab-filter-chip content="Invalid filter" [error]="true"></goab-filter-chip>`,
-        webComponents: `<goa-filter-chip version="2" content="Invalid filter" error></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Invalid filter" error></goa-filter-chip>`,
       },
     },
   ],

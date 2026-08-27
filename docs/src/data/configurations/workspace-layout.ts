@@ -190,8 +190,8 @@ const pageHeader = (
   <div slot="page-header" style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <goa-text tag="h1" size="heading-m" mt="none" mb="none">My cases</goa-text>
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" version="2">Filter</goa-button>
-      <goa-button type="primary" size="compact" version="2">New case</goa-button>
+      <goa-button type="secondary" size="compact">Filter</goa-button>
+      <goa-button type="primary" size="compact">New case</goa-button>
     </goa-button-group>
   </div>
 
@@ -296,8 +296,8 @@ const pageFooter = (
   <div slot="page-footer" style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <goa-text size="body-s" mt="none" mb="none">3 cases selected</goa-text>
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" version="2">Clear</goa-button>
-      <goa-button type="primary" size="compact" version="2">Export</goa-button>
+      <goa-button type="secondary" size="compact">Clear</goa-button>
+      <goa-button type="primary" size="compact">Export</goa-button>
     </goa-button-group>
   </div>
 </goa-workspace-layout>
@@ -384,7 +384,7 @@ const drawer = (
   </nav>
 
   <div style="padding: 24px">
-    <goa-button id="wsl-open-drawer" type="primary" size="compact" version="2">Open</goa-button>
+    <goa-button id="wsl-open-drawer" type="primary" size="compact">Open</goa-button>
     <div id="wsl-drawer-body" style="margin-top: 16px"></div>
   </div>
 

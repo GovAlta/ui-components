@@ -94,8 +94,8 @@ export const appHeaderConfigurations: ComponentConfigurations = {
 </ng-template>`,
         webComponents: `<header>
   <goa-app-header version="2" heading="My Application" url="/">
-    <goa-button slot="utilities" version="2" type="tertiary" size="compact">Help</goa-button>
-    <goa-button slot="utilities" version="2" type="tertiary" size="compact" leadingicon="person">Sign in</goa-button>
+    <goa-button slot="utilities" type="tertiary" size="compact">Help</goa-button>
+    <goa-button slot="utilities" type="tertiary" size="compact" leadingicon="person">Sign in</goa-button>
   </goa-app-header>
 </header>`,
       },
@@ -124,7 +124,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
 </ng-template>`,
         webComponents: `<header>
   <goa-app-header version="2" heading="My Application" url="/">
-    <goa-badge slot="phase" version="2" type="important" content="Service preview" icon="false"></goa-badge>
+    <goa-badge slot="phase" type="important" content="Service preview" icon="false"></goa-badge>
   </goa-app-header>
 </header>`,
       },
@@ -234,7 +234,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
     </goa-app-header-menu>
     <a slot="navigation" href="#">Reports</a>
     <a slot="navigation" href="#">Settings</a>
-    <goa-menu-button slot="utilities" version="2" text="John Smith" type="tertiary" size="compact">
+    <goa-menu-button slot="utilities" text="John Smith" type="tertiary" size="compact">
       <goa-menu-action text="User settings" action="user-settings"></goa-menu-action>
       <goa-menu-action text="Sign out" action="sign-out"></goa-menu-action>
     </goa-menu-button>

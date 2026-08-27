@@ -206,28 +206,3 @@ class GoabThemeService {
 .my-card {
   background-color: var(--my-card-background);
 }`}</code></pre>
-
-<goa-divider mt="xl" mb="xl"></goa-divider>
-
-<h2 id="scss">Using design tokens in SCSS</h2>
-
-<goa-callout version="2" type="important" emphasis="low" mb="m">
-  <span style="color: var(--goa-color-text-default)">
-    Dark theme support requires CSS custom properties. Sass variables
-    (<code>{`$goa-*`}</code>) are inlined at compile time and cannot flip when the
-    theme changes. Reference tokens via <code>{`var(--goa-*)`}</code> wherever a
-    value should respond to theme switching.
-  </span>
-</goa-callout>
-
-<goa-text size="body-m" mt="none" mb="m">
-  The Web Components stylesheet provides CSS custom properties. Use
-  <code>{`var(--goa-*)`}</code> for values that should respond to theme switching.
-</goa-text>
-<pre><code>@import "@abgov/web-components/index.css";</code></pre>
-<pre><code>{`.my-card {
-  background: var(--goa-color-surface-card);
-  font-family: var(--goa-font-family-sans);
-  padding: var(--goa-space-m);
-  transition-duration: var(--goa-motion-duration-medium-2);
-}`}</code></pre>
