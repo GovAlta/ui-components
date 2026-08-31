@@ -1,13 +1,12 @@
 ---
 // Import v2 design tokens and web component styles
-import '@abgov/web-components/index.css';
-import "@abgov/design-tokens/dist/tokens.css";
+import "@abgov/web-components/index.css";
 
 // Import search styles eagerly so inline search inputs don't flash unstyled
-import '../components/search/search.css';
+import "../components/search/search.css";
 
 // Global search modal (available on all pages)
-import { SearchModal } from '../components/search';
+import { SearchModal } from "../components/search";
 
 interface Props {
   title: string;
@@ -15,84 +14,100 @@ interface Props {
   page?: string;
 }
 
-import { withBase } from '@/lib/base-url';
+import { withBase } from "@/lib/base-url";
 
 const { title, description, page } = Astro.props;
-const metaDescription = description || "Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.";
-const ogImage = new URL(withBase('/og-image.png'), Astro.site).href;
+const metaDescription =
+  description ||
+  "Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.";
+const ogImage = new URL(withBase("/og-image.png"), Astro.site).href;
 const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <!-- Theme init - runs before paint to prevent FOUC.
+  <head>
+    <!-- Theme init - runs before paint to prevent FOUC.
        Priority: localStorage > prefers-color-scheme > "light" -->
-  <script is:inline>
-    (function() {
-      var stored = null;
-      try { stored = localStorage.getItem('goab-theme'); } catch (e) {}
-      var mode;
-      if (stored === 'light' || stored === 'dark') {
-        mode = stored;
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        mode = 'dark';
-      } else {
-        mode = 'light';
-      }
-      document.documentElement.setAttribute('data-theme', mode);
-    })();
-  </script>
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem("goab-theme");
+        } catch (e) {}
+        var mode;
+        if (stored === "light" || stored === "dark") {
+          mode = stored;
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          mode = "dark";
+        } else {
+          mode = "light";
+        }
+        document.documentElement.setAttribute("data-theme", mode);
+      })();
+    </script>
 
-  <!-- Sidebar width init - runs before body to prevent layout shift -->
-  <script is:inline>
-    (function() {
-      var MOBILE = 624, EXPANDED = 280, COLLAPSED = 72;
-      var w;
-      if (window.innerWidth < MOBILE) {
-        w = 0;
-      } else {
-        var saved = localStorage.getItem('goa-ds-menu-open');
-        var isOpen = saved === null ? true : saved === 'true';
-        w = isOpen ? EXPANDED : COLLAPSED;
-      }
-      document.documentElement.style.setProperty('--sidebar-width', w + 'px');
-    })();
-  </script>
+    <!-- Sidebar width init - runs before body to prevent layout shift -->
+    <script is:inline>
+      (function () {
+        var MOBILE = 624,
+          EXPANDED = 280,
+          COLLAPSED = 72;
+        var w;
+        if (window.innerWidth < MOBILE) {
+          w = 0;
+        } else {
+          var saved = localStorage.getItem("goa-ds-menu-open");
+          var isOpen = saved === null ? true : saved === "true";
+          w = isOpen ? EXPANDED : COLLAPSED;
+        }
+        document.documentElement.style.setProperty("--sidebar-width", w + "px");
+      })();
+    </script>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{page === 'home' ? title : `${title} - GoA Design System`}</title>
-  <meta name="description" content={metaDescription}>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{page === "home" ? title : `${title} - GoA Design System`}</title>
+    <meta name="description" content={metaDescription} />
 
-  <!-- Favicon & icons -->
-  <link rel="icon" type="image/x-icon" href={withBase('/favicon.ico')}>
-  <link rel="icon" type="image/png" href={withBase('/favicon.png')} sizes="32x32">
-  <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} sizes="any">
-  <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} sizes="180x180">
-  <link rel="manifest" href={withBase('/site.webmanifest')}>
-  <meta name="theme-color" content="#333333">
+    <!-- Favicon & icons -->
+    <link rel="icon" type="image/x-icon" href={withBase("/favicon.ico")} />
+    <link rel="icon" type="image/png" href={withBase("/favicon.png")} sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} sizes="any" />
+    <link
+      rel="apple-touch-icon"
+      href={withBase("/apple-touch-icon.png")}
+      sizes="180x180"
+    />
+    <link rel="manifest" href={withBase("/site.webmanifest")} />
+    <meta name="theme-color" content="#333333" />
 
-  <!-- Open Graph / social sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={metaDescription}>
-  <meta property="og:image" content={ogImage}>
-  <meta property="og:url" content={ogUrl}>
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={ogUrl} />
 
-  <!-- GoA Web Components JavaScript (registers custom elements) -->
-  <script>
-    import '../../../dist/libs/web-components/index.js';
-  </script>
+    <!-- GoA Web Components JavaScript (registers custom elements) -->
+    <script>
+      import "../../../dist/libs/web-components/index.js";
+    </script>
 
-  <!-- Ionicons CDN (required for GoabIcon) -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Ionicons CDN (required for GoabIcon) -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
 
-  <!-- Mobile bridge: bridges React menu state to page-level CSS -->
-  <script>
-    import '../scripts/mobile-bridge.ts';
-  </script>
+    <!-- Mobile bridge: bridges React menu state to page-level CSS -->
+    <script>
+      import "../scripts/mobile-bridge.ts";
+    </script>
 
     <style is:global>
       * {
@@ -276,19 +291,19 @@ const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
         color: var(--goa-color-greyscale-700);
       }
 
-    /* Menu overlay backdrop when sidebar is open on mobile */
-    body[data-mobile="true"][data-menu-open="true"]::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 90;
-    }
-  </style>
-</head>
-<body data-page={page}>
-  <!-- Global search modal (Cmd+K / Ctrl+K or mobile search button) -->
-  <SearchModal client:only="react" />
-  <slot />
-</body>
+      /* Menu overlay backdrop when sidebar is open on mobile */
+      body[data-mobile="true"][data-menu-open="true"]::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 90;
+      }
+    </style>
+  </head>
+  <body data-page={page}>
+    <!-- Global search modal (Cmd+K / Ctrl+K or mobile search button) -->
+    <SearchModal client:only="react" />
+    <slot />
+  </body>
 </html>

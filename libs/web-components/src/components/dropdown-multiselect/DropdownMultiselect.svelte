@@ -626,7 +626,6 @@
           {name}
           {value}
           disabled={fromBoolean(disabled)}
-          version="2"
           {size}
           testid={testid ? `${testid}-checkbox-list` : undefined}
           on:_change={handleCheckboxListChange}

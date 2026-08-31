@@ -22,7 +22,6 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   size?: GoabRadioGroupSize;
-  version?: string;
 }
 
 declare module "react" {
@@ -121,7 +120,6 @@ export function GoabRadioGroup({
       name={name}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
-      version="2"
     >
       {children}
     </goa-radio-group>
