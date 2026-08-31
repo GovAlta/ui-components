@@ -402,7 +402,9 @@
     opacity: 0.5;
   }
 
-  button:focus-visible {
+  button:focus-visible,
+  button.secondary:focus-visible,
+  button.tertiary:focus-visible {
     box-shadow: none;
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: var(--goa-button-outline-offset);

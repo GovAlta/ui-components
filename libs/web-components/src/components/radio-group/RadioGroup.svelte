@@ -31,12 +31,10 @@
     "vertical",
     "horizontal",
   ]);
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
 
   // Types
   type Orientation = (typeof Orientations)[number];
-  type VersionType = (typeof Version)[number];
   type SizeType = (typeof Size)[number];
 
   // Public
@@ -51,9 +49,7 @@
   export let disabled: string = "false";
   /** Shows an error state on all radio items in the group. */
   export let error: string = "false";
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
-  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). */
+  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts. */
   export let size: SizeType = "default";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
@@ -77,7 +73,6 @@
   $: isCompact = size === "compact";
   $: {
     isDisabled;
-    version;
     isCompact;
     bindOptions();
   }
@@ -99,7 +94,6 @@
   // Hooks
   onMount(() => {
     validateOrientation(orientation);
-    validateVersion(version);
     validateSize(size);
     addRelayListener();
     sendMountedMessage();
@@ -184,8 +178,7 @@
             name,
             checked: props.value === value,
             revealAriaLabel: props.revealAriaLabel,
-            version: version,
-            compact: version === "2" && isCompact,
+            compact: isCompact,
           },
         }),
       );
@@ -235,7 +228,6 @@
   bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
-  class:v2={version === "2"}
   class:compact={isCompact}
   data-testid={testid}
   role="radiogroup"
@@ -258,8 +250,7 @@
     gap: var(--goa-radio-group-gap-horizontal);
   }
 
-  /* V2 compact size variant - V2-only feature */
-  .goa-radio-group--horizontal.v2.compact {
+  .goa-radio-group--horizontal.compact {
     gap: var(--goa-radio-group-gap-horizontal-compact);
   }
 
@@ -270,8 +261,7 @@
     width: 100%;
   }
 
-  /* V2 compact size variant - V2-only feature */
-  .goa-radio-group--vertical.v2.compact {
+  .goa-radio-group--vertical.compact {
     gap: var(--goa-radio-group-gap-vertical-compact);
   }
 

@@ -201,7 +201,7 @@
           "type": "GoabRadioGroupSize",
           "required": false,
           "default": "default",
-          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
+          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
         },
         {
           "name": "testId",
@@ -330,7 +330,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
+          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
         },
         {
           "name": "testid",
@@ -345,18 +345,6 @@
           "required": true,
           "default": null,
           "description": "The currently selected value in the radio group."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabRadioGroupVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

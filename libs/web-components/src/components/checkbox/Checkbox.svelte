@@ -570,7 +570,12 @@ max-width: ${maxwidth};
   .container:has(:focus-visible):hover,
   .container.selected:has(:focus-visible):hover,
   label:hover .container.selected:has(:focus-visible),
-  label:hover .container:has(:focus-visible) {
+  label:hover .container:has(:focus-visible),
+  .error .container:has(:focus-visible),
+  .error .container:has(:focus-visible):hover,
+  .error .container.selected:has(:focus-visible):hover,
+  label:hover.error .container.selected:has(:focus-visible),
+  label:hover.error .container:has(:focus-visible) {
     outline: var(--goa-checkbox-border-focus);
     outline-offset: var(--goa-space-3xs);
     box-shadow: none;

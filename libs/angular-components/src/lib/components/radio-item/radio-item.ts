@@ -17,7 +17,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-radio-item
-        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.label]="label"
@@ -79,7 +78,6 @@ export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) compact?: boolean;
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

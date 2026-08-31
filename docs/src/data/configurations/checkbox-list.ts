@@ -568,5 +568,123 @@ const [sizeCompact, setSizeCompact] = useState<string[]>([]);
 </goa-form-item>`,
       },
     },
+    {
+      id: "select-all",
+      name: "Select all",
+      description: "Select or clear every checkbox in a list",
+      code: {
+        react: {
+          ts: `const selectAllOptions = ["email", "text", "push"];
+const [selectAllValues, setSelectAllValues] = useState<string[]>([]);
+
+const allOptionsSelected = selectAllValues.length === selectAllOptions.length;
+const someOptionsSelected = selectAllValues.length > 0 && !allOptionsSelected;`,
+          jsx: `<GoabFormItem label="Select notification methods" mb="l">
+  <GoabCheckbox
+    name="selectAllNotifications"
+    text="Select all"
+    checked={allOptionsSelected}
+    indeterminate={someOptionsSelected}
+    onChange={(detail) =>
+      setSelectAllValues(detail.checked ? [...selectAllOptions] : [])
+    }
+    mb="m"
+  />
+  <GoabCheckboxList
+    name="notifications"
+    value={selectAllValues}
+    ml="l"
+    onChange={(detail) => setSelectAllValues(detail.value)}
+  >
+    <GoabCheckbox name="email" text="Email" />
+    <GoabCheckbox name="text" text="Text message" />
+    <GoabCheckbox name="push" text="Push notification" />
+  </GoabCheckboxList>
+</GoabFormItem>`,
+        },
+        angular: {
+          ts: `export class SomeOtherComponent {
+  readonly selectAllOptions = ["email", "text", "push"];
+  selectAllValues: string[] = [];
+
+  get allOptionsSelected(): boolean {
+    return this.selectAllValues.length === this.selectAllOptions.length;
+  }
+
+  get someOptionsSelected(): boolean {
+    return this.selectAllValues.length > 0 && !this.allOptionsSelected;
+  }
+
+  selectAllOnChange(event: GoabCheckboxOnChangeDetail): void {
+    this.selectAllValues = event.checked ? [...this.selectAllOptions] : [];
+  }
+
+  selectAllListOnChange(event: GoabCheckboxListOnChangeDetail): void {
+    this.selectAllValues = event.value;
+  }
+}`,
+          template: `<goab-form-item label="Select notification methods" mb="l">
+  <goab-checkbox
+    name="selectAllNotifications"
+    text="Select all"
+    [checked]="allOptionsSelected"
+    [indeterminate]="someOptionsSelected"
+    (onChange)="selectAllOnChange($event)"
+    mb="m"
+  ></goab-checkbox>
+  <goab-checkbox-list
+    name="notifications"
+    [value]="selectAllValues"
+    ml="l"
+    (onChange)="selectAllListOnChange($event)"
+  >
+    <goab-checkbox name="email" text="Email"></goab-checkbox>
+    <goab-checkbox name="text" text="Text message"></goab-checkbox>
+    <goab-checkbox name="push" text="Push notification"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>`,
+        },
+        webComponents: {
+          html: `<goa-form-item label="Select notification methods" mb="l">
+  <goa-checkbox
+    id="select-all-notifications"
+    name="selectAllNotifications"
+    text="Select all"
+    mb="m"
+  ></goa-checkbox>
+  <goa-checkbox-list
+    id="notification-list"
+    name="notifications"
+    ml="l"
+  >
+    <goa-checkbox name="email" text="Email"></goa-checkbox>
+    <goa-checkbox name="text" text="Text message"></goa-checkbox>
+    <goa-checkbox name="push" text="Push notification"></goa-checkbox>
+  </goa-checkbox-list>
+</goa-form-item>`,
+          js: `const selectAllOptions = ["email", "text", "push"];
+const selectAllCheckbox = document.getElementById("select-all-notifications");
+const checkboxList = document.getElementById("notification-list");
+
+function updateSelectAll(values) {
+  const allOptionsSelected = values.length === selectAllOptions.length;
+  const someOptionsSelected = values.length > 0 && !allOptionsSelected;
+
+  selectAllCheckbox.setAttribute("checked", String(allOptionsSelected));
+  selectAllCheckbox.setAttribute("indeterminate", String(someOptionsSelected));
+}
+
+selectAllCheckbox.addEventListener("_change", (event) => {
+  const values = event.detail.checked ? [...selectAllOptions] : [];
+  checkboxList.value = values;
+  updateSelectAll(values);
+});
+
+checkboxList.addEventListener("_change", (event) => {
+  updateSelectAll(event.detail.value);
+});`,
+        },
+      },
+    },
   ],
 };
