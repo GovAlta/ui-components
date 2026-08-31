@@ -52,7 +52,7 @@ Allow users to select one option from a set.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. |
 | `orientation` | GoabRadioGroupOrientation | (none) | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
-| `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). |
+| `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string | (none) | No | The currently selected value in the radio group. |
 
@@ -83,7 +83,7 @@ Tag: `goa-radio-group`
 | `mt` | Spacing | (none) | No | Top margin. |
 | `name` | string | (none) | Yes | The name for the radio group. Used for accessibility and change events. |
 | `orientation` | "vertical" \| "horizontal" | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
-| `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string | (none) | Yes | The currently selected value in the radio group. |
 
