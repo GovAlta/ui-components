@@ -690,10 +690,10 @@ describe("GoADropdown", () => {
   });
 
   describe("placeholder", () => {
-    it("does not show a placeholder", async () => {
+    it("shows the default placeholder", async () => {
       const result = render(GoADropdownWrapper, { name, items });
       const input = result.container.querySelector("input");
-      expect(input?.getAttribute("placeholder")).toBe("");
+      expect(input?.getAttribute("placeholder")).toBe("—Select—");
     });
 
     it("shows a placeholder", async () => {

@@ -27,7 +27,6 @@ interface WCProps extends Margins {
   autocomplete?: string;
   testid?: string;
   size?: GoabTextAreaSize;
-  version?: string;
 }
 
 declare module "react" {
@@ -145,7 +144,6 @@ export function GoabTextArea({
       readOnly={readOnly ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
-      version="2"
       {..._props}
     ></goa-textarea>
   );

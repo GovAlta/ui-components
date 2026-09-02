@@ -5,10 +5,10 @@
   label="Name of item"
   helptext="Add an item to the dropdown list below"
 >
-  <goa-input version="2" id="item-input" name="item"></goa-input>
+  <goa-input id="item-input" name="item"></goa-input>
 </goa-form-item>
 
-<goa-form-item version="2" mt="l" label="Add to">
+<goa-form-item mt="l" label="Add to">
   <goa-radio-group
     id="mount-type"
     name="mountType"
@@ -27,8 +27,8 @@
 
 <goa-divider mt="l"></goa-divider>
 
-<goa-form-item version="2" mt="l" label="All items">
-  <goa-dropdown version="2" id="task-dropdown" name="selectedTask">
+<goa-form-item mt="l" label="All items">
+  <goa-dropdown id="task-dropdown" name="selectedTask">
     <goa-dropdown-item value="finish-report" label="Finish Report"></goa-dropdown-item>
     <goa-dropdown-item value="attend-meeting" label="Attend Meeting"></goa-dropdown-item>
     <goa-dropdown-item value="reply-emails" label="Reply Emails"></goa-dropdown-item>

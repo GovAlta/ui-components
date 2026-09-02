@@ -65,8 +65,8 @@ export const textAreaConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Comments" mb="l">
-  <goa-textarea id="comments-textarea" version="2" name="comments"></goa-textarea>
+        webComponents: `<goa-form-item label="Comments" mb="l">
+  <goa-textarea id="comments-textarea" name="comments"></goa-textarea>
 </goa-form-item>
 <script>
   document
@@ -137,8 +137,8 @@ export const textAreaConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Feedback" mb="l">
-  <goa-textarea id="feedback-textarea" version="2" name="feedback" placeholder="Enter your feedback here..."></goa-textarea>
+        webComponents: `<goa-form-item label="Feedback" mb="l">
+  <goa-textarea id="feedback-textarea" name="feedback" placeholder="Enter your feedback here..."></goa-textarea>
 </goa-form-item>
 <script>
   document
@@ -208,8 +208,8 @@ export const textAreaConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Description" mb="l">
-  <goa-textarea id="description-textarea" version="2" name="description" rows="6"></goa-textarea>
+        webComponents: `<goa-form-item label="Description" mb="l">
+  <goa-textarea id="description-textarea" name="description" rows="6"></goa-textarea>
 </goa-form-item>
 <script>
   document
@@ -283,8 +283,8 @@ export const textAreaConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Tell us about your experience with the service" mb="l">
-  <goa-textarea id="experience-textarea" version="2" name="experience" countby="character" maxcount="200"></goa-textarea>
+        webComponents: `<goa-form-item label="Tell us about your experience with the service" mb="l">
+  <goa-textarea id="experience-textarea" name="experience" countby="character" maxcount="200"></goa-textarea>
 </goa-form-item>
 <script>
   document
@@ -370,8 +370,8 @@ export const textAreaConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Describe the circumstances that led to this request" mb="l">
-  <goa-textarea id="circumstances-textarea" version="2" name="circumstances" countby="word" maxcount="500" rows="8"></goa-textarea>
+        webComponents: `<goa-form-item label="Describe the circumstances that led to this request" mb="l">
+  <goa-textarea id="circumstances-textarea" name="circumstances" countby="word" maxcount="500" rows="8"></goa-textarea>
 </goa-form-item>
 <script>
   document
@@ -469,11 +469,11 @@ const [sizeCompact, setSizeCompact] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-  <goa-textarea id="size-default-textarea" version="2" name="sizeDefault"></goa-textarea>
+        webComponents: `<goa-form-item label="Default size" mb="l">
+  <goa-textarea id="size-default-textarea" name="sizeDefault"></goa-textarea>
 </goa-form-item>
-<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-  <goa-textarea id="size-compact-textarea" version="2" name="sizeCompact" size="compact"></goa-textarea>
+<goa-form-item label="Compact size" labelsize="compact" mb="l">
+  <goa-textarea id="size-compact-textarea" name="sizeCompact" size="compact"></goa-textarea>
 </goa-form-item>
 <script>
   function handleTextareaChange(e) {
@@ -573,14 +573,14 @@ const [errorValue, setErrorValue] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Disabled" mb="l">
-  <goa-textarea id="disabled-textarea" version="2" name="disabled" disabled value="Cannot edit this content"></goa-textarea>
+        webComponents: `<goa-form-item label="Disabled" mb="l">
+  <goa-textarea id="disabled-textarea" name="disabled" disabled value="Cannot edit this content"></goa-textarea>
 </goa-form-item>
-<goa-form-item version="2" label="Read-only" mb="l">
-  <goa-textarea id="readonly-textarea" version="2" name="readonly" readonly value="View only content"></goa-textarea>
+<goa-form-item label="Read-only" mb="l">
+  <goa-textarea id="readonly-textarea" name="readonly" readonly value="View only content"></goa-textarea>
 </goa-form-item>
-<goa-form-item version="2" label="With error" error="This field is required" mb="l">
-  <goa-textarea id="error-textarea" version="2" name="error" error></goa-textarea>
+<goa-form-item label="With error" error="This field is required" mb="l">
+  <goa-textarea id="error-textarea" name="error" error></goa-textarea>
 </goa-form-item>
 <script>
   function handleTextareaChange(e) {

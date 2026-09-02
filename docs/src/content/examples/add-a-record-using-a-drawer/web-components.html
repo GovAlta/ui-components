@@ -6,8 +6,8 @@
   heading="Add Record"
   position="right"
 >
-  <goa-form-item version="2" label="Level of education">
-    <goa-dropdown version="2" name="education" value="university">
+  <goa-form-item label="Level of education">
+    <goa-dropdown name="education" value="university">
       <goa-dropdown-item
         value="high-school"
         label="High School Diploma"
@@ -18,20 +18,20 @@
       <goa-dropdown-item value="doctorate" label="Doctorate"></goa-dropdown-item>
     </goa-dropdown>
   </goa-form-item>
-  <goa-form-item version="2" label="Educational institution" mt="l">
-    <goa-input version="2" name="education" type="text"></goa-input>
+  <goa-form-item label="Educational institution" mt="l">
+    <goa-input name="education" type="text"></goa-input>
   </goa-form-item>
-  <goa-form-item version="2" label="Field of study" requirement="optional" mt="l">
-    <goa-input version="2" name="fieldOfStudy" type="text"></goa-input>
+  <goa-form-item label="Field of study" requirement="optional" mt="l">
+    <goa-input name="fieldOfStudy" type="text"></goa-input>
   </goa-form-item>
-  <goa-form-item version="2" label="Is the person currently attending?" mt="l">
+  <goa-form-item label="Is the person currently attending?" mt="l">
     <goa-radio-group name="attendTraining" orientation="horizontal">
       <goa-radio-item value="yes" label="Yes"></goa-radio-item>
       <goa-radio-item value="no" label="No"></goa-radio-item>
     </goa-radio-group>
   </goa-form-item>
-  <goa-form-item version="2" label="Start date" mt="l">
-    <goa-date-picker version="2"></goa-date-picker>
+  <goa-form-item label="Start date" mt="l">
+    <goa-date-picker></goa-date-picker>
     <goa-checkbox
       name="startDateApproximate"
       text="Approximate date"
@@ -39,7 +39,7 @@
       mt="s"
     ></goa-checkbox>
   </goa-form-item>
-  <goa-form-item version="2" label="Credential received?" mt="l">
+  <goa-form-item label="Credential received?" mt="l">
     <goa-radio-group name="credentialReceived" orientation="horizontal">
       <goa-radio-item value="yes" label="Yes"></goa-radio-item>
       <goa-radio-item value="no" label="No"></goa-radio-item>

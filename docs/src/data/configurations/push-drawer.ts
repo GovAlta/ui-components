@@ -301,7 +301,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
   <goa-push-drawer version="2" id="demo-push-drawer" heading="Edit notification preferences" width="280px">
-    <goa-form-item version="2" label="Email notifications">
+    <goa-form-item label="Email notifications">
       <goa-checkbox-list name="email-notifications" value="updates,deadlines">
         <goa-checkbox name="updates" text="Case status updates"></goa-checkbox>
         <goa-checkbox name="deadlines" text="Upcoming deadlines"></goa-checkbox>

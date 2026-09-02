@@ -132,8 +132,6 @@
   export let textalign: TextAlign = "left";
   /** Sets the size of the input. 'compact' reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
@@ -378,7 +376,6 @@
   class:leading-content={_leadingContentSlot}
   class:trailing-content={_trailingContentSlot}
   class:compact={size === "compact"}
-  class:v2={version === "2"}
 >
   {#if $$slots.leadingContent}
     <div class="leading-content-slot">
@@ -519,8 +516,8 @@
     min-width: 0;
   }
 
-  /* V2 Compact size */
-  .container.v2.compact {
+  /* Compact size */
+  .container.compact {
     --goa-text-input-height: var(--goa-text-input-height-compact);
     --goa-text-input-padding: var(--goa-text-input-padding-compact);
     --goa-text-input-padding-lr: var(--goa-text-input-padding-compact-lr);
@@ -555,14 +552,14 @@
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
-  /* V2: Focus state shows only blue focus border (no default border) */
-  .container.v2 .goa-input:has(input:focus-visible) {
+  /* Focus state shows only the focus border */
+  .container .goa-input:has(input:focus-visible) {
     box-shadow: var(--goa-text-input-border-focus);
   }
 
-  /* V2: Vertically center date/time input labels in Safari */
-  .container.v2 input::-webkit-datetime-edit,
-  .container.v2 input::-webkit-date-and-time-value {
+  /* Vertically center date/time input labels in Safari */
+  .container input::-webkit-datetime-edit,
+  .container input::-webkit-date-and-time-value {
     display: flex;
     align-items: center;
     height: 100%;
@@ -706,24 +703,24 @@
     border-bottom-right-radius: var(--goa-text-input-border-radius);
   }
 
-  /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2 .goa-input:has(input:read-only:not(:disabled)) {
+  /* Read-only input field styling (exclude disabled inputs) */
+  .container .goa-input:has(input:read-only:not(:disabled)) {
     background-color: var(--goa-text-input-color-bg-readonly);
   }
 
-  /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2
+  /* Read-only input field border (exclude disabled inputs) */
+  .container
     .goa-input:not(.error):has(
       input:read-only:not(:disabled):not(:focus-visible)
     ) {
     box-shadow: var(--goa-text-input-border-readonly);
   }
 
-  /* V2: Read-only leading/trailing content - background, border, and text color */
-  .container.v2.leading-content:has(input:read-only:not(:disabled))
+  /* Read-only leading/trailing content */
+  .container.leading-content:has(input:read-only:not(:disabled))
     .leading-content-slot
     :global(::slotted(div)),
-  .container.v2.trailing-content:has(input:read-only:not(:disabled))
+  .container.trailing-content:has(input:read-only:not(:disabled))
     .trailing-content-slot
     :global(::slotted(div)) {
     background-color: var(--goa-text-input-lt-content-color-bg-readonly);
@@ -731,11 +728,11 @@
     color: var(--goa-text-input-color-text);
   }
 
-  /* V2: Disabled leading/trailing content - text color and border (must come after all default slot styles) */
-  .container.v2.leading-content:has(.input--disabled)
+  /* Disabled leading/trailing content (must come after the default slot styles) */
+  .container.leading-content:has(.input--disabled)
     .leading-content-slot
     :global(::slotted(div)),
-  .container.v2.trailing-content:has(.input--disabled)
+  .container.trailing-content:has(.input--disabled)
     .trailing-content-slot
     :global(::slotted(div)) {
     color: var(--goa-text-input-color-text-disabled);

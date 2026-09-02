@@ -45,8 +45,8 @@ function handleChange(detail: GoabInputOnChangeDetail) {
   </goab-input>
 </goab-form-item>`,
         },
-        webComponents: `<goa-form-item version="2" label="First name" mb="l">
-  <goa-input version="2" name="firstName"></goa-input>
+        webComponents: `<goa-form-item label="First name" mb="l">
+  <goa-input name="firstName"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -61,8 +61,8 @@ function handleChange(detail: GoabInputOnChangeDetail) {
         angular: `<goab-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
   <goab-input name="password" type="password" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Password" helptext="Must be at least 8 characters" mb="l">
-  <goa-input version="2" name="password" type="password" width="100%"></goa-input>
+        webComponents: `<goa-form-item label="Password" helptext="Must be at least 8 characters" mb="l">
+  <goa-input name="password" type="password" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -77,8 +77,8 @@ function handleChange(detail: GoabInputOnChangeDetail) {
         angular: `<goab-form-item label="Full name" requirement="required" mb="l">
   <goab-input name="fullName" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Full name" requirement="required" mb="l">
-  <goa-input version="2" name="fullName" width="100%"></goa-input>
+        webComponents: `<goa-form-item label="Full name" requirement="required" mb="l">
+  <goa-input name="fullName" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -93,8 +93,8 @@ function handleChange(detail: GoabInputOnChangeDetail) {
         angular: `<goab-form-item label="Middle name" requirement="optional" mb="l">
   <goab-input name="middleName" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Middle name" requirement="optional" mb="l">
-  <goa-input version="2" name="middleName" width="100%"></goa-input>
+        webComponents: `<goa-form-item label="Middle name" requirement="optional" mb="l">
+  <goa-input name="middleName" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -109,8 +109,8 @@ function handleChange(detail: GoabInputOnChangeDetail) {
         angular: `<goab-form-item label="Email address" error="Please enter a valid email address" mb="l">
   <goab-input name="email" type="email" [error]="true" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Email address" error="Please enter a valid email address" mb="l">
-  <goa-input version="2" name="email" type="email" error width="100%"></goa-input>
+        webComponents: `<goa-form-item label="Email address" error="Please enter a valid email address" mb="l">
+  <goa-input name="email" type="email" error width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -137,14 +137,14 @@ function handleChange(detail: GoabInputOnChangeDetail) {
 <goab-form-item label="Large label" labelSize="large" mb="l">
   <goab-input name="large" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Compact label" labelsize="compact" mb="l">
-  <goa-input version="2" name="compact" width="100%"></goa-input>
+        webComponents: `<goa-form-item label="Compact label" labelsize="compact" mb="l">
+  <goa-input name="compact" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Regular label" labelsize="regular" mb="l">
-  <goa-input version="2" name="regular" width="100%"></goa-input>
+<goa-form-item label="Regular label" labelsize="regular" mb="l">
+  <goa-input name="regular" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Large label" labelsize="large" mb="l">
-  <goa-input version="2" name="large" width="100%"></goa-input>
+<goa-form-item label="Large label" labelsize="large" mb="l">
+  <goa-input name="large" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
