@@ -81,8 +81,6 @@
   export let native: string = "false";
   /** Sets the size of the dropdown. Compact reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
@@ -787,7 +785,6 @@
   class="dropdown"
   class:dropdown-native={_native}
   class:compact={size === "compact"}
-  class:v2={version === "2"}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
@@ -877,7 +874,7 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          placeholder={placeholder || (version === "2" ? "—Select—" : "")}
+          placeholder={placeholder || "—Select—"}
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
@@ -1002,9 +999,9 @@
     box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
 
-  /* V2: Focus state has a single border */
-  .v2 .dropdown-input-group:has(input:focus-visible),
-  .v2 .dropdown-input-group.error:has(:focus-visible) {
+  /* Focus state has a single border */
+  .dropdown-input-group:has(input:focus-visible),
+  .dropdown-input-group.error:has(:focus-visible) {
     box-shadow: var(--goa-dropdown-border-focus);
   }
 

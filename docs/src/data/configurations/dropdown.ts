@@ -90,8 +90,8 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Province or territory" mb="l">
-  <goa-dropdown version="2" name="province">
+        webComponents: `<goa-form-item label="Province or territory" mb="l">
+  <goa-dropdown name="province">
     <goa-dropdown-item value="Alberta"></goa-dropdown-item>
     <goa-dropdown-item value="British Columbia"></goa-dropdown-item>
     <goa-dropdown-item value="Manitoba"></goa-dropdown-item>
@@ -178,8 +178,8 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="How would you like to be contacted?" mb="l">
-  <goa-dropdown version="2" name="contactMethod" placeholder="—Select contact method—">
+        webComponents: `<goa-form-item label="How would you like to be contacted?" mb="l">
+  <goa-dropdown name="contactMethod" placeholder="—Select contact method—">
     <goa-dropdown-item value="Email"></goa-dropdown-item>
     <goa-dropdown-item value="Phone"></goa-dropdown-item>
     <goa-dropdown-item value="Mail"></goa-dropdown-item>
@@ -395,8 +395,8 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="What city do you live in?" mb="l">
-  <goa-dropdown version="2" name="city" filterable leadingicon="search" maxheight="400px">
+        webComponents: `<goa-form-item label="What city do you live in?" mb="l">
+  <goa-dropdown name="city" filterable leadingicon="search" maxheight="400px">
     <goa-dropdown-item value="Airdrie"></goa-dropdown-item>
     <goa-dropdown-item value="Athabasca"></goa-dropdown-item>
     <goa-dropdown-item value="Banff"></goa-dropdown-item>
@@ -477,7 +477,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <goab-dropdown-item value="Health"></goab-dropdown-item>
   </goab-dropdown>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Program" mb="l">
+        webComponents: `<goa-form-item label="Program" mb="l">
   <goa-dropdown
     version="2"
     name="program"
@@ -584,8 +584,8 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Assign to" mb="l">
-  <goa-dropdown version="2" name="assignee" width="250px">
+        webComponents: `<goa-form-item label="Assign to" mb="l">
+  <goa-dropdown name="assignee" width="250px">
     <goa-dropdown-item value="sarah" label="Sarah Johnson">
       <goa-block version="2" direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
@@ -726,8 +726,8 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Assign to" mb="l">
-  <goa-dropdown version="2" name="assignee" filterable leadingicon="search">
+        webComponents: `<goa-form-item label="Assign to" mb="l">
+  <goa-dropdown name="assignee" filterable leadingicon="search">
     <goa-dropdown-item
       value="sarah"
       label="Sarah Johnson"
@@ -839,15 +839,15 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Custom dropdown" mb="l">
-  <goa-dropdown version="2" name="custom">
+        webComponents: `<goa-form-item label="Custom dropdown" mb="l">
+  <goa-dropdown name="custom">
     <goa-dropdown-item value="opt1" label="Option 1"></goa-dropdown-item>
     <goa-dropdown-item value="opt2" label="Option 2"></goa-dropdown-item>
     <goa-dropdown-item value="opt3" label="Option 3"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
-<goa-form-item version="2" label="Native dropdown" mb="l">
-  <goa-dropdown version="2" name="native" native>
+<goa-form-item label="Native dropdown" mb="l">
+  <goa-dropdown name="native" native>
     <goa-dropdown-item value="opt1" label="Option 1"></goa-dropdown-item>
     <goa-dropdown-item value="opt2" label="Option 2"></goa-dropdown-item>
     <goa-dropdown-item value="opt3" label="Option 3"></goa-dropdown-item>
@@ -944,15 +944,15 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-  <goa-dropdown version="2" name="sizeDefault">
+        webComponents: `<goa-form-item label="Default size" mb="l">
+  <goa-dropdown name="sizeDefault">
     <goa-dropdown-item value="Draft"></goa-dropdown-item>
     <goa-dropdown-item value="In review"></goa-dropdown-item>
     <goa-dropdown-item value="Approved"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
-<goa-form-item version="2" label="Compact size" mb="l">
-  <goa-dropdown version="2" name="sizeCompact" size="compact">
+<goa-form-item label="Compact size" mb="l">
+  <goa-dropdown name="sizeCompact" size="compact">
     <goa-dropdown-item value="Draft"></goa-dropdown-item>
     <goa-dropdown-item value="In review"></goa-dropdown-item>
     <goa-dropdown-item value="Approved"></goa-dropdown-item>
@@ -1067,14 +1067,14 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Disabled dropdown" mb="l">
-  <goa-dropdown version="2" name="disabled" disabled value="AB">
+        webComponents: `<goa-form-item label="Disabled dropdown" mb="l">
+  <goa-dropdown name="disabled" disabled value="AB">
     <goa-dropdown-item value="AB" label="Alberta"></goa-dropdown-item>
     <goa-dropdown-item value="BC" label="British Columbia"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
-<goa-form-item version="2" label="Dropdown with error" error="Please select an option" mb="l">
-  <goa-dropdown version="2" name="error" error placeholder="Select an option">
+<goa-form-item label="Dropdown with error" error="Please select an option" mb="l">
+  <goa-dropdown name="error" error placeholder="Select an option">
     <goa-dropdown-item value="opt1" label="Option 1"></goa-dropdown-item>
     <goa-dropdown-item value="opt2" label="Option 2"></goa-dropdown-item>
   </goa-dropdown>

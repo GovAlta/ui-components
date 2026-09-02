@@ -31,7 +31,6 @@ interface WCProps extends Margins {
   autocomplete?: string;
   testid?: string;
   size?: GoabDropdownSize;
-  version?: string;
 }
 
 declare module "react" {
@@ -170,7 +169,6 @@ export function GoabDropdown({
       native={native ? "true" : undefined}
       relative={relative ? "true" : undefined}
       {..._props}
-      version="2"
     >
       {children}
     </goa-dropdown>

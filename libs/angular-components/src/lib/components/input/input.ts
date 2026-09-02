@@ -33,7 +33,6 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `@if (isReady) {
     <goa-input
       #goaComponentRef
-      [attr.version]="version"
       [attr.type]="type"
       [attr.name]="name"
       [attr.focused]="focused"
@@ -174,7 +173,6 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   /** Emits when the input value changes. Emits change detail including the new value. */
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
-  version = "2";
   isReady = false;
   handleTrailingIconClick = false;
 

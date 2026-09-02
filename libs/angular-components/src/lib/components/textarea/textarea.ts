@@ -31,7 +31,6 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-textarea
         #goaComponentRef
-        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.placeholder]="placeholder"
@@ -105,7 +104,6 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

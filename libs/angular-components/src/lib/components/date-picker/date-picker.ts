@@ -17,7 +17,7 @@ import {
   HostListener,
   OnInit,
   ChangeDetectorRef,
-    inject,
+  inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -43,7 +43,6 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.mr]="mr"
-      [attr.version]="version"
       (_change)="_onChange($event)"
       (_focus)="_onFocus($event)"
       (_blur)="_onBlur($event)"
@@ -65,7 +64,6 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
 
   /** Sets the name of the date field. */
   @Input() name?: string;
@@ -126,7 +124,10 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   }
 
   _onFocus(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabDatePickerOnFocusDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabDatePickerOnFocusDetail>).detail,
+      event: e,
+    };
     this.onFocus.emit(detail);
   }
 
@@ -135,7 +136,6 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     this.markAsTouched();
     this.onBlur.emit(detail);
   }
-
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

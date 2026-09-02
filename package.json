@@ -50,7 +50,6 @@
     "@astrojs/check": "0.9.8",
     "@babel/core": "7.29.6",
     "@babel/preset-react": "7.28.5",
-    "@faker-js/faker": "8.4.1",
     "@nx/angular": "22.6.4",
     "@nx/eslint": "22.6.4",
     "@nx/eslint-plugin": "22.6.4",
