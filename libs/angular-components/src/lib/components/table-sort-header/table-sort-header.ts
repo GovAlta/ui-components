@@ -17,7 +17,6 @@ import {
         [attr.name]="name"
         [attr.direction]="direction"
         [attr.sort-order]="sortOrder"
-        [attr.version]="version"
       >
         <ng-content />
       </goa-table-sort-header>
@@ -31,7 +30,6 @@ export class GoabTableSortHeader implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** Column name identifier for sorting. */
   @Input() name?: string;
   /** Sets the sort direction indicator. @default "none" */

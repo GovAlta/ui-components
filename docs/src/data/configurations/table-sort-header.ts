@@ -23,7 +23,7 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
         angular: `<goab-table-sort-header name="name" direction="asc">
   Name
 </goab-table-sort-header>`,
-        webComponents: `<goa-table-sort-header version="2" name="name" direction="asc">
+        webComponents: `<goa-table-sort-header name="name" direction="asc">
   Name
 </goa-table-sort-header>`,
       },
@@ -51,13 +51,13 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
 <goab-table-sort-header name="col3" direction="none">
   Unsorted
 </goab-table-sort-header>`,
-        webComponents: `<goa-table-sort-header version="2" name="col1" direction="asc">
+        webComponents: `<goa-table-sort-header name="col1" direction="asc">
   Ascending
 </goa-table-sort-header>
-<goa-table-sort-header version="2" name="col2" direction="desc">
+<goa-table-sort-header name="col2" direction="desc">
   Descending
 </goa-table-sort-header>
-<goa-table-sort-header version="2" name="col3" direction="none">
+<goa-table-sort-header name="col3" direction="none">
   Unsorted
 </goa-table-sort-header>`,
       },
@@ -79,10 +79,10 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
 <goab-table-sort-header name="date" direction="desc" [sortOrder]="2">
   Date
 </goab-table-sort-header>`,
-        webComponents: `<goa-table-sort-header version="2" name="name" direction="asc" sort-order="1">
+        webComponents: `<goa-table-sort-header name="name" direction="asc" sort-order="1">
   Name
 </goa-table-sort-header>
-<goa-table-sort-header version="2" name="date" direction="desc" sort-order="2">
+<goa-table-sort-header name="date" direction="desc" sort-order="2">
   Date
 </goa-table-sort-header>`,
       },

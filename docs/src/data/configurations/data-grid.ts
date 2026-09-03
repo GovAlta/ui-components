@@ -94,7 +94,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
   </goab-table>
 </goab-data-grid>`,
         webComponents: `<goa-data-grid keyboard-nav="table" keyboard-icon-position="right">
-  <goa-table version="2" width="100%">
+  <goa-table width="100%">
     <table width="100%">
       <thead>
         <tr data-grid="row">

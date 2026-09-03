@@ -208,13 +208,9 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   });
 
   // Listen for table sort events (from goa-table web component)
-  // Also explicitly set version="2" attribute since React may not set it correctly on custom elements
   useEffect(() => {
     const table = tableRef.current;
     if (!table) return;
-
-    // Explicitly set version attribute for V2 styling (React doesn't always set attributes on custom elements)
-    table.setAttribute("version", "2");
 
     const handleMultiSort = (e: Event) => {
       const detail = (
@@ -721,7 +717,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           <div className="view-toggle-wrapper">
             <goa-tabs
               ref={tabsRef}
-              version="2"
               variant="segmented"
               initialTab={viewMode === "card" ? 1 : 2}
               orientation="horizontal"
@@ -874,10 +869,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           }}
         >
           <div className="examples-table-scroll-shadow-left" aria-hidden="true" />
-          {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
           <goa-table
             ref={tableRef}
-            version="2"
             width="100%"
             variant="normal"
             sort-mode="multi"
@@ -887,7 +880,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 <tr>
                   <th style={{ width: "320px" }}>
                     <goa-table-sort-header
-                      version="2"
                       name="title"
                       direction={getColumnSortDirection("title")}
                       sort-order={getColumnSortOrder("title")}
@@ -897,7 +889,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   </th>
                   <th style={{ width: "120px" }}>
                     <goa-table-sort-header
-                      version="2"
                       name="size"
                       direction={getColumnSortDirection("size")}
                       sort-order={getColumnSortOrder("size")}
@@ -907,7 +898,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   </th>
                   <th style={{ minWidth: "140px" }}>
                     <goa-table-sort-header
-                      version="2"
                       name="productType"
                       direction={getColumnSortDirection("productType")}
                       sort-order={getColumnSortOrder("productType")}
