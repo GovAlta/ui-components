@@ -21,6 +21,7 @@ interface WCProps extends Margins {
   multiselect?: string;
   name?: string;
   native?: string;
+  noresults?: string;
   placeholder?: string;
   value?: string;
   width?: string;
@@ -79,6 +80,8 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
   multiselect?: boolean;
   /** When true, renders the native select HTML element. */
   native?: boolean;
+  /** Sets the text displayed when filtering returns no results. @default "No matches found" */
+  noResults?: string;
   /** The text displayed in the dropdown before a selection is made. Non-native only. */
   placeholder?: string;
   /** Sets a data-testid attribute for automated testing. */

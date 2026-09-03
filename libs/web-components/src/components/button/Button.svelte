@@ -13,7 +13,13 @@
 
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean, dispatch } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    dispatch,
+    style,
+    styles,
+  } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   // Validators
@@ -62,10 +68,13 @@
   /** Icon displayed after the button text. */
   export let trailingicon: GoAIconType | null = null;
 
+  /** Sets the accessible name. Include the visible button text in the value. */
+  export let arialabel: string | undefined = undefined;
+
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
-  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
+  /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   export let width: string = "";
 
   /** @internal Design system version for styling. */
@@ -110,7 +119,9 @@
     validateVersion(version);
 
     if (variant === "dark" && type !== "text") {
-      console.warn(`[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${type}".`);
+      console.warn(
+        `[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${type}".`,
+      );
     }
   });
 
@@ -136,14 +147,12 @@
 <button
   class="{type} {size} {variant}"
   class:v2={version === "2"}
-  style={`
-      ${calculateMargin(mt, mr, mb, ml)};
-      --width: ${width};
-    `}
+  style={styles(calculateMargin(mt, mr, mb, ml), style("--width", width))}
   disabled={isDisabled}
   on:click={clickHandler}
   data-testid={testid}
   type={type === "submit" ? type : "button"}
+  aria-label={arialabel || undefined}
 >
   {#if type === "start"}
     <span class="text">
@@ -159,7 +168,7 @@
     {#if leadingicon}
       <goa-icon
         id="leading-icon"
-        size={ version === "2" && size === "normal" ? "4" : "3" }
+        size={version === "2" && size === "normal" ? "4" : "3"}
         type={leadingicon}
         inverted={isButtonDark}
       />
@@ -170,7 +179,7 @@
     {#if trailingicon}
       <goa-icon
         id="trailing-icon"
-        size={ version === "2" && size === "normal" ? "4" : "3" }
+        size={version === "2" && size === "normal" ? "4" : "3"}
         type={trailingicon}
         inverted={isButtonDark}
       />
@@ -217,6 +226,9 @@
       width: 100%;
       display: flex;
     }
+    button.v2 {
+      width: var(--width, 100%);
+    }
     button.tertiary {
       background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
     }
@@ -238,7 +250,10 @@
   button.compact {
     height: var(--goa-button-height-compact);
     font: var(--goa-button-text-compact);
-    padding: var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));
+    padding: var(
+      --goa-button-padding-compact,
+      var(--goa-button-padding-lr-compact)
+    );
     gap: var(--goa-button-compact-gap);
   }
 
@@ -411,7 +426,7 @@
   }
 
   button.v2.primary:disabled {
-    background-color: var(--goa-button-primary-disabled-color-bg)
+    background-color: var(--goa-button-primary-disabled-color-bg);
   }
 
   button.v2.secondary.destructive {
@@ -435,7 +450,6 @@
     border: var(--goa-button-tertiary-inverse-border);
   }
 
-
   button.v2.tertiary.inverse:hover {
     border: var(--goa-button-tertiary-inverse-hover-border);
   }
@@ -445,7 +459,7 @@
   }
 
   button.v2.tertiary.destructive:hover {
-    border: var(--goa-button-tertiary-destructive-hover-border)
+    border: var(--goa-button-tertiary-destructive-hover-border);
   }
 
   button.v2.tertiary:disabled {

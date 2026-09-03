@@ -24,8 +24,6 @@
 
   /** Icon displayed before the heading text. */
   export let leadingicon: GoAIconType;
-  /** The menu style variant. Primary uses bold text, secondary uses regular weight. */
-  export let type: "primary" | "secondary" = "primary";
   /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** Sets a data-testid attribute for automated testing. */
@@ -207,7 +205,6 @@
     >
       <button
         slot="target"
-        class={type}
         class:open={_open}
         class:current={_hasCurrentLink}
         class:v2-nav={_isV2Navigation}
@@ -235,7 +232,6 @@
     <button
       class:open={_open}
       on:click={toggleMenu}
-      class={type}
       class:v2-nav={_isV2Navigation}
     >
       {#if leadingicon}
@@ -352,39 +348,6 @@
     ) !important;
   }
 
-  /* Menu items in collapsed menu --Interactive */
-  :global(::slotted(a.interactive)) {
-    color: var(--goa-app-header-nav-color-text-link-item) !important;
-    text-decoration: underline !important;
-    white-space: nowrap;
-  }
-  /* Menu items in collapsed menu --Interactive--Hover */
-  :global(::slotted(a.interactive:hover)) {
-    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
-  }
-  /* Menu items in collapsed menu --Interactive--Focus */
-  :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
-    background-color: var(--goa-app-header-color-bg-nav-item-focus);
-  }
-
-  /* Menu items in collapsed menu --Interactive--Current */
-  :global(::slotted(a.interactive.current)) {
-    color: var(
-      --goa-app-header-color-text-nav-item-in-menu-current-hover
-    ) !important;
-    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current);
-  }
-  /* Menu items in collapsed menu --Interactive--Current--Hover */
-  :global(::slotted(a.interactive.current:hover)) {
-    color: var(
-      --goa-app-header-color-text-nav-item-in-menu-current-hover
-    ) !important;
-    background-color: var(
-      --goa-app-header-color-bg-nav-item-in-menu-current-hover
-    );
-  }
-
   /* Menu headers (non-clickable group labels in More menu) */
   /* Need high specificity to override .desktop.v2-nav-menu styles */
   .desktop.v2-nav-menu :global(::slotted(a.menu-header)),
@@ -483,9 +446,6 @@
     button[slot="target"] {
       font-weight: var(--goa-font-weight-bold);
       white-space: nowrap;
-    }
-    button.secondary {
-      font-weight: var(--goa-font-weight-regular);
     }
     button.open {
       background-color: var(--goa-app-header-color-bg-menu-button-focus);

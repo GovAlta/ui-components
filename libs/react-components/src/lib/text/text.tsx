@@ -38,7 +38,7 @@ interface GoATextProps extends Margins, DataAttributes {
   size?: GoabTextSize;
   /** Sets the max width. @default "65ch" */
   maxWidth?: GoabTextMaxWidth;
-  /** Sets the text colour. @default "primary" */
+  /** Sets the text colour to primary, secondary, light, or disabled. @default "primary" */
   color?: GoabTextColor;
   /** Sets the id attribute on the element. */
   id?: string;

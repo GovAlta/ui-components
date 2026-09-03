@@ -761,26 +761,6 @@
     color: var(--goa-app-header-color-text-nav-item-focus) !important;
   }
 
-  /* Menu items in collapsed menu --Interactive */
-  :global(::slotted(a.interactive)) {
-    color: var(--goa-app-header-nav-color-text-link-item) !important;
-    text-decoration: underline !important;
-    white-space: nowrap;
-  }
-
-  /* Menu items in collapsed menu --Interactive--Hover */
-  :global(::slotted(a.interactive:hover)) {
-    color: var(--goa-app-header-nav-color-text-link-item-hover) !important;
-  }
-
-  /* Menu items in collapsed menu --Interactive--Focus */
-  :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
-    background-color: var(
-      --goa-app-header-color-bg-nav-item-child-focus
-    ) !important;
-  }
-
   /* Menu items in collapsed menu -- Current */
   :global(::slotted(a.inside-collapse-menu.current)) {
     color: var(--goa-app-header-color-text-nav-item-in-menu-current);
@@ -905,34 +885,6 @@
     color: var(--goa-app-header-color-text-nav-item-hover);
   }
 
-  /* Link item styling */
-  .desktop :global(::slotted(a.interactive)) {
-    font: var(--goa-app-header-typography-link-item);
-    padding: var(--goa-app-header-padding-link-item);
-  }
-
-  /* Link item styling --Hover */
-  .desktop :global(::slotted(a.interactive:hover)) {
-    border-top: var(--goa-app-header-border-nav-item-default);
-    border-bottom: var(--goa-app-header-border-nav-item-default);
-    background-color: var(--goa-app-header-nav-color-bg-link-item-hover);
-  }
-
-  /* Link item styling --Focus */
-  .desktop :global(::slotted(a.interactive:focus-visible)) {
-    border-top: var(--goa-app-header-border-nav-item-default) !important;
-    border-bottom: var(--goa-app-header-border-nav-item-default) !important;
-    background-color: var(
-      --goa-app-header-nav-color-bg-link-item-focus
-    ) !important;
-  }
-
-  /* Link item styling --Current */
-  .desktop :global(::slotted(a.interactive.current)) {
-    border-top: var(--goa-app-header-border-nav-item-default) !important;
-    border-bottom: var(--goa-app-header-border-nav-item-default) !important;
-  }
-
   /*------------------------------------------------*/
 
   /* TABLET -------------------------------------- */
@@ -1016,16 +968,6 @@
     height: 100%;
     display: flex;
     align-items: end;
-  }
-
-  /* Link menu items in collapsed menu --Focus */
-  :global(::slotted(a.interactive:focus-visible)) {
-    color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
-    background-color: var(
-      --goa-app-header-nav-color-bg-link-item-in-menu-focus
-    ) !important;
-    border-top: none !important;
-    border-bottom: none;
   }
 
   /* Add top border to all menu items in popover menu (except first) */
@@ -1225,7 +1167,7 @@
   }
 
   /* Style links in utilities slot - medium link style without underline */
-  /* Need !important to override V1 .interactive styles and nav item styles */
+  /* Need !important to override V1 nav item styles */
   .v2 .v2-utilities-placeholder :global(::slotted(a)) {
     text-decoration: none !important;
     font-weight: 400 !important;

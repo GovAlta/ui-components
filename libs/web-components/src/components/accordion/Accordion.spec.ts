@@ -101,6 +101,12 @@ describe("Accordion", () => {
     expect(actionsButton).toBeTruthy();
   });
 
+  it("does not render the heading content container when the heading content slot is empty", () => {
+    const { container } = render(Accordion, { heading: "Title" });
+    const headingContent = container.querySelector("summary .heading-content");
+    expect(headingContent).toBeNull();
+  });
+
   it("handle accessibility features", async () => {
     const { container } = render(Accordion, {
       heading: "Title",

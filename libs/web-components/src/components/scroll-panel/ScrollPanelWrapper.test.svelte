@@ -5,9 +5,10 @@
   export let content: string = "";
   export let footer: string = "";
   export let height: string = "400px";
+  export let maxheight: string = "";
 </script>
 
-<goa-scroll-panel {height}>
+<goa-scroll-panel {height} {maxheight}>
   {#if header}
     <div slot="header" class="header-content">{header}</div>
   {/if}

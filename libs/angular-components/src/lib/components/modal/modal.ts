@@ -29,7 +29,7 @@ import { NgTemplateOutlet } from "@angular/common";
         [attr.maxwidth]="maxWidth"
         [attr.testid]="testId"
         [attr.role]="role"
-        [attr.closable]="closable"
+        [attr.closable]="onClose.observed ? 'true' : 'false'"
         [attr.transition]="transition"
         [attr.heading]="getHeadingAsString()"
         (_close)="_onClose($event)"
@@ -74,7 +74,10 @@ export class GoabModal implements OnInit {
   @Input({ transform: booleanAttribute }) open?: boolean;
   /** Set the max allowed width of the modal. */
   @Input() maxWidth?: string;
-  /** Show close icon and allow clicking the background to close the modal. */
+  /**
+   * @deprecated The modal is closable when an onClose handler is provided.
+   * This input is retained for backwards compatibility and has no effect.
+   */
   @Input() closable = false;
   /** Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. */
   @Input() transition?: GoabModalTransition;

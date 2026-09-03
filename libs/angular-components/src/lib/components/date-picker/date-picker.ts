@@ -69,11 +69,11 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
 
   /** Sets the name of the date field. */
   @Input() name?: string;
-  /** Sets the value of the calendar date. */
+  /** Sets the calendar date as an ISO date string (yyyy-mm-dd). */
   @Input() override value?: Date | string | null | undefined;
-  /** Sets the minimum date value allowed. */
+  /** Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). */
   @Input() min?: Date | string;
-  /** Sets the maximum date value allowed. */
+  /** Sets the latest allowed date as an ISO date string (yyyy-mm-dd). */
   @Input() max?: Date | string;
   /** Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. @default "calendar" */
   @Input() type?: GoabDatePickerInputType;

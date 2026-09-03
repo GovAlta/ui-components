@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -65,6 +65,8 @@
   export let maxheight: string = "276px";
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
+  /** Sets the text displayed when filtering returns no results. */
+  export let noresults: string = "No matches found";
   /** Overrides the autosized menu width. Non-native only. */
   export let width: string = "";
   /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
@@ -119,7 +121,6 @@
   let _bindTimeoutId: any;
 
   let _error = toBoolean(error);
-  let _prevError = _error;
 
   //
   // Reactive
@@ -149,19 +150,7 @@
     _popoverMaxWidth = getRenderedWidth();
   }
 
-  // TODO: Syed can you add a comment here describing what this does?
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
 
   //
   // Hooks
@@ -225,6 +214,10 @@
   function setupPopoverListeners() {
     _popoverEl?.addEventListener("_open", (e) => {
       _isMenuVisible = true;
+      if (_filterable) {
+        // Queue input focus after the popover focus trap has handled opening.
+        tick().then(() => setTimeout(() => _inputEl?.focus(), 0));
+      }
     });
 
     _popoverEl?.addEventListener("_close", (e) => {
@@ -702,13 +695,8 @@
           this.onArrow(e, "down");
           break;
         case "Home":
-          this.input.setSelectionRange(0, 0);
-          break;
         case "End":
-          this.input.setSelectionRange(
-            this.input.value.length,
-            this.input.value.length,
-          );
+          // Allow the input to position the caret or extend the text selection.
           break;
         case "Tab":
           // ignore tab
@@ -969,7 +957,7 @@
         {:else}
           {#if _filterable}
             <li class="dropdown-item" data-testid="dropdown-item-not-found">
-              No matches found
+              {noresults}
             </li>
           {/if}
         {/each}
@@ -1023,12 +1011,6 @@
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     box-shadow: var(--goa-dropdown-border-error);
-  }
-
-  @container not (--mobile) {
-    .dropdown-input-group {
-      width: var(--width, 100%);
-    }
   }
 
   .dropdown-icon--arrow,

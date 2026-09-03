@@ -1,0 +1,239 @@
+<goab-text tag="h1" mt="m" mb="s">
+  Bug 4249 - Drawer, Modal, and ScrollPanel sizing
+</goab-text>
+<goab-link trailingIcon="open">
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/4249"
+    target="_blank"
+    rel="noopener"
+  >
+    View issue 4249 on GitHub
+  </a>
+</goab-link>
+<goab-text tag="p">
+  Verify content-sized, overflowing, and fixed-height layouts. In scrolling examples, the
+  final numbered row must be reachable while the heading and actions remain visible.
+</goab-text>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Drawer examples</goab-text>
+
+<goab-text tag="h3">Content-sized Drawers</goab-text>
+<goab-text tag="p">
+  These should be only as tall as their content. The right Drawer omits its heading, and
+  the bottom Drawer omits its actions.
+</goab-text>
+<goab-block direction="row" gap="s">
+  <goab-button type="secondary" (onClick)="openDrawer('content-left')">
+    Open left
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('content-right')">
+    Open right, no heading
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('content-bottom')">
+    Open bottom, no actions
+  </goab-button>
+</goab-block>
+
+<goab-text tag="h3" mt="l">Drawers requiring scrolling</goab-text>
+<goab-text tag="p">
+  Each Drawer contains 30 rows. Scroll to row 30 and confirm the page behind the Drawer
+  remains stationary.
+</goab-text>
+<goab-block direction="row" gap="s">
+  <goab-button type="secondary" (onClick)="openDrawer('overflow-left')">
+    Scroll left
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('overflow-right')">
+    Scroll right
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('overflow-bottom')">
+    Scroll bottom
+  </goab-button>
+</goab-block>
+
+<goab-text tag="h3" mt="l">Drawers with fixed-height content</goab-text>
+<goab-text tag="p">
+  Each Drawer contains an explicitly 18rem-tall body and should size around it.
+</goab-text>
+<goab-block direction="row" gap="s">
+  <goab-button type="secondary" (onClick)="openDrawer('fixed-left')">
+    Fixed left
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('fixed-right')">
+    Fixed right
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openDrawer('fixed-bottom')">
+    Fixed bottom
+  </goab-button>
+</goab-block>
+
+@if (drawerExample) {
+  @if (drawerHasActions) {
+    <goab-drawer
+      [open]="true"
+      [position]="drawerPosition"
+      [heading]="drawerHasHeading ? drawerPosition + ' Drawer' : ''"
+      [actions]="drawerActions"
+      (onClose)="closeDrawer()"
+    >
+      <ng-container *ngTemplateOutlet="drawerBody"></ng-container>
+    </goab-drawer>
+  } @else {
+    <goab-drawer
+      [open]="true"
+      [position]="drawerPosition"
+      [heading]="drawerHasHeading ? drawerPosition + ' Drawer' : ''"
+      (onClose)="closeDrawer()"
+    >
+      <ng-container *ngTemplateOutlet="drawerBody"></ng-container>
+    </goab-drawer>
+  }
+}
+
+<ng-template #drawerBody>
+  @if (drawerHasOverflow) {
+    @for (row of overflowRows; track row) {
+      <p>Drawer row {{ row }} - row 30 must be reachable by scrolling.</p>
+    }
+  } @else if (drawerHasFixedContent) {
+    <div style="height: 18rem">
+      <p>This body has a fixed height of 18rem.</p>
+      <p>The Drawer should include the complete body, heading, and actions.</p>
+    </div>
+  } @else {
+    <p>This Drawer should remain content-sized.</p>
+    <p>There should be no unnecessary empty space or scrollbar.</p>
+  }
+</ng-template>
+
+<ng-template #drawerActions>
+  <goab-button-group alignment="end">
+    <goab-button type="primary" (onClick)="closeDrawer()">Done</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Modal examples</goab-text>
+<goab-block direction="row" gap="s">
+  <goab-button type="secondary" (onClick)="openModal('content')">
+    Content-sized Modal
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openModal('overflow')">
+    Scrolling Modal
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openModal('fixed')">
+    Fixed-height content
+  </goab-button>
+  <goab-button type="secondary" (onClick)="openModal('missing-slots')">
+    No heading or actions
+  </goab-button>
+</goab-block>
+
+@if (modalExample) {
+  @if (modalExample === "missing-slots") {
+    <goab-modal [open]="true" [closable]="true" (onClose)="closeModal()">
+      <p>This Modal should remain content-sized without heading or action slots.</p>
+    </goab-modal>
+  } @else {
+    <goab-modal
+      [open]="true"
+      [closable]="true"
+      heading="Modal sizing test"
+      [actions]="modalActions"
+      (onClose)="closeModal()"
+    >
+      @if (modalExample === "overflow") {
+        @for (row of overflowRows; track row) {
+          <p>Modal row {{ row }} - row 30 must be reachable by scrolling.</p>
+        }
+      } @else if (modalExample === "fixed") {
+        <div style="height: 18rem">
+          <p>This Modal body has a fixed height of 18rem.</p>
+        </div>
+      } @else {
+        <p>This Modal should remain content-sized.</p>
+        <p>There should be no unnecessary empty space or scrollbar.</p>
+      }
+    </goab-modal>
+  }
+}
+
+<ng-template #modalActions>
+  <goab-button-group alignment="end">
+    <goab-button type="primary" (onClick)="closeModal()">Done</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<goab-text tag="h2">Standalone ScrollPanel examples</goab-text>
+
+<goab-text tag="h3">Content-sized</goab-text>
+<goab-scroll-panel
+  height="auto"
+  [header]="contentPanelHeader"
+  [footer]="contentPanelFooter"
+>
+  <p>This panel uses height="auto" and should fit its short content.</p>
+</goab-scroll-panel>
+<ng-template #contentPanelHeader>
+  <div
+    style="padding: var(--goa-space-m); background-color: var(--goa-color-greyscale-100)"
+  >
+    <strong>Header:</strong> content-sized panel
+  </div>
+</ng-template>
+<ng-template #contentPanelFooter>
+  <div
+    style="padding: var(--goa-space-m); background-color: var(--goa-color-greyscale-200)"
+  >
+    <strong>Footer:</strong> content-sized panel
+  </div>
+</ng-template>
+
+<goab-text tag="h3" mt="l">Fixed height</goab-text>
+<goab-scroll-panel height="18rem" [header]="fixedPanelHeader" [footer]="fixedPanelFooter">
+  @for (row of overflowRows; track row) {
+    <p>Fixed panel row {{ row }}</p>
+  }
+</goab-scroll-panel>
+<ng-template #fixedPanelHeader>
+  <div
+    style="padding: var(--goa-space-m); background-color: var(--goa-color-greyscale-100)"
+  >
+    <strong>Header:</strong> fixed-height panel
+  </div>
+</ng-template>
+<ng-template #fixedPanelFooter>
+  <div
+    style="padding: var(--goa-space-m); background-color: var(--goa-color-greyscale-200)"
+  >
+    <strong>Footer:</strong> fixed-height panel
+  </div>
+</ng-template>
+
+<goab-text tag="h3" mt="l">Missing header and footer</goab-text>
+<goab-scroll-panel height="12rem">
+  @for (row of overflowRows.slice(0, 12); track row) {
+    <p>No-slots row {{ row }}</p>
+  }
+</goab-scroll-panel>
+
+<goab-text tag="h3" mt="l">Horizontal scrolling</goab-text>
+<goab-scroll-panel height="10rem" direction="horizontal">
+  <div
+    style="
+      width: calc(100% + 40rem);
+      display: flex;
+      justify-content: space-between;
+      white-space: nowrap;
+    "
+  >
+    <strong>Start of horizontal content</strong>
+    <span>Middle marker</span>
+    <strong>End of horizontal content</strong>
+  </div>
+</goab-scroll-panel>

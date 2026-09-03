@@ -78,22 +78,10 @@
   export let ml: Spacing = null;
 
   let _error = false;
-  let _prevError = false;
 
   // reactive
 
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
   $: isDisabled = toBoolean(disabled);
   $: isReadonly = toBoolean(readonly);
   $: count =

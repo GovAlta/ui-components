@@ -110,8 +110,12 @@ export function DocsTextRoute() {
       <GoabDivider mb="none" mt="none" />
 
       <h3>Color</h3>
-      <GoabText color="primary" mt="none" mb="none">Primary color text (default)</GoabText>
-      <GoabText color="secondary" mb="none">Secondary color text</GoabText>
+      <GoabText color="primary" mt="none" mb="none">Primary colour text (default)</GoabText>
+      <GoabText color="secondary" mb="none">Secondary colour text</GoabText>
+      <GoabText color="disabled" mb="none">Disabled colour text</GoabText>
+      <div style={{ backgroundColor: "var(--goa-color-greyscale-700)", padding: "var(--goa-space-m)" }}>
+        <GoabText color="light" mt="none" mb="none">Light colour text</GoabText>
+      </div>
 
       <h2>Examples</h2>
 

@@ -1513,6 +1513,27 @@
   },
   {
     "type": "example",
+    "id": "limit-the-width-of-helper-text",
+    "title": "Limit the width of helper text",
+    "description": "Use the Text component in the Form item help text slot to limit the line length of helper text.",
+    "status": "published",
+    "size": "interaction",
+    "tags": [
+      "form",
+      "form-item",
+      "helper-text",
+      "text"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "text"
+    ],
+    "aliases": [],
+    "slug": "limit-the-width-of-helper-text"
+  },
+  {
+    "type": "example",
     "id": "link-the-user-to-give-feedback-to-the-service",
     "title": "Link the user to give feedback to the service",
     "description": "Use the microsite header's feedback functionality to collect user feedback during alpha or beta phases of a service.",

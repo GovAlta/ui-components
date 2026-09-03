@@ -141,7 +141,6 @@
   let _inputEl: HTMLInputElement;
   let _rootEl: HTMLElement;
   let _error = false;
-  let _prevError = false;
   // separate styles for input and input's container
   let _containerStyle = "";
   let _inputWidth = "";
@@ -154,18 +153,7 @@
   $: isFocused = toBoolean(focused);
   $: isReadonly = toBoolean(readonly);
   $: isDisabled = toBoolean(disabled);
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
 
   // TODO: determine if this and the next reactive statement need to be reactive, as they are both
   // things that should only be run once
@@ -572,7 +560,6 @@
     box-shadow: var(--goa-text-input-border-focus);
   }
 
-
   /* V2: Vertically center date/time input labels in Safari */
   .container.v2 input::-webkit-datetime-edit,
   .container.v2 input::-webkit-date-and-time-value {
@@ -725,8 +712,9 @@
   }
 
   /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2.goa-input:not(.error)::has(
-      input:read-only:not(:disabled):not(:focus-visible):not(:hover)
+  .container.v2
+    .goa-input:not(.error):has(
+      input:read-only:not(:disabled):not(:focus-visible)
     ) {
     box-shadow: var(--goa-text-input-border-readonly);
   }

@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 
-import { GoabDropdown, GoabDropdownItem } from "../src";
+import { GoabAccordion, GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
@@ -418,6 +418,48 @@ describe("Dropdown", () => {
         });
       });
 
+      it("keeps the input width aligned when nested in a query container", async () => {
+        const Component = () => (
+          <GoabAccordion heading="Dropdown container" open>
+            <GoabDropdown
+              name="page"
+              testId="nested-dropdown"
+              size="compact"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="1" value="1" />
+              <GoabDropdownItem label="10" value="10" />
+            </GoabDropdown>
+          </GoabAccordion>
+        );
+
+        render(<Component />);
+        await vi.waitFor(() => {
+          expect(
+            document.querySelector("goa-dropdown"),
+          ).not.toBeNull();
+        });
+
+        const dropdownHost = document.querySelector<HTMLElement>("goa-dropdown");
+        const dropdown = dropdownHost?.shadowRoot?.querySelector<HTMLElement>(
+          '[data-testid="nested-dropdown"]',
+        );
+        const inputGroup = dropdownHost?.shadowRoot?.querySelector<HTMLElement>(
+          ".dropdown-input-group",
+        );
+
+        if (!dropdown || !inputGroup) {
+          throw new Error("Dropdown internals were not rendered");
+        }
+
+        await vi.waitFor(() => {
+          expect(inputGroup.getBoundingClientRect().width).toBeCloseTo(
+            dropdown.getBoundingClientRect().width,
+            0,
+          );
+        });
+      });
+
       it("defaults to px when no unit is provided", async () => {
         const Component = () => {
           return (
@@ -618,6 +660,39 @@ describe("Dropdown", () => {
   })
 
   describe("Filterable Dropdown", () => {
+    it("focuses the input when the caret opens the menu", async () => {
+      const Component = () => (
+        <GoabDropdown name="favcolor" onChange={noop} filterable={true}>
+          <GoabDropdownItem label="Red" value="red" />
+          <GoabDropdownItem label="Blue" value="blue" />
+          <GoabDropdownItem label="Green" value="green" />
+        </GoabDropdown>
+      );
+
+      const result = render(<Component />);
+      const caret = result.getByTestId("chevron");
+      const input = result.getByRole("combobox");
+
+      await vi.waitFor(() => {
+        expect(input).toBeVisible();
+      });
+
+      const inputEl = input.element() as HTMLInputElement;
+
+      await caret.click();
+
+      await vi.waitFor(() => {
+        expect(inputEl.getAttribute("aria-expanded")).toBe("true");
+        expect(inputEl.matches(":focus")).toBe(true);
+      });
+
+      await userEvent.keyboard("B");
+
+      await vi.waitFor(() => {
+        expect(inputEl.value).toBe("B");
+      });
+    });
+
     it("should render with the default props", async () => {
       // Setup
       const Component = () => {
@@ -701,6 +776,32 @@ describe("Dropdown", () => {
           expect(ddi.elements().length).toBe(0);
         });
       })
+    });
+
+    it("preserves text selection when Shift+Home and Shift+End are pressed", async () => {
+      const Component = () => (
+        <GoabDropdown name="favcolor" onChange={noop} filterable={true}>
+          <GoabDropdownItem label="Red" value="red" />
+          <GoabDropdownItem label="Blue" value="blue" />
+          <GoabDropdownItem label="Green" value="green" />
+        </GoabDropdown>
+      );
+
+      const result = render(<Component />);
+      const filter = result.getByTestId("input");
+
+      await userEvent.type(filter, "Green");
+      const input = filter.element() as HTMLInputElement;
+
+      input.setSelectionRange(2, 2);
+      await userEvent.keyboard("{Shift>}{Home}{/Shift}");
+      expect(input.selectionStart).toBe(0);
+      expect(input.selectionEnd).toBe(2);
+
+      input.setSelectionRange(2, 2);
+      await userEvent.keyboard("{Shift>}{End}{/Shift}");
+      expect(input.selectionStart).toBe(2);
+      expect(input.selectionEnd).toBe(input.value.length);
     });
 
     it("clears the input and opens the menu when the clear icon is clicked", async () => {

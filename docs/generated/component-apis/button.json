@@ -26,6 +26,13 @@
           "description": "Multiple argument values passed with the action in click events."
         },
         {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -107,7 +114,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [
@@ -144,6 +151,13 @@
           "required": false,
           "default": null,
           "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
         },
         {
           "name": "disabled",
@@ -227,7 +241,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [
@@ -264,6 +278,13 @@
           "required": false,
           "default": "{}",
           "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible name. Include the visible button text in the value."
         },
         {
           "name": "disabled",
@@ -386,7 +407,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+          "description": "Sets a custom width for the button (e.g., \"200px\", \"100%\" or \"fit-content\")."
         }
       ],
       "events": [

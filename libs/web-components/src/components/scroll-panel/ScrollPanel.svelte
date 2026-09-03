@@ -27,6 +27,9 @@
    */
   export let height: string = "100%";
 
+  /** @internal Sets a maximum height while allowing the panel to remain content-sized. */
+  export let maxheight: string = "";
+
   /**
    * The scroll direction(s). When content overflows, enables scrolling and shadow
    * indicators for the specified direction(s). Defaults to "vertical".
@@ -44,6 +47,7 @@
     "both",
   ]);
   $: validateDirection(direction);
+  $: if (_hostEl) setHostSizing(height, maxheight);
 
   // Internal edge state, shared by both axes. "at-start" is top/left,
   // "at-end" is bottom/right depending on the axis.
@@ -60,7 +64,9 @@
   };
 
   let _hostEl: HTMLElement | null = null;
+  let _scrollWrapperEl: HTMLElement | null = null;
   let _scrollEl: HTMLElement | null = null;
+  let _isMaxHeightConstrained = false;
   let _scrollStateV: EdgeState = "no-scroll";
   let _scrollStateH: EdgeState = "no-scroll";
   let _isVerticalScrollable: boolean = false;
@@ -95,25 +101,23 @@
   // Hooks
   // *****
   onMount(() => {
-    if (
-      typeof CSS !== "undefined" &&
-      typeof CSS.supports === "function" &&
-      !CSS.supports("height", height)
-    ) {
+    if (!supportsHeight(height)) {
       console.error(
-        `ScrollPanel: "${height}" is not a valid CSS height; falling back to "100%".`,
+        `ScrollPanel: "${height}" is not a valid CSS height. Falling back to "100%".`,
       );
+      height = "100%";
     }
 
     if (_scrollEl) {
       const root = _scrollEl.getRootNode();
       _hostEl = root instanceof ShadowRoot ? (root.host as HTMLElement) : null;
-      setHostHeight(height);
+      setHostSizing(height, maxheight);
 
       // Re-measure when the viewport resizes, including when it goes from
       // hidden (height 0) to visible — e.g. a push drawer toggled via display.
       _resizeObserver = new ResizeObserver(() => updateScrollState());
       _resizeObserver.observe(_scrollEl);
+      if (_scrollWrapperEl) _resizeObserver.observe(_scrollWrapperEl);
     }
     tick().then(() => updateScrollState());
   });
@@ -125,12 +129,24 @@
   // *********
   // Functions
   // *********
-  function setHostHeight(h: string) {
-    if (!_scrollEl) return;
-    const root = _scrollEl.getRootNode();
-    if (root instanceof ShadowRoot) {
-      (root.host as HTMLElement).style.height = h;
-    }
+  function supportsHeight(value: string) {
+    return (
+      typeof CSS === "undefined" ||
+      typeof CSS.supports !== "function" ||
+      CSS.supports("height", value)
+    );
+  }
+
+  function setHostSizing(panelHeight: string, panelMaxHeight: string) {
+    if (!_hostEl) return;
+
+    _hostEl.style.height =
+      panelMaxHeight && panelHeight === "100%"
+        ? _isMaxHeightConstrained
+          ? panelMaxHeight
+          : "auto"
+        : panelHeight;
+    _hostEl.style.maxHeight = panelMaxHeight;
   }
 
   function calculateScrollState(
@@ -174,6 +190,19 @@
 
   function updateScrollState() {
     if (!_scrollEl) return;
+
+    const isMaxHeightConstrained = Boolean(
+      maxheight &&
+      _scrollWrapperEl &&
+      _scrollEl.scrollHeight > _scrollWrapperEl.clientHeight + 1,
+    );
+    if (isMaxHeightConstrained !== _isMaxHeightConstrained) {
+      _isMaxHeightConstrained = isMaxHeightConstrained;
+      setHostSizing(height, maxheight);
+      tick().then(() => updateScrollState());
+      return;
+    }
+
     const {
       scrollTop,
       scrollHeight,
@@ -218,8 +247,13 @@
 
 <div
   class="scroll-panel-scroll-wrapper"
-  class:scroll-panel-scroll-wrapper--shadow-left={_trackHorizontal && _isHorizontallyScrollable && _scrollStateH !== "at-start"}
-  class:scroll-panel-scroll-wrapper--shadow-right={_trackHorizontal && _isHorizontallyScrollable && _scrollStateH !== "at-end"}
+  class:scroll-panel-scroll-wrapper--shadow-left={_trackHorizontal &&
+    _isHorizontallyScrollable &&
+    _scrollStateH !== "at-start"}
+  class:scroll-panel-scroll-wrapper--shadow-right={_trackHorizontal &&
+    _isHorizontallyScrollable &&
+    _scrollStateH !== "at-end"}
+  bind:this={_scrollWrapperEl}
 >
   <div
     class="scroll-panel-scroll-container"
@@ -248,10 +282,14 @@
 {/if}
 
 <style>
-  /* The host element IS the flex container — height is set on it via JS. */
+  /* The host is the grid container; height is set on it via JS. */
   :host {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      "header"
+      "body"
+      "footer";
+    grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
@@ -272,7 +310,7 @@
      above it. Drop shadow (not inset) so it stays visible over slotted content
      that has its own opaque background (e.g. notification cards). */
   .scroll-panel-header {
-    flex: 0 0 auto;
+    grid-area: header;
     background-color: var(
       --goa-scroll-panel-header-color-bg,
       var(--goa-color-greyscale-white)
@@ -305,7 +343,7 @@
 
   /* Scrollable content */
   .scroll-panel-scroll-wrapper {
-    flex: 1 1 auto;
+    grid-area: body;
     position: relative;
     min-height: 0;
     min-width: 0;
@@ -342,8 +380,8 @@
     pointer-events: none;
     z-index: 1;
     opacity: 0;
-    transition:
-      opacity var(--goa-motion-duration-medium-1) var(--goa-motion-curve-expressive);
+    transition: opacity var(--goa-motion-duration-medium-1)
+      var(--goa-motion-curve-expressive);
   }
 
   .scroll-panel-scroll-wrapper::before {
@@ -376,7 +414,7 @@
 
   /* Footer — casts a drop shadow up onto the content when content is below it. */
   .scroll-panel-footer {
-    flex: 0 0 auto;
+    grid-area: footer;
     background-color: var(
       --goa-scroll-panel-footer-color-bg,
       var(--goa-color-greyscale-white)

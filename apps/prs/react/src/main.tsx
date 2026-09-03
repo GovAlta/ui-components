@@ -8,6 +8,7 @@ import App from "./app/app";
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
 import { prRouteDefinitions } from "./app/route-manifest";
+import { PublicFormApp } from "./routes/public-form/public-form-app";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <GoabThemeProvider>
         <Routes>
           <Route path="/everything/b" element={<EverythingBRoute />} />
+          <Route path="/public-form/*" element={<PublicFormApp />} />
           <Route path="/" element={<App />}>
             <Route path="everything" element={<EverythingRoute />} />
             {prRouteDefinitions.map((route) => {

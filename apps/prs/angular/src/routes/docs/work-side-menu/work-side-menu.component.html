@@ -1,75 +1,85 @@
 <h2>Work side menu</h2>
 
 <h3>Basic work side menu</h3>
-<goab-work-side-menu heading="My Application" url="/" (onNavigate)="handleNavigate($event)" [primaryContent]="basicPrimaryTpl">
-  <ng-template #basicPrimaryTpl>
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="settings" label="Admin" url="/admin"></goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu heading="My Application" url="/" (onNavigate)="handleNavigate($event)" [primaryContent]="basicPrimaryTpl">
+    <ng-template #basicPrimaryTpl>
+      <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+      <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+      <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
+      <goab-work-side-menu-item icon="settings" label="Admin" url="/admin"></goab-work-side-menu-item>
+    </ng-template>
+  </goab-work-side-menu>
+</nav>
 
 <h3>With user profile</h3>
-<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  userName="Jane Smith"
-  userSecondaryText="Case Worker"
-  (onNavigate)="handleNavigate($event)"
-  [primaryContent]="profilePrimaryTpl">
-  <ng-template #profilePrimaryTpl>
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    userName="Jane Smith"
+    userSecondaryText="Case Worker"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="profilePrimaryTpl">
+    <ng-template #profilePrimaryTpl>
+      <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+      <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    </ng-template>
+  </goab-work-side-menu>
+</nav>
 
 <h3>With groups</h3>
-<goab-work-side-menu
-  heading="My Application"
-  url="/"
-  [primaryContent]="groupsPrimaryTpl"
-  [open]="true"
-  (onNavigate)="handleNavigate($event)">
-  <ng-template #groupsPrimaryTpl>
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-group icon="document" heading="Documents" [open]="true">
-      <goab-work-side-menu-item label="Invoices" url="/documents/invoices"></goab-work-side-menu-item>
-      <goab-work-side-menu-item label="Contracts" url="/documents/contracts"></goab-work-side-menu-item>
-      <goab-work-side-menu-item label="Reports" url="/documents/reports"></goab-work-side-menu-item>
-    </goab-work-side-menu-group>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu
+    heading="My Application"
+    url="/"
+    [primaryContent]="groupsPrimaryTpl"
+    [open]="true"
+    (onNavigate)="handleNavigate($event)">
+    <ng-template #groupsPrimaryTpl>
+      <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+      <goab-work-side-menu-group icon="document" heading="Documents" [open]="true">
+        <goab-work-side-menu-item label="Invoices" url="/documents/invoices"></goab-work-side-menu-item>
+        <goab-work-side-menu-item label="Contracts" url="/documents/contracts"></goab-work-side-menu-item>
+        <goab-work-side-menu-item label="Reports" url="/documents/reports"></goab-work-side-menu-item>
+      </goab-work-side-menu-group>
+      <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    </ng-template>
+  </goab-work-side-menu>
+</nav>
 
 <h3>Secondary menu</h3>
-<goab-work-side-menu heading="Case Management" url="/cases" [open]="true" (onNavigate)="handleNavigate($event)" [primaryContent]="secondaryPrimaryTpl">
-  <ng-template #secondaryPrimaryTpl>
-    <goab-work-side-menu-item icon="arrow-back" label="All cases" url="/cases"></goab-work-side-menu-item>
-    <goab-work-side-menu-item label="Overview" url="/cases/123/overview"></goab-work-side-menu-item>
-    <goab-work-side-menu-item label="Documents" url="/cases/123/documents"></goab-work-side-menu-item>
-    <goab-work-side-menu-item label="Notes" url="/cases/123/notes"></goab-work-side-menu-item>
-    <goab-work-side-menu-item label="Activity log" url="/cases/123/activity"></goab-work-side-menu-item>
-    <goab-work-side-menu-item label="Payments" url="/cases/123/payments"></goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu heading="Case Management" url="/cases" [open]="true" (onNavigate)="handleNavigate($event)" [primaryContent]="secondaryPrimaryTpl">
+    <ng-template #secondaryPrimaryTpl>
+      <goab-work-side-menu-item icon="arrow-back" label="All cases" url="/cases"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Overview" url="/cases/123/overview"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Documents" url="/cases/123/documents"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Notes" url="/cases/123/notes"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Activity log" url="/cases/123/activity"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Payments" url="/cases/123/payments"></goab-work-side-menu-item>
+    </ng-template>
+  </goab-work-side-menu>
+</nav>
 
 <h3>With notifications</h3>
-<goab-work-side-menu heading="My Application" url="/" [primaryContent]="notifPrimaryTpl" [secondaryContent]="notifSecondaryTpl">
-  <ng-template #notifPrimaryTpl>
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-  </ng-template>
-  <ng-template #notifSecondaryTpl>
-    <goab-work-side-menu-item
-      icon="notifications"
-      label="Notifications"
-      badge="3"
-      type="success"
-      [popoverContent]="notificationsTpl">
-    </goab-work-side-menu-item>
-  </ng-template>
-</goab-work-side-menu>
+<nav>
+  <goab-work-side-menu heading="My Application" url="/" [primaryContent]="notifPrimaryTpl" [secondaryContent]="notifSecondaryTpl">
+    <ng-template #notifPrimaryTpl>
+      <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+      <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    </ng-template>
+    <ng-template #notifSecondaryTpl>
+      <goab-work-side-menu-item
+        icon="notifications"
+        label="Notifications"
+        badge="3"
+        type="success"
+        [popoverContent]="notificationsTpl">
+      </goab-work-side-menu-item>
+    </ng-template>
+  </goab-work-side-menu>
+</nav>
 
 <ng-template #notificationsTpl>
   <goab-work-side-notification-panel

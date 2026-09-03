@@ -111,14 +111,26 @@ export const textConfigurations: ComponentConfigurations = {
     {
       id: "color",
       name: "Color",
-      description: "Primary and secondary text colors",
+      description: "Primary, secondary, light, and disabled text colours",
       code: {
-        react: `<GoabText color="primary" mt="none" mb="none">Primary color text (default)</GoabText>
-<GoabText color="secondary" mb="none">Secondary color text</GoabText>`,
-        angular: `<goab-text color="primary" mt="none" mb="none">Primary color text (default)</goab-text>
-<goab-text color="secondary" mb="none">Secondary color text</goab-text>`,
-        webComponents: `<goa-text color="primary" mt="none" mb="none">Primary color text (default)</goa-text>
-<goa-text color="secondary" mb="none">Secondary color text</goa-text>`,
+        react: `<GoabText color="primary" mt="none" mb="none">Primary colour text (default)</GoabText>
+<GoabText color="secondary" mb="none">Secondary colour text</GoabText>
+<GoabText color="disabled" mb="none">Disabled colour text</GoabText>
+<div style={{ backgroundColor: "var(--goa-color-greyscale-700)", padding: "var(--goa-space-m)" }}>
+  <GoabText color="light" mt="none" mb="none">Light colour text</GoabText>
+</div>`,
+        angular: `<goab-text color="primary" mt="none" mb="none">Primary colour text (default)</goab-text>
+<goab-text color="secondary" mb="none">Secondary colour text</goab-text>
+<goab-text color="disabled" mb="none">Disabled colour text</goab-text>
+<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-m);">
+  <goab-text color="light" mt="none" mb="none">Light colour text</goab-text>
+</div>`,
+        webComponents: `<goa-text color="primary" mt="none" mb="none">Primary colour text (default)</goa-text>
+<goa-text color="secondary" mb="none">Secondary colour text</goa-text>
+<goa-text color="disabled" mb="none">Disabled colour text</goa-text>
+<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-m);">
+  <goa-text color="light" mt="none" mb="none">Light colour text</goa-text>
+</div>`,
       },
     },
   ],

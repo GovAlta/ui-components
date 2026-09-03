@@ -198,13 +198,37 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// Keep backward-compatible wrapper types in source while documenting only the
+// preferred public input types. Date picker still accepts Date values at runtime.
+const PROP_TYPE_OVERRIDES: Record<
+  string,
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+> = {
+  "date-picker": {
+    react: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+    angular: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+  },
+};
 // Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
 // typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
 // consumers never bind a value to them, they nest the sub-component instead.
 const HIDE_SLOT = null;
 const SLOT_TYPE_OVERRIDES: Record<
   string,
-  Partial<Record<"react" | "angular" | "webComponents", Record<string, string | typeof HIDE_SLOT>>>
+  Partial<
+    Record<
+      "react" | "angular" | "webComponents",
+      Record<string, string | typeof HIDE_SLOT>
+    >
+  >
 > = {
   footer: {
     react: {
@@ -277,6 +301,24 @@ function specializeAngularValuePropFromReact(
 
   angularValueProp.type = reactValueProp.type;
   angularValueProp.values = reactValueProp.values;
+}
+
+function applyPropTypeOverrides(
+  componentName: string,
+  framework: "react" | "angular" | "webComponents",
+  props: ExtractedProp[],
+): void {
+  const overrides = PROP_TYPE_OVERRIDES[componentName]?.[framework];
+  if (!overrides) return;
+
+  for (const prop of props) {
+    const type = overrides[prop.name];
+    if (!type) continue;
+
+    prop.type = type;
+    delete prop.typeLabel;
+    delete prop.values;
+  }
 }
 
 // =============================================================================
@@ -1203,18 +1245,34 @@ function extractAngularBaseComponentProps(): Map<string, ExtractedProp> {
 
   for (const classDecl of classDecls) {
     for (const member of classDecl.members) {
-      if (!ts.isPropertyDeclaration(member)) continue;
+      if (!ts.isPropertyDeclaration(member) && !ts.isSetAccessorDeclaration(member)) {
+        continue;
+      }
       if (!hasDecorator(member, "Input")) continue;
       if (!member.name || !ts.isIdentifier(member.name)) continue;
 
       const rawComment = findImmediateJsDocBefore(content, member.getStart(sourceFile));
       const propName = member.name.text;
       const inputDecorator = getDecoratorCall(member, "Input");
-      const rawDefault = member.initializer?.getText(sourceFile)?.trim();
+      const rawDefault = ts.isPropertyDeclaration(member)
+        ? member.initializer?.getText(sourceFile)?.trim()
+        : undefined;
+      const declaredType = ts.isPropertyDeclaration(member)
+        ? member.type?.getText(sourceFile)?.trim()
+        : member.parameters[0]?.type?.getText(sourceFile)?.trim();
+      const documentedType = ts.isSetAccessorDeclaration(member)
+        ? declaredType
+            ?.split("|")
+            .map((type) => type.trim())
+            .filter((type) => type !== "undefined")
+            .join(" | ")
+        : declaredType;
       const rawType = cleanType(
-        member.type?.getText(sourceFile)?.trim() || inferTypeFromDefault(rawDefault),
+        documentedType || declaredType || inferTypeFromDefault(rawDefault),
       );
-      const fullDescription = parseDescriptionFromJSDoc(rawComment);
+      const fullDescription = parseDescriptionFromJSDoc(rawComment)
+        .replace(/@param\s+\S+(?:\s*-\s*)?[^@]*/gi, "")
+        .trim();
       const { description, defaultValue: descriptionDefault } =
         extractDefaultFromDescription(fullDescription);
       const defaultValue = descriptionDefault ?? parseDefaultValue(rawDefault);
@@ -2613,7 +2671,11 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     name: string,
   ): string | typeof HIDE_SLOT | undefined => {
     const frameworkOverrides = SLOT_TYPE_OVERRIDES[componentName]?.[framework];
-    if (!frameworkOverrides || !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)) return undefined;
+    if (
+      !frameworkOverrides ||
+      !Object.prototype.hasOwnProperty.call(frameworkOverrides, name)
+    )
+      return undefined;
     return frameworkOverrides[name];
   };
 
@@ -2637,7 +2699,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
             : rawDescription;
         return {
           name: useAliasNames ? slotNameAliases[name] || name : name,
-          type: getSlotOverride(framework, name) ?? (type && hasWrapperSlotEvidence(name) ? type : undefined),
+          type:
+            getSlotOverride(framework, name) ??
+            (type && hasWrapperSlotEvidence(name) ? type : undefined),
           description,
           required: slotRequired[name] || false,
         };
@@ -2653,6 +2717,10 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     : [];
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
+
+  applyPropTypeOverrides(componentName, "react", reactProps);
+  applyPropTypeOverrides(componentName, "angular", angularProps);
+  applyPropTypeOverrides(componentName, "webComponents", webComponentProps);
 
   const webComponentVersionProp = webComponentProps.find(
     (prop) => prop.name.toLowerCase() === "version",

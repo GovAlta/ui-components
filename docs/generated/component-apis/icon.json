@@ -5,6 +5,13 @@
     "react": {
       "props": [
         {
+          "name": "ariaHidden",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Sets whether the icon is hidden from assistive technologies."
+        },
+        {
           "name": "ariaLabel",
           "type": "string",
           "required": false,
@@ -116,6 +123,13 @@
     },
     "angular": {
       "props": [
+        {
+          "name": "ariaHidden",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Sets whether the icon is hidden from assistive technologies."
+        },
         {
           "name": "ariaLabel",
           "type": "string",
@@ -237,6 +251,13 @@
           "required": false,
           "default": "",
           "description": "Indicates whether the element controlled by this icon is expanded or collapsed."
+        },
+        {
+          "name": "ariahidden",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Sets whether the icon is hidden from assistive technologies."
         },
         {
           "name": "arialabel",

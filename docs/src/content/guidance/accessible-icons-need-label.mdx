@@ -38,3 +38,12 @@ Icon-only interactive elements must have an accessible label so screen reader us
 The label should describe:
 - What action happens (for buttons): "Delete", "Edit", "Close"
 - What the icon represents (for informational icons): "Warning", "Success"
+
+**For decorative icons:** Set `ariaHidden` to `true` when nearby text or the parent control already communicates the same meaning. This prevents screen readers from announcing duplicate information.
+
+```jsx
+<GoabIcon type="checkmark-circle" ariaHidden />
+<span>Application saved</span>
+```
+
+Do not use `ariaHidden` to replace a missing accessible label. If the icon provides information that is not available elsewhere, use `ariaLabel` instead.

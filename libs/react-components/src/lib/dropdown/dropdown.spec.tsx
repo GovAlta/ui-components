@@ -45,6 +45,7 @@ describe("GoabDropdown", () => {
         name="favColor"
         value={[""]}
         maxHeight="100px"
+        noResults="Nothing found"
         placeholder="Select..."
         disabled
         error
@@ -87,6 +88,7 @@ describe("GoabDropdown", () => {
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
     expect(el?.getAttribute("maxwidth")).toBe("400px");
+    expect(el?.getAttribute("noresults")).toBe("Nothing found");
     expect(el?.getAttribute("size")).toBe("compact");
   });
 

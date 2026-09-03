@@ -73,23 +73,11 @@
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
   let _error: boolean;
-  let _prevError: boolean;
   let _revealSlotHeight: number = 0;
 
   // Binding
   $: isDisabled = toBoolean(disabled);
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-    }
-  }
+  $: _error = toBoolean(error);
   $: isChecked = toBoolean(checked);
   $: isIndeterminate = toBoolean(indeterminate);
   $: if (_checkboxRef) {
@@ -185,15 +173,11 @@
   function sendMountedMessage() {
     if (!name) return;
 
-    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)
-      ?.host as HTMLElement;
-    const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
-
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
       { name, el: _rootEl },
-      { bubbles: !fromCheckboxList, timeout: 10 },
+      { bubbles: true, timeout: 10 },
     );
   }
 
@@ -604,7 +588,7 @@ max-width: ${maxwidth};
     border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container svg {
-    fill: #f58185;
+    fill: var(--goa-checkbox-color-bg-checked-error-disabled);
   }
 
   /* Version 2 */

@@ -177,7 +177,7 @@ export function DocsDrawerRoute() {
           </GoabRadioGroup>
         </GoabFormItem>
         <GoabFormItem label="Start date" mt="l">
-          <GoabDatePicker onChange={() => { /* no-op */ }} value={new Date("2022-09-01")} />
+          <GoabDatePicker onChange={() => { /* no-op */ }} value="2022-09-01" />
           <GoabCheckbox
             name="startDateApproximate"
             text="Approximate date"

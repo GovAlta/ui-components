@@ -29,4 +29,22 @@ describe("Styling", () => {
     expect(val).not.toContain("margin-bottom");
     expect(val).not.toContain("margin-left");
   });
+
+  it("should create zero margins when set to none", () => {
+    const val = calculateMargin("none", "none", "none", "none");
+
+    expect(val).toContain("margin-top:var(--goa-space-none);");
+    expect(val).toContain("margin-right:var(--goa-space-none);");
+    expect(val).toContain("margin-bottom:var(--goa-space-none);");
+    expect(val).toContain("margin-left:var(--goa-space-none);");
+  });
+
+  it("should convert numeric spacing aliases", () => {
+    const val = calculateMargin("1", "2", "3", "0");
+
+    expect(val).toContain("margin-top:var(--goa-space-3xs);");
+    expect(val).toContain("margin-right:var(--goa-space-2xs);");
+    expect(val).toContain("margin-bottom:var(--goa-space-xs);");
+    expect(val).toContain("margin-left:var(--goa-space-none);");
+  });
 });

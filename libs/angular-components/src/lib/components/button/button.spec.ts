@@ -22,6 +22,7 @@ import { fireEvent } from "@testing-library/dom";
       [disabled]="disabled"
       [leadingIcon]="leadingIcon"
       [trailingIcon]="trailingIcon"
+      [ariaLabel]="ariaLabel"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
@@ -40,6 +41,7 @@ class TestButtonComponent {
   disabled?: boolean;
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
+  ariaLabel?: string;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -101,4 +103,18 @@ describe("GoABButton", () => {
     fireEvent(buttonElement, new CustomEvent("_click"));
     expect(onClick).toHaveBeenCalled();
   }));
+
+  it("should set arialabel when ariaLabel is provided", () => {
+    component.ariaLabel = "Remove Jane Smith";
+    fixture.detectChanges();
+    const buttonElement = fixture.debugElement.query(By.css("goa-button")).nativeElement;
+
+    expect(buttonElement.getAttribute("arialabel")).toBe("Remove Jane Smith");
+  });
+
+  it("should not set arialabel when ariaLabel is not provided", () => {
+    const buttonElement = fixture.debugElement.query(By.css("goa-button")).nativeElement;
+
+    expect(buttonElement.hasAttribute("arialabel")).toBe(false);
+  });
 });

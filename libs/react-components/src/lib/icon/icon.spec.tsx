@@ -8,6 +8,7 @@ describe("GoabIcon", () => {
     const el = container.querySelector("goa-icon");
     expect(el?.getAttribute("type")).toBe("information");
     expect(el?.getAttribute("inverted")).toBeNull();
+    expect(el?.getAttribute("ariahidden")).toBeNull();
   });
 
   it("should render with properties", () => {
@@ -21,6 +22,7 @@ describe("GoabIcon", () => {
         opacity={0.5}
         title="foo"
         ariaLabel="bar"
+        ariaHidden
         role="presentation"
         testId="foo"
         mt="s"
@@ -39,6 +41,7 @@ describe("GoabIcon", () => {
     expect(el?.getAttribute("opacity")).toBe("0.5");
     expect(el?.getAttribute("title")).toBe("foo");
     expect(el?.getAttribute("arialabel")).toBe("bar");
+    expect(el?.getAttribute("ariahidden")).toBe("true");
     expect(el?.getAttribute("role")).toBe("presentation");
     expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.getAttribute("mt")).toBe("s");

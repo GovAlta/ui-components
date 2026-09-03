@@ -32,6 +32,7 @@ import { GoabBaseComponent } from "../base.component";
         [disabled]="disabled"
         [attr.leadingicon]="leadingIcon"
         [attr.trailingicon]="trailingIcon"
+        [attr.arialabel]="ariaLabel || null"
         [attr.width]="width"
         [attr.testid]="testId"
         [attr.action]="action"
@@ -65,7 +66,9 @@ export class GoabButton extends GoabBaseComponent implements OnInit {
   @Input() leadingIcon?: GoabIconType;
   /** Icon displayed after the button text. */
   @Input() trailingIcon?: GoabIconType;
-  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
+  /** Sets the accessible name. Include the visible button text in the value. */
+  @Input() ariaLabel?: string;
+  /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   @Input() width?: string;
   /** Action identifier passed in click events for event delegation patterns. */
   @Input() action?: string;

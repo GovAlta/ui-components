@@ -11,7 +11,12 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
+  import {
+    receive,
+    dispatch,
+    relay,
+    watchFocusWithin,
+  } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -36,13 +41,13 @@
   export let type: "calendar" | "input" = "calendar";
   /** Name of the date field. */
   export let name: string = "";
-  /** Value of the calendar date. */
+  /** Sets the calendar date as an ISO date string (yyyy-mm-dd). */
   export let value: string = "";
   /** Sets the input to an error state. */
   export let error: string = "false";
-  /** Minimum date value allowed. */
+  /** Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). */
   export let min: string = "";
-  /** Maximum date value allowed. */
+  /** Sets the latest allowed date as an ISO date string (yyyy-mm-dd). */
   export let max: string = "";
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
@@ -438,5 +443,13 @@
     --goa-text-input-color-bg-readonly: var(--goa-text-input-color-bg);
     --goa-text-input-border-readonly: var(--goa-text-input-border);
     --goa-text-input-cursor-readonly: var(--goa-date-input-cursor);
+  }
+
+  .calendar-input:hover {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-hover);
+  }
+
+  .calendar-input:focus-within {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-focus);
   }
 </style>

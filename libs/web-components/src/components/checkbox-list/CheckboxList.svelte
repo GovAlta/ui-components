@@ -64,7 +64,10 @@
 
   // Reactive bindings
   $: isDisabled = toBoolean(disabled);
-  $: updateState(value, error);
+  $: {
+    isDisabled;
+    updateState(value, error);
+  }
 
   onMount(async () => {
     await tick();
@@ -99,7 +102,7 @@
 
   /**
    * Synchronize component when external props change.
-   * - Emits error change events and propagates to children
+   * - Propagates error changes to children
    * - Syncs checkbox values after initialization
    */
   function updateState(newValue: string[], newError: string) {
@@ -111,15 +114,7 @@
     // Handle error state changes
     const currentError = toBoolean(newError);
     if (currentError !== _error) {
-      _rootEl?.dispatchEvent(
-        new CustomEvent("error::change", {
-          detail: { isError: currentError },
-          bubbles: true,
-          composed: true,
-        }),
-      );
       _error = currentError;
-      updateChildCheckboxesError();
     }
 
     // Sync Set when value changes externally (not from internal changes)
@@ -237,7 +232,9 @@
           onSetValue({ name, value: [] });
           break;
         case FormFieldMountMsg:
-          onChildCheckboxMount(data as FormFieldMountRelayDetail);
+          if (onChildCheckboxMount(data as FormFieldMountRelayDetail)) {
+            event.stopPropagation();
+          }
           break;
       }
     });
@@ -281,13 +278,13 @@
    * Register a newly mounted child checkbox that belongs to this list.
    * Also synchronizes its state and applies child-level styles.
    */
-  function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
+  function onChildCheckboxMount(detail: FormFieldMountRelayDetail): boolean {
     const checkboxElement = (detail.el.getRootNode() as any)?.host;
     if (
       !checkboxElement ||
       checkboxElement.tagName.toLowerCase() !== "goa-checkbox"
     ) {
-      return;
+      return false;
     }
 
     // Capture label
@@ -297,6 +294,7 @@
       { el: detail.el, name: detail.name, label },
     ];
     updateChildCheckboxState(detail.el, detail.name);
+    return true;
   }
 
   /**
@@ -410,20 +408,13 @@
       } else {
         containerElement.removeAttribute("disabled");
       }
-    }
-  }
 
-  /** Propagate error state to all children via the relay bus. */
-  function updateChildCheckboxesError() {
-    for (const rec of _childRecords) {
       if (_error) {
-        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+        containerElement.setAttribute("error", "true");
       } else {
-        relay(rec.el, FieldsetResetErrorsMsg);
+        containerElement.removeAttribute("error");
       }
     }
-
-    updateSlottedCheckboxesState();
   }
 
   // Announce help text for screen readers when the group receives focus.

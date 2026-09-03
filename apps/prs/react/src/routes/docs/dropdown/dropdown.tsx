@@ -136,6 +136,20 @@ export function DocsDropdownRoute() {
         </GoabDropdown>
       </GoabFormItem>
 
+      <h3>Custom no-results text</h3>
+      <GoabFormItem label="Program" mb="l">
+        <GoabDropdown
+          name="program"
+          filterable
+          noResults="No programs found"
+          placeholder="Select a program"
+        >
+          <GoabDropdownItem value="Child care" />
+          <GoabDropdownItem value="Education" />
+          <GoabDropdownItem value="Health" />
+        </GoabDropdown>
+      </GoabFormItem>
+
       <h3>Native</h3>
       <GoabFormItem label="Custom dropdown" mb="l">
         <GoabDropdown

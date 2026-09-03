@@ -13,10 +13,14 @@ import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 
 export function ConfirmAChange() {
   const [open, setOpen] = useState(false);
-  const [effectiveDate, setEffectiveDate] = useState<Date | undefined>(new Date());
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const [effectiveDate, setEffectiveDate] = useState(`${year}-${month}-${day}`);
 
   const onChangeEffectiveDate = (detail: GoabDatePickerOnChangeDetail) => {
-    setEffectiveDate(detail.value as Date);
+    setEffectiveDate(detail.valueStr);
   };
 
   return (

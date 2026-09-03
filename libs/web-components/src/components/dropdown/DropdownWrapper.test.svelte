@@ -12,6 +12,7 @@
   export let value: string = "";
   export let leadingicon: GoAIconType | null = null;
   export let maxheight: string = "276px";
+  export let noresults: string = "No matches found";
   export let placeholder: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
@@ -45,6 +46,7 @@
   {error}
   {leadingicon}
   {maxheight}
+  {noresults}
   {placeholder}
   {disabled}
   {width}

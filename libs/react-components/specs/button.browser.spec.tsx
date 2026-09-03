@@ -1,7 +1,8 @@
 import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import { GoabButton } from "../src";
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it, vi, afterEach } from "vitest";
 
 describe("Button", () => {
   it("should trigger the action with an arg", async () => {
@@ -67,4 +68,40 @@ describe("Button", () => {
       expect(spy).toBeCalledWith({foo: "bar"});
     })
   })
+
+  describe("mobile width", () => {
+    afterEach(async () => {
+      await page.viewport(1280, 800);
+    });
+
+    it("should default to the full container width", async () => {
+      await page.viewport(390, 800);
+      const result = render(
+        <div style={{ width: "300px" }}>
+          <GoabButton testId="button">Button</GoabButton>
+        </div>,
+      );
+      const button = result.getByTestId("button");
+
+      await vi.waitFor(() => {
+        expect(button.element().getBoundingClientRect().width).toBe(300);
+      });
+    });
+
+    it("should use the supplied width", async () => {
+      await page.viewport(390, 800);
+      const result = render(
+        <div style={{ width: "300px" }}>
+          <GoabButton testId="button" width="100px">
+            Button
+          </GoabButton>
+        </div>,
+      );
+      const button = result.getByTestId("button");
+
+      await vi.waitFor(() => {
+        expect(button.element().getBoundingClientRect().width).toBe(100);
+      });
+    });
+  });
 })

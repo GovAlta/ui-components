@@ -16,6 +16,7 @@ interface WCProps extends Margins {
   disabled?: string;
   leadingicon?: string;
   trailingicon?: string;
+  arialabel?: string;
   width?: string;
   testid?: string;
   action?: string;
@@ -29,9 +30,9 @@ declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "goa-button": WCProps &
-      React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -49,7 +50,9 @@ export interface GoabButtonProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   /** Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
-  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
+  /** Sets the accessible name. Include the visible button text in the value. */
+  ariaLabel?: string;
+  /** Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). */
   width?: string;
   /** Callback fired when the button is clicked. */
   onClick?: () => void;
@@ -71,6 +74,7 @@ export function GoabButton({
   onClick,
   actionArgs,
   actionArg,
+  ariaLabel,
   children,
   ...rest
 }: GoabButtonProps): JSX.Element {
@@ -102,6 +106,7 @@ export function GoabButton({
       disabled={disabled ? "true" : undefined}
       action-arg={actionArg}
       action-args={JSON.stringify(actionArgs)}
+      arialabel={ariaLabel || undefined}
       {..._props}
       version="2"
     >

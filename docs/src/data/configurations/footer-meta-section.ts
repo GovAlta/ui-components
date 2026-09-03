@@ -17,27 +17,33 @@ export const footerMetaSectionConfigurations: ComponentConfigurations = {
       name: "Basic footer meta section",
       description: "Meta links section within Footer",
       code: {
-        react: `<GoabAppFooter>
-  <GoabAppFooterMetaSection>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms of use</a>
-    <a href="/accessibility">Accessibility</a>
-  </GoabAppFooterMetaSection>
-</GoabAppFooter>`,
-        angular: `<goab-app-footer>
-  <goab-app-footer-meta-section slot="meta">
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms of use</a>
-    <a href="/accessibility">Accessibility</a>
-  </goab-app-footer-meta-section>
-</goab-app-footer>`,
-        webComponents: `<goa-app-footer version="2">
-  <goa-app-footer-meta-section slot="meta">
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms of use</a>
-    <a href="/accessibility">Accessibility</a>
-  </goa-app-footer-meta-section>
-</goa-app-footer>`,
+        react: `<footer>
+  <GoabAppFooter>
+    <GoabAppFooterMetaSection>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms of use</a>
+      <a href="/accessibility">Accessibility</a>
+    </GoabAppFooterMetaSection>
+  </GoabAppFooter>
+</footer>`,
+        angular: `<footer>
+  <goab-app-footer>
+    <goab-app-footer-meta-section slot="meta">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms of use</a>
+      <a href="/accessibility">Accessibility</a>
+    </goab-app-footer-meta-section>
+  </goab-app-footer>
+</footer>`,
+        webComponents: `<footer>
+  <goa-app-footer version="2">
+    <goa-app-footer-meta-section slot="meta">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms of use</a>
+      <a href="/accessibility">Accessibility</a>
+    </goa-app-footer-meta-section>
+  </goa-app-footer>
+</footer>`,
       },
     },
   ],

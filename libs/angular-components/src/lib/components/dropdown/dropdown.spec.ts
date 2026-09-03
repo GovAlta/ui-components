@@ -17,6 +17,7 @@ import { fireEvent } from "@testing-library/dom";
       [name]="name"
       [value]="value"
       [maxHeight]="maxHeight"
+      [noResults]="noResults"
       [placeholder]="placeholder"
       [filterable]="filterable"
       [disabled]="disabled"
@@ -57,6 +58,7 @@ class TestDropdownComponent {
   filterable?: boolean;
   leadingIcon?: GoabIconType;
   maxHeight?: string;
+  noResults?: string;
   multiselect?: boolean;
   native?: boolean;
   placeholder?: string;
@@ -105,6 +107,7 @@ describe("GoABDropdown", () => {
     component.name = "favColor";
     component.value = "blue";
     component.maxHeight = "100px";
+    component.noResults = "Nothing found";
     component.placeholder = "Select...";
     component.filterable = true;
     component.disabled = true;
@@ -138,6 +141,7 @@ describe("GoABDropdown", () => {
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
     expect(el?.getAttribute("maxwidth")).toBe("400px");
+    expect(el?.getAttribute("noresults")).toBe("Nothing found");
 
     // Check options
     const dropdownItems = el.querySelectorAll("goa-dropdown-item");

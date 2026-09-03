@@ -11,9 +11,11 @@ export function BasicPageLayout() {
   return (
     <GoabOneColumnLayout>
       <section slot="header">
-        <GoabAppHeader url="/" heading="Service name">
-          <a href="/login">Sign in</a>
-        </GoabAppHeader>
+        <header>
+          <GoabAppHeader url="/" heading="Service name">
+            <a href="/login">Sign in</a>
+          </GoabAppHeader>
+        </header>
       </section>
       <GoabPageBlock width="full">
         <p>
@@ -30,7 +32,9 @@ export function BasicPageLayout() {
         </GoabGrid>
       </GoabPageBlock>
       <section slot="footer">
-        <GoabAppFooter />
+        <footer>
+          <GoabAppFooter />
+        </footer>
       </section>
     </GoabOneColumnLayout>
   );
