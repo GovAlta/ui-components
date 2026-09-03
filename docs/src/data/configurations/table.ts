@@ -59,7 +59,7 @@ export const tableConfigurations: ComponentConfigurations = {
     </tr>
   </tbody>
 </goab-table>`,
-        webComponents: `<goa-table version="2" width="100%">
+        webComponents: `<goa-table width="100%">
   <table width="100%">
     <thead>
       <tr>
@@ -141,7 +141,7 @@ export const tableConfigurations: ComponentConfigurations = {
     </tr>
   </tbody>
 </goab-table>`,
-        webComponents: `<goa-table version="2" striped="true">
+        webComponents: `<goa-table striped="true">
   <table width="100%">
     <thead>
       <tr>
@@ -253,7 +253,7 @@ export const tableConfigurations: ComponentConfigurations = {
   </tbody>
 </goab-table>`,
         webComponents: `<goa-text mt="none" mb="s">Normal</goa-text>
-<goa-table version="2" width="100%">
+<goa-table width="100%">
   <table width="100%">
     <thead>
       <tr>
@@ -274,7 +274,7 @@ export const tableConfigurations: ComponentConfigurations = {
   </table>
 </goa-table>
 <goa-text mt="l" mb="s">Relaxed</goa-text>
-<goa-table version="2" width="100%" variant="relaxed">
+<goa-table width="100%" variant="relaxed">
   <table width="100%">
     <thead>
       <tr>
@@ -343,7 +343,7 @@ export const tableConfigurations: ComponentConfigurations = {
     </tr>
   </tbody>
 </goab-table>`,
-        webComponents: `<goa-table version="2" width="400px">
+        webComponents: `<goa-table width="400px">
   <table width="100%">
     <thead>
       <tr>
@@ -452,7 +452,7 @@ const handleSort = (detail: GoabTableOnSortDetail) => {
   </tbody>
 </goab-table>`,
         },
-        webComponents: `<goa-table version="2" width="100%" id="sort-table">
+        webComponents: `<goa-table width="100%" id="sort-table">
   <table width="100%">
     <thead>
       <tr>
@@ -582,7 +582,7 @@ const handleMultiSort = (detail: GoabTableOnMultiSortDetail) => {
   </tbody>
 </goab-table>`,
         },
-        webComponents: `<goa-table version="2" sort-mode="multi" width="100%" id="multi-sort-table">
+        webComponents: `<goa-table sort-mode="multi" width="100%" id="multi-sort-table">
   <table width="100%">
     <thead>
       <tr>

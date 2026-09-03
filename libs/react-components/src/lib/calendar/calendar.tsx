@@ -12,7 +12,6 @@ interface WCProps extends Margins {
   min?: string;
   max?: string;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -77,7 +76,6 @@ export function GoabCalendar({
       name={name}
       min={min || undefined}
       max={max || undefined}
-      version="2"
       {..._props}
     />
   );

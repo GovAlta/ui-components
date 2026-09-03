@@ -3,7 +3,6 @@
     tag: "goa-table",
     props: {
       variant: { reflect: true },
-      version: { reflect: true },
       striped: { reflect: true },
       sortMode: { attribute: "sort-mode", reflect: true },
     },
@@ -28,9 +27,6 @@
   );
   type Variant = (typeof Variants)[number];
 
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  type VersionType = (typeof Version)[number];
-
   const [SortModes, validateSortMode] = typeValidator(
     "Sort mode",
     ["single", "multi"],
@@ -48,8 +44,6 @@
   export let striped: string = "false";
   /** A relaxed variant of the table with more vertical padding for the cells. */
   export let variant: Variant = "normal";
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Sort mode: "single" allows one column, "multi" allows up to 2 columns. */
@@ -81,7 +75,6 @@
 
   onMount(() => {
     validateVariant(variant);
-    validateVersion(version);
     validateSortMode(sortMode);
 
     // exit here if when running tests (tests don't have assignedElements)
@@ -263,7 +256,6 @@
 <div
   bind:this={_rootEl}
   class={`goatable ${variant}`}
-  class:v2={version === "2"}
   class:sticky={_stickyHeader}
   class:striped={_striped}
   style={`
@@ -289,17 +281,13 @@
   /* other styles can be found in the assets/css/components.css file */
   .goatable {
     width: 0;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  /* V2 Border and Border-Radius */
-  .v2.goatable {
     border: var(--goa-table-container-border, 1px solid #e7e7e7);
     border-radius: var(--goa-table-border-radius-container, 16px);
     overflow: hidden;
     box-sizing: border-box;
+  }
+
+  table {
+    border-collapse: collapse;
   }
 </style>

@@ -317,7 +317,6 @@
           {max}
           bordered="false"
           on:_change={onCalendarChange}
-          version="2"
         />
       </goa-popover>
     </div>
@@ -356,7 +355,6 @@
         {max}
         bordered="false"
         on:_change={onCalendarChange}
-        version="2"
       />
     </goa-popover>
   {/if}

@@ -39,7 +39,7 @@ export const tabsConfigurations: ComponentConfigurations = {
     <p>Historical data goes here.</p>
   </goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2" initialtab="1">
+        webComponents: `<goa-tabs initialtab="1">
   <goa-tab heading="Overview">
     <p>Overview content goes here.</p>
   </goa-tab>
@@ -67,7 +67,7 @@ export const tabsConfigurations: ComponentConfigurations = {
   <goab-tab heading="Week">Weekly view</goab-tab>
   <goab-tab heading="Month">Monthly view</goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2" variant="segmented">
+        webComponents: `<goa-tabs variant="segmented">
   <goa-tab heading="Day">Daily view</goa-tab>
   <goa-tab heading="Week">Weekly view</goa-tab>
   <goa-tab heading="Month">Monthly view</goa-tab>
@@ -89,7 +89,7 @@ export const tabsConfigurations: ComponentConfigurations = {
   <goab-tab heading="Second">Second tab content (initially shown).</goab-tab>
   <goab-tab heading="Third">Third tab content.</goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2" initialtab="2">
+        webComponents: `<goa-tabs initialtab="2">
   <goa-tab heading="First">First tab content.</goa-tab>
   <goa-tab heading="Second">Second tab content (initially shown).</goa-tab>
   <goa-tab heading="Third">Third tab content.</goa-tab>
@@ -124,7 +124,7 @@ export const tabsConfigurations: ComponentConfigurations = {
     <goab-text>Manage your preferences.</goab-text>
   </goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2">
+        webComponents: `<goa-tabs>
   <goa-tab heading="Messages">
     <goa-text>Your messages will appear here.</goa-text>
   </goa-tab>
@@ -165,7 +165,7 @@ export const tabsConfigurations: ComponentConfigurations = {
     <goab-text>This tab is also available.</goab-text>
   </goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2">
+        webComponents: `<goa-tabs>
   <goa-tab heading="Active">
     <goa-text>This tab is active.</goa-text>
   </goa-tab>
@@ -193,7 +193,7 @@ export const tabsConfigurations: ComponentConfigurations = {
   <goab-tab heading="Tab 2">Content 2</goab-tab>
   <goab-tab heading="Tab 3">Content 3</goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2" initialtab="1" orientation="horizontal">
+        webComponents: `<goa-tabs initialtab="1" orientation="horizontal">
   <goa-tab heading="Tab 1">Content 1</goa-tab>
   <goa-tab heading="Tab 2">Content 2</goa-tab>
   <goa-tab heading="Tab 3">Content 3</goa-tab>

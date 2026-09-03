@@ -21,8 +21,6 @@
   export let name: string = "";
   /** Sets the sort direction indicator. */
   export let direction: GoATableSortDirection = "none";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sort order number for multi-column sort display ("1", "2", etc). */
   export let sortOrder: GoATableSortOrder = 0;
 
@@ -44,11 +42,7 @@
   });
 </script>
 
-<button
-  bind:this={_rootEl}
-  class:sorted={direction !== "none"}
-  class:v2={version === "2"}
->
+<button bind:this={_rootEl} class:sorted={direction !== "none"}>
   <span class="content">
     <slot />
     <span class="icon-wrapper">
@@ -145,8 +139,8 @@
     color: var(--goa-color-interactive-hover);
   }
 
-  /* V2: Icon color on focus for unsorted state */
-  button.v2:not(.sorted):focus-visible goa-icon {
+  /* Icon color on focus for unsorted state */
+  button:not(.sorted):focus-visible goa-icon {
     color: var(--goa-color-interactive-hover);
   }
 
