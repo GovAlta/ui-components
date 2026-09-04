@@ -22,6 +22,9 @@
     "flexsearch": "^0.7.43"
   },
   "devDependencies": {
-    "tsx": "^4.22.4"
+    "fastest-levenshtein": "1.0.16",
+    "tsx": "^4.22.4",
+    "typescript": "5.9.3",
+    "yaml": "2.9.0"
   }
 }

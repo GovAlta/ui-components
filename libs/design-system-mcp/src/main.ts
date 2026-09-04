@@ -17,6 +17,10 @@
  * not recorded.
  */
 
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
@@ -67,6 +71,39 @@ function withErrorLogging<TArgs, TResult>(
   };
 }
 
+// ─── Package version ────────────────────────────────────────────────────────
+
+const moduleDir = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Read this package's own version so serverInfo reports the real published
+ * version. semantic-release stamps package.json at release, after the bundle
+ * is built, so the version must be read at runtime rather than baked in.
+ * Probes the bundled layout (package.json beside main.js) then the source
+ * layout (one level above src/); the name guard keeps an unrelated
+ * package.json from matching. Falls back to the 0.0.0 placeholder.
+ */
+function resolvePackageVersion(): string {
+  const candidates = [
+    join(moduleDir, 'package.json'),
+    join(moduleDir, '..', 'package.json'),
+  ];
+  for (const candidate of candidates) {
+    try {
+      const pkg = JSON.parse(readFileSync(candidate, 'utf8')) as {
+        name?: string;
+        version?: string;
+      };
+      if (pkg.name === '@abgov/design-system-mcp' && typeof pkg.version === 'string') {
+        return pkg.version;
+      }
+    } catch {
+      // Probe failed (no file there, or not JSON); try the next candidate.
+    }
+  }
+  return '0.0.0';
+}
+
 // ─── Server ─────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -75,12 +112,14 @@ async function main() {
 
   const itemCount = dataLoader.getStats().totalItems;
 
+  const packageVersion = resolvePackageVersion();
+
   // One process, one stdio connection, one server instance. (The hosted
   // predecessor needed a factory to give each HTTP session its own instance;
   // stdio has no sessions.)
   const server = new McpServer({
     name: 'goa-design-system-mcp',
-    version: '2.0.0',
+    version: packageVersion,
     description:
       'AI-native knowledge base for the Government of Alberta Design System. Provides component details, patterns, and implementation examples.',
   });
@@ -90,7 +129,7 @@ async function main() {
   await server.connect(new StdioServerTransport());
 
   process.stderr.write(
-    `GoA Design System MCP v2.0 ready (${itemCount} items loaded)\n`,
+    `GoA Design System MCP v${packageVersion} ready (${itemCount} items loaded)\n`,
   );
 }
 

@@ -1,0 +1,63 @@
+{
+  "name": "design-system-mcp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/design-system-mcp/src",
+  "projectType": "library",
+  "implicitDependencies": [
+    "docs",
+    "web-components",
+    "react-components",
+    "angular-components",
+    "common"
+  ],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "generate-data": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["default", "^production"],
+      "outputs": [
+        "{workspaceRoot}/docs/generated/mcp",
+        "{workspaceRoot}/docs/generated/md-bundle"
+      ],
+      "options": {
+        "command": "npx tsx src/scripts/content-generators/index.ts",
+        "cwd": "docs"
+      },
+      "metadata": {
+        "description": "Generates the MCP data records from the docs content pipeline. The generator halts on its own validation errors."
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "dependsOn": ["generate-data"],
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/design-system-mcp",
+        "tsConfig": "libs/design-system-mcp/tsconfig.lib.json"
+      },
+      "configurations": {
+        "development": { "mode": "development" },
+        "production": { "mode": "production" }
+      },
+      "metadata": {
+        "description": "Bundles the server and copies the generated data and README into dist. Depends on generate-data only, not ^build: the data derives from content and wrapper sources, never from other libs' build output."
+      }
+    },
+    "post": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node libs/design-system-mcp/scripts/smoke-test.mjs"
+      },
+      "metadata": {
+        "description": "Packs dist, installs the tarball into a throwaway folder, and drives the installed server over JSON-RPC through its npm bin. Halts on a data floor (300 records), missing relationship edges, or a failed search/get round trip. Runs in PR CI via nx affected --target=post."
+      }
+    }
+  },
+  "tags": []
+}
