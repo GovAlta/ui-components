@@ -21,7 +21,6 @@ import {
   template: `
     @if (isReady) {
       <goa-notification
-        [attr.version]="version"
         [attr.type]="type"
         [attr.arialive]="ariaLive"
         [attr.maxcontentwidth]="maxContentWidth"
@@ -42,7 +41,6 @@ export class GoabNotification implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** Define the context and colour of the notification. @default "information" */
   @Input() type?: GoabNotificationType = "information";
   /** Indicates how assistive technology should handle updates to the live region. */

@@ -388,7 +388,7 @@ const drawer = (
     <div id="wsl-drawer-body" style="margin-top: 16px"></div>
   </div>
 
-  <goa-push-drawer id="wsl-drawer" slot="push-drawer" heading="Case details" width="360px" version="2">
+  <goa-push-drawer id="wsl-drawer" slot="push-drawer" heading="Case details" width="360px">
     <div id="wsl-drawer-content" style="padding: 0 4px"></div>
   </goa-push-drawer>
 </goa-workspace-layout>

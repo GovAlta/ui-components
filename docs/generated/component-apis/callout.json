@@ -296,18 +296,6 @@
           "required": true,
           "default": null,
           "description": "Define the context and colour of the callout."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabCalloutVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [],

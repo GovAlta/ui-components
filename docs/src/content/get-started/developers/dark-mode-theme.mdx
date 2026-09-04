@@ -14,13 +14,13 @@ import { withBase } from "@/lib/base-url";
   GoabThemeService. The user&apos;s choice persists across sessions.
 </goa-text>
 
-<goa-callout version="2" type="important" heading="Dark mode is still experimental" mt="none" mb="2xl">
+<goa-callout type="important" heading="Dark mode is still experimental" mt="none" mb="2xl">
   <goa-text size="body-m" mt="none" mb="none">
     Dark mode is still being tested. The CSS API and tokens may evolve as we iterate.
   </goa-text>
 </goa-callout>
 
-<goa-callout version="2" type="information" emphasis="low" mb="2xl">
+<goa-callout type="information" emphasis="low" mb="2xl">
   <span style="color: var(--goa-color-text-default)">
     Dark theme styles are included in <code>@abgov/web-components/index.css</code>. If you
     completed the <a href={withBase('/get-started/developers/setup')}>developer setup</a>,
@@ -109,7 +109,7 @@ interface GoabThemeProviderProps {
   defaultMode?: "light" | "dark";
 }`}</code></pre>
 
-<goa-callout version="2" type="information" emphasis="low" mb="m">
+<goa-callout type="information" emphasis="low" mb="m">
   <span style="color: var(--goa-color-text-default)">
     <code>useTheme</code> throws if called outside of <code>GoabThemeProvider</code>.
   </span>

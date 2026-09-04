@@ -36,8 +36,6 @@
   export let arialive: AriaLiveType = "polite";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sets the visual prominence. 'high' for full background, 'filled' for medium. */
   export let emphasis: EmphasisType = "high";
   /** When true, reduces padding for a more compact notification. */
@@ -74,12 +72,7 @@
 
 <!-- HTML -->
 {#if show}
-  <div
-    id="container"
-    data-testid={testid}
-    class:v2={version === "2"}
-    class:compact={version === "2" && compact}
-  >
+  <div id="container" data-testid={testid} class:compact>
     <div
       transition:fade
       class="notification {type} {emphasis}"
@@ -180,10 +173,6 @@
   .content {
     flex: 1 1 auto;
     font: var(--goa-notification-banner-text-size);
-  }
-
-  /* V2: Improved vertical alignment with icon */
-  .v2 .content {
     margin-top: 2px;
   }
 
@@ -256,20 +245,18 @@
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
   }
 
-  /* V2 Styling */
-
   /* Compact mode spacing */
-  .v2.compact .notification {
+  .compact .notification {
     padding-top: var(--goa-notification-banner-padding-tb-compact);
     padding-bottom: var(--goa-notification-banner-padding-tb-compact);
   }
 
-  .v2.compact .content-container {
+  .compact .content-container {
     gap: var(--goa-notification-banner-gap-compact);
   }
 
   @container self (--not-mobile) {
-    .v2.compact .notification {
+    .compact .notification {
       padding-left: var(
         --goa-notification-banner-padding-lr-medium-screen-compact
       );
@@ -280,7 +267,7 @@
   }
 
   @container self (--desktop) {
-    .v2.compact .notification {
+    .compact .notification {
       padding-left: var(
         --goa-notification-banner-padding-lr-large-screen-compact
       );
@@ -290,160 +277,160 @@
     }
   }
 
-  /* V2 emphasis-based colors - Information */
-  .v2 .notification.information.high {
+  /* Emphasis-based colors - Information */
+  .notification.information.high {
     background-color: var(--goa-notification-banner-information-high-color-bg);
     color: var(--goa-notification-banner-information-high-color-text);
   }
 
-  .v2 .notification.information.low {
+  .notification.information.low {
     background-color: var(--goa-notification-banner-information-low-color-bg);
     color: var(--goa-notification-banner-information-low-color-text);
     border: var(--goa-border-width-s) solid
       var(--goa-notification-banner-information-low-color-border);
   }
 
-  /* V2 emphasis-based colors - Important */
-  .v2 .notification.important.high {
+  /* Emphasis-based colors - Important */
+  .notification.important.high {
     background-color: var(--goa-notification-banner-important-high-color-bg);
     color: var(--goa-notification-banner-important-high-color-text);
   }
 
-  .v2 .notification.important.low {
+  .notification.important.low {
     background-color: var(--goa-notification-banner-important-low-color-bg);
     color: var(--goa-notification-banner-important-low-color-text);
     border: var(--goa-border-width-s) solid
       var(--goa-notification-banner-important-low-color-border);
   }
 
-  /* V2 emphasis-based colors - Emergency */
-  .v2 .notification.emergency.high {
+  /* Emphasis-based colors - Emergency */
+  .notification.emergency.high {
     background-color: var(--goa-notification-banner-emergency-high-color-bg);
     color: var(--goa-notification-banner-emergency-high-color-text);
   }
 
-  .v2 .notification.emergency.low {
+  .notification.emergency.low {
     background-color: var(--goa-notification-banner-emergency-low-color-bg);
     color: var(--goa-notification-banner-emergency-low-color-text);
     border: var(--goa-border-width-s) solid
       var(--goa-notification-banner-emergency-low-color-border);
   }
 
-  /* V2 close button icon colors */
-  .v2 .notification.information.high .close button goa-icon {
+  /* Close button icon colors */
+  .notification.information.high .close button goa-icon {
     color: var(--goa-notification-banner-information-high-color-text);
   }
 
-  .v2 .notification.information.low .close button goa-icon {
+  .notification.information.low .close button goa-icon {
     color: var(--goa-color-info-dark);
   }
 
-  .v2 .notification.important.high .close button goa-icon {
+  .notification.important.high .close button goa-icon {
     color: var(--goa-notification-banner-important-high-color-text);
   }
 
-  .v2 .notification.important.low .close button goa-icon {
+  .notification.important.low .close button goa-icon {
     color: var(--goa-color-important-text-dark);
   }
 
-  .v2 .notification.emergency.high .close button goa-icon {
+  .notification.emergency.high .close button goa-icon {
     color: var(--goa-notification-banner-emergency-high-color-text);
   }
 
-  .v2 .notification.emergency.low .close button goa-icon {
+  .notification.emergency.low .close button goa-icon {
     color: var(--goa-color-emergency-dark);
   }
 
-  /* V2 close button hover and focus background colors */
-  .v2 .notification.information.high .close button:hover,
-  .v2 .notification.information.high .close button:focus-visible {
+  /* Close button hover and focus background colors */
+  .notification.information.high .close button:hover,
+  .notification.information.high .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-information-high-close-bg-hover
     );
   }
 
-  .v2 .notification.information.low .close button:hover,
-  .v2 .notification.information.low .close button:focus-visible {
+  .notification.information.low .close button:hover,
+  .notification.information.low .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-information-low-close-bg-hover
     );
   }
 
-  .v2 .notification.important.high .close button:hover,
-  .v2 .notification.important.high .close button:focus-visible {
+  .notification.important.high .close button:hover,
+  .notification.important.high .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-important-high-close-bg-hover
     );
   }
 
-  .v2 .notification.important.low .close button:hover,
-  .v2 .notification.important.low .close button:focus-visible {
+  .notification.important.low .close button:hover,
+  .notification.important.low .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-important-low-close-bg-hover
     );
   }
 
-  .v2 .notification.emergency.high .close button:hover,
-  .v2 .notification.emergency.high .close button:focus-visible {
+  .notification.emergency.high .close button:hover,
+  .notification.emergency.high .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-emergency-high-close-bg-hover
     );
   }
 
-  .v2 .notification.emergency.low .close button:hover,
-  .v2 .notification.emergency.low .close button:focus-visible {
+  .notification.emergency.low .close button:hover,
+  .notification.emergency.low .close button:focus-visible {
     background-color: var(
       --goa-notification-banner-emergency-low-close-bg-hover
     );
   }
 
-  /* V2 contrast-based focus borders */
-  .v2 .notification.information.high .close button:focus-visible {
+  /* Contrast-based focus borders */
+  .notification.information.high .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-information-high-focus-border);
   }
 
-  .v2 .notification.information.low .close button:focus-visible {
+  .notification.information.low .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-information-low-focus-border);
   }
 
-  .v2 .notification.important.high .close button:focus-visible {
+  .notification.important.high .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-important-high-focus-border);
   }
 
-  .v2 .notification.important.low .close button:focus-visible {
+  .notification.important.low .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-important-low-focus-border);
   }
 
-  .v2 .notification.emergency.high .close button:focus-visible {
+  .notification.emergency.high .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-emergency-high-focus-border);
   }
 
-  .v2 .notification.emergency.low .close button:focus-visible {
+  .notification.emergency.low .close button:focus-visible {
     box-shadow: var(--goa-notification-banner-emergency-low-focus-border);
   }
 
-  /* V2 link focus states */
-  .v2 .notification.important.high :global(::slotted(a:focus-visible)) {
+  /* Link focus states */
+  .notification.important.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-important-high-focus-border);
   }
 
-  .v2 .notification.important.low :global(::slotted(a:focus-visible)) {
+  .notification.important.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-important-low-focus-border);
   }
 
-  .v2 .notification.information.high :global(::slotted(a:focus-visible)) {
+  .notification.information.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-information-high-focus-border);
   }
 
-  .v2 .notification.information.low :global(::slotted(a:focus-visible)) {
+  .notification.information.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-information-low-focus-border);
   }
 
-  .v2 .notification.emergency.high :global(::slotted(a:focus-visible)) {
+  .notification.emergency.high :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-emergency-high-focus-border);
   }
 
-  .v2 .notification.emergency.low :global(::slotted(a:focus-visible)) {
+  .notification.emergency.low :global(::slotted(a:focus-visible)) {
     box-shadow: var(--goa-notification-banner-emergency-low-focus-border);
   }
 </style>

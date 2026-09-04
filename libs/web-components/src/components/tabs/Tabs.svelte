@@ -361,25 +361,29 @@
     const ownHashes = new Set<string>();
 
     // send message to each tab to set visibility within
-    [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map((el, index) => {
-      const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
+    [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map(
+      (el, index) => {
+        const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
 
-      el.setAttribute("aria-selected", fromBoolean(isCurrent));
-      el.setAttribute("tabindex", isCurrent ? "0" : "-1");
+        el.setAttribute("aria-selected", fromBoolean(isCurrent));
+        el.setAttribute("tabindex", isCurrent ? "0" : "-1");
 
-      // Track every hash this tabs instance could produce, so its own
-      // previous hash can be told apart from hashes contributed elsewhere
-      // (a nested tabs' hash, or a content anchor).
-      const ownHash = (el as HTMLLinkElement).getAttribute("href")?.split("#")[1];
-      if (ownHash) ownHashes.add(ownHash);
+        // Track every hash this tabs instance could produce, so its own
+        // previous hash can be told apart from hashes contributed elsewhere
+        // (a nested tabs' hash, or a content anchor).
+        const ownHash = (el as HTMLLinkElement)
+          .getAttribute("href")
+          ?.split("#")[1];
+        if (ownHash) ownHashes.add(ownHash);
 
-      if (isCurrent) {
-        currentLocation = (el as HTMLLinkElement).href;
-        if (!skipFocus) {
-          el.focus({ preventScroll: true });
+        if (isCurrent) {
+          currentLocation = (el as HTMLLinkElement).href;
+          if (!skipFocus) {
+            el.focus({ preventScroll: true });
+          }
         }
-      }
-    });
+      },
+    );
 
     for (const [i, props] of _tabProps.entries()) {
       props.el.dispatchEvent(
@@ -582,22 +586,9 @@
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding);
-      border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       min-width: var(--goa-space-2xl);
       justify-content: center;
-    }
-    :global([role="tab"][aria-selected="true"]) {
-      border-bottom: var(--goa-tab-border-selected);
-    }
-    :global(
-      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
-    ) {
-      border-bottom: var(--goa-tab-border-hover);
-    }
-
-    :global([role="tab"][aria-disabled="true"]) {
-      border-bottom: var(--goa-tab-border-not-selected);
     }
   }
 
@@ -615,25 +606,18 @@
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
-      border-left: var(--goa-tab-border-not-selected);
       text-overflow: wrap;
       white-space: normal;
       word-break: break-word;
       overflow-wrap: break-word;
     }
     :global([role="tab"][aria-selected="true"]) {
-      border-left: var(--goa-tab-border-selected);
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-      border-left: var(--goa-tab-border-hover);
       background: var(--goa-tab-color-bg-hover-small-screen, transparent);
-    }
-
-    :global([role="tab"][aria-disabled="true"]) {
-      border-left: var(--goa-tab-border-not-selected);
     }
 
     /* horizontal: override mobile styles to use desktop layout */
@@ -647,16 +631,12 @@
     }
     .horizontal :global([role="tab"]) {
       padding: var(--goa-tab-padding);
-      border-left: none;
-      border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       white-space: nowrap;
       min-width: var(--goa-space-2xl);
       justify-content: center;
     }
     .horizontal :global([role="tab"][aria-selected="true"]) {
-      border-left: none;
-      border-bottom: var(--goa-tab-border-selected);
       background: transparent;
     }
     .horizontal
@@ -665,8 +645,6 @@
             [aria-disabled="true"]
           )
       ) {
-      border-left: none;
-      border-bottom: var(--goa-tab-border-hover);
       background: transparent;
     }
   }
@@ -679,17 +657,7 @@
     border-radius: var(--goa-border-radius-xs);
   }
 
-  :global(
-    [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
-  ) {
-    border-bottom: none;
-  }
-
   @media (--not-mobile) {
-    :global([role="tab"]) {
-      border-bottom: none;
-    }
-
     :global([role="tab"]::after) {
       content: "";
       position: absolute;
@@ -716,18 +684,6 @@
   }
 
   @media (--mobile) {
-    :global([role="tab"]) {
-      border-left: none;
-    }
-    :global([role="tab"][aria-selected="true"]) {
-      border-left: none;
-    }
-    :global(
-      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
-    ) {
-      border-left: none;
-    }
-
     :global([role="tab"]::after) {
       content: "";
       position: absolute;
@@ -753,20 +709,6 @@
     }
 
     /* Horizontal tabs use the bottom indicator on mobile */
-    .horizontal :global([role="tab"]) {
-      border-bottom: none;
-    }
-    .horizontal :global([role="tab"][aria-selected="true"]) {
-      border-bottom: none;
-    }
-    .horizontal
-      :global(
-        [role="tab"]:hover:not([aria-selected="true"]):not(
-            [aria-disabled="true"]
-          )
-      ) {
-      border-bottom: none;
-    }
     .horizontal :global([role="tab"]::after) {
       top: auto;
       left: 0;
