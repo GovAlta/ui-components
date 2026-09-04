@@ -23,7 +23,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-callout
-        [attr.version]="version"
         [attr.type]="type"
         [attr.heading]="heading"
         [attr.size]="size"
@@ -48,7 +47,6 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

@@ -15,7 +15,7 @@
   import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import { dispatch, style, styles, typeValidator } from "../../common/utils";
+  import { dispatch, style, styles } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -35,12 +35,6 @@
   /** Controls visibility of the close button and header. */
   export let closeButtonVisibility: "visible" | "hidden" = "visible";
 
-  // version
-  type VersionType = "1" | "2";
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
-
   // *******
   // Private
   // *******
@@ -58,13 +52,11 @@
   $: _showCloseButton = closeButtonVisibility !== "hidden";
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
   $: _scrollPanelMaxHeight =
-    version === "2"
-      ? position === "bottom"
-        ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
-        : position === "left" || position === "right"
-          ? "calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px))"
-          : undefined
-      : undefined;
+    position === "bottom"
+      ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
+      : position === "left" || position === "right"
+        ? "calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px))"
+        : undefined;
   $: _flyParams = {
     duration: 200,
     x: position === "right" ? 200 : position === "left" ? -200 : 0,
@@ -90,7 +82,6 @@
 
   onMount(async () => {
     await tick();
-    validateVersion(version);
 
     if (position === "bottom") {
       _drawerSize = _contentEl?.getBoundingClientRect().height ?? 0;
@@ -150,37 +141,28 @@
       use:noscroll={{ enable: open }}
       style={styles(
         style("--drawer-offset", `-${_drawerSize}px`),
-        style("height", position === "bottom" ? "unset" : undefined),
+        position === "bottom" && style("height", "unset"),
         style(
           "max-width",
           position === "bottom"
             ? "unset"
-            : version === "2"
-              ? `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
-              : `min(${maxsize}, 100vw)`,
+            : `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
         ),
-        style(
-          "width",
-          position === "bottom"
-            ? "100%"
-            : version === "2"
-              ? `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
-              : `min(${maxsize}, 100vw)`,
-        ),
-        style(
-          "max-height",
-          position === "bottom"
-            ? version === "2"
-              ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
-              : `min(${maxsize}, 100vh)`
-            : undefined,
-        ),
+        position !== "bottom" &&
+          style(
+            "width",
+            `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
+          ),
+        position === "bottom" &&
+          style(
+            "max-height",
+            `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
+          ),
       )}
       in:fly={_flyParams}
       out:fly={_flyParams}
       class:open
       class:closing={!open}
-      class:v2={version === "2"}
       class={`drawer drawer-${position}`}
       class:drawer-open-bottom={position === "bottom" && open}
       class:drawer-open-right={position === "right" && open}
@@ -197,15 +179,9 @@
           <div slot="header" class="header" id="goa-drawer-heading">
             {#if heading || $$slots.heading}
               {#if heading}
-                {#if version === "2"}
-                  <goa-text size="heading-s" as="h3" mt="3xs" mb="none"
-                    >{heading}</goa-text
-                  >
-                {:else}
-                  <goa-text size="heading-m" as="h3" mt="none" mb="none"
-                    >{heading}</goa-text
-                  >
-                {/if}
+                <goa-text size="heading-s" as="h3" mt="3xs" mb="none"
+                  >{heading}</goa-text
+                >
               {:else}
                 <slot name="heading" />
               {/if}
@@ -257,7 +233,7 @@
     transition: opacity 200ms ease-out;
   }
 
-  /* scroll-panel owns scroll mechanics and the sticky header/footer scroll cue (V1 + V2) */
+  /* scroll-panel owns scroll mechanics and the sticky header/footer scroll cue */
   .drawer goa-scroll-panel {
     flex: 1 1 auto;
     min-height: 0;
@@ -308,17 +284,17 @@
     align-items: flex-start; /* Align to top instead of center */
   }
 
-  /* V2: Header uses flexbox positioning (stays at top) */
-  .v2.drawer-right .header,
-  .v2.drawer-left .header,
-  .v2.drawer-bottom .header {
+  /* Header uses flexbox positioning and stays at the top */
+  .drawer-right .header,
+  .drawer-left .header,
+  .drawer-bottom .header {
     flex: 0 0 auto; /* Don't grow or shrink */
     gap: var(--goa-space-2xs); /* 4px gap between heading and close icon */
     background-color: var(--goa-color-greyscale-white);
     border-bottom: none; /* Remove border by default */
   }
 
-  .v2 .header goa-icon-button {
+  .header goa-icon-button {
     margin-top: -0.1875rem;
   }
 
@@ -342,17 +318,17 @@
     background: var(--goa-color-greyscale-white);
   }
 
-  /* V2: Actions use flexbox positioning (stay at bottom) */
-  .v2.drawer-right .drawer-actions,
-  .v2.drawer-left .drawer-actions,
-  .v2.drawer-bottom .drawer-actions {
+  /* Actions use flexbox positioning and stay at the bottom */
+  .drawer-right .drawer-actions,
+  .drawer-left .drawer-actions,
+  .drawer-bottom .drawer-actions {
     flex: 0 0 auto; /* Don't grow or shrink */
     background-color: var(--goa-color-greyscale-white);
     border-top: none; /* Remove border by default */
   }
 
-  /* V2: Bottom drawer actions rounded corners */
-  .v2.drawer-bottom .drawer-actions {
+  /* Bottom drawer actions have rounded corners */
+  .drawer-bottom .drawer-actions {
     border-bottom-left-radius: var(--goa-drawer-border-radius, 24px);
     border-bottom-right-radius: var(--goa-drawer-border-radius, 24px);
   }
@@ -371,23 +347,9 @@
 
   .drawer-bottom {
     bottom: var(--drawer-offset);
-    width: 100%;
-    height: 300px;
-    border-top-left-radius: var(--goa-drawer-border-radius, 0.5rem);
-    border-top-right-radius: var(--goa-drawer-border-radius, 0.5rem);
-    transform: translateY(100%);
-    box-shadow: var(--goa-drawer-bottom-shadow);
-  }
-
-  .drawer-open-bottom {
-    bottom: 0;
-  }
-
-  /* V2: Border radius + 16px offset from edges */
-  .drawer-bottom.v2 {
     left: var(--goa-drawer-offset, 0);
     right: var(--goa-drawer-offset, 0);
-    width: auto !important; /* Override base width: 100% */
+    width: auto;
     height: auto;
     overflow-y: hidden; /* No scroll on drawer itself */
     border-radius: var(--goa-drawer-border-radius, 24px); /* All corners 24px */
@@ -399,8 +361,8 @@
       transform var(--goa-motion-duration-medium-1)
         var(--goa-motion-curve-expressive);
   }
-  .drawer-bottom.v2.open,
-  .drawer-bottom.v2.drawer-open-bottom {
+  .drawer-bottom.open,
+  .drawer-bottom.drawer-open-bottom {
     bottom: var(--goa-drawer-offset, 0);
     transform: translateY(0); /* Slide in */
   }
@@ -408,18 +370,6 @@
   /* Right */
 
   .drawer-right {
-    right: var(--drawer-offset);
-    height: 100vh; /* V1: bound to viewport so the scroll-panel scrolls internally */
-    transform: translateX(100%);
-    box-shadow: var(--goa-drawer-right-shadow);
-  }
-
-  .drawer-open-right {
-    right: 0;
-  }
-
-  /* V2: Border radius + 16px offset from edges + content-driven height */
-  .v2.drawer-right {
     right: var(--drawer-offset);
     top: var(--goa-drawer-offset, 0);
     /* No bottom positioning - allows height: auto to work naturally */
@@ -441,7 +391,7 @@
       transform var(--goa-motion-duration-medium-1)
         var(--goa-motion-curve-expressive);
   }
-  .v2.drawer-open-right {
+  .drawer-open-right {
     right: var(--goa-drawer-offset, 0);
     transform: translateX(0); /* Slide in */
   }
@@ -449,18 +399,6 @@
   /* Left */
 
   .drawer-left {
-    left: var(--drawer-offset);
-    height: 100vh; /* V1: bound to viewport so the scroll-panel scrolls internally */
-    transform: translateX(-100%);
-    box-shadow: var(--goa-drawer-left-shadow);
-  }
-
-  .drawer-open-left {
-    left: 0;
-  }
-
-  /* V2: Border radius + 16px offset from edges + content-driven height */
-  .v2.drawer-left {
     left: var(--drawer-offset);
     top: var(--goa-drawer-offset, 0);
     /* No bottom positioning - allows height: auto to work naturally */
@@ -482,7 +420,7 @@
       transform var(--goa-motion-duration-medium-1)
         var(--goa-motion-curve-expressive);
   }
-  .v2.drawer-open-left {
+  .drawer-open-left {
     left: var(--goa-drawer-offset, 0);
     transform: translateX(0); /* Slide in */
   }

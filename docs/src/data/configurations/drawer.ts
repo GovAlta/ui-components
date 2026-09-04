@@ -80,7 +80,7 @@ const handleClose = () => setIsOpen(false);`,
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Application details" position="right">
+<goa-drawer id="demo-drawer" heading="Application details" position="right">
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
   <p>Drawers are useful for:</p>
   <ul>
@@ -133,7 +133,7 @@ const handleClose = () => setIsOpen(false);`,
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Bottom drawer" position="bottom">
+<goa-drawer id="demo-drawer" heading="Bottom drawer" position="bottom">
   <p>Opens from the bottom of the screen.</p>
 </goa-drawer>
 <script>${drawerScript}</script>`,
@@ -180,7 +180,7 @@ const handleClose = () => setIsOpen(false);`,
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Navigation" position="left">
+<goa-drawer id="demo-drawer" heading="Navigation" position="left">
   <p>Opens from the left side of the screen.</p>
 </goa-drawer>
 <script>${drawerScript}</script>`,
@@ -255,7 +255,7 @@ const handleSave = () => {
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Edit settings" position="right">
+<goa-drawer id="demo-drawer" heading="Edit settings" position="right">
   <p>Make changes to your settings here.</p>
   <div slot="actions">
     <goa-button-group alignment="start">
@@ -310,7 +310,7 @@ const handleClose = () => setIsOpen(false);`,
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Narrow drawer" position="right" maxsize="240px">
+<goa-drawer id="demo-drawer" heading="Narrow drawer" position="right" maxsize="240px">
   <p>Narrow width for simple content.</p>
 </goa-drawer>
 <script>${drawerScript}</script>`,
@@ -359,7 +359,7 @@ const handleClose = () => setIsOpen(false);`,
 </goab-drawer>`,
         },
         webComponents: `<goa-button id="open-drawer">Open drawer</goa-button>
-<goa-drawer version="2" id="demo-drawer" heading="Wide drawer" position="right" maxsize="600px">
+<goa-drawer id="demo-drawer" heading="Wide drawer" position="right" maxsize="600px">
   <p>Wide width for more complex content.</p>
 </goa-drawer>
 <script>${drawerScript}</script>`,

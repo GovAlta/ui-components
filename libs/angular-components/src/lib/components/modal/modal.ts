@@ -23,7 +23,6 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `
     @if (isReady) {
       <goa-modal
-        [attr.version]="version"
         [attr.calloutvariant]="calloutVariant"
         [attr.open]="open"
         [attr.maxwidth]="maxWidth"
@@ -57,7 +56,6 @@ export class GoabModal implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

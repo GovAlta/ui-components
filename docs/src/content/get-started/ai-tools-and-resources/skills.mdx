@@ -14,7 +14,7 @@ import { withBase } from "@/lib/base-url";
 <goa-text size="heading-xl" mt="none" mb="m">Skills</goa-text>
 <goa-text size="body-l" mt="none" mb="2xl">Plain Markdown instruction files give your AI a workflow to follow when the work matches. They follow the open SKILL.md standard, so the same files work across Claude Code, Cursor, Copilot, and more.</goa-text>
 
-<goa-callout version="2" type="information" emphasis="low" mt="m" mb="l">
+<goa-callout type="information" emphasis="low" mt="m" mb="l">
   <goa-text version="2" size="body-s" mt="none" mb="none">Skills are one tool in a larger AI toolset. For the overview of all available AI tools and how they fit together, see <a href={withBase("/get-started/ai-tools-and-resources")}>AI tools and resources</a>.</goa-text>
 </goa-callout>
 
@@ -50,7 +50,7 @@ import { withBase } from "@/lib/base-url";
 <CodeSnippet language="bash" showCopy client:visible code={`npx skills update`} />
 <goa-text size="body-m" mt="m" mb="none">To update automatically, add <code>npx skills update -g -y</code> to a SessionStart hook in your AI tool and they refresh every session. You'll only get an update when a skill itself changes, not every time something else in the repo changes.</goa-text>
 
-<goa-callout version="2" type="information" emphasis="low" mt="xl" mb="2xl">
+<goa-callout type="information" emphasis="low" mt="xl" mb="2xl">
   <goa-text version="2" size="body-m" mt="none" mb="none">Using a tool without the <code>skills</code> CLI? Clone a skill folder from the <goa-link version="2" trailingicon="open"><a href="https://github.com/GovAlta/ui-components/tree/dev/skills" target="_blank" rel="noopener noreferrer">skills directory</a></goa-link> into your tool's skills folder, for example <code>~/.claude/skills</code>, <code>.cursor/skills</code>, or <code>.github/skills</code>.</goa-text>
 </goa-callout>
 

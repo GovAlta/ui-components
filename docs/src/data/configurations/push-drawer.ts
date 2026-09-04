@@ -99,7 +99,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
-  <goa-push-drawer version="2" id="demo-push-drawer" heading="Application details" width="260px">
+  <goa-push-drawer id="demo-push-drawer" heading="Application details" width="260px">
     <goa-text as="h4" size="heading-xs" mb="s" mt="none">Applicant name</goa-text>
     <goa-text size="body-m" mt="none">Jane Smith</goa-text>
     <goa-text as="h4" size="heading-xs" mb="s" mt="none">File number</goa-text>
@@ -168,7 +168,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
-  <goa-push-drawer version="2" id="demo-push-drawer" width="320px">
+  <goa-push-drawer id="demo-push-drawer" width="320px">
     <goa-block slot="heading" gap="s" alignment="center" direction="row">
       <span>Cases</span>
       <goa-badge type="success" content="Approved"></goa-badge>
@@ -221,7 +221,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
-  <goa-push-drawer version="2" id="demo-push-drawer" heading="Case notes" width="600px">
+  <goa-push-drawer id="demo-push-drawer" heading="Case notes" width="600px">
     <goa-text as="h4" size="heading-xs" mb="s" mt="none">Officer</goa-text>
     <goa-text size="body-m" mt="none">Const. M. Roberts, Badge #4412</goa-text>
     <goa-text as="h4" size="heading-xs" mb="s" mt="none">Date</goa-text>
@@ -300,7 +300,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
-  <goa-push-drawer version="2" id="demo-push-drawer" heading="Edit notification preferences" width="280px">
+  <goa-push-drawer id="demo-push-drawer" heading="Edit notification preferences" width="280px">
     <goa-form-item label="Email notifications">
       <goa-checkbox-list name="email-notifications" value="updates,deadlines">
         <goa-checkbox name="updates" text="Case status updates"></goa-checkbox>
@@ -395,7 +395,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button id="open-push-drawer">Open push drawer</goa-button>
   </div>
-  <goa-push-drawer version="2" id="demo-push-drawer" heading="Case history" width="320px">
+  <goa-push-drawer id="demo-push-drawer" heading="Case history" width="320px">
     <goa-text as="h4" size="heading-xs" mb="s" mt="none">Jan 15, 2025</goa-text>
     <goa-text size="body-m" mt="none">Application received. Initial review completed by intake officer. All required documents present.</goa-text>
     <goa-text as="h4" size="heading-xs" mb="s" mt="l">Feb 3, 2025</goa-text>

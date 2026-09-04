@@ -132,7 +132,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Confirm action">
+<goa-modal id="demo-modal" heading="Confirm action">
   <p>Are you sure you want to proceed with this action?</p>
   <goa-button-group alignment="end" mt="l">
     <goa-button type="secondary" size="compact">Cancel</goa-button>
@@ -160,7 +160,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Information" closable>
+<goa-modal id="demo-modal" heading="Information" closable>
   <p>You can close this modal with the X button or by clicking the backdrop.</p>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -192,7 +192,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Are you sure you want to delete this item?" calloutvariant="emergency">
+<goa-modal id="demo-modal" heading="Are you sure you want to delete this item?" calloutvariant="emergency">
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <goa-button-group alignment="end" mt="l">
     <goa-button type="secondary" size="compact">Cancel</goa-button>
@@ -226,7 +226,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Your session is about to expire" calloutvariant="important">
+<goa-modal id="demo-modal" heading="Your session is about to expire" calloutvariant="important">
   <p>You will be logged out in 5 minutes due to inactivity.</p>
   <goa-button-group alignment="end" mt="l">
     <goa-button size="compact">Stay logged in</goa-button>
@@ -253,7 +253,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="New features available" closable calloutvariant="information">
+<goa-modal id="demo-modal" heading="New features available" closable calloutvariant="information">
   <p>We have updated the application with new features. Review the changes to get started.</p>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -277,7 +277,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Application submitted" closable calloutvariant="success">
+<goa-modal id="demo-modal" heading="Application submitted" closable calloutvariant="success">
   <p>Your application has been successfully submitted. You will receive a confirmation email shortly.</p>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -301,7 +301,7 @@ export const modalConfigurations: ComponentConfigurations = {
 </goab-modal>`,
         },
         webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Wide modal" maxwidth="80ch" closable>
+<goa-modal id="demo-modal" heading="Wide modal" maxwidth="80ch" closable>
   <p>This modal has a wider maximum width for more content.</p>
 </goa-modal>
 <script>${modalScript}</script>`,

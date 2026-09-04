@@ -98,7 +98,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     />
   ) : (
     <div class="no-configurations">
-      <goa-callout version="2" type="information" heading="Preview coming soon">
+      <goa-callout type="information" heading="Preview coming soon">
         Interactive preview configurations are being developed for this component.
       </goa-callout>
     </div>
@@ -129,7 +129,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
             )}
           </>
         ) : (
-          <goa-callout version="2" type="information" heading="No API data available">
+          <goa-callout type="information" heading="No API data available">
             API documentation is automatically extracted from the component source code.
           </goa-callout>
         )}
@@ -158,7 +158,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
             ))}
           </div>
         ) : (
-          <goa-callout version="2" type="information" heading="No examples available">
+          <goa-callout type="information" heading="No examples available">
             Examples show common usage patterns and implementation guidance.
           </goa-callout>
         )}
@@ -189,7 +189,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     {!hideTabs.includes('accessibility') && (
     <goa-tab heading="Accessibility">
       <TabContentWrapper tocQuery=".guidance-section .topic-heading">
-        <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch">
+        <goa-callout type="information" emphasis="low" mb="l" maxwidth="80ch">
           All GoA Design System components are built to meet <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 AA</a> standards.
           The following guidelines provide additional context for accessible implementation.
         </goa-callout>
