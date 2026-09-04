@@ -1,0 +1,1 @@
+import{j as l}from"./jsx-runtime.u17CrQMm.js";import{t as n,l as p}from"./workspace-layout-scroll-state.CwoYdGbs.js";const c=({type:o="information",iconTheme:r="outline",size:t="large",ariaLive:a="off",emphasis:s="medium",children:e,...i})=>{const m=n({type:o,icontheme:r,size:t,arialive:a,emphasis:s,...i},p);return l.jsx("goa-callout",{...m,children:e})};export{c as G};
