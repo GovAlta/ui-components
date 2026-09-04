@@ -98,7 +98,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     />
   ) : (
     <div class="no-configurations">
-      <goa-callout version="2" type="information" heading="Preview coming soon">
+      <goa-callout type="information" heading="Preview coming soon">
         Interactive preview configurations are being developed for this component.
       </goa-callout>
     </div>
@@ -108,7 +108,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
   <goa-spacer version="2" vspacing="xl"></goa-spacer>
 
   <!-- Documentation Tabs - each tab has its own TOC via TabContentWrapper -->
-  <goa-tabs version="2" initialtab="1">
+  <goa-tabs initialtab="1">
     <!-- Properties Tab -->
     <goa-tab heading="Properties">
       <TabContentWrapper tocQuery=".api-section h3, .sub-component-section h2">
@@ -129,7 +129,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
             )}
           </>
         ) : (
-          <goa-callout version="2" type="information" heading="No API data available">
+          <goa-callout type="information" heading="No API data available">
             API documentation is automatically extracted from the component source code.
           </goa-callout>
         )}
@@ -149,7 +149,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     <!-- Examples Tab -->
     {!hideTabs.includes('examples') && (
     <goa-tab heading="Examples" slug="examples">
-      <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
+      <span slot="heading">Examples <goa-badge type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
         {componentExamples.length > 0 ? (
           <div class="examples-list">
@@ -158,7 +158,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
             ))}
           </div>
         ) : (
-          <goa-callout version="2" type="information" heading="No examples available">
+          <goa-callout type="information" heading="No examples available">
             Examples show common usage patterns and implementation guidance.
           </goa-callout>
         )}
@@ -189,7 +189,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     {!hideTabs.includes('accessibility') && (
     <goa-tab heading="Accessibility">
       <TabContentWrapper tocQuery=".guidance-section .topic-heading">
-        <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch">
+        <goa-callout type="information" emphasis="low" mb="l" maxwidth="80ch">
           All GoA Design System components are built to meet <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 AA</a> standards.
           The following guidelines provide additional context for accessible implementation.
         </goa-callout>
@@ -221,7 +221,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
                   <p class="related-card-description">{comp.data.description}</p>
                 )}
                 <div class="related-card-badge">
-                  <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
+                  <goa-badge type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
                 </div>
               </div>
             </a>

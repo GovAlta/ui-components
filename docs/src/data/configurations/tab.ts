@@ -33,7 +33,7 @@ export const tabConfigurations: ComponentConfigurations = {
     Content for the second tab.
   </goab-tab>
 </goab-tabs>`,
-        webComponents: `<goa-tabs version="2">
+        webComponents: `<goa-tabs>
   <goa-tab heading="First tab">
     Content for the first tab.
   </goa-tab>

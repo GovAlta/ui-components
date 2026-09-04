@@ -26,8 +26,8 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <goab-button type="secondary">Cancel</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
-  <goa-button version="2">Submit</goa-button>
-  <goa-button version="2" type="secondary">Cancel</goa-button>
+  <goa-button>Submit</goa-button>
+  <goa-button type="secondary">Cancel</goa-button>
 </goa-button-group>`,
       },
     },
@@ -78,23 +78,23 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
 </goab-button-group>`,
         webComponents: `<goa-text mt="none" mb="s">Start</goa-text>
 <goa-button-group alignment="start">
-  <goa-button version="2" type="primary">Submit</goa-button>
-  <goa-button version="2" type="secondary">Save draft</goa-button>
-  <goa-button version="2" type="tertiary">Cancel</goa-button>
+  <goa-button type="primary">Submit</goa-button>
+  <goa-button type="secondary">Save draft</goa-button>
+  <goa-button type="tertiary">Cancel</goa-button>
 </goa-button-group>
 <goa-divider mt="l" mb="l"></goa-divider>
 <goa-text mt="none" mb="s">Center</goa-text>
 <goa-button-group alignment="center">
-  <goa-button version="2" type="primary">Submit</goa-button>
-  <goa-button version="2" type="secondary">Save draft</goa-button>
-  <goa-button version="2" type="tertiary">Cancel</goa-button>
+  <goa-button type="primary">Submit</goa-button>
+  <goa-button type="secondary">Save draft</goa-button>
+  <goa-button type="tertiary">Cancel</goa-button>
 </goa-button-group>
 <goa-divider mt="l" mb="l"></goa-divider>
 <goa-text mt="none" mb="s">End</goa-text>
 <goa-button-group alignment="end">
-  <goa-button version="2" type="tertiary">Cancel</goa-button>
-  <goa-button version="2" type="secondary">Save draft</goa-button>
-  <goa-button version="2" type="primary">Submit</goa-button>
+  <goa-button type="tertiary">Cancel</goa-button>
+  <goa-button type="secondary">Save draft</goa-button>
+  <goa-button type="primary">Submit</goa-button>
 </goa-button-group>`,
       },
     },
@@ -112,8 +112,8 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <goab-button type="secondary" size="compact">Back</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start" gap="compact">
-  <goa-button version="2" size="compact">Continue</goa-button>
-  <goa-button version="2" type="secondary" size="compact">Back</goa-button>
+  <goa-button size="compact">Continue</goa-button>
+  <goa-button type="secondary" size="compact">Back</goa-button>
 </goa-button-group>`,
       },
     },
@@ -152,8 +152,8 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
   </goab-menu-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
-  <goa-button version="2">Submit</goa-button>
-  <goa-button version="2" type="secondary">Save draft</goa-button>
+  <goa-button>Submit</goa-button>
+  <goa-button type="secondary">Save draft</goa-button>
   <goa-menu-button text="More" type="tertiary">
     <goa-menu-action text="Preview" action="preview"></goa-menu-action>
     <goa-menu-action text="Duplicate" action="duplicate"></goa-menu-action>

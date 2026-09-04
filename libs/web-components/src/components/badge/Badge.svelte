@@ -63,11 +63,6 @@
     "large",
   ]);
 
-  const [versions, validateVersion] = typeValidator("Badge version", [
-    "1",
-    "2",
-  ]);
-
   const [emphasisLevels, validateEmphasisLevel] = typeValidator(
     "Badge emphasis level",
     ["subtle", "strong"],
@@ -76,7 +71,6 @@
   //Type
   type BadgeType = (typeof Types)[number];
   type BadgeSize = (typeof badgeSizes)[number];
-  type BadgeVersion = (typeof versions)[number];
   type BadgeJustifyContent =
     | "center"
     | "flex-start"
@@ -89,7 +83,7 @@
   // Optional
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Content displayed in the badge. Use the content slot for custom HTML in version 2. */
+  /** Content displayed in the badge. Use the content slot for custom HTML. */
   export let content: string = "";
   /** @deprecated Use icontype instead. Includes an icon in the badge. */
   export let icon: string = "";
@@ -101,9 +95,6 @@
   export let size: BadgeSize = "medium";
   /** Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. */
   export let emphasis: (typeof emphasisLevels)[number] = "strong";
-  /** @internal Design system version for styling. */
-  export let version: BadgeVersion = "1";
-
   /** Top margin. */
   export let mt: Spacing = null;
   /** Right margin. */
@@ -121,7 +112,7 @@
   // private
   // Show icon unless explicitly disabled, when either icon=true or icontype is provided
   $: showIcon = icon !== "false" && (toBoolean(icon) || !!icontype);
-  $: _hasSlottedContent = version === "2" && !!$$slots.content;
+  $: _hasSlottedContent = !!$$slots.content;
   $: _hasContent = !!content || _hasSlottedContent;
   $: showIconOnly = showIcon && !_hasContent;
 
@@ -166,7 +157,6 @@
     validateType(type);
     validateBadgeSize(size);
     validateEmphasisLevel(emphasis);
-    validateVersion(version);
 
     if (!showIcon && !_hasContent) {
       console.warn(
@@ -190,7 +180,6 @@
   data-type="goa-badge"
   class="goa-badge badge-{type} badge-{size} badge-{emphasis}"
   class:icon-only={showIconOnly}
-  class:v2={version === "2"}
 >
   {#if showIcon}
     <goa-icon
@@ -390,35 +379,35 @@
     color: var(--goa-badge-light-color-content);
   }
 
-  .v2 .goa-badge-content {
+  .goa-badge-content {
     padding-bottom: 0;
   }
 
-  .v2.badge-strong {
+  .badge-strong {
     box-shadow: none;
   }
 
-  /* Version 2: Default Colours */
-  .v2.badge-default {
+  /* Default colours */
+  .badge-default {
     background-color: var(--goa-badge-default-color-bg);
     color: var(--goa-badge-default-color-content);
   }
 
-  .v2.badge-default.badge-subtle {
+  .badge-default.badge-subtle {
     background-color: var(--goa-badge-default-subtle-color-bg);
     box-shadow: var(--goa-badge-default-subtle-border);
     color: var(--goa-badge-default-subtle-color-content);
   }
 
-  .v2.goa-badge.badge-archived.badge-subtle {
+  .goa-badge.badge-archived.badge-subtle {
     background-color: var(--goa-badge-archived-subtle-color-bg);
     box-shadow: var(--goa-badge-archived-subtle-border);
     color: var(--goa-badge-archived-subtle-color-content);
   }
 
-  /* Version 2: Extended Colours */
+  /* Extended colours */
 
-  .v2.badge-sky {
+  .badge-sky {
     background-color: var(--goa-color-extended-sky-default);
     color: var(
       --goa-color-extended-sky-text-dark,
@@ -426,7 +415,7 @@
     );
   }
 
-  .v2.badge-prairie {
+  .badge-prairie {
     background-color: var(--goa-color-extended-prairie-default);
     color: var(
       --goa-color-extended-prairie-text-dark,
@@ -434,7 +423,7 @@
     );
   }
 
-  .v2.badge-lilac {
+  .badge-lilac {
     background-color: var(--goa-color-extended-lilac-default);
     color: var(
       --goa-color-extended-lilac-text-dark,
@@ -442,7 +431,7 @@
     );
   }
 
-  .v2.badge-pasture {
+  .badge-pasture {
     background-color: var(--goa-color-extended-pasture-default);
     color: var(
       --goa-color-extended-pasture-text-dark,
@@ -450,7 +439,7 @@
     );
   }
 
-  .v2.badge-sunset {
+  .badge-sunset {
     background-color: var(--goa-color-extended-sunset-default);
     color: var(
       --goa-color-extended-sunset-text-dark,
@@ -458,7 +447,7 @@
     );
   }
 
-  .v2.badge-dawn {
+  .badge-dawn {
     background-color: var(--goa-color-extended-dawn-default);
     color: var(
       --goa-color-extended-dawn-text-dark,
@@ -466,77 +455,77 @@
     );
   }
 
-  .v2.badge-subtle.badge-sky {
+  .badge-subtle.badge-sky {
     background-color: var(--goa-color-extended-sky-light);
     box-shadow: var(--goa-badge-sky-subtle-border);
     color: var(--goa-color-extended-sky-text);
   }
 
-  .v2.badge-subtle.badge-prairie {
+  .badge-subtle.badge-prairie {
     background-color: var(--goa-color-extended-prairie-light);
     box-shadow: var(--goa-badge-prairie-subtle-border);
     color: var(--goa-color-extended-prairie-text);
   }
 
-  .v2.badge-subtle.badge-lilac {
+  .badge-subtle.badge-lilac {
     background-color: var(--goa-color-extended-lilac-light);
     box-shadow: var(--goa-badge-lilac-subtle-border);
     color: var(--goa-color-extended-lilac-text);
   }
 
-  .v2.badge-subtle.badge-pasture {
+  .badge-subtle.badge-pasture {
     background-color: var(--goa-color-extended-pasture-light);
     box-shadow: var(--goa-badge-pasture-subtle-border);
     color: var(--goa-color-extended-pasture-text);
   }
 
-  .v2.badge-subtle.badge-sunset {
+  .badge-subtle.badge-sunset {
     background-color: var(--goa-color-extended-sunset-light);
     box-shadow: var(--goa-badge-sunset-subtle-border);
     color: var(--goa-color-extended-sunset-text);
   }
 
-  .v2.badge-subtle.badge-dawn {
+  .badge-subtle.badge-dawn {
     background-color: var(--goa-color-extended-dawn-light);
     box-shadow: var(--goa-badge-dawn-subtle-border);
     color: var(--goa-color-extended-dawn-text);
   }
 
-  /* Version 2: Subtle emphasis for standard colours */
+  /* Subtle emphasis for standard colours */
 
-  .v2.goa-badge.badge-subtle.badge-information {
+  .goa-badge.badge-subtle.badge-information {
     background-color: var(--goa-badge-info-subtle-color-bg);
     color: var(--goa-badge-info-subtle-color-content);
     box-shadow: var(--goa-badge-info-subtle-border);
   }
 
-  .v2.goa-badge.badge-subtle.badge-success {
+  .goa-badge.badge-subtle.badge-success {
     background-color: var(--goa-badge-success-subtle-color-bg);
     color: var(--goa-badge-success-subtle-color-content);
     box-shadow: var(--goa-badge-success-subtle-border);
   }
 
-  .v2.goa-badge.badge-subtle.badge-important {
+  .goa-badge.badge-subtle.badge-important {
     background-color: var(--goa-badge-important-subtle-color-bg);
     color: var(--goa-badge-important-subtle-color-content);
     box-shadow: var(--goa-badge-important-subtle-border);
   }
 
-  .v2.goa-badge.badge-subtle.badge-emergency {
+  .goa-badge.badge-subtle.badge-emergency {
     background-color: var(--goa-badge-emergency-subtle-color-bg);
     color: var(--goa-badge-emergency-subtle-color-content);
     box-shadow: var(--goa-badge-emergency-subtle-border);
   }
 
-  /* Version 2: Large size */
+  /* Large size */
 
-  .v2.goa-badge.badge-large {
+  .goa-badge.badge-large {
     height: var(--goa-badge-height-large);
     padding: var(--goa-badge-padding-large);
     --goa-icon-size: var(--goa-badge-icon-size-large);
   }
 
-  .v2.goa-badge.badge-large .goa-badge-content {
+  .goa-badge.badge-large .goa-badge-content {
     font-size: var(--goa-badge-font-size-large);
     line-height: var(--goa-badge-line-height-large);
   }

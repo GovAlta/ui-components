@@ -94,7 +94,7 @@ describe("GoABBadge", () => {
     expect(badgeElement.getAttribute("mr")).toBe(component.mr);
   }));
 
-  it("should render template content in the content slot for version 2", fakeAsync(() => {
+  it("should render template content in the content slot", fakeAsync(() => {
     fixture = TestBed.createComponent(TestBadgeComponent);
     component = fixture.componentInstance;
     component.type = "information";

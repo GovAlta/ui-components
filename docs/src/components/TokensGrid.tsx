@@ -757,7 +757,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               />
             </div>
             <goa-badge
-              version="2"
               type={getCategoryBadgeType(token.category)}
               content={formatCategory(token.category)}
               emphasis="subtle"
@@ -783,7 +782,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getCategoryBadgeType(token.category)}
             content={formatCategory(token.category)}
             emphasis="subtle"
@@ -839,7 +837,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           <div className="syntax-toggle-wrapper">
             <goa-tabs
               ref={tabsRef}
-              version="2"
               variant="segmented"
               initialTab={tokenSyntax === "css" ? 1 : 2}
               orientation="horizontal"
@@ -983,10 +980,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           }}
         >
           <div className="tokens-table-scroll-shadow-left" aria-hidden="true" />
-          {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
           <goa-table
             ref={tableRef}
-            version="2"
             width="100%"
             variant="normal"
             sort-mode="multi"
@@ -997,7 +992,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                   <th style={{ width: 60 }}>Preview</th>
                   <th style={{ minWidth: 320 }}>
                     <goa-table-sort-header
-                      version="2"
                       name="name"
                       direction={getColumnSortDirection("name")}
                       sort-order={getColumnSortOrder("name")}
@@ -1008,7 +1002,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                   <th style={{ width: "320px" }}>Value</th>
                   <th>
                     <goa-table-sort-header
-                      version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
                       sort-order={getColumnSortOrder("category")}

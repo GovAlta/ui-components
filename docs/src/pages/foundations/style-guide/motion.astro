@@ -300,7 +300,7 @@ const motionDurations = [
 
   <h3 id="duration-lengths">Duration lengths</h3>
   <DesktopOnly client:only="react">
-    <goa-table version="2" width="100%">
+    <goa-table width="100%">
       <table width="100%">
         <thead>
           <tr>
@@ -321,7 +321,6 @@ const motionDurations = [
                 <td>{duration.value}</td>
                 <td>
                   <goa-badge
-                    version="2"
                     type={duration.badgeType}
                     content={duration.badgeContent}
                     emphasis="subtle"
@@ -346,7 +345,7 @@ const motionDurations = [
           <goa-block width="100%">
             <dl>
               <dd class="dd-style item-name"><code>{duration.id}</code></dd>
-              <dt>Service type</dt><dd class="dd-style badge-type"><goa-badge version="2" type={duration.badgeType} content={duration.badgeContent} emphasis="subtle" icon={false} /></dd>
+              <dt>Service type</dt><dd class="dd-style badge-type"><goa-badge type={duration.badgeType} content={duration.badgeContent} emphasis="subtle" icon={false} /></dd>
               <dt>Value</dt> <dd class="dd-style">{duration.value}</dd>
               <dt>Usage examples</dt> <dd class="dd-style">{duration.usage}</dd>
             </dl>
@@ -361,7 +360,7 @@ const motionDurations = [
 
   <h3 id="page-transitions">Page transitions</h3>
   <DesktopOnly client:only="react">
-    <goa-table version="2" width="100%">
+    <goa-table width="100%">
       <table width="100%">
         <thead>
           <tr>

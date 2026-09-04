@@ -12,12 +12,9 @@
     "links-only",
   ]);
   type Variant = (typeof Variants)[number];
-  type Version = "1" | "2";
 
   // public
 
-  /** @internal Design system version for styling. */
-  export let version: Version = "1";
   /** @required The current page being viewed (non-zero based). */
   export let pagenumber: number;
   /** @required Total number of data items within all pages. */
@@ -111,8 +108,7 @@
         <input bind:this={hiddenEl} type="hidden" />
         {#if itemcount <= 0}
           <goa-dropdown
-            {version}
-            size={version === "2" ? "compact" : "default"}
+            size="compact"
             bind:this={pageDropdownEl}
             value="1"
             on:_change={handlePageChange}
@@ -122,8 +118,7 @@
         {:else}
           {#key _pageCount}
             <goa-dropdown
-              {version}
-              size={version === "2" ? "compact" : "default"}
+              size="compact"
               bind:this={pageDropdownEl}
               value={pagenumber}
               on:_change={handlePageChange}
@@ -141,10 +136,9 @@
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
-        {version}
         on:click={(e) => goto(e, -1)}
         type="tertiary"
-        size={version === "2" ? "compact" : "normal"}
+        size="compact"
         leadingicon="arrow-back"
         disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}
         >Previous</goa-button
@@ -152,10 +146,9 @@
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
-        {version}
         on:click={(e) => goto(e, 1)}
         type="tertiary"
-        size={version === "2" ? "compact" : "normal"}
+        size="compact"
         trailingicon="arrow-forward"
         disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}
         >Next</goa-button

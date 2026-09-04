@@ -5,7 +5,6 @@ interface WCProps {
   heading?: string;
   width?: string;
   testid?: string;
-  version?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 
@@ -71,7 +70,6 @@ export function GoabPushDrawer({
       heading={typeof heading === "string" ? heading : undefined}
       width={width}
       testid={testId}
-      version="2"
     >
       {heading && typeof heading !== "string" && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

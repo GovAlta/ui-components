@@ -5,7 +5,6 @@
   export let open: boolean = false;
   export let heading: string = "Test Heading";
   export let width: string = "999px";
-  export let version: string = "1";
   export let showActions: boolean = true;
 
   function closeDrawer() {
@@ -21,7 +20,7 @@
 <button on:click={closeDrawer} data-testid="closeButton">Close</button>
 
 {#if showActions}
-  <PushDrawerInternal testid={testId} {open} {width} {heading} {version}>
+  <PushDrawerInternal testid={testId} {open} {width} {heading}>
     <div slot="actions">
       <p>Action 1</p>
       <p>Action 2</p>
@@ -29,7 +28,7 @@
     <slot />
   </PushDrawerInternal>
 {:else}
-  <PushDrawerInternal testid={testId} {open} {width} {heading} {version}>
+  <PushDrawerInternal testid={testId} {open} {width} {heading}>
     <slot />
   </PushDrawerInternal>
 {/if}

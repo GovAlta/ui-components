@@ -126,7 +126,7 @@ export const containerConfigurations: ComponentConfigurations = {
         webComponents: `<goa-container type="non-interactive" accent="thick">
   <div slot="title">Heading</div>
   <div slot="actions">
-    <goa-badge version="2" type="important" content="Priority"></goa-badge>
+    <goa-badge type="important" content="Priority"></goa-badge>
   </div>
   Content
 </goa-container>`,

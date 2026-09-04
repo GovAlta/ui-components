@@ -85,7 +85,7 @@ describe("GoabFilterChip", () => {
     expect(chipElement.getAttribute("ml")).toBe(component.ml);
   });
 
-  it("should render template content in the content slot for version 2", () => {
+  it("should render template content in the content slot", () => {
     component.contentSlot = true;
     fixture.detectChanges();
 

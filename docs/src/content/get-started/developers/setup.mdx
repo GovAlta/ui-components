@@ -13,7 +13,7 @@ import DropInCallout from "../../../components/DropInCallout.astro";
 <goa-text size="body-l" mt="none" mb="2xl">Set up the Government of Alberta Design System in Angular, React, or directly with Web Components.</goa-text>
 
 <h2 id="angular">Angular UI components</h2>
-<goa-callout version="2" type="information" emphasis="low" mb="m">
+<goa-callout type="information" emphasis="low" mb="m">
   <goa-text size="body-m" mt="2xs" mb="none">Supported versions: 18, 19, 20, 21</goa-text>
 </goa-callout>
 <goa-text size="body-m" mt="none" mb="m">
@@ -24,8 +24,7 @@ import DropInCallout from "../../../components/DropInCallout.astro";
 <h3 id="angular-step-1">1. Add dependencies</h3>
 <pre><code>{`npm i @abgov/web-components
 npm i @abgov/angular-components
-npm i @abgov/ui-components-common
-npm i @abgov/design-tokens`}</code></pre>
+npm i @abgov/ui-components-common`}</code></pre>
 
 <h3 id="angular-step-2">2. Register the web components</h3>
 <goa-text size="body-m" mt="none" mb="m">
@@ -65,10 +64,10 @@ export class App {}`}</code></pre>
 
 <h3 id="angular-step-4">4. Add styles</h3>
 <goa-text size="body-m" mt="none" mb="m">
-  Import the component styles and design tokens in <code>src/styles.css</code>:
+  Import the component styles in <code>src/styles.css</code>. This stylesheet includes the
+  design tokens and dark theme overrides:
 </goa-text>
-<pre><code>{`@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";`}</code></pre>
+<pre><code>@import "@abgov/web-components/index.css";</code></pre>
 
 <h3 id="angular-step-5">5. Add icons</h3>
 <goa-text size="body-m" mt="none" mb="m">
@@ -80,7 +79,7 @@ export class App {}`}</code></pre>
 <goa-divider mt="xl" mb="xl"></goa-divider>
 
 <h2 id="react">React UI components</h2>
-<goa-callout version="2" type="information" emphasis="low" mb="m">
+<goa-callout type="information" emphasis="low" mb="m">
   <goa-text size="body-m" mt="2xs" mb="none">Supported versions: 17, 18, 19</goa-text>
 </goa-callout>
 <goa-text size="body-m" mt="none" mb="m">
@@ -91,8 +90,7 @@ export class App {}`}</code></pre>
 <h3 id="react-step-1">1. Add dependencies</h3>
 <pre><code>npm i @abgov/react-components
 npm i @abgov/web-components
-npm i @abgov/ui-components-common
-npm i @abgov/design-tokens</code></pre>
+npm i @abgov/ui-components-common</code></pre>
 
 <h3 id="react-step-2">2. Link ionicons in app/index.html</h3>
 <goa-text size="body-m" mt="none" mb="m">
@@ -105,8 +103,10 @@ npm i @abgov/design-tokens</code></pre>
 <pre><code>import "@abgov/web-components";</code></pre>
 
 <h3 id="react-step-4">4. Import the styles in src/index.css</h3>
-<pre><code>@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+<goa-text size="body-m" mt="none" mb="m">
+  This stylesheet includes the design tokens and dark theme overrides:
+</goa-text>
+<pre><code>@import "@abgov/web-components/index.css";</code></pre>
 
 <goa-divider mt="xl" mb="xl"></goa-divider>
 
@@ -116,8 +116,7 @@ npm i @abgov/design-tokens</code></pre>
 </goa-text>
 
 <h3 id="web-step-1">1. Add dependencies</h3>
-<pre><code>npm i @abgov/web-components
-npm i @abgov/design-tokens</code></pre>
+<pre><code>npm i @abgov/web-components</code></pre>
 
 <h3 id="web-step-2">2. Link ionicons in index.html</h3>
 <goa-text size="body-m" mt="none" mb="m">
@@ -132,11 +131,38 @@ npm i @abgov/design-tokens</code></pre>
 <h3 id="web-step-4">4. Add the styles link in your main CSS file</h3>
 <goa-text size="body-m" mt="none" mb="m">
   Add the following in <code>src/assets/main.css</code> or wherever your main CSS file is
-  located:
+  located. This stylesheet includes the design tokens and dark theme overrides:
 </goa-text>
-<pre><code>@import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+<pre><code>@import "@abgov/web-components/index.css";</code></pre>
 
 <goa-divider mt="xl" mb="xl"></goa-divider>
+
+<h2 id="sass-variables">Use Sass variables</h2>
+<goa-text size="body-m" mt="none" mb="m">
+  The Web Components stylesheet includes the design tokens and dark theme overrides. You
+  only need to install the design tokens package if you want to use its Sass variables
+  directly in your own styles.
+</goa-text>
+
+<h3 id="sass-step-1">1. Add the design tokens package</h3>
+<pre><code>npm i @abgov/design-tokens</code></pre>
+
+<h3 id="sass-step-2">2. Import the Sass variables</h3>
+<goa-text size="body-m" mt="none" mb="m">
+  Import the variables into the Sass file where you need them:
+</goa-text>
+<pre><code>@use "@abgov/design-tokens/dist/tokens" as *;</code></pre>
+<pre><code>{`.my-card {
+  padding: $goa-space-m * 2;
+  border-radius: $goa-border-radius-m;
+}`}</code></pre>
+
+<goa-callout type="important" emphasis="low" mb="xl">
+  <span style="color: var(--goa-color-text-default)">
+    Sass variables are set when your styles compile and cannot change with the active
+    theme. Use CSS custom properties such as <code>{`var(--goa-*)`}</code> for colours,
+    surfaces, and other values that need to switch between light and dark themes.
+  </span>
+</goa-callout>
 
 <DropInCallout />

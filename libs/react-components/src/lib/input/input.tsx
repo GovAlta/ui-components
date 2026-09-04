@@ -47,7 +47,6 @@ interface WCProps extends Margins {
   step?: number;
   maxlength?: number;
 
-  version?: string;
   trailingiconarialabel?: string;
 }
 
@@ -245,7 +244,6 @@ export function GoabInput({
       readonly={readonly ? "true" : undefined}
       error={error ? "true" : undefined}
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
-      version="2"
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

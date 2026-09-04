@@ -21,7 +21,6 @@ interface WCProps extends Margins {
   id?: string;
   testid?: string;
   type?: GoabFormItemType;
-  version?: string;
 }
 
 declare module "react" {
@@ -77,7 +76,6 @@ export function GoabFormItem({
       helptext={typeof helpText === "string" ? helpText : undefined}
       public-form-summary-order={publicFormSummaryOrder}
       {..._props}
-      version="2"
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}

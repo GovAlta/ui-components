@@ -94,7 +94,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
   </goab-table>
 </goab-data-grid>`,
         webComponents: `<goa-data-grid keyboard-nav="table" keyboard-icon-position="right">
-  <goa-table version="2" width="100%">
+  <goa-table width="100%">
     <table width="100%">
       <thead>
         <tr data-grid="row">
@@ -108,26 +108,26 @@ export const dataGridConfigurations: ComponentConfigurations = {
         <tr data-grid="row">
           <td data-grid="cell">Alice Johnson</td>
           <td data-grid="cell">Developer</td>
-          <td data-grid="cell"><goa-badge version="2" type="success" content="Active"></goa-badge></td>
-          <td data-grid="cell"><goa-button version="2" type="tertiary" size="compact">View</goa-button></td>
+          <td data-grid="cell"><goa-badge type="success" content="Active"></goa-badge></td>
+          <td data-grid="cell"><goa-button type="tertiary" size="compact">View</goa-button></td>
         </tr>
         <tr data-grid="row">
           <td data-grid="cell">Bob Smith</td>
           <td data-grid="cell">Designer</td>
-          <td data-grid="cell"><goa-badge version="2" type="success" content="Active"></goa-badge></td>
-          <td data-grid="cell"><goa-button version="2" type="tertiary" size="compact">View</goa-button></td>
+          <td data-grid="cell"><goa-badge type="success" content="Active"></goa-badge></td>
+          <td data-grid="cell"><goa-button type="tertiary" size="compact">View</goa-button></td>
         </tr>
         <tr data-grid="row">
           <td data-grid="cell">Carol White</td>
           <td data-grid="cell">Manager</td>
-          <td data-grid="cell"><goa-badge version="2" type="information" content="Away"></goa-badge></td>
-          <td data-grid="cell"><goa-button version="2" type="tertiary" size="compact">View</goa-button></td>
+          <td data-grid="cell"><goa-badge type="information" content="Away"></goa-badge></td>
+          <td data-grid="cell"><goa-button type="tertiary" size="compact">View</goa-button></td>
         </tr>
         <tr data-grid="row">
           <td data-grid="cell">David Brown</td>
           <td data-grid="cell">Analyst</td>
-          <td data-grid="cell"><goa-badge version="2" type="success" content="Active"></goa-badge></td>
-          <td data-grid="cell"><goa-button version="2" type="tertiary" size="compact">View</goa-button></td>
+          <td data-grid="cell"><goa-badge type="success" content="Active"></goa-badge></td>
+          <td data-grid="cell"><goa-button type="tertiary" size="compact">View</goa-button></td>
         </tr>
       </tbody>
     </table>
@@ -307,11 +307,11 @@ export const dataGridConfigurations: ComponentConfigurations = {
         webComponents: `<goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
   <goa-container version="2" mt="m" data-grid="row" maxwidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
-      <goa-checkbox version="2" data-grid="cell-0" name="user-1"></goa-checkbox>
+      <goa-checkbox data-grid="cell-0" name="user-1"></goa-checkbox>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">
         <goa-block direction="row" gap="s" alignment="center">
           <strong data-grid="cell-1">Mike Zwei</strong>
-          <goa-badge version="2" data-grid="cell-2" type="success" content="Removed"></goa-badge>
+          <goa-badge data-grid="cell-2" type="success" content="Removed"></goa-badge>
         </goa-block>
         <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl)">
           <goa-block direction="column" gap="xs" data-grid="cell-4">
@@ -338,7 +338,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
           </goa-block>
         </div>
       </div>
-      <goa-menu-button version="2" data-grid="cell-3" text="Actions" type="tertiary" size="compact">
+      <goa-menu-button data-grid="cell-3" text="Actions" type="tertiary" size="compact">
         <goa-menu-action action="open" text="Open"></goa-menu-action>
         <goa-menu-action action="delete" text="Delete"></goa-menu-action>
       </goa-menu-button>
@@ -346,11 +346,11 @@ export const dataGridConfigurations: ComponentConfigurations = {
   </goa-container>
   <goa-container version="2" mt="m" data-grid="row" maxwidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
-      <goa-checkbox version="2" data-grid="cell-0" name="user-2"></goa-checkbox>
+      <goa-checkbox data-grid="cell-0" name="user-2"></goa-checkbox>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">
         <goa-block direction="row" gap="s" alignment="center">
           <strong data-grid="cell-1">Emma Stroman</strong>
-          <goa-badge version="2" data-grid="cell-2" type="emergency" content="To be removed"></goa-badge>
+          <goa-badge data-grid="cell-2" type="emergency" content="To be removed"></goa-badge>
         </goa-block>
         <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl)">
           <goa-block direction="column" gap="xs" data-grid="cell-4">
@@ -377,7 +377,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
           </goa-block>
         </div>
       </div>
-      <goa-menu-button version="2" data-grid="cell-3" text="Actions" type="tertiary" size="compact">
+      <goa-menu-button data-grid="cell-3" text="Actions" type="tertiary" size="compact">
         <goa-menu-action action="open" text="Open"></goa-menu-action>
         <goa-menu-action action="delete" text="Delete"></goa-menu-action>
       </goa-menu-button>

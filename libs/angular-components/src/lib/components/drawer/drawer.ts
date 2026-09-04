@@ -24,7 +24,6 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
       [attr.heading]="getHeadingAsString()"
       [attr.maxsize]="maxSize"
       [attr.testid]="testId"
-      [attr.version]="version"
       (_close)="_onClose($event)"
     >
       <ng-content></ng-content>
@@ -41,8 +40,6 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 /** A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view. */
 export class GoabDrawer implements OnInit {
   private cdr = inject(ChangeDetectorRef);
-
-  version = "2";
 
   /** @required Whether the drawer is open. */
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;

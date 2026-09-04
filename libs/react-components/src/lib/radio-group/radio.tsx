@@ -15,7 +15,6 @@ interface WCProps extends Margins {
   error?: string;
   arialabel?: string;
   compact?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -93,7 +92,6 @@ export function GoabRadioItem({
       mr={mr}
       mb={mb}
       ml={ml}
-      version="2"
     >
       {description && typeof description !== "string" && (
         <div slot="description">{description}</div>

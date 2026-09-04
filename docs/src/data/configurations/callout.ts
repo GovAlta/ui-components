@@ -23,7 +23,7 @@ export const calloutConfigurations: ComponentConfigurations = {
         angular: `<goab-callout type="information" emphasis="low" maxWidth="480px">
   This is important information for the user.
 </goab-callout>`,
-        webComponents: `<goa-callout version="2" type="information" emphasis="low" maxwidth="480px">
+        webComponents: `<goa-callout type="information" emphasis="low" maxwidth="480px">
   This is important information for the user.
 </goa-callout>`,
       },
@@ -57,16 +57,16 @@ export const calloutConfigurations: ComponentConfigurations = {
 <goab-callout type="success" heading="Success">
   Confirmation that an action was successful.
 </goab-callout>`,
-        webComponents: `<goa-callout version="2" type="information" heading="Information">
+        webComponents: `<goa-callout type="information" heading="Information">
   General information for the user.
 </goa-callout>
-<goa-callout version="2" type="important" heading="Important">
+<goa-callout type="important" heading="Important">
   Something the user should pay attention to.
 </goa-callout>
-<goa-callout version="2" type="emergency" heading="Emergency">
+<goa-callout type="emergency" heading="Emergency">
   Critical information requiring immediate attention.
 </goa-callout>
-<goa-callout version="2" type="success" heading="Success">
+<goa-callout type="success" heading="Success">
   Confirmation that an action was successful.
 </goa-callout>`,
       },
@@ -88,10 +88,10 @@ export const calloutConfigurations: ComponentConfigurations = {
 <goab-callout type="important" emphasis="low">
   Your application must be submitted by December 31, 2024.
 </goab-callout>`,
-        webComponents: `<goa-callout version="2" type="important" emphasis="low" heading="Application deadline">
+        webComponents: `<goa-callout type="important" emphasis="low" heading="Application deadline">
   Your application must be submitted by December 31, 2024.
 </goa-callout>
-<goa-callout version="2" type="important" emphasis="low">
+<goa-callout type="important" emphasis="low">
   Your application must be submitted by December 31, 2024.
 </goa-callout>`,
       },
@@ -119,13 +119,13 @@ export const calloutConfigurations: ComponentConfigurations = {
 <goab-callout type="important" emphasis="low" heading="Low emphasis">
   Minimal styling for less prominent messaging.
 </goab-callout>`,
-        webComponents: `<goa-callout version="2" type="important" emphasis="high" heading="High emphasis">
+        webComponents: `<goa-callout type="important" emphasis="high" heading="High emphasis">
   Full background color for maximum visibility.
 </goa-callout>
-<goa-callout version="2" type="important" emphasis="medium" heading="Medium emphasis">
+<goa-callout type="important" emphasis="medium" heading="Medium emphasis">
   Subtle background for balanced visibility.
 </goa-callout>
-<goa-callout version="2" type="important" emphasis="low" heading="Low emphasis">
+<goa-callout type="important" emphasis="low" heading="Low emphasis">
   Minimal styling for less prominent messaging.
 </goa-callout>`,
       },

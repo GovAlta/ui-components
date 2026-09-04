@@ -18,7 +18,6 @@ interface WCProps extends Margins {
   icontheme?: GoabCalloutIconTheme;
   emphasis?: GoabCalloutEmphasis;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -66,11 +65,7 @@ export const GoabCallout = ({
     lowercase,
   );
 
-  return (
-    <goa-callout {..._props} version="2">
-      {children}
-    </goa-callout>
-  );
+  return <goa-callout {..._props}>{children}</goa-callout>;
 };
 
 export default GoabCallout;
