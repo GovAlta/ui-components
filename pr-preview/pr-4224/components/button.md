@@ -15,6 +15,7 @@ Carry out an important action or navigate to another page.
 | `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
 | `actionArg` | string | (none) | No | Single argument value passed with the action in click events. |
 | `actionArgs` | Record<string, unknown> | (none) | No | Multiple argument values passed with the action in click events. |
+| `ariaLabel` | string | (none) | No | Sets the accessible name. Include the visible button text in the value. |
 | `disabled` | boolean | (none) | No | When true, prevents user interaction and applies disabled styling. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the button text. |
 | `mb` | Spacing | (none) | No | (none) |
@@ -45,6 +46,7 @@ Carry out an important action or navigate to another page.
 | `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
 | `actionArg` | string | (none) | No | Single argument value passed with the action in click events. |
 | `actionArgs` | Record<string, unknown> | (none) | No | Multiple argument values passed with the action in click events. |
+| `ariaLabel` | string | (none) | No | Sets the accessible name. Include the visible button text in the value. |
 | `disabled` | boolean | (none) | No | Sets the disabled state. When true, prevents user interaction and applies disabled styling. |
 | `leadingIcon` | GoabIconType | (none) | No | Sets the icon displayed before the button text. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
@@ -77,6 +79,7 @@ Tag: `goa-button`
 | `action` | string | (none) | No | Action identifier passed in click events for event delegation patterns. |
 | `action-arg` | string | (none) | No | Single argument value passed with the action in click events. |
 | `action-args` | Record<string, unknown> | `{}` | No | Multiple argument values passed with the action in click events. |
+| `arialabel` | string | (none) | No | Sets the accessible name. Include the visible button text in the value. |
 | `disabled` | boolean | `false` | No | When true, prevents user interaction and applies disabled styling. |
 | `leadingicon` | GoabIconType | (none) | No | Icon displayed before the button text. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin using design system spacing tokens. |
