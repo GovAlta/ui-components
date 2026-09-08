@@ -1,16 +1,14 @@
 /**
  * SiteNav.tsx
  *
- * Unified site navigation with parent/sub-menu state switching.
+ * Unified site navigation. Every top-level section links directly to its index
+ * page; which menu renders (parent vs. a submenu) is derived from the current
+ * URL, not from in-menu click state.
  *
- * Navigation behavior:
- * - Components, Get started, Foundations: has submenu (many pages)
- * - Tokens: Direct link, stays on parent menu, highlights "Tokens"
- * - Examples: Direct link, stays on parent menu, highlights "Examples"
- *
- * Menu level is managed via React state:
- * - Parent view: Shows all sections
- * - Sub-menu view: Shows section-specific navigation (components, get-started, foundations)
+ * - Components, Get started, Foundations: land on their index page, which shows
+ *   the matching submenu.
+ * - Tokens, Examples: single pages, stay on the parent menu and highlight.
+ * - A submenu's "All" item navigates home and opens global search.
  */
 
 import { useState, useEffect, useCallback } from "react";
@@ -176,25 +174,6 @@ export function SiteNav({
     });
   }, [menuLevel]);
 
-  const handleSelectSection = useCallback(
-    (section: MenuSection) => {
-      // Submenu sections switch the menu into their dedicated view.
-      if (SUBMENU_SECTIONS.includes(section)) {
-        setMenuLevel(section);
-        // Auto-expand when entering submenu while collapsed (icons aren't descriptive enough)
-        if (!isOpen) {
-          setIsOpen(true);
-        }
-      }
-      // Other sections navigate directly via url prop, no state change needed
-    },
-    [isOpen],
-  );
-
-  const handleBack = useCallback(() => {
-    setMenuLevel("parent");
-  }, []);
-
   const handleExpandMenu = useCallback(() => {
     setIsOpen(true);
   }, []);
@@ -209,7 +188,6 @@ export function SiteNav({
         <ComponentsSubMenu
           isOpen={isOpen}
           onToggle={handleToggle}
-          onBack={handleBack}
           onExpandMenu={handleExpandMenu}
           currentSlug={currentSlug}
           categories={categories}
@@ -221,7 +199,6 @@ export function SiteNav({
         <GetStartedSubMenu
           isOpen={isOpen}
           onToggle={handleToggle}
-          onBack={handleBack}
           onExpandMenu={handleExpandMenu}
           currentUrl={currentUrl}
           items={getStartedNav}
@@ -233,7 +210,6 @@ export function SiteNav({
         <FoundationsSubMenu
           isOpen={isOpen}
           onToggle={handleToggle}
-          onBack={handleBack}
           onExpandMenu={handleExpandMenu}
           currentUrl={currentUrl}
         />
@@ -246,7 +222,6 @@ export function SiteNav({
         <ParentMenu
           isOpen={isOpen}
           onToggle={handleToggle}
-          onSelectSection={handleSelectSection}
           currentSection={currentSection}
         />
       );

@@ -5,13 +5,13 @@
  * Uses GoabWorkSideMenuGroup for expandable Style guide sections.
  */
 
-import { type MouseEvent } from "react";
 import {
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { AllHomeItem } from "./AllHomeItem";
 import { withBase } from "@/lib/base-url";
 
 // Top-level pages (not in a group)
@@ -77,7 +77,6 @@ const ALL_URLS = [
 interface FoundationsSubMenuProps {
   isOpen: boolean;
   onToggle: () => void;
-  onBack: () => void;
   onExpandMenu?: () => void;
   currentUrl?: string;
 }
@@ -85,22 +84,13 @@ interface FoundationsSubMenuProps {
 export function FoundationsSubMenu({
   isOpen,
   onToggle,
-  onBack,
   onExpandMenu,
   currentUrl,
 }: FoundationsSubMenuProps) {
-  const handleBackClick = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onBack();
-  };
-
   const primaryContent = (
     <>
-      {/* Back to parent menu */}
-      <div onClick={handleBackClick} style={{ cursor: "pointer" }}>
-        <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
-      </div>
+      {/* "All" navigates home and opens global search */}
+      <AllHomeItem />
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
