@@ -12504,7 +12504,7 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 /**
- * @remix-run/router v1.23.3
+ * @remix-run/router v1.23.4
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -13000,8 +13000,6 @@ function stripBasename(pathname, basename) {
   }
   return pathname.slice(startIndex) || "/";
 }
-const ABSOLUTE_URL_REGEX$1 = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
-const isAbsoluteUrl = (url) => ABSOLUTE_URL_REGEX$1.test(url);
 function resolvePath(to2, fromPathname) {
   if (fromPathname === void 0) {
     fromPathname = "/";
@@ -13013,19 +13011,11 @@ function resolvePath(to2, fromPathname) {
   } = typeof to2 === "string" ? parsePath(to2) : to2;
   let pathname;
   if (toPathname) {
-    if (isAbsoluteUrl(toPathname)) {
-      pathname = toPathname;
+    toPathname = removeDoubleSlashes(toPathname);
+    if (toPathname.startsWith("/")) {
+      pathname = resolvePathname(toPathname.substring(1), "/");
     } else {
-      if (toPathname.includes("//")) {
-        let oldPathname = toPathname;
-        toPathname = removeDoubleSlashes(toPathname);
-        warning(false, "Pathnames cannot have embedded double slashes - normalizing " + (oldPathname + " -> " + toPathname));
-      }
-      if (toPathname.startsWith("/")) {
-        pathname = resolvePathname(toPathname.substring(1), "/");
-      } else {
-        pathname = resolvePathname(toPathname, fromPathname);
-      }
+      pathname = resolvePathname(toPathname, fromPathname);
     }
   } else {
     pathname = fromPathname;
@@ -13112,7 +13102,7 @@ new Set(validMutationMethodsArr);
 const validRequestMethodsArr = ["get", ...validMutationMethodsArr];
 new Set(validRequestMethodsArr);
 /**
- * React Router v6.30.4
+ * React Router v6.30.6
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -13725,7 +13715,7 @@ function createRoutesFromChildren(children, parentPath) {
   return routes;
 }
 /**
- * React Router DOM v6.30.4
+ * React Router DOM v6.30.6
  *
  * Copyright (c) Remix Software Inc.
  *
