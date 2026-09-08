@@ -5,7 +5,6 @@
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
-  import { MOBILE_BP } from "../../common/breakpoints";
   import type { IconTheme } from "../icon/Icon.svelte";
 
   // Validators
@@ -15,10 +14,6 @@
     ["emergency", "important", "information", "event", "success"],
     true,
   );
-  const [CalloutSizes, validateCalloutSize] = typeValidator("Callout size", [
-    "medium",
-    "large",
-  ]);
   const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator(
     "Callout emphasis",
     ["high", "medium", "low"],
@@ -30,7 +25,6 @@
   ]);
   // Types
   type CalloutType = (typeof Types)[number];
-  type CalloutSize = (typeof CalloutSizes)[number];
   type CalloutEmphasisType = (typeof CalloutEmphasis)[number];
   type AriaLiveType = (typeof AriaLive)[number];
 
@@ -43,8 +37,6 @@
   /** Left margin. */
   export let ml: Spacing = null;
 
-  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. */
-  export let size: CalloutSize = "large";
   /** @required Define the context and colour of the callout. */
   export let type: CalloutType;
   /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. */
@@ -60,15 +52,7 @@
   /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. */
   export let icontheme: IconTheme = "outline";
 
-  // Private
-
-  let screenSize = 0;
-  let iconSize = "medium";
-
   // Reactive
-
-  $: isMediumCallout = screenSize < MOBILE_BP || size === "medium";
-
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -83,18 +67,15 @@
               : "";
 
   onMount(() => {
-    validateCalloutSize(size);
     validateCalloutEmphasis(emphasis);
     validateAriaLive(arialive);
     setTimeout(() => {
       validateType(type);
-      iconSize = isMediumCallout ? "small" : "medium";
     });
   });
 </script>
 
 <!-- HTML -->
-<svelte:window bind:innerWidth={screenSize} />
 <div
   role="region"
   style={`
@@ -102,14 +83,12 @@
     max-width: ${maxwidth};
   `}
   class="notification {type} emphasis-{emphasis}"
-  class:medium={isMediumCallout}
   data-testid={testid}
   aria-live={arialive}
 >
   <div class="heading">
     <goa-icon
       type={iconType}
-      size={iconSize}
       theme={emphasis === "high" ? "outline" : "filled"}
     />
     <h3 class="heading-label">{heading}</h3>

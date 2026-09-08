@@ -22,8 +22,6 @@
   export let maxfilesize: string = "5MB";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   // Private
 
@@ -255,7 +253,7 @@
 
 {#if variant === "button"}
   <div class="button" bind:this={_el}>
-    <goa-button on:click={openFilePicker} type="secondary" {version}>
+    <goa-button on:click={openFilePicker} type="secondary">
       Choose file
     </goa-button>
 
@@ -288,7 +286,6 @@
         size={issue.size}
         type={issue.filetype}
         error={issue.error}
-        {version}
       />
     {/each}
   </div>

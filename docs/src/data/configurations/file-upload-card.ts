@@ -39,7 +39,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   (onDelete)="handleDelete($event)">
 </goab-file-upload-card>`,
         },
-        webComponents: `<goa-file-upload-card version="2"
+        webComponents: `<goa-file-upload-card
   filename="document.pdf"
   size="1024000">
 </goa-file-upload-card>`,
@@ -68,9 +68,9 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
 <goab-file-upload-card filename="photo.jpg" type="image/jpeg" [size]="1024000" (onDelete)="handleDelete($event)"></goab-file-upload-card>
 <goab-file-upload-card filename="data.csv" type="text/csv" [size]="48000" (onDelete)="handleDelete($event)"></goab-file-upload-card>`,
         },
-        webComponents: `<goa-file-upload-card version="2" filename="report.pdf" type="application/pdf" size="256000"></goa-file-upload-card>
-<goa-file-upload-card version="2" filename="photo.jpg" type="image/jpeg" size="1024000"></goa-file-upload-card>
-<goa-file-upload-card version="2" filename="data.csv" type="text/csv" size="48000"></goa-file-upload-card>`,
+        webComponents: `<goa-file-upload-card filename="report.pdf" type="application/pdf" size="256000"></goa-file-upload-card>
+<goa-file-upload-card filename="photo.jpg" type="image/jpeg" size="1024000"></goa-file-upload-card>
+<goa-file-upload-card filename="data.csv" type="text/csv" size="48000"></goa-file-upload-card>`,
       },
     },
     {
@@ -88,7 +88,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   [size]="2048000"
   [progress]="65">
 </goab-file-upload-card>`,
-        webComponents: `<goa-file-upload-card version="2"
+        webComponents: `<goa-file-upload-card
   filename="image.png"
   size="2048000"
   progress="65">
@@ -124,7 +124,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   (onDelete)="handleDelete($event)">
 </goab-file-upload-card>`,
         },
-        webComponents: `<goa-file-upload-card version="2"
+        webComponents: `<goa-file-upload-card
   filename="large-file.zip"
   size="104857600"
   error="File exceeds maximum size limit">

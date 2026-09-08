@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import GoACallout from "./Callout.svelte";
 import GoACalloutWrapper from "./CalloutWrapper.test.svelte";
 import { it, describe } from "vitest";
@@ -46,6 +46,7 @@ describe("GoACalloutComponent", () => {
     expect(callout).toBeTruthy();
     expect(callout).toHaveClass("information");
     expect(icon).toHaveAttribute("type", "information-circle");
+    expect(icon).toHaveAttribute("size", "medium");
     expect(callout).toContainHTML("Complete");
   });
 
@@ -97,23 +98,6 @@ describe("GoACalloutComponent", () => {
     const el = baseElement.queryByTestId("testid");
     const heading = el.querySelector("h3");
     expect(heading?.textContent?.trim()).toBe("");
-  });
-
-  it("should render - with size medium", async () => {
-    const baseElement = render(GoACallout, {
-      type: "emergency",
-      size: "medium",
-      heading: "Heading",
-      testid: "testid",
-    });
-    const el = baseElement.queryByTestId("testid");
-
-    expect(el).toHaveClass("medium");
-
-    await waitFor(() => {
-      const icon = el.querySelector("goa-icon");
-      expect(icon).toHaveAttribute("size", "small");
-    });
   });
 
   it("should render - with max width", async () => {

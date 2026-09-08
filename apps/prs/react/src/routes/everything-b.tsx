@@ -890,7 +890,6 @@ export function EverythingBRoute() {
                   <GoabCallout
                     type="information"
                     heading="dsada"
-                    size="large"
                     maxWidth="640px"
                   >
                     Callout important information for the user.
@@ -898,7 +897,6 @@ export function EverythingBRoute() {
                   <GoabCallout
                     type="success"
                     heading="Application submitted"
-                    size="large"
                   >
                     <GoabText size="body-m" mt="none" mb="s">
                       You will receive a copy of the confirmation to the email

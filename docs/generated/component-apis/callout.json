@@ -68,13 +68,6 @@
           "description": ""
         },
         {
-          "name": "size",
-          "type": "GoabCalloutSize",
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
-        },
-        {
           "name": "testId",
           "type": "string",
           "required": false,
@@ -156,13 +149,6 @@
           "required": false,
           "default": null,
           "description": "Sets the top margin spacing token."
-        },
-        {
-          "name": "size",
-          "type": "GoabCalloutSize",
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
         },
         {
           "name": "testId",
@@ -262,18 +248,6 @@
           "required": false,
           "default": null,
           "description": "Top margin."
-        },
-        {
-          "name": "size",
-          "type": "\"medium\" | \"large\"",
-          "typeLabel": "GoabCalloutSize",
-          "values": [
-            "medium",
-            "large"
-          ],
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
         },
         {
           "name": "testid",

@@ -330,7 +330,6 @@ export type GoabCalloutType =
   | "important"
   | "emergency"
   | "event";
-export type GoabCalloutSize = "medium" | "large";
 export type GoabCalloutAriaLive = "off" | "polite" | "assertive";
 export type GoabCalloutIconTheme = "outline" | "filled";
 
