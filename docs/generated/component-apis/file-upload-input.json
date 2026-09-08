@@ -156,17 +156,6 @@
           "required": false,
           "default": "dragdrop",
           "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

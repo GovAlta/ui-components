@@ -1,6 +1,5 @@
 import {
   GoabCalloutAriaLive,
-  GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
   GoabCalloutEmphasis,
@@ -25,7 +24,6 @@ import { GoabBaseComponent } from "../base.component";
       <goa-callout
         [attr.type]="type"
         [attr.heading]="heading"
-        [attr.size]="size"
         [attr.maxwidth]="maxWidth"
         [attr.arialive]="ariaLive"
         [attr.icontheme]="iconTheme"
@@ -61,8 +59,6 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabCalloutType = "information";
   /** Callout heading text. */
   @Input() heading?: string = "";
-  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. @default "large" */
-  @Input() size?: GoabCalloutSize = "large";
   /** Sets the maximum width of the callout. */
   @Input() maxWidth?: string;
   /** Indicates how assistive technology should handle updates to the live region. @default "off" */

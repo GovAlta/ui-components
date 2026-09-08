@@ -17,8 +17,6 @@
   export let error: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   // Private
 
@@ -143,14 +141,12 @@
         <goa-button
           type="tertiary"
           size="compact"
-          {version}
           on:click={() => dispatch("_cancel")}>Cancel</goa-button
         >
       {:else if _status === "uploaded"}
         <goa-button
           type="tertiary"
           size="compact"
-          {version}
           on:click={() => dispatch("_delete")}
           leadingicon="trash">Remove</goa-button
         >
@@ -158,7 +154,6 @@
         <goa-button
           type="tertiary"
           size="compact"
-          {version}
           on:click={() => dispatch("_delete")}
           variant="destructive">Cancel</goa-button
         >
