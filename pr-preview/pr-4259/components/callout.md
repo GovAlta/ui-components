@@ -21,7 +21,6 @@ Communicate important information through a strong visual emphasis.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabCalloutSize | `large` | No | Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | GoabCalloutType | `information` | No | Sets the context and colour of the callout. |
 
@@ -42,7 +41,6 @@ Communicate important information through a strong visual emphasis.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabCalloutSize | `large` | No | Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `type` | GoabCalloutType | `information` | No | Define the context and colour of the callout. |
 
@@ -65,7 +63,6 @@ Tag: `goa-callout`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `size` | "medium" \| "large" | `large` | No | Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "emergency" \| "important" \| "information" \| "event" \| "success" | (none) | Yes | Define the context and colour of the callout. |
 
@@ -76,7 +73,6 @@ Tag: `goa-callout`
 ### Sizing
 
 - **[Do]** Use full width callouts with a maximum width of 700px.
-- **[Do]** Use the medium callout on mobile to save space.
 
 ### Content
 
