@@ -2,8 +2,10 @@
  * Smoke test for the built @abgov/design-system-mcp package.
  *
  * Packs dist/libs/design-system-mcp, installs the tarball into a throwaway
- * folder, and drives the installed server through its npm bin over JSON-RPC,
- * the same path a consuming team's MCP client uses. Exits non-zero on any
+ * folder, and drives the installed server over JSON-RPC the way a consuming
+ * team's MCP client starts it: through the npm bin on every platform (on
+ * Windows the .cmd shim runs through a shell, since nothing else can run
+ * one). Exits non-zero on any
  * failure so CI stops instead of shipping a broken package.
  *
  * Checks:
@@ -12,7 +14,7 @@
  *   3. initialize succeeds through the bin symlink, and serverInfo.version
  *      matches the installed package.json (the version is read at runtime).
  *   4. tools/list exposes search and get.
- *   5. search returns hits and get returns a real record.
+ *   5. search finds the button component and get returns the record asked for.
  */
 import { spawn, spawnSync } from "child_process";
 import {
@@ -29,13 +31,44 @@ import { join } from "path";
 
 const RECORD_FLOOR = 300;
 const TIMEOUT_MS = 60_000;
+const isWindows = process.platform === "win32";
+
+// On Windows npm is a .cmd (or an exe shim under managers like Volta), which
+// Node only runs through a shell; the shell's own lookup finds whichever one
+// is installed. The whole command goes as one pre-quoted string (an args
+// array combined with a shell is deprecated), so paths with spaces survive.
+function runNpm(args, cwd) {
+  return isWindows
+    ? spawnSync(["npm", ...args.map((a) => `"${a}"`)].join(" "), {
+        cwd,
+        encoding: "utf8",
+        shell: true,
+      })
+    : spawnSync("npm", args, { cwd, encoding: "utf8" });
+}
 
 let work;
 function cleanup() {
-  if (work) rmSync(work, { recursive: true, force: true });
+  if (!work) return;
+  try {
+    // Windows can hold just-written files briefly (the exiting child, or a
+    // virus scanner); retry, and never let a temp-folder hiccup turn a
+    // finished run into a failure.
+    rmSync(work, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+  } catch (err) {
+    console.error(`smoke-test: warning - could not remove ${work}: ${err?.message ?? err}`);
+  }
 }
+let serverChild = null;
 function fail(message) {
   console.error(`smoke-test: FAIL - ${message}`);
+  if (serverChild) {
+    try {
+      serverChild.kill();
+    } catch {
+      // already gone
+    }
+  }
   cleanup();
   process.exit(1);
 }
@@ -57,12 +90,9 @@ if (!existsSync(join(distDir, "package.json"))) {
 work = mkdtempSync(join(tmpdir(), "goa-mcp-smoke-"));
 
 // 1. Pack dist, exactly what a publish uploads.
-const pack = spawnSync("npm", ["pack", "--pack-destination", work, "--loglevel=error"], {
-  cwd: distDir,
-  encoding: "utf8",
-});
+const pack = runNpm(["pack", "--pack-destination", work, "--loglevel=error"], distDir);
 if (pack.status !== 0) fail(`npm pack exited ${pack.status}:\n${pack.stderr}`);
-const tarball = pack.stdout.trim().split("\n").pop();
+const tarball = pack.stdout.trim().split(/\r?\n/).pop();
 if (!tarball) fail("npm pack reported no tarball name");
 ok(`packed ${tarball}`);
 
@@ -73,15 +103,16 @@ writeFileSync(
   join(consumer, "package.json"),
   JSON.stringify({ name: "smoke-consumer", private: true }),
 );
-const install = spawnSync(
-  "npm",
+const install = runNpm(
   ["install", join(work, tarball), "--no-audit", "--no-fund", "--loglevel=error"],
-  { cwd: consumer, encoding: "utf8" },
+  consumer,
 );
 if (install.status !== 0) fail(`npm install exited ${install.status}:\n${install.stderr}`);
 
 const installedRoot = join(consumer, "node_modules", "@abgov", "design-system-mcp");
-const bin = join(consumer, "node_modules", ".bin", "goa-design-system-mcp");
+// npm wires the bin as a symlink on Unix and a .cmd shim on Windows.
+const binBase = join(consumer, "node_modules", ".bin", "goa-design-system-mcp");
+const bin = isWindows ? `${binBase}.cmd` : binBase;
 if (!existsSync(bin)) fail(`installed package has no bin at ${bin}`);
 const pkg = JSON.parse(readFileSync(join(installedRoot, "package.json"), "utf8"));
 ok(`installed ${pkg.name}@${pkg.version} with a working bin entry`);
@@ -115,7 +146,27 @@ if (!exampleId) fail("no example record with components found to test get agains
 ok(`${records} records, ${edges} relationship edges`);
 
 // 4. Drive the installed server over JSON-RPC through the bin symlink.
-const child = spawn(bin, [], { stdio: ["pipe", "pipe", "pipe"] });
+// On Unix, start the server through the bin symlink itself: that is how MCP
+// clients start it, and the indirection once hid a real data-resolution bug.
+// Windows shims are .cmd files that need a shell, so there the installed
+// entry file runs directly; the shim's existence is already checked above.
+// The server honors GOA_MCP_DATA_DIR above every probe, and the readme tells
+// developers to export it, so it is removed here or the test would quietly
+// answer from that folder instead of the packed data. Windows environment
+// names are case-insensitive, so every casing goes.
+const childEnv = { ...process.env };
+for (const key of Object.keys(childEnv)) {
+  if (key.toUpperCase() === "GOA_MCP_DATA_DIR") delete childEnv[key];
+}
+// Start the server the way an MCP client does: through the npm bin. On Unix
+// the .bin symlink runs directly; Windows shims are .cmd files only a shell
+// can run, so there the quoted path goes through one as a single command
+// string (an args array combined with a shell is deprecated).
+const child = isWindows
+  ? spawn(`"${bin}"`, { stdio: ["pipe", "pipe", "pipe"], env: childEnv, shell: true })
+  : spawn(bin, [], { stdio: ["pipe", "pipe", "pipe"], env: childEnv });
+serverChild = child;
+let shuttingDown = false;
 let stderrTail = "";
 child.stderr.on("data", (chunk) => {
   stderrTail = (stderrTail + chunk.toString()).slice(-2000);
@@ -142,6 +193,10 @@ child.stdout.on("data", (chunk) => {
   }
 });
 child.on("error", (err) => fail(`could not start the installed bin: ${err.message}`));
+child.stdin.on("error", (err) => {
+  if (shuttingDown) return;
+  fail(`could not write to the server (${err.code ?? err.message}). stderr:\n${stderrTail}`);
+});
 child.on("exit", (code) => {
   if (pending.size > 0) {
     fail(`server exited early (code ${code}). stderr:\n${stderrTail}`);
@@ -176,7 +231,7 @@ try {
       `serverInfo.version is "${serverInfo.version}" but the installed package.json says "${pkg.version}" (the runtime version read is broken)`,
     );
   }
-  ok(`initialize through the bin symlink, serverInfo.version ${serverInfo.version}`);
+  ok(`initialize through the installed bin, serverInfo.version ${serverInfo.version}`);
   notify("notifications/initialized");
 
   const tools = await request("tools/list", {});
@@ -186,27 +241,72 @@ try {
   }
   ok(`tools: ${names.join(", ")}`);
 
+  // Scoped to components so the button assertion is order-proof: button is
+  // the only component that can top a "button" search, while the unscoped
+  // ranking carries a wide score tie that load order could shuffle past any
+  // page size.
   const search = await request("tools/call", {
     name: "search",
-    arguments: { query: "button" },
+    arguments: { query: "button", collection: "components", limit: 25 },
   });
   const searchText = search.result?.content?.[0]?.text ?? "";
   if (search.result?.isError || searchText.length === 0) {
     fail(`search for "button" failed or returned nothing: ${JSON.stringify(search).slice(0, 300)}`);
   }
-  ok(`search returned content (${searchText.length} chars)`);
+  // The text is a JSON envelope: { query, count, results, next }. A length
+  // check alone would pass on an empty envelope, so assert the contents.
+  let searchBody;
+  try {
+    searchBody = JSON.parse(searchText);
+  } catch {
+    fail(`search returned text that is not JSON: ${searchText.slice(0, 200)}`);
+  }
+  if (!(searchBody.count > 0) || !Array.isArray(searchBody.results) || searchBody.results.length === 0) {
+    fail(`search for "button" returned an empty result set: ${searchText.slice(0, 200)}`);
+  }
+  if (!searchBody.results.some((r) => r.id === "button")) {
+    fail(
+      `search for "button" did not include the button component: ${searchBody.results
+        .map((r) => r.id)
+        .join(", ")}`,
+    );
+  }
+  ok(`search found ${searchBody.count} results, button among them`);
 
   const get = await request("tools/call", { name: "get", arguments: { id: exampleId } });
   const getText = get.result?.content?.[0]?.text ?? "";
   if (get.result?.isError || getText.length === 0) {
     fail(`get for "${exampleId}" failed or returned nothing: ${JSON.stringify(get).slice(0, 300)}`);
   }
-  ok(`get returned "${exampleId}" (${getText.length} chars)`);
+  // Same idea as search: the text is a JSON envelope ({ id, collection,
+  // entry, related, next }), so assert it is the record that was asked for.
+  let getBody;
+  try {
+    getBody = JSON.parse(getText);
+  } catch {
+    fail(`get returned text that is not JSON: ${getText.slice(0, 200)}`);
+  }
+  if (getBody.id !== exampleId || getBody.collection !== "examples" || !getBody.entry) {
+    fail(
+      `get for "${exampleId}" returned the wrong record or no entry: ${getText.slice(0, 200)}`,
+    );
+  }
+  ok(`get returned "${exampleId}" with its entry`);
 } catch (err) {
   fail(err instanceof Error ? err.message : String(err));
 }
 
-child.kill();
+// The server exits on its own when stdin closes; end it that way so the
+// whole process tree winds down (kill only as backstop), then wait before
+// removing a folder the child may still hold open on Windows.
+shuttingDown = true;
+const exited = new Promise((resolve) => {
+  child.once("exit", resolve);
+  setTimeout(resolve, 5000).unref();
+});
+child.stdin.end();
+await exited;
+if (child.exitCode === null) child.kill();
 cleanup();
 console.log(
   `smoke-test: PASS (${records} records, ${edges} edges, v${pkg.version} through the npm bin)`,
