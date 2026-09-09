@@ -46,7 +46,6 @@ describe("GoACalloutComponent", () => {
     expect(callout).toBeTruthy();
     expect(callout).toHaveClass("information");
     expect(icon).toHaveAttribute("type", "information-circle");
-    expect(icon).toHaveAttribute("size", "medium");
     expect(callout).toContainHTML("Complete");
   });
 

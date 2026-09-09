@@ -16,7 +16,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-side-menu-group
-        [attr.version]="version"
         [attr.heading]="heading"
         [attr.testid]="testId"
         [attr.icon]="icon"
@@ -37,7 +36,6 @@ export class GoabSideMenuGroup extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** @required The heading text for the menu group. */
   @Input({ required: true }) heading!: string;
   /** Icon displayed alongside the heading. */
