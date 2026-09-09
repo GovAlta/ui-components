@@ -21,7 +21,6 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -143,7 +142,6 @@ export function GoabDatePicker({
       min={formatValue(min) || undefined}
       max={formatValue(max) || undefined}
       relative={relative ? "true" : undefined}
-      version="2"
       {..._props}
     />
   );

@@ -21,7 +21,6 @@ import { GoabBaseComponent } from "../base.component";
   imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-filter-chip
-      [attr.version]="version"
       [attr.error]="error"
       [attr.icontheme]="iconTheme"
       [attr.content]="getContentAsString()"
@@ -68,7 +67,6 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
   @Output() onClick = new EventEmitter();
 
   isReady = false;
-  version = "2";
 
   getContentAsString(): string | undefined {
     return typeof this.content === "string" ? this.content : undefined;

@@ -68,13 +68,6 @@
           "description": ""
         },
         {
-          "name": "size",
-          "type": "GoabCalloutSize",
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
-        },
-        {
           "name": "testId",
           "type": "string",
           "required": false,
@@ -156,13 +149,6 @@
           "required": false,
           "default": null,
           "description": "Sets the top margin spacing token."
-        },
-        {
-          "name": "size",
-          "type": "GoabCalloutSize",
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
         },
         {
           "name": "testId",
@@ -264,18 +250,6 @@
           "description": "Top margin."
         },
         {
-          "name": "size",
-          "type": "\"medium\" | \"large\"",
-          "typeLabel": "GoabCalloutSize",
-          "values": [
-            "medium",
-            "large"
-          ],
-          "required": false,
-          "default": "large",
-          "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
-        },
-        {
           "name": "testid",
           "type": "string",
           "required": false,
@@ -296,18 +270,6 @@
           "required": true,
           "default": null,
           "description": "Define the context and colour of the callout."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabCalloutVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [],

@@ -12,9 +12,8 @@ describe("FilterChip", () => {
     expect(container.querySelector(".error")).toBeNull();
   });
 
-  it("should render HTML content in the content slot for version 2", async () => {
+  it("should render HTML content in the content slot", async () => {
     const chip = document.createElement("goa-filter-chip");
-    chip.setAttribute("version", "2");
     chip.innerHTML = '<span slot="content"><strong>Some Badge</strong></span>';
     document.body.appendChild(chip);
     await Promise.resolve();
@@ -33,25 +32,30 @@ describe("FilterChip", () => {
       content: "Some Badge",
       testid: "chip",
     });
-    const chip = await result.findByTestId("chip");
+    const deleteButton = result.container.querySelector("goa-icon-button");
 
-    expect(chip).toHaveAttribute("aria-label", "Some Badge, removable");
+    expect(deleteButton).toHaveAttribute(
+      "arialabel",
+      "Remove filter: Some Badge",
+    );
   });
 
-  it("should retain an explicit accessible label for version 1", async () => {
+  it("should use an explicit accessible label for the remove button", async () => {
     const result = render(GoAFilterChip, {
       ariaLabel: "Custom filter label",
       content: "Some Badge",
       testid: "chip",
     });
-    const chip = await result.findByTestId("chip");
+    const deleteButton = result.container.querySelector("goa-icon-button");
 
-    expect(chip).toHaveAttribute("aria-label", "Custom filter label");
+    expect(deleteButton).toHaveAttribute(
+      "arialabel",
+      "Remove filter: Custom filter label",
+    );
   });
 
-  it("should use slotted text to label the remove button for version 2", async () => {
+  it("should use slotted text to label the remove button", async () => {
     const chip = document.createElement("goa-filter-chip");
-    chip.setAttribute("version", "2");
     chip.innerHTML =
       '<span slot="content"><strong>Some</strong> filter chip</span>';
     document.body.appendChild(chip);
@@ -75,7 +79,6 @@ describe("FilterChip", () => {
 
   it("should allow an accessible label to override slotted text", async () => {
     const chip = document.createElement("goa-filter-chip");
-    chip.setAttribute("version", "2");
     chip.setAttribute("arialabel", "Custom filter");
     chip.innerHTML = '<span slot="content">Some filter chip</span>';
     document.body.appendChild(chip);
@@ -108,13 +111,12 @@ describe("FilterChip", () => {
       testid: "chip",
       content: "Some Badge",
     });
-    const deleteIcon = result.container.querySelector(".delete-icon");
     const chip = await result.findByTestId("chip");
+    const deleteButton = result.container.querySelector("goa-icon-button");
     const onClick = vi.fn();
 
-    expect(deleteIcon).not.toBeNull();
     chip.addEventListener("_click", onClick);
-    await fireEvent.click(chip);
+    await fireEvent(deleteButton!, new CustomEvent("_click"));
 
     expect(onClick).toHaveBeenCalled();
   });
@@ -128,32 +130,6 @@ describe("FilterChip", () => {
     expect(chip).toHaveStyle(
       "min-width: var(--goa-filter-chip-min-width, 56px)",
     );
-  });
-
-  it("should have an unfilled close icon by default for deletable chips", async () => {
-    const { container } = render(GoAFilterChip, {
-      content: "Test",
-    });
-    const deleteIcon = container.querySelector("goa-icon[type='close-circle']");
-
-    expect(deleteIcon).not.toBeNull();
-    expect(deleteIcon).toHaveAttribute("theme", "outline");
-  });
-
-  it("should have a filled close icon on hover for deletable chips", async () => {
-    const { container } = render(GoAFilterChip, {
-      testid: "chip",
-      content: "Test",
-    });
-    const chip = container.querySelector("[data-testid='chip']");
-    const deleteIcon = container.querySelector("goa-icon[type='close-circle']");
-
-    expect(deleteIcon).not.toBeNull();
-    expect(deleteIcon).toHaveAttribute("theme", "outline");
-
-    await fireEvent.mouseOver(chip);
-
-    expect(deleteIcon).toHaveAttribute("theme", "filled");
   });
 
   it("should not apply background fill on hover", async () => {

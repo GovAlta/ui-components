@@ -4,8 +4,15 @@ import {
   GoabFormItem,
   GoabTextArea,
 } from "@abgov/react-components";
+import { useState } from "react";
+
+const selectAllOptions = ["email", "text", "push"];
 
 export function DocsCheckboxListRoute() {
+  const [selectAllValues, setSelectAllValues] = useState<string[]>([]);
+  const allOptionsSelected = selectAllValues.length === selectAllOptions.length;
+  const someOptionsSelected = selectAllValues.length > 0 && !allOptionsSelected;
+
   return (
     <div>
       <h2>Checkbox list</h2>
@@ -76,6 +83,31 @@ export function DocsCheckboxListRoute() {
           <GoabCheckbox name="e3" text="Option 3" />
         </GoabCheckboxList>
       </GoabFormItem>
+
+      <h3>Select all</h3>
+      <GoabFormItem label="Select notification methods" mb="l">
+        <GoabCheckbox
+          name="selectAllNotifications"
+          text="Select all"
+          checked={allOptionsSelected}
+          indeterminate={someOptionsSelected}
+          onChange={(detail) =>
+            setSelectAllValues(detail.checked ? [...selectAllOptions] : [])
+          }
+          mb="m"
+        />
+        <GoabCheckboxList
+          name="notifications"
+          value={selectAllValues}
+          ml="l"
+          onChange={(detail) => setSelectAllValues(detail.value)}
+        >
+          <GoabCheckbox name="email" text="Email" />
+          <GoabCheckbox name="text" text="Text message" />
+          <GoabCheckbox name="push" text="Push notification" />
+        </GoabCheckboxList>
+      </GoabFormItem>
+      <p>Value: {JSON.stringify(selectAllValues)}</p>
     </div>
   );
 }

@@ -64,8 +64,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Date" mb="l">
-  <goa-date-picker version="2" name="date"></goa-date-picker>
+        webComponents: `<goa-form-item label="Date" mb="l">
+  <goa-date-picker name="date"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -124,8 +124,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Start date" mb="l">
-  <goa-date-picker version="2" name="startDate" value="2024-01-15"></goa-date-picker>
+        webComponents: `<goa-form-item label="Start date" mb="l">
+  <goa-date-picker name="startDate" value="2024-01-15"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -199,8 +199,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
-  <goa-date-picker version="2"
+        webComponents: `<goa-form-item label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
+  <goa-date-picker
     name="appointment"
     min="2024-03-01"
     max="2024-03-07">
@@ -228,11 +228,11 @@ export const datePickerConfigurations: ComponentConfigurations = {
     // <goab-form-item label="Compact size" labelSize="compact" mb="l">
     //   <goab-date-picker name="sizeCompact" size="compact" (onChange)="handleDateChange($event)"></goab-date-picker>
     // </goab-form-item>`,
-    //     webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-    //   <goa-date-picker version="2" name="sizeDefault"></goa-date-picker>
+    //     webComponents: `<goa-form-item label="Default size" mb="l">
+    //   <goa-date-picker name="sizeDefault"></goa-date-picker>
     // </goa-form-item>
-    // <goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-    //   <goa-date-picker version="2" name="sizeCompact" size="compact"></goa-date-picker>
+    // <goa-form-item label="Compact size" labelsize="compact" mb="l">
+    //   <goa-date-picker name="sizeCompact" size="compact"></goa-date-picker>
     // </goa-form-item>`,
     //   },
     // },
@@ -321,11 +321,11 @@ const [birthday, setBirthday] = useState<string | undefined>();
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="What day was the incident?" mb="l">
-  <goa-date-picker version="2" name="incident" type="calendar"></goa-date-picker>
+        webComponents: `<goa-form-item label="What day was the incident?" mb="l">
+  <goa-date-picker name="incident" type="calendar"></goa-date-picker>
 </goa-form-item>
-<goa-form-item version="2" label="What is your birthday?" mb="l">
-  <goa-date-picker version="2" name="birthday" type="input"></goa-date-picker>
+<goa-form-item label="What is your birthday?" mb="l">
+  <goa-date-picker name="birthday" type="input"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -410,11 +410,11 @@ const [birthday, setBirthday] = useState<string | undefined>();
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Locked date" mb="l">
-  <goa-date-picker version="2" name="locked" value="2024-01-01" disabled></goa-date-picker>
+        webComponents: `<goa-form-item label="Locked date" mb="l">
+  <goa-date-picker name="locked" value="2024-01-01" disabled></goa-date-picker>
 </goa-form-item>
-<goa-form-item version="2" label="Date with error" error="Please select a valid date" mb="l">
-  <goa-date-picker version="2" name="error" error></goa-date-picker>
+<goa-form-item label="Date with error" error="Please select a valid date" mb="l">
+  <goa-date-picker name="error" error></goa-date-picker>
 </goa-form-item>`,
       },
     },

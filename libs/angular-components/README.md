@@ -9,7 +9,7 @@ Supported Angular versions: 18, 19, 20, and 21.
 ## Install
 
 ```bash
-npm i @abgov/angular-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
+npm i @abgov/angular-components @abgov/web-components @abgov/ui-components-common
 ```
 
 ## Register the web components
@@ -52,11 +52,10 @@ still use the legacy `goaValue`, `goaValueList`, or `goaChecked` form directives
 
 ## Add styles
 
-Import the component styles and design tokens in `src/styles.css`:
+Import the component styles in `src/styles.css`. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 ## Add icons

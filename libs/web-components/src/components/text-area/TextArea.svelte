@@ -56,12 +56,6 @@
   /** Specifies the autocomplete attribute for the textarea input. */
   export let autocomplete: string = "";
 
-  // version
-  type VersionType = "1" | "2";
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
-
   // size
   type SizeType = "default" | "compact";
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
@@ -97,7 +91,6 @@
   // Hooks
 
   onMount(() => {
-    validateVersion(version);
     validateSize(size);
     addRelayListener();
     sendMountedMessage();
@@ -202,7 +195,6 @@
     class:disabled={isDisabled}
     class:readonly={isReadonly}
     class:compact={size === "compact"}
-    class:v2={version === "2"}
     style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -313,17 +305,17 @@
     );
   }
 
-  /* V2 focus state - single blue border only (no layered borders) */
-  .v2.root:focus-within {
+  /* Focus state uses a single focus border */
+  .root:focus-within {
     box-shadow: var(--goa-text-area-border-focus);
   }
-  .v2.error:focus-within,
-  .v2.error:focus-within:hover {
+  .error:focus-within,
+  .error:focus-within:hover {
     box-shadow: var(--goa-text-area-border-focus);
   }
 
-  /* V2 compact size variant */
-  .v2.compact textarea {
+  /* Compact size */
+  .compact textarea {
     padding: var(--goa-text-area-padding-compact);
     font: var(--goa-text-area-typography-compact);
   }

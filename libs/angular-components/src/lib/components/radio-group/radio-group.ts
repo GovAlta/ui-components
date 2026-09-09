@@ -27,7 +27,6 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-radio-group
         #goaComponentRef
-        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [disabled]="disabled"
@@ -64,7 +63,6 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** The name for the radio group. Used for accessibility and change events. */
   @Input() name?: string;
   /** The currently selected value in the radio group. */
@@ -73,7 +71,7 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   @Input() orientation?: GoabRadioGroupOrientation;
   /** Defines how the radio group will be announced by screen readers. */
   @Input() ariaLabel?: string;
-  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). @default "default" */
+  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts. @default "default" */
   @Input() size?: GoabRadioGroupSize = "default";
 
 

@@ -1,9 +1,14 @@
-<svelte:options customElement={{
-  tag: "goa-form-item",
-  props: {
-    publicFormSummaryOrder: { type: "Number", attribute: "public-form-summary-order" },
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-form-item",
+    props: {
+      publicFormSummaryOrder: {
+        type: "Number",
+        attribute: "public-form-summary-order",
+      },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts" context="module">
@@ -47,7 +52,6 @@
     ["compact", "regular", "large"],
     false,
   );
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   const [INPUT_TYPES, validateType] = typeValidator(
     "Input type",
     ["", "text-input", "textarea", "checkbox-list", "radio-group"],
@@ -56,7 +60,6 @@
 
   type RequirementType = (typeof REQUIREMENT_TYPES)[number];
   type LabelSizeType = (typeof LABEL_SIZE_TYPES)[number];
-  type VersionType = (typeof Version)[number];
   type InputType = (typeof INPUT_TYPES)[number];
 
   // Margin
@@ -84,8 +87,6 @@
   export let requirement: RequirementType = "";
   /** Sets the maximum width of the form item. */
   export let maxwidth: string = "none";
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
   /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   export let type: InputType = "";
 
@@ -101,13 +102,12 @@
 
   // Computed: Error icon size based on form item size
   // Compact: xsmall (16px), Regular/Large: small (18px)
-  $: errorIconSize = labelsize === 'compact' ? 'xsmall' : 'small';
+  $: errorIconSize = labelsize === "compact" ? "xsmall" : "small";
   $: updateAriaDescribedBy(Boolean(error));
 
   onMount(() => {
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
-    validateVersion(version);
     validateType(type);
 
     receive(_rootEl, (action, data) => {
@@ -190,7 +190,12 @@
     relay<FormItemMountRelayDetail>(
       _rootEl,
       FormItemMountMsg,
-      { id: _name, label: name !== "blank" ? name : label, el: _rootEl, order: publicFormSummaryOrder },
+      {
+        id: _name,
+        label: name !== "blank" ? name : label,
+        el: _rootEl,
+        order: publicFormSummaryOrder,
+      },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -198,8 +203,7 @@
 
 <!-- HTML -->
 <div
-  class:v2={version === "2"}
-  class={`${labelsize}${type ? ' ' + type : ''}`}
+  class={`${labelsize}${type ? " " + type : ""}`}
   data-testid={testid}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -219,7 +223,7 @@
 
   <slot />
 
-  {#if ($$slots.error || error) || ($$slots.helptext || helptext)}
+  {#if $$slots.error || error || $$slots.helptext || helptext}
     <div class={`messages-container ${labelsize}`}>
       {#if $$slots.error || error}
         <div class="error-msg" id={_errorId} role="alert">
@@ -265,8 +269,8 @@
     padding-bottom: var(--goa-form-item-label-large-padding-bottom);
   }
 
-  /* V2 ONLY: Compact size variant */
-  .v2.compact .label {
+  /* Compact size */
+  .compact .label {
     font: var(--goa-form-item-label-compact-typography);
     padding-bottom: var(--goa-form-item-label-compact-padding-bottom);
   }
@@ -277,48 +281,60 @@
     margin-left: var(--goa-space-2xs); /* Space between label and requirement */
   }
 
-  /* Messages container - spacing from input */
-  /* V1: Always 12px (--goa-form-item-message-margin-top) */
-  /* V2: Size and input-type specific spacing */
+  /* Messages container spacing from input */
 
   .large .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-large, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 16px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-large,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    );
   }
 
   .regular .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-regular, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 12px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-regular,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    );
   }
 
-  /* V2 ONLY: Compact size messages container spacing */
-  .v2.compact .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-compact, 0.5rem); /* V2: 8px */
+  .compact .messages-container {
+    margin-top: var(--goa-form-item-message-margin-top-compact, 0.5rem);
   }
 
   /* InputType overrides: checkbox-list, radio-group for adjusted sizing */
   .large.checkbox-list .messages-container,
   .large.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-large, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 20px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-large,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    );
   }
 
   .regular.checkbox-list .messages-container,
   .regular.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-regular, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 16px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-regular,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    );
   }
 
-  /* V2 ONLY: Compact size inputType pattern overrides for adjusted sizing */
-  .v2.compact.checkbox-list .messages-container,
-  .v2.compact.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-compact, 0.75rem); /* V2: 12px */
+  /* Compact selection controls use adjusted message spacing */
+  .compact.checkbox-list .messages-container,
+  .compact.radio-group .messages-container {
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-compact,
+      0.75rem
+    );
   }
 
-  /* V2: Flex layout for error + helper stacking */
-  .v2 .messages-container {
+  /* Stack error and helper messages */
+  .messages-container {
     display: flex;
     flex-direction: column;
     gap: var(--goa-form-item-message-stack-gap);
   }
 
-  .v2 .messages-container.compact {
+  .messages-container.compact {
     gap: var(--goa-form-item-message-stack-gap-compact);
   }
 
@@ -331,8 +347,7 @@
     color: var(--goa-form-item-error-message-color);
   }
 
-  /* V2 ONLY: Compact icon gap */
-  .v2.compact .error-msg {
+  .compact .error-msg {
     gap: var(--goa-form-item-message-gap-compact);
   }
 
@@ -341,8 +356,8 @@
     margin-top: 0.0625rem; /* 1px */
   }
 
-  /* V2 ONLY: Compact error text alignment (icon and text align naturally) */
-  .v2.compact .error-text {
+  /* Compact icons and text align naturally */
+  .compact .error-text {
     margin-top: 0;
   }
 
@@ -352,14 +367,7 @@
     color: var(--goa-form-item-help-message-color);
   }
 
-  /* V1: Gap between error and helper when both present (sibling selector) */
-  /* Uses space.xs (8px) for proper vertical stacking */
   .error-msg + .help-msg {
-    margin-top: var(--goa-form-item-message-stack-gap, var(--goa-space-xs, 0.5rem));
-  }
-
-  /* V2: Remove sibling margin (flex gap handles spacing) */
-  .v2 .error-msg + .help-msg {
     margin-top: 0;
   }
 </style>

@@ -25,7 +25,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-button
-        [attr.version]="version"
         [attr.type]="type"
         [attr.size]="size"
         [attr.variant]="variant"
@@ -81,7 +80,6 @@ export class GoabButton extends GoabBaseComponent implements OnInit {
   @Output() onClick = new EventEmitter();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

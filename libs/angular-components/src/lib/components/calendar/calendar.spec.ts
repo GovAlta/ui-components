@@ -76,7 +76,6 @@ describe("GoABCalendar", () => {
     expect(calendar.getAttribute("ml")).toBe(component.ml);
     expect(calendar.getAttribute("mr")).toBe(component.mr);
     expect(calendar.getAttribute("value")).toBe(new CalendarDate(component.value!).toString());
-    expect(calendar.getAttribute("version")).toBe("2");
   });
 
   it("should handle the event", () => {

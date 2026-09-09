@@ -44,7 +44,7 @@ export class SomeOtherComponent {
         },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
-<goa-button version="2" id="save-btn">Notification</goa-button>
+<goa-button id="save-btn">Notification</goa-button>
 
 <script>
   document.getElementById("save-btn").addEventListener("_click", function() {
@@ -85,9 +85,9 @@ export class SomeOtherComponent {
         },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
-<goa-button version="2" id="btn-basic" mb="xs">Basic</goa-button>
-<goa-button version="2" id="btn-success" mb="xs">Success</goa-button>
-<goa-button version="2" id="btn-failure">Failure</goa-button>
+<goa-button id="btn-basic" mb="xs">Basic</goa-button>
+<goa-button id="btn-success" mb="xs">Success</goa-button>
+<goa-button id="btn-failure">Failure</goa-button>
 
 <script>
   function showTempNotification(message, type) {
@@ -151,8 +151,8 @@ export class SomeOtherComponent {
         },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
-<goa-button version="2" id="progress-btn" mb="xs">Progress</goa-button>
-<goa-button version="2" id="indeterminate-btn">Indeterminate</goa-button>
+<goa-button id="progress-btn" mb="xs">Progress</goa-button>
+<goa-button id="indeterminate-btn">Indeterminate</goa-button>
 
 <script>
   document.getElementById("progress-btn").addEventListener("_click", function() {
@@ -219,7 +219,7 @@ export class SomeOtherComponent {
         },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
-<goa-button version="2" id="action-btn">Show notification</goa-button>
+<goa-button id="action-btn">Show notification</goa-button>
 
 <script>
   document.getElementById("action-btn").addEventListener("_click", function() {

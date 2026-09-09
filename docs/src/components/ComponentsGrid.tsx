@@ -186,9 +186,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     const table = tableRef.current;
     if (!table) return;
 
-    // Explicitly set version attribute for V2 styling
-    table.setAttribute("version", "2");
-
     const handleMultiSort = (e: Event) => {
       const detail = (
         e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
@@ -566,7 +563,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           {/* Category badge only - status shown in table view */}
           <div className="component-card-badges">
             <goa-badge
-              version="2"
               type={getCategoryBadgeType(component.data.category)}
               content={formatCategory(component.data.category)}
               emphasis="subtle"
@@ -593,7 +589,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getCategoryBadgeType(component.data.category)}
             content={formatCategory(component.data.category)}
             emphasis="subtle"
@@ -602,7 +597,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getStatusBadgeType(component.data.status)}
             content={formatStatus(component.data.status)}
             emphasis="subtle"
@@ -654,7 +648,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           <div className="view-toggle-wrapper">
             <goa-tabs
               ref={tabsRef}
-              version="2"
               variant="segmented"
               initialTab={viewMode === "card" ? 1 : 2}
               orientation="horizontal"
@@ -807,10 +800,8 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           }}
         >
           <div className="components-table-scroll-shadow-left" aria-hidden="true" />
-          {/* TODO: Table not rendering with V2 styling despite version="2" - investigate CSS loading or timing issue */}
           <goa-table
             ref={tableRef}
-            version="2"
             width="100%"
             variant="normal"
             sort-mode="multi"
@@ -820,7 +811,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                 <tr>
                   <th style={{ width: "200px" }}>
                     <goa-table-sort-header
-                      version="2"
                       name="name"
                       direction={getColumnSortDirection("name")}
                       sort-order={getColumnSortOrder("name")}
@@ -831,7 +821,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   <th>Description</th>
                   <th>
                     <goa-table-sort-header
-                      version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
                       sort-order={getColumnSortOrder("category")}
@@ -841,7 +830,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   </th>
                   <th>
                     <goa-table-sort-header
-                      version="2"
                       name="status"
                       direction={getColumnSortDirection("status")}
                       sort-order={getColumnSortOrder("status")}
@@ -871,7 +859,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                               />
                               <strong>{group.label}</strong>
                               <goa-badge
-                                version="2"
                                 type="default"
                                 content={String(group.components.length)}
                                 emphasis="subtle"
@@ -909,7 +896,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   />
                   <strong>{group.label}</strong>
                   <goa-badge
-                    version="2"
                     type="dark"
                     content={String(group.components.length)}
                     emphasis="subtle"

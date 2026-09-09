@@ -14,7 +14,6 @@ interface WCProps extends Margins {
   error?: string;
   testid?: string;
   maxwidth?: string;
-  version?: string;
   size?: string;
 }
 
@@ -109,7 +108,6 @@ export function GoabCheckboxList({
       error={error ? "true" : undefined}
       testid={testId}
       maxwidth={maxWidth}
-      version="2"
       size={size}
       mt={mt}
       mr={mr}

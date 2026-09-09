@@ -5,7 +5,6 @@ interface WCProps extends Margins {
   heading: string;
   icon?: GoabIconType;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -49,7 +48,6 @@ export function GoabSideMenuGroup({
       mr={mr}
       mb={mb}
       ml={ml}
-      version="2"
     >
       {children}
     </goa-side-menu-group>

@@ -88,7 +88,6 @@ describe("GoABFormItem", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("ml")).toBe(component.ml);
-    expect(el?.getAttribute("version")).toBe("2");
     expect(el?.getAttribute("type")).toBe("");
 
     // Children is rendered

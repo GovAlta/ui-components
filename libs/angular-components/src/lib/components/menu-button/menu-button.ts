@@ -22,7 +22,6 @@ import {
       [attr.type]="type"
       [attr.size]="size"
       [attr.variant]="variant"
-      version="2"
       [attr.max-width]="maxWidth"
       [attr.leading-icon]="leadingIcon"
       [attr.aria-label]="ariaLabel"

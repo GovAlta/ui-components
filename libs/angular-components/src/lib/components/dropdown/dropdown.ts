@@ -30,7 +30,6 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-dropdown
         #goaComponentRef
-        [attr.version]="version"
         [attr.name]="name"
         [value]="value"
         [attr.arialabel]="ariaLabel"
@@ -114,7 +113,6 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Output() onBlur = new EventEmitter<GoabDropdownOnBlurDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

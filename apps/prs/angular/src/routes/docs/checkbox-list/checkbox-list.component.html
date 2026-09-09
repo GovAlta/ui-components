@@ -93,3 +93,25 @@
     <goab-checkbox name="e3" text="Option 3"></goab-checkbox>
   </goab-checkbox-list>
 </goab-form-item>
+
+<h3>Select all</h3>
+<goab-form-item label="Select notification methods" mb="l">
+  <goab-checkbox
+    name="selectAllNotifications"
+    text="Select all"
+    [checked]="allOptionsSelected"
+    [indeterminate]="someOptionsSelected"
+    (onChange)="selectAllOnChange($event)"
+    mb="m">
+  </goab-checkbox>
+  <goab-checkbox-list
+    name="notifications"
+    [value]="selectAllValues"
+    ml="l"
+    (onChange)="selectAllListOnChange($event)">
+    <goab-checkbox name="email" text="Email"></goab-checkbox>
+    <goab-checkbox name="text" text="Text message"></goab-checkbox>
+    <goab-checkbox name="push" text="Push notification"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+<p>Value: {{ selectAllValues | json }}</p>

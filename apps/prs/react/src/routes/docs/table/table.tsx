@@ -920,7 +920,6 @@ export function DocsTableRoute() {
       <GoabCallout
         type="important"
         emphasis="low"
-        size="medium"
         heading="Application incomplete"
         mb="2xl"
         mt="xl"

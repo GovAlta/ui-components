@@ -88,17 +88,6 @@
           "required": false,
           "default": "0",
           "description": "Sort order number for multi-column sort display (\"1\", \"2\", etc)."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [],

@@ -86,8 +86,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    // @ts-expect-error - stable WCProps requires text, but experimental supports icon-only mode
-    <goa-menu-button {..._props} version="2" ref={el}>
+    <goa-menu-button {..._props} ref={el}>
       {children}
     </goa-menu-button>
   );

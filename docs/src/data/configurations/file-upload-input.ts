@@ -138,8 +138,8 @@ function handleDelete(detail: GoabFileUploadOnDeleteDetail) {
 </goab-file-upload-card>
 }`,
         },
-        webComponents: `<goa-form-item version="2" label="Upload document" mb="l">
-  <goa-file-upload-input version="2"></goa-file-upload-input>
+        webComponents: `<goa-form-item label="Upload document" mb="l">
+  <goa-file-upload-input></goa-file-upload-input>
 </goa-form-item>
 <script>${fileUploadScript}</script>`,
       },
@@ -311,11 +311,11 @@ function handleDelete(
 </goab-file-upload-card>
 }`,
         },
-        webComponents: `<goa-form-item version="2" label="Upload image" mb="l">
-  <goa-file-upload-input version="2" accept="image/*"></goa-file-upload-input>
+        webComponents: `<goa-form-item label="Upload image" mb="l">
+  <goa-file-upload-input accept="image/*"></goa-file-upload-input>
 </goa-form-item>
-<goa-form-item version="2" label="Upload PDF" mb="l">
-  <goa-file-upload-input version="2" accept=".pdf"></goa-file-upload-input>
+<goa-form-item label="Upload PDF" mb="l">
+  <goa-file-upload-input accept=".pdf"></goa-file-upload-input>
 </goa-form-item>
 <script>${fileUploadScript}</script>`,
       },
@@ -489,11 +489,11 @@ function handleDelete(
 </goab-file-upload-card>
 }`,
         },
-        webComponents: `<goa-form-item version="2" label="Small file (100KB limit)" mb="l">
-  <goa-file-upload-input version="2" maxfilesize="100KB"></goa-file-upload-input>
+        webComponents: `<goa-form-item label="Small file (100KB limit)" mb="l">
+  <goa-file-upload-input maxfilesize="100KB"></goa-file-upload-input>
 </goa-form-item>
-<goa-form-item version="2" label="Large file (50MB limit)" mb="l">
-  <goa-file-upload-input version="2" maxfilesize="50MB"></goa-file-upload-input>
+<goa-form-item label="Large file (50MB limit)" mb="l">
+  <goa-file-upload-input maxfilesize="50MB"></goa-file-upload-input>
 </goa-form-item>
 <script>${fileUploadScript}</script>`,
       },
@@ -665,11 +665,11 @@ function handleDelete(
 </goab-file-upload-card>
 }`,
         },
-        webComponents: `<goa-form-item version="2" label="Button variant" mb="l">
-  <goa-file-upload-input version="2" variant="button"></goa-file-upload-input>
+        webComponents: `<goa-form-item label="Button variant" mb="l">
+  <goa-file-upload-input variant="button"></goa-file-upload-input>
 </goa-form-item>
-<goa-form-item version="2" label="Dragdrop variant" mb="l">
-  <goa-file-upload-input version="2" variant="dragdrop"></goa-file-upload-input>
+<goa-form-item label="Dragdrop variant" mb="l">
+  <goa-file-upload-input variant="dragdrop"></goa-file-upload-input>
 </goa-form-item>
 <script>${fileUploadScript}</script>`,
       },

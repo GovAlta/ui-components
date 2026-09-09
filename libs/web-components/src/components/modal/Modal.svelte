@@ -12,7 +12,6 @@
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
-  type VersionType = (typeof Version)[number];
 
   // ******
   // Public
@@ -32,9 +31,6 @@
   export let maxwidth: string = "60ch";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "modal";
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
-
   /** @deprecated Use maxwidth instead. */
   export let width: string = "";
 
@@ -58,8 +54,6 @@
     "slow",
     "none",
   ]);
-
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
 
   // ********
   // Reactive
@@ -102,8 +96,6 @@
   onMount(() => {
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
-    validateVersion(version);
-
     // event listeners
     window.addEventListener("keydown", onInputKeyDown);
 
@@ -197,31 +189,22 @@
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
-        class:v2={version === "2"}
         tabindex="-1"
         role="dialog"
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
         data-first-focus="true"
       >
-        {#if calloutvariant !== null && version !== "2"}
-          <div class="callout-bar {calloutvariant}">
-            <goa-icon
-              type={_iconType}
-              inverted={calloutvariant === "important" ? "false" : "true"}
-            />
-          </div>
-        {/if}
         <div class="content">
           <goa-scroll-panel maxheight="calc(100vh - 10rem)">
             <header
               slot="header"
               class:has-content={_headerHasContent}
               class:callout={calloutvariant !== null}
-              class={version === "2" && calloutvariant ? calloutvariant : ""}
+              class={calloutvariant || ""}
             >
               <div class="modal-heading-content">
-                {#if version === "2" && _iconType}
+                {#if _iconType}
                   <goa-icon type={_iconType} size="medium" theme="filled" />
                 {/if}
                 <div
@@ -333,14 +316,6 @@
     background-color: var(--goa-color-success-default);
   }
 
-  .callout-bar {
-    flex: 0 0 3rem;
-    text-align: center;
-    padding: var(--goa-modal-callout-bar-padding) 0 0 0;
-    border-radius: var(--goa-modal-border-radius) 0px 0px
-      var(--goa-modal-border-radius);
-  }
-
   .content {
     flex: 1 1 auto;
     width: 100%;
@@ -395,33 +370,24 @@
       flex-direction: column;
     }
 
-    .callout-bar {
-      text-align: left;
-      padding: var(--goa-modal-callout-bar-padding-small-screen);
-      border-radius: var(--goa-modal-border-radius)
-        var(--goa-modal-border-radius) 0px 0px;
-      height: var(--goa-space-2xl);
-    }
-
     .modal-content {
       margin: 0;
       padding: 0 var(--goa-modal-scrollable-padding-mobile, var(--goa-space-m));
       box-shadow: none;
     }
 
-    /* V2 Mobile Overrides */
-    .v2 .content header {
+    .content header {
       padding: var(--goa-modal-heading-padding-mobile, var(--goa-space-m));
     }
 
-    .v2 .content header.callout {
+    .content header.callout {
       padding: var(
         --goa-modal-callout-heading-padding-mobile,
         var(--goa-space-m)
       );
     }
 
-    .v2 .modal-content {
+    .modal-content {
       padding: var(
         --goa-modal-content-padding-mobile,
         var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl)
@@ -429,7 +395,7 @@
       );
     }
 
-    .v2 .modal-actions {
+    .modal-actions {
       padding: var(
         --goa-modal-actions-padding-mobile,
         0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m)
@@ -448,7 +414,7 @@
       box-shadow: none;
     }
 
-    .v2 .modal-content {
+    .modal-content {
       padding: var(
         --goa-modal-content-padding-desktop,
         var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl)
@@ -459,7 +425,7 @@
 
   .modal-pane {
     background-color: var(--goa-modal-color-bg, #fff);
-    border: var(--goa-modal-border, none);
+    border: none;
     z-index: 2;
     width: var(--goa-modal-pane-width, 90%);
     display: flex;
@@ -467,13 +433,8 @@
     border-radius: var(--goa-modal-border-radius);
   }
 
-  .v2.modal-pane {
-    border: none;
-  }
-
   /* Bound the pane so scroll-panel inside has a flex height context. 10rem =
-     8rem edge margin (4rem top + 4rem bottom) + 2rem (matches the prior V1
-     maxheight calc's extra --goa-space-xl term), */
+     8rem edge margin (4rem top + 4rem bottom) + 2rem for content spacing. */
   .modal-pane {
     max-height: calc(100vh - 10rem);
     overflow: hidden;
@@ -494,8 +455,8 @@
   .modal-content :global(::slotted(:last-child)) {
     margin-bottom: var(--goa-space-m) !important;
   }
-  /* V2: Remove margins from slotted content to prevent spacing issues */
-  .v2 .modal-content :global(::slotted(:first-child)) {
+  /* Remove margins from slotted content to prevent spacing issues */
+  .modal-content :global(::slotted(:first-child)) {
     margin-top: 0 !important;
   }
 
@@ -518,96 +479,91 @@
   }
 
   .modal-actions.empty-actions {
-    padding: 0 0 var(--goa-modal-padding) 0;
-  }
-
-  /* V2: Empty actions should take no space */
-  .v2 .modal-actions.empty-actions {
     padding: 0;
   }
 
-  /* V2 Callout Styles */
-  .v2 .modal-heading-content {
+  /* Callout styles */
+  .modal-heading-content {
     display: flex;
     align-items: start;
     gap: var(--goa-space-xs);
   }
 
-  .v2 .content header.callout {
+  .content header.callout {
     padding: var(--goa-modal-callout-heading-padding);
     border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius)
       0 0;
   }
 
-  .v2 header.callout goa-icon {
+  header.callout goa-icon {
     margin-top: 1px;
   }
 
-  .v2 header.information {
+  header.information {
     background-color: var(--goa-modal-callout-information-bg);
     border-bottom-color: var(--goa-modal-callout-information-border);
   }
 
-  .v2 header.information goa-icon {
+  header.information goa-icon {
     color: var(--goa-modal-callout-information-icon);
   }
 
-  .v2 header.success {
+  header.success {
     background-color: var(--goa-modal-callout-success-bg);
     border-bottom-color: var(--goa-modal-callout-success-border);
   }
 
-  .v2 header.success goa-icon {
+  header.success goa-icon {
     color: var(--goa-modal-callout-success-icon);
   }
 
-  .v2 header.important {
+  header.important {
     background-color: var(--goa-modal-callout-important-bg);
     border-bottom-color: var(--goa-modal-callout-important-border);
   }
 
-  .v2 header.important goa-icon {
+  header.important goa-icon {
     color: var(--goa-modal-callout-important-icon);
   }
 
-  .v2 header.emergency {
+  header.emergency {
     background-color: var(--goa-modal-callout-emergency-bg);
     border-bottom-color: var(--goa-modal-callout-emergency-border);
   }
 
-  .v2 header.emergency goa-icon {
+  header.emergency goa-icon {
     color: var(--goa-modal-callout-emergency-icon);
   }
 
-  .v2 header.event {
+  header.event {
     background-color: var(--goa-modal-callout-event-bg);
     border-bottom-color: var(--goa-modal-callout-event-border);
   }
 
-  .v2 header.event goa-icon {
+  header.event goa-icon {
     color: var(--goa-modal-callout-event-icon);
   }
 
-  /* V2 callout close button hover colors — override icon-button's dark hover bg */
-  .v2 header.information .modal-close goa-icon-button {
+  /* Callout close button hover colors — override icon-button's dark hover bg */
+  header.information .modal-close goa-icon-button {
     --goa-icon-button-dark-hover-color-bg: var(
       --goa-modal-callout-information-close-bg-hover
     );
   }
 
-  .v2 header.success .modal-close goa-icon-button {
+  header.success .modal-close goa-icon-button {
     --goa-icon-button-dark-hover-color-bg: var(
       --goa-modal-callout-success-close-bg-hover
     );
   }
 
-  .v2 header.important .modal-close goa-icon-button {
+  header.important .modal-close goa-icon-button {
     --goa-icon-button-dark-hover-color-bg: var(
       --goa-modal-callout-important-close-bg-hover
     );
   }
 
-  .v2 header.emergency .modal-close goa-icon-button {
+  header.emergency .modal-close goa-icon-button {
     --goa-icon-button-dark-hover-color-bg: var(
       --goa-modal-callout-emergency-close-bg-hover
     );

@@ -24,7 +24,7 @@ export const notificationConfigurations: ComponentConfigurations = {
         angular: `<goab-notification type="information">
   Your application has been received and is being processed.
 </goab-notification>`,
-        webComponents: `<goa-notification version="2" type="information">
+        webComponents: `<goa-notification type="information">
   Your application has been received and is being processed.
 </goa-notification>`,
       },
@@ -61,16 +61,16 @@ export const notificationConfigurations: ComponentConfigurations = {
   Emergency: Critical issue requiring attention.
 </goab-notification>`,
         webComponents: `<div style="margin-bottom: var(--goa-space-m);">
-  <goa-notification version="2" type="information">
+  <goa-notification type="information">
     Information: General updates for the user.
   </goa-notification>
 </div>
 <div style="margin-bottom: var(--goa-space-m);">
-  <goa-notification version="2" type="important">
+  <goa-notification type="important">
     Important: Action may be required.
   </goa-notification>
 </div>
-<goa-notification version="2" type="emergency">
+<goa-notification type="emergency">
   Emergency: Critical issue requiring attention.
 </goa-notification>`,
       },
@@ -97,11 +97,11 @@ export const notificationConfigurations: ComponentConfigurations = {
   Low emphasis: Minimal styling for less prominent messaging.
 </goab-notification>`,
         webComponents: `<div style="margin-bottom: var(--goa-space-m);">
-  <goa-notification version="2" type="important" emphasis="high">
+  <goa-notification type="important" emphasis="high">
     High emphasis: Full background for maximum visibility.
   </goa-notification>
 </div>
-<goa-notification version="2" type="important" emphasis="low">
+<goa-notification type="important" emphasis="low">
   Low emphasis: Minimal styling for less prominent messaging.
 </goa-notification>`,
       },
@@ -128,11 +128,11 @@ export const notificationConfigurations: ComponentConfigurations = {
   Compact notification with reduced padding.
 </goab-notification>`,
         webComponents: `<div style="margin-bottom: var(--goa-space-m);">
-  <goa-notification version="2" type="information">
+  <goa-notification type="information">
     Standard notification with default padding.
   </goa-notification>
 </div>
-<goa-notification version="2" type="information" compact>
+<goa-notification type="information" compact>
   Compact notification with reduced padding.
 </goa-notification>`,
       },

@@ -8,7 +8,6 @@ describe("GoabCallout", () => {
       <GoabCallout
         type="information"
         heading="Callout Title"
-        size="medium"
         emphasis="high"
         maxWidth="480px"
         mt="s"
@@ -26,7 +25,6 @@ describe("GoabCallout", () => {
     const el = result.container.querySelector("goa-callout");
     expect(el?.getAttribute("heading")).toContain("Callout Title");
     expect(el?.getAttribute("type")).toContain("information");
-    expect(el?.getAttribute("size")).toContain("medium");
     expect(el?.getAttribute("emphasis")).toContain("high");
     expect(el?.getAttribute("maxwidth")).toBe("480px");
     expect(el?.getAttribute("mt")).toBe("s");

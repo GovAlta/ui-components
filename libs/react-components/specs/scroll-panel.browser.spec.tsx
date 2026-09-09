@@ -50,13 +50,19 @@ describe("ScrollPanel", () => {
     const footerBottomBefore = footer.element().getBoundingClientRect().bottom;
     const paraTopBefore = firstPara.element().getBoundingClientRect().top;
 
-    // Scroll the body down.
-    scrollEl.scrollTop = 200;
+    // Scroll the body down by as much as the rendered content allows. Token changes
+    // can affect content height, so the assertion should not rely on a fixed distance.
+    const scrollDistance = Math.min(
+      200,
+      scrollEl.scrollHeight - scrollEl.clientHeight,
+    );
+    expect(scrollDistance).toBeGreaterThan(0);
+    scrollEl.scrollTop = scrollDistance;
     await vi.waitFor(() => {
-      expect(scrollEl.scrollTop).toBeCloseTo(200, 0);
+      expect(scrollEl.scrollTop).toBeCloseTo(scrollDistance, 0);
       // Body content moved up by the scrolled amount.
       expect(firstPara.element().getBoundingClientRect().top).toBeCloseTo(
-        paraTopBefore - 200,
+        paraTopBefore - scrollDistance,
         0,
       );
     });

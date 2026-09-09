@@ -59,8 +59,6 @@
   export let width: string = "";
   /** Sets the size of the date picker. 'compact' reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -311,7 +309,6 @@
           on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
-          {version}
         />
         <goa-calendar
           {name}
@@ -320,7 +317,6 @@
           {max}
           bordered="false"
           on:_change={onCalendarChange}
-          {version}
         />
       </goa-popover>
     </div>
@@ -351,7 +347,6 @@
         on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
-        {version}
       />
       <goa-calendar
         {name}
@@ -360,14 +355,13 @@
         {max}
         bordered="false"
         on:_change={onCalendarChange}
-        {version}
       />
     </goa-popover>
   {/if}
 {:else if type === "input"}
-  <goa-form-item error={_error && error} bind:this={_rootEl} {version}>
+  <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
-      <goa-form-item helptext="Month" {version}>
+      <goa-form-item helptext="Month">
         <goa-dropdown
           name="month"
           testid="input-month"
@@ -378,7 +372,6 @@
           value={_date.month + ""}
           disabled={isDisabled}
           {size}
-          {version}
         >
           <goa-dropdown-item value="0" label="—Select a month—" />
           <goa-dropdown-item value="1" label="January" />
@@ -395,7 +388,7 @@
           <goa-dropdown-item value="12" label="December" />
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext="Day (DD)" {version}>
+      <goa-form-item helptext="Day (DD)">
         <goa-input
           name="day"
           type="number"
@@ -411,10 +404,9 @@
           {error}
           disabled={isDisabled}
           {size}
-          {version}
         />
       </goa-form-item>
-      <goa-form-item helptext="Year (YYYY)" {version}>
+      <goa-form-item helptext="Year (YYYY)">
         <goa-input
           name="year"
           type="number"
@@ -430,7 +422,6 @@
           {error}
           disabled={isDisabled}
           {size}
-          {version}
         />
       </goa-form-item>
     </goa-block>

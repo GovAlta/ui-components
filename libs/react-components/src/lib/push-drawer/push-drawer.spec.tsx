@@ -13,7 +13,6 @@ describe("GoabPushDrawer", () => {
     const el = content.container.querySelector("goa-push-drawer");
 
     expect(el?.getAttribute("open")).toBeNull();
-    expect(el?.getAttribute("version")).toBe("2");
   });
 
   it("should render with properties", async () => {
@@ -36,7 +35,6 @@ describe("GoabPushDrawer", () => {
       expect(el?.getAttribute("heading")).toBe("The heading");
       expect(el?.getAttribute("width")).toBe("600px");
       expect(el?.getAttribute("testid")).toBe("the testid");
-      expect(el?.getAttribute("version")).toBe("2");
     });
   });
 

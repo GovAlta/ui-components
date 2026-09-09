@@ -8,7 +8,6 @@ interface WCProps extends Margins {
   pagenumber: number;
   variant?: "all" | "links-only";
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -71,7 +70,6 @@ export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
       ml={props.ml}
       mr={props.mr}
       testid={props.testId}
-      version="2"
     />
   );
 }

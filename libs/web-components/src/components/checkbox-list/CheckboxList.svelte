@@ -38,8 +38,6 @@
   export let testid: string = "";
   /** Sets the maximum width of the checkbox list container. */
   export let maxwidth: string = "none";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. */
   export let size: "default" | "compact" = "default";
 
@@ -444,7 +442,6 @@
   <div
     bind:this={_slotEl}
     class="checkbox-container"
-    class:v2={version === "2"}
     class:compact={size === "compact"}
   >
     <slot />
@@ -467,14 +464,10 @@
   .checkbox-container {
     display: flex;
     flex-direction: column;
-    gap: 0;
-  }
-
-  .checkbox-container.v2 {
     gap: var(--goa-space-m);
   }
 
-  .checkbox-container.v2.compact {
+  .checkbox-container.compact {
     gap: var(--goa-space-s);
   }
 </style>

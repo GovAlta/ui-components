@@ -89,7 +89,6 @@ describe("GoabCheckboxList", () => {
       By.css("goa-checkbox-list"),
     ).nativeElement;
     expect(el.getAttribute("name")).toBe(component.name);
-    expect(el.getAttribute("version")).toBe("2");
     expect(el.getAttribute("size")).toBe("compact");
     expect(el.getAttribute("testid")).toBe(component.testId);
     expect(el.getAttribute("maxwidth")).toBe(component.maxWidth);
@@ -97,13 +96,6 @@ describe("GoabCheckboxList", () => {
     expect(el.getAttribute("mr")).toBe(component.mr);
     expect(el.getAttribute("mb")).toBe(component.mb);
     expect(el.getAttribute("ml")).toBe(component.ml);
-  });
-
-  it("should default version to 2", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-checkbox-list"),
-    ).nativeElement;
-    expect(el.getAttribute("version")).toBe("2");
   });
 
   it("should handle onChange event", async () => {
