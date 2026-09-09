@@ -14,8 +14,6 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
 
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** The heading text for the menu group. */
   export let heading: string;
   /** Icon displayed alongside the heading. */
@@ -131,7 +129,6 @@
 <div bind:this={_senderEl}></div>
 <div bind:this={_rootEl}
      class="side-menu-group"
-     class:v2={version === "2"}
      class:current={_current}
      data-testid={testid}
      style={`
@@ -141,27 +138,15 @@
   <a href={`#${_slug}`} class="heading" class:open={_open} class:current={_current} on:click={handleClick}>
     {#if icon}
       <div class="leading-icon">
-        {#if version === "2"}
-          <goa-icon type={icon} size="3" />
-        {:else}
-          <goa-icon type={icon} />
-        {/if}
+        <goa-icon type={icon} size="3" />
       </div>
     {/if}
     {heading}
     <div class="trailing-icon">
-      {#if version === "2"}
-        {#if _open}
-          <goa-icon type="chevron-down" size="3" />
-        {:else}
-          <goa-icon type="chevron-forward" size="3" />
-        {/if}
+      {#if _open}
+        <goa-icon type="chevron-down" size="3" />
       {:else}
-        {#if _open}
-          <goa-icon type="chevron-down" />
-        {:else}
-          <goa-icon type="chevron-forward" />
-        {/if}
+        <goa-icon type="chevron-forward" size="3" />
       {/if}
     </div>
   </a>
@@ -284,16 +269,12 @@
     height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
   }
 
-  /* V2 Styles */
-
-  /* V2: Open group heading */
-  .side-menu-group.v2 .heading.open {
+  .side-menu-group .heading.open {
     border-radius: var(--goa-side-menu-group-border-radius-open, 0);
     background: var(--goa-color-greyscale-100);
   }
 
-  /* V2: Nested child links - typography, padding, border-radius, colors */
-  .side-menu-group.v2 :global(::slotted(a)) {
+  .side-menu-group :global(::slotted(a)) {
     border-radius: var(--goa-border-radius-l, 6px);
     font: var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));
     padding: var(--goa-space-2xs) var(--goa-space-xs);
@@ -302,8 +283,7 @@
     color: var(--goa-color-text-secondary) !important;
   }
 
-  /* V2: Group container - left border on container instead of individual items */
-  .side-menu-group.v2 .group {
+  .side-menu-group .group {
     border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
     margin-left: var(--goa-side-menu-group-container-margin-left, 20px);
     padding-left: var(--goa-space-s);
@@ -311,43 +291,41 @@
     margin-bottom: var(--goa-side-menu-group-container-margin-bottom, 6px);
   }
 
-  /* V2: Current state - background, bold text, default text color */
-  .side-menu-group.v2 :global(::slotted(a.current)) {
+  .side-menu-group :global(::slotted(a.current)) {
     border-left: none;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
     color: var(--goa-color-text-default) !important;
     font-weight: var(--goa-font-weight-bold);
   }
 
-  /* V2: Hover state */
-  .side-menu-group.v2 :global(::slotted(a:hover:not(.current))) {
+  .side-menu-group :global(::slotted(a:hover:not(.current))) {
     border-left: none;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
-  /* V2: Group heading - padding, alignment, color */
-  .side-menu-group.v2 .heading {
+  .side-menu-group .heading {
     padding: var(--goa-space-xs) var(--goa-space-s);
     align-items: flex-start;
     color: var(--goa-color-text-secondary);
   }
 
-  .side-menu-group.v2 .heading:hover {
+  .side-menu-group .heading:hover {
     border-radius: var(--goa-side-menu-group-border-radius-open, 0);
   }
 
-  .side-menu-group.v2 .heading:focus-visible {
+  .side-menu-group .heading:focus-visible {
     border-radius: var(--goa-side-menu-group-border-radius-open, 0);
   }
 
-  /* V2: Nested groups (child attribute) */
-  :host([child="true"]) .side-menu-group.v2 a.heading {
+  :host([child="true"]) .side-menu-group a.heading {
     border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+    padding: var(--goa-space-xs) var(--goa-space-s);
+    align-items: flex-start;
+    color: var(--goa-color-text-secondary);
   }
 
-  /* V2: Icon containers - smaller height for size-3 icons, align with first line */
-  .side-menu-group.v2 .leading-icon,
-  .side-menu-group.v2 .trailing-icon {
+  .side-menu-group .leading-icon,
+  .side-menu-group .trailing-icon {
     height: var(--goa-icon-size-3, 1.25rem);
     margin-top: 1px;
   }

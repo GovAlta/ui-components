@@ -12,7 +12,7 @@ import {
   selector: "goab-side-menu",
   template: `
     @if (isReady) {
-      <goa-side-menu [attr.version]="version" [attr.testid]="testId">
+      <goa-side-menu [attr.testid]="testId">
         <ng-content />
       </goa-side-menu>
     }
@@ -25,7 +25,6 @@ export class GoabSideMenu implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 

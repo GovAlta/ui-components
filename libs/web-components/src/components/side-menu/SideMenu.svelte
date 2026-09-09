@@ -6,8 +6,6 @@
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
@@ -104,7 +102,7 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu" class:v2={version === "2"} data-testid={testid}>
+<div bind:this={_rootEl} class="side-menu" data-testid={testid}>
   <slot />
 </div>
 
@@ -112,11 +110,14 @@
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;
-    display: block;
+    color: var(--goa-color-text-secondary) !important;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--goa-space-xs);
     font: var(--goa-side-menu-typography-item);
-    padding: var(--goa-side-menu-padding-item);
+    padding: var(--goa-space-xs) var(--goa-space-s);
     text-decoration: none;
+    border-radius: var(--goa-side-menu-item-border-radius, 0);
   }
 
   :global(::slotted(a.current)) {
@@ -141,19 +142,6 @@
     gap: var(--goa-side-menu-items-gap);
     background-color: var(--goa-side-menu-color-bg);
     border-right: var(--goa-side-menu-border-right);
-  }
-
-  /* V2 Styles */
-  .side-menu.v2 {
     padding: var(--goa-side-menu-padding);
-  }
-
-  .side-menu.v2 :global(::slotted(a)) {
-    border-radius: var(--goa-side-menu-item-border-radius, 0);
-    padding: var(--goa-space-xs) var(--goa-space-s);
-    display: flex;
-    align-items: flex-start;
-    gap: var(--goa-space-xs);
-    color: var(--goa-color-text-secondary) !important;
   }
 </style>
