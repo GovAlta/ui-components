@@ -121,7 +121,7 @@ describe("GoabAppHeader", () => {
     component = fixture.componentInstance;
   }));
 
-  it("should render with version 2", fakeAsync(() => {
+  it("should render", fakeAsync(() => {
     component.heading = "Test heading";
     fixture.detectChanges();
     tick();
@@ -129,7 +129,6 @@ describe("GoabAppHeader", () => {
 
     const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;
     expect(el).toBeTruthy();
-    expect(el.getAttribute("version")).toBe("2");
   }));
 
   it("should render all properties", fakeAsync(() => {
@@ -150,7 +149,6 @@ describe("GoabAppHeader", () => {
     expect(el.getAttribute("maxcontentwidth")).toBe("800px");
     expect(el.getAttribute("fullmenubreakpoint")).toBe("1024");
     expect(el.getAttribute("testid")).toBe("my-header");
-    expect(el.getAttribute("version")).toBe("2");
   }));
 
   it("should set hasmenuclickhandler to true when onMenuClick is bound", fakeAsync(() => {

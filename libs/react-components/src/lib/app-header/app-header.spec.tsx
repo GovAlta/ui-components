@@ -5,12 +5,11 @@ import { GoabAppHeaderMenu } from "../app-header-menu/app-header-menu";
 import { describe, it, expect, vi } from "vitest";
 
 describe("GoabAppHeader", () => {
-  it("should render with version 2", () => {
+  it("should render", () => {
     const { container } = render(<GoabAppHeader heading="Test heading" />);
 
     const el = container.querySelector("goa-app-header");
     expect(el).toBeTruthy();
-    expect(el?.getAttribute("version")).toBe("2");
   });
 
   it("should render all properties", () => {
@@ -32,7 +31,6 @@ describe("GoabAppHeader", () => {
     expect(el?.getAttribute("maxcontentwidth")).toBe("800px");
     expect(el?.getAttribute("fullmenubreakpoint")).toBe("1024");
     expect(el?.getAttribute("testid")).toBe("my-header");
-    expect(el?.getAttribute("version")).toBe("2");
   });
 
   it("should set hasmenuclickhandler to false when no handler provided", () => {

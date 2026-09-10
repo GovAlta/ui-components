@@ -20,7 +20,6 @@ interface WCProps {
   fullmenubreakpoint?: number;
   hasmenuclickhandler?: string;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -116,7 +115,6 @@ export function GoabAppHeader({
       hasmenuclickhandler={onMenuClick ? "true" : "false"}
       secondarytext={secondaryText}
       {..._props}
-      version="2"
     >
       {children}
       {banner && <div slot="banner">{banner}</div>}
