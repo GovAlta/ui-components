@@ -315,7 +315,6 @@ export function EverythingRoute(): JSX.Element {
   const [filterChipClicks, setFilterChipClicks] = useState(0);
   const [fileUploadCardEvents, setFileUploadCardEvents] = useState<string[]>([]);
   const [fileUploadInputFiles, setFileUploadInputFiles] = useState<string[]>([]);
-  const [headerMenuActivated, setHeaderMenuActivated] = useState(false);
   const [iconButtonClickCount, setIconButtonClickCount] = useState<
     Record<GoabIconButtonVariant, number>
   >({
@@ -483,10 +482,6 @@ export function EverythingRoute(): JSX.Element {
   const handleNotificationDismiss = () => {
     setNotificationDismissed(true);
     logEvent("notification.dismiss", {});
-  };
-  const handleHeaderMenuClick = () => {
-    setHeaderMenuActivated(true);
-    logEvent("header.menuClick", {});
   };
   const handleIconButtonClick = (variant: GoabIconButtonVariant) => {
     setIconButtonClickCount((prev) => {
@@ -1630,7 +1625,7 @@ export function EverythingRoute(): JSX.Element {
           </GoabText>
           <GoabOneColumnLayout>
             <GoabMicrositeHeader type="alpha" version="UAT" />
-            <GoabAppHeader heading="Sample App" onMenuClick={handleHeaderMenuClick}>
+            <GoabAppHeader heading="Sample App">
               <a href="#">Home</a>
               <GoabAppHeaderMenu heading="Menu">
                 <a href="#">Item 1</a>
@@ -1673,9 +1668,6 @@ export function EverythingRoute(): JSX.Element {
               </GoabAppFooterMetaSection>
             </GoabAppFooter>
           </GoabOneColumnLayout>
-          <GoabText tag="p" size="body-s" mt="s">
-            Header menu clicked: {headerMenuActivated.toString()}
-          </GoabText>
         </GoabContainer>
       </GoabBlock>
     </GoabDetails>

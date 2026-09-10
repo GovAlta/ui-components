@@ -11,12 +11,7 @@ import {
   standalone: true,
   selector: "goab-app-footer",
   template: `@if (isReady) {
-    <goa-app-footer
-      [attr.maxcontentwidth]="maxContentWidth"
-      [attr.url]="url"
-      [attr.testid]="testId"
-      [attr.version]="version"
-    >
+    <goa-app-footer [attr.maxcontentwidth]="maxContentWidth" [attr.testid]="testId">
       <ng-content select="[slot=nav]" />
       <ng-content select="goab-app-footer-meta-section"></ng-content>
       <ng-content></ng-content>
@@ -32,11 +27,8 @@ export class GoabAppFooter implements OnInit {
   @Input() maxContentWidth?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** URL for the Government of Alberta logo link. Set to empty string to disable the link. */
-  @Input() url?: string;
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

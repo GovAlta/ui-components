@@ -6040,7 +6040,7 @@ export function EverythingBRoute() {
       </section>
 
       <section slot="footer">
-        <GoabAppFooter url="http://localhost:4200" maxContentWidth="100%">
+        <GoabAppFooter maxContentWidth="100%">
           <GoabAppFooterNavSection maxColumnCount={2} heading="Heading">
             <a href="g.html">Link 123we</a>
             <a href="h.html">Link 2</a>
@@ -6062,11 +6062,8 @@ export function EverythingBRoute() {
         </GoabAppFooter>
 
         <GoabAppFooter maxContentWidth="100%"> </GoabAppFooter>
-        <GoabAppFooter maxContentWidth="100%" url="http://localhost:4200">
-          {" "}
-        </GoabAppFooter>
 
-        <GoabAppFooter url="" maxContentWidth="100%">
+        <GoabAppFooter maxContentWidth="100%">
           <GoabAppFooterMetaSection>
             <a href="privacy.html">Meta link</a>
             <a href="disclaimer.html">Meta link</a>

@@ -5,8 +5,6 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
-  useEffect,
-  useRef,
   type JSX,
 } from "react";
 import { DataAttributes } from "@abgov/ui-components-common";
@@ -17,8 +15,6 @@ interface WCProps {
   secondarytext?: string;
   url?: string;
   maxcontentwidth?: string;
-  fullmenubreakpoint?: number;
-  hasmenuclickhandler?: string;
   testid?: string;
 }
 
@@ -26,10 +22,7 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-app-header": WCProps &
-        React.HTMLAttributes<HTMLElement> & {
-          ref: React.RefObject<HTMLElement | null>;
-        };
+      "goa-app-header": WCProps & React.HTMLAttributes<HTMLElement>;
     }
   }
 }
@@ -59,12 +52,8 @@ export interface GoabAppHeaderProps extends DataAttributes {
   url?: string;
   /** Maximum width of the content area. */
   maxContentWidth?: string;
-  /** Sets the breakpoint in px for the full menu to display. */
-  fullMenuBreakpoint?: number;
   /** Content rendered inside the app header, typically navigation links. */
   children?: ReactNode;
-  /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
-  onMenuClick?: () => void;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /** Banner content displayed above the header. */
@@ -79,7 +68,6 @@ export interface GoabAppHeaderProps extends DataAttributes {
 
 /** Provide structure to help users find their way around the service. */
 export function GoabAppHeader({
-  onMenuClick,
   children,
   secondaryText,
   banner,
@@ -88,34 +76,10 @@ export function GoabAppHeader({
   utilities,
   ...rest
 }: GoabAppHeaderProps): JSX.Element {
-  const el = useRef<HTMLElement>(null);
-
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  useEffect(() => {
-    if (!el.current) {
-      return;
-    }
-    if (!onMenuClick) {
-      return;
-    }
-    const current = el.current;
-    const listener = () => {
-      onMenuClick?.();
-    };
-    current.addEventListener("_menuClick", listener);
-    return () => {
-      current.removeEventListener("_menuClick", listener);
-    };
-  }, [el, onMenuClick]);
-
   return (
-    <goa-app-header
-      ref={el}
-      hasmenuclickhandler={onMenuClick ? "true" : "false"}
-      secondarytext={secondaryText}
-      {..._props}
-    >
+    <goa-app-header secondarytext={secondaryText} {..._props}>
       {children}
       {banner && <div slot="banner">{banner}</div>}
       {phase && <div slot="phase">{phase}</div>}

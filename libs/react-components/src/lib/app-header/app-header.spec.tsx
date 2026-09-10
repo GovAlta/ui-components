@@ -1,8 +1,7 @@
 import { render } from "@testing-library/react";
-import { fireEvent } from "@testing-library/dom";
 import { GoabAppHeader } from "./app-header";
 import { GoabAppHeaderMenu } from "../app-header-menu/app-header-menu";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 
 describe("GoabAppHeader", () => {
   it("should render", () => {
@@ -19,7 +18,6 @@ describe("GoabAppHeader", () => {
         secondaryText="Beta"
         url="https://example.com"
         maxContentWidth="800px"
-        fullMenuBreakpoint={1024}
         testId="my-header"
       />,
     );
@@ -29,28 +27,7 @@ describe("GoabAppHeader", () => {
     expect(el?.getAttribute("secondarytext")).toBe("Beta");
     expect(el?.getAttribute("url")).toBe("https://example.com");
     expect(el?.getAttribute("maxcontentwidth")).toBe("800px");
-    expect(el?.getAttribute("fullmenubreakpoint")).toBe("1024");
     expect(el?.getAttribute("testid")).toBe("my-header");
-  });
-
-  it("should set hasmenuclickhandler to false when no handler provided", () => {
-    const { container } = render(<GoabAppHeader heading="Test heading" />);
-
-    const el = container.querySelector("goa-app-header");
-    expect(el?.getAttribute("hasmenuclickhandler")).toBe("false");
-  });
-
-  it("should set hasmenuclickhandler to true and dispatch event when handler provided", () => {
-    const onMenuClick = vi.fn();
-    const { container } = render(
-      <GoabAppHeader heading="Test heading" onMenuClick={onMenuClick} />,
-    );
-
-    const el = container.querySelector("goa-app-header");
-    expect(el?.getAttribute("hasmenuclickhandler")).toBe("true");
-
-    el && fireEvent(el, new CustomEvent("_menuClick"));
-    expect(onMenuClick).toHaveBeenCalledTimes(1);
   });
 
   it("should render children into the slot", () => {
