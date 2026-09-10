@@ -683,7 +683,8 @@ describe("Dropdown", () => {
 
       await vi.waitFor(() => {
         expect(inputEl.getAttribute("aria-expanded")).toBe("true");
-        expect(inputEl.matches(":focus")).toBe(true);
+        // Firefox can lose document focus while other browser test files run.
+        expect((inputEl.getRootNode() as ShadowRoot).activeElement).toBe(inputEl);
       });
 
       await userEvent.keyboard("B");
