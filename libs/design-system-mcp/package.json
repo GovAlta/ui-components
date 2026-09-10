@@ -1,0 +1,27 @@
+{
+  "name": "@abgov/design-system-mcp",
+  "version": "0.0.0",
+  "description": "MCP server for the Government of Alberta Design System. Gives AI tools accurate knowledge of the components, guidance, and examples from the design system release it ships with.",
+  "keywords": ["Goab", "ui-components", "mcp", "design-system"],
+  "bugs": {
+    "url": "https://github.com/GovAlta/ui-components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GovAlta/ui-components.git",
+    "directory": "libs/design-system-mcp"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./main.js",
+  "bin": {
+    "goa-design-system-mcp": "./main.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
