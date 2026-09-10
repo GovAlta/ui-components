@@ -4,7 +4,7 @@
 <!-- Script -->
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
-  import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
+  import { MOBILE_BP } from "../../common/breakpoints";
   import AppHeaderNavigation from "../app-header-navigation/AppHeaderNavigation.svelte";
 
   // optional
@@ -18,11 +18,6 @@
   export let testid: string = "";
   /** Maximum width of the content area. */
   export let maxcontentwidth = "";
-  /** Sets the breakpoint in px for the full menu to display. */
-  export let fullmenubreakpoint: number = TABLET_BP; // minimum window width to show all menu links
-  /** When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling. */
-  export let hasmenuclickhandler: string = "false"; // If this is yes, we will not expand menu when clicking a toggle button
-
   // Private
 
   const _mobileLogo =
