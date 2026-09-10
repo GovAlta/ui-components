@@ -26,7 +26,6 @@ import { GoabSlottedTemplate } from "../../slotted-directive";
       [attr.fullmenubreakpoint]="fullMenuBreakpoint"
       [attr.testid]="testId"
       [attr.hasmenuclickhandler]="onMenuClick.observed ? 'true' : 'false'"
-      [attr.version]="version"
       (_menuClick)="_onMenuClick()"
     >
       @if (banner) {
@@ -82,7 +81,6 @@ export class GoabAppHeader implements OnInit {
   @Input() utilities?: TemplateRef<any>;
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -24,7 +24,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   <goab-app-header heading="My Application"></goab-app-header>
 </header>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application"></goa-app-header>
+  <goa-app-header heading="My Application"></goa-app-header>
 </header>`,
       },
     },
@@ -40,7 +40,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   <goab-app-header heading="My Application" url="/"></goab-app-header>
 </header>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application" url="/"></goa-app-header>
+  <goa-app-header heading="My Application" url="/"></goa-app-header>
 </header>`,
       },
     },
@@ -56,7 +56,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   <goab-app-header heading="My Application" secondaryText="Supporting information" url="/"></goab-app-header>
 </header>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application" secondarytext="Supporting information" url="/"></goa-app-header>
+  <goa-app-header heading="My Application" secondarytext="Supporting information" url="/"></goa-app-header>
 </header>`,
       },
     },
@@ -93,7 +93,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   <goab-button type="tertiary" size="compact" leadingIcon="person">Sign in</goab-button>
 </ng-template>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application" url="/">
+  <goa-app-header heading="My Application" url="/">
     <goa-button slot="utilities" type="tertiary" size="compact">Help</goa-button>
     <goa-button slot="utilities" type="tertiary" size="compact" leadingicon="person">Sign in</goa-button>
   </goa-app-header>
@@ -123,7 +123,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   <goab-badge type="important" content="Service preview"></goab-badge>
 </ng-template>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application" url="/">
+  <goa-app-header heading="My Application" url="/">
     <goa-badge slot="phase" type="important" content="Service preview" icon="false"></goa-badge>
   </goa-app-header>
 </header>`,
@@ -165,7 +165,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   </span>
 </ng-template>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application" url="/">
+  <goa-app-header heading="My Application" url="/">
     <span slot="banner" style="text-align: right; width: 100%; font-size: 12px; font-weight: normal">v2.3.1 | UAT Environment</span>
   </goa-app-header>
 </header>`,
@@ -225,9 +225,9 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   </goab-menu-button>
 </ng-template>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="Service Portal" url="/">
+  <goa-app-header heading="Service Portal" url="/">
     <a slot="navigation" href="#">Dashboard</a>
-    <goa-app-header-menu slot="navigation" version="2" heading="Applications">
+    <goa-app-header-menu slot="navigation" heading="Applications">
       <a href="#">New application</a>
       <a href="#">Active</a>
       <a href="#">Archived</a>
