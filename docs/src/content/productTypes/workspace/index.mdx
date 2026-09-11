@@ -13,13 +13,17 @@ tags:
   - dashboard
   - pattern
 components:
+  - workspace-layout
   - work-side-menu
+  - work-side-notification-panel
   - table
+  - data-grid
   - badge
   - tabs
   - container
   - accordion
   - drawer
+  - push-drawer
   - button
   - block
 status: published
@@ -192,6 +196,25 @@ Use it when users need to keep the main record in view while completing the task
 <img
   src={withBase("/thumbnails/workspace-push-drawer.png")}
   alt="Workspace push drawer"
+  style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
+/>
+
+### Notifications
+
+The [notification panel](/components/work-side-notification-panel) is where a user catches up on everything happening to their work across the service. It opens from the [work side menu](/components/work-side-menu), so it is available from any page rather than tied to one.
+
+Use it for the things a user would otherwise have to go looking for:
+
+- comments left on a record they hold
+- status changes on work they are following
+- work newly assigned to them
+- files or documents added to a case
+
+Keep each notification to what happened, which record, and when, so the panel can be scanned without opening anything. Use the urgent priority to weight what matters most in your service's context. The panel offers a "View all" link, so plan for a full notifications page to sit behind it.
+
+<img
+  src={withBase("/thumbnails/workspace-notification-panel.png")}
+  alt="Workspace notification panel"
   style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
 />
 
