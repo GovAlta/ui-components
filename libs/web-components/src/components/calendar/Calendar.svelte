@@ -430,10 +430,7 @@
 <style>
   .bordered {
     display: inline-block;
-    border: var(
-      --goa-date-input-calendar-border,
-      1px solid var(--goa-color-greyscale-700)
-    );
+    border: var(--goa-date-input-calendar-border);
     border-radius: var(--goa-date-input-calendar-border-radius);
     padding: 1rem;
   }
@@ -499,7 +496,7 @@
   }
 
   .day.selected:focus-within {
-    outline-offset: var(--goa-date-input-day-today-outline-offset, 0);
+    outline-offset: var(--goa-date-input-day-today-outline-offset);
   }
   .day.today.selected:hover {
     background-color: var(--goa-date-input-day-color-bg-selected-hover);

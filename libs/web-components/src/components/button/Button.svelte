@@ -184,7 +184,7 @@
     font: var(--goa-button-text);
     height: var(--goa-button-height);
     letter-spacing: var(--goa-button-letter-spacing);
-    padding: var(--goa-button-padding, 0 var(--goa-button-padding-lr));
+    padding: var(--goa-button-padding);
     white-space: nowrap;
     gap: var(--goa-button-gap);
     align-items: center; /* for leading and trailing icon vertical alignment */
@@ -238,10 +238,7 @@
   button.compact {
     height: var(--goa-button-height-compact);
     font: var(--goa-button-text-compact);
-    padding: var(
-      --goa-button-padding-compact,
-      var(--goa-button-padding-lr-compact)
-    );
+    padding: var(--goa-button-padding-compact);
     gap: var(--goa-button-compact-gap);
   }
 
@@ -294,7 +291,7 @@
     border: var(--goa-button-tertiary-border);
     background-color: var(--goa-button-tertiary-color-bg);
     color: var(--goa-button-tertiary-color-text);
-    text-decoration: var(--goa-button-tertiary-text-decoration, underline);
+    text-decoration: var(--goa-button-tertiary-text-decoration);
   }
   button.tertiary:hover {
     background-color: var(--goa-button-tertiary-hover-color-bg);

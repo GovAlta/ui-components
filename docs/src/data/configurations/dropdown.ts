@@ -479,7 +479,6 @@ export const dropdownConfigurations: ComponentConfigurations = {
 </goab-form-item>`,
         webComponents: `<goa-form-item label="Program" mb="l">
   <goa-dropdown
-    version="2"
     name="program"
     filterable
     noresults="No programs found"
@@ -587,14 +586,14 @@ export const dropdownConfigurations: ComponentConfigurations = {
         webComponents: `<goa-form-item label="Assign to" mb="l">
   <goa-dropdown name="assignee" width="250px">
     <goa-dropdown-item value="sarah" label="Sarah Johnson">
-      <goa-block version="2" direction="column" gap="3xs">
+      <goa-block direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
         <span>Case worker &middot; Edmonton</span>
         <goa-badge type="success" content="Available"></goa-badge>
       </goa-block>
     </goa-dropdown-item>
     <goa-dropdown-item value="michael" label="Michael Chen">
-      <goa-block version="2" direction="column" gap="3xs">
+      <goa-block direction="column" gap="3xs">
         <strong>Michael Chen</strong>
         <span>Supervisor &middot; Calgary</span>
         <goa-badge type="information" content="In a meeting"></goa-badge>
@@ -733,7 +732,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       label="Sarah Johnson"
       filter="Sarah Johnson Case worker Edmonton Available"
     >
-      <goa-block version="2" direction="column" gap="3xs">
+      <goa-block direction="column" gap="3xs">
         <strong>Sarah Johnson</strong>
         <span>Case worker &middot; Edmonton</span>
         <goa-badge type="success" content="Available"></goa-badge>
@@ -744,7 +743,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
       label="Michael Chen"
       filter="Michael Chen Supervisor Calgary In a meeting"
     >
-      <goa-block version="2" direction="column" gap="3xs">
+      <goa-block direction="column" gap="3xs">
         <strong>Michael Chen</strong>
         <span>Supervisor &middot; Calgary</span>
         <goa-badge type="information" content="In a meeting"></goa-badge>

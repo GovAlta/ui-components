@@ -340,7 +340,7 @@
   .label {
     font: var(--goa-radio-label);
     color: var(--goa-radio-color-label, var(--goa-input-color-text-secondary));
-    padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
+    padding-left: var(--goa-radio-gap-label);
   }
 
   .radio.compact .label {
@@ -352,7 +352,7 @@
     font: var(--goa-radio-description);
     margin-left: calc(var(--goa-radio-size) + var(--goa-space-s));
     margin-top: var(--goa-space-2xs);
-    color: var(--goa-input-color-text-helper, var(--goa-color-text-default));
+    color: var(--goa-input-color-text-helper);
   }
 
   .radio:not(.compact) ~ .description {
@@ -374,15 +374,15 @@
   }
 
    .reveal.visible.has-content {
-    padding: var(--goa-radio-reveal-padding, var(--goa-space-m));
-    margin: var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));
-    border-left: var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));
+    padding: var(--goa-radio-reveal-padding);
+    margin: var(--goa-radio-reveal-margin);
+    border-left: var(--goa-radio-reveal-border);
     box-sizing: border-box;
   }
 
   .radio ~ .reveal.visible.has-content {
-    padding: var(--goa-radio-reveal-padding, var(--goa-space-l));
-    border-left: var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200));
+    padding: var(--goa-radio-reveal-padding);
+    border-left: var(--goa-radio-reveal-border);
   }
 
   .radio.compact ~ .reveal.visible.has-content {
@@ -467,7 +467,7 @@
 
   /* Checked - Default */
   input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked, 4px solid var(--goa-color-greyscale-200));
+    border: var(--goa-radio-border-checked);
   }
   .radio input[type="radio"]:checked ~ .icon::after {
     background-color: var(--goa-radio-inner-color);

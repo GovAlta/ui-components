@@ -299,10 +299,7 @@
   /* Read-only state */
   .readonly,
   .readonly:hover {
-    background-color: var(
-      --goa-text-area-color-bg-readonly,
-      var(--goa-color-greyscale-100)
-    );
+    background-color: var(--goa-text-area-color-bg-readonly);
   }
 
   /* Focus state uses a single focus border */

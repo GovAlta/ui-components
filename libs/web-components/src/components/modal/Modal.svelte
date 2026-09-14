@@ -319,19 +319,15 @@
   .content {
     flex: 1 1 auto;
     width: 100%;
-    padding: var(
-      --goa-modal-content-wrapper-padding,
-      var(--goa-modal-padding) var(--goa-modal-padding) 0
-        var(--goa-modal-padding)
-    );
+    padding: var(--goa-modal-content-wrapper-padding);
   }
 
   .content header {
     display: flex;
     justify-content: space-between;
     align-items: start;
-    padding: var(--goa-modal-heading-padding, 0);
-    border-bottom: var(--goa-modal-heading-border-bottom, none);
+    padding: var(--goa-modal-heading-padding);
+    border-bottom: var(--goa-modal-heading-border-bottom);
   }
 
   .content header.has-content {
@@ -344,12 +340,7 @@
 
   @media (--mobile) {
     .content {
-      padding: var(
-        --goa-modal-content-wrapper-padding,
-        var(--goa-modal-padding-small-screen)
-          var(--goa-modal-padding-small-screen) 0
-          var(--goa-modal-padding-small-screen)
-      );
+      padding: var(--goa-modal-content-wrapper-padding);
     }
 
     .content header.has-content {
@@ -372,34 +363,24 @@
 
     .modal-content {
       margin: 0;
-      padding: 0 var(--goa-modal-scrollable-padding-mobile, var(--goa-space-m));
+      padding: 0 var(--goa-modal-scrollable-padding-mobile);
       box-shadow: none;
     }
 
     .content header {
-      padding: var(--goa-modal-heading-padding-mobile, var(--goa-space-m));
+      padding: var(--goa-modal-heading-padding-mobile);
     }
 
     .content header.callout {
-      padding: var(
-        --goa-modal-callout-heading-padding-mobile,
-        var(--goa-space-m)
-      );
+      padding: var(--goa-modal-callout-heading-padding-mobile);
     }
 
     .modal-content {
-      padding: var(
-        --goa-modal-content-padding-mobile,
-        var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl)
-          var(--goa-space-m)
-      );
+      padding: var(--goa-modal-content-padding-mobile);
     }
 
     .modal-actions {
-      padding: var(
-        --goa-modal-actions-padding-mobile,
-        0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m)
-      );
+      padding: var(--goa-modal-actions-padding-mobile);
     }
   }
 
@@ -410,24 +391,20 @@
 
     .modal-content {
       margin: 0;
-      padding: 0 var(--goa-modal-scrollable-padding-desktop, var(--goa-space-l));
+      padding: 0 var(--goa-modal-scrollable-padding-desktop);
       box-shadow: none;
     }
 
     .modal-content {
-      padding: var(
-        --goa-modal-content-padding-desktop,
-        var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl)
-          var(--goa-space-l)
-      );
+      padding: var(--goa-modal-content-padding-desktop);
     }
   }
 
   .modal-pane {
-    background-color: var(--goa-modal-color-bg, #fff);
+    background-color: var(--goa-modal-color-bg);
     border: none;
     z-index: 2;
-    width: var(--goa-modal-pane-width, 90%);
+    width: var(--goa-modal-pane-width);
     display: flex;
     box-shadow: var(--goa-shadow-modal);
     border-radius: var(--goa-modal-border-radius);
@@ -470,10 +447,7 @@
 
   .modal-actions {
     width: 100%;
-    padding: var(
-      --goa-modal-actions-padding,
-      var(--goa-space-m) 0 var(--goa-modal-padding) 0
-    );
+    padding: var(--goa-modal-actions-padding);
     margin: auto 0 0 0;
     text-align: right;
   }

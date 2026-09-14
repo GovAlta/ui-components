@@ -14,7 +14,6 @@ inputs.forEach(input => {
   input.addEventListener('_selectFile', (e) => {
     const file = e.detail.file;
     const card = document.createElement('goa-file-upload-card');
-    card.setAttribute('version', '2');
     card.setAttribute('filename', file.name);
     card.setAttribute('size', file.size);
     if (file.type) card.setAttribute('type', file.type);

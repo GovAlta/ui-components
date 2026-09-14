@@ -160,9 +160,9 @@
   :global(::slotted(goa-side-menu-heading)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;
+    color: var(--goa-side-menu-color-item) !important;
     display: block;
-    font: var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));
+    font: var(--goa-side-menu-group-item-typography);
     margin-left: var(--goa-side-menu-child-margin);
     background-color: var(--goa-side-menu-group-color-bg);
   }
@@ -175,11 +175,11 @@
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-side-menu-group-item-typography-current, var(--goa-side-menu-typography-item-current));
+    font: var(--goa-side-menu-group-item-typography-current);
     border-left: var(--goa-side-menu-child-border-left-selected);
     background: var(--goa-side-menu-child-color-bg-selected);
     /* required to override base styles & above :global(::slotted(a) !important */
-    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default))!important;
+    color: var(--goa-side-menu-color-item-current)!important;
   }
 
   :global(::slotted(a:hover:not(.current))) {
@@ -190,7 +190,7 @@
   :global(::slotted(a:focus-visible)),
   .heading:focus-visible {
     outline: var(--goa-side-menu-item-focus-border);
-    outline-offset: var(--goa-side-menu-item-focus-outline-offset, -3px);
+    outline-offset: var(--goa-side-menu-item-focus-outline-offset);
   }
 
 
@@ -207,7 +207,7 @@
    */
   :host([child="true"]) a.heading,
   .heading {
-    color: var(--goa-side-menu-color-item, var(--goa-color-text-default));
+    color: var(--goa-side-menu-color-item);
     display: flex;
     justify-content: space-between;
     font: var(--goa-side-menu-typography-item);
@@ -220,7 +220,7 @@
   }
   .heading.open.current {
     font: var(--goa-side-menu-typography-item-current);
-    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default));
+    color: var(--goa-side-menu-color-item-current);
   }
 
   :host([child="true"]) a.heading {
@@ -270,13 +270,13 @@
   }
 
   .side-menu-group .heading.open {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+    border-radius: var(--goa-side-menu-group-border-radius-open);
     background: var(--goa-color-greyscale-100);
   }
 
   .side-menu-group :global(::slotted(a)) {
-    border-radius: var(--goa-border-radius-l, 6px);
-    font: var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));
+    border-radius: var(--goa-border-radius-l);
+    font: var(--goa-side-menu-group-item-typography);
     padding: var(--goa-space-2xs) var(--goa-space-xs);
     border-left: none;
     margin-left: 0;
@@ -285,10 +285,10 @@
 
   .side-menu-group .group {
     border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
-    margin-left: var(--goa-side-menu-group-container-margin-left, 20px);
+    margin-left: var(--goa-side-menu-group-container-margin-left);
     padding-left: var(--goa-space-s);
     margin-top: var(--goa-space-xs);
-    margin-bottom: var(--goa-side-menu-group-container-margin-bottom, 6px);
+    margin-bottom: var(--goa-side-menu-group-container-margin-bottom);
   }
 
   .side-menu-group :global(::slotted(a.current)) {
@@ -310,15 +310,15 @@
   }
 
   .side-menu-group .heading:hover {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+    border-radius: var(--goa-side-menu-group-border-radius-open);
   }
 
   .side-menu-group .heading:focus-visible {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+    border-radius: var(--goa-side-menu-group-border-radius-open);
   }
 
   :host([child="true"]) .side-menu-group a.heading {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+    border-radius: var(--goa-side-menu-group-border-radius-open);
     padding: var(--goa-space-xs) var(--goa-space-s);
     align-items: flex-start;
     color: var(--goa-color-text-secondary);
@@ -326,7 +326,7 @@
 
   .side-menu-group .leading-icon,
   .side-menu-group .trailing-icon {
-    height: var(--goa-icon-size-3, 1.25rem);
+    height: var(--goa-icon-size-3);
     margin-top: 1px;
   }
 </style>

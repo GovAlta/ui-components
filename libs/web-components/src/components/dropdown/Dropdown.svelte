@@ -1069,12 +1069,9 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(
-      --goa-dropdown-menu-border-radius,
-      var(--goa-dropdown-border-radius)
-    );
+    border-radius: var(--goa-dropdown-menu-border-radius);
     padding: 0;
-    margin: var(--goa-dropdown-menu-margin, 0);
+    margin: var(--goa-dropdown-menu-margin);
   }
 
   /* dropdown items */
@@ -1088,7 +1085,7 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
-    border-radius: var(--goa-dropdown-item-border-radius, 0);
+    border-radius: var(--goa-dropdown-item-border-radius);
   }
 
   .dropdown-item:hover,

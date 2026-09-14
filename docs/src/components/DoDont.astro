@@ -70,7 +70,6 @@ const config = typeConfig[type];
     {config.showIndicator && (
       <div class="do-content" data-type={type}>
         <goa-icon
-          version="2"
           type={config.icon}
           size="medium"
         ></goa-icon>
@@ -84,7 +83,7 @@ const config = typeConfig[type];
     )}
 
     <!-- Expandable details (populated by script) -->
-    <goa-details version="2" heading="More details" mt="s" class="guidance-details">
+    <goa-details heading="More details" mt="s" class="guidance-details">
       <div class="details-content"></div>
     </goa-details>
   </div>

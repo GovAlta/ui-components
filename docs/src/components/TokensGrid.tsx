@@ -26,6 +26,10 @@ import {
   GoabIcon,
   GoabIconButton,
   GoabPushDrawer,
+  GoabTab,
+  GoabTable,
+  GoabTableSortHeader,
+  GoabTabs,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
@@ -44,7 +48,7 @@ interface TokensGridProps {
   filterGroups: FilterGroup[];
 }
 
-// Badge type mapping for categories (using V2 extended colors)
+// Badge type mapping for categories
 function getCategoryBadgeType(
   category: string,
 ): "sky" | "pasture" | "sunset" | "lilac" | "prairie" | "dawn" | "success" {
@@ -105,7 +109,10 @@ function toScssSyntax(cssName: string): string {
  * Pick the active-theme variant of a token's display values. Returns light values
  * when not in dark mode, or when the token has no dark variant.
  */
-function activeOf(token: FlatToken, isDark: boolean): { value: string; resolvedValue: string } {
+function activeOf(
+  token: FlatToken,
+  isDark: boolean,
+): { value: string; resolvedValue: string } {
   if (isDark && token.darkValue) {
     return {
       value: token.darkValue,
@@ -127,11 +134,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // Ref for sticky detection sentinel
   const gridRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Ref for table (to handle sort events from web component)
-  const tableRef = useRef<HTMLElement>(null);
-  // TODO: Remove tabsRef when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  const tabsRef = useRef<HTMLElement>(null);
-
   // Detect when toolbar becomes sticky using IntersectionObserver
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -154,19 +156,11 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
 
   // Hooks
-  const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
-    useTwoLevelSort();
+  const { sortConfig, setSortConfig, clearSort } = useTwoLevelSort();
   const isContainerNarrow = useContainerNarrow(gridRef, 840);
 
-  // Listen for table sort events (from goa-table web component)
-  useEffect(() => {
-    const table = tableRef.current;
-    if (!table) return;
-
-    const handleMultiSort = (e: Event) => {
-      const detail = (
-        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
-      ).detail;
+  const handleMultiSort = useCallback(
+    (detail: { sorts: { column: string; direction: "asc" | "desc" }[] }) => {
       const sorts = detail.sorts;
       setSortConfig({
         primary: sorts[0]
@@ -176,29 +170,16 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           ? { key: sorts[1].column, direction: sorts[1].direction }
           : null,
       });
-    };
+    },
+    [setSortConfig],
+  );
 
-    table.addEventListener("_multisort", handleMultiSort);
-    return () => table.removeEventListener("_multisort", handleMultiSort);
-  }, [setSortConfig]);
-
-  // TODO: Remove this useEffect when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  // Using goa-tabs web component directly because GoabTabs wrapper is missing these props
-  useEffect(() => {
-    const tabs = tabsRef.current;
-    if (!tabs) return;
-
-    const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<{ tab: number }>).detail;
-      if (detail.tab === 1) {
-        setTokenSyntax("css");
-      } else if (detail.tab === 2) {
-        setTokenSyntax("scss");
-      }
-    };
-
-    tabs.addEventListener("_change", handleChange);
-    return () => tabs.removeEventListener("_change", handleChange);
+  const handleTabsChange = useCallback((detail: { tab: number }) => {
+    if (detail.tab === 1) {
+      setTokenSyntax("css");
+    } else if (detail.tab === 2) {
+      setTokenSyntax("scss");
+    }
   }, []);
 
   // Slash commands derived from filter groups
@@ -341,16 +322,16 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
   // Get sort order indicator ("1" or "2") for column headers
   const getColumnSortOrder = useCallback(
-    (columnKey: string): string | undefined => {
+    (columnKey: string): 1 | 2 | undefined => {
       // Only show numbers if there are two sorts active
       if (!sortConfig.primary || !sortConfig.secondary) {
         return undefined;
       }
       if (sortConfig.primary.key === columnKey) {
-        return "1";
+        return 1;
       }
       if (sortConfig.secondary.key === columnKey) {
-        return "2";
+        return 2;
       }
       return undefined;
     },
@@ -825,29 +806,22 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
         {/* Syntax toggle + Filters */}
         <div className="tokens-toolbar-actions">
-          {/*
-           * TODO: Replace <goa-tabs> with GoabTabs when wrapper exposes these props
-           *
-           * Using web component directly because GoabTabs wrapper is missing:
-           * - updateUrl prop (we need false to avoid polluting browser history)
-           * - stackOnMobile prop (we need false for compact toggle)
-           *
-           * When fixed, remove: tabsRef, useEffect for _change event, goa-tabs from global.d.ts
-           */}
           <div className="syntax-toggle-wrapper">
-            <goa-tabs
-              ref={tabsRef}
+            <GoabTabs
+              key={tokenSyntax}
               variant="segmented"
               initialTab={tokenSyntax === "css" ? 1 : 2}
               orientation="horizontal"
+              navigation="none"
+              onChange={handleTabsChange}
             >
-              <goa-tab heading="CSS">
+              <GoabTab heading="CSS">
                 <span />
-              </goa-tab>
-              <goa-tab heading="SCSS">
+              </GoabTab>
+              <GoabTab heading="SCSS">
                 <span />
-              </goa-tab>
-            </goa-tabs>
+              </GoabTab>
+            </GoabTabs>
           </div>
 
           <span className="filter-btn-desktop">
@@ -980,41 +954,39 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           }}
         >
           <div className="tokens-table-scroll-shadow-left" aria-hidden="true" />
-          <goa-table
-            ref={tableRef}
+          <GoabTable
             width="100%"
             variant="normal"
-            sort-mode="multi"
+            sortMode="multi"
+            onMultiSort={handleMultiSort}
           >
-            <table style={{ width: "100%" }}>
               <thead>
                 <tr>
                   <th style={{ width: 60 }}>Preview</th>
                   <th style={{ minWidth: 320 }}>
-                    <goa-table-sort-header
+                    <GoabTableSortHeader
                       name="name"
                       direction={getColumnSortDirection("name")}
-                      sort-order={getColumnSortOrder("name")}
+                      sortOrder={getColumnSortOrder("name")}
                     >
                       Token
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th style={{ width: "320px" }}>Value</th>
                   <th>
-                    <goa-table-sort-header
+                    <GoabTableSortHeader
                       name="category"
                       direction={getColumnSortDirection("category")}
-                      sort-order={getColumnSortOrder("category")}
+                      sortOrder={getColumnSortOrder("category")}
                     >
                       Category
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th style={{ width: 60 }}></th>
                 </tr>
               </thead>
               <tbody>{filteredTokens.map(renderTableRow)}</tbody>
-            </table>
-          </goa-table>
+          </GoabTable>
           <div className="tokens-table-scroll-shadow-right" aria-hidden="true" />
         </div>
       )}
@@ -1205,7 +1177,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         }
 
         /* Horizontal scroll container for table - bleeds into card padding */
-        /* TODO: Remove calc workaround when goa-table V2 gets box-sizing: border-box */
         .tokens-table-wrapper {
           display: flex;
           align-items: stretch;
@@ -1220,7 +1191,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         }
 
         .tokens-table-wrapper goa-table {
-          width: calc(100% - 2px) !important;
+          width: 100% !important;
           margin-left: var(--card-padding-h, var(--goa-space-2xl));
           margin-right: var(--card-padding-h, var(--goa-space-2xl));
         }

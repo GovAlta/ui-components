@@ -188,12 +188,7 @@ const initialVisibleFramework =
         <div class="api-heading">
           <h3 id={`${idBase}props`}>{prefix}Props</h3>
           {badge && (
-            <goa-badge
-              type="default"
-              emphasis="subtle"
-              icon="false"
-              content={badge}
-            />
+            <goa-badge type="default" emphasis="subtle" icon="false" content={badge} />
           )}
         </div>
         {frameworkOrder.map((framework) => (
@@ -202,7 +197,7 @@ const initialVisibleFramework =
             data-framework={framework}
             style={framework === initialVisibleFramework ? "" : "display:none;"}
           >
-            <goa-container version="2" type="interactive">
+            <goa-container type="interactive">
               <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
                 {frameworkViews[framework].props.map((prop) => {
                   return (
@@ -210,11 +205,7 @@ const initialVisibleFramework =
                       <div class="prop-cell prop-cell-name" data-grid="cell">
                         <span class="prop-name">{prop.name}</span>
                         {prop.required && (
-                          <goa-badge
-                            type="important"
-                            icon="false"
-                            content="Required"
-                          />
+                          <goa-badge type="important" icon="false" content="Required" />
                         )}
                         {prop.deprecated && (
                           <goa-badge
@@ -262,12 +253,7 @@ const initialVisibleFramework =
         <div class="api-heading">
           <h3 id={`${idBase}events`}>{prefix}Events</h3>
           {badge && (
-            <goa-badge
-              type="default"
-              emphasis="subtle"
-              icon="false"
-              content={badge}
-            />
+            <goa-badge type="default" emphasis="subtle" icon="false" content={badge} />
           )}
         </div>
         {frameworkOrder.map((framework) => (
@@ -276,7 +262,7 @@ const initialVisibleFramework =
             data-framework={framework}
             style={framework === initialVisibleFramework ? "" : "display:none;"}
           >
-            <goa-container version="2" type="interactive">
+            <goa-container type="interactive">
               <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
                 {frameworkViews[framework].events.map((event) => (
                   <div class="prop-row" data-grid="row">
@@ -310,12 +296,7 @@ const initialVisibleFramework =
             {getSlotsHeadingLabel(initialVisibleFramework)}
           </h3>
           {badge && (
-            <goa-badge
-              type="default"
-              emphasis="subtle"
-              icon="false"
-              content={badge}
-            />
+            <goa-badge type="default" emphasis="subtle" icon="false" content={badge} />
           )}
         </div>
         {frameworkOrder.map((framework) => (
@@ -324,18 +305,14 @@ const initialVisibleFramework =
             data-framework={framework}
             style={framework === initialVisibleFramework ? "" : "display:none;"}
           >
-            <goa-container version="2" type="interactive">
+            <goa-container type="interactive">
               <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
                 {frameworkViews[framework].slots.map((slot) => (
                   <div class="prop-row" data-grid="row">
                     <div class="prop-cell prop-cell-name" data-grid="cell">
                       <span class="prop-name">{slot.name}</span>
                       {slot.required && (
-                        <goa-badge
-                          type="important"
-                          icon="false"
-                          content="Required"
-                        />
+                        <goa-badge type="important" icon="false" content="Required" />
                       )}
                     </div>
                     <div class="prop-cell prop-cell-type" data-grid="cell">

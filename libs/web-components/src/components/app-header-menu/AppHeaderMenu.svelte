@@ -117,7 +117,7 @@
     minwidth="8rem"
     position="below"
     open={_open}
-    style="--goa-popover-shadow: var(--goa-app-header-nav-menu-dropdown-shadow); --goa-popover-border: var(--goa-app-header-nav-menu-dropdown-border, 0.5px solid var(--goa-color-greyscale-200, #e0e0e0)); margin-top: var(--goa-app-header-nav-menu-dropdown-gap, 3px);"
+    style="--goa-popover-shadow: var(--goa-app-header-nav-menu-dropdown-shadow); --goa-popover-border: var(--goa-app-header-nav-menu-dropdown-border); margin-top: var(--goa-app-header-nav-menu-dropdown-gap);"
   >
     <button slot="target" class:open={_open} class:current={_hasCurrentLink}>
       {#if leadingicon}

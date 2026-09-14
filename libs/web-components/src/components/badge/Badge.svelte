@@ -274,14 +274,8 @@
   }
 
   .goa-badge.badge-archived {
-    background-color: var(
-      --goa-badge-archived-color-bg,
-      var(--goa-color-greyscale-700)
-    );
-    color: var(
-      --goa-badge-archived-color-content,
-      var(--goa-badge-dark-color-content)
-    );
+    background-color: var(--goa-badge-archived-color-bg);
+    color: var(--goa-badge-archived-color-content);
   }
 
   .goa-badge.badge-aqua {
@@ -409,50 +403,32 @@
 
   .badge-sky {
     background-color: var(--goa-color-extended-sky-default);
-    color: var(
-      --goa-color-extended-sky-text-dark,
-      var(--goa-color-extended-sky-text)
-    );
+    color: var(--goa-color-extended-sky-text-dark);
   }
 
   .badge-prairie {
     background-color: var(--goa-color-extended-prairie-default);
-    color: var(
-      --goa-color-extended-prairie-text-dark,
-      var(--goa-color-extended-prairie-text)
-    );
+    color: var(--goa-color-extended-prairie-text-dark);
   }
 
   .badge-lilac {
     background-color: var(--goa-color-extended-lilac-default);
-    color: var(
-      --goa-color-extended-lilac-text-dark,
-      var(--goa-color-extended-lilac-text)
-    );
+    color: var(--goa-color-extended-lilac-text-dark);
   }
 
   .badge-pasture {
     background-color: var(--goa-color-extended-pasture-default);
-    color: var(
-      --goa-color-extended-pasture-text-dark,
-      var(--goa-color-extended-pasture-text)
-    );
+    color: var(--goa-color-extended-pasture-text-dark);
   }
 
   .badge-sunset {
     background-color: var(--goa-color-extended-sunset-default);
-    color: var(
-      --goa-color-extended-sunset-text-dark,
-      var(--goa-color-extended-sunset-text)
-    );
+    color: var(--goa-color-extended-sunset-text-dark);
   }
 
   .badge-dawn {
     background-color: var(--goa-color-extended-dawn-default);
-    color: var(
-      --goa-color-extended-dawn-text-dark,
-      var(--goa-color-extended-dawn-text)
-    );
+    color: var(--goa-color-extended-dawn-text-dark);
   }
 
   .badge-subtle.badge-sky {

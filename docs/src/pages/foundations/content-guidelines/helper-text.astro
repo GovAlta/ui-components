@@ -1,5 +1,5 @@
 ---
-import { withBase } from '@/lib/base-url';
+import { withBase } from "@/lib/base-url";
 /**
  * Foundations - Content guidelines - Helper text
  *
@@ -11,7 +11,6 @@ import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.as
 import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
 import DoDont from "../../../components/DoDont.astro";
 import Preview from "../../../components/Preview.astro";
-
 
 interface HelperTextCard {
   label: string;
@@ -175,7 +174,7 @@ const helperTextTypes: HelperTextType[] = [
         label: "Region code",
         helper: "Only digits <= 9 are acceptable",
         description:
-          "Don't write comparisons in symbols rather than words. For example, use \"less than or equal to 0\" instead of \"<= 9\"",
+          'Don\'t write comparisons in symbols rather than words. For example, use "less than or equal to 0" instead of "<= 9"',
       },
     ],
   },
@@ -216,15 +215,12 @@ function buildFieldName(...parts: string[]) {
 >
   <goa-text size="heading-xl" mt="none" mb="m">Helper text</goa-text>
   <goa-text size="body-l" mt="none" mb="m">
-    Helper text provides additional context or guidance displayed
-    below an input field. It helps users understand what information is
-    required or how to complete a field before moving to the next step in a form or
-    process.
+    Helper text provides additional context or guidance displayed below an input field. It
+    helps users understand what information is required or how to complete a field before
+    moving to the next step in a form or process.
   </goa-text>
-  <goa-divider version="2" mt="xl" mb="xl" />
-  <goa-text size="body-m" mt="none" mb="m">
-    Helper text can be used with:
-  </goa-text>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
+  <goa-text size="body-m" mt="none" mb="m"> Helper text can be used with: </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
     <ul>
       {
@@ -239,7 +235,7 @@ function buildFieldName(...parts: string[]) {
     </ul>
   </goa-text>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="anatomy">Anatomy</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -260,7 +256,7 @@ function buildFieldName(...parts: string[]) {
     alt="Annotated helper text anatomy showing an input label, input control, and helper text."
   />
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="when-to-use-helper-text">When to use helper text</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -292,7 +288,7 @@ function buildFieldName(...parts: string[]) {
     </ul>
   </goa-text>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="language-and-tone">Language and tone</h2>
   {
@@ -332,7 +328,7 @@ function buildFieldName(...parts: string[]) {
     .
   </goa-text>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="types-of-helper-text">Types of helper text</h2>
   <goa-text size="body-m" mt="none" mb="xl">
@@ -359,13 +355,11 @@ function buildFieldName(...parts: string[]) {
               <Preview>
                 <div class="preview-form">
                   <goa-form-item
-                    version="2"
                     label={card.label}
                     helptext={card.helper}
                     maxwidth="28rem"
                   >
                     <goa-input
-                      version="2"
                       name={buildFieldName(section.id, "do", card.label)}
                       width="100%"
                       disabled="true"
@@ -381,13 +375,11 @@ function buildFieldName(...parts: string[]) {
               <Preview>
                 <div class="preview-form">
                   <goa-form-item
-                    version="2"
                     label={card.label}
                     helptext={card.helper}
                     maxwidth="28rem"
                   >
                     <goa-input
-                      version="2"
                       name={buildFieldName(section.id, "dont", card.label)}
                       width="100%"
                       disabled="true"
@@ -402,7 +394,7 @@ function buildFieldName(...parts: string[]) {
     ))
   }
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="accessibility">Accessibility</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -410,9 +402,7 @@ function buildFieldName(...parts: string[]) {
     <strong> aria-describedby</strong> attribute. This ensures screen readers can provide the
     same context to users who rely on assistive technology.
   </goa-text>
-  <goa-text size="body-m" mt="none" mb="m">
-    Refer to:
-  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"> Refer to: </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
     <ul>
       <li>

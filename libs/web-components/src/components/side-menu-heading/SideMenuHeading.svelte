@@ -32,7 +32,7 @@
     border-top: none;
     border-bottom: var(--goa-side-menu-heading-border);
     background: var(--goa-side-menu-heading-color-bg);
-    padding: var(--goa-side-menu-heading-padding-top, 14px) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s);
+    padding: var(--goa-side-menu-heading-padding-top) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s);
     color: var(--goa-side-menu-heading-color);
     font: var(--goa-side-menu-heading-typography);
     display: flex;

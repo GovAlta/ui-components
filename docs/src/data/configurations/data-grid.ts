@@ -305,7 +305,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
   </goab-container>
 </goab-data-grid>`,
         webComponents: `<goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
-  <goa-container version="2" mt="m" data-grid="row" maxwidth="100%">
+  <goa-container mt="m" data-grid="row" maxwidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
       <goa-checkbox data-grid="cell-0" name="user-1"></goa-checkbox>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">
@@ -344,7 +344,7 @@ export const dataGridConfigurations: ComponentConfigurations = {
       </goa-menu-button>
     </div>
   </goa-container>
-  <goa-container version="2" mt="m" data-grid="row" maxwidth="100%">
+  <goa-container mt="m" data-grid="row" maxwidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
       <goa-checkbox data-grid="cell-0" name="user-2"></goa-checkbox>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">

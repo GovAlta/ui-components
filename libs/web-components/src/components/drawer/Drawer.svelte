@@ -53,9 +53,9 @@
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
   $: _scrollPanelMaxHeight =
     position === "bottom"
-      ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`
+      ? `min(${maxsize}, calc(100vh - var(--goa-drawer-offset) - var(--goa-drawer-offset)))`
       : position === "left" || position === "right"
-        ? "calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px))"
+        ? "calc(100vh - var(--goa-drawer-offset) - var(--goa-drawer-offset))"
         : undefined;
   $: _flyParams = {
     duration: 200,
@@ -146,17 +146,17 @@
           "max-width",
           position === "bottom"
             ? "unset"
-            : `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
+            : `min(${maxsize}, calc(100vw - var(--goa-drawer-offset) - var(--goa-drawer-offset)))`,
         ),
         position !== "bottom" &&
           style(
             "width",
-            `min(${maxsize}, calc(100vw - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
+            `min(${maxsize}, calc(100vw - var(--goa-drawer-offset) - var(--goa-drawer-offset)))`,
           ),
         position === "bottom" &&
           style(
             "max-height",
-            `min(${maxsize}, calc(100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)))`,
+            `min(${maxsize}, calc(100vh - var(--goa-drawer-offset) - var(--goa-drawer-offset)))`,
           ),
       )}
       in:fly={_flyParams}
@@ -299,8 +299,8 @@
   }
 
   .scroll-content {
-    padding: var(--goa-drawer-content-padding-vertical, var(--goa-space-l))
-      var(--goa-drawer-content-padding-horizontal, var(--goa-space-l));
+    padding: var(--goa-drawer-content-padding-vertical)
+      var(--goa-drawer-content-padding-horizontal);
   }
 
   /* Remove margin-top from first child in content to prevent double spacing */
@@ -311,9 +311,9 @@
   /* Actions styles */
   .drawer-actions {
     width: 100%;
-    padding: var(--goa-drawer-actions-padding-top, var(--goa-space-l))
-      var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl))
-      var(--goa-drawer-actions-padding-bottom, var(--goa-space-xl));
+    padding: var(--goa-drawer-actions-padding-top)
+      var(--goa-drawer-content-padding-horizontal)
+      var(--goa-drawer-actions-padding-bottom);
     border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     background: var(--goa-color-greyscale-white);
   }
@@ -329,8 +329,8 @@
 
   /* Bottom drawer actions have rounded corners */
   .drawer-bottom .drawer-actions {
-    border-bottom-left-radius: var(--goa-drawer-border-radius, 24px);
-    border-bottom-right-radius: var(--goa-drawer-border-radius, 24px);
+    border-bottom-left-radius: var(--goa-drawer-border-radius);
+    border-bottom-right-radius: var(--goa-drawer-border-radius);
   }
 
   .drawer-actions.empty-actions {
@@ -347,12 +347,12 @@
 
   .drawer-bottom {
     bottom: var(--drawer-offset);
-    left: var(--goa-drawer-offset, 0);
-    right: var(--goa-drawer-offset, 0);
+    left: var(--goa-drawer-offset);
+    right: var(--goa-drawer-offset);
     width: auto;
     height: auto;
     overflow-y: hidden; /* No scroll on drawer itself */
-    border-radius: var(--goa-drawer-border-radius, 24px); /* All corners 24px */
+    border-radius: var(--goa-drawer-border-radius); /* All corners 24px */
     box-shadow: var(--goa-drawer-shadow);
     transform: translateY(100%); /* Start off-screen at bottom */
     transition:
@@ -363,7 +363,7 @@
   }
   .drawer-bottom.open,
   .drawer-bottom.drawer-open-bottom {
-    bottom: var(--goa-drawer-offset, 0);
+    bottom: var(--goa-drawer-offset);
     transform: translateY(0); /* Slide in */
   }
 
@@ -371,15 +371,15 @@
 
   .drawer-right {
     right: var(--drawer-offset);
-    top: var(--goa-drawer-offset, 0);
+    top: var(--goa-drawer-offset);
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
     max-height: calc(
-      100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)
+      100vh - var(--goa-drawer-offset) - var(--goa-drawer-offset)
     );
     overflow-y: hidden; /* No scroll on drawer itself */
-    border-radius: var(--goa-drawer-border-radius, 24px);
+    border-radius: var(--goa-drawer-border-radius);
     box-shadow: var(--goa-drawer-shadow);
     transform: translateX(100%); /* Start off-screen to the right */
     /* Smooth transitions for position and transform */
@@ -392,7 +392,7 @@
         var(--goa-motion-curve-expressive);
   }
   .drawer-open-right {
-    right: var(--goa-drawer-offset, 0);
+    right: var(--goa-drawer-offset);
     transform: translateX(0); /* Slide in */
   }
 
@@ -400,15 +400,15 @@
 
   .drawer-left {
     left: var(--drawer-offset);
-    top: var(--goa-drawer-offset, 0);
+    top: var(--goa-drawer-offset);
     /* No bottom positioning - allows height: auto to work naturally */
     height: auto;
     /* Max-height accounts for BOTH top and bottom margins (modal stays floating) */
     max-height: calc(
-      100vh - var(--goa-drawer-offset, 0px) - var(--goa-drawer-offset, 0px)
+      100vh - var(--goa-drawer-offset) - var(--goa-drawer-offset)
     );
     overflow-y: hidden; /* No scroll on drawer itself */
-    border-radius: var(--goa-drawer-border-radius, 24px);
+    border-radius: var(--goa-drawer-border-radius);
     box-shadow: var(--goa-drawer-shadow);
     transform: translateX(-100%); /* Start off-screen to the left */
     /* Smooth transitions for position and transform */
@@ -421,7 +421,7 @@
         var(--goa-motion-curve-expressive);
   }
   .drawer-open-left {
-    left: var(--goa-drawer-offset, 0);
+    left: var(--goa-drawer-offset);
     transform: translateX(0); /* Slide in */
   }
 </style>

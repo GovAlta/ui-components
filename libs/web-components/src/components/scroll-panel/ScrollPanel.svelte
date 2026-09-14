@@ -296,10 +296,7 @@
     width: 100%;
     /* Fallback height. JS sets an explicit inline height from the `height` prop */
     height: 100%;
-    background-color: var(
-      --goa-scroll-panel-color-bg,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-scroll-panel-color-bg);
   }
 
   :host * {
@@ -311,10 +308,7 @@
      that has its own opaque background (e.g. notification cards). */
   .scroll-panel-header {
     grid-area: header;
-    background-color: var(
-      --goa-scroll-panel-header-color-bg,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-scroll-panel-header-color-bg);
     border-bottom: var(--goa-border-width-2xs) solid transparent;
     z-index: 1;
     transition:
@@ -331,14 +325,8 @@
      with no layout shift. The shadow is the system shallow-below token; the host
      overflow:hidden clips any side bleed at the edge. */
   .scroll-panel-header--shadow {
-    border-bottom-color: var(
-      --goa-scroll-panel-header-scroll-border,
-      var(--goa-color-greyscale-150)
-    );
-    box-shadow: var(
-      --goa-scroll-panel-header-scroll-shadow,
-      var(--goa-shadow-shallow-below)
-    );
+    border-bottom-color: var(--goa-scroll-panel-header-scroll-border);
+    box-shadow: var(--goa-scroll-panel-header-scroll-shadow);
   }
 
   /* Scrollable content */
@@ -389,7 +377,7 @@
     width: 10px;
     background: linear-gradient(
       to right,
-      var(--goa-scroll-panel-content-shadow-horizontal, rgba(0, 0, 0, 0.1)),
+      var(--goa-scroll-panel-content-shadow-horizontal),
       transparent
     );
   }
@@ -399,7 +387,7 @@
     width: 10px;
     background: linear-gradient(
       to left,
-      var(--goa-scroll-panel-content-shadow-horizontal, rgba(0, 0, 0, 0.1)),
+      var(--goa-scroll-panel-content-shadow-horizontal),
       transparent
     );
   }
@@ -415,10 +403,7 @@
   /* Footer — casts a drop shadow up onto the content when content is below it. */
   .scroll-panel-footer {
     grid-area: footer;
-    background-color: var(
-      --goa-scroll-panel-footer-color-bg,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-scroll-panel-footer-color-bg);
     border-top: var(--goa-border-width-2xs) solid transparent;
     z-index: 1;
     transition:
@@ -431,13 +416,7 @@
   /* Mirror of the header cue: a hairline top border + soft shadow casting up
      onto the content above the footer. */
   .scroll-panel-footer--shadow {
-    border-top-color: var(
-      --goa-scroll-panel-footer-scroll-border,
-      var(--goa-color-greyscale-150)
-    );
-    box-shadow: var(
-      --goa-scroll-panel-footer-scroll-shadow,
-      var(--goa-shadow-shallow-above)
-    );
+    border-top-color: var(--goa-scroll-panel-footer-scroll-border);
+    box-shadow: var(--goa-scroll-panel-footer-scroll-shadow);
   }
 </style>

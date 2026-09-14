@@ -170,7 +170,7 @@
 
   .controls {
     display: flex;
-    gap: var(--goa-pagination-gap, 1rem);
+    gap: var(--goa-pagination-gap);
     flex-direction: column;
     align-items: center;
     width: 100%;

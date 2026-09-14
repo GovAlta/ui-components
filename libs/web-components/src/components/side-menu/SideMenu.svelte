@@ -117,12 +117,12 @@
     font: var(--goa-side-menu-typography-item);
     padding: var(--goa-space-xs) var(--goa-space-s);
     text-decoration: none;
-    border-radius: var(--goa-side-menu-item-border-radius, 0);
+    border-radius: var(--goa-side-menu-item-border-radius);
   }
 
   :global(::slotted(a.current)) {
     font: var(--goa-side-menu-typography-item-current);
-    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default)) !important;
+    color: var(--goa-side-menu-color-item-current) !important;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
@@ -132,7 +132,7 @@
 
   :global(::slotted(a:focus-visible)) {
     outline: var(--goa-side-menu-item-focus-border);
-    outline-offset: var(--goa-side-menu-item-focus-outline-offset, -3px);
+    outline-offset: var(--goa-side-menu-item-focus-outline-offset);
   }
 
   .side-menu {

@@ -11,7 +11,12 @@
 
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import { typeValidator, dispatch, formatRelativeTimestamp, formatFullDate } from "../../common/utils";
+  import {
+    typeValidator,
+    dispatch,
+    formatRelativeTimestamp,
+    formatFullDate,
+  } from "../../common/utils";
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -82,7 +87,9 @@
     _isUrgent = priority === "urgent";
     _badgeType = getBadgeType(type);
     _showBadge = type !== "default";
-    _transformTime = formatRelativeTimestamp(timestamp ? new Date(timestamp) : null);
+    _transformTime = formatRelativeTimestamp(
+      timestamp ? new Date(timestamp) : null,
+    );
     _fullDate = formatFullDate(timestamp ? new Date(timestamp) : null);
 
     _rootEl.addEventListener("notification-panel:tabchange", handleTabChange);
@@ -188,7 +195,9 @@
   <div class="top-row">
     <div class="header-row">
       {#if title}
-        <h4 class="notification-title" data-testid={`title-${testid}`}>{title}</h4>
+        <h4 class="notification-title" data-testid={`title-${testid}`}>
+          {title}
+        </h4>
       {/if}
 
       {#if _showBadge}
@@ -198,7 +207,6 @@
             icon="true"
             arialabel={type}
             emphasis="subtle"
-            version="2"
           />
         </span>
       {/if}

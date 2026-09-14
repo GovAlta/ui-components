@@ -505,7 +505,7 @@
     display: inline-flex;
     align-items: stretch;
     width: 100%;
-    height: var(--goa-text-input-height, 42px);
+    height: var(--goa-text-input-height);
     z-index: 1;
     background-color: var(--goa-text-input-color-bg);
     /* default border */
@@ -678,7 +678,7 @@
     display: flex;
     align-items: center;
     white-space: normal;
-    height: var(--goa-text-input-height, 42px);
+    height: var(--goa-text-input-height);
   }
 
   .leading-content .leading-content-slot :global(::slotted(div)),

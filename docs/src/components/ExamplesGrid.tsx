@@ -26,6 +26,10 @@ import {
   GoabIcon,
   GoabIconButton,
   GoabPushDrawer,
+  GoabTab,
+  GoabTable,
+  GoabTableSortHeader,
+  GoabTabs,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
@@ -75,9 +79,7 @@ function getSizeBadgeType(
   }
 }
 
-function getProductTypeBadgeType(
-  productType: string,
-): "lilac" | "sunset" | "default" {
+function getProductTypeBadgeType(productType: string): "lilac" | "sunset" | "default" {
   switch (productType) {
     case "workspace":
       return "lilac";
@@ -113,11 +115,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   // Ref for sticky detection sentinel
   const gridRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Ref for table (to handle sort events from web component)
-  const tableRef = useRef<HTMLElement>(null);
-  // TODO: Remove tabsRef when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  const tabsRef = useRef<HTMLElement>(null);
-
   // Detect when toolbar becomes sticky using IntersectionObserver
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -197,8 +194,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   }, [appliedFilters, urlFiltersApplied]);
 
   // Hooks
-  const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
-    useTwoLevelSort();
+  const { sortConfig, setSortConfig, clearSort } = useTwoLevelSort();
   const isContainerNarrow = useContainerNarrow(gridRef, 780);
   const { search, isLoading, error } = useSearch();
   const { viewSettings, setLayout } = useViewSettings({
@@ -207,15 +203,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     defaultColumns: DEFAULT_VISIBLE_COLUMNS,
   });
 
-  // Listen for table sort events (from goa-table web component)
-  useEffect(() => {
-    const table = tableRef.current;
-    if (!table) return;
-
-    const handleMultiSort = (e: Event) => {
-      const detail = (
-        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
-      ).detail;
+  const handleMultiSort = useCallback(
+    (detail: { sorts: { column: string; direction: "asc" | "desc" }[] }) => {
       const sorts = detail.sorts;
       setSortConfig({
         primary: sorts[0]
@@ -225,30 +214,20 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           ? { key: sorts[1].column, direction: sorts[1].direction }
           : null,
       });
-    };
+    },
+    [setSortConfig],
+  );
 
-    table.addEventListener("_multisort", handleMultiSort);
-    return () => table.removeEventListener("_multisort", handleMultiSort);
-  }, [setSortConfig, viewSettings.layout]);
-
-  // TODO: Remove this useEffect when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  // Using goa-tabs web component directly because GoabTabs wrapper is missing these props
-  useEffect(() => {
-    const tabs = tabsRef.current;
-    if (!tabs) return;
-
-    const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<{ tab: number }>).detail;
+  const handleTabsChange = useCallback(
+    (detail: { tab: number }) => {
       if (detail.tab === 1) {
         setLayout("card"); // Grid view
       } else if (detail.tab === 2) {
         setLayout("list"); // List view
       }
-    };
-
-    tabs.addEventListener("_change", handleChange);
-    return () => tabs.removeEventListener("_change", handleChange);
-  }, [setLayout]);
+    },
+    [setLayout],
+  );
 
   // Expanded groups state
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
@@ -261,9 +240,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     );
     const productTypes = [
       ...new Set(
-        examples
-          .map((e) => e.data.productType)
-          .filter((st) => st !== undefined),
+        examples.map((e) => e.data.productType).filter((st) => st !== undefined),
       ),
     ].sort();
     return { sizes, productTypes };
@@ -322,9 +299,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     wasNarrowRef.current = isContainerNarrow;
     if (becameNarrow && viewSettings.layout === "list") {
       setLayout("card");
-      if (tabsRef.current) {
-        tabsRef.current.setAttribute("initialtab", "1");
-      }
     }
   }, [isContainerNarrow, viewSettings.layout, setLayout]);
 
@@ -604,10 +578,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     (example: Example) => (
       <tr key={example.slug}>
         <td>
-          <a
-            href={withBase(`/examples/${example.slug}`)}
-            className="example-table-link"
-          >
+          <a href={withBase(`/examples/${example.slug}`)} className="example-table-link">
             {example.data.title}
           </a>
         </td>
@@ -663,16 +634,16 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
   // Get sort order indicator ("1" or "2") for column headers
   const getColumnSortOrder = useCallback(
-    (columnKey: string): string | undefined => {
+    (columnKey: string): 1 | 2 | undefined => {
       // Only show numbers if there are two sorts active
       if (!sortConfig.primary || !sortConfig.secondary) {
         return undefined;
       }
       if (sortConfig.primary.key === columnKey) {
-        return "1";
+        return 1;
       }
       if (sortConfig.secondary.key === columnKey) {
-        return "2";
+        return 2;
       }
       return undefined;
     },
@@ -705,29 +676,22 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
         {/* View toggle + Filters */}
         <div className="examples-toolbar-actions">
-          {/*
-           * TODO: Replace <goa-tabs> with GoabTabs when wrapper exposes these props
-           *
-           * Using web component directly because GoabTabs wrapper is missing:
-           * - updateUrl prop (we need false to avoid polluting browser history)
-           * - stackOnMobile prop (we need false for compact view toggle)
-           *
-           * When fixed, remove: tabsRef, useEffect for _change event, goa-tabs from global.d.ts
-           */}
           <div className="view-toggle-wrapper">
-            <goa-tabs
-              ref={tabsRef}
+            <GoabTabs
+              key={viewMode}
               variant="segmented"
               initialTab={viewMode === "card" ? 1 : 2}
               orientation="horizontal"
+              navigation="none"
+              onChange={handleTabsChange}
             >
-              <goa-tab heading="Grid">
+              <GoabTab heading="Grid">
                 <span />
-              </goa-tab>
-              <goa-tab heading="List">
+              </GoabTab>
+              <GoabTab heading="List">
                 <span />
-              </goa-tab>
-            </goa-tabs>
+              </GoabTab>
+            </GoabTabs>
           </div>
 
           <span className="filter-btn-desktop">
@@ -869,41 +833,40 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           }}
         >
           <div className="examples-table-scroll-shadow-left" aria-hidden="true" />
-          <goa-table
-            ref={tableRef}
+          <GoabTable
             width="100%"
             variant="normal"
-            sort-mode="multi"
+            sortMode="multi"
+            onMultiSort={handleMultiSort}
           >
-            <table style={{ width: "100%" }}>
               <thead>
                 <tr>
                   <th style={{ width: "320px" }}>
-                    <goa-table-sort-header
+                    <GoabTableSortHeader
                       name="title"
                       direction={getColumnSortDirection("title")}
-                      sort-order={getColumnSortOrder("title")}
+                      sortOrder={getColumnSortOrder("title")}
                     >
                       Name
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th style={{ width: "120px" }}>
-                    <goa-table-sort-header
+                    <GoabTableSortHeader
                       name="size"
                       direction={getColumnSortDirection("size")}
-                      sort-order={getColumnSortOrder("size")}
+                      sortOrder={getColumnSortOrder("size")}
                     >
                       Size
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th style={{ minWidth: "140px" }}>
-                    <goa-table-sort-header
+                    <GoabTableSortHeader
                       name="productType"
                       direction={getColumnSortDirection("productType")}
-                      sort-order={getColumnSortOrder("productType")}
+                      sortOrder={getColumnSortOrder("productType")}
                     >
                       Product type
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th>Tags</th>
                 </tr>
@@ -941,8 +904,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                     ))
                   : filteredExamples.map(renderTableRow)}
               </tbody>
-            </table>
-          </goa-table>
+          </GoabTable>
           <div className="examples-table-scroll-shadow-right" aria-hidden="true" />
         </div>
       )}
@@ -1189,7 +1151,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         }
 
         /* Horizontal scroll container for table - bleeds into card padding */
-        /* TODO: Remove calc workaround when goa-table V2 gets box-sizing: border-box */
         .examples-table-wrapper {
           display: flex;
           align-items: stretch;
@@ -1204,7 +1165,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         }
 
         .examples-table-wrapper goa-table {
-          width: calc(100% - 2px) !important;
+          width: 100% !important;
           margin-left: var(--card-padding-h, var(--goa-space-2xl));
           margin-right: var(--card-padding-h, var(--goa-space-2xl));
         }

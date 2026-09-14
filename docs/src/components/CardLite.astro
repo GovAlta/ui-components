@@ -5,7 +5,7 @@
  * A lightweight card component for homepage grids.
  * Displays an image, title, and description with a link.
  */
-import { withBase } from '@/lib/base-url';
+import { withBase } from "@/lib/base-url";
 
 interface Props {
   title: string;
@@ -19,28 +19,48 @@ const isExternal = linkTo?.startsWith("http");
 const isDisabled = !linkTo;
 ---
 
-{isDisabled ? (
-  <div class="card-lite">
-    {imageUrl && <div class="card-image"><img src={withBase(imageUrl)} alt="" loading="lazy" /></div>}
-    <goa-text version="2" size="heading-m" mt="l" mb="m">
-      {title}
-    </goa-text>
-    <goa-text version="2" size="body-m" mt="none" mb="xs">
-      <span class="card-description">{description}</span>
-    </goa-text>
-    <goa-badge type="default" content="Coming soon" icon="false" emphasis="subtle" mt="s"></goa-badge>
-  </div>
-) : (
-  <a href={linkTo} class="card-lite" {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}>
-    {imageUrl && <div class="card-image"><img src={withBase(imageUrl)} alt="" loading="lazy" /></div>}
-    <goa-text version="2" size="heading-m" mt="l" mb="m">
-      <u>{title}</u>
-    </goa-text>
-    <goa-text version="2" size="body-m" mt="none" mb="xs">
-      <span class="card-description">{description}</span>
-    </goa-text>
-  </a>
-)}
+{
+  isDisabled ? (
+    <div class="card-lite">
+      {imageUrl && (
+        <div class="card-image">
+          <img src={withBase(imageUrl)} alt="" loading="lazy" />
+        </div>
+      )}
+      <goa-text size="heading-m" mt="l" mb="m">
+        {title}
+      </goa-text>
+      <goa-text size="body-m" mt="none" mb="xs">
+        <span class="card-description">{description}</span>
+      </goa-text>
+      <goa-badge
+        type="default"
+        content="Coming soon"
+        icon="false"
+        emphasis="subtle"
+        mt="s"
+      />
+    </div>
+  ) : (
+    <a
+      href={linkTo}
+      class="card-lite"
+      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {imageUrl && (
+        <div class="card-image">
+          <img src={withBase(imageUrl)} alt="" loading="lazy" />
+        </div>
+      )}
+      <goa-text size="heading-m" mt="l" mb="m">
+        <u>{title}</u>
+      </goa-text>
+      <goa-text size="body-m" mt="none" mb="xs">
+        <span class="card-description">{description}</span>
+      </goa-text>
+    </a>
+  )
+}
 
 <style>
   .card-lite {

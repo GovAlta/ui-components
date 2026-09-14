@@ -543,13 +543,13 @@
     cursor: pointer;
     border: none;
     font: var(--goa-tab-typography);
-    color: var(--goa-tab-color-text-not-selected, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-not-selected);
     text-decoration: none;
   }
 
   :global([role="tab"][aria-selected="true"]) {
     font: var(--goa-tab-typography-selected);
-    color: var(--goa-tab-color-text-selected, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-selected);
   }
 
   :global([role="tab"]:focus-visible) {
@@ -559,12 +559,12 @@
   :global(
     [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
   ) {
-    color: var(--goa-tab-color-text-hover, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-hover);
   }
 
   /* Disabled tab styles */
   :global([role="tab"][aria-disabled="true"]) {
-    color: var(--goa-color-greyscale-400, #949494);
+    color: var(--goa-color-greyscale-400);
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -599,10 +599,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--goa-tabs-gap-small-screen);
-      padding-bottom: var(
-        --goa-tabs-padding-bottom-small-screen,
-        var(--goa-space-m)
-      );
+      padding-bottom: var(--goa-tabs-padding-bottom-small-screen);
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
@@ -617,7 +614,7 @@
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-      background: var(--goa-tab-color-bg-hover-small-screen, transparent);
+      background: var(--goa-tab-color-bg-hover-small-screen);
     }
 
     /* horizontal: override mobile styles to use desktop layout */
@@ -664,22 +661,19 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: var(--goa-tab-indicator-width, 3px);
+      height: var(--goa-tab-indicator-width);
       background: transparent;
-      border-radius: var(
-        --goa-tab-indicator-border-radius-desktop,
-        6px 6px 0 0
-      );
+      border-radius: var(--goa-tab-indicator-border-radius-desktop);
     }
     :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070c4);
+      background: var(--goa-tab-indicator-color-active);
     }
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not(
           [aria-disabled="true"]
         )::after
     ) {
-      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+      background: var(--goa-tab-indicator-color-hover);
     }
   }
 
@@ -690,22 +684,19 @@
       top: 0;
       left: 0;
       bottom: 0;
-      width: var(--goa-tab-indicator-width, 3px);
+      width: var(--goa-tab-indicator-width);
       background: transparent;
-      border-radius: var(
-        --goa-tab-indicator-border-radius-small-screen,
-        0 6px 6px 0
-      );
+      border-radius: var(--goa-tab-indicator-border-radius-small-screen);
     }
     :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070c4);
+      background: var(--goa-tab-indicator-color-active);
     }
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not(
           [aria-disabled="true"]
         )::after
     ) {
-      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+      background: var(--goa-tab-indicator-color-hover);
     }
 
     /* Horizontal tabs use the bottom indicator on mobile */
@@ -715,11 +706,8 @@
       right: 0;
       bottom: 0;
       width: auto;
-      height: var(--goa-tab-indicator-width, 3px);
-      border-radius: var(
-        --goa-tab-indicator-border-radius-desktop,
-        6px 6px 0 0
-      );
+      height: var(--goa-tab-indicator-width);
+      border-radius: var(--goa-tab-indicator-border-radius-desktop);
     }
   }
 
@@ -743,10 +731,10 @@
   /* Container - gray background with rounded corners */
   .segmented .tabs {
     position: relative;
-    background: var(--goa-color-greyscale-50, #f8f8f8);
-    border: 1px solid var(--goa-color-greyscale-150, #dcdcdc);
-    border-bottom: 1px solid var(--goa-color-greyscale-150, #dcdcdc); /* Override base border-bottom */
-    border-radius: var(--goa-border-radius-m, 10px);
+    background: var(--goa-color-greyscale-50);
+    border: 1px solid var(--goa-color-greyscale-150);
+    border-bottom: 1px solid var(--goa-color-greyscale-150); /* Override base border-bottom */
+    border-radius: var(--goa-border-radius-m);
     padding: 3px;
     gap: var(--goa-space-3xs);
     margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
@@ -762,9 +750,9 @@
     left: var(--segmented-indicator-left, 0);
     width: var(--segmented-indicator-width, 0);
     height: var(--segmented-indicator-height, 30px);
-    background: var(--goa-color-greyscale-white, #ffffff);
+    background: var(--goa-color-greyscale-white);
     border: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-150, #dcdcdc);
+      var(--goa-color-greyscale-150);
     border-radius: var(--goa-border-radius-m);
     pointer-events: none;
     z-index: 0;
@@ -784,10 +772,10 @@
     border: var(--goa-border-width-s) solid transparent;
     border-radius: var(--goa-border-radius-m);
     min-height: 30px;
-    padding: 0 var(--goa-space-s, 12px);
+    padding: 0 var(--goa-space-s);
     /* Typography */
     font: var(--goa-typography-body-s);
-    color: var(--goa-color-greyscale-600, #666666);
+    color: var(--goa-color-greyscale-600);
     /* Ensure proper alignment */
     display: flex;
     align-items: center;
@@ -821,7 +809,7 @@
   .segmented :global([role="tab"][aria-selected="true"]) {
     background: transparent;
     border: var(--goa-border-width-s) solid transparent;
-    color: var(--goa-color-text-secondary, #666666);
+    color: var(--goa-color-text-secondary);
     font: var(--goa-typography-body-s);
     font-weight: 600;
   }
@@ -830,30 +818,30 @@
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-    background: var(--goa-color-greyscale-150, #dcdcdc);
+    background: var(--goa-color-greyscale-150);
     border: var(--goa-border-width-s) solid transparent;
-    color: var(--goa-color-text-default, #353535);
+    color: var(--goa-color-text-default);
   }
 
   .segmented :global([role="tab"][aria-disabled="true"]) {
-    color: var(--goa-color-greyscale-400, #949494);
+    color: var(--goa-color-greyscale-400);
     cursor: not-allowed;
     pointer-events: none;
     background: transparent;
   }
 
   .segmented :global([role="tab"]:focus-visible) {
-    outline: var(--goa-border-width-l, 3px) solid
+    outline: var(--goa-border-width-l) solid
       var(--goa-color-interactive-focus);
     outline-offset: 1px;
-    border-radius: var(--goa-border-radius-s, 8px);
+    border-radius: var(--goa-border-radius-s);
   }
 
   /* Mobile - segmented tabs stay horizontal */
   @media (--mobile) {
     .segmented .tabs {
       flex-direction: row;
-      padding-bottom: var(--goa-space-2xs, 4px);
+      padding-bottom: var(--goa-space-2xs);
     }
 
     .segmented :global([role="tab"]) {

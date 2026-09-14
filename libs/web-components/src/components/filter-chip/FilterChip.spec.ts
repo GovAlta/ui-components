@@ -127,9 +127,7 @@ describe("FilterChip", () => {
     });
     const chip = container.querySelector(".chip");
 
-    expect(chip).toHaveStyle(
-      "min-width: var(--goa-filter-chip-min-width, 56px)",
-    );
+    expect(chip).toHaveStyle("min-width: var(--goa-filter-chip-min-width)");
   });
 
   it("should not apply background fill on hover", async () => {

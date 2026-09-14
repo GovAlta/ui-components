@@ -225,8 +225,8 @@
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
-    margin: var(--goa-drawer-offset, 16px);
-    height: calc(100% - 2 * var(--goa-drawer-offset, 16px));
+    margin: var(--goa-drawer-offset);
+    height: calc(100% - 2 * var(--goa-drawer-offset));
     overflow: hidden;
     border-radius: var(--goa-push-drawer-border-radius);
     background: var(--goa-color-greyscale-white);
@@ -242,7 +242,7 @@
     margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    height: calc(100% - var(--goa-drawer-offset, 16px));
+    height: calc(100% - var(--goa-drawer-offset));
   }
 
   /* Middle of scroll — both edges flush */
@@ -258,7 +258,7 @@
     margin-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: calc(100% - var(--goa-drawer-offset, 16px));
+    height: calc(100% - var(--goa-drawer-offset));
   }
 
   goa-scroll-panel {

@@ -281,8 +281,8 @@
   /* other styles can be found in the assets/css/components.css file */
   .goatable {
     width: 0;
-    border: var(--goa-table-container-border, 1px solid #e7e7e7);
-    border-radius: var(--goa-table-border-radius-container, 16px);
+    border: var(--goa-table-container-border);
+    border-radius: var(--goa-table-border-radius-container);
     overflow: hidden;
     box-sizing: border-box;
   }

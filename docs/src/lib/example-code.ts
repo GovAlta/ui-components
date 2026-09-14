@@ -84,10 +84,3 @@ export async function getExampleCode(exampleSlug: string): Promise<ExampleCode> 
 
   return code;
 }
-
-/**
- * Add version="2" attribute to all goa- elements for v2 styling
- */
-export function addVersionAttribute(html: string): string {
-  return html.replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"');
-}

@@ -63,7 +63,7 @@
 
   .app-footer {
     background-color: var(--goa-footer-color-bg);
-    color: var(--goa-footer-color-text, var(--goa-color-text-default));
+    color: var(--goa-footer-color-text);
     border-top: var(--goa-footer-border-top);
     border-bottom: var(--goa-footer-border-bottom);
     container: self / inline-size;

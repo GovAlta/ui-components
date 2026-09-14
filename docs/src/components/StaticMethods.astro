@@ -22,11 +22,18 @@ const { methods } = Astro.props;
         <h3 id={`method-${method.name}`}>{method.name}()</h3>
       </div>
 
-      {method.description && <p class="static-method-description">{method.description}</p>}
+      {method.description && (
+        <p class="static-method-description">{method.description}</p>
+      )}
 
-      <pre class="static-method-signature"><code>{method.signature}{method.returnType ? `: ${method.returnType}` : ""}</code></pre>
+      <pre class="static-method-signature">
+        <code>
+          {method.signature}
+          {method.returnType ? `: ${method.returnType}` : ""}
+        </code>
+      </pre>
 
-      <goa-container version="2" type="interactive">
+      <goa-container type="interactive">
         <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
           {method.params.map((param) => (
             <div class="prop-row" data-grid="row">

@@ -112,53 +112,35 @@
   .chip {
     display: inline-flex;
     align-items: center;
-    background-color: var(
-      --goa-filter-chip-bg-color,
-      var(--goa-color-greyscale-white)
-    );
-    border-radius: var(--goa-filter-chip-border-radius, 1rem);
-    border: var(
-      --goa-filter-chip-border,
-      var(--goa-border-width-s) solid var(--goa-color-greyscale-700)
-    );
+    background-color: var(--goa-filter-chip-bg-color);
+    border-radius: var(--goa-filter-chip-border-radius);
+    border: var(--goa-filter-chip-border);
     box-sizing: border-box;
-    color: var(--goa-filter-chip-text-color, var(--goa-color-text-default));
-    font: var(--goa-filter-chip-typography, var(--goa-typography-body-s));
-    gap: var(--goa-filter-chip-gap, 0.5rem);
-    min-height: var(--goa-filter-chip-min-height, 2rem);
-    padding-top: var(--goa-filter-chip-padding-vertical, 3px);
-    padding-right: var(--goa-filter-chip-padding-horizontal-right, 8px);
-    padding-bottom: var(--goa-filter-chip-padding-vertical, 3px);
-    padding-left: var(--goa-filter-chip-padding-horizontal-left, 12px);
-    min-width: var(--goa-filter-chip-min-width, 56px);
+    color: var(--goa-filter-chip-text-color);
+    font: var(--goa-filter-chip-typography);
+    gap: var(--goa-filter-chip-gap);
+    min-height: var(--goa-filter-chip-min-height);
+    padding-top: var(--goa-filter-chip-padding-vertical);
+    padding-right: var(--goa-filter-chip-padding-horizontal-right);
+    padding-bottom: var(--goa-filter-chip-padding-vertical);
+    padding-left: var(--goa-filter-chip-padding-horizontal-left);
+    min-width: var(--goa-filter-chip-min-width);
   }
 
   .chip.error {
-    background-color: var(
-      --goa-filter-chip-bg-color-error,
-      var(--goa-color-emergency-light)
-    );
-    border-color: var(
-      --goa-filter-chip-border-color-error,
-      var(--goa-color-emergency-default)
-    );
-    color: var(
-      --goa-filter-chip-text-color-error,
-      var(--goa-color-emergency-default)
-    );
+    background-color: var(--goa-filter-chip-bg-color-error);
+    border-color: var(--goa-filter-chip-border-color-error);
+    color: var(--goa-filter-chip-text-color-error);
   }
 
   .label-container {
     display: flex;
     align-items: center;
-    gap: var(--goa-filter-chip-label-gap, 6px);
+    gap: var(--goa-filter-chip-label-gap);
   }
 
   .text {
-    line-height: var(
-      --goa-filter-chip-line-height,
-      var(--goa-line-height-2)
-    ); /* 24px */
+    line-height: var(--goa-filter-chip-line-height); /* 24px */
     padding-top: 0;
     display: flex;
     align-items: center;

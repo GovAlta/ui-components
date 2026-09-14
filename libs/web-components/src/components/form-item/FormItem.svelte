@@ -284,47 +284,32 @@
   /* Messages container spacing from input */
 
   .large .messages-container {
-    margin-top: var(
-      --goa-form-item-message-margin-top-large,
-      var(--goa-form-item-message-margin-top, 0.75rem)
-    );
+    margin-top: var(--goa-form-item-message-margin-top-large);
   }
 
   .regular .messages-container {
-    margin-top: var(
-      --goa-form-item-message-margin-top-regular,
-      var(--goa-form-item-message-margin-top, 0.75rem)
-    );
+    margin-top: var(--goa-form-item-message-margin-top-regular);
   }
 
   .compact .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-compact, 0.5rem);
+    margin-top: var(--goa-form-item-message-margin-top-compact);
   }
 
   /* InputType overrides: checkbox-list, radio-group for adjusted sizing */
   .large.checkbox-list .messages-container,
   .large.radio-group .messages-container {
-    margin-top: var(
-      --goa-form-item-message-margin-top-selection-large,
-      var(--goa-form-item-message-margin-top, 0.75rem)
-    );
+    margin-top: var(--goa-form-item-message-margin-top-selection-large);
   }
 
   .regular.checkbox-list .messages-container,
   .regular.radio-group .messages-container {
-    margin-top: var(
-      --goa-form-item-message-margin-top-selection-regular,
-      var(--goa-form-item-message-margin-top, 0.75rem)
-    );
+    margin-top: var(--goa-form-item-message-margin-top-selection-regular);
   }
 
   /* Compact selection controls use adjusted message spacing */
   .compact.checkbox-list .messages-container,
   .compact.radio-group .messages-container {
-    margin-top: var(
-      --goa-form-item-message-margin-top-selection-compact,
-      0.75rem
-    );
+    margin-top: var(--goa-form-item-message-margin-top-selection-compact);
   }
 
   /* Stack error and helper messages */

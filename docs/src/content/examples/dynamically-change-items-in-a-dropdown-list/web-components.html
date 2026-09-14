@@ -1,16 +1,10 @@
 <div style="padding: 40px">
   <goa-form-item
-    version="2"
     label="Size"
     requirement="optional"
     helptext="Choose the size to change the list below"
   >
-    <goa-dropdown
-      version="2"
-      id="parent-dropdown"
-      placeholder="Select a value"
-      name="parent"
-    >
+    <goa-dropdown id="parent-dropdown" placeholder="Select a value" name="parent">
       <goa-dropdown-item value="All" label="All"></goa-dropdown-item>
       <goa-dropdown-item value="Big" label="Big"></goa-dropdown-item>
       <goa-dropdown-item value="Small" label="Small"></goa-dropdown-item>
@@ -18,12 +12,7 @@
   </goa-form-item>
 
   <goa-form-item label="Items" requirement="optional" mt="xl">
-    <goa-dropdown
-      version="2"
-      id="child-dropdown"
-      placeholder="Select a value"
-      name="children"
-    >
+    <goa-dropdown id="child-dropdown" placeholder="Select a value" name="children">
     </goa-dropdown>
   </goa-form-item>
 </div>

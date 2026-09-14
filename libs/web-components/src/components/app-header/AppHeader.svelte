@@ -558,15 +558,15 @@
   }
 
   .utilities-dropdown :global(::slotted(a:hover)) {
-    background: var(--goa-color-greyscale-100, #f1f1f1) !important;
-    color: var(--goa-color-text-default, #000000) !important;
+    background: var(--goa-color-greyscale-100) !important;
+    color: var(--goa-color-text-default) !important;
     text-decoration: none !important;
   }
 
   .utilities-dropdown :global(::slotted(a:focus-visible)) {
-    outline: 3px solid var(--goa-color-interactive-focus, #004f84) !important;
+    outline: 3px solid var(--goa-color-interactive-focus) !important;
     outline-offset: -3px !important;
-    background: var(--goa-color-greyscale-100, #f1f1f1) !important;
+    background: var(--goa-color-greyscale-100) !important;
   }
 
   /* Style buttons inside the utilities dropdown - make them look like menu items */
@@ -581,7 +581,7 @@
     font-size: 18px !important;
     font-weight: 500 !important;
     line-height: 24px !important;
-    color: var(--goa-color-text-default, #000000) !important;
+    color: var(--goa-color-text-default) !important;
 
     /* Remove button styling, make it look like a menu item */
     background: transparent !important;
@@ -623,9 +623,9 @@
   @media (min-width: 768px) {
     .logo-desktop {
       display: block;
-      height: var(--goa-app-header-logo-desktop-height, 32px);
+      height: var(--goa-app-header-logo-desktop-height);
       width: 118px;
-      background-image: var(--goa-app-header-logo-desktop, var(--logo-default));
+      background-image: var(--goa-app-header-logo-desktop);
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -643,9 +643,9 @@
 
     .logo-mobile {
       display: block;
-      width: var(--goa-app-header-logo-mobile-size, 32px);
-      height: var(--goa-app-header-logo-mobile-size, 32px);
-      background-image: var(--goa-app-header-logo-mobile, var(--logo-default));
+      width: var(--goa-app-header-logo-mobile-size);
+      height: var(--goa-app-header-logo-mobile-size);
+      background-image: var(--goa-app-header-logo-mobile);
       background-size: contain;
       background-repeat: no-repeat;
     }
