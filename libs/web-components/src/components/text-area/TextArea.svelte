@@ -4,6 +4,7 @@
 <script lang="ts">
   import {
     dispatch,
+    generateRandomId,
     pluralize,
     receive,
     relay,
@@ -27,8 +28,8 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
-  /** Name of the input value that is received in the _change event. */
-  export let name: string;
+  /** Name of the input value that is received in the _change event. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** Bound to value */
   export let value: string = "";
   /** Text displayed within the input when no value is set. */

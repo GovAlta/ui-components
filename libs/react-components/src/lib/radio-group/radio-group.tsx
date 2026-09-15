@@ -13,7 +13,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 export * from "./radio";
 
 interface WCProps extends Margins {
-  name: string;
+  name?: string;
   value?: string;
   id?: string;
   orientation?: GoabRadioGroupOrientation;
@@ -37,8 +37,8 @@ declare module "react" {
 }
 
 export interface GoabRadioGroupProps extends Margins, DataAttributes {
-  /** @required The name for the radio group. Used for accessibility and change events. */
-  name: string;
+  /** The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. */
+  name?: string;
   /** The currently selected value in the radio group. */
   value?: string;
   /** The identifier for the radio group element. */

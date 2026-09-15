@@ -52,8 +52,8 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) error?: boolean;
   /** Marks the chip as deletable. */
   @Input({ transform: booleanAttribute }) deletable?: boolean;
-  /** Content displayed in the chip. Accepts a string or template for custom content. */
-  @Input() content?: string | TemplateRef<unknown> = "";
+  /** @required Content displayed in the chip. Accepts a string or template for custom content. */
+  @Input({ required: true }) content!: string | TemplateRef<unknown>;
   /** Accessible content used to label the filter chip controls. */
   @Input() ariaLabel?: string;
   /** Sets the icon theme style for the filter chip. */

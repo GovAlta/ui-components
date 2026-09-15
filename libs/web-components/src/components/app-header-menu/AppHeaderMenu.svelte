@@ -13,7 +13,7 @@
   // Optional
 
   /** Icon displayed before the heading text. */
-  export let leadingicon: GoAIconType;
+  export let leadingicon: GoAIconType | undefined = undefined;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "rootEl";
 

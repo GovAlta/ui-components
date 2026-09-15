@@ -21,6 +21,16 @@ describe("GoADropdown", () => {
   const items = ["red", "blue", "orange"];
 
   describe("Render", () => {
+    it("generates a name when omitted", () => {
+      const result = render(GoADropdown, { testid: "generated-name" });
+      const input = result.container.querySelector("input");
+      const generatedName = input?.getAttribute("name");
+
+      expect(generatedName).toMatch(/^[a-z0-9]{7}$/);
+      expect(input?.getAttribute("id")).toBe(generatedName);
+      expect(input?.getAttribute("aria-controls")).toBe(`menu-${generatedName}`);
+    });
+
     it("should render dropdown", async () => {
       const result = render(GoADropdownWrapper, {
         name,

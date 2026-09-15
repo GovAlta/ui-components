@@ -58,8 +58,8 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  /** @required The name for the checkbox list group. Used as group identifier in change events. */
-  @Input() name!: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  @Input() name?: string;
   /** Sets the maximum width of the checkbox list container. */
   @Input() maxWidth?: string;
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. @default "default" */

@@ -86,7 +86,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     }, 0);
   }
 
-  /** Sets the name of the checkbox input for form submission. */
+  /** Sets the name of the checkbox input for form submission. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Marks the checkbox item as selected. */
   @Input({ transform: booleanAttribute }) checked?: boolean;

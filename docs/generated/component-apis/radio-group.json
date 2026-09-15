@@ -63,9 +63,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -187,7 +187,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -304,9 +304,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -342,7 +342,7 @@
         {
           "name": "value",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
           "description": "The currently selected value in the radio group."
         }

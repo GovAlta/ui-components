@@ -71,7 +71,7 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Name of the input value that is received in the _change event. */
+  /** Name of the input value that is received in the _change event. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Text displayed within the input when no value is set. */
   @Input() placeholder?: string;

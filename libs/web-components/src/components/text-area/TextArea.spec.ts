@@ -3,6 +3,13 @@ import GoATextArea from "./TextArea.svelte";
 import { describe, it, expect, vi } from "vitest";
 
 describe("GoATextArea", () => {
+  it("generates a name when omitted", () => {
+    const result = render(GoATextArea, { testid: "generated-name" });
+    const textarea = result.queryByTestId("generated-name");
+
+    expect(textarea?.getAttribute("name")).toMatch(/^[a-z0-9]{7}$/);
+  });
+
   it("should render", async () => {
     const result = render(GoATextArea, {
       name: "name",

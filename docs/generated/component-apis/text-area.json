@@ -91,9 +91,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Name of the input value that is received in the change event."
+          "description": "Name of the input value that is received in the change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -272,7 +272,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Name of the input value that is received in the _change event."
+          "description": "Name of the input value that is received in the _change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -450,9 +450,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Name of the input value that is received in the _change event."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Name of the input value that is received in the _change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",

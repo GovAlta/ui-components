@@ -23,7 +23,7 @@ declare module "react" {
 
 interface WCProps extends Margins {
   id?: string;
-  name: string;
+  name?: string;
   checked?: string;
   indeterminate?: string;
   disabled?: string;
@@ -41,8 +41,8 @@ interface WCProps extends Margins {
 
 /* eslint-disable-next-line */
 export interface GoabCheckboxProps extends Margins, DataAttributes {
-  /** @required Unique name to identify the checkbox. */
-  name: string;
+  /** Unique name to identify the checkbox. If omitted, a unique name is generated. */
+  name?: string;
   /** Sets a unique id for the checkbox element. */
   id?: string;
   /** Marks the checkbox item as selected. */

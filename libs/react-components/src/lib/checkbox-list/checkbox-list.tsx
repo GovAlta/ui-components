@@ -8,7 +8,7 @@ import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
-  name: string;
+  name?: string;
   value?: string[];
   disabled?: string;
   error?: string;
@@ -27,8 +27,8 @@ declare module "react" {
 }
 
 export interface GoabCheckboxListProps extends Margins {
-  /** @required The name for the checkbox list group. Used as group identifier in change events. */
-  name: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  name?: string;
   /** Array of currently selected checkbox values. */
   value?: string[];
   /** Disables all checkboxes in the list. */

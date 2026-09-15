@@ -52,8 +52,8 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** The value of this radio option. Will be emitted when selected. */
-  @Input() value?: string;
+  /** @required The value of this radio option. Will be emitted when selected. */
+  @Input({ required: true }) value!: string;
   /** The display label for this radio option. Falls back to value if not provided. */
   @Input() label?: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */

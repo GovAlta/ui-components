@@ -4,6 +4,13 @@ import GoARadioGroupWrapper from "./RadioGroupWrapper.test.svelte";
 import { describe, it, expect, vi } from "vitest";
 
 describe("GoARadioGroup Component", () => {
+  it("generates a name when omitted", () => {
+    const result = render(GoARadioGroup, { testid: "generated-name" });
+    const radioGroup = result.component as unknown as { name: string };
+
+    expect(radioGroup.name).toMatch(/^[a-z0-9]{7}$/);
+  });
+
   it("should render", async () => {
     const name = "favcolor";
     const items = ["red", "blue", "orange"];

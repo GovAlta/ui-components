@@ -43,12 +43,19 @@
   // Public
   // ******
 
+  /** Sets the visual type/style of the notification item. */
   export let type: WorkSideNotificationItemType = "default";
+  /** ISO timestamp string representing when the notification occurred. */
   export let timestamp: string = "";
+  /** Title text displayed in the notification card header. */
   export let title: string = "";
-  export let description: string = "";
+  /** The body text content of the notification card. */
+  export let description: string;
+  /** Indicates whether the notification has been read or is unread. */
   export let readStatus: ReadStatus = "unread";
+  /** Sets the urgency level of the notification. */
   export let priority: Priority = "normal";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   // *******

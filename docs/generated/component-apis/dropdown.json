@@ -107,7 +107,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",
@@ -296,7 +296,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",
@@ -481,9 +481,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",

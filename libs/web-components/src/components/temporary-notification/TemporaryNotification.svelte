@@ -106,7 +106,7 @@
   .snackbar {
     position: relative;
     box-sizing: border-box;
-    border-radius: var(--goa-temporary-notification-borderRadius);
+    border-radius: var(--goa-temporary-notification-border-radius);
     max-width: var(--goa-temporary-notification-max-width);
     min-height: 3.75rem;
     /* TODO: replace with token once shadow values are finalized */

@@ -164,7 +164,7 @@
         {
           "name": "type",
           "type": "GoabBadgeType",
-          "required": false,
+          "required": true,
           "default": null,
           "description": "Sets the context and colour of the badge."
         }

@@ -25,7 +25,7 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestBadgeComponent {
-  type?: GoabBadgeType;
+  type!: GoabBadgeType;
   content?: string | TemplateRef<unknown>;
   contentSlot?: boolean;
   testId?: string;
@@ -50,7 +50,7 @@ class TestBadgeComponent {
   `,
 })
 class TestBadgeNoIconComponent {
-  type?: GoabBadgeType;
+  type!: GoabBadgeType;
   content?: string;
   iconType?: GoabIconType;
 }

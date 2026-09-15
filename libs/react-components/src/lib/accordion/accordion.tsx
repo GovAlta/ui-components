@@ -12,7 +12,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps extends Margins {
   open?: string;
   headingsize?: GoabAccordionHeadingSize;
-  heading?: string;
+  heading: string;
   secondarytext?: string;
   headingContent?: ReactNode;
   maxwidth?: string;
@@ -34,8 +34,8 @@ declare module "react" {
 }
 
 export interface GoabAccordionProps extends Margins, DataAttributes {
-  /** Sets the heading text. */
-  heading?: string;
+  /** @required Sets the heading text. */
+  heading: string;
   /** Sets the state of the accordion container open or closed. */
   open?: boolean;
   /** Sets the heading size of the accordion container heading. @default "small" */

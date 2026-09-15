@@ -47,7 +47,7 @@ declare module "react" {
 }
 
 export interface GoabDropdownProps extends Margins, DataAttributes {
-  /** Identifier for the dropdown. Should be unique. */
+  /** Identifier for the dropdown. If omitted, a unique name is generated. */
   name?: string;
   /** The currently selected value(s) of the dropdown. */
   value?: string[] | string;

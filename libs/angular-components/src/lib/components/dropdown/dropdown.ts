@@ -75,7 +75,7 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Identifier for the dropdown. Should be unique. */
+  /** Identifier for the dropdown. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   @Input() ariaLabel?: string;

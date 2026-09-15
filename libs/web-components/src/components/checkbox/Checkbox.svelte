@@ -8,6 +8,7 @@
   import {
     dispatch,
     fromBoolean,
+    generateRandomId,
     receive,
     relay,
     toBoolean,
@@ -24,9 +25,8 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
-  // Required
-  /** Unique name to identify the checkbox. */
-  export let name: string;
+  /** Unique name to identify the checkbox. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
 
   // Optional values
   /** Marks the checkbox item as selected. */

@@ -12,7 +12,6 @@
   const [Types, validateType] = typeValidator(
     "Callout type",
     ["emergency", "important", "information", "event", "success"],
-    true,
   );
   const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator(
     "Callout emphasis",
@@ -37,8 +36,8 @@
   /** Left margin. */
   export let ml: Spacing = null;
 
-  /** @required Define the context and colour of the callout. */
-  export let type: CalloutType;
+  /** Sets the context and colour of the callout. */
+  export let type: CalloutType = "information";
   /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. */
   export let emphasis: CalloutEmphasisType = "medium";
   /** Callout heading text. */

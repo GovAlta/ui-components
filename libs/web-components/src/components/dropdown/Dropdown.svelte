@@ -23,6 +23,7 @@
     dispatch,
     ensureSlotExists,
     fromBoolean,
+    generateRandomId,
     receive,
     relay,
     toBoolean,
@@ -49,8 +50,8 @@
 
   // Props
 
-  /** @required Identifier for the dropdown. Should be unique. */
-  export let name: string;
+  /** Identifier for the dropdown. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   export let arialabel: string = "";
   /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */

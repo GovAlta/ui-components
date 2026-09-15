@@ -4,7 +4,7 @@ import type { JSX } from "react";
 
 interface WCProps extends Margins {
   name?: string;
-  value?: string;
+  value: string;
   description?: string | React.ReactNode;
   reveal?: React.ReactNode;
   revealarialabel?: string;
@@ -27,8 +27,8 @@ declare module "react" {
 }
 
 export interface GoabRadioItemProps extends Margins {
-  /** The value of this radio option. Will be emitted when selected. */
-  value?: string;
+  /** @required The value of this radio option. Will be emitted when selected. */
+  value: string;
   /** The display label for this radio option. Falls back to value if not provided. */
   label?: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */

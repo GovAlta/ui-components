@@ -110,8 +110,8 @@
             "string",
             "TemplateRef<unknown>"
           ],
-          "required": false,
-          "default": "",
+          "required": true,
+          "default": null,
           "description": "Content displayed in the chip. Accepts a string or template for custom content."
         },
         {

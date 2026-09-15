@@ -19,6 +19,17 @@ describe("GoACheckboxList", () => {
   };
 
   describe("Rendering", () => {
+    it("generates a name when omitted", () => {
+      const { queryByTestId } = render(CheckboxList, {
+        testid: "generated-name",
+      });
+      const checkboxList = queryByTestId("generated-name");
+
+      expect(checkboxList?.getAttribute("aria-label")).toMatch(
+        /^[a-z0-9]{7}$/,
+      );
+    });
+
     it("should render checkbox list with default props", async () => {
       const { queryByTestId } = render(CheckboxList, defaultProps);
 

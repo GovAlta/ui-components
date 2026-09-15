@@ -12,7 +12,7 @@ import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  name: string;
+  name?: string;
   value?: string;
   placeholder?: string;
   rows?: number;
@@ -42,8 +42,8 @@ declare module "react" {
 }
 
 export interface GoabTextAreaProps extends Margins, DataAttributes {
-  /** @required Name of the input value that is received in the change event. */
-  name: string;
+  /** Name of the input value that is received in the change event. If omitted, a unique name is generated. */
+  name?: string;
   /** Bound to the current value of the textarea. */
   value?: string;
   /** Sets the id attribute on the textarea element. */

@@ -6,6 +6,7 @@
     typeValidator,
     toBoolean,
     dispatch,
+    generateRandomId,
     receive,
     relay,
     watchFocusWithin,
@@ -39,10 +40,10 @@
 
   // Public
 
-  /** The name for the radio group. Used for accessibility and change events. */
-  export let name: string;
+  /** The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** The currently selected value in the radio group. */
-  export let value: string;
+  export let value: string | undefined = undefined;
   /** Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. */
   export let orientation: Orientation = "vertical";
   /** Disables all radio items in the group. */

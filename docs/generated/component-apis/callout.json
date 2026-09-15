@@ -267,9 +267,9 @@
             "event",
             "success"
           ],
-          "required": true,
-          "default": null,
-          "description": "Define the context and colour of the callout."
+          "required": false,
+          "default": "information",
+          "description": "Sets the context and colour of the callout."
         }
       ],
       "events": [],

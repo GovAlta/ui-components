@@ -29,8 +29,8 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 export class GoabDropdownItem implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** The value submitted when this item is selected. */
-  @Input() value?: string;
+  /** @required The value submitted when this item is selected. Set to an empty string (`""`) to make this item the default selected value. */
+  @Input({ required: true }) value!: string;
   /** Rich item content. On selection, `label` is shown and `filter` defaults to the content's text. */
   @Input() filter?: string;
   /** Display label for the dropdown item. */

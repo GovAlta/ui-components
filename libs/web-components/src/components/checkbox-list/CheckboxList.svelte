@@ -13,7 +13,14 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { dispatch, receive, relay, toBoolean, watchFocusWithin } from "../../common/utils";
+  import {
+    dispatch,
+    generateRandomId,
+    receive,
+    relay,
+    toBoolean,
+    watchFocusWithin,
+  } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -25,8 +32,8 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
-  /** The name for the checkbox list group. Used as group identifier in change events. */
-  export let name: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
 
   /** Array of currently selected checkbox values. */
   export let value: string[] = [];

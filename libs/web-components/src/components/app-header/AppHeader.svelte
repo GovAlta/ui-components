@@ -625,7 +625,7 @@
       display: block;
       height: var(--goa-app-header-logo-desktop-height);
       width: 118px;
-      background-image: var(--goa-app-header-logo-desktop);
+      background-image: var(--goa-app-header-logo-desktop, var(--logo-default));
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -645,7 +645,7 @@
       display: block;
       width: var(--goa-app-header-logo-mobile-size);
       height: var(--goa-app-header-logo-mobile-size);
-      background-image: var(--goa-app-header-logo-mobile);
+      background-image: var(--goa-app-header-logo-mobile, var(--logo-default));
       background-size: contain;
       background-repeat: no-repeat;
     }

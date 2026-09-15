@@ -95,9 +95,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Unique name to identify the checkbox."
+          "description": "Unique name to identify the checkbox. If omitted, a unique name is generated."
         },
         {
           "name": "revealAriaLabel",
@@ -276,7 +276,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets the name of the checkbox input for form submission."
+          "description": "Sets the name of the checkbox input for form submission. If omitted, a unique name is generated."
         },
         {
           "name": "revealArialLabel",
@@ -446,9 +446,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Unique name to identify the checkbox."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Unique name to identify the checkbox. If omitted, a unique name is generated."
         },
         {
           "name": "revealarialabel",

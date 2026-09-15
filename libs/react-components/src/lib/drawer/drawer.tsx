@@ -26,7 +26,7 @@ export interface GoabDrawerProps {
   children: ReactNode;
   /** @required Callback fired when the drawer requests to be closed. */
   onClose: () => void;
-  /** Whether the drawer is open. */
+  /** Whether the drawer is open. @default false */
   open?: boolean;
   /** The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content. */
   heading?: string | ReactNode;
@@ -41,7 +41,7 @@ export interface GoabDrawerProps {
 /** A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view. */
 export function GoabDrawer({
   position,
-  open,
+  open = false,
   heading,
   maxSize,
   testId,

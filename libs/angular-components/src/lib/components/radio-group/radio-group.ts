@@ -63,7 +63,7 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  /** The name for the radio group. Used for accessibility and change events. */
+  /** The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** The currently selected value in the radio group. */
   @Input() override value?: string;

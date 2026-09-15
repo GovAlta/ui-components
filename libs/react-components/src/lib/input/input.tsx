@@ -17,7 +17,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type?: GoabInputType;
-  name: string;
+  name?: string;
   value?: string;
   id?: string;
   autocapitalize?: GoabAutoCapitalize;
@@ -63,8 +63,8 @@ declare module "react" {
 }
 
 interface BaseProps extends Margins, DataAttributes {
-  /** Name of input value that is received in event detail payloads. */
-  name: string;
+  /** Name of input value that is received in event detail payloads. If omitted, a unique name is generated. */
+  name?: string;
 
   /** Sets the id attribute of the input element. */
   id?: string;

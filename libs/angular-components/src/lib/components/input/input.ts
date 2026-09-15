@@ -113,7 +113,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
 
   /** Sets the type of the input field. @default "text" */
   @Input() type?: GoabInputType = "text";
-  /** Name of input value that is received in the onChange event. */
+  /** Name of input value that is received in the onChange event. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Debounce delay in milliseconds before firing the change event. 0 means no debounce. */
   @Input({ transform: numberAttribute }) debounce?: number;

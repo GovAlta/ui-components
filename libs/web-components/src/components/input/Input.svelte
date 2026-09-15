@@ -18,6 +18,7 @@
     relay,
     receive,
     dispatch,
+    generateRandomId,
     styles,
   } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
@@ -68,8 +69,8 @@
 
   /** Sets the type of the input field. */
   export let type: Type = "text";
-  /** Name of input value that is received in the onChange event. */
-  export let name: string = "";
+  /** Name of input value that is received in the onChange event. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** Bound to value. */
   export let value: string = "";
   /** Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. */

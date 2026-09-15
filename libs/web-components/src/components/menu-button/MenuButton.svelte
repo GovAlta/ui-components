@@ -29,7 +29,7 @@
   /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   export let leadingIcon: GoAIconType | undefined = undefined;
   /** Maximum width of the dropdown menu. */
-  export let maxWidth: string;
+  export let maxWidth: string | undefined = undefined;
   /** Sets the size of the button. */
   export let size: "normal" | "compact" = "normal";
   /** Sets the color variant for semantic meaning. */

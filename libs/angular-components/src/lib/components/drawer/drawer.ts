@@ -41,8 +41,8 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 export class GoabDrawer implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** @required Whether the drawer is open. */
-  @Input({ required: true, transform: booleanAttribute }) open!: boolean;
+  /** Whether the drawer is open. @default false */
+  @Input({ transform: booleanAttribute }) open = false;
   /** @required The position of the drawer. */
   @Input({ required: true }) position!: GoabDrawerPosition;
   /** The heading text displayed at the top of the drawer. */

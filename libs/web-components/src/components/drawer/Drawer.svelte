@@ -25,7 +25,7 @@
   /** Whether the drawer is open. */
   export let open = false;
   /** The position of the drawer. */
-  export let position: DrawerPosition = undefined;
+  export let position: DrawerPosition;
   /** The heading text displayed at the top of the drawer. */
   export let heading: string = "";
   /** Sets max height on bottom position, sets width on left and right position. */
