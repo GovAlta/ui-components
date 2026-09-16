@@ -99,7 +99,7 @@
   export let testid: string = "";
   /** Sets the width of the text input area. */
   export let width: string = "30ch";
-  /** Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the input will be translated for the screen reader. */
   export let arialabel: string = "";
   /** The aria-labelledby attribute identifies the element (or elements) that labels the input. */
   export let arialabelledby: string = "";

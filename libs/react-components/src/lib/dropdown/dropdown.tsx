@@ -57,7 +57,7 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
   onFocus?: (detail: GoabDropdownOnFocusDetail) => void;
   /** Callback fired when the dropdown loses focus. */
   onBlur?: (detail: GoabDropdownOnBlurDetail) => void;
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the selected value will be translated for the screen reader. */
   ariaLabel?: string;
   /** The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. */
   ariaLabelledBy?: string;

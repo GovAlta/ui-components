@@ -43,7 +43,7 @@
   export let error: string = "false";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. */
   export let arialabel: string = "";
   /** Additional description text displayed below the checkbox label. */
   export let description: string = "";
@@ -282,7 +282,7 @@ max-width: ${maxwidth};
         disabled={isDisabled}
         type="checkbox"
         value={`${value}`}
-        aria-label={arialabel || text || name}
+        aria-label={arialabel || text}
         aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
         aria-describedby={$$slots.description || description !== ""
           ? _descriptionId

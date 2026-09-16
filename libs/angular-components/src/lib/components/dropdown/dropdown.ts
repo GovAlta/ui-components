@@ -77,7 +77,7 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
 
   /** Identifier for the dropdown. If omitted, a unique name is generated. */
   @Input() name?: string;
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the selected value will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   @Input() ariaLabelledBy?: string;

@@ -19,14 +19,15 @@ describe("GoACheckboxList", () => {
   };
 
   describe("Rendering", () => {
-    it("generates a name when omitted", () => {
+    it("accepts an arialabel property", () => {
       const { queryByTestId } = render(CheckboxList, {
-        testid: "generated-name",
+        testid: "checkbox-list-label",
+        arialabel: "Contact preferences",
       });
-      const checkboxList = queryByTestId("generated-name");
+      const checkboxList = queryByTestId("checkbox-list-label");
 
-      expect(checkboxList?.getAttribute("aria-label")).toMatch(
-        /^[a-z0-9]{7}$/,
+      expect(checkboxList?.getAttribute("aria-label")).toBe(
+        "Contact preferences",
       );
     });
 
@@ -36,7 +37,6 @@ describe("GoACheckboxList", () => {
       const checkboxList = queryByTestId("checkbox-list");
       expect(checkboxList).toBeTruthy();
       expect(checkboxList?.getAttribute("role")).toBe("group");
-      expect(checkboxList?.getAttribute("aria-label")).toBe(defaultProps.name);
     });
 
     it("should apply max-width style", async () => {

@@ -64,7 +64,7 @@ export interface GoabTextAreaProps extends Margins, DataAttributes {
   maxWidth?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   ariaLabel?: string;
   /** Counting interval for characters or words, specifying whether to count every character or word. */
   countBy?: GoabTextAreaCountBy;

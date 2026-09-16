@@ -18,6 +18,7 @@ import { Spacing } from "@abgov/ui-components-common";
       [testId]="testId"
       [maxWidth]="maxWidth"
       [size]="size"
+      [ariaLabel]="ariaLabel"
       [mt]="mt"
       [mb]="mb"
       [ml]="ml"
@@ -37,6 +38,7 @@ class TestCheckboxListComponent {
   testId?: string;
   maxWidth?: string;
   size?: "default" | "compact";
+  ariaLabel?: string;
   mt?: Spacing;
   mb?: Spacing;
   ml?: Spacing;
@@ -75,6 +77,7 @@ describe("GoabCheckboxList", () => {
     component.testId = "testId";
     component.maxWidth = "480px";
     component.size = "compact";
+    component.ariaLabel = "Contact preferences";
     component.mt = "s";
     component.mr = "m";
     component.mb = "l";
@@ -90,6 +93,7 @@ describe("GoabCheckboxList", () => {
     ).nativeElement;
     expect(el.getAttribute("name")).toBe(component.name);
     expect(el.getAttribute("size")).toBe("compact");
+    expect(el.getAttribute("arialabel")).toBe(component.ariaLabel);
     expect(el.getAttribute("testid")).toBe(component.testId);
     expect(el.getAttribute("maxwidth")).toBe(component.maxWidth);
     expect(el.getAttribute("mt")).toBe(component.mt);

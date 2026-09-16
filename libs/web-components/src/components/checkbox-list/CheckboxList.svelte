@@ -47,6 +47,8 @@
   export let maxwidth: string = "none";
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. */
   export let size: "default" | "compact" = "default";
+  /** Defines how the input will be translated for the screen reader. */
+  export let arialabel: string = "";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -442,7 +444,7 @@
     max-width: ${maxwidth};
   `}
   role="group"
-  aria-label={name}
+  aria-label={arialabel}
   data-testid={testid}
   on:focus={onFocus}
 >

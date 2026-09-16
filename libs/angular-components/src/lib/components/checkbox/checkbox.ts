@@ -97,7 +97,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   // ** NOTE: can we just use the base component for this?
   /** The value binding. */
   @Input() override value?: string | number | boolean | null;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. */
   @Input() ariaLabel?: string;
   /** Sets additional description content displayed below the checkbox label. Accepts plain text or a template. */
   @Input() description!: string | TemplateRef<any>;

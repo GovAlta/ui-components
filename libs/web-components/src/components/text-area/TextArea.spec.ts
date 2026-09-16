@@ -181,12 +181,6 @@ describe("GoATextArea", () => {
     expect(root).toBeTruthy();
   });
 
-  it("defaults to the name property if arialabel is not supplied", async () => {
-    const el = render(GoATextArea, { name: "about" });
-    const root = el.container.querySelector('[aria-label="about"]');
-    expect(root).toBeTruthy();
-  });
-
   describe("Char count", () => {
     it("does not show a char count if not enabled", async () => {
       const { container } = render(GoATextArea, { name: "test-name" });

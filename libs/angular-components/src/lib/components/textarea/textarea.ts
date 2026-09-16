@@ -81,7 +81,7 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Input({ transform: booleanAttribute }) readOnly?: boolean;
   /** Width of the text area. */
   @Input() width?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** Counting interval for characters or words, specifying whether to count every character or word. @default "" */
   @Input() countBy?: GoabTextAreaCountBy = "";

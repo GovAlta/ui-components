@@ -61,7 +61,7 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
   children?: React.ReactNode;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. */
   ariaLabel?: string;
   /** Additional description text displayed below the checkbox label. */
   description?: string | React.ReactNode;

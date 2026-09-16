@@ -5,6 +5,13 @@
     "react": {
       "props": [
         {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Defines how the input will be translated for the screen reader."
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -116,6 +123,13 @@
     },
     "angular": {
       "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Defines how the input will be translated for the screen reader."
+        },
         {
           "name": "disabled",
           "type": "boolean",
@@ -231,6 +245,13 @@
     },
     "webComponents": {
       "props": [
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Defines how the input will be translated for the screen reader."
+        },
         {
           "name": "disabled",
           "type": "boolean",

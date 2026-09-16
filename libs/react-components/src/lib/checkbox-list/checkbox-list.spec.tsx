@@ -22,6 +22,7 @@ describe("GoabCheckboxList", () => {
       value: ["option1", "option2"],
       maxWidth: "480px",
       size: "compact",
+      ariaLabel: "Contact preferences",
       disabled: true,
       error: true,
       testId: testId,
@@ -37,6 +38,9 @@ describe("GoabCheckboxList", () => {
     expect(checkboxList?.getAttribute("name")).toBe("foo");
     expect(checkboxList?.getAttribute("maxwidth")).toBe("480px");
     expect(checkboxList?.getAttribute("size")).toBe("compact");
+    expect(checkboxList?.getAttribute("arialabel")).toBe(
+      "Contact preferences",
+    );
     expect(checkboxList?.getAttribute("disabled")).toBe("true");
     expect(checkboxList?.getAttribute("error")).toBe("true");
     expect(checkboxList?.getAttribute("testid")).toBe(testId);

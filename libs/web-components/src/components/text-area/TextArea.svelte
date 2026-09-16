@@ -48,7 +48,7 @@
   export let readonly: string = "false";
   /** Sets the input to a disabled state. Use [attr.disabled] with [formControl] */
   export let disabled: string = "false";
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   export let arialabel: string = "";
   /** Counting interval for characters or words, specifying whether to count every character or word. */
   export let countby: "character" | "word" | "" = "";
@@ -208,7 +208,7 @@
       {name}
       {placeholder}
       {rows}
-      aria-label={arialabel || name}
+      aria-label={arialabel}
       aria-invalid={_error ? "true" : "false"}
       disabled={isDisabled}
       readonly={isReadonly}

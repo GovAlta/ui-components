@@ -52,7 +52,7 @@
 
   /** Identifier for the dropdown. If omitted, a unique name is generated. */
   export let name: string = generateRandomId();
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the selected value will be translated for the screen reader. */
   export let arialabel: string = "";
   /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   export let arialabelledby: string = "";
@@ -110,6 +110,7 @@
   let _rootEl: HTMLElement;
   let _menuEl: HTMLElement;
   let _inputEl: HTMLInputElement;
+  let _selectEl: HTMLSelectElement;
   let _eventHandler: EventHandler;
   let _popoverEl: HTMLElement;
 
@@ -272,7 +273,7 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      { name, el: _native ? _selectEl : _inputEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -793,8 +794,9 @@
 >
   {#if _native}
     <select
+      bind:this={_selectEl}
       {name}
-      aria-label={arialabel || name}
+      aria-label={arialabel}
       aria-labelledby={arialabelledby}
       class:error={_error}
       disabled={_disabled}
@@ -866,7 +868,7 @@
           aria-autocomplete="list"
           aria-controls={`menu-${name}`}
           aria-expanded={_isMenuVisible}
-          aria-label={arialabel || name}
+          aria-label={arialabel}
           aria-labelledby={arialabelledby}
           id={name}
           aria-activedescendant={_activeDescendantId}

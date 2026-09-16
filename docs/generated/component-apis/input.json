@@ -599,7 +599,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the input will be translated for the screen reader."
         },
         {
           "name": "arialabelledby",

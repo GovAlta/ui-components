@@ -606,7 +606,7 @@
     width: 32px;
     height: 32px;
     flex-shrink: 0;
-    background-image: var(--goa-work-side-menu-logo);
+    background-image: var(--goa-work-side-menu-logo, var(--logo-default));
     background-size: contain;
     background-repeat: no-repeat;
   }

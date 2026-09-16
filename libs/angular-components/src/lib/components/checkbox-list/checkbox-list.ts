@@ -32,6 +32,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [id]="id"
       [attr.maxwidth]="maxWidth"
       [attr.size]="size"
+      [attr.arialabel]="ariaLabel"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -64,6 +65,8 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
   @Input() maxWidth?: string;
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. @default "default" */
   @Input() size?: GoabCheckboxSize = "default";
+  /** Defines how the input will be translated for the screen reader. */
+  @Input() ariaLabel?: string;
 
   // Override value to handle string arrays consistently
   /** Array of currently selected checkbox values. */
