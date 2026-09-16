@@ -890,7 +890,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            arialabel={`clear ${arialabel || name}`}
+            arialabel="clear input"
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -920,8 +920,6 @@
         tabindex="-1"
         data-testid="dropdown-menu"
         bind:this={_menuEl}
-        aria-label={arialabel || name}
-        aria-labelledby={arialabelledby}
         on:focus={onFocus}
         on:mousedown={(e) => e.preventDefault()}
         style={`

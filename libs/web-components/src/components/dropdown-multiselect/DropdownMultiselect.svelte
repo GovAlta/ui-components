@@ -574,7 +574,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={disabled ? undefined : 0}
-            arialabel={`clear ${ariaLabel || name}`}
+            arialabel="clear filter"
             on:click={handleClearIconClick}
             on:keydown={handleClearIconKeyDown}
             class="dropdown-icon--clear"
