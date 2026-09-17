@@ -12,7 +12,7 @@ Let the user select one or more options.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. |
 | `checked` | boolean | (none) | No | Marks the checkbox item as selected. |
 | `description` | string \| React.ReactNode | (none) | No | Additional description text displayed below the checkbox label. |
 | `disabled` | boolean | (none) | No | Disable this control. It will not receive focus or events. |
@@ -24,7 +24,7 @@ Let the user select one or more options.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | Yes | Unique name to identify the checkbox. |
+| `name` | string | (none) | No | Unique name to identify the checkbox. If omitted, a unique name is generated. |
 | `revealAriaLabel` | string | (none) | No | Text announced by screen readers when the reveal slot content is displayed. |
 | `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -54,7 +54,7 @@ Let the user select one or more options.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. |
 | `checked` | boolean | (none) | No | Marks the checkbox item as selected. |
 | `description` | string \| TemplateRef<any> | (none) | No | Sets additional description content displayed below the checkbox label. Accepts plain text or a template. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
@@ -66,7 +66,7 @@ Let the user select one or more options.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | Sets the name of the checkbox input for form submission. |
+| `name` | string | (none) | No | Sets the name of the checkbox input for form submission. If omitted, a unique name is generated. |
 | `revealArialLabel` | string | (none) | No | Text announced by screen readers when the reveal slot content is displayed. |
 | `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
@@ -98,7 +98,7 @@ Tag: `goa-checkbox`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. |
 | `checked` | boolean | `false` | No | Marks the checkbox item as selected. |
 | `description` | string | (none) | No | Additional description text displayed below the checkbox label. |
 | `disabled` | boolean | `false` | No | Disable this control. It will not receive focus or events. |
@@ -109,7 +109,7 @@ Tag: `goa-checkbox`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | Yes | Unique name to identify the checkbox. |
+| `name` | string | `generateRandomId()` | No | Unique name to identify the checkbox. If omitted, a unique name is generated. |
 | `revealarialabel` | string | (none) | No | Text announced by screen readers when the reveal slot content is displayed. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |

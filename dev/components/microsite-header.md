@@ -65,6 +65,7 @@ Tag: `goa-microsite-header`
 | `maxcontentwidth` | string | `100%` | No | Maximum width of the content area |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "live" \| "alpha" \| "beta" | (none) | Yes | The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. |
+| `version` | string | (none) | No | App or service version displayed on the right side of the header. |
 
 ### Events
 

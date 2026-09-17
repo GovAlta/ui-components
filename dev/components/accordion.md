@@ -12,7 +12,7 @@ Let users show and hide sections of related content on a page.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | (none) | No | Sets the heading text. |
+| `heading` | string | (none) | Yes | Sets the heading text. |
 | `headingSize` | GoabAccordionHeadingSize | `small` | No | Sets the heading size of the accordion container heading. |
 | `headingType` | GoabAccordionHeadingType | `normal` | No | Sets the accordion style variant. |
 | `iconPosition` | GoabAccordionIconPosition | `left` | No | Sets the position of the expand/collapse icon. |
@@ -46,7 +46,7 @@ Let users show and hide sections of related content on a page.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | (none) | No | Sets the heading text. |
+| `heading` | string | (none) | Yes | Sets the heading text. |
 | `headingSize` | GoabAccordionHeadingSize | `small` | No | Sets the heading size of the accordion container heading. |
 | `headingType` | GoabAccordionHeadingType | `normal` | No | Sets the accordion style variant. |
 | `iconPosition` | GoabAccordionIconPosition | `left` | No | Sets the position of the expand/collapse icon. |

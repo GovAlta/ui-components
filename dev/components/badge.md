@@ -47,7 +47,7 @@ Small labels which hold small amounts of information, system feedback, or states
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | No | Sets the context and colour of the badge. |
+| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 
@@ -66,7 +66,7 @@ Tag: `goa-badge`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `arialabel` | string | (none) | No | Accessible label for screen readers. |
-| `content` | string | (none) | No | Content displayed in the badge. Use the content slot for custom HTML in version 2. |
+| `content` | string | (none) | No | Content displayed in the badge. Use the content slot for custom HTML. |
 | `emphasis` |  | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `icontype` | GoabIconType | (none) | No | Icon type to display in the badge. |
 | `justify-content` | "center" \| "flex-start" \| "flex-end" \| "space-between" \| "" | (none) | No | justify-content value for the badge container. |

@@ -12,7 +12,7 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | GoabButtonGroupAlignment | (none) | Yes | Positions the button group in the page layout. |
+| `alignment` | GoabButtonGroupAlignment | `start` | No | Positions the button group in the page layout. |
 | `gap` | GoabButtonGroupGap | `relaxed` | No | Sets the spacing between buttons in the button group. |
 | `mb` | Spacing | (none) | No | (none) |
 | `ml` | Spacing | (none) | No | (none) |
@@ -28,7 +28,7 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | GoabButtonGroupAlignment | (none) | No | Positions the button group in the page layout. |
+| `alignment` | GoabButtonGroupAlignment | `start` | No | Positions the button group in the page layout. |
 | `gap` | GoabButtonGroupGap | (none) | No | Sets the spacing between buttons in the button group. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
