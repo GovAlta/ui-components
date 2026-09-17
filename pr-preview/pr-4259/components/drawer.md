@@ -14,7 +14,7 @@ A panel that slides in from the side of the screen to display additional content
 |------|------|---------|----------|-------------|
 | `heading` | string \| ReactNode | (none) | No | The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content. |
 | `maxSize` | GoabDrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
-| `open` | boolean | (none) | No | Whether the drawer is open. |
+| `open` | boolean | `false` | No | Whether the drawer is open. |
 | `position` | GoabDrawerPosition | (none) | Yes | The position of the drawer. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
@@ -41,7 +41,7 @@ A panel that slides in from the side of the screen to display additional content
 |------|------|---------|----------|-------------|
 | `heading` | string \| TemplateRef<any> | (none) | No | The heading text displayed at the top of the drawer. |
 | `maxSize` | GoabDrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
-| `open` | boolean | (none) | Yes | Whether the drawer is open. |
+| `open` | boolean | `false` | No | Whether the drawer is open. |
 | `position` | GoabDrawerPosition | (none) | Yes | The position of the drawer. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
@@ -72,7 +72,7 @@ Tag: `goa-drawer`
 | `heading` | string | (none) | No | The heading text displayed at the top of the drawer. |
 | `maxsize` | DrawerSize | (none) | No | Sets max height on bottom position, sets width on left and right position. |
 | `open` | boolean | `false` | No | Whether the drawer is open. |
-| `position` | DrawerPosition | (none) | No | The position of the drawer. |
+| `position` | DrawerPosition | (none) | Yes | The position of the drawer. |
 | `testid` | string | `drawer` | No | Sets a data-testid attribute for automated testing. |
 
 ### Events

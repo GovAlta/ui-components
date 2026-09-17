@@ -12,7 +12,7 @@ A multi-line field where users can input and edit text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the textarea input. |
 | `countBy` | GoabTextAreaCountBy | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
 | `disabled` | boolean | (none) | No | Sets the input to a disabled state. |
@@ -24,7 +24,7 @@ A multi-line field where users can input and edit text.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | Yes | Name of the input value that is received in the change event. |
+| `name` | string | (none) | No | Name of the input value that is received in the change event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the textarea when no value is set. |
 | `readOnly` | boolean | (none) | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Sets the number of visible text rows. |
@@ -50,7 +50,7 @@ A multi-line field where users can input and edit text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autoComplete` | string | `on` | No | Specifies the autocomplete attribute for the textarea input. |
 | `countBy` | GoabTextAreaCountBy | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
@@ -62,7 +62,7 @@ A multi-line field where users can input and edit text.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | Name of the input value that is received in the _change event. |
+| `name` | string | (none) | No | Name of the input value that is received in the _change event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readOnly` | boolean | (none) | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Set the number of rows. |
@@ -90,7 +90,7 @@ Tag: `goa-text-area`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | (none) | No | Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the textarea input. |
 | `countby` | "character" \| "word" \| "" | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
 | `disabled` | boolean | `false` | No | Sets the input to a disabled state. Use [attr.disabled] with [formControl] |
@@ -101,7 +101,7 @@ Tag: `goa-text-area`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | Yes | Name of the input value that is received in the _change event. |
+| `name` | string | `generateRandomId()` | No | Name of the input value that is received in the _change event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | `false` | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Set the number of rows. |

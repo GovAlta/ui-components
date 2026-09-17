@@ -12,7 +12,7 @@ Present a list of options to the user to select from.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. |
 | `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element that labels the dropdown. Normally it is the id of the label. |
 | `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
 | `disabled` | boolean | (none) | No | Disables the dropdown control. |
@@ -26,7 +26,7 @@ Present a list of options to the user to select from.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
+| `name` | string | (none) | No | Identifier for the dropdown. If omitted, a unique name is generated. |
 | `native` | boolean | (none) | No | When true, renders the native select HTML element. |
 | `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed in the dropdown before a selection is made. Non-native only. |
@@ -51,7 +51,7 @@ Present a list of options to the user to select from.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. |
 | `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
 | `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
@@ -65,7 +65,7 @@ Present a list of options to the user to select from.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | Identifier for the dropdown. Should be unique. |
+| `name` | string | (none) | No | Identifier for the dropdown. If omitted, a unique name is generated. |
 | `native` | boolean | (none) | No | When true will render the native select HTML element. |
 | `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
@@ -92,7 +92,7 @@ Tag: `goa-dropdown`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabel` | string | (none) | No | Defines how the selected value will be translated for the screen reader. |
 | `arialabelledby` | string | (none) | No | The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. |
 | `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the dropdown input. Native only. |
 | `disabled` | boolean | `false` | No | Disable this control. |
@@ -105,7 +105,7 @@ Tag: `goa-dropdown`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | Yes | Identifier for the dropdown. Should be unique. |
+| `name` | string | `generateRandomId()` | No | Identifier for the dropdown. If omitted, a unique name is generated. |
 | `native` | boolean | `false` | No | When true will render the native select HTML element. |
 | `noresults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |

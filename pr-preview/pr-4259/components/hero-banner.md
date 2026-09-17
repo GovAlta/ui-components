@@ -36,7 +36,7 @@ A visual band of text, including an image and a call to action.
 |------|------|---------|----------|-------------|
 | `backgroundColor` | string | (none) | No | Hero Banner background color when no background image is provided. |
 | `backgroundUrl` | string | (none) | No | Background image url. |
-| `heading` | string | (none) | No | Main heading text. |
+| `heading` | string | (none) | Yes | Main heading text. |
 | `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
 | `minHeight` | string | (none) | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -59,10 +59,10 @@ Tag: `goa-hero-banner`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `backgroundcolor` | string | `#f8f8f8` | No | Hero Banner background color when no background image is provided |
-| `backgroundurl` | string | (none) | Yes | Background image url |
+| `backgroundurl` | string | (none) | No | Background image url |
 | `heading` | string | (none) | Yes | Main heading text |
 | `maxcontentwidth` | string | `100%` | No | Maximum width of the content area |
-| `minheight` | string | (none) | Yes | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
+| `minheight` | string | (none) | No | Minimum height of the hero banner. Defaults to 600px when a background image is provided. |
 | `testid` | string | `background` | No | Sets a data-testid attribute for automated testing. |
 | `textcolor` | string | (none) | No | Text color within the hero banner. |
 

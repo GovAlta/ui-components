@@ -64,7 +64,7 @@ Tag: `goa-callout`
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | "emergency" \| "important" \| "information" \| "event" \| "success" | (none) | Yes | Define the context and colour of the callout. |
+| `type` | "emergency" \| "important" \| "information" \| "event" \| "success" | `information` | No | Sets the context and colour of the callout. |
 
 ---
 

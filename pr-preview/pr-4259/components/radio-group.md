@@ -20,7 +20,7 @@ Allow users to select one option from a set.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | Yes | The name for the radio group. Used for accessibility and change events. |
+| `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. |
 | `orientation` | GoabRadioGroupOrientation | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
 | `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -50,7 +50,7 @@ Allow users to select one option from a set.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. |
+| `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. |
 | `orientation` | GoabRadioGroupOrientation | (none) | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
 | `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
@@ -81,11 +81,11 @@ Tag: `goa-radio-group`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | Yes | The name for the radio group. Used for accessibility and change events. |
+| `name` | string | `generateRandomId()` | No | The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. |
 | `orientation` | "vertical" \| "horizontal" | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `value` | string | (none) | Yes | The currently selected value in the radio group. |
+| `value` | string | (none) | No | The currently selected value in the radio group. |
 
 ### Events
 

@@ -47,7 +47,7 @@ Small labels which hold small amounts of information, system feedback, or states
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | No | Sets the context and colour of the badge. |
+| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 

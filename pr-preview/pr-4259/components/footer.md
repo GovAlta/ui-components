@@ -14,7 +14,6 @@ Provides information related your service at the bottom of every page.
 |------|------|---------|----------|-------------|
 | `maxContentWidth` | string | (none) | No | The maximum width of the main content area. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | `https://alberta.ca` | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
 
 ---
 
@@ -26,7 +25,6 @@ Provides information related your service at the bottom of every page.
 |------|------|---------|----------|-------------|
 | `maxContentWidth` | string | (none) | No | The maximum width of the main content area. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | (none) | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
 
 ---
 
@@ -40,7 +38,6 @@ Tag: `goa-footer`
 |------|------|---------|----------|-------------|
 | `maxcontentwidth` | string | (none) | No | The maximum width of the main content area |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `url` | string | `https://alberta.ca` | No | URL for the Government of Alberta logo link. Set to empty string to disable the link. |
 
 ### Slots
 
