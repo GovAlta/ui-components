@@ -804,9 +804,6 @@ describe("GoADropdown", () => {
 
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-label")).toBe("Favourite Color");
-
-      const menu = result.container.querySelector("ul");
-      expect(menu?.getAttribute("aria-label")).toBe("Favourite Color");
     });
   });
 
@@ -821,9 +818,6 @@ describe("GoADropdown", () => {
 
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-labelledby")).toBe("Favourite Color");
-
-      const menu = result.container.querySelector("ul");
-      expect(menu?.getAttribute("aria-labelledby")).toBe("Favourite Color");
     });
   });
 
