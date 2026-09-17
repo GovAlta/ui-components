@@ -57,7 +57,6 @@ describe("GoabPushDrawer", () => {
 
     expect(pushDrawerElement.getAttribute("width")).toBe("600px");
     expect(pushDrawerElement.getAttribute("testid")).toBe("test-push-drawer");
-    expect(pushDrawerElement.getAttribute("version")).toBe("2");
     const headingContent = pushDrawerElement.querySelector("[slot='heading']");
     expect(headingContent?.textContent).toContain("Heading");
     expect(pushDrawerElement.textContent).toContain("Test Content");

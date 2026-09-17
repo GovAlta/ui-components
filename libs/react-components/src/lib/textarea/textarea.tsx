@@ -12,7 +12,7 @@ import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  name: string;
+  name?: string;
   value?: string;
   placeholder?: string;
   rows?: number;
@@ -27,7 +27,6 @@ interface WCProps extends Margins {
   autocomplete?: string;
   testid?: string;
   size?: GoabTextAreaSize;
-  version?: string;
 }
 
 declare module "react" {
@@ -43,8 +42,8 @@ declare module "react" {
 }
 
 export interface GoabTextAreaProps extends Margins, DataAttributes {
-  /** @required Name of the input value that is received in the change event. */
-  name: string;
+  /** Name of the input value that is received in the change event. If omitted, a unique name is generated. */
+  name?: string;
   /** Bound to the current value of the textarea. */
   value?: string;
   /** Sets the id attribute on the textarea element. */
@@ -65,7 +64,7 @@ export interface GoabTextAreaProps extends Margins, DataAttributes {
   maxWidth?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   ariaLabel?: string;
   /** Counting interval for characters or words, specifying whether to count every character or word. */
   countBy?: GoabTextAreaCountBy;
@@ -145,7 +144,6 @@ export function GoabTextArea({
       readOnly={readOnly ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
-      version="2"
       {..._props}
     ></goa-textarea>
   );

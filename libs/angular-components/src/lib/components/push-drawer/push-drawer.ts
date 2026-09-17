@@ -22,7 +22,6 @@ import {
       [attr.heading]="getHeadingAsString()"
       [attr.testid]="testId"
       [attr.width]="width"
-      [attr.version]="version"
       (_close)="_onClose($event)"
     >
       <ng-content></ng-content>
@@ -41,8 +40,6 @@ import {
 /** A panel that pushes the main page content aside on desktop, falling back to an overlay drawer on smaller screens. */
 export class GoabPushDrawer implements OnInit {
   private cdr = inject(ChangeDetectorRef);
-
-  version = "2";
 
   /** Sets the open state of the push drawer. */
   @Input({ transform: booleanAttribute }) open?: boolean;

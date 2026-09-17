@@ -317,4 +317,70 @@ describe("CheckboxList", () => {
       expect(detail.event).toBeInstanceOf(Event);
     });
   });
+
+  it("should propagate disabled state to child checkboxes on mount", async () => {
+    const Component = () => (
+      <GoabCheckboxList name="test-list" testId="checkbox-list" disabled={true}>
+        <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+        <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+      </GoabCheckboxList>
+    );
+
+    const result = render(<Component />);
+    const checkbox1 = result.getByTestId("checkbox-1");
+    const checkbox2 = result.getByTestId("checkbox-2");
+
+    await vi.waitFor(() => {
+      expect(checkbox1.element().classList.contains("disabled")).toBe(true);
+      expect(checkbox2.element().classList.contains("disabled")).toBe(true);
+    });
+  });
+
+  it("should propagate error state to child checkboxes on mount", async () => {
+    const Component = () => (
+      <GoabCheckboxList name="test-list" testId="checkbox-list" error={true}>
+        <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+        <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+      </GoabCheckboxList>
+    );
+
+    const result = render(<Component />);
+    const checkbox1 = result.getByTestId("checkbox-1");
+    const checkbox2 = result.getByTestId("checkbox-2");
+
+    await vi.waitFor(() => {
+      expect(checkbox1.element().classList.contains("error")).toBe(true);
+      expect(checkbox2.element().classList.contains("error")).toBe(true);
+    });
+  });
+
+  it("should support compact size", async () => {
+    const Component = () => (
+      <div data-testid="container">
+        <GoabCheckboxList name="compact-list" testId="compact-checkbox-list" size="compact">
+          <GoabCheckbox
+            name="option1"
+            text="Option 1"
+            size="compact"
+            testId="compact-checkbox-1"
+          />
+          <GoabCheckbox
+            name="option2"
+            text="Option 2"
+            size="compact"
+            testId="compact-checkbox-2"
+          />
+        </GoabCheckboxList>
+      </div>
+    );
+
+    const result = render(<Component />);
+    const container = result.getByTestId("container");
+    const checkboxList = container.element().querySelector("goa-checkbox-list") as HTMLElement & {
+      size: string;
+    };
+
+    expect(checkboxList).toBeTruthy();
+    expect(checkboxList.size).toBe("compact");
+  });
 });

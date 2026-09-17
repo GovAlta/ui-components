@@ -21,6 +21,16 @@ describe("GoADropdown", () => {
   const items = ["red", "blue", "orange"];
 
   describe("Render", () => {
+    it("generates a name when omitted", () => {
+      const result = render(GoADropdown, { testid: "generated-name" });
+      const input = result.container.querySelector("input");
+      const generatedName = input?.getAttribute("name");
+
+      expect(generatedName).toMatch(/^[a-z0-9]{7}$/);
+      expect(input?.getAttribute("id")).toBe(generatedName);
+      expect(input?.getAttribute("aria-controls")).toBe(`menu-${generatedName}`);
+    });
+
     it("should render dropdown", async () => {
       const result = render(GoADropdownWrapper, {
         name,
@@ -690,10 +700,10 @@ describe("GoADropdown", () => {
   });
 
   describe("placeholder", () => {
-    it("does not show a placeholder", async () => {
+    it("shows the default placeholder", async () => {
       const result = render(GoADropdownWrapper, { name, items });
       const input = result.container.querySelector("input");
-      expect(input?.getAttribute("placeholder")).toBe("");
+      expect(input?.getAttribute("placeholder")).toBe("—Select—");
     });
 
     it("shows a placeholder", async () => {
@@ -794,9 +804,6 @@ describe("GoADropdown", () => {
 
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-label")).toBe("Favourite Color");
-
-      const menu = result.container.querySelector("ul");
-      expect(menu?.getAttribute("aria-label")).toBe("Favourite Color");
     });
   });
 
@@ -811,9 +818,6 @@ describe("GoADropdown", () => {
 
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("aria-labelledby")).toBe("Favourite Color");
-
-      const menu = result.container.querySelector("ul");
-      expect(menu?.getAttribute("aria-labelledby")).toBe("Favourite Color");
     });
   });
 

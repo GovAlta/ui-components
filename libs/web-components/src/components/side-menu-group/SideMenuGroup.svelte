@@ -14,8 +14,6 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
 
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** The heading text for the menu group. */
   export let heading: string;
   /** Icon displayed alongside the heading. */
@@ -131,7 +129,6 @@
 <div bind:this={_senderEl}></div>
 <div bind:this={_rootEl}
      class="side-menu-group"
-     class:v2={version === "2"}
      class:current={_current}
      data-testid={testid}
      style={`
@@ -141,27 +138,15 @@
   <a href={`#${_slug}`} class="heading" class:open={_open} class:current={_current} on:click={handleClick}>
     {#if icon}
       <div class="leading-icon">
-        {#if version === "2"}
-          <goa-icon type={icon} size="3" />
-        {:else}
-          <goa-icon type={icon} />
-        {/if}
+        <goa-icon type={icon} size="3" />
       </div>
     {/if}
     {heading}
     <div class="trailing-icon">
-      {#if version === "2"}
-        {#if _open}
-          <goa-icon type="chevron-down" size="3" />
-        {:else}
-          <goa-icon type="chevron-forward" size="3" />
-        {/if}
+      {#if _open}
+        <goa-icon type="chevron-down" size="3" />
       {:else}
-        {#if _open}
-          <goa-icon type="chevron-down" />
-        {:else}
-          <goa-icon type="chevron-forward" />
-        {/if}
+        <goa-icon type="chevron-forward" size="3" />
       {/if}
     </div>
   </a>
@@ -175,9 +160,9 @@
   :global(::slotted(goa-side-menu-heading)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;
+    color: var(--goa-side-menu-color-item) !important;
     display: block;
-    font: var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));
+    font: var(--goa-side-menu-group-item-typography);
     margin-left: var(--goa-side-menu-child-margin);
     background-color: var(--goa-side-menu-group-color-bg);
   }
@@ -190,11 +175,11 @@
   }
 
   :global(::slotted(a.current)) {
-    font: var(--goa-side-menu-group-item-typography-current, var(--goa-side-menu-typography-item-current));
+    font: var(--goa-side-menu-group-item-typography-current);
     border-left: var(--goa-side-menu-child-border-left-selected);
     background: var(--goa-side-menu-child-color-bg-selected);
     /* required to override base styles & above :global(::slotted(a) !important */
-    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default))!important;
+    color: var(--goa-side-menu-color-item-current)!important;
   }
 
   :global(::slotted(a:hover:not(.current))) {
@@ -205,7 +190,7 @@
   :global(::slotted(a:focus-visible)),
   .heading:focus-visible {
     outline: var(--goa-side-menu-item-focus-border);
-    outline-offset: var(--goa-side-menu-item-focus-outline-offset, -3px);
+    outline-offset: var(--goa-side-menu-item-focus-outline-offset);
   }
 
 
@@ -222,7 +207,7 @@
    */
   :host([child="true"]) a.heading,
   .heading {
-    color: var(--goa-side-menu-color-item, var(--goa-color-text-default));
+    color: var(--goa-side-menu-color-item);
     display: flex;
     justify-content: space-between;
     font: var(--goa-side-menu-typography-item);
@@ -235,7 +220,7 @@
   }
   .heading.open.current {
     font: var(--goa-side-menu-typography-item-current);
-    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default));
+    color: var(--goa-side-menu-color-item-current);
   }
 
   :host([child="true"]) a.heading {
@@ -284,71 +269,64 @@
     height: var(--goa-icon-size-l); /* to make sure the icon vertical center */
   }
 
-  /* V2 Styles */
-
-  /* V2: Open group heading */
-  .side-menu-group.v2 .heading.open {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+  .side-menu-group .heading.open {
+    border-radius: var(--goa-side-menu-group-border-radius-open);
     background: var(--goa-color-greyscale-100);
   }
 
-  /* V2: Nested child links - typography, padding, border-radius, colors */
-  .side-menu-group.v2 :global(::slotted(a)) {
-    border-radius: var(--goa-border-radius-l, 6px);
-    font: var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));
+  .side-menu-group :global(::slotted(a)) {
+    border-radius: var(--goa-border-radius-l);
+    font: var(--goa-side-menu-group-item-typography);
     padding: var(--goa-space-2xs) var(--goa-space-xs);
     border-left: none;
     margin-left: 0;
     color: var(--goa-color-text-secondary) !important;
   }
 
-  /* V2: Group container - left border on container instead of individual items */
-  .side-menu-group.v2 .group {
+  .side-menu-group .group {
     border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
-    margin-left: var(--goa-side-menu-group-container-margin-left, 20px);
+    margin-left: var(--goa-side-menu-group-container-margin-left);
     padding-left: var(--goa-space-s);
     margin-top: var(--goa-space-xs);
-    margin-bottom: var(--goa-side-menu-group-container-margin-bottom, 6px);
+    margin-bottom: var(--goa-side-menu-group-container-margin-bottom);
   }
 
-  /* V2: Current state - background, bold text, default text color */
-  .side-menu-group.v2 :global(::slotted(a.current)) {
+  .side-menu-group :global(::slotted(a.current)) {
     border-left: none;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
     color: var(--goa-color-text-default) !important;
     font-weight: var(--goa-font-weight-bold);
   }
 
-  /* V2: Hover state */
-  .side-menu-group.v2 :global(::slotted(a:hover:not(.current))) {
+  .side-menu-group :global(::slotted(a:hover:not(.current))) {
     border-left: none;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
-  /* V2: Group heading - padding, alignment, color */
-  .side-menu-group.v2 .heading {
+  .side-menu-group .heading {
     padding: var(--goa-space-xs) var(--goa-space-s);
     align-items: flex-start;
     color: var(--goa-color-text-secondary);
   }
 
-  .side-menu-group.v2 .heading:hover {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+  .side-menu-group .heading:hover {
+    border-radius: var(--goa-side-menu-group-border-radius-open);
   }
 
-  .side-menu-group.v2 .heading:focus-visible {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+  .side-menu-group .heading:focus-visible {
+    border-radius: var(--goa-side-menu-group-border-radius-open);
   }
 
-  /* V2: Nested groups (child attribute) */
-  :host([child="true"]) .side-menu-group.v2 a.heading {
-    border-radius: var(--goa-side-menu-group-border-radius-open, 0);
+  :host([child="true"]) .side-menu-group a.heading {
+    border-radius: var(--goa-side-menu-group-border-radius-open);
+    padding: var(--goa-space-xs) var(--goa-space-s);
+    align-items: flex-start;
+    color: var(--goa-color-text-secondary);
   }
 
-  /* V2: Icon containers - smaller height for size-3 icons, align with first line */
-  .side-menu-group.v2 .leading-icon,
-  .side-menu-group.v2 .trailing-icon {
-    height: var(--goa-icon-size-3, 1.25rem);
+  .side-menu-group .leading-icon,
+  .side-menu-group .trailing-icon {
+    height: var(--goa-icon-size-3);
     margin-top: 1px;
   }
 </style>

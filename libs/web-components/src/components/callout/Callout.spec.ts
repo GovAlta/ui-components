@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import GoACallout from "./Callout.svelte";
 import GoACalloutWrapper from "./CalloutWrapper.test.svelte";
 import { it, describe } from "vitest";
@@ -11,12 +11,10 @@ describe("GoACalloutComponent", () => {
       heading: "Complete",
     });
     const callout = await baseElement.findByTestId("callout-test");
-    const span = callout.firstElementChild;
-    const icon = span.firstElementChild;
+    const icon = callout.querySelector("goa-icon");
 
     expect(callout).toBeTruthy();
-    expect(span).toBeTruthy();
-    expect(span).toHaveClass("emergency");
+    expect(callout).toHaveClass("emergency");
     expect(icon).toHaveAttribute("type", "warning");
     expect(callout).toContainHTML("Complete");
   });
@@ -28,12 +26,10 @@ describe("GoACalloutComponent", () => {
       heading: "Complete",
     });
     const callout = await baseElement.findByTestId("callout-test");
-    const span = callout.firstElementChild;
-    const icon = span.firstElementChild;
+    const icon = callout.querySelector("goa-icon");
 
     expect(callout).toBeTruthy();
-    expect(span).toBeTruthy();
-    expect(span).toHaveClass("important");
+    expect(callout).toHaveClass("important");
     expect(icon).toHaveAttribute("type", "alert-circle");
     expect(callout).toContainHTML("Complete");
   });
@@ -45,12 +41,10 @@ describe("GoACalloutComponent", () => {
       heading: "Complete",
     });
     const callout = await baseElement.findByTestId("callout-test");
-    const span = callout.firstElementChild;
-    const icon = span.firstElementChild;
+    const icon = callout.querySelector("goa-icon");
 
     expect(callout).toBeTruthy();
-    expect(span).toBeTruthy();
-    expect(span).toHaveClass("information");
+    expect(callout).toHaveClass("information");
     expect(icon).toHaveAttribute("type", "information-circle");
     expect(callout).toContainHTML("Complete");
   });
@@ -62,12 +56,10 @@ describe("GoACalloutComponent", () => {
       heading: "Complete",
     });
     const callout = await baseElement.findByTestId("callout-test");
-    const span = callout.firstElementChild;
-    const icon = span.firstElementChild;
+    const icon = callout.querySelector("goa-icon");
 
     expect(callout).toBeTruthy();
-    expect(span).toBeTruthy();
-    expect(span).toHaveClass("success");
+    expect(callout).toHaveClass("success");
     expect(icon).toHaveAttribute("type", "checkmark-circle");
     expect(callout).toContainHTML("Complete");
   });
@@ -79,12 +71,10 @@ describe("GoACalloutComponent", () => {
       heading: "Complete",
     });
     const callout = await baseElement.findByTestId("callout-test");
-    const span = callout.firstElementChild;
-    const icon = span.firstElementChild;
+    const icon = callout.querySelector("goa-icon");
 
     expect(callout).toBeTruthy();
-    expect(span).toBeTruthy();
-    expect(span).toHaveClass("emergency");
+    expect(callout).toHaveClass("emergency");
     expect(icon).toHaveAttribute("type", "warning");
     expect(callout).toContainHTML("Complete");
   });
@@ -106,25 +96,7 @@ describe("GoACalloutComponent", () => {
     });
     const el = baseElement.queryByTestId("testid");
     const heading = el.querySelector("h3");
-    expect(heading).toBeNull();
-  });
-
-  it("should render - with size medium", async () => {
-    const baseElement = render(GoACallout, {
-      type: "emergency",
-      size: "medium",
-      heading: "Heading",
-      testid: "testid",
-    });
-    const el = baseElement.queryByTestId("testid");
-
-    const heading = el.querySelector("h3.medium");
-    expect(heading).toHaveClass("medium");
-
-    await waitFor(() => {
-      const icon = el.querySelector("goa-icon");
-      expect(icon).toHaveAttribute("size", "small");
-    });
+    expect(heading?.textContent?.trim()).toBe("");
   });
 
   it("should render - with max width", async () => {

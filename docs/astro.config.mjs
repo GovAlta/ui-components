@@ -99,14 +99,6 @@ export default defineConfig({
           find: "@abgov/style",
           replacement: path.resolve(workspaceRoot, "dist/libs/web-components/index.css"),
         },
-        // Design tokens V2 for docs styling (via npm alias)
-        {
-          find: "@design-tokens",
-          replacement: path.resolve(
-            workspaceRoot,
-            "node_modules/@abgov/design-tokens-v2/dist",
-          ),
-        },
         // @astrojs/react registers its SSR renderer via the bare specifier
         // "@astrojs/react/server.js", which Vite then externalizes for the
         // prerender build instead of bundling it. Externalizing leaves the

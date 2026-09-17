@@ -66,16 +66,8 @@ export function ExamplePreview({
       const scriptMatch = code.webComponents.match(/<script>([\s\S]*?)<\/script>/i);
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
-      // Sanitize HTML and add version attribute
       // DOMPurify handles script removal — no need for regex stripping
-      // Skip microsite-header: its `version` prop displays the app version
-      // string, not the v1/v2 styling flag.
-      const html = code.webComponents
-        .replace(/<goa-([a-z-]+)/g, (match, tag) => {
-          if (tag === "microsite-header") return match;
-          return `<goa-${tag} version="2"`;
-        })
-        .trim();
+      const html = code.webComponents.trim();
       const safeHtml = DOMPurify.sanitize(html, DOMPURIFY_CONFIG);
       previewRef.current.innerHTML = safeHtml;
 

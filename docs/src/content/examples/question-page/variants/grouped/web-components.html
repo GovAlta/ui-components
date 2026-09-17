@@ -3,9 +3,8 @@
 <goa-text as="h2" mt="xl" mb="m">Your address</goa-text>
 <goa-text mt="none" mb="xl">This is the home address of the person applying</goa-text>
 
-<goa-form-item version="2" label="Address line 1">
+<goa-form-item label="Address line 1">
   <goa-input
-    version="2"
     id="address-line-1"
     name="address-line-1"
     aria-label="Address line 1"
@@ -14,9 +13,8 @@
   </goa-input>
 </goa-form-item>
 
-<goa-form-item version="2" label="Address line 2" mt="l">
+<goa-form-item label="Address line 2" mt="l">
   <goa-input
-    version="2"
     id="address-line-2"
     name="address-line-2"
     aria-label="Address line 2"
@@ -25,20 +23,13 @@
   </goa-input>
 </goa-form-item>
 
-<goa-form-item version="2" label="Town or city" mt="l">
-  <goa-input
-    version="2"
-    id="town-city"
-    name="town-city"
-    aria-label="Town or city name"
-    width="460px"
-  >
+<goa-form-item label="Town or city" mt="l">
+  <goa-input id="town-city" name="town-city" aria-label="Town or city name" width="460px">
   </goa-input>
 </goa-form-item>
 
-<goa-form-item version="2" label="Province or territory" mt="l" id="provinceLabel">
+<goa-form-item label="Province or territory" mt="l" id="provinceLabel">
   <goa-dropdown
-    version="2"
     id="province-territory"
     name="province-territory"
     aria-labelledby="provinceLabel"
@@ -59,13 +50,11 @@
   </goa-dropdown>
 </goa-form-item>
 
-<goa-form-item version="2" label="Postal code" mt="l">
-  <goa-input version="2" id="postal-code" name="postal-code" width="105px"> </goa-input>
+<goa-form-item label="Postal code" mt="l">
+  <goa-input id="postal-code" name="postal-code" width="105px"> </goa-input>
 </goa-form-item>
 
-<goa-button version="2" type="submit" mt="2xl" id="submit-btn">
-  Save and continue
-</goa-button>
+<goa-button type="submit" mt="2xl" id="submit-btn"> Save and continue </goa-button>
 
 <script>
   document.getElementById("address-line-1").addEventListener("_change", (e) => {

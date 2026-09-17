@@ -17,7 +17,6 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `
     @if (isReady) {
       <goa-side-menu-heading
-        [attr.version]="version"
         [attr.testid]="testId"
         [attr.icon]="icon"
       >
@@ -35,7 +34,6 @@ export class GoabSideMenuHeading implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** @required Icon displayed before the heading text. */
   @Input() icon!: GoabIconType;
   /** Sets a data-testid attribute for automated testing. */

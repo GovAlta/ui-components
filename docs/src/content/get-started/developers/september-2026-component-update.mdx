@@ -1,0 +1,175 @@
+---
+id: developers/september-2026-component-update
+title: September 2026 component library update
+navLabel: September 2026 update
+description: Breaking API changes in the September 2026 component library update
+section: developers
+order: 5
+status: published
+---
+
+<goa-text size="heading-xl" mt="none" mb="m">September 2026 component library update</goa-text>
+<goa-text size="body-l" mt="none" mb="m">The September 2026 update introduces Web components 3, Angular components 6, and React components 8. These major releases include breaking API changes that may require updates to your application.</goa-text>
+<p>If your team has already upgraded to Web components 2.x and the updated design system, you should not need to make any other changes beyond those listed on this page.</p>
+
+<goa-callout type="information" emphasis="low" heading="Package versions" mt="l" mb="xl">
+  <ul>
+    <li>Web components: 2.x to 3.x</li>
+    <li>Angular components: 5.x to 6.x</li>
+    <li>React components: 7.x to 8.x</li>
+  </ul>
+</goa-callout>
+
+<h2 id="changes-that-may-require-code-updates">Changes that may require code updates</h2>
+
+<goa-table width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Component and property</th>
+        <th>Web components</th>
+        <th>Angular</th>
+        <th>React</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Accordion</strong><br /><code>heading</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>Now required</td>
+      </tr>
+      <tr>
+        <td><strong>App header menu</strong><br /><code>heading</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Filter chip</strong><br /><code>content</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Badge</strong><br /><code>type</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Hero banner</strong><br /><code>heading</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Drawer</strong><br /><code>position</code></td>
+        <td>Now required</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Dropdown item</strong><br /><code>value</code></td>
+        <td>Now required. Use <code>""</code> for the default selected item.</td>
+        <td>Now required. Use <code>""</code> for the default selected item.</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Menu action</strong><br /><code>action</code></td>
+        <td>Now required</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Menu action</strong><br /><code>text</code></td>
+        <td>Now required</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Work side notification item</strong><br /><code>description</code></td>
+        <td>Now required</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Radio item</strong><br /><code>value</code></td>
+        <td>No change</td>
+        <td>Now required</td>
+        <td>Now required</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<h2 id="properties-that-are-now-optional-or-have-defaults">Properties that are now optional or have defaults</h2>
+
+<goa-table width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Component and property</th>
+        <th>Web components</th>
+        <th>Angular</th>
+        <th>React</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>App header menu</strong><br /><code>leadingicon</code></td>
+        <td>Now optional</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Callout</strong><br /><code>type</code></td>
+        <td>Now optional and defaults to <code>information</code></td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Hero banner</strong><br /><code>backgroundurl</code></td>
+        <td>Now optional</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Hero banner</strong><br /><code>minheight</code></td>
+        <td>Now optional</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Button group</strong><br /><code>alignment</code></td>
+        <td>No change</td>
+        <td>Now defaults to <code>start</code></td>
+        <td>Now optional and defaults to <code>start</code></td>
+      </tr>
+      <tr>
+        <td><strong>Data grid</strong><br /><code>keyboardNav</code></td>
+        <td>No change</td>
+        <td>Now optional and defaults to <code>table</code></td>
+        <td>Now optional and defaults to <code>table</code></td>
+      </tr>
+      <tr>
+        <td><strong>Drawer</strong><br /><code>open</code></td>
+        <td>No change</td>
+        <td>Now optional and defaults to <code>false</code></td>
+        <td>Now defaults to <code>false</code></td>
+      </tr>
+      <tr>
+        <td><strong>Menu button</strong><br /><code>max-width</code></td>
+        <td>Now optional</td>
+        <td>No change</td>
+        <td>No change</td>
+      </tr>
+      <tr>
+        <td><strong>Dropdown, checkbox, checkbox list, radio group, text area and input</strong><br /><code>name</code></td>
+        <td>Optional. A name is generated when omitted.</td>
+        <td>Optional. A name is generated when omitted.</td>
+        <td>Optional. A name is generated when omitted.</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>

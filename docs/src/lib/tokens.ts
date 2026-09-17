@@ -7,7 +7,7 @@
 
 // Import the global design tokens JSON
 // Note: This will be resolved at build time by Astro/Vite
-import globalTokens from "@abgov/design-tokens-v2/data/goa-global-design-tokens.json";
+import globalTokens from "@abgov/design-tokens/data/goa-global-design-tokens.json";
 
 /**
  * Flattened token structure for grid display

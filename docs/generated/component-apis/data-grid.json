@@ -33,8 +33,8 @@
             "layout",
             "table"
           ],
-          "required": true,
-          "default": null,
+          "required": false,
+          "default": "table",
           "description": "Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows."
         }
       ],
@@ -72,8 +72,8 @@
             "layout",
             "table"
           ],
-          "required": true,
-          "default": null,
+          "required": false,
+          "default": "table",
           "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
         }
       ],

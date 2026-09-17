@@ -13,7 +13,6 @@ interface WCProps {
   testid?: string;
   variant?: GoabTabsVariant;
   navigation?: GoabTabsNavigation;
-  version?: string;
   orientation?: string;
 }
 
@@ -75,7 +74,6 @@ export function GoabTabs({
       initialtab={initialTab}
       testid={testId}
       variant={variant}
-      version="2"
       orientation={orientation}
       navigation={navigation}
     >

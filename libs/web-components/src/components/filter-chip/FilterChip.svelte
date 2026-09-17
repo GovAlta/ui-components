@@ -29,22 +29,17 @@
   export let testid: string = "";
   /** Accessible content used to label the filter chip controls. */
   export let ariaLabel: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   // Private variables
   let el: HTMLElement;
 
   // booleans
-  let _hovering: boolean = false;
-  let _focused: boolean = false;
   let _error: boolean;
   let _slottedContent: string = "";
 
   // Reactive declarations
   $: _error = toBoolean(error);
   $: accessibleContent = ariaLabel || content || _slottedContent;
-  $: chipAriaLabel = ariaLabel || `${content}, removable`;
   $: removeFilterAriaLabel = accessibleContent
     ? `Remove filter: ${accessibleContent}`
     : "Remove filter";
@@ -55,13 +50,6 @@
       new CustomEvent("_click", { composed: true, bubbles: true }),
     );
     e.stopPropagation();
-  }
-
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key === "Enter" || e.key === " ") {
-      onDelete(e);
-      e.preventDefault();
-    }
   }
 
   function handleContentSlotChange(e: Event) {
@@ -76,161 +64,83 @@
 </script>
 
 <!-- HTML -->
-{#if version === "2"}
-  <div
-    bind:this={el}
-    data-testid={testid}
-    class="v2 chip"
-    class:error={_error}
-    role="presentation"
-    style={calculateMargin(mt, mr, mb, ml)}
-  >
-    <div class="label-container">
-      {#if leadingicon}
-        <goa-icon
-          class="leading-icon"
-          size="small"
-          type={leadingicon}
-          fillcolor={_error
-            ? "var(--goa-filter-chip-icon-color-error)"
-            : "var(--goa-filter-chip-icon-color)"}
-        />
-      {/if}
-      {#if secondarytext}
-        <div class="secondary-text">
-          {secondarytext}
-        </div>
-      {/if}
-      <div class="text" on:slotchange={handleContentSlotChange}>
-        {#if $$slots.content}
-          <slot name="content" />
-        {:else}
-          {content}
-        {/if}
+<div
+  bind:this={el}
+  data-testid={testid}
+  class="chip"
+  class:error={_error}
+  role="presentation"
+  style={calculateMargin(mt, mr, mb, ml)}
+>
+  <div class="label-container">
+    {#if leadingicon}
+      <goa-icon
+        class="leading-icon"
+        size="small"
+        type={leadingicon}
+        fillcolor={_error
+          ? "var(--goa-filter-chip-icon-color-error)"
+          : "var(--goa-filter-chip-icon-color)"}
+      />
+    {/if}
+    {#if secondarytext}
+      <div class="secondary-text">
+        {secondarytext}
       </div>
+    {/if}
+    <div class="text" on:slotchange={handleContentSlotChange}>
+      {#if $$slots.content}
+        <slot name="content" />
+      {:else}
+        {content}
+      {/if}
     </div>
-    <goa-icon-button
-      size="3"
-      icon="close"
-      on:_click={onDelete}
-      arialabel={removeFilterAriaLabel}
-      variant={_error ? "destructive" : "dark"}
-      testid="delete-button"
-    >
-    </goa-icon-button>
   </div>
-{:else}
-  <div
-    bind:this={el}
-    data-testid={testid}
-    class="chip"
-    class:error={_error}
-    style={calculateMargin(mt, mr, mb, ml)}
-    tabindex="0"
-    role="button"
-    aria-label={chipAriaLabel}
-    on:click={onDelete}
-    on:keydown={handleKeyDown}
-    on:mouseover={() => (_hovering = true)}
-    on:mouseout={() => (_hovering = false)}
-    on:focus={() => (_focused = true)}
-    on:blur={() => (_focused = false)}
+  <goa-icon-button
+    size="3"
+    icon="close"
+    on:_click={onDelete}
+    arialabel={removeFilterAriaLabel}
+    variant={_error ? "destructive" : "dark"}
+    testid="delete-button"
   >
-    <div class="text">
-      {content}
-    </div>
-    <goa-icon
-      class="delete-icon"
-      size="medium"
-      theme={_error ? "filled" : _hovering || _focused ? "filled" : "outline"}
-      type="close-circle"
-      fillcolor={_error
-        ? "var(--goa-color-emergency-default)"
-        : "var(--goa-color-greyscale-700)"}
-      opacity={_error ? (_hovering || _focused ? 1 : 0.5) : 1}
-    />
-  </div>
-{/if}
+  </goa-icon-button>
+</div>
 
 <!-- Style -->
 <style>
   .chip {
     display: inline-flex;
     align-items: center;
-    background-color: var(
-      --goa-filter-chip-bg-color,
-      var(--goa-color-greyscale-white)
-    );
-    border-radius: var(--goa-filter-chip-border-radius, 1rem);
-    border: var(
-      --goa-filter-chip-border,
-      var(--goa-border-width-s) solid var(--goa-color-greyscale-700)
-    );
+    background-color: var(--goa-filter-chip-bg-color);
+    border-radius: var(--goa-filter-chip-border-radius);
+    border: var(--goa-filter-chip-border);
     box-sizing: border-box;
-    color: var(--goa-filter-chip-text-color, var(--goa-color-text-default));
-    font: var(--goa-filter-chip-typography, var(--goa-typography-body-s));
-    gap: var(--goa-filter-chip-gap, 0.5rem);
-    min-height: var(--goa-filter-chip-min-height, 2rem);
-    padding-top: var(--goa-filter-chip-padding-vertical, 3px);
-    padding-right: var(--goa-filter-chip-padding-horizontal-right, 8px);
-    padding-bottom: var(--goa-filter-chip-padding-vertical, 3px);
-    padding-left: var(--goa-filter-chip-padding-horizontal-left, 12px);
-    min-width: var(--goa-filter-chip-min-width, 56px);
-  }
-
-  /* V1: Entire chip is clickable */
-  .chip[role="button"] {
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-
-  .chip:focus-visible {
-    outline: none;
-  }
-
-  .chip:focus-visible .delete-icon {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: 0.125rem;
-    border-radius: 50%;
+    color: var(--goa-filter-chip-text-color);
+    font: var(--goa-filter-chip-typography);
+    gap: var(--goa-filter-chip-gap);
+    min-height: var(--goa-filter-chip-min-height);
+    padding-top: var(--goa-filter-chip-padding-vertical);
+    padding-right: var(--goa-filter-chip-padding-horizontal-right);
+    padding-bottom: var(--goa-filter-chip-padding-vertical);
+    padding-left: var(--goa-filter-chip-padding-horizontal-left);
+    min-width: var(--goa-filter-chip-min-width);
   }
 
   .chip.error {
-    background-color: var(
-      --goa-filter-chip-bg-color-error,
-      var(--goa-color-emergency-light)
-    );
-    border-color: var(
-      --goa-filter-chip-border-color-error,
-      var(--goa-color-emergency-default)
-    );
-    color: var(
-      --goa-filter-chip-text-color-error,
-      var(--goa-color-emergency-default)
-    );
-  }
-
-  .chip:not(.v2).error:hover {
-    background-color: var(--goa-color-emergency-light);
-  }
-
-  .delete-icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    pointer-events: none; /* Icon itself should not capture pointer events, the chip handles it */
+    background-color: var(--goa-filter-chip-bg-color-error);
+    border-color: var(--goa-filter-chip-border-color-error);
+    color: var(--goa-filter-chip-text-color-error);
   }
 
   .label-container {
     display: flex;
     align-items: center;
-    gap: var(--goa-filter-chip-label-gap, 6px);
+    gap: var(--goa-filter-chip-label-gap);
   }
 
   .text {
-    line-height: var(
-      --goa-filter-chip-line-height,
-      var(--goa-line-height-2)
-    ); /* 24px */
+    line-height: var(--goa-filter-chip-line-height); /* 24px */
     padding-top: 0;
     display: flex;
     align-items: center;
@@ -242,31 +152,28 @@
     word-wrap: break-word;
   }
 
-  /* Version 2 */
-
-  .v2 .leading-icon {
+  .leading-icon {
     flex-shrink: 0;
     display: flex;
     align-items: center;
   }
-  .v2 .secondary-text {
+  .secondary-text {
     line-height: var(--goa-filter-chip-line-height);
     color: var(--goa-filter-chip-secondary-text-color);
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
 
-  .v2.error .secondary-text {
+  .error .secondary-text {
     color: var(--goa-filter-chip-secondary-text-color-error);
   }
 
-  .v2 .text,
-  .v2 .secondary-text {
+  .text,
+  .secondary-text {
     padding-bottom: 0;
   }
 
-  /* V2 Icon Button */
-  .v2 {
+  .chip {
     --padding: 0.125rem;
     --goa-icon-button-destructive-hover-color-bg: var(
       --goa-filter-chip-close-button-error-hover-bg-color

@@ -26,7 +26,7 @@
           "name": "open",
           "type": "boolean",
           "required": false,
-          "default": null,
+          "default": "false",
           "description": "Whether the drawer is open."
         },
         {
@@ -92,8 +92,8 @@
         {
           "name": "open",
           "type": "boolean",
-          "required": true,
-          "default": null,
+          "required": false,
+          "default": "false",
           "description": "Whether the drawer is open."
         },
         {
@@ -173,7 +173,7 @@
         {
           "name": "position",
           "type": "DrawerPosition",
-          "required": false,
+          "required": true,
           "default": null,
           "description": "The position of the drawer."
         },
@@ -183,17 +183,6 @@
           "required": false,
           "default": "drawer",
           "description": "Sets a data-testid attribute for automated testing."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

@@ -2,7 +2,7 @@ import { render } from "vitest-browser-react";
 import { GoabBadge } from "../src";
 import { expect, describe, it, vi } from "vitest";
 
-describe("Badge V2 Emphasis", () => {
+describe("Badge Emphasis", () => {
   it("should have an explicit box-shadow none rule on strong emphasis", async () => {
     const result = render(
       <GoabBadge testId="badge-strong" type="information" content="Strong" emphasis="strong" />,
@@ -12,8 +12,6 @@ describe("Badge V2 Emphasis", () => {
 
     await vi.waitFor(() => {
       const el = badge.element();
-      expect(el).toBeTruthy();
-      expect(el.classList.contains("v2")).toBe(true);
       expect(el.classList.contains("badge-strong")).toBe(true);
 
       // Verify the shadow DOM stylesheet has an explicit box-shadow: none rule for strong
@@ -37,8 +35,6 @@ describe("Badge V2 Emphasis", () => {
 
     await vi.waitFor(() => {
       const el = badge.element();
-      expect(el).toBeTruthy();
-      expect(el.classList.contains("v2")).toBe(true);
       expect(el.classList.contains("badge-subtle")).toBe(true);
       expect(el.classList.contains("badge-information")).toBe(true);
 

@@ -13,7 +13,6 @@ interface WCProps {
   progress?: number;
   error?: string;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -73,7 +72,7 @@ export function GoabFileUploadCard({
     };
   }, [el, onDelete, onCancel, filename]);
 
-  return <goa-file-upload-card ref={el} {..._props} version="2" />;
+  return <goa-file-upload-card ref={el} {..._props} />;
 }
 
 export default GoabFileUploadCard;

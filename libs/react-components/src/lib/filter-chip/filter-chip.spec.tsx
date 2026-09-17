@@ -11,7 +11,7 @@ describe("GoabFilterChip", () => {
     expect(el?.getAttribute("error")).toBeNull();
   });
 
-  it("should render ReactNode content in the content slot for version 2", () => {
+  it("should render ReactNode content in the content slot", () => {
     const { container } = render(
       <GoabFilterChip content={<strong>some filter chip</strong>} />,
     );

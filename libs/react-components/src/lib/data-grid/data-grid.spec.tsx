@@ -4,7 +4,7 @@ import { GoabDataGrid } from "./data-grid";
 describe("GoabDataGrid", () => {
   it("should create component and render goa-data-grid with projected content", () => {
     const { container } = render(
-      <GoabDataGrid keyboardNav="table">
+      <GoabDataGrid>
         <div>Test content</div>
       </GoabDataGrid>
     );

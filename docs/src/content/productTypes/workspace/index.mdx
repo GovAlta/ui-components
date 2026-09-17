@@ -30,16 +30,16 @@ import PreviewContainer from "../../../components/PreviewContainer.astro";
 import { withBase } from "@/lib/base-url";
 
 <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:0.5rem;margin-bottom:2rem;">
-  <goa-button version="2" type="secondary" onclick="window.open('https://govalta.github.io/goa-workspace-playground/', '_blank')">View demo</goa-button>
-  <goa-button version="2" type="tertiary" leadingicon="logo-react" onclick="window.open('https://github.com/GovAlta/goa-workspace-playground', '_blank')">React template</goa-button>
-  <goa-button version="2" type="tertiary" leadingicon="logo-angular" onclick="window.open('https://github.com/GovAlta/goa-workspace-angular', '_blank')">Angular template</goa-button>
+  <goa-button type="secondary" onclick="window.open('https://govalta.github.io/goa-workspace-playground/', '_blank')">View demo</goa-button>
+  <goa-button type="tertiary" leadingicon="logo-react" onclick="window.open('https://github.com/GovAlta/goa-workspace-playground', '_blank')">React template</goa-button>
+  <goa-button type="tertiary" leadingicon="logo-angular" onclick="window.open('https://github.com/GovAlta/goa-workspace-angular', '_blank')">Angular template</goa-button>
 </div>
 
 ## Page types
 
 Common pages seen in workspace products that you can combine and adapt to fit the work your service supports.
 
-<goa-callout version="2" type="information" emphasis="low" heading="Workspace layout component" maxwidth="80ch">
+<goa-callout type="information" emphasis="low" heading="Workspace layout component" maxwidth="80ch">
   All of the page examples are built using the workspace layout component. It is a responsive shell with a side menu, sticky page header and footer, and an optional push drawer. On small screens, the side menu collapses into a hamburger menu.
   <div style="margin-top: var(--goa-space-s, 0.75rem);">
     <goa-link size="small"><a href="/components/workspace-layout">View layout component</a></goa-link>

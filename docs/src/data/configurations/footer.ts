@@ -24,7 +24,7 @@ export const footerConfigurations: ComponentConfigurations = {
   <goab-app-footer></goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2"></goa-app-footer>
+  <goa-app-footer></goa-app-footer>
 </footer>`,
       },
     },
@@ -52,7 +52,7 @@ export const footerConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-meta-section slot="meta">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms of use</a>
@@ -94,7 +94,7 @@ export const footerConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-nav-section slot="nav" heading="Services">
       <a href="/apply">Apply online</a>
       <a href="/renew">Renew</a>
@@ -150,7 +150,7 @@ export const footerConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-nav-section slot="nav" heading="Services">
       <a href="/apply">Apply online</a>
       <a href="/renew">Renew</a>
@@ -203,7 +203,7 @@ export const footerConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-nav-section slot="nav" heading="Services">
       <a href="/apply">Apply online</a>
       <goa-link trailingicon="open">

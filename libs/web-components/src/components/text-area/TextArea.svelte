@@ -4,6 +4,7 @@
 <script lang="ts">
   import {
     dispatch,
+    generateRandomId,
     pluralize,
     receive,
     relay,
@@ -27,8 +28,8 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
-  /** Name of the input value that is received in the _change event. */
-  export let name: string;
+  /** Name of the input value that is received in the _change event. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** Bound to value */
   export let value: string = "";
   /** Text displayed within the input when no value is set. */
@@ -47,7 +48,7 @@
   export let readonly: string = "false";
   /** Sets the input to a disabled state. Use [attr.disabled] with [formControl] */
   export let disabled: string = "false";
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   export let arialabel: string = "";
   /** Counting interval for characters or words, specifying whether to count every character or word. */
   export let countby: "character" | "word" | "" = "";
@@ -55,12 +56,6 @@
   export let maxcount: number = -1;
   /** Specifies the autocomplete attribute for the textarea input. */
   export let autocomplete: string = "";
-
-  // version
-  type VersionType = "1" | "2";
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
 
   // size
   type SizeType = "default" | "compact";
@@ -97,7 +92,6 @@
   // Hooks
 
   onMount(() => {
-    validateVersion(version);
     validateSize(size);
     addRelayListener();
     sendMountedMessage();
@@ -202,7 +196,6 @@
     class:disabled={isDisabled}
     class:readonly={isReadonly}
     class:compact={size === "compact"}
-    class:v2={version === "2"}
     style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -215,7 +208,7 @@
       {name}
       {placeholder}
       {rows}
-      aria-label={arialabel || name}
+      aria-label={arialabel}
       aria-invalid={_error ? "true" : "false"}
       disabled={isDisabled}
       readonly={isReadonly}
@@ -307,23 +300,20 @@
   /* Read-only state */
   .readonly,
   .readonly:hover {
-    background-color: var(
-      --goa-text-area-color-bg-readonly,
-      var(--goa-color-greyscale-100)
-    );
+    background-color: var(--goa-text-area-color-bg-readonly);
   }
 
-  /* V2 focus state - single blue border only (no layered borders) */
-  .v2.root:focus-within {
+  /* Focus state uses a single focus border */
+  .root:focus-within {
     box-shadow: var(--goa-text-area-border-focus);
   }
-  .v2.error:focus-within,
-  .v2.error:focus-within:hover {
+  .error:focus-within,
+  .error:focus-within:hover {
     box-shadow: var(--goa-text-area-border-focus);
   }
 
-  /* V2 compact size variant */
-  .v2.compact textarea {
+  /* Compact size */
+  .compact textarea {
     padding: var(--goa-text-area-padding-compact);
     font: var(--goa-text-area-typography-compact);
   }

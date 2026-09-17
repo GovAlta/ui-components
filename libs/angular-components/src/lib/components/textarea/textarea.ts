@@ -31,7 +31,6 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-textarea
         #goaComponentRef
-        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.placeholder]="placeholder"
@@ -72,7 +71,7 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Name of the input value that is received in the _change event. */
+  /** Name of the input value that is received in the _change event. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Text displayed within the input when no value is set. */
   @Input() placeholder?: string;
@@ -82,7 +81,7 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Input({ transform: booleanAttribute }) readOnly?: boolean;
   /** Width of the text area. */
   @Input() width?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** Counting interval for characters or words, specifying whether to count every character or word. @default "" */
   @Input() countBy?: GoabTextAreaCountBy = "";
@@ -105,7 +104,6 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

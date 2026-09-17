@@ -459,7 +459,6 @@ export class EverythingComponent {
   filterChipClicks = 0;
   fileUploadCardEvents: string[] = [];
   fileUploadInputFiles: string[] = [];
-  headerMenuActivated = false;
   iconButtonClickCount: Record<GoabIconButtonVariant, number> = {
     color: 0,
     nocolor: 0,
@@ -763,11 +762,6 @@ export class EverythingComponent {
       size: detail.file?.size,
       type: detail.file?.type,
     });
-  }
-
-  onHeaderMenuClick() {
-    this.headerMenuActivated = true;
-    this.logEvent("header.menuClick", {});
   }
 
   onIconButtonClick(variant: GoabIconButtonVariant) {

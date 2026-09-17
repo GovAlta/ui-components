@@ -19,7 +19,7 @@ export const badgeConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabBadge type="default" content="New" icon={false} />`,
         angular: `<goab-badge type="default" content="New" [icon]="false"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="default" content="New" icon="false"></goa-badge>`,
+        webComponents: `<goa-badge type="default" content="New" icon="false"></goa-badge>`,
       },
     },
     {
@@ -37,11 +37,11 @@ export const badgeConfigurations: ComponentConfigurations = {
 <goab-badge type="emergency" content="Emergency"></goab-badge>
 <goab-badge type="success" content="Success"></goab-badge>
 <goab-badge type="archived" content="Archived"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="information" content="Information"></goa-badge>
-<goa-badge version="2" type="important" content="Important"></goa-badge>
-<goa-badge version="2" type="emergency" content="Emergency"></goa-badge>
-<goa-badge version="2" type="success" content="Success"></goa-badge>
-<goa-badge version="2" type="archived" content="Archived"></goa-badge>`,
+        webComponents: `<goa-badge type="information" content="Information"></goa-badge>
+<goa-badge type="important" content="Important"></goa-badge>
+<goa-badge type="emergency" content="Emergency"></goa-badge>
+<goa-badge type="success" content="Success"></goa-badge>
+<goa-badge type="archived" content="Archived"></goa-badge>`,
       },
     },
     {
@@ -73,18 +73,18 @@ export const badgeConfigurations: ComponentConfigurations = {
 <goab-badge type="sunset" content="Sunset" [icon]="false" emphasis="subtle"></goab-badge>
 <goab-badge type="dawn" content="Dawn" [icon]="false"></goab-badge>
 <goab-badge type="dawn" content="Dawn" [icon]="false" emphasis="subtle"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="sky" content="Sky" icon="false"></goa-badge>
-<goa-badge version="2" type="sky" content="Sky" icon="false" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="prairie" content="Prairie" icon="false"></goa-badge>
-<goa-badge version="2" type="prairie" content="Prairie" icon="false" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="lilac" content="Lilac" icon="false"></goa-badge>
-<goa-badge version="2" type="lilac" content="Lilac" icon="false" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="pasture" content="Pasture" icon="false"></goa-badge>
-<goa-badge version="2" type="pasture" content="Pasture" icon="false" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="sunset" content="Sunset" icon="false"></goa-badge>
-<goa-badge version="2" type="sunset" content="Sunset" icon="false" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="dawn" content="Dawn" icon="false"></goa-badge>
-<goa-badge version="2" type="dawn" content="Dawn" icon="false" emphasis="subtle"></goa-badge>`,
+        webComponents: `<goa-badge type="sky" content="Sky" icon="false"></goa-badge>
+<goa-badge type="sky" content="Sky" icon="false" emphasis="subtle"></goa-badge>
+<goa-badge type="prairie" content="Prairie" icon="false"></goa-badge>
+<goa-badge type="prairie" content="Prairie" icon="false" emphasis="subtle"></goa-badge>
+<goa-badge type="lilac" content="Lilac" icon="false"></goa-badge>
+<goa-badge type="lilac" content="Lilac" icon="false" emphasis="subtle"></goa-badge>
+<goa-badge type="pasture" content="Pasture" icon="false"></goa-badge>
+<goa-badge type="pasture" content="Pasture" icon="false" emphasis="subtle"></goa-badge>
+<goa-badge type="sunset" content="Sunset" icon="false"></goa-badge>
+<goa-badge type="sunset" content="Sunset" icon="false" emphasis="subtle"></goa-badge>
+<goa-badge type="dawn" content="Dawn" icon="false"></goa-badge>
+<goa-badge type="dawn" content="Dawn" icon="false" emphasis="subtle"></goa-badge>`,
       },
     },
     {
@@ -116,18 +116,18 @@ export const badgeConfigurations: ComponentConfigurations = {
 <goab-badge type="pasture" content="Pasture" [icon]="false"></goab-badge>
 <goab-badge type="sunset" content="Sunset" [icon]="false"></goab-badge>
 <goab-badge type="dawn" content="Dawn" [icon]="false"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="default" content="Default" icon="false"></goa-badge>
-<goa-badge version="2" type="information" content="Information" icon="false"></goa-badge>
-<goa-badge version="2" type="important" content="Important" icon="false"></goa-badge>
-<goa-badge version="2" type="emergency" content="Emergency" icon="false"></goa-badge>
-<goa-badge version="2" type="success" content="Success" icon="false"></goa-badge>
-<goa-badge version="2" type="archived" content="Archived" icon="false"></goa-badge>
-<goa-badge version="2" type="sky" content="Sky" icon="false"></goa-badge>
-<goa-badge version="2" type="prairie" content="Prairie" icon="false"></goa-badge>
-<goa-badge version="2" type="lilac" content="Lilac" icon="false"></goa-badge>
-<goa-badge version="2" type="pasture" content="Pasture" icon="false"></goa-badge>
-<goa-badge version="2" type="sunset" content="Sunset" icon="false"></goa-badge>
-<goa-badge version="2" type="dawn" content="Dawn" icon="false"></goa-badge>`,
+        webComponents: `<goa-badge type="default" content="Default" icon="false"></goa-badge>
+<goa-badge type="information" content="Information" icon="false"></goa-badge>
+<goa-badge type="important" content="Important" icon="false"></goa-badge>
+<goa-badge type="emergency" content="Emergency" icon="false"></goa-badge>
+<goa-badge type="success" content="Success" icon="false"></goa-badge>
+<goa-badge type="archived" content="Archived" icon="false"></goa-badge>
+<goa-badge type="sky" content="Sky" icon="false"></goa-badge>
+<goa-badge type="prairie" content="Prairie" icon="false"></goa-badge>
+<goa-badge type="lilac" content="Lilac" icon="false"></goa-badge>
+<goa-badge type="pasture" content="Pasture" icon="false"></goa-badge>
+<goa-badge type="sunset" content="Sunset" icon="false"></goa-badge>
+<goa-badge type="dawn" content="Dawn" icon="false"></goa-badge>`,
       },
     },
     {
@@ -159,18 +159,18 @@ export const badgeConfigurations: ComponentConfigurations = {
 <goab-badge type="pasture" content="Pasture" emphasis="subtle" [icon]="false"></goab-badge>
 <goab-badge type="sunset" content="Sunset" emphasis="subtle" [icon]="false"></goab-badge>
 <goab-badge type="dawn" content="Dawn" emphasis="subtle" [icon]="false"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="default" content="Default" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="information" content="Information" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="important" content="Important" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="emergency" content="Emergency" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="success" content="Success" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="archived" content="Archived" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="sky" content="Sky" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="prairie" content="Prairie" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="lilac" content="Lilac" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="pasture" content="Pasture" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="sunset" content="Sunset" emphasis="subtle" icon="false"></goa-badge>
-<goa-badge version="2" type="dawn" content="Dawn" emphasis="subtle" icon="false"></goa-badge>`,
+        webComponents: `<goa-badge type="default" content="Default" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="information" content="Information" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="important" content="Important" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="emergency" content="Emergency" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="success" content="Success" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="archived" content="Archived" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="sky" content="Sky" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="prairie" content="Prairie" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="lilac" content="Lilac" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="pasture" content="Pasture" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="sunset" content="Sunset" emphasis="subtle" icon="false"></goa-badge>
+<goa-badge type="dawn" content="Dawn" emphasis="subtle" icon="false"></goa-badge>`,
       },
     },
     {
@@ -184,9 +184,9 @@ export const badgeConfigurations: ComponentConfigurations = {
         angular: `<goab-badge type="success" content="Approved" iconType="checkmark"></goab-badge>
 <goab-badge type="emergency" content="Rejected" iconType="close"></goab-badge>
 <goab-badge type="information" content="Pending" iconType="time"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="success" content="Approved" icontype="checkmark"></goa-badge>
-<goa-badge version="2" type="emergency" content="Rejected" icontype="close"></goa-badge>
-<goa-badge version="2" type="information" content="Pending" icontype="time"></goa-badge>`,
+        webComponents: `<goa-badge type="success" content="Approved" icontype="checkmark"></goa-badge>
+<goa-badge type="emergency" content="Rejected" icontype="close"></goa-badge>
+<goa-badge type="information" content="Pending" icontype="time"></goa-badge>`,
       },
     },
     {
@@ -198,8 +198,8 @@ export const badgeConfigurations: ComponentConfigurations = {
 <GoabBadge type="default" content="Large" size="large" emphasis="subtle" />`,
         angular: `<goab-badge type="default" content="Medium" size="medium" emphasis="subtle"></goab-badge>
 <goab-badge type="default" content="Large" size="large" emphasis="subtle"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="default" content="Medium" size="medium" emphasis="subtle"></goa-badge>
-<goa-badge version="2" type="default" content="Large" size="large" emphasis="subtle"></goa-badge>`,
+        webComponents: `<goa-badge type="default" content="Medium" size="medium" emphasis="subtle"></goa-badge>
+<goa-badge type="default" content="Large" size="large" emphasis="subtle"></goa-badge>`,
       },
     },
   ],

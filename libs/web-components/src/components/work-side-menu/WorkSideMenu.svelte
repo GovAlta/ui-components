@@ -474,11 +474,8 @@
        internal layout can fill it. Defaults to 100vh (full-page shell);
        consumers (e.g. GoabWorkspaceLayout) override via the CSS var. */
     display: block;
-    height: var(--goa-work-side-menu-height, 100vh);
-    --goa-popover-box-shadow: var(
-      --goa-work-side-menu-popover-shadow,
-      var(--goa-shadow-raised-light)
-    );
+    height: var(--goa-work-side-menu-height);
+    --goa-popover-box-shadow: var(--goa-work-side-menu-popover-shadow);
   }
 
   :host * {
@@ -561,13 +558,13 @@
     align-items: stretch;
     position: relative;
     height: 100%;
-    width: var(--goa-work-side-menu-width-open, 280px);
-    background-color: var(--goa-work-side-menu-color-bg, transparent);
+    width: var(--goa-work-side-menu-width-open);
+    background-color: var(--goa-work-side-menu-color-bg);
     transition: width 100ms ease-out;
   }
 
   .closed .container {
-    width: var(--goa-work-side-menu-width-closed, 72px);
+    width: var(--goa-work-side-menu-width-closed);
   }
 
   /* scroll-panel fills the container and owns scroll + sticky header/footer borders */
@@ -586,10 +583,7 @@
   .header {
     container: heading / inline-size;
     height: 32px;
-    border-radius: var(
-      --goa-work-side-menu-border-radius,
-      var(--goa-border-radius-m)
-    );
+    border-radius: var(--goa-work-side-menu-border-radius);
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -653,18 +647,9 @@
   .account-menu {
     visibility: hidden;
     opacity: 0;
-    background: var(
-      --goa-work-side-menu-account-bg,
-      var(--goa-color-greyscale-white)
-    );
-    box-shadow: var(
-      --goa-work-side-menu-account-shadow,
-      0px 12px 20px -8px rgba(26, 26, 26, 0.24)
-    );
-    border-radius: var(
-      --goa-work-side-menu-border-radius,
-      var(--goa-border-radius-m)
-    );
+    background: var(--goa-work-side-menu-account-bg);
+    box-shadow: var(--goa-work-side-menu-account-shadow);
+    border-radius: var(--goa-work-side-menu-border-radius);
     padding: var(--goa-space-2xs);
     position: fixed;
     left: var(--goa-space-s);
@@ -702,29 +687,20 @@
     overflow: hidden;
     align-items: center;
     flex-shrink: 0;
-    border: var(
-      --goa-work-side-menu-border,
-      var(--goa-border-width-s) solid var(--goa-color-greyscale-200)
-    );
+    border: var(--goa-work-side-menu-border);
     background-color: transparent;
     padding: var(--goa-space-xs);
     margin: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-m);
-    border-radius: var(
-      --goa-work-side-menu-border-radius,
-      var(--goa-border-radius-m)
-    );
+    border-radius: var(--goa-work-side-menu-border-radius);
     gap: calc(var(--goa-space-xs) + 1px);
     min-height: 44px;
-    color: var(--goa-work-side-menu-text-color, var(--goa-color-greyscale-600));
+    color: var(--goa-work-side-menu-text-color);
     cursor: pointer;
   }
 
   .profile:hover {
     background-color: var(--goa-color-greyscale-100);
-    color: var(
-      --goa-work-side-menu-item-text-color-hover,
-      var(--goa-color-text-default)
-    );
+    color: var(--goa-work-side-menu-item-text-color-hover);
   }
 
   .profile:focus-visible {
@@ -804,21 +780,11 @@
     position: relative;
     display: flex;
     gap: var(--goa-space-m);
-    border-radius: var(
-      --goa-work-side-menu-item-border-radius,
-      var(--goa-border-radius-m)
-    );
+    border-radius: var(--goa-work-side-menu-item-border-radius);
     text-decoration: none;
     align-items: center;
-    padding: var(
-      --goa-work-side-menu-item-padding,
-      var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs)
-        var(--goa-space-s)
-    );
-    color: var(
-      --goa-work-side-menu-item-text-color,
-      var(--goa-color-greyscale-600)
-    );
+    padding: var(--goa-work-side-menu-item-padding);
+    color: var(--goa-work-side-menu-item-text-color);
     min-height: 40px;
     width: 100%;
     background: none;
@@ -831,10 +797,7 @@
       --goa-work-side-toggle-color-bg-hover,
       var(--goa-color-greyscale-100)
     );
-    color: var(
-      --goa-work-side-menu-item-text-color-hover,
-      var(--goa-color-text-default)
-    );
+    color: var(--goa-work-side-menu-item-text-color-hover);
     cursor: pointer;
   }
 
@@ -845,10 +808,7 @@
 
   .toggle-button-label {
     flex-grow: 1;
-    font: var(
-      --goa-work-side-menu-item-text-size,
-      var(--goa-typography-body-s)
-    );
+    font: var(--goa-work-side-menu-item-text-size);
   }
 
   @container (max-width: 160px) {
@@ -902,10 +862,7 @@
       z-index: 9999;
       display: flex;
       margin-left: 0;
-      background-color: var(
-        --goa-work-side-menu-mobile-bg,
-        var(--goa-color-greyscale-50)
-      );
+      background-color: var(--goa-work-side-menu-mobile-bg);
     }
   }
 

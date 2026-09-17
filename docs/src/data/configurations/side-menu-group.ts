@@ -44,13 +44,13 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
   </goab-side-menu>
 </nav>`,
         webComponents: `<nav>
-  <goa-side-menu version="2">
-    <goa-side-menu-group version="2" heading="Applications">
+  <goa-side-menu>
+    <goa-side-menu-group heading="Applications">
       <a href="/apps/active">Active</a>
       <a href="/apps/pending">Pending</a>
       <a href="/apps/archived">Archived</a>
     </goa-side-menu-group>
-    <goa-side-menu-group version="2" heading="Reports">
+    <goa-side-menu-group heading="Reports">
       <a href="/reports/monthly">Monthly</a>
       <a href="/reports/annual">Annual</a>
     </goa-side-menu-group>
@@ -88,12 +88,12 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
   </goab-side-menu>
 </nav>`,
         webComponents: `<nav>
-  <goa-side-menu version="2">
-    <goa-side-menu-group version="2" heading="Applications" icon="document">
+  <goa-side-menu>
+    <goa-side-menu-group heading="Applications" icon="document">
       <a href="/apps/active">Active</a>
       <a href="/apps/pending">Pending</a>
     </goa-side-menu-group>
-    <goa-side-menu-group version="2" heading="Settings" icon="settings">
+    <goa-side-menu-group heading="Settings" icon="settings">
       <a href="/settings/profile">Profile</a>
       <a href="/settings/security">Security</a>
     </goa-side-menu-group>

@@ -19,7 +19,6 @@ import {
   selector: "goab-file-upload-card",
   template: ` @if (isReady) {
     <goa-file-upload-card
-      [attr.version]="version"
       [attr.filename]="filename"
       [attr.size]="size"
       [attr.type]="type"
@@ -56,7 +55,6 @@ export class GoabFileUploadCard implements OnInit {
   @Output() onDelete = new EventEmitter<GoabFileUploadOnDeleteDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

@@ -86,12 +86,12 @@ const userGoal = getUserGoal(data.title);
     </p>
 
     <div class="card-badges">
-      <goa-badge version="2" type={getSizeBadgeType(data.size)} emphasis="subtle" icon="false" content={formatSize(data.size)}></goa-badge>
+      <goa-badge type={getSizeBadgeType(data.size)} emphasis="subtle" icon="false" content={formatSize(data.size)}></goa-badge>
       {data.productType && (
-        <goa-badge version="2" type={getProductTypeBadgeType(data.productType)} emphasis="subtle" icon="false" content={formatProductType(data.productType)}></goa-badge>
+        <goa-badge type={getProductTypeBadgeType(data.productType)} emphasis="subtle" icon="false" content={formatProductType(data.productType)}></goa-badge>
       )}
       {userGoal && (
-        <goa-badge version="2" type="sky" emphasis="subtle" icon="false" content={userGoal}></goa-badge>
+        <goa-badge type="sky" emphasis="subtle" icon="false" content={userGoal}></goa-badge>
       )}
     </div>
   </div>

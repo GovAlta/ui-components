@@ -74,7 +74,7 @@ const daylightTimeZones = [
     accessible across different contexts.
   </goa-text>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="conversational-and-long-form-dates">Conversational and long-form dates</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -141,7 +141,7 @@ const daylightTimeZones = [
     </DoDont>
   </div>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="short-form-dates">Short-form dates</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -165,12 +165,8 @@ const daylightTimeZones = [
   <h3 id="short-form-examples">Examples</h3>
   <goa-text size="body-m" mt="none" mb="m">
     <ul>
-      <li>
-        Jan 14, 2026
-      </li>
-      <li>
-        Feb 6, 2026
-      </li>
+      <li>Jan 14, 2026</li>
+      <li>Feb 6, 2026</li>
     </ul>
   </goa-text>
 
@@ -230,7 +226,7 @@ const daylightTimeZones = [
     </DoDont>
   </div>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="including-the-day-of-the-week">Including the day of the week</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -249,12 +245,8 @@ const daylightTimeZones = [
   </goa-text>
   <goa-text size="body-m" mt="none" mb="m">
     <ul>
-      <li>
-        Tue, Jan 13, 2026
-      </li>
-      <li>
-        Wed, Feb 18, 2026
-      </li>
+      <li>Tue, Jan 13, 2026</li>
+      <li>Wed, Feb 18, 2026</li>
     </ul>
   </goa-text>
 
@@ -293,7 +285,10 @@ const daylightTimeZones = [
       </Preview>
     </DoDont>
 
-    <DoDont type="dont" description="Don't forget to delineate day and month with a comma.">
+    <DoDont
+      type="dont"
+      description="Don't forget to delineate day and month with a comma."
+    >
       <Preview>
         <goa-block direction="column" gap="xs">
           <goa-text size="body-m" mt="none" mb="none">Monday March 16, 2026</goa-text>
@@ -317,7 +312,7 @@ const daylightTimeZones = [
     This can add unnecessary visual clutter.
   </goa-text>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="time-format">Time format</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -337,7 +332,8 @@ const daylightTimeZones = [
 
   <h3 id="date-with-time">Date with time</h3>
   <goa-text size="body-m" mt="none" mb="m">
-    When a date and time appear together, write the <strong>date first</strong>, followed by
+    When a date and time appear together, write the <strong>date first</strong>, followed
+    by
     <strong>at</strong> and the time.
   </goa-text>
 
@@ -357,7 +353,9 @@ const daylightTimeZones = [
     <DoDont type="do" description="Write the date first, followed by at and the time.">
       <Preview>
         <goa-block direction="column" gap="xs">
-          <goa-text size="body-m" mt="none" mb="none">Monday, March 16, 2026 at 3:30 pm</goa-text>
+          <goa-text size="body-m" mt="none" mb="none"
+            >Monday, March 16, 2026 at 3:30 pm</goa-text
+          >
         </goa-block>
       </Preview>
     </DoDont>
@@ -381,17 +379,20 @@ const daylightTimeZones = [
     <DoDont type="dont" description="Don't place the time before the date.">
       <Preview>
         <goa-block direction="column" gap="xs">
-          <goa-text size="body-m" mt="none" mb="none">7:55 am on Monday, March 16, 2026</goa-text>
+          <goa-text size="body-m" mt="none" mb="none"
+            >7:55 am on Monday, March 16, 2026</goa-text
+          >
         </goa-block>
       </Preview>
     </DoDont>
   </div>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="time-zones">Time zones</h2>
   <goa-text size="body-m" mt="none" mb="m">
-    Include time zones when needed. You may use either the long form or the abbreviated form.
+    Include time zones when needed. You may use either the long form or the abbreviated
+    form.
   </goa-text>
 
   <h3 id="long-form">Long form</h3>
@@ -414,7 +415,7 @@ const daylightTimeZones = [
 
   <h3 id="canadian-time-zones">Canadian time zones</h3>
   <h4 id="standard-time">Standard time</h4>
-  <goa-table version="2" width="100%">
+  <goa-table width="100%">
     <table width="100%">
       <thead>
         <tr>
@@ -442,7 +443,7 @@ const daylightTimeZones = [
     From mid-March to early November, most time zones observe daylight saving time, when
     clocks are moved ahead by one hour.
   </goa-text>
-  <goa-callout version="2" type="information" emphasis="low" mb="m">
+  <goa-callout type="information" emphasis="low" mb="m">
     In Alberta daylight saving time begins on the <strong
       >second Sunday in March at 2:00 am</strong
     >
@@ -451,7 +452,7 @@ const daylightTimeZones = [
     >.
   </goa-callout>
 
-  <goa-table version="2" width="100%">
+  <goa-table width="100%">
     <table width="100%">
       <thead>
         <tr>
@@ -487,7 +488,7 @@ const daylightTimeZones = [
     </DoDont>
   </div>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-divider mt="xl" mb="xl"></goa-divider>
 
   <h2 id="accessibility-and-screen-readers">Accessibility and screen readers</h2>
   <goa-text size="body-m" mt="none" mb="m">
@@ -510,7 +511,8 @@ const daylightTimeZones = [
   May 15, 2001 - 7:30 pm
 &lt;/time&gt;</code></pre>
 
-  <goa-text size="body-m" mt="none" mb="m">Some screen readers may read this as:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Some screen readers may read this as:</goa-text
+  >
   <goa-text size="body-m" mt="none" mb="m">
     &quot;May one five, two zero zero one, seven three zero pm&quot;
   </goa-text>
@@ -522,13 +524,7 @@ const daylightTimeZones = [
     &quot;Tuesday, May fifteenth, two-thousand one at seven thirty pm&quot;
   </goa-text>
 
-  <goa-callout
-    version="2"
-    type="information"
-    emphasis="low"
-    heading="ISO 8601 format"
-    mb="xl"
-  >
+  <goa-callout type="information" emphasis="low" heading="ISO 8601 format" mb="xl">
     The date time variables entered into the module for producing readable and
     conversational dates need to be rendered in ISO 8601 format.
   </goa-callout>

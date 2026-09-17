@@ -9,7 +9,7 @@ Supported React versions: 17, 18, and 19.
 ## Install
 
 ```bash
-npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
+npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common
 ```
 
 ## Register the web components
@@ -23,12 +23,10 @@ import "@abgov/web-components";
 
 ## Add styles
 
-Import the component styles and design tokens in your main stylesheet, such as
-`src/index.css`:
+Import the component styles in your main stylesheet, such as `src/index.css`. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 ## Add icons

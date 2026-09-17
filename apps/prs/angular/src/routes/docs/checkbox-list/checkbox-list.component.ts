@@ -4,7 +4,10 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angul
 import {
   GoabCheckbox, GoabCheckboxList, GoabFormItem, GoabTextArea,
 } from "@abgov/angular-components";
-import type { GoabCheckboxListOnChangeDetail } from "@abgov/ui-components-common";
+import type {
+  GoabCheckboxListOnChangeDetail,
+  GoabCheckboxOnChangeDetail,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -21,8 +24,26 @@ export class DocsCheckboxListComponent {
   });
 
   ngModelInterests: string[] = [];
+  readonly selectAllOptions = ["email", "text", "push"];
+  selectAllValues: string[] = [];
+
+  get allOptionsSelected(): boolean {
+    return this.selectAllValues.length === this.selectAllOptions.length;
+  }
+
+  get someOptionsSelected(): boolean {
+    return this.selectAllValues.length > 0 && !this.allOptionsSelected;
+  }
 
   checkboxListOnChange(event: GoabCheckboxListOnChangeDetail): void {
     console.log(event);
+  }
+
+  selectAllOnChange(event: GoabCheckboxOnChangeDetail): void {
+    this.selectAllValues = event.checked ? [...this.selectAllOptions] : [];
+  }
+
+  selectAllListOnChange(event: GoabCheckboxListOnChangeDetail): void {
+    this.selectAllValues = event.value;
   }
 }

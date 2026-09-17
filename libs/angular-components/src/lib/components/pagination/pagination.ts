@@ -22,7 +22,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-pagination
-        [attr.version]="version"
         [attr.itemcount]="itemCount"
         [attr.perpagecount]="perPageCount"
         [attr.pagenumber]="pageNumber"
@@ -45,7 +44,6 @@ export class GoabPagination extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** @required Total number of data items within all pages. */
   @Input({ required: true }) itemCount!: number;
   /** @required The current page being viewed (non-zero based). */

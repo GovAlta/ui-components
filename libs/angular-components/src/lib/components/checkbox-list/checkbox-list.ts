@@ -31,8 +31,8 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.testid]="testId"
       [id]="id"
       [attr.maxwidth]="maxWidth"
-      [attr.version]="version"
       [attr.size]="size"
+      [attr.arialabel]="ariaLabel"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -59,13 +59,14 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
-  /** @required The name for the checkbox list group. Used as group identifier in change events. */
-  @Input() name!: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  @Input() name?: string;
   /** Sets the maximum width of the checkbox list container. */
   @Input() maxWidth?: string;
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. @default "default" */
   @Input() size?: GoabCheckboxSize = "default";
+  /** Defines how the input will be translated for the screen reader. */
+  @Input() ariaLabel?: string;
 
   // Override value to handle string arrays consistently
   /** Array of currently selected checkbox values. */

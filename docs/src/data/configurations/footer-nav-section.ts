@@ -36,7 +36,7 @@ export const footerNavSectionConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-nav-section slot="nav" heading="Services">
       <a href="/apply">Apply online</a>
       <a href="/renew">Renew</a>
@@ -82,7 +82,7 @@ export const footerNavSectionConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-nav-section slot="nav" heading="All services" maxcolumncount="3">
       <a href="/health">Health</a>
       <a href="/education">Education</a>
