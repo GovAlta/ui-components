@@ -13,13 +13,17 @@ tags:
   - dashboard
   - pattern
 components:
+  - workspace-layout
   - work-side-menu
+  - work-side-notification-panel
   - table
+  - data-grid
   - badge
   - tabs
   - container
   - accordion
   - drawer
+  - push-drawer
   - button
   - block
 status: published
@@ -42,7 +46,7 @@ Common pages seen in workspace products that you can combine and adapt to fit th
 <goa-callout type="information" emphasis="low" heading="Workspace layout component" maxwidth="80ch">
   All of the page examples are built using the workspace layout component. It is a responsive shell with a side menu, sticky page header and footer, and an optional push drawer. On small screens, the side menu collapses into a hamburger menu.
   <div style="margin-top: var(--goa-space-s, 0.75rem);">
-    <goa-link size="small"><a href="/components/workspace-layout">View layout component</a></goa-link>
+    <goa-link size="small"><a href={withBase("/components/workspace-layout")}>View layout component</a></goa-link>
   </div>
 </goa-callout>
 
@@ -128,11 +132,11 @@ Workers need different ways to view, scan, and act on records depending on the t
 </goa-tabs>
 </div>
 
-Any view can be combined with grouping (for example, group by priority or status) to organize records into collapsible sections. Users can also search, filter by status using [tabs](/components/tabs), sort with multi-level sorting, and manage active filters with [filter chips](/components/filter-chip).
+Any view can be combined with grouping (for example, group by priority or status) to organize records into collapsible sections. Users can also search, filter by status using <a href={withBase("/components/tabs")}>tabs</a>, sort with multi-level sorting, and manage active filters with <a href={withBase("/components/filter-chip")}>filter chips</a>.
 
 ### Sidebar navigation
 
-Use the [work side menu](/components/work-side-menu) as the primary navigation for a workspace. The [workspace layout](/components/workspace-layout) provides this navigation, including the collapse to a hamburger on mobile.
+Use the <a href={withBase("/components/work-side-menu")}>work side menu</a> as the primary navigation for a workspace. The <a href={withBase("/components/workspace-layout")}>workspace layout</a> provides this navigation, including the collapse to a hamburger on mobile.
 
 Keep top-level navigation focused on the main areas of work. When a user opens a record or case, switch to contextual navigation that supports that task. This puts the user into a focused mode with relevant navigation items (like sections of an application, comments, reminders) and a back link to return to the main view. The sidebar can adapt to what the user is doing, it doesn't have to show everything at once.
 
@@ -161,7 +165,7 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
 
 ### Sticky action bar
 
-A scroll-aware header that pins to the top of the content area as the user scrolls. Use it to keep the most important tools visible. The [workspace layout](/components/workspace-layout) provides this as its sticky page header.
+A scroll-aware header that pins to the top of the content area as the user scrolls. Use it to keep the most important tools visible. The <a href={withBase("/components/workspace-layout")}>workspace layout</a> provides this as its sticky page header.
 
 Set the content for each page based on the task:
 
@@ -178,7 +182,7 @@ Do not pin everything. Keep only the information and actions people need to cont
 
 ### Push drawer
 
-Use a [push drawer](/components/push-drawer) for focused work that should happen without leaving the current page. The [workspace layout](/components/workspace-layout) hosts this as a push drawer that narrows the main card rather than overlaying it.
+Use a <a href={withBase("/components/push-drawer")}>push drawer</a> for focused work that should happen without leaving the current page. The <a href={withBase("/components/workspace-layout")}>workspace layout</a> hosts this as a push drawer that narrows the main card rather than overlaying it.
 
 This works well for actions such as:
 
@@ -195,6 +199,25 @@ Use it when users need to keep the main record in view while completing the task
   style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
 />
 
+### Notifications
+
+The <a href={withBase("/components/work-side-notification-panel")}>notification panel</a> is where a user catches up on everything happening to their work across the service. It opens from the <a href={withBase("/components/work-side-menu")}>work side menu</a>, so it is available from any page rather than tied to one.
+
+Use it for the things a user would otherwise have to go looking for:
+
+- comments left on a record they hold
+- status changes on work they are following
+- work newly assigned to them
+- files or documents added to a case
+
+Keep each notification to what happened, which record, and when, so the panel can be scanned without opening anything. Use the urgent priority to weight what matters most in your service's context. The panel offers a "View all" link, so plan for a full notifications page to sit behind it.
+
+<img
+  src={withBase("/thumbnails/workspace-notification-panel.png")}
+  alt="Workspace notification panel"
+  style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
+/>
+
 ---
 
 ## Components built for workspace
@@ -202,17 +225,17 @@ Use it when users need to keep the main record in view while completing the task
 Workspace patterns are supported by component features designed for denser, more productive interfaces:
 
 - **Compact inputs:** Every input component now has a `compact` variant that reduces height and spacing. This lets you build tighter forms and toolbars without sacrificing usability.
-- **Compact badges and notifications:** [Badges](/components/badge) and [notification banners](/components/notification) also have compact sizing to fit within dense data views and action bars.
-- **Badge variants:** [Badges](/components/badge) now include `strong` and `subtle` emphasis options, giving you control over visual weight depending on context.
-- **Data grid:** The [data grid](/components/data-grid) works with the table component to support accessible, keyboard-navigable data views. Use them together when the user needs to move through records efficiently without relying on a mouse.
-- **Segmented tabs:** A new [tab](/components/tab) variant that works as a segmented toggle for switching between views or modes within a workspace, rather than navigating between pages.
-- **Enhanced filter chips:** [Filter chips](/components/filter-chip) now support secondary text and secondary icons, making them more useful for richer filtering in workspace data views.
+- **Compact badges and notifications:** <a href={withBase("/components/badge")}>Badges</a> and <a href={withBase("/components/notification")}>notification banners</a> also have compact sizing to fit within dense data views and action bars.
+- **Badge variants:** <a href={withBase("/components/badge")}>Badges</a> now include `strong` and `subtle` emphasis options, giving you control over visual weight depending on context.
+- **Data grid:** The <a href={withBase("/components/data-grid")}>data grid</a> works with the table component to support accessible, keyboard-navigable data views. Use them together when the user needs to move through records efficiently without relying on a mouse.
+- **Segmented tabs:** A new <a href={withBase("/components/tab")}>tab</a> variant that works as a segmented toggle for switching between views or modes within a workspace, rather than navigating between pages.
+- **Enhanced filter chips:** <a href={withBase("/components/filter-chip")}>Filter chips</a> now support secondary text and secondary icons, making them more useful for richer filtering in workspace data views.
 
 ---
 
 ## Keyboard-accessible data views
 
-Workspace data views use the [data grid](/components/data-grid) to make table and card layouts fully keyboard navigable. Users can use arrow keys to move between cells and rows, making it possible to scan and act on records without a mouse. This is especially important in workspace contexts where staff are processing high volumes of cases and keyboard navigation is significantly faster than clicking. For assistive technology users, screen readers announce cell content and position as the user navigates.
+Workspace data views use the <a href={withBase("/components/data-grid")}>data grid</a> to make table and card layouts fully keyboard navigable. Users can use arrow keys to move between cells and rows, making it possible to scan and act on records without a mouse. This is especially important in workspace contexts where staff are processing high volumes of cases and keyboard navigation is significantly faster than clicking. For assistive technology users, screen readers announce cell content and position as the user navigates.
 
 ---
 
@@ -227,7 +250,7 @@ Use the workspace when your service needs to support regular, task-based work, s
 
 ## When not to use
 
-- Public facing applications or forms. Use the [public form](/examples/public-form) pattern instead.
+- Public facing applications or forms. Use the <a href={withBase("/examples/public-form")}>public form</a> pattern instead.
 - Content-only pages that do not involve case management.
 - Simple internal tools that do not need structured case processing.
 
