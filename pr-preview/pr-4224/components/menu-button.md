@@ -62,7 +62,7 @@ Tag: `goa-menu-button`
 |------|------|---------|----------|-------------|
 | `aria-label` | string | `Open menu` | No | Sets the aria-label for the icon button in icon-only mode. |
 | `leading-icon` | GoabIconType | (none) | No | Icon displayed before the button text. When no text is provided, displays as an icon button. |
-| `max-width` | string | (none) | Yes | Maximum width of the dropdown menu. |
+| `max-width` | string | (none) | No | Maximum width of the dropdown menu. |
 | `size` | "normal" \| "compact" | `normal` | No | Sets the size of the button. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `text` | string | (none) | No | The button label text. When provided, displays as a text button with a dropdown icon. |

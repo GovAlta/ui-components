@@ -12,18 +12,11 @@ Provide structure to help users find their way around the service.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `fullMenuBreakpoint` | number | (none) | No | Sets the breakpoint in px for the full menu to display. |
 | `heading` | string | (none) | No | Set the service name to display in the app header. |
 | `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
 | `secondaryText` | string | (none) | No | Secondary text displayed under the service name. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `url` | string | (none) | No | Set the URL to link from the alberta.ca logo. A full url is required. |
-
-### Events
-
-| Event | Type | Description |
-|-------|------|-------------|
-| `onMenuClick` | () => void | Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. |
 
 ### Slots
 
@@ -42,18 +35,11 @@ Provide structure to help users find their way around the service.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `fullMenuBreakpoint` | number | (none) | No | Sets the breakpoint in px for the full menu to display. |
 | `heading` | string | (none) | No | Sets the service name to display in the app header. |
 | `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
 | `secondaryText` | string | (none) | No | Secondary text displayed under the service name. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `url` | string | (none) | No | Sets the URL to link from the alberta.ca logo. A full url is required. |
-
-### Events
-
-| Event | Type | Description |
-|-------|------|-------------|
-| `onMenuClick` | () => void | Emits when the menu button is clicked. Used for custom menu handling. |
 
 ### Slots
 
@@ -74,19 +60,11 @@ Tag: `goa-app-header`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `fullmenubreakpoint` | number | `TABLET_BP` | No | Sets the breakpoint in px for the full menu to display. |
-| `hasmenuclickhandler` | boolean | `false` | No | When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling. |
 | `heading` | string | (none) | No | Set the service name to display in the app header. |
 | `maxcontentwidth` | string | (none) | No | Maximum width of the content area. |
-| `secondarytext` | string | (none) | No | V2 only: Secondary text displayed under the service name. |
+| `secondarytext` | string | (none) | No | Secondary text displayed under the service name. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `url` | string | (none) | No | Set the URL to link from the alberta.ca logo. A full url is required. |
-
-### Events
-
-| Event | Type | Description |
-|-------|------|-------------|
-| `_menuClick` | CustomEvent | (none) |
 
 ### Slots
 

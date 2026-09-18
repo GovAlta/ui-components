@@ -14,7 +14,7 @@ Advanced table with sorting and selection.
 |------|------|---------|----------|-------------|
 | `keyboardIconPosition` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
 | `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. |
-| `keyboardNav` | "layout" \| "table" | (none) | Yes | Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. |
+| `keyboardNav` | "layout" \| "table" | `table` | No | Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. |
 
 ---
 
@@ -26,7 +26,7 @@ Advanced table with sorting and selection.
 |------|------|---------|----------|-------------|
 | `keyboardIconPosition` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
 | `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
-| `keyboardNav` | "layout" \| "table" | (none) | Yes | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
+| `keyboardNav` | "layout" \| "table" | `table` | No | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
 
 ---
 

@@ -12,6 +12,7 @@ A multiple selection input.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
+| `ariaLabel` | string | (none) | No | Defines how the input will be translated for the screen reader. |
 | `disabled` | boolean | (none) | No | Disables all checkboxes in the list. |
 | `error` | boolean | (none) | No | Shows an error state on all checkboxes in the list. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the checkbox list container. |
@@ -19,7 +20,7 @@ A multiple selection input.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | Yes | The name for the checkbox list group. Used as group identifier in change events. |
+| `name` | string | (none) | No | The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string[] | (none) | No | Array of currently selected checkbox values. |
@@ -40,6 +41,7 @@ A multiple selection input.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
+| `ariaLabel` | string | (none) | No | Defines how the input will be translated for the screen reader. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
 | `error` | boolean | (none) | No | Sets the error state for the control. |
 | `id` | string | (none) | No | Sets the id attribute of the underlying web component. |
@@ -48,7 +50,7 @@ A multiple selection input.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | The name for the checkbox list group. Used as group identifier in change events. |
+| `name` | string | (none) | No | The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. |
 | `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string[] | (none) | No | Array of currently selected checkbox values. |
@@ -71,6 +73,7 @@ Tag: `goa-checkbox-list`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
+| `arialabel` | string | (none) | No | Defines how the input will be translated for the screen reader. |
 | `disabled` | boolean | `false` | No | Disables all checkboxes in the list. |
 | `error` | boolean | `false` | No | Shows an error state on all checkboxes in the list. |
 | `maxwidth` | string | `none` | No | Sets the maximum width of the checkbox list container. |
@@ -78,7 +81,7 @@ Tag: `goa-checkbox-list`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | Yes | The name for the checkbox list group. Used as group identifier in change events. |
+| `name` | string | `generateRandomId()` | No | The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string[] | `[]` | No | Array of currently selected checkbox values. |

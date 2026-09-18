@@ -29,7 +29,7 @@ A single-line field where users can input and edit text.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
-| `name` | string | (none) | Yes | Name of input value that is received in event detail payloads. |
+| `name` | string | (none) | No | Name of input value that is received in event detail payloads. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Sets placeholder text when the input is empty. |
 | `readonly` | boolean | (none) | No | Sets the readonly state. |
 | `size` | GoabInputSize | `default` | No | Sets the input size. |
@@ -86,7 +86,7 @@ A single-line field where users can input and edit text.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `name` | string | (none) | No | Name of input value that is received in the onChange event. |
+| `name` | string | (none) | No | Name of input value that is received in the onChange event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | (none) | No | Makes the input readonly. |
 | `size` | GoabInputSize | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
@@ -128,7 +128,7 @@ Tag: `goa-input`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `arialabel` | string | (none) | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
+| `arialabel` | string | (none) | No | Defines how the input will be translated for the screen reader. |
 | `arialabelledby` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
 | `autocapitalize` | "on" \| "off" \| "none" \| "sentences" \| "words" \| "characters" | `off` | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
 | `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the input field. |
@@ -146,7 +146,7 @@ Tag: `goa-input`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `name` | string | (none) | No | Name of input value that is received in the onChange event. |
+| `name` | string | `generateRandomId()` | No | Name of input value that is received in the onChange event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | `false` | No | Makes the input readonly. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
