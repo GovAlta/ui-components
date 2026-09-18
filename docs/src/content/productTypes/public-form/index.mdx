@@ -13,6 +13,8 @@ components: []
 status: published
 ---
 
+import { withBase } from "@/lib/base-url";
+
 <goa-button version="2" type="tertiary" mt="s" mb="l" onclick="window.open('https://digital-service-demo-v2.netlify.app/', '_blank')">View demo</goa-button>
 
 import PreviewContainer from "../../../components/PreviewContainer.astro";
@@ -119,7 +121,7 @@ It also helps the service to:
 
 ### Combine questions when helpful
 
-Asking a question does not necessarily mean you should use one form field. Asking a user for their address is best captured all on the same page with multiple fields. See the [grouped fields variant on the question page](/examples/question-page#group-related-questions-on-one-page).
+Asking a question does not necessarily mean you should use one form field. Asking a user for their address is best captured all on the same page with multiple fields. See the <a href={withBase("/examples/question-page#group-related-questions-on-one-page")}>grouped fields variant on the question page</a>.
 
 ---
 
@@ -151,8 +153,8 @@ Start by making sure the content and questions you are asking the user are as si
 
 As the complexity of your form grows, consider:
 
-- adding simple [progress indicators on a question page](/examples/question-page#show-a-progress-indicator) to communicate progress
-- breaking the form into sections on a [task list page](/examples/task-list-page)
+- adding simple <a href={withBase("/examples/question-page#show-a-progress-indicator")}>progress indicators on a question page</a> to communicate progress
+- breaking the form into sections on a <a href={withBase("/examples/task-list-page")}>task list page</a>
 
 ---
 

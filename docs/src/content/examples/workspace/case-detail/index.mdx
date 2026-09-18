@@ -21,17 +21,19 @@ tags:
 status: published
 ---
 
+import { withBase } from "@/lib/base-url";
+
 ## When to use
 
 Use the case detail view when staff need to review and act on a single record.
 
 ## Structure
 
-Break long content into sections using [accordions](/components/accordion) to organize submitted data into collapsible sections. A table-of-contents sidebar helps users navigate long case content. [Badges](/components/badge) show case status, and action buttons in the header provide quick access to review, assign, and comment actions.
+Break long content into sections using <a href={withBase("/components/accordion")}>accordions</a> to organize submitted data into collapsible sections. A table-of-contents sidebar helps users navigate long case content. <a href={withBase("/components/badge")}>Badges</a> show case status, and action buttons in the header provide quick access to review, assign, and comment actions.
 
 ## Actions
 
-For focused work that should happen without leaving the page, pair case detail with a [push drawer](/components/push-drawer).
+For focused work that should happen without leaving the page, pair case detail with a <a href={withBase("/components/push-drawer")}>push drawer</a>.
 
 ## Considerations
 

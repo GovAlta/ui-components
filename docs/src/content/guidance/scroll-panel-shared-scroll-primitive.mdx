@@ -12,11 +12,13 @@ appliesTo:
 status: published
 ---
 
+import { withBase } from "@/lib/base-url";
+
 You usually will not add scroll panel yourself. It works inside several other components, giving each one the same scrolling and the same soft shadow when there is more to see:
 
-- [Modal](/components/modal) scrolls its content between the fixed heading and the buttons.
-- [Drawer](/components/drawer) and [push drawer](/components/push-drawer) scroll their content under a sticky header.
-- [Work side notification panel](/components/work-side-notification-panel) scrolls its list under the tabs.
-- [Work side menu](/components/work-side-menu) scrolls its navigation under a sticky heading.
+- <a href={withBase("/components/modal")}>Modal</a> scrolls its content between the fixed heading and the buttons.
+- <a href={withBase("/components/drawer")}>Drawer</a> and <a href={withBase("/components/push-drawer")}>push drawer</a> scroll their content under a sticky header.
+- <a href={withBase("/components/work-side-notification-panel")}>Work side notification panel</a> scrolls its list under the tabs.
+- <a href={withBase("/components/work-side-menu")}>Work side menu</a> scrolls its navigation under a sticky heading.
 
 You can also use it on its own when you need a box whose content scrolls while a header or footer stays in place.
