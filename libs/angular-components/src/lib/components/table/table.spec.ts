@@ -90,7 +90,6 @@ describe("GoabTable", () => {
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-table");
-    expect(el?.getAttribute("version")).toBe("2");
     expect(el?.getAttribute("width")).toBe(component.width);
     expect(el?.getAttribute("variant")).toBe(component.variant);
     expect(el?.getAttribute("sort-mode")).toBe(component.sortMode);

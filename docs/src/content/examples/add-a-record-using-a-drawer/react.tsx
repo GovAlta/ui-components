@@ -65,7 +65,7 @@ export function AddARecordUsingADrawer() {
           </GoabRadioGroup>
         </GoabFormItem>
         <GoabFormItem label="Start date" mt="l">
-          <GoabDatePicker onChange={() => {}} value={new Date("2022-09-01")} />
+          <GoabDatePicker onChange={() => {}} value="2022-09-01" />
           <GoabCheckbox
             name="startDateApproximate"
             text="Approximate date"

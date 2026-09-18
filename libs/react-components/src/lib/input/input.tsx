@@ -17,7 +17,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type?: GoabInputType;
-  name: string;
+  name?: string;
   value?: string;
   id?: string;
   autocapitalize?: GoabAutoCapitalize;
@@ -36,6 +36,7 @@ interface WCProps extends Margins {
   prefix?: string;
   suffix?: string;
   arialabel?: string;
+  arialabelledby?: string;
   testid?: string;
   textalign?: string;
   size?: GoabInputSize;
@@ -46,7 +47,6 @@ interface WCProps extends Margins {
   step?: number;
   maxlength?: number;
 
-  version?: string;
   trailingiconarialabel?: string;
 }
 
@@ -63,8 +63,8 @@ declare module "react" {
 }
 
 interface BaseProps extends Margins, DataAttributes {
-  /** Name of input value that is received in event detail payloads. */
-  name: string;
+  /** Name of input value that is received in event detail payloads. If omitted, a unique name is generated. */
+  name?: string;
 
   /** Sets the id attribute of the input element. */
   id?: string;
@@ -102,6 +102,8 @@ interface BaseProps extends Margins, DataAttributes {
   testId?: string;
   /** Sets the aria-label used by assistive technologies. */
   ariaLabel?: string;
+  /** The aria-labelledby attribute identifies the element (or elements) that labels the input */
+  ariaLabelledBy?: string;
   /** Sets content in the leading slot. */
   leadingContent?: React.ReactNode;
   /** Sets content in the trailing slot. */
@@ -242,7 +244,6 @@ export function GoabInput({
       readonly={readonly ? "true" : undefined}
       error={error ? "true" : undefined}
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
-      version="2"
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

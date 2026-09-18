@@ -184,12 +184,13 @@
     reconcileTooltipLayout();
   }
 
-  // Mouse click also fires on:focus on a tabindex=0 element, but we only want
+  // Mouse click also fires focus events, but we only want
   // to reveal the tooltip on keyboard-driven focus so JS state stays aligned
   // with the CSS :focus-visible rule that drives opacity.
   function handleFocus(e: FocusEvent) {
-    const target = e.currentTarget as HTMLElement | null;
+    const target = e.composedPath()[0] as HTMLElement | undefined;
     if (!target?.matches?.(":focus-visible")) return;
+    target.setAttribute("aria-description", content);
     clearTimeout(_hideTooltipTimeout);
     showTooltip();
   }
@@ -388,7 +389,6 @@
 
 <svelte:window bind:innerWidth={_screenSize} />
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="tooltip"
@@ -400,11 +400,10 @@
     showTooltip();
   }}
   on:mouseleave={hideTooltip}
-  on:focus={handleFocus}
-  on:blur={hideTooltip}
+  on:focusin={handleFocus}
+  on:focusout={hideTooltip}
   data-testid={testid}
   aria-describedby="{_tooltipInstanceId}-tooltip"
-  tabindex="0"
   style={calculateMargin(mt, mr, mb, ml)}
 >
   <div
@@ -441,12 +440,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .tooltip:focus-visible {
-    outline: var(--goa-tooltip-border-focus);
-    outline-offset: -4px;
-    border-radius: 8px;
   }
 
   .tooltip-text {

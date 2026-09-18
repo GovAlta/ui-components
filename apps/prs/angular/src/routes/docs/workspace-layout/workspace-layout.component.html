@@ -16,12 +16,14 @@
   </goab-workspace-layout>
 </div>
 <ng-template #basicSideMenu>
-  <goab-work-side-menu
-    heading="Workspace layout"
-    url="/"
-    [primaryContent]="basicMenuItems"
-    (onNavigate)="handleNavigate($event)"
-  ></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu
+      heading="Workspace layout"
+      url="/"
+      [primaryContent]="basicMenuItems"
+      (onNavigate)="handleNavigate($event)"
+    ></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #basicMenuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -40,12 +42,14 @@
   </goab-workspace-layout>
 </div>
 <ng-template #headerSideMenu>
-  <goab-work-side-menu
-    heading="Workspace layout"
-    url="/"
-    [primaryContent]="headerMenuItems"
-    (onNavigate)="handleNavigate($event)"
-  ></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu
+      heading="Workspace layout"
+      url="/"
+      [primaryContent]="headerMenuItems"
+      (onNavigate)="handleNavigate($event)"
+    ></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #headerMenuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -72,12 +76,14 @@
   </goab-workspace-layout>
 </div>
 <ng-template #footerSideMenu>
-  <goab-work-side-menu
-    heading="Workspace layout"
-    url="/"
-    [primaryContent]="footerMenuItems"
-    (onNavigate)="handleNavigate($event)"
-  ></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu
+      heading="Workspace layout"
+      url="/"
+      [primaryContent]="footerMenuItems"
+      (onNavigate)="handleNavigate($event)"
+    ></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #footerMenuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -108,12 +114,14 @@
   </goab-workspace-layout>
 </div>
 <ng-template #drawerSideMenu>
-  <goab-work-side-menu
-    heading="Workspace layout"
-    url="/"
-    [primaryContent]="drawerMenuItems"
-    (onNavigate)="handleNavigate($event)"
-  ></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu
+      heading="Workspace layout"
+      url="/"
+      [primaryContent]="drawerMenuItems"
+      (onNavigate)="handleNavigate($event)"
+    ></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #drawerMenuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>

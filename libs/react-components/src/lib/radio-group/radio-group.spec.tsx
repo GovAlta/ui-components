@@ -43,7 +43,11 @@ describe("GoabRadioGroup", () => {
       const { baseElement } = render(
         <GoabRadioGroup name="fruits" onChange={noop}>
           {data.radios.map((radio) => (
-            <GoabRadioItem key={radio.value} name="fruits"></GoabRadioItem>
+            <GoabRadioItem
+              key={radio.value}
+              name="fruits"
+              value={radio.value}
+            ></GoabRadioItem>
           ))}
         </GoabRadioGroup>,
       );

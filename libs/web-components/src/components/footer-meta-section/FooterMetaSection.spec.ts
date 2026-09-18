@@ -1,18 +1,25 @@
-import { render } from '@testing-library/svelte';
-import FooterMetaSectionWrapper from './FooterMetaSectionWrapper.test.svelte';
-import { fireEvent } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-describe('FooterMetaSection', () => {
-  it('should display and handle link clicks correctly', async () => {
-    const { getByTestId, getByText } = render(FooterMetaSectionWrapper);
+import { fireEvent, render } from "@testing-library/svelte";
+import "@testing-library/jest-dom";
+import FooterMetaSectionWrapper from "./FooterMetaSectionWrapper.test.svelte";
 
-    const link1 = getByText('Link 1');
-    const link2 = getByTestId('specialClick');
-    expect(link1).toBeTruthy();
-    expect(link2).toBeTruthy();
+describe("FooterMetaSection", () => {
+  it("renders slotted content without replacing it", () => {
+    const { getByTestId } = render(FooterMetaSectionWrapper);
+
+    expect(getByTestId("standard-link")).toHaveAttribute(
+      "href",
+      "https://example.com",
+    );
+    expect(getByTestId("goa-link").tagName).toBe("GOA-LINK");
+    expect(getByTestId("custom-content")).toHaveTextContent("Custom content");
+  });
+
+  it("preserves events on slotted content", async () => {
+    const { getByTestId } = render(FooterMetaSectionWrapper);
+    const link2 = getByTestId("specialClick");
+
     await fireEvent.click(link2);
-    await fireEvent.click(link2);
-    const clickedText = getByTestId('link-is-clicked');
-    expect(clickedText).toHaveTextContent('Link 2 clicked');
+
+    expect(getByTestId("link-is-clicked")).toHaveTextContent("Link 2 clicked");
   });
 });

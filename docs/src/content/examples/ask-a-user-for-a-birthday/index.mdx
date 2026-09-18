@@ -33,4 +33,5 @@ Use this pattern when you need to collect a date of birth for:
 
 - Consider whether you really need exact birthday vs just year or age range
 - The date picker provides a consistent, accessible date selection experience
-- Users can type the date directly or use the calendar picker
+- The date picker has two types: input (a month dropdown with day and year fields, used here) and calendar (a popup calendar, for choosing dates near today). A birthday is a date the user already knows, so this example uses the input type
+- Validate that the entered date is in the past. The input type doesn't enforce min and max, so typing a future year isn't blocked

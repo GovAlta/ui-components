@@ -19,17 +19,19 @@ function navigate(path: string) {
 }
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    onNavigate={(path: string) => navigate(path)}
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      onNavigate={(path: string) => navigate(path)}
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+        </>
+      }
+    />
+  </nav>
 );
 
 const pageHeader = (

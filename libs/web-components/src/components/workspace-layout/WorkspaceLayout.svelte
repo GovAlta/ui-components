@@ -261,10 +261,7 @@
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
-    background-color: var(
-      --goa-workspace-layout-bg-color,
-      var(--goa-color-greyscale-50)
-    );
+    background-color: var(--goa-workspace-layout-bg-color);
     isolation: isolate;
   }
 
@@ -297,25 +294,16 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: var(--goa-workspace-layout-mobile-toggle-top, var(--goa-space-l));
-      left: var(--goa-workspace-layout-mobile-toggle-left, var(--goa-space-s));
+      top: var(--goa-workspace-layout-mobile-toggle-top);
+      left: var(--goa-workspace-layout-mobile-toggle-left);
       z-index: 110;
-      width: var(
-        --goa-workspace-layout-mobile-toggle-size,
-        var(--goa-icon-size-xl)
-      );
-      height: var(
-        --goa-workspace-layout-mobile-toggle-size,
-        var(--goa-icon-size-xl)
-      );
+      width: var(--goa-workspace-layout-mobile-toggle-size);
+      height: var(--goa-workspace-layout-mobile-toggle-size);
       padding: 0;
       border: none;
       border-radius: var(--goa-border-radius-s);
       background: transparent;
-      color: var(
-        --goa-workspace-layout-mobile-toggle-color,
-        var(--goa-color-text-default)
-      );
+      color: var(--goa-workspace-layout-mobile-toggle-color);
       cursor: pointer;
     }
 
@@ -324,16 +312,13 @@
     }
 
     .shell.mobile .mobile-menu-toggle:focus-visible {
-      outline: var(--goa-button-outline-offset, 2px) solid
+      outline: var(--goa-button-outline-offset) solid
         var(--goa-color-interactive-default);
-      outline-offset: var(--goa-button-outline-offset, 2px);
+      outline-offset: var(--goa-button-outline-offset);
     }
 
     .shell.mobile .page-header {
-      padding-left: var(
-        --goa-workspace-layout-mobile-header-padding-left,
-        var(--goa-space-2xl)
-      );
+      padding-left: var(--goa-workspace-layout-mobile-header-padding-left);
     }
 
     .shell.mobile .card-container {
@@ -366,10 +351,7 @@
 
   /* Card — the actual scroll container */
   .card {
-    background-color: var(
-      --goa-workspace-layout-card-bg-color,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-workspace-layout-card-bg-color);
     flex: 1 1 auto;
     min-height: 0;
     display: flex;
@@ -434,10 +416,7 @@
        z-index and escape this layout's stacking, so they still sit on top. */
     z-index: 2;
     padding: var(--goa-space-m) var(--goa-space-l);
-    background-color: var(
-      --goa-workspace-layout-header-bg-color,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-workspace-layout-header-bg-color);
     border-bottom: var(--goa-border-width-2xs) solid transparent;
     flex: 0 0 auto;
     transition:
@@ -452,10 +431,7 @@
     bottom: 0;
     z-index: 2;
     padding: var(--goa-space-m) var(--goa-space-l);
-    background-color: var(
-      --goa-workspace-layout-footer-bg-color,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-workspace-layout-footer-bg-color);
     border-top: var(--goa-border-width-2xs) solid transparent;
     flex: 0 0 auto;
     transition:
@@ -470,26 +446,14 @@
      exists past the sticky edge.*/
   .shell.state-middle .page-header,
   .shell.state-at-bottom .page-header {
-    border-bottom-color: var(
-      --goa-workspace-layout-header-scroll-border-color,
-      var(--goa-color-greyscale-200)
-    );
-    box-shadow: var(
-      --goa-workspace-layout-header-scroll-shadow,
-      var(--goa-shadow-shallow-below)
-    );
+    border-bottom-color: var(--goa-workspace-layout-header-scroll-border-color);
+    box-shadow: var(--goa-workspace-layout-header-scroll-shadow);
   }
 
   .shell.state-at-top .page-footer,
   .shell.state-middle .page-footer {
-    border-top-color: var(
-      --goa-workspace-layout-footer-scroll-border-color,
-      var(--goa-color-greyscale-200)
-    );
-    box-shadow: var(
-      --goa-workspace-layout-footer-scroll-shadow,
-      var(--goa-shadow-shallow-above)
-    );
+    border-top-color: var(--goa-workspace-layout-footer-scroll-border-color);
+    box-shadow: var(--goa-workspace-layout-footer-scroll-shadow);
   }
 
   .content {

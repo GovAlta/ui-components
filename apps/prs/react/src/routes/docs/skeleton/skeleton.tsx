@@ -55,9 +55,11 @@ export function DocsSkeletonRoute() {
       <h3>Basic page layout</h3>
       <GoabOneColumnLayout>
         <section slot="header">
-          <GoabAppHeader url="/" heading="Service name">
-            <a href="/login">Sign in</a>
-          </GoabAppHeader>
+          <header>
+            <GoabAppHeader url="/" heading="Service name">
+              <a href="/login">Sign in</a>
+            </GoabAppHeader>
+          </header>
         </section>
         <GoabPageBlock width="704px">
           <p>
@@ -74,7 +76,9 @@ export function DocsSkeletonRoute() {
           </GoabGrid>
         </GoabPageBlock>
         <section slot="footer">
-          <GoabAppFooter />
+          <footer>
+            <GoabAppFooter />
+          </footer>
         </section>
       </GoabOneColumnLayout>
 

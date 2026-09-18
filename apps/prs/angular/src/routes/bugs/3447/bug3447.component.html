@@ -1,0 +1,55 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">Bug 3447: Browser styling for p tags</goab-text>
+
+  <goab-link trailingIcon="open">
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3447"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View on GitHub
+    </a>
+  </goab-link>
+
+  <goab-text tag="p">
+    When GoabText renders a paragraph, setting mt or mb to none should explicitly apply a
+    zero margin and override the browser's default paragraph styling.
+  </goab-text>
+
+  <goab-divider />
+
+  <goab-text tag="h3">1. Margins set to s</goab-text>
+  <goab-text tag="p" mt="none" mb="m">
+    The paragraph should have small top and bottom margins between the dividers.
+  </goab-text>
+  <goab-container mb="none">
+    <goab-divider mt="none" mb="none" />
+    <goab-text tag="p" mt="s" mb="s">
+      Paragraph with mt=&quot;s&quot; and mb=&quot;s&quot;
+    </goab-text>
+    <goab-divider mt="none" mb="none" />
+  </goab-container>
+
+  <goab-text tag="h3">2. Margins not set</goab-text>
+  <goab-text tag="p" mt="none" mb="m">
+    The paragraph should use the Text component defaults: s on top and l on the bottom.
+  </goab-text>
+  <goab-container mb="none">
+    <goab-divider mt="none" mb="none" />
+    <goab-text tag="p">Paragraph without mt or mb</goab-text>
+    <goab-divider mt="none" mb="none" />
+  </goab-container>
+
+  <goab-text tag="h3">3. Margins set to none</goab-text>
+  <goab-text tag="p" mt="none" mb="m">
+    The paragraph should touch both dividers because none resolves to zero and overrides
+    the browser's native 1em paragraph margins.
+  </goab-text>
+  <goab-container mb="none">
+    <goab-divider mt="none" mb="none" />
+    <goab-text tag="p" mt="none" mb="none">
+      Paragraph with mt=&quot;none&quot; and mb=&quot;none&quot;
+    </goab-text>
+    <goab-divider mt="none" mb="none" />
+  </goab-container>
+</goab-block>

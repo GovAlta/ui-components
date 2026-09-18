@@ -12,6 +12,13 @@
           "description": "Sets the aria-label used by assistive technologies."
         },
         {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The aria-labelledby attribute identifies the element (or elements) that labels the input"
+        },
+        {
           "name": "autoCapitalize",
           "type": "GoabAutoCapitalize",
           "required": false,
@@ -127,9 +134,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Name of input value that is received in event detail payloads."
+          "description": "Name of input value that is received in event detail payloads. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -426,7 +433,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Name of input value that is received in the onChange event."
+          "description": "Name of input value that is received in the onChange event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -592,7 +599,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the input will be translated for the screen reader."
         },
         {
           "name": "arialabelledby",
@@ -731,8 +738,8 @@
           "name": "name",
           "type": "string",
           "required": false,
-          "default": "",
-          "description": "Name of input value that is received in the onChange event."
+          "default": "generateRandomId()",
+          "description": "Name of input value that is received in the onChange event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -840,17 +847,6 @@
           "required": false,
           "default": "goa",
           "description": "Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         },
         {
           "name": "width",

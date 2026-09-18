@@ -2599,6 +2599,19 @@
   },
   {
     "type": "page",
+    "id": "developers/september-2026-component-update",
+    "title": "September 2026 component library update",
+    "description": "Breaking API changes in the September 2026 component library update",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/september-2026-component-update"
+  },
+  {
+    "type": "page",
     "id": "developers/setup",
     "title": "Developer setup",
     "description": "Set up Angular, React, or Web Components to use the GoA Design System",

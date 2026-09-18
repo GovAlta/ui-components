@@ -249,7 +249,6 @@
         size="medium"
         variant="dark"
         mr="s"
-        version="2"
         testid={`close-${testid}`}
         on:_click={handleClose}
       />
@@ -258,7 +257,6 @@
     <goa-tabs
       initialtab="1"
       navigation="none"
-      version="2"
       variant="segmented"
       on:_change={handleTabChange}
     >
@@ -270,7 +268,6 @@
               testid="unreadCount"
               type="default"
               icon="false"
-              version="2"
               content={`${_unreadCount}`}
               emphasis="subtle"
             />
@@ -284,7 +281,6 @@
             <goa-badge
               icon="false"
               type="important"
-              version="2"
               content={`${_urgentCount}`}
               emphasis="subtle"
             />

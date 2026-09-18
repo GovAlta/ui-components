@@ -2,12 +2,12 @@
 
 ## Testing Tiers
 
-| Tier | Framework | When to Use |
-|------|-----------|-------------|
-| WC Unit | Vitest + @testing-library/svelte | Prop rendering, basic state, margins |
-| React Unit | Vitest + @testing-library/react | Wrapper prop transformation |
-| React Browser | Vitest + Playwright (Chromium + Firefox) | Event behavior, interactions, shadow DOM |
-| Angular | Jest + TestBed | Wrapper attribute binding, form integration |
+| Tier          | Framework                                | When to Use                                 |
+| ------------- | ---------------------------------------- | ------------------------------------------- |
+| WC Unit       | Vitest + @testing-library/svelte         | Prop rendering, basic state, margins        |
+| React Unit    | Vitest + @testing-library/react          | Wrapper prop transformation                 |
+| React Browser | Vitest + Playwright (Chromium + Firefox) | Event behavior, interactions, shadow DOM    |
+| Angular       | Jest + TestBed                           | Wrapper attribute binding, form integration |
 
 **Browser tests for events, unit tests for props.**
 
@@ -46,8 +46,6 @@ await vi.waitFor(() => {
 ## What to Test
 
 Every component: basic rendering, all prop variants, event dispatch, margins, disabled state, `data-*` passthrough, ARIA where applicable.
-
-V2 components need their own browser tests.
 
 ## Angular Testing
 

@@ -162,19 +162,9 @@
     margin: 0;
   }
 
-  /*
-   * heading-2xl (like heading-2xs) exists only in the V2 token set. When a
-   * consumer has only V1 tokens loaded the token is undefined, so it falls back
-   * to the nearest size that exists in V1 (heading-xl) rather than collapsing to
-   * unstyled text. Sizes that exist in both token sets (heading-xl through
-   * heading-xs) reference their token directly and need no fallback.
-   */
   .heading-2xl {
-    font: var(--goa-typography-heading-2xl, var(--goa-typography-heading-xl));
-    letter-spacing: var(
-      --goa-typography-heading-2xl-letter-spacing,
-      var(--goa-typography-heading-xl-letter-spacing)
-    );
+    font: var(--goa-typography-heading-2xl);
+    letter-spacing: var(--goa-typography-heading-2xl-letter-spacing);
   }
   .heading-xl {
     font: var(--goa-typography-heading-xl);
@@ -197,7 +187,7 @@
     letter-spacing: var(--goa-typography-heading-xs-letter-spacing);
   }
   .heading-2xs {
-    font: var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));
+    font: var(--goa-typography-heading-2xs);
     letter-spacing: var(--goa-typography-heading-2xs-letter-spacing);
   }
   .body-l {
@@ -214,16 +204,9 @@
   }
 
   @media (--mobile) {
-    /* V2-only size; falls back to the nearest V1 size. See the note on the desktop .heading-2xl rule above. */
     .heading-2xl {
-      font: var(
-        --goa-typography-mobile-heading-2xl,
-        var(--goa-typography-mobile-heading-xl)
-      );
-      letter-spacing: var(
-        --goa-typography-mobile-heading-2xl-letter-spacing,
-        var(--goa-typography-mobile-heading-xl-letter-spacing)
-      );
+      font: var(--goa-typography-mobile-heading-2xl);
+      letter-spacing: var(--goa-typography-mobile-heading-2xl-letter-spacing);
     }
     .heading-xl {
       font: var(--goa-typography-mobile-heading-xl);
@@ -246,10 +229,7 @@
       letter-spacing: var(--goa-typography-mobile-heading-xs-letter-spacing);
     }
     .heading-2xs {
-      font: var(
-        --goa-typography-mobile-heading-2xs,
-        var(--goa-typography-mobile-heading-xs)
-      );
+      font: var(--goa-typography-mobile-heading-2xs);
       letter-spacing: var(--goa-typography-mobile-heading-2xs-letter-spacing);
     }
     .body-l {

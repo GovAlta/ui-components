@@ -37,11 +37,13 @@ import {
     </ng-template>
 
     <ng-template #sideMenuTpl>
-      <goab-work-side-menu
-        heading="Workspace layout"
-        url="/"
-        [primaryContent]="menuItems"
-      ></goab-work-side-menu>
+      <nav>
+        <goab-work-side-menu
+          heading="Workspace layout"
+          url="/"
+          [primaryContent]="menuItems"
+        ></goab-work-side-menu>
+      </nav>
     </ng-template>
     <ng-template #menuItems>
       <goab-work-side-menu-item

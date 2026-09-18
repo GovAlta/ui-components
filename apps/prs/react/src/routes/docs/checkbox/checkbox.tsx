@@ -36,7 +36,21 @@ export function DocsCheckboxRoute() {
 
       <h3>States</h3>
       <GoabCheckbox name="disabled" text="Cannot be changed" disabled mb="m" />
-      <GoabCheckbox name="disabledChecked" text="Checked and disabled" checked disabled mb="m" />
+      <GoabCheckbox
+        name="disabledChecked"
+        text="Checked and disabled"
+        checked
+        disabled
+        mb="m"
+      />
+      <GoabCheckbox
+        name="disabledCheckedError"
+        text="Checked, disabled and error"
+        checked
+        disabled
+        error
+        mb="m"
+      />
       <GoabCheckbox name="terms" text="Accept terms and conditions" error />
 
       <h2>Examples</h2>
@@ -74,7 +88,13 @@ export function DocsCheckboxRoute() {
             label="Email"
             reveal={
               <GoabFormItem label="Email address">
-                <GoabInput name="email" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="email"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />
@@ -83,7 +103,13 @@ export function DocsCheckboxRoute() {
             label="Phone"
             reveal={
               <GoabFormItem label="Phone number">
-                <GoabInput name="phoneNumber" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="phoneNumber"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />
@@ -92,7 +118,13 @@ export function DocsCheckboxRoute() {
             label="Text message"
             reveal={
               <GoabFormItem label="Mobile phone number">
-                <GoabInput name="mobilePhoneNumber" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="mobilePhoneNumber"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />
@@ -111,7 +143,13 @@ export function DocsCheckboxRoute() {
             value="email"
             reveal={
               <GoabFormItem label="Email address">
-                <GoabInput name="email" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="email"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />
@@ -121,7 +159,13 @@ export function DocsCheckboxRoute() {
             value="phone"
             reveal={
               <GoabFormItem label="Phone number">
-                <GoabInput name="phoneNumber" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="phoneNumber"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />
@@ -131,7 +175,13 @@ export function DocsCheckboxRoute() {
             value="text"
             reveal={
               <GoabFormItem label="Mobile phone number">
-                <GoabInput name="mobilePhoneNumber" onChange={() => { /* no-op */ }} value="" />
+                <GoabInput
+                  name="mobilePhoneNumber"
+                  onChange={() => {
+                    /* no-op */
+                  }}
+                  value=""
+                />
               </GoabFormItem>
             }
           />

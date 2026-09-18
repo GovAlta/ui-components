@@ -6,13 +6,19 @@ topic: other
 tags:
   - layout
   - page-structure
+appliesTo:
+  components:
+    - app-header
+    - footer
 status: published
 ---
 
 <Preview>
   <goa-one-column-layout>
     <section slot="header">
-      <goa-app-header heading="My Service"></goa-app-header>
+      <header>
+        <goa-app-header heading="My Service"></goa-app-header>
+      </header>
     </section>
     <goa-page-block width="704px">
       <p>Main content goes here</p>

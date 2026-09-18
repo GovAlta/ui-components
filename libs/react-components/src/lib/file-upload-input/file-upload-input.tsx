@@ -11,7 +11,6 @@ interface WCProps {
   accept?: string;
   maxfilesize?: string;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -60,7 +59,7 @@ export function GoabFileUploadInput({ onSelectFile, ...rest }: GoabFileUploadInp
     };
   }, [el, onSelectFile]);
 
-  return <goa-file-upload-input ref={el} {..._props} version="2" />;
+  return <goa-file-upload-input ref={el} {..._props} />;
 }
 
 export default GoabFileUploadInput;

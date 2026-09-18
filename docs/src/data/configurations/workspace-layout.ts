@@ -31,18 +31,20 @@ export const workspaceLayoutConfigurations: ComponentConfigurations = {
           ts: `const rows = Array.from({ length: 16 }, (_, i) => i + 1);
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    onNavigate={(path: string) => navigate(path)}
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-        <GoabWorkSideMenuItem icon="document" label="Reports" url="/reports" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      onNavigate={(path: string) => navigate(path)}
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+          <GoabWorkSideMenuItem icon="document" label="Reports" url="/reports" />
+        </>
+      }
+    />
+  </nav>
 );`,
           jsx: `<GoabWorkspaceLayout sideMenu={sideMenu}>
   <div style={{ padding: "24px" }}>
@@ -70,7 +72,9 @@ const sideMenu = (
 </goab-workspace-layout>
 
 <ng-template #sideMenuTpl>
-  <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #menuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -79,11 +83,13 @@ const sideMenu = (
 </ng-template>`,
         },
         webComponents: `<goa-workspace-layout style="height: 600px;">
-  <goa-work-side-menu slot="side-menu" heading="Workspace layout" url="/" open="true">
-    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="document" label="Reports" url="/reports"></goa-work-side-menu-item>
-  </goa-work-side-menu>
+  <nav slot="side-menu">
+    <goa-work-side-menu heading="Workspace layout" url="/" open="true">
+      <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="document" label="Reports" url="/reports"></goa-work-side-menu-item>
+    </goa-work-side-menu>
+  </nav>
 
   <div id="wsl-basic-body" style="padding: 24px"></div>
 </goa-workspace-layout>
@@ -105,17 +111,19 @@ const sideMenu = (
           ts: `const rows = Array.from({ length: 16 }, (_, i) => i + 1);
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    onNavigate={(path: string) => navigate(path)}
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      onNavigate={(path: string) => navigate(path)}
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+        </>
+      }
+    />
+  </nav>
 );
 
 const pageHeader = (
@@ -153,7 +161,9 @@ const pageHeader = (
 </goab-workspace-layout>
 
 <ng-template #sideMenuTpl>
-  <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #menuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -170,16 +180,18 @@ const pageHeader = (
 </ng-template>`,
         },
         webComponents: `<goa-workspace-layout style="height: 600px;">
-  <goa-work-side-menu slot="side-menu" heading="Workspace layout" url="/" open="true">
-    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  </goa-work-side-menu>
+  <nav slot="side-menu">
+    <goa-work-side-menu heading="Workspace layout" url="/" open="true">
+      <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    </goa-work-side-menu>
+  </nav>
 
   <div slot="page-header" style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <goa-text tag="h1" size="heading-m" mt="none" mb="none">My cases</goa-text>
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" version="2">Filter</goa-button>
-      <goa-button type="primary" size="compact" version="2">New case</goa-button>
+      <goa-button type="secondary" size="compact">Filter</goa-button>
+      <goa-button type="primary" size="compact">New case</goa-button>
     </goa-button-group>
   </div>
 
@@ -203,17 +215,19 @@ const pageHeader = (
           ts: `const rows = Array.from({ length: 16 }, (_, i) => i + 1);
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    onNavigate={(path: string) => navigate(path)}
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      onNavigate={(path: string) => navigate(path)}
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+        </>
+      }
+    />
+  </nav>
 );
 
 const pageFooter = (
@@ -251,7 +265,9 @@ const pageFooter = (
 </goab-workspace-layout>
 
 <ng-template #sideMenuTpl>
-  <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #menuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -268,18 +284,20 @@ const pageFooter = (
 </ng-template>`,
         },
         webComponents: `<goa-workspace-layout style="height: 600px;">
-  <goa-work-side-menu slot="side-menu" heading="Workspace layout" url="/" open="true">
-    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  </goa-work-side-menu>
+  <nav slot="side-menu">
+    <goa-work-side-menu heading="Workspace layout" url="/" open="true">
+      <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    </goa-work-side-menu>
+  </nav>
 
   <div id="wsl-footer-body" style="padding: 24px"></div>
 
   <div slot="page-footer" style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <goa-text size="body-s" mt="none" mb="none">3 cases selected</goa-text>
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" version="2">Clear</goa-button>
-      <goa-button type="primary" size="compact" version="2">Export</goa-button>
+      <goa-button type="secondary" size="compact">Clear</goa-button>
+      <goa-button type="primary" size="compact">Export</goa-button>
     </goa-button-group>
   </div>
 </goa-workspace-layout>
@@ -301,17 +319,19 @@ const pageFooter = (
           ts: `const [open, setOpen] = useState(false);
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    onNavigate={(path: string) => navigate(path)}
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      onNavigate={(path: string) => navigate(path)}
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+        </>
+      }
+    />
+  </nav>
 );
 
 const drawer = (
@@ -341,7 +361,9 @@ const drawer = (
 </goab-workspace-layout>
 
 <ng-template #sideMenuTpl>
-  <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems" (onNavigate)="handleNavigate($event)"></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #menuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -354,17 +376,19 @@ const drawer = (
 </ng-template>`,
         },
         webComponents: `<goa-workspace-layout style="height: 600px;">
-  <goa-work-side-menu slot="side-menu" heading="Workspace layout" url="/" open="true">
-    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  </goa-work-side-menu>
+  <nav slot="side-menu">
+    <goa-work-side-menu heading="Workspace layout" url="/" open="true">
+      <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    </goa-work-side-menu>
+  </nav>
 
   <div style="padding: 24px">
-    <goa-button id="wsl-open-drawer" type="primary" size="compact" version="2">Open</goa-button>
+    <goa-button id="wsl-open-drawer" type="primary" size="compact">Open</goa-button>
     <div id="wsl-drawer-body" style="margin-top: 16px"></div>
   </div>
 
-  <goa-push-drawer id="wsl-drawer" slot="push-drawer" heading="Case details" width="360px" version="2">
+  <goa-push-drawer id="wsl-drawer" slot="push-drawer" heading="Case details" width="360px">
     <div id="wsl-drawer-content" style="padding: 0 4px"></div>
   </goa-push-drawer>
 </goa-workspace-layout>
@@ -402,16 +426,18 @@ const drawer = (
 const rows = Array.from({ length: 20 }, (_, i) => i + 1);
 
 const sideMenu = (
-  <GoabWorkSideMenu
-    heading="Workspace layout"
-    url="/"
-    primaryContent={
-      <>
-        <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-        <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      </>
-    }
-  />
+  <nav>
+    <GoabWorkSideMenu
+      heading="Workspace layout"
+      url="/"
+      primaryContent={
+        <>
+          <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+          <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+        </>
+      }
+    />
+  </nav>
 );
 
 function PageHeader() {
@@ -467,7 +493,9 @@ export class SomeComponent {
 </ng-template>
 
 <ng-template #sideMenuTpl>
-  <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems"></goab-work-side-menu>
+  <nav>
+    <goab-work-side-menu heading="Workspace layout" url="/" [primaryContent]="menuItems"></goab-work-side-menu>
+  </nav>
 </ng-template>
 <ng-template #menuItems>
   <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
@@ -475,10 +503,12 @@ export class SomeComponent {
 </ng-template>`,
         },
         webComponents: `<goa-workspace-layout id="wsl-scroll" style="height: 600px;">
-  <goa-work-side-menu slot="side-menu" heading="Workspace layout" url="/" open="true">
-    <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
-    <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
-  </goa-work-side-menu>
+  <nav slot="side-menu">
+    <goa-work-side-menu heading="Workspace layout" url="/" open="true">
+      <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+      <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+    </goa-work-side-menu>
+  </nav>
 
   <div slot="page-header">
     <goa-text tag="h1" size="heading-m" mt="none" mb="none">My cases</goa-text>

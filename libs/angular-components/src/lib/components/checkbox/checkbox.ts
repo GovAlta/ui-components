@@ -27,7 +27,6 @@ import { GoabControlValueAccessor } from "../base.component";
   template: `@if (isReady) {
     <goa-checkbox
       #goaComponentRef
-      [attr.version]="version"
       [attr.name]="name"
       [checked]="checked"
       [disabled]="disabled"
@@ -76,7 +75,6 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
 
 
   ngOnInit(): void {
@@ -88,7 +86,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     }, 0);
   }
 
-  /** Sets the name of the checkbox input for form submission. */
+  /** Sets the name of the checkbox input for form submission. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Marks the checkbox item as selected. */
   @Input({ transform: booleanAttribute }) checked?: boolean;
@@ -99,7 +97,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   // ** NOTE: can we just use the base component for this?
   /** The value binding. */
   @Input() override value?: string | number | boolean | null;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. */
   @Input() ariaLabel?: string;
   /** Sets additional description content displayed below the checkbox label. Accepts plain text or a template. */
   @Input() description!: string | TemplateRef<any>;

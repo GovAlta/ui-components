@@ -21,7 +21,7 @@ declare module "react" {
 }
 
 export interface GoabDropdownItemProps {
-  /** @required The value submitted when this item is selected. */
+  /** @required The value submitted when this item is selected. Set to an empty string (`""`) to make this item the default selected value. */
   value: string;
   /** Display label for the dropdown item. */
   label?: string;

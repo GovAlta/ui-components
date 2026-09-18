@@ -11,7 +11,12 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { receive, dispatch, relay, watchFocusWithin } from "../../common/utils";
+  import {
+    receive,
+    dispatch,
+    relay,
+    watchFocusWithin,
+  } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
   import {
     FieldsetSetValueMsg,
@@ -36,13 +41,13 @@
   export let type: "calendar" | "input" = "calendar";
   /** Name of the date field. */
   export let name: string = "";
-  /** Value of the calendar date. */
+  /** Sets the calendar date as an ISO date string (yyyy-mm-dd). */
   export let value: string = "";
   /** Sets the input to an error state. */
   export let error: string = "false";
-  /** Minimum date value allowed. */
+  /** Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). */
   export let min: string = "";
-  /** Maximum date value allowed. */
+  /** Sets the latest allowed date as an ISO date string (yyyy-mm-dd). */
   export let max: string = "";
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
@@ -54,8 +59,6 @@
   export let width: string = "";
   /** Sets the size of the date picker. 'compact' reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -306,7 +309,6 @@
           on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
-          {version}
         />
         <goa-calendar
           {name}
@@ -315,7 +317,6 @@
           {max}
           bordered="false"
           on:_change={onCalendarChange}
-          {version}
         />
       </goa-popover>
     </div>
@@ -346,7 +347,6 @@
         on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
-        {version}
       />
       <goa-calendar
         {name}
@@ -355,14 +355,13 @@
         {max}
         bordered="false"
         on:_change={onCalendarChange}
-        {version}
       />
     </goa-popover>
   {/if}
 {:else if type === "input"}
-  <goa-form-item error={_error && error} bind:this={_rootEl} {version}>
+  <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
-      <goa-form-item helptext="Month" {version}>
+      <goa-form-item helptext="Month">
         <goa-dropdown
           name="month"
           testid="input-month"
@@ -373,7 +372,6 @@
           value={_date.month + ""}
           disabled={isDisabled}
           {size}
-          {version}
         >
           <goa-dropdown-item value="0" label="—Select a month—" />
           <goa-dropdown-item value="1" label="January" />
@@ -390,7 +388,7 @@
           <goa-dropdown-item value="12" label="December" />
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext="Day (DD)" {version}>
+      <goa-form-item helptext="Day (DD)">
         <goa-input
           name="day"
           type="number"
@@ -406,10 +404,9 @@
           {error}
           disabled={isDisabled}
           {size}
-          {version}
         />
       </goa-form-item>
-      <goa-form-item helptext="Year (YYYY)" {version}>
+      <goa-form-item helptext="Year (YYYY)">
         <goa-input
           name="year"
           type="number"
@@ -425,7 +422,6 @@
           {error}
           disabled={isDisabled}
           {size}
-          {version}
         />
       </goa-form-item>
     </goa-block>
@@ -438,5 +434,13 @@
     --goa-text-input-color-bg-readonly: var(--goa-text-input-color-bg);
     --goa-text-input-border-readonly: var(--goa-text-input-border);
     --goa-text-input-cursor-readonly: var(--goa-date-input-cursor);
+  }
+
+  .calendar-input:hover {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-hover);
+  }
+
+  .calendar-input:focus-within {
+    --goa-text-input-border-readonly: var(--goa-text-input-border-focus);
   }
 </style>

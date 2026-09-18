@@ -1,11 +1,9 @@
-import { render } from "@testing-library/svelte";
+import { render, waitFor } from "@testing-library/svelte";
 import GoAScrollPanelWrapper from "./ScrollPanelWrapper.test.svelte";
 import GoAScrollPanel from "./ScrollPanel.svelte";
 import { it, describe, expect, beforeAll, afterEach, vi } from "vitest";
 
-// The node test environment has no `CSS` global, so stub it. Tests drive the
-// branch via mockReturnValue; the real validation runs against the browser's
-// CSS.supports in the browser spec.
+// The node test environment has no `CSS` global, so stub it for sizing fallback.
 const cssSupports = vi.fn().mockReturnValue(true);
 
 beforeAll(() => {
@@ -57,31 +55,35 @@ describe("GoA ScrollPanel", () => {
     expect(el.getAttribute("role")).toBe("region");
   });
 
-  // Validation defers to CSS.supports (stubbed above); the real fallback
-  // behaviour is covered in the browser spec.
-  it("does not log an error when CSS.supports accepts the height", () => {
-    cssSupports.mockReturnValue(true);
-    const errorSpy = vi.spyOn(console, "error").mockReturnValue(undefined);
-    render(GoAScrollPanel, {
-      testid: "panel-valid-height",
-      height: "calc(100vh - 4rem)",
+  it("uses content-driven height when an internal maximum height is provided", async () => {
+    render(GoAScrollPanelWrapper, {
+      height: "100%",
+      maxheight: "20rem",
     });
-    expect(errorSpy).not.toHaveBeenCalledWith(
-      expect.stringContaining("not a valid CSS height"),
-    );
-    errorSpy.mockRestore();
+    const host = document.querySelector("goa-scroll-panel") as HTMLElement;
+
+    await waitFor(() => {
+      expect(host.style.height).toBe("auto");
+      expect(host.style.maxHeight).toBe("20rem");
+    });
   });
 
-  it("logs an error when CSS.supports rejects the height", () => {
+  it("logs invalid heights and falls back to 100%", async () => {
     cssSupports.mockReturnValue(false);
     const errorSpy = vi.spyOn(console, "error").mockReturnValue(undefined);
-    render(GoAScrollPanel, {
-      testid: "panel-invalid-height",
-      height: "not-a-dimension",
+
+    render(GoAScrollPanelWrapper, {
+      height: "not-a-valid-height",
     });
-    expect(errorSpy).toHaveBeenCalledWith(
-      expect.stringContaining("not a valid CSS height"),
-    );
+    const host = document.querySelector("goa-scroll-panel") as HTMLElement;
+
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalledWith(
+        'ScrollPanel: "not-a-valid-height" is not a valid CSS height. Falling back to "100%".',
+      );
+      expect(host.style.height).toBe("100%");
+    });
+
     errorSpy.mockRestore();
   });
 });

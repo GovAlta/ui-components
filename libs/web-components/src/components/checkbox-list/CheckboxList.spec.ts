@@ -19,13 +19,24 @@ describe("GoACheckboxList", () => {
   };
 
   describe("Rendering", () => {
+    it("accepts an arialabel property", () => {
+      const { queryByTestId } = render(CheckboxList, {
+        testid: "checkbox-list-label",
+        arialabel: "Contact preferences",
+      });
+      const checkboxList = queryByTestId("checkbox-list-label");
+
+      expect(checkboxList?.getAttribute("aria-label")).toBe(
+        "Contact preferences",
+      );
+    });
+
     it("should render checkbox list with default props", async () => {
       const { queryByTestId } = render(CheckboxList, defaultProps);
 
       const checkboxList = queryByTestId("checkbox-list");
       expect(checkboxList).toBeTruthy();
       expect(checkboxList?.getAttribute("role")).toBe("group");
-      expect(checkboxList?.getAttribute("aria-label")).toBe(defaultProps.name);
     });
 
     it("should apply max-width style", async () => {
@@ -134,6 +145,37 @@ describe("GoACheckboxList", () => {
 
       await waitFor(() => {
         expect(checkbox.getAttribute("disabled")).toBe("true");
+      });
+    });
+
+    it("should apply and clear errors on a child checkbox", async () => {
+      const result = render(CheckboxList, {
+        ...defaultProps,
+        error: "true",
+      });
+      const checkboxContainer = result.container.querySelector(".checkbox-container");
+      const checkbox = document.createElement("goa-checkbox");
+      const checkboxRoot = document.createElement("div");
+      checkbox.attachShadow({ mode: "open" }).appendChild(checkboxRoot);
+      checkboxContainer?.appendChild(checkbox);
+
+      await waitFor(() => {
+        relay<FormFieldMountRelayDetail>(
+          checkboxRoot,
+          FormFieldMountMsg,
+          { name: "option1", el: checkboxRoot },
+          { bubbles: true },
+        );
+        expect(checkbox.getAttribute("error")).toBe("true");
+      });
+
+      await result.rerender({
+        ...defaultProps,
+        error: "false",
+      });
+
+      await waitFor(() => {
+        expect(checkbox.hasAttribute("error")).toBe(false);
       });
     });
   });

@@ -158,11 +158,7 @@ interface WrapperExtraction {
   slotRequired: Record<string, boolean>;
 }
 
-const INTERNAL_PROP_NAMES = new Set([
-  "publicformsummaryorder",
-  "filterablecontext",
-  "version",
-]);
+const INTERNAL_PROP_NAMES = new Set(["publicformsummaryorder", "filterablecontext"]);
 const INTERNAL_SLOT_NAMES = new Set(["version"]);
 const INTERNAL_EVENT_NAMES = new Set(["_revealChange", "_update"]);
 
@@ -198,6 +194,25 @@ const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>>
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
   },
 };
+// Keep backward-compatible wrapper types in source while documenting only the
+// preferred public input types. Date picker still accepts Date values at runtime.
+const PROP_TYPE_OVERRIDES: Record<
+  string,
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+> = {
+  "date-picker": {
+    react: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+    angular: {
+      value: "string",
+      min: "string",
+      max: "string",
+    },
+  },
+};
 // Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
 // typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
 // consumers never bind a value to them, they nest the sub-component instead.
@@ -226,47 +241,8 @@ const SLOT_TYPE_OVERRIDES: Record<
     },
   },
 };
-const ALLOW_INTERNAL_PROP_BY_COMPONENT: Record<string, Set<string>> = {
-  "microsite-header": new Set(["version"]),
-};
-
-function shouldSkipInternalProp(componentName: string, propName: string): boolean {
-  const normalizedComponentName = toKebabCase(componentName);
-  const normalizedName = propName.toLowerCase();
-  if (ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(normalizedName)) {
-    return false;
-  }
-  return INTERNAL_PROP_NAMES.has(normalizedName);
-}
-
-function shouldAllowInternalProp(componentName: string, propName: string): boolean {
-  const normalizedComponentName = toKebabCase(componentName);
-  return Boolean(
-    ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(
-      propName.toLowerCase(),
-    ),
-  );
-}
-
-function isInternalPropName(propName: string): boolean {
+function shouldSkipInternalProp(propName: string): boolean {
   return INTERNAL_PROP_NAMES.has(propName.toLowerCase());
-}
-
-function isStandardV1V2VersionProp(prop: ExtractedProp | undefined): boolean {
-  if (!prop || prop.name.toLowerCase() !== "version") return false;
-
-  const values = (prop.values || []).map((value) =>
-    String(value).replace(/['"]/g, "").trim(),
-  );
-  if (values.length === 2 && values.includes("1") && values.includes("2")) {
-    return true;
-  }
-
-  const normalizedType = String(prop.type || "")
-    .replace(/['"]/g, "")
-    .replace(/\s+/g, "");
-
-  return normalizedType === "1|2";
 }
 
 function specializeAngularValuePropFromReact(
@@ -282,6 +258,24 @@ function specializeAngularValuePropFromReact(
 
   angularValueProp.type = reactValueProp.type;
   angularValueProp.values = reactValueProp.values;
+}
+
+function applyPropTypeOverrides(
+  componentName: string,
+  framework: "react" | "angular" | "webComponents",
+  props: ExtractedProp[],
+): void {
+  const overrides = PROP_TYPE_OVERRIDES[componentName]?.[framework];
+  if (!overrides) return;
+
+  for (const prop of props) {
+    const type = overrides[prop.name];
+    if (!type) continue;
+
+    prop.type = type;
+    delete prop.typeLabel;
+    delete prop.values;
+  }
 }
 
 // =============================================================================
@@ -512,11 +506,7 @@ function extractProps(
     // Skip private props (starting with _)
     if (rawName.startsWith("_")) continue;
 
-    // Keep `version` on Web Component docs; wrappers are filtered later.
-    if (
-      rawName.toLowerCase() !== "version" &&
-      shouldSkipInternalProp(componentName, rawName)
-    ) {
+    if (shouldSkipInternalProp(rawName)) {
       continue;
     }
 
@@ -600,12 +590,7 @@ function extractProps(
     // Get JSDoc info from map (description + required flag)
     const jsDocInfo = jsDocMap.get(rawName);
 
-    // Keep Svelte `version` visible in Web Component docs.
-    if (
-      jsDocInfo?.internal &&
-      rawName.toLowerCase() !== "version" &&
-      !shouldAllowInternalProp(componentName, rawName)
-    ) {
+    if (jsDocInfo?.internal) {
       continue;
     }
 
@@ -1415,15 +1400,14 @@ function extractReactWrapperApi(
     const { internal, deprecated } = parseJSDocContent(rawComment || "");
 
     // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName)))
-      continue;
+    if (deprecated || internal) continue;
 
     const fullDescription = parseDescriptionFromJSDoc(rawComment);
     const { description, defaultValue } = extractDefaultFromDescription(fullDescription);
     const isReadonly = isReadonlyDescription(description);
     const isRequired = !optional && !isReadonly;
 
-    if (shouldSkipInternalProp(componentName, propName)) continue;
+    if (shouldSkipInternalProp(propName)) continue;
 
     const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
@@ -1560,10 +1544,9 @@ function extractAngularWrapperApi(
     const required = !isReadonly && isAngularInputRequired(inputDecorator);
 
     // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName)))
-      continue;
+    if (deprecated || internal) continue;
 
-    if (shouldSkipInternalProp(componentName, propName)) continue;
+    if (shouldSkipInternalProp(propName)) continue;
 
     const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
@@ -2681,25 +2664,14 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
 
-  const webComponentVersionProp = webComponentProps.find(
-    (prop) => prop.name.toLowerCase() === "version",
-  );
-  const hideVersionOutsideWeb = isStandardV1V2VersionProp(webComponentVersionProp);
+  applyPropTypeOverrides(componentName, "react", reactProps);
+  applyPropTypeOverrides(componentName, "angular", angularProps);
+  applyPropTypeOverrides(componentName, "webComponents", webComponentProps);
 
-  reactProps = reactProps.filter(
-    (prop) =>
-      !shouldSkipInternalProp(componentName, prop.name) &&
-      !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
-  );
-  angularProps = angularProps.filter(
-    (prop) =>
-      !shouldSkipInternalProp(componentName, prop.name) &&
-      !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
-  );
+  reactProps = reactProps.filter((prop) => !shouldSkipInternalProp(prop.name));
+  angularProps = angularProps.filter((prop) => !shouldSkipInternalProp(prop.name));
   webComponentProps = webComponentProps.filter(
-    (prop) =>
-      prop.name.toLowerCase() === "version" ||
-      !shouldSkipInternalProp(componentName, prop.name),
+    (prop) => !shouldSkipInternalProp(prop.name),
   );
 
   reactProps = dedupeByName(reactProps).sort((a, b) => a.name.localeCompare(b.name));

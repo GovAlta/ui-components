@@ -16,8 +16,8 @@ export interface ComponentRecord extends BaseRecord {
   aliases: string[];
   relatedComponents: string[];
   figmaUrl?: string;
-  hidden?: boolean;
   subcomponent?: boolean;
+  internal?: boolean;
   webComponentTag?: string;
   reactClassName?: string;
   angularSelector?: string;
@@ -43,7 +43,6 @@ export interface ExampleRecord extends BaseRecord {
   previewImage?: string;
   figmaUrl?: string;
   accessibilityNotes?: string;
-  hidden?: boolean;
   // Page-like fields (page, task, product sizes only)
   previewUrl?: string;
   reactSourceUrl?: string;

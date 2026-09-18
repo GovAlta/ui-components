@@ -1,0 +1,133 @@
+<goab-text tag="h1" mt="m">Bug #3002: Fix how FormItem detects errors</goab-text>
+
+<goab-link trailingIcon="open">
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/3002"
+    target="_blank"
+    rel="noreferrer"
+  >
+    View on GitHub
+  </a>
+</goab-link>
+
+<goab-text mt="m">
+  These four scenarios cover every combination of the FormItem error message and the
+  nested control error state. Inspect each control's aria-invalid and aria-describedby
+  attributes as well as the visible message and error styling.
+</goab-text>
+
+@for (scenario of scenarios; track scenario.id) {
+  <section>
+    <goab-text tag="h2" mt="l" mb="xs">{{ scenario.heading }}</goab-text>
+    <goab-text mb="m">{{ scenario.description }}</goab-text>
+
+    <goab-form-item
+      label="Input"
+      [error]="errorMessage(scenario)"
+      helpText="Input helper text"
+      mb="l"
+    >
+      <goab-input
+        [name]="controlName(scenario, 'input')"
+        [error]="scenario.controlError"
+      ></goab-input>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Textarea"
+      [error]="errorMessage(scenario)"
+      helpText="Textarea helper text"
+      mb="l"
+    >
+      <goab-textarea
+        [name]="controlName(scenario, 'textarea')"
+        [error]="scenario.controlError"
+      ></goab-textarea>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Dropdown"
+      [error]="errorMessage(scenario)"
+      helpText="Dropdown helper text"
+      mb="l"
+    >
+      <goab-dropdown
+        [name]="controlName(scenario, 'dropdown')"
+        [error]="scenario.controlError"
+      >
+        <goab-dropdown-item value="one" label="Option one"></goab-dropdown-item>
+        <goab-dropdown-item value="two" label="Option two"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Checkbox"
+      [error]="errorMessage(scenario)"
+      helpText="Checkbox helper text"
+      mb="l"
+    >
+      <goab-checkbox
+        [name]="controlName(scenario, 'checkbox')"
+        text="Confirm this option"
+        [error]="scenario.controlError"
+      ></goab-checkbox>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Radio group"
+      type="radio-group"
+      [error]="errorMessage(scenario)"
+      helpText="Radio group helper text"
+      mb="l"
+    >
+      <goab-radio-group
+        [name]="controlName(scenario, 'radio-group')"
+        [error]="scenario.controlError"
+      >
+        <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+        <goab-radio-item value="no" label="No"></goab-radio-item>
+      </goab-radio-group>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Checkbox list"
+      type="checkbox-list"
+      [error]="errorMessage(scenario)"
+      helpText="Checkbox list helper text"
+      mb="l"
+    >
+      <goab-checkbox-list
+        [name]="controlName(scenario, 'checkbox-list')"
+        [value]="emptyValues"
+        [error]="scenario.controlError"
+      >
+        <goab-checkbox
+          [name]="controlName(scenario, 'checkbox-list-one')"
+          value="one"
+          text="Option one"
+        ></goab-checkbox>
+        <goab-checkbox
+          [name]="controlName(scenario, 'checkbox-list-two')"
+          value="two"
+          text="Option two"
+        ></goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+
+    <goab-form-item
+      label="Dropdown multiselect"
+      [error]="errorMessage(scenario)"
+      helpText="Dropdown multiselect helper text"
+    >
+      <goab-dropdown-multiselect
+        [name]="controlName(scenario, 'dropdown-multiselect')"
+        [error]="scenario.controlError"
+      >
+        <goab-dropdown-item value="one" label="Option one"></goab-dropdown-item>
+        <goab-dropdown-item value="two" label="Option two"></goab-dropdown-item>
+      </goab-dropdown-multiselect>
+    </goab-form-item>
+
+    <goab-divider mt="xl"></goab-divider>
+  </section>
+}

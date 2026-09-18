@@ -13,7 +13,14 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { dispatch, receive, relay, toBoolean, watchFocusWithin } from "../../common/utils";
+  import {
+    dispatch,
+    generateRandomId,
+    receive,
+    relay,
+    toBoolean,
+    watchFocusWithin,
+  } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -25,8 +32,8 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
-  /** The name for the checkbox list group. Used as group identifier in change events. */
-  export let name: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
 
   /** Array of currently selected checkbox values. */
   export let value: string[] = [];
@@ -38,10 +45,10 @@
   export let testid: string = "";
   /** Sets the maximum width of the checkbox list container. */
   export let maxwidth: string = "none";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. */
   export let size: "default" | "compact" = "default";
+  /** Defines how the input will be translated for the screen reader. */
+  export let arialabel: string = "";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -102,7 +109,7 @@
 
   /**
    * Synchronize component when external props change.
-   * - Emits error change events and propagates to children
+   * - Propagates error changes to children
    * - Syncs checkbox values after initialization
    */
   function updateState(newValue: string[], newError: string) {
@@ -114,15 +121,7 @@
     // Handle error state changes
     const currentError = toBoolean(newError);
     if (currentError !== _error) {
-      _rootEl?.dispatchEvent(
-        new CustomEvent("error::change", {
-          detail: { isError: currentError },
-          bubbles: true,
-          composed: true,
-        }),
-      );
       _error = currentError;
-      updateChildCheckboxesError();
     }
 
     // Sync Set when value changes externally (not from internal changes)
@@ -416,20 +415,13 @@
       } else {
         containerElement.removeAttribute("disabled");
       }
-    }
-  }
 
-  /** Propagate error state to all children via the relay bus. */
-  function updateChildCheckboxesError() {
-    for (const rec of _childRecords) {
       if (_error) {
-        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+        containerElement.setAttribute("error", "true");
       } else {
-        relay(rec.el, FieldsetResetErrorsMsg);
+        containerElement.removeAttribute("error");
       }
     }
-
-    updateSlottedCheckboxesState();
   }
 
   // Announce help text for screen readers when the group receives focus.
@@ -452,14 +444,13 @@
     max-width: ${maxwidth};
   `}
   role="group"
-  aria-label={name}
+  aria-label={arialabel}
   data-testid={testid}
   on:focus={onFocus}
 >
   <div
     bind:this={_slotEl}
     class="checkbox-container"
-    class:v2={version === "2"}
     class:compact={size === "compact"}
   >
     <slot />
@@ -482,14 +473,10 @@
   .checkbox-container {
     display: flex;
     flex-direction: column;
-    gap: 0;
-  }
-
-  .checkbox-container.v2 {
     gap: var(--goa-space-m);
   }
 
-  .checkbox-container.v2.compact {
+  .checkbox-container.compact {
     gap: var(--goa-space-s);
   }
 </style>

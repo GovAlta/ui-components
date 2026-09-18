@@ -82,7 +82,6 @@
           testid="action"
           type="tertiary"
           size="compact"
-          version="2"
           variant="inverse"
           on:_click={handleActionClick}
         >
@@ -99,10 +98,7 @@
       aria-label={message}
     />
   {:else if type === "indeterminate"}
-    <goa-linear-progress
-      percent-visibility="hidden"
-      aria-label={message}
-    />
+    <goa-linear-progress percent-visibility="hidden" aria-label={message} />
   {/if}
 </div>
 
@@ -110,19 +106,16 @@
   .snackbar {
     position: relative;
     box-sizing: border-box;
-    border-radius: var(
-      --goa-temporary-notification-borderRadius,
-      var(--goa-border-radius-l)
-    );
-    max-width: var(--goa-temporary-notification-max-width, 640px);
+    border-radius: var(--goa-temporary-notification-border-radius);
+    max-width: var(--goa-temporary-notification-max-width);
     min-height: 3.75rem;
     /* TODO: replace with token once shadow values are finalized */
     box-shadow:
       0px 0px 2px 0px rgba(0, 0, 0, 0.3),
       0px 16px 32px -8px rgba(0, 0, 0, 0.35);
     transition:
-      transform var(--goa-temporary-notification-transition-duration, 0.3s) ease,
-      opacity var(--goa-temporary-notification-transition-duration, 0.3s) ease;
+      transform var(--goa-temporary-notification-transition-duration) ease,
+      opacity var(--goa-temporary-notification-transition-duration) ease;
   }
 
   .snackbar:has(.action) {
@@ -135,7 +128,7 @@
 
   @media (--not-mobile) {
     .snackbar {
-      min-width: var(--goa-temporary-notification-min-width-desktop, 360px);
+      min-width: var(--goa-temporary-notification-min-width-desktop);
     }
   }
 
@@ -163,13 +156,11 @@
   }
   .hide.animate-up {
     transform: translateY(
-      calc(-1 * var(--goa-temporary-notification-animation-distance, 100px))
+      calc(-1 * var(--goa-temporary-notification-animation-distance))
     );
   }
   .hide.animate-down {
-    transform: translateY(
-      var(--goa-temporary-notification-animation-distance, 100px)
-    );
+    transform: translateY(var(--goa-temporary-notification-animation-distance));
   }
 
   /** State **/
@@ -177,22 +168,13 @@
   .basic,
   .indeterminate,
   .progress {
-    background: var(
-      --goa-temporary-notification-color-bg-basic,
-      var(--goa-color-greyscale-black)
-    );
+    background: var(--goa-temporary-notification-color-bg-basic);
   }
   .success {
-    background: var(
-      --goa-temporary-notification-color-bg-success,
-      var(--goa-color-success-default)
-    );
+    background: var(--goa-temporary-notification-color-bg-success);
   }
   .failure {
-    background: var(
-      --goa-temporary-notification-color-bg-failure,
-      var(--goa-color-emergency-default)
-    );
+    background: var(--goa-temporary-notification-color-bg-failure);
   }
 
   /** Details **/
@@ -201,18 +183,9 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: var(
-      --goa-temporary-notification-row-gap,
-      var(--goa-space-m)
-    );
-    padding: var(
-      --goa-temporary-notification-padding,
-      var(--goa-space-m) var(--goa-space-l)
-    );
-    color: var(
-      --goa-temporary-notification-color-text,
-      var(--goa-color-text-light)
-    );
+    gap: var(--goa-temporary-notification-row-gap);
+    padding: var(--goa-temporary-notification-padding);
+    color: var(--goa-temporary-notification-color-text);
     overflow: hidden;
   }
 
@@ -223,19 +196,13 @@
 
   .message {
     flex: 1 1 auto;
-    font: var(
-      --goa-temporary-notification-typography,
-      var(--goa-typography-body-m)
-    );
+    font: var(--goa-temporary-notification-typography);
     line-height: var(--goa-line-height-3);
   }
 
   /* Add top margin to message when icon is present to vertically center first line with icon */
   .content:has(goa-icon) .message {
-    margin-top: var(
-      --goa-temporary-notification-padding-text-top,
-      var(--goa-space-2xs)
-    );
+    margin-top: var(--goa-temporary-notification-padding-text-top);
   }
 
   /* Override goa-linear-progress tokens so the bar reads against the dark snackbar */

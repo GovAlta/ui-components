@@ -38,8 +38,8 @@ export class GoabHeroBanner implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  /** Main heading text. */
-  @Input() heading?: string;
+  /** @required Main heading text. */
+  @Input({ required: true }) heading!: string;
   /** Background image url. */
   @Input() backgroundUrl?: string;
   /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */

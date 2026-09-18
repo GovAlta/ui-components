@@ -1,23 +1,17 @@
 import { render } from "@testing-library/react";
 import { GoabButtonGroup } from "./button-group";
-import { GoabButtonGroupAlignment } from "@abgov/ui-components-common";
 
 describe("GoabButtonGroup", () => {
-  it("should render", () => {
-    const { container } = render(
-      <GoabButtonGroup alignment={"start" as GoabButtonGroupAlignment}></GoabButtonGroup>,
-    );
+  it("should default alignment to start", () => {
+    const { container } = render(<GoabButtonGroup />);
 
     const el = container.querySelector("goa-button-group");
-    expect(el).toBeTruthy();
+    expect(el?.getAttribute("alignment")).toBe("start");
   });
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabButtonGroup
-        alignment={"start" as GoabButtonGroupAlignment}
-        data-grid="row"
-      >
+      <GoabButtonGroup data-grid="row">
         Content
       </GoabButtonGroup>,
     );

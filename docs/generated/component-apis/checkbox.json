@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text."
         },
         {
           "name": "checked",
@@ -95,9 +95,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Unique name to identify the checkbox."
+          "description": "Unique name to identify the checkbox. If omitted, a unique name is generated."
         },
         {
           "name": "revealAriaLabel",
@@ -188,7 +188,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text."
         },
         {
           "name": "checked",
@@ -276,7 +276,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Sets the name of the checkbox input for form submission."
+          "description": "Sets the name of the checkbox input for form submission. If omitted, a unique name is generated."
         },
         {
           "name": "revealArialLabel",
@@ -367,7 +367,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text."
         },
         {
           "name": "checked",
@@ -446,9 +446,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Unique name to identify the checkbox."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Unique name to identify the checkbox. If omitted, a unique name is generated."
         },
         {
           "name": "revealarialabel",
@@ -488,17 +488,6 @@
           "required": false,
           "default": "",
           "description": "The value binding."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

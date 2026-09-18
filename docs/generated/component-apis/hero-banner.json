@@ -83,7 +83,7 @@
         {
           "name": "heading",
           "type": "string",
-          "required": false,
+          "required": true,
           "default": null,
           "description": "Main heading text."
         },
@@ -138,7 +138,7 @@
         {
           "name": "backgroundurl",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
           "description": "Background image url"
         },
@@ -159,7 +159,7 @@
         {
           "name": "minheight",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
           "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
         },

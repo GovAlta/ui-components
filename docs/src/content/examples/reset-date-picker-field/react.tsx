@@ -7,16 +7,10 @@ import {
 } from "@abgov/react-components";
 
 export function ResetDatePickerField() {
-  const [date, setDate] = useState<Date | undefined>();
-
-  const setNewDate = (value: Date | undefined) => {
-    setDate(value);
-  };
+  const [date, setDate] = useState<string | undefined>();
 
   function setValue() {
-    const d = new Date();
-    d.setDate(d.getDate() - 7);
-    setDate(d);
+    setDate("2024-01-15");
   }
 
   function clearValue() {
@@ -29,7 +23,7 @@ export function ResetDatePickerField() {
         <GoabDatePicker
           name="item"
           value={date}
-          onChange={(e) => setNewDate(e.value as Date)}
+          onChange={(e) => setDate(e.valueStr || undefined)}
           mb="xl"
         />
       </GoabFormItem>

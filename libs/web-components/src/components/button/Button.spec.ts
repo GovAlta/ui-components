@@ -131,4 +131,42 @@ describe("GoAButtonComponent", () => {
       });
     });
   });
+
+  describe("width", () => {
+    it("should set the width custom property when width is provided", async () => {
+      const result = render(GoAButton, {
+        testid: "button-test",
+        width: "12rem",
+      });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.style.getPropertyValue("--width")).toBe("12rem");
+    });
+
+    it("should not set the width custom property by default", async () => {
+      const result = render(GoAButton, { testid: "button-test" });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.style.getPropertyValue("--width")).toBe("");
+    });
+  });
+
+  describe("aria label", () => {
+    it("should set aria-label when arialabel is provided", async () => {
+      const result = render(GoAButton, {
+        testid: "button-test",
+        arialabel: "Remove Jane Smith",
+      });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.getAttribute("aria-label")).toBe("Remove Jane Smith");
+    });
+
+    it("should not set aria-label when arialabel is not provided", async () => {
+      const result = render(GoAButton, { testid: "button-test" });
+      const button = await result.findByTestId("button-test");
+
+      expect(button.hasAttribute("aria-label")).toBe(false);
+    });
+  });
 });

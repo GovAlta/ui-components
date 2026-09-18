@@ -134,6 +134,40 @@ describe("Checkbox", () => {
     });
   });
 
+  it.each([false, true])(
+    "should leave a gap between the focus ring and an error checkbox when checked is %s",
+    async (checked) => {
+      const result = render(
+        <GoabCheckbox
+          testId="error-checkbox"
+          name="error"
+          text="Error checkbox"
+          error={true}
+          checked={checked}
+        />,
+      );
+      const checkbox = result.getByTestId("error-checkbox");
+
+      await vi.waitFor(() => {
+        expect(checkbox.element()).toBeTruthy();
+      });
+
+      const container = checkbox.element().querySelector(".container") as HTMLElement;
+      const input = checkbox.element().querySelector("input") as HTMLInputElement;
+
+      await userEvent.tab();
+
+      await vi.waitFor(() => {
+        const styles = window.getComputedStyle(container);
+
+        expect(input.matches(":focus-visible")).toBe(true);
+        expect(styles.outlineStyle).toBe("solid");
+        expect(parseFloat(styles.outlineOffset)).toBeGreaterThan(0);
+        expect(styles.boxShadow).toBe("none");
+      });
+    },
+  );
+
   it("passes the browser event in change detail", async () => {
     const handleChange = vi.fn();
     const result = render(

@@ -19,13 +19,13 @@ export class DocsDatePickerComponent {
   private fb = inject(FormBuilder);
 
   basicForm = new FormGroup({
-    date: new FormControl<Date | null>(null),
+    date: new FormControl<string | null>(null),
   });
 
-  ngModelDate: Date | undefined;
+  ngModelDate: string | undefined;
 
   withValueForm: FormGroup = this.fb.group({
-    startDate: [new Date("2024-01-15")],
+    startDate: ["2024-01-15"],
   });
   rangeForm: FormGroup = this.fb.group({
     appointment: [null],
@@ -35,30 +35,28 @@ export class DocsDatePickerComponent {
     birthday: [null],
   });
   statesForm: FormGroup = this.fb.group({
-    locked: [{ value: new Date("2024-01-01"), disabled: true }],
+    locked: [{ value: "2024-01-01", disabled: true }],
     errorDate: [null],
   });
 
   // Examples
-  exampleBirthday: Date | undefined;
-  resetItem: Date | undefined;
+  exampleBirthday: string | undefined;
+  resetItem: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail): void {
-    this.ngModelDate = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.ngModelDate = event.valueStr || undefined;
   }
 
   onBirthdayChange(event: GoabDatePickerOnChangeDetail): void {
-    this.exampleBirthday = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.exampleBirthday = event.valueStr || undefined;
   }
 
   onResetChange(event: GoabDatePickerOnChangeDetail): void {
-    this.resetItem = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.resetItem = event.valueStr || undefined;
   }
 
   setResetValue(): void {
-    const d = new Date();
-    d.setDate(d.getDate() - 7);
-    this.resetItem = d;
+    this.resetItem = "2024-01-15";
   }
 
   clearResetValue(): void {

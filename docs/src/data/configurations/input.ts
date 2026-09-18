@@ -66,8 +66,8 @@ export const inputConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Full name" mb="l">
-  <goa-input version="2" name="fullName"></goa-input>
+        webComponents: `<goa-form-item label="Full name" mb="l">
+  <goa-input name="fullName"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -169,11 +169,11 @@ const [website, setWebsite] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Search" mb="l">
-  <goa-input version="2" name="search" leadingicon="search" width="30ch"></goa-input>
+        webComponents: `<goa-form-item label="Search" mb="l">
+  <goa-input name="search" leadingicon="search" width="30ch"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Website" mb="l">
-  <goa-input version="2" name="website" trailingicon="open" width="30ch"></goa-input>
+<goa-form-item label="Website" mb="l">
+  <goa-input name="website" trailingicon="open" width="30ch"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -248,8 +248,8 @@ const [website, setWebsite] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Search" mb="l">
-  <goa-input version="2"
+        webComponents: `<goa-form-item label="Search" mb="l">
+  <goa-input
     id="clearable-input"
     name="search"
     trailingicon="close"
@@ -351,21 +351,21 @@ const [sin, setSin] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Postal code" mb="l">
-  <goa-input version="2" name="postalCode" width="7ch"></goa-input>
+        webComponents: `<goa-form-item label="Postal code" mb="l">
+  <goa-input name="postalCode" width="7ch"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Year" mb="l">
-  <goa-input version="2" name="year" width="4ch"></goa-input>
+<goa-form-item label="Year" mb="l">
+  <goa-input name="year" width="4ch"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="SIN" mb="l">
-  <goa-input version="2" name="sin" width="11ch"></goa-input>
+<goa-form-item label="SIN" mb="l">
+  <goa-input name="sin" width="11ch"></goa-input>
 </goa-form-item>`,
       },
     },
     {
       id: "leading-trailing-content",
       name: "With leading or trailing content",
-      description: "Inputs with text content before or after the input field",
+      description: "Inputs with text or slotted content before or after the input field",
       code: {
         react: {
           ts: `const [price, setPrice] = useState<string>("");
@@ -386,6 +386,26 @@ const [weight, setWeight] = useState<string>("");`,
     type="number"
     width="10ch"
     trailingContent="kg"
+    value={weight}
+    onChange={(detail) => setWeight(detail.value)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Price with rich leading content" mb="l">
+  <GoabInput
+    name="priceWithSlot"
+    type="number"
+    width="10ch"
+    leadingContent={<strong>CAD</strong>}
+    value={price}
+    onChange={(detail) => setPrice(detail.value)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Weight with rich trailing content" mb="l">
+  <GoabInput
+    name="weightWithSlot"
+    type="number"
+    width="10ch"
+    trailingContent={<abbr title="pounds">lb</abbr>}
     value={weight}
     onChange={(detail) => setWeight(detail.value)}
   />
@@ -422,6 +442,26 @@ const [weight, setWeight] = useState<string>("");`,
       formControlName="weight"
     ></goab-input>
   </goab-form-item>
+  <ng-template #leadingContent><strong>CAD</strong></ng-template>
+  <goab-form-item label="Price with rich leading content" mb="l">
+    <goab-input
+      name="priceWithSlot"
+      type="number"
+      width="10ch"
+      [leadingContent]="leadingContent"
+      formControlName="price"
+    ></goab-input>
+  </goab-form-item>
+  <ng-template #trailingContent><abbr title="pounds">lb</abbr></ng-template>
+  <goab-form-item label="Weight with rich trailing content" mb="l">
+    <goab-input
+      name="weightWithSlot"
+      type="number"
+      width="10ch"
+      [trailingContent]="trailingContent"
+      formControlName="weight"
+    ></goab-input>
+  </goab-form-item>
 </form>`,
           },
           {
@@ -449,17 +489,47 @@ const [weight, setWeight] = useState<string>("");`,
       [(ngModel)]="weight"
     ></goab-input>
   </goab-form-item>
+  <ng-template #leadingContent><strong>CAD</strong></ng-template>
+  <goab-form-item label="Price with rich leading content" mb="l">
+    <goab-input
+      name="priceWithSlot"
+      type="number"
+      width="10ch"
+      [leadingContent]="leadingContent"
+      [(ngModel)]="price"
+    ></goab-input>
+  </goab-form-item>
+  <ng-template #trailingContent><abbr title="pounds">lb</abbr></ng-template>
+  <goab-form-item label="Weight with rich trailing content" mb="l">
+    <goab-input
+      name="weightWithSlot"
+      type="number"
+      width="10ch"
+      [trailingContent]="trailingContent"
+      [(ngModel)]="weight"
+    ></goab-input>
+  </goab-form-item>
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Price" mb="l">
-  <goa-input version="2" name="price" type="number" width="10ch">
+        webComponents: `<goa-form-item label="Price" mb="l">
+  <goa-input name="price" type="number" width="10ch">
     <div slot="leadingContent">$</div>
   </goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Weight" mb="l">
-  <goa-input version="2" name="weight" type="number" width="10ch">
+<goa-form-item label="Weight" mb="l">
+  <goa-input name="weight" type="number" width="10ch">
     <div slot="trailingContent">kg</div>
+  </goa-input>
+</goa-form-item>
+<goa-form-item label="Price with rich leading content" mb="l">
+  <goa-input name="priceWithSlot" type="number" width="10ch">
+    <div slot="leadingContent"><strong>CAD</strong></div>
+  </goa-input>
+</goa-form-item>
+<goa-form-item label="Weight with rich trailing content" mb="l">
+  <goa-input name="weightWithSlot" type="number" width="10ch">
+    <div slot="trailingContent"><abbr title="pounds">lb</abbr></div>
   </goa-input>
 </goa-form-item>`,
       },
@@ -533,11 +603,11 @@ const [sizeCompact, setSizeCompact] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-  <goa-input version="2" name="sizeDefault"></goa-input>
+        webComponents: `<goa-form-item label="Default size" mb="l">
+  <goa-input name="sizeDefault"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-  <goa-input version="2" name="sizeCompact" size="compact"></goa-input>
+<goa-form-item label="Compact size" labelsize="compact" mb="l">
+  <goa-input name="sizeCompact" size="compact"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -605,8 +675,8 @@ const [sizeCompact, setSizeCompact] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Amount" mb="l">
-  <goa-input version="2" name="amount" type="number" textalign="right" width="10ch">
+        webComponents: `<goa-form-item label="Amount" mb="l">
+  <goa-input name="amount" type="number" textalign="right" width="10ch">
     <div slot="trailingContent">CAD</div>
   </goa-input>
 </goa-form-item>`,
@@ -709,14 +779,14 @@ const [errorValue, setErrorValue] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Disabled input" mb="l">
-  <goa-input version="2" name="disabled" disabled value="Cannot edit"></goa-input>
+        webComponents: `<goa-form-item label="Disabled input" mb="l">
+  <goa-input name="disabled" disabled value="Cannot edit"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Read-only input" mb="l">
-  <goa-input version="2" name="readonly" readonly value="View only"></goa-input>
+<goa-form-item label="Read-only input" mb="l">
+  <goa-input name="readonly" readonly value="View only"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Input with error" error="This field is required" mb="l">
-  <goa-input version="2" name="error" error></goa-input>
+<goa-form-item label="Input with error" error="This field is required" mb="l">
+  <goa-input name="error" error></goa-input>
 </goa-form-item>`,
       },
     },
@@ -835,17 +905,17 @@ const [age, setAge] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Email address" mb="l">
-  <goa-input version="2" name="email" type="email"></goa-input>
+        webComponents: `<goa-form-item label="Email address" mb="l">
+  <goa-input name="email" type="email"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Password" mb="l">
-  <goa-input version="2" name="password" type="password"></goa-input>
+<goa-form-item label="Password" mb="l">
+  <goa-input name="password" type="password"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Date of birth" mb="l">
-  <goa-input version="2" name="dob" type="date"></goa-input>
+<goa-form-item label="Date of birth" mb="l">
+  <goa-input name="dob" type="date"></goa-input>
 </goa-form-item>
-<goa-form-item version="2" label="Age" mb="l">
-  <goa-input version="2" name="age" type="number" width="3ch"></goa-input>
+<goa-form-item label="Age" mb="l">
+  <goa-input name="age" type="number" width="3ch"></goa-input>
 </goa-form-item>`,
       },
     },

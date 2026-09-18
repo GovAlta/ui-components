@@ -21,7 +21,6 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -41,13 +40,13 @@ export interface GoabDatePickerProps extends Margins, DataAttributes {
   type?: GoabDatePickerInputType;
   /** Name of the date field. */
   name?: string;
-  /** Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd). */
+  /** Sets the calendar date as an ISO date string (yyyy-mm-dd). */
   value?: Date | string | undefined;
   /** Sets the input to an error state. */
   error?: boolean;
-  /** Minimum date value allowed. */
+  /** Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). */
   min?: Date | string;
-  /** Maximum date value allowed. */
+  /** Sets the latest allowed date as an ISO date string (yyyy-mm-dd). */
   max?: Date | string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
@@ -143,7 +142,6 @@ export function GoabDatePicker({
       min={formatValue(min) || undefined}
       max={formatValue(max) || undefined}
       relative={relative ? "true" : undefined}
-      version="2"
       {..._props}
     />
   );

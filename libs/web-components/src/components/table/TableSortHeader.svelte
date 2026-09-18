@@ -21,8 +21,6 @@
   export let name: string = "";
   /** Sets the sort direction indicator. */
   export let direction: GoATableSortDirection = "none";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sort order number for multi-column sort display ("1", "2", etc). */
   export let sortOrder: GoATableSortOrder = 0;
 
@@ -44,11 +42,7 @@
   });
 </script>
 
-<button
-  bind:this={_rootEl}
-  class:sorted={direction !== "none"}
-  class:v2={version === "2"}
->
+<button bind:this={_rootEl} class:sorted={direction !== "none"}>
   <span class="content">
     <slot />
     <span class="icon-wrapper">
@@ -82,10 +76,7 @@
     line-height: inherit;
     height: inherit;
     width: 100%;
-    padding: var(
-      --goa-table-padding-heading,
-      var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs)
-    );
+    padding: var(--goa-table-padding-heading);
     justify-content: var(--header-text-align, flex-start);
     align-items: flex-end;
     text-align: var(--header-align, left);
@@ -97,17 +88,14 @@
   .content {
     display: inline-flex;
     align-items: flex-end;
-    gap: var(--goa-table-sort-header-gap, var(--goa-space-2xs));
+    gap: var(--goa-table-sort-header-gap);
     padding: var(--goa-space-3xs);
     border-radius: var(--goa-border-radius-m);
   }
 
   /* Hover state - no background change, only text color */
   button:hover {
-    color: var(
-      --goa-table-color-heading-hover,
-      var(--goa-color-interactive-hover)
-    );
+    color: var(--goa-table-color-heading-hover);
   }
 
   button:focus {
@@ -145,8 +133,8 @@
     color: var(--goa-color-interactive-hover);
   }
 
-  /* V2: Icon color on focus for unsorted state */
-  button.v2:not(.sorted):focus-visible goa-icon {
+  /* Icon color on focus for unsorted state */
+  button:not(.sorted):focus-visible goa-icon {
     color: var(--goa-color-interactive-hover);
   }
 

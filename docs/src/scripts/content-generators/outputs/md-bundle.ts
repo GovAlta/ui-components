@@ -251,6 +251,7 @@ export function renderComponent(
     ["tags", c.tags],
   ];
   if (c.subcomponent) fm.push(["subcomponent", true]);
+  if (c.internal) fm.push(["internal", true]);
   if (identifier) fm.push([target.frontmatterKey, identifier]);
   if (c.figmaUrl) fm.push(["figma", c.figmaUrl]);
 
@@ -955,6 +956,7 @@ function renderIndex(
       .map((c) => {
         const marks: string[] = [];
         if (c.subcomponent) marks.push("subcomponent");
+        if (c.internal) marks.push("internal");
         if (c.status === "deprecated") marks.push("deprecated");
         const tag = marks.length ? ` (${marks.join(", ")})` : "";
         const desc = c.description ? ` — ${c.description}` : "";

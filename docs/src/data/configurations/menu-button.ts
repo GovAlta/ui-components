@@ -34,7 +34,7 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <goab-menu-action text="Delete" action="delete"></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="basic-menu-button" version="2" text="Actions">
+        webComponents: `<goa-menu-button id="basic-menu-button" text="Actions">
   <goa-menu-action text="Edit" action="edit"></goa-menu-action>
   <goa-menu-action text="Copy" action="copy"></goa-menu-action>
   <goa-menu-action text="Delete" action="delete"></goa-menu-action>
@@ -96,15 +96,15 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="primary-menu-button" version="2" text="Primary" type="primary">
+        webComponents: `<goa-menu-button id="primary-menu-button" text="Primary" type="primary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button id="secondary-menu-button" version="2" text="Secondary" type="secondary">
+<goa-menu-button id="secondary-menu-button" text="Secondary" type="secondary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button id="tertiary-menu-button" version="2" text="Tertiary" type="tertiary">
+<goa-menu-button id="tertiary-menu-button" text="Tertiary" type="tertiary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
@@ -152,7 +152,7 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   ></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="icon-only-menu-button" version="2"
+        webComponents: `<goa-menu-button id="icon-only-menu-button"
   leadingicon="ellipsis-horizontal"
   arialabel="More options"
 >
@@ -195,7 +195,7 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <goab-menu-action text="Print" action="print" icon="print"></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="options-menu-button" version="2" text="Options">
+        webComponents: `<goa-menu-button id="options-menu-button" text="Options">
   <goa-menu-action text="Download" action="download" icon="download"></goa-menu-action>
   <goa-menu-action text="Share" action="share" icon="share"></goa-menu-action>
   <goa-menu-action text="Print" action="print" icon="print"></goa-menu-action>
@@ -241,11 +241,11 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="normal-menu-button" version="2" text="Normal" size="normal">
+        webComponents: `<goa-menu-button id="normal-menu-button" text="Normal" size="normal">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button id="compact-menu-button" version="2" text="Compact" size="compact">
+<goa-menu-button id="compact-menu-button" text="Compact" size="compact">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
@@ -332,15 +332,15 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   ></goab-menu-action>
 </goab-menu-button>`,
         },
-        webComponents: `<goa-menu-button id="destructive-primary-menu-button" version="2" text="Primary" variant="destructive">
+        webComponents: `<goa-menu-button id="destructive-primary-menu-button" text="Primary" variant="destructive">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button id="destructive-secondary-menu-button" version="2" text="Secondary" variant="destructive" type="secondary">
+<goa-menu-button id="destructive-secondary-menu-button" text="Secondary" variant="destructive" type="secondary">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button id="destructive-tertiary-menu-button" version="2" text="Tertiary" variant="destructive" type="tertiary">
+<goa-menu-button id="destructive-tertiary-menu-button" text="Tertiary" variant="destructive" type="tertiary">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
 </goa-menu-button>

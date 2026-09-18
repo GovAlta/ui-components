@@ -9,7 +9,7 @@ import {
   GoabFormItem,
 } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { page, userEvent } from "@vitest/browser/context";
+import { page, userEvent } from "vitest/browser";
 import { useState } from "react";
 
 describe("Modal", () => {
@@ -141,6 +141,61 @@ describe("Modal", () => {
 
     expect(testLink1.element()).toBeTruthy();
     expect(testLink2.element()).toBeTruthy();
+  });
+
+  it("scrolls overflowing content on mobile", async () => {
+    await page.viewport(375, 600);
+    const rows = Array.from({ length: 30 }, (_, i) => i + 1);
+
+    const result = render(
+      <GoabModal
+        heading="Scrollable modal"
+        open={true}
+        onClose={vi.fn()}
+        testId="mobile-modal"
+      >
+        {rows.map((row) => (
+          <p key={row} data-testid={`modal-row-${row}`}>
+            Modal row {row} — content that exceeds the mobile viewport height.
+          </p>
+        ))}
+      </GoabModal>,
+    );
+
+    const modalHost = result.baseElement.querySelector("goa-modal") as HTMLElement;
+
+    await vi.waitFor(() => {
+      const scrollPanel = modalHost.shadowRoot?.querySelector(
+        "goa-scroll-panel",
+      ) as HTMLElement | null;
+      const scrollContainer = scrollPanel?.shadowRoot?.querySelector(
+        ".scroll-panel-scroll-container",
+      ) as HTMLElement | null;
+      expect(
+        scrollContainer &&
+          scrollContainer.clientHeight > 100 &&
+          scrollContainer.scrollHeight > scrollContainer.clientHeight,
+      ).toBe(true);
+    });
+
+    const scrollPanel = modalHost.shadowRoot?.querySelector(
+      "goa-scroll-panel",
+    ) as HTMLElement | null;
+    const scrollContainer = scrollPanel?.shadowRoot?.querySelector(
+      ".scroll-panel-scroll-container",
+    ) as HTMLElement | null;
+    if (!scrollContainer) throw new Error("Modal scroll container was not rendered");
+    const finalRow = result.getByTestId("modal-row-30");
+
+    scrollContainer.scrollTop =
+      scrollContainer.scrollHeight - scrollContainer.clientHeight;
+
+    await vi.waitFor(() => {
+      expect(scrollContainer.scrollTop).toBeGreaterThan(0);
+      expect(finalRow.element().getBoundingClientRect().bottom).toBeLessThanOrEqual(
+        scrollContainer.getBoundingClientRect().bottom,
+      );
+    });
   });
 
   it("should allow dropdown selection within a modal", async () => {

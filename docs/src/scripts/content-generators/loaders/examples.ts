@@ -57,7 +57,6 @@ export function loadExamples(): ExampleRecord[] {
       previewImage: asString(data.previewImage),
       figmaUrl: asString(data.figmaUrl),
       accessibilityNotes: asString(data.accessibilityNotes),
-      hidden: data.hidden === true ? true : undefined,
       previewUrl: asString(data.previewUrl),
       reactSourceUrl: asString(data.reactSourceUrl),
       angularSourceUrl: asString(data.angularSourceUrl),

@@ -26,6 +26,10 @@ import {
   GoabIcon,
   GoabIconButton,
   GoabPushDrawer,
+  GoabTab,
+  GoabTable,
+  GoabTableSortHeader,
+  GoabTabs,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
@@ -76,7 +80,7 @@ function getStatusBadgeType(
   }
 }
 
-// Badge type mapping for categories (using V2 extended colors)
+// Badge type mapping for categories
 function getCategoryBadgeType(
   category: string,
 ): "sky" | "pasture" | "dawn" | "lilac" | "prairie" | "default" {
@@ -122,11 +126,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   // Ref for sticky detection sentinel
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Ref for table (to handle sort events from web component)
-  const tableRef = useRef<HTMLElement>(null);
-  // TODO: Remove tabsRef when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  const tabsRef = useRef<HTMLElement>(null);
-
   // Detect when toolbar becomes sticky using IntersectionObserver
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -171,8 +170,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   }, [urlFiltersApplied]);
 
   // Hooks
-  const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
-    useTwoLevelSort();
+  const { sortConfig, setSortConfig, clearSort } = useTwoLevelSort();
   const isContainerNarrow = useContainerNarrow(gridRef, 624);
   const { search, isLoading, error } = useSearch();
   const { viewSettings, setLayout } = useViewSettings({
@@ -181,18 +179,8 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     defaultColumns: DEFAULT_VISIBLE_COLUMNS,
   });
 
-  // Listen for table sort events (from goa-table web component)
-  useEffect(() => {
-    const table = tableRef.current;
-    if (!table) return;
-
-    // Explicitly set version attribute for V2 styling
-    table.setAttribute("version", "2");
-
-    const handleMultiSort = (e: Event) => {
-      const detail = (
-        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
-      ).detail;
+  const handleMultiSort = useCallback(
+    (detail: { sorts: { column: string; direction: "asc" | "desc" }[] }) => {
       const sorts = detail.sorts;
       setSortConfig({
         primary: sorts[0]
@@ -202,30 +190,20 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           ? { key: sorts[1].column, direction: sorts[1].direction }
           : null,
       });
-    };
+    },
+    [setSortConfig],
+  );
 
-    table.addEventListener("_multisort", handleMultiSort);
-    return () => table.removeEventListener("_multisort", handleMultiSort);
-  }, [setSortConfig, viewSettings.layout]);
-
-  // TODO: Remove this useEffect when GoabTabs wrapper exposes updateUrl and stackOnMobile props
-  // Using goa-tabs web component directly because GoabTabs wrapper is missing these props
-  useEffect(() => {
-    const tabs = tabsRef.current;
-    if (!tabs) return;
-
-    const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<{ tab: number }>).detail;
+  const handleTabsChange = useCallback(
+    (detail: { tab: number }) => {
       if (detail.tab === 1) {
         setLayout("card"); // Grid view
       } else if (detail.tab === 2) {
         setLayout("list"); // List view
       }
-    };
-
-    tabs.addEventListener("_change", handleChange);
-    return () => tabs.removeEventListener("_change", handleChange);
-  }, [setLayout]);
+    },
+    [setLayout],
+  );
 
   // Expanded groups state
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
@@ -289,9 +267,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     wasNarrowRef.current = isContainerNarrow;
     if (becameNarrow && viewSettings.layout === "list") {
       setLayout("card");
-      if (tabsRef.current) {
-        tabsRef.current.setAttribute("initialtab", "1");
-      }
     }
   }, [isContainerNarrow, viewSettings.layout, setLayout]);
 
@@ -509,16 +484,16 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
 
   // Get sort order indicator ("1" or "2") for column headers
   const getColumnSortOrder = useCallback(
-    (columnKey: string): string | undefined => {
+    (columnKey: string): 1 | 2 | undefined => {
       // Only show numbers if there are two sorts active
       if (!sortConfig.primary || !sortConfig.secondary) {
         return undefined;
       }
       if (sortConfig.primary.key === columnKey) {
-        return "1";
+        return 1;
       }
       if (sortConfig.secondary.key === columnKey) {
-        return "2";
+        return 2;
       }
       return undefined;
     },
@@ -566,7 +541,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           {/* Category badge only - status shown in table view */}
           <div className="component-card-badges">
             <goa-badge
-              version="2"
               type={getCategoryBadgeType(component.data.category)}
               content={formatCategory(component.data.category)}
               emphasis="subtle"
@@ -584,7 +558,10 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     (component: Component) => (
       <tr key={component.slug}>
         <td>
-          <a href={withBase(`/components/${component.slug}`)} className="component-table-link">
+          <a
+            href={withBase(`/components/${component.slug}`)}
+            className="component-table-link"
+          >
             {component.data.name}
           </a>
         </td>
@@ -593,7 +570,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getCategoryBadgeType(component.data.category)}
             content={formatCategory(component.data.category)}
             emphasis="subtle"
@@ -602,7 +578,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         </td>
         <td>
           <goa-badge
-            version="2"
             type={getStatusBadgeType(component.data.status)}
             content={formatStatus(component.data.status)}
             emphasis="subtle"
@@ -642,30 +617,22 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
 
         {/* View toggle + Filters */}
         <div className="components-toolbar-actions">
-          {/*
-           * TODO: Replace <goa-tabs> with GoabTabs when wrapper exposes these props
-           *
-           * Using web component directly because GoabTabs wrapper is missing:
-           * - updateUrl prop (we need false to avoid polluting browser history)
-           * - stackOnMobile prop (we need false for compact view toggle)
-           *
-           * When fixed, remove: tabsRef, useEffect for _change event, goa-tabs from global.d.ts
-           */}
           <div className="view-toggle-wrapper">
-            <goa-tabs
-              ref={tabsRef}
-              version="2"
+            <GoabTabs
+              key={viewMode}
               variant="segmented"
               initialTab={viewMode === "card" ? 1 : 2}
               orientation="horizontal"
+              navigation="none"
+              onChange={handleTabsChange}
             >
-              <goa-tab heading="Grid">
+              <GoabTab heading="Grid">
                 <span />
-              </goa-tab>
-              <goa-tab heading="List">
+              </GoabTab>
+              <GoabTab heading="List">
                 <span />
-              </goa-tab>
-            </goa-tabs>
+              </GoabTab>
+            </GoabTabs>
           </div>
 
           <span className="filter-btn-desktop">
@@ -807,47 +774,41 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           }}
         >
           <div className="components-table-scroll-shadow-left" aria-hidden="true" />
-          {/* TODO: Table not rendering with V2 styling despite version="2" - investigate CSS loading or timing issue */}
-          <goa-table
-            ref={tableRef}
-            version="2"
+          <GoabTable
             width="100%"
             variant="normal"
-            sort-mode="multi"
+            sortMode="multi"
+            onMultiSort={handleMultiSort}
           >
-            <table style={{ width: "100%" }}>
               <thead>
                 <tr>
                   <th style={{ width: "200px" }}>
-                    <goa-table-sort-header
-                      version="2"
+                    <GoabTableSortHeader
                       name="name"
                       direction={getColumnSortDirection("name")}
-                      sort-order={getColumnSortOrder("name")}
+                      sortOrder={getColumnSortOrder("name")}
                     >
                       Name
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th>Description</th>
                   <th>
-                    <goa-table-sort-header
-                      version="2"
+                    <GoabTableSortHeader
                       name="category"
                       direction={getColumnSortDirection("category")}
-                      sort-order={getColumnSortOrder("category")}
+                      sortOrder={getColumnSortOrder("category")}
                     >
                       Category
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                   <th>
-                    <goa-table-sort-header
-                      version="2"
+                    <GoabTableSortHeader
                       name="status"
                       direction={getColumnSortDirection("status")}
-                      sort-order={getColumnSortOrder("status")}
+                      sortOrder={getColumnSortOrder("status")}
                     >
                       Status
-                    </goa-table-sort-header>
+                    </GoabTableSortHeader>
                   </th>
                 </tr>
               </thead>
@@ -871,7 +832,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                               />
                               <strong>{group.label}</strong>
                               <goa-badge
-                                version="2"
                                 type="default"
                                 content={String(group.components.length)}
                                 emphasis="subtle"
@@ -885,8 +845,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                     ))
                   : filteredComponents.map(renderTableRow)}
               </tbody>
-            </table>
-          </goa-table>
+          </GoabTable>
           <div className="components-table-scroll-shadow-right" aria-hidden="true" />
         </div>
       )}
@@ -909,7 +868,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   />
                   <strong>{group.label}</strong>
                   <goa-badge
-                    version="2"
                     type="dark"
                     content={String(group.components.length)}
                     emphasis="subtle"
@@ -1133,7 +1091,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
 
         /* Table/List view */
         /* Horizontal scroll container for table - bleeds into card padding */
-        /* TODO: Remove calc workaround when goa-table V2 gets box-sizing: border-box */
         .components-table-wrapper {
           display: flex;
           align-items: stretch;
@@ -1148,7 +1105,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         }
 
         .components-table-wrapper goa-table {
-          width: calc(100% - 2px) !important;
+          width: 100% !important;
           margin-left: var(--card-padding-h, var(--goa-space-2xl));
           margin-right: var(--card-padding-h, var(--goa-space-2xl));
         }

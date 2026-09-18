@@ -30,7 +30,6 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-dropdown
         #goaComponentRef
-        [attr.version]="version"
         [attr.name]="name"
         [value]="value"
         [attr.arialabel]="ariaLabel"
@@ -76,9 +75,9 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Identifier for the dropdown. Should be unique. */
+  /** Identifier for the dropdown. If omitted, a unique name is generated. */
   @Input() name?: string;
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the selected value will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   @Input() ariaLabelledBy?: string;
@@ -114,7 +113,6 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Output() onBlur = new EventEmitter<GoabDropdownOnBlurDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

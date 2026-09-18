@@ -37,17 +37,17 @@ import {
 export class GoabWorkSideNotificationItem implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Sets the visual style of the notification item. */
+  /** Sets the visual type/style of the notification item. @default "default" */
   @Input() type?: GoabWorkSideNotificationItemType;
-  /** The timestamp for when the notification was created. */
+  /** ISO timestamp string representing when the notification occurred. */
   @Input() timestamp?: string;
-  /** The title text of the notification item. */
+  /** Title text displayed in the notification card header. */
   @Input() title?: string;
-  /** @required The description text of the notification item. */
+  /** @required The body text content of the notification card. */
   @Input({ required: true }) description!: string;
-  /** Indicates whether the notification is read or unread. */
+  /** Indicates whether the notification has been read or is unread. @default "unread" */
   @Input() readStatus?: GoabWorkSideNotificationReadStatus;
-  /** Sets the priority level of the notification. */
+  /** Sets the urgency level of the notification. @default "normal" */
   @Input() priority?: GoabWorkSideNotificationPriority;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;

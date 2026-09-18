@@ -80,21 +80,11 @@
     list-style: none;
     gap: var(--goa-space-m);
     align-items: flex-start;
-    border-radius: var(
-      --goa-work-side-menu-item-border-radius,
-      var(--goa-border-radius-m)
-    );
+    border-radius: var(--goa-work-side-menu-item-border-radius);
     align-items: flex-start;
-    padding: var(
-      --goa-work-side-menu-item-padding,
-      var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs)
-        calc(var(--goa-space-xs) + var(--goa-space-3xs))
-    );
-    color: var(
-      --goa-work-side-menu-item-text-color,
-      var(--goa-color-greyscale-600)
-    );
-    min-height: var(--goa-work-side-menu-item-min-height, 40px);
+    padding: var(--goa-work-side-menu-item-padding);
+    color: var(--goa-work-side-menu-item-text-color);
+    min-height: var(--goa-work-side-menu-item-min-height);
   }
 
   /* Hide native icon on iOS */
@@ -104,14 +94,8 @@
 
   summary:hover,
   details[open] summary {
-    background: var(
-      --goa-work-side-menu-item-color-bg-hover,
-      var(--goa-color-greyscale-100)
-    );
-    color: var(
-      --goa-work-side-menu-item-text-color-hover,
-      var(--goa-color-text-default)
-    );
+    background: var(--goa-work-side-menu-item-color-bg-hover);
+    color: var(--goa-work-side-menu-item-text-color-hover);
   }
 
   details[open] .marker-icon {
@@ -126,41 +110,23 @@
     margin-top: var(--goa-space-3xs);
   }
   .group {
-    border-left: var(
-      --goa-work-side-menu-group-border,
-      var(--goa-border-width-xl) solid var(--goa-color-greyscale-100)
-    );
-    margin: var(
-      --goa-work-side-menu-group-margin,
-      var(--goa-space-xs) 0 0.375rem 1.125rem
-    );
-    padding: var(--goa-work-side-menu-group-padding, 0 0 0 0.75rem);
+    border-left: var(--goa-work-side-menu-group-border);
+    margin: var(--goa-work-side-menu-group-margin);
+    padding: var(--goa-work-side-menu-group-padding);
     display: flex;
     flex-direction: column;
     gap: 2px;
 
     /* Menu item styling */
     --goa-work-side-menu-item-icon-display: none;
-    --goa-work-side-menu-item-padding: var(
-      --goa-work-side-menu-group-item-padding,
-      0.25rem 0.5rem
-    );
-    --goa-work-side-menu-item-min-height: var(
-      --goa-work-side-menu-group-item-min-height,
-      1.75rem
-    );
-    --goa-work-side-menu-item-text-size: var(
-      --goa-work-side-menu-group-item-text-size,
-      var(--goa-typography-body-xs)
-    );
+    --goa-work-side-menu-item-padding: var(--goa-work-side-menu-group-item-padding);
+    --goa-work-side-menu-item-min-height: var(--goa-work-side-menu-group-item-min-height);
+    --goa-work-side-menu-item-text-size: var(--goa-work-side-menu-group-item-text-size);
   }
 
   .label {
     flex-grow: 1;
-    font: var(
-      --goa-work-side-menu-item-text-size,
-      var(--goa-typography-body-s)
-    );
+    font: var(--goa-work-side-menu-item-text-size);
     animation: delayText 100ms;
   }
 
@@ -179,10 +145,7 @@
 
     details[open] summary {
       background: transparent;
-      color: var(
-        --goa-work-side-menu-item-text-color,
-        var(--goa-color-greyscale-600)
-      );
+      color: var(--goa-work-side-menu-item-text-color);
     }
   }
 

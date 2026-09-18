@@ -10,7 +10,6 @@ interface WCProps {
   name?: string;
   direction?: GoabTableSortDirection;
   "sort-order"?: GoabTableSortOrder;
-  version?: "1" | "2";
 }
 
 declare module "react" {
@@ -47,7 +46,6 @@ export function GoabTableSortHeader({
       name={name}
       direction={direction}
       sort-order={sortOrder}
-      version="2"
       {...rest}
     >
       {children}

@@ -6,9 +6,9 @@ import type { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
   templateUrl: "./angular.html",
 })
 export class AskForBirthdayComponent {
-  birthdate: Date | undefined;
+  birthdate: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail): void {
-    this.birthdate = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.birthdate = event.valueStr || undefined;
   }
 }

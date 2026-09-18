@@ -17,13 +17,13 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: "Basic date picker",
       description: "Simple date selection",
       code: {
-        react: `const [date, setDate] = useState<Date | undefined>();
+        react: `const [date, setDate] = useState<string | undefined>();
 
 <GoabFormItem label="Date" mb="l">
   <GoabDatePicker
     name="date"
     value={date}
-    onChange={(detail) => setDate(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setDate(detail.valueStr || undefined)}
   />
 </GoabFormItem>`,
         angular: [
@@ -46,10 +46,10 @@ export const datePickerConfigurations: ComponentConfigurations = {
           {
             title: "Template driven (ngModel)",
             ts: `export class SomeOtherComponent {
-  date: Date | undefined;
+  date: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail) {
-    this.date = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.date = event.valueStr || undefined;
   }
 }`,
             template: `<form>
@@ -64,8 +64,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Date" mb="l">
-  <goa-date-picker version="2" name="date"></goa-date-picker>
+        webComponents: `<goa-form-item label="Date" mb="l">
+  <goa-date-picker name="date"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -74,13 +74,13 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: "With initial value",
       description: "Date picker with preset date",
       code: {
-        react: `const [startDate, setStartDate] = useState<Date | undefined>(new Date("2024-01-15"));
+        react: `const [startDate, setStartDate] = useState<string | undefined>("2024-01-15");
 
 <GoabFormItem label="Start date" mb="l">
   <GoabDatePicker
     name="startDate"
     value={startDate}
-    onChange={(detail) => setStartDate(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setStartDate(detail.valueStr || undefined)}
   />
 </GoabFormItem>`,
         angular: [
@@ -90,7 +90,7 @@ export const datePickerConfigurations: ComponentConfigurations = {
   form!: FormGroup;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      startDate: [new Date("2024-01-15")],
+      startDate: ["2024-01-15"],
     });
   }
 }`,
@@ -106,10 +106,10 @@ export const datePickerConfigurations: ComponentConfigurations = {
           {
             title: "Template driven (ngModel)",
             ts: `export class SomeOtherComponent {
-  startDate: Date | undefined = new Date("2024-01-15");
+  startDate: string | undefined = "2024-01-15";
 
   onDateChange(event: GoabDatePickerOnChangeDetail) {
-    this.startDate = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.startDate = event.valueStr || undefined;
   }
 }`,
             template: `<form>
@@ -124,8 +124,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Start date" mb="l">
-  <goa-date-picker version="2" name="startDate" value="2024-01-15"></goa-date-picker>
+        webComponents: `<goa-form-item label="Start date" mb="l">
+  <goa-date-picker name="startDate" value="2024-01-15"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -134,7 +134,7 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: "With date range",
       description: "Restrict selectable dates",
       code: {
-        react: `const [appointment, setAppointment] = useState<Date | undefined>();
+        react: `const [appointment, setAppointment] = useState<string | undefined>();
 
 <GoabFormItem label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
   <GoabDatePicker
@@ -142,7 +142,7 @@ export const datePickerConfigurations: ComponentConfigurations = {
     min="2024-03-01"
     max="2024-03-07"
     value={appointment}
-    onChange={(detail) => setAppointment(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setAppointment(detail.valueStr || undefined)}
   />
 </GoabFormItem>`,
         angular: [
@@ -175,10 +175,10 @@ export const datePickerConfigurations: ComponentConfigurations = {
           {
             title: "Template driven (ngModel)",
             ts: `export class SomeOtherComponent {
-  appointment: Date | undefined;
+  appointment: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail) {
-    this.appointment = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.appointment = event.valueStr || undefined;
   }
 }`,
             template: `<form>
@@ -199,8 +199,8 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
-  <goa-date-picker version="2"
+        webComponents: `<goa-form-item label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
+  <goa-date-picker
     name="appointment"
     min="2024-03-01"
     max="2024-03-07">
@@ -228,11 +228,11 @@ export const datePickerConfigurations: ComponentConfigurations = {
     // <goab-form-item label="Compact size" labelSize="compact" mb="l">
     //   <goab-date-picker name="sizeCompact" size="compact" (onChange)="handleDateChange($event)"></goab-date-picker>
     // </goab-form-item>`,
-    //     webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-    //   <goa-date-picker version="2" name="sizeDefault"></goa-date-picker>
+    //     webComponents: `<goa-form-item label="Default size" mb="l">
+    //   <goa-date-picker name="sizeDefault"></goa-date-picker>
     // </goa-form-item>
-    // <goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-    //   <goa-date-picker version="2" name="sizeCompact" size="compact"></goa-date-picker>
+    // <goa-form-item label="Compact size" labelsize="compact" mb="l">
+    //   <goa-date-picker name="sizeCompact" size="compact"></goa-date-picker>
     // </goa-form-item>`,
     //   },
     // },
@@ -241,15 +241,15 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: "Input type",
       description: "Date picker rendered as a simple date input without calendar popup",
       code: {
-        react: `const [incident, setIncident] = useState<Date | undefined>();
-const [birthday, setBirthday] = useState<Date | undefined>();
+        react: `const [incident, setIncident] = useState<string | undefined>();
+const [birthday, setBirthday] = useState<string | undefined>();
 
 <GoabFormItem label="What day was the incident?" mb="l">
   <GoabDatePicker
     name="incident"
     type="calendar"
     value={incident}
-    onChange={(detail) => setIncident(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setIncident(detail.valueStr || undefined)}
   />
 </GoabFormItem>
 <GoabFormItem label="What is your birthday?" mb="l">
@@ -257,7 +257,7 @@ const [birthday, setBirthday] = useState<Date | undefined>();
     name="birthday"
     type="input"
     value={birthday}
-    onChange={(detail) => setBirthday(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setBirthday(detail.valueStr || undefined)}
   />
 </GoabFormItem>`,
         angular: [
@@ -292,8 +292,8 @@ const [birthday, setBirthday] = useState<Date | undefined>();
           {
             title: "Template driven (ngModel)",
             ts: `export class SomeOtherComponent {
-  incident: Date | undefined;
-  birthday: Date | undefined;
+  incident: string | undefined;
+  birthday: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail) {
     console.log(event);
@@ -321,11 +321,11 @@ const [birthday, setBirthday] = useState<Date | undefined>();
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="What day was the incident?" mb="l">
-  <goa-date-picker version="2" name="incident" type="calendar"></goa-date-picker>
+        webComponents: `<goa-form-item label="What day was the incident?" mb="l">
+  <goa-date-picker name="incident" type="calendar"></goa-date-picker>
 </goa-form-item>
-<goa-form-item version="2" label="What is your birthday?" mb="l">
-  <goa-date-picker version="2" name="birthday" type="input"></goa-date-picker>
+<goa-form-item label="What is your birthday?" mb="l">
+  <goa-date-picker name="birthday" type="input"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -334,17 +334,17 @@ const [birthday, setBirthday] = useState<Date | undefined>();
       name: "States",
       description: "Disabled and error states",
       code: {
-        react: `const [errorDate, setErrorDate] = useState<Date | undefined>();
+        react: `const [errorDate, setErrorDate] = useState<string | undefined>();
 
 <GoabFormItem label="Locked date" mb="l">
-  <GoabDatePicker name="locked" value={new Date("2024-01-01")} disabled />
+  <GoabDatePicker name="locked" value="2024-01-01" disabled />
 </GoabFormItem>
 <GoabFormItem label="Date with error" error="Please select a valid date" mb="l">
   <GoabDatePicker
     name="error"
     error
     value={errorDate}
-    onChange={(detail) => setErrorDate(detail.valueStr ? new Date(detail.valueStr) : undefined)}
+    onChange={(detail) => setErrorDate(detail.valueStr || undefined)}
   />
 </GoabFormItem>`,
         angular: [
@@ -354,7 +354,7 @@ const [birthday, setBirthday] = useState<Date | undefined>();
   form!: FormGroup;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      locked: [{ value: new Date("2024-01-01"), disabled: true }],
+      locked: [{ value: "2024-01-01", disabled: true }],
       errorDate: [null],
     });
   }
@@ -379,11 +379,11 @@ const [birthday, setBirthday] = useState<Date | undefined>();
           {
             title: "Template driven (ngModel)",
             ts: `export class SomeOtherComponent {
-  locked: Date = new Date("2024-01-01");
-  errorDate: Date | undefined;
+  locked = "2024-01-01";
+  errorDate: string | undefined;
 
   onDateChange(event: GoabDatePickerOnChangeDetail) {
-    this.errorDate = event.valueStr ? new Date(event.valueStr) : undefined;
+    this.errorDate = event.valueStr || undefined;
   }
 }`,
             template: `<form>
@@ -410,11 +410,11 @@ const [birthday, setBirthday] = useState<Date | undefined>();
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Locked date" mb="l">
-  <goa-date-picker version="2" name="locked" value="2024-01-01" disabled></goa-date-picker>
+        webComponents: `<goa-form-item label="Locked date" mb="l">
+  <goa-date-picker name="locked" value="2024-01-01" disabled></goa-date-picker>
 </goa-form-item>
-<goa-form-item version="2" label="Date with error" error="Please select a valid date" mb="l">
-  <goa-date-picker version="2" name="error" error></goa-date-picker>
+<goa-form-item label="Date with error" error="Please select a valid date" mb="l">
+  <goa-date-picker name="error" error></goa-date-picker>
 </goa-form-item>`,
       },
     },

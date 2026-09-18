@@ -22,7 +22,6 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
   imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-form-item
-      [attr.version]="version"
       [attr.label]="label"
       [attr.labelsize]="labelSize"
       [attr.helptext]="getHelpTextAsString()"
@@ -80,7 +79,6 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
   @Input() name?: string;
 
   isReady = false;
-  version = "2";
 
   getHelpTextAsString(): string | undefined {
     return typeof this.helpText === "string" ? this.helpText : undefined;

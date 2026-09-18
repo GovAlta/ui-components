@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the selected value will be translated for the screen reader."
         },
         {
           "name": "ariaLabelledBy",
@@ -107,7 +107,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",
@@ -198,7 +198,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the selected value will be translated for the screen reader."
         },
         {
           "name": "ariaLabelledBy",
@@ -296,7 +296,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",
@@ -387,7 +387,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the selected value will be translated for the screen reader."
         },
         {
           "name": "arialabelledby",
@@ -481,9 +481,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Identifier for the dropdown. Should be unique."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Identifier for the dropdown. If omitted, a unique name is generated."
         },
         {
           "name": "native",
@@ -530,17 +530,6 @@
           "required": false,
           "default": "",
           "description": "Stores the value of the item selected from the dropdown."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         },
         {
           "name": "width",

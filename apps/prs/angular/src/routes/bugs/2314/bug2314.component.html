@@ -1,0 +1,23 @@
+<goab-text tag="h1" size="heading-l" mb="m">Button: Mobile width</goab-text>
+
+<goab-text tag="p">
+  The width of the Button component was controllable on desktop (ie. the width property
+  was respected). But on mobile, it defaulted to and only used width="100%", despite any
+  width being set.
+</goab-text>
+
+<goab-text tag="p">
+  This fix should see the width property respected on mobile as well as desktop. Default
+  width for mobile will stay as 100%.
+</goab-text>
+
+<goab-divider></goab-divider>
+
+<goab-text tag="h2">Default (no width set)</goab-text>
+<goab-button>Default button</goab-button>
+
+<goab-text tag="h2">Width set to 50%</goab-text>
+<goab-button width="50%">50% Button</goab-button>
+
+<goab-text tag="h2">Width set to 100px</goab-text>
+<goab-button width="100px">100px Button</goab-button>

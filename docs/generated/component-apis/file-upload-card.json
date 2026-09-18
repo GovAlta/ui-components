@@ -175,17 +175,6 @@
           "required": false,
           "default": "",
           "description": "The MIME type of the file. Used to determine the file type icon."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

@@ -23,7 +23,6 @@
     error: boolean;
     name: string;
     checked: boolean;
-    version?: string;
     compact?: boolean;
     ariaLabel: string;
     maxWidth: string;
@@ -90,7 +89,6 @@
   let _revealSlotEl: HTMLElement;
   let _formFields: HTMLElement[] = [];
   let _revealSlotHeight: number = 0;
-  let _version: string = "1";
   let _compact: boolean = false;
 
   // Reactive
@@ -210,7 +208,6 @@
       description = data.description;
       name = data.name;
       revealarialabel = data.revealAriaLabel || "";
-      _version = data.version || "1";
       _compact = data.compact || false;
     });
   }
@@ -268,7 +265,6 @@
     class="radio"
     class:radio--disabled={isDisabled}
     class:radio--error={isError}
-    class:v2={_version === "2"}
     class:compact={_compact}
   >
     <input
@@ -344,24 +340,11 @@
   .label {
     font: var(--goa-radio-label);
     color: var(--goa-radio-color-label, var(--goa-input-color-text-secondary));
-    padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
+    padding-left: var(--goa-radio-gap-label);
   }
 
-  /* V1 only: the V1 label line-height (28px) is taller than the 24px radio
-     circle, so the text needs an optical nudge upward. In V2 the label
-     line-height matches the circle height, so no nudge is needed (this is
-     what the V2 checkbox already does). */
-  .radio:not(.v2) .label {
-    margin-top: -3px;
-  }
-
-  /* V2 compact: Use smaller gap */
-  .radio.v2.compact .label {
+  .radio.compact .label {
     padding-left: var(--goa-radio-gap-label-compact);
-  }
-
-  /* Compact mode - V2 only */
-  .radio.v2.compact .label {
     font: var(--goa-radio-label-compact);
   }
 
@@ -369,16 +352,14 @@
     font: var(--goa-radio-description);
     margin-left: calc(var(--goa-radio-size) + var(--goa-space-s));
     margin-top: var(--goa-space-2xs);
-    color: var(--goa-input-color-text-helper, var(--goa-color-text-default));
+    color: var(--goa-input-color-text-helper);
   }
 
-  /* V2 default: Description aligns with label (icon width + gap) */
-  .radio.v2:not(.compact) ~ .description {
+  .radio:not(.compact) ~ .description {
     margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label));
   }
 
-  /* V2 compact: Description aligns with label (icon width + gap) */
-  .radio.v2.compact ~ .description {
+  .radio.compact ~ .description {
     margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));
     margin-top: var(--goa-space-3xs);
   }
@@ -393,18 +374,18 @@
   }
 
    .reveal.visible.has-content {
-    padding: var(--goa-radio-reveal-padding, var(--goa-space-m));
-    margin: var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));
-    border-left: var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));
+    padding: var(--goa-radio-reveal-padding);
+    margin: var(--goa-radio-reveal-margin);
+    border-left: var(--goa-radio-reveal-border);
     box-sizing: border-box;
   }
 
-  .radio.v2 ~ .reveal.visible.has-content {
-    padding: var(--goa-radio-reveal-padding, var(--goa-space-l));
-    border-left: var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200));
+  .radio ~ .reveal.visible.has-content {
+    padding: var(--goa-radio-reveal-padding);
+    border-left: var(--goa-radio-reveal-border);
   }
 
-  .radio.v2.compact ~ .reveal.visible.has-content {
+  .radio.compact ~ .reveal.visible.has-content {
     padding: calc(var(--goa-space-m) + var(--goa-space-2xs));
   }
 
@@ -420,8 +401,7 @@
     flex: 0 0 auto;
   }
 
-  /* V2: Inner dot for checked state */
-  .v2 .icon::after {
+  .icon::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -481,17 +461,15 @@
     border: var(--goa-radio-border-disabled);
   }
 
-  /* V2: Unchecked - Disabled background */
-  .radio.v2 input[type="radio"]:not(:checked):disabled ~ .icon {
+  .radio input[type="radio"]:not(:checked):disabled ~ .icon {
     background-color: var(--goa-radio-color-bg-disabled);
   }
 
   /* Checked - Default */
   input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked, 4px solid var(--goa-color-greyscale-200));
+    border: var(--goa-radio-border-checked);
   }
-  /* V2 only: Inner dot */
-  .radio.v2 input[type="radio"]:checked ~ .icon::after {
+  .radio input[type="radio"]:checked ~ .icon::after {
     background-color: var(--goa-radio-inner-color);
   }
 
@@ -499,8 +477,7 @@
   input[type="radio"]:checked:hover ~ .icon {
     border: var(--goa-radio-border-checked-hover);
   }
-  /* V2 only: Inner dot hover */
-  .radio.v2 input[type="radio"]:checked:hover ~ .icon::after {
+  .radio input[type="radio"]:checked:hover ~ .icon::after {
     background-color: var(--goa-radio-inner-color-hover);
   }
 
@@ -521,13 +498,11 @@
   input[type="radio"]:checked:disabled ~ .icon {
     border: var(--goa-radio-border-checked-disabled);
   }
-  /* V2 only: Inner dot disabled */
-  .radio.v2 input[type="radio"]:checked:disabled ~ .icon::after {
+  .radio input[type="radio"]:checked:disabled ~ .icon::after {
     background-color: var(--goa-radio-inner-color-disabled);
   }
 
-  /* V2: Checked - Disabled background */
-  .radio.v2 input[type="radio"]:checked:disabled ~ .icon {
+  .radio input[type="radio"]:checked:disabled ~ .icon {
     background-color: var(--goa-radio-color-bg-disabled);
   }
 
@@ -536,8 +511,7 @@
     border: var(--goa-radio-border-error);
   }
 
-  /* V2: Unchecked - Error background */
-  .radio.v2.radio--error input[type="radio"]:not(:checked) ~ .icon {
+  .radio.radio--error input[type="radio"]:not(:checked) ~ .icon {
     background-color: var(--goa-radio-color-bg-error);
   }
 
@@ -546,8 +520,7 @@
     border: var(--goa-radio-border-error-hover);
   }
 
-  /* V2: Unchecked - Error+Hover background */
-  .radio.v2.radio--error input[type="radio"]:not(:checked):hover ~ .icon {
+  .radio.radio--error input[type="radio"]:not(:checked):hover ~ .icon {
     background-color: var(--goa-radio-color-bg-error-hover);
   }
 
@@ -562,23 +535,19 @@
     border: var(--goa-radio-border-error-disabled);
   }
 
-  /* V2: Unchecked - Error+Disabled background */
-  .radio.v2.radio--error input[type="radio"]:not(:checked):disabled ~ .icon {
+  .radio.radio--error input[type="radio"]:not(:checked):disabled ~ .icon {
     background-color: var(--goa-radio-color-bg-disabled);
   }
 
   /* Checked - Error */
-  .radio--error input[type="radio"]:checked ~ .icon,
-  .radio--error.v2 input[type="radio"]:checked ~ .icon {
+  .radio--error input[type="radio"]:checked ~ .icon {
     border: var(--goa-radio-border-checked-error);
   }
-  /* V2 only: Inner dot error */
-  .radio--error.v2 input[type="radio"]:checked ~ .icon::after {
+  .radio--error input[type="radio"]:checked ~ .icon::after {
     background-color: var(--goa-radio-inner-color-error);
   }
 
-  /* V2: Checked - Error background */
-  .radio.v2.radio--error input[type="radio"]:checked ~ .icon {
+  .radio.radio--error input[type="radio"]:checked ~ .icon {
     background-color: var(--goa-radio-color-bg-error);
   }
 
@@ -586,13 +555,11 @@
   .radio--error input[type="radio"]:checked:hover ~ .icon {
     border: var(--goa-radio-border-checked-error-hover);
   }
-  /* V2 only: Inner dot error hover */
-  .radio--error.v2 input[type="radio"]:checked:hover ~ .icon::after {
+  .radio--error input[type="radio"]:checked:hover ~ .icon::after {
     background-color: var(--goa-radio-inner-color-error-hover);
   }
 
-  /* V2: Checked - Error+Hover background */
-  .radio.v2.radio--error input[type="radio"]:checked:hover ~ .icon {
+  .radio.radio--error input[type="radio"]:checked:hover ~ .icon {
     background-color: var(--goa-radio-color-bg-error-hover);
   }
 
@@ -606,13 +573,11 @@
   .radio--error input[type="radio"]:checked:disabled ~ .icon {
     border: var(--goa-radio-border-checked-error-disabled);
   }
-  /* V2 only: Inner dot error disabled */
-  .radio--error.v2 input[type="radio"]:checked:disabled ~ .icon::after {
+  .radio--error input[type="radio"]:checked:disabled ~ .icon::after {
     background-color: var(--goa-radio-inner-color-disabled);
   }
 
-  /* V2: Checked - Error+Disabled background */
-  .radio.v2.radio--error input[type="radio"]:checked:disabled ~ .icon {
+  .radio.radio--error input[type="radio"]:checked:disabled ~ .icon {
     background-color: var(--goa-radio-color-bg-disabled);
   }
 </style>

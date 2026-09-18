@@ -76,8 +76,8 @@ export const radioGroupConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Contact preference" mb="l">
-  <goa-radio-group id="contact-radio" version="2" name="contact" value="">
+        webComponents: `<goa-form-item label="Contact preference" mb="l">
+  <goa-radio-group id="contact-radio" name="contact" value="">
     <goa-radio-item value="email" label="Email"></goa-radio-item>
     <goa-radio-item value="phone" label="Phone"></goa-radio-item>
     <goa-radio-item value="mail" label="Mail"></goa-radio-item>
@@ -162,8 +162,8 @@ export const radioGroupConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Size" mb="l">
-  <goa-radio-group id="size-radio" version="2" name="size" value="" orientation="horizontal">
+        webComponents: `<goa-form-item label="Size" mb="l">
+  <goa-radio-group id="size-radio" name="size" value="" orientation="horizontal">
     <goa-radio-item value="small" label="Small"></goa-radio-item>
     <goa-radio-item value="medium" label="Medium"></goa-radio-item>
     <goa-radio-item value="large" label="Large"></goa-radio-item>
@@ -278,8 +278,8 @@ export const radioGroupConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Shipping method" mb="l">
-  <goa-radio-group id="shipping-radio" version="2" name="shipping" value="">
+        webComponents: `<goa-form-item label="Shipping method" mb="l">
+  <goa-radio-group id="shipping-radio" name="shipping" value="">
     <goa-radio-item value="standard" label="Standard" description="5-7 business days"></goa-radio-item>
     <goa-radio-item value="express" label="Express" description="2-3 business days"></goa-radio-item>
     <goa-radio-item value="overnight" label="Overnight" description="Next business day"></goa-radio-item>
@@ -398,13 +398,13 @@ function handleDateChange(detail: GoabDatePickerOnChangeDetail) {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Do you have a preferred date?" mb="l">
-  <goa-radio-group id="has-date-radio" version="2" name="hasDate" value="">
+        webComponents: `<goa-form-item label="Do you have a preferred date?" mb="l">
+  <goa-radio-group id="has-date-radio" name="hasDate" value="">
     <goa-radio-item value="no" label="No"></goa-radio-item>
     <goa-radio-item value="yes" label="Yes">
       <div slot="reveal">
-        <goa-form-item version="2" label="Preferred date" mb="l">
-          <goa-date-picker id="preferred-date-picker" version="2" name="preferredDate"></goa-date-picker>
+        <goa-form-item label="Preferred date" mb="l">
+          <goa-date-picker id="preferred-date-picker" name="preferredDate"></goa-date-picker>
         </goa-form-item>
       </div>
     </goa-radio-item>
@@ -488,8 +488,8 @@ function handleDateChange(detail: GoabDatePickerOnChangeDetail) {
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Notification frequency" mb="l">
-  <goa-radio-group id="frequency-radio" version="2" name="frequency" value="daily">
+        webComponents: `<goa-form-item label="Notification frequency" mb="l">
+  <goa-radio-group id="frequency-radio" name="frequency" value="daily">
     <goa-radio-item value="realtime" label="Real-time"></goa-radio-item>
     <goa-radio-item value="daily" label="Daily digest"></goa-radio-item>
     <goa-radio-item value="weekly" label="Weekly summary"></goa-radio-item>
@@ -604,14 +604,14 @@ const [sizeCompact, setSizeCompact] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
-  <goa-radio-group id="size-default-radio" version="2" name="sizeDefault" value="">
+        webComponents: `<goa-form-item label="Default size" mb="l">
+  <goa-radio-group id="size-default-radio" name="sizeDefault" value="">
     <goa-radio-item value="yes" label="Yes"></goa-radio-item>
     <goa-radio-item value="no" label="No"></goa-radio-item>
   </goa-radio-group>
 </goa-form-item>
-<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
-  <goa-radio-group id="size-compact-radio" version="2" name="sizeCompact" value="" size="compact">
+<goa-form-item label="Compact size" labelsize="compact" mb="l">
+  <goa-radio-group id="size-compact-radio" name="sizeCompact" value="" size="compact">
     <goa-radio-item value="yes" label="Yes"></goa-radio-item>
     <goa-radio-item value="no" label="No"></goa-radio-item>
   </goa-radio-group>
@@ -738,14 +738,14 @@ const [payment, setPayment] = useState<string>("");`,
 </form>`,
           },
         ],
-        webComponents: `<goa-form-item version="2" label="Account type" mb="l">
-  <goa-radio-group id="account-type-radio" version="2" name="accountType" value="basic" disabled>
+        webComponents: `<goa-form-item label="Account type" mb="l">
+  <goa-radio-group id="account-type-radio" name="accountType" value="basic" disabled>
     <goa-radio-item value="basic" label="Basic"></goa-radio-item>
     <goa-radio-item value="premium" label="Premium"></goa-radio-item>
   </goa-radio-group>
 </goa-form-item>
-<goa-form-item version="2" label="Payment method" error="Please select a payment method" mb="l">
-  <goa-radio-group id="payment-radio" version="2" name="payment" value="" error>
+<goa-form-item label="Payment method" error="Please select a payment method" mb="l">
+  <goa-radio-group id="payment-radio" name="payment" value="" error>
     <goa-radio-item value="credit" label="Credit card"></goa-radio-item>
     <goa-radio-item value="debit" label="Debit card"></goa-radio-item>
     <goa-radio-item value="bank" label="Bank transfer"></goa-radio-item>

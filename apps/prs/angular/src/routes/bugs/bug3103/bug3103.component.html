@@ -1,0 +1,70 @@
+<goab-text tag="h1" mt="m" mb="s">
+  Bug #3103: Pagination dropdown small inside Accordion
+</goab-text>
+<goab-text>
+  Compare the page-number dropdown outside and inside the Accordion. Both dropdowns should
+  be wide enough to display the current page number.
+</goab-text>
+<p>
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/3103"
+    target="_blank"
+    rel="noopener"
+  >
+    View issue #3103 on GitHub
+  </a>
+</p>
+
+<goab-text tag="h2" mt="l" mb="s">Pagination outside Accordion</goab-text>
+<goab-table width="100%" mb="xl">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of pageUsers; track user.id) {
+      <tr>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.age }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+<goab-pagination
+  [pageNumber]="page"
+  [itemCount]="users.length"
+  [perPageCount]="perPage"
+  (onChange)="handlePageChange($event)"
+/>
+
+<goab-text tag="h2" mt="l" mb="s">Pagination inside Accordion</goab-text>
+<goab-accordion heading="Pagination inside Accordion" [open]="true">
+  <goab-table width="100%" mb="xl">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of pageUsers; track user.id) {
+        <tr>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.age }}</td>
+        </tr>
+      }
+    </tbody>
+  </goab-table>
+  <goab-pagination
+    [pageNumber]="page"
+    [itemCount]="users.length"
+    [perPageCount]="perPage"
+    (onChange)="handlePageChange($event)"
+  />
+</goab-accordion>

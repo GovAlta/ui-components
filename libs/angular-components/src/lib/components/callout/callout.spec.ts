@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabCallout } from "./callout";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabCalloutSize, GoabCalloutType, Spacing } from "@abgov/ui-components-common";
+import { GoabCalloutType, Spacing } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -10,7 +10,6 @@ import { GoabCalloutSize, GoabCalloutType, Spacing } from "@abgov/ui-components-
     <goab-callout
       [type]="type"
       [heading]="heading"
-      [size]="size"
       [testId]="testId"
       maxWidth="480px"
       [mt]="mt"
@@ -26,7 +25,6 @@ import { GoabCalloutSize, GoabCalloutType, Spacing } from "@abgov/ui-components-
 class TestCalloutComponent {
   type?: GoabCalloutType;
   heading?: string;
-  size?: GoabCalloutSize;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -49,7 +47,6 @@ describe("GoABCallout", () => {
 
     component.type = "information";
     component.heading = "Callout Title";
-    component.size = "medium";
     component.testId = "test-callout";
     component.mt = "s";
     component.mr = "m";
@@ -64,7 +61,6 @@ describe("GoABCallout", () => {
     const el = fixture.nativeElement.querySelector("goa-callout");
     expect(el.getAttribute("heading")).toContain(component.heading);
     expect(el.getAttribute("type")).toContain(component.type);
-    expect(el.getAttribute("size")).toContain(component.size);
     expect(el.getAttribute("testid")).toContain(component.testId);
     expect(el.getAttribute("maxwidth")).toContain("480px");
     expect(el.getAttribute("mt")).toBe(component.mt);

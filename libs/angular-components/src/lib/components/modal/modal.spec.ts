@@ -40,7 +40,7 @@ class TestModalComponent {
   callOutVariant = "information" as GoabModalCalloutVariant;
   role = "alertdialog" as GoabModalRole;
   testId = "testId";
-  closable = true;
+  closable = false;
   transition = "fast" as GoabModalTransition;
   heading = "Modal Heading";
   actions = "Close";
@@ -77,11 +77,42 @@ describe("GoABModal", () => {
     expect(headingContent?.textContent).toContain("Heading");
     expect(modal?.getAttribute("open")).toBe(`${component.open}`);
     expect(modal?.getAttribute("maxwidth")).toBe(component.maxWidth);
-    expect(modal?.getAttribute("closable")).toBe(`${component.closable}`);
+    expect(modal?.getAttribute("closable")).toBe("true");
     expect(modal?.textContent).toContain(component.content);
     expect(modal?.getAttribute("calloutvariant")).toBe(component.callOutVariant);
     expect(modal?.getAttribute("testid")).toBe(component.testId);
     expect(modal?.getAttribute("transition")).toBe(component.transition);
     expect(modal?.getAttribute("role")).toBe(component.role);
   });
+
+  it("should be closable when an onClose handler is provided", () => {
+    const modal = fixture.debugElement.query(By.css("goa-modal")).nativeElement;
+
+    expect(component.closable).toBe(false);
+    expect(modal.getAttribute("closable")).toBe("true");
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [GoabModal],
+  template: `<goab-modal [closable]="true" heading="Modal Heading" />`,
+})
+class TestModalWithoutCloseHandlerComponent {}
+
+describe("GoABModal without an onClose handler", () => {
+  it("should not be closable when the compatibility input is supplied", fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestModalWithoutCloseHandlerComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestModalWithoutCloseHandlerComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const modal = fixture.debugElement.query(By.css("goa-modal")).nativeElement;
+    expect(modal.getAttribute("closable")).toBe("false");
+  }));
 });

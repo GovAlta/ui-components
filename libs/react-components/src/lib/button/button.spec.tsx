@@ -117,6 +117,22 @@ describe("GoabButton", () => {
     const el = container.querySelector("goa-button");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
+
+  it("should set arialabel when ariaLabel is provided", () => {
+    const { container } = render(
+      <GoabButton ariaLabel="Remove Jane Smith">Remove</GoabButton>,
+    );
+    const el = container.querySelector("goa-button");
+
+    expect(el?.getAttribute("arialabel")).toBe("Remove Jane Smith");
+  });
+
+  it("should not set arialabel when ariaLabel is not provided", () => {
+    const { container } = render(<GoabButton>Remove</GoabButton>);
+    const el = container.querySelector("goa-button");
+
+    expect(el?.hasAttribute("arialabel")).toBe(false);
+  });
 });
 
 describe("GoabButton disabled attribute", () => {

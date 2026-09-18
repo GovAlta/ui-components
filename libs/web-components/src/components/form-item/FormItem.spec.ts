@@ -234,31 +234,18 @@ describe("GoA FormItem", () => {
     expect(input.getAttribute("aria-describedby")).toBeTruthy();
     expect(input.getAttribute("aria-describedby")).toContain("helptext-");
 
-    // Simulate error state change
-    await fireEvent(
-      formItem,
-      new CustomEvent("error::change", {
-        detail: { isError: true },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    await component.$set({ error: "Error Message" });
 
     // Now both error and helptext should be in aria-describedby
     const describedBy = input.getAttribute("aria-describedby");
     expect(describedBy).toBeTruthy();
     expect(describedBy).toContain("error-");
     expect(describedBy).toContain("helptext-");
+    const errorMessage = formItem.querySelector(".error-msg");
+    expect(errorMessage?.id).toBe(describedBy?.split(" ")[0]);
+    expect(errorMessage?.textContent).toContain("Error Message");
 
-    // Simulate error state change back to no error
-    await fireEvent(
-      formItem,
-      new CustomEvent("error::change", {
-        detail: { isError: false },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    await component.$set({ error: "" });
 
     // Back to only helptext in aria-describedby
     expect(input.getAttribute("aria-describedby")).toBeTruthy();

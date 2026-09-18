@@ -37,7 +37,7 @@
           "type": "string",
           "required": true,
           "default": null,
-          "description": "The value submitted when this item is selected."
+          "description": "The value submitted when this item is selected. Set to an empty string (`\"\"`) to make this item the default selected value."
         }
       ],
       "events": [],
@@ -76,9 +76,9 @@
         {
           "name": "value",
           "type": "string",
-          "required": false,
+          "required": true,
           "default": null,
-          "description": "The value submitted when this item is selected."
+          "description": "The value submitted when this item is selected. Set to an empty string (`\"\"`) to make this item the default selected value."
         }
       ],
       "events": [],
@@ -115,9 +115,9 @@
         {
           "name": "value",
           "type": "string",
-          "required": false,
-          "default": "",
-          "description": "The value submitted when this item is selected."
+          "required": true,
+          "default": null,
+          "description": "The value submitted when this item is selected. Set to an empty string (`\"\"`) to make this item the default selected value."
         }
       ],
       "events": [],
