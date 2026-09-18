@@ -116,6 +116,13 @@ export default defineConfig({
           },
         },
       },
+      {
+        test: {
+          name: "design-system-mcp-unit",
+          environment: "node",
+          include: ["libs/design-system-mcp/**/*.spec.mjs"],
+        },
+      },
     ],
   },
 });

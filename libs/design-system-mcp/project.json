@@ -57,6 +57,16 @@
       "metadata": {
         "description": "Packs dist, installs the tarball into a throwaway folder, and drives the installed server over JSON-RPC through its npm bin. Halts on a data floor (300 records), missing relationship edges, or a failed search/get round trip. Runs in PR CI via nx affected --target=post."
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build", "^release"],
+      "options": {
+        "command": "node libs/design-system-mcp/scripts/release.mjs"
+      },
+      "metadata": {
+        "description": "Publishes the package from main (npm tag latest) or dev (npm tag dev), after the component libraries' releases, matching the web-components version this run published or, when it published none, the registry's. The version is web-components' major.minor plus our own patch counter. The script runs the smoke test on the stamped artifact before publishing and holds the dev lane until a stable version exists."
+      }
     }
   },
   "tags": []
