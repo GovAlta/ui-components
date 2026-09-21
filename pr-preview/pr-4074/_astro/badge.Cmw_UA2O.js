@@ -1,1 +1,0 @@
-import{j as a}from"./jsx-runtime.D_zvdyIk.js";import{t as u,l as f}from"./theme-context.DBIa_puq.js";function i(r,o){return r!==void 0?r?"true":"false":o?"true":"false"}function c({icon:r,iconType:o,size:t="medium",emphasis:e="strong",...n}){const s=u({size:t,emphasis:e,...n},f);return a.jsx("goa-badge",{icon:i(r,o),icontype:o,...s,version:"2",size:t,emphasis:e})}export{c as G};
