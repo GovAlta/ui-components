@@ -55,7 +55,8 @@ describe("RadioItem", () => {
 
   it("should render the radio item with disabled attribute", () => {
     const result = render(GoARadioItem, { disabled: true, value: "foobar" });
-    expect(result.getByRole("radio").getAttribute("disabled")).not.toBeNull();
+    const input = result.getByTestId("radio-option-foobar");
+    expect(input.getAttribute("disabled")).not.toBeNull();
   });
 
   it("should render the radio item with error attribute", () => {
