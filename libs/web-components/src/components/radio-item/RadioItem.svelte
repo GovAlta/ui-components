@@ -8,7 +8,6 @@
       arialabel: { reflect: true },
       error: { reflect: true },
       revealarialabel: { reflect: true },
-      disabled: { reflect: true },
     },
   }}
 />
@@ -273,6 +272,7 @@
       {value}
       data-testid="radio-option-{value}"
       disabled={isDisabled}
+      aria-hidden={isDisabled ? "true" : undefined}
       checked={isChecked}
       aria-label={arialabel}
       aria-describedby={$$slots.description || description
