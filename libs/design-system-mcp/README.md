@@ -4,7 +4,7 @@ An MCP server that gives AI tools accurate knowledge of the Government of Albert
 
 ## Setup
 
-Requires Node 20 or newer.
+Requires Node 20 or newer. Use the same version as your installed `@abgov/web-components` package.
 
 Claude Code:
 
@@ -25,7 +25,7 @@ Any other MCP client (Cursor, VS Code, and similar):
 }
 ```
 
-Every published version keeps its data forever. To freeze the knowledge your tools see, pin an exact version (for example `@abgov/design-system-mcp@x.y.z`) instead of letting npx take the latest.
+Every published version keeps its data forever. To freeze the knowledge your tools see, pin the same version you're using for `@abgov/web-components` (for example `@abgov/design-system-mcp@x.y.z`) instead of letting npx take the latest.
 
 ## Tools
 
