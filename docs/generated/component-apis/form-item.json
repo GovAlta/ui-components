@@ -34,13 +34,6 @@
           "description": "Sets the id attribute on the form item element."
         },
         {
-          "name": "label",
-          "type": "string",
-          "required": false,
-          "default": null,
-          "description": "Creates a label for the form item."
-        },
-        {
           "name": "labelSize",
           "type": "GoabFormItemLabelSize",
           "required": false,
@@ -124,6 +117,12 @@
           "type": "ReactNode",
           "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content.",
           "required": false
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements.",
+          "required": false
         }
       ]
     },
@@ -160,10 +159,14 @@
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
           "required": false,
           "default": null,
-          "description": "Creates a label for the form item."
+          "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements."
         },
         {
           "name": "labelSize",
@@ -249,6 +252,12 @@
           "type": "TemplateRef",
           "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or ngTemplate for custom help content.",
           "required": false
+        },
+        {
+          "name": "label",
+          "type": "TemplateRef",
+          "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements.",
+          "required": false
         }
       ]
     },
@@ -273,7 +282,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Creates a label for the form item."
+          "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements."
         },
         {
           "name": "labelsize",
@@ -378,6 +387,11 @@
         {
           "name": "helptext",
           "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content.",
+          "required": false
+        },
+        {
+          "name": "label",
+          "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements.",
           "required": false
         }
       ]

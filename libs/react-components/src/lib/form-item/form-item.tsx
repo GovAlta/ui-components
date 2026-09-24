@@ -33,8 +33,8 @@ declare module "react" {
 }
 
 export interface GoabFormItemProps extends Margins, DataAttributes {
-  /** Creates a label for the form item. */
-  label?: string;
+  /** Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. */
+  label?: React.ReactNode;
   /** Sets the label size. 'regular' for standard, 'large' for emphasis. @default "regular" */
   labelSize?: GoabFormItemLabelSize;
   /** Marks the field with an optional or required label indicator. */
@@ -61,6 +61,7 @@ export interface GoabFormItemProps extends Margins, DataAttributes {
 
 /** Wraps an input control with a text label, requirement label, helper text, and error text. */
 export function GoabFormItem({
+  label,
   error,
   helpText,
   publicFormSummaryOrder,
@@ -72,11 +73,13 @@ export function GoabFormItem({
 
   return (
     <goa-form-item
+      label={typeof label === "string" ? label : undefined}
       error={typeof error === "string" ? error : undefined}
       helptext={typeof helpText === "string" ? helpText : undefined}
       public-form-summary-order={publicFormSummaryOrder}
       {..._props}
     >
+      {label && typeof label !== "string" && <span slot="label">{label}</span>}
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}
       {children}

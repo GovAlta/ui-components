@@ -26,6 +26,9 @@ function handleChange(detail: GoabInputOnChangeDetail) {
 }`,
           jsx: `<GoabFormItem label="First name" mb="l">
   <GoabInput name="firstName" value={firstName} onChange={handleChange} />
+</GoabFormItem>
+<GoabFormItem label={<>Last name <em>(as shown on your ID)</em></>} mb="l">
+  <GoabInput name="lastName" />
 </GoabFormItem>`,
         },
         angular: {
@@ -43,10 +46,18 @@ function handleChange(detail: GoabInputOnChangeDetail) {
     (onChange)="handleChange($event)"
   >
   </goab-input>
+</goab-form-item>
+<ng-template #lastNameLabel>Last name <em>(as shown on your ID)</em></ng-template>
+<goab-form-item [label]="lastNameLabel" mb="l">
+  <goab-input name="lastName"></goab-input>
 </goab-form-item>`,
         },
         webComponents: `<goa-form-item label="First name" mb="l">
   <goa-input name="firstName"></goa-input>
+</goa-form-item>
+<goa-form-item mb="l">
+  <span slot="label">Last name <em>(as shown on your ID)</em></span>
+  <goa-input name="lastName"></goa-input>
 </goa-form-item>`,
       },
     },
