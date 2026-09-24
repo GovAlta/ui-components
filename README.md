@@ -45,8 +45,12 @@ Import the component styles in your main stylesheet. This stylesheet includes th
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 You can then use the components directly in markup:
@@ -80,8 +84,12 @@ Import the component styles in your main stylesheet. This stylesheet includes th
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 Example:
@@ -107,8 +115,12 @@ npm i @abgov/web-components @abgov/angular-components @abgov/ui-components-commo
 Add Ionicons to `src/index.html`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 Update your app module:

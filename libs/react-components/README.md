@@ -36,11 +36,9 @@ Add Ionicons to the `<head>` of `index.html`:
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
-></script>
-<script
-  nomodule
-  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
 ></script>
 ```
 
