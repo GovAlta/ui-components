@@ -31,7 +31,7 @@ export class GoabDropdownItem implements OnInit {
 
   /** @required The value submitted when this item is selected. Set to an empty string (`""`) to make this item the default selected value. */
   @Input({ required: true }) value!: string;
-  /** Rich item content. On selection, `label` is shown and `filter` defaults to the content's text. */
+  /** Additional text used to match this item in typeahead search, alongside the label. Defaults to the content's text. */
   @Input() filter?: string;
   /** Display label for the dropdown item. */
   @Input() label?: string;

@@ -295,7 +295,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the input will be translated for the screen reader."
         },
         {
           "name": "ariaLabelledBy",
@@ -643,7 +643,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": "Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]."
+          "description": "Disables this input. The input will not receive focus or events."
         },
         {
           "name": "error",

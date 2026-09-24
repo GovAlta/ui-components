@@ -120,7 +120,7 @@
           ],
           "required": false,
           "default": "hash",
-          "description": ""
+          "description": "Sets the navigation mode for tab switching. \"hash\" updates the URL hash when switching tabs."
         },
         {
           "name": "orientation",

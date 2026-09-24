@@ -157,27 +157,6 @@
     "webComponents": {
       "props": [
         {
-          "name": "borderradius",
-          "type": "string",
-          "required": false,
-          "default": "var(--goa-border-radius-m)",
-          "description": "Border radius of the popover window."
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "required": false,
-          "default": "false",
-          "description": "Disables the popover interaction. Used by parent components like Dropdown."
-        },
-        {
-          "name": "focusborderwidth",
-          "type": "string",
-          "required": false,
-          "default": "var(--goa-border-width-l)",
-          "description": "Width of the focus outline border."
-        },
-        {
           "name": "height",
           "type": "\"full\" | \"wrap-content\"",
           "values": [
@@ -187,13 +166,6 @@
           "required": false,
           "default": "wrap-content",
           "description": "Controls the height behavior. 'full' stretches to parent height, 'wrap-content' fits content."
-        },
-        {
-          "name": "hoffset",
-          "type": "string",
-          "required": false,
-          "default": "",
-          "description": "Additional horizontal offset added to the popover's position."
         },
         {
           "name": "maxwidth",
@@ -246,13 +218,6 @@
           "description": "Top margin."
         },
         {
-          "name": "open",
-          "type": "boolean",
-          "required": false,
-          "default": "false",
-          "description": "Controls the open state of the popover programmatically. Used by Dropdown, AppHeaderMenu."
-        },
-        {
           "name": "padded",
           "type": "boolean",
           "required": false,
@@ -285,13 +250,6 @@
           "required": false,
           "default": "popover",
           "description": "Sets a data-testid attribute for automated testing."
-        },
-        {
-          "name": "voffset",
-          "type": "string",
-          "required": false,
-          "default": "",
-          "description": "Additional vertical offset added to the popover's position."
         },
         {
           "name": "width",

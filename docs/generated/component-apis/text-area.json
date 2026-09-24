@@ -392,7 +392,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": "Sets the input to a disabled state. Use [attr.disabled] with [formControl]"
+          "description": "Sets the input to a disabled state."
         },
         {
           "name": "error",
@@ -484,7 +484,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": ""
+          "description": "Sets the visual size variant of the text area."
         },
         {
           "name": "testid",

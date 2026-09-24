@@ -84,7 +84,7 @@
           "type": "GoabLinkTarget",
           "required": false,
           "default": null,
-          "description": "For internal feedback urls sets target."
+          "description": "Sets the target attribute for the feedback URL link."
         },
         {
           "name": "headerUrlTarget",
@@ -157,7 +157,7 @@
           ],
           "required": false,
           "default": "blank",
-          "description": "For internal feedback urls sets target="
+          "description": "Sets the target attribute for the feedback URL link."
         },
         {
           "name": "hasfeedbackhandler",

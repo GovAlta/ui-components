@@ -85,7 +85,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": ""
+          "description": "When true, disables the tab so it cannot be selected."
         },
         {
           "name": "heading",
@@ -106,7 +106,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "URL-friendly identifier for the tab, used for hash-based navigation."
         }
       ],
       "events": [],

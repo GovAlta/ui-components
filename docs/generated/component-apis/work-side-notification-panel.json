@@ -103,21 +103,21 @@
           ],
           "required": false,
           "default": "unread",
-          "description": ""
+          "description": "Sets the initially active tab."
         },
         {
           "name": "heading",
           "type": "string",
           "required": false,
           "default": "Notifications",
-          "description": ""
+          "description": "Sets the panel heading text."
         },
         {
           "name": "testid",
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "Sets a data-testid attribute for automated testing."
         }
       ],
       "events": [

@@ -28,7 +28,9 @@
   export let heading: string = "";
   /** Whether this tab is currently selected/active. */
   export let open: boolean = false;
+  /** When true, disables the tab so it cannot be selected. */
   export let disabled: boolean = false;
+  /** URL-friendly identifier for the tab, used for hash-based navigation. */
   export let slug: string = "";
 
   // =======
