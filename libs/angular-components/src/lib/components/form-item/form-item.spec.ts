@@ -10,7 +10,7 @@ import { By } from "@angular/platform-browser";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <goab-form-item
-      [label]="label"
+      [label]="labelSlot ? labelTemplate : label"
       [requirement]="requirement"
       [error]="errorSlot ? errorTemplate : error"
       [helpText]="helpTextSlot ? helpTextTemplate : helpText"
@@ -24,6 +24,7 @@ import { By } from "@angular/platform-browser";
     >
       <input data-testid="foo" />
 
+      <ng-template #labelTemplate><strong>First name</strong></ng-template>
       <ng-template #errorTemplate> This is an error slot </ng-template>
       <ng-template #helpTextTemplate> This is a helpText slot </ng-template>
     </goab-form-item>
@@ -31,6 +32,7 @@ import { By } from "@angular/platform-browser";
 })
 class TestFormItemComponent {
   label?: string;
+  labelSlot = false;
   requirement?: GoabFormItemRequirement;
   error?: string | TemplateRef<any>;
   helpText?: string | TemplateRef<any>;
@@ -69,6 +71,20 @@ describe("GoABFormItem", () => {
     tick();
     fixture.detectChanges();
   }));
+
+  it("switches between template labels and backwards-compatible string labels", () => {
+    component.labelSlot = true;
+    fixture.detectChanges();
+    const el = fixture.debugElement.query(By.css("goa-form-item")).nativeElement;
+    expect(el.getAttribute("label")).toBeNull();
+    expect(el.querySelector('[slot="label"] strong')?.textContent).toBe("First name");
+    expect(el.querySelector("input")).not.toBeNull();
+
+    component.labelSlot = false;
+    fixture.detectChanges();
+    expect(el.getAttribute("label")).toBe("First name");
+    expect(el.querySelector('[slot="label"]')).toBeNull();
+  });
 
   it("should render with properties", () => {
     component.error = "This is an error";

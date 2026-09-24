@@ -14,6 +14,21 @@ ul.goa-unordered-list li::marker {
   color: var(--goa-color-brand-default);
 }
 
+/* Form item label content lives in the main HTML content */
+goa-form-item > em[slot="label"],
+goa-form-item > [slot="label"] em {
+  font: inherit;
+  color: inherit;
+  font-style: italic;
+}
+
+goa-form-item > strong[slot="label"],
+goa-form-item > [slot="label"] strong {
+  font: inherit;
+  color: inherit;
+  font-weight: var(--goa-font-weight-bold);
+}
+
 /* GoAAppHeader */
 /** needed to override a,
 a:visited at reset.css */

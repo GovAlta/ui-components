@@ -51,6 +51,24 @@ function handleChange(detail: GoabInputOnChangeDetail) {
       },
     },
     {
+      id: "with-rich-label-content",
+      name: "With rich label content",
+      description: "Form item with bold text in its label",
+      code: {
+        react: `<GoabFormItem label={<>Last name <em>(as shown on your ID)</em></>} mb="l">
+  <GoabInput name="lastName" />
+</GoabFormItem>`,
+        angular: `<ng-template #lastNameLabel>Last name <em>(as shown on your ID)</em></ng-template>
+<goab-form-item [label]="lastNameLabel" mb="l">
+  <goab-input name="lastName"></goab-input>
+</goab-form-item>`,
+        webComponents: `<goa-form-item mb="l">
+  <span slot="label">Last name <em>(as shown on your ID)</em></span>
+  <goa-input name="lastName"></goa-input>
+</goa-form-item>`,
+      },
+    },
+    {
       id: "with-help-text",
       name: "With help text",
       description: "Form item with additional guidance",

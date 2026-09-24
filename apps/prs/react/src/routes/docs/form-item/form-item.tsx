@@ -19,6 +19,18 @@ export function DocsFormItemRoute() {
       </GoabFormItem>
       <p>Value: {firstName}</p>
 
+      <h3>With rich label content</h3>
+      <GoabFormItem
+        label={
+          <>
+            Last name <em>(as shown on your ID)</em>
+          </>
+        }
+        mb="l"
+      >
+        <GoabInput name="lastName" />
+      </GoabFormItem>
+
       <h3>With help text</h3>
       <GoabFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
         <GoabInput name="password" type="password" width="100%" />
