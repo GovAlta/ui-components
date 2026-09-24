@@ -30,9 +30,11 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
       <div slot="heading">
         <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
       </div>
-      <div slot="actions">
-        <ng-container [ngTemplateOutlet]="actions"></ng-container>
-      </div>
+      @if (actions) {
+        <div slot="actions">
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      }
     </goa-drawer>
   } `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
