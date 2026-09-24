@@ -4,6 +4,27 @@ import { GoabFormItem } from "./form-item";
 afterEach(cleanup);
 
 describe("GoabFormItem", () => {
+  it("switches between rich labels and backwards-compatible string labels", () => {
+    const { baseElement, rerender } = render(
+      <GoabFormItem label={<strong>First name</strong>}>
+        <input />
+      </GoabFormItem>,
+    );
+    const el = baseElement.querySelector("goa-form-item");
+    expect(el?.getAttribute("label")).toBeNull();
+    expect(el?.querySelector('[slot="label"] strong')?.textContent).toBe("First name");
+    expect(el?.querySelector("input")).not.toBeNull();
+
+    rerender(<GoabFormItem label="First name" />);
+    expect(el?.getAttribute("label")).toBe("First name");
+    expect(el?.querySelector('[slot="label"]')).toBeNull();
+  });
+
+  it("renders a numeric ReactNode label", () => {
+    const { baseElement } = render(<GoabFormItem label={1} />);
+    expect(baseElement.querySelector('[slot="label"]')?.textContent).toBe("1");
+  });
+
   it("renders all with properties", () => {
     const { baseElement } = render(
       <GoabFormItem
@@ -17,7 +38,7 @@ describe("GoabFormItem", () => {
         id="firstName"
         name="first_name"
         publicFormSummaryOrder={1}
-      />
+      />,
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");
@@ -33,11 +54,7 @@ describe("GoabFormItem", () => {
   });
 
   it("renders without optional properties", () => {
-    const { baseElement } = render(
-      <GoabFormItem
-        label="First Name"
-      />
-    );
+    const { baseElement } = render(<GoabFormItem label="First Name" />);
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");
     expect(el?.getAttribute("name")).toBeNull();
@@ -46,11 +63,7 @@ describe("GoabFormItem", () => {
 
   it("renders with only public form properties", () => {
     const { baseElement } = render(
-      <GoabFormItem
-        label="First Name"
-        name="first_name"
-        publicFormSummaryOrder={2}
-      />
+      <GoabFormItem label="First Name" name="first_name" publicFormSummaryOrder={2} />,
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("label")).toEqual("First Name");
@@ -60,12 +73,9 @@ describe("GoabFormItem", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabFormItem
-        label="Test Label"
-        data-grid="cell"
-      >
+      <GoabFormItem label="Test Label" data-grid="cell">
         Form content
-      </GoabFormItem>
+      </GoabFormItem>,
     );
     const el = baseElement.querySelector("goa-form-item");
     expect(el?.getAttribute("data-grid")).toBe("cell");

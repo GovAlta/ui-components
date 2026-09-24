@@ -75,7 +75,7 @@
   // Optional
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Creates a label for the form item. */
+  /** Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. */
   export let label: string = "";
   /** Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. */
   export let labelsize: LabelSizeType = "regular";
@@ -135,7 +135,7 @@
     // Check if aria-label is present and has a value in the child element
     const ariaLabel = _inputEl.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
-      _inputEl.setAttribute("aria-label", label);
+      _inputEl.setAttribute("aria-label", getLabelText());
     }
 
     // Set aria-required
@@ -178,10 +178,17 @@
     // Check if aria-label is present and has a value in the child element
     const ariaLabel = el.getAttribute("aria-label");
     if (!ariaLabel || ariaLabel.trim() === "") {
-      el.setAttribute("aria-label", label);
+      el.setAttribute("aria-label", getLabelText());
     }
 
     sendMountedMessage(name);
+  }
+
+  function getLabelText(): string {
+    if (!$$slots.label) return label;
+    const slot = _rootEl?.querySelector<HTMLSlotElement>('slot[name="label"]');
+    const nodes = slot?.assignedNodes({ flatten: true }) ?? [];
+    return nodes.map((node) => node.textContent ?? "").join("").trim();
   }
 
   // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
@@ -192,7 +199,7 @@
       FormItemMountMsg,
       {
         id: _name,
-        label: name !== "blank" ? name : label,
+        label: name !== "blank" ? name : getLabelText(),
         el: _rootEl,
         order: publicFormSummaryOrder,
       },
@@ -211,10 +218,10 @@
   `}
   bind:this={_rootEl}
 >
-  {#if label}
+  {#if $$slots.label || label}
     <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class={`label ${labelsize}`}>
-      {label}
+      <slot name="label">{label}</slot>
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
         <em>({requirement})</em>
       {/if}

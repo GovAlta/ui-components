@@ -22,7 +22,7 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
   imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-form-item
-      [attr.label]="label"
+      [attr.label]="getLabelAsString()"
       [attr.labelsize]="labelSize"
       [attr.helptext]="getHelpTextAsString()"
       [attr.error]="getErrorAsString()"
@@ -38,6 +38,11 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
       [attr.mr]="mr"
       [attr.ml]="ml"
     >
+      @if (getLabelAsTemplate()) {
+        <span slot="label">
+          <ng-container [ngTemplateOutlet]="getLabelAsTemplate()"></ng-container>
+        </span>
+      }
       @if (getErrorAsTemplate()) {
         <div slot="error">
           <ng-container [ngTemplateOutlet]="getErrorAsTemplate()"></ng-container>
@@ -57,8 +62,8 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Creates a label for the form item. */
-  @Input() label?: string;
+  /** Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. */
+  @Input() label?: string | TemplateRef<any>;
   /** Sets the label size. 'regular' for standard, 'large' for emphasis. */
   @Input() labelSize?: GoabFormItemLabelSize;
   /** Help text displayed under the form field to provide additional explanation. */
@@ -79,6 +84,14 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
   @Input() name?: string;
 
   isReady = false;
+
+  getLabelAsString(): string | undefined {
+    return typeof this.label === "string" ? this.label : undefined;
+  }
+
+  getLabelAsTemplate(): TemplateRef<any> | null {
+    return this.label instanceof TemplateRef ? this.label : null;
+  }
 
   getHelpTextAsString(): string | undefined {
     return typeof this.helpText === "string" ? this.helpText : undefined;
