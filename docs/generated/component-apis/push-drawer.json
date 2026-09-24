@@ -7,10 +7,6 @@
         {
           "name": "heading",
           "type": "string | ReactNode",
-          "values": [
-            "string",
-            "ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the heading text or custom heading content."
@@ -55,6 +51,12 @@
           "required": false
         },
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the push drawer body.",
+          "required": true
+        },
+        {
           "name": "heading",
           "type": "ReactNode",
           "description": "Sets the heading text or custom heading content.",
@@ -67,10 +69,6 @@
         {
           "name": "heading",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the heading text or template for the push drawer."
@@ -115,6 +113,12 @@
           "required": false
         },
         {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the push drawer body.",
+          "required": true
+        },
+        {
           "name": "heading",
           "type": "TemplateRef",
           "description": "Sets the heading text or custom heading content.",
@@ -157,7 +161,7 @@
         {
           "name": "_close",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the push drawer closes.",
           "frameworks": [
             "webComponents"
           ]
@@ -168,6 +172,11 @@
           "name": "actions",
           "description": "Content rendered in the actions slot, typically action buttons.",
           "required": false
+        },
+        {
+          "name": "default",
+          "description": "Content rendered inside the push drawer body.",
+          "required": true
         },
         {
           "name": "heading",

@@ -13,14 +13,24 @@
         },
         {
           "name": "feedbackUrlTarget",
-          "type": "GoabLinkTarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabLinkTarget",
+          "values": [
+            "self",
+            "blank"
+          ],
           "required": false,
           "default": "blank",
           "description": "Sets the target attribute for the feedback URL link."
         },
         {
           "name": "headerUrlTarget",
-          "type": "GoabLinkTarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabLinkTarget",
+          "values": [
+            "self",
+            "blank"
+          ],
           "required": false,
           "default": "blank",
           "description": "Sets the target attribute for the header link."
@@ -41,7 +51,13 @@
         },
         {
           "name": "type",
-          "type": "GoabServiceLevel",
+          "type": "\"alpha\" | \"beta\" | \"live\"",
+          "typeLabel": "GoabServiceLevel",
+          "values": [
+            "alpha",
+            "beta",
+            "live"
+          ],
           "required": true,
           "default": null,
           "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
@@ -49,10 +65,6 @@
         {
           "name": "version",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "App or service version displayed on the right side of the header."
@@ -68,7 +80,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "version",
+          "type": "ReactNode",
+          "description": "App or service version displayed on the right side of the header.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -81,14 +100,24 @@
         },
         {
           "name": "feedbackUrlTarget",
-          "type": "GoabLinkTarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabLinkTarget",
+          "values": [
+            "self",
+            "blank"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the target attribute for the feedback URL link."
         },
         {
           "name": "headerUrlTarget",
-          "type": "GoabLinkTarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabLinkTarget",
+          "values": [
+            "self",
+            "blank"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the target attribute for the header link."
@@ -109,7 +138,13 @@
         },
         {
           "name": "type",
-          "type": "GoabServiceLevel",
+          "type": "\"alpha\" | \"beta\" | \"live\"",
+          "typeLabel": "GoabServiceLevel",
+          "values": [
+            "alpha",
+            "beta",
+            "live"
+          ],
           "required": true,
           "default": null,
           "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
@@ -117,10 +152,6 @@
         {
           "name": "version",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "App or service version displayed on the right side of the header."
@@ -136,7 +167,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "version",
+          "type": "TemplateRef",
+          "description": "App or service version displayed on the right side of the header.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -217,13 +255,19 @@
         {
           "name": "_feedbackClick",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the feedback link is clicked.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "version",
+          "description": "App or service version displayed on the right side of the header.",
+          "required": false
+        }
+      ]
     }
   }
 }

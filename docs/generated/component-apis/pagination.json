@@ -16,28 +16,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "pageNumber",
@@ -144,7 +144,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabPaginationVariant",
+          "type": "\"all\" | \"links-only\"",
+          "typeLabel": "GoabPaginationVariant",
+          "values": [
+            "all",
+            "links-only"
+          ],
           "required": false,
           "default": "all",
           "description": "Controls which nav controls are visible."
@@ -241,7 +246,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ page: number }>",
-          "description": "",
+          "description": "Emits when the page changes.",
           "frameworks": [
             "webComponents"
           ]

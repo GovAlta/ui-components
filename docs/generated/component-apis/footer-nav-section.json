@@ -27,7 +27,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Anchor link elements rendered as footer navigation links.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -61,7 +68,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Anchor link elements rendered as footer navigation links.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -88,7 +102,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Anchor link elements rendered as footer navigation links.",
+          "required": false
+        }
+      ]
     }
   }
 }

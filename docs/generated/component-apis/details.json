@@ -23,28 +23,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "open",
@@ -62,7 +62,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the details body.",
+          "required": true
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -124,7 +131,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the details body.",
+          "required": true
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -190,7 +204,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the details body.",
+          "required": true
+        }
+      ]
     }
   }
 }

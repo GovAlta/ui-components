@@ -13,14 +13,24 @@
         },
         {
           "name": "priority",
-          "type": "GoabWorkSideNotificationPriority",
+          "type": "\"normal\" | \"urgent\"",
+          "typeLabel": "GoabWorkSideNotificationPriority",
+          "values": [
+            "normal",
+            "urgent"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the urgency level of the notification."
         },
         {
           "name": "readStatus",
-          "type": "GoabWorkSideNotificationReadStatus",
+          "type": "\"read\" | \"unread\"",
+          "typeLabel": "GoabWorkSideNotificationReadStatus",
+          "values": [
+            "read",
+            "unread"
+          ],
           "required": false,
           "default": "unread",
           "description": "Indicates whether the notification has been read or is unread."
@@ -48,7 +58,15 @@
         },
         {
           "name": "type",
-          "type": "GoabWorkSideNotificationItemType",
+          "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+          "typeLabel": "GoabWorkSideNotificationItemType",
+          "values": [
+            "default",
+            "success",
+            "critical",
+            "warning",
+            "info"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the visual type/style of the notification item."
@@ -77,14 +95,24 @@
         },
         {
           "name": "priority",
-          "type": "GoabWorkSideNotificationPriority",
+          "type": "\"normal\" | \"urgent\"",
+          "typeLabel": "GoabWorkSideNotificationPriority",
+          "values": [
+            "normal",
+            "urgent"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the urgency level of the notification."
         },
         {
           "name": "readStatus",
-          "type": "GoabWorkSideNotificationReadStatus",
+          "type": "\"read\" | \"unread\"",
+          "typeLabel": "GoabWorkSideNotificationReadStatus",
+          "values": [
+            "read",
+            "unread"
+          ],
           "required": false,
           "default": "unread",
           "description": "Indicates whether the notification has been read or is unread."
@@ -112,7 +140,15 @@
         },
         {
           "name": "type",
-          "type": "GoabWorkSideNotificationItemType",
+          "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+          "typeLabel": "GoabWorkSideNotificationItemType",
+          "values": [
+            "default",
+            "success",
+            "critical",
+            "warning",
+            "info"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the visual type/style of the notification item."
@@ -204,7 +240,7 @@
         {
           "name": "_click",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the notification item is clicked.",
           "frameworks": [
             "webComponents"
           ]
@@ -212,7 +248,7 @@
         {
           "name": "_notificationItemRead",
           "type": "CustomEvent<{ el: unknown; readStatus: unknown }>",
-          "description": "",
+          "description": "Emits when the notification's read status changes.",
           "frameworks": [
             "webComponents"
           ]

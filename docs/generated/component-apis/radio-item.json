@@ -21,10 +21,6 @@
         {
           "name": "description",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Additional description text displayed below the label."
@@ -62,28 +58,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -142,10 +138,6 @@
         {
           "name": "description",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Additional description text displayed below the label."
@@ -353,7 +345,7 @@
         {
           "name": "_radioItemChange",
           "type": "CustomEvent<{ value: string; label: string }>",
-          "description": "",
+          "description": "Emits when the radio item is selected.",
           "frameworks": [
             "webComponents"
           ]

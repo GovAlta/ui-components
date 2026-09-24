@@ -6,7 +6,13 @@
       "props": [
         {
           "name": "status",
-          "type": "GoabFormStepStatus",
+          "type": "\"complete\" | \"incomplete\" | \"not-started\"",
+          "typeLabel": "GoabFormStepStatus",
+          "values": [
+            "complete",
+            "incomplete",
+            "not-started"
+          ],
           "required": false,
           "default": null,
           "description": "The completion status of the step. Affects visual styling and icons."
@@ -26,7 +32,13 @@
       "props": [
         {
           "name": "status",
-          "type": "GoabFormStepStatus",
+          "type": "\"complete\" | \"incomplete\" | \"not-started\"",
+          "typeLabel": "GoabFormStepStatus",
+          "values": [
+            "complete",
+            "incomplete",
+            "not-started"
+          ],
           "required": false,
           "default": null,
           "description": "The completion status of the step. Affects visual styling and icons."
@@ -75,7 +87,7 @@
         {
           "name": "_click",
           "type": "CustomEvent<{ step: unknown }>",
-          "description": "",
+          "description": "Emits when the step is clicked.",
           "frameworks": [
             "webComponents"
           ]

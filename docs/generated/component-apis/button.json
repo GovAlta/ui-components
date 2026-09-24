@@ -51,32 +51,37 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabButtonSize",
+          "type": "\"compact\" | \"normal\"",
+          "typeLabel": "GoabButtonSize",
+          "values": [
+            "compact",
+            "normal"
+          ],
           "required": false,
           "default": "normal",
           "description": "Controls the size of the button. Use \"compact\" for inline actions or space-constrained layouts."
@@ -97,14 +102,32 @@
         },
         {
           "name": "type",
-          "type": "GoabButtonType",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
+          "typeLabel": "GoabButtonType",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "start",
+            "text"
+          ],
           "required": false,
           "default": "primary",
-          "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, \"start\" for prominent call-to-action buttons, and \"text\" for text-only buttons."
+          "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, \"start\" for prominent call-to-action buttons, and \"text\" for text-only buttons.",
+          "deprecatedValues": [
+            "submit"
+          ]
         },
         {
           "name": "variant",
-          "type": "GoabButtonVariant",
+          "type": "\"normal\" | \"destructive\" | \"inverse\" | \"dark\"",
+          "typeLabel": "GoabButtonVariant",
+          "values": [
+            "normal",
+            "destructive",
+            "inverse",
+            "dark"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for light-colored text on dark backgrounds, and \"dark\" for dark text color on text buttons only. Note: \"dark\" has no effect on non-text button types."
@@ -127,7 +150,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the button.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -203,7 +233,12 @@
         },
         {
           "name": "size",
-          "type": "GoabButtonSize",
+          "type": "\"compact\" | \"normal\"",
+          "typeLabel": "GoabButtonSize",
+          "values": [
+            "compact",
+            "normal"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the size of the button. Use \"compact\" for inline actions or space-constrained layouts."
@@ -224,14 +259,32 @@
         },
         {
           "name": "type",
-          "type": "GoabButtonType",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
+          "typeLabel": "GoabButtonType",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "start",
+            "text"
+          ],
           "required": false,
           "default": "primary",
-          "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, \"start\" for prominent call-to-action buttons, and \"text\" for text-only buttons."
+          "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, \"start\" for prominent call-to-action buttons, and \"text\" for text-only buttons.",
+          "deprecatedValues": [
+            "submit"
+          ]
         },
         {
           "name": "variant",
-          "type": "GoabButtonVariant",
+          "type": "\"normal\" | \"destructive\" | \"inverse\" | \"dark\"",
+          "typeLabel": "GoabButtonVariant",
+          "values": [
+            "normal",
+            "destructive",
+            "inverse",
+            "dark"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for light-colored text on dark backgrounds, and \"dark\" for dark text color on text buttons only. Note: \"dark\" has no effect on non-text button types."
@@ -254,7 +307,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the button.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -362,15 +422,17 @@
         },
         {
           "name": "type",
-          "type": "\"primary\" | \"submit\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
           "typeLabel": "GoabButtonType",
           "values": [
             "primary",
-            "submit",
             "secondary",
             "tertiary",
             "start",
             "text"
+          ],
+          "deprecatedValues": [
+            "submit"
           ],
           "required": false,
           "default": "primary",
@@ -402,13 +464,19 @@
         {
           "name": "_click",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the button is clicked.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the button.",
+          "required": false
+        }
+      ]
     }
   }
 }

@@ -16,32 +16,39 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Page content to show or hide based on the current page index.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -89,7 +96,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Page content to show or hide based on the current page index.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -134,7 +148,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Page content to show or hide based on the current page index.",
+          "required": false
+        }
+      ]
     }
   }
 }

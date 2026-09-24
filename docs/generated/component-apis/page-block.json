@@ -13,14 +13,22 @@
         },
         {
           "name": "width",
-          "type": "GoabPageBlockSize",
+          "type": "\"full\" | string",
+          "typeLabel": "GoabPageBlockSize",
           "required": false,
           "default": "full",
           "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the page block.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -33,14 +41,22 @@
         },
         {
           "name": "width",
-          "type": "GoabPageBlockSize",
+          "type": "\"full\" | string",
+          "typeLabel": "GoabPageBlockSize",
           "required": false,
           "default": null,
           "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the page block.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -54,17 +70,19 @@
         {
           "name": "width",
           "type": "\"full\" | string",
-          "values": [
-            "full",
-            "string"
-          ],
           "required": false,
           "default": "full",
           "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the page block.",
+          "required": false
+        }
+      ]
     }
   }
 }

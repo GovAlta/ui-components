@@ -27,7 +27,12 @@
         },
         {
           "name": "size",
-          "type": "GoabButtonSize",
+          "type": "\"compact\" | \"normal\"",
+          "typeLabel": "GoabButtonSize",
+          "values": [
+            "compact",
+            "normal"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the size of the button."
@@ -48,14 +53,32 @@
         },
         {
           "name": "type",
-          "type": "GoabButtonType",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
+          "typeLabel": "GoabButtonType",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "start",
+            "text"
+          ],
           "required": false,
           "default": "primary",
-          "description": "The button style variant."
+          "description": "The button style variant.",
+          "deprecatedValues": [
+            "submit"
+          ]
         },
         {
           "name": "variant",
-          "type": "GoabButtonVariant",
+          "type": "\"normal\" | \"destructive\" | \"inverse\" | \"dark\"",
+          "typeLabel": "GoabButtonVariant",
+          "values": [
+            "normal",
+            "destructive",
+            "inverse",
+            "dark"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the color variant for semantic meaning."
@@ -71,7 +94,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the menu button, typically GoabMenuAction items.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -98,7 +128,12 @@
         },
         {
           "name": "size",
-          "type": "GoabButtonSize",
+          "type": "\"compact\" | \"normal\"",
+          "typeLabel": "GoabButtonSize",
+          "values": [
+            "compact",
+            "normal"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the size of the button."
@@ -119,14 +154,32 @@
         },
         {
           "name": "type",
-          "type": "GoabButtonType",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
+          "typeLabel": "GoabButtonType",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary",
+            "start",
+            "text"
+          ],
           "required": false,
           "default": null,
-          "description": "The button style variant."
+          "description": "The button style variant.",
+          "deprecatedValues": [
+            "submit"
+          ]
         },
         {
           "name": "variant",
-          "type": "GoabButtonVariant",
+          "type": "\"normal\" | \"destructive\" | \"inverse\" | \"dark\"",
+          "typeLabel": "GoabButtonVariant",
+          "values": [
+            "normal",
+            "destructive",
+            "inverse",
+            "dark"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the color variant for semantic meaning."
@@ -142,7 +195,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the menu button, typically GoabMenuAction items.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -221,13 +281,19 @@
         {
           "name": "_action",
           "type": "CustomEvent<{ action?: string; size?: \"normal\" | \"compact\" }>",
-          "description": "",
+          "description": "Emits when a menu action is clicked.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the menu button, typically GoabMenuAction items.",
+          "required": false
+        }
+      ]
     }
   }
 }

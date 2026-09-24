@@ -6,9 +6,15 @@
       "props": [
         {
           "name": "direction",
-          "type": "GoabScrollPanelDirectionType",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "typeLabel": "GoabScrollPanelDirectionType",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
           "required": false,
-          "default": null,
+          "default": "vertical",
           "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."
         },
         {
@@ -29,6 +35,12 @@
       "events": [],
       "slots": [
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered in the scrollable body region.",
+          "required": false
+        },
+        {
           "name": "footer",
           "type": "ReactNode",
           "description": "Content rendered in the sticky footer region.",
@@ -46,7 +58,13 @@
       "props": [
         {
           "name": "direction",
-          "type": "GoabScrollPanelDirectionType",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "typeLabel": "GoabScrollPanelDirectionType",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
           "required": false,
           "default": "vertical",
           "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."
@@ -68,6 +86,12 @@
       ],
       "events": [],
       "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered in the scrollable body region.",
+          "required": false
+        },
         {
           "name": "footer",
           "type": "TemplateRef",
@@ -113,6 +137,11 @@
       ],
       "events": [],
       "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered in the scrollable body region.",
+          "required": false
+        },
         {
           "name": "footer",
           "description": "Content rendered in the sticky footer region.",

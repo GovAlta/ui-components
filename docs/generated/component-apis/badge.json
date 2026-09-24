@@ -13,7 +13,12 @@
         },
         {
           "name": "emphasis",
-          "type": "GoabBadgeEmphasis",
+          "type": "\"subtle\" | \"strong\"",
+          "typeLabel": "GoabBadgeEmphasis",
+          "values": [
+            "subtle",
+            "strong"
+          ],
           "required": false,
           "default": "strong",
           "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
@@ -30,32 +35,37 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabBadgeSize",
+          "type": "\"medium\" | \"large\"",
+          "typeLabel": "GoabBadgeSize",
+          "values": [
+            "medium",
+            "large"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of the badge."
@@ -69,7 +79,22 @@
         },
         {
           "name": "type",
-          "type": "GoabBadgeType",
+          "type": "\"information\" | \"success\" | \"important\" | \"emergency\" | \"archived\" | \"sky\" | \"prairie\" | \"lilac\" | \"pasture\" | \"sunset\" | \"dawn\" | \"default\"",
+          "typeLabel": "GoabBadgeType",
+          "values": [
+            "information",
+            "success",
+            "important",
+            "emergency",
+            "archived",
+            "sky",
+            "prairie",
+            "lilac",
+            "pasture",
+            "sunset",
+            "dawn",
+            "default"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the context and colour of the badge."
@@ -97,17 +122,18 @@
         {
           "name": "content",
           "type": "string | TemplateRef<unknown>",
-          "values": [
-            "string",
-            "TemplateRef<unknown>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the content displayed in the badge. Accepts a string or template for custom content."
         },
         {
           "name": "emphasis",
-          "type": "GoabBadgeEmphasis",
+          "type": "\"subtle\" | \"strong\"",
+          "typeLabel": "GoabBadgeEmphasis",
+          "values": [
+            "subtle",
+            "strong"
+          ],
           "required": false,
           "default": "strong",
           "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
@@ -149,7 +175,12 @@
         },
         {
           "name": "size",
-          "type": "GoabBadgeSize",
+          "type": "\"medium\" | \"large\"",
+          "typeLabel": "GoabBadgeSize",
+          "values": [
+            "medium",
+            "large"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of the badge."
@@ -163,7 +194,22 @@
         },
         {
           "name": "type",
-          "type": "GoabBadgeType",
+          "type": "\"information\" | \"success\" | \"important\" | \"emergency\" | \"archived\" | \"sky\" | \"prairie\" | \"lilac\" | \"pasture\" | \"sunset\" | \"dawn\" | \"default\"",
+          "typeLabel": "GoabBadgeType",
+          "values": [
+            "information",
+            "success",
+            "important",
+            "emergency",
+            "archived",
+            "sky",
+            "prairie",
+            "lilac",
+            "pasture",
+            "sunset",
+            "dawn",
+            "default"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the context and colour of the badge."
@@ -197,7 +243,11 @@
         },
         {
           "name": "emphasis",
-          "type": "",
+          "type": "\"subtle\" | \"strong\"",
+          "values": [
+            "subtle",
+            "strong"
+          ],
           "required": false,
           "default": "strong",
           "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
@@ -330,7 +380,7 @@
       "slots": [
         {
           "name": "content",
-          "description": "Content displayed in the badge. Accepts a string or ReactNode for custom content.",
+          "description": "Content displayed in the badge.",
           "required": false
         }
       ]

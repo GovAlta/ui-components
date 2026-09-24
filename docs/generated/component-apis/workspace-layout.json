@@ -24,6 +24,12 @@
       ],
       "slots": [
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Main scrollable content.",
+          "required": false
+        },
+        {
           "name": "pageFooter",
           "type": "ReactNode",
           "description": "Content rendered in the sticky page footer region.",
@@ -71,6 +77,12 @@
       ],
       "slots": [
         {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Main scrollable content.",
+          "required": false
+        },
+        {
           "name": "pageFooter",
           "type": "TemplateRef",
           "description": "Content rendered in the sticky page footer region.",
@@ -110,13 +122,18 @@
         {
           "name": "_scrollStateChange",
           "type": "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
-          "description": "",
+          "description": "Emitted whenever the internal scroll state changes (no-scroll → at-top → middle → at-bottom).",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
       "slots": [
+        {
+          "name": "default",
+          "description": "Main scrollable content.",
+          "required": false
+        },
         {
           "name": "page-footer",
           "description": "Content rendered in the sticky page footer region.",

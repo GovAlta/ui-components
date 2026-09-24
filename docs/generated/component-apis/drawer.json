@@ -7,17 +7,14 @@
         {
           "name": "heading",
           "type": "string | ReactNode",
-          "values": [
-            "string",
-            "ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content."
         },
         {
           "name": "maxSize",
-          "type": "GoabDrawerSize",
+          "type": "`${number}${\"px\" | \"rem\" | \"ch\" | \"vh\" | \"vw\" | \"%\"}`",
+          "typeLabel": "GoabDrawerSize",
           "required": false,
           "default": null,
           "description": "Sets max height on bottom position, sets width on left and right position."
@@ -31,7 +28,13 @@
         },
         {
           "name": "position",
-          "type": "GoabDrawerPosition",
+          "type": "\"bottom\" | \"left\" | \"right\"",
+          "typeLabel": "GoabDrawerPosition",
+          "values": [
+            "bottom",
+            "left",
+            "right"
+          ],
           "required": true,
           "default": null,
           "description": "The position of the drawer."
@@ -62,6 +65,12 @@
           "required": false
         },
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the drawer body.",
+          "required": true
+        },
+        {
           "name": "heading",
           "type": "ReactNode",
           "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content.",
@@ -74,17 +83,14 @@
         {
           "name": "heading",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "The heading text displayed at the top of the drawer."
         },
         {
           "name": "maxSize",
-          "type": "GoabDrawerSize",
+          "type": "`${number}${\"px\" | \"rem\" | \"ch\" | \"vh\" | \"vw\" | \"%\"}`",
+          "typeLabel": "GoabDrawerSize",
           "required": false,
           "default": null,
           "description": "Sets max height on bottom position, sets width on left and right position."
@@ -98,7 +104,13 @@
         },
         {
           "name": "position",
-          "type": "GoabDrawerPosition",
+          "type": "\"bottom\" | \"left\" | \"right\"",
+          "typeLabel": "GoabDrawerPosition",
+          "values": [
+            "bottom",
+            "left",
+            "right"
+          ],
           "required": true,
           "default": null,
           "description": "The position of the drawer."
@@ -127,6 +139,12 @@
           "type": "TemplateRef",
           "description": "Action elements rendered in the drawer footer slot.",
           "required": false
+        },
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the drawer body.",
+          "required": true
         },
         {
           "name": "heading",
@@ -158,7 +176,7 @@
         },
         {
           "name": "maxsize",
-          "type": "DrawerSize",
+          "type": "`${number}${\"px\" | \"rem\" | \"ch\" | \"vh\" | \"vw\" | \"%\"}`",
           "required": false,
           "default": null,
           "description": "Sets max height on bottom position, sets width on left and right position."
@@ -172,7 +190,12 @@
         },
         {
           "name": "position",
-          "type": "DrawerPosition",
+          "type": "\"bottom\" | \"left\" | \"right\"",
+          "values": [
+            "bottom",
+            "left",
+            "right"
+          ],
           "required": true,
           "default": null,
           "description": "The position of the drawer."
@@ -189,7 +212,7 @@
         {
           "name": "_close",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the drawer is closed.",
           "frameworks": [
             "webComponents"
           ]
@@ -202,8 +225,13 @@
           "required": false
         },
         {
+          "name": "default",
+          "description": "Content rendered inside the drawer body.",
+          "required": true
+        },
+        {
           "name": "heading",
-          "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content.",
+          "description": "The heading text displayed at the top of the drawer.",
           "required": false
         }
       ]

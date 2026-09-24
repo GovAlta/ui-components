@@ -13,7 +13,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Navigation links and groups rendered inside the side menu.",
+          "required": true
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -26,7 +33,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Navigation links and groups rendered inside the side menu.",
+          "required": true
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -39,7 +53,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Navigation links and groups rendered inside the side menu.",
+          "required": true
+        }
+      ]
     }
   }
 }

@@ -7,17 +7,19 @@
         {
           "name": "content",
           "type": "string | ReactNode",
-          "values": [
-            "string",
-            "ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "The content of the tooltip. Accepts plain text or rich content."
         },
         {
           "name": "hAlign",
-          "type": "GoabTooltipHorizontalAlignment",
+          "type": "\"left\" | \"right\" | \"center\"",
+          "typeLabel": "GoabTooltipHorizontalAlignment",
+          "values": [
+            "left",
+            "right",
+            "center"
+          ],
           "required": false,
           "default": "center",
           "description": "Horizontal alignment of the tooltip relative to the child element."
@@ -34,32 +36,39 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "position",
-          "type": "GoabTooltipPosition",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "typeLabel": "GoabTooltipPosition",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
           "required": false,
           "default": "top",
           "description": "Position of the tooltip with respect to the child element."
@@ -75,6 +84,12 @@
       "events": [],
       "slots": [
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "The element that triggers the tooltip on hover or focus.",
+          "required": false
+        },
+        {
           "name": "content",
           "type": "ReactNode",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
@@ -87,17 +102,19 @@
         {
           "name": "content",
           "type": "string | TemplateRef<unknown>",
-          "values": [
-            "string",
-            "TemplateRef<unknown>"
-          ],
           "required": false,
           "default": null,
           "description": "The content of the tooltip."
         },
         {
           "name": "hAlign",
-          "type": "GoabTooltipHorizontalAlignment",
+          "type": "\"left\" | \"right\" | \"center\"",
+          "typeLabel": "GoabTooltipHorizontalAlignment",
+          "values": [
+            "left",
+            "right",
+            "center"
+          ],
           "required": false,
           "default": "center",
           "description": "Horizontal alignment to the child element."
@@ -139,7 +156,14 @@
         },
         {
           "name": "position",
-          "type": "GoabTooltipPosition",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+          "typeLabel": "GoabTooltipPosition",
+          "values": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
           "required": false,
           "default": "top",
           "description": "Position with respect to the child element."
@@ -158,6 +182,12 @@
           "name": "content",
           "type": "TemplateRef",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
+          "required": false
+        },
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "The element that triggers the tooltip on hover or focus.",
           "required": false
         }
       ]
@@ -250,6 +280,11 @@
         {
           "name": "content",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
+          "required": false
+        },
+        {
+          "name": "default",
+          "description": "The element that triggers the tooltip on hover or focus.",
           "required": false
         }
       ]

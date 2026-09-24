@@ -79,28 +79,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -132,9 +132,14 @@
         },
         {
           "name": "size",
-          "type": "GoabDropdownSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabDropdownSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
-          "default": null,
+          "default": "default",
           "description": "Sets the size of the dropdown. Compact reduces height for dense layouts."
         },
         {
@@ -147,10 +152,6 @@
         {
           "name": "value",
           "type": "string[] | string",
-          "values": [
-            "string[]",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "The value of the selected item."
@@ -189,7 +190,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Dropdown items rendered inside the dropdown.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -321,7 +329,12 @@
         },
         {
           "name": "size",
-          "type": "GoabDropdownSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabDropdownSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of the dropdown. Compact reduces height for dense layouts."
@@ -336,10 +349,6 @@
         {
           "name": "value",
           "type": "string[] | string",
-          "values": [
-            "string[]",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the control value used by Angular forms and one-way binding."
@@ -378,7 +387,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Dropdown items rendered inside the dropdown.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -543,15 +559,15 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when the dropdown loses focus.",
           "frameworks": [
             "webComponents"
           ]
         },
         {
           "name": "_change",
-          "type": "CustomEvent<{ name?: string; value?: string; event: Event }>",
-          "description": "",
+          "type": "CustomEvent<{ name?: string; value?: string }>",
+          "description": "Emits when the user selects a value from the dropdown.",
           "frameworks": [
             "webComponents"
           ]
@@ -559,13 +575,19 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when the dropdown receives focus.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Dropdown items rendered inside the dropdown.",
+          "required": false
+        }
+      ]
     }
   }
 }

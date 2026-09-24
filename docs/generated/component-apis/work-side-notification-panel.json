@@ -6,7 +6,13 @@
       "props": [
         {
           "name": "activeTab",
-          "type": "GoabWorkSideNotificationActiveTabType",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "typeLabel": "GoabWorkSideNotificationActiveTabType",
+          "values": [
+            "unread",
+            "urgent",
+            "all"
+          ],
           "required": false,
           "default": "unread",
           "description": "Sets the initially active tab."
@@ -44,13 +50,26 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Notification item content rendered inside the panel.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
         {
           "name": "activeTab",
-          "type": "GoabWorkSideNotificationActiveTabType",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "typeLabel": "GoabWorkSideNotificationActiveTabType",
+          "values": [
+            "unread",
+            "urgent",
+            "all"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the initially active tab in the notification panel."
@@ -88,7 +107,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Notification item content rendered inside the panel.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -124,7 +150,7 @@
         {
           "name": "_markAllRead",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the user clicks \"Mark all as read\".",
           "frameworks": [
             "webComponents"
           ]
@@ -132,13 +158,19 @@
         {
           "name": "_viewAll",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the user clicks \"View all\".",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Notification item content rendered inside the panel.",
+          "required": false
+        }
+      ]
     }
   }
 }

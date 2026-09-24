@@ -13,21 +13,36 @@
         },
         {
           "name": "headingSize",
-          "type": "GoabAccordionHeadingSize",
+          "type": "\"small\" | \"medium\"",
+          "typeLabel": "GoabAccordionHeadingSize",
+          "values": [
+            "small",
+            "medium"
+          ],
           "required": false,
           "default": "small",
           "description": "Sets the heading size of the accordion container heading."
         },
         {
           "name": "headingType",
-          "type": "GoabAccordionHeadingType",
+          "type": "\"normal\" | \"filled\"",
+          "typeLabel": "GoabAccordionHeadingType",
+          "values": [
+            "normal",
+            "filled"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the accordion style variant."
         },
         {
           "name": "iconPosition",
-          "type": "GoabAccordionIconPosition",
+          "type": "\"left\" | \"right\"",
+          "typeLabel": "GoabAccordionIconPosition",
+          "values": [
+            "left",
+            "right"
+          ],
           "required": false,
           "default": "left",
           "description": "Sets the position of the expand/collapse icon."
@@ -44,28 +59,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "open",
@@ -107,6 +122,12 @@
           "required": false
         },
         {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the accordion body.",
+          "required": false
+        },
+        {
           "name": "headingContent",
           "type": "ReactNode",
           "description": "Sets content rendered within the accordion heading, alongside the heading text.",
@@ -125,21 +146,36 @@
         },
         {
           "name": "headingSize",
-          "type": "GoabAccordionHeadingSize",
+          "type": "\"small\" | \"medium\"",
+          "typeLabel": "GoabAccordionHeadingSize",
+          "values": [
+            "small",
+            "medium"
+          ],
           "required": false,
           "default": "small",
           "description": "Sets the heading size of the accordion container heading."
         },
         {
           "name": "headingType",
-          "type": "GoabAccordionHeadingType",
+          "type": "\"normal\" | \"filled\"",
+          "typeLabel": "GoabAccordionHeadingType",
+          "values": [
+            "normal",
+            "filled"
+          ],
           "required": false,
           "default": "normal",
           "description": "Sets the accordion style variant."
         },
         {
           "name": "iconPosition",
-          "type": "GoabAccordionIconPosition",
+          "type": "\"left\" | \"right\"",
+          "typeLabel": "GoabAccordionIconPosition",
+          "values": [
+            "left",
+            "right"
+          ],
           "required": false,
           "default": "left",
           "description": "Sets the position of the expand/collapse icon."
@@ -216,6 +252,12 @@
           "name": "actions",
           "type": "TemplateRef",
           "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
+          "required": false
+        },
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the accordion body.",
           "required": false
         },
         {
@@ -343,7 +385,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ open: boolean }>",
-          "description": "",
+          "description": "Emits when the accordion opens or closes.",
           "frameworks": [
             "webComponents"
           ]
@@ -353,6 +395,11 @@
         {
           "name": "actions",
           "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
+          "required": false
+        },
+        {
+          "name": "default",
+          "description": "Content rendered inside the accordion body.",
           "required": false
         },
         {

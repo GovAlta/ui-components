@@ -20,9 +20,15 @@
         },
         {
           "name": "mountType",
-          "type": "GoabDropdownItemMountType",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "typeLabel": "GoabDropdownItemMountType",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
           "required": false,
-          "default": null,
+          "default": "append",
           "description": "Controls how the item is registered with the parent dropdown."
         },
         {
@@ -41,7 +47,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -61,7 +74,13 @@
         },
         {
           "name": "mountType",
-          "type": "GoabDropdownItemMountType",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "typeLabel": "GoabDropdownItemMountType",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
           "required": false,
           "default": null,
           "description": "Controls how the item is registered with the parent dropdown."
@@ -82,7 +101,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -121,7 +147,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
+          "required": false
+        }
+      ]
     }
   }
 }

@@ -51,32 +51,47 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabIconSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"2xsmall\" | \"xsmall\" | \"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabIconSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "2xsmall",
+            "xsmall",
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of button."
@@ -90,7 +105,12 @@
         },
         {
           "name": "theme",
-          "type": "GoabIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the theme of the icon inside the button. \"outline\" for stroked icons, \"filled\" for solid icons."
@@ -104,14 +124,27 @@
         },
         {
           "name": "type",
-          "type": "GoabIconButtonType",
+          "type": "\"default\" | \"tertiary\"",
+          "typeLabel": "GoabIconButtonType",
+          "values": [
+            "default",
+            "tertiary"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the visual style of the button."
         },
         {
           "name": "variant",
-          "type": "GoabIconButtonVariant",
+          "type": "\"color\" | \"nocolor\" | \"dark\" | \"light\" | \"destructive\"",
+          "typeLabel": "GoabIconButtonVariant",
+          "values": [
+            "color",
+            "nocolor",
+            "dark",
+            "light",
+            "destructive"
+          ],
           "required": false,
           "default": "color",
           "description": "Styles the button to show color, light, dark or destructive action."
@@ -203,7 +236,22 @@
         },
         {
           "name": "size",
-          "type": "GoabIconSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"2xsmall\" | \"xsmall\" | \"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabIconSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "2xsmall",
+            "xsmall",
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of button."
@@ -217,7 +265,12 @@
         },
         {
           "name": "theme",
-          "type": "GoabIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. \"outline\" for stroked icons, \"filled\" for solid icons."
@@ -231,14 +284,27 @@
         },
         {
           "name": "type",
-          "type": "GoabIconButtonType",
+          "type": "\"default\" | \"tertiary\"",
+          "typeLabel": "GoabIconButtonType",
+          "values": [
+            "default",
+            "tertiary"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the visual style of the button."
         },
         {
           "name": "variant",
-          "type": "GoabIconButtonVariant",
+          "type": "\"color\" | \"nocolor\" | \"dark\" | \"light\" | \"destructive\"",
+          "typeLabel": "GoabIconButtonVariant",
+          "values": [
+            "color",
+            "nocolor",
+            "dark",
+            "light",
+            "destructive"
+          ],
           "required": false,
           "default": null,
           "description": "Styles the button to show color, light, dark or destructive action."
@@ -342,7 +408,21 @@
         },
         {
           "name": "size",
-          "type": "IconSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"2xsmall\" | \"xsmall\" | \"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "2xsmall",
+            "xsmall",
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of button."
@@ -356,7 +436,11 @@
         },
         {
           "name": "theme",
-          "type": "IconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
@@ -400,7 +484,7 @@
         {
           "name": "_click",
           "type": "CustomEvent<{ event: Event }>",
-          "description": "",
+          "description": "Emits when the icon button is clicked.",
           "frameworks": [
             "webComponents"
           ]

@@ -513,6 +513,39 @@ try {
   }
   ok(`a question puts its component first, for all ${askable.length} stable public components`);
 
+  // 13. A component's API reads cleanly in every framework: every event and
+  // margin is described, no raw @default tag shows, and no slot outside React
+  // talks about React. These are rules, not named props, so renaming a prop
+  // never fails this check.
+  const frameworksOf = {};
+  for (const c of recordsBy.components) {
+    const full = await call("get", { id: c.id, collection: "components", detail: "full" });
+    frameworksOf[c.id] = full.body?.entry?.api?.frameworks ?? {};
+  }
+  const apiGaps = [];
+  for (const [id, frameworks] of Object.entries(frameworksOf)) {
+    for (const [fw, api] of Object.entries(frameworks)) {
+      for (const e of api.events ?? []) {
+        if (!e.description?.trim()) apiGaps.push(`${id} ${fw} event ${e.name} has no description`);
+      }
+      for (const p of api.props ?? []) {
+        if (["mt", "mr", "mb", "ml"].includes(p.name) && !p.description?.trim()) {
+          apiGaps.push(`${id} ${fw} ${p.name} has no description`);
+        }
+      }
+      for (const item of [...(api.props ?? []), ...(api.events ?? []), ...(api.slots ?? [])]) {
+        if (/@default\b/.test(item.description ?? "")) apiGaps.push(`${id} ${fw} ${item.name} shows a raw @default tag`);
+      }
+      for (const s of api.slots ?? []) {
+        if (fw !== "react" && /React/.test(s.description ?? "")) apiGaps.push(`${id} ${fw} slot ${s.name} names React`);
+      }
+    }
+  }
+  if (apiGaps.length) {
+    fail(`component APIs have ${apiGaps.length} gaps, e.g. ${apiGaps.slice(0, 5).join("; ")}`);
+  }
+  ok(`every component's events and margins are described, with no raw tags or React wording elsewhere`);
+
 } catch (err) {
   fail(err instanceof Error ? err.message : String(err));
 }

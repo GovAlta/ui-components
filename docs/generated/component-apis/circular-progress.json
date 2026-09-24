@@ -20,7 +20,12 @@
         },
         {
           "name": "size",
-          "type": "GoabCircularProgressSize",
+          "type": "\"small\" | \"large\"",
+          "typeLabel": "GoabCircularProgressSize",
+          "values": [
+            "small",
+            "large"
+          ],
           "required": false,
           "default": "large",
           "description": "Sets the size of the progress indicator."
@@ -34,7 +39,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabCircularProgressVariant",
+          "type": "\"fullscreen\" | \"inline\"",
+          "typeLabel": "GoabCircularProgressVariant",
+          "values": [
+            "fullscreen",
+            "inline"
+          ],
           "required": false,
           "default": "inline",
           "description": "Controls the display mode. 'fullscreen' stretches across the full screen; 'inline' is used within content."
@@ -68,7 +78,12 @@
         },
         {
           "name": "size",
-          "type": "GoabCircularProgressSize",
+          "type": "\"small\" | \"large\"",
+          "typeLabel": "GoabCircularProgressSize",
+          "values": [
+            "small",
+            "large"
+          ],
           "required": false,
           "default": null,
           "description": "Size of the progress indicator."
@@ -82,7 +97,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabCircularProgressVariant",
+          "type": "\"fullscreen\" | \"inline\"",
+          "typeLabel": "GoabCircularProgressVariant",
+          "values": [
+            "fullscreen",
+            "inline"
+          ],
           "required": false,
           "default": null,
           "description": "Stretch across the full screen or use it inline."

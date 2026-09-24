@@ -9,32 +9,37 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "sortMode",
-          "type": "GoabTableSortMode",
+          "type": "\"single\" | \"multi\"",
+          "typeLabel": "GoabTableSortMode",
+          "values": [
+            "single",
+            "multi"
+          ],
           "required": false,
           "default": "single",
           "description": "Sort mode: \"single\" allows one column, \"multi\" allows up to 2 columns."
@@ -55,7 +60,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabTableVariant",
+          "type": "\"normal\" | \"relaxed\"",
+          "typeLabel": "GoabTableVariant",
+          "values": [
+            "normal",
+            "relaxed"
+          ],
           "required": false,
           "default": "normal",
           "description": "A relaxed variant of the table with more vertical padding for the cells."
@@ -86,7 +96,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the table (table rows, headers, etc.).",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -120,7 +137,12 @@
         },
         {
           "name": "sortMode",
-          "type": "GoabTableSortMode",
+          "type": "\"single\" | \"multi\"",
+          "typeLabel": "GoabTableSortMode",
+          "values": [
+            "single",
+            "multi"
+          ],
           "required": false,
           "default": null,
           "description": "Sets sort mode: \"single\" allows one column, \"multi\" allows up to 2 columns."
@@ -141,7 +163,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabTableVariant",
+          "type": "\"normal\" | \"relaxed\"",
+          "typeLabel": "GoabTableVariant",
+          "values": [
+            "normal",
+            "relaxed"
+          ],
           "required": false,
           "default": null,
           "description": "Sets a relaxed variant of the table with more vertical padding for the cells."
@@ -172,7 +199,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the table (table rows, headers, etc.).",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -258,7 +292,7 @@
         {
           "name": "_multisort",
           "type": "CustomEvent<{ sorts: { column: string; direction: \"asc\" | \"desc\" }[] }>",
-          "description": "",
+          "description": "Emits when multi-column sorting changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -266,13 +300,19 @@
         {
           "name": "_sort",
           "type": "CustomEvent<{ sortBy: string; sortDir: number }>",
-          "description": "",
+          "description": "Emits when a table column is sorted.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the table (table rows, headers, etc.).",
+          "required": false
+        }
+      ]
     }
   }
 }

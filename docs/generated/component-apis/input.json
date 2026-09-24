@@ -20,7 +20,16 @@
         },
         {
           "name": "autoCapitalize",
-          "type": "GoabAutoCapitalize",
+          "type": "\"on\" | \"off\" | \"none\" | \"sentences\" | \"words\" | \"characters\"",
+          "typeLabel": "GoabAutoCapitalize",
+          "values": [
+            "on",
+            "off",
+            "none",
+            "sentences",
+            "words",
+            "characters"
+          ],
           "required": false,
           "default": null,
           "description": "Controls automatic capitalization behavior on supported mobile browsers."
@@ -77,10 +86,6 @@
         {
           "name": "max",
           "type": "number | string",
-          "values": [
-            "number",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "Maximum value. Supports any number, or ISO 8601 format for date/datetime types."
@@ -97,15 +102,11 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "min",
           "type": "number | string",
-          "values": [
-            "number",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "Minimum value. Supports any number, or ISO 8601 format for date/datetime types."
@@ -115,21 +116,21 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -154,7 +155,12 @@
         },
         {
           "name": "size",
-          "type": "GoabInputSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabInputSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the input size."
@@ -200,7 +206,23 @@
         },
         {
           "name": "type",
-          "type": "GoabInputType",
+          "type": "\"text\" | \"password\" | \"email\" | \"number\" | \"date\" | \"datetime-local\" | \"month\" | \"range\" | \"search\" | \"tel\" | \"time\" | \"url\" | \"week\"",
+          "typeLabel": "GoabInputType",
+          "values": [
+            "text",
+            "password",
+            "email",
+            "number",
+            "date",
+            "datetime-local",
+            "month",
+            "range",
+            "search",
+            "tel",
+            "time",
+            "url",
+            "week"
+          ],
           "required": false,
           "default": "text",
           "description": "Sets the type of the input field."
@@ -306,7 +328,16 @@
         },
         {
           "name": "autoCapitalize",
-          "type": "GoabInputAutoCapitalize",
+          "type": "\"on\" | \"off\" | \"none\" | \"sentences\" | \"words\" | \"characters\"",
+          "typeLabel": "GoabInputAutoCapitalize",
+          "values": [
+            "on",
+            "off",
+            "none",
+            "sentences",
+            "words",
+            "characters"
+          ],
           "required": false,
           "default": null,
           "description": "Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices."
@@ -356,10 +387,6 @@
         {
           "name": "leadingContent",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the leading content slot, accepting a string or template reference."
@@ -374,10 +401,6 @@
         {
           "name": "max",
           "type": "string | number",
-          "values": [
-            "string",
-            "number"
-          ],
           "required": false,
           "default": null,
           "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type."
@@ -399,10 +422,6 @@
         {
           "name": "min",
           "type": "string | number",
-          "values": [
-            "string",
-            "number"
-          ],
           "required": false,
           "default": null,
           "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type."
@@ -451,7 +470,12 @@
         },
         {
           "name": "size",
-          "type": "GoabInputSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabInputSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of the input. 'compact' reduces height for dense layouts."
@@ -484,10 +508,6 @@
         {
           "name": "trailingContent",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the trailing content slot, accepting a string or template reference."
@@ -508,7 +528,23 @@
         },
         {
           "name": "type",
-          "type": "GoabInputType",
+          "type": "\"text\" | \"password\" | \"email\" | \"number\" | \"date\" | \"datetime-local\" | \"month\" | \"range\" | \"search\" | \"tel\" | \"time\" | \"url\" | \"week\"",
+          "typeLabel": "GoabInputType",
+          "values": [
+            "text",
+            "password",
+            "email",
+            "number",
+            "date",
+            "datetime-local",
+            "month",
+            "range",
+            "search",
+            "tel",
+            "time",
+            "url",
+            "week"
+          ],
           "required": false,
           "default": "text",
           "description": "Sets the type of the input field."
@@ -860,7 +896,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the input loses focus.",
           "frameworks": [
             "webComponents"
           ]
@@ -868,7 +904,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the input value changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -876,7 +912,7 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the input receives focus.",
           "frameworks": [
             "webComponents"
           ]
@@ -884,7 +920,7 @@
         {
           "name": "_keyPress",
           "type": "CustomEvent<{ name: string; value: string; key: string }>",
-          "description": "",
+          "description": "Emits when a key is pressed in the input.",
           "frameworks": [
             "webComponents"
           ]
@@ -892,7 +928,7 @@
         {
           "name": "_trailingIconClick",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the trailing icon is clicked.",
           "frameworks": [
             "webComponents"
           ]

@@ -14,10 +14,6 @@
         {
           "name": "heading",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "The text label for this tab. Can also pass React nodes for custom heading content."
@@ -32,6 +28,12 @@
       ],
       "events": [],
       "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the tab panel.",
+          "required": false
+        },
         {
           "name": "heading",
           "type": "ReactNode",
@@ -52,10 +54,6 @@
         {
           "name": "heading",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "The text label for this tab. Can also use the heading slot for custom content."
@@ -71,9 +69,15 @@
       "events": [],
       "slots": [
         {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the tab panel.",
+          "required": false
+        },
+        {
           "name": "heading",
           "type": "TemplateRef",
-          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "description": "The text label for this tab. Can also use the heading slot for custom content.",
           "required": false
         }
       ]
@@ -112,8 +116,13 @@
       "events": [],
       "slots": [
         {
+          "name": "default",
+          "description": "Content rendered inside the tab panel.",
+          "required": false
+        },
+        {
           "name": "heading",
-          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "description": "The text label for this tab.",
           "required": false
         }
       ]

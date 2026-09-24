@@ -61,6 +61,12 @@
           "type": "ReactNode",
           "description": "Content rendered in the actions slot.",
           "required": false
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the hero banner body.",
+          "required": false
         }
       ]
     },
@@ -123,6 +129,12 @@
           "type": "TemplateRef",
           "description": "Content rendered in the actions slot.",
           "required": false
+        },
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the hero banner body.",
+          "required": false
         }
       ]
     },
@@ -183,6 +195,11 @@
         {
           "name": "actions",
           "description": "Content rendered in the actions slot.",
+          "required": false
+        },
+        {
+          "name": "default",
+          "description": "Content rendered inside the hero banner body.",
           "required": false
         }
       ]

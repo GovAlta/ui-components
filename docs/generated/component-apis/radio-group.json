@@ -37,28 +37,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -69,14 +69,24 @@
         },
         {
           "name": "orientation",
-          "type": "GoabRadioGroupOrientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeLabel": "GoabRadioGroupOrientation",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
           "required": false,
           "default": "vertical",
           "description": "Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row."
         },
         {
           "name": "size",
-          "type": "GoabRadioGroupSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabRadioGroupSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
@@ -122,7 +132,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Radio items to render inside the group.",
+          "required": false
+        }
+      ]
     },
     "angular": {
       "props": [
@@ -191,14 +208,24 @@
         },
         {
           "name": "orientation",
-          "type": "GoabRadioGroupOrientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeLabel": "GoabRadioGroupOrientation",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row."
         },
         {
           "name": "size",
-          "type": "GoabRadioGroupSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabRadioGroupSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
@@ -244,7 +271,14 @@
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Radio items to render inside the group.",
+          "required": false
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -351,7 +385,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus leaves all radio items in the group.",
           "frameworks": [
             "webComponents"
           ]
@@ -359,7 +393,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string; label: string }>",
-          "description": "",
+          "description": "Emits when the selected radio item changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -367,13 +401,19 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus enters any radio item in the group.",
           "frameworks": [
             "webComponents"
           ]
         }
       ],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Radio items to render inside the group.",
+          "required": false
+        }
+      ]
     }
   }
 }

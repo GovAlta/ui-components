@@ -20,7 +20,14 @@
         },
         {
           "name": "size",
-          "type": "GoabSpinnerSize",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabSpinnerSize",
+          "values": [
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the size of the spinner."
@@ -34,7 +41,12 @@
         },
         {
           "name": "type",
-          "type": "GoabSpinnerType",
+          "type": "\"infinite\" | \"progress\"",
+          "typeLabel": "GoabSpinnerType",
+          "values": [
+            "infinite",
+            "progress"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the spinner animation type."
@@ -61,7 +73,14 @@
         },
         {
           "name": "size",
-          "type": "GoabSpinnerSize",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabSpinnerSize",
+          "values": [
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the size of the spinner."
@@ -75,7 +94,12 @@
         },
         {
           "name": "type",
-          "type": "GoabSpinnerType",
+          "type": "\"infinite\" | \"progress\"",
+          "typeLabel": "GoabSpinnerType",
+          "values": [
+            "infinite",
+            "progress"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the spinner type."

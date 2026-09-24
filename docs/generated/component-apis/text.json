@@ -6,7 +6,14 @@
       "props": [
         {
           "name": "color",
-          "type": "GoabTextColor",
+          "type": "\"primary\" | \"secondary\" | \"light\" | \"disabled\"",
+          "typeLabel": "GoabTextColor",
+          "values": [
+            "primary",
+            "secondary",
+            "light",
+            "disabled"
+          ],
           "required": false,
           "default": "primary",
           "description": "Sets the text colour to primary, secondary, light, or disabled."
@@ -20,7 +27,8 @@
         },
         {
           "name": "maxWidth",
-          "type": "GoabTextMaxWidth",
+          "type": "\"none\" | string",
+          "typeLabel": "GoabTextMaxWidth",
           "required": false,
           "default": "65ch",
           "description": "Sets the max width."
@@ -30,42 +38,63 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabTextSize",
+          "type": "\"heading-2xl\" | \"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
+          "typeLabel": "GoabTextSize",
+          "values": [
+            "heading-2xl",
+            "heading-xl",
+            "heading-l",
+            "heading-m",
+            "heading-s",
+            "heading-xs",
+            "heading-2xs",
+            "body-l",
+            "body-m",
+            "body-s",
+            "body-xs"
+          ],
           "required": false,
           "default": null,
           "description": "Overrides the text size."
         },
         {
           "name": "tag",
-          "type": "GoabTextTextElement | GoabTextHeadingElement",
+          "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
+          "typeLabel": "GoabTextTextElement | GoabTextHeadingElement",
           "values": [
-            "GoabTextTextElement",
-            "GoabTextHeadingElement"
+            "span",
+            "div",
+            "p",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
           ],
           "required": false,
           "default": null,
@@ -73,13 +102,27 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "description": "Content rendered inside the text element.",
+          "required": true
+        }
+      ]
     },
     "angular": {
       "props": [
         {
           "name": "color",
-          "type": "GoabTextColor",
+          "type": "\"primary\" | \"secondary\" | \"light\" | \"disabled\"",
+          "typeLabel": "GoabTextColor",
+          "values": [
+            "primary",
+            "secondary",
+            "light",
+            "disabled"
+          ],
           "required": false,
           "default": "primary",
           "description": "Sets the text colour to primary, secondary, light, or disabled."
@@ -93,7 +136,8 @@
         },
         {
           "name": "maxWidth",
-          "type": "GoabTextMaxWidth",
+          "type": "\"none\" | string",
+          "typeLabel": "GoabTextMaxWidth",
           "required": false,
           "default": "65ch",
           "description": "Sets the max width."
@@ -128,17 +172,38 @@
         },
         {
           "name": "size",
-          "type": "GoabTextSize",
+          "type": "\"heading-2xl\" | \"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
+          "typeLabel": "GoabTextSize",
+          "values": [
+            "heading-2xl",
+            "heading-xl",
+            "heading-l",
+            "heading-m",
+            "heading-s",
+            "heading-xs",
+            "heading-2xs",
+            "body-l",
+            "body-m",
+            "body-s",
+            "body-xs"
+          ],
           "required": false,
           "default": null,
           "description": "Overrides the text size."
         },
         {
           "name": "tag",
-          "type": "GoabTextTextElement | GoabTextHeadingElement",
+          "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
+          "typeLabel": "GoabTextTextElement | GoabTextHeadingElement",
           "values": [
-            "GoabTextTextElement",
-            "GoabTextHeadingElement"
+            "span",
+            "div",
+            "p",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
           ],
           "required": false,
           "default": null,
@@ -146,7 +211,14 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "type": "ng-content",
+          "description": "Content rendered inside the text element.",
+          "required": true
+        }
+      ]
     },
     "webComponents": {
       "props": [
@@ -183,10 +255,6 @@
         {
           "name": "maxwidth",
           "type": "string | \"none\"",
-          "values": [
-            "string",
-            "none"
-          ],
           "required": false,
           "default": "65ch",
           "description": "Sets the max width."
@@ -245,7 +313,13 @@
         }
       ],
       "events": [],
-      "slots": []
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content rendered inside the text element.",
+          "required": true
+        }
+      ]
     }
   }
 }
