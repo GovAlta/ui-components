@@ -52,6 +52,7 @@ export default defineConfig({
         ...builtinModules,
         /^@modelcontextprotocol\/sdk/,
         "zod",
+        "express",
       ],
       output: {
         banner: "#!/usr/bin/env node",
