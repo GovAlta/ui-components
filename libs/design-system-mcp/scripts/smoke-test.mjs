@@ -546,6 +546,34 @@ try {
   }
   ok(`every component's events and margins are described, with no raw tags or React wording elsewhere`);
 
+  // 14. An example's code travels with it: get's full answer carries the files
+  // for each framework it was detected in, while get's default answer and
+  // search stay small. And an example with code or a source link for a
+  // framework says it comes in that framework, so the framework filter finds it.
+  let examplesWithCode = 0;
+  for (const e of recordsBy.examples) {
+    const detected = ["interaction", "section"].includes(e.size) ? (e.frameworks ?? []) : [];
+    const full = (await call("get", { id: e.id, collection: "examples", detail: "full" })).body?.entry;
+    const missing = detected.filter((fw) => !(full?.code?.[fw] ?? []).some((f) => f.content?.trim()));
+    if (missing.length) fail(`get "${e.id}" in full carries no ${missing.join(" or ")} code`);
+    if (full?.code) examplesWithCode++;
+    const summary = (await call("get", { id: e.id, collection: "examples" })).body?.entry;
+    if (summary?.code) fail(`get "${e.id}" carries code in its default answer`);
+  }
+  if (examplesWithCode === 0) fail("no example carried code, so the check proved nothing");
+  if ((listedExamples.body?.results ?? []).some((r) => r.code)) fail("search results carry example code");
+  const sourceLinkField = { react: "reactSourceUrl", angular: "angularSourceUrl", "web-components": "webComponentsSourceUrl" };
+  const unlisted = recordsBy.examples.filter((e) =>
+    Object.keys(frameworkNameField).some(
+      (framework) =>
+        (e.code?.[framework] || e[sourceLinkField[framework]]) &&
+        !(Array.isArray(e.frameworks) && e.frameworks.includes(framework)),
+    ),
+  );
+  if (unlisted.length) {
+    fail(`${unlisted.length} examples have code or a source link for a framework they don't list, e.g. ${unlisted.slice(0, 5).map((e) => e.id).join(", ")}`);
+  }
+  ok(`${examplesWithCode} examples carry their code in get's full answer`);
 } catch (err) {
   fail(err instanceof Error ? err.message : String(err));
 }

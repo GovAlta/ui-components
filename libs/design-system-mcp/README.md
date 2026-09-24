@@ -30,7 +30,7 @@ Every published version keeps its data forever. To freeze the knowledge your too
 ## Tools
 
 - `search`: find components, guidance, examples, and foundations by keyword
-- `get`: fetch one item by id, alias, or any name a component goes by (its React, web component, Angular or display name); a summary by default, the whole record with `detail: "full"`
+- `get`: fetch one item by id, alias, or any name a component goes by (its React, web component, Angular or display name); a summary by default, the whole record with `detail: "full"`, which for an example includes its code for each framework
 
 ## Data
 

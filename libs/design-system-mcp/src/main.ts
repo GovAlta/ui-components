@@ -306,7 +306,7 @@ internal: rendered by another component; teams don't use it directly. subcompone
     `Fetch one item by ID or any name it goes by: an alias, or a component's React, web component, Angular or display name (GoabDropdown, goa-dropdown, "Date picker"). Use for known IDs, or after \`search\` returns a high-confidence match. Old slugs like "confirm-that-an-application-was-submitted" resolve to current entries ("result-page"). The response's resolved_via field tells you which path matched.
 
 collection: components | guidance | examples | foundations | get-started | productTypes (optional; scopes the lookup to one collection. Omit it and the first id or alias match wins.)
-detail: summary (default, ~1KB) | full (entire entry)
+detail: summary (default, ~1KB) | full (entire entry, including an example's code for each framework)
 
 Returns: { id, collection, resolved_via, entry, related: { components, examples, guidance }, next: { suggested_calls } }`,
     {
