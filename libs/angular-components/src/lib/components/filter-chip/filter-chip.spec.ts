@@ -75,6 +75,7 @@ describe("GoabFilterChip", () => {
       By.css("goa-filter-chip"),
     ).nativeElement;
     expect(chipElement.getAttribute("error")).toBe(`${component.error}`);
+    expect(chipElement.getAttribute("removable")).toBe("true");
     expect(chipElement.getAttribute("content")).toBe(component.content);
     expect(chipElement.getAttribute("arialabel")).toBe(component.ariaLabel);
     expect(chipElement.getAttribute("icontheme")).toBe(`${component.iconTheme}`);
@@ -83,6 +84,17 @@ describe("GoabFilterChip", () => {
     expect(chipElement.getAttribute("mr")).toBe(component.mr);
     expect(chipElement.getAttribute("mb")).toBe(component.mb);
     expect(chipElement.getAttribute("ml")).toBe(component.ml);
+  });
+
+  it("should bind changes to removable", () => {
+    const wrapper = fixture.debugElement.query(By.directive(GoabFilterChip));
+    const chip = wrapper.query(By.css("goa-filter-chip")).nativeElement;
+    wrapper.componentInstance.removable = false;
+    fixture.detectChanges();
+    expect(chip.getAttribute("removable")).toBe("false");
+    wrapper.componentInstance.removable = true;
+    fixture.detectChanges();
+    expect(chip.getAttribute("removable")).toBe("true");
   });
 
   it("should render template content in the content slot", () => {
