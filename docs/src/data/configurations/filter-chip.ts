@@ -51,6 +51,16 @@ export const filterChipConfigurations: ComponentConfigurations = {
       },
     },
     {
+      id: "basic-chip",
+      name: "Basic chip",
+      description: "A filter chip without a remove button or remove action",
+      code: {
+        react: `<GoabFilterChip content="Active" removable={false} />`,
+        angular: `<goab-filter-chip content="Active" [removable]="false"></goab-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Active" removable="false"></goa-filter-chip>`,
+      },
+    },
+    {
       id: "filter-group",
       name: "Filter group",
       description: "Multiple filter options",

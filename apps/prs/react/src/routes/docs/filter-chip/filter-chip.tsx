@@ -50,6 +50,9 @@ export function DocsFilterChipRoute() {
       <h3>Basic filter chip</h3>
       <GoabFilterChip content="Active" onClick={handleToggle} />
 
+      <h3>Basic chip</h3>
+      <GoabFilterChip content="Active" removable={false} />
+
       <h3>Filter group</h3>
       <GoabFilterChip content="All" onClick={() => setFilter("all")} />
       <GoabFilterChip content="Active" onClick={() => setFilter("active")} />

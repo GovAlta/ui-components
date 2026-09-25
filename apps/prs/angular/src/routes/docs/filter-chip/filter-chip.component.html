@@ -3,6 +3,9 @@
 <h3>Basic filter chip</h3>
 <goab-filter-chip content="Active" (onClick)="handleToggle()"></goab-filter-chip>
 
+<h3>Basic chip</h3>
+<goab-filter-chip content="Active" [removable]="false"></goab-filter-chip>
+
 <h3>Filter group</h3>
 <goab-filter-chip content="All" (onClick)="setFilter('all')"></goab-filter-chip>
 <goab-filter-chip content="Active" (onClick)="setFilter('active')"></goab-filter-chip>

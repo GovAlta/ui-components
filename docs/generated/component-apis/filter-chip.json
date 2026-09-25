@@ -61,6 +61,13 @@
           "description": ""
         },
         {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
+        },
+        {
           "name": "secondaryText",
           "type": "string",
           "required": false,
@@ -174,6 +181,13 @@
           "description": "Sets the top margin spacing token."
         },
         {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
+        },
+        {
           "name": "secondaryText",
           "type": "string",
           "required": false,
@@ -269,6 +283,13 @@
           "required": false,
           "default": null,
           "description": "Top margin."
+        },
+        {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
         },
         {
           "name": "secondarytext",
