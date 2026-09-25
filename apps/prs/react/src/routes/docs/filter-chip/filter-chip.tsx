@@ -47,8 +47,9 @@ export function DocsFilterChipRoute() {
     <div>
       <h2>Filter chip</h2>
 
-      <h3>Basic filter chip</h3>
-      <GoabFilterChip content="Active" onClick={handleToggle} />
+      <h3>Basic filter chips</h3>
+      <GoabFilterChip content="Removable" onClick={handleToggle} />
+      <GoabFilterChip content="Not removable" removable={false} />
 
       <h3>Filter group</h3>
       <GoabFilterChip content="All" onClick={() => setFilter("all")} />
@@ -82,7 +83,9 @@ export function DocsFilterChipRoute() {
           />
         ))}
       </div>
-      <GoabButton mt="l" onClick={addFilter}>Add Random Filter</GoabButton>
+      <GoabButton mt="l" onClick={addFilter}>
+        Add Random Filter
+      </GoabButton>
 
       <h3>Remove a filter</h3>
       <div>
@@ -108,14 +111,20 @@ export function DocsFilterChipRoute() {
                 if (e.key === "Enter" && e.value.trim()) {
                   setTypedChips([...typedChips, e.value.trim()]);
                   setTimeout(() => setInputValue(""), 0);
-                } else if (e.key === "Backspace" && !e.value.trim() && typedChips.length > 0) {
+                } else if (
+                  e.key === "Backspace" &&
+                  !e.value.trim() &&
+                  typedChips.length > 0
+                ) {
                   setTypedChips(typedChips.slice(0, -1));
                 }
               }}
               width="100%"
             />
           </div>
-          <GoabButton type="secondary" onClick={addChip}>Add</GoabButton>
+          <GoabButton type="secondary" onClick={addChip}>
+            Add
+          </GoabButton>
         </GoabBlock>
       </GoabFormItem>
       <div>

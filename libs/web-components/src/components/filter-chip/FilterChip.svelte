@@ -19,6 +19,8 @@
   // Props
   /** Shows an error state. */
   export let error: string = "false";
+  /** Sets the chip's removability and visibility of the close button. */
+  export let removable: string = "true";
   /** @required Content displayed in the chip. Use the content slot for custom HTML. */
   export let content: string = "";
   /** Secondary text displayed in a smaller size before the main content. */
@@ -39,6 +41,7 @@
 
   // Reactive declarations
   $: _error = toBoolean(error);
+  $: _removable = toBoolean(removable);
   $: accessibleContent = ariaLabel || content || _slottedContent;
   $: removeFilterAriaLabel = accessibleContent
     ? `Remove filter: ${accessibleContent}`
@@ -69,6 +72,7 @@
   data-testid={testid}
   class="chip"
   class:error={_error}
+  class:removable={_removable}
   role="presentation"
   style={calculateMargin(mt, mr, mb, ml)}
 >
@@ -96,15 +100,17 @@
       {/if}
     </div>
   </div>
-  <goa-icon-button
-    size="3"
-    icon="close"
-    on:_click={onDelete}
-    arialabel={removeFilterAriaLabel}
-    variant={_error ? "destructive" : "dark"}
-    testid="delete-button"
-  >
-  </goa-icon-button>
+  {#if _removable}
+    <goa-icon-button
+      size="3"
+      icon="close"
+      on:_click={onDelete}
+      arialabel={removeFilterAriaLabel}
+      variant={_error ? "destructive" : "dark"}
+      testid="delete-button"
+    >
+    </goa-icon-button>
+  {/if}
 </div>
 
 <!-- Style -->
@@ -119,12 +125,19 @@
     color: var(--goa-filter-chip-text-color);
     font: var(--goa-filter-chip-typography);
     gap: var(--goa-filter-chip-gap);
+    height: var(--goa-icon-size-6);
     min-height: var(--goa-filter-chip-min-height);
     padding-top: var(--goa-filter-chip-padding-vertical);
     padding-right: var(--goa-filter-chip-padding-horizontal-right);
     padding-bottom: var(--goa-filter-chip-padding-vertical);
     padding-left: var(--goa-filter-chip-padding-horizontal-left);
     min-width: var(--goa-filter-chip-min-width);
+  }
+
+  .chip:not(.removable) {
+    --goa-filter-chip-padding-horizontal-right: var(
+      --goa-filter-chip-padding-horizontal-left
+    );
   }
 
   .chip.error {

@@ -36,18 +36,21 @@ export const filterChipConfigurations: ComponentConfigurations = {
   configurations: [
     {
       id: "basic",
-      name: "Basic filter chip",
-      description: "Simple filter toggle",
+      name: "Basic filter chips",
+      description: "Simple filter",
       code: {
         react: {
           ts: reactToggleSetup,
-          jsx: `<GoabFilterChip content="Active" onClick={handleToggle} />`,
+          jsx: `<GoabFilterChip content="Removable" onClick={handleToggle} />
+          <GoabFilterChip content="Not removable" removable={false} />`,
         },
         angular: {
           ts: angularToggleSetup,
-          template: `<goab-filter-chip content="Active" (onClick)="handleToggle()"></goab-filter-chip>`,
+          template: `<goab-filter-chip content="Removable" (onClick)="handleToggle()"></goab-filter-chip>
+          <goab-filter-chip content="Not removable" [removable]="false"></goab-filter-chip`,
         },
-        webComponents: `<goa-filter-chip content="Active"></goa-filter-chip>`,
+        webComponents: `<goa-filter-chip content="Removable"></goa-filter-chip>
+        <goa-filter-chip content="Not removable" removable="false"></goa-filter-chip>`,
       },
     },
     {

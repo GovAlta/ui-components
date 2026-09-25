@@ -3,6 +3,32 @@ import GoAFilterChip from "./FilterChip.svelte";
 import { describe, it, expect, vi } from "vitest";
 
 describe("FilterChip", () => {
+  it.each([undefined, "true", ""])(
+    "should show the close button when removable is %s",
+    (removable) => {
+      const { container } = render(GoAFilterChip, {
+        content: "Filter",
+        ...(removable === undefined ? {} : { removable }),
+      });
+      expect(container.querySelector("goa-icon-button")).not.toBeNull();
+    },
+  );
+
+  it("should update the close button when removability changes", async () => {
+    const { container, rerender, getByTestId } = render(GoAFilterChip, {
+      content: "Filter",
+      removable: "false",
+      testid: "chip",
+    });
+    expect(container.querySelector("goa-icon-button")).toBeNull();
+    expect(getByTestId("chip")).toHaveTextContent("Filter");
+    expect(getByTestId("chip")).not.toHaveAttribute("tabindex");
+    await rerender({ removable: "true" });
+    expect(container.querySelector("goa-icon-button")).not.toBeNull();
+    await rerender({ removable: "false" });
+    expect(container.querySelector("goa-icon-button")).toBeNull();
+  });
+
   it("should render", async () => {
     const { container } = render(GoAFilterChip, {
       content: "Some Badge",
