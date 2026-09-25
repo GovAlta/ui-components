@@ -19,6 +19,8 @@
   // Props
   /** Shows an error state. */
   export let error: string = "false";
+  /** Sets the chip's removability and visibility of the close button. */
+  export let removable: string = "true";
   /** @required Content displayed in the chip. Use the content slot for custom HTML. */
   export let content: string = "";
   /** Secondary text displayed in a smaller size before the main content. */
@@ -39,6 +41,7 @@
 
   // Reactive declarations
   $: _error = toBoolean(error);
+  $: _removable = toBoolean(removable);
   $: accessibleContent = ariaLabel || content || _slottedContent;
   $: removeFilterAriaLabel = accessibleContent
     ? `Remove filter: ${accessibleContent}`
@@ -96,15 +99,17 @@
       {/if}
     </div>
   </div>
-  <goa-icon-button
-    size="3"
-    icon="close"
-    on:_click={onDelete}
-    arialabel={removeFilterAriaLabel}
-    variant={_error ? "destructive" : "dark"}
-    testid="delete-button"
-  >
-  </goa-icon-button>
+  {#if _removable}
+    <goa-icon-button
+      size="3"
+      icon="close"
+      on:_click={onDelete}
+      arialabel={removeFilterAriaLabel}
+      variant={_error ? "destructive" : "dark"}
+      testid="delete-button"
+    >
+    </goa-icon-button>
+  {/if}
 </div>
 
 <!-- Style -->
