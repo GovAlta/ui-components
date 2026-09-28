@@ -15,6 +15,7 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `error` | string \| React.ReactNode | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
 | `helpText` | string \| React.ReactNode | (none) | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
+| `label` | string \| React.ReactNode | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 | `labelSize` | GoabFormItemLabelSize | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | (none) |
