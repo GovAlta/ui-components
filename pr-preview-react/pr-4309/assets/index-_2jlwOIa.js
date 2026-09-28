@@ -69926,6 +69926,7 @@ function DocsFormItemRoute() {
       "Value: ",
       firstName
     ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With rich label content" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabFormItem,
       {
