@@ -33839,10 +33839,12 @@ class If extends ke {
 }
 customElements.define("goa-file-upload-input", ye(If, { variant: {}, accept: {}, maxfilesize: {}, testid: {} }, [], [], true));
 function Tf(t) {
-  xe(t, "svelte-s7y184", `.chip.svelte-s7y184.svelte-s7y184{display:inline-flex;align-items:center;background-color:var(--goa-filter-chip-bg-color);border-radius:var(--goa-filter-chip-border-radius);border:var(--goa-filter-chip-border);box-sizing:border-box;color:var(--goa-filter-chip-text-color);font:var(--goa-filter-chip-typography);gap:var(--goa-filter-chip-gap);min-height:var(--goa-filter-chip-min-height);padding-top:var(--goa-filter-chip-padding-vertical);padding-right:var(--goa-filter-chip-padding-horizontal-right);padding-bottom:var(--goa-filter-chip-padding-vertical);padding-left:var(--goa-filter-chip-padding-horizontal-left);min-width:var(--goa-filter-chip-min-width)}.chip.error.svelte-s7y184.svelte-s7y184{background-color:var(--goa-filter-chip-bg-color-error);border-color:var(--goa-filter-chip-border-color-error);color:var(--goa-filter-chip-text-color-error)}.label-container.svelte-s7y184.svelte-s7y184{display:flex;align-items:center;gap:var(--goa-filter-chip-label-gap)}.text.svelte-s7y184.svelte-s7y184{line-height:var(--goa-filter-chip-line-height);padding-top:0;display:flex;align-items:center;padding-bottom:var(
+  xe(t, "svelte-13te3in", `.chip.svelte-13te3in.svelte-13te3in{display:inline-flex;align-items:center;background-color:var(--goa-filter-chip-bg-color);border-radius:var(--goa-filter-chip-border-radius);border:var(--goa-filter-chip-border);box-sizing:border-box;color:var(--goa-filter-chip-text-color);font:var(--goa-filter-chip-typography);gap:var(--goa-filter-chip-gap);height:var(--goa-icon-size-6);min-height:var(--goa-filter-chip-min-height);padding-top:var(--goa-filter-chip-padding-vertical);padding-right:var(--goa-filter-chip-padding-horizontal-right);padding-bottom:var(--goa-filter-chip-padding-vertical);padding-left:var(--goa-filter-chip-padding-horizontal-left);min-width:var(--goa-filter-chip-min-width)}.chip.svelte-13te3in.svelte-13te3in:not(.removable){--goa-filter-chip-padding-horizontal-right:var(
+      --goa-filter-chip-padding-horizontal-left
+    )}.chip.error.svelte-13te3in.svelte-13te3in{background-color:var(--goa-filter-chip-bg-color-error);border-color:var(--goa-filter-chip-border-color-error);color:var(--goa-filter-chip-text-color-error)}.label-container.svelte-13te3in.svelte-13te3in{display:flex;align-items:center;gap:var(--goa-filter-chip-label-gap)}.text.svelte-13te3in.svelte-13te3in{line-height:var(--goa-filter-chip-line-height);padding-top:0;display:flex;align-items:center;padding-bottom:var(
       --font-valign-fix,
       0
-    );overflow-wrap:break-word;word-wrap:break-word}.leading-icon.svelte-s7y184.svelte-s7y184{flex-shrink:0;display:flex;align-items:center}.secondary-text.svelte-s7y184.svelte-s7y184{line-height:var(--goa-filter-chip-line-height);color:var(--goa-filter-chip-secondary-text-color);overflow-wrap:break-word;word-wrap:break-word}.error.svelte-s7y184 .secondary-text.svelte-s7y184{color:var(--goa-filter-chip-secondary-text-color-error)}.text.svelte-s7y184.svelte-s7y184,.secondary-text.svelte-s7y184.svelte-s7y184{padding-bottom:0}.chip.svelte-s7y184.svelte-s7y184{--padding:0.125rem;--goa-icon-button-destructive-hover-color-bg:var(
+    );overflow-wrap:break-word;word-wrap:break-word}.leading-icon.svelte-13te3in.svelte-13te3in{flex-shrink:0;display:flex;align-items:center}.secondary-text.svelte-13te3in.svelte-13te3in{line-height:var(--goa-filter-chip-line-height);color:var(--goa-filter-chip-secondary-text-color);overflow-wrap:break-word;word-wrap:break-word}.error.svelte-13te3in .secondary-text.svelte-13te3in{color:var(--goa-filter-chip-secondary-text-color-error)}.text.svelte-13te3in.svelte-13te3in,.secondary-text.svelte-13te3in.svelte-13te3in{padding-bottom:0}.chip.svelte-13te3in.svelte-13te3in{--padding:0.125rem;--goa-icon-button-destructive-hover-color-bg:var(
       --goa-filter-chip-close-button-error-hover-bg-color
     )}`);
 }
@@ -33851,7 +33853,7 @@ function al(t) {
   let e, o;
   return {
     c() {
-      e = C("goa-icon"), b(e, "class", "leading-icon svelte-s7y184"), b(e, "size", "small"), b(
+      e = C("goa-icon"), b(e, "class", "leading-icon svelte-13te3in"), b(e, "size", "small"), b(
         e,
         "type",
         /*leadingicon*/
@@ -33885,7 +33887,7 @@ function sl(t) {
       e = C("div"), o = ve(
         /*secondarytext*/
         t[5]
-      ), u(e, "class", "secondary-text svelte-s7y184");
+      ), u(e, "class", "secondary-text svelte-13te3in");
     },
     m(i, n) {
       S(i, e, n), y(e, o);
@@ -34039,12 +34041,12 @@ function Of(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("div"), v && v.c(), i = R(), h && h.c(), n = R(), l = C("div"), a.c(), d = R(), _ && _.c(), u(l, "class", "text svelte-s7y184"), u(o, "class", "label-container svelte-s7y184"), u(
+      e = C("div"), o = C("div"), v && v.c(), i = R(), h && h.c(), n = R(), l = C("div"), a.c(), d = R(), _ && _.c(), u(l, "class", "text svelte-13te3in"), u(o, "class", "label-container svelte-13te3in"), u(
         e,
         "data-testid",
         /*testid*/
         t[7]
-      ), u(e, "class", "chip svelte-s7y184"), u(e, "role", "presentation"), u(e, "style", c = De(
+      ), u(e, "class", "chip svelte-13te3in"), u(e, "role", "presentation"), u(e, "style", c = De(
         /*mt*/
         t[0],
         /*mr*/
@@ -34058,6 +34060,11 @@ function Of(t) {
         "error",
         /*_error*/
         t[9]
+      ), V(
+        e,
+        "removable",
+        /*_removable*/
+        t[11]
       );
     },
     m(z, j) {
@@ -34097,6 +34104,12 @@ function Of(t) {
         "error",
         /*_error*/
         z[9]
+      ), (!s || j & /*_removable*/
+      2048) && V(
+        e,
+        "removable",
+        /*_removable*/
+        z[11]
       );
     },
     i(z) {
@@ -44607,14 +44620,14 @@ class $5 extends ke {
   }
 }
 customElements.define("goa-pagination", ye($5, { pagenumber: {}, itemcount: {}, perpagecount: {}, variant: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function e4(t) {
+function e3(t) {
   xe(t, "svelte-r6cbe9", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);font:var(--goa-typography-body-m);display:inline;align-items:center;height:100%}.popover-target.svelte-r6cbe9{cursor:pointer;display:block;height:100%;outline:none;border:none;padding:0;background-color:transparent;width:inherit;text-align:inherit;anchor-name:--goa-popover-target}.popover-target.svelte-r6cbe9:has(:focus-visible){outline:var(--goa-popover-border-focus)}.popover-content.svelte-r6cbe9{color:var(--goa-color-text-default);width:-moz-fit-content;width:fit-content;list-style-type:none;background:var(--goa-popover-color-bg);border-radius:var(--border-radius, var(--goa-popover-border-radius));outline:none;overflow:visible;box-shadow:var(--goa-popover-box-shadow);filter:var(--goa-popover-shadow, none);border:var(--goa-popover-border);margin:0;position-anchor:--goa-popover-target;inset-block-start:anchor(bottom);inset-inline-start:anchor(left);--popover-translate-x:var(--offset-left, 0);--popover-translate-y:var(--offset-top, 3px);translate:var(--popover-translate-x) var(--popover-translate-y)}.popover-content.use-anchor-based-positioning.svelte-r6cbe9{inset-block-start:anchor(top);--popover-translate-y:calc(-100% - var(--offset-bottom, 3px))}.popover-content.use-anchor-based-positioning.position-above.svelte-r6cbe9{inset-block-start:anchor(top);--popover-translate-y:calc(-100% - var(--offset-bottom, 3px));position-try-fallbacks:none}.popover-content.position-below.svelte-r6cbe9{inset-block-start:anchor(bottom);--popover-translate-y:var(--offset-top, 3px)}.popover-content.position-right.svelte-r6cbe9{inset-block-start:unset;inset-block-end:max(
       20px,
       calc(anchor(bottom) - var(--offset-bottom, 0px))
     );inset-inline-start:anchor(right);--popover-translate-x:var(--offset-left, 8px);--popover-translate-y:0px;position-try-fallbacks:none}.popover-content.align-right.svelte-r6cbe9:not(.position-right){inset-inline-start:unset;inset-inline-end:anchor(right)}::slotted(ul){display:block;padding:0;margin:0;list-style-type:none;line-height:2rem}`);
 }
-const t4 = (t) => ({}), Zr = (t) => ({});
-function o4(t) {
+const t3 = (t) => ({}), Zr = (t) => ({});
+function o3(t) {
   let e, o, i, n, l, r, a, d, c, s;
   const f = (
     /*#slots*/
@@ -44782,7 +44795,7 @@ function o4(t) {
           /*togglePopover*/
           t[26]
         ),
-        ie(o, "keyup", i4)
+        ie(o, "keyup", i3)
       ], c = true);
     },
     p(m, w) {
@@ -44798,7 +44811,7 @@ function o4(t) {
           /*$$scope*/
           m[33],
           w,
-          t4
+          t3
         ) : ue(
           /*$$scope*/
           m[33]
@@ -44970,10 +44983,10 @@ function o4(t) {
     }
   };
 }
-const i4 = (t) => {
+const i3 = (t) => {
   t.preventDefault();
 };
-function n4(t, e, o) {
+function n3(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e, { testid: c = "popover" } = e, { position: s = "auto" } = e, { maxwidth: f = "320px" } = e, { minwidth: g = "" } = e, { width: v = "" } = e, { height: h = "wrap-content" } = e, { padded: m = "true" } = e, { tabindex: w = 0 } = e, { relative: p = "" } = e, { mt: _ = null } = e, { mr: z = null } = e, { mb: j = null } = e, { ml: M = null } = e, { open: L = "false" } = e, { disabled: x = "false" } = e, { voffset: N = "" } = e, { hoffset: H = "" } = e, { focusborderwidth: q = "var(--goa-border-width-l)" } = e, { borderradius: Z = "var(--goa-border-radius-m)" } = e, { filterablecontext: I = "false" } = e, { fitcontent: W = "false" } = e, O, E;
   const B = typeof document < "u" && !("anchorName" in document.documentElement.style);
   let U = null, P, T = false, F = "below", J = "left";
@@ -45182,13 +45195,13 @@ function n4(t, e, o) {
     Ie
   ];
 }
-class l4 extends ke {
+class l3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      n4,
-      o4,
+      n3,
+      o3,
       we,
       {
         testid: 0,
@@ -45213,7 +45226,7 @@ class l4 extends ke {
         filterablecontext: 31,
         fitcontent: 32
       },
-      e4,
+      e3,
       [-1, -1]
     );
   }
@@ -45344,8 +45357,8 @@ class l4 extends ke {
     this.$$set({ fitcontent: e }), k();
   }
 }
-customElements.define("goa-popover", ye(l4, { testid: {}, position: {}, maxwidth: {}, minwidth: {}, width: {}, height: {}, padded: {}, tabindex: {}, relative: {}, mt: {}, mr: {}, mb: {}, ml: {}, open: { reflect: true, type: "String" }, disabled: {}, voffset: {}, hoffset: {}, focusborderwidth: {}, borderradius: {}, filterablecontext: {}, fitcontent: {} }, ["target", "default"], [], true));
-function r4(t) {
+customElements.define("goa-popover", ye(l3, { testid: {}, position: {}, maxwidth: {}, minwidth: {}, width: {}, height: {}, padded: {}, tabindex: {}, relative: {}, mt: {}, mr: {}, mb: {}, ml: {}, open: { reflect: true, type: "String" }, disabled: {}, voffset: {}, hoffset: {}, focusborderwidth: {}, borderradius: {}, filterablecontext: {}, fitcontent: {} }, ["target", "default"], [], true));
+function r3(t) {
   xe(t, "svelte-1ynftji", `:host .svelte-1ynftji.svelte-1ynftji{box-sizing:border-box}@keyframes svelte-1ynftji-opening{0%{display:flex;transform:translateX(100%)}100%{transform:translateX(0%)}}@keyframes svelte-1ynftji-closing{0%{transform:translateX(0%)}99%{transform:translateX(99%)}100%{transform:translateX(100%)}}.goa-push-drawer.svelte-1ynftji.svelte-1ynftji{display:flex;flex-direction:column;width:var(--goa-push-drawer-width, 492px);padding:var(--goa-space-none);flex-direction:column;align-items:flex-start;align-self:stretch;margin:var(--goa-drawer-offset);height:calc(100% - 2 * var(--goa-drawer-offset));overflow:hidden;border-radius:var(--goa-push-drawer-border-radius);background:var(--goa-color-greyscale-white);border:var(--goa-border-width-s) solid var(--goa-color-greyscale-150);transition:margin 0.2s ease,
       border-radius 0.2s ease,
       height 0.2s ease}.goa-push-drawer.scroll-top.svelte-1ynftji.svelte-1ynftji{margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;height:calc(100% - var(--goa-drawer-offset))}.goa-push-drawer.scroll-middle.svelte-1ynftji.svelte-1ynftji{margin-top:0;margin-bottom:0;border-radius:0;height:100%}.goa-push-drawer.scroll-bottom.svelte-1ynftji.svelte-1ynftji{margin-top:0;border-top-left-radius:0;border-top-right-radius:0;height:calc(100% - var(--goa-drawer-offset))}goa-scroll-panel.svelte-1ynftji.svelte-1ynftji{flex:1 1 auto;min-height:0}@starting-style{}.goa-push-drawer.open.svelte-1ynftji.svelte-1ynftji{animation:svelte-1ynftji-opening ease-in-out var(--goa-push-drawer-transition-time) normal
@@ -45357,10 +45370,10 @@ function r4(t) {
       var(--goa-push-drawer-content-padding-horizontal);border-top:none;background:var(--goa-color-greyscale-white)}.drawer-actions.empty-actions.svelte-1ynftji.svelte-1ynftji{padding:0;border-top:none;height:0;overflow:hidden;flex-basis:0}.drawer-content.svelte-1ynftji.svelte-1ynftji{display:flex;width:100%;flex-direction:column;align-items:flex-start;align-self:stretch}.scroll-content.svelte-1ynftji.svelte-1ynftji{width:100%;padding:var(--goa-push-drawer-content-padding-vertical)
       var(--goa-push-drawer-content-padding-horizontal)}`);
 }
-const a4 = (t) => ({}), Fr = (t) => ({}), s4 = (t) => ({}), Wr = (t) => ({});
+const a3 = (t) => ({}), Fr = (t) => ({}), s3 = (t) => ({}), Wr = (t) => ({});
 function Yr(t) {
   let e, o, i, n;
-  const l = [c4, d4], r = [];
+  const l = [c3, d3], r = [];
   function a(d, c) {
     return (
       /*heading*/
@@ -45391,7 +45404,7 @@ function Yr(t) {
     }
   };
 }
-function d4(t) {
+function d3(t) {
   let e;
   const o = (
     /*#slots*/
@@ -45423,7 +45436,7 @@ function d4(t) {
           /*$$scope*/
           n[12],
           l,
-          s4
+          s3
         ) : ue(
           /*$$scope*/
           n[12]
@@ -45442,7 +45455,7 @@ function d4(t) {
     }
   };
 }
-function c4(t) {
+function c3(t) {
   let e, o, i;
   return {
     c() {
@@ -45507,7 +45520,7 @@ function Ur(t) {
           /*$$scope*/
           l[12],
           r,
-          a4
+          a3
         ) : ue(
           /*$$scope*/
           l[12]
@@ -45528,7 +45541,7 @@ function Ur(t) {
     }
   };
 }
-function u4(t) {
+function u3(t) {
   let e, o, i, n, l, r, a, d, c, s, f, g, v, h = (
     /*heading*/
     (t[2] || /*$$slots*/
@@ -45680,7 +45693,7 @@ function u4(t) {
     }
   };
 }
-function f4(t, e, o) {
+function f3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const l = ut(i);
   let { testid: r = void 0 } = e, { open: a = false } = e, { heading: d = "" } = e, { width: c = "492px" } = e, s = null, f = null, g = "initial", v = null, h = null, m = false;
@@ -45753,9 +45766,9 @@ function f4(t, e, o) {
     j
   ];
 }
-class g4 extends ke {
+class g3 extends ke {
   constructor(e) {
-    super(), _e(this, e, f4, u4, we, { testid: 0, open: 1, heading: 2, width: 3 }, r4);
+    super(), _e(this, e, f3, u3, we, { testid: 0, open: 1, heading: 2, width: 3 }, r3);
   }
   get testid() {
     return this.$$.ctx[0];
@@ -45782,13 +45795,13 @@ class g4 extends ke {
     this.$$set({ width: e }), k();
   }
 }
-customElements.define("goa-push-drawer-internal", ye(g4, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true } }, ["heading", "default", "actions"], [], true));
+customElements.define("goa-push-drawer-internal", ye(g3, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true } }, ["heading", "default", "actions"], [], true));
 const { window: l1 } = yo;
-function h4(t) {
+function h3(t) {
   xe(t, "svelte-bmf18g", ":host{display:contents}");
 }
-const v4 = (t) => ({}), Qr = (t) => ({}), m4 = (t) => ({}), Rr = (t) => ({}), b4 = (t) => ({}), Gr = (t) => ({}), p4 = (t) => ({}), Xr = (t) => ({});
-function w4(t) {
+const v3 = (t) => ({}), Qr = (t) => ({}), m3 = (t) => ({}), Rr = (t) => ({}), b3 = (t) => ({}), Gr = (t) => ({}), p3 = (t) => ({}), Xr = (t) => ({});
+function w3(t) {
   let e, o, i, n, l = (
     /*$$slots*/
     t[8].heading && Jr(t)
@@ -45901,7 +45914,7 @@ function w4(t) {
     }
   };
 }
-function _4(t) {
+function _3(t) {
   let e, o, i, n, l = (
     /*$$slots*/
     t[8].heading && $r(t)
@@ -46046,7 +46059,7 @@ function Jr(t) {
           /*$$scope*/
           l[9],
           r,
-          m4
+          m3
         ) : ue(
           /*$$scope*/
           l[9]
@@ -46097,7 +46110,7 @@ function Kr(t) {
           /*$$scope*/
           l[9],
           r,
-          v4
+          v3
         ) : ue(
           /*$$scope*/
           l[9]
@@ -46148,7 +46161,7 @@ function $r(t) {
           /*$$scope*/
           l[9],
           r,
-          p4
+          p3
         ) : ue(
           /*$$scope*/
           l[9]
@@ -46199,7 +46212,7 @@ function ea(t) {
           /*$$scope*/
           l[9],
           r,
-          b4
+          b3
         ) : ue(
           /*$$scope*/
           l[9]
@@ -46218,13 +46231,13 @@ function ea(t) {
     }
   };
 }
-function y4(t) {
+function y3(t) {
   let e, o, i, n, l, r;
   ct(
     /*onwindowresize*/
     t[11]
   );
-  const a = [_4, w4], d = [];
+  const a = [_3, w3], d = [];
   function c(s, f) {
     return (
       /*windowIsSmallerThanDesktop*/
@@ -46260,8 +46273,8 @@ function y4(t) {
     }
   };
 }
-const k4 = 1023;
-function C4(t, e, o) {
+const k3 = 1023;
+function C3(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
   const a = ut(l);
   let { testid: d = void 0 } = e, { open: c = false } = e, { heading: s = "" } = e, { width: f = "492px" } = e;
@@ -46273,7 +46286,7 @@ function C4(t, e, o) {
     "testid" in m && o(0, d = m.testid), "open" in m && o(1, c = m.open), "heading" in m && o(2, s = m.heading), "width" in m && o(3, f = m.width), "$$scope" in m && o(9, r = m.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*windowWidth*/
-    64 && o(7, n = i <= k4);
+    64 && o(7, n = i <= k3);
   }, o(6, i = window.innerWidth), [
     d,
     c,
@@ -46289,13 +46302,13 @@ function C4(t, e, o) {
     h
   ];
 }
-class z4 extends ke {
+class z3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      C4,
-      y4,
+      C3,
+      y3,
       we,
       {
         testid: 0,
@@ -46305,7 +46318,7 @@ class z4 extends ke {
         drawerTestId: 4,
         pushDrawerTestId: 5
       },
-      h4
+      h3
     );
   }
   get testid() {
@@ -46339,11 +46352,11 @@ class z4 extends ke {
     return this.$$.ctx[5];
   }
 }
-customElements.define("goa-push-drawer", ye(z4, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true } }, ["heading", "actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
-function M4(t) {
+customElements.define("goa-push-drawer", ye(z3, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true } }, ["heading", "actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
+function M3(t) {
   xe(t, "svelte-zyw5y5", `.radio.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{display:inline-flex;align-self:flex-start}label.radio.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{box-sizing:border-box;display:inline-flex}.container.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{display:flex;flex-direction:column;justify-content:flex-start}.radio.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5:hover{cursor:pointer}.radio.svelte-zyw5y5 .svelte-zyw5y5.svelte-zyw5y5,.radio.svelte-zyw5y5 .svelte-zyw5y5.svelte-zyw5y5:before,.radio.svelte-zyw5y5 .svelte-zyw5y5.svelte-zyw5y5:after{box-sizing:border-box}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5.svelte-zyw5y5{width:0;min-height:28px;margin:0;opacity:0}.label.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{font:var(--goa-radio-label);color:var(--goa-radio-color-label, var(--goa-input-color-text-secondary));padding-left:var(--goa-radio-gap-label)}.radio.compact.svelte-zyw5y5 .label.svelte-zyw5y5.svelte-zyw5y5{padding-left:var(--goa-radio-gap-label-compact);font:var(--goa-radio-label-compact)}.description.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{font:var(--goa-radio-description);margin-left:calc(var(--goa-radio-size) + var(--goa-space-s));margin-top:var(--goa-space-2xs);color:var(--goa-input-color-text-helper)}.radio.svelte-zyw5y5:not(.compact)~.description.svelte-zyw5y5.svelte-zyw5y5{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label))}.radio.compact.svelte-zyw5y5~.description.svelte-zyw5y5.svelte-zyw5y5{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));margin-top:var(--goa-space-3xs)}.reveal.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{display:none;height:0}.reveal.visible.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{height:-moz-fit-content;height:fit-content;display:block}.reveal.visible.has-content.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{padding:var(--goa-radio-reveal-padding);margin:var(--goa-radio-reveal-margin);border-left:var(--goa-radio-reveal-border);box-sizing:border-box}.radio.svelte-zyw5y5~.reveal.visible.has-content.svelte-zyw5y5.svelte-zyw5y5{padding:var(--goa-radio-reveal-padding);border-left:var(--goa-radio-reveal-border)}.radio.compact.svelte-zyw5y5~.reveal.visible.has-content.svelte-zyw5y5.svelte-zyw5y5{padding:calc(var(--goa-space-m) + var(--goa-space-2xs))}.icon.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5{position:relative;display:inline-block;height:var(--goa-radio-size);width:var(--goa-radio-size);border-radius:var(--goa-radio-border-radius);background-color:var(--goa-radio-color-bg);transition:all 100ms ease-in-out;flex:0 0 auto}.icon.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:var(--goa-radio-inner-size);height:var(--goa-radio-inner-size);border-radius:50%;transition:background-color 100ms ease-in-out}.icon.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5::before{content:'';position:absolute;width:44px;height:44px;top:50%;left:50%;transform:translate(-50%, -50%)}.radio--disabled.svelte-zyw5y5 .label.svelte-zyw5y5.svelte-zyw5y5,.radio--disabled.svelte-zyw5y5~.description.svelte-zyw5y5.svelte-zyw5y5{color:var(--goa-radio-label-color-disabled)}.radio--disabled.svelte-zyw5y5.svelte-zyw5y5.svelte-zyw5y5:hover{cursor:default}input[type="radio"].svelte-zyw5y5:not(:checked)~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border)}input[type="radio"].svelte-zyw5y5:not(:checked):hover~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-hover)}input[type="radio"].svelte-zyw5y5:not(:checked):focus-visible~.icon.svelte-zyw5y5.svelte-zyw5y5{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-zyw5y5:not(:checked):hover:focus-visible~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-zyw5y5:not(:checked):disabled~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-disabled)}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):disabled~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-disabled)}input[type="radio"].svelte-zyw5y5:checked~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-checked)}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color)}input[type="radio"].svelte-zyw5y5:checked:hover~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-checked-hover)}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:hover~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color-hover)}input[type="radio"].svelte-zyw5y5:checked:focus-visible~.icon.svelte-zyw5y5.svelte-zyw5y5{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-zyw5y5:checked:hover:focus-visible~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-checked);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5.svelte-zyw5y5{border:var(--goa-radio-border-checked-disabled)}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked)~.icon.icon.svelte-zyw5y5{border:var(--goa-radio-border-error)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked)~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):hover~.icon.svelte-zyw5y5{border:var(--goa-radio-border-error-hover)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):hover~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):focus-visible~.icon.svelte-zyw5y5{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):disabled~.icon.svelte-zyw5y5{border:var(--goa-radio-border-error-disabled)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:not(:checked):disabled~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked~.icon.svelte-zyw5y5{border:var(--goa-radio-border-checked-error)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color-error)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:hover~.icon.svelte-zyw5y5{border:var(--goa-radio-border-checked-error-hover)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:hover~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color-error-hover)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:hover~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:focus-visible~.icon.svelte-zyw5y5{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5{border:var(--goa-radio-border-checked-error-disabled)}.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.radio--error.svelte-zyw5y5 input[type="radio"].svelte-zyw5y5:checked:disabled~.icon.svelte-zyw5y5{background-color:var(--goa-radio-color-bg-disabled)}`);
 }
-const j4 = (t) => ({}), ta = (t) => ({}), L4 = (t) => ({}), oa = (t) => ({});
+const j3 = (t) => ({}), ta = (t) => ({}), L3 = (t) => ({}), oa = (t) => ({});
 function ia(t) {
   let e, o, i, n, l;
   const r = (
@@ -46381,7 +46394,7 @@ function ia(t) {
           /*$$scope*/
           d[24],
           c,
-          L4
+          L3
         ) : ue(
           /*$$scope*/
           d[24]
@@ -46408,7 +46421,7 @@ function ia(t) {
     }
   };
 }
-function x4(t) {
+function x3(t) {
   let e, o, i, n, l, r, a, d, c, s, f = (
     /*label*/
     (t[3] || /*value*/
@@ -46582,7 +46595,7 @@ function x4(t) {
           /*$$scope*/
           N[24],
           H,
-          j4
+          j3
         ) : ue(
           /*$$scope*/
           N[24]
@@ -46628,7 +46641,7 @@ function x4(t) {
     }
   };
 }
-function N4(t, e, o) {
+function N3(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e;
   const c = ut(a);
   let { value: s } = e, { name: f = "" } = e, { label: g = "" } = e, { description: v = "" } = e, { disabled: h = "false" } = e, { error: m = "false" } = e, { checked: w = "false" } = e, { arialabel: p = "" } = e, { revealarialabel: _ = "" } = e, { maxwidth: z = "none" } = e, { mt: j = null } = e, { mr: M = null } = e, { mb: L = null } = e, { ml: x = null } = e, N, H, q = [], Z = 0, I = false;
@@ -46766,13 +46779,13 @@ function N4(t, e, o) {
     G
   ];
 }
-class D4 extends ke {
+class D3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      N4,
-      x4,
+      N3,
+      x3,
       we,
       {
         value: 2,
@@ -46790,7 +46803,7 @@ class D4 extends ke {
         mb: 8,
         ml: 9
       },
-      M4,
+      M3,
       [-1, -1]
     );
   }
@@ -46879,11 +46892,11 @@ class D4 extends ke {
     this.$$set({ ml: e }), k();
   }
 }
-customElements.define("goa-radio-item", ye(D4, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: {}, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
-function E4(t) {
+customElements.define("goa-radio-item", ye(D3, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: {}, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
+function E3(t) {
   xe(t, "svelte-sjh0kf", ":host{font-family:var(--goa-font-family-sans)}.goa-radio-group--horizontal.svelte-sjh0kf{display:flex;flex-direction:row;gap:var(--goa-radio-group-gap-horizontal)}.goa-radio-group--horizontal.compact.svelte-sjh0kf{gap:var(--goa-radio-group-gap-horizontal-compact)}.goa-radio-group--vertical.svelte-sjh0kf{display:flex;flex-direction:column;gap:var(--goa-radio-group-gap-vertical);width:100%}.goa-radio-group--vertical.compact.svelte-sjh0kf{gap:var(--goa-radio-group-gap-vertical-compact)}.goa-radio-group--horizontal.svelte-sjh0kf:focus,.goa-radio-group--vertical.svelte-sjh0kf:focus{outline:none}");
 }
-function I4(t) {
+function I3(t) {
   let e, o, i, n, l, r, a;
   const d = (
     /*#slots*/
@@ -46997,7 +47010,7 @@ function I4(t) {
     }
   };
 }
-function T4(t, e, o) {
+function T3(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
   const [a, d] = Be("Radio group orientation", ["vertical", "horizontal"]), [c, s] = Be("Size", ["default", "compact"]);
   let { name: f = xt() } = e, { value: g = void 0 } = e, { orientation: v = "vertical" } = e, { disabled: h = "false" } = e, { error: m = "false" } = e, { size: w = "default" } = e, { testid: p = "" } = e, { arialabel: _ = "" } = e, { mt: z = null } = e, { mr: j = null } = e, { mb: M = null } = e, { ml: L = null } = e, x = Oe(m), N, H = [], q, Z;
@@ -47158,13 +47171,13 @@ function T4(t, e, o) {
     ee
   ];
 }
-class A4 extends ke {
+class A3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      T4,
-      I4,
+      T3,
+      I3,
       we,
       {
         name: 13,
@@ -47180,7 +47193,7 @@ class A4 extends ke {
         mb: 5,
         ml: 6
       },
-      E4,
+      E3,
       [-1, -1]
     );
   }
@@ -47257,11 +47270,11 @@ class A4 extends ke {
     this.$$set({ ml: e }), k();
   }
 }
-customElements.define("goa-radio-group", ye(A4, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function S4(t) {
+customElements.define("goa-radio-group", ye(A3, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function S3(t) {
   xe(t, "svelte-1y2cug5", ".goa-scrollable.svelte-1y2cug5{scroll-behavior:smooth;margin:2px;width:auto}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar{width:var(--goa-space-xs)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track{border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track:hover{background:var(--goa-color-greyscale-200)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb{background:var(--goa-color-greyscale-400);border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb:hover{background:var(--goa-color-greyscale-600)}");
 }
-function q4(t) {
+function q3(t) {
   let e, o, i, n, l;
   const r = (
     /*#slots*/
@@ -47340,7 +47353,7 @@ function q4(t) {
     }
   };
 }
-function O4(t, e, o) {
+function O3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { direction: l = "vertical" } = e, { hpadding: r = "" } = e, { vpadding: a = "" } = e, { maxheight: d = "" } = e, { offsetHeight: c } = e, { scrollHeight: s } = e, f;
   function g(h) {
     h.target.dispatchEvent(new CustomEvent(
@@ -47379,13 +47392,13 @@ function O4(t, e, o) {
     v
   ];
 }
-class H4 extends ke {
+class H3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      O4,
-      q4,
+      O3,
+      q3,
       we,
       {
         direction: 0,
@@ -47395,7 +47408,7 @@ class H4 extends ke {
         offsetHeight: 6,
         scrollHeight: 7
       },
-      S4
+      S3
     );
   }
   get direction() {
@@ -47435,8 +47448,8 @@ class H4 extends ke {
     this.$$set({ scrollHeight: e }), k();
   }
 }
-customElements.define("goa-scrollable", ye(H4, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
-function P4(t) {
+customElements.define("goa-scrollable", ye(H3, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
+function P3(t) {
   xe(t, "svelte-w9001k", '::slotted(a),::slotted(goa-side-menu-heading),::slotted(a:visited){color:var(--goa-side-menu-color-item) !important;display:block;font:var(--goa-side-menu-group-item-typography);margin-left:var(--goa-side-menu-child-margin);background-color:var(--goa-side-menu-group-color-bg)}::slotted(a),::slotted(a:visited){padding:var(--goa-side-menu-padding-child);text-decoration:none;border-left:var(--goa-side-menu-child-border-left)}::slotted(a.current){font:var(--goa-side-menu-group-item-typography-current);border-left:var(--goa-side-menu-child-border-left-selected);background:var(--goa-side-menu-child-color-bg-selected);color:var(--goa-side-menu-color-item-current)!important}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-child-color-bg-hover);border-left:var(--goa-side-menu-child-border-left-hover)}::slotted(a:focus-visible),.heading.svelte-w9001k.svelte-w9001k:focus-visible{outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset)}.heading.svelte-w9001k.svelte-w9001k{gap:var(--goa-space-xs);display:flex;flex-direction:row;align-items:center}:host([child="true"]) a.heading.svelte-w9001k.svelte-w9001k,.heading.svelte-w9001k.svelte-w9001k{color:var(--goa-side-menu-color-item);display:flex;justify-content:space-between;font:var(--goa-side-menu-typography-item);padding:var(--goa-side-menu-parent-padding);text-decoration:none;border-radius:var(--goa-side-menu-group-border-radius)}.heading.open.svelte-w9001k.svelte-w9001k{font:var(--goa-side-menu-typography-item)}.heading.open.current.svelte-w9001k.svelte-w9001k{font:var(--goa-side-menu-typography-item-current);color:var(--goa-side-menu-color-item-current)}:host([child="true"]) a.heading.svelte-w9001k.svelte-w9001k{border-left:var(--goa-side-menu-child-border-left);padding:var(--goa-side-menu-padding-child);margin-left:var(--goa-side-menu-child-margin)}:host([child="true"]) a.heading.svelte-w9001k.svelte-w9001k:hover{border-left:var(--goa-side-menu-child-border-left-hover);background:var(--goa-side-menu-child-color-bg-hover)}:host([child="true"]) .side-menu-group.current a.heading.svelte-w9001k.svelte-w9001k{background:var(--goa-side-menu-child-color-bg-selected);border-left:var(--goa-side-menu-child-border-left)}.side-menu-group.svelte-w9001k.svelte-w9001k{background-color:var(--goa-side-menu-group-color-bg);border-radius:var(--goa-side-menu-group-border-radius);padding:var(--goa-side-menu-group-padding)}.side-menu-group.current.svelte-w9001k .heading.svelte-w9001k{background:var(--goa-side-menu-parent-color-bg-selected)}.heading.svelte-w9001k.svelte-w9001k:hover{background:var(--goa-side-menu-color-bg-menu-item-hover)}.hidden.svelte-w9001k.svelte-w9001k{display:none}.group.svelte-w9001k.svelte-w9001k{padding-left:var(--goa-side-menu-child-margin)}.trailing-icon.svelte-w9001k.svelte-w9001k{margin-left:auto;height:var(--goa-icon-size-l)}.leading-icon.svelte-w9001k.svelte-w9001k{height:var(--goa-icon-size-l)}.side-menu-group.svelte-w9001k .heading.open.svelte-w9001k{border-radius:var(--goa-side-menu-group-border-radius-open);background:var(--goa-color-greyscale-100)}.side-menu-group.svelte-w9001k ::slotted(a){border-radius:var(--goa-border-radius-l);font:var(--goa-side-menu-group-item-typography);padding:var(--goa-space-2xs) var(--goa-space-xs);border-left:none;margin-left:0;color:var(--goa-color-text-secondary) !important}.side-menu-group.svelte-w9001k .group.svelte-w9001k{border-left:var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);margin-left:var(--goa-side-menu-group-container-margin-left);padding-left:var(--goa-space-s);margin-top:var(--goa-space-xs);margin-bottom:var(--goa-side-menu-group-container-margin-bottom)}.side-menu-group.svelte-w9001k ::slotted(a.current){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover);color:var(--goa-color-text-default) !important;font-weight:var(--goa-font-weight-bold)}.side-menu-group.svelte-w9001k ::slotted(a:hover:not(.current)){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover)}.side-menu-group.svelte-w9001k .heading.svelte-w9001k{padding:var(--goa-space-xs) var(--goa-space-s);align-items:flex-start;color:var(--goa-color-text-secondary)}.side-menu-group.svelte-w9001k .heading.svelte-w9001k:hover{border-radius:var(--goa-side-menu-group-border-radius-open)}.side-menu-group.svelte-w9001k .heading.svelte-w9001k:focus-visible{border-radius:var(--goa-side-menu-group-border-radius-open)}:host([child="true"]) .side-menu-group a.heading.svelte-w9001k.svelte-w9001k{border-radius:var(--goa-side-menu-group-border-radius-open);padding:var(--goa-space-xs) var(--goa-space-s);align-items:flex-start;color:var(--goa-color-text-secondary)}.side-menu-group.svelte-w9001k .leading-icon.svelte-w9001k,.side-menu-group.svelte-w9001k .trailing-icon.svelte-w9001k{height:var(--goa-icon-size-3);margin-top:1px}');
 }
 function na(t) {
@@ -47467,7 +47480,7 @@ function na(t) {
     }
   };
 }
-function V4(t) {
+function V3(t) {
   let e;
   return {
     c() {
@@ -47481,7 +47494,7 @@ function V4(t) {
     }
   };
 }
-function B4(t) {
+function B3(t) {
   let e;
   return {
     c() {
@@ -47495,7 +47508,7 @@ function B4(t) {
     }
   };
 }
-function Z4(t) {
+function Z3(t) {
   let e, o, i, n, l, r, a, d, c, s, f, g, v, h, m, w = (
     /*icon*/
     t[1] && na(t)
@@ -47503,7 +47516,7 @@ function Z4(t) {
   function p(L, x) {
     return (
       /*_open*/
-      L[7] ? B4 : V4
+      L[7] ? B3 : V3
     );
   }
   let _ = p(t), z = _(t);
@@ -47642,10 +47655,10 @@ function Z4(t) {
     }
   };
 }
-function F4(t) {
+function F3(t) {
   return t == null ? void 0 : t.toLowerCase().replace(/ /g, "-");
 }
-function W4(t, e, o) {
+function W3(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e, { heading: r } = e, { icon: a = null } = e, { testid: d = "" } = e, { mt: c = null } = e, { mr: s = null } = e, { mb: f = null } = e, { ml: g = null } = e, v = false, h = false, m, w;
   Te(() => {
     p(), _();
@@ -47705,7 +47718,7 @@ function W4(t, e, o) {
     "heading" in N && o(0, r = N.heading), "icon" in N && o(1, a = N.icon), "testid" in N && o(2, d = N.testid), "mt" in N && o(3, c = N.mt), "mr" in N && o(4, s = N.mr), "mb" in N && o(5, f = N.mb), "ml" in N && o(6, g = N.ml), "$$scope" in N && o(13, l = N.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*heading*/
-    1 && o(11, i = F4(r));
+    1 && o(11, i = F3(r));
   }, [
     r,
     a,
@@ -47726,13 +47739,13 @@ function W4(t, e, o) {
     x
   ];
 }
-class Y4 extends ke {
+class Y3 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      W4,
-      Z4,
+      W3,
+      Z3,
       we,
       {
         heading: 0,
@@ -47743,7 +47756,7 @@ class Y4 extends ke {
         mb: 5,
         ml: 6
       },
-      P4
+      P3
     );
   }
   get heading() {
@@ -47789,11 +47802,11 @@ class Y4 extends ke {
     this.$$set({ ml: e }), k();
   }
 }
-customElements.define("goa-side-menu-group", ye(Y4, { heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function U4(t) {
+customElements.define("goa-side-menu-group", ye(Y3, { heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function U3(t) {
   xe(t, "svelte-18n06w4", "::slotted(a),::slotted(a:visited){color:var(--goa-color-text-secondary) !important;display:flex;align-items:flex-start;gap:var(--goa-space-xs);font:var(--goa-side-menu-typography-item);padding:var(--goa-space-xs) var(--goa-space-s);text-decoration:none;border-radius:var(--goa-side-menu-item-border-radius)}::slotted(a.current){font:var(--goa-side-menu-typography-item-current);color:var(--goa-side-menu-color-item-current) !important;background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:focus-visible){outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset)}.side-menu.svelte-18n06w4{display:flex;height:100%;flex-direction:column;gap:var(--goa-side-menu-items-gap);background-color:var(--goa-side-menu-color-bg);border-right:var(--goa-side-menu-border-right);padding:var(--goa-side-menu-padding)}");
 }
-function Q4(t) {
+function Q3(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -47855,7 +47868,7 @@ function Q4(t) {
     }
   };
 }
-function R4(t, e, o) {
+function R3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { testid: l = "" } = e, r, a = [], d = [], c = null;
   Te(async () => {
     await Je(), s(), g(), h();
@@ -47902,9 +47915,9 @@ function R4(t, e, o) {
     "testid" in p && o(0, l = p.testid), "$$scope" in p && o(2, n = p.$$scope);
   }, [l, r, n, i, w];
 }
-class G4 extends ke {
+class G3 extends ke {
   constructor(e) {
-    super(), _e(this, e, R4, Q4, we, { testid: 0 }, U4);
+    super(), _e(this, e, R3, Q3, we, { testid: 0 }, U3);
   }
   get testid() {
     return this.$$.ctx[0];
@@ -47913,11 +47926,11 @@ class G4 extends ke {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-side-menu", ye(G4, { testid: {} }, ["default"], [], true));
-function X4(t) {
+customElements.define("goa-side-menu", ye(G3, { testid: {} }, ["default"], [], true));
+function X3(t) {
   xe(t, "svelte-1kllvnv", "h2.icon.svelte-1kllvnv.svelte-1kllvnv{display:flex;align-items:flex-start}goa-icon.svelte-1kllvnv.svelte-1kllvnv{margin-right:0;color:var(--goa-side-menu-heading-color)}h2.svelte-1kllvnv.svelte-1kllvnv{border-top:none;border-bottom:var(--goa-side-menu-heading-border);background:var(--goa-side-menu-heading-color-bg);padding:var(--goa-side-menu-heading-padding-top) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s);color:var(--goa-side-menu-heading-color);font:var(--goa-side-menu-heading-typography);display:flex;align-items:flex-start;margin:var(--goa-side-menu-heading-margin);margin-bottom:var(--goa-space-2xs);margin-right:var(--goa-space-xs);gap:var(--goa-side-menu-heading-gap)}h2.svelte-1kllvnv .label.svelte-1kllvnv{margin-top:2px}");
 }
-const J4 = (t) => ({}), la = (t) => ({});
+const J3 = (t) => ({}), la = (t) => ({});
 function ra(t) {
   let e;
   return {
@@ -47946,7 +47959,7 @@ function ra(t) {
     }
   };
 }
-function K4(t) {
+function K3(t) {
   let e, o, i, n, l, r = (
     /*icon*/
     t[0] && ra(t)
@@ -48018,7 +48031,7 @@ function K4(t) {
           /*$$scope*/
           f[2],
           g,
-          J4
+          J3
         ) : ue(
           /*$$scope*/
           f[2]
@@ -48049,15 +48062,15 @@ function K4(t) {
     }
   };
 }
-function $4(t, e, o) {
+function $3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { icon: l = null } = e, { testid: r = "section-heading" } = e;
   return t.$$set = (a) => {
     "icon" in a && o(0, l = a.icon), "testid" in a && o(1, r = a.testid), "$$scope" in a && o(2, n = a.$$scope);
   }, [l, r, n, i];
 }
-class e3 extends ke {
+class e4 extends ke {
   constructor(e) {
-    super(), _e(this, e, $4, K4, we, { icon: 0, testid: 1 }, X4);
+    super(), _e(this, e, $3, K3, we, { icon: 0, testid: 1 }, X3);
   }
   get icon() {
     return this.$$.ctx[0];
@@ -48072,15 +48085,15 @@ class e3 extends ke {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-side-menu-heading", ye(e3, { icon: {}, testid: {} }, ["default", "meta"], [], true));
-function t3(t) {
+customElements.define("goa-side-menu-heading", ye(e4, { icon: {}, testid: {} }, ["default", "meta"], [], true));
+function t4(t) {
   xe(t, "svelte-1e4jerw", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1e4jerw-pulse{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}.skeleton.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);animation:svelte-1e4jerw-pulse 2s infinite ease-in-out;overflow:hidden;margin:10px 0}.image.svelte-1e4jerw.svelte-1e4jerw,.image-1.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);flex:1 1 100px;height:100px;margin:0}.image-2.svelte-1e4jerw.svelte-1e4jerw{height:140px}.image-3.svelte-1e4jerw.svelte-1e4jerw{height:200px}.image-4.svelte-1e4jerw.svelte-1e4jerw{height:300px}.text.svelte-1e4jerw.svelte-1e4jerw,.text-1.svelte-1e4jerw.svelte-1e4jerw,.text-2.svelte-1e4jerw.svelte-1e4jerw,.text-3.svelte-1e4jerw.svelte-1e4jerw,.text-4.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:12px;border-radius:0.25rem;margin:6px 0}.title.svelte-1e4jerw.svelte-1e4jerw,.title-1.svelte-1e4jerw.svelte-1e4jerw,.title-2.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:0.75rem;border-radius:0.25rem}.title-3.svelte-1e4jerw.svelte-1e4jerw{height:0.8rem}.title-4.svelte-1e4jerw.svelte-1e4jerw{height:1rem}.text-small.svelte-1e4jerw.svelte-1e4jerw,.text-small-1.svelte-1e4jerw.svelte-1e4jerw{width:30%;height:6px;border-radius:2px}.text-small-2.svelte-1e4jerw.svelte-1e4jerw{width:40%;height:8px;border-radius:2px}.text-small-3.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:10px;border-radius:3px}.text-small-4.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:12px;border-radius:4px}.paragraph.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:70px;border-radius:4px}.header.svelte-1e4jerw.svelte-1e4jerw,.header-1.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:18px;margin:12px 0;border-radius:0.25rem}.header-2.svelte-1e4jerw.svelte-1e4jerw{width:60%;height:20px;margin:14px 0;border-radius:0.25rem}.header-3.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:22px;margin:16px 0;border-radius:0.25rem}.header-4.svelte-1e4jerw.svelte-1e4jerw{width:80%;height:24px;margin:18px 0;border-radius:0.3rem}.avatar.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.avatar.svelte-1e4jerw.svelte-1e4jerw,.avatar-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:50%}.avatar-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:50%}.avatar-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:50%}.avatar-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:50%}.thumbnail.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.thumbnail.svelte-1e4jerw.svelte-1e4jerw,.thumbnail-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:4px}.thumbnail-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:4px}.thumbnail-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:4px}.thumbnail-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:4px}.card.svelte-1e4jerw.svelte-1e4jerw,.card-1.svelte-1e4jerw.svelte-1e4jerw,.card-2.svelte-1e4jerw.svelte-1e4jerw,.card-3.svelte-1e4jerw.svelte-1e4jerw,.card-4.svelte-1e4jerw.svelte-1e4jerw{border:1px solid var(--goa-color-greyscale-100);border-radius:4px}@container self (max-width: 623px){.card.svelte-1e4jerw.svelte-1e4jerw{width:100%}}@container self (min-width: 624px){.card.svelte-1e4jerw.svelte-1e4jerw{width:var(--max-width)}}.card-content.svelte-1e4jerw.svelte-1e4jerw{flex:1 1 auto;padding:1rem}.profile.svelte-1e4jerw.svelte-1e4jerw{display:flex;flex-direction:row;align-items:center;gap:1rem}.profile-1.svelte-1e4jerw.svelte-1e4jerw{max-width:280px}.profile-2.svelte-1e4jerw.svelte-1e4jerw{max-width:360px}.profile-3.svelte-1e4jerw.svelte-1e4jerw{max-width:480px}.profile-4.svelte-1e4jerw.svelte-1e4jerw{max-width:560px}.profile.svelte-1e4jerw .profile-avatar.svelte-1e4jerw{flex-shrink:0}.profile.svelte-1e4jerw .profile-name.svelte-1e4jerw{flex:1 1 auto}");
 }
 function aa(t, e, o) {
   const i = t.slice();
   return i[13] = e[o], i;
 }
-function o3(t) {
+function o4(t) {
   let e, o;
   return {
     c() {
@@ -48106,7 +48119,7 @@ function o3(t) {
     }
   };
 }
-function i3(t) {
+function i4(t) {
   let e, o, i, n, l, r, a, d, c, s, f, g;
   return n = new Lt({
     props: { type: "image", size: (
@@ -48146,7 +48159,7 @@ function i3(t) {
     }
   };
 }
-function n3(t) {
+function n4(t) {
   let e, o, i = Ge(Array(Number.parseInt(
     /*linecount*/
     t[2] + ""
@@ -48202,7 +48215,7 @@ function n3(t) {
     }
   };
 }
-function l3(t) {
+function l4(t) {
   let e, o, i, n, l, r, a, d, c, s;
   return i = new Lt({
     props: { type: "avatar", size: (
@@ -48257,7 +48270,7 @@ function l3(t) {
     }
   };
 }
-function r3(t) {
+function r4(t) {
   let e, o, i, n, l, r, a, d, c;
   return o = new Lt({
     props: { type: "image", size: (
@@ -48369,14 +48382,14 @@ function sa(t) {
     }
   };
 }
-function a3(t) {
+function a4(t) {
   let e, o, i, n, l;
   const r = [
-    r3,
-    l3,
-    n3,
-    i3,
-    o3
+    r4,
+    l4,
+    n4,
+    i4,
+    o4
   ], a = [];
   function d(c, s) {
     return (
@@ -48447,7 +48460,7 @@ function a3(t) {
     }
   };
 }
-function s3(t, e, o) {
+function s4(t, e, o) {
   const [i, n] = Be(
     "Skeleton type",
     [
@@ -48478,8 +48491,8 @@ class Lt extends ke {
     super(), _e(
       this,
       e,
-      s3,
-      a3,
+      s4,
+      a4,
       we,
       {
         maxwidth: 0,
@@ -48492,7 +48505,7 @@ class Lt extends ke {
         mb: 7,
         ml: 8
       },
-      t3
+      t4
     );
   }
   get maxwidth() {
@@ -48551,7 +48564,7 @@ class Lt extends ke {
   }
 }
 customElements.define("goa-skeleton", ye(Lt, { maxwidth: {}, size: {}, linecount: {}, type: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function d3(t) {
+function d4(t) {
   let e, o;
   return {
     c() {
@@ -48598,7 +48611,7 @@ function d3(t) {
     }
   };
 }
-function c3(t, e, o) {
+function c4(t, e, o) {
   let { hspacing: i = "none" } = e, { vspacing: n = "none" } = e, { testid: l = "" } = e, r;
   Te(() => {
     const d = `var(--goa-space-${n})`, c = i === "fill" ? "100%" : `var(--goa-space-${i})`;
@@ -48613,9 +48626,9 @@ function c3(t, e, o) {
     "hspacing" in d && o(0, i = d.hspacing), "vspacing" in d && o(1, n = d.vspacing), "testid" in d && o(2, l = d.testid);
   }, [i, n, l, r, a];
 }
-class u3 extends ke {
+class u4 extends ke {
   constructor(e) {
-    super(), _e(this, e, c3, d3, we, { hspacing: 0, vspacing: 1, testid: 2 });
+    super(), _e(this, e, c4, d4, we, { hspacing: 0, vspacing: 1, testid: 2 });
   }
   get hspacing() {
     return this.$$.ctx[0];
@@ -48636,9 +48649,9 @@ class u3 extends ke {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-spacer", ye(u3, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
+customElements.define("goa-spacer", ye(u4, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
 const $t = [];
-function f3(t, e = Me) {
+function f4(t, e = Me) {
   let o;
   const i = /* @__PURE__ */ new Set();
   function n(a) {
@@ -48699,8 +48712,8 @@ function ui(t, e) {
   }
   throw new Error(`Cannot interpolate ${o} values`);
 }
-function g3(t, e = {}) {
-  const o = f3(t);
+function g4(t, e = {}) {
+  const o = f4(t);
   let i, n = t;
   function l(r, a) {
     if (t == null)
@@ -48730,7 +48743,7 @@ function g3(t, e = {}) {
     subscribe: o.subscribe
   };
 }
-function h3(t) {
+function h4(t) {
   xe(t, "svelte-1n1bmdf", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1n1bmdf-rotate{100%{transform:rotate(360deg)}}.spinner-infinite.svelte-1n1bmdf{animation:svelte-1n1bmdf-rotate 2s linear infinite}");
 }
 function ca(t) {
@@ -48855,7 +48868,7 @@ function ca(t) {
     }
   };
 }
-function v3(t) {
+function v4(t) {
   let e, o = (
     /*ready*/
     t[6] && ca(t)
@@ -48877,9 +48890,9 @@ function v3(t) {
     }
   };
 }
-function m3(t, e, o) {
+function m4(t, e, o) {
   let i, n, l, r, a, d, { size: c } = e, { invert: s = false } = e, { progress: f = -1 } = e, { testid: g = "" } = e, v = "infinite";
-  const h = g3(0, { duration: 500, easing: R2 });
+  const h = g4(0, { duration: 500, easing: R2 });
   p1(t, h, (p) => o(7, d = p));
   function m(p) {
     const _ = l + r * Math.cos(p), z = l + r * Math.sin(p);
@@ -48932,13 +48945,13 @@ function m3(t, e, o) {
     r
   ];
 }
-class b3 extends ke {
+class b4 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      m3,
-      v3,
+      m4,
+      v4,
       we,
       {
         size: 10,
@@ -48946,7 +48959,7 @@ class b3 extends ke {
         progress: 11,
         testid: 1
       },
-      h3
+      h4
     );
   }
   get size() {
@@ -48974,8 +48987,8 @@ class b3 extends ke {
     this.$$set({ testid: e }), k();
   }
 }
-customElements.define("goa-spinner", ye(b3, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
-function p3(t) {
+customElements.define("goa-spinner", ye(b4, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
+function p4(t) {
   xe(t, "svelte-11b7q5w", `:host{display:grid;grid-template-areas:"header"
       "body"
       "footer";grid-template-rows:auto minmax(0, 1fr) auto;overflow:hidden;box-sizing:border-box;font-family:var(--goa-font-family-sans);width:100%;height:100%;background-color:var(--goa-scroll-panel-color-bg)}:host .svelte-11b7q5w{box-sizing:border-box}.scroll-panel-header.svelte-11b7q5w{grid-area:header;background-color:var(--goa-scroll-panel-header-color-bg);border-bottom:var(--goa-border-width-2xs) solid transparent;z-index:1;transition:box-shadow var(--goa-motion-duration-medium-1)
@@ -48995,7 +49008,7 @@ function p3(t) {
       border-color var(--goa-motion-duration-medium-1)
         var(--goa-motion-curve-expressive)}.scroll-panel-footer--shadow.svelte-11b7q5w{border-top-color:var(--goa-scroll-panel-footer-scroll-border);box-shadow:var(--goa-scroll-panel-footer-scroll-shadow)}`);
 }
-const w3 = (t) => ({}), ua = (t) => ({}), _3 = (t) => ({}), fa = (t) => ({});
+const w4 = (t) => ({}), ua = (t) => ({}), _4 = (t) => ({}), fa = (t) => ({});
 function ga(t) {
   let e, o;
   const i = (
@@ -49034,7 +49047,7 @@ function ga(t) {
           /*$$scope*/
           l[15],
           r,
-          _3
+          _4
         ) : ue(
           /*$$scope*/
           l[15]
@@ -49098,7 +49111,7 @@ function ha(t) {
           /*$$scope*/
           l[15],
           r,
-          w3
+          w4
         ) : ue(
           /*$$scope*/
           l[15]
@@ -49124,7 +49137,7 @@ function ha(t) {
     }
   };
 }
-function y3(t) {
+function y4(t) {
   let e, o, i, n, l, r, a, d, c, s, f = (
     /*$$slots*/
     t[9].header && ga(t)
@@ -49253,7 +49266,7 @@ function y3(t) {
   };
 }
 const va = 20;
-function k3(t) {
+function k4(t) {
   return typeof CSS > "u" || typeof CSS.supports != "function" || CSS.supports("height", t);
 }
 function ma(t, e, o, i) {
@@ -49261,7 +49274,7 @@ function ma(t, e, o, i) {
   const l = t, r = e - t - o;
   return i === "at-start" && l < va ? { state: "at-start", isScrollable: true } : i === "at-end" && r < va ? { state: "at-end", isScrollable: true } : l < 1 ? { state: "at-start", isScrollable: true } : r < 1 ? { state: "at-end", isScrollable: true } : { state: "middle", isScrollable: true };
 }
-function C3(t, e, o) {
+function C4(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
   const a = ut(l);
   let { testid: d = "" } = e, { height: c = "100%" } = e, { maxheight: s = "" } = e, { direction: f = "vertical" } = e;
@@ -49273,7 +49286,7 @@ function C3(t, e, o) {
   };
   let h = null, m = null, w = null, p = false, _ = "no-scroll", z = "no-scroll", j = false, M = false, L = null;
   Te(() => {
-    if (k3(c) || (console.error(`ScrollPanel: "${c}" is not a valid CSS height. Falling back to "100%".`), o(10, c = "100%")), w) {
+    if (k4(c) || (console.error(`ScrollPanel: "${c}" is not a valid CSS height. Falling back to "100%".`), o(10, c = "100%")), w) {
       const I = w.getRootNode();
       o(13, h = I instanceof ShadowRoot ? I.host : null), x(c, s), L = new ResizeObserver(() => H()), L.observe(w), m && L.observe(m);
     }
@@ -49345,13 +49358,13 @@ function C3(t, e, o) {
     Z
   ];
 }
-class z3 extends ke {
+class z4 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      C3,
-      y3,
+      C4,
+      y4,
       we,
       {
         testid: 0,
@@ -49359,7 +49372,7 @@ class z3 extends ke {
         maxheight: 11,
         direction: 12
       },
-      p3
+      p4
     );
   }
   get testid() {
@@ -49387,12 +49400,12 @@ class z3 extends ke {
     this.$$set({ direction: e }), k();
   }
 }
-customElements.define("goa-scroll-panel", ye(z3, { testid: {}, height: {}, maxheight: {}, direction: {} }, ["header", "default", "footer"], [], true));
-function M3(t) {
+customElements.define("goa-scroll-panel", ye(z4, { testid: {}, height: {}, maxheight: {}, direction: {} }, ["header", "default", "footer"], [], true));
+function M4(t) {
   xe(t, "svelte-1ifx1we", ".hidden.svelte-1ifx1we{display:none}");
 }
-const j3 = (t) => ({}), ba = (t) => ({});
-function L3(t) {
+const j4 = (t) => ({}), ba = (t) => ({});
+function L4(t) {
   let e, o, i, n, l, r, a;
   const d = (
     /*#slots*/
@@ -49437,7 +49450,7 @@ function L3(t) {
           /*$$scope*/
           g[7],
           v,
-          j3
+          j4
         ) : ue(
           /*$$scope*/
           g[7]
@@ -49481,7 +49494,7 @@ function L3(t) {
     }
   };
 }
-function x3(t, e, o) {
+function x4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const l = ut(i);
   let { heading: r = "" } = e, { open: a = false } = e, { disabled: d = false } = e, { slug: c = "" } = e, s, f, g;
@@ -49552,13 +49565,13 @@ function x3(t, e, o) {
     _
   ];
 }
-class N3 extends ke {
+class N4 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      x3,
-      L3,
+      x4,
+      L4,
       we,
       {
         heading: 1,
@@ -49566,7 +49579,7 @@ class N3 extends ke {
         disabled: 5,
         slug: 6
       },
-      M3
+      M4
     );
   }
   get heading() {
@@ -49594,11 +49607,11 @@ class N3 extends ke {
     this.$$set({ slug: e }), k();
   }
 }
-customElements.define("goa-tab", ye(N3, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
-function D3(t) {
+customElements.define("goa-tab", ye(N4, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
+function D4(t) {
   xe(t, "svelte-rqk1xa", ":host{box-sizing:border-box}.goatable.svelte-rqk1xa{width:0;border:var(--goa-table-container-border);border-radius:var(--goa-table-border-radius-container);overflow:hidden;box-sizing:border-box}table.svelte-rqk1xa{border-collapse:collapse}");
 }
-function E3(t) {
+function E4(t) {
   let e, o, i;
   const n = (
     /*#slots*/
@@ -49652,7 +49665,7 @@ function E3(t) {
     }
   };
 }
-function I3(t) {
+function I4(t) {
   let e;
   const o = (
     /*#slots*/
@@ -49703,9 +49716,9 @@ function I3(t) {
     }
   };
 }
-function T3(t) {
+function T4(t) {
   let e, o, i, n, l, r;
-  const a = [I3, E3], d = [];
+  const a = [I4, E4], d = [];
   function c(s, f) {
     return (
       /*_isTableRoot*/
@@ -49800,7 +49813,7 @@ function T3(t) {
   };
 }
 const pa = 2;
-function A3(t, e, o) {
+function A4(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
   const [a, d] = Be("Table variant", ["normal", "relaxed"], true), [c, s] = Be("Sort mode", ["single", "multi"], { required: true });
   let { width: f = "" } = e, { stickyheader: g = "false" } = e, { striped: v = "false" } = e, { variant: h = "normal" } = e, { testid: m = "" } = e, { sortMode: w = "single" } = e, { mt: p = null } = e, { mr: _ = null } = e, { mb: z = null } = e, { ml: j = null } = e, M, L = false, x = [], N;
@@ -49913,13 +49926,13 @@ function A3(t, e, o) {
     P
   ];
 }
-class S3 extends ke {
+class S4 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      A3,
-      T3,
+      A4,
+      T4,
       we,
       {
         width: 0,
@@ -49933,7 +49946,7 @@ class S3 extends ke {
         mb: 5,
         ml: 6
       },
-      D3,
+      D4,
       [-1, -1]
     );
   }
@@ -49998,12 +50011,12 @@ class S3 extends ke {
     this.$$set({ ml: e }), k();
   }
 }
-customElements.define("goa-table", ye(S3, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function q3(t) {
+customElements.define("goa-table", ye(S4, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function q4(t) {
   xe(t, "svelte-c3jvwx", `:host{display:flex;align-items:flex-end;cursor:pointer}button.svelte-c3jvwx.svelte-c3jvwx{border:none;background:none;display:flex;font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;line-height:inherit;height:inherit;width:100%;padding:var(--goa-table-padding-heading);justify-content:var(--header-text-align, flex-start);align-items:flex-end;text-align:var(--header-align, left)}.content.svelte-c3jvwx.svelte-c3jvwx{display:inline-flex;align-items:flex-end;gap:var(--goa-table-sort-header-gap);padding:var(--goa-space-3xs);border-radius:var(--goa-border-radius-m)}button.svelte-c3jvwx.svelte-c3jvwx:hover{color:var(--goa-table-color-heading-hover)}button.svelte-c3jvwx.svelte-c3jvwx:focus{outline:none}button.svelte-c3jvwx:focus-visible .content.svelte-c3jvwx{box-shadow:0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus)}.icon-wrapper.svelte-c3jvwx.svelte-c3jvwx{display:inline-flex;align-items:center;justify-content:center;border-radius:var(--goa-border-radius-m)}button.sorted.svelte-c3jvwx goa-icon.svelte-c3jvwx{color:var(--goa-color-interactive-default)}button.sorted.svelte-c3jvwx:hover goa-icon.svelte-c3jvwx{color:var(--goa-color-interactive-hover)}button.svelte-c3jvwx:not(.sorted) goa-icon.svelte-c3jvwx{color:var(--goa-color-greyscale-500)}button.svelte-c3jvwx:not(.sorted):hover goa-icon.svelte-c3jvwx{color:var(--goa-color-interactive-hover)}button.svelte-c3jvwx:not(.sorted):focus-visible goa-icon.svelte-c3jvwx{color:var(--goa-color-interactive-hover)}.sort-order.svelte-c3jvwx.svelte-c3jvwx{font-size:var(--goa-font-size-1);font-weight:var(--goa-font-weight-bold);color:var(--goa-color-interactive-default);line-height:1;margin-left:var(--goa-space-2xs)}.sort-order.hidden.svelte-c3jvwx.svelte-c3jvwx{visibility:hidden}button.svelte-c3jvwx:hover .sort-order.svelte-c3jvwx{color:var(--goa-color-interactive-hover)}`);
 }
-function O3(t) {
+function O4(t) {
   let e;
   return {
     c() {
@@ -50017,7 +50030,7 @@ function O3(t) {
     }
   };
 }
-function H3(t) {
+function H4(t) {
   let e;
   return {
     c() {
@@ -50031,7 +50044,7 @@ function H3(t) {
     }
   };
 }
-function P3(t) {
+function P4(t) {
   let e;
   return {
     c() {
@@ -50045,7 +50058,7 @@ function P3(t) {
     }
   };
 }
-function V3(t) {
+function V4(t) {
   let e, o, i, n, l, r, a, d;
   const c = (
     /*#slots*/
@@ -50060,9 +50073,9 @@ function V3(t) {
   function f(h, m) {
     return (
       /*direction*/
-      h[0] === "desc" ? P3 : (
+      h[0] === "desc" ? P4 : (
         /*direction*/
-        h[0] === "asc" ? H3 : O3
+        h[0] === "asc" ? H4 : O4
       )
     );
   }
@@ -50130,7 +50143,7 @@ function V3(t) {
     }
   };
 }
-function B3(t, e, o) {
+function B4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { name: l = "" } = e, { direction: r = "none" } = e, { sortOrder: a = 0 } = e, d;
   Te(() => {
     if (d) {
@@ -50147,9 +50160,9 @@ function B3(t, e, o) {
     "name" in s && o(3, l = s.name), "direction" in s && o(0, r = s.direction), "sortOrder" in s && o(1, a = s.sortOrder), "$$scope" in s && o(4, n = s.$$scope);
   }, [r, a, d, l, n, i, c];
 }
-class Z3 extends ke {
+class Z4 extends ke {
   constructor(e) {
-    super(), _e(this, e, B3, V3, we, { name: 3, direction: 0, sortOrder: 1 }, q3);
+    super(), _e(this, e, B4, V4, we, { name: 3, direction: 0, sortOrder: 1 }, q4);
   }
   get name() {
     return this.$$.ctx[3];
@@ -50170,8 +50183,8 @@ class Z3 extends ke {
     this.$$set({ sortOrder: e }), k();
   }
 }
-customElements.define("goa-table-sort-header", ye(Z3, { name: { reflect: true }, direction: { reflect: true }, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
-function F3(t) {
+customElements.define("goa-table-sort-header", ye(Z4, { name: { reflect: true }, direction: { reflect: true }, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
+function F4(t) {
   xe(t, "svelte-5ruhll", `:host{box-sizing:border-box;font:var(--goa-tab-typography)}.tab{display:flex;align-items:center;gap:var(--goa-space-xs)}[role="tab"]{display:flex;background:none;overflow:hidden;white-space:nowrap;cursor:pointer;border:none;font:var(--goa-tab-typography);color:var(--goa-tab-color-text-not-selected);text-decoration:none}[role="tab"][aria-selected="true"]{font:var(--goa-tab-typography-selected);color:var(--goa-tab-color-text-selected)}[role="tab"]:focus-visible{outline:var(--goa-tab-border-focus)}
     [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
   {color:var(--goa-tab-color-text-hover)}[role="tab"][aria-disabled="true"]{color:var(--goa-color-greyscale-400);cursor:not-allowed;pointer-events:none}[role="tabpanel"]:focus-visible{outline:var(--goa-tab-border-focus);outline-offset:4px}.segmented.svelte-5ruhll .tabpanel.svelte-5ruhll:focus-visible{outline:none}@media(min-width: 624px){.tabs.svelte-5ruhll.svelte-5ruhll{border-bottom:var(--goa-tabs-bottom-border);display:flex;gap:var(--goa-tabs-gap);margin-bottom:2rem}[role="tab"]{padding:var(--goa-tab-padding);text-overflow:ellipsis;min-width:var(--goa-space-2xl);justify-content:center}}@media(max-width: 623px){.tabs.svelte-5ruhll.svelte-5ruhll{border-left:var(--goa-tabs-bottom-border);border-bottom:var(--goa-tabs-bottom-border);display:flex;flex-direction:column;gap:var(--goa-tabs-gap-small-screen);padding-bottom:var(--goa-tabs-padding-bottom-small-screen)}[role="tab"]{padding:var(--goa-tab-padding-mobile);text-overflow:wrap;white-space:normal;word-break:break-word;overflow-wrap:break-word}[role="tab"][aria-selected="true"]{background:var(--goa-tab-color-bg-selected-small-screen)}
@@ -50209,7 +50222,7 @@ function wa(t) {
     }
   };
 }
-function W3(t) {
+function W4(t) {
   let e, o, i, n, l, r, a = (
     /*variant*/
     t[1] === "segmented" && /*_segmentedIndicatorWidth*/
@@ -50345,12 +50358,12 @@ function W3(t) {
     }
   };
 }
-const Y3 = 200, U3 = 0.2, Q3 = 400;
-function R3(t) {
+const Y4 = 200, U4 = 0.2, Q4 = 400;
+function R4(t) {
   const o = t.toLowerCase().split(" ").map((i) => i.toLowerCase()).join("-");
   return encodeURIComponent(o);
 }
-function G3(t, e, o) {
+function G4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { initialtab: l = -1 } = e, { testid: r = "" } = e, { variant: a = "default" } = e, { orientation: d = "auto" } = e, { navigation: c = "hash" } = e, s, f, g, v = 1, h = [], m, w = true, p = 0, _ = 0, z = 30, j = 0, M = 1, L = null, x = null;
   Te(() => {
     Rt(s), I(), O(), c !== "none" && U();
@@ -50418,7 +50431,7 @@ function G3(t, e, o) {
         me = K.heading, je = K.slug;
       else {
         const be = K.heading;
-        me = document.createElement("div"), me.textContent = be, je = K.slug || R3(be);
+        me = document.createElement("div"), me.textContent = be, je = K.slug || R4(be);
       }
       me.classList.add("tab"), je || (je = "tab-" + oe);
       const ae = document.createElement("a");
@@ -50463,8 +50476,8 @@ function G3(t, e, o) {
       if (G) {
         const me = D[M - 1];
         if (me) {
-          const ae = Math.abs(je.left - me.getBoundingClientRect().left), Se = Y3 + U3 * ae;
-          o(10, j = Math.min(Se, Q3) / 1e3);
+          const ae = Math.abs(je.left - me.getBoundingClientRect().left), Se = Y4 + U4 * ae;
+          o(10, j = Math.min(Se, Q4) / 1e3);
         } else
           o(10, j = 0);
       } else
@@ -50580,13 +50593,13 @@ function G3(t, e, o) {
     $
   ];
 }
-class X3 extends ke {
+class X4 extends ke {
   constructor(e) {
     super(), _e(
       this,
       e,
-      G3,
-      W3,
+      G4,
+      W4,
       we,
       {
         initialtab: 11,
@@ -50595,7 +50608,7 @@ class X3 extends ke {
         orientation: 2,
         navigation: 3
       },
-      F3,
+      F4,
       [-1, -1]
     );
   }
@@ -50630,8 +50643,8 @@ class X3 extends ke {
     this.$$set({ navigation: e }), k();
   }
 }
-customElements.define("goa-tabs", ye(X3, { initialtab: {}, testid: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
-function J3(t) {
+customElements.define("goa-tabs", ye(X4, { initialtab: {}, testid: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
+function J4(t) {
   xe(t, "svelte-saj8rn", ".notification-container.svelte-saj8rn{position:fixed;display:flex;flex-direction:column;gap:1rem;z-index:1000}.pos-top.svelte-saj8rn{top:20px}.pos-bottom.svelte-saj8rn{bottom:20px}.pos-left.svelte-saj8rn{left:20px;transform:none}.pos-center.svelte-saj8rn{left:0;right:0;align-items:center;padding:0 var(--goa-space-m);pointer-events:none}.pos-center.svelte-saj8rn *{pointer-events:auto}.pos-right.svelte-saj8rn{right:20px;transform:none}.sr-only.svelte-saj8rn{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}");
 }
 function _a(t) {
@@ -50677,7 +50690,7 @@ function _a(t) {
     }
   };
 }
-function K3(t) {
+function K4(t) {
   var d;
   let e, o, i, n = (
     /*_notification*/
@@ -50795,7 +50808,7 @@ function ya(t) {
     }
   return t;
 }
-function $3(t, e, o) {
+function $4(t, e, o) {
   let { vPosition: i = "bottom" } = e, { hPosition: n = "center" } = e, { testid: l } = e, r = [], a, d;
   Te(() => at(window.document.body, (m, w, p) => {
     switch (m) {
@@ -50883,7 +50896,7 @@ function $3(t, e, o) {
 }
 class eh extends ke {
   constructor(e) {
-    super(), _e(this, e, $3, K3, we, { vPosition: 0, hPosition: 1, testid: 2 }, J3);
+    super(), _e(this, e, $4, K4, we, { vPosition: 0, hPosition: 1, testid: 2 }, J4);
   }
   get vPosition() {
     return this.$$.ctx[0];
@@ -69732,10 +69745,9 @@ function DocsFilterChipRoute() {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Filter chip" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic filter chip" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "Active", onClick: handleToggle }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic chip" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "Active", removable: false }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic filter chips" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "Removable", onClick: handleToggle }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "Not removable", removable: false }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filter group" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "All", onClick: () => setFilter("all") }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFilterChip, { content: "Active", onClick: () => setFilter("active") }),
