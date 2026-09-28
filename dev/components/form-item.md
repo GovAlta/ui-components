@@ -15,7 +15,7 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `error` | string \| React.ReactNode | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
 | `helpText` | string \| React.ReactNode | (none) | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
-| `label` | string | (none) | No | Creates a label for the form item. |
+| `label` | string \| React.ReactNode | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 | `labelSize` | GoabFormItemLabelSize | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | (none) |
@@ -33,6 +33,7 @@ Wraps an input control with a text label, requirement label, helper text, and er
 |------|----------|-------------|
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
 | `helpText` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
+| `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 
 ---
 
@@ -45,7 +46,7 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `error` | string \| TemplateRef<any> | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
 | `helpText` | string \| TemplateRef<any> | (none) | No | Help text displayed under the form field to provide additional explanation. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
-| `label` | string | (none) | No | Creates a label for the form item. |
+| `label` | string \| TemplateRef<any> | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 | `labelSize` | GoabFormItemLabelSize | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
@@ -63,6 +64,7 @@ Wraps an input control with a text label, requirement label, helper text, and er
 |------|----------|-------------|
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ngTemplate for custom error content. |
 | `helpText` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ngTemplate for custom help content. |
+| `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 
 ---
 
@@ -76,7 +78,7 @@ Tag: `goa-form-item`
 |------|------|---------|----------|-------------|
 | `error` | string | (none) | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
 | `helptext` | string | (none) | No | Help text displayed under the form field to provide additional explanation. |
-| `label` | string | (none) | No | Creates a label for the form item. |
+| `label` | string | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 | `labelsize` | "compact" \| "regular" \| "large" | `regular` | No | Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. |
 | `maxwidth` | string | `none` | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
@@ -94,6 +96,7 @@ Tag: `goa-form-item`
 |------|----------|-------------|
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
 | `helptext` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
+| `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 
 ---
 
