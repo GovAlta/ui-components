@@ -46,7 +46,6 @@ Allow the user to enter information, filter content, and make selections.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
 | `content` | string \| TemplateRef<unknown> | (none) | Yes | Content displayed in the chip. Accepts a string or template for custom content. |
-| `deletable` | boolean | (none) | No | Marks the chip as deletable. |
 | `error` | boolean | (none) | No | Shows an error state. |
 | `iconTheme` | GoabChipTheme | (none) | No | Sets the icon theme style for the filter chip. |
 | `leadingIcon` | GoabIconType \| null | (none) | No | Icon displayed at the start of the chip. |
