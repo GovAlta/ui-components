@@ -20,6 +20,7 @@ Allow the user to enter information, filter content, and make selections.
 | `ml` | Spacing | (none) | No | (none) |
 | `mr` | Spacing | (none) | No | (none) |
 | `mt` | Spacing | (none) | No | (none) |
+| `removable` | boolean | `true` | No | Sets the chip's removability and visibility of the close button. |
 | `secondaryText` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
@@ -45,7 +46,6 @@ Allow the user to enter information, filter content, and make selections.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
 | `content` | string \| TemplateRef<unknown> | (none) | Yes | Content displayed in the chip. Accepts a string or template for custom content. |
-| `deletable` | boolean | (none) | No | Marks the chip as deletable. |
 | `error` | boolean | (none) | No | Shows an error state. |
 | `iconTheme` | GoabChipTheme | (none) | No | Sets the icon theme style for the filter chip. |
 | `leadingIcon` | GoabIconType \| null | (none) | No | Icon displayed at the start of the chip. |
@@ -53,6 +53,7 @@ Allow the user to enter information, filter content, and make selections.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `removable` | boolean | `true` | No | Sets the chip's removability and visibility of the close button. |
 | `secondaryText` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
@@ -86,6 +87,7 @@ Tag: `goa-filter-chip`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
+| `removable` | boolean | `true` | No | Sets the chip's removability and visibility of the close button. |
 | `secondarytext` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
