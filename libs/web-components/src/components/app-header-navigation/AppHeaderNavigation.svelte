@@ -1,12 +1,10 @@
 <svelte:options customElement="goa-app-header-navigation" />
 
 <script lang="ts">
-  import { onMount, onDestroy, tick } from 'svelte';
-  import { isUrlMatch, getMatchedLink } from '../../common/urls';
+  import { onMount, onDestroy, tick } from "svelte";
+  import { isUrlMatch, getMatchedLink } from "../../common/urls";
 
   // Props
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   export let windowWidth: number;
   export let mobile: boolean = false;
 
@@ -17,7 +15,13 @@
   let _navigationPlaceholderEl: HTMLElement | null = null;
   let _navigationInitialMeasurementDone = false;
   let _navigationCheckTimeout: number | null = null;
-  let _overflowItems: Array<{type: 'link' | 'header', href?: string, text: string, current?: boolean, indented?: boolean}> = [];
+  let _overflowItems: Array<{
+    type: "link" | "header";
+    href?: string;
+    text: string;
+    current?: boolean;
+    indented?: boolean;
+  }> = [];
   let _moreMenuElement: HTMLElement | null = null; // The More menu element in light DOM
 
   // Reactive statement - check overflow when window resizes
@@ -29,21 +33,23 @@
 
   // Function 1: Count navigation items (excluding More menu)
   function detectNavigationItems() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     const hostElement = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
     const lightDomChildren = hostElement.host?.children || [];
 
     // Find all direct elements with slot="navigation" attribute (links and menus)
     // Exclude the More menu from the count
-    const navigationItems = Array.from(lightDomChildren).filter(
-      (el) => {
-        if (el.getAttribute('slot') !== 'navigation') return false;
-        // Exclude the More menu itself
-        if (el.tagName === 'GOA-APP-HEADER-MENU' && el.getAttribute('heading') === 'More') return false;
-        return true;
-      }
-    );
+    const navigationItems = Array.from(lightDomChildren).filter((el) => {
+      if (el.getAttribute("slot") !== "navigation") return false;
+      // Exclude the More menu itself
+      if (
+        el.tagName === "GOA-APP-HEADER-MENU" &&
+        el.getAttribute("heading") === "More"
+      )
+        return false;
+      return true;
+    });
 
     _navigationItemCount = navigationItems.length;
     _visibleNavigationCount = _navigationItemCount; // Start with all visible
@@ -58,7 +64,7 @@
 
     // Debounce the check to prevent infinite loops
     _navigationCheckTimeout = window.setTimeout(() => {
-      if (!_navigationPlaceholderEl || version !== "2" || _navigationItemCount === 0) {
+      if (!_navigationPlaceholderEl || _navigationItemCount === 0) {
         if (_showMoreMenu !== false) {
           _showMoreMenu = false;
           _visibleNavigationCount = _navigationItemCount;
@@ -71,7 +77,9 @@
 
       // Get shadow root to access slotted elements
       const shadowRoot = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
-      const navigationSlot = shadowRoot?.querySelector('slot[name="navigation"]') as HTMLSlotElement;
+      const navigationSlot = shadowRoot?.querySelector(
+        'slot[name="navigation"]',
+      ) as HTMLSlotElement;
 
       if (!navigationSlot) {
         if (_showMoreMenu !== false) {
@@ -93,7 +101,11 @@
 
       // Filter out the More menu itself before measuring
       const itemsWithoutMoreMenu = Array.from(slottedItems).filter(
-        item => !(item.tagName === 'GOA-APP-HEADER-MENU' && item.getAttribute('heading') === 'More')
+        (item) =>
+          !(
+            item.tagName === "GOA-APP-HEADER-MENU" &&
+            item.getAttribute("heading") === "More"
+          ),
       );
 
       const moreMenuWidth = 100;
@@ -155,7 +167,9 @@
       }
 
       if (_visibleNavigationCount !== itemsFit) {
-        _visibleNavigationCount = needsMoreMenu ? itemsFit : slottedItems.length;
+        _visibleNavigationCount = needsMoreMenu
+          ? itemsFit
+          : slottedItems.length;
       }
 
       // Extract overflow items and inject More menu
@@ -174,9 +188,10 @@
 
   // Function 4: Inject More menu into light DOM
   function injectMoreMenu() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
-    const hostElement = (_navigationPlaceholderEl.getRootNode() as ShadowRoot)?.host;
+    const hostElement = (_navigationPlaceholderEl.getRootNode() as ShadowRoot)
+      ?.host;
     if (!hostElement) return;
 
     // Check if More menu already exists
@@ -187,33 +202,33 @@
     }
 
     // Create More menu element
-    const moreMenu = document.createElement('goa-app-header-menu');
-    moreMenu.setAttribute('slot', 'navigation');
-    moreMenu.setAttribute('heading', 'More');
+    const moreMenu = document.createElement("goa-app-header-menu");
+    moreMenu.setAttribute("slot", "navigation");
+    moreMenu.setAttribute("heading", "More");
 
     // Add overflow items (headers + links)
-    _overflowItems.forEach(item => {
-      if (item.type === 'header') {
+    _overflowItems.forEach((item) => {
+      if (item.type === "header") {
         // Create non-clickable header (using <a> tag for consistent styling)
-        const header = document.createElement('a');
+        const header = document.createElement("a");
         header.textContent = item.text;
-        header.classList.add('menu-header');
-        header.href = 'javascript:void(0)';
-        header.setAttribute('role', 'heading');
-        header.setAttribute('aria-level', '2');
-        header.setAttribute('tabindex', '-1');
-        header.addEventListener('click', (e) => e.preventDefault());
+        header.classList.add("menu-header");
+        header.href = "javascript:void(0)";
+        header.setAttribute("role", "heading");
+        header.setAttribute("aria-level", "2");
+        header.setAttribute("tabindex", "-1");
+        header.addEventListener("click", (e) => e.preventDefault());
         moreMenu.appendChild(header);
-      } else if (item.type === 'link') {
+      } else if (item.type === "link") {
         // Create clickable link
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = item.href!;
         link.textContent = item.text;
         if (item.current) {
-          link.classList.add('current');
+          link.classList.add("current");
         }
         if (item.indented) {
-          link.classList.add('indented');
+          link.classList.add("indented");
         }
         moreMenu.appendChild(link);
       }
@@ -234,28 +249,28 @@
     }
 
     // Add updated overflow items (headers + links)
-    _overflowItems.forEach(item => {
-      if (item.type === 'header') {
+    _overflowItems.forEach((item) => {
+      if (item.type === "header") {
         // Create non-clickable header (using <a> tag for consistent styling)
-        const header = document.createElement('a');
+        const header = document.createElement("a");
         header.textContent = item.text;
-        header.classList.add('menu-header');
-        header.href = 'javascript:void(0)';
-        header.setAttribute('role', 'heading');
-        header.setAttribute('aria-level', '2');
-        header.setAttribute('tabindex', '-1');
-        header.addEventListener('click', (e) => e.preventDefault());
+        header.classList.add("menu-header");
+        header.href = "javascript:void(0)";
+        header.setAttribute("role", "heading");
+        header.setAttribute("aria-level", "2");
+        header.setAttribute("tabindex", "-1");
+        header.addEventListener("click", (e) => e.preventDefault());
         _moreMenuElement!.appendChild(header);
-      } else if (item.type === 'link') {
+      } else if (item.type === "link") {
         // Create clickable link
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = item.href!;
         link.textContent = item.text;
         if (item.current) {
-          link.classList.add('current');
+          link.classList.add("current");
         }
         if (item.indented) {
-          link.classList.add('indented');
+          link.classList.add("indented");
         }
         _moreMenuElement!.appendChild(link);
       }
@@ -272,57 +287,74 @@
 
   // Function 3: Extract overflow navigation items for "More" menu
   function extractOverflowItems() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     const shadowRoot = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
-    const navigationSlot = shadowRoot?.querySelector('slot[name="navigation"]') as HTMLSlotElement;
+    const navigationSlot = shadowRoot?.querySelector(
+      'slot[name="navigation"]',
+    ) as HTMLSlotElement;
 
     if (!navigationSlot) return;
 
     const slottedItems = navigationSlot.assignedElements();
-    const overflow: Array<{type: 'link' | 'header', href?: string, text: string, current?: boolean, indented?: boolean}> = [];
+    const overflow: Array<{
+      type: "link" | "header";
+      href?: string;
+      text: string;
+      current?: boolean;
+      indented?: boolean;
+    }> = [];
 
     // Filter out the More menu itself from the items list
     const itemsWithoutMoreMenu = Array.from(slottedItems).filter(
-      item => !(item.tagName === 'GOA-APP-HEADER-MENU' && item.getAttribute('heading') === 'More')
+      (item) =>
+        !(
+          item.tagName === "GOA-APP-HEADER-MENU" &&
+          item.getAttribute("heading") === "More"
+        ),
     );
 
     // Get items beyond the visible count
-    for (let i = _visibleNavigationCount; i < itemsWithoutMoreMenu.length; i++) {
+    for (
+      let i = _visibleNavigationCount;
+      i < itemsWithoutMoreMenu.length;
+      i++
+    ) {
       const item = itemsWithoutMoreMenu[i];
 
       // Handle direct <a> links
-      if (item.tagName === 'A') {
+      if (item.tagName === "A") {
         const link = item as HTMLAnchorElement;
         overflow.push({
-          type: 'link',
-          href: link.getAttribute('href') || '#',
-          text: link.textContent?.trim() || '',
-          current: link.classList.contains('current'),
-          indented: false
+          type: "link",
+          href: link.getAttribute("href") || "#",
+          text: link.textContent?.trim() || "",
+          current: link.classList.contains("current"),
+          indented: false,
         });
       }
       // Handle goa-app-header-menu items (create header + indented children)
-      else if (item.tagName === 'GOA-APP-HEADER-MENU') {
+      else if (item.tagName === "GOA-APP-HEADER-MENU") {
         // Try both attribute and property access (Svelte components expose props as properties)
-        const menuHeading = item.getAttribute('heading') || (item as any).heading || '';
+        const menuHeading =
+          item.getAttribute("heading") || (item as any).heading || "";
 
         // Add non-clickable header
         overflow.push({
-          type: 'header',
+          type: "header",
           text: menuHeading,
-          indented: false
+          indented: false,
         });
 
         // Add indented child links
-        const menuLinks = Array.from(item.querySelectorAll('a'));
+        const menuLinks = Array.from(item.querySelectorAll("a"));
         menuLinks.forEach((link) => {
           overflow.push({
-            type: 'link',
-            href: link.getAttribute('href') || '#',
-            text: link.textContent?.trim() || '',
-            current: link.classList.contains('current'),
-            indented: true
+            type: "link",
+            href: link.getAttribute("href") || "#",
+            text: link.textContent?.trim() || "",
+            current: link.classList.contains("current"),
+            indented: true,
           });
         });
       }
@@ -335,10 +367,12 @@
 
   // Function 7: Hide overflow items using inline styles
   function hideOverflowItems() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     const shadowRoot = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
-    const navigationSlot = shadowRoot?.querySelector('slot[name="navigation"]') as HTMLSlotElement;
+    const navigationSlot = shadowRoot?.querySelector(
+      'slot[name="navigation"]',
+    ) as HTMLSlotElement;
 
     if (!navigationSlot) return;
 
@@ -346,7 +380,11 @@
 
     // Filter out the More menu itself
     const itemsWithoutMoreMenu = Array.from(slottedItems).filter(
-      item => !(item.tagName === 'GOA-APP-HEADER-MENU' && item.getAttribute('heading') === 'More')
+      (item) =>
+        !(
+          item.tagName === "GOA-APP-HEADER-MENU" &&
+          item.getAttribute("heading") === "More"
+        ),
     );
 
     // Hide items beyond the visible count
@@ -354,20 +392,22 @@
       const htmlItem = item as HTMLElement;
       if (index < _visibleNavigationCount) {
         // Show visible items
-        htmlItem.style.display = '';
+        htmlItem.style.display = "";
       } else {
         // Hide overflow items
-        htmlItem.style.display = 'none';
+        htmlItem.style.display = "none";
       }
     });
   }
 
   // Function 8: Show all navigation items (remove inline display styles)
   function showAllItems() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     const shadowRoot = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
-    const navigationSlot = shadowRoot?.querySelector('slot[name="navigation"]') as HTMLSlotElement;
+    const navigationSlot = shadowRoot?.querySelector(
+      'slot[name="navigation"]',
+    ) as HTMLSlotElement;
 
     if (!navigationSlot) return;
 
@@ -375,13 +415,17 @@
 
     // Filter out the More menu itself
     const itemsWithoutMoreMenu = Array.from(slottedItems).filter(
-      item => !(item.tagName === 'GOA-APP-HEADER-MENU' && item.getAttribute('heading') === 'More')
+      (item) =>
+        !(
+          item.tagName === "GOA-APP-HEADER-MENU" &&
+          item.getAttribute("heading") === "More"
+        ),
     );
 
     // Show all items
     itemsWithoutMoreMenu.forEach((item) => {
       const htmlItem = item as HTMLElement;
-      htmlItem.style.display = '';
+      htmlItem.style.display = "";
     });
   }
 
@@ -389,13 +433,15 @@
 
   // Function 9: Mark current link as active based on URL
   function setCurrentLink() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     // Get the shadow root
-    const shadowRoot = (_navigationPlaceholderEl.getRootNode() as ShadowRoot);
+    const shadowRoot = _navigationPlaceholderEl.getRootNode() as ShadowRoot;
 
     // Get the navigation slot element
-    const navigationSlotEl = shadowRoot.querySelector('slot[name="navigation"]') as HTMLSlotElement;
+    const navigationSlotEl = shadowRoot.querySelector(
+      'slot[name="navigation"]',
+    ) as HTMLSlotElement;
     if (!navigationSlotEl) return;
 
     // Get all slotted elements in the navigation slot
@@ -405,34 +451,34 @@
     let navigationLinks: Element[] = [];
 
     slottedElements.forEach((el) => {
-      if (el.tagName === 'A') {
+      if (el.tagName === "A") {
         // Direct link in navigation slot
         navigationLinks.push(el);
-      } else if (el.tagName === 'GOA-APP-HEADER-MENU') {
+      } else if (el.tagName === "GOA-APP-HEADER-MENU") {
         // Get links from inside the menu component
-        const menuLinks = Array.from(el.querySelectorAll('a'));
+        const menuLinks = Array.from(el.querySelectorAll("a"));
         navigationLinks = [...navigationLinks, ...menuLinks];
       }
     });
 
     // Remove 'current' class from all navigation links
-    navigationLinks.forEach((link) => link.classList.remove('current'));
+    navigationLinks.forEach((link) => link.classList.remove("current"));
 
     // Find the matched link and add 'current' class
     const matchedLink = getMatchedLink(navigationLinks, window.location);
 
     if (matchedLink) {
-      matchedLink.classList.add('current');
+      matchedLink.classList.add("current");
 
       // If the matched link is inside a menu, mark the menu button as having a current child
-      const parentMenu = matchedLink.closest('goa-app-header-menu');
+      const parentMenu = matchedLink.closest("goa-app-header-menu");
       if (parentMenu) {
         // Dispatch event to app-header-menu to let it know a child link is current
         parentMenu.dispatchEvent(
-          new CustomEvent('app-header:changed', {
+          new CustomEvent("app-header:changed", {
             composed: true,
-            detail: matchedLink.getAttribute('href') || '',
-          })
+            detail: matchedLink.getAttribute("href") || "",
+          }),
         );
       }
     }
@@ -447,7 +493,7 @@
   let mutationObserver: MutationObserver | null = null;
 
   function addEventListeners() {
-    if (!_navigationPlaceholderEl || version !== "2") return;
+    if (!_navigationPlaceholderEl) return;
 
     // Watch path changes via MutationObserver
     let currentLocation = document.location.href;
@@ -465,66 +511,60 @@
 
   // Lifecycle Hooks
   onMount(async () => {
-    if (version === "2") {
-      // Detect navigation items initially
-      detectNavigationItems();
+    // Detect navigation items initially
+    detectNavigationItems();
 
-      // Setup event listeners for route tracking
-      addEventListeners();
+    // Setup event listeners for route tracking
+    addEventListeners();
 
-      // Wait for next tick to ensure DOM is ready
-      await tick();
+    // Wait for next tick to ensure DOM is ready
+    await tick();
 
-      // Check overflow after initial render
-      checkNavigationOverflow();
-      _navigationInitialMeasurementDone = true;
-    }
+    // Check overflow after initial render
+    checkNavigationOverflow();
+    _navigationInitialMeasurementDone = true;
   });
 
   onDestroy(() => {
-    if (version === "2") {
-      // Cleanup: Remove popstate listener
-      window.removeEventListener("popstate", onRouteChange, true);
+    // Cleanup: Remove popstate listener
+    window.removeEventListener("popstate", onRouteChange, true);
 
-      // Cleanup: Disconnect MutationObserver
-      if (mutationObserver) {
-        mutationObserver.disconnect();
-        mutationObserver = null;
-      }
-
-      // Cleanup: Clear timeout
-      if (_navigationCheckTimeout) {
-        clearTimeout(_navigationCheckTimeout);
-        _navigationCheckTimeout = null;
-      }
-
-      // Cleanup: Remove More menu if exists
-      removeMoreMenu();
+    // Cleanup: Disconnect MutationObserver
+    if (mutationObserver) {
+      mutationObserver.disconnect();
+      mutationObserver = null;
     }
+
+    // Cleanup: Clear timeout
+    if (_navigationCheckTimeout) {
+      clearTimeout(_navigationCheckTimeout);
+      _navigationCheckTimeout = null;
+    }
+
+    // Cleanup: Remove More menu if exists
+    removeMoreMenu();
   });
 </script>
 
-{#if version === "2"}
-  <div
-    class="v2-navigation-placeholder"
-    class:mobile
-    class:overflow-1={_showMoreMenu && _visibleNavigationCount === 1}
-    class:overflow-2={_showMoreMenu && _visibleNavigationCount === 2}
-    class:overflow-3={_showMoreMenu && _visibleNavigationCount === 3}
-    class:overflow-4={_showMoreMenu && _visibleNavigationCount === 4}
-    class:overflow-5={_showMoreMenu && _visibleNavigationCount === 5}
-    class:overflow-6={_showMoreMenu && _visibleNavigationCount === 6}
-    class:overflow-7={_showMoreMenu && _visibleNavigationCount === 7}
-    class:overflow-8={_showMoreMenu && _visibleNavigationCount === 8}
-    bind:this={_navigationPlaceholderEl}
-  >
-    <slot />
-  </div>
-{/if}
+<div
+  class="navigation-placeholder"
+  class:mobile
+  class:overflow-1={_showMoreMenu && _visibleNavigationCount === 1}
+  class:overflow-2={_showMoreMenu && _visibleNavigationCount === 2}
+  class:overflow-3={_showMoreMenu && _visibleNavigationCount === 3}
+  class:overflow-4={_showMoreMenu && _visibleNavigationCount === 4}
+  class:overflow-5={_showMoreMenu && _visibleNavigationCount === 5}
+  class:overflow-6={_showMoreMenu && _visibleNavigationCount === 6}
+  class:overflow-7={_showMoreMenu && _visibleNavigationCount === 7}
+  class:overflow-8={_showMoreMenu && _visibleNavigationCount === 8}
+  bind:this={_navigationPlaceholderEl}
+>
+  <slot />
+</div>
 
 <style>
-  /* V2 Navigation Section - Base Container */
-  .v2-navigation-placeholder {
+  /* Navigation Section - Base Container */
+  .navigation-placeholder {
     background: var(--goa-app-header-nav-bar-bg);
     padding: 0 var(--goa-app-header-padding-h-desktop);
     min-height: var(--goa-app-header-height-nav-item);
@@ -533,12 +573,12 @@
     gap: var(--goa-app-header-nav-item-gap);
   }
 
-  .v2-navigation-placeholder.mobile {
+  .navigation-placeholder.mobile {
     padding: 0 var(--goa-app-header-padding-h-mobile);
   }
 
-  /* V2 Navigation Items - Base Styling */
-  .v2-navigation-placeholder :global(::slotted(a)) {
+  /* Navigation Items - Base Styling */
+  .navigation-placeholder :global(::slotted(a)) {
     display: inline-flex;
     align-items: center;
     flex-shrink: 0; /* Don't shrink - maintain natural width */
@@ -557,31 +597,36 @@
     border-radius: 0 !important; /* No rounded corners needed */
     background: transparent !important;
     box-shadow: none !important;
-    transition: border-bottom-color 0.2s ease, font-weight 0.2s ease !important;
+    transition:
+      border-bottom-color 0.2s ease,
+      font-weight 0.2s ease !important;
     box-sizing: border-box !important; /* Ensure padding is included in height */
   }
 
-  /* V2 Navigation Items - Hover State */
-  .v2-navigation-placeholder :global(::slotted(a:hover)) {
-    border-bottom-color: var(--goa-app-header-nav-hover-indicator-color) !important;
+  /* Navigation Items - Hover State */
+  .navigation-placeholder :global(::slotted(a:hover)) {
+    border-bottom-color: var(
+      --goa-app-header-nav-hover-indicator-color
+    ) !important;
   }
 
-  /* V2 Navigation Items - Active State (current page) */
-  .v2-navigation-placeholder :global(::slotted(a.current)) {
+  /* Navigation Items - Active State (current page) */
+  .navigation-placeholder :global(::slotted(a.current)) {
     font-weight: var(--goa-font-weight-semi-bold) !important;
-    border-bottom-color: var(--goa-app-header-nav-active-indicator-color) !important;
+    border-bottom-color: var(
+      --goa-app-header-nav-active-indicator-color
+    ) !important;
   }
 
-  /* V2 Navigation Items - Focus State */
-  .v2-navigation-placeholder :global(::slotted(a:focus-visible)) {
+  /* Navigation Items - Focus State */
+  .navigation-placeholder :global(::slotted(a:focus-visible)) {
     outline: var(--goa-app-header-service-name-border-focus) !important;
     outline-offset: -3px !important;
     z-index: 1;
   }
 
-  /* V2 Navigation Menu Items (app-header-menu) - Container Styling */
-  /* Note: Menu button styling is handled via .v2-nav class in AppHeaderMenu.svelte */
-  .v2-navigation-placeholder :global(::slotted(goa-app-header-menu)) {
+  /* Navigation Menu Items (app-header-menu) - Container Styling */
+  .navigation-placeholder :global(::slotted(goa-app-header-menu)) {
     /* Container styling */
     display: inline-flex;
     align-items: center;

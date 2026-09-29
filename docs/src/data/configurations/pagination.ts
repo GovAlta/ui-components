@@ -48,7 +48,6 @@ function handlePageChange(detail: GoabPaginationOnChangeDetail) {
         },
         webComponents: `<goa-pagination
   id="basic-pagination"
-  version="2"
   style="display: block; width: 100%"
   pagenumber="1"
   itemcount="100"
@@ -101,7 +100,6 @@ function handlePageChange(detail: GoabPaginationOnChangeDetail) {
         },
         webComponents: `<goa-pagination
   id="simple-pagination"
-  version="2"
   style="display: block; width: 100%"
   pagenumber="1"
   itemcount="50"

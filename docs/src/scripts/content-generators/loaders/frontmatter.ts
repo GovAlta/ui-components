@@ -9,7 +9,10 @@ export interface ParsedFrontmatter {
 }
 
 export function parseFrontmatter(raw: string): ParsedFrontmatter {
-  const lines = raw.split("\n");
+  // Editors can save a UTF-8 BOM, and Windows checkouts arrive with CRLF line
+  // endings; either would make the opening --- comparison miss and silently
+  // parse the whole file's frontmatter as empty.
+  const lines = raw.replace(/^\uFEFF/, "").split(/\r?\n/);
   if (lines[0] !== "---") return { data: {}, body: raw };
 
   let endIdx = -1;

@@ -2,9 +2,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   Input,
-  Output,
-  EventEmitter,
-  numberAttribute,
   OnInit,
   ChangeDetectorRef,
   inject,
@@ -23,11 +20,7 @@ import { GoabSlottedTemplate } from "../../slotted-directive";
       [attr.heading]="heading"
       [attr.secondarytext]="secondaryText"
       [attr.maxcontentwidth]="maxContentWidth"
-      [attr.fullmenubreakpoint]="fullMenuBreakpoint"
       [attr.testid]="testId"
-      [attr.hasmenuclickhandler]="onMenuClick.observed ? 'true' : 'false'"
-      [attr.version]="version"
-      (_menuClick)="_onMenuClick()"
     >
       @if (banner) {
         <div slot="banner">
@@ -68,8 +61,6 @@ export class GoabAppHeader implements OnInit {
   @Input() secondaryText?: string;
   /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
-  /** Sets the breakpoint in px for the full menu to display. */
-  @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
   /** Banner content displayed above the header. */
@@ -82,19 +73,11 @@ export class GoabAppHeader implements OnInit {
   @Input() utilities?: TemplateRef<any>;
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     setTimeout(() => {
       this.isReady = true;
       this.cdr.detectChanges();
     }, 0);
-  }
-
-  /** Emits when the menu button is clicked. Used for custom menu handling. */
-  @Output() onMenuClick = new EventEmitter();
-
-  _onMenuClick() {
-    this.onMenuClick.emit();
   }
 }

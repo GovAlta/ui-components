@@ -25,10 +25,18 @@ const { href, title, description, icon } = Astro.props;
 ---
 
 <a href={href} target="_blank" rel="noopener noreferrer" class="link-card">
-  {icon && <ion-icon name={icon} class="link-card-icon"></ion-icon>}
+  {icon && <ion-icon name={icon} class="link-card-icon" />}
   <span class="link-card-text">
-    <goa-text version="2" size="body-m" mt="none" mb="none"><strong class="link-card-title">{title}</strong></goa-text>
-    {description && <goa-text version="2" size="body-xs" mt="none" mb="none"><span class="link-card-description">{description}</span></goa-text>}
+    <goa-text size="body-m" mt="none" mb="none"
+      ><strong class="link-card-title">{title}</strong></goa-text
+    >
+    {
+      description && (
+        <goa-text size="body-xs" mt="none" mb="none">
+          <span class="link-card-description">{description}</span>
+        </goa-text>
+      )
+    }
   </span>
 </a>
 

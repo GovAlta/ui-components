@@ -24,7 +24,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-table
-        [attr.version]="version"
         [attr.width]="width"
         [attr.variant]="variant"
         [attr.sort-mode]="sortMode"
@@ -51,7 +50,6 @@ export class GoabTable extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** Width of the table. By default it will fit the enclosed content. */
   @Input() width?: string;
   /** Sets a relaxed variant of the table with more vertical padding for the cells. */

@@ -20,9 +20,6 @@
   export let max: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
-
   /** Top margin. */
   export let mt: Spacing = null;
   /** Right margin. */
@@ -340,12 +337,7 @@
   tabindex="-1"
 >
   <goa-block gap="s" mb="s">
-    <goa-form-item
-      label="Month"
-      mt="0"
-      {version}
-      labelsize={version === "2" ? "compact" : "regular"}
-    >
+    <goa-form-item label="Month" mt="0" labelsize="compact">
       <goa-dropdown
         name="month"
         arialabel={`${name} month`}
@@ -354,8 +346,7 @@
         maxheight="240px"
         value={_calendarDate?.month}
         on:_change={setMonth}
-        {version}
-        size={version === "2" ? "compact" : "default"}
+        size="compact"
       >
         {#each _months as month, i}
           <goa-dropdown-item value={i + 1 + ""} label={month} />
@@ -363,12 +354,7 @@
       </goa-dropdown>
     </goa-form-item>
 
-    <goa-form-item
-      label="Year"
-      mt="0"
-      {version}
-      labelsize={version === "2" ? "compact" : "regular"}
-    >
+    <goa-form-item label="Year" mt="0" labelsize="compact">
       <goa-dropdown
         name="year"
         arialabel={`${name} year`}
@@ -377,8 +363,7 @@
         maxheight="240px"
         value={_calendarDate?.year}
         on:_change={setYear}
-        {version}
-        size={version === "2" ? "compact" : "default"}
+        size="compact"
       >
         {#each _years as year}
           <goa-dropdown-item value={year} />
@@ -445,10 +430,7 @@
 <style>
   .bordered {
     display: inline-block;
-    border: var(
-      --goa-date-input-calendar-border,
-      1px solid var(--goa-color-greyscale-700)
-    );
+    border: var(--goa-date-input-calendar-border);
     border-radius: var(--goa-date-input-calendar-border-radius);
     padding: 1rem;
   }
@@ -514,7 +496,7 @@
   }
 
   .day.selected:focus-within {
-    outline-offset: var(--goa-date-input-day-today-outline-offset, 0);
+    outline-offset: var(--goa-date-input-day-today-outline-offset);
   }
   .day.today.selected:hover {
     background-color: var(--goa-date-input-day-color-bg-selected-hover);

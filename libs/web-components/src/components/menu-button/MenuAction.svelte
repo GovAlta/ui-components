@@ -13,7 +13,7 @@
 <script lang="ts" context="module">
   import { GoAIconType } from "../icon/Icon.svelte";
   export type MenuActionProps = {
-    action?: string;
+    action: string;
     size?: "normal" | "compact";
   };
 </script>
@@ -23,9 +23,9 @@
   import { relay, style, styles } from "../../common/utils";
 
   /** Display text for the menu action. */
-  export let text: string = "";
+  export let text: string;
   /** Action identifier included in the click event. */
-  export let action: string = "default";
+  export let action: string;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Icon displayed before the text. */
@@ -38,7 +38,9 @@
   // Hooks
   onMount(() => {
     _el.addEventListener("menu-button:init", (e: Event) => {
-      const data = (e as CustomEvent<MenuActionProps>).detail;
+      const data = (
+        e as CustomEvent<{ size?: "normal" | "compact" }>
+      ).detail;
       size = data.size || "normal";
     });
 

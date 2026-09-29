@@ -1,11 +1,13 @@
-<svelte:options customElement={{
- tag: "goa-link",
-  props: {
-    action: { type: "String", attribute: "action", reflect: true},
-    actionArg: { type: "String", attribute: "action-arg", reflect: true},
-    actionArgs: { type: "Object", attribute: "action-args", reflect: true},
-  }
-}}/>
+<svelte:options
+  customElement={{
+    tag: "goa-link",
+    props: {
+      action: { type: "String", attribute: "action", reflect: true },
+      actionArg: { type: "String", attribute: "action-arg", reflect: true },
+      actionArgs: { type: "Object", attribute: "action-args", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { calculateMargin, Spacing } from "../../common/styling";
@@ -60,11 +62,13 @@
     }
     _rootEl.addEventListener("focusin", handleFocusIn);
     _rootEl.addEventListener("focusout", handleFocusOut);
-  })
+  });
 
   function handleClick(e: Event) {
     e.preventDefault();
-    dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+    dispatch(e.target as Element, action, actionArg || actionArgs, {
+      bubbles: true,
+    });
   }
 
   function handleIconClick() {
@@ -102,17 +106,26 @@
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
-
   {#if leadingicon}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <goa-icon data-testid="leading-icon" type={leadingicon} size={_iconSize} on:click={handleIconClick} />
+    <goa-icon
+      data-testid="leading-icon"
+      type={leadingicon}
+      size={_iconSize}
+      on:click={handleIconClick}
+    />
   {/if}
   <slot />
   {#if trailingicon}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <goa-icon data-testid="trailing-icon" type={trailingicon} size={_iconSize} on:click={handleIconClick} />
+    <goa-icon
+      data-testid="trailing-icon"
+      type={trailingicon}
+      size={_iconSize}
+      on:click={handleIconClick}
+    />
   {/if}
 </div>
 
@@ -126,93 +139,91 @@
     background: none;
     cursor: pointer;
     text-decoration: underline;
-    /* V1: Default gap fallback (4px) */
-    gap: var(--goa-link-gap, 0.25rem);
-    /* V2: Size-specific gaps override below */
+    gap: var(--goa-link-gap);
   }
 
   /* Size variants - Typography and Gap */
   .link.xsmall {
     font: var(--goa-link-typography-xsmall);
-    gap: var(--goa-link-gap-xsmall, 0.125rem);
+    gap: var(--goa-link-gap-xsmall);
   }
 
   .link.small {
     font: var(--goa-link-typography-small);
-    gap: var(--goa-link-gap-small, 0.1875rem);
+    gap: var(--goa-link-gap-small);
   }
 
   .link.medium {
     font: var(--goa-link-typography-medium);
-    gap: var(--goa-link-gap-medium, 0.25rem);
+    gap: var(--goa-link-gap-medium);
   }
 
   .link.large {
     font: var(--goa-link-typography-large);
-    gap: var(--goa-link-gap-large, 0.3125rem);
+    gap: var(--goa-link-gap-large);
   }
 
   /* Color variant: Interactive (Blue) */
   .link.interactive {
-    color: var(--goa-link-color-interactive-default, var(--goa-color-interactive-default));
+    color: var(--goa-link-color-interactive-default);
   }
 
   .link.interactive :global(::slotted(a)) {
-    color: var(--goa-link-color-interactive-default, var(--goa-color-interactive-default)) !important;
+    color: var(--goa-link-color-interactive-default) !important;
   }
 
   .link.interactive:hover {
-    color: var(--goa-link-color-interactive-hover, var(--goa-color-interactive-hover));
+    color: var(--goa-link-color-interactive-hover);
   }
 
   .link.interactive:hover :global(::slotted(a)) {
-    color: var(--goa-link-color-interactive-hover, var(--goa-color-interactive-hover)) !important;
+    color: var(--goa-link-color-interactive-hover) !important;
   }
 
   .link.interactive :global(a:visited) {
-    color: var(--goa-link-color-interactive-visited, var(--goa-color-interactive-visited)) !important;
+    color: var(--goa-link-color-interactive-visited) !important;
   }
 
   /* Color variant: Dark (Black) */
   .link.dark {
-    color: var(--goa-link-color-dark-default, var(--goa-color-greyscale-black));
+    color: var(--goa-link-color-dark-default);
   }
 
   .link.dark :global(::slotted(a)) {
-    color: var(--goa-link-color-dark-default, var(--goa-color-greyscale-black)) !important;
+    color: var(--goa-link-color-dark-default) !important;
   }
 
   .link.dark:hover {
-    color: var(--goa-link-color-dark-hover, var(--goa-color-greyscale-700));
+    color: var(--goa-link-color-dark-hover);
   }
 
   .link.dark:hover :global(::slotted(a)) {
-    color: var(--goa-link-color-dark-hover, var(--goa-color-greyscale-700)) !important;
+    color: var(--goa-link-color-dark-hover) !important;
   }
 
   .link.dark :global(a:visited) {
-    color: var(--goa-link-color-dark-visited, var(--goa-color-interactive-visited)) !important;
+    color: var(--goa-link-color-dark-visited) !important;
   }
 
   /* Color variant: Light (White) */
   .link.light {
-    color: var(--goa-link-color-light-default, var(--goa-color-text-light));
+    color: var(--goa-link-color-light-default);
   }
 
   .link.light :global(::slotted(a)) {
-    color: var(--goa-link-color-light-default, var(--goa-color-text-light)) !important;
+    color: var(--goa-link-color-light-default) !important;
   }
 
   .link.light:hover {
-    color: var(--goa-link-color-light-hover, var(--goa-color-greyscale-200));
+    color: var(--goa-link-color-light-hover);
   }
 
   .link.light:hover :global(::slotted(a)) {
-    color: var(--goa-link-color-light-hover, var(--goa-color-greyscale-200)) !important;
+    color: var(--goa-link-color-light-hover) !important;
   }
 
   .link.light :global(a:visited) {
-    color: var(--goa-link-color-light-visited, #9D8EBB) !important;
+    color: var(--goa-link-color-light-visited) !important;
   }
 
   /* Suppress browser-default rings on the slotted anchor — the container draws
@@ -228,8 +239,8 @@
      match. This keeps the pre-#3605 visual (ring wraps icon + text) while only
      showing on keyboard-driven focus. */
   .link.keyboard-focused {
-    border-radius: var(--goa-link-border-radius-focus, var(--goa-border-radius-s));
-    outline: var(--goa-link-border-focus, var(--goa-border-width-l) solid var(--goa-color-interactive-focus));
-    outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
+    border-radius: var(--goa-link-border-radius-focus);
+    outline: var(--goa-link-border-focus);
+    outline-offset: var(--goa-link-focus-offset);
   }
 </style>

@@ -2,7 +2,6 @@ import { ReactNode, type JSX } from "react";
 
 interface WCProps {
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -25,7 +24,7 @@ export interface GoabSideMenuProps {
 /** A side navigation that helps the user navigate between pages. */
 export function GoabSideMenu({ testId, children }: GoabSideMenuProps): JSX.Element {
   return (
-    <goa-side-menu testid={testId} version="2">
+    <goa-side-menu testid={testId}>
       {children}
     </goa-side-menu>
   );

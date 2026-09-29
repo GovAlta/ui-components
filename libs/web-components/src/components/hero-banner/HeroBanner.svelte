@@ -5,9 +5,9 @@
   /** Main heading text */
   export let heading: string;
   /** Background image url */
-  export let backgroundurl: string;
+  export let backgroundurl: string | undefined = undefined;
   /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
-  export let minheight: string;
+  export let minheight: string | undefined = undefined;
   /** Maximum width of the content area */
   export let maxcontentwidth = "100%";
   /** Hero Banner background color when no background image is provided */

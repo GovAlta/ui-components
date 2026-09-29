@@ -45,20 +45,12 @@ Every component starts with:
 }
 ```
 
-## V2 Token Fallbacks (Mandatory)
-
-Every V2 CSS variable must fall back to V1. This is the most repeated review feedback on V2 PRs.
-
-```css
-color: var(--goa-component-v2-token, var(--goa-v1-fallback));
-```
-
 ## Class Binding
 
 Variant classes use string interpolation. State classes use `class:` directive.
 
 ```svelte
-<div class="goa-badge badge-{type}" class:v2={version === "2"} class:disabled={isDisabled}>
+<div class="goa-badge badge-{type}" class:disabled={isDisabled}>
 ```
 
 ## Responsive

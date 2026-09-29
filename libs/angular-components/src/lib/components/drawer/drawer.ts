@@ -24,16 +24,17 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
       [attr.heading]="getHeadingAsString()"
       [attr.maxsize]="maxSize"
       [attr.testid]="testId"
-      [attr.version]="version"
       (_close)="_onClose($event)"
     >
       <ng-content></ng-content>
       <div slot="heading">
         <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
       </div>
-      <div slot="actions">
-        <ng-container [ngTemplateOutlet]="actions"></ng-container>
-      </div>
+      @if (actions) {
+        <div slot="actions">
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      }
     </goa-drawer>
   } `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -42,10 +43,8 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 export class GoabDrawer implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  version = "2";
-
-  /** @required Whether the drawer is open. */
-  @Input({ required: true, transform: booleanAttribute }) open!: boolean;
+  /** Whether the drawer is open. @default false */
+  @Input({ transform: booleanAttribute }) open = false;
   /** @required The position of the drawer. */
   @Input({ required: true }) position!: GoabDrawerPosition;
   /** The heading text displayed at the top of the drawer. */

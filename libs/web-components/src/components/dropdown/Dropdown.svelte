@@ -23,6 +23,7 @@
     dispatch,
     ensureSlotExists,
     fromBoolean,
+    generateRandomId,
     receive,
     relay,
     toBoolean,
@@ -49,9 +50,9 @@
 
   // Props
 
-  /** @required Identifier for the dropdown. Should be unique. */
-  export let name: string;
-  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Identifier for the dropdown. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
+  /** Defines how the selected value will be translated for the screen reader. */
   export let arialabel: string = "";
   /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   export let arialabelledby: string = "";
@@ -81,8 +82,6 @@
   export let native: string = "false";
   /** Sets the size of the dropdown. Compact reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
 
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
@@ -111,6 +110,7 @@
   let _rootEl: HTMLElement;
   let _menuEl: HTMLElement;
   let _inputEl: HTMLInputElement;
+  let _selectEl: HTMLSelectElement;
   let _eventHandler: EventHandler;
   let _popoverEl: HTMLElement;
 
@@ -273,7 +273,7 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      { name, el: _native ? _selectEl : _inputEl },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -787,7 +787,6 @@
   class="dropdown"
   class:dropdown-native={_native}
   class:compact={size === "compact"}
-  class:v2={version === "2"}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
@@ -795,8 +794,9 @@
 >
   {#if _native}
     <select
+      bind:this={_selectEl}
       {name}
-      aria-label={arialabel || name}
+      aria-label={arialabel}
       aria-labelledby={arialabelledby}
       class:error={_error}
       disabled={_disabled}
@@ -868,7 +868,7 @@
           aria-autocomplete="list"
           aria-controls={`menu-${name}`}
           aria-expanded={_isMenuVisible}
-          aria-label={arialabel || name}
+          aria-label={arialabel}
           aria-labelledby={arialabelledby}
           id={name}
           aria-activedescendant={_activeDescendantId}
@@ -877,7 +877,7 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          placeholder={placeholder || (version === "2" ? "—Select—" : "")}
+          placeholder={placeholder || "—Select—"}
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
@@ -890,7 +890,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            arialabel={`clear ${arialabel || name}`}
+            arialabel="clear input"
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -920,8 +920,6 @@
         tabindex="-1"
         data-testid="dropdown-menu"
         bind:this={_menuEl}
-        aria-label={arialabel || name}
-        aria-labelledby={arialabelledby}
         on:focus={onFocus}
         on:mousedown={(e) => e.preventDefault()}
         style={`
@@ -1002,9 +1000,9 @@
     box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
 
-  /* V2: Focus state has a single border */
-  .v2 .dropdown-input-group:has(input:focus-visible),
-  .v2 .dropdown-input-group.error:has(:focus-visible) {
+  /* Focus state has a single border */
+  .dropdown-input-group:has(input:focus-visible),
+  .dropdown-input-group.error:has(:focus-visible) {
     box-shadow: var(--goa-dropdown-border-focus);
   }
 
@@ -1072,12 +1070,9 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(
-      --goa-dropdown-menu-border-radius,
-      var(--goa-dropdown-border-radius)
-    );
+    border-radius: var(--goa-dropdown-menu-border-radius);
     padding: 0;
-    margin: var(--goa-dropdown-menu-margin, 0);
+    margin: var(--goa-dropdown-menu-margin);
   }
 
   /* dropdown items */
@@ -1091,7 +1086,7 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
-    border-radius: var(--goa-dropdown-item-border-radius, 0);
+    border-radius: var(--goa-dropdown-item-border-radius);
   }
 
   .dropdown-item:hover,

@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 import { GoabButton } from "../src";
 import { expect, describe, it, vi, afterEach } from "vitest";
@@ -68,6 +68,29 @@ describe("Button", () => {
       expect(spy).toBeCalledWith({foo: "bar"});
     })
   })
+
+  it.each(["secondary", "tertiary"] as const)(
+    "should show a focus ring on a %s button",
+    async (type) => {
+      const result = render(
+        <GoabButton type={type} testId="button">
+          Button
+        </GoabButton>,
+      );
+      const button = result.getByTestId("button");
+
+      await userEvent.tab();
+
+      await vi.waitFor(() => {
+        const element = button.element();
+        const styles = window.getComputedStyle(element);
+
+        expect(element.matches(":focus-visible")).toBe(true);
+        expect(styles.outlineStyle).toBe("solid");
+        expect(parseFloat(styles.outlineWidth)).toBeGreaterThan(0);
+      });
+    },
+  );
 
   describe("mobile width", () => {
     afterEach(async () => {

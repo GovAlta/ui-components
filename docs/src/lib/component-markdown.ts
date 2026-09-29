@@ -192,10 +192,7 @@ export function buildComponentMarkdown(input: ComponentMarkdownInput): string {
       frameworkSection("Angular", null, api.frameworks.angular),
       "---",
       "",
-      frameworkSection("Web Components", wcTag, {
-        ...api.frameworks.webComponents,
-        props: api.frameworks.webComponents.props.filter((p) => p.name !== "version"),
-      }, "Attributes"),
+      frameworkSection("Web Components", wcTag, api.frameworks.webComponents, "Attributes"),
     );
 
     if (api.subComponents && api.subComponents.length > 0) {
@@ -207,10 +204,7 @@ export function buildComponentMarkdown(input: ComponentMarkdownInput): string {
         parts.push(
           frameworkSection("React (subcomponent)", null, sub.frameworks.react),
           frameworkSection("Angular (subcomponent)", null, sub.frameworks.angular),
-          frameworkSection("Web Components (subcomponent)", sub.webComponentTag, {
-            ...sub.frameworks.webComponents,
-            props: sub.frameworks.webComponents.props.filter((p) => p.name !== "version"),
-          }, "Attributes"),
+          frameworkSection("Web Components (subcomponent)", sub.webComponentTag, sub.frameworks.webComponents, "Attributes"),
         );
       }
     }

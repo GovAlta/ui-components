@@ -14,7 +14,6 @@ interface WCProps extends Margins {
   "sort-mode"?: GoabTableSortMode;
   testid?: string;
   striped?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -89,7 +88,6 @@ export function GoabTable({ onSort, onMultiSort, sortMode, ...props }: GoabTable
       mb={props.mb}
       ml={props.ml}
       mr={props.mr}
-      version="2"
     >
       <table style={{ width: "100%" }}>{props.children}</table>
     </goa-table>

@@ -3,6 +3,15 @@ import { GoabFilterChip } from "./filter-chip";
 import { describe, it, expect, vi } from "vitest";
 
 describe("GoabFilterChip", () => {
+  it.each([undefined, true, false])("should bind removable=%s", (removable) => {
+    const { container } = render(
+      <GoabFilterChip content="Filter" removable={removable} />,
+    );
+    expect(container.querySelector("goa-filter-chip")?.getAttribute("removable")).toBe(
+      String(removable ?? true),
+    );
+  });
+
   it("should render", () => {
     const { container } = render(<GoabFilterChip content="some filter chip" />);
 
@@ -11,7 +20,7 @@ describe("GoabFilterChip", () => {
     expect(el?.getAttribute("error")).toBeNull();
   });
 
-  it("should render ReactNode content in the content slot for version 2", () => {
+  it("should render ReactNode content in the content slot", () => {
     const { container } = render(
       <GoabFilterChip content={<strong>some filter chip</strong>} />,
     );

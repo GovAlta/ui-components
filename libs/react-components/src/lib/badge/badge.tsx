@@ -18,7 +18,6 @@ interface WCProps extends Margins {
   icontype?: GoabIconType;
   size?: GoabBadgeSize;
   emphasis?: GoabBadgeEmphasis;
-  version?: string;
 }
 
 declare module "react" {
@@ -85,7 +84,6 @@ export function GoabBadge({
       icontype={iconType}
       content={typeof content === "string" ? content : undefined}
       {..._props}
-      version="2"
       size={size}
       emphasis={emphasis}
     >

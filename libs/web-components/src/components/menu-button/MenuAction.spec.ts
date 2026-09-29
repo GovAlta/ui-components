@@ -4,14 +4,20 @@ import { it, describe, vi } from "vitest";
 
 describe("GoAMenuAction", () => {
   it("should render", async () => {
-    const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
+    const { findByRole } = render(GoAMenuAction, {
+      text: "Test Action",
+      action: "test-action",
+    });
     const button = await findByRole("button");
 
     expect(button).toBeTruthy();
   });
 
   it("should render with text", async () => {
-    const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
+    const { findByRole } = render(GoAMenuAction, {
+      text: "Test Action",
+      action: "test-action",
+    });
     const button = await findByRole("button");
 
     expect(button).toHaveTextContent("Test Action");
@@ -20,6 +26,7 @@ describe("GoAMenuAction", () => {
   it("should render with testid", async () => {
     const { findByTestId } = render(GoAMenuAction, {
       text: "Test Action",
+      action: "test-action",
       testid: "menu-action-test",
     });
     const button = await findByTestId("menu-action-test");
@@ -29,7 +36,10 @@ describe("GoAMenuAction", () => {
 
   describe("icon", () => {
     it("should render without icon by default", async () => {
-      const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
+      const { findByRole } = render(GoAMenuAction, {
+        text: "Test Action",
+        action: "test-action",
+      });
       const button = await findByRole("button");
 
       expect(button.querySelector("goa-icon")).toBeNull();
@@ -38,6 +48,7 @@ describe("GoAMenuAction", () => {
     it("should render with icon when provided", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
+        action: "test-action",
         icon: "add",
       });
       const button = await findByRole("button");
@@ -50,13 +61,6 @@ describe("GoAMenuAction", () => {
   });
 
   describe("action", () => {
-    it("should have default action", async () => {
-      const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
-      const button = await findByRole("button");
-
-      expect(button).toBeTruthy();
-    });
-
     it("should accept custom action", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
@@ -115,6 +119,7 @@ describe("GoAMenuAction", () => {
     it("should render icon before text when both provided", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
+        action: "test-action",
         icon: "add",
       });
       const button = await findByRole("button");
@@ -127,14 +132,20 @@ describe("GoAMenuAction", () => {
 
   describe("accessibility", () => {
     it("should be focusable", async () => {
-      const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
+      const { findByRole } = render(GoAMenuAction, {
+        text: "Test Action",
+        action: "test-action",
+      });
       const button = await findByRole("button");
 
       expect(button).toHaveAttribute("tabindex", "0");
     });
 
     it("should have proper button role", async () => {
-      const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
+      const { findByRole } = render(GoAMenuAction, {
+        text: "Test Action",
+        action: "test-action",
+      });
       const button = await findByRole("button");
 
       expect(button.getAttribute("role")).toBe(null); // Native button role

@@ -9,7 +9,7 @@ Supported Angular versions: 18, 19, 20, and 21.
 ## Install
 
 ```bash
-npm i @abgov/angular-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
+npm i @abgov/angular-components @abgov/web-components @abgov/ui-components-common
 ```
 
 ## Register the web components
@@ -52,11 +52,10 @@ still use the legacy `goaValue`, `goaValueList`, or `goaChecked` form directives
 
 ## Add styles
 
-Import the component styles and design tokens in `src/styles.css`:
+Import the component styles in `src/styles.css`. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 ## Add icons
@@ -66,11 +65,9 @@ Add Ionicons to the `<head>` of `src/index.html`:
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
-></script>
-<script
-  nomodule
-  src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
 ></script>
 ```
 

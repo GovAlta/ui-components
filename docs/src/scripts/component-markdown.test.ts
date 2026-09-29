@@ -94,13 +94,6 @@ const buttonApi: ComponentApi = {
           default: "primary",
           description: "Sets the visual style of the button.",
         },
-        {
-          name: "version",
-          type: '"1" | "2"',
-          required: false,
-          default: "1",
-          description: "Design system version for styling.",
-        },
       ],
       events: [
         {
@@ -325,12 +318,35 @@ test("pipe characters in union types are escaped so table columns don't break", 
   assert.match(tableRows[0], /\\|/, "pipe in union type should be escaped with backslash");
 });
 
-test("version attribute is filtered out of the Web Components table", () => {
-  const out = buildComponentMarkdown(baseInput());
+test("legitimate version attributes are included in the Web Components table", () => {
+  const apiWithApplicationVersion: ComponentApi = {
+    ...buttonApi,
+    componentSlug: "microsite-header",
+    frameworks: {
+      ...buttonApi.frameworks,
+      webComponents: {
+        ...buttonApi.frameworks.webComponents,
+        props: [
+          ...buttonApi.frameworks.webComponents.props,
+          {
+            name: "version",
+            type: "string",
+            required: false,
+            default: "",
+            description: "App or service version displayed in the header.",
+          },
+        ],
+      },
+    },
+  };
+  const out = buildComponentMarkdown(
+    baseInput({ slug: "microsite-header", api: apiWithApplicationVersion }),
+  );
   const wcSection = out.slice(out.indexOf("## Web Components"));
-  const angularIdx = out.indexOf("## Angular");
-  const wcOnlySection = wcSection.slice(0, wcSection.indexOf("---") || wcSection.length);
-  assert.doesNotMatch(wcOnlySection, /\| `version` \|/, "version attr should not appear in WC Attributes table");
+  assert.match(
+    wcSection,
+    /\| `version` \| string \| \(none\) \| No \| App or service version displayed in the header\. \|/,
+  );
 });
 
 test("guidance prefixes are ASCII-safe (no emoji)", () => {

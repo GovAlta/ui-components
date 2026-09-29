@@ -46,7 +46,7 @@ export class GoabButtonGroup extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   /** Positions the button group in the page layout. */
-  @Input() alignment?: GoabButtonGroupAlignment;
+  @Input() alignment?: GoabButtonGroupAlignment = "start";
   /** Sets the spacing between buttons in the button group. */
   @Input() gap?: GoabButtonGroupGap;
 

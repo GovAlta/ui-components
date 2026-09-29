@@ -38,11 +38,11 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
   </goab-side-menu>
 </nav>`,
         webComponents: `<nav>
-  <goa-side-menu version="2">
-    <goa-side-menu-heading version="2">Main Menu</goa-side-menu-heading>
+  <goa-side-menu>
+    <goa-side-menu-heading>Main Menu</goa-side-menu-heading>
     <a href="/dashboard">Dashboard</a>
     <a href="/reports">Reports</a>
-    <goa-side-menu-heading version="2">Settings</goa-side-menu-heading>
+    <goa-side-menu-heading>Settings</goa-side-menu-heading>
     <a href="/profile">Profile</a>
     <a href="/preferences">Preferences</a>
   </goa-side-menu>
@@ -75,11 +75,11 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
   </goab-side-menu>
 </nav>`,
         webComponents: `<nav>
-  <goa-side-menu version="2">
-    <goa-side-menu-heading version="2" icon="grid">Navigation</goa-side-menu-heading>
+  <goa-side-menu>
+    <goa-side-menu-heading icon="grid">Navigation</goa-side-menu-heading>
     <a href="/dashboard">Dashboard</a>
     <a href="/reports">Reports</a>
-    <goa-side-menu-heading version="2" icon="settings">Configuration</goa-side-menu-heading>
+    <goa-side-menu-heading icon="settings">Configuration</goa-side-menu-heading>
     <a href="/profile">Profile</a>
     <a href="/preferences">Preferences</a>
   </goa-side-menu>

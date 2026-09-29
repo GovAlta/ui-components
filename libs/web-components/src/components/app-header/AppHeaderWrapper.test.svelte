@@ -6,17 +6,18 @@
   export let heading: string;
   export let url: string;
   export let haschildren: boolean = false;
-  export let fullmenubreakpoint: number;
 </script>
 
-<GoAAppHeader {heading} {url} {fullmenubreakpoint}>
-  {#if haschildren}
-    <a href="#learnmore">Learn more</a>
-    <a class="current" href="#aboutus">About Us</a>
-    <goa-app-header-menu heading="Apply Now">
-      <a href="#seniors">Seniors</a>
-      <a href="#family">Family</a>
-      <a href="#children">Children</a>
-    </goa-app-header-menu>
-  {/if}
+<GoAAppHeader {heading} {url}>
+  <svelte:fragment slot="navigation">
+    {#if haschildren}
+      <a href="#learnmore">Learn more</a>
+      <a class="current" href="#aboutus">About Us</a>
+      <goa-app-header-menu heading="Apply Now">
+        <a href="#seniors">Seniors</a>
+        <a href="#family">Family</a>
+        <a href="#children">Children</a>
+      </goa-app-header-menu>
+    {/if}
+  </svelte:fragment>
 </GoAAppHeader>

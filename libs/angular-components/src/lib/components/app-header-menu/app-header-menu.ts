@@ -31,8 +31,8 @@ export class GoabAppHeaderMenu implements OnInit {
 
   /** Icon displayed before the heading text. */
   @Input() leadingIcon?: GoabIconType;
-  /** The menu heading text displayed as the dropdown trigger. */
-  @Input() heading?: string;
+  /** @required The menu heading text displayed as the dropdown trigger. */
+  @Input({ required: true }) heading!: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
   /** @deprecated Sets the slot name for the component. Deprecated: use AppHeader navigation TemplateRef instead. */

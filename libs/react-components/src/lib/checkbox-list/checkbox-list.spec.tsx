@@ -12,7 +12,6 @@ describe("GoabCheckboxList", () => {
 
     const checkboxList = document.querySelector("goa-checkbox-list");
     expect(checkboxList?.getAttribute("name")).toBe("foo");
-    expect(checkboxList?.getAttribute("version")).toBe("2");
     expect(checkboxList?.getAttribute("disabled")).toBeNull();
     expect(checkboxList?.getAttribute("error")).toBeNull();
   });
@@ -23,6 +22,7 @@ describe("GoabCheckboxList", () => {
       value: ["option1", "option2"],
       maxWidth: "480px",
       size: "compact",
+      ariaLabel: "Contact preferences",
       disabled: true,
       error: true,
       testId: testId,
@@ -38,7 +38,9 @@ describe("GoabCheckboxList", () => {
     expect(checkboxList?.getAttribute("name")).toBe("foo");
     expect(checkboxList?.getAttribute("maxwidth")).toBe("480px");
     expect(checkboxList?.getAttribute("size")).toBe("compact");
-    expect(checkboxList?.getAttribute("version")).toBe("2");
+    expect(checkboxList?.getAttribute("arialabel")).toBe(
+      "Contact preferences",
+    );
     expect(checkboxList?.getAttribute("disabled")).toBe("true");
     expect(checkboxList?.getAttribute("error")).toBe("true");
     expect(checkboxList?.getAttribute("testid")).toBe(testId);
@@ -46,13 +48,6 @@ describe("GoabCheckboxList", () => {
     expect(checkboxList?.getAttribute("mr")).toBe("m");
     expect(checkboxList?.getAttribute("mb")).toBe("l");
     expect(checkboxList?.getAttribute("ml")).toBe("xl");
-  });
-
-  it("should default version to 2", () => {
-    render(<GoabCheckboxList name="foo" />);
-
-    const checkboxList = document.querySelector("goa-checkbox-list");
-    expect(checkboxList?.getAttribute("version")).toBe("2");
   });
 
   it("should handle the onChange event", async function () {

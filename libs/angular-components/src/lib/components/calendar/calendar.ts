@@ -31,7 +31,6 @@ import { GoabBaseComponent } from "../base.component";
         [attr.mb]="mb"
         [attr.ml]="ml"
         [attr.mr]="mr"
-        [attr.version]="version"
         (_change)="_onChange($event)"
       >
         <ng-content />
@@ -43,8 +42,6 @@ import { GoabBaseComponent } from "../base.component";
 /** Visual calendar for date selection. */
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
-
-  version = "2";
 
   /** Name identifier for the calendar, included in change events. */
   @Input() name?: string;

@@ -10,12 +10,12 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps extends Margins {
   icontheme: GoabFilterChipTheme;
   error?: string;
+  removable?: string;
   content?: string;
   arialabel?: string;
   secondarytext?: string;
   leadingicon?: GoabIconType;
   testid?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -39,6 +39,8 @@ export interface GoabFilterChipProps extends Margins, DataAttributes {
   iconTheme?: GoabFilterChipTheme;
   /** Shows an error state. */
   error?: boolean;
+  /** Sets the chip's removability and visibility of the close button. @default true */
+  removable?: boolean;
   /** Secondary text displayed in a smaller size before the main content. */
   secondaryText?: string;
   /** Icon displayed at the start of the chip. */
@@ -54,6 +56,7 @@ export const GoabFilterChip = ({
   content,
   iconTheme = "outline",
   error,
+  removable = true,
   onClick,
   ...rest
 }: GoabFilterChipProps) => {
@@ -78,7 +81,7 @@ export const GoabFilterChip = ({
       ref={el}
       content={typeof content === "string" ? content : undefined}
       error={error ? "true" : undefined}
-      version="2"
+      removable={String(removable)}
       {..._props}
     >
       {typeof content !== "string" && content != null && (

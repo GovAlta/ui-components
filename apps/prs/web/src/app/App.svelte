@@ -1,6 +1,5 @@
 <script lang="ts">
   import "@abgov/style";
-  import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
   import { Router, Route } from "svelte-routing";
   import Issue2333 from "../routes/2333.svelte";
   import Issue3279 from "../routes/3279.svelte";

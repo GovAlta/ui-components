@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader."
         },
         {
           "name": "autoComplete",
@@ -91,9 +91,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "Name of the input value that is received in the change event."
+          "description": "Name of the input value that is received in the change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -188,7 +188,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader."
         },
         {
           "name": "autoComplete",
@@ -272,7 +272,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Name of the input value that is received in the _change event."
+          "description": "Name of the input value that is received in the _change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -367,7 +367,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "Defines how the text will be translated for the screen reader. If not specified it will fall back to the name."
+          "description": "Defines how the text will be translated for the screen reader."
         },
         {
           "name": "autocomplete",
@@ -450,9 +450,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "Name of the input value that is received in the _change event."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "Name of the input value that is received in the _change event. If omitted, a unique name is generated."
         },
         {
           "name": "placeholder",
@@ -499,17 +499,6 @@
           "required": false,
           "default": "",
           "description": "Bound to value"
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         },
         {
           "name": "width",

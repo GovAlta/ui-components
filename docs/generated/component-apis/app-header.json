@@ -5,13 +5,6 @@
     "react": {
       "props": [
         {
-          "name": "fullMenuBreakpoint",
-          "type": "number",
-          "required": false,
-          "default": null,
-          "description": "Sets the breakpoint in px for the full menu to display."
-        },
-        {
           "name": "heading",
           "type": "string",
           "required": false,
@@ -47,16 +40,7 @@
           "description": "Set the URL to link from the alberta.ca logo. A full url is required."
         }
       ],
-      "events": [
-        {
-          "name": "onMenuClick",
-          "type": "() => void",
-          "description": "Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu.",
-          "frameworks": [
-            "react"
-          ]
-        }
-      ],
+      "events": [],
       "slots": [
         {
           "name": "banner",
@@ -86,13 +70,6 @@
     },
     "angular": {
       "props": [
-        {
-          "name": "fullMenuBreakpoint",
-          "type": "number",
-          "required": false,
-          "default": null,
-          "description": "Sets the breakpoint in px for the full menu to display."
-        },
         {
           "name": "heading",
           "type": "string",
@@ -129,16 +106,7 @@
           "description": "Sets the URL to link from the alberta.ca logo. A full url is required."
         }
       ],
-      "events": [
-        {
-          "name": "onMenuClick",
-          "type": "() => void",
-          "description": "Emits when the menu button is clicked. Used for custom menu handling.",
-          "frameworks": [
-            "angular"
-          ]
-        }
-      ],
+      "events": [],
       "slots": [
         {
           "name": "banner",
@@ -169,20 +137,6 @@
     "webComponents": {
       "props": [
         {
-          "name": "fullmenubreakpoint",
-          "type": "number",
-          "required": false,
-          "default": "TABLET_BP",
-          "description": "Sets the breakpoint in px for the full menu to display."
-        },
-        {
-          "name": "hasmenuclickhandler",
-          "type": "boolean",
-          "required": false,
-          "default": "false",
-          "description": "When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling."
-        },
-        {
           "name": "heading",
           "type": "string",
           "required": false,
@@ -201,7 +155,7 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": "V2 only: Secondary text displayed under the service name."
+          "description": "Secondary text displayed under the service name."
         },
         {
           "name": "testid",
@@ -216,29 +170,9 @@
           "required": false,
           "default": "",
           "description": "Set the URL to link from the alberta.ca logo. A full url is required."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
-      "events": [
-        {
-          "name": "_menuClick",
-          "type": "CustomEvent",
-          "description": "",
-          "frameworks": [
-            "webComponents"
-          ]
-        }
-      ],
+      "events": [],
       "slots": [
         {
           "name": "banner",

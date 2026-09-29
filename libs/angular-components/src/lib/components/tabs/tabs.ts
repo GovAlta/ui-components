@@ -22,7 +22,6 @@ import {
   template: `
     @if (isReady) {
       <goa-tabs
-        [attr.version]="version"
         [attr.initialtab]="initialTab"
         [attr.testid]="testId"
         [attr.variant]="variant"
@@ -42,7 +41,6 @@ export class GoabTabs implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  version = "2";
   /** The initially active tab (1-based index). If not set, the first tab is active. */
   @Input({ transform: numberAttribute }) initialTab?: number;
   /** Sets a data-testid attribute for automated testing. */

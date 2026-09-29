@@ -5,6 +5,13 @@
     "react": {
       "props": [
         {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Defines how the input will be translated for the screen reader."
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -56,9 +63,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "The name for the checkbox list group. Used as group identifier in change events."
+          "description": "The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated."
         },
         {
           "name": "size",
@@ -116,6 +123,13 @@
     },
     "angular": {
       "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Defines how the input will be translated for the screen reader."
+        },
         {
           "name": "disabled",
           "type": "boolean",
@@ -177,7 +191,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "The name for the checkbox list group. Used as group identifier in change events."
+          "description": "The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated."
         },
         {
           "name": "size",
@@ -231,6 +245,13 @@
     },
     "webComponents": {
       "props": [
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Defines how the input will be translated for the screen reader."
+        },
         {
           "name": "disabled",
           "type": "boolean",
@@ -287,9 +308,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "The name for the checkbox list group. Used as group identifier in change events."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated."
         },
         {
           "name": "size",
@@ -315,17 +336,6 @@
           "required": false,
           "default": "[]",
           "description": "Array of currently selected checkbox values."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

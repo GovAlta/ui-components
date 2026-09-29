@@ -21,8 +21,8 @@ import { GoabBaseComponent } from "../base.component";
   imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-filter-chip
-      [attr.version]="version"
       [attr.error]="error"
+      [attr.removable]="removable"
       [attr.icontheme]="iconTheme"
       [attr.content]="getContentAsString()"
       [attr.arialabel]="ariaLabel"
@@ -51,10 +51,10 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
 
   /** Shows an error state. */
   @Input({ transform: booleanAttribute }) error?: boolean;
-  /** Marks the chip as deletable. */
-  @Input({ transform: booleanAttribute }) deletable?: boolean;
-  /** Content displayed in the chip. Accepts a string or template for custom content. */
-  @Input() content?: string | TemplateRef<unknown> = "";
+  /** Sets the chip's removability and visibility of the close button. @default true */
+  @Input({ transform: booleanAttribute }) removable = true;
+  /** @required Content displayed in the chip. Accepts a string or template for custom content. */
+  @Input({ required: true }) content!: string | TemplateRef<unknown>;
   /** Accessible content used to label the filter chip controls. */
   @Input() ariaLabel?: string;
   /** Sets the icon theme style for the filter chip. */
@@ -68,7 +68,6 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
   @Output() onClick = new EventEmitter();
 
   isReady = false;
-  version = "2";
 
   getContentAsString(): string | undefined {
     return typeof this.content === "string" ? this.content : undefined;

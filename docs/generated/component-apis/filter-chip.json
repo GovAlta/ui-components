@@ -61,6 +61,13 @@
           "description": ""
         },
         {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
+        },
+        {
           "name": "secondaryText",
           "type": "string",
           "required": false,
@@ -110,16 +117,9 @@
             "string",
             "TemplateRef<unknown>"
           ],
-          "required": false,
-          "default": "",
-          "description": "Content displayed in the chip. Accepts a string or template for custom content."
-        },
-        {
-          "name": "deletable",
-          "type": "boolean",
-          "required": false,
+          "required": true,
           "default": null,
-          "description": "Marks the chip as deletable."
+          "description": "Content displayed in the chip. Accepts a string or template for custom content."
         },
         {
           "name": "error",
@@ -172,6 +172,13 @@
           "required": false,
           "default": null,
           "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
         },
         {
           "name": "secondaryText",
@@ -271,6 +278,13 @@
           "description": "Top margin."
         },
         {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Sets the chip's removability and visibility of the close button."
+        },
+        {
           "name": "secondarytext",
           "type": "string",
           "required": false,
@@ -283,17 +297,6 @@
           "required": false,
           "default": "",
           "description": "Sets a data-testid attribute for automated testing."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

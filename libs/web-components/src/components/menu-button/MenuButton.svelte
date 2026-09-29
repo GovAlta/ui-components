@@ -6,7 +6,6 @@
       maxWidth: { type: "String", attribute: "max-width", reflect: true },
       size: { type: "String", attribute: "size" },
       variant: { type: "String", attribute: "variant" },
-      version: { type: "String", attribute: "version" },
       ariaLabel: { attribute: "aria-label", type: "String" },
     },
   }}
@@ -30,13 +29,11 @@
   /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   export let leadingIcon: GoAIconType | undefined = undefined;
   /** Maximum width of the dropdown menu. */
-  export let maxWidth: string;
+  export let maxWidth: string | undefined = undefined;
   /** Sets the size of the button. */
   export let size: "normal" | "compact" = "normal";
   /** Sets the color variant for semantic meaning. */
   export let variant: "normal" | "destructive" = "normal";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Sets the aria-label for the icon button in icon-only mode. */
   export let ariaLabel: string = "Open menu";
 
@@ -172,7 +169,6 @@
       {type}
       {size}
       {variant}
-      {version}
       trailingicon={_icon}
     >
       {text}

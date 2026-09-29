@@ -20,7 +20,6 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-file-upload-input",
   template: `@if (isReady) {
     <goa-file-upload-input
-      [attr.version]="version"
       [attr.variant]="variant"
       [attr.accept]="accept"
       [attr.maxfilesize]="maxFileSize"
@@ -53,7 +52,6 @@ export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
   @Output() onSelectFile = new EventEmitter<GoabFileUploadInputOnSelectFileDetail>();
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

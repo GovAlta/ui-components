@@ -59,7 +59,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-checkbox version="2" name="agree" text="I agree to the terms"></goa-checkbox>`,
+        webComponents: `<goa-checkbox name="agree" text="I agree to the terms"></goa-checkbox>`,
       },
     },
     {
@@ -119,7 +119,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-checkbox version="2"
+        webComponents: `<goa-checkbox
   name="newsletter"
   text="Subscribe to newsletter"
   description="Receive weekly updates about new features">
@@ -179,7 +179,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-checkbox version="2" name="selectAll" text="Select all items" indeterminate></goa-checkbox>`,
+        webComponents: `<goa-checkbox name="selectAll" text="Select all items" indeterminate></goa-checkbox>`,
       },
     },
     {
@@ -248,8 +248,8 @@ export const checkboxConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-checkbox version="2" name="default" text="Default size checkbox" mb="m"></goa-checkbox>
-<goa-checkbox version="2" name="compact" text="Compact size checkbox" size="compact"></goa-checkbox>`,
+        webComponents: `<goa-checkbox name="default" text="Default size checkbox" mb="m"></goa-checkbox>
+<goa-checkbox name="compact" text="Compact size checkbox" size="compact"></goa-checkbox>`,
       },
     },
     {
@@ -356,10 +356,10 @@ export const checkboxConfigurations: ComponentConfigurations = {
 </form>`,
           },
         ],
-        webComponents: `<goa-checkbox version="2" name="disabled" text="Cannot be changed" disabled mb="m"></goa-checkbox>
-<goa-checkbox version="2" name="disabledChecked" text="Checked and disabled" checked disabled mb="m"></goa-checkbox>
-<goa-checkbox version="2" name="disabledCheckedError" text="Checked, disabled and error" checked disabled error mb="m"></goa-checkbox>
-<goa-checkbox version="2" name="terms" text="Accept terms and conditions" error></goa-checkbox>`,
+        webComponents: `<goa-checkbox name="disabled" text="Cannot be changed" disabled mb="m"></goa-checkbox>
+<goa-checkbox name="disabledChecked" text="Checked and disabled" checked disabled mb="m"></goa-checkbox>
+<goa-checkbox name="disabledCheckedError" text="Checked, disabled and error" checked disabled error mb="m"></goa-checkbox>
+<goa-checkbox name="terms" text="Accept terms and conditions" error></goa-checkbox>`,
       },
     },
   ],

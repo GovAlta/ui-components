@@ -31,15 +31,17 @@ import {
  * returns the first one that contains a `components/` subfolder. Handles
  * both production layouts (compiled `main.js` sitting next to `data/`) and
  * dev / script layouts (e.g. `npx tsx` on a script, where the entry point is
- * the script itself and `data/` is one level up).
+ * the script itself and `data/` is one level up). The npm bin is a symlink,
+ * so the module's own folder is probed as well: `import.meta.url` resolves to
+ * the real install location where `process.argv[1]` does not.
  *
  * Set `GOA_MCP_DATA_DIR` to override entirely.
  */
 const moduleDir = dirname(fileURLToPath(import.meta.url));
 
 function resolveDataDir(): string {
-  if (process.env.GOA_MCP_DATA_DIR) {
-    return process.env.GOA_MCP_DATA_DIR;
+  if (process.env['GOA_MCP_DATA_DIR']) {
+    return process.env['GOA_MCP_DATA_DIR'];
   }
 
   const candidates: string[] = [];
@@ -51,6 +53,9 @@ function resolveDataDir(): string {
     // scripts/<name>.ts is one level under data/'s sibling.
     candidates.push(join(mainDir, '..', 'data'));
   }
+  // Bundled main.js run through the npm bin: argv[1] is the .bin symlink, not
+  // the real file, so probe beside this module too (import.meta.url is real).
+  candidates.push(join(moduleDir, 'data'));
   // src/data-loader.ts → ../data when imported directly during dev.
   candidates.push(join(moduleDir, '..', 'data'));
 

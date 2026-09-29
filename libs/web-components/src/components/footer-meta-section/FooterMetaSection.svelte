@@ -17,7 +17,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--goa-footer-meta-links-gap);
-    margin: var(--goa-footer-meta-links-margin, 8px 0px 0px 0px);
+    margin: var(--goa-footer-meta-links-margin);
   }
 
   @media (--mobile) {

@@ -7,8 +7,8 @@
         {
           "name": "alignment",
           "type": "GoabButtonGroupAlignment",
-          "required": true,
-          "default": null,
+          "required": false,
+          "default": "start",
           "description": "Positions the button group in the page layout."
         },
         {
@@ -63,7 +63,7 @@
           "name": "alignment",
           "type": "GoabButtonGroupAlignment",
           "required": false,
-          "default": null,
+          "default": "start",
           "description": "Positions the button group in the page layout."
         },
         {

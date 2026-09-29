@@ -23,7 +23,6 @@
     watch,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
-  import { Once } from "@abgov/ui-components-common";
 
   // Validators
 
@@ -96,8 +95,6 @@
   let _isClosing = false;
   // Store if the element is expanding
   let _isExpanding = false;
-  // Show error messages only once
-  let _once: Once = new Once();
 
   // Reactive
 
@@ -270,42 +267,24 @@
 
   // Because the animation is done using JavaScript we can't use CSS variables
   // in the animation, this helps to work around that.
-  function getCssVariableValue(variableName: string): string | null {
-    const value = getComputedStyle(_rootEl)
-      .getPropertyValue(variableName)
-      .trim();
-
-    if (!value || value === "") {
-      // Show a warning only once
-      _once.do(variableName, () =>
-        console.warn(
-          `CSS variable ${variableName} is not defined. Please make sure you're using the correct version of @abgov/design-tokens`,
-        ),
-      );
-      return null;
-    }
-    return value;
+  function getCssVariableValue(variableName: string): string {
+    return getComputedStyle(_rootEl).getPropertyValue(variableName).trim();
   }
 
   function getAnimationDuration(): number {
-    const durationValueStr =
-      getCssVariableValue("--goa-motion-duration-short-3") ?? "100ms";
+    const durationValueStr = getCssVariableValue(
+      "--goa-motion-duration-short-3",
+    );
 
     return parseCssTimeToMilliseconds(durationValueStr, 100);
   }
 
   function getAnimationEasingReveal(): string {
-    return (
-      getCssVariableValue("--goa-motion-curve-expressive-reveal") ??
-      "cubic-bezier(0.7, 0, 0.25, 1)"
-    );
+    return getCssVariableValue("--goa-motion-curve-expressive-reveal");
   }
 
   function getAnimationEasingExit(): string {
-    return (
-      getCssVariableValue("--goa-motion-curve-expressive-exit") ??
-      "cubic-bezier(0.42, 0, 1, 1)"
-    );
+    return getCssVariableValue("--goa-motion-curve-expressive-exit");
   }
 </script>
 
@@ -345,8 +324,8 @@
         <goa-icon
           type="chevron-forward"
           fillcolor={_hovering
-            ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))"
-            : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"}
+            ? "var(--goa-accordion-icon-color-hover)"
+            : "var(--goa-accordion-icon-color)"}
         ></goa-icon>
       {/if}
 
@@ -382,8 +361,8 @@
         <goa-icon
           type="chevron-down"
           fillcolor={_hovering
-            ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))"
-            : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"}
+            ? "var(--goa-accordion-icon-color-hover)"
+            : "var(--goa-accordion-icon-color)"}
         ></goa-icon>
       {/if}
     </summary>
@@ -424,7 +403,7 @@
   }
 
   summary {
-    min-height: var(--goa-accordion-heading-min-height, 3.5rem);
+    min-height: var(--goa-accordion-heading-min-height);
     padding: var(--goa-accordion-padding-heading-icon-left);
     border: var(--goa-accordion-border);
     border-radius: var(--goa-accordion-border-radius);
@@ -442,17 +421,11 @@
   }
 
   summary.filled {
-    background-color: var(
-      --goa-accordion-color-filled-bg-heading,
-      var(--goa-color-greyscale-100)
-    );
+    background-color: var(--goa-accordion-color-filled-bg-heading);
   }
 
   summary.filled:hover {
-    background-color: var(
-      --goa-accordion-color-filled-bg-heading-hover,
-      var(--goa-color-greyscale-150)
-    );
+    background-color: var(--goa-accordion-color-filled-bg-heading-hover);
   }
 
   summary.iconRight {
@@ -461,7 +434,7 @@
 
   summary:hover {
     background-color: var(--goa-accordion-color-bg-heading-hover);
-    border: var(--goa-accordion-border-hover, var(--goa-accordion-border));
+    border: var(--goa-accordion-border-hover);
     color: var(--goa-accordion-color-heading-hover);
   }
   summary:focus-visible,
@@ -472,10 +445,7 @@
 
   summary.filled:focus-visible,
   summary.filled:active {
-    background-color: var(
-      --goa-accordion-color-filled-bg-heading,
-      var(--goa-color-greyscale-100)
-    );
+    background-color: var(--goa-accordion-color-filled-bg-heading);
   }
 
   /* Hack to make outline radius work on Safari */
@@ -520,23 +490,14 @@
   }
 
   .secondary-text {
-    font: var(
-      --goa-accordion-heading-secondary-text,
-      var(--goa-typography-body-s)
-    );
-    color: var(
-      --goa-accordion-heading-secondary-text-color,
-      var(--goa-color-text-default)
-    );
+    font: var(--goa-accordion-heading-secondary-text);
+    color: var(--goa-accordion-heading-secondary-text-color);
     line-height: 1.5rem;
     padding-right: 1rem;
   }
 
   .heading-medium + .secondary-text {
-    font: var(
-      --goa-accordion-heading-m-secondary-text,
-      var(--goa-typography-body-s)
-    );
+    font: var(--goa-accordion-heading-m-secondary-text);
   }
 
   .heading-content {
@@ -547,11 +508,11 @@
     display: flex;
     align-items: center;
     align-self: center;
-    padding-left: var(--goa-space-xs, 0.5rem);
+    padding-left: var(--goa-space-xs);
   }
 
   .container-medium {
-    min-height: var(--goa-accordion-heading-m-min-height, 4rem);
+    min-height: var(--goa-accordion-heading-m-min-height);
   }
 
   .container-medium goa-icon {
@@ -582,31 +543,19 @@
   }
 
   details[open] summary:hover {
-    border-bottom: var(
-      --goa-accordion-divider-hover,
-      var(--goa-accordion-divider)
-    );
+    border-bottom: var(--goa-accordion-divider-hover);
   }
 
   details[open] summary:focus-visible::before {
-    border-radius: var(
-      --goa-accordion-border-radius-focus,
-      var(--goa-accordion-border-radius)
-    );
+    border-radius: var(--goa-accordion-border-radius-focus);
   }
 
   .container-medium {
-    padding: var(
-      --goa-accordion-padding-heading-m-icon-left,
-      var(--goa-accordion-padding-heading-icon-left)
-    );
+    padding: var(--goa-accordion-padding-heading-m-icon-left);
   }
 
   .container-medium.iconRight {
-    padding: var(
-      --goa-accordion-padding-heading-m-icon-right,
-      var(--goa-accordion-padding-heading-icon-right)
-    );
+    padding: var(--goa-accordion-padding-heading-m-icon-right);
   }
 
   @container self (--mobile) {

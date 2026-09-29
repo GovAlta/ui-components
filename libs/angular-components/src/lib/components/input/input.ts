@@ -33,7 +33,6 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `@if (isReady) {
     <goa-input
       #goaComponentRef
-      [attr.version]="version"
       [attr.type]="type"
       [attr.name]="name"
       [attr.focused]="focused"
@@ -114,7 +113,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
 
   /** Sets the type of the input field. @default "text" */
   @Input() type?: GoabInputType = "text";
-  /** Name of input value that is received in the onChange event. */
+  /** Name of input value that is received in the onChange event. If omitted, a unique name is generated. */
   @Input() name?: string;
   /** Debounce delay in milliseconds before firing the change event. 0 means no debounce. */
   @Input({ transform: numberAttribute }) debounce?: number;
@@ -174,7 +173,6 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   /** Emits when the input value changes. Emits change detail including the new value. */
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
-  version = "2";
   isReady = false;
   handleTrailingIconClick = false;
 

@@ -25,7 +25,7 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestHeroBannerComponent {
-  heading?: string;
+  heading!: string;
   backgroundUrl?: string;
   backgroundColor?: string;
   textColor?: string;

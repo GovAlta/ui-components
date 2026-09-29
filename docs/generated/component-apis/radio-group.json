@@ -63,9 +63,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -187,7 +187,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -201,7 +201,7 @@
           "type": "GoabRadioGroupSize",
           "required": false,
           "default": "default",
-          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
+          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
         },
         {
           "name": "testId",
@@ -304,9 +304,9 @@
         {
           "name": "name",
           "type": "string",
-          "required": true,
-          "default": null,
-          "description": "The name for the radio group. Used for accessibility and change events."
+          "required": false,
+          "default": "generateRandomId()",
+          "description": "The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated."
         },
         {
           "name": "orientation",
@@ -330,7 +330,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
+          "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts."
         },
         {
           "name": "testid",
@@ -342,21 +342,9 @@
         {
           "name": "value",
           "type": "string",
-          "required": true,
+          "required": false,
           "default": null,
           "description": "The currently selected value in the radio group."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabRadioGroupVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

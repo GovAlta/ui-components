@@ -8,6 +8,7 @@ import { GoabRadioItem } from "./radio-item";
   template: `
     <goab-radio-item
       name="test"
+      value="test-value"
       [checked]="true"
       label="radio item text"
       [reveal]="revealTemplate"

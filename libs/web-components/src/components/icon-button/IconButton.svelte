@@ -153,10 +153,7 @@
   .goa-icon-button--2xsmall,
   .goa-icon-button--xsmall,
   .goa-icon-button--small {
-    padding: var(
-      --goa-icon-button-small-padding,
-      var(--goa-icon-button-medium-padding)
-    );
+    padding: var(--goa-icon-button-small-padding);
   }
 
   .goa-icon-button--medium {
@@ -176,19 +173,14 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: var(
-      --goa-icon-button-border-radius,
-      var(--goa-icon-button-medium-border-radius)
-    );
-    /* Fallbacks preserve the pre-token values for v1 consumers — the motion
-       tokens only exist in the v2 tokens package. */
+    border-radius: var(--goa-icon-button-border-radius);
     transition:
-      background-color var(--goa-motion-duration-short-4, 0.2s)
-        var(--goa-motion-curve-expressive, ease-in-out),
-      color var(--goa-motion-duration-short-4, 0.2s)
-        var(--goa-motion-curve-expressive, ease-in-out),
-      transform var(--goa-motion-duration-short-3, 0.1s)
-        var(--goa-motion-curve-expressive-transform, ease-in-out);
+      background-color var(--goa-motion-duration-short-4)
+        var(--goa-motion-curve-expressive),
+      color var(--goa-motion-duration-short-4)
+        var(--goa-motion-curve-expressive),
+      transform var(--goa-motion-duration-short-3)
+        var(--goa-motion-curve-expressive-transform);
   }
 
   button:active {
@@ -200,11 +192,8 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px)
-      var(
-        --goa-icon-button-focus-border-color,
-        var(--goa-color-interactive-focus)
-      );
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width)
+      var(--goa-icon-button-focus-border-color);
     outline: none;
   }
 
@@ -246,14 +235,8 @@
   }
 
   .dark:disabled {
-    color: var(
-      --goa-icon-button-dark-disabled-color,
-      var(--goa-icon-button-dark-disabled-color-bg)
-    );
-    fill: var(
-      --goa-icon-button-dark-disabled-color,
-      var(--goa-icon-button-dark-disabled-color-bg)
-    );
+    color: var(--goa-icon-button-dark-disabled-color);
+    fill: var(--goa-icon-button-dark-disabled-color);
   }
 
   /*  Type: nocolor (same as dark, not documented) */
@@ -316,18 +299,13 @@
       disabled fall back to the variant styling. An inset box-shadow is used
       instead of a border so the button footprint is identical in all states. */
   .tertiary {
-    box-shadow: inset 0 0 0
-      var(--goa-icon-button-tertiary-border-width, var(--goa-border-width-s))
-      var(--goa-icon-button-tertiary-border-color, var(--goa-color-greyscale-200));
+    box-shadow: inset 0 0 0 var(--goa-icon-button-tertiary-border-width)
+      var(--goa-icon-button-tertiary-border-color);
   }
 
   .tertiary.destructive {
-    box-shadow: inset 0 0 0
-      var(--goa-icon-button-tertiary-border-width, var(--goa-border-width-s))
-      var(
-        --goa-icon-button-tertiary-destructive-border-color,
-        var(--goa-color-emergency-light)
-      );
+    box-shadow: inset 0 0 0 var(--goa-icon-button-tertiary-border-width)
+      var(--goa-icon-button-tertiary-destructive-border-color);
   }
 
   .tertiary:hover:not(:focus-visible),
@@ -338,10 +316,7 @@
   /* re-assert the focus ring: .tertiary.destructive above would otherwise
      outrank button:focus-visible */
   .tertiary:focus-visible {
-    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px)
-      var(
-        --goa-icon-button-focus-border-color,
-        var(--goa-color-interactive-focus)
-      );
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width)
+      var(--goa-icon-button-focus-border-color);
   }
 </style>

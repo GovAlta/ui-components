@@ -25,7 +25,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-badge
-        [attr.version]="version"
         [attr.size]="size"
         [attr.emphasis]="emphasis"
         [attr.type]="type"
@@ -61,8 +60,8 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabBadge extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Sets the context and colour of the badge. */
-  @Input() type?: GoabBadgeType;
+  /** @required Sets the context and colour of the badge. */
+  @Input({ required: true }) type!: GoabBadgeType;
   /** Sets the content displayed in the badge. Accepts a string or template for custom content. */
   @Input() content?: string | TemplateRef<unknown>;
   /** @deprecated Use icontype instead. Includes an icon in the badge. */
@@ -77,7 +76,6 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
   @Input() ariaLabel?: string;
 
   isReady = false;
-  version = "2";
 
   get showIcon(): boolean {
     return this.icon ?? !!this.iconType;

@@ -13,7 +13,6 @@ interface WCProps {
   testid?: string;
   emphasis?: GoabNotificationEmphasis;
   compact?: string;
-  version?: string;
 }
 
 declare module "react" {
@@ -81,7 +80,6 @@ export const GoabNotification = ({
       arialive={ariaLive}
       emphasis={emphasis}
       compact={compact ? "true" : undefined}
-      version="2"
     >
       {children}
     </goa-notification>

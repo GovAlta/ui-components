@@ -7,7 +7,7 @@ Every Svelte component script follows this order:
 1. Imports
 2. Validators (`typeValidator` declarations)
 3. Type declarations
-4. Exported props (ordered: required > content > state > visual > a11y > version > margins)
+4. Exported props (ordered: required > content > state > visual > a11y > margins)
 5. Private state (underscore prefix: `_rootEl`, `_isOpen`)
 6. Reactive declarations (`$:`)
 7. Lifecycle (`onMount`, `onDestroy`)
@@ -19,7 +19,6 @@ Every component must include:
 
 - `testid: string = ""` with `data-testid={testid}` on root element
 - `mt, mr, mb, ml: Spacing = null` with `style={calculateMargin(mt, mr, mb, ml)}`
-- `version: "1" | "2" = "1"` with `class:v2={version === "2"}`
 
 ## Boolean Props
 
@@ -32,10 +31,14 @@ Note: `toBoolean("")` returns `true` (HTML attribute semantics).
 Always use `typeValidator` for enum/union props. Use the object form `{ required: true }` over the boolean shorthand.
 
 ```typescript
-const [Types, validateType] = typeValidator("Button type", ["primary", "secondary"], { required: true });
+const [Types, validateType] = typeValidator("Button type", ["primary", "secondary"], {
+  required: true,
+});
 type ButtonType = (typeof Types)[number];
 export let type: ButtonType = "primary";
-onMount(() => { validateType(type); });
+onMount(() => {
+  validateType(type);
+});
 ```
 
 ## Events

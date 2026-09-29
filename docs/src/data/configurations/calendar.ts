@@ -35,7 +35,7 @@ export const calendarConfigurations: ComponentConfigurations = {
           ts: angularCalendarSetup,
           template: `<goab-calendar name="calendar" (onChange)="handleDateChange($event)"></goab-calendar>`,
         },
-        webComponents: `<goa-calendar version="2" name="calendar"></goa-calendar>`,
+        webComponents: `<goa-calendar name="calendar"></goa-calendar>`,
       },
     },
     {
@@ -51,7 +51,7 @@ export const calendarConfigurations: ComponentConfigurations = {
           ts: angularCalendarSetup,
           template: `<goab-calendar name="calendar" value="2024-06-15" (onChange)="handleDateChange($event)"></goab-calendar>`,
         },
-        webComponents: `<goa-calendar version="2" name="calendar" value="2024-06-15"></goa-calendar>`,
+        webComponents: `<goa-calendar name="calendar" value="2024-06-15"></goa-calendar>`,
       },
     },
     {
@@ -77,7 +77,7 @@ export const calendarConfigurations: ComponentConfigurations = {
   (onChange)="handleDateChange($event)">
 </goab-calendar>`,
         },
-        webComponents: `<goa-calendar version="2"
+        webComponents: `<goa-calendar
   name="booking"
   min="2024-01-01"
   max="2024-12-31">

@@ -27,7 +27,7 @@ export const radioItemConfigurations: ComponentConfigurations = {
   <goab-radio-item value="opt2" label="Option 2"></goab-radio-item>
   <goab-radio-item value="opt3" label="Option 3"></goab-radio-item>
 </goab-radio-group>`,
-        webComponents: `<goa-radio-group version="2" name="option" value="">
+        webComponents: `<goa-radio-group name="option" value="">
   <goa-radio-item value="opt1" label="Option 1"></goa-radio-item>
   <goa-radio-item value="opt2" label="Option 2"></goa-radio-item>
   <goa-radio-item value="opt3" label="Option 3"></goa-radio-item>
@@ -47,7 +47,7 @@ export const radioItemConfigurations: ComponentConfigurations = {
   <goab-radio-item value="basic" label="Basic" description="Free tier with limited features"></goab-radio-item>
   <goab-radio-item value="pro" label="Professional" description="Full access to all features"></goab-radio-item>
 </goab-radio-group>`,
-        webComponents: `<goa-radio-group version="2" name="plan" value="">
+        webComponents: `<goa-radio-group name="plan" value="">
   <goa-radio-item value="basic" label="Basic" description="Free tier with limited features"></goa-radio-item>
   <goa-radio-item value="pro" label="Professional" description="Full access to all features"></goa-radio-item>
 </goa-radio-group>`,

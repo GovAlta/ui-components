@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 interface WCProps {
   testid?: string;
   icon?: GoabIconType;
-  version?: string;
 }
 
 declare module "react" {
@@ -36,7 +35,7 @@ export function GoabSideMenuHeading({
   children,
 }: GoabSideMenuHeadingProps) {
   return (
-    <goa-side-menu-heading icon={icon} testid={testId} version="2">
+    <goa-side-menu-heading icon={icon} testid={testId}>
       {children}
       {meta && <span slot="meta">{meta}</span>}
     </goa-side-menu-heading>

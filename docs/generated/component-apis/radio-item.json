@@ -102,7 +102,7 @@
         {
           "name": "value",
           "type": "string",
-          "required": false,
+          "required": true,
           "default": null,
           "description": "The value of this radio option. Will be emitted when selected."
         }
@@ -230,7 +230,7 @@
         {
           "name": "value",
           "type": "string",
-          "required": false,
+          "required": true,
           "default": null,
           "description": "The value of this radio option. Will be emitted when selected."
         }

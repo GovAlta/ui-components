@@ -10,7 +10,7 @@ export function loadGetStarted(): GetStartedRecord[] {
 
   for (const filePath of walkMdxFiles(paths.content.getStarted)) {
     const rel = path.relative(paths.content.getStarted, filePath);
-    const slug = rel.replace(/\.mdx$/, "");
+    const slug = rel.replace(/\\/g, "/").replace(/\.mdx$/, "");
     const raw = fs.readFileSync(filePath, "utf8");
     const { data, body } = parseFrontmatter(raw);
 

@@ -23,7 +23,7 @@ declare module "react" {
 
 interface WCProps extends Margins {
   id?: string;
-  name: string;
+  name?: string;
   checked?: string;
   indeterminate?: string;
   disabled?: string;
@@ -37,13 +37,12 @@ interface WCProps extends Margins {
   maxwidth?: string;
   testid?: string;
   size?: GoabCheckboxSize;
-  version?: string;
 }
 
 /* eslint-disable-next-line */
 export interface GoabCheckboxProps extends Margins, DataAttributes {
-  /** @required Unique name to identify the checkbox. */
-  name: string;
+  /** Unique name to identify the checkbox. If omitted, a unique name is generated. */
+  name?: string;
   /** Sets a unique id for the checkbox element. */
   id?: string;
   /** Marks the checkbox item as selected. */
@@ -62,7 +61,7 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
   children?: React.ReactNode;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the checkbox text. */
   ariaLabel?: string;
   /** Additional description text displayed below the checkbox label. */
   description?: string | React.ReactNode;
@@ -146,7 +145,6 @@ export function GoabCheckbox({
       disabled={disabled ? "true" : undefined}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
       description={typeof description === "string" ? description : undefined}
-      version="2"
     >
       {children}
       {typeof description !== "string" && description && (

@@ -6,12 +6,13 @@
     typeValidator,
     toBoolean,
     dispatch,
+    generateRandomId,
     receive,
     relay,
     watchFocusWithin,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     GoARadioItemProps,
     RadioItemSelectProps,
@@ -31,29 +32,25 @@
     "vertical",
     "horizontal",
   ]);
-  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
 
   // Types
   type Orientation = (typeof Orientations)[number];
-  type VersionType = (typeof Version)[number];
   type SizeType = (typeof Size)[number];
 
   // Public
 
-  /** The name for the radio group. Used for accessibility and change events. */
-  export let name: string;
+  /** The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. */
+  export let name: string = generateRandomId();
   /** The currently selected value in the radio group. */
-  export let value: string;
+  export let value: string | undefined = undefined;
   /** Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. */
   export let orientation: Orientation = "vertical";
   /** Disables all radio items in the group. */
   export let disabled: string = "false";
   /** Shows an error state on all radio items in the group. */
   export let error: string = "false";
-  /** @internal Design system version for styling. */
-  export let version: VersionType = "1";
-  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). */
+  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts. */
   export let size: SizeType = "default";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
@@ -77,7 +74,6 @@
   $: isCompact = size === "compact";
   $: {
     isDisabled;
-    version;
     isCompact;
     bindOptions();
   }
@@ -95,12 +91,18 @@
   let _rootEl: HTMLElement;
   let _radioItems: GoARadioItemProps[] = [];
   let _bindTimeoutId: any;
+  let _radioObserver: MutationObserver;
 
   // Hooks
   onMount(() => {
     validateOrientation(orientation);
-    validateVersion(version);
     validateSize(size);
+    _radioObserver = new MutationObserver(updateRadioAccessibility);
+    const host = (_rootEl.getRootNode() as ShadowRoot).host ?? _rootEl;
+    _radioObserver.observe(host, {
+      childList: true,
+      subtree: true,
+    });
     addRelayListener();
     sendMountedMessage();
     getChildren();
@@ -109,12 +111,18 @@
       const detail = (e as CustomEvent).detail;
       onChange(detail.value, detail.label);
     });
+    _rootEl.addEventListener("keydown", onKeyDown);
 
     watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
       () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
     );
+
+    return () => {
+      _radioObserver.disconnect();
+      clearTimeout(_bindTimeoutId);
+    };
   });
 
   // Functions
@@ -159,8 +167,15 @@
 
   function getChildren() {
     _rootEl.addEventListener("radio-item:mounted", (e: Event) => {
+      // A radio in a nested reveal group belongs only to its nearest group.
+      e.stopPropagation();
       const radioItemProps = (e as CustomEvent<GoARadioItemProps>).detail;
       _radioItems = [..._radioItems, radioItemProps];
+      _radioObserver.observe(radioItemProps.el, {
+        attributes: true,
+        attributeFilter: ["disabled"],
+        subtree: true,
+      });
 
       // call bindOptions once all children are attained
       if (_bindTimeoutId) {
@@ -184,12 +199,67 @@
             name,
             checked: props.value === value,
             revealAriaLabel: props.revealAriaLabel,
-            version: version,
-            compact: version === "2" && isCompact,
+            compact: isCompact,
           },
         }),
       );
     });
+    updateRadioAccessibility();
+  }
+
+  function getRadioInputs(includeDisabled = false): HTMLInputElement[] {
+    return _radioItems
+      .filter((item) => item.el.isConnected)
+      .sort((a, b) => {
+        const aHost = (a.el.getRootNode() as ShadowRoot).host ?? a.el;
+        const bHost = (b.el.getRootNode() as ShadowRoot).host ?? b.el;
+        return aHost.compareDocumentPosition(bHost) & Node.DOCUMENT_POSITION_FOLLOWING
+          ? -1
+          : 1;
+      })
+      .map((item) => item.el.querySelector<HTMLInputElement>('input[type="radio"]'))
+      .filter((input): input is HTMLInputElement =>
+        input !== null && (includeDisabled || !input.disabled),
+      );
+  }
+
+  async function updateRadioAccessibility() {
+    // Native radio grouping cannot cross the items' separate shadow roots.
+    await tick();
+    if (!_rootEl?.isConnected) return;
+
+    // Clear the previous position and Tab stop when an item becomes disabled.
+    getRadioInputs(true).forEach((input) => {
+      if (!input.disabled) return;
+      input.removeAttribute("aria-posinset");
+      input.removeAttribute("aria-setsize");
+      input.tabIndex = -1;
+    });
+
+    const inputs = getRadioInputs();
+    const tabStop = inputs.find((input) => input.checked) || inputs[0];
+
+    inputs.forEach((input, index) => {
+      input.setAttribute("aria-posinset", String(index + 1));
+      input.setAttribute("aria-setsize", String(inputs.length));
+      input.tabIndex = input === tabStop ? 0 : -1;
+    });
+  }
+
+  function onKeyDown(e: KeyboardEvent) {
+    if (!["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(e.key)) return;
+
+    const inputs = getRadioInputs();
+    const index = inputs.indexOf(e.composedPath()[0] as HTMLInputElement);
+    // Leave keyboard events from reveal content and nested groups alone.
+    if (index === -1) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    const direction = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : -1;
+    const next = inputs[(index + direction + inputs.length) % inputs.length];
+    next.focus();
+    next.click();
   }
 
   /**
@@ -223,6 +293,7 @@
         }),
       );
     });
+    updateRadioAccessibility();
   }
 
   function onFocus(e: Event) {
@@ -235,7 +306,6 @@
   bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
-  class:v2={version === "2"}
   class:compact={isCompact}
   data-testid={testid}
   role="radiogroup"
@@ -258,8 +328,7 @@
     gap: var(--goa-radio-group-gap-horizontal);
   }
 
-  /* V2 compact size variant - V2-only feature */
-  .goa-radio-group--horizontal.v2.compact {
+  .goa-radio-group--horizontal.compact {
     gap: var(--goa-radio-group-gap-horizontal-compact);
   }
 
@@ -270,8 +339,7 @@
     width: 100%;
   }
 
-  /* V2 compact size variant - V2-only feature */
-  .goa-radio-group--vertical.v2.compact {
+  .goa-radio-group--vertical.compact {
     gap: var(--goa-radio-group-gap-vertical-compact);
   }
 

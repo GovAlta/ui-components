@@ -43,8 +43,8 @@ export const appHeaderMenuConfigurations: ComponentConfigurations = {
   </goab-app-header-menu>
 </ng-template>`,
         webComponents: `<header>
-  <goa-app-header version="2" heading="My Application">
-    <goa-app-header-menu slot="navigation" version="2" heading="Menu">
+  <goa-app-header heading="My Application">
+    <goa-app-header-menu slot="navigation" heading="Menu">
       <a href="/dashboard">Dashboard</a>
       <a href="/reports">Reports</a>
       <a href="/settings">Settings</a>

@@ -36,7 +36,7 @@ export const footerMetaSectionConfigurations: ComponentConfigurations = {
   </goab-app-footer>
 </footer>`,
         webComponents: `<footer>
-  <goa-app-footer version="2">
+  <goa-app-footer>
     <goa-app-footer-meta-section slot="meta">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms of use</a>

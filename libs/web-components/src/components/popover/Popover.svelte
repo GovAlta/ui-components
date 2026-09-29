@@ -526,10 +526,7 @@
   }
 
   .popover-target:has(:focus-visible) {
-    outline: var(
-      --goa-popover-border-focus,
-      var(--focus-border-width) solid var(--goa-color-interactive-default)
-    );
+    outline: var(--goa-popover-border-focus);
   }
 
   .popover-content {
@@ -540,9 +537,9 @@
     border-radius: var(--border-radius, var(--goa-popover-border-radius));
     outline: none;
     overflow: visible;
-    box-shadow: var(--goa-popover-box-shadow, none);
+    box-shadow: var(--goa-popover-box-shadow);
     filter: var(--goa-popover-shadow, none);
-    border: var(--goa-popover-border, none);
+    border: var(--goa-popover-border);
     margin: 0;
     position-anchor: --goa-popover-target;
     inset-block-start: anchor(bottom);

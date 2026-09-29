@@ -65,23 +65,22 @@ Understanding this pattern is essential for working in this codebase.
 
 These are the most frequently enforced rules during PR review. Violating these will result in review comments.
 
-| # | Standard | Enforcer(s) |
-|---|----------|-------------|
-| 1 | Design tokens over hardcoded values | Vanessa, Benji, all |
-| 2 | Scope discipline -- every changed line justified by ticket | Chris |
-| 3 | Cross-framework consistency -- React/Angular match Svelte | Vanessa, Dustin |
-| 4 | Browser tests for event/interaction behavior | Chris |
-| 5 | Locator patterns -- declare outside `waitFor`, no truthy assertions | Chris |
-| 6 | Prop naming describes behavior, not implementation | Chris |
-| 7 | Use `rem` over `px` even without a token | Chris |
-| 8 | No duplicate or redundant state variables | Chris |
-| 9 | Use existing utilities (`performOnce`, `toBoolean`, etc.) | Chris |
-| 10 | V2 CSS must include V1 token fallbacks | Benji |
-| 11 | Tests must test what they claim -- meaningful assertions | Chris, Dustin |
-| 12 | No `console.log` or commented-out code | All |
-| 13 | Event details wrapped in objects for extensibility | Chris |
-| 14 | JSDoc consistency -- `testid` format, no `version` docs, include defaults | Vanessa |
-| 15 | Breaking change awareness | Dustin, Chris |
+| # | Standard |
+|---|----------|
+| 1 | Design tokens over hardcoded values
+| 2 | Scope discipline -- every changed line justified by ticket
+| 3 | Cross-framework consistency -- React/Angular match Svelte
+| 4 | Browser tests for event/interaction behavior
+| 5 | Locator patterns -- declare outside `waitFor`, no truthy assertions
+| 6 | Prop naming describes behavior, not implementation
+| 7 | Use `rem` over `px` even without a token
+| 8 | No duplicate or redundant state variables
+| 9 | Use existing utilities (`performOnce`, `toBoolean`, etc.)
+| 10 | Tests must test what they claim -- meaningful assertions
+| 11 | No `console.log` or commented-out code
+| 12 | Event details wrapped in objects for extensibility
+| 13 | JSDoc consistency -- `testid` format, include defaults
+| 14 | Breaking change awareness
 
 ### Props Conventions
 
@@ -105,7 +104,6 @@ Scan before opening a PR:
 - [ ] Browser tests for event/interaction behavior
 - [ ] Tests test what they claim (meaningful assertions matching test name)
 - [ ] Locators declared outside `waitFor`, no truthy assertions on locators
-- [ ] V2 styles include V1 token fallbacks: `var(--goa-v2-token, var(--goa-v1-fallback))`
 - [ ] JSDoc starts with "Sets the...", includes defaults, no `version` docs
 - [ ] No breaking changes (or explicitly flagged if intentional)
 - [ ] Commit message includes ticket number
@@ -281,7 +279,7 @@ Detailed standards for component authoring, styling, framework wrappers, testing
 | Rules File | Covers |
 |------------|--------|
 | `component-authoring.md` | Script ordering, props, events, lifecycle, naming |
-| `styling.md` | Tokens, V2 fallbacks, responsive, CSS patterns |
+| `styling.md` | Tokens, responsive, CSS patterns |
 | `framework-wrappers.md` | The cross-framework rule (wrapper templates are in the `write-wrapper` skill) |
 | `testing.md` | Test tiers, enforced patterns, Angular testing |
 | `common-utilities.md` | Utility inventory, relay vs dispatch boundary |

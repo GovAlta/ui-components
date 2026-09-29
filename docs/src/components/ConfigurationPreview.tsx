@@ -11,7 +11,6 @@
  */
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-// Note: Using web component directly for v2 styling (React wrapper doesn't pass version prop)
 import { GoabTooltip } from "@abgov/react-components";
 import { CodeSnippet } from "./CodeSnippet";
 import { useGitHubIssueCount } from "../hooks/useGitHubIssueCount";
@@ -74,14 +73,9 @@ export function ConfigurationPreview({
       const scriptMatch = previewHtml.match(/<script>([\s\S]*?)<\/script>/i);
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
-      // Sanitize HTML and add version="2" to all goa- components
+      // Sanitize the preview markup before rendering it
       const sanitizedHtml = DOMPurify.sanitize(previewHtml, DOMPURIFY_CONFIG);
-      previewRef.current.innerHTML = sanitizedHtml
-        .replace(
-          /<goa-(?!microsite-header)([a-z-]+)(?![^>]*version=)/g,
-          '<goa-$1 version="2"',
-        )
-        .trim();
+      previewRef.current.innerHTML = sanitizedHtml.trim();
 
       // Execute script content after HTML is rendered
       if (scriptContent) {
@@ -145,7 +139,6 @@ export function ConfigurationPreview({
           <goa-dropdown
             name="configuration"
             value={selectedConfigId}
-            version="2"
             size="compact"
             maxheight="600px"
             ref={dropdownRef}

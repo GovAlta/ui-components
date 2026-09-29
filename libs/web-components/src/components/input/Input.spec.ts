@@ -7,6 +7,15 @@ import { it, describe, expect, afterEach, vi } from "vitest";
 afterEach(cleanup);
 
 describe("GoAInput Component", () => {
+  it("generates a name when omitted", async () => {
+    const el = render(GoAInput, { testid: "generated-name" });
+    const input = await el.findByTestId("generated-name");
+    const generatedName = input.getAttribute("name");
+
+    expect(generatedName).toMatch(/^[a-z0-9]{7}$/);
+    expect(input.getAttribute("id")).toBe(generatedName);
+  });
+
   it("should render", async () => {
     const el = render(GoAInput, { testid: "input-test", id: "test" });
     const input = await el.findByTestId("input-test");

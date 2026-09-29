@@ -4,17 +4,17 @@
  * tabs (React, Angular, Web Components) for section and interaction
  * snippets that compose into a host page.
  */
-import type { CollectionEntry } from 'astro:content';
-import { ExamplePreview } from './ExamplePreview';
-import { getExampleCode } from '../lib/example-code';
+import type { CollectionEntry } from "astro:content";
+import { ExamplePreview } from "./ExamplePreview";
+import { getExampleCode } from "../lib/example-code";
 
 interface Props {
-  example: CollectionEntry<'examples'>;
+  example: CollectionEntry<"examples">;
   /** Title size - 'large' for standalone pages, 'small' for embedded */
-  titleSize?: 'large' | 'small';
+  titleSize?: "large" | "small";
 }
 
-const { example, titleSize = 'small' } = Astro.props;
+const { example, titleSize = "small" } = Astro.props;
 const { data } = example;
 const slug = data.slug || example.id;
 const code = await getExampleCode(slug);
@@ -32,13 +32,15 @@ const code = await getExampleCode(slug);
     titleSize={titleSize}
   />
 
-  {data.accessibilityNotes && (
-    <div class="example-meta">
-      <goa-details version="2" heading="Accessibility">
-        <p>{data.accessibilityNotes}</p>
-      </goa-details>
-    </div>
-  )}
+  {
+    data.accessibilityNotes && (
+      <div class="example-meta">
+        <goa-details heading="Accessibility">
+          <p>{data.accessibilityNotes}</p>
+        </goa-details>
+      </div>
+    )
+  }
 </div>
 
 <style>

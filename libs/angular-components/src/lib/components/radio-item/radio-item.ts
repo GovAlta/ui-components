@@ -17,7 +17,6 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-radio-item
-        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.label]="label"
@@ -53,8 +52,8 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** The value of this radio option. Will be emitted when selected. */
-  @Input() value?: string;
+  /** @required The value of this radio option. Will be emitted when selected. */
+  @Input({ required: true }) value!: string;
   /** The display label for this radio option. Falls back to value if not provided. */
   @Input() label?: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
@@ -79,7 +78,6 @@ export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) compact?: boolean;
 
   isReady = false;
-  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

@@ -19,13 +19,24 @@ describe("GoACheckboxList", () => {
   };
 
   describe("Rendering", () => {
+    it("accepts an arialabel property", () => {
+      const { queryByTestId } = render(CheckboxList, {
+        testid: "checkbox-list-label",
+        arialabel: "Contact preferences",
+      });
+      const checkboxList = queryByTestId("checkbox-list-label");
+
+      expect(checkboxList?.getAttribute("aria-label")).toBe(
+        "Contact preferences",
+      );
+    });
+
     it("should render checkbox list with default props", async () => {
       const { queryByTestId } = render(CheckboxList, defaultProps);
 
       const checkboxList = queryByTestId("checkbox-list");
       expect(checkboxList).toBeTruthy();
       expect(checkboxList?.getAttribute("role")).toBe("group");
-      expect(checkboxList?.getAttribute("aria-label")).toBe(defaultProps.name);
     });
 
     it("should apply max-width style", async () => {

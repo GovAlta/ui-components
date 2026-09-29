@@ -65,7 +65,6 @@ The site resolves monorepo packages directly via aliases in `astro.config.mjs`:
 - `@abgov/react-components` → `libs/react-components/src/index.ts`
 - `@abgov/web-components` → `dist/libs/web-components/`
 - `@abgov/style` → `dist/libs/web-components/index.css`
-- `@design-tokens` → `node_modules/@abgov/design-tokens-v2/dist`
 
 **Important:** `@abgov/web-components` points to `dist/`, so you need to build web components first (`npm run build` from the root) for the docs site to work.
 
@@ -261,7 +260,7 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabButton>Submit</GoabButton>`,
         angular: `<goab-button>Submit</goab-button>`,
-        webComponents: `<goa-button version="2">Submit</goa-button>`,
+        webComponents: `<goa-button>Submit</goa-button>`,
       },
     },
     // ... more variants
@@ -269,7 +268,7 @@ export const buttonConfigurations: ComponentConfigurations = {
 };
 ```
 
-**Note:** Most configuration code uses `Goab*` / `goab-*` prefixes. Some components also include V2-specific variants — check `libs/react-components/src/lib/` for the full list.
+**Note:** Most configuration code uses `Goab*` / `goab-*` prefixes
 
 **Slots across frameworks:** Each configuration file contains code for all three frameworks, and slots work differently in each:
 
@@ -486,22 +485,9 @@ Configuration previews and example code tabs both respect this preference — ch
 
 When a React wrapper doesn't support a V2 feature yet, we declare the raw web component in JSX so TypeScript doesn't error. Each entry has a tracking issue:
 
-- `goa-badge` — V2 types not in wrapper ([#3385](https://github.com/GovAlta/ui-components/issues/3385))
-- `goa-table` — V2 styling issues ([#3384](https://github.com/GovAlta/ui-components/issues/3384))
-- `goa-table-sort-header` — missing sortOrder prop
-- `goa-tabs` / `goa-tab` — missing updateUrl and stackOnMobile props
+- `goa-badge` — V2 colours not in wrapper ([#4274](https://github.com/GovAlta/ui-components/issues/4274))
 
 When the wrapper is fixed, remove the corresponding `global.d.ts` entry and switch to the React wrapper.
-
-### Design tokens V2
-
-The docs site uses V2 tokens via an npm alias:
-
-```json
-"@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.0.0"
-```
-
-Referenced in code as `@design-tokens` (Vite alias). This lets us use V2 tokens while the main package is still at V1 for other consumers.
 
 ### `client:only="react"` hydration
 

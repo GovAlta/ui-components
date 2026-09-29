@@ -20,7 +20,7 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestAppHeaderMenuComponent {
-  heading?: string;
+  heading!: string;
   leadingIcon?: GoabIconType;
   testId?: string;
   slotName?: string;

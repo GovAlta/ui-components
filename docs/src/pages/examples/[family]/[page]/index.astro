@@ -45,9 +45,9 @@ const internalPreviewUrl = `/examples/${family}/${page}/preview`;
     <Breadcrumbs />
     <header class="template-header">
       <div class="badges">
-        <goa-badge version="2" type="information" emphasis="subtle" icon="false" content="Page"></goa-badge>
+        <goa-badge type="information" emphasis="subtle" icon="false" content="Page"></goa-badge>
         {pageData.frameworks?.map((f: string) => (
-          <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={f}></goa-badge>
+          <goa-badge type="default" emphasis="subtle" icon="false" content={f}></goa-badge>
         ))}
       </div>
       <h1 class="template-title">{data.title}</h1>

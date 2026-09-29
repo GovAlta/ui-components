@@ -60,8 +60,8 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabAccordion extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Sets the heading text. */
-  @Input() heading?: string;
+  /** @required Sets the heading text. */
+  @Input({ required: true }) heading!: string;
   /** Sets secondary text. */
   @Input() secondaryText?: string;
   /** Sets the state of the accordion container open or closed. */

@@ -17,7 +17,6 @@ This repository contains the Government of Alberta Design System component libra
 | `@abgov/react-components` | You are building a React application. | [npm](https://www.npmjs.com/package/@abgov/react-components) |
 | `@abgov/angular-components` | You are building an Angular application. | [npm](https://www.npmjs.com/package/@abgov/angular-components) |
 | `@abgov/ui-components-common` | You need shared types, event detail interfaces, or common utilities used by the component packages. | [npm](https://www.npmjs.com/package/@abgov/ui-components-common) |
-| `@abgov/design-tokens` | You need the design tokens used by the components. | [npm](https://www.npmjs.com/package/@abgov/design-tokens) |
 
 `@abgov/styles` is deprecated. Import `@abgov/web-components/index.css` instead.
 
@@ -28,7 +27,7 @@ This repository contains the Government of Alberta Design System component libra
 Install the packages:
 
 ```bash
-npm i @abgov/web-components @abgov/design-tokens
+npm i @abgov/web-components
 ```
 
 Register the custom elements in your app entry point, for example `src/main.js`:
@@ -37,18 +36,21 @@ Register the custom elements in your app entry point, for example `src/main.js`:
 import "@abgov/web-components";
 ```
 
-Import the component styles and tokens in your main stylesheet:
+Import the component styles in your main stylesheet. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 You can then use the components directly in markup:
@@ -64,7 +66,7 @@ Supported React versions: `17`, `18`, `19`.
 Install the packages:
 
 ```bash
-npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common @abgov/design-tokens
+npm i @abgov/react-components @abgov/web-components @abgov/ui-components-common
 ```
 
 Register the underlying web components in your app entry point, for example `src/main.tsx`:
@@ -73,18 +75,21 @@ Register the underlying web components in your app entry point, for example `src
 import "@abgov/web-components";
 ```
 
-Import the styles in your main stylesheet:
+Import the component styles in your main stylesheet. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 Add Ionicons to your `index.html` `<head>`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 Example:
@@ -104,14 +109,18 @@ Supported Angular versions in the current docs: `18`, `19`, `20`, `21`.
 Install the packages:
 
 ```bash
-npm i @abgov/web-components @abgov/angular-components @abgov/ui-components-common @abgov/design-tokens
+npm i @abgov/web-components @abgov/angular-components @abgov/ui-components-common
 ```
 
 Add Ionicons to `src/index.html`:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/ionicons/ionicons.esm.js"
+  integrity="sha384-QeK0N4dchhCMcoF1OkHAcgwR00gJv1uQr15TCJ5CXEcLF0wm8HC4QbtQzJMCTO+c"
+  crossorigin="anonymous"
+></script>
 ```
 
 Update your app module:
@@ -135,11 +144,10 @@ export class AppModule {}
 
 If your Angular app uses standalone bootstrapping instead of `AppModule`, use the same package installs, web component import, styles, and Ionicons setup, then adapt the module example to your bootstrap configuration.
 
-Import the styles in `src/styles.css`:
+Import the component styles in `src/styles.css`. This stylesheet includes the design tokens and dark theme overrides:
 
 ```css
 @import "@abgov/web-components/index.css";
-@import "@abgov/design-tokens/dist/tokens.css";
 ```
 
 ## Local development

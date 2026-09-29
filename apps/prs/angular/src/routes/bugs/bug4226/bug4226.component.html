@@ -1,0 +1,174 @@
+<goab-text tag="h1" mt="m"
+  >Bug 4226 + 4227: Radio accessibility and keyboard navigation</goab-text
+>
+<goab-link trailingIcon="open" mr="xl">
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/4226"
+    target="_blank"
+    rel="noreferrer"
+  >
+    View issue 4226 on GitHub
+  </a>
+</goab-link>
+<goab-link trailingIcon="open">
+  <a
+    href="https://github.com/GovAlta/ui-components/issues/4227"
+    target="_blank"
+    rel="noreferrer"
+  >
+    View issue 4227 on Github
+  </a>
+</goab-link>
+<goab-text tag="p">
+  All 4 arrows keys can be used to navigate radio options. Down and Right go forward, Left
+  and Up go backwards.
+</goab-text>
+
+@for (scenario of scenarios; track scenario.id; let index = $index) {
+  <section>
+    <goab-divider mt="l" mb="l"></goab-divider>
+    <goab-text tag="h2">{{ index + 1 }}. {{ scenario.title }}</goab-text>
+    <goab-text tag="p">{{ scenario.description }}</goab-text>
+    <goab-form-item [label]="scenario.title">
+      <goab-radio-group
+        [name]="'bug4226-' + scenario.id"
+        [ariaLabel]="scenario.title"
+        [value]="values[scenario.id]"
+        [disabled]="scenario.disabled"
+        [orientation]="scenario.orientation"
+        [size]="scenario.size"
+        (onChange)="values[scenario.id] = $event.value"
+      >
+        @for (option of scenario.options; track option.value) {
+          <goab-radio-item
+            [value]="option.value"
+            [label]="option.label"
+            [disabled]="option.disabled"
+            [description]="option.description || ''"
+          ></goab-radio-item>
+        }
+      </goab-radio-group>
+    </goab-form-item>
+  </section>
+}
+
+<section data-testid="case-item-disabled">
+  <goab-divider mt="l" mb="l"></goab-divider>
+  <goab-text tag="h2">7. Dynamically disable individual items</goab-text>
+  <goab-text tag="p">
+    Toggle any item, including the selected one. Total group count and keyboard navigation
+    should be updated automatically.
+  </goab-text>
+  <goab-button-group mb="m">
+    @for (option of fruitOptions; track option.value) {
+      <goab-button type="secondary" (onClick)="toggleItem(option.value)">
+        {{ disabledItems.includes(option.value) ? "Enable" : "Disable" }}
+        {{ option.label }}
+      </goab-button>
+    }
+  </goab-button-group>
+  <goab-form-item label="Individual disabled states">
+    <goab-radio-group
+      name="bug4226-item-disabled"
+      ariaLabel="Individual disabled states"
+      [value]="disabledValue"
+      (onChange)="disabledValue = $event.value"
+    >
+      @for (option of fruitOptions; track option.value) {
+        <goab-radio-item
+          [value]="option.value"
+          [label]="option.label"
+          [disabled]="disabledItems.includes(option.value)"
+        ></goab-radio-item>
+      }
+    </goab-radio-group>
+  </goab-form-item>
+  <goab-text tag="p">Selected value: {{ disabledValue || "None" }}</goab-text>
+</section>
+
+<section data-testid="case-dynamic-list">
+  <goab-divider mt="l" mb="l"></goab-divider>
+  <goab-text tag="h2">8. Add, remove and reorder items</goab-text>
+  <goab-text tag="p">
+    Add or remove an item. Reverse the order. Ensure that accessible group counts are
+    accurate, and keyboard navigation is accurate
+  </goab-text>
+  <goab-button-group mb="m">
+    <goab-button type="secondary" (onClick)="addItem(true)">Add at start</goab-button>
+    <goab-button type="secondary" (onClick)="addItem(false)">Add at end</goab-button>
+    <goab-button
+      type="secondary"
+      [disabled]="items.length &lt; 2"
+      (onClick)="reverseItems()"
+      >Reverse order</goab-button
+    >
+    <goab-button
+      type="secondary"
+      [disabled]="!items.length"
+      (onClick)="removeItem(items[0].value)"
+      >Remove first</goab-button
+    >
+    <goab-button
+      type="secondary"
+      [disabled]="!items.length"
+      (onClick)="removeItem(items[items.length - 1].value)"
+      >Remove last</goab-button
+    >
+    <goab-button
+      type="secondary"
+      [disabled]="!listValue"
+      (onClick)="removeItem(listValue)"
+      >Remove selected</goab-button
+    >
+  </goab-button-group>
+  <goab-form-item label="Dynamic options">
+    <goab-radio-group
+      name="bug4226-dynamic-list"
+      ariaLabel="Dynamic options"
+      [value]="listValue"
+      (onChange)="listValue = $event.value"
+    >
+      @for (option of items; track option.value) {
+        <goab-radio-item [value]="option.value" [label]="option.label"></goab-radio-item>
+      }
+    </goab-radio-group>
+  </goab-form-item>
+  <goab-text tag="p">Selected value: {{ listValue || "None" }}</goab-text>
+</section>
+
+<section data-testid="case-reveal">
+  <goab-divider mt="l" mb="l"></goab-divider>
+  <goab-text tag="h2">9. Reveal input and a nested radio group</goab-text>
+  <goab-text tag="p">
+    With details has a reveal property. Ensure that arrow keys only work on the selected
+    group (outer or inner)
+  </goab-text>
+  <goab-form-item label="Outer choice">
+    <goab-radio-group
+      name="bug4226-outer"
+      ariaLabel="Outer choice"
+      [value]="outerValue"
+      (onChange)="outerValue = $event.value"
+    >
+      <goab-radio-item value="none" label="No details"></goab-radio-item>
+      <goab-radio-item
+        value="details"
+        label="With details"
+        [reveal]="details"
+      ></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <ng-template #details>
+    <goab-form-item label="Inner choice">
+      <goab-radio-group
+        name="bug4226-inner"
+        ariaLabel="Inner choice"
+        [value]="innerValue"
+        (onChange)="innerValue = $event.value"
+      >
+        <goab-radio-item value="email" label="Email"></goab-radio-item>
+        <goab-radio-item value="phone" label="Phone"></goab-radio-item>
+      </goab-radio-group>
+    </goab-form-item>
+  </ng-template>
+</section>

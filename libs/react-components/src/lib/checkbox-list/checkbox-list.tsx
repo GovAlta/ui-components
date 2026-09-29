@@ -8,14 +8,14 @@ import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
-  name: string;
+  name?: string;
   value?: string[];
   disabled?: string;
   error?: string;
   testid?: string;
   maxwidth?: string;
-  version?: string;
   size?: string;
+  arialabel?: string;
 }
 
 declare module "react" {
@@ -28,8 +28,8 @@ declare module "react" {
 }
 
 export interface GoabCheckboxListProps extends Margins {
-  /** @required The name for the checkbox list group. Used as group identifier in change events. */
-  name: string;
+  /** The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. */
+  name?: string;
   /** Array of currently selected checkbox values. */
   value?: string[];
   /** Disables all checkboxes in the list. */
@@ -42,6 +42,8 @@ export interface GoabCheckboxListProps extends Margins {
   maxWidth?: string;
   /** Sets the size of the checkbox list. 'compact' reduces spacing between items. @default "default" */
   size?: "default" | "compact";
+  /** Defines how the input will be translated for the screen reader. */
+  ariaLabel?: string;
   /** Content rendered inside the checkbox list. */
   children?: React.ReactNode;
   /** Callback fired when the selected values change. */
@@ -61,6 +63,7 @@ export function GoabCheckboxList({
   testId,
   maxWidth,
   size = "default",
+  ariaLabel,
   children,
   onChange,
   onFocus,
@@ -109,8 +112,8 @@ export function GoabCheckboxList({
       error={error ? "true" : undefined}
       testid={testId}
       maxwidth={maxWidth}
-      version="2"
       size={size}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}

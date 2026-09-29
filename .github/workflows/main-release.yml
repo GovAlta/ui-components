@@ -8,12 +8,17 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+concurrency:
+  group: main-release
+  cancel-in-progress: false
+
 permissions:
   id-token: write # Required for OIDC
   contents: read
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -50,7 +55,23 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
 
+      - name: Prepare MCP release
+        run: |
+          web_tag=$(git tag --points-at HEAD --list "web-components-v*" --sort=-v:refname | head -n 1)
+          if [ -z "$web_tag" ]; then echo "No web-components release tag found at HEAD"; exit 1; fi
+          web_version="${web_tag#web-components-v}"
+          npm --prefix ./dist/libs/design-system-mcp version "$web_version" --no-git-tag-version
+
+      - name: Validate MCP package
+        run: node libs/design-system-mcp/scripts/smoke-test.mjs
+
+      - name: Publish MCP package
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish ./dist/libs/design-system-mcp --tag latest --registry https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken="$NPM_TOKEN"
+
   release-docs:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
 

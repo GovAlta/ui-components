@@ -97,7 +97,7 @@ for (let i = 0; i < crumbCount; i++) {
       {parentGroup && (
         <li>
           {parentGroup.url ? (
-            <a href={parentGroup.url}>{parentGroup.label}</a>
+            <a href={withBase(parentGroup.url)}>{parentGroup.label}</a>
           ) : (
             <span>{parentGroup.label}</span>
           )}

@@ -17,6 +17,15 @@ describe('GoACheckbox Component', () => {
   });
 
   describe("properties", () => {
+    it("generates a name when omitted", () => {
+      const el = render(GoACheckbox, { testid });
+      const checkbox = el.container.querySelector("input");
+      const generatedName = checkbox?.getAttribute("name");
+
+      expect(generatedName).toMatch(/^[a-z0-9]{7}$/);
+      expect(checkbox?.getAttribute("id")).toBe(generatedName);
+    });
+
     it("can set value", async () => {
       const el = await createElement({ value: "foobar" });
       const checkbox = el.container.querySelector("input");

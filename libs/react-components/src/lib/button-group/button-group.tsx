@@ -24,8 +24,8 @@ declare module "react" {
 }
 
 export interface GoabButtonGroupProps extends Margins, DataAttributes {
-  /** @required Positions the button group in the page layout. */
-  alignment: GoabButtonGroupAlignment;
+  /** Positions the button group in the page layout. @default "start" */
+  alignment?: GoabButtonGroupAlignment;
   /** Sets the spacing between buttons in the button group. @default "relaxed" */
   gap?: GoabButtonGroupGap;
   /** Sets a data-testid attribute for automated testing. */
@@ -37,9 +37,10 @@ export interface GoabButtonGroupProps extends Margins, DataAttributes {
 /** Display multiple related actions stacked or in a horizontal row to help with arrangement and spacing. */
 export function GoabButtonGroup({
   children,
+  alignment = "start",
   ...rest
 }: GoabButtonGroupProps): JSX.Element {
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ alignment, ...rest }, lowercase);
 
   return <goa-button-group {..._props}>{children}</goa-button-group>;
 }

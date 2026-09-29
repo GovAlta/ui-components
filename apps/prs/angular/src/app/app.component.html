@@ -8,16 +8,11 @@
       userSecondaryText="edna.mode@gov.ab.ca"
       (onNavigate)="handleNavigate($event)"
       [primaryContent]="primaryTemplate"
-      [secondaryContent]="tokenToggleTemplate"
+      [secondaryContent]="secondaryTemplate"
       [accountContent]="accountTemplate"
     />
   </ng-template>
-  <ng-template #tokenToggleTemplate>
-    <goab-work-side-menu-item
-      [label]="'Switch to ' + (tokenMode === 'v1' ? 'V2' : 'V1') + ' tokens'"
-      icon="swap-horizontal"
-      [url]="tokenToggleUrl"
-    />
+  <ng-template #secondaryTemplate>
     <goab-work-side-menu-item
       [icon]="theme.mode() === 'dark' ? 'sunny' : 'moon'"
       [label]="theme.mode() === 'dark' ? 'Light mode' : 'Dark mode'"

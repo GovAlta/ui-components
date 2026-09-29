@@ -13,8 +13,6 @@
   export let initialtab: number = -1;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** @internal Design system version for styling. */
-  export let version: "1" | "2" = "1";
   /** Visual style variant. "segmented" shows pill-style tabs with animation. */
   export let variant: "default" | "segmented" = "default";
   /** Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. */
@@ -213,11 +211,9 @@
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
 
       // Store text content for CSS pseudo-element (prevents layout shift when font-weight changes)
-      if (variant === "segmented" || version === "2") {
-        const textContent = headingEl.textContent?.trim() || "";
-        if (textContent) {
-          link.setAttribute("data-text", textContent);
-        }
+      const textContent = headingEl.textContent?.trim() || "";
+      if (textContent) {
+        link.setAttribute("data-text", textContent);
       }
 
       if (tabProps.disabled) {
@@ -365,25 +361,29 @@
     const ownHashes = new Set<string>();
 
     // send message to each tab to set visibility within
-    [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map((el, index) => {
-      const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
+    [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map(
+      (el, index) => {
+        const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
 
-      el.setAttribute("aria-selected", fromBoolean(isCurrent));
-      el.setAttribute("tabindex", isCurrent ? "0" : "-1");
+        el.setAttribute("aria-selected", fromBoolean(isCurrent));
+        el.setAttribute("tabindex", isCurrent ? "0" : "-1");
 
-      // Track every hash this tabs instance could produce, so its own
-      // previous hash can be told apart from hashes contributed elsewhere
-      // (a nested tabs' hash, or a content anchor).
-      const ownHash = (el as HTMLLinkElement).getAttribute("href")?.split("#")[1];
-      if (ownHash) ownHashes.add(ownHash);
+        // Track every hash this tabs instance could produce, so its own
+        // previous hash can be told apart from hashes contributed elsewhere
+        // (a nested tabs' hash, or a content anchor).
+        const ownHash = (el as HTMLLinkElement)
+          .getAttribute("href")
+          ?.split("#")[1];
+        if (ownHash) ownHashes.add(ownHash);
 
-      if (isCurrent) {
-        currentLocation = (el as HTMLLinkElement).href;
-        if (!skipFocus) {
-          el.focus({ preventScroll: true });
+        if (isCurrent) {
+          currentLocation = (el as HTMLLinkElement).href;
+          if (!skipFocus) {
+            el.focus({ preventScroll: true });
+          }
         }
-      }
-    });
+      },
+    );
 
     for (const [i, props] of _tabProps.entries()) {
       props.el.dispatchEvent(
@@ -497,7 +497,6 @@
 <div
   role="tablist"
   bind:this={_rootEl}
-  class:v2={version === "2"}
   class:horizontal={orientation === "horizontal"}
   class:segmented={variant === "segmented"}
   data-testid={testid}
@@ -534,9 +533,7 @@
     gap: var(--goa-space-xs);
   }
 
-  /* ========================================
-     Base Styles (Token-driven, works for V1 and V2)
-     ======================================== */
+  /* Base styles */
 
   :global([role="tab"]) {
     display: flex;
@@ -546,13 +543,13 @@
     cursor: pointer;
     border: none;
     font: var(--goa-tab-typography);
-    color: var(--goa-tab-color-text-not-selected, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-not-selected);
     text-decoration: none;
   }
 
   :global([role="tab"][aria-selected="true"]) {
     font: var(--goa-tab-typography-selected);
-    color: var(--goa-tab-color-text-selected, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-selected);
   }
 
   :global([role="tab"]:focus-visible) {
@@ -562,12 +559,12 @@
   :global(
     [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
   ) {
-    color: var(--goa-tab-color-text-hover, var(--goa-tab-text-color));
+    color: var(--goa-tab-color-text-hover);
   }
 
   /* Disabled tab styles */
   :global([role="tab"][aria-disabled="true"]) {
-    color: var(--goa-color-greyscale-400, #949494);
+    color: var(--goa-color-greyscale-400);
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -589,22 +586,9 @@
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding);
-      border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       min-width: var(--goa-space-2xl);
       justify-content: center;
-    }
-    :global([role="tab"][aria-selected="true"]) {
-      border-bottom: var(--goa-tab-border-selected);
-    }
-    :global(
-      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
-    ) {
-      border-bottom: var(--goa-tab-border-hover);
-    }
-
-    :global([role="tab"][aria-disabled="true"]) {
-      border-bottom: var(--goa-tab-border-not-selected);
     }
   }
 
@@ -615,32 +599,22 @@
       display: flex;
       flex-direction: column;
       gap: var(--goa-tabs-gap-small-screen);
-      padding-bottom: var(
-        --goa-tabs-padding-bottom-small-screen,
-        var(--goa-space-m)
-      );
+      padding-bottom: var(--goa-tabs-padding-bottom-small-screen);
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
-      border-left: var(--goa-tab-border-not-selected);
       text-overflow: wrap;
       white-space: normal;
       word-break: break-word;
       overflow-wrap: break-word;
     }
     :global([role="tab"][aria-selected="true"]) {
-      border-left: var(--goa-tab-border-selected);
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-      border-left: var(--goa-tab-border-hover);
-      background: var(--goa-tab-color-bg-hover-small-screen, transparent);
-    }
-
-    :global([role="tab"][aria-disabled="true"]) {
-      border-left: var(--goa-tab-border-not-selected);
+      background: var(--goa-tab-color-bg-hover-small-screen);
     }
 
     /* horizontal: override mobile styles to use desktop layout */
@@ -654,16 +628,12 @@
     }
     .horizontal :global([role="tab"]) {
       padding: var(--goa-tab-padding);
-      border-left: none;
-      border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       white-space: nowrap;
       min-width: var(--goa-space-2xl);
       justify-content: center;
     }
     .horizontal :global([role="tab"][aria-selected="true"]) {
-      border-left: none;
-      border-bottom: var(--goa-tab-border-selected);
       background: transparent;
     }
     .horizontal
@@ -672,137 +642,81 @@
             [aria-disabled="true"]
           )
       ) {
-      border-left: none;
-      border-bottom: var(--goa-tab-border-hover);
       background: transparent;
     }
   }
 
-  .v2 :global([role="tab"]) {
+  :global([role="tab"]) {
     position: relative; /* Required for ::after positioning */
   }
 
-  .v2 :global([role="tab"]:focus-visible) {
+  :global([role="tab"]:focus-visible) {
     border-radius: var(--goa-border-radius-xs);
   }
 
-  .v2
-    :global(
-      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
-    ) {
-    border-bottom: none;
-  }
-
   @media (--not-mobile) {
-    .v2 :global([role="tab"]) {
-      border-bottom: none; /* Remove V1 border, replaced with ::after */
-    }
-
-    /* V2 uses ::after pseudo-element for rounded corner indicators */
-    .v2 :global([role="tab"]::after) {
+    :global([role="tab"]::after) {
       content: "";
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: var(--goa-tab-indicator-width, 3px);
+      height: var(--goa-tab-indicator-width);
       background: transparent;
-      border-radius: var(
-        --goa-tab-indicator-border-radius-desktop,
-        6px 6px 0 0
-      );
+      border-radius: var(--goa-tab-indicator-border-radius-desktop);
     }
-    .v2 :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070c4);
+    :global([role="tab"][aria-selected="true"]::after) {
+      background: var(--goa-tab-indicator-color-active);
     }
-    .v2
-      :global(
-        [role="tab"]:hover:not([aria-selected="true"]):not(
-            [aria-disabled="true"]
-          )::after
-      ) {
-      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not(
+          [aria-disabled="true"]
+        )::after
+    ) {
+      background: var(--goa-tab-indicator-color-hover);
     }
   }
 
   @media (--mobile) {
-    .v2 :global([role="tab"]) {
-      border-left: none; /* Remove V1 border, replaced with ::after */
-    }
-    .v2 :global([role="tab"][aria-selected="true"]) {
-      border-left: none;
-    }
-    .v2
-      :global(
-        [role="tab"]:hover:not([aria-selected="true"]):not(
-            [aria-disabled="true"]
-          )
-      ) {
-      border-left: none;
-    }
-
-    /* V2 uses ::after pseudo-element for rounded corner indicators */
-    .v2 :global([role="tab"]::after) {
+    :global([role="tab"]::after) {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
-      width: var(--goa-tab-indicator-width, 3px);
+      width: var(--goa-tab-indicator-width);
       background: transparent;
-      border-radius: var(
-        --goa-tab-indicator-border-radius-small-screen,
-        0 6px 6px 0
-      );
+      border-radius: var(--goa-tab-indicator-border-radius-small-screen);
     }
-    .v2 :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070c4);
+    :global([role="tab"][aria-selected="true"]::after) {
+      background: var(--goa-tab-indicator-color-active);
     }
-    .v2
-      :global(
-        [role="tab"]:hover:not([aria-selected="true"]):not(
-            [aria-disabled="true"]
-          )::after
-      ) {
-      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not(
+          [aria-disabled="true"]
+        )::after
+    ) {
+      background: var(--goa-tab-indicator-color-hover);
     }
 
-    /* V2 horizontal on mobile: remove V1 borders, use ::after bottom indicator instead */
-    .horizontal.v2 :global([role="tab"]) {
-      border-bottom: none;
-    }
-    .horizontal.v2 :global([role="tab"][aria-selected="true"]) {
-      border-bottom: none;
-    }
-    .horizontal.v2
-      :global(
-        [role="tab"]:hover:not([aria-selected="true"]):not(
-            [aria-disabled="true"]
-          )
-      ) {
-      border-bottom: none;
-    }
-    /* V2 horizontal: switch ::after from left indicator to bottom indicator */
-    .horizontal.v2 :global([role="tab"]::after) {
+    /* Horizontal tabs use the bottom indicator on mobile */
+    .horizontal :global([role="tab"]::after) {
       top: auto;
       left: 0;
       right: 0;
       bottom: 0;
       width: auto;
-      height: var(--goa-tab-indicator-width, 3px);
-      border-radius: var(
-        --goa-tab-indicator-border-radius-desktop,
-        6px 6px 0 0
-      );
+      height: var(--goa-tab-indicator-width);
+      border-radius: var(--goa-tab-indicator-border-radius-desktop);
     }
   }
 
   /* Prevent layout shift when bold font is applied to selected tab */
-  .v2:not(.segmented) :global([role="tab"][data-text]) {
+  [role="tablist"]:not(.segmented) :global([role="tab"][data-text]) {
     flex-direction: column;
   }
 
-  .v2:not(.segmented) :global([role="tab"][data-text]::before) {
+  [role="tablist"]:not(.segmented) :global([role="tab"][data-text]::before) {
     content: attr(data-text);
     font: var(--goa-tab-typography-selected);
     height: 0;
@@ -817,10 +731,10 @@
   /* Container - gray background with rounded corners */
   .segmented .tabs {
     position: relative;
-    background: var(--goa-color-greyscale-50, #f8f8f8);
-    border: 1px solid var(--goa-color-greyscale-150, #dcdcdc);
-    border-bottom: 1px solid var(--goa-color-greyscale-150, #dcdcdc); /* Override base border-bottom */
-    border-radius: var(--goa-border-radius-m, 10px);
+    background: var(--goa-color-greyscale-50);
+    border: 1px solid var(--goa-color-greyscale-150);
+    border-bottom: 1px solid var(--goa-color-greyscale-150); /* Override base border-bottom */
+    border-radius: var(--goa-border-radius-m);
     padding: 3px;
     gap: var(--goa-space-3xs);
     margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
@@ -836,9 +750,9 @@
     left: var(--segmented-indicator-left, 0);
     width: var(--segmented-indicator-width, 0);
     height: var(--segmented-indicator-height, 30px);
-    background: var(--goa-color-greyscale-white, #ffffff);
+    background: var(--goa-color-greyscale-white);
     border: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-150, #dcdcdc);
+      var(--goa-color-greyscale-150);
     border-radius: var(--goa-border-radius-m);
     pointer-events: none;
     z-index: 0;
@@ -858,10 +772,10 @@
     border: var(--goa-border-width-s) solid transparent;
     border-radius: var(--goa-border-radius-m);
     min-height: 30px;
-    padding: 0 var(--goa-space-s, 12px);
+    padding: 0 var(--goa-space-s);
     /* Typography */
     font: var(--goa-typography-body-s);
-    color: var(--goa-color-greyscale-600, #666666);
+    color: var(--goa-color-greyscale-600);
     /* Ensure proper alignment */
     display: flex;
     align-items: center;
@@ -895,7 +809,7 @@
   .segmented :global([role="tab"][aria-selected="true"]) {
     background: transparent;
     border: var(--goa-border-width-s) solid transparent;
-    color: var(--goa-color-text-secondary, #666666);
+    color: var(--goa-color-text-secondary);
     font: var(--goa-typography-body-s);
     font-weight: 600;
   }
@@ -904,30 +818,30 @@
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-    background: var(--goa-color-greyscale-150, #dcdcdc);
+    background: var(--goa-color-greyscale-150);
     border: var(--goa-border-width-s) solid transparent;
-    color: var(--goa-color-text-default, #353535);
+    color: var(--goa-color-text-default);
   }
 
   .segmented :global([role="tab"][aria-disabled="true"]) {
-    color: var(--goa-color-greyscale-400, #949494);
+    color: var(--goa-color-greyscale-400);
     cursor: not-allowed;
     pointer-events: none;
     background: transparent;
   }
 
   .segmented :global([role="tab"]:focus-visible) {
-    outline: var(--goa-border-width-l, 3px) solid
+    outline: var(--goa-border-width-l) solid
       var(--goa-color-interactive-focus);
     outline-offset: 1px;
-    border-radius: var(--goa-border-radius-s, 8px);
+    border-radius: var(--goa-border-radius-s);
   }
 
   /* Mobile - segmented tabs stay horizontal */
   @media (--mobile) {
     .segmented .tabs {
       flex-direction: row;
-      padding-bottom: var(--goa-space-2xs, 4px);
+      padding-bottom: var(--goa-space-2xs);
     }
 
     .segmented :global([role="tab"]) {

@@ -20,6 +20,8 @@ tags:
 status: published
 ---
 
+import { withBase } from "@/lib/base-url";
+
 ## When to use
 
 Use a dashboard as the landing view of a workspace when staff need to see priorities and act quickly.
@@ -34,7 +36,7 @@ Include the information that helps staff understand priorities and act quickly, 
 
 ## Layout
 
-The layout uses [containers](/components/container) and [blocks](/components/block) to organize content into scannable sections.
+The layout uses <a href={withBase("/components/container")}>containers</a> and <a href={withBase("/components/block")}>blocks</a> to organize content into scannable sections.
 
 ## Considerations
 

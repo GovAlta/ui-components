@@ -37,7 +37,7 @@ export const sideMenuConfigurations: ComponentConfigurations = {
 </div>`,
         webComponents: `<div style="width: 200px">
   <nav>
-    <goa-side-menu version="2">
+    <goa-side-menu>
       <a href="/overview">Overview</a>
       <a href="/details">Details</a>
       <a href="/settings">Settings</a>
@@ -77,11 +77,11 @@ export const sideMenuConfigurations: ComponentConfigurations = {
 </div>`,
         webComponents: `<div style="width: 200px">
   <nav>
-    <goa-side-menu version="2">
-      <goa-side-menu-heading version="2">Main</goa-side-menu-heading>
+    <goa-side-menu>
+      <goa-side-menu-heading>Main</goa-side-menu-heading>
       <a href="/dashboard">Dashboard</a>
       <a href="/reports">Reports</a>
-      <goa-side-menu-heading version="2">Settings</goa-side-menu-heading>
+      <goa-side-menu-heading>Settings</goa-side-menu-heading>
       <a href="/profile">Profile</a>
       <a href="/preferences">Preferences</a>
     </goa-side-menu>
@@ -126,13 +126,13 @@ export const sideMenuConfigurations: ComponentConfigurations = {
 </div>`,
         webComponents: `<div style="width: 200px">
   <nav>
-    <goa-side-menu version="2">
-      <goa-side-menu-group version="2" heading="Applications">
+    <goa-side-menu>
+      <goa-side-menu-group heading="Applications">
         <a href="/apps/active">Active</a>
         <a href="/apps/pending">Pending</a>
         <a href="/apps/archived">Archived</a>
       </goa-side-menu-group>
-      <goa-side-menu-group version="2" heading="Reports">
+      <goa-side-menu-group heading="Reports">
         <a href="/reports/monthly">Monthly</a>
         <a href="/reports/annual">Annual</a>
       </goa-side-menu-group>

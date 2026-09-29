@@ -32,8 +32,8 @@ export class GoabDataGrid implements OnInit {
   @Input() keyboardIconVisibility: "visible" | "hidden" = "visible";
   /** Position of the keyboard navigation indicator icon. @default "left" */
   @Input() keyboardIconPosition: "left" | "right" = "left";
-  /** @required Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. */
-  @Input({ required: true }) keyboardNav!: "layout" | "table";
+  /** Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. @default "table" */
+  @Input() keyboardNav: "layout" | "table" = "table";
 
   isReady = false;
 

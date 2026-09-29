@@ -36,8 +36,8 @@
   export let filter: string = "";
   /** Display label for the dropdown item. */
   export let label: string = "";
-  /** The value submitted when this item is selected. */
-  export let value: string = "";
+  /** The value submitted when this item is selected. Set to an empty string (`""`) to make this item the default selected value. */
+  export let value: string;
   /** Controls how the item is registered with the parent dropdown. */
   export let mount: DropdownItemMountType = "reset";
 

@@ -91,8 +91,8 @@ export const scrollPanelConfigurations: ComponentConfigurations = {
   <div id="case-details-body" style="padding: 16px 24px"></div>
   <div slot="footer" style="padding: 12px 24px">
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" version="2">Cancel</goa-button>
-      <goa-button type="primary" size="compact" version="2">Save changes</goa-button>
+      <goa-button type="secondary" size="compact">Cancel</goa-button>
+      <goa-button type="primary" size="compact">Save changes</goa-button>
     </goa-button-group>
   </div>
 </goa-scroll-panel>
@@ -211,7 +211,7 @@ export const scrollPanelConfigurations: ComponentConfigurations = {
   <div id="footer-only-body" style="padding: 12px 24px"></div>
   <div slot="footer" style="padding: 12px 24px">
     <goa-button-group alignment="end">
-      <goa-button type="primary" size="compact" version="2">Submit</goa-button>
+      <goa-button type="primary" size="compact">Submit</goa-button>
     </goa-button-group>
   </div>
 </goa-scroll-panel>

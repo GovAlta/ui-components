@@ -15,13 +15,16 @@
     "verify-bundle": "npx tsx src/scripts/content-generators/verify-bundle.ts"
   },
   "dependencies": {
-    "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.9.0",
+    "@abgov/design-tokens": "^2.12.8",
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
     "@abgov/web-components": "*",
     "flexsearch": "^0.7.43"
   },
   "devDependencies": {
-    "tsx": "^4.22.4"
+    "fastest-levenshtein": "1.0.16",
+    "tsx": "^4.22.4",
+    "typescript": "5.9.3",
+    "yaml": "2.9.0"
   }
 }

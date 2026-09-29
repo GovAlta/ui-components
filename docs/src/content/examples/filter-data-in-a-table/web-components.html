@@ -1,8 +1,7 @@
-<goa-form-item version="2" id="filter-form-item" mb="m">
+<goa-form-item id="filter-form-item" mb="m">
   <goa-block gap="xs" direction="row" alignment="center" width="100%">
     <div style="flex: 1">
       <goa-input
-        version="2"
         id="filter-input"
         name="filterChipInput"
         leadingicon="search"
@@ -10,7 +9,7 @@
       >
       </goa-input>
     </div>
-    <goa-button version="2" id="filter-btn" type="secondary" leadingicon="filter">
+    <goa-button id="filter-btn" type="secondary" leadingicon="filter">
       Filter
     </goa-button>
   </goa-block>
@@ -19,12 +18,12 @@
 <div id="chips-container" style="display: none">
   <goa-text as="span" color="secondary" mb="xs" mr="xs">Filter:</goa-text>
   <span id="chips-list"></span>
-  <goa-button version="2" id="clear-all-btn" type="tertiary" size="compact" mb="xs">
+  <goa-button id="clear-all-btn" type="tertiary" size="compact" mb="xs">
     Clear all
   </goa-button>
 </div>
 
-<goa-table version="2" width="100%" mt="s">
+<goa-table width="100%" mt="s">
   <table style="width: 100%">
     <thead>
       <tr>
@@ -36,72 +35,42 @@
     <tbody>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="information"
-            content="In progress"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="information" content="In progress" icon="false"></goa-badge>
         </td>
         <td>Ivan Schmidt</td>
         <td class="goa-table-number-column">7838576954</td>
       </tr>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="success"
-            content="Completed"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="success" content="Completed" icon="false"></goa-badge>
         </td>
         <td>Luz Lakin</td>
         <td class="goa-table-number-column">8576953364</td>
       </tr>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="information"
-            content="In progress"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="information" content="In progress" icon="false"></goa-badge>
         </td>
         <td>Keith McGlynn</td>
         <td class="goa-table-number-column">9846041345</td>
       </tr>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="success"
-            content="Completed"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="success" content="Completed" icon="false"></goa-badge>
         </td>
         <td>Melody Frami</td>
         <td class="goa-table-number-column">7385256175</td>
       </tr>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="important"
-            content="Updated"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="important" content="Updated" icon="false"></goa-badge>
         </td>
         <td>Frederick Skiles</td>
         <td class="goa-table-number-column">5807570418</td>
       </tr>
       <tr>
         <td>
-          <goa-badge
-            version="2"
-            type="success"
-            content="Completed"
-            icon="false"
-          ></goa-badge>
+          <goa-badge type="success" content="Completed" icon="false"></goa-badge>
         </td>
         <td>Dana Pfannerstill</td>
         <td class="goa-table-number-column">5736306857</td>
@@ -137,7 +106,6 @@
     chipsList.innerHTML = "";
     typedChips.forEach((chip) => {
       const filterChip = document.createElement("goa-filter-chip");
-      filterChip.setAttribute("version", "2");
       filterChip.setAttribute("content", chip);
       filterChip.setAttribute("mb", "xs");
       filterChip.setAttribute("mr", "xs");

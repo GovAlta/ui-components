@@ -73,21 +73,21 @@
           "type": "string",
           "required": true,
           "default": null,
-          "description": "The description text of the notification item."
+          "description": "The body text content of the notification card."
         },
         {
           "name": "priority",
           "type": "GoabWorkSideNotificationPriority",
           "required": false,
-          "default": null,
-          "description": "Sets the priority level of the notification."
+          "default": "normal",
+          "description": "Sets the urgency level of the notification."
         },
         {
           "name": "readStatus",
           "type": "GoabWorkSideNotificationReadStatus",
           "required": false,
-          "default": null,
-          "description": "Indicates whether the notification is read or unread."
+          "default": "unread",
+          "description": "Indicates whether the notification has been read or is unread."
         },
         {
           "name": "testId",
@@ -101,21 +101,21 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "The timestamp for when the notification was created."
+          "description": "ISO timestamp string representing when the notification occurred."
         },
         {
           "name": "title",
           "type": "string",
           "required": false,
           "default": null,
-          "description": "The title text of the notification item."
+          "description": "Title text displayed in the notification card header."
         },
         {
           "name": "type",
           "type": "GoabWorkSideNotificationItemType",
           "required": false,
-          "default": null,
-          "description": "Sets the visual style of the notification item."
+          "default": "default",
+          "description": "Sets the visual type/style of the notification item."
         }
       ],
       "events": [
@@ -135,9 +135,9 @@
         {
           "name": "description",
           "type": "string",
-          "required": false,
-          "default": "",
-          "description": ""
+          "required": true,
+          "default": null,
+          "description": "The body text content of the notification card."
         },
         {
           "name": "priority",
@@ -149,7 +149,7 @@
           ],
           "required": false,
           "default": "normal",
-          "description": ""
+          "description": "Sets the urgency level of the notification."
         },
         {
           "name": "read-status",
@@ -161,28 +161,28 @@
           ],
           "required": false,
           "default": "unread",
-          "description": ""
+          "description": "Indicates whether the notification has been read or is unread."
         },
         {
           "name": "testid",
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "Sets a data-testid attribute for automated testing."
         },
         {
           "name": "timestamp",
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "ISO timestamp string representing when the notification occurred."
         },
         {
           "name": "title",
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "Title text displayed in the notification card header."
         },
         {
           "name": "type",
@@ -197,7 +197,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": ""
+          "description": "Sets the visual type/style of the notification item."
         }
       ],
       "events": [

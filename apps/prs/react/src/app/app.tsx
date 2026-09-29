@@ -22,15 +22,6 @@ import {
   featureRouteDefinitions,
 } from "./route-manifest";
 import "@abgov/style";
-// Runtime V1/V2 token switching. Importing this module applies the currently
-// selected token set (default V2) to <head> before the app renders. The
-// playground's work-side-menu exposes a secondary item that flips between
-// V1 and V2 at runtime without editing source or restarting the dev server.
-import {
-  applyTokenVersion,
-  resolveTokenVersion,
-  type TokenVersion,
-} from "./tokenVersion";
 
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -93,9 +84,6 @@ export interface AppOutletContext {
   openPushDrawer: () => void;
 }
 
-// Sentinel URL handled by onNavigate below to toggle tokens instead of routing.
-const TOKEN_TOGGLE_URL = "#tokens";
-
 // Demo: a slotted page-header that shrinks its heading once content scrolls
 // under the pinned header. It reads the layout's scroll state via the context
 // hook (no prop drilling), using the same middle / at-bottom states that drive
@@ -139,7 +127,6 @@ export function App() {
   const isDark = mode === "dark";
   const location = useLocation();
   const baseUrl = import.meta.env.BASE_URL;
-  const [tokenMode, setTokenMode] = useState<TokenVersion>(() => resolveTokenVersion());
 
   const isPushDrawerRoute =
     location.pathname === PUSH_DRAWER_ROUTE_PATH ||
@@ -165,12 +152,6 @@ export function App() {
   );
 
   const handleSideMenuNavigate = (path: string) => {
-    if (path === TOKEN_TOGGLE_URL) {
-      const next: TokenVersion = tokenMode === "v1" ? "v2" : "v1";
-      setTokenMode(next);
-      applyTokenVersion(next);
-      return;
-    }
     if (path === "#toggle-theme") {
       toggle();
       return;
@@ -214,11 +195,6 @@ export function App() {
       onNavigate={handleSideMenuNavigate}
       secondaryContent={
         <>
-          <GoabWorkSideMenuItem
-            label={`Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`}
-            icon="swap-horizontal"
-            url={TOKEN_TOGGLE_URL}
-          />
           <GoabWorkSideMenuItem
             icon={isDark ? "sunny" : "moon"}
             label={isDark ? "Light mode" : "Dark mode"}
