@@ -12,7 +12,7 @@ Claude Code:
 claude mcp add goa-design-system -- npx -y @abgov/design-system-mcp
 ```
 
-Any other MCP client (Cursor, VS Code, and similar):
+Any other MCP client (Cursor and similar):
 
 ```json
 {
@@ -24,6 +24,8 @@ Any other MCP client (Cursor, VS Code, and similar):
   }
 }
 ```
+
+VS Code's own `mcp.json` uses `servers` in place of `mcpServers`.
 
 Every published version keeps its data forever. To freeze the knowledge your tools see, pin the same version you're using for `@abgov/web-components` (for example `@abgov/design-system-mcp@x.y.z`) instead of letting npx take the latest.
 
