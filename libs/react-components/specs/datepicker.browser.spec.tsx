@@ -259,6 +259,45 @@ describe("DatePicker", () => {
     });
   });
 
+  it("keeps focus after selecting a calendar date until focus moves outside", async () => {
+    const onChange = vi.fn();
+    const onBlur = vi.fn();
+
+    const result = render(
+      <div>
+        <GoabDatePicker
+          name="event-date"
+          testId="date-picker"
+          value="2026-03-01"
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        <button data-testid="outside">Outside</button>
+      </div>,
+    );
+    const input = result.getByTestId("calendar-input");
+    const dateToSelect = result.getByTestId("2026-03-02");
+    const outside = result.getByTestId("outside");
+
+    await userEvent.click(input);
+    await vi.waitFor(() => {
+      expect(dateToSelect).toBeVisible();
+    });
+    await userEvent.click(dateToSelect);
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange.mock.calls[0][0].valueStr).toBe("2026-03-02");
+    });
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.click(outside);
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur.mock.calls[0][0].name).toBe("event-date");
+    });
+  });
+
   describe("Width property", () => {
     it("applies custom width with px units", async () => {
       const Component = () => {

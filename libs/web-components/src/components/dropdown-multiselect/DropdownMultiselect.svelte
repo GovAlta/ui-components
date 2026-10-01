@@ -58,6 +58,7 @@
     toBoolean,
     typeValidator,
     validateRequired,
+    watchFocusWithin,
   } from "../../common/utils";
   import { isFilterMatch } from "../../common/filtering";
   import type {
@@ -140,6 +141,7 @@
   let _options: Option[] = [];
   let _popoverWidth = "";
   let _resizeObserver: ResizeObserver | null = null;
+  let _stopWatchingFocus: (() => void) | undefined;
   const _contentId = `goa-dropdown-multiselect-content-${generateRandomId()}`;
   let _filterText = "";
   let _filterInputEl: HTMLInputElement | undefined;
@@ -179,6 +181,18 @@
     ensureSlotExists(_rootEl);
     addRelayListener();
     updatePopoverWidth();
+    _stopWatchingFocus = watchFocusWithin(
+      _rootEl,
+      () => {},
+      () =>
+        dispatch(
+          _rootEl,
+          "_blur",
+          { name, value, labels: value.map((v) => _labelMap[v] || v) },
+          { bubbles: true },
+        ),
+      { settlePointerFocus: true },
+    );
 
     if (_rootEl && typeof ResizeObserver !== "undefined") {
       _resizeObserver = new ResizeObserver(updatePopoverWidth);
@@ -190,6 +204,7 @@
   });
 
   onDestroy(() => {
+    _stopWatchingFocus?.();
     _resizeObserver?.disconnect();
   });
 
@@ -426,6 +441,10 @@
     );
   }
 
+  function stopInnerBlur(e: Event) {
+    e.stopPropagation();
+  }
+
   function handleKeydown(e: KeyboardEvent) {
     if (disabled) return;
     switch (e.key) {
@@ -616,6 +635,7 @@
           disabled={fromBoolean(disabled)}
           {size}
           on:_change={handleSelectAllChange}
+          on:_blur={stopInnerBlur}
         />
         <hr class="select-all-divider" />
       {/if}
@@ -628,6 +648,7 @@
           {size}
           testid={testid ? `${testid}-checkbox-list` : undefined}
           on:_change={handleCheckboxListChange}
+          on:_blur={stopInnerBlur}
         >
           {#each _visibleOptions as option (option.value)}
             <goa-checkbox

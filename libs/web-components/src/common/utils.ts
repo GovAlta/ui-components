@@ -624,9 +624,40 @@ export function watchFocusWithin(
   rootEl: HTMLElement,
   onEnter: (e: FocusEvent) => void,
   onLeave: (e: FocusEvent) => void,
+  { settlePointerFocus = false }: { settlePointerFocus?: boolean } = {},
 ) {
   const hostEl = (rootEl.getRootNode() as ShadowRoot)?.host ?? rootEl;
   let focused = false;
+  let pointerDownInside = false;
+  let lastFocusOut: FocusEvent | undefined;
+
+  const checkLeave = (event: FocusEvent) => {
+    if (focused && !isFocusWithin(hostEl)) {
+      focused = false;
+      onLeave(event);
+    }
+  };
+
+  const onPointerDown = (event: PointerEvent) => {
+    pointerDownInside = event.composedPath().includes(hostEl);
+    if (!pointerDownInside) {
+      // A click outside must also end focus when an internal click left no DOM node focused.
+      setTimeout(() => checkLeave(lastFocusOut ?? new FocusEvent("focusout")), 0);
+    }
+  };
+
+  const onPointerUp = () => {
+    // Keep the flag through click handlers that can move focus synchronously.
+    setTimeout(() => {
+      pointerDownInside = false;
+    }, 0);
+  };
+
+  if (settlePointerFocus) {
+    document.addEventListener("pointerdown", onPointerDown, true);
+    document.addEventListener("pointerup", onPointerUp, true);
+    document.addEventListener("pointercancel", onPointerUp, true);
+  }
 
   rootEl.addEventListener("focusin", (e) => {
     if (!focused) {
@@ -637,13 +668,21 @@ export function watchFocusWithin(
 
   rootEl.addEventListener("focusout", (e) => {
     const evt = e as FocusEvent;
+    lastFocusOut = evt;
+    const fromInternalPointer = pointerDownInside;
     setTimeout(() => {
-      if (focused && !isFocusWithin(hostEl)) {
-        focused = false;
-        onLeave(evt);
-      }
+      // An option click can briefly put focus on body before the next option receives it.
+      if (!fromInternalPointer) checkLeave(evt);
     }, 0);
   });
+
+  return () => {
+    if (settlePointerFocus) {
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("pointerup", onPointerUp, true);
+      document.removeEventListener("pointercancel", onPointerUp, true);
+    }
+  };
 }
 
 export function parseCssTimeToMilliseconds(

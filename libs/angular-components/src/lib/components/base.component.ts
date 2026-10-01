@@ -109,17 +109,12 @@ export abstract class GoabControlValueAccessor
    */
   public fcTouched?: () => unknown;
 
-  private touched = false;
-
   /**
-   * Marks the component as touched. If the component is not already marked as touched,
-   * it triggers the `fcTouched` callback (if defined) and sets the `touched` property to `true`.
+   * Notifies Angular whenever the control blurs. Angular uses this callback to commit
+   * pending values for controls configured with updateOn: "blur".
    */
   public markAsTouched() {
-    if (!this.touched) {
-      this.fcTouched?.();
-      this.touched = true;
-    }
+    this.fcTouched?.();
   }
 
   /**
