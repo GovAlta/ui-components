@@ -129,7 +129,6 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
     this.value = detail.value || null;
     this.onChange.emit(detail);
 
-    this.markAsTouched();
     this.fcChange?.(detail.value || "");
   }
 

@@ -150,6 +150,14 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(detail: GoabDropdownMultiselectOnBlurDetail) => void",
+          "description": "Callback fired when focus leaves the dropdown multiselect.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(detail: GoabDropdownMultiselectOnChangeDetail) => void",
           "description": "Callback fired when the selected value change.",
@@ -315,9 +323,17 @@
       ],
       "events": [
         {
+          "name": "onBlur",
+          "type": "(event: GoabDropdownMultiselectOnBlurDetail) => void",
+          "description": "Callback fired when focus leaves the dropdown multiselect.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
           "name": "onChange",
           "type": "(event: GoabDropdownMultiselectOnChangeDetail) => void",
-          "description": "Emits when the selected value change.",
+          "description": "Callback fired when the selected value change.",
           "frameworks": [
             "angular"
           ]
@@ -476,9 +492,17 @@
       ],
       "events": [
         {
+          "name": "_blur",
+          "type": "CustomEvent<{ name: string; value: string[]; labels: string[] }>",
+          "description": "Callback fired when focus leaves the dropdown multiselect.",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string[]; labels: string[] }>",
-          "description": "Emits when the selected value change.",
+          "description": "Callback fired when the selected value change.",
           "frameworks": [
             "webComponents"
           ]

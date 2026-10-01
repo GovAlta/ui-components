@@ -30,6 +30,84 @@ function renderedCheckboxNames(checkboxListShadowDiv: HTMLElement): string[] {
 }
 
 describe("DropdownMultiselect", () => {
+  it("does not blur when options are selected with the mouse", async () => {
+    const onBlur = vi.fn();
+    const { getByTestId } = render(
+      <>
+        <button data-testid="before">Before</button>
+        <GoabDropdownMultiselect
+          name="fruit"
+          testId="dropdown-multiselect"
+          onBlur={onBlur}
+        >
+          <GoabDropdownItem value="apple" label="Apple" />
+          <GoabDropdownItem value="banana" label="Banana" />
+        </GoabDropdownMultiselect>
+      </>,
+    );
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+    const before = getByTestId("before");
+
+    await userEvent.click(trigger);
+    await vi.waitFor(() => expect(checkboxList).toBeVisible());
+
+    const [first, second] = renderedCheckboxes(checkboxList.element() as HTMLElement);
+    await userEvent.click(first.shadowRoot?.querySelector("label") as HTMLElement);
+    await userEvent.click(second.shadowRoot?.querySelector("label") as HTMLElement);
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.click(before);
+    await vi.waitFor(() => expect(onBlur).toHaveBeenCalledTimes(1));
+  });
+
+  it("fires blur once when focus leaves the multiselect", async () => {
+    const onBlur = vi.fn();
+    const Component = () => {
+      const [selected, setSelected] = useState<string[]>(["apple"]);
+      return (
+        <>
+          <GoabDropdownMultiselect
+            name="fruit"
+            value={selected}
+            testId="dropdown-multiselect"
+            onChange={({ value }) => setSelected(value)}
+            onBlur={onBlur}
+          >
+            <GoabDropdownItem value="apple" label="Apple" />
+            <GoabDropdownItem value="banana" label="Banana" />
+          </GoabDropdownMultiselect>
+          <button data-testid="after">After</button>
+        </>
+      );
+    };
+
+    const { getByTestId } = render(<Component />);
+    const trigger = getByTestId("dropdown-multiselect-trigger");
+    const checkboxList = getByTestId("dropdown-multiselect-checkbox-list");
+    const after = getByTestId("after");
+
+    await userEvent.click(trigger);
+    await vi.waitFor(() => expect(checkboxList).toBeVisible());
+    expect(onBlur).toHaveBeenCalledTimes(0);
+
+    for (let i = 0; i < 4 && document.activeElement !== after.element(); i++) {
+      await userEvent.tab();
+    }
+    await vi.waitFor(() => {
+      expect(after.element()).toBe(document.activeElement);
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: "fruit",
+          value: ["apple"],
+          labels: ["Apple"],
+          event: expect.any(Event),
+        }),
+      );
+    });
+  });
+
   it("should not open the popover when disabled", async () => {
     const Component = () => {
       return (

@@ -291,6 +291,34 @@ describe("CheckboxList", () => {
     });
   });
 
+  it("does not blur when checkboxes are clicked with the mouse", async () => {
+    const onBlur = vi.fn();
+    const result = render(
+      <div>
+        <GoabCheckboxList name="click-list" onBlur={onBlur}>
+          <GoabCheckbox name="option1" text="Option 1" testId="click-checkbox-1" />
+          <GoabCheckbox name="option2" text="Option 2" testId="click-checkbox-2" />
+        </GoabCheckboxList>
+        <input data-testid="outside-input" />
+      </div>,
+    );
+    const first = result.getByTestId("click-checkbox-1");
+    const second = result.getByTestId("click-checkbox-2");
+    const outside = result.getByTestId("outside-input");
+
+    await vi.waitFor(() => {
+      expect(first).toBeVisible();
+      expect(second).toBeVisible();
+    });
+
+    await userEvent.click((first.element() as HTMLInputElement).closest("label") as HTMLElement);
+    await userEvent.click((second.element() as HTMLInputElement).closest("label") as HTMLElement);
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.click(outside);
+    await vi.waitFor(() => expect(onBlur).toHaveBeenCalledTimes(1));
+  });
+
   it("passes the browser event in change detail", async () => {
     const onChange = vi.fn();
 

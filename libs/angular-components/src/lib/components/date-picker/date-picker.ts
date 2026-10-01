@@ -119,7 +119,6 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
       event: e,
     };
     this.onChange.emit(detail);
-    this.markAsTouched();
     this.fcChange?.(detail.value);
   }
 
