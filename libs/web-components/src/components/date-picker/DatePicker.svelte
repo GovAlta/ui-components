@@ -317,6 +317,8 @@
           {max}
           bordered="false"
           on:_change={onCalendarChange}
+          on:_focus={stopInnerFocusEvent}
+          on:_blur={stopInnerFocusEvent}
         />
       </goa-popover>
     </div>
@@ -355,6 +357,8 @@
         {max}
         bordered="false"
         on:_change={onCalendarChange}
+        on:_focus={stopInnerFocusEvent}
+        on:_blur={stopInnerFocusEvent}
       />
     </goa-popover>
   {/if}
