@@ -131,7 +131,6 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   _onChange(e: Event) {
     const detail = { ...(e as CustomEvent<GoabCheckboxOnChangeDetail>).detail, event: e };
     this.onChange.emit(detail);
-    this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");
   }
 

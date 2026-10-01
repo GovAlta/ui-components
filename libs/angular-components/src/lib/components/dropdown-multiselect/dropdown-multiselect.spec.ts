@@ -27,6 +27,7 @@ import { GoabDropdownMultiselectSize, Spacing } from "@abgov/ui-components-commo
       [ml]="ml"
       [mr]="mr"
       (onChange)="onChangeFn($event)"
+      (onBlur)="onBlurFn($event)"
     >
     </goab-dropdown-multiselect>
   `,
@@ -50,6 +51,10 @@ class TestDropdownMultiselectComponent {
   mr?: Spacing;
 
   onChangeFn(_detail: unknown) {
+    /* do nothing */
+  }
+
+  onBlurFn(_detail: unknown) {
     /* do nothing */
   }
 }
@@ -173,4 +178,21 @@ describe("GoabDropdownMultiselect", () => {
     expect(detail.value).toEqual(["apple", "banana"]);
     expect(detail.labels).toEqual(["Apple", "Banana"]);
   }));
+
+  it("should emit onBlur when _blur fires", () => {
+    const onBlur = jest.spyOn(component, "onBlurFn");
+    const el = fixture.debugElement.query(
+      By.css("goa-dropdown-multiselect"),
+    ).nativeElement;
+    const detail = {
+      name: "fruit",
+      value: ["apple"],
+      labels: ["Apple"],
+    };
+    const event = new CustomEvent("_blur", { detail });
+
+    fireEvent(el, event);
+
+    expect(onBlur).toHaveBeenCalledWith({ ...detail, event });
+  });
 });

@@ -1513,6 +1513,18 @@ export type GoabDropdownMultiselectOnChangeDetail = {
   event: Event;
 };
 
+/** Provides details when focus leaves a dropdown multiselect. */
+export type GoabDropdownMultiselectOnBlurDetail = {
+  /** The group name. */
+  name: string;
+  /** The selected values. */
+  value: string[];
+  /** The display labels for each selected value. */
+  labels: string[];
+  /** The originating DOM event. */
+  event: Event;
+};
+
 /**
  * Label formatting options:
  * - list: Displays the selected items as a comma-separated list.

@@ -58,6 +58,7 @@
     toBoolean,
     typeValidator,
     validateRequired,
+    watchFocusWithin,
   } from "../../common/utils";
   import { isFilterMatch } from "../../common/filtering";
   import type {
@@ -179,6 +180,17 @@
     ensureSlotExists(_rootEl);
     addRelayListener();
     updatePopoverWidth();
+    watchFocusWithin(
+      _rootEl,
+      () => {},
+      () =>
+        dispatch(
+          _rootEl,
+          "_blur",
+          { name, value, labels: value.map((v) => _labelMap[v] || v) },
+          { bubbles: true },
+        ),
+    );
 
     if (_rootEl && typeof ResizeObserver !== "undefined") {
       _resizeObserver = new ResizeObserver(updatePopoverWidth);
@@ -426,6 +438,10 @@
     );
   }
 
+  function stopInnerBlur(e: Event) {
+    e.stopPropagation();
+  }
+
   function handleKeydown(e: KeyboardEvent) {
     if (disabled) return;
     switch (e.key) {
@@ -616,6 +632,7 @@
           disabled={fromBoolean(disabled)}
           {size}
           on:_change={handleSelectAllChange}
+          on:_blur={stopInnerBlur}
         />
         <hr class="select-all-divider" />
       {/if}
@@ -628,6 +645,7 @@
           {size}
           testid={testid ? `${testid}-checkbox-list` : undefined}
           on:_change={handleCheckboxListChange}
+          on:_blur={stopInnerBlur}
         >
           {#each _visibleOptions as option (option.value)}
             <goa-checkbox
