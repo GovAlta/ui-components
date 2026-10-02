@@ -8,6 +8,9 @@ import {
   GoabBadge,
   GoabButton,
   GoabButtonGroup,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
   GoabPushDrawer,
   GoabThemeService,
   GoabWorkSideMenu,
@@ -17,11 +20,13 @@ import {
   GoabWorkSideNotificationItem,
   GoabWorkspaceLayout,
 } from "@abgov/angular-components";
+import { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 import { PushDrawerHostService } from "../routes/features/feat3347PushDrawer/push-drawer-host.service";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
   featureRouteDefinitions,
+  prRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
 
 interface NotificationData {
@@ -38,13 +43,15 @@ interface NotificationData {
   standalone: true,
   selector: "abgov-root",
   templateUrl: "./app.component.html",
-  styles: ``,
   imports: [
     RouterOutlet,
     GoabAppFooter,
     GoabAppHeader,
     GoabButton,
     GoabButtonGroup,
+    GoabDropdown,
+    GoabDropdownItem,
+    GoabFormItem,
     GoabPushDrawer,
     GoabBadge,
     GoabWorkSideMenu,
@@ -59,6 +66,8 @@ interface NotificationData {
 export class AppComponent {
   isFullPage = false;
   isPushDrawerRoute = false;
+  sideMenuOpen = true;
+  readonly prRouteDefinitions = prRouteDefinitions;
   readonly bugRouteDefinitions = bugRouteDefinitions;
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
@@ -166,5 +175,13 @@ export class AppComponent {
       ? "/" + path.slice(this.baseHref.length)
       : path;
     this.router.navigateByUrl(internal);
+  }
+
+  handleSideMenuToggle(): void {
+    this.sideMenuOpen = !this.sideMenuOpen;
+  }
+
+  handleRouteSelect(detail: GoabDropdownOnChangeDetail): void {
+    if (detail.value) this.router.navigateByUrl(`/${detail.value}`);
   }
 }
