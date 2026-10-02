@@ -36,7 +36,6 @@ Let users show and hide sections of related content on a page.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon. |
-| `children` | No | Content rendered inside the accordion body. |
 | `headingContent` | No | Sets content rendered within the accordion heading, alongside the heading text. |
 
 ---
@@ -71,7 +70,6 @@ Let users show and hide sections of related content on a page.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon. |
-| `default` | No | Content rendered inside the accordion body. |
 | `headingContent` | No | Sets content rendered within the accordion heading, alongside the heading text. |
 
 ---
@@ -109,7 +107,6 @@ Tag: `goa-accordion`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon. |
-| `default` | No | Content rendered inside the accordion body. |
 | `headingcontent` | No | Sets content rendered within the accordion heading, alongside the heading text. |
 
 ---

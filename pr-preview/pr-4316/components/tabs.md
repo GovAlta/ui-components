@@ -24,12 +24,6 @@ Let users navigate between related sections of content, displaying one section a
 |-------|------|-------------|
 | `onChange` | (detail: GoabTabsOnChangeDetail) => void | Callback fired when the active tab changes. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the tabs container, typically GoabTab components. |
-
 ---
 
 ## Angular
@@ -49,12 +43,6 @@ Let users navigate between related sections of content, displaying one section a
 | Event | Type | Description |
 |-------|------|-------------|
 | `onChange` | (event: GoabTabsOnChangeDetail) => void | Emits when the active tab changes. Emits the new tab index as GoabTabsOnChangeDetail. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the tabs container, typically GoabTab components. |
 
 ---
 
@@ -77,12 +65,6 @@ Tag: `goa-tabs`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_change` | CustomEvent<{ tab: number }> | Emits when the active tab changes. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the tabs container, typically GoabTab components. |
 
 ---
 

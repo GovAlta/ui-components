@@ -29,7 +29,6 @@ A panel that slides in from the side of the screen to display additional content
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Action elements rendered in the drawer footer slot. |
-| `children` | Yes | Content rendered inside the drawer body. |
 | `heading` | No | The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content. |
 
 ---
@@ -57,7 +56,6 @@ A panel that slides in from the side of the screen to display additional content
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Action elements rendered in the drawer footer slot. |
-| `default` | Yes | Content rendered inside the drawer body. |
 | `heading` | No | The heading text displayed at the top of the drawer. Accepts a string or a ngTemplate for custom heading content. |
 
 ---
@@ -88,7 +86,6 @@ Tag: `goa-drawer`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Action elements rendered in the drawer footer slot. |
-| `default` | Yes | Content rendered inside the drawer body. |
 | `heading` | No | The heading text displayed at the top of the drawer. |
 
 ---

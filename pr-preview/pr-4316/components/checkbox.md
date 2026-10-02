@@ -43,7 +43,6 @@ Let the user select one or more options.
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | No | Content rendered inside the checkbox label slot. |
 | `description` | No | Additional description text displayed below the checkbox label. |
 | `reveal` | No | Content revealed when the checkbox is checked. |
 
@@ -86,7 +85,6 @@ Let the user select one or more options.
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered inside the checkbox label slot. |
 | `description` | No | Additional description text displayed below the checkbox label. |
 | `reveal` | No | Content revealed when the checkbox is checked. |
 
@@ -130,7 +128,6 @@ Tag: `goa-checkbox`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered inside the checkbox label slot. |
 | `description` | No | Additional description text displayed below the checkbox label. |
 | `reveal` | No | Content revealed when the checkbox is checked. |
 

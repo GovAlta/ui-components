@@ -21,12 +21,6 @@ Let users reveal more detailed information when they need it.
 | `open` | boolean | (none) | No | Controls if details is expanded or not. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | Yes | Content rendered inside the details body. |
-
 ---
 
 ## Angular
@@ -43,12 +37,6 @@ Let users reveal more detailed information when they need it.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `open` | boolean | (none) | No | Controls if details is expanded or not. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the details body. |
 
 ---
 
@@ -68,12 +56,6 @@ Tag: `goa-details`
 | `mt` | Spacing | (none) | No | Top margin. |
 | `open` | boolean | `false` | No | Controls if details is expanded or not. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the details body. |
 
 ---
 

@@ -28,7 +28,6 @@ A panel that pushes the main page content aside on desktop, falling back to an o
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot, typically action buttons. |
-| `children` | Yes | Content rendered inside the push drawer body. |
 | `heading` | No | Sets the heading text or custom heading content. |
 
 ---
@@ -55,7 +54,6 @@ A panel that pushes the main page content aside on desktop, falling back to an o
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot, typically action buttons. |
-| `default` | Yes | Content rendered inside the push drawer body. |
 | `heading` | No | Sets the heading text or custom heading content. |
 
 ---
@@ -84,7 +82,6 @@ Tag: `goa-push-drawer`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot, typically action buttons. |
-| `default` | Yes | Content rendered inside the push drawer body. |
 | `heading` | No | Sets the heading text or custom heading content. |
 
 ---

@@ -22,12 +22,6 @@ Provides consistent sizing, spacing, and colour to written content.
 | `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
 | `tag` | "span" \| "div" \| "p" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | Yes | Content rendered inside the text element. |
-
 ---
 
 ## Angular
@@ -45,12 +39,6 @@ Provides consistent sizing, spacing, and colour to written content.
 | `mt` | Spacing | (none) | No | Top margin. |
 | `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
 | `tag` | "span" \| "div" \| "p" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the text element. |
 
 ---
 
@@ -70,12 +58,6 @@ Tag: `goa-text`
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
 | `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the text element. |
 
 ---
 

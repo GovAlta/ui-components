@@ -14,12 +14,6 @@ A side navigation that helps the user navigate between pages.
 |------|------|---------|----------|-------------|
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | Yes | Navigation links and groups rendered inside the side menu. |
-
 ---
 
 ## Angular
@@ -29,12 +23,6 @@ A side navigation that helps the user navigate between pages.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Navigation links and groups rendered inside the side menu. |
 
 ---
 
@@ -47,12 +35,6 @@ Tag: `goa-side-menu`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Navigation links and groups rendered inside the side menu. |
 
 ---
 

@@ -25,12 +25,6 @@ Wraps an anchor element to add icons or margins.
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the link text. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | Yes | Content rendered inside the link. |
-
 ---
 
 ## Angular
@@ -51,12 +45,6 @@ Wraps an anchor element to add icons or margins.
 | `size` | "xsmall" \| "small" \| "medium" \| "large" | `medium` | No | Sets the text size and corresponding icon size. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the link text. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the link. |
 
 ---
 
@@ -80,12 +68,6 @@ Tag: `goa-link`
 | `size` | "xsmall" \| "small" \| "medium" \| "large" | `medium` | No | Sets the text size and corresponding icon size. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingicon` | GoabIconType | (none) | No | Icon displayed after the link text. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | Yes | Content rendered inside the link. |
 
 ---
 

@@ -20,12 +20,6 @@ Arrange a number of components into a responsive grid pattern.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the grid layout. |
-
 ---
 
 ## Angular
@@ -41,12 +35,6 @@ Arrange a number of components into a responsive grid pattern.
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the grid layout. |
 
 ---
 
@@ -65,12 +53,6 @@ Tag: `goa-grid`
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the grid layout. |
 
 ---
 

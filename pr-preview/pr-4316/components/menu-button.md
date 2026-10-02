@@ -27,12 +27,6 @@ A button with more than one action.
 |-------|------|-------------|
 | `onAction` | (detail: GoabMenuButtonOnActionDetail) => void | Callback fired when a menu action is selected. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the menu button, typically GoabMenuAction items. |
-
 ---
 
 ## Angular
@@ -55,12 +49,6 @@ A button with more than one action.
 | Event | Type | Description |
 |-------|------|-------------|
 | `onAction` | (event: GoabMenuButtonOnActionDetail) => void | Emits when a menu action is clicked. Emits the action detail. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the menu button, typically GoabMenuAction items. |
 
 ---
 
@@ -86,12 +74,6 @@ Tag: `goa-menu-button`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_action` | CustomEvent<{ action?: string; size?: "normal" \| "compact" }> | Emits when a menu action is clicked. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the menu button, typically GoabMenuAction items. |
 
 ---
 

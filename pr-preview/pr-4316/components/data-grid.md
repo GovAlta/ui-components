@@ -16,12 +16,6 @@ Advanced table with sorting and selection.
 | `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. |
 | `keyboardNav` | "layout" \| "table" | `table` | No | Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the data grid, typically rows and cells. |
-
 ---
 
 ## Angular
@@ -33,12 +27,6 @@ Advanced table with sorting and selection.
 | `keyboardIconPosition` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
 | `keyboardIconVisibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
 | `keyboardNav` | "layout" \| "table" | `table` | No | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the data grid, typically rows and cells. |
 
 ---
 
@@ -53,12 +41,6 @@ Tag: `goa-data-grid`
 | `keyboard-icon-position` | "left" \| "right" | `left` | No | Position of the keyboard navigation indicator icon. |
 | `keyboard-icon-visibility` | "visible" \| "hidden" | `visible` | No | Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. |
 | `keyboard-nav` | "layout" \| "table" | `table` | No | Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the data grid, typically rows and cells. |
 
 ---
 

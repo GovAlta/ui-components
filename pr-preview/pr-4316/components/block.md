@@ -25,12 +25,6 @@ Group components into a block with consistent space between.
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | string | (none) | No | Sets the width of the block container. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the block container. |
-
 ---
 
 ## Angular
@@ -51,12 +45,6 @@ Group components into a block with consistent space between.
 | `stretch` | boolean | (none) | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `width` | string | (none) | No | Sets the width of the block container. Defaults to max-content. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the block container. |
 
 ---
 
@@ -80,12 +68,6 @@ Tag: `goa-block`
 | `stretch` | boolean | `false` | No | When true, children fill the cross-axis (e.g. width in a column block) regardless of alignment. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | string | (none) | No | Sets the width of the block container. Defaults to max-content. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the block container. |
 
 ---
 

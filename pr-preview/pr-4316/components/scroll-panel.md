@@ -20,7 +20,6 @@ A bounded container with sticky header and footer slots that scrolls its body co
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | No | Content rendered in the scrollable body region. |
 | `footer` | No | Content rendered in the sticky footer region. |
 | `header` | No | Content rendered in the sticky header region. |
 
@@ -40,7 +39,6 @@ A bounded container with sticky header and footer slots that scrolls its body co
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered in the scrollable body region. |
 | `footer` | No | Content rendered in the sticky footer region. |
 | `header` | No | Content rendered in the sticky header region. |
 
@@ -62,7 +60,6 @@ Tag: `goa-scroll-panel`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered in the scrollable body region. |
 | `footer` | No | Content rendered in the sticky footer region. |
 | `header` | No | Content rendered in the sticky header region. |
 

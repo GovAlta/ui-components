@@ -23,12 +23,6 @@ A notification center panel that displays notification items within a work side 
 | `onMarkAllRead` | () => void | Callback fired when the "Mark all as read" button is clicked. |
 | `onViewAll` | () => void | Callback fired when the "View all" button is clicked. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Notification item content rendered inside the panel. |
-
 ---
 
 ## Angular
@@ -47,12 +41,6 @@ A notification center panel that displays notification items within a work side 
 |-------|------|-------------|
 | `onMarkAllRead` | () => void | Emits when the user clicks "Mark all as read". |
 | `onViewAll` | () => void | Emits when the user clicks "View all". |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Notification item content rendered inside the panel. |
 
 ---
 
@@ -74,12 +62,6 @@ Tag: `goa-work-side-notification-panel`
 |-------|------|-------------|
 | `_markAllRead` | CustomEvent<void> | Emits when the user clicks "Mark all as read". |
 | `_viewAll` | CustomEvent<void> | Emits when the user clicks "View all". |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Notification item content rendered inside the panel. |
 
 ---
 

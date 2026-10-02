@@ -24,12 +24,6 @@ Communicate important information through a strong visual emphasis.
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "information" \| "success" \| "important" \| "emergency" \| "event" | `information` | No | Sets the context and colour of the callout. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the callout body. |
-
 ---
 
 ## Angular
@@ -49,12 +43,6 @@ Communicate important information through a strong visual emphasis.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `type` | "information" \| "success" \| "important" \| "emergency" \| "event" | `information` | No | Define the context and colour of the callout. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the callout body. |
 
 ---
 
@@ -77,12 +65,6 @@ Tag: `goa-callout`
 | `mt` | Spacing | (none) | No | Top margin. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "emergency" \| "important" \| "information" \| "event" \| "success" | `information` | No | Sets the context and colour of the callout. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the callout body. |
 
 ---
 

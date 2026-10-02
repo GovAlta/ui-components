@@ -25,12 +25,6 @@ Display important page level information or notifications.
 |-------|------|-------------|
 | `onDismiss` | () => void | Callback fired when the notification is dismissed. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the notification. |
-
 ---
 
 ## Angular
@@ -51,12 +45,6 @@ Display important page level information or notifications.
 | Event | Type | Description |
 |-------|------|-------------|
 | `onDismiss` | () => void | Emits when the notification is dismissed. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the notification. |
 
 ---
 
@@ -80,12 +68,6 @@ Tag: `goa-notification`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_dismiss` | CustomEvent | Emits when the notification is dismissed. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the notification. |
 
 ---
 

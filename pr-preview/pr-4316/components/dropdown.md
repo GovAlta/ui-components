@@ -43,12 +43,6 @@ Present a list of options to the user to select from.
 | `onChange` | (detail: GoabDropdownOnChangeDetail) => void | Callback fired when the selected value changes. |
 | `onFocus` | (detail: GoabDropdownOnFocusDetail) => void | Callback fired when the dropdown receives focus. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Dropdown items rendered inside the dropdown. |
-
 ---
 
 ## Angular
@@ -87,12 +81,6 @@ Present a list of options to the user to select from.
 | `onBlur` | (event: GoabDropdownOnBlurDetail) => void | Emits when the dropdown loses focus. |
 | `onChange` | (event: GoabDropdownOnChangeDetail) => void | Emits when the user selects a value from the dropdown. Emits a GoabDropdownOnChangeDetail object with the new value. |
 | `onFocus` | (event: GoabDropdownOnFocusDetail) => void | Emits when the dropdown receives focus. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Dropdown items rendered inside the dropdown. |
 
 ---
 
@@ -133,12 +121,6 @@ Tag: `goa-dropdown`
 | `_blur` | CustomEvent<{ name: string }> | Emits when the dropdown loses focus. |
 | `_change` | CustomEvent<{ name?: string; value?: string }> | Emits when the user selects a value from the dropdown. |
 | `_focus` | CustomEvent<{ name: string }> | Emits when the dropdown receives focus. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Dropdown items rendered inside the dropdown. |
 
 ---
 

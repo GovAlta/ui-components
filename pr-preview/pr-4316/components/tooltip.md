@@ -26,7 +26,6 @@ A small popover that displays more information about an item.
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | No | The element that triggers the tooltip on hover or focus. |
 | `content` | No | The content of the tooltip. Accepts plain text or rich content. |
 
 ---
@@ -52,7 +51,6 @@ A small popover that displays more information about an item.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `content` | No | The content of the tooltip. Accepts plain text or rich content. |
-| `default` | No | The element that triggers the tooltip on hover or focus. |
 
 ---
 
@@ -79,7 +77,6 @@ Tag: `goa-tooltip`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `content` | No | The content of the tooltip. Accepts plain text or rich content. |
-| `default` | No | The element that triggers the tooltip on hover or focus. |
 
 ---
 

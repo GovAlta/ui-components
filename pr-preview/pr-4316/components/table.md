@@ -29,12 +29,6 @@ A set of structured data that is easy for a user to scan, examine, and compare.
 | `onMultiSort` | (detail: GoabTableOnMultiSortDetail) => void | Callback fired when multi-column sorting changes. |
 | `onSort` | (detail: GoabTableOnSortDetail) => void | Callback fired when a single-column sort header is clicked. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the table (table rows, headers, etc.). |
-
 ---
 
 ## Angular
@@ -59,12 +53,6 @@ A set of structured data that is easy for a user to scan, examine, and compare.
 |-------|------|-------------|
 | `onMultiSort` | (event: GoabTableOnMultiSortDetail) => void | Emits when multi-column sorting changes. Emits an array of sort entries as GoabTableOnMultiSortDetail. |
 | `onSort` | (event: GoabTableOnSortDetail) => void | Emits when a table column is sorted. Emits the sort column and direction as GoabTableOnSortDetail. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the table (table rows, headers, etc.). |
 
 ---
 
@@ -92,12 +80,6 @@ Tag: `goa-table`
 |-------|------|-------------|
 | `_multisort` | CustomEvent<{ sorts: { column: string; direction: "asc" \| "desc" }[] }> | Emits when multi-column sorting changes. |
 | `_sort` | CustomEvent<{ sortBy: string; sortDir: number }> | Emits when a table column is sorted. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the table (table rows, headers, etc.). |
 
 ---
 

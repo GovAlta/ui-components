@@ -38,12 +38,6 @@ Present a list of options to the user to select multiple values from.
 |-------|------|-------------|
 | `onChange` | (detail: GoabDropdownMultiselectOnChangeDetail) => void | Callback fired when the selected value change. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Dropdown items rendered inside the component (GoabDropdownItem elements). |
-
 ---
 
 ## Angular
@@ -78,12 +72,6 @@ Present a list of options to the user to select multiple values from.
 | Event | Type | Description |
 |-------|------|-------------|
 | `onChange` | (event: GoabDropdownMultiselectOnChangeDetail) => void | Emits when the selected value change. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Dropdown items rendered inside the component (GoabDropdownItem elements). |
 
 ---
 
@@ -120,12 +108,6 @@ Tag: `goa-dropdown-multiselect`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Emits when the selected value change. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Dropdown items rendered inside the component (GoabDropdownItem elements). |
 
 ---
 

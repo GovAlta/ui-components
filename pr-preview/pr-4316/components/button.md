@@ -35,12 +35,6 @@ Carry out an important action or navigate to another page.
 |-------|------|-------------|
 | `onClick` | () => void | Callback fired when the button is clicked. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the button. |
-
 ---
 
 ## Angular
@@ -71,12 +65,6 @@ Carry out an important action or navigate to another page.
 | Event | Type | Description |
 |-------|------|-------------|
 | `onClick` | () => void | Emits when the button is clicked. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the button. |
 
 ---
 
@@ -110,12 +98,6 @@ Tag: `goa-button`
 | Event | Type | Description |
 |-------|------|-------------|
 | `_click` | CustomEvent | Emits when the button is clicked. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the button. |
 
 ---
 

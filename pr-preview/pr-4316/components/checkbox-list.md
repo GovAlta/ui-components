@@ -33,12 +33,6 @@ A multiple selection input.
 | `onChange` | (detail: GoabCheckboxListOnChangeDetail) => void | Callback fired when the selected values change. |
 | `onFocus` | (detail: GoabCheckboxListOnFocusDetail) => void | Callback fired when focus enters any checkbox in the list. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the checkbox list. |
-
 ---
 
 ## Angular
@@ -68,12 +62,6 @@ A multiple selection input.
 | `onBlur` | (event: GoabCheckboxListOnBlurDetail) => void | Emits when focus leaves all checkboxes in the list. |
 | `onChange` | (event: GoabCheckboxListOnChangeDetail) => void | Emits when a checkbox selection changes. Emits the change detail including name, value array, and event. |
 | `onFocus` | (event: GoabCheckboxListOnFocusDetail) => void | Emits when focus enters any checkbox in the list. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the checkbox list. |
 
 ---
 
@@ -105,12 +93,6 @@ Tag: `goa-checkbox-list`
 | `_blur` | CustomEvent<{ name: string }> | Emits when focus leaves all checkboxes in the list. |
 | `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Emits when a checkbox selection changes. |
 | `_focus` | CustomEvent<{ name: string }> | Emits when focus enters any checkbox in the list. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the checkbox list. |
 
 ---
 

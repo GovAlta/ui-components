@@ -30,7 +30,6 @@ Group information, create hierarchy, and show related information.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the container's actions area, typically buttons or controls. |
-| `children` | No | Content rendered inside the container body. |
 | `title` | No | Content rendered in the container's title/heading area. |
 
 ---
@@ -59,7 +58,6 @@ Group information, create hierarchy, and show related information.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the container's actions area, typically buttons or controls. |
-| `default` | No | Content rendered inside the container body. |
 | `title` | No | Content rendered in the container's title/heading area. |
 
 ---
@@ -90,7 +88,6 @@ Tag: `goa-container`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the container's actions area, typically buttons or controls. |
-| `default` | No | Content rendered inside the container body. |
 | `title` | No | Content rendered in the container's title/heading area. |
 
 ---

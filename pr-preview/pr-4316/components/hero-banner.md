@@ -25,7 +25,6 @@ A visual band of text, including an image and a call to action.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot. |
-| `children` | No | Content rendered inside the hero banner body. |
 
 ---
 
@@ -48,7 +47,6 @@ A visual band of text, including an image and a call to action.
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot. |
-| `default` | No | Content rendered inside the hero banner body. |
 
 ---
 
@@ -73,7 +71,6 @@ Tag: `goa-hero-banner`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the actions slot. |
-| `default` | No | Content rendered inside the hero banner body. |
 
 ---
 

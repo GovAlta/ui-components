@@ -20,12 +20,6 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Button components to render inside the group. |
-
 ---
 
 ## Angular
@@ -41,12 +35,6 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Button components to render inside the group. |
 
 ---
 
@@ -65,12 +53,6 @@ Tag: `goa-button-group`
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Button components to render inside the group. |
 
 ---
 

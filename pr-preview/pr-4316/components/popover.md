@@ -26,7 +26,6 @@ A small overlay that opens on demand, used in other components.
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | Yes | Content rendered inside the popover body. |
 | `target` | Yes | Sets the element used as the popover trigger. |
 
 ---
@@ -51,7 +50,6 @@ A small overlay that opens on demand, used in other components.
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | Yes | Content rendered inside the popover body. |
 | `target` | Yes | Sets the element used as the popover trigger. |
 
 ---
@@ -88,7 +86,6 @@ Tag: `goa-popover`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | Yes | Content rendered inside the popover body. |
 | `target` | Yes | Sets the element used as the popover trigger. |
 
 ---

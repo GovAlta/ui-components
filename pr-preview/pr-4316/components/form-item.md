@@ -31,7 +31,6 @@ Wraps an input control with a text label, requirement label, helper text, and er
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | No | Content rendered inside the form item, typically an input component. |
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
 | `helpText` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
 | `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
@@ -63,7 +62,6 @@ Wraps an input control with a text label, requirement label, helper text, and er
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered inside the form item, typically an input component. |
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ngTemplate for custom error content. |
 | `helpText` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ngTemplate for custom help content. |
 | `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
@@ -96,7 +94,6 @@ Tag: `goa-form-item`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Content rendered inside the form item, typically an input component. |
 | `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
 | `helptext` | No | Help text displayed under the form field to provide additional explanation. |
 | `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |

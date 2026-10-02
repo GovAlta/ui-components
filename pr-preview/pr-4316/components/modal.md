@@ -29,7 +29,6 @@ An overlay that appears in front of all other content, and requires a user to ta
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the modal's actions slot, typically action buttons. |
-| `children` | No | Content rendered inside the modal body. |
 | `heading` | No | The heading text displayed at the top of the modal. |
 
 ---
@@ -58,7 +57,6 @@ An overlay that appears in front of all other content, and requires a user to ta
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the modal's actions slot, typically action buttons. |
-| `default` | No | Content rendered inside the modal body. |
 | `heading` | No | The heading text displayed at the top of the modal. |
 
 ---
@@ -90,7 +88,6 @@ Tag: `goa-modal`
 | Slot | Required | Description |
 |------|----------|-------------|
 | `actions` | No | Content rendered in the modal's actions slot, typically action buttons. |
-| `default` | No | Content rendered inside the modal body. |
 | `heading` | No | The heading text displayed at the top of the modal. |
 
 ---

@@ -15,12 +15,6 @@ Full-width section with optional background.
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | "full" \| string | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Content rendered inside the page block. |
-
 ---
 
 ## Angular
@@ -31,12 +25,6 @@ Full-width section with optional background.
 |------|------|---------|----------|-------------|
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | "full" \| string | (none) | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the page block. |
 
 ---
 
@@ -50,12 +38,6 @@ Tag: `goa-page-block`
 |------|------|---------|----------|-------------|
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `width` | "full" \| string | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Content rendered inside the page block. |
 
 ---
 

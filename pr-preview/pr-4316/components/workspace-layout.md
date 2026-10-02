@@ -24,7 +24,6 @@ A full-page layout for workspace-style applications that wraps your content resp
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `children` | No | Main scrollable content. |
 | `pageFooter` | No | Content rendered in the sticky page footer region. |
 | `pageHeader` | No | Content rendered in the sticky page header region. |
 | `pushDrawer` | No | A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is. |
@@ -50,7 +49,6 @@ A full-page layout for workspace-style applications that wraps your content resp
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Main scrollable content. |
 | `pageFooter` | No | Content rendered in the sticky page footer region. |
 | `pageHeader` | No | Content rendered in the sticky page header region. |
 | `pushDrawer` | No | A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is. |
@@ -78,7 +76,6 @@ Tag: `goa-workspace-layout`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `default` | No | Main scrollable content. |
 | `page-footer` | No | Content rendered in the sticky page footer region. |
 | `page-header` | No | Content rendered in the sticky page header region. |
 | `push-drawer` | No | A GoabPushDrawer rendered as a sibling of the main card, inside the same workspace shell. Use this slot when the page needs a push drawer alongside the workspace layout — it gives the drawer the shell-level height and flex context it expects, so the consumer does not have to wrap the layout in their own flex container. The side menu is not pushed; only the card is. |

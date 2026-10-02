@@ -34,12 +34,6 @@ Allow users to select one option from a set.
 | `onChange` | (detail: GoabRadioGroupOnChangeDetail) => void | Callback fired when the selected radio item changes. |
 | `onFocus` | (detail: GoabRadioGroupOnFocusDetail) => void | Callback fired when focus enters any radio item in the group. |
 
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `children` | No | Radio items to render inside the group. |
-
 ---
 
 ## Angular
@@ -69,12 +63,6 @@ Allow users to select one option from a set.
 | `onBlur` | (event: GoabRadioGroupOnBlurDetail) => void | Emits when focus leaves all radio items in the group. |
 | `onChange` | (event: GoabRadioGroupOnChangeDetail) => void | Emits when the selected radio item changes. Emits the name, value, and event of the selected item. |
 | `onFocus` | (event: GoabRadioGroupOnFocusDetail) => void | Emits when focus enters any radio item in the group. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Radio items to render inside the group. |
 
 ---
 
@@ -106,12 +94,6 @@ Tag: `goa-radio-group`
 | `_blur` | CustomEvent<{ name: string }> | Emits when focus leaves all radio items in the group. |
 | `_change` | CustomEvent<{ name: string; value: string; label: string }> | Emits when the selected radio item changes. |
 | `_focus` | CustomEvent<{ name: string }> | Emits when focus enters any radio item in the group. |
-
-### Slots
-
-| Slot | Required | Description |
-|------|----------|-------------|
-| `default` | No | Radio items to render inside the group. |
 
 ---
 
