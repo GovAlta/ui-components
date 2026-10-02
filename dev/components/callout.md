@@ -12,17 +12,17 @@ Communicate important information through a strong visual emphasis.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLive` | GoabCalloutAriaLive | `off` | No | Indicates how assistive technology should handle updates to the live region. |
-| `emphasis` | GoabCalloutEmphasis | `medium` | No | Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. |
+| `ariaLive` | "off" \| "polite" \| "assertive" | `off` | No | Indicates how assistive technology should handle updates to the live region. |
+| `emphasis` | "high" \| "medium" \| "low" | `medium` | No | Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. |
 | `heading` | string | (none) | No | Callout heading text. |
-| `iconTheme` | GoabCalloutIconTheme | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
+| `iconTheme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the callout. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabCalloutType | `information` | No | Sets the context and colour of the callout. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "event" | `information` | No | Sets the context and colour of the callout. |
 
 ---
 
@@ -32,17 +32,17 @@ Communicate important information through a strong visual emphasis.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLive` | GoabCalloutAriaLive | `off` | No | Indicates how assistive technology should handle updates to the live region. |
-| `emphasis` | GoabCalloutEmphasis | `medium` | No | Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. |
+| `ariaLive` | "off" \| "polite" \| "assertive" | `off` | No | Indicates how assistive technology should handle updates to the live region. |
+| `emphasis` | "high" \| "medium" \| "low" | `medium` | No | Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. |
 | `heading` | string | (none) | No | Callout heading text. |
-| `iconTheme` | GoabCalloutIconTheme | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
+| `iconTheme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the callout. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabCalloutType | `information` | No | Define the context and colour of the callout. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "event" | `information` | No | Define the context and colour of the callout. |
 
 ---
 
@@ -57,7 +57,7 @@ Tag: `goa-callout`
 | `arialive` | "off" \| "assertive" \| "polite" | `off` | No | Indicates how assistive technology should handle updates to the live region. |
 | `emphasis` | "high" \| "medium" \| "low" | `medium` | No | Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. |
 | `heading` | string | (none) | No | Callout heading text. |
-| `icontheme` | IconTheme | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
+| `icontheme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
 | `maxwidth` | string | `none` | No | Sets the maximum width of the callout. |
 | `mb` | Spacing | `l` | No | Bottom margin. |
 | `ml` | Spacing | (none) | No | Left margin. |

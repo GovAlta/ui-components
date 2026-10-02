@@ -13,10 +13,10 @@ Help users navigation between multiple pages or screens as part of a set.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `itemCount` | number | (none) | Yes | Total number of data items within all pages. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `pageNumber` | number | (none) | Yes | The current page being viewed (non-zero based). |
 | `perPageCount` | number | `10` | No | Number of data items shown per page. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -44,7 +44,7 @@ Help users navigation between multiple pages or screens as part of a set.
 | `pageNumber` | number | (none) | Yes | The current page being viewed (non-zero based). |
 | `perPageCount` | number | `10` | No | Number of data items shown per page. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `variant` | GoabPaginationVariant | `all` | No | Controls which nav controls are visible. |
+| `variant` | "all" \| "links-only" | `all` | No | Controls which nav controls are visible. |
 
 ### Events
 
@@ -76,7 +76,7 @@ Tag: `goa-pagination`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_change` | CustomEvent<{ page: number }> | (none) |
+| `_change` | CustomEvent<{ page: number }> | Emits when the page changes. |
 
 ---
 

@@ -18,16 +18,16 @@ A compact button with an icon and no text.
 | `ariaLabel` | string | (none) | No | Sets the aria-label of the button. |
 | `disabled` | boolean | (none) | No | Disables the button. |
 | `icon` | GoabIconType | (none) | Yes | Sets the icon. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabIconSize | `medium` | No | Sets the size of button. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "2xsmall" \| "xsmall" \| "small" \| "medium" \|… | `medium` | No | Sets the size of button. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `theme` | GoabIconTheme | `outline` | No | Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. |
+| `theme` | "outline" \| "filled" | `outline` | No | Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. |
 | `title` | string | (none) | No | Sets the title of the button. |
-| `type` | GoabIconButtonType | `default` | No | Sets the visual style of the button. |
-| `variant` | GoabIconButtonVariant | `color` | No | Styles the button to show color, light, dark or destructive action. |
+| `type` | "default" \| "tertiary" | `default` | No | Sets the visual style of the button. |
+| `variant` | "color" \| "nocolor" \| "dark" \| "light" \| "destructive" | `color` | No | Styles the button to show color, light, dark or destructive action. |
 
 ### Events
 
@@ -53,12 +53,12 @@ A compact button with an icon and no text.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabIconSize | `medium` | No | Sets the size of button. |
+| `size` | "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "2xsmall" \| "xsmall" \| "small" \| "medium" \|… | `medium` | No | Sets the size of button. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `theme` | GoabIconTheme | `outline` | No | Sets the icon theme. "outline" for stroked icons, "filled" for solid icons. |
+| `theme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. "outline" for stroked icons, "filled" for solid icons. |
 | `title` | string | (none) | No | Sets the title of the button. |
-| `type` | GoabIconButtonType | `default` | No | Sets the visual style of the button. |
-| `variant` | GoabIconButtonVariant | (none) | No | Styles the button to show color, light, dark or destructive action. |
+| `type` | "default" \| "tertiary" | `default` | No | Sets the visual style of the button. |
+| `variant` | "color" \| "nocolor" \| "dark" \| "light" \| "destructive" | (none) | No | Styles the button to show color, light, dark or destructive action. |
 
 ### Events
 
@@ -87,9 +87,9 @@ Tag: `goa-icon-button`
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `size` | IconSize | `medium` | No | Sets the size of button. |
+| `size` | "1" \| "2" \| "3" \| "4" \| "5" \| "6" \| "2xsmall" \| "xsmall" \| "small" \| "medium" \|… | `medium` | No | Sets the size of button. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `theme` | IconTheme | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
+| `theme` | "outline" \| "filled" | `outline` | No | Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. |
 | `title` | string | (none) | No | Sets the title of the button. |
 | `type` | "default" \| "tertiary" | `default` | No | Sets the visual style of the button. |
 | `variant` | "color" \| "nocolor" \| "light" \| "dark" \| "destructive" | `color` | No | Styles the button to show color, light, dark or destructive action. |
@@ -98,7 +98,7 @@ Tag: `goa-icon-button`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent<{ event: Event }> | (none) |
+| `_click` | CustomEvent<{ event: Event }> | Emits when the icon button is clicked. |
 
 ---
 

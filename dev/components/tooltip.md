@@ -13,13 +13,13 @@ A small popover that displays more information about an item.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `content` | string \| ReactNode | (none) | No | The content of the tooltip. Accepts plain text or rich content. |
-| `hAlign` | GoabTooltipHorizontalAlignment | `center` | No | Horizontal alignment of the tooltip relative to the child element. |
+| `hAlign` | "left" \| "right" \| "center" | `center` | No | Horizontal alignment of the tooltip relative to the child element. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `position` | GoabTooltipPosition | `top` | No | Position of the tooltip with respect to the child element. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `position` | "top" \| "bottom" \| "left" \| "right" | `top` | No | Position of the tooltip with respect to the child element. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Slots
@@ -37,13 +37,13 @@ A small popover that displays more information about an item.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `content` | string \| TemplateRef<unknown> | (none) | No | The content of the tooltip. |
-| `hAlign` | GoabTooltipHorizontalAlignment | `center` | No | Horizontal alignment to the child element. |
+| `hAlign` | "left" \| "right" \| "center" | `center` | No | Horizontal alignment to the child element. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the tooltip. Must use 'px' unit. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `position` | GoabTooltipPosition | `top` | No | Position with respect to the child element. |
+| `position` | "top" \| "bottom" \| "left" \| "right" | `top` | No | Position with respect to the child element. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 
 ### Slots

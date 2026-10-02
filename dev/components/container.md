@@ -12,18 +12,18 @@ Group information, create hierarchy, and show related information.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `accent` | GoabContainerAccent | `filled` | No | Sets the style of accent on the container. |
+| `accent` | "thick" \| "thin" \| "filled" | `filled` | No | Sets the style of accent on the container. |
 | `maxHeight` | string | (none) | No | Sets the maximum height of the container. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the container. |
-| `mb` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `minHeight` | string | (none) | No | Sets the minimum height of the container. |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `padding` | GoabContainerPadding | `relaxed` | No | Sets the amount of white space in the container. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `padding` | "relaxed" \| "compact" | `relaxed` | No | Sets the amount of white space in the container. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabContainerType | `interactive` | No | Sets the container and accent bar styling. |
-| `width` | GoabContainerWidth | `full` | No | Sets the width of the container. |
+| `type` | "interactive" \| "non-interactive" \| "info" \| "error" \| "success" \| "important" | `interactive` | No | Sets the container and accent bar styling. |
+| `width` | "full" \| "content" | `full` | No | Sets the width of the container. |
 
 ### Slots
 
@@ -40,7 +40,7 @@ Group information, create hierarchy, and show related information.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `accent` | GoabContainerAccent | `filled` | No | Sets the style of accent on the container. |
+| `accent` | "thick" \| "thin" \| "filled" | `filled` | No | Sets the style of accent on the container. |
 | `maxHeight` | string | (none) | No | Sets the maximum height of the container. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the container. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
@@ -48,10 +48,10 @@ Group information, create hierarchy, and show related information.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `padding` | GoabContainerPadding | `relaxed` | No | Sets the amount of white space in the container. |
+| `padding` | "relaxed" \| "compact" | `relaxed` | No | Sets the amount of white space in the container. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabContainerType | `interactive` | No | Sets the container and accent bar styling. |
-| `width` | GoabContainerWidth | `full` | No | Sets the width of the container. |
+| `type` | "interactive" \| "non-interactive" \| "info" \| "error" \| "success" \| "important" | `interactive` | No | Sets the container and accent bar styling. |
+| `width` | "full" \| "content" | `full` | No | Sets the width of the container. |
 
 ### Slots
 

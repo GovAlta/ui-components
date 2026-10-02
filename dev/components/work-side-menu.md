@@ -85,8 +85,8 @@ Tag: `goa-work-side-menu`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_navigate` | CustomEvent<{ url: string }> | (none) |
-| `_toggle` | CustomEvent<{ open: boolean }> | (none) |
+| `_navigate` | CustomEvent<{ url: string }> | Emits when a navigation link is clicked. |
+| `_toggle` | CustomEvent<{ open: boolean }> | Emits when the side menu is toggled open or closed. |
 
 ### Slots
 

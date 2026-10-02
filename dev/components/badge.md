@@ -13,15 +13,15 @@ Small labels which hold small amounts of information, system feedback, or states
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible label for screen readers. |
-| `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Icon type to display in the badge. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "archived" \| "sky" \| "p… | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 
@@ -39,15 +39,15 @@ Small labels which hold small amounts of information, system feedback, or states
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Sets the accessible label for screen readers. |
 | `content` | string \| TemplateRef<unknown> | (none) | No | Sets the content displayed in the badge. Accepts a string or template for custom content. |
-| `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Sets the icon type to display in the badge. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
+| `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "archived" \| "sky" \| "p… | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 
@@ -67,7 +67,7 @@ Tag: `goa-badge`
 |------|------|---------|----------|-------------|
 | `arialabel` | string | (none) | No | Accessible label for screen readers. |
 | `content` | string | (none) | No | Content displayed in the badge. Use the content slot for custom HTML. |
-| `emphasis` |  | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `icontype` | GoabIconType | (none) | No | Icon type to display in the badge. |
 | `justify-content` | "center" \| "flex-start" \| "flex-end" \| "space-between" \| "" | (none) | No | justify-content value for the badge container. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
@@ -83,7 +83,7 @@ Tag: `goa-badge`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `content` | No | Content displayed in the badge. Accepts a string or ReactNode for custom content. |
+| `content` | No | Content displayed in the badge. |
 
 ---
 

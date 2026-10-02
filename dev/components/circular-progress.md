@@ -14,9 +14,9 @@ Provide feedback of progress to users while loading.
 |------|------|---------|----------|-------------|
 | `message` | string | (none) | No | Loading message displayed below the progress indicator. |
 | `progress` | number | (none) | No | Sets the progress value (0–100). When omitted, an infinite spinner is shown. |
-| `size` | GoabCircularProgressSize | `large` | No | Sets the size of the progress indicator. |
+| `size` | "small" \| "large" | `large` | No | Sets the size of the progress indicator. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `variant` | GoabCircularProgressVariant | `inline` | No | Controls the display mode. 'fullscreen' stretches across the full screen; 'inline' is used within content. |
+| `variant` | "fullscreen" \| "inline" | `inline` | No | Controls the display mode. 'fullscreen' stretches across the full screen; 'inline' is used within content. |
 | `visible` | boolean | (none) | No | Controls visibility of the progress indicator, allowing a fade transition to be applied. |
 
 ---
@@ -29,9 +29,9 @@ Provide feedback of progress to users while loading.
 |------|------|---------|----------|-------------|
 | `message` | string | (none) | No | Loading message displayed under the progress indicator. |
 | `progress` | number | (none) | No | Set the progress value. Setting this value will change the type from infinite to progress. |
-| `size` | GoabCircularProgressSize | (none) | No | Size of the progress indicator. |
+| `size` | "small" \| "large" | (none) | No | Size of the progress indicator. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `variant` | GoabCircularProgressVariant | (none) | No | Stretch across the full screen or use it inline. |
+| `variant` | "fullscreen" \| "inline" | (none) | No | Stretch across the full screen or use it inline. |
 | `visible` | boolean | (none) | No | Show/hide the page loader. This allows for fade transition to be applied in each transition. |
 
 ---

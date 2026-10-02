@@ -15,13 +15,13 @@ Wraps an anchor element to add icons or margins.
 | `action` | string | (none) | No | Custom action event name to dispatch when the link is clicked. |
 | `actionArg` | string | (none) | No | Single argument to pass with the action event. Deprecated, use actionArgs instead. |
 | `actionArgs` | Record<string, unknown> | (none) | No | Object of arguments to pass with the action event. |
-| `color` | GoabLinkColor | `interactive` | No | Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. |
+| `color` | "interactive" \| "dark" \| "light" | `interactive` | No | Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the link text. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabLinkSize | `medium` | No | Sets the text size and corresponding icon size. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "xsmall" \| "small" \| "medium" \| "large" | `medium` | No | Sets the text size and corresponding icon size. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the link text. |
 
@@ -36,13 +36,13 @@ Wraps an anchor element to add icons or margins.
 | `action` | string | (none) | No | Custom action event name to dispatch when the link is clicked. |
 | `actionArg` | string | (none) | No | Single argument to pass with the action event (deprecated, use actionArgs). |
 | `actionArgs` | Record<string, unknown> | (none) | No | Object of arguments to pass with the action event. |
-| `color` | GoabLinkColor | `interactive` | No | Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. |
+| `color` | "interactive" \| "dark" \| "light" | `interactive` | No | Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the link text. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `size` | GoabLinkSize | `medium` | No | Sets the text size and corresponding icon size. |
+| `size` | "xsmall" \| "small" \| "medium" \| "large" | `medium` | No | Sets the text size and corresponding icon size. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the link text. |
 

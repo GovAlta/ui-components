@@ -15,7 +15,7 @@ Help users select and upload a file.
 | `accept` | string | (none) | No | Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf"). |
 | `maxFileSize` | string | `5MB` | No | Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `variant` | GoabFileUploadInputVariant | `dragdrop` | No | The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. |
+| `variant` | "dragdrop" \| "button" | `dragdrop` | No | The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. |
 
 ### Events
 
@@ -39,7 +39,7 @@ Help users select and upload a file.
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `variant` | GoabFileUploadInputVariant | `dragdrop` | No | The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. |
+| `variant` | "dragdrop" \| "button" | `dragdrop` | No | The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. |
 
 ### Events
 
@@ -66,7 +66,7 @@ Tag: `goa-file-upload-input`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_selectFile` | CustomEvent<{ file: File; event: Event }> | (none) |
+| `_selectFile` | CustomEvent<{ file: File }> | Emits when a file is selected. |
 
 ---
 
