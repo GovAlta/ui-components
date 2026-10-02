@@ -37,28 +37,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -89,7 +89,7 @@
           "name": "value",
           "type": "string[]",
           "required": false,
-          "default": null,
+          "default": "[]",
           "description": "Array of currently selected checkbox values."
         }
       ],
@@ -195,7 +195,12 @@
         },
         {
           "name": "size",
-          "type": "GoabCheckboxSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabCheckboxSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of the checkbox list. 'compact' reduces spacing between items."
@@ -342,7 +347,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus leaves all checkboxes in the list.",
           "frameworks": [
             "webComponents"
           ]
@@ -350,7 +355,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string[]; labels: string[] }>",
-          "description": "",
+          "description": "Emits when a checkbox selection changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -358,7 +363,7 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus enters any checkbox in the list.",
           "frameworks": [
             "webComponents"
           ]

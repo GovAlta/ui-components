@@ -7,10 +7,6 @@
         {
           "name": "error",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content."
@@ -18,10 +14,6 @@
         {
           "name": "helpText",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content."
@@ -36,17 +28,19 @@
         {
           "name": "label",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements."
         },
         {
           "name": "labelSize",
-          "type": "GoabFormItemLabelSize",
+          "type": "\"compact\" | \"regular\" | \"large\"",
+          "typeLabel": "GoabFormItemLabelSize",
+          "values": [
+            "compact",
+            "regular",
+            "large"
+          ],
           "required": false,
           "default": "regular",
           "description": "Sets the label size. 'regular' for standard, 'large' for emphasis."
@@ -63,28 +57,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -95,7 +89,12 @@
         },
         {
           "name": "requirement",
-          "type": "GoabFormItemRequirement",
+          "type": "\"optional\" | \"required\"",
+          "typeLabel": "GoabFormItemRequirement",
+          "values": [
+            "optional",
+            "required"
+          ],
           "required": false,
           "default": null,
           "description": "Marks the field with an optional or required label indicator."
@@ -109,9 +108,16 @@
         },
         {
           "name": "type",
-          "type": "GoabFormItemType",
+          "type": "\"\" | \"text-input\" | \"textarea\" | \"checkbox-list\" | \"radio-group\"",
+          "typeLabel": "GoabFormItemType",
+          "values": [
+            "text-input",
+            "textarea",
+            "checkbox-list",
+            "radio-group"
+          ],
           "required": false,
-          "default": null,
+          "default": "",
           "description": "Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group."
         }
       ],
@@ -142,10 +148,6 @@
         {
           "name": "error",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Error text displayed under the form field. Leave blank to indicate a valid field."
@@ -153,10 +155,6 @@
         {
           "name": "helpText",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Help text displayed under the form field to provide additional explanation."
@@ -171,17 +169,19 @@
         {
           "name": "label",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements."
         },
         {
           "name": "labelSize",
-          "type": "GoabFormItemLabelSize",
+          "type": "\"compact\" | \"regular\" | \"large\"",
+          "typeLabel": "GoabFormItemLabelSize",
+          "values": [
+            "compact",
+            "regular",
+            "large"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the label size. 'regular' for standard, 'large' for emphasis."
@@ -230,7 +230,12 @@
         },
         {
           "name": "requirement",
-          "type": "GoabFormItemRequirement",
+          "type": "\"optional\" | \"required\"",
+          "typeLabel": "GoabFormItemRequirement",
+          "values": [
+            "optional",
+            "required"
+          ],
           "required": false,
           "default": null,
           "description": "Marks the field with an optional or required label indicator."
@@ -244,7 +249,14 @@
         },
         {
           "name": "type",
-          "type": "GoabFormItemType",
+          "type": "\"\" | \"text-input\" | \"textarea\" | \"checkbox-list\" | \"radio-group\"",
+          "typeLabel": "GoabFormItemType",
+          "values": [
+            "text-input",
+            "textarea",
+            "checkbox-list",
+            "radio-group"
+          ],
           "required": false,
           "default": "",
           "description": "Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group."
@@ -392,12 +404,12 @@
       "slots": [
         {
           "name": "error",
-          "description": "Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content.",
+          "description": "Error text displayed under the form field. Leave blank to indicate a valid field.",
           "required": false
         },
         {
           "name": "helptext",
-          "description": "Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content.",
+          "description": "Help text displayed under the form field to provide additional explanation.",
           "required": false
         },
         {

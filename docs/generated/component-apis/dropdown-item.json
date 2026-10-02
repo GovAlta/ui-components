@@ -9,7 +9,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
+          "description": "Additional text used to match this item in typeahead search, alongside the label. Defaults to the content's text."
         },
         {
           "name": "label",
@@ -20,9 +20,15 @@
         },
         {
           "name": "mountType",
-          "type": "GoabDropdownItemMountType",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "typeLabel": "GoabDropdownItemMountType",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
           "required": false,
-          "default": null,
+          "default": "append",
           "description": "Controls how the item is registered with the parent dropdown."
         },
         {
@@ -50,7 +56,7 @@
           "type": "string",
           "required": false,
           "default": null,
-          "description": "Rich item content. On selection, `label` is shown and `filter` defaults to the content's text."
+          "description": "Additional text used to match this item in typeahead search, alongside the label. Defaults to the content's text."
         },
         {
           "name": "label",
@@ -61,7 +67,13 @@
         },
         {
           "name": "mountType",
-          "type": "GoabDropdownItemMountType",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "typeLabel": "GoabDropdownItemMountType",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
           "required": false,
           "default": null,
           "description": "Controls how the item is registered with the parent dropdown."

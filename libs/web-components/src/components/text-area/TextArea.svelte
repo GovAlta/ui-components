@@ -46,7 +46,7 @@
   export let error: string = "false";
   /** Sets the input to a read only state. */
   export let readonly: string = "false";
-  /** Sets the input to a disabled state. Use [attr.disabled] with [formControl] */
+  /** Sets the input to a disabled state. */
   export let disabled: string = "false";
   /** Defines how the text will be translated for the screen reader. */
   export let arialabel: string = "";
@@ -60,6 +60,7 @@
   // size
   type SizeType = "default" | "compact";
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
+  /** Sets the visual size variant of the text area. */
   export let size: SizeType = "default";
 
   // margin

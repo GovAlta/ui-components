@@ -7,10 +7,6 @@
         {
           "name": "heading",
           "type": "string | ReactNode",
-          "values": [
-            "string",
-            "ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the heading text or custom heading content."
@@ -67,10 +63,6 @@
         {
           "name": "heading",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets the heading text or template for the push drawer."
@@ -129,35 +121,35 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "Sets the heading text of the push drawer. Use the heading slot for custom heading content."
         },
         {
           "name": "open",
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": ""
+          "description": "Sets the open state of the push drawer."
         },
         {
           "name": "testid",
           "type": "string",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets a data-testid attribute for automated testing."
         },
         {
           "name": "width",
           "type": "string",
           "required": false,
           "default": "492px",
-          "description": ""
+          "description": "Sets the width of the push drawer panel."
         }
       ],
       "events": [
         {
           "name": "_close",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the push drawer closes.",
           "frameworks": [
             "webComponents"
           ]

@@ -6,7 +6,13 @@
       "props": [
         {
           "name": "activeTab",
-          "type": "GoabWorkSideNotificationActiveTabType",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "typeLabel": "GoabWorkSideNotificationActiveTabType",
+          "values": [
+            "unread",
+            "urgent",
+            "all"
+          ],
           "required": false,
           "default": "unread",
           "description": "Sets the initially active tab."
@@ -50,7 +56,13 @@
       "props": [
         {
           "name": "activeTab",
-          "type": "GoabWorkSideNotificationActiveTabType",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "typeLabel": "GoabWorkSideNotificationActiveTabType",
+          "values": [
+            "unread",
+            "urgent",
+            "all"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the initially active tab in the notification panel."
@@ -103,28 +115,28 @@
           ],
           "required": false,
           "default": "unread",
-          "description": ""
+          "description": "Sets the initially active tab."
         },
         {
           "name": "heading",
           "type": "string",
           "required": false,
           "default": "Notifications",
-          "description": ""
+          "description": "Sets the panel heading text."
         },
         {
           "name": "testid",
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "Sets a data-testid attribute for automated testing."
         }
       ],
       "events": [
         {
           "name": "_markAllRead",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the user clicks \"Mark all as read\".",
           "frameworks": [
             "webComponents"
           ]
@@ -132,7 +144,7 @@
         {
           "name": "_viewAll",
           "type": "CustomEvent<void>",
-          "description": "",
+          "description": "Emits when the user clicks \"View all\".",
           "frameworks": [
             "webComponents"
           ]

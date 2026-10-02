@@ -110,7 +110,7 @@
         {
           "name": "_scrollStateChange",
           "type": "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
-          "description": "",
+          "description": "Emitted whenever the internal scroll state changes (no-scroll → at-top → middle → at-bottom).",
           "frameworks": [
             "webComponents"
           ]

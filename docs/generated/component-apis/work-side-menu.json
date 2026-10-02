@@ -219,7 +219,7 @@
         {
           "name": "_navigate",
           "type": "CustomEvent<{ url: string }>",
-          "description": "",
+          "description": "Emits when a navigation link is clicked.",
           "frameworks": [
             "webComponents"
           ]
@@ -227,7 +227,7 @@
         {
           "name": "_toggle",
           "type": "CustomEvent<{ open: boolean }>",
-          "description": "",
+          "description": "Emits when the side menu is toggled open or closed.",
           "frameworks": [
             "webComponents"
           ]

@@ -21,10 +21,6 @@
         {
           "name": "description",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "Additional description text displayed below the checkbox label."
@@ -69,28 +65,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -108,7 +104,12 @@
         },
         {
           "name": "size",
-          "type": "GoabCheckboxSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabCheckboxSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of the checkbox. 'compact' reduces spacing for dense layouts."
@@ -130,11 +131,6 @@
         {
           "name": "value",
           "type": "string | number | boolean",
-          "values": [
-            "string",
-            "number",
-            "boolean"
-          ],
           "required": false,
           "default": null,
           "description": "The value binding."
@@ -200,10 +196,6 @@
         {
           "name": "description",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "Sets additional description content displayed below the checkbox label. Accepts plain text or a template."
@@ -287,7 +279,12 @@
         },
         {
           "name": "size",
-          "type": "GoabCheckboxSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabCheckboxSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size of the checkbox. 'compact' reduces spacing for dense layouts."
@@ -309,11 +306,6 @@
         {
           "name": "value",
           "type": "string | number | boolean | null",
-          "values": [
-            "string",
-            "number",
-            "boolean"
-          ],
           "required": false,
           "default": null,
           "description": "The value binding."
@@ -494,7 +486,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string; value: string; checked: boolean }>",
-          "description": "",
+          "description": "Emits when the checkbox loses focus.",
           "frameworks": [
             "webComponents"
           ]
@@ -502,7 +494,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; checked: boolean; value: string }>",
-          "description": "",
+          "description": "Emits when the checkbox value changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -510,7 +502,7 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string; value: string; checked: boolean }>",
-          "description": "",
+          "description": "Emits when the checkbox receives focus.",
           "frameworks": [
             "webComponents"
           ]

@@ -17,6 +17,7 @@
   export let variant: "default" | "segmented" = "default";
   /** Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. */
   export let orientation: "auto" | "horizontal" = "auto";
+  /** Sets the navigation mode for tab switching. "hash" updates the URL hash when switching tabs. */
   export let navigation: "hash" | "none" = "hash";
 
   // Private

@@ -67,6 +67,7 @@ interface ExtractedProp {
   type: string;
   typeLabel?: string; // TypeScript type name (e.g., "GoabButtonType")
   values?: string[]; // Allowed values for union types
+  deprecatedValues?: string[]; // Values still accepted but deprecated, left out of values
   required: boolean;
   default: string | null;
   description: string; // From JSDoc comments in source (empty if not documented)
@@ -142,6 +143,7 @@ interface ParsedPropRaw {
   type: string;
   typeLabel?: string;
   values?: string[];
+  deprecatedValues?: string[];
   required: boolean;
   default: string | null;
   isBooleanProp: boolean;
@@ -159,7 +161,6 @@ interface WrapperExtraction {
 }
 
 const INTERNAL_PROP_NAMES = new Set(["publicformsummaryorder", "filterablecontext"]);
-const INTERNAL_SLOT_NAMES = new Set(["version"]);
 const INTERNAL_EVENT_NAMES = new Set(["_revealChange", "_update"]);
 
 const DOCS_EXCLUDED_COMPONENTS = new Set(["focus-trap", "form-stepper", "scrollable"]);
@@ -184,14 +185,33 @@ const WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES: Record<string, Set<string>> = {
 };
 const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>> = {
   dropdown: {
-    _change: "CustomEvent<{ name?: string; value?: string; event: Event }>",
+    _change: "CustomEvent<{ name?: string; value?: string }>",
   },
   "file-upload-input": {
-    _selectFile: "CustomEvent<{ file: File; event: Event }>",
+    _selectFile: "CustomEvent<{ file: File }>",
   },
   "workspace-layout": {
     _scrollStateChange:
       "CustomEvent<{ state: 'no-scroll' | 'at-top' | 'middle' | 'at-bottom'; isScrollable: boolean }>",
+  },
+  form: {
+    _complete: "CustomEvent<GoabFormState>",
+    _stateChange:
+      'CustomEvent<{ type: "details"; data: GoabFormState } | { id: string; type: "list"; data: GoabFormState[] }>',
+  },
+};
+// An element event takes its text from its wrapper twin, so an event no wrapper
+// exposes has its text here.
+const WEB_COMPONENT_EVENT_DESCRIPTIONS: Record<string, Record<string, string>> = {
+  "form-step": { _click: "Emits when the step is clicked." },
+  "link-button": { _click: "Emits when the link button is clicked." },
+  popover: {
+    _open: "Emits when the popover opens.",
+    _close: "Emits when the popover closes.",
+  },
+  "radio-item": { _radioItemChange: "Emits when the radio item is selected." },
+  "work-side-notification-item": {
+    _notificationItemRead: "Emits when the notification's read status changes.",
   },
 };
 // Keep backward-compatible wrapper types in source while documenting only the
@@ -239,6 +259,14 @@ const SLOT_TYPE_OVERRIDES: Record<
       nav: "goa-app-footer-nav-section",
       meta: "goa-app-footer-meta-section",
     },
+  },
+};
+// An element's slot takes its text from the wrapper that exposes it, so a slot
+// no wrapper exposes has its text here.
+const WEB_COMPONENT_SLOT_DESCRIPTIONS: Record<string, Record<string, string>> = {
+  footer: {
+    nav: "Navigation link sections, each a goa-app-footer-nav-section.",
+    meta: "Copyright and legal links, in a goa-app-footer-meta-section.",
   },
 };
 function shouldSkipInternalProp(propName: string): boolean {
@@ -388,52 +416,6 @@ function extractTagName(content: string): string | null {
   return null;
 }
 
-/**
- * Extracts type aliases from the Svelte file (both module and instance scripts).
- * Resolves composite aliases like `type Size = HeadingSize | BodySize` by
- * recursively expanding references until all values are string literals.
- */
-function extractTypeAliases(content: string): Map<string, string[]> {
-  const aliases = new Map<string, string[]>();
-
-  // Match: type Name = "value1" | "value2" | OtherType;
-  const typeMatches = content.matchAll(/\btype\s+(\w+)\s*=\s*([^;]+);/g);
-
-  for (const match of typeMatches) {
-    const name = match[1];
-    const definition = match[2].trim();
-
-    const members = definition
-      .split("|")
-      .map((v) => v.trim())
-      .filter((v) => v.length > 0);
-
-    aliases.set(name, members);
-  }
-
-  // Resolve composite aliases (expand references to other aliases)
-  // Iterate until stable — handles chained aliases
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (const [name, members] of aliases) {
-      const expanded: string[] = [];
-      for (const member of members) {
-        const clean = member.replace(/["']/g, "");
-        if (aliases.has(clean) && clean !== name) {
-          expanded.push(...aliases.get(clean)!);
-          changed = true;
-        } else {
-          expanded.push(member);
-        }
-      }
-      aliases.set(name, expanded);
-    }
-  }
-
-  return aliases;
-}
-
 function extractValidators(content: string): Map<string, ValidatorInfo> {
   const validators = new Map<string, ValidatorInfo>();
 
@@ -481,11 +463,298 @@ function extractValidators(content: string): Map<string, ValidatorInfo> {
   return validators;
 }
 
+/**
+ * Every element validator that marks some of its values deprecated, read once
+ * from all the Svelte components. A wrapper type can be shared by a component
+ * whose own element doesn't validate it: MenuButton's type is the same
+ * GoabButtonType whose "submit" Button's validator deprecates.
+ */
+let deprecatingValidators: ValidatorInfo[] | undefined;
+
+function getDeprecatingValidators(): ValidatorInfo[] {
+  if (deprecatingValidators) return deprecatingValidators;
+  const found: ValidatorInfo[] = [];
+  const stack = [UI_COMPONENTS_PATH];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current) continue;
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const full = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(full);
+      } else if (entry.isFile() && entry.name.endsWith(".svelte")) {
+        const content = fs.readFileSync(full, "utf-8");
+        if (!content.includes("deprecated:")) continue;
+        for (const validator of extractValidators(content).values()) {
+          if (validator.deprecated?.length) found.push(validator);
+        }
+      }
+    }
+  }
+  deprecatingValidators = found;
+  return found;
+}
+
+// =============================================================================
+// Allowed values: resolving a declared type to the values it accepts
+// =============================================================================
+
+// Types too large to list, kept by name wherever they appear. GoabIconType is
+// the Ionicons set, a name optionally followed by ":theme", and Spacing is the
+// spacing scale. The element's own names for the icon set are published as
+// GoabIconType. A value one of these already covers is not listed again.
+const TYPES_KEPT_BY_NAME: Record<string, string> = {
+  GoabIconType: "GoabIconType",
+  GoabIconBaseType: "GoabIconType",
+  GoAIconType: "GoabIconType",
+  GoaIconType: "GoabIconType",
+  GoAIconTypeWithTheme: "GoabIconType",
+  Spacing: "Spacing",
+};
+
+const COMMON_TYPES_FILE = path.join(WORKSPACE_ROOT, "libs/common/src/lib/common.ts");
+
+interface TypeResolution {
+  /** The union as text: kept names, then literal values, then anything else. */
+  type: string;
+  /** The literal values, only when they are the whole set. */
+  values?: string[];
+  /** Kept names in the union, by their published name. */
+  keptNames: string[];
+  /** Whether any alias or kept name was read into the union. */
+  expanded: boolean;
+  /** Whether null or undefined was dropped from the union. */
+  droppedNullish: boolean;
+  /** How many literal values the union lists. */
+  literalCount: number;
+}
+
+/** Type alias definitions by name, as written (`type Name = definition;`). */
+function extractRawTypeAliases(content: string): Map<string, string> {
+  const aliases = new Map<string, string>();
+  for (const match of content.matchAll(/\btype\s+(\w+)\s*=\s*([^;]+);/g)) {
+    aliases.set(match[1], match[2].trim().replace(/^\|/, "").trim());
+  }
+  return aliases;
+}
+
+/** Splits a union at its top-level `|`, leaving nested and quoted text whole. */
+function splitTopLevelUnion(text: string): string[] {
+  const parts: string[] = [];
+  let current = "";
+  let depth = 0;
+  let quote = "";
+  for (const ch of text) {
+    if (quote) {
+      if (ch === quote) quote = "";
+    } else if (ch === '"' || ch === "'" || ch === "`") {
+      quote = ch;
+    } else if ("([{<".includes(ch)) {
+      depth++;
+    } else if (")]}".includes(ch) || (ch === ">" && !current.endsWith("="))) {
+      depth--;
+    } else if (ch === "|" && depth === 0) {
+      parts.push(current.trim());
+      current = "";
+      continue;
+    }
+    current += ch;
+  }
+  parts.push(current.trim());
+  return parts.filter((part) => part.length > 0);
+}
+
+/**
+ * Resolves a declared type through the aliases it names into the values it
+ * accepts. Kept names stay by name, string literals become values, and
+ * anything else (a primitive, an object or template type) stays as written, in
+ * which case the values are not the whole set and none are listed. A kept name
+ * covers the values of the published type it stands for, read from
+ * `publishedAliases`.
+ */
+function resolveTypeText(
+  declared: string,
+  aliases: Map<string, string>,
+  publishedAliases: Map<string, string> = aliases,
+): TypeResolution {
+  const keptNames: string[] = [];
+  const literals: { value: string; text: string }[] = [];
+  const others: string[] = [];
+  const covered = new Set<string>();
+  let expanded = false;
+  let droppedNullish = false;
+
+  // Every string literal an alias reaches, kept names included, so the values
+  // a kept name already covers are not listed again.
+  const reachableLiterals = (
+    name: string,
+    from: Map<string, string>,
+    seen = new Set<string>(),
+  ): string[] => {
+    const definition = from.get(name);
+    if (!definition || seen.has(name)) return [];
+    seen.add(name);
+    return splitTopLevelUnion(definition).flatMap((member) => {
+      const quoted = member.match(/^["']([^"']*)["']$/);
+      if (quoted) return [quoted[1]];
+      return /^\w+$/.test(member) ? reachableLiterals(member, from, seen) : [];
+    });
+  };
+
+  // An alias whose members are all string literals, spelled out in place.
+  const closedUnionText = (name: string): string | null => {
+    const definition = aliases.get(name);
+    if (!definition) return null;
+    const members = splitTopLevelUnion(definition).filter(
+      (member) => member !== "undefined" && member !== "null",
+    );
+    return members.length > 0 &&
+      members.every((member) => /^["'][^"']*["']$/.test(member))
+      ? members.map((member) => `"${member.slice(1, -1)}"`).join(" | ")
+      : null;
+  };
+
+  const visit = (member: string, seen: Set<string>) => {
+    if (member === "null" || member === "undefined") {
+      droppedNullish = true;
+      return;
+    }
+    const quoted = member.match(/^["']([^"']*)["']$/);
+    if (quoted) {
+      literals.push({ value: quoted[1], text: `"${quoted[1]}"` });
+      return;
+    }
+    if (/^(?:-?\d+(?:\.\d+)?|true|false)$/.test(member)) {
+      literals.push({ value: member, text: member });
+      return;
+    }
+    const keptName = TYPES_KEPT_BY_NAME[member];
+    if (keptName) {
+      if (!keptNames.includes(keptName)) keptNames.push(keptName);
+      for (const value of reachableLiterals(member, aliases)) covered.add(value);
+      for (const value of reachableLiterals(keptName, publishedAliases))
+        covered.add(value);
+      if (keptName !== member) expanded = true;
+      return;
+    }
+    if (/^\w+$/.test(member) && aliases.has(member) && !seen.has(member)) {
+      expanded = true;
+      const next = new Set(seen).add(member);
+      for (const part of splitTopLevelUnion(aliases.get(member)!)) visit(part, next);
+      return;
+    }
+    if (member.startsWith("`")) {
+      // A template type, with any closed union it names spelled out.
+      others.push(
+        member.replace(/\$\{(\w+)\}/g, (whole, name: string) => {
+          const union = closedUnionText(name);
+          if (!union) return whole;
+          expanded = true;
+          return `\${${union}}`;
+        }),
+      );
+      return;
+    }
+    others.push(member);
+  };
+
+  for (const member of splitTopLevelUnion(declared)) visit(member, new Set());
+
+  const seenValues = new Set<string>();
+  const listed = literals.filter((literal) => {
+    if (covered.has(literal.value) || seenValues.has(literal.value)) return false;
+    seenValues.add(literal.value);
+    return true;
+  });
+  const otherTypes = [...new Set(others)];
+  const closed = keptNames.length === 0 && otherTypes.length === 0 && listed.length > 0;
+
+  return {
+    type: [...keptNames, ...listed.map((literal) => literal.text), ...otherTypes].join(
+      " | ",
+    ),
+    // An empty string stays in the type but is not listed as a value.
+    values: closed
+      ? listed.map((literal) => literal.value).filter((value) => value !== "")
+      : undefined,
+    keptNames,
+    expanded,
+    droppedNullish,
+    literalCount: listed.length,
+  };
+}
+
+/**
+ * The type aliases an element's props can name: its own, those of the modules
+ * it imports types from, and its validators' values.
+ */
+function buildWebComponentTypeAliases(
+  content: string,
+  filePath: string,
+  validators: Map<string, ValidatorInfo>,
+): Map<string, string> {
+  const aliases = new Map<string, string>();
+  for (const importMatch of content.matchAll(
+    /import\s*(?:type\s*)?\{[^}]*\}\s*from\s*["'](\.[^"']+)["']/g,
+  )) {
+    const base = path.resolve(path.dirname(filePath), importMatch[1]);
+    const modulePath = [base, `${base}.ts`, path.join(base, "index.ts")].find(
+      (candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile(),
+    );
+    if (!modulePath) continue;
+    for (const [name, definition] of extractRawTypeAliases(
+      fs.readFileSync(modulePath, "utf-8"),
+    )) {
+      aliases.set(name, definition);
+    }
+  }
+  for (const [name, definition] of extractRawTypeAliases(content)) {
+    aliases.set(name, definition);
+  }
+  for (const [name, validator] of validators) {
+    aliases.set(name, validator.values.map((value) => `"${value}"`).join(" | "));
+  }
+  return aliases;
+}
+
+let commonTypeAliases: Map<string, string> | undefined;
+
+/** The shared type aliases the common library publishes. */
+function getCommonTypeAliases(): Map<string, string> {
+  commonTypeAliases ??= fs.existsSync(COMMON_TYPES_FILE)
+    ? extractRawTypeAliases(fs.readFileSync(COMMON_TYPES_FILE, "utf-8"))
+    : new Map<string, string>();
+  return commonTypeAliases;
+}
+
+/**
+ * The type aliases a wrapper's props can name: its own and the shared ones in
+ * the common library.
+ */
+function buildWrapperTypeAliases(content: string): Map<string, string> {
+  return new Map([...getCommonTypeAliases(), ...extractRawTypeAliases(content)]);
+}
+
+/**
+ * A wrapper prop's declared type, with the values its named aliases resolve
+ * to. The declared name stays as the label, which is what an editor shows.
+ */
+function resolveWrapperPropType(
+  rawType: string,
+  aliases: Map<string, string>,
+): Pick<ExtractedProp, "type" | "typeLabel" | "values"> {
+  const resolution = resolveTypeText(rawType, aliases);
+  const addsValues =
+    resolution.expanded && (resolution.literalCount > 0 || /"/.test(resolution.type));
+  if (!addsValues) return { type: rawType, values: parseWrapperPropValues(rawType) };
+  return { type: resolution.type, typeLabel: rawType, values: resolution.values };
+}
+
 function extractProps(
   content: string,
   validators: Map<string, ValidatorInfo>,
   componentName: string,
-  typeAliases: Map<string, string[]>,
+  typeAliases: Map<string, string>,
 ): ParsedPropRaw[] {
   const props: ParsedPropRaw[] = [];
   const customElementPropAttributeMap = extractCustomElementPropAttributeMap(content);
@@ -513,27 +782,52 @@ function extractProps(
     const name = customElementPropAttributeMap.get(rawName) || rawName.toLowerCase();
     let typeLabel: string | undefined;
     let values: string[] | undefined;
+    let deprecatedValues: string[] | undefined;
 
-    // Check if this prop has a validator for allowed values
-    if (validators.has(type)) {
-      const validatorData = validators.get(type)!;
-      values = validatorData.values;
-      // Generate typeLabel based on component name and prop type
-      typeLabel = generateTypeLabel(componentName, type, validatorData);
+    // A validator gives the allowed values, whether the prop names its type
+    // (`ButtonType`), reads it inline (`(typeof Types)[number]`) or also allows
+    // null. A value the validator marks deprecated is flagged, not listed.
+    const declaredMembers = splitTopLevelUnion(type).filter(
+      (member) => member !== "null" && member !== "undefined",
+    );
+    const inlineValidatorName = declaredMembers[0]?.match(
+      /^\(\s*typeof\s+(\w+)\s*\)\s*\[\s*number\s*\]$/,
+    )?.[1];
+    const validatorKey =
+      declaredMembers.length === 1
+        ? (inlineValidatorName ?? declaredMembers[0])
+        : undefined;
+    const validatorData = validatorKey ? validators.get(validatorKey) : undefined;
+
+    if (validatorKey && validatorData) {
+      deprecatedValues = validatorData.deprecated?.length
+        ? validatorData.deprecated
+        : undefined;
+      values = validatorData.values.filter((value) => !deprecatedValues?.includes(value));
+      // A named type has a published name; an inline one has none.
+      if (!inlineValidatorName) {
+        typeLabel = generateTypeLabel(componentName, validatorKey, validatorData);
+      }
       type = values.map((v) => `"${v}"`).join(" | ");
-    }
-
-    // Handle special types
-    if (type.includes("GoAIconType") || type.includes("GoaIconType")) {
-      typeLabel = "GoabIconType";
-      type = "GoabIconType";
-    } else if (type === "Spacing" || type.includes("Spacing")) {
-      typeLabel = "Spacing";
-      type = "Spacing";
+    } else {
+      // Anything else resolves through the aliases the element can name, with
+      // any value a kept name such as GoabIconType does not cover listed beside it.
+      const resolution = resolveTypeText(type, typeAliases, getCommonTypeAliases());
+      if (
+        resolution.expanded ||
+        resolution.droppedNullish ||
+        resolution.keptNames.length
+      ) {
+        type = resolution.type;
+        values = resolution.values;
+        if (resolution.type === resolution.keptNames.join(" | ")) {
+          typeLabel = resolution.type;
+        }
+      }
     }
 
     // Parse default value
-    let defaultValue: string | null = parseDefaultValue(defaultStr);
+    const defaultValue: string | null = parseDefaultValue(defaultStr);
 
     // Detect boolean props serialized as strings
     let isBooleanProp = false;
@@ -542,50 +836,8 @@ function extractProps(
       isBooleanProp = true;
     }
 
-    // Resolve type aliases (e.g., Size -> "heading-xl" | "heading-l" | ...)
-    // Split type into union members, expand any alias references, filter undefined/null
-    {
-      const members = type
-        .split("|")
-        .map((v) => v.trim())
-        .filter((v) => v.length > 0);
-      const expanded: string[] = [];
-      let didResolve = false;
-
-      for (const member of members) {
-        const clean = member.replace(/["']/g, "");
-        // Skip undefined/null — they just mean the prop is optional
-        if (clean === "undefined" || clean === "null") {
-          didResolve = true;
-          continue;
-        }
-        if (typeAliases.has(clean)) {
-          expanded.push(...typeAliases.get(clean)!);
-          didResolve = true;
-        } else {
-          expanded.push(member);
-        }
-      }
-
-      if (didResolve && expanded.length > 0) {
-        const primitives = new Set(["string", "boolean", "number", "any", "object"]);
-        type = expanded
-          .map((v) => {
-            const c = v.replace(/["']/g, "");
-            if (primitives.has(c)) return c;
-            return `"${c}"`;
-          })
-          .join(" | ");
-      }
-    }
-
     // Handle inline union types
-    if (!values && type.includes("|") && !type.includes("typeof")) {
-      values = type
-        .split("|")
-        .map((v) => v.trim().replace(/["']/g, ""))
-        .filter((v) => v.length > 0 && !v.includes("("));
-    }
+    values ??= parseWrapperPropValues(type);
 
     // Get JSDoc info from map (description + required flag)
     const jsDocInfo = jsDocMap.get(rawName);
@@ -597,7 +849,9 @@ function extractProps(
     // Skip @deprecated props — not for public API docs
     if (jsDocInfo?.deprecated) continue;
 
-    const description = jsDocInfo?.description || "";
+    // The code's own default is the truth for an element, so a @default tag in
+    // its comment is only stripped from the text.
+    const { description } = extractDefaultFromDescription(jsDocInfo?.description || "");
     const isReadonly = isReadonlyDescription(description);
     // Use @required from JSDoc if present, otherwise fall back to checking if no default value.
     // Read-only, component-managed values should not be presented as consumer-required props.
@@ -610,6 +864,7 @@ function extractProps(
       type: cleanType(type),
       typeLabel,
       values,
+      deprecatedValues,
       required: isRequired,
       default: defaultValue,
       isBooleanProp,
@@ -643,16 +898,30 @@ function extractCustomElementPropAttributeMap(content: string): Map<string, stri
 // Known limitation: only scans the top-level Svelte file, so components that
 // delegate event dispatching to child Svelte files will have missing events.
 // Events from React/Angular wrappers fill this gap for those frameworks.
-function extractEvents(content: string): string[] {
+function extractEvents(content: string, filePath?: string): string[] {
   const eventNames = new Set<string>();
 
-  // Pattern 1: dispatch(element, "_eventName", ...)
-  const dispatchMatches = content.matchAll(/dispatch\s*\(\s*[^,]+,\s*["']([^"']+)["']/g);
+  // Pattern 1: dispatch(element, "_eventName", ...), typed or not (dispatch<T>)
+  const dispatchMatches = content.matchAll(
+    /dispatch(?:<[^>]*>)?\s*\(\s*[^,]+,\s*["']([^"']+)["']/g,
+  );
   for (const match of dispatchMatches) {
     const eventName = match[1];
     // Skip internal events (like "help-text::announce")
     if (eventName.includes("::")) continue;
     eventNames.add(eventName);
+  }
+
+  // Pattern 1b: dispatch(element, EventNameConstant, ...), where the constant
+  // is a string declared in this file or in the module it is imported from.
+  if (filePath) {
+    const constantMatches = content.matchAll(
+      /dispatch(?:<[^>]*>)?\s*\(\s*[^,]+,\s*([A-Za-z_$][\w$]*)\s*,/g,
+    );
+    for (const match of constantMatches) {
+      const eventName = resolveStringConstant(match[1], content, filePath);
+      if (eventName && !eventName.includes("::")) eventNames.add(eventName);
+    }
   }
 
   // Pattern 2: dispatchEvent(new CustomEvent("_eventName", ...))
@@ -667,6 +936,46 @@ function extractEvents(content: string): string[] {
   }
 
   return Array.from(eventNames);
+}
+
+/**
+ * The string value of a `const`, declared in this file or exported by the
+ * module it is imported from. Anything else, such as a prop, is not a constant
+ * and yields null.
+ */
+function resolveStringConstant(
+  name: string,
+  content: string,
+  filePath: string,
+): string | null {
+  const declaration = (source: string, exported: boolean) =>
+    source.match(
+      new RegExp(
+        `${exported ? "export\\s+" : ""}const\\s+${escapeRegExp(name)}\\s*(?::[^=]+)?=\\s*["']([^"']+)["']`,
+      ),
+    )?.[1] ?? null;
+
+  const local = declaration(content, false);
+  if (local) return local;
+
+  for (const importMatch of content.matchAll(
+    /import\s*(?:type\s*)?\{([^}]*)\}\s*from\s*["']([^"']+)["']/g,
+  )) {
+    const names = importMatch[1].split(",").map((part) => part.trim());
+    if (!names.includes(name) || !importMatch[2].startsWith(".")) continue;
+    const base = path.resolve(path.dirname(filePath), importMatch[2]);
+    const modulePath = [
+      base,
+      `${base}.ts`,
+      `${base}.js`,
+      path.join(base, "index.ts"),
+    ].find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+    if (!modulePath) continue;
+    const value = declaration(fs.readFileSync(modulePath, "utf-8"), true);
+    if (value) return value;
+  }
+
+  return null;
 }
 
 function extractSlots(content: string): string[] {
@@ -686,13 +995,29 @@ function extractSlots(content: string): string[] {
   return slotNames;
 }
 
+// Drops the sentences of a text that match a pattern, such as one framework's
+// type names, so the rest can stand for an element or another framework.
+function withoutSentencesMatching(text: string, pattern: RegExp): string {
+  return text
+    .split(/(?<=\.)\s+(?=[A-Z])/)
+    .filter((sentence) => !pattern.test(sentence))
+    .join(" ")
+    .trim();
+}
+
+// The allowed values of an inline union, only when every member is a literal
+// value: a union that also takes `string` or `ReactNode` has no closed set.
 function parseWrapperPropValues(type: string): string[] | undefined {
   if (!type.includes("|")) return undefined;
-  const values = type
-    .split("|")
-    .map((v) => v.trim().replace(/['"]/g, ""))
-    .filter((v) => v.length > 0 && v !== "undefined" && v !== "null");
-  return values.length > 0 ? values : undefined;
+  const members = splitTopLevelUnion(type).filter(
+    (member) => member !== "undefined" && member !== "null",
+  );
+  const isLiteral = (member: string) =>
+    /^["'][^"']*["']$|^(?:-?\d+(?:\.\d+)?|true|false)$/.test(member);
+  if (members.length === 0 || !members.every(isLiteral)) return undefined;
+  return members
+    .map((member) => member.replace(/^["']|["']$/g, ""))
+    .filter((value) => value !== "");
 }
 
 function inferTypeFromDefault(defaultValue: string | undefined): string {
@@ -918,6 +1243,53 @@ function resolvePrimaryReactComponentParameterType(
   componentName: string,
   sourceFile: ts.SourceFile,
 ): ts.TypeNode | null {
+  const fn = findPrimaryReactComponentFunction(componentName, sourceFile);
+  return fn ? getFunctionLikeFirstParameterType(fn) : null;
+}
+
+/**
+ * Defaults a React wrapper sets where it destructures its props
+ * (`{ mountType = "append" }`), which its JSDoc does not carry. Only literal
+ * defaults count.
+ */
+function resolvePrimaryReactComponentParameterDefaults(
+  componentName: string,
+  sourceFile: ts.SourceFile,
+): Map<string, string> {
+  const defaults = new Map<string, string>();
+  const pattern = findPrimaryReactComponentFunction(componentName, sourceFile)
+    ?.parameters[0]?.name;
+  if (!pattern || !ts.isObjectBindingPattern(pattern)) return defaults;
+
+  for (const element of pattern.elements) {
+    const key = element.propertyName ?? element.name;
+    const init = element.initializer;
+    if (!init || !ts.isIdentifier(key)) continue;
+
+    if (
+      ts.isStringLiteral(init) ||
+      ts.isNoSubstitutionTemplateLiteral(init) ||
+      ts.isNumericLiteral(init)
+    ) {
+      defaults.set(key.text, init.text);
+    } else if (
+      init.kind === ts.SyntaxKind.TrueKeyword ||
+      init.kind === ts.SyntaxKind.FalseKeyword ||
+      (ts.isPrefixUnaryExpression(init) && ts.isNumericLiteral(init.operand)) ||
+      (ts.isArrayLiteralExpression(init) && init.elements.length === 0) ||
+      (ts.isObjectLiteralExpression(init) && init.properties.length === 0)
+    ) {
+      defaults.set(key.text, init.getText(sourceFile));
+    }
+  }
+
+  return defaults;
+}
+
+function findPrimaryReactComponentFunction(
+  componentName: string,
+  sourceFile: ts.SourceFile,
+): ts.FunctionDeclaration | ts.ArrowFunction | ts.FunctionExpression | null {
   const componentPart = capitalize(toCamelCase(componentName));
   const candidates = [`Goab${componentPart}`, `GoA${componentPart}`];
 
@@ -930,7 +1302,7 @@ function resolvePrimaryReactComponentParameterType(
         (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword,
       )
     ) {
-      return getFunctionLikeFirstParameterType(statement);
+      return statement;
     }
 
     if (
@@ -951,7 +1323,7 @@ function resolvePrimaryReactComponentParameterType(
           ts.isArrowFunction(declaration.initializer) ||
           ts.isFunctionExpression(declaration.initializer)
         ) {
-          return getFunctionLikeFirstParameterType(declaration.initializer);
+          return declaration.initializer;
         }
       }
     }
@@ -1175,6 +1547,36 @@ function findImmediateJsDocBefore(
   return beforeMarker.slice(start + 3, end);
 }
 
+let commonMarginDescriptions: Map<string, string> | undefined;
+
+/**
+ * The doc comments on the shared Margins type, which React wrappers inherit
+ * their margin props from, so the record carries the text an editor shows.
+ */
+function getCommonMarginDescriptions(): Map<string, string> {
+  if (commonMarginDescriptions) return commonMarginDescriptions;
+  commonMarginDescriptions = new Map<string, string>();
+
+  const commonFile = path.join(WORKSPACE_ROOT, "libs/common/src/lib/common.ts");
+  if (!fs.existsSync(commonFile)) return commonMarginDescriptions;
+
+  const content = fs.readFileSync(commonFile, "utf-8");
+  const sourceFile = createTsSourceFile(commonFile, content);
+  for (const statement of sourceFile.statements) {
+    if (!ts.isInterfaceDeclaration(statement) || statement.name.text !== "Margins")
+      continue;
+    for (const member of statement.members) {
+      if (!ts.isPropertySignature(member) || !ts.isIdentifier(member.name)) continue;
+      const rawComment = findImmediateJsDocBefore(content, member.getStart(sourceFile));
+      commonMarginDescriptions.set(
+        member.name.text,
+        parseDescriptionFromJSDoc(rawComment),
+      );
+    }
+  }
+  return commonMarginDescriptions;
+}
+
 function extractAngularBaseComponentProps(): Map<string, ExtractedProp> {
   const baseFile = path.join(
     WORKSPACE_ROOT,
@@ -1382,6 +1784,11 @@ function extractReactWrapperApi(
   );
   const reactMembers = [...interfaceMembers, ...componentParameterMembers];
   const callbackAliases = extractReactCallbackAliases(sourceFile);
+  const parameterDefaults = resolvePrimaryReactComponentParameterDefaults(
+    wrapperComponentName,
+    sourceFile,
+  );
+  const typeAliases = buildWrapperTypeAliases(content);
 
   const props: ExtractedProp[] = [];
   const events: ExtractedEvent[] = [];
@@ -1409,7 +1816,6 @@ function extractReactWrapperApi(
 
     if (shouldSkipInternalProp(propName)) continue;
 
-    const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
 
     if (slotName && isSlotCarrierType(rawType)) {
@@ -1440,10 +1846,9 @@ function extractReactWrapperApi(
 
     props.push({
       name: propName,
-      type: rawType,
-      values,
+      ...resolveWrapperPropType(rawType, typeAliases),
       required: isRequired,
-      default: defaultValue,
+      default: defaultValue ?? parameterDefaults.get(propName) ?? null,
       description,
     });
   }
@@ -1451,6 +1856,7 @@ function extractReactWrapperApi(
   // Inject inherited margin props when the interface extends Margins
   if (hasReactMarginsInHierarchy(primaryInterfaceName, interfaces)) {
     const existingNames = new Set(props.map((p) => p.name));
+    const marginDescriptions = getCommonMarginDescriptions();
     const marginProps: ExtractedProp[] = ["mt", "mr", "mb", "ml"]
       .filter((name) => !existingNames.has(name))
       .map((name) => ({
@@ -1458,7 +1864,7 @@ function extractReactWrapperApi(
         type: "Spacing",
         required: false,
         default: null,
-        description: "",
+        description: marginDescriptions.get(name) ?? "",
       }));
     props.push(...marginProps);
   }
@@ -1508,6 +1914,7 @@ function extractAngularWrapperApi(
 
   const content = fs.readFileSync(angularFile, "utf-8");
   const sourceFile = createTsSourceFile(angularFile, content);
+  const typeAliases = buildWrapperTypeAliases(content);
 
   const props: ExtractedProp[] = [];
   const events: ExtractedEvent[] = [];
@@ -1548,7 +1955,6 @@ function extractAngularWrapperApi(
 
     if (shouldSkipInternalProp(propName)) continue;
 
-    const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
 
     if (slotName && isSlotCarrierType(rawType)) {
@@ -1566,8 +1972,7 @@ function extractAngularWrapperApi(
 
     props.push({
       name: propName,
-      type: rawType,
-      values,
+      ...resolveWrapperPropType(rawType, typeAliases),
       required,
       default: defaultValue,
       description,
@@ -1972,6 +2377,32 @@ function transformWebComponentEvents(
       description: "",
       frameworks: ["webComponents"],
     }));
+}
+
+/**
+ * An element's events carry no doc comments, so each takes the first sentence
+ * of its wrapper twin's text (`_change` and `onChange`): the trigger, which
+ * reads true for the element. The rest can describe the wrapper's own payload,
+ * and the element's payload is in its type. Angular's "Emits when" wording
+ * comes first; React's "Callback fired when" is reworded to match.
+ */
+function describeWebComponentEvent(
+  componentName: string,
+  eventName: string,
+  angularEvents: ExtractedEvent[],
+  reactEvents: ExtractedEvent[],
+): string {
+  const written = WEB_COMPONENT_EVENT_DESCRIPTIONS[componentName]?.[eventName];
+  if (written) return written;
+
+  const key = eventName.replace(/^_/, "").toLowerCase();
+  const twinText = (events: ExtractedEvent[]) =>
+    events.find((event) => event.name.replace(/^on/, "").toLowerCase() === key)
+      ?.description ?? "";
+  const text =
+    twinText(angularEvents) ||
+    twinText(reactEvents).replace(/^(?:Callback fired|Called)\b/, "Emits");
+  return text.split(/(?<=\.)\s+(?=[A-Z])/)[0].trim();
 }
 
 // =============================================================================
@@ -2514,11 +2945,11 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   }
 
   // Extract data
-  const typeAliases = extractTypeAliases(content);
   const validators = extractValidators(content);
+  const typeAliases = buildWebComponentTypeAliases(content, svelteFilePath, validators);
   const rawProps = extractProps(content, validators, componentName, typeAliases);
   let eventContent = content;
-  let rawEventNames = extractEvents(content);
+  let rawEventNames = extractEvents(content, svelteFilePath);
   const explicitEventsByComponent: Record<string, Set<string>> = {
     "file-upload-card": new Set(["_cancel", "_delete"]),
   };
@@ -2544,8 +2975,8 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     for (const siblingFile of siblingFiles) {
       const siblingPath = path.join(componentDir, siblingFile);
       const siblingContent = fs.readFileSync(siblingPath, "utf-8");
-      const siblingEventNames = extractEvents(siblingContent).filter((eventName) =>
-        companionEvents.has(eventName),
+      const siblingEventNames = extractEvents(siblingContent, siblingPath).filter(
+        (eventName) => companionEvents.has(eventName),
       );
       if (siblingEventNames.length > 0) {
         rawEventNames = [...rawEventNames, ...siblingEventNames];
@@ -2579,6 +3010,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     type: p.type,
     typeLabel: p.typeLabel,
     values: p.values,
+    ...(p.deprecatedValues && { deprecatedValues: p.deprecatedValues }),
     required: p.required,
     default: p.default,
     description: p.description, // From JSDoc comments in source
@@ -2592,6 +3024,14 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   );
   if (componentName === "side-menu-group") {
     webComponentEvents = webComponentEvents.filter((event) => event.name !== "_open");
+  }
+  for (const event of webComponentEvents) {
+    event.description = describeWebComponentEvent(
+      componentName,
+      event.name,
+      angularWrapper.events,
+      reactWrapper.events,
+    );
   }
   const slotDescriptions = {
     ...angularWrapper.slotDescriptions,
@@ -2625,6 +3065,29 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     return frameworkOverrides[name];
   };
 
+  // Slot text comes from the wrappers, React's first, and must read true for
+  // each framework. Angular takes it with ReactNode read as ngTemplate, or its
+  // own text where React wording would remain. The element has no slot docs of
+  // its own, so it takes the text without any sentence that names a
+  // framework's type.
+  const describeSlot = (
+    framework: "react" | "angular" | "webComponents",
+    name: string,
+  ): string => {
+    const angularText = angularWrapper.slotDescriptions[name] || "";
+    const wrapperText = reactWrapper.slotDescriptions[name] || angularText;
+    if (framework === "react") return wrapperText;
+    if (framework === "angular") {
+      const text = wrapperText.replace(/ReactNode/g, "ngTemplate");
+      if (!/React/.test(text)) return text;
+      return angularText || withoutSentencesMatching(text, /React/);
+    }
+    return (
+      WEB_COMPONENT_SLOT_DESCRIPTIONS[componentName]?.[name] ??
+      withoutSentencesMatching(wrapperText, /React|TemplateRef|ngTemplate|\btemplate\b/i)
+    );
+  };
+
   const createSlots = (
     framework: "react" | "angular" | "webComponents",
     type?: string,
@@ -2633,25 +3096,17 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     slotNames
       .filter(
         (name) =>
-          !INTERNAL_SLOT_NAMES.has(name.toLowerCase()) &&
           getSlotOverride(framework, name) !== HIDE_SLOT &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
-      .map((name) => {
-        const rawDescription = slotDescriptions[name] || "";
-        const description =
-          framework === "angular"
-            ? rawDescription.replace(/ReactNode/g, "ngTemplate")
-            : rawDescription;
-        return {
-          name: useAliasNames ? slotNameAliases[name] || name : name,
-          type:
-            getSlotOverride(framework, name) ??
-            (type && hasWrapperSlotEvidence(name) ? type : undefined),
-          description,
-          required: slotRequired[name] || false,
-        };
-      });
+      .map((name) => ({
+        name: useAliasNames ? slotNameAliases[name] || name : name,
+        type:
+          getSlotOverride(framework, name) ??
+          (type && hasWrapperSlotEvidence(name) ? type : undefined),
+        description: describeSlot(framework, name),
+        required: slotRequired[name] || false,
+      }));
 
   const reactSlots = createSlots("react", "ReactNode", true);
   const angularSlots = createSlots("angular", "TemplateRef", true);
@@ -2663,6 +3118,36 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     : [];
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
+
+  // A value the element's validator marks deprecated is deprecated in every
+  // framework, though the shared wrapper types still list it.
+  for (const elementProp of webComponentProps) {
+    const deprecatedValues = elementProp.deprecatedValues;
+    if (!deprecatedValues) continue;
+    for (const prop of [...reactProps, ...angularProps]) {
+      if (prop.name.toLowerCase() !== elementProp.name.toLowerCase() || !prop.values)
+        continue;
+      prop.values = prop.values.filter((value) => !deprecatedValues.includes(value));
+      prop.type = prop.values.map((value) => `"${value}"`).join(" | ");
+      prop.deprecatedValues = deprecatedValues;
+    }
+  }
+
+  // The same deprecation follows a shared type to every component that uses
+  // it: a wrapper prop that accepts exactly a deprecating validator's values
+  // is that validator's type.
+  for (const prop of [...reactProps, ...angularProps]) {
+    if (!prop.values || prop.deprecatedValues) continue;
+    const accepted = new Set(prop.values);
+    const validator = getDeprecatingValidators().find(
+      (v) => v.values.length === accepted.size && v.values.every((value) => accepted.has(value)),
+    );
+    const deprecatedValues = validator?.deprecated;
+    if (!deprecatedValues) continue;
+    prop.values = prop.values.filter((value) => !deprecatedValues.includes(value));
+    prop.type = prop.values.map((value) => `"${value}"`).join(" | ");
+    prop.deprecatedValues = deprecatedValues;
+  }
 
   applyPropTypeOverrides(componentName, "react", reactProps);
   applyPropTypeOverrides(componentName, "angular", angularProps);

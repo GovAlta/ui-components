@@ -13,14 +13,24 @@
         },
         {
           "name": "navigation",
-          "type": "GoabTabsNavigation",
+          "type": "\"hash\" | \"none\"",
+          "typeLabel": "GoabTabsNavigation",
+          "values": [
+            "hash",
+            "none"
+          ],
           "required": false,
           "default": "hash",
           "description": "Controls URL navigation mode on tab change."
         },
         {
           "name": "orientation",
-          "type": "GoabTabsOrientation",
+          "type": "\"auto\" | \"horizontal\"",
+          "typeLabel": "GoabTabsOrientation",
+          "values": [
+            "auto",
+            "horizontal"
+          ],
           "required": false,
           "default": "auto",
           "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
@@ -34,7 +44,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabTabsVariant",
+          "type": "\"default\" | \"segmented\"",
+          "typeLabel": "GoabTabsVariant",
+          "values": [
+            "default",
+            "segmented"
+          ],
           "required": false,
           "default": "default",
           "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
@@ -63,14 +78,24 @@
         },
         {
           "name": "navigation",
-          "type": "GoabTabsNavigation",
+          "type": "\"hash\" | \"none\"",
+          "typeLabel": "GoabTabsNavigation",
+          "values": [
+            "hash",
+            "none"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the navigation mode for tab switching. \"hash\" updates the URL hash when switching tabs."
         },
         {
           "name": "orientation",
-          "type": "GoabTabsOrientation",
+          "type": "\"auto\" | \"horizontal\"",
+          "typeLabel": "GoabTabsOrientation",
+          "values": [
+            "auto",
+            "horizontal"
+          ],
           "required": false,
           "default": null,
           "description": "Tab layout orientation. \"auto\" stacks vertically on mobile (default), \"horizontal\" keeps horizontal on all screen sizes."
@@ -84,7 +109,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabTabsVariant",
+          "type": "\"default\" | \"segmented\"",
+          "typeLabel": "GoabTabsVariant",
+          "values": [
+            "default",
+            "segmented"
+          ],
           "required": false,
           "default": null,
           "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
@@ -120,7 +150,7 @@
           ],
           "required": false,
           "default": "hash",
-          "description": ""
+          "description": "Sets the navigation mode for tab switching. \"hash\" updates the URL hash when switching tabs."
         },
         {
           "name": "orientation",
@@ -156,7 +186,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ tab: number }>",
-          "description": "",
+          "description": "Emits when the active tab changes.",
           "frameworks": [
             "webComponents"
           ]

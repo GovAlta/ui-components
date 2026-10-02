@@ -32,7 +32,24 @@ export interface SearchCandidate {
   item: IndexedItem;
   matchCount: number;
   matchTypes: Set<'exact' | 'partial' | 'tag' | 'category'>;
+  /** The query, less its stopwords, is this record's id, name or an alias. */
+  named?: boolean;
 }
+
+/**
+ * Words that name no subject in a question ("how do I use the table
+ * component"). Each one matched most of the index and outvoted the one word
+ * that named the thing being asked about. "component" names the kind of
+ * thing rather than the thing; the collection filter carries the kind.
+ */
+const QUERY_STOPWORDS = new Set([
+  'an', 'and', 'are', 'as', 'at', 'be', 'by', 'can', 'component',
+  'components', 'could', 'did', 'do', 'does', 'for', 'from', 'has', 'have',
+  'how', 'in', 'is', 'it', 'its', 'me', 'my', 'of', 'on', 'or', 'our',
+  'should', 'that', 'the', 'their', 'there', 'these', 'this', 'those', 'to',
+  'use', 'using', 'we', 'what', 'when', 'where', 'which', 'who', 'why',
+  'with', 'would', 'you', 'your',
+]);
 
 export class InvertedIndex {
   // Core indices for fast lookups
@@ -40,6 +57,7 @@ export class InvertedIndex {
   private tagIndex = new Map<string, Set<string>>(); // tag -> set of item IDs
   private categoryIndex = new Map<string, Set<string>>(); // category -> set of item IDs
   private prefixIndex = new Map<string, Set<string>>(); // prefix -> set of item IDs
+  private nameIndex = new Map<string, Set<string>>(); // name phrase -> set of item IDs
 
   // Item storage
   private items = new Map<string, IndexedItem>(); // id -> item data
@@ -89,6 +107,20 @@ export class InvertedIndex {
       }
       (this.tagIndex.get(normalizedTag) as Set<string>).add(item.id);
     });
+
+    // Index the record's names, read the way a query is read, so a question
+    // that names the record exactly can put it first.
+    const names = [item.id, item.data.name, item.data.componentName, item.data.title];
+    if (Array.isArray(item.data.aliases)) names.push(...item.data.aliases);
+    for (const name of names) {
+      if (typeof name !== 'string') continue;
+      const phrase = this.toPhrase(this.extractQueryTerms(name));
+      if (!phrase) continue;
+      if (!this.nameIndex.has(phrase)) {
+        this.nameIndex.set(phrase, new Set());
+      }
+      (this.nameIndex.get(phrase) as Set<string>).add(item.id);
+    }
 
     // Index category
     if (item.category) {
@@ -156,10 +188,26 @@ export class InvertedIndex {
       }
     });
 
+    // A query that is exactly a record's name ("how do I use the text
+    // component" is "text") names what it wants. Every word counting the same
+    // left that record tied with any other that mentions the word.
+    this.nameIndex.get(this.toPhrase(queryTerms))?.forEach((itemId) => {
+      if (!candidateScores.has(itemId)) {
+        this.addCandidateMatch(candidateScores, itemId, 'exact');
+      }
+      const candidate = candidateScores.get(itemId);
+      if (candidate) candidate.named = true;
+    });
+
     // Convert to array and sort by relevance
     const candidates = Array.from(candidateScores.values())
       .sort((a, b) => {
-        // Primary sort: number of matches
+        // A record the query names comes first
+        if (Boolean(a.named) !== Boolean(b.named)) {
+          return a.named ? -1 : 1;
+        }
+
+        // Then the number of matches
         if (a.matchCount !== b.matchCount) {
           return b.matchCount - a.matchCount;
         }
@@ -180,6 +228,13 @@ export class InvertedIndex {
    */
   getItem(id: string): IndexedItem | undefined {
     return this.items.get(id);
+  }
+
+  /**
+   * Get every indexed item
+   */
+  getAllItems(): IndexedItem[] {
+    return Array.from(this.items.values());
   }
 
   /**
@@ -206,6 +261,7 @@ export class InvertedIndex {
     this.tagIndex.clear();
     this.categoryIndex.clear();
     this.prefixIndex.clear();
+    this.nameIndex.clear();
     this.items.clear();
     this.updateStats();
   }
@@ -258,16 +314,24 @@ export class InvertedIndex {
   }
 
   private extractQueryTerms(query: string): string[] {
-    return (
+    const terms =
       query
         .toLowerCase()
         .match(/\b\w+\b/g)
-        ?.filter((term) => term.length >= 2) || []
-    );
+        ?.filter((term) => term.length >= 2) || [];
+    const meaningful = terms.filter((term) => !QUERY_STOPWORDS.has(term));
+    // A query made only of stopwords ("what components are there") keeps its
+    // words, so it still searches instead of coming back empty.
+    return meaningful.length > 0 ? meaningful : terms;
   }
 
   private normalizeTerm(term: string): string {
     return term.toLowerCase().trim();
+  }
+
+  /** "date picker", "date-picker" and "Date picker" all read as date-picker. */
+  private toPhrase(terms: string[]): string {
+    return terms.map((term) => this.normalizeTerm(term)).join('-');
   }
 
   private addCandidateMatch(

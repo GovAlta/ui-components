@@ -6,7 +6,13 @@
       "props": [
         {
           "name": "ariaLive",
-          "type": "GoabAriaLiveType",
+          "type": "\"polite\" | \"assertive\" | \"off\"",
+          "typeLabel": "GoabAriaLiveType",
+          "values": [
+            "polite",
+            "assertive",
+            "off"
+          ],
           "required": false,
           "default": "polite",
           "description": "Indicates how assistive technology should handle updates to the live region."
@@ -20,7 +26,12 @@
         },
         {
           "name": "emphasis",
-          "type": "GoabNotificationEmphasis",
+          "type": "\"high\" | \"low\"",
+          "typeLabel": "GoabNotificationEmphasis",
+          "values": [
+            "high",
+            "low"
+          ],
           "required": false,
           "default": "high",
           "description": "Sets the visual prominence. 'high' for full background, 'low' for a bordered style."
@@ -41,9 +52,16 @@
         },
         {
           "name": "type",
-          "type": "GoabNotificationType",
+          "type": "\"important\" | \"information\" | \"event\" | \"emergency\"",
+          "typeLabel": "GoabNotificationType",
+          "values": [
+            "important",
+            "information",
+            "event",
+            "emergency"
+          ],
           "required": false,
-          "default": null,
+          "default": "information",
           "description": "Define the context and colour of the notification."
         }
       ],
@@ -63,7 +81,13 @@
       "props": [
         {
           "name": "ariaLive",
-          "type": "GoabAriaLiveType",
+          "type": "\"polite\" | \"assertive\" | \"off\"",
+          "typeLabel": "GoabAriaLiveType",
+          "values": [
+            "polite",
+            "assertive",
+            "off"
+          ],
           "required": false,
           "default": null,
           "description": "Indicates how assistive technology should handle updates to the live region."
@@ -77,7 +101,12 @@
         },
         {
           "name": "emphasis",
-          "type": "GoabNotificationEmphasis",
+          "type": "\"high\" | \"low\"",
+          "typeLabel": "GoabNotificationEmphasis",
+          "values": [
+            "high",
+            "low"
+          ],
           "required": false,
           "default": "high",
           "description": "Sets the visual prominence. 'high' for full background, 'low' for medium."
@@ -98,7 +127,14 @@
         },
         {
           "name": "type",
-          "type": "GoabNotificationType",
+          "type": "\"important\" | \"information\" | \"event\" | \"emergency\"",
+          "typeLabel": "GoabNotificationType",
+          "values": [
+            "important",
+            "information",
+            "event",
+            "emergency"
+          ],
           "required": false,
           "default": "information",
           "description": "Define the context and colour of the notification."
@@ -183,7 +219,7 @@
         {
           "name": "_dismiss",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the notification is dismissed.",
           "frameworks": [
             "webComponents"
           ]

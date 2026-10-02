@@ -24,6 +24,7 @@ interface GoALinkButtonProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   /** @deprecated Use GoabButton instead. Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
+  /** Content rendered inside the link button. */
   children: ReactNode;
 }
 

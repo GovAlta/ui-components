@@ -36,8 +36,11 @@
 
   // Public
 
+  /** Sets the panel heading text. */
   export let heading: string = "Notifications";
+  /** Sets the initially active tab. */
   export let activeTab: TabType = "unread";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   // *******

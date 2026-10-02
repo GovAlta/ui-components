@@ -13,9 +13,13 @@
 <script lang="ts">
   import PushDrawerInternal from "./PushDrawerInternal.svelte";
 
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string | undefined = undefined;
+  /** Sets the open state of the push drawer. */
   export let open: boolean = false;
+  /** Sets the heading text of the push drawer. Use the heading slot for custom heading content. */
   export let heading: string = "";
+  /** Sets the width of the push drawer panel. */
   export let width: string = "492px";
 
   // Minimum window width for desktop layout from vite.config.js

@@ -23,32 +23,39 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabSkeletonSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\"",
+          "typeLabel": "GoabSkeletonSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
           "required": false,
           "default": "1",
           "description": "Size can affect either the height, width or both for different skeleton types."
@@ -62,7 +69,22 @@
         },
         {
           "name": "type",
-          "type": "GoabSkeletonType",
+          "type": "\"image\" | \"text\" | \"title\" | \"text-small\" | \"avatar\" | \"header\" | \"paragraph\" | \"thumbnail\" | \"card\" | \"lines\" | \"profile\" | \"article\"",
+          "typeLabel": "GoabSkeletonType",
+          "values": [
+            "image",
+            "text",
+            "title",
+            "text-small",
+            "avatar",
+            "header",
+            "paragraph",
+            "thumbnail",
+            "card",
+            "lines",
+            "profile",
+            "article"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the skeleton shape to represent your content."
@@ -117,7 +139,14 @@
         },
         {
           "name": "size",
-          "type": "GoabSkeletonSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\"",
+          "typeLabel": "GoabSkeletonSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
           "required": false,
           "default": null,
           "description": "Size can affect either the height, width or both for different skeleton types."
@@ -131,7 +160,22 @@
         },
         {
           "name": "type",
-          "type": "GoabSkeletonType",
+          "type": "\"image\" | \"text\" | \"title\" | \"text-small\" | \"avatar\" | \"header\" | \"paragraph\" | \"thumbnail\" | \"card\" | \"lines\" | \"profile\" | \"article\"",
+          "typeLabel": "GoabSkeletonType",
+          "values": [
+            "image",
+            "text",
+            "title",
+            "text-small",
+            "avatar",
+            "header",
+            "paragraph",
+            "thumbnail",
+            "card",
+            "lines",
+            "profile",
+            "article"
+          ],
           "required": true,
           "default": null,
           "description": "Sets the skeleton shape to represent your content."
