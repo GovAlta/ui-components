@@ -34,14 +34,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the link button.",
-          "required": true
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [],
@@ -60,13 +53,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the link button.",
-          "required": true
-        }
-      ]
+      "slots": []
     }
   }
 }

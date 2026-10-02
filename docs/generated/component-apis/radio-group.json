@@ -132,14 +132,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Radio items to render inside the group.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -271,14 +264,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Radio items to render inside the group.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
@@ -407,13 +393,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Radio items to render inside the group.",
-          "required": false
-        }
-      ]
+      "slots": []
     }
   }
 }

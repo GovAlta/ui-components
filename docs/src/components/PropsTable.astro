@@ -108,9 +108,8 @@ function getSlotType(slot: SlotDefinition, framework: FrameworkKey): string {
 }
 
 function getSlotsHeadingLabel(framework: FrameworkKey): string {
-  // Angular's section also lists its projected child content, which isn't a
-  // TemplateRef, so it takes the web component's heading.
   if (framework === "react") return "ReactNode";
+  if (framework === "angular") return "TemplateRef";
   return "Slots";
 }
 
@@ -469,7 +468,12 @@ const initialVisibleFramework =
       ) as HTMLElement | null;
       if (slotsHeading) {
         const prefix = slotsHeading.dataset.prefix || "";
-        const label = supported === "react" ? "ReactNode" : "Slots";
+        const label =
+          supported === "react"
+            ? "ReactNode"
+            : supported === "angular"
+              ? "TemplateRef"
+              : "Slots";
         slotsHeading.textContent = `${prefix}${label}`;
       }
 

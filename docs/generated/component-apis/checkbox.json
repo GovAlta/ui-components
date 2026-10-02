@@ -164,12 +164,6 @@
       ],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the checkbox label slot.",
-          "required": false
-        },
-        {
           "name": "description",
           "type": "ReactNode",
           "description": "Additional description text displayed below the checkbox label.",
@@ -345,12 +339,6 @@
       ],
       "slots": [
         {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the checkbox label slot.",
-          "required": false
-        },
-        {
           "name": "description",
           "type": "TemplateRef",
           "description": "Additional description text displayed below the checkbox label.",
@@ -521,11 +509,6 @@
         }
       ],
       "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the checkbox label slot.",
-          "required": false
-        },
         {
           "name": "description",
           "description": "Additional description text displayed below the checkbox label.",

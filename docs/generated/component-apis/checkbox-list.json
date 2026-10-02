@@ -119,14 +119,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the checkbox list.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -253,14 +246,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the checkbox list.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
@@ -383,13 +369,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the checkbox list.",
-          "required": false
-        }
-      ]
+      "slots": []
     }
   }
 }

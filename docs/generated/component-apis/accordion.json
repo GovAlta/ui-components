@@ -122,12 +122,6 @@
           "required": false
         },
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the accordion body.",
-          "required": false
-        },
-        {
           "name": "headingContent",
           "type": "ReactNode",
           "description": "Sets content rendered within the accordion heading, alongside the heading text.",
@@ -252,12 +246,6 @@
           "name": "actions",
           "type": "TemplateRef",
           "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the accordion body.",
           "required": false
         },
         {
@@ -395,11 +383,6 @@
         {
           "name": "actions",
           "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "description": "Content rendered inside the accordion body.",
           "required": false
         },
         {

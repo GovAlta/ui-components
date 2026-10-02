@@ -84,12 +84,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "The element that triggers the tooltip on hover or focus.",
-          "required": false
-        },
-        {
           "name": "content",
           "type": "ReactNode",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
@@ -183,12 +177,6 @@
           "type": "TemplateRef",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
           "required": false
-        },
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "The element that triggers the tooltip on hover or focus.",
-          "required": false
         }
       ]
     },
@@ -280,11 +268,6 @@
         {
           "name": "content",
           "description": "The content of the tooltip. Accepts plain text or rich content.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "description": "The element that triggers the tooltip on hover or focus.",
           "required": false
         }
       ]

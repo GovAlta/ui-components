@@ -22,12 +22,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "The heading text or content rendered inside the side menu heading.",
-          "required": false
-        },
-        {
           "name": "meta",
           "type": "ReactNode",
           "description": "Content rendered in the meta slot, displayed alongside the heading.",
@@ -54,12 +48,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "The heading text or content rendered inside the side menu heading.",
-          "required": false
-        },
         {
           "name": "meta",
           "type": "TemplateRef",
@@ -88,11 +76,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "description": "The heading text or content rendered inside the side menu heading.",
-          "required": false
-        },
         {
           "name": "meta",
           "description": "Content rendered in the meta slot, displayed alongside the heading.",

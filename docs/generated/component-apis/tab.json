@@ -29,12 +29,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the tab panel.",
-          "required": false
-        },
-        {
           "name": "heading",
           "type": "ReactNode",
           "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
@@ -68,12 +62,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the tab panel.",
-          "required": false
-        },
         {
           "name": "heading",
           "type": "TemplateRef",
@@ -115,11 +103,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the tab panel.",
-          "required": false
-        },
         {
           "name": "heading",
           "description": "The text label for this tab.",

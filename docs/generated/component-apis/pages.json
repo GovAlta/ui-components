@@ -41,14 +41,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Page content to show or hide based on the current page index.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -96,14 +89,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Page content to show or hide based on the current page index.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
@@ -148,13 +134,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Page content to show or hide based on the current page index.",
-          "required": false
-        }
-      ]
+      "slots": []
     }
   }
 }

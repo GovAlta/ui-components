@@ -269,8 +269,6 @@ const WEB_COMPONENT_SLOT_DESCRIPTIONS: Record<string, Record<string, string>> = 
     meta: "Copyright and legal links, in a goa-app-footer-meta-section.",
   },
 };
-// Elements that take their child content in code rather than through a <slot>.
-const DEFAULT_CONTENT_WITHOUT_SLOT = new Set(["container"]);
 function shouldSkipInternalProp(propName: string): boolean {
   return INTERNAL_PROP_NAMES.has(propName.toLowerCase());
 }
@@ -992,16 +990,6 @@ function extractSlots(content: string): string[] {
       seenNames.add(name);
       slotNames.push(name);
     }
-  }
-
-  // The default slot, a <slot> with no name, which takes the element's child
-  // content. Only the markup counts, not the script or the styles.
-  const markup = content.replace(
-    /<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,
-    "",
-  );
-  if (/<slot(?![^>]*\bname\s*=)[\s/>]/.test(markup) && !seenNames.has("default")) {
-    slotNames.push("default");
   }
 
   return slotNames;
@@ -2999,9 +2987,6 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     rawEventNames = Array.from(new Set(rawEventNames));
   }
   const slotNames = extractSlots(content);
-  if (DEFAULT_CONTENT_WITHOUT_SLOT.has(componentName) && !slotNames.includes("default")) {
-    slotNames.push("default");
-  }
   const wrapperComponentName = WRAPPER_COMPONENT_ALIASES[componentName] ?? componentName;
   const reactWrapper = extractReactWrapperApi(
     componentName,
@@ -3015,6 +3000,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     slotNames,
     wrapperComponentName,
   );
+
+  // Default slot content is implied by usage examples and is intentionally omitted
+  // from the API docs to reduce noise.
 
   // Transform to output format
   let webComponentProps: ExtractedProp[] = rawProps.map((p) => ({
@@ -3111,26 +3099,14 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
           getSlotOverride(framework, name) !== HIDE_SLOT &&
           !(name === "content" && !slotNameAliases[name] && !slotDescriptions[name]),
       )
-      .map((name) => {
-        // Angular takes child content by projection, not through an input.
-        const isProjectedContent = framework === "angular" && name === "default";
-        return {
-          name: isProjectedContent
-            ? name
-            : useAliasNames
-              ? slotNameAliases[name] || name
-              : name,
-          type:
-            getSlotOverride(framework, name) ??
-            (isProjectedContent
-              ? "ng-content"
-              : type && hasWrapperSlotEvidence(name)
-                ? type
-                : undefined),
-          description: describeSlot(framework, name),
-          required: slotRequired[name] || false,
-        };
-      });
+      .map((name) => ({
+        name: useAliasNames ? slotNameAliases[name] || name : name,
+        type:
+          getSlotOverride(framework, name) ??
+          (type && hasWrapperSlotEvidence(name) ? type : undefined),
+        description: describeSlot(framework, name),
+        required: slotRequired[name] || false,
+      }));
 
   const reactSlots = createSlots("react", "ReactNode", true);
   const angularSlots = createSlots("angular", "TemplateRef", true);

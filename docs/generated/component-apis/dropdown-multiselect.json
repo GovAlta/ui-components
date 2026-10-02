@@ -158,14 +158,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Dropdown items rendered inside the component (GoabDropdownItem elements).",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -330,14 +323,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Dropdown items rendered inside the component (GoabDropdownItem elements).",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
@@ -498,13 +484,7 @@
           ]
         }
       ],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Dropdown items rendered inside the component (GoabDropdownItem elements).",
-          "required": false
-        }
-      ]
+      "slots": []
     }
   }
 }

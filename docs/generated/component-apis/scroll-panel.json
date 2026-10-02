@@ -35,12 +35,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered in the scrollable body region.",
-          "required": false
-        },
-        {
           "name": "footer",
           "type": "ReactNode",
           "description": "Content rendered in the sticky footer region.",
@@ -87,12 +81,6 @@
       "events": [],
       "slots": [
         {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered in the scrollable body region.",
-          "required": false
-        },
-        {
           "name": "footer",
           "type": "TemplateRef",
           "description": "Content rendered in the sticky footer region.",
@@ -137,11 +125,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered in the scrollable body region.",
-          "required": false
-        },
         {
           "name": "footer",
           "description": "Content rendered in the sticky footer region.",

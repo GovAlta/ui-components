@@ -51,12 +51,6 @@
           "required": false
         },
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the push drawer body.",
-          "required": true
-        },
-        {
           "name": "heading",
           "type": "ReactNode",
           "description": "Sets the heading text or custom heading content.",
@@ -113,12 +107,6 @@
           "required": false
         },
         {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the push drawer body.",
-          "required": true
-        },
-        {
           "name": "heading",
           "type": "TemplateRef",
           "description": "Sets the heading text or custom heading content.",
@@ -172,11 +160,6 @@
           "name": "actions",
           "description": "Content rendered in the actions slot, typically action buttons.",
           "required": false
-        },
-        {
-          "name": "default",
-          "description": "Content rendered inside the push drawer body.",
-          "required": true
         },
         {
           "name": "heading",

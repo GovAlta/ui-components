@@ -72,12 +72,6 @@
           "required": false
         },
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the modal body.",
-          "required": false
-        },
-        {
           "name": "heading",
           "type": "ReactNode",
           "description": "The heading text displayed at the top of the modal.",
@@ -159,12 +153,6 @@
           "name": "actions",
           "type": "TemplateRef",
           "description": "Content rendered in the modal's actions slot, typically action buttons.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the modal body.",
           "required": false
         },
         {
@@ -255,11 +243,6 @@
         {
           "name": "actions",
           "description": "Content rendered in the modal's actions slot, typically action buttons.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "description": "Content rendered inside the modal body.",
           "required": false
         },
         {

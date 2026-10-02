@@ -123,12 +123,6 @@
           "required": false
         },
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the container body.",
-          "required": false
-        },
-        {
           "name": "title",
           "type": "ReactNode",
           "description": "Content rendered in the container's title/heading area.",
@@ -254,12 +248,6 @@
           "name": "actions",
           "type": "TemplateRef",
           "description": "Content rendered in the container's actions area, typically buttons or controls.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the container body.",
           "required": false
         },
         {
@@ -391,11 +379,6 @@
         {
           "name": "actions",
           "description": "Content rendered in the container's actions area, typically buttons or controls.",
-          "required": false
-        },
-        {
-          "name": "default",
-          "description": "Content rendered inside the container body.",
           "required": false
         },
         {

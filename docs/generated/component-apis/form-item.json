@@ -124,12 +124,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the form item, typically an input component.",
-          "required": false
-        },
-        {
           "name": "error",
           "type": "ReactNode",
           "description": "Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content.",
@@ -271,12 +265,6 @@
       "events": [],
       "slots": [
         {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the form item, typically an input component.",
-          "required": false
-        },
-        {
           "name": "error",
           "type": "TemplateRef",
           "description": "Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ngTemplate for custom error content.",
@@ -414,11 +402,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the form item, typically an input component.",
-          "required": false
-        },
         {
           "name": "error",
           "description": "Error text displayed under the form field. Leave blank to indicate a valid field.",

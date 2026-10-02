@@ -77,12 +77,6 @@
       "events": [],
       "slots": [
         {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Content rendered inside the popover body.",
-          "required": true
-        },
-        {
           "name": "target",
           "type": "ReactNode",
           "description": "Sets the element used as the popover trigger.",
@@ -164,12 +158,6 @@
       ],
       "events": [],
       "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Content rendered inside the popover body.",
-          "required": true
-        },
         {
           "name": "target",
           "type": "TemplateRef",
@@ -298,11 +286,6 @@
         }
       ],
       "slots": [
-        {
-          "name": "default",
-          "description": "Content rendered inside the popover body.",
-          "required": true
-        },
         {
           "name": "target",
           "description": "Sets the element used as the popover trigger.",

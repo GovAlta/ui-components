@@ -47,14 +47,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "children",
-          "type": "ReactNode",
-          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "angular": {
       "props": [
@@ -101,14 +94,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "default",
-          "type": "ng-content",
-          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
-          "required": false
-        }
-      ]
+      "slots": []
     },
     "webComponents": {
       "props": [
@@ -147,13 +133,7 @@
         }
       ],
       "events": [],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Rich content rendered for this item in the dropdown menu. When set, `label` is shown in the dropdown input on selection and `filter` defaults to the content's text.",
-          "required": false
-        }
-      ]
+      "slots": []
     }
   }
 }
