@@ -8,6 +8,8 @@ import {
   GoabBadge,
   GoabButton,
   GoabButtonGroup,
+  GoabFormItem,
+  GoabInput,
   GoabPushDrawer,
   GoabThemeService,
   GoabWorkSideMenu,
@@ -17,12 +19,18 @@ import {
   GoabWorkSideNotificationItem,
   GoabWorkspaceLayout,
 } from "@abgov/angular-components";
+import {
+  GoabInputOnChangeDetail,
+  GoabInputOnKeyPressDetail,
+} from "@abgov/ui-components-common";
 import { PushDrawerHostService } from "../routes/features/feat3347PushDrawer/push-drawer-host.service";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
   featureRouteDefinitions,
+  prRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
+import { findPrRoute } from "./route-search";
 
 interface NotificationData {
   id: string;
@@ -38,13 +46,14 @@ interface NotificationData {
   standalone: true,
   selector: "abgov-root",
   templateUrl: "./app.component.html",
-  styles: ``,
   imports: [
     RouterOutlet,
     GoabAppFooter,
     GoabAppHeader,
     GoabButton,
     GoabButtonGroup,
+    GoabFormItem,
+    GoabInput,
     GoabPushDrawer,
     GoabBadge,
     GoabWorkSideMenu,
@@ -59,6 +68,9 @@ interface NotificationData {
 export class AppComponent {
   isFullPage = false;
   isPushDrawerRoute = false;
+  sideMenuOpen = true;
+  routeSearchQuery = "";
+  routeSearchError = "";
   readonly bugRouteDefinitions = bugRouteDefinitions;
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
@@ -166,5 +178,30 @@ export class AppComponent {
       ? "/" + path.slice(this.baseHref.length)
       : path;
     this.router.navigateByUrl(internal);
+  }
+
+  handleSideMenuToggle(): void {
+    this.sideMenuOpen = !this.sideMenuOpen;
+  }
+
+  handleRouteSearchChange(detail: GoabInputOnChangeDetail): void {
+    this.routeSearchQuery = detail.value;
+    this.routeSearchError = "";
+  }
+
+  handleRouteSearch(query = this.routeSearchQuery): void {
+    const route = findPrRoute(query, prRouteDefinitions);
+
+    if (!route) {
+      this.routeSearchError = "No route found. Try a story number or component name.";
+      return;
+    }
+
+    this.routeSearchError = "";
+    this.router.navigateByUrl(`/${route.path}`);
+  }
+
+  handleRouteSearchKeyPress(detail: GoabInputOnKeyPressDetail): void {
+    if (detail.key === "Enter") this.handleRouteSearch(detail.value);
   }
 }

@@ -3,10 +3,11 @@
     <goab-work-side-menu
       heading="Testing Playground"
       [url]="baseHref"
-      [open]="true"
+      [open]="sideMenuOpen"
       userName="Edna Mode"
       userSecondaryText="edna.mode@gov.ab.ca"
       (onNavigate)="handleNavigate($event)"
+      (onToggle)="handleSideMenuToggle()"
       [primaryContent]="primaryTemplate"
       [secondaryContent]="secondaryTemplate"
       [accountContent]="accountTemplate"
@@ -61,6 +62,31 @@
   </ng-template>
 
   <ng-template #primaryTemplate>
+    @if (sideMenuOpen) {
+      <goab-form-item label="Find a route" [error]="routeSearchError || undefined" mb="m">
+        <goab-input
+          type="search"
+          name="route-search"
+          [value]="routeSearchQuery"
+          placeholder="Story # or component"
+          leadingIcon="search"
+          size="compact"
+          width="70%"
+          [error]="!!routeSearchError"
+          (onChange)="handleRouteSearchChange($event)"
+          (onKeyPress)="handleRouteSearchKeyPress($event)"
+          mr="xs"
+        />
+        <goab-button
+          type="secondary"
+          size="compact"
+          testId="route-search-submit"
+          (onClick)="handleRouteSearch()"
+        >
+          Go
+        </goab-button>
+      </goab-form-item>
+    }
     <goab-work-side-menu-item
       label="All Components"
       [url]="baseHref + 'everything'"

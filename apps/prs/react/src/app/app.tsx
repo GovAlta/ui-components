@@ -4,6 +4,8 @@ import {
   GoabBadge,
   GoabButton,
   GoabButtonGroup,
+  GoabFormItem,
+  GoabInput,
   GoabPushDrawer,
   GoabText,
   GoabWorkSideMenu,
@@ -15,13 +17,18 @@ import {
   GoabWorkspaceLayout,
   useGoabWorkspaceLayoutScrollState,
 } from "@abgov/react-components";
-import { GoabWorkspaceLayoutScrollState } from "@abgov/ui-components-common";
+import {
+  GoabInputOnChangeDetail,
+  GoabInputOnKeyPressDetail,
+  GoabWorkspaceLayoutScrollState,
+} from "@abgov/ui-components-common";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
   featureRouteDefinitions,
+  prRouteDefinitions,
 } from "./route-manifest";
-import "@abgov/style";
+import { findPrRoute } from "./route-search";
 
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -127,6 +134,9 @@ export function App() {
   const isDark = mode === "dark";
   const location = useLocation();
   const baseUrl = import.meta.env.BASE_URL;
+  const [sideMenuOpen, setSideMenuOpen] = useState(true);
+  const [routeSearchQuery, setRouteSearchQuery] = useState("");
+  const [routeSearchError, setRouteSearchError] = useState("");
 
   const isPushDrawerRoute =
     location.pathname === PUSH_DRAWER_ROUTE_PATH ||
@@ -160,6 +170,27 @@ export function App() {
     navigate(internal);
   };
 
+  const handleRouteSearchChange = (detail: GoabInputOnChangeDetail) => {
+    setRouteSearchQuery(detail.value);
+    setRouteSearchError("");
+  };
+
+  const handleRouteSearch = (query = routeSearchQuery) => {
+    const route = findPrRoute(query, prRouteDefinitions);
+
+    if (!route) {
+      setRouteSearchError("No route found. Try a story number or component name.");
+      return;
+    }
+
+    setRouteSearchError("");
+    navigate(`/${route.path}`);
+  };
+
+  const handleRouteSearchKeyPress = (detail: GoabInputOnKeyPressDetail) => {
+    if (detail.key === "Enter") handleRouteSearch(detail.value);
+  };
+
   // Sample notifications to populate the position-right panel for #4110.
   const [notifications, setNotifications] = useState<NotificationData[]>(() =>
     createSampleNotifications(),
@@ -189,7 +220,8 @@ export function App() {
     <GoabWorkSideMenu
       heading="Testing Playground"
       url={baseUrl}
-      open={true}
+      open={sideMenuOpen}
+      onToggle={() => setSideMenuOpen((open) => !open)}
       userName="Edna Mode"
       userSecondaryText="edna.mode@gov.ab.ca"
       onNavigate={handleSideMenuNavigate}
@@ -242,6 +274,35 @@ export function App() {
       }
       primaryContent={
         <>
+          {sideMenuOpen && (
+            <GoabFormItem
+              label="Find a route"
+              error={routeSearchError || undefined}
+              mb="m"
+            >
+              <GoabInput
+                type="search"
+                name="route-search"
+                value={routeSearchQuery}
+                placeholder="Story # or component"
+                leadingIcon="search"
+                size="compact"
+                width="70%"
+                error={Boolean(routeSearchError)}
+                onChange={handleRouteSearchChange}
+                onKeyPress={handleRouteSearchKeyPress}
+                mr="xs"
+              />
+              <GoabButton
+                type="secondary"
+                size="compact"
+                testId="route-search-submit"
+                onClick={() => handleRouteSearch()}
+              >
+                Go
+              </GoabButton>
+            </GoabFormItem>
+          )}
           <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
             {bugRouteDefinitions.map((route) => (
               <GoabWorkSideMenuItem
