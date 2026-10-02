@@ -477,17 +477,26 @@ try {
     }
   }
   // A filter that can't match its collection is bad input too: a framework on
-  // a collection that isn't tied to one, or a status no record there carries.
+  // a collection that isn't tied to one, or a status, size or product type no
+  // record there carries, in one collection or across all of them.
   const noFramework = Object.keys(recordsBy).filter((collection) => !["components", "examples"].includes(collection));
   for (const collection of noFramework) {
     if ((await call("search", { query: "", collection, framework: "react" })).isError) continue;
     fail(`search with a framework on ${collection} answered instead of an error`);
   }
-  for (const [collection, list] of Object.entries(recordsBy)) {
-    const used = new Set(list.map((r) => r.status));
-    for (const status of ["published", "stable", "deprecated"].filter((s) => !used.has(s))) {
-      if ((await call("search", { query: "", collection, status })).isError) continue;
-      fail(`search for ${status} ${collection} answered instead of an error; ${collection} are ${[...used].join(" or ")}`);
+  const filterValues = {
+    status: ["published", "stable", "deprecated"],
+    size: ["interaction", "section", "page", "task", "product"],
+    productType: ["workspace", "public-form"],
+  };
+  const everyRecord = Object.values(recordsBy).flat();
+  for (const [collection, list] of [...Object.entries(recordsBy), [undefined, everyRecord]]) {
+    for (const [field, values] of Object.entries(filterValues)) {
+      const used = new Set(list.map((r) => r[field]).filter(Boolean));
+      for (const value of values.filter((v) => !used.has(v))) {
+        if ((await call("search", { query: "", collection, [field]: value })).isError) continue;
+        fail(`search for ${field} ${value} in ${collection ?? "every collection"} answered instead of an error`);
+      }
     }
   }
   const padded = await call("get", { id: `  ${componentIds[0]}  ` });

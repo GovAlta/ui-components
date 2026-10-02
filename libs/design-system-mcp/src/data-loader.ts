@@ -277,17 +277,28 @@ export class DataLoader {
   }
 
   /**
-   * The statuses the records in a collection carry, or those across every
-   * collection. A status filter outside these can never match.
+   * The values the records in a collection carry for a filter field, or those
+   * across every collection. A filter value outside these can never match.
    */
-  statusesIn(collection?: string): string[] {
+  valuesIn(
+    field: 'status' | 'size' | 'productType',
+    collection?: string,
+  ): string[] {
     const type = collection ? COLLECTION_TO_TYPE[collection] : undefined;
-    const statuses = new Set<string>();
+    const values = new Set<string>();
     for (const item of this.index.getAllItems()) {
       if (type && item.type !== type) continue;
-      if (typeof item.data.status === 'string') statuses.add(item.data.status);
+      const value = item.data[field];
+      if (typeof value === 'string' && value) values.add(value);
     }
-    return [...statuses].sort();
+    return [...values].sort();
+  }
+
+  /** The collections whose records carry a filter field at all. */
+  collectionsWith(field: 'status' | 'size' | 'productType'): string[] {
+    return Object.keys(COLLECTION_TO_TYPE).filter(
+      (collection) => this.valuesIn(field, collection).length > 0,
+    );
   }
 
   /**

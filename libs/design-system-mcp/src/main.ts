@@ -233,7 +233,7 @@ internal: rendered by another component; teams don't use it directly. subcompone
           );
         }
         if (status) {
-          const used = dataLoader.statusesIn(collection);
+          const used = dataLoader.valuesIn('status', collection);
           if (!used.includes(status)) {
             return toolError(
               new Error(
@@ -241,6 +241,24 @@ internal: rendered by another component; teams don't use it directly. subcompone
               ),
             );
           }
+        }
+        // Only some records carry a size or a product type, and not every size
+        // the schema allows is in use, so a value nothing carries is an error.
+        for (const [label, field, value] of [
+          ['size', 'size', size],
+          ['product type', 'productType', productType],
+        ] as const) {
+          if (!value) continue;
+          const used = dataLoader.valuesIn(field, collection);
+          if (used.includes(value)) continue;
+          const where = collection ?? 'records';
+          return toolError(
+            new Error(
+              used.length > 0
+                ? `No ${where} have ${label} ${value}; the ${label}s in use are ${used.join(', ')}.`
+                : `No ${where} have a ${label}; only ${dataLoader.collectionsWith(field).join(' and ')} do.`,
+            ),
+          );
         }
         if (component && !dataLoader.resolveComponentId(component)) {
           const { results: near } = await dataLoader.search(component, {
