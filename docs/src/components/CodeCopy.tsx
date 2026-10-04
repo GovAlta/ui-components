@@ -22,7 +22,7 @@ export const CodeCopy: React.FC<Props> = ({ code, className }) => {
     <>
     <div className={`goa-code-copy ${className || ""}`}>
       <GoabTooltip content={isCopied ? "Copied" : "Copy"} position="left">
-        <GoabIconButton ml="xs" mt="3xs" size="small" icon={isCopied ? "checkmark" :  "copy"} onClick={copyCode} />
+        <GoabIconButton ml="xs" mt="3xs" size="small" icon={isCopied ? "checkmark" : "copy"} ariaLabel={isCopied ? "Copied" : "Copy"} onClick={copyCode} />
       </GoabTooltip>
     </div>
     </>
