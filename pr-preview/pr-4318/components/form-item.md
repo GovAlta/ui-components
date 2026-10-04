@@ -16,16 +16,16 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `helpText` | string \| React.ReactNode | (none) | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
 | `label` | string \| React.ReactNode | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
-| `labelSize` | GoabFormItemLabelSize | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
+| `labelSize` | "compact" \| "regular" \| "large" | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the form item. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `requirement` | "optional" \| "required" | (none) | No | Marks the field with an optional or required label indicator. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `type` | "" \| "text-input" \| "textarea" \| "checkbox-list" \| "radio-group" | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -47,16 +47,16 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `helpText` | string \| TemplateRef<any> | (none) | No | Help text displayed under the form field to provide additional explanation. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
 | `label` | string \| TemplateRef<any> | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
-| `labelSize` | GoabFormItemLabelSize | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
+| `labelSize` | "compact" \| "regular" \| "large" | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `requirement` | "optional" \| "required" | (none) | No | Marks the field with an optional or required label indicator. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `type` | "" \| "text-input" \| "textarea" \| "checkbox-list" \| "radio-group" | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -94,8 +94,8 @@ Tag: `goa-form-item`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
-| `helptext` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
+| `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
+| `helptext` | No | Help text displayed under the form field to provide additional explanation. |
 | `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 
 ---

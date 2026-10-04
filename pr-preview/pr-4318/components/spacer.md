@@ -12,7 +12,7 @@ Negative area between the components and the interface.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `hSpacing` | GoabSpacerHorizontalSpacing | `none` | No | Horizontal spacing. |
+| `hSpacing` | Spacing \| "fill" | `none` | No | Horizontal spacing. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `vSpacing` | GoabSpacerVerticalSpacing | `none` | No | Vertical spacing. |
 
@@ -24,7 +24,7 @@ Negative area between the components and the interface.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `hSpacing` | GoabSpacerHorizontalSpacing | (none) | No | Horizontal spacing. |
+| `hSpacing` | Spacing \| "fill" | (none) | No | Horizontal spacing. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `vSpacing` | GoabSpacerVerticalSpacing | (none) | No | Vertical spacing. |
 
@@ -38,7 +38,7 @@ Tag: `goa-spacer`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `hspacing` | Spacing | `none` | No | Horizontal spacing. |
+| `hspacing` | Spacing \| "fill" | `none` | No | Horizontal spacing. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `vspacing` | Spacing | `none` | No | Vertical spacing |
 

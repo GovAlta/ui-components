@@ -13,14 +13,14 @@ Let users show and hide sections of related content on a page.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `heading` | string | (none) | Yes | Sets the heading text. |
-| `headingSize` | GoabAccordionHeadingSize | `small` | No | Sets the heading size of the accordion container heading. |
-| `headingType` | GoabAccordionHeadingType | `normal` | No | Sets the accordion style variant. |
-| `iconPosition` | GoabAccordionIconPosition | `left` | No | Sets the position of the expand/collapse icon. |
+| `headingSize` | "small" \| "medium" | `small` | No | Sets the heading size of the accordion container heading. |
+| `headingType` | "normal" \| "filled" | `normal` | No | Sets the accordion style variant. |
+| `iconPosition` | "left" \| "right" | `left` | No | Sets the position of the expand/collapse icon. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the accordion. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `open` | boolean | (none) | No | Sets the state of the accordion container open or closed. |
 | `secondaryText` | string | (none) | No | Sets secondary text displayed alongside the heading. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -47,9 +47,9 @@ Let users show and hide sections of related content on a page.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `heading` | string | (none) | Yes | Sets the heading text. |
-| `headingSize` | GoabAccordionHeadingSize | `small` | No | Sets the heading size of the accordion container heading. |
-| `headingType` | GoabAccordionHeadingType | `normal` | No | Sets the accordion style variant. |
-| `iconPosition` | GoabAccordionIconPosition | `left` | No | Sets the position of the expand/collapse icon. |
+| `headingSize` | "small" \| "medium" | `small` | No | Sets the heading size of the accordion container heading. |
+| `headingType` | "normal" \| "filled" | `normal` | No | Sets the accordion style variant. |
+| `iconPosition` | "left" \| "right" | `left` | No | Sets the position of the expand/collapse icon. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the accordion. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
@@ -100,7 +100,7 @@ Tag: `goa-accordion`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_change` | CustomEvent<{ open: boolean }> | (none) |
+| `_change` | CustomEvent<{ open: boolean }> | Emits when the accordion opens or closes. |
 
 ### Slots
 

@@ -16,14 +16,14 @@ A multiple selection input.
 | `disabled` | boolean | (none) | No | Disables all checkboxes in the list. |
 | `error` | boolean | (none) | No | Shows an error state on all checkboxes in the list. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the checkbox list container. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `value` | string[] | (none) | No | Array of currently selected checkbox values. |
+| `value` | string[] | `[]` | No | Array of currently selected checkbox values. |
 
 ### Events
 
@@ -51,7 +51,7 @@ A multiple selection input.
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | The name for the checkbox list group. Used as group identifier in change events. If omitted, a unique name is generated. |
-| `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox list. 'compact' reduces spacing between items. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string[] | (none) | No | Array of currently selected checkbox values. |
 
@@ -90,9 +90,9 @@ Tag: `goa-checkbox-list`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> | (none) |
-| `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | (none) |
-| `_focus` | CustomEvent<{ name: string }> | (none) |
+| `_blur` | CustomEvent<{ name: string }> | Emits when focus leaves all checkboxes in the list. |
+| `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Emits when a checkbox selection changes. |
+| `_focus` | CustomEvent<{ name: string }> | Emits when focus enters any checkbox in the list. |
 
 ---
 

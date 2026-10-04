@@ -66,16 +66,16 @@ Tag: `goa-push-drawer`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `heading` | string | (none) | No | (none) |
-| `open` | boolean | `false` | No | (none) |
-| `testid` | string | (none) | No | (none) |
-| `width` | string | `492px` | No | (none) |
+| `heading` | string | (none) | No | Sets the heading text of the push drawer. Use the heading slot for custom heading content. |
+| `open` | boolean | `false` | No | Sets the open state of the push drawer. |
+| `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
+| `width` | string | `492px` | No | Sets the width of the push drawer panel. |
 
 ### Events
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_close` | CustomEvent<void> | (none) |
+| `_close` | CustomEvent<void> | Emits when the push drawer closes. |
 
 ### Slots
 

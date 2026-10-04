@@ -43,8 +43,8 @@ Tag: `goa-footer`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `meta` | No | (none) |
-| `nav` | No | (none) |
+| `meta` | No | Copyright and legal links, in a goa-app-footer-meta-section. |
+| `nav` | No | Navigation link sections, each a goa-app-footer-nav-section. |
 
 ---
 

@@ -12,12 +12,12 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | GoabButtonGroupAlignment | `start` | No | Positions the button group in the page layout. |
-| `gap` | GoabButtonGroupGap | `relaxed` | No | Sets the spacing between buttons in the button group. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `alignment` | "start" \| "end" \| "center" | `start` | No | Positions the button group in the page layout. |
+| `gap` | "relaxed" \| "compact" | `relaxed` | No | Sets the spacing between buttons in the button group. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ---
@@ -28,8 +28,8 @@ Display multiple related actions stacked or in a horizontal row to help with arr
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `alignment` | GoabButtonGroupAlignment | `start` | No | Positions the button group in the page layout. |
-| `gap` | GoabButtonGroupGap | (none) | No | Sets the spacing between buttons in the button group. |
+| `alignment` | "start" \| "end" \| "center" | `start` | No | Positions the button group in the page layout. |
+| `gap` | "relaxed" \| "compact" | (none) | No | Sets the spacing between buttons in the button group. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |

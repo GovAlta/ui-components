@@ -20,13 +20,13 @@ Let the user select one or more options.
 | `id` | string | (none) | No | Sets a unique id for the checkbox element. |
 | `indeterminate` | boolean | (none) | No | Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the checkbox. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Unique name to identify the checkbox. If omitted, a unique name is generated. |
 | `revealAriaLabel` | string | (none) | No | Text announced by screen readers when the reveal slot content is displayed. |
-| `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `text` | string | (none) | No | Label shown beside the checkbox. |
 | `value` | string \| number \| boolean | (none) | No | The value binding. |
@@ -68,7 +68,7 @@ Let the user select one or more options.
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Sets the name of the checkbox input for form submission. If omitted, a unique name is generated. |
 | `revealArialLabel` | string | (none) | No | Text announced by screen readers when the reveal slot content is displayed. |
-| `size` | GoabCheckboxSize | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `text` | string | (none) | No | Label shown beside the checkbox. |
 | `value` | string \| number \| boolean \| null | (none) | No | The value binding. |
@@ -120,9 +120,9 @@ Tag: `goa-checkbox`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string; value: string; checked: boolean }> | (none) |
-| `_change` | CustomEvent<{ name: string; checked: boolean; value: string }> | (none) |
-| `_focus` | CustomEvent<{ name: string; value: string; checked: boolean }> | (none) |
+| `_blur` | CustomEvent<{ name: string; value: string; checked: boolean }> | Emits when the checkbox loses focus. |
+| `_change` | CustomEvent<{ name: string; checked: boolean; value: string }> | Emits when the checkbox value changes. |
+| `_focus` | CustomEvent<{ name: string; value: string; checked: boolean }> | Emits when the checkbox receives focus. |
 
 ### Slots
 

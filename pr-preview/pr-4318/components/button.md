@@ -18,15 +18,15 @@ Carry out an important action or navigate to another page.
 | `ariaLabel` | string | (none) | No | Sets the accessible name. Include the visible button text in the value. |
 | `disabled` | boolean | (none) | No | When true, prevents user interaction and applies disabled styling. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the button text. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabButtonSize | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "compact" \| "normal" | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
-| `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
@@ -53,11 +53,11 @@ Carry out an important action or navigate to another page.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabButtonSize | `normal` | No | Sets the size of the button. Use "compact" for inline actions or space-constrained layouts. |
+| `size` | "compact" \| "normal" | `normal` | No | Sets the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
-| `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
@@ -89,7 +89,7 @@ Tag: `goa-button`
 | `size` | "normal" \| "compact" | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingicon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | "primary" \| "submit" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
 | `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
@@ -97,7 +97,7 @@ Tag: `goa-button`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent | (none) |
+| `_click` | CustomEvent | Emits when the button is clicked. |
 
 ---
 

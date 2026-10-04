@@ -14,13 +14,13 @@ Provide visual feedback to users while loading a content heavy page or page elem
 |------|------|---------|----------|-------------|
 | `lineCount` | number | `3` | No | Used within components that contain multiple lines. Currently only used in card skeleton type. |
 | `maxWidth` | string | `300px` | No | Sets the maximum width. Currently only used in card skeleton type. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabSkeletonSize | `1` | No | Size can affect either the height, width or both for different skeleton types. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "1" \| "2" \| "3" \| "4" | `1` | No | Size can affect either the height, width or both for different skeleton types. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabSkeletonType | (none) | Yes | Sets the skeleton shape to represent your content. |
+| `type` | "image" \| "text" \| "title" \| "text-small" \| "avatar" \| "header" \| "paragraph" \|… | (none) | Yes | Sets the skeleton shape to represent your content. |
 
 ---
 
@@ -36,9 +36,9 @@ Provide visual feedback to users while loading a content heavy page or page elem
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabSkeletonSize | (none) | No | Size can affect either the height, width or both for different skeleton types. |
+| `size` | "1" \| "2" \| "3" \| "4" | (none) | No | Size can affect either the height, width or both for different skeleton types. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabSkeletonType | (none) | Yes | Sets the skeleton shape to represent your content. |
+| `type` | "image" \| "text" \| "title" \| "text-small" \| "avatar" \| "header" \| "paragraph" \|… | (none) | Yes | Sets the skeleton shape to represent your content. |
 
 ---
 

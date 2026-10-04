@@ -12,15 +12,15 @@ Provides consistent sizing, spacing, and colour to written content.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `color` | GoabTextColor | `primary` | No | Sets the text colour to primary, secondary, light, or disabled. |
+| `color` | "primary" \| "secondary" \| "light" \| "disabled" | `primary` | No | Sets the text colour to primary, secondary, light, or disabled. |
 | `id` | string | (none) | No | Sets the id attribute on the element. |
-| `maxWidth` | GoabTextMaxWidth | `65ch` | No | Sets the max width. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabTextSize | (none) | No | Overrides the text size. |
-| `tag` | GoabTextTextElement \| GoabTextHeadingElement | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
+| `maxWidth` | "none" \| string | `65ch` | No | Sets the max width. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
+| `tag` | "span" \| "div" \| "p" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
 
 ---
 
@@ -30,15 +30,15 @@ Provides consistent sizing, spacing, and colour to written content.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `color` | GoabTextColor | `primary` | No | Sets the text colour to primary, secondary, light, or disabled. |
+| `color` | "primary" \| "secondary" \| "light" \| "disabled" | `primary` | No | Sets the text colour to primary, secondary, light, or disabled. |
 | `id` | string | (none) | No | Sets the id attribute on the host element. |
-| `maxWidth` | GoabTextMaxWidth | `65ch` | No | Sets the max width. |
+| `maxWidth` | "none" \| string | `65ch` | No | Sets the max width. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
 | `ml` | Spacing | (none) | No | Left margin. |
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
-| `size` | GoabTextSize | (none) | No | Overrides the text size. |
-| `tag` | GoabTextTextElement \| GoabTextHeadingElement | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
+| `size` | "heading-2xl" \| "heading-xl" \| "heading-l" \| "heading-m" \| "heading-s" \| "headi… | (none) | No | Overrides the text size. |
+| `tag` | "span" \| "div" \| "p" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" | (none) | No | The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. |
 
 ---
 
