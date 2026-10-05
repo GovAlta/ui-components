@@ -125,7 +125,7 @@ const examplesBase = z.object({
 
   tags: z.array(z.string()).optional(),
 
-  // Components used (structural query: "what's in it")
+  // Components used - to be included as an example for the component
   components: z.array(z.string()),
 
   // Related examples (editorial cross-link)

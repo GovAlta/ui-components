@@ -49,6 +49,8 @@ const subcomponents = await getSubcomponents(component.data.relatedComponents);
 const allGuidance = await getGuidanceForComponent(slug);
 const { usage: usageGuidance, accessibility: accessibilityGuidance } =
   categorizeGuidance(allGuidance);
+const hasUsageContent =
+  Object.keys(usageGuidance).length > 0 || Boolean(component.body?.trim());
 
 // 4. Query related examples
 const componentExamples = await getExamplesForComponent(slug);
@@ -147,33 +149,26 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     </goa-tab>
 
     <!-- Examples Tab -->
-    {!hideTabs.includes('examples') && (
+    {!hideTabs.includes('examples') && componentExamples.length > 0 && (
     <goa-tab heading="Examples" slug="examples">
       <span slot="heading">Examples <goa-badge type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
-        {componentExamples.length > 0 ? (
-          <div class="examples-list">
-            {componentExamples.map((example) => (
-              <ExampleDisplay example={example} />
-            ))}
-          </div>
-        ) : (
-          <goa-callout type="information" heading="No examples available">
-            Examples show common usage patterns and implementation guidance.
-          </goa-callout>
-        )}
+        <div class="examples-list">
+          {componentExamples.map((example) => (
+            <ExampleDisplay example={example} />
+          ))}
+        </div>
       </TabContentWrapper>
     </goa-tab>
     )}
 
     <!-- Usage Guidelines Tab -->
-    {!hideTabs.includes('usage') && (
+    {!hideTabs.includes('usage') && hasUsageContent && (
     <goa-tab heading="Usage guidelines">
       <TabContentWrapper tocQuery=".guidance-section .topic-heading">
-        <GuidanceGrid
-          guidance={usageGuidance}
-          emptyMessage="No usage guidelines have been documented for this component yet."
-        />
+        {Object.keys(usageGuidance).length > 0 && (
+          <GuidanceGrid guidance={usageGuidance} />
+        )}
 
         <!-- MDX Content (additional usage info; only when the component has body content) -->
         {component.body?.trim() && (
