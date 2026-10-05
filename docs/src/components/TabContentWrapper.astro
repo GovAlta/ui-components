@@ -30,7 +30,7 @@ const { tocQuery = "h2[id], h3[id]" } = Astro.props;
 <style>
   .tab-content-wrapper {
     display: grid;
-    grid-template-columns: 1fr 180px;
+    grid-template-columns: minmax(0, 1fr) fit-content(21.875rem);
     gap: var(--goa-space-xl, 2rem);
     padding-bottom: var(--goa-space-l, 1.5rem);
   }
@@ -47,21 +47,22 @@ const { tocQuery = "h2[id], h3[id]" } = Astro.props;
     overflow-y: auto;
   }
 
-  /* Hide TOC on smaller screens */
-  @media (max-width: 1000px) {
+  /* Reduce TOC width between the mobile and tablet breakpoints */
+  @media (min-width: 624px) and (max-width: 1023px) {
+    .tab-content-wrapper {
+      grid-template-columns: minmax(0, 1fr) fit-content(11.25rem);
+    }
+  }
+
+  /* Hide TOC below the mobile breakpoint */
+  @media (max-width: 623px) {
     .tab-content-wrapper {
       grid-template-columns: 1fr;
+      padding-top: var(--goa-space-l);
     }
 
     .tab-toc {
       display: none;
-    }
-  }
-
-  /* Mobile: Add space above content (below vertical tab list) */
-  @media (max-width: 623px) {
-    .tab-content-wrapper {
-      padding-top: var(--goa-space-l);
     }
   }
 </style>
