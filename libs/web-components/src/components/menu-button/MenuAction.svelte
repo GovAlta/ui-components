@@ -38,9 +38,7 @@
   // Hooks
   onMount(() => {
     _el.addEventListener("menu-button:init", (e: Event) => {
-      const data = (
-        e as CustomEvent<{ size?: "normal" | "compact" }>
-      ).detail;
+      const data = (e as CustomEvent<{ size?: "normal" | "compact" }>).detail;
       size = data.size || "normal";
     });
 
@@ -98,7 +96,7 @@
 
   button:focus-visible,
   button:hover {
-    background-color: var(--goa-button-tertiary-hover-color-bg);
+    background-color: var(--goa-app-header-color-bg-nav-item-child-hover);
     color: var(--goa-button-tertiary-hover-color-text);
   }
 
