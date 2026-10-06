@@ -89,6 +89,20 @@ describe("Icon Theme", () => {
   });
 });
 
+describe("Custom icons", () => {
+  it("should draw goa-dashed-circle from the library's own icons, not Ionicons", async () => {
+    const result = render(GoAIcon, {
+      testid: "icon-dashed-circle",
+      type: "goa-dashed-circle",
+    });
+
+    const icon = await result.findByTestId("icon-dashed-circle");
+
+    expect(icon.querySelector(".icon-override svg")).not.toBeNull();
+    expect(icon.querySelector("ion-icon")).toBeNull();
+  });
+});
+
 describe("Icon Sizes", () => {
   const sizes = [
     {
