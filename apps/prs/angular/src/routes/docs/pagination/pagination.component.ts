@@ -3,8 +3,8 @@ import {
   GoabBlock,
   GoabDropdown,
   GoabDropdownItem,
+  GoabGrid,
   GoabPagination,
-  GoabSpacer,
   GoabTable,
 } from "@abgov/angular-components";
 import type {
@@ -84,8 +84,8 @@ function generateUsers(): User[] {
     GoabBlock,
     GoabDropdown,
     GoabDropdownItem,
+    GoabGrid,
     GoabPagination,
-    GoabSpacer,
     GoabTable,
   ],
 })
