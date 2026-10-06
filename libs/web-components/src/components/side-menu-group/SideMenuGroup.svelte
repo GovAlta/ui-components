@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { getSlottedChildren } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
@@ -33,12 +33,19 @@
   let _current = false;
   let _rootEl: HTMLElement;
   let _senderEl: HTMLElement;
+  let _mountTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   $: _slug = toSlug(heading);
 
   onMount(() => {
     dispatchInit();
     addEventListeners();
+  });
+
+  onDestroy(() => {
+    if (_mountTimeoutId !== null) {
+      clearTimeout(_mountTimeoutId);
+    }
   });
 
   function dispatchInit() {
@@ -54,7 +61,7 @@
         return el;
       });
 
-    setTimeout(() => {
+    _mountTimeoutId = setTimeout(() => {
       _senderEl.dispatchEvent(
         new CustomEvent<SideMenuGroupProps>("sidemenugroup:mounted", {
           detail: {
@@ -65,6 +72,7 @@
           bubbles: true,
         }),
       );
+      _mountTimeoutId = null;
     }, 1);
   }
 
@@ -120,22 +128,29 @@
     _senderEl.dispatchEvent(
       new CustomEvent("_open", {
         bubbles: true,
-        composed: true
+        composed: true,
       }),
     );
   }
 </script>
 
 <div bind:this={_senderEl}></div>
-<div bind:this={_rootEl}
-     class="side-menu-group"
-     class:current={_current}
-     data-testid={testid}
-     style={`
+<div
+  bind:this={_rootEl}
+  class="side-menu-group"
+  class:current={_current}
+  data-testid={testid}
+  style={`
     ${calculateMargin(mt, mr, mb, ml)};
   `}
 >
-  <a href={`#${_slug}`} class="heading" class:open={_open} class:current={_current} on:click={handleClick}>
+  <a
+    href={`#${_slug}`}
+    class="heading"
+    class:open={_open}
+    class:current={_current}
+    on:click={handleClick}
+  >
     {#if icon}
       <div class="leading-icon">
         <goa-icon type={icon} size="3" />
@@ -179,7 +194,7 @@
     border-left: var(--goa-side-menu-child-border-left-selected);
     background: var(--goa-side-menu-child-color-bg-selected);
     /* required to override base styles & above :global(::slotted(a) !important */
-    color: var(--goa-side-menu-color-item-current)!important;
+    color: var(--goa-side-menu-color-item-current) !important;
   }
 
   :global(::slotted(a:hover:not(.current))) {
@@ -193,9 +208,10 @@
     outline-offset: var(--goa-side-menu-item-focus-outline-offset);
   }
 
-
   .heading {
-    gap: var(--goa-space-xs); /* 8px - the minimum space between the text and the chevron icon */
+    gap: var(
+      --goa-space-xs
+    ); /* 8px - the minimum space between the text and the chevron icon */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -284,7 +300,8 @@
   }
 
   .side-menu-group .group {
-    border-left: var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);
+    border-left: var(--goa-side-menu-child-border-width) solid
+      var(--goa-color-greyscale-100);
     margin-left: var(--goa-side-menu-group-container-margin-left);
     padding-left: var(--goa-space-s);
     margin-top: var(--goa-space-xs);

@@ -36,27 +36,6 @@ describe("FormStep", () => {
     mock.mockRestore();
   });
 
-  it.skip("emits a _click event", async () => {
-    const click = vi.fn();
-    const el = render(FormStep, { text: "Some form" });
-    const rootEl = el.queryByTestId("label");
-    const inputEl = el.queryByTestId("button");
-
-    dispatch(rootEl, "formstepper:init", {
-      ariaLabel: "some label",
-      enabled: true,
-      childIndex: 1,
-      current: false,
-    }, { timeout: 5 });
-
-    el.container.addEventListener("_click", click);
-    inputEl && (await fireEvent.click(inputEl));
-
-    await waitFor(() => {
-      expect(click).toHaveBeenCalledOnce();
-    });
-  });
-
   it("won't emit event when clicked if disabled", async () => {
     const click = vi.fn();
     const el = render(FormStep, { text: "Some form" });
