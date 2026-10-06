@@ -863,6 +863,7 @@ export type GoabIconBaseType =
   | "git-pull-request"
   | "glasses"
   | "globe"
+  | "goa-dashed-circle"
   | "golf"
   | "grid"
   | "hammer"
