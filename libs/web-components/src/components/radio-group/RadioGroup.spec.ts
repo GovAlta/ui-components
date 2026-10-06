@@ -51,7 +51,9 @@ describe("GoARadioGroup Component", () => {
     });
 
     const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
-    expect(radioGroupDiv?.getAttribute("aria-label")).toBe("please choose a color");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe(
+      "please choose a color",
+    );
 
     const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
     expect(goaRadioItems.length).toBe(3);
@@ -60,7 +62,9 @@ describe("GoARadioGroup Component", () => {
         const el = goaRadioItems[index];
 
         expect(el.getAttribute("value")).toBe(item);
-        expect(el.getAttribute("arialabel")).toBe("you are choosing color " + item);
+        expect(el.getAttribute("arialabel")).toBe(
+          "you are choosing color " + item,
+        );
         if (index === 2) {
           expect(el.getAttribute("checked")).toBe("true");
         } else {
@@ -92,8 +96,7 @@ describe("GoARadioGroup Component", () => {
     });
   });
 
-  // FIXME: radio group doesn't hear child event
-  it.skip("should handle the events", async () => {
+  it("should handle the events", async () => {
     const mockOnChange = vi.fn();
     const name = "favcolor";
     const items = ["red", "blue", "orange"];
@@ -101,22 +104,35 @@ describe("GoARadioGroup Component", () => {
       name,
       value: "orange",
       items,
+      testid: "radio-group",
     });
 
-    const radioGroup = result.container.querySelector("goa-radio-group");
-    radioGroup?.addEventListener("_change", mockOnChange);
+    const radioGroup = result.getByTestId("radio-group");
+    radioGroup.addEventListener("_change", mockOnChange);
 
     const radioItems = result.container.querySelectorAll("goa-radio-item");
     expect(radioItems.length).toBe(3);
-    await fireEvent.click(radioItems[0]);
-    await fireEvent.change(radioItems[0]);
+
+    await fireEvent(
+      radioItems[0],
+      new CustomEvent("_radioItemChange", {
+        bubbles: true,
+        composed: true,
+        detail: { value: "red", label: "red" },
+      }),
+    );
+
     await waitFor(() => {
-      expect(mockOnChange).toBeCalled();
+      expect(mockOnChange).toHaveBeenCalledOnce();
+      expect((mockOnChange.mock.calls[0][0] as CustomEvent).detail).toEqual({
+        name,
+        value: "red",
+        label: "red",
+      });
     });
   });
 
-  // FIXME: this test passes on a dev machine, but fails in the Github action
-  it.skip("should show the error state when it is changed", async () => {
+  it("should show the error state when it is changed", async () => {
     const name = "favcolor";
     const items = ["red", "blue", "orange"];
     const result = render(GoARadioGroupWrapper, {
@@ -124,9 +140,8 @@ describe("GoARadioGroup Component", () => {
       value: "orange",
       items,
     });
-    const button = result.queryByTestId("set-error");
-    expect(button).toBeTruthy();
-    button && (await fireEvent.click(button));
+    const button = result.getByTestId("set-error");
+    await fireEvent.click(button);
 
     await waitFor(() => {
       const radioItem = result.container.querySelector("goa-radio-item");
