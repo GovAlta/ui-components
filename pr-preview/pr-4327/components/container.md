@@ -112,6 +112,7 @@ Tag: `goa-container`
 - [Review and action](/examples/review-and-action)
 - [Show status on a card](/examples/show-status-on-a-card)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
+- [Dashboard](/examples/workspace/dashboard): Gives staff an overview of their work with counts, trends, and assigned items.
 
 ---
 

@@ -106,6 +106,12 @@ Tag: `goa-work-side-menu`
 
 ---
 
+## Examples
+
+- [Index page](/examples/workspace/index-page): The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.
+
+---
+
 ## Related components
 
 - [Side menu](/components/side-menu): A side navigation that helps the user navigate between pages.

@@ -63,5 +63,6 @@ Tag: `goa-footer`
 
 ## Examples
 
+- [Basic page layout](/examples/basic-page-layout)
 - [Show links to navigation items](/examples/show-links-to-navigation-items)
 - [Show quick links](/examples/show-quick-links)

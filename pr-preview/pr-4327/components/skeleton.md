@@ -76,3 +76,9 @@ Tag: `goa-skeleton`
 ### States
 
 - **[Warning]** Show an error state if loading takes too long. Don't leave skeletons showing indefinitely without feedback.
+
+---
+
+## Examples
+
+- [Basic page layout](/examples/basic-page-layout)

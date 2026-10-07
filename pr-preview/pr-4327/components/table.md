@@ -103,10 +103,13 @@ Tag: `goa-table`
 
 - [Display numbers in a table so they can be scanned easily](/examples/display-numbers-in-a-table-so-they-can-be-scanned-easily)
 - [Filter data in a table](/examples/filter-data-in-a-table)
+- [Review page](/examples/review-page): A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a "change" link so the user can revise without starting over.
 - [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
 - [Show multiple actions in a compact table](/examples/show-multiple-actions-in-a-compact-table)
+- [Show number of results per page](/examples/show-number-of-results-per-page)
 - [Show status in a table](/examples/show-status-in-a-table)
 - [Sort data in a table](/examples/sort-data-in-a-table)
+- [Task list page](/examples/task-list-page): A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
 
 ---
 

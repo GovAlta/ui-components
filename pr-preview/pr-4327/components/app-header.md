@@ -95,6 +95,7 @@ Tag: `goa-app-header`
 
 ## Examples
 
+- [Basic page layout](/examples/basic-page-layout)
 - [Header with navigation](/examples/header-with-navigation)
 
 ---

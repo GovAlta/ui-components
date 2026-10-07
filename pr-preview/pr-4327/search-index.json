@@ -837,7 +837,8 @@
       "data-management"
     ],
     "components": [
-      "drawer"
+      "drawer",
+      "checkbox-list"
     ],
     "aliases": [],
     "slug": "add-and-edit-lots-of-filters"
@@ -953,7 +954,8 @@
       "financial"
     ],
     "components": [
-      "input"
+      "input",
+      "details"
     ],
     "aliases": [],
     "slug": "ask-a-user-for-direct-deposit-information"
@@ -993,8 +995,7 @@
       "app-header",
       "footer",
       "page-block",
-      "skeleton",
-      "grid"
+      "skeleton"
     ],
     "aliases": [],
     "slug": "basic-page-layout"
@@ -1090,7 +1091,8 @@
       "destructive"
     ],
     "components": [
-      "modal"
+      "modal",
+      "button-group"
     ],
     "aliases": [],
     "slug": "confirm-a-destructive-action"
@@ -1261,14 +1263,7 @@
       "server problem",
       "page-structure"
     ],
-    "components": [
-      "page-block",
-      "block",
-      "text",
-      "icon",
-      "link",
-      "button"
-    ],
+    "components": [],
     "aliases": [
       "401-error-page",
       "404-error-page",
@@ -1353,7 +1348,8 @@
     ],
     "components": [
       "app-header",
-      "app-header-menu"
+      "app-header-menu",
+      "menu-button"
     ],
     "aliases": [],
     "slug": "header-with-navigation"
@@ -1536,16 +1532,7 @@
     ],
     "components": [
       "form-item",
-      "input",
-      "text-area",
-      "radio-group",
-      "radio-item",
-      "dropdown",
-      "dropdown-item",
-      "details",
-      "block",
-      "button",
-      "button-group"
+      "radio-group"
     ],
     "aliases": [
       "ask-a-user-one-question-at-a-time",
@@ -1632,10 +1619,7 @@
       "application"
     ],
     "components": [
-      "block",
-      "callout",
-      "button",
-      "button-group"
+      "callout"
     ],
     "aliases": [
       "confirm-that-an-application-was-submitted"
@@ -1659,7 +1643,8 @@
     "components": [
       "radio-group",
       "radio-item",
-      "checkbox"
+      "checkbox",
+      "input"
     ],
     "aliases": [],
     "slug": "reveal-input-based-on-a-selection"
@@ -2001,7 +1986,8 @@
     "components": [
       "pagination",
       "dropdown",
-      "dropdown-item"
+      "dropdown-item",
+      "table"
     ],
     "aliases": [],
     "slug": "show-number-of-results-per-page"
@@ -2159,9 +2145,7 @@
       "start",
       "citizen"
     ],
-    "components": [
-      "button"
-    ],
+    "components": [],
     "aliases": [],
     "slug": "start-page"
   },
@@ -2181,8 +2165,7 @@
     ],
     "components": [
       "table",
-      "badge",
-      "callout"
+      "badge"
     ],
     "aliases": [],
     "slug": "task-list-page"
@@ -2242,10 +2225,7 @@
       "worker"
     ],
     "components": [
-      "accordion",
-      "badge",
-      "button",
-      "drawer"
+      "accordion"
     ],
     "aliases": [],
     "slug": "workspace/case-detail"
@@ -2264,9 +2244,7 @@
       "worker"
     ],
     "components": [
-      "container",
-      "block",
-      "badge"
+      "container"
     ],
     "aliases": [],
     "slug": "workspace/dashboard"
@@ -2288,8 +2266,7 @@
       "work-side-menu",
       "data-grid",
       "tabs",
-      "filter-chip",
-      "badge"
+      "filter-chip"
     ],
     "aliases": [],
     "slug": "workspace/index-page"

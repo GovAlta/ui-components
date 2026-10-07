@@ -49,6 +49,12 @@ Tag: `goa-page-block`
 
 ---
 
+## Examples
+
+- [Basic page layout](/examples/basic-page-layout)
+
+---
+
 ## Related components
 
 - [Block](/components/block): Group components into a block with consistent space between.

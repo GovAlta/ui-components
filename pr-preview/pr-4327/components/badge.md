@@ -123,6 +123,7 @@ Tag: `goa-badge`
 - [Show multiple tags together](/examples/show-multiple-tags-together)
 - [Show status in a table](/examples/show-status-in-a-table)
 - [Show status on a card](/examples/show-status-on-a-card)
+- [Task list page](/examples/task-list-page): A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
 
 ---
 

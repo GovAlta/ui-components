@@ -217,6 +217,7 @@ Tag: `goa-input`
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
+- [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
 - [Search](/examples/search)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
 

@@ -119,3 +119,4 @@ Tag: `goa-filter-chip`
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Remove a filter](/examples/remove-a-filter)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
+- [Index page](/examples/workspace/index-page): The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.

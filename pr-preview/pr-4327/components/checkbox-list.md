@@ -108,6 +108,12 @@ Tag: `goa-checkbox-list`
 
 ---
 
+## Examples
+
+- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
+
+---
+
 ## Related components
 
 - [Checkbox](/components/checkbox): Let the user select one or more options.

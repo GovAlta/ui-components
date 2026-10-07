@@ -77,6 +77,12 @@ Tag: `goa-details`
 
 ---
 
+## Examples
+
+- [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
+
+---
+
 ## Related components
 
 - [Accordion](/components/accordion): Let users show and hide sections of related content on a page.

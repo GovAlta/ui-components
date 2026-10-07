@@ -82,6 +82,12 @@ Tag: `goa-button-group`
 
 ---
 
+## Examples
+
+- [Confirm a destructive action](/examples/confirm-a-destructive-action)
+
+---
+
 ## Related components
 
 - [Button](/components/button): Carry out an important action or navigate to another page.

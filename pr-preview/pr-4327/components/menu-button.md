@@ -85,6 +85,12 @@ Tag: `goa-menu-button`
 
 ---
 
+## Examples
+
+- [Header with navigation](/examples/header-with-navigation)
+
+---
+
 ## Related components
 
 - [Button](/components/button): Carry out an important action or navigate to another page.

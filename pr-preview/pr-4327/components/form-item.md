@@ -127,6 +127,7 @@ Tag: `goa-form-item`
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
+- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Slotted error text in a form item](/examples/slotted-error-text-in-a-form-item)
 - [Slotted helper text in a form item](/examples/slotted-helper-text-in-a-form-item)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)

@@ -132,6 +132,7 @@ Tag: `goa-accordion`
 
 - [Expand or collapse part of a form](/examples/expand-or-collapse-part-of-a-form)
 - [Hide and show many sections of information](/examples/hide-and-show-many-sections-of-information)
+- [Case detail](/examples/workspace/case-detail): A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
 
 ---
 

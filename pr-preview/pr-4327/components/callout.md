@@ -95,6 +95,12 @@ Tag: `goa-callout`
 
 ---
 
+## Examples
+
+- [Result page](/examples/result-page): A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.
+
+---
+
 ## Related components
 
 - [Badge](/components/badge): Small labels which hold small amounts of information, system feedback, or states.
