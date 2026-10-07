@@ -83145,15 +83145,6 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
-function findPrRoute(query, routes) {
-  if (/^\d+$/.test(query)) {
-    const storyRoutes = routes.filter(
-      (route) => route.type !== "docs" && route.id === query
-    );
-    return storyRoutes.find((route) => route.path.endsWith(`/${query}`)) ?? storyRoutes[0];
-  }
-  return routes.find((route) => route.type === "docs" && route.title === query);
-}
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
 function createSampleNotifications() {
@@ -83228,8 +83219,6 @@ function App() {
   const location2 = useLocation();
   const baseUrl = "/ui-components/pr-preview-react/pr-4324/";
   const [sideMenuOpen, setSideMenuOpen] = reactExports.useState(true);
-  const [routeSearchQuery, setRouteSearchQuery] = reactExports.useState("");
-  const [routeSearchError, setRouteSearchError] = reactExports.useState("");
   const isPushDrawerRoute = location2.pathname === PUSH_DRAWER_ROUTE_PATH || location2.pathname === `${baseUrl}features/3347-push`;
   const [pushDrawerOpen, setPushDrawerOpen] = reactExports.useState(isPushDrawerRoute);
   reactExports.useEffect(() => {
@@ -83248,21 +83237,8 @@ function App() {
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate2(internal);
   };
-  const handleRouteSearchChange = (detail) => {
-    setRouteSearchQuery(detail.value);
-    setRouteSearchError("");
-  };
-  const handleRouteSearch = (query = routeSearchQuery) => {
-    const route = findPrRoute(query, prRouteDefinitions);
-    if (!route) {
-      setRouteSearchError("No route found. Try a story number or component name.");
-      return;
-    }
-    setRouteSearchError("");
-    navigate2(`/${route.path}`);
-  };
-  const handleRouteSearchKeyPress = (detail) => {
-    if (detail.key === "Enter") handleRouteSearch(detail.value);
+  const handleRouteSelect = (detail) => {
+    if (detail.value) navigate2(`/${detail.value}`);
   };
   const [notifications, setNotifications] = reactExports.useState(
     () => createSampleNotifications()
@@ -83341,42 +83317,26 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "log-out", label: "Log out", url: "#" })
       ] }),
       primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        sideMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          GoabFormItem,
+        sideMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Find a route", mb: "m", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabDropdown,
           {
-            label: "Find a route",
-            error: routeSearchError || void 0,
-            mb: "m",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                GoabInput,
-                {
-                  type: "search",
-                  name: "route-search",
-                  value: routeSearchQuery,
-                  placeholder: "Story # or component",
-                  leadingIcon: "search",
-                  size: "compact",
-                  width: "70%",
-                  error: Boolean(routeSearchError),
-                  onChange: handleRouteSearchChange,
-                  onKeyPress: handleRouteSearchKeyPress,
-                  mr: "xs"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                GoabButton,
-                {
-                  type: "secondary",
-                  size: "compact",
-                  testId: "route-search-submit",
-                  onClick: () => handleRouteSearch(),
-                  children: "Go"
-                }
-              )
-            ]
+            name: "route-search",
+            placeholder: "Story #, component or title",
+            filterable: true,
+            size: "compact",
+            width: "100%",
+            onChange: handleRouteSelect,
+            children: prRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabDropdownItem,
+              {
+                value: route.path,
+                filter: route.type === "docs" ? route.title : `${route.id} ${route.title}`,
+                label: route.type === "docs" ? route.title : `#${route.id} - ${route.title}`
+              },
+              route.path
+            ))
           }
-        ),
+        ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabWorkSideMenuItem,
           {
