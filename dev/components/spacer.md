@@ -44,12 +44,6 @@ Tag: `goa-spacer`
 
 ---
 
-## Examples
-
-- [Show number of results per page](/examples/show-number-of-results-per-page)
-
----
-
 ## Related components
 
 - [Divider](/components/divider): Indicate a separation of layout, or to distinguish large chunks of information on a page.

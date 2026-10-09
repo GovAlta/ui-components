@@ -84,22 +84,7 @@ Tag: `goa-button-group`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
-- [Ask a user for an address](/examples/ask-a-user-for-an-address)
-- [Button with Icon](/examples/button-with-icon)
-- [Confirm a change](/examples/confirm-a-change)
 - [Confirm a destructive action](/examples/confirm-a-destructive-action)
-- [Confirm before navigating away](/examples/confirm-before-navigating-away)
-- [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Require user action before continuing](/examples/require-user-action-before-continuing)
-- [Reset date picker field](/examples/reset-date-picker-field)
-- [Result page](/examples/result-page): A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.
-- [Review page](/examples/review-page): A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a "change" link so the user can revise without starting over.
-- [Show a label on an icon only button](/examples/show-a-label-on-an-icon-only-button)
-- [Warn a user of a deadline](/examples/warn-a-user-of-a-deadline)
 
 ---
 

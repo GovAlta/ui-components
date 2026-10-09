@@ -70,7 +70,6 @@ Tag: `goa-grid`
 
 ## Examples
 
-- [Basic page layout](/examples/basic-page-layout)
 - [Card grid](/examples/card-grid)
 - [Review and action](/examples/review-and-action)
 

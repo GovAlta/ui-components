@@ -80,7 +80,6 @@ Tag: `goa-details`
 ## Examples
 
 - [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 
 ---
 

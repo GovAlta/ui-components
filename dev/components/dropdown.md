@@ -172,15 +172,9 @@ Tag: `goa-dropdown`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a user for an address](/examples/ask-a-user-for-an-address)
 - [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
 - [Dynamically change items in a dropdown list](/examples/dynamically-change-items-in-a-dropdown-list)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Review and action](/examples/review-and-action)
 - [Show number of results per page](/examples/show-number-of-results-per-page)
 
 ---

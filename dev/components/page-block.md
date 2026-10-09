@@ -52,7 +52,6 @@ Tag: `goa-page-block`
 ## Examples
 
 - [Basic page layout](/examples/basic-page-layout)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
 
 ---
 

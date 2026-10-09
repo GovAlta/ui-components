@@ -90,13 +90,6 @@ Tag: `goa-icon`
 
 ---
 
-## Examples
-
-- [Button with Icon](/examples/button-with-icon)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
-
----
-
 ## Related components
 
 - [Icon button](/components/icon-button): A compact button with an icon and no text.

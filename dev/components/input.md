@@ -210,21 +210,15 @@ Tag: `goa-input`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a user for an address](/examples/ask-a-user-for-an-address)
 - [Ask a user for an Indian registration number](/examples/ask-a-user-for-an-indian-registration-number)
 - [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
 - [Ask a user for dollar amounts](/examples/ask-a-user-for-dollar-amounts)
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
-- [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
 - [Search](/examples/search)
-- [Slotted error text in a form item](/examples/slotted-error-text-in-a-form-item)
-- [Slotted helper text in a form item](/examples/slotted-helper-text-in-a-form-item)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
 
 ---

@@ -123,7 +123,6 @@ Tag: `goa-date-picker`
 ## Examples
 
 - [Ask a user for a birthday](/examples/ask-a-user-for-a-birthday)
-- [Confirm a change](/examples/confirm-a-change)
 - [Reset date picker field](/examples/reset-date-picker-field)
 
 ---

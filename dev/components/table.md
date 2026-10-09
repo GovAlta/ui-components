@@ -102,11 +102,8 @@ Tag: `goa-table`
 ## Examples
 
 - [Display numbers in a table so they can be scanned easily](/examples/display-numbers-in-a-table-so-they-can-be-scanned-easily)
-- [Display user information](/examples/display-user-information)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Review page](/examples/review-page): A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a "change" link so the user can revise without starting over.
-- [Set a specific tab to be active](/examples/set-a-specific-tab-to-be-active)
 - [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
 - [Show multiple actions in a compact table](/examples/show-multiple-actions-in-a-compact-table)
 - [Show number of results per page](/examples/show-number-of-results-per-page)

@@ -79,10 +79,4 @@ Tag: `goa-text`
 
 ## Examples
 
-- [Ask a user for an address](/examples/ask-a-user-for-an-address)
-- [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
-- [Card grid](/examples/card-grid)
-- [Display user information](/examples/display-user-information)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
-- [Filter data in a table](/examples/filter-data-in-a-table)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)

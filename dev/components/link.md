@@ -90,6 +90,4 @@ Tag: `goa-link`
 
 ## Examples
 
-- [Card grid](/examples/card-grid)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
 - [Link to an external page](/examples/link-to-an-external-page)

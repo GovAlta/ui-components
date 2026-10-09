@@ -139,12 +139,9 @@ Tag: `goa-radio-group`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
 - [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
-- [Review and action](/examples/review-and-action)
 - [Set a max width on a long radio item](/examples/set-a-max-width-on-a-long-radio-item)
 
 ---

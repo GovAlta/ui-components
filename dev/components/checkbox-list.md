@@ -111,7 +111,6 @@ Tag: `goa-checkbox-list`
 ## Examples
 
 - [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
 
 ---
 

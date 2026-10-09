@@ -106,7 +106,6 @@ Tag: `goa-drawer`
 
 - [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
 - [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Case detail](/examples/workspace/case-detail): A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
 
 ---
 

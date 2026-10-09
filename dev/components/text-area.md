@@ -147,10 +147,7 @@ Tag: `goa-text-area`
 
 ## Examples
 
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a long answer question with a maximum word count](/examples/ask-a-long-answer-question-with-a-maximum-word-count)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Review and action](/examples/review-and-action)
 
 ---
 

@@ -120,20 +120,10 @@ Tag: `goa-badge`
 
 ## Examples
 
-- [Card view of case files](/examples/card-view-of-case-files)
-- [Expand or collapse part of a form](/examples/expand-or-collapse-part-of-a-form)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Filter data in a table](/examples/filter-data-in-a-table)
-- [Set a specific tab to be active](/examples/set-a-specific-tab-to-be-active)
-- [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
-- [Show multiple actions in a compact table](/examples/show-multiple-actions-in-a-compact-table)
 - [Show multiple tags together](/examples/show-multiple-tags-together)
 - [Show status in a table](/examples/show-status-in-a-table)
 - [Show status on a card](/examples/show-status-on-a-card)
 - [Task list page](/examples/task-list-page): A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
-- [Case detail](/examples/workspace/case-detail): A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
-- [Dashboard](/examples/workspace/dashboard): Gives staff an overview of their work with counts, trends, and assigned items.
-- [Index page](/examples/workspace/index-page): The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.
 
 ---
 

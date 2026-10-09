@@ -108,10 +108,8 @@ Tag: `goa-container`
 
 - [Card grid](/examples/card-grid)
 - [Card view of case files](/examples/card-view-of-case-files)
-- [Confirm a change](/examples/confirm-a-change)
 - [Display user information](/examples/display-user-information)
 - [Review and action](/examples/review-and-action)
-- [Show full date in a tooltip](/examples/show-full-date-in-a-tooltip)
 - [Show status on a card](/examples/show-status-on-a-card)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
 - [Dashboard](/examples/workspace/dashboard): Gives staff an overview of their work with counts, trends, and assigned items.

@@ -164,8 +164,6 @@ Tag: `goa-checkbox`
 
 ## Examples
 
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
 - [Include a link in the helper text of an option](/examples/include-a-link-in-the-helper-text-of-an-option)
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
 - [Select one or more from a list of options](/examples/select-one-or-more-from-a-list-of-options)

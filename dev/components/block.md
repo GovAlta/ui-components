@@ -82,22 +82,7 @@ Tag: `goa-block`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Ask a user for an address](/examples/ask-a-user-for-an-address)
-- [Ask a user for an Indian registration number](/examples/ask-a-user-for-an-indian-registration-number)
-- [Card view of case files](/examples/card-view-of-case-files)
-- [Copy to clipboard](/examples/copy-to-clipboard)
-- [Display user information](/examples/display-user-information)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
-- [Filter data in a table](/examples/filter-data-in-a-table)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Result page](/examples/result-page): A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.
-- [Review and action](/examples/review-and-action)
-- [Search](/examples/search)
-- [Show multiple actions in a compact table](/examples/show-multiple-actions-in-a-compact-table)
 - [Show multiple tags together](/examples/show-multiple-tags-together)
-- [Show number of results per page](/examples/show-number-of-results-per-page)
-- [Dashboard](/examples/workspace/dashboard): Gives staff an overview of their work with counts, trends, and assigned items.
 
 ---
 
