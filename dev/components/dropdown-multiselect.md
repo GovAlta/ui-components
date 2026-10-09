@@ -36,6 +36,7 @@ Present a list of options to the user to select multiple values from.
 
 | Event | Type | Description |
 |-------|------|-------------|
+| `onBlur` | (detail: GoabDropdownMultiselectOnBlurDetail) => void | Callback fired when focus leaves the dropdown multiselect. |
 | `onChange` | (detail: GoabDropdownMultiselectOnChangeDetail) => void | Callback fired when the selected value change. |
 
 ---
@@ -71,7 +72,8 @@ Present a list of options to the user to select multiple values from.
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `onChange` | (event: GoabDropdownMultiselectOnChangeDetail) => void | Emits when the selected value change. |
+| `onBlur` | (event: GoabDropdownMultiselectOnBlurDetail) => void | Callback fired when focus leaves the dropdown multiselect. |
+| `onChange` | (event: GoabDropdownMultiselectOnChangeDetail) => void | Callback fired when the selected value change. |
 
 ---
 
@@ -107,7 +109,8 @@ Tag: `goa-dropdown-multiselect`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Emits when the selected value change. |
+| `_blur` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Callback fired when focus leaves the dropdown multiselect. |
+| `_change` | CustomEvent<{ name: string; value: string[]; labels: string[] }> | Callback fired when the selected value change. |
 
 ---
 
