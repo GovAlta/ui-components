@@ -3,8 +3,8 @@ import {
   GoabBlock,
   GoabDropdown,
   GoabDropdownItem,
+  GoabGrid,
   GoabPagination,
-  GoabSpacer,
   GoabTable,
 } from "@abgov/react-components";
 import type {
@@ -162,8 +162,8 @@ export function DocsPaginationRoute() {
         </tbody>
       </GoabTable>
 
-      <GoabBlock alignment="center" width="100%">
-        <GoabBlock mb="m" alignment="center">
+      <GoabGrid minChildWidth="23rem">
+        <GoabBlock alignment="center">
           Show
           <GoabDropdown
             onChange={handlePerPageCountChangeEvent}
@@ -175,16 +175,17 @@ export function DocsPaginationRoute() {
             <GoabDropdownItem value="20" label="20" />
             <GoabDropdownItem value="30" label="30" />
           </GoabDropdown>
-          <span style={{ width: "75px" }}>per page</span>
+          <span>per page</span>
         </GoabBlock>
-        <GoabSpacer hSpacing="fill" />
-        <GoabPagination
-          itemCount={users.length}
-          perPageCount={perPage}
-          pageNumber={page}
-          onChange={(event: GoabPaginationOnChangeDetail) => setPage(event.page)}
-        />
-      </GoabBlock>
+        <GoabBlock direction="column" alignment="end" width="100%">
+          <GoabPagination
+            itemCount={users.length}
+            perPageCount={perPage}
+            pageNumber={page}
+            onChange={(event: GoabPaginationOnChangeDetail) => setPage(event.page)}
+          />
+        </GoabBlock>
+      </GoabGrid>
     </div>
   );
 }
