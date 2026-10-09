@@ -12,11 +12,11 @@ An overlay that appears in front of all other content, and requires a user to ta
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutVariant` | GoabModalCalloutVariant | (none) | No | Sets the context and colour of the callout modal. Required when used as a callout type. |
+| `calloutVariant` | "information" \| "important" \| "emergency" \| "success" \| "event" | (none) | No | Sets the context and colour of the callout modal. Required when used as a callout type. |
 | `maxWidth` | string | `60ch` | No | Set the max allowed width of the modal. |
 | `open` | boolean | (none) | No | Controls if the modal is visible or not. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `transition` | GoabModalTransition | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
+| `transition` | "fast" \| "slow" \| "none" | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
 
 ### Events
 
@@ -39,12 +39,12 @@ An overlay that appears in front of all other content, and requires a user to ta
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutVariant` | GoabModalCalloutVariant | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
+| `calloutVariant` | "information" \| "important" \| "emergency" \| "success" \| "event" | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
 | `heading` | string \| TemplateRef<any> | (none) | No | The heading text displayed at the top of the modal. |
 | `maxWidth` | string | (none) | No | Set the max allowed width of the modal. |
 | `open` | boolean | (none) | No | Controls if modal is visible or not. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `transition` | GoabModalTransition | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
+| `transition` | "fast" \| "slow" \| "none" | (none) | No | Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. |
 
 ### Events
 
@@ -69,7 +69,7 @@ Tag: `goa-modal`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `calloutvariant` | "" | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
+| `calloutvariant` | "emergency" \| "important" \| "information" \| "success" \| "event" | (none) | No | Define the context and colour of the callout modal. It is required when type is set to callout. |
 | `closable` | boolean | `false` | No | Show close icon and allow clicking the background to close the modal. |
 | `heading` | string | (none) | No | The heading text displayed at the top of the modal. |
 | `maxwidth` | string | `60ch` | No | Set the max allowed width of the modal. |
@@ -81,7 +81,7 @@ Tag: `goa-modal`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_close` | CustomEvent | (none) |
+| `_close` | CustomEvent | Emits when the modal is closed. |
 
 ### Slots
 

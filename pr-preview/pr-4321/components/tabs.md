@@ -13,10 +13,10 @@ Let users navigate between related sections of content, displaying one section a
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `initialTab` | number | (none) | No | The initially active tab (1-based index). If not set, the first tab is active. |
-| `navigation` | GoabTabsNavigation | `hash` | No | Controls URL navigation mode on tab change. |
-| `orientation` | GoabTabsOrientation | `auto` | No | Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. |
+| `navigation` | "hash" \| "none" | `hash` | No | Controls URL navigation mode on tab change. |
+| `orientation` | "auto" \| "horizontal" | `auto` | No | Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `variant` | GoabTabsVariant | `default` | No | Visual style variant. "segmented" shows pill-style tabs with animation. |
+| `variant` | "default" \| "segmented" | `default` | No | Visual style variant. "segmented" shows pill-style tabs with animation. |
 
 ### Events
 
@@ -33,10 +33,10 @@ Let users navigate between related sections of content, displaying one section a
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `initialTab` | number | (none) | No | The initially active tab (1-based index). If not set, the first tab is active. |
-| `navigation` | GoabTabsNavigation | (none) | No | Sets the navigation mode for tab switching. "hash" updates the URL hash when switching tabs. |
-| `orientation` | GoabTabsOrientation | (none) | No | Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. |
+| `navigation` | "hash" \| "none" | (none) | No | Sets the navigation mode for tab switching. "hash" updates the URL hash when switching tabs. |
+| `orientation` | "auto" \| "horizontal" | (none) | No | Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `variant` | GoabTabsVariant | (none) | No | Visual style variant. "segmented" shows pill-style tabs with animation. |
+| `variant` | "default" \| "segmented" | (none) | No | Visual style variant. "segmented" shows pill-style tabs with animation. |
 
 ### Events
 
@@ -55,7 +55,7 @@ Tag: `goa-tabs`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `initialtab` | number | `-1` | No | The initially active tab (1-based index). If not set, the first tab is active. |
-| `navigation` | "hash" \| "none" | `hash` | No | (none) |
+| `navigation` | "hash" \| "none" | `hash` | No | Sets the navigation mode for tab switching. "hash" updates the URL hash when switching tabs. |
 | `orientation` | "auto" \| "horizontal" | `auto` | No | Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `variant` | "default" \| "segmented" | `default` | No | Visual style variant. "segmented" shows pill-style tabs with animation. |
@@ -64,7 +64,7 @@ Tag: `goa-tabs`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_change` | CustomEvent<{ tab: number }> | (none) |
+| `_change` | CustomEvent<{ tab: number }> | Emits when the active tab changes. |
 
 ---
 

@@ -16,16 +16,16 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `helpText` | string \| React.ReactNode | (none) | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
 | `label` | string \| React.ReactNode | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
-| `labelSize` | GoabFormItemLabelSize | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
+| `labelSize` | "compact" \| "regular" \| "large" | `regular` | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | `none` | No | Sets the maximum width of the form item. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `requirement` | "optional" \| "required" | (none) | No | Marks the field with an optional or required label indicator. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `type` | "" \| "text-input" \| "textarea" \| "checkbox-list" \| "radio-group" | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -47,16 +47,16 @@ Wraps an input control with a text label, requirement label, helper text, and er
 | `helpText` | string \| TemplateRef<any> | (none) | No | Help text displayed under the form field to provide additional explanation. |
 | `id` | string | (none) | No | Sets the id attribute on the form item element. |
 | `label` | string \| TemplateRef<any> | (none) | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
-| `labelSize` | GoabFormItemLabelSize | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
+| `labelSize` | "compact" \| "regular" \| "large" | (none) | No | Sets the label size. 'regular' for standard, 'large' for emphasis. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the form item. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Overrides the label value within the form-summary to provide a shorter description. For public-form use only. |
-| `requirement` | GoabFormItemRequirement | (none) | No | Marks the field with an optional or required label indicator. |
+| `requirement` | "optional" \| "required" | (none) | No | Marks the field with an optional or required label indicator. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabFormItemType | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
+| `type` | "" \| "text-input" \| "textarea" \| "checkbox-list" \| "radio-group" | (none) | No | Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. |
 
 ### Slots
 
@@ -94,8 +94,8 @@ Tag: `goa-form-item`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. |
-| `helptext` | No | Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. |
+| `error` | No | Error text displayed under the form field. Leave blank to indicate a valid field. |
+| `helptext` | No | Help text displayed under the form field to provide additional explanation. |
 | `label` | No | Creates a label for the form item. HTML content must be phrasing content, such as span, strong, or em elements. |
 
 ---
@@ -123,31 +123,11 @@ Tag: `goa-form-item`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
-- [Ask a long answer question with a maximum word count](/examples/ask-a-long-answer-question-with-a-maximum-word-count)
-- [Ask a user for a birthday](/examples/ask-a-user-for-a-birthday)
 - [Ask a user for an address](/examples/ask-a-user-for-an-address)
-- [Ask a user for an Indian registration number](/examples/ask-a-user-for-an-indian-registration-number)
-- [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
-- [Ask a user for dollar amounts](/examples/ask-a-user-for-dollar-amounts)
-- [Confirm a change](/examples/confirm-a-change)
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
-- [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
-- [Dynamically change items in a dropdown list](/examples/dynamically-change-items-in-a-dropdown-list)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Filter data in a table](/examples/filter-data-in-a-table)
-- [Include a link in the helper text of an option](/examples/include-a-link-in-the-helper-text-of-an-option)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
 - [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Reset date picker field](/examples/reset-date-picker-field)
-- [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
-- [Review and action](/examples/review-and-action)
-- [Search](/examples/search)
-- [Select one or more from a list of options](/examples/select-one-or-more-from-a-list-of-options)
-- [Set a max width on a long radio item](/examples/set-a-max-width-on-a-long-radio-item)
 - [Slotted error text in a form item](/examples/slotted-error-text-in-a-form-item)
 - [Slotted helper text in a form item](/examples/slotted-helper-text-in-a-form-item)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)

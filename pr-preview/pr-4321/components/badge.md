@@ -13,15 +13,15 @@ Small labels which hold small amounts of information, system feedback, or states
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible label for screen readers. |
-| `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Icon type to display in the badge. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "archived" \| "sky" \| "p… | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 
@@ -39,15 +39,15 @@ Small labels which hold small amounts of information, system feedback, or states
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Sets the accessible label for screen readers. |
 | `content` | string \| TemplateRef<unknown> | (none) | No | Sets the content displayed in the badge. Accepts a string or template for custom content. |
-| `emphasis` | GoabBadgeEmphasis | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `iconType` | GoabIconType | (none) | No | Sets the icon type to display in the badge. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabBadgeSize | `medium` | No | Sets the size of the badge. |
+| `size` | "medium" \| "large" | `medium` | No | Sets the size of the badge. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabBadgeType | (none) | Yes | Sets the context and colour of the badge. |
+| `type` | "information" \| "success" \| "important" \| "emergency" \| "archived" \| "sky" \| "p… | (none) | Yes | Sets the context and colour of the badge. |
 
 ### Slots
 
@@ -67,7 +67,7 @@ Tag: `goa-badge`
 |------|------|---------|----------|-------------|
 | `arialabel` | string | (none) | No | Accessible label for screen readers. |
 | `content` | string | (none) | No | Content displayed in the badge. Use the content slot for custom HTML. |
-| `emphasis` |  | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
+| `emphasis` | "subtle" \| "strong" | `strong` | No | Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. |
 | `icontype` | GoabIconType | (none) | No | Icon type to display in the badge. |
 | `justify-content` | "center" \| "flex-start" \| "flex-end" \| "space-between" \| "" | (none) | No | justify-content value for the badge container. |
 | `mb` | Spacing | (none) | No | Bottom margin. |
@@ -83,7 +83,7 @@ Tag: `goa-badge`
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `content` | No | Content displayed in the badge. Accepts a string or ReactNode for custom content. |
+| `content` | No | Content displayed in the badge. |
 
 ---
 
@@ -120,20 +120,10 @@ Tag: `goa-badge`
 
 ## Examples
 
-- [Card view of case files](/examples/card-view-of-case-files)
-- [Expand or collapse part of a form](/examples/expand-or-collapse-part-of-a-form)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Filter data in a table](/examples/filter-data-in-a-table)
-- [Set a specific tab to be active](/examples/set-a-specific-tab-to-be-active)
-- [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
-- [Show multiple actions in a compact table](/examples/show-multiple-actions-in-a-compact-table)
 - [Show multiple tags together](/examples/show-multiple-tags-together)
 - [Show status in a table](/examples/show-status-in-a-table)
 - [Show status on a card](/examples/show-status-on-a-card)
 - [Task list page](/examples/task-list-page): A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
-- [Case detail](/examples/workspace/case-detail): A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
-- [Dashboard](/examples/workspace/dashboard): Gives staff an overview of their work with counts, trends, and assigned items.
-- [Index page](/examples/workspace/index-page): The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.
 
 ---
 

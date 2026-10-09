@@ -16,13 +16,13 @@ Allow users to select one option from a set.
 | `disabled` | boolean | (none) | No | Disables all radio items in the group. |
 | `error` | boolean | (none) | No | Shows an error state on all radio items in the group. |
 | `id` | string | (none) | No | The identifier for the radio group element. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. |
-| `orientation` | GoabRadioGroupOrientation | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
-| `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
+| `orientation` | "horizontal" \| "vertical" | `vertical` | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string | (none) | No | The currently selected value in the radio group. |
 
@@ -51,8 +51,8 @@ Allow users to select one option from a set.
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | The name for the radio group. Used for accessibility and change events. If omitted, a unique name is generated. |
-| `orientation` | GoabRadioGroupOrientation | (none) | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
-| `size` | GoabRadioGroupSize | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
+| `orientation` | "horizontal" \| "vertical" | (none) | No | Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of all radio items. 'compact' reduces spacing for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string | (none) | No | The currently selected value in the radio group. |
 
@@ -91,9 +91,9 @@ Tag: `goa-radio-group`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> | (none) |
-| `_change` | CustomEvent<{ name: string; value: string; label: string }> | (none) |
-| `_focus` | CustomEvent<{ name: string }> | (none) |
+| `_blur` | CustomEvent<{ name: string }> | Emits when focus leaves all radio items in the group. |
+| `_change` | CustomEvent<{ name: string; value: string; label: string }> | Emits when the selected radio item changes. |
+| `_focus` | CustomEvent<{ name: string }> | Emits when focus enters any radio item in the group. |
 
 ---
 
@@ -139,12 +139,9 @@ Tag: `goa-radio-group`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
 - [Include descriptions for items in a checkbox list](/examples/include-descriptions-for-items-in-a-checkbox-list)
 - [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
-- [Review and action](/examples/review-and-action)
 - [Set a max width on a long radio item](/examples/set-a-max-width-on-a-long-radio-item)
 
 ---

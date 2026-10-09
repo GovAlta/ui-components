@@ -13,7 +13,7 @@ Full-width section with optional background.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `width` | GoabPageBlockSize | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
+| `width` | "full" \| string | `full` | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
 ---
 
@@ -24,7 +24,7 @@ Full-width section with optional background.
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `width` | GoabPageBlockSize | (none) | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
+| `width` | "full" \| string | (none) | No | Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". |
 
 ---
 
@@ -52,7 +52,6 @@ Tag: `goa-page-block`
 ## Examples
 
 - [Basic page layout](/examples/basic-page-layout)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
 
 ---
 

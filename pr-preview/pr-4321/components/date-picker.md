@@ -15,14 +15,14 @@ Lets users select a date through a calendar without the need to manually type it
 | `disabled` | boolean | (none) | No | Disables the date picker. |
 | `error` | boolean | (none) | No | Sets the input to an error state. |
 | `max` | string | (none) | No | Sets the latest allowed date as an ISO date string (yyyy-mm-dd). |
-| `mb` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `min` | string | (none) | No | Sets the earliest allowed date as an ISO date string (yyyy-mm-dd). |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Name of the date field. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabDatePickerInputType | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
+| `type` | "calendar" \| "input" | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
 | `value` | string | (none) | No | Sets the calendar date as an ISO date string (yyyy-mm-dd). |
 | `width` | string | (none) | No | Sets the width of the date picker input. |
 
@@ -53,7 +53,7 @@ Lets users select a date through a calendar without the need to manually type it
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Sets the name of the date field. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
-| `type` | GoabDatePickerInputType | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
+| `type` | "calendar" \| "input" | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
 | `value` | string | (none) | No | Sets the calendar date as an ISO date string (yyyy-mm-dd). |
 | `width` | string | (none) | No | Sets the width of the date picker input. |
 
@@ -94,9 +94,9 @@ Tag: `goa-date-picker`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> | (none) |
-| `_change` | CustomEvent<{ name: string; value: Date \| string \| null; valueStr: string }> | (none) |
-| `_focus` | CustomEvent<{ name: string }> | (none) |
+| `_blur` | CustomEvent<{ name: string }> | Emits when focus leaves all of the date picker's internal fields. |
+| `_change` | CustomEvent<{ name: string; value: Date \| string \| null; valueStr: string }> | Emits when the selected date changes. |
+| `_focus` | CustomEvent<{ name: string }> | Emits when focus enters any of the date picker's internal fields. |
 
 ---
 
@@ -123,7 +123,6 @@ Tag: `goa-date-picker`
 ## Examples
 
 - [Ask a user for a birthday](/examples/ask-a-user-for-a-birthday)
-- [Confirm a change](/examples/confirm-a-change)
 - [Reset date picker field](/examples/reset-date-picker-field)
 
 ---

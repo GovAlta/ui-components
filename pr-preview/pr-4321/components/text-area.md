@@ -14,21 +14,21 @@ A multi-line field where users can input and edit text.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the textarea input. |
-| `countBy` | GoabTextAreaCountBy | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
+| `countBy` | "character" \| "word" \| "" | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
 | `disabled` | boolean | (none) | No | Sets the input to a disabled state. |
 | `error` | boolean | (none) | No | Sets the input to an error state. |
 | `id` | string | (none) | No | Sets the id attribute on the textarea element. |
 | `maxCount` | number | (none) | No | Maximum number of characters or words allowed. |
 | `maxWidth` | string | `60ch` | No | Sets the maximum width of the text area. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Name of the input value that is received in the change event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the textarea when no value is set. |
 | `readOnly` | boolean | (none) | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Sets the number of visible text rows. |
-| `size` | GoabTextAreaSize | (none) | No | Sets the visual size variant of the text area. |
+| `size` | "default" \| "compact" | (none) | No | Sets the visual size variant of the text area. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string | (none) | No | Bound to the current value of the textarea. |
 | `width` | string | `100%` | No | Sets the width of the text area. |
@@ -52,7 +52,7 @@ A multi-line field where users can input and edit text.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autoComplete` | string | `on` | No | Specifies the autocomplete attribute for the textarea input. |
-| `countBy` | GoabTextAreaCountBy | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
+| `countBy` | "character" \| "word" \| "" | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
 | `error` | boolean | (none) | No | Sets the error state for the control. |
 | `id` | string | (none) | No | Sets the id attribute of the underlying web component. |
@@ -66,7 +66,7 @@ A multi-line field where users can input and edit text.
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readOnly` | boolean | (none) | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Set the number of rows. |
-| `size` | GoabTextAreaSize | `default` | No | Sets the size variant of the textarea. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size variant of the textarea. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string | (none) | No | Sets the control value used by Angular forms and one-way binding. |
 | `width` | string | (none) | No | Width of the text area. |
@@ -93,7 +93,7 @@ Tag: `goa-text-area`
 | `arialabel` | string | (none) | No | Defines how the text will be translated for the screen reader. |
 | `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the textarea input. |
 | `countby` | "character" \| "word" \| "" | (none) | No | Counting interval for characters or words, specifying whether to count every character or word. |
-| `disabled` | boolean | `false` | No | Sets the input to a disabled state. Use [attr.disabled] with [formControl] |
+| `disabled` | boolean | `false` | No | Sets the input to a disabled state. |
 | `error` | boolean | `false` | No | Sets the input to an error state |
 | `maxcount` | number | `-1` | No | Maximum number of characters or words allowed |
 | `maxwidth` | string | `60ch` | No | Maximum width of the text area |
@@ -105,7 +105,7 @@ Tag: `goa-text-area`
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | `false` | No | Sets the input to a read only state. |
 | `rows` | number | `3` | No | Set the number of rows. |
-| `size` | "default" \| "compact" | `default` | No | (none) |
+| `size` | "default" \| "compact" | `default` | No | Sets the visual size variant of the text area. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `value` | string | (none) | No | Bound to value |
 | `width` | string | `100%` | No | Width of the text area. |
@@ -114,10 +114,10 @@ Tag: `goa-text-area`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_change` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_focus` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> | (none) |
+| `_blur` | CustomEvent<{ name: string; value: string }> | Emits when the textarea loses focus. |
+| `_change` | CustomEvent<{ name: string; value: string }> | Emits when the textarea value changes. |
+| `_focus` | CustomEvent<{ name: string; value: string }> | Emits when the textarea receives focus. |
+| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> | Emits when a key is pressed in the textarea. |
 
 ---
 
@@ -147,10 +147,7 @@ Tag: `goa-text-area`
 
 ## Examples
 
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a long answer question with a maximum word count](/examples/ask-a-long-answer-question-with-a-maximum-word-count)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Review and action](/examples/review-and-action)
 
 ---
 

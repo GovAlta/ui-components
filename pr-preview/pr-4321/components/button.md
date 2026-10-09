@@ -18,15 +18,15 @@ Carry out an important action or navigate to another page.
 | `ariaLabel` | string | (none) | No | Sets the accessible name. Include the visible button text in the value. |
 | `disabled` | boolean | (none) | No | When true, prevents user interaction and applies disabled styling. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the button text. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
-| `size` | GoabButtonSize | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
+| `size` | "compact" \| "normal" | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
-| `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
@@ -53,11 +53,11 @@ Carry out an important action or navigate to another page.
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
-| `size` | GoabButtonSize | `normal` | No | Sets the size of the button. Use "compact" for inline actions or space-constrained layouts. |
+| `size` | "compact" \| "normal" | `normal` | No | Sets the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | GoabButtonType | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
-| `variant` | GoabButtonVariant | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
 ### Events
@@ -89,7 +89,7 @@ Tag: `goa-button`
 | `size` | "normal" \| "compact" | `normal` | No | Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `trailingicon` | GoabIconType | (none) | No | Icon displayed after the button text. |
-| `type` | "primary" \| "submit" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
+| `type` | "primary" \| "secondary" \| "tertiary" \| "start" \| "text" | `primary` | No | Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. |
 | `variant` | "normal" \| "destructive" \| "inverse" \| "dark" | `normal` | No | Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. |
 | `width` | string | (none) | No | Sets a custom width for the button (e.g., "200px", "100%" or "fit-content"). |
 
@@ -97,7 +97,7 @@ Tag: `goa-button`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent | (none) |
+| `_click` | CustomEvent | Emits when the button is clicked. |
 
 ---
 
@@ -166,42 +166,9 @@ Tag: `goa-button`
 
 ## Examples
 
-- [Activate a specific tab with a button](/examples/activate-a-specific-tab-with-a-button)
-- [Add a filter chip](/examples/add-a-filter-chip)
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
-- [Ask a user for an address](/examples/ask-a-user-for-an-address)
 - [Button with Icon](/examples/button-with-icon)
-- [Card view of case files](/examples/card-view-of-case-files)
-- [Confirm a change](/examples/confirm-a-change)
-- [Confirm a destructive action](/examples/confirm-a-destructive-action)
-- [Confirm before navigating away](/examples/confirm-before-navigating-away)
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
-- [Display user information](/examples/display-user-information)
-- [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
-- [Error pages](/examples/error-pages): Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Filter data in a table](/examples/filter-data-in-a-table)
-- [Hero banner with actions](/examples/hero-banner-with-actions)
-- [Hide and show many sections of information](/examples/hide-and-show-many-sections-of-information)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Require user action before continuing](/examples/require-user-action-before-continuing)
-- [Reset date picker field](/examples/reset-date-picker-field)
-- [Result page](/examples/result-page): A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.
-- [Review and action](/examples/review-and-action)
-- [Review page](/examples/review-page): A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a "change" link so the user can revise without starting over.
 - [Search](/examples/search)
-- [Set a specific tab to be active](/examples/set-a-specific-tab-to-be-active)
-- [Show a notification](/examples/show-a-notification)
-- [Show a notification with an action](/examples/show-a-notification-with-an-action)
-- [Show a user progress](/examples/show-a-user-progress)
-- [Show a user progress when the time is unknown](/examples/show-a-user-progress-when-the-time-is-unknown)
-- [Show different views of data in a table](/examples/show-different-views-of-data-in-a-table)
-- [Show status in a table](/examples/show-status-in-a-table)
-- [Start page](/examples/start-page): The front door to a government service for a citizen. It is the way into the service and how citizens access it. Each government service has a start page on Alberta.ca.
-- [Warn a user of a deadline](/examples/warn-a-user-of-a-deadline)
-- [Case detail](/examples/workspace/case-detail): A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
 
 ---
 

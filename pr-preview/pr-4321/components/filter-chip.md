@@ -14,12 +14,12 @@ Allow the user to enter information, filter content, and make selections.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
 | `error` | boolean | (none) | No | Shows an error state. |
-| `iconTheme` | GoabFilterChipTheme | `outline` | No | Theme style of the leading icon. |
+| `iconTheme` | "outline" \| "filled" | `outline` | No | Theme style of the leading icon. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed at the start of the chip. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `removable` | boolean | `true` | No | Sets the chip's removability and visibility of the close button. |
 | `secondaryText` | string | (none) | No | Secondary text displayed in a smaller size before the main content. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
@@ -47,7 +47,7 @@ Allow the user to enter information, filter content, and make selections.
 | `ariaLabel` | string | (none) | No | Accessible content used to label the filter chip controls. |
 | `content` | string \| TemplateRef<unknown> | (none) | Yes | Content displayed in the chip. Accepts a string or template for custom content. |
 | `error` | boolean | (none) | No | Shows an error state. |
-| `iconTheme` | GoabChipTheme | (none) | No | Sets the icon theme style for the filter chip. |
+| `iconTheme` | "outline" \| "filled" | (none) | No | Sets the icon theme style for the filter chip. |
 | `leadingIcon` | GoabIconType \| null | (none) | No | Icon displayed at the start of the chip. |
 | `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
@@ -95,13 +95,13 @@ Tag: `goa-filter-chip`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_click` | CustomEvent | (none) |
+| `_click` | CustomEvent | Emits when the filter chip delete button is clicked. |
 
 ### Slots
 
 | Slot | Required | Description |
 |------|----------|-------------|
-| `content` | Yes | Content displayed in the chip. Accepts a string or ReactNode for custom content. |
+| `content` | Yes | Content displayed in the chip. |
 
 ---
 

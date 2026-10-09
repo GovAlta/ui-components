@@ -14,10 +14,10 @@ Let users reveal more detailed information when they need it.
 |------|------|---------|----------|-------------|
 | `heading` | string | (none) | Yes | The title heading. |
 | `maxWidth` | string | `75ch` | No | Sets the maximum width of the details. |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `open` | boolean | (none) | No | Controls if details is expanded or not. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
@@ -80,7 +80,6 @@ Tag: `goa-details`
 ## Examples
 
 - [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 
 ---
 

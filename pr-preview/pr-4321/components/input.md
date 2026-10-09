@@ -14,7 +14,7 @@ A single-line field where users can input and edit text.
 |------|------|---------|----------|-------------|
 | `ariaLabel` | string | (none) | No | Sets the aria-label used by assistive technologies. |
 | `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input |
-| `autoCapitalize` | GoabAutoCapitalize | (none) | No | Controls automatic capitalization behavior on supported mobile browsers. |
+| `autoCapitalize` | "on" \| "off" \| "none" \| "sentences" \| "words" \| "characters" | (none) | No | Controls automatic capitalization behavior on supported mobile browsers. |
 | `autoComplete` | string | (none) | No | Sets the autocomplete attribute for the input element. |
 | `debounce` | number | (none) | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
 | `disabled` | boolean | (none) | No | Sets the input disabled state. |
@@ -24,21 +24,21 @@ A single-line field where users can input and edit text.
 | `leadingIcon` | GoabIconType | (none) | No | Sets the icon shown before the value. |
 | `max` | number \| string | (none) | No | Maximum value. Supports any number, or ISO 8601 format for date/datetime types. |
 | `maxLength` | number | (none) | No | Sets the maximum number of characters. |
-| `mb` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
 | `min` | number \| string | (none) | No | Minimum value. Supports any number, or ISO 8601 format for date/datetime types. |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Name of input value that is received in event detail payloads. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Sets placeholder text when the input is empty. |
 | `readonly` | boolean | (none) | No | Sets the readonly state. |
-| `size` | GoabInputSize | `default` | No | Sets the input size. |
+| `size` | "default" \| "compact" | `default` | No | Sets the input size. |
 | `step` | number | `1` | No | How much a number or date value should change by. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `textAlign` | "left" \| "right" | `left` | No | Sets text alignment. |
 | `trailingIcon` | GoabIconType | (none) | No | Sets the icon shown after the value. |
 | `trailingIconAriaLabel` | string | (none) | No | Sets the aria-label for an interactive trailing icon. |
-| `type` | GoabInputType | `text` | No | Sets the type of the input field. |
+| `type` | "text" \| "password" \| "email" \| "number" \| "date" \| "datetime-local" \| "month" … | `text` | No | Sets the type of the input field. |
 | `value` | string | (none) | No | Bound to the current value of the input field. |
 | `variant` | "goa" \| "bare" | `goa` | No | Sets the visual style variant. |
 | `width` | string | (none) | No | Sets the width of the input field. |
@@ -68,9 +68,9 @@ A single-line field where users can input and edit text.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. |
+| `ariaLabel` | string | (none) | No | Defines how the input will be translated for the screen reader. |
 | `ariaLabelledBy` | string | (none) | No | The aria-labelledby attribute identifies the element (or elements) that labels the input. |
-| `autoCapitalize` | GoabInputAutoCapitalize | (none) | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
+| `autoCapitalize` | "on" \| "off" \| "none" \| "sentences" \| "words" \| "characters" | (none) | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
 | `autoComplete` | string | (none) | No | Specifies the autocomplete attribute for the input field. |
 | `debounce` | number | (none) | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
 | `disabled` | boolean | (none) | No | Sets the disabled state for the control. |
@@ -89,14 +89,14 @@ A single-line field where users can input and edit text.
 | `name` | string | (none) | No | Name of input value that is received in the onChange event. If omitted, a unique name is generated. |
 | `placeholder` | string | (none) | No | Text displayed within the input when no value is set. |
 | `readonly` | boolean | (none) | No | Makes the input readonly. |
-| `size` | GoabInputSize | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the input. 'compact' reduces height for dense layouts. |
 | `step` | number | (none) | No | How much a number or date should change by. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `textAlign` | "left" \| "right" | `left` | No | Sets the text alignment within the input field. |
 | `trailingContent` | string \| TemplateRef<any> | (none) | No | Sets the trailing content slot, accepting a string or template reference. |
 | `trailingIcon` | GoabIconType | (none) | No | Icon shown to the right of the text. |
 | `trailingIconAriaLabel` | string | (none) | No | Aria label for the trailing icon. Use only when the trailing icon is interactive. |
-| `type` | GoabInputType | `text` | No | Sets the type of the input field. |
+| `type` | "text" \| "password" \| "email" \| "number" \| "date" \| "datetime-local" \| "month" … | `text` | No | Sets the type of the input field. |
 | `value` | string | (none) | No | Sets the control value used by Angular forms and one-way binding. |
 | `variant` | string | (none) | No | Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. |
 | `width` | string | (none) | No | Sets the width of the text input area. |
@@ -133,7 +133,7 @@ Tag: `goa-input`
 | `autocapitalize` | "on" \| "off" \| "none" \| "sentences" \| "words" \| "characters" | `off` | No | Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. |
 | `autocomplete` | string | (none) | No | Specifies the autocomplete attribute for the input field. |
 | `debounce` | number | `0` | No | Debounce delay in milliseconds before firing the change event. 0 means no debounce. |
-| `disabled` | boolean | `false` | No | Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]. |
+| `disabled` | boolean | `false` | No | Disables this input. The input will not receive focus or events. |
 | `error` | boolean | `false` | No | Sets the input to an error state. |
 | `focused` | boolean | `false` | No | Sets the cursor focus to the input. |
 | `handletrailingiconclick` | boolean | `false` | No | Flag that will result in an icon button component being rendered instead of an icon. |
@@ -164,11 +164,11 @@ Tag: `goa-input`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_change` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_focus` | CustomEvent<{ name: string; value: string }> | (none) |
-| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> | (none) |
-| `_trailingIconClick` | CustomEvent | (none) |
+| `_blur` | CustomEvent<{ name: string; value: string }> | Emits when the input loses focus. |
+| `_change` | CustomEvent<{ name: string; value: string }> | Emits when the input value changes. |
+| `_focus` | CustomEvent<{ name: string; value: string }> | Emits when the input receives focus. |
+| `_keyPress` | CustomEvent<{ name: string; value: string; key: string }> | Emits when a key is pressed in the input. |
+| `_trailingIconClick` | CustomEvent | Emits when the trailing icon is clicked. |
 
 ### Slots
 
@@ -210,21 +210,15 @@ Tag: `goa-input`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a user for an address](/examples/ask-a-user-for-an-address)
 - [Ask a user for an Indian registration number](/examples/ask-a-user-for-an-indian-registration-number)
 - [Ask a user for direct deposit information](/examples/ask-a-user-for-direct-deposit-information)
 - [Ask a user for dollar amounts](/examples/ask-a-user-for-dollar-amounts)
 - [Disabled button with a required field](/examples/disabled-button-with-a-required-field)
-- [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
 - [Filter data in a table](/examples/filter-data-in-a-table)
 - [Limit the width of helper text](/examples/limit-the-width-of-helper-text)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
 - [Reveal input based on a selection](/examples/reveal-input-based-on-a-selection)
 - [Search](/examples/search)
-- [Slotted error text in a form item](/examples/slotted-error-text-in-a-form-item)
-- [Slotted helper text in a form item](/examples/slotted-helper-text-in-a-form-item)
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
 
 ---

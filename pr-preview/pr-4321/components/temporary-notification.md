@@ -12,9 +12,9 @@ A notification that appears at the bottom of the screen.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `horizontalPosition` | SnackbarHorizontalPosition | `center` | No | Horizontal position of the notification container. |
+| `horizontalPosition` | "left" \| "center" \| "right" | `center` | No | Horizontal position of the notification container. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `verticalPosition` | SnackbarVerticalPosition | `bottom` | No | Vertical position of the notification container. |
+| `verticalPosition` | "top" \| "bottom" | `bottom` | No | Vertical position of the notification container. |
 
 ---
 
@@ -24,9 +24,9 @@ A notification that appears at the bottom of the screen.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `horizontalPosition` | SnackbarHorizontalPosition | `center` | No | Horizontal position of the notification container. |
+| `horizontalPosition` | "left" \| "center" \| "right" | `center` | No | Horizontal position of the notification container. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `verticalPosition` | SnackbarVerticalPosition | `bottom` | No | Vertical position of the notification container. |
+| `verticalPosition` | "top" \| "bottom" | `bottom` | No | Vertical position of the notification container. |
 
 ---
 

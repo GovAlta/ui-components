@@ -22,17 +22,17 @@ Present a list of options to the user to select from.
 | `leadingIcon` | GoabIconType | (none) | No | Icon shown to the left of the dropdown input. |
 | `maxHeight` | string | `276px` | No | Maximum height of the dropdown menu. Non-native only. |
 | `maxWidth` | string | (none) | No | Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). |
-| `mb` | Spacing | (none) | No | (none) |
-| `ml` | Spacing | (none) | No | (none) |
-| `mr` | Spacing | (none) | No | (none) |
-| `mt` | Spacing | (none) | No | (none) |
+| `mb` | Spacing | (none) | No | Sets the bottom margin spacing token. |
+| `ml` | Spacing | (none) | No | Sets the left margin spacing token. |
+| `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
+| `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Identifier for the dropdown. If omitted, a unique name is generated. |
 | `native` | boolean | (none) | No | When true, renders the native select HTML element. |
 | `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed in the dropdown before a selection is made. Non-native only. |
-| `size` | GoabDropdownSize | (none) | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `value` | string[] \| string | (none) | No | The currently selected value(s) of the dropdown. |
+| `value` | string[] \| string | (none) | No | The value of the selected item. |
 | `width` | string | (none) | No | Overrides the autosized menu width. Non-native only. |
 
 ### Events
@@ -69,7 +69,7 @@ Present a list of options to the user to select from.
 | `native` | boolean | (none) | No | When true will render the native select HTML element. |
 | `noResults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
-| `size` | GoabDropdownSize | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `value` | string[] \| string | (none) | No | Sets the control value used by Angular forms and one-way binding. |
 | `width` | string | (none) | No | Overrides the autosized menu width. Non-native only. |
@@ -118,9 +118,9 @@ Tag: `goa-dropdown`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_blur` | CustomEvent<{ name: string }> | (none) |
-| `_change` | CustomEvent<{ name?: string; value?: string; event: Event }> | (none) |
-| `_focus` | CustomEvent<{ name: string }> | (none) |
+| `_blur` | CustomEvent<{ name: string }> | Emits when the dropdown loses focus. |
+| `_change` | CustomEvent<{ name?: string; value?: string }> | Emits when the user selects a value from the dropdown. |
+| `_focus` | CustomEvent<{ name: string }> | Emits when the dropdown receives focus. |
 
 ---
 
@@ -172,15 +172,9 @@ Tag: `goa-dropdown`
 
 ## Examples
 
-- [Add a record using a drawer](/examples/add-a-record-using-a-drawer)
-- [Add and edit lots of filters](/examples/add-and-edit-lots-of-filters)
-- [Add another item in a modal](/examples/add-another-item-in-a-modal)
 - [Ask a user for an address](/examples/ask-a-user-for-an-address)
 - [Dynamically add an item to a dropdown list](/examples/dynamically-add-an-item-to-a-dropdown-list)
 - [Dynamically change items in a dropdown list](/examples/dynamically-change-items-in-a-dropdown-list)
-- [Filter a list using a push drawer](/examples/filter-a-list-using-a-push-drawer)
-- [Question page](/examples/question-page): A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.
-- [Review and action](/examples/review-and-action)
 - [Show number of results per page](/examples/show-number-of-results-per-page)
 
 ---

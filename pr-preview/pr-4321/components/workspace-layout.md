@@ -70,7 +70,7 @@ Tag: `goa-workspace-layout`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_scrollStateChange` | CustomEvent<{ state: 'no-scroll' \| 'at-top' \| 'middle' \| 'at-bottom'; isScrollable: boolean }> | (none) |
+| `_scrollStateChange` | CustomEvent<{ state: 'no-scroll' \| 'at-top' \| 'middle' \| 'at-bottom'; isScrollable: boolean }> | Emitted whenever the internal scroll state changes (no-scroll → at-top → middle → at-bottom). |
 
 ### Slots
 

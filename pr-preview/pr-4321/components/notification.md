@@ -12,12 +12,12 @@ Display important page level information or notifications.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLive` | GoabAriaLiveType | `polite` | No | Indicates how assistive technology should handle updates to the live region. |
+| `ariaLive` | "polite" \| "assertive" \| "off" | `polite` | No | Indicates how assistive technology should handle updates to the live region. |
 | `compact` | boolean | (none) | No | When true, reduces padding for a more compact notification. |
-| `emphasis` | GoabNotificationEmphasis | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for a bordered style. |
+| `emphasis` | "high" \| "low" | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for a bordered style. |
 | `maxContentWidth` | string | `100%` | No | Maximum width of the content area. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabNotificationType | (none) | No | Define the context and colour of the notification. |
+| `type` | "important" \| "information" \| "event" \| "emergency" | `information` | No | Define the context and colour of the notification. |
 
 ### Events
 
@@ -33,12 +33,12 @@ Display important page level information or notifications.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLive` | GoabAriaLiveType | (none) | No | Indicates how assistive technology should handle updates to the live region. |
+| `ariaLive` | "polite" \| "assertive" \| "off" | (none) | No | Indicates how assistive technology should handle updates to the live region. |
 | `compact` | boolean | (none) | No | When true, reduces padding for a more compact notification. |
-| `emphasis` | GoabNotificationEmphasis | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for medium. |
+| `emphasis` | "high" \| "low" | `high` | No | Sets the visual prominence. 'high' for full background, 'low' for medium. |
 | `maxContentWidth` | string | (none) | No | Maximum width of the content area. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
-| `type` | GoabNotificationType | `information` | No | Define the context and colour of the notification. |
+| `type` | "important" \| "information" \| "event" \| "emergency" | `information` | No | Define the context and colour of the notification. |
 
 ### Events
 
@@ -67,7 +67,7 @@ Tag: `goa-notification`
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `_dismiss` | CustomEvent | (none) |
+| `_dismiss` | CustomEvent | Emits when the notification is dismissed. |
 
 ---
 
