@@ -83231,6 +83231,7 @@ function App() {
   const isDark = mode === "dark";
   const location2 = useLocation();
   const baseUrl = "/";
+  const [sideMenuOpen, setSideMenuOpen] = reactExports.useState(true);
   const isPushDrawerRoute = location2.pathname === PUSH_DRAWER_ROUTE_PATH || location2.pathname === `${baseUrl}features/3347-push`;
   const [pushDrawerOpen, setPushDrawerOpen] = reactExports.useState(isPushDrawerRoute);
   reactExports.useEffect(() => {
@@ -83248,6 +83249,9 @@ function App() {
     }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate2(internal);
+  };
+  const handleRouteSelect = (detail) => {
+    if (detail.value) navigate2(`/${detail.value}`);
   };
   const [notifications, setNotifications] = reactExports.useState(
     () => createSampleNotifications()
@@ -83272,7 +83276,8 @@ function App() {
     {
       heading: "Testing Playground",
       url: baseUrl,
-      open: true,
+      open: sideMenuOpen,
+      onToggle: () => setSideMenuOpen((open) => !open),
       userName: "Edna Mode",
       userSecondaryText: "edna.mode@gov.ab.ca",
       onNavigate: handleSideMenuNavigate,
@@ -83325,6 +83330,26 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "log-out", label: "Log out", url: "#" })
       ] }),
       primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        sideMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(GoabFormItem, { label: "Find a route", mb: "m", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabDropdown,
+          {
+            name: "route-search",
+            placeholder: "Story #, component or title",
+            filterable: true,
+            size: "compact",
+            width: "100%",
+            onChange: handleRouteSelect,
+            children: prRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabDropdownItem,
+              {
+                value: route.path,
+                filter: route.type === "docs" ? route.title : `${route.id} ${route.title}`,
+                label: route.type === "docs" ? route.title : `#${route.id} - ${route.title}`
+              },
+              route.path
+            ))
+          }
+        ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabWorkSideMenuItem,
           {
