@@ -182,25 +182,8 @@
               {#if _state.form[page]?.data?.type}
                 {#if _state.form[page]?.data?.type === "details"}
                   <table>
-                    {#each Object.entries(getData(_state, page)) as [_, data]}
-                      <tr>
-                        <td class="label">{data.label}</td>
-                        <td class="value" class:empty={isBlank(data.value)}>
-                          {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
-                            {#each formatValue(data.value, data.valueLabel, data.labels) as label}
-                              <div>{label}</div>
-                            {/each}
-                          {:else}
-                            {formatValue(data.value, data.valueLabel, data.labels)}
-                          {/if}
-                        </td>
-                      </tr>
-                    {/each}
-                  </table>
-                {:else}
-                  {#each getDataList(_state, page) as item, index}
-                    <table>
-                      {#each Object.entries(item) as [_, data]}
+                    <tbody>
+                      {#each Object.entries(getData(_state, page)) as [_, data]}
                         <tr>
                           <td class="label">{data.label}</td>
                           <td class="value" class:empty={isBlank(data.value)}>
@@ -209,14 +192,43 @@
                                 <div>{label}</div>
                               {/each}
                             {:else}
-                              {formatValue(data.value, data.valueLabel, data.labels)}
+                              {formatValue(
+                                data.value,
+                                data.valueLabel,
+                                data.labels,
+                              )}
                             {/if}
                           </td>
                         </tr>
                       {/each}
+                    </tbody>
+                  </table>
+                {:else}
+                  {#each getDataList(_state, page) as item, index}
+                    <table>
+                      <tbody>
+                        {#each Object.entries(item) as [_, data]}
+                          <tr>
+                            <td class="label">{data.label}</td>
+                            <td class="value" class:empty={isBlank(data.value)}>
+                              {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
+                                {#each formatValue(data.value, data.valueLabel, data.labels) as label}
+                                  <div>{label}</div>
+                                {/each}
+                              {:else}
+                                {formatValue(
+                                  data.value,
+                                  data.valueLabel,
+                                  data.labels,
+                                )}
+                              {/if}
+                            </td>
+                          </tr>
+                        {/each}
+                      </tbody>
                     </table>
                     {#if index < getDataList(_state, page).length - 1}
-                      <goa-divider mt="m" mb="m" />
+                      <goa-divider mt="m" mb="m"></goa-divider>
                     {/if}
                   {/each}
                 {/if}

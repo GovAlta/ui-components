@@ -255,7 +255,7 @@
             theme={current ? "filled" : "outline"}
             type={icon}
             arialabel={label}
-          />
+          ></goa-icon>
         {/if}
         <div class="menu-item-label">
           {label}
@@ -274,7 +274,7 @@
             icon="false"
             min-width="var(--goa-space-m)"
             justify-content="center"
-          />
+          ></goa-badge>
         {/if}
       </button>
       <!-- Slot content is moved to a goa-drawer appended to document.body on open.
@@ -310,7 +310,7 @@
               theme={current ? "filled" : "outline"}
               type={icon}
               arialabel={label}
-            />
+            ></goa-icon>
           {/if}
           <div class="menu-item-label">
             {label}
@@ -329,7 +329,7 @@
               icon="false"
               min-width="var(--goa-space-m)"
               justify-content="center"
-            />
+            ></goa-badge>
           {/if}
         </div>
         <slot name="popoverContent" />
@@ -353,7 +353,7 @@
           theme={current ? "filled" : "outline"}
           type={icon}
           arialabel={label}
-        />
+        ></goa-icon>
       {/if}
       <div class="menu-item-label">
         {label}
@@ -372,7 +372,7 @@
           icon="false"
           min-width="var(--goa-space-m)"
           justify-content="center"
-        />
+        ></goa-badge>
       {/if}
     </svelte:element>
   {/if}

@@ -8,7 +8,7 @@
       sectionTitle: { type: "String", attribute: "section-title" },
       backUrl: { attribute: "back-url", type: "String" },
       summaryHeading: { attribute: "summary-heading", type: "String" },
-    }
+    },
   }}
 />
 
@@ -22,7 +22,8 @@
     FieldsetChangeRelayDetail,
     FieldsetCompleteMsg,
     FormDispatchEditMsg,
-    FormDispatchEditRelayDetail, FormPageBackMsg,
+    FormDispatchEditRelayDetail,
+    FormPageBackMsg,
     FormPageBindMsg,
     FormPageBindRelayDetail,
     FormPageContinueMsg,
@@ -56,7 +57,7 @@
   let _rootEl: HTMLElement;
   let _fieldsetEl: HTMLElement;
   let _active: boolean = false;
-  let _editting: string = "";  // the id of the form page that is currently being editted
+  let _editting: string = ""; // the id of the form page that is currently being editted
 
   // ========
   // Reactive
@@ -144,7 +145,9 @@
   function dispatchContinueMsg(cancelled = false) {
     if (_fieldsetEl) {
       // send message to fieldset to then get it to send data up
-      relay<FormPageContinueRelayDetail>(_fieldsetEl, FormPageContinueMsg, { cancelled });
+      relay<FormPageContinueRelayDetail>(_fieldsetEl, FormPageContinueMsg, {
+        cancelled,
+      });
     } else {
       dispatch(_senderEl, "_continue", null, { bubbles: true });
     }
@@ -192,13 +195,22 @@
     {/if}
 
     {#if sectionTitle}
-      <goa-text size="body-l" mt="none" mb="xs" color="secondary">{sectionTitle}</goa-text>
+      <goa-text size="body-l" mt="none" mb="xs" color="secondary"
+        >{sectionTitle}</goa-text
+      >
     {/if}
     {#if heading}
-      <goa-text as="h2" size="heading-l" mt="none" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
+      <goa-text
+        as="h2"
+        size="heading-l"
+        mt="none"
+        mb={subHeading ? "none" : "m"}>{heading}</goa-text
+      >
     {/if}
     {#if subHeading}
-      <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>
+      <goa-text size="body-l" mt="2xs" mb="xl" color="primary"
+        >{subHeading}</goa-text
+      >
     {/if}
 
     <slot />
@@ -206,7 +218,10 @@
     {#if type !== "multistep"}
       <goa-block mt="2xl">
         {#if _editting === id}
-          <goa-button on:_click={() => dispatchContinueMsg(true)} type="secondary">
+          <goa-button
+            on:_click={() => dispatchContinueMsg(true)}
+            type="secondary"
+          >
             Cancel
           </goa-button>
         {/if}
@@ -215,12 +230,10 @@
           <goa-button on:_click={() => dispatchCompletion()} type="primary">
             {buttonText || "Confirm"}
           </goa-button>
-        {:else}
-          {#if buttonVisibility === "visible"}
-            <goa-button on:_click={() => dispatchContinueMsg()} type="primary">
-              {buttonText || "Continue"}
-            </goa-button>
-          {/if}
+        {:else if buttonVisibility === "visible"}
+          <goa-button on:_click={() => dispatchContinueMsg()} type="primary">
+            {buttonText || "Continue"}
+          </goa-button>
         {/if}
       </goa-block>
     {/if}

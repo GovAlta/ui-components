@@ -291,7 +291,7 @@
 <!-- HTML -->
 <div
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
+    ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
     --icon-rotate: ${iconposition === "right" ? "180deg" : "90deg"}
   `}
@@ -305,7 +305,7 @@
     open={isOpen}
     data-testid={`${testid}-details`}
   >
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <summary
       class={`container-${headingsize}`}
       on:mouseover={() => (_hovering = true)}
@@ -338,7 +338,7 @@
           <span class="secondary-text">{secondarytext}</span>
         {/if}
         {#if $$slots.headingcontent}
-          <!-- svelte-ignore a11y-click-events-have-key-events because the enter and space handlers are blocked too-->
+          <!-- svelte-ignore a11y_click_events_have_key_events because the enter and space handlers are blocked too-->
           <div
             class="heading-content"
             class:heading-content-top={_headingSlotChildren.length}
@@ -349,8 +349,8 @@
         {/if}
       </div>
 
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
       {#if $$slots.actions}
         <div class="actions" on:click|stopPropagation>
           <slot name="actions" />

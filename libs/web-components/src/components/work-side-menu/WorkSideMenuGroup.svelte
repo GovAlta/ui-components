@@ -50,14 +50,12 @@
   >
     <summary aria-expanded={open}>
       {#if icon}
-        <goa-icon
-          type={icon}
-          size="small"
-          theme={open ? "filled" : "outline"}
-        />
+        <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"}
+        ></goa-icon>
       {/if}
       <span class="label">{heading}</span>
-      <goa-icon class="marker-icon" type="chevron-forward" size="small" />
+      <goa-icon class="marker-icon" type="chevron-forward" size="small"
+      ></goa-icon>
     </summary>
     <div class="group" data-testid="group">
       <slot />
@@ -119,9 +117,15 @@
 
     /* Menu item styling */
     --goa-work-side-menu-item-icon-display: none;
-    --goa-work-side-menu-item-padding: var(--goa-work-side-menu-group-item-padding);
-    --goa-work-side-menu-item-min-height: var(--goa-work-side-menu-group-item-min-height);
-    --goa-work-side-menu-item-text-size: var(--goa-work-side-menu-group-item-text-size);
+    --goa-work-side-menu-item-padding: var(
+      --goa-work-side-menu-group-item-padding
+    );
+    --goa-work-side-menu-item-min-height: var(
+      --goa-work-side-menu-group-item-min-height
+    );
+    --goa-work-side-menu-item-text-size: var(
+      --goa-work-side-menu-group-item-text-size
+    );
   }
 
   .label {

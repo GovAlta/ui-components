@@ -630,19 +630,43 @@ export function watchFocusWithin(
   let focused = false;
   let pointerDownInside = false;
   let lastFocusOut: FocusEvent | undefined;
+  let leaveTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
-  const checkLeave = (event: FocusEvent) => {
+  const cancelLeaveCheck = () => {
+    if (leaveTimeoutId !== undefined) {
+      clearTimeout(leaveTimeoutId);
+      leaveTimeoutId = undefined;
+    }
+  };
+
+  const checkLeave = (event: FocusEvent, canSettle = true) => {
+    leaveTimeoutId = undefined;
     if (focused && !isFocusWithin(hostEl)) {
+      // Firefox can temporarily report body as active while a popover closes and
+      // restores focus to its trigger. Allow that restoration one more task to settle.
+      if (
+        settlePointerFocus &&
+        canSettle &&
+        document.activeElement === document.body
+      ) {
+        leaveTimeoutId = setTimeout(() => checkLeave(event, false), 0);
+        return;
+      }
       focused = false;
       onLeave(event);
     }
+  };
+
+  const scheduleLeaveCheck = (event: FocusEvent) => {
+    cancelLeaveCheck();
+    leaveTimeoutId = setTimeout(() => checkLeave(event), 0);
   };
 
   const onPointerDown = (event: PointerEvent) => {
     pointerDownInside = event.composedPath().includes(hostEl);
     if (!pointerDownInside) {
       // A click outside must also end focus when an internal click left no DOM node focused.
-      setTimeout(() => checkLeave(lastFocusOut ?? new FocusEvent("focusout")), 0);
+      scheduleLeaveCheck(lastFocusOut ?? new FocusEvent("focusout"));
     }
   };
 
@@ -659,24 +683,30 @@ export function watchFocusWithin(
     document.addEventListener("pointercancel", onPointerUp, true);
   }
 
-  rootEl.addEventListener("focusin", (e) => {
+  const onFocusIn = (e: FocusEvent) => {
+    // Moving between nested shadow roots can briefly leave document.activeElement on
+    // body. A subsequent focusin proves focus is still within this component.
+    cancelLeaveCheck();
     if (!focused) {
       focused = true;
-      onEnter(e as FocusEvent);
+      onEnter(e);
     }
-  });
+  };
 
-  rootEl.addEventListener("focusout", (e) => {
-    const evt = e as FocusEvent;
+  const onFocusOut = (evt: FocusEvent) => {
     lastFocusOut = evt;
     const fromInternalPointer = pointerDownInside;
-    setTimeout(() => {
-      // An option click can briefly put focus on body before the next option receives it.
-      if (!fromInternalPointer) checkLeave(evt);
-    }, 0);
-  });
+    // An option click can briefly put focus on body before the next option receives it.
+    if (!fromInternalPointer) scheduleLeaveCheck(evt);
+  };
+
+  rootEl.addEventListener("focusin", onFocusIn);
+  rootEl.addEventListener("focusout", onFocusOut);
 
   return () => {
+    cancelLeaveCheck();
+    rootEl.removeEventListener("focusin", onFocusIn);
+    rootEl.removeEventListener("focusout", onFocusOut);
     if (settlePointerFocus) {
       document.removeEventListener("pointerdown", onPointerDown, true);
       document.removeEventListener("pointerup", onPointerUp, true);

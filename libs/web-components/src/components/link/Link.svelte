@@ -107,25 +107,25 @@
   data-testid={testid}
 >
   {#if leadingicon}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <goa-icon
       data-testid="leading-icon"
       type={leadingicon}
       size={_iconSize}
       on:click={handleIconClick}
-    />
+    ></goa-icon>
   {/if}
   <slot />
   {#if trailingicon}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <goa-icon
       data-testid="trailing-icon"
       type={trailingicon}
       size={_iconSize}
       on:click={handleIconClick}
-    />
+    ></goa-icon>
   {/if}
 </div>
 

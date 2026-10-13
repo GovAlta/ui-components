@@ -182,9 +182,13 @@
       role="presentation"
       bind:this={_rootEl}
     >
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <div
+        data-testid="modal-overlay"
+        class="modal-overlay"
+        on:click={close}
+      ></div>
       <div
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
@@ -205,7 +209,8 @@
             >
               <div class="modal-heading-content">
                 {#if _iconType}
-                  <goa-icon type={_iconType} size="medium" theme="filled" />
+                  <goa-icon type={_iconType} size="medium" theme="filled"
+                  ></goa-icon>
                 {/if}
                 <div
                   data-testid="modal-title"
@@ -222,8 +227,8 @@
               </div>
               {#if _isClosable}
                 <div class="modal-close">
-                  <!-- svelte-ignore a11y-click-events-have-key-events -->
-                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <!-- svelte-ignore a11y_click_events_have_key_events -->
+                  <!-- svelte-ignore a11y_no_static_element_interactions -->
                   <goa-icon-button
                     size="medium"
                     data-ignore-focus="true"
@@ -233,7 +238,7 @@
                     theme="filled"
                     on:click={close}
                     variant="dark"
-                  />
+                  ></goa-icon-button>
                 </div>
               {/if}
             </header>

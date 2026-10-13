@@ -11,7 +11,7 @@
 
 <h2 data-testid={testid} class:icon>
   {#if icon}
-    <goa-icon id="heading-icon" type={icon} theme="outline" size="3" />
+    <goa-icon id="heading-icon" type={icon} theme="outline" size="3"></goa-icon>
   {/if}
   <span class="label"><slot /></span>
   <slot name="meta" />
@@ -32,7 +32,8 @@
     border-top: none;
     border-bottom: var(--goa-side-menu-heading-border);
     background: var(--goa-side-menu-heading-color-bg);
-    padding: var(--goa-side-menu-heading-padding-top) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s);
+    padding: var(--goa-side-menu-heading-padding-top) var(--goa-space-s)
+      var(--goa-space-xs) var(--goa-space-s);
     color: var(--goa-side-menu-heading-color);
     font: var(--goa-side-menu-heading-typography);
     display: flex;

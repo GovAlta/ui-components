@@ -3,7 +3,7 @@ import { render } from "@testing-library/svelte";
 import { it } from "vitest";
 
 it("it renders", async () => {
-  const { queryByTestId } = render(Block, {
+  const { getByTestId } = render(Block, {
     testid: "block",
     mt: "s",
     mr: "m",
@@ -11,19 +11,12 @@ it("it renders", async () => {
     ml: "xl",
   });
 
-  const el = queryByTestId("block");
-  expect(el).toBeTruthy();
+  const el = getByTestId("block");
 
-  expect(el?.getAttribute("style")).toContain("margin-top:var(--goa-space-s)");
-  expect(el?.getAttribute("style")).toContain(
-    "margin-right:var(--goa-space-m)",
-  );
-  expect(el?.getAttribute("style")).toContain(
-    "margin-bottom:var(--goa-space-l)",
-  );
-  expect(el?.getAttribute("style")).toContain(
-    "margin-left:var(--goa-space-xl)",
-  );
+  expect(el.style.marginTop).toBe("var(--goa-space-s)");
+  expect(el.style.marginRight).toBe("var(--goa-space-m)");
+  expect(el.style.marginBottom).toBe("var(--goa-space-l)");
+  expect(el.style.marginLeft).toBe("var(--goa-space-xl)");
 });
 
 it("applies the stretch class when stretch is true", async () => {

@@ -13,7 +13,7 @@
 <section data-testid={testid}>
   {#if heading}
     <div class="title">{heading}</div>
-    <goa-divider mb="l" />
+    <goa-divider mb="l"></goa-divider>
   {/if}
 
   <div

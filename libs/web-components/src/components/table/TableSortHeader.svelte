@@ -46,13 +46,15 @@
   <span class="content">
     <slot />
     <span class="icon-wrapper">
-      <span class="sort-order" class:hidden={!sortOrder || direction === "none"}>{sortOrder}</span>
+      <span class="sort-order" class:hidden={!sortOrder || direction === "none"}
+        >{sortOrder}</span
+      >
       {#if direction === "desc"}
-        <goa-icon type="arrow-down" size="3" />
+        <goa-icon type="arrow-down" size="3"></goa-icon>
       {:else if direction === "asc"}
-        <goa-icon type="arrow-up" size="3" />
+        <goa-icon type="arrow-up" size="3"></goa-icon>
       {:else}
-        <goa-icon type="chevron-expand" size="3" />
+        <goa-icon type="chevron-expand" size="3"></goa-icon>
       {/if}
     </span>
   </span>

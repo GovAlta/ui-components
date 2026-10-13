@@ -8,7 +8,7 @@
 />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
   import {
@@ -72,6 +72,7 @@
   let _error: boolean = toBoolean(error);
   let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let _stopWatchingFocus: (() => void) | undefined;
 
   let _date: CalendarDate = CalendarDate.init();
 
@@ -87,10 +88,11 @@
     sendMountedMessage();
     showDeprecationWarnings();
 
-    watchFocusWithin(
+    _stopWatchingFocus = watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
       () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+      { settlePointerFocus: true },
     );
 
     if (width && !isValidDimension(width)) {
@@ -99,6 +101,8 @@
       );
     }
   });
+
+  onDestroy(() => _stopWatchingFocus?.());
 
   function stopInnerFocusEvent(e: Event) {
     e.stopPropagation();
@@ -294,7 +298,7 @@
         width="100%"
         disabled={isDisabled}
       >
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <goa-input
           slot="target"
           testid="calendar-input"
@@ -309,7 +313,7 @@
           on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
         <goa-calendar
           {name}
           {value}
@@ -334,7 +338,7 @@
       {mr}
       disabled={isDisabled}
     >
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
       <goa-input
         slot="target"
         testid="calendar-input"
@@ -349,7 +353,7 @@
         on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
-      />
+      ></goa-input>
       <goa-calendar
         {name}
         {value}
@@ -377,19 +381,20 @@
           disabled={isDisabled}
           {size}
         >
-          <goa-dropdown-item value="0" label="—Select a month—" />
-          <goa-dropdown-item value="1" label="January" />
-          <goa-dropdown-item value="2" label="February" />
-          <goa-dropdown-item value="3" label="March" />
-          <goa-dropdown-item value="4" label="April" />
-          <goa-dropdown-item value="5" label="May" />
-          <goa-dropdown-item value="6" label="June" />
-          <goa-dropdown-item value="7" label="July" />
-          <goa-dropdown-item value="8" label="August" />
-          <goa-dropdown-item value="9" label="September" />
-          <goa-dropdown-item value="10" label="October" />
-          <goa-dropdown-item value="11" label="November" />
-          <goa-dropdown-item value="12" label="December" />
+          <goa-dropdown-item value="0" label="—Select a month—"
+          ></goa-dropdown-item>
+          <goa-dropdown-item value="1" label="January"></goa-dropdown-item>
+          <goa-dropdown-item value="2" label="February"></goa-dropdown-item>
+          <goa-dropdown-item value="3" label="March"></goa-dropdown-item>
+          <goa-dropdown-item value="4" label="April"></goa-dropdown-item>
+          <goa-dropdown-item value="5" label="May"></goa-dropdown-item>
+          <goa-dropdown-item value="6" label="June"></goa-dropdown-item>
+          <goa-dropdown-item value="7" label="July"></goa-dropdown-item>
+          <goa-dropdown-item value="8" label="August"></goa-dropdown-item>
+          <goa-dropdown-item value="9" label="September"></goa-dropdown-item>
+          <goa-dropdown-item value="10" label="October"></goa-dropdown-item>
+          <goa-dropdown-item value="11" label="November"></goa-dropdown-item>
+          <goa-dropdown-item value="12" label="December"></goa-dropdown-item>
         </goa-dropdown>
       </goa-form-item>
       <goa-form-item helptext="Day (DD)">
@@ -408,7 +413,7 @@
           {error}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
       </goa-form-item>
       <goa-form-item helptext="Year (YYYY)">
         <goa-input
@@ -426,7 +431,7 @@
           {error}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
       </goa-form-item>
     </goa-block>
   </goa-form-item>

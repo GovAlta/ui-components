@@ -349,7 +349,8 @@
         size="compact"
       >
         {#each _months as month, i}
-          <goa-dropdown-item value={i + 1 + ""} label={month} />
+          <goa-dropdown-item value={i + 1 + ""} label={month}
+          ></goa-dropdown-item>
         {/each}
       </goa-dropdown>
     </goa-form-item>
@@ -366,7 +367,7 @@
         size="compact"
       >
         {#each _years as year}
-          <goa-dropdown-item value={year} />
+          <goa-dropdown-item value={year}></goa-dropdown-item>
         {/each}
       </goa-dropdown>
     </goa-form-item>

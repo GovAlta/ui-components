@@ -391,7 +391,7 @@ it("updates year dropdown when min date changes", async () => {
   const initialMin = new Date(2020, 0, 1);
   const initialMax = new Date(2025, 0, 1);
 
-  const { component, queryByTestId } = render(Calendar, {
+  const { queryByTestId, rerender } = render(Calendar, {
     min: new CalendarDate(initialMin).toString(),
     max: new CalendarDate(initialMax).toString(),
   });
@@ -412,8 +412,7 @@ it("updates year dropdown when min date changes", async () => {
 
   // Update min to 2022, reducing the range
   const newMin = new Date(2022, 0, 1);
-  component.$set({ min: new CalendarDate(newMin).toString() });
-  await tick();
+  await rerender({ min: new CalendarDate(newMin).toString() });
 
   // Check updated years in dropdown
   yearDropdown = queryByTestId("years");
@@ -444,7 +443,7 @@ it("updates year dropdown when max date changes", async () => {
   const initialMin = new Date(2020, 0, 1);
   const initialMax = new Date(2025, 0, 1);
 
-  const { component, queryByTestId } = render(Calendar, {
+  const { queryByTestId, rerender } = render(Calendar, {
     min: new CalendarDate(initialMin).toString(),
     max: new CalendarDate(initialMax).toString(),
   });
@@ -465,8 +464,7 @@ it("updates year dropdown when max date changes", async () => {
 
   // Update max to 2023, reducing the range
   const newMax = new Date(2023, 0, 1);
-  component.$set({ max: new CalendarDate(newMax).toString() });
-  await tick();
+  await rerender({ max: new CalendarDate(newMax).toString() });
 
   // Check updated years in dropdown
   yearDropdown = queryByTestId("years");

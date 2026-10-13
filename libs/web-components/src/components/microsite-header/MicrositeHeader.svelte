@@ -83,13 +83,14 @@
           <span data-testid="feedback">
             — help us improve it by giving
             <span class="feedback-link">
-              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a
+              >
             </span>
           </span>
         {:else if _hasfeedbackhandler}
           <span data-testid="feedback-click" bind:this={_feedbackElement}>
             — help us improve it by giving
-            <!-- svelte-ignore a11y-invalid-attribute -->
+            <!-- svelte-ignore a11y_invalid_attribute -->
             <a href="#" on:click={handleFeedbackClick}>feedback</a>
           </span>
         {/if}
@@ -114,19 +115,20 @@
           <span data-testid="feedback">
             — help us improve it by giving
             <span class="feedback-link">
-              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a
+              >
             </span>
           </span>
         {:else if _hasfeedbackhandler}
           <span data-testid="feedback-click" bind:this={_feedbackElement}>
             — help us improve it by giving
-            <!-- svelte-ignore a11y-invalid-attribute -->
+            <!-- svelte-ignore a11y_invalid_attribute -->
             <a href="#" on:click={handleFeedbackClick}>feedback</a>
           </span>
         {/if}
       </div>
     {/if}
-    <div class="spacer" />
+    <div class="spacer"></div>
     {#if $$slots.version || version}
       <div data-testid="version" class="version">
         <slot name="version">
@@ -146,7 +148,7 @@
 
   .feedback-link {
     display: inline-flex; /* Keeps the text and icon together when text wraps */
-}
+  }
 
   #container {
     background-color: var(--goa-microsite-header-color-bg);

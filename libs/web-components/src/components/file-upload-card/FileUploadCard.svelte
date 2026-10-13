@@ -27,9 +27,9 @@
   // Reactive
 
   $: _status =
-      error && "error"
-      || (progress >= 0 && progress < 100) && "uploading"
-      || "uploaded"
+    (error && "error") ||
+    (progress >= 0 && progress < 100 && "uploading") ||
+    "uploaded";
 
   $: _fileIcon = filename && type && getFiletypeIcon(filename, type);
 
@@ -40,30 +40,29 @@
     const parts = filename.split(".");
     const ext = parts[parts.length - 1];
     const extTypeIcon =
-      ext === "xlxs"     && "goa-xls"
-      || ext === "xls"   && "goa-xls"
-      || ext === "zip"   && "goa-zip"
-      || ext === "docx"  && "goa-doc"
-      || ext === "doc"   && "goa-doc"
-      || ext === "pptx"  && "goa-ppt"
-      || ext === "ppt"   && "goa-ppt"
-      || ext === "pdf"   && "goa-pdf"
-      || ext === "html"  && "goa-html"
-
+      (ext === "xlxs" && "goa-xls") ||
+      (ext === "xls" && "goa-xls") ||
+      (ext === "zip" && "goa-zip") ||
+      (ext === "docx" && "goa-doc") ||
+      (ext === "doc" && "goa-doc") ||
+      (ext === "pptx" && "goa-ppt") ||
+      (ext === "ppt" && "goa-ppt") ||
+      (ext === "pdf" && "goa-pdf") ||
+      (ext === "html" && "goa-html");
 
     if (extTypeIcon) return extTypeIcon;
 
     // mimetype
     const mimeTypeIcon =
-      type === "application/vnd.ms-powerpoint"  && "goa-ppt"
-      || type.includes("presentationml")        && "goa-ppt"
-      || type.includes("wordprocessingml")      && "goa-doc"
-      || type.includes("spreadsheet")           && "goa-xls"
-      || type.startsWith("video")               && "goa-video"
-      || type.startsWith("audio")               && "goa-audio"
-      || type.startsWith("image")               && "goa-image"
-      || type === "application/msword"          && "goa-doc"
-      || "goa-file"
+      (type === "application/vnd.ms-powerpoint" && "goa-ppt") ||
+      (type.includes("presentationml") && "goa-ppt") ||
+      (type.includes("wordprocessingml") && "goa-doc") ||
+      (type.includes("spreadsheet") && "goa-xls") ||
+      (type.startsWith("video") && "goa-video") ||
+      (type.startsWith("audio") && "goa-audio") ||
+      (type.startsWith("image") && "goa-image") ||
+      (type === "application/msword" && "goa-doc") ||
+      "goa-file";
 
     return mimeTypeIcon;
   }
@@ -104,7 +103,7 @@
         type={_fileIcon}
         fillcolor="#0070c4"
         size="xlarge"
-      />
+      ></goa-icon>
     {:else}
       <goa-icon
         class="fileicon"
@@ -112,16 +111,18 @@
         type="goa-file"
         fillcolor="#dcdcdc"
         size="xlarge"
-      />
+      ></goa-icon>
     {/if}
     <div class="details">
       <div class="filename" data-testid="filename">{filename}</div>
       {#if _status !== "error"}
-        <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
+        <div class="filesize" data-testid="filesize">
+          {formatFileSize(size)}
+        </div>
       {/if}
       {#if _status === "uploading"}
         <div class="progress" data-testid="progress">
-          <progress value={progress} max="100" />
+          <progress value={progress} max="100"></progress>
           {Math.ceil(progress)}%
         </div>
       {:else if _status === "uploaded"}
@@ -130,7 +131,7 @@
         </div>
       {:else if _status === "error"}
         <div class="error-msg" data-testid="error">
-          <goa-icon type="warning" size="small" theme="filled" />
+          <goa-icon type="warning" size="small" theme="filled"></goa-icon>
           {error}
         </div>
       {/if}

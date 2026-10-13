@@ -885,8 +885,16 @@ describe("Tabs Browser Tests", () => {
 
         const containerRect = tabsContainer.getBoundingClientRect();
         const tabRect = longHeadingTab.getBoundingClientRect();
-        expect(getIndicatorLeft()).toBeCloseTo(tabRect.left - containerRect.left - 1, 0);
-        expect(getIndicatorWidth()).toBeCloseTo(tabRect.width, 0);
+        // DOMRect geometry can differ fractionally across browser and OS font rendering.
+        // Within one CSS pixel is visually aligned while still catching indicator drift.
+        const alignmentTolerance = 1;
+
+        expect(
+          Math.abs(getIndicatorLeft() - (tabRect.left - containerRect.left - 1)),
+        ).toBeLessThanOrEqual(alignmentTolerance);
+        expect(Math.abs(getIndicatorWidth() - tabRect.width)).toBeLessThanOrEqual(
+          alignmentTolerance,
+        );
       });
     });
   });

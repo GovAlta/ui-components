@@ -172,7 +172,6 @@
       : _options;
 
   onMount(async () => {
-    await tick();
     validateSize(size);
     validateLabelFormat(labelFormat);
     validateLeadingIcon();
@@ -180,6 +179,8 @@
 
     ensureSlotExists(_rootEl);
     addRelayListener();
+
+    await tick();
     updatePopoverWidth();
     _stopWatchingFocus = watchFocusWithin(
       _rootEl,
@@ -566,7 +567,7 @@
             data-testid={testid ? `${testid}-leading-icon` : undefined}
             size={size === "compact" ? "small" : "medium"}
             type={filterable ? "search" : leadingIcon}
-          />
+          ></goa-icon>
         {/if}
         {#if _isOpen && filterable}
           <input
@@ -587,8 +588,8 @@
           </span>
         {/if}
         {#if _isOpen && filterable && _filterText.length > 0}
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+          <!-- svelte-ignore a11y_no_static_element_interactions -->
+          <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
           <goa-icon-button
             id={name}
             data-testid="clear-icon"
@@ -603,18 +604,18 @@
             theme="filled"
             variant="dark"
             icon="close"
-          />
+          ></goa-icon-button>
         {:else}
           <goa-icon
             type={_isOpen ? "chevron-up" : "chevron-down"}
             size="medium"
             aria-hidden="true"
-          />
+          ></goa-icon>
         {/if}
       </div>
     </div>
 
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <div
       id={_contentId}
       role="dialog"
@@ -657,7 +658,7 @@
               text={option.label || option.value}
               checked={fromBoolean(value.includes(option.value))}
               {size}
-            />
+            ></goa-checkbox>
           {/each}
         </goa-checkbox-list>
       {/if}

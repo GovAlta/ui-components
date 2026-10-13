@@ -1,8 +1,9 @@
-<svelte:options customElement={{
+<svelte:options
+  customElement={{
     tag: "goa-public-subform",
     props: {
-      continueMsg: { attribute: "continue-msg", type: "String" }
-    }
+      continueMsg: { attribute: "continue-msg", type: "String" },
+    },
   }}
 />
 
@@ -18,15 +19,20 @@
     FieldsetBindRelayDetail,
     FormBindMsg,
     FormBindRelayDetail,
-    FormDispatchStateMsg, FormDispatchStateRelayDetail,
-    FormDispatchStateRelayDetailList, FormPageBackMsg,
+    FormDispatchStateMsg,
+    FormDispatchStateRelayDetail,
+    FormDispatchStateRelayDetailList,
+    FormPageBackMsg,
     FormResetFormMsg,
     FormSetFieldsetMsg,
     FormState,
-    StateChangeEvent, StateChangeRelayDetail, SubFormBindMsg, SubFormBindRelayDetail,
+    StateChangeEvent,
+    StateChangeRelayDetail,
+    SubFormBindMsg,
+    SubFormBindRelayDetail,
     SubFormIndexContinueToParentMsg,
     SubFormIndexContinueToSubFormMsg,
-    FieldsetCompleteMsg
+    FieldsetCompleteMsg,
   } from "../../types/relay-types";
 
   // Subform props
@@ -58,7 +64,6 @@
   // item's history to allow handling of "Back" clicks.
   let _itemIndex: number = 0;
 
-
   onMount(() => {
     addRelayListener();
     dispatchBindMsg();
@@ -86,10 +91,9 @@
     setTimeout(() => {
       const el = document
         .querySelector("goa-public-subform-index")
-        .shadowRoot
-        .querySelector("[data-bind]") as HTMLElement;
-      relay<SubFormBindRelayDetail>(el, SubFormBindMsg, { el: _receiverEl});
-    }, 10)
+        .shadowRoot.querySelector("[data-bind]") as HTMLElement;
+      relay<SubFormBindRelayDetail>(el, SubFormBindMsg, { el: _receiverEl });
+    }, 10);
   }
 
   function addRelayListener() {
@@ -168,16 +172,25 @@
     setItemIndex(index);
 
     // send selected item to child form
-    relay<FormDispatchStateRelayDetail>(_formEl, FormDispatchStateMsg, _state[index]);
+    relay<FormDispatchStateRelayDetail>(
+      _formEl,
+      FormDispatchStateMsg,
+      _state[index],
+    );
   }
 
   function removeItem(index: number) {
     _state = [..._state.slice(0, index), ..._state.slice(index + 1)];
-    dispatch<StateChangeRelayDetail>(_relayEl, StateChangeEvent, {
-      type: "list",
-      data: _state,
-      id
-    }, { bubbles: true });
+    dispatch<StateChangeRelayDetail>(
+      _relayEl,
+      StateChangeEvent,
+      {
+        type: "list",
+        data: _state,
+        id,
+      },
+      { bubbles: true },
+    );
   }
 
   function initState(data: FormState[]) {
@@ -235,9 +248,13 @@
    */
   // TODO: come up with a better name for this function
   function bindWithParentForm() {
-    relay<FormBindRelayDetail>(_relayEl, FormBindMsg, { id, el: _receiverEl }, { bubbles: true, timeout: 10 });
+    relay<FormBindRelayDetail>(
+      _relayEl,
+      FormBindMsg,
+      { id, el: _receiverEl },
+      { bubbles: true, timeout: 10 },
+    );
   }
-
 
   /**
    * Bind as a "fieldset" like component to allow parent to control the visibility of this subform
@@ -288,11 +305,16 @@
   }
 
   function dispatchState() {
-    dispatch<StateChangeRelayDetail>(_relayEl, StateChangeEvent, {
-      type: "list",
-      data: _state,
-      id
-    }, { bubbles: true });
+    dispatch<StateChangeRelayDetail>(
+      _relayEl,
+      StateChangeEvent,
+      {
+        type: "list",
+        data: _state,
+        id,
+      },
+      { bubbles: true },
+    );
   }
 
   /**
@@ -335,9 +357,7 @@
     on:_continue={onFormContinue}
     on:_complete={onChildFormComplete}
     on:_init={onInit}
-    style={styles(
-      `display: ${_mode === "form" ? "block" : "none"}`,
-    )}
+    style={styles(`display: ${_mode === "form" ? "block" : "none"}`)}
   >
     <slot />
   </goa-public-form>

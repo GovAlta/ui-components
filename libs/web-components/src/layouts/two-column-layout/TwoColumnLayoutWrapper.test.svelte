@@ -8,7 +8,7 @@
 
 <!-- HTML -->
 <goa-two-column-layout {navcolumnwidth} {maxcontentwidth}>
-  <goa-app-header slot="header" />
+  <goa-app-header slot="header"></goa-app-header>
   <section slot="nav">
     <a href="#dashboard">Dashboard</a>
     <a href="#accounts">Accounts</a>
@@ -19,8 +19,9 @@
 
   <h1>Content</h1>
   <p>
-    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum
+    sint consectetur cupidatat.
   </p>
 
-  <goa-app-footer slot="footer" />
+  <goa-app-footer slot="footer"></goa-app-footer>
 </goa-two-column-layout>

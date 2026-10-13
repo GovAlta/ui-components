@@ -22,7 +22,6 @@
   export let mobile: string = "false";
   export let backgroundcolor: string = "inherit";
 
-
   // =======
   // Private
   // =======
@@ -34,7 +33,7 @@
   let _gridEl: HTMLElement;
 
   // collection of references to the child goa-form-step web components
-  let _steps: { el: HTMLElement, status: FormStepStatus}[] = [];
+  let _steps: { el: HTMLElement; status: FormStepStatus }[] = [];
 
   // calculated x distance (px) between each step point
   let _stepWidth: number;
@@ -94,7 +93,7 @@
   // =====
 
   onMount(async () => {
-    await tick();  // needed to ensure Angular's delay, when rendering within a route, doesn't break things
+    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
 
     _stepType = +step === -1 ? "free" : "constrained";
 
@@ -138,7 +137,6 @@
         _currentStep = step < 1 ? 1 : step;
         dispatchCurrentStep(); // so app can display first step's content
       });
-
     });
   }
 
@@ -236,7 +234,7 @@
   // than the number of steps
   function calculateProgress() {
     // The final step is not included in the progress calculation
-   _progress = _isMobile ? 100 : (_currentStep/ (_steps.length - 1)) * 100;
+    _progress = _isMobile ? 100 : (_currentStep / (_steps.length - 1)) * 100;
   }
 
   function calcStepDimensions() {
@@ -248,7 +246,7 @@
 
     // ensure progress bar is not shows until initial calcs are complete, timeout needed to
     // prevent flickering of the scrollbar
-    setTimeout(() => _showProgressBars = true, 100);
+    setTimeout(() => (_showProgressBars = true), 100);
   }
 
   // notify outside app of step change
@@ -268,7 +266,7 @@
     class="form-stepper"
     class:mobile={_isMobile}
     style={`
-      ${calculateMargin(mt, mr, mb, ml)};
+      ${calculateMargin(mt, mr, mb, ml)}
       --progress: ${_progress}%;
       --step-width: ${_stepWidth}px;
       --step-height: ${_stepHeight}px;
@@ -280,15 +278,22 @@
     data-testid={testid}
   >
     <div class="slots" bind:this={_gridEl}>
-      <div class="goa-grid" class:mobile={_isMobile}
-           style={`--min-child-width: ${_isMobile ? "40px" : "108px"};
+      <div
+        class="goa-grid"
+        class:mobile={_isMobile}
+        style={`--min-child-width: ${_isMobile ? "40px" : "108px"};
         gap: var(--goa-space-${_isMobile ? "xs" : "none"});`}
       >
         <slot />
       </div>
     </div>
     {#if _steps.length > 0 && _showProgressBars}
-      <progress class="horizontal" class:mobile={_isMobile}  value={_progress} max="100"></progress>
+      <progress
+        class="horizontal"
+        class:mobile={_isMobile}
+        value={_progress}
+        max="100"
+      ></progress>
     {/if}
   </div>
 </div>
@@ -297,12 +302,12 @@
   .goa-grid {
     display: grid;
     grid-template-columns: repeat(
-        auto-fit,
-        minmax(var(--min-child-width), 1fr)
-      );
+      auto-fit,
+      minmax(var(--min-child-width), 1fr)
+    );
   }
   .goa-grid.mobile {
-    display:flex;
+    display: flex;
     justify-content: space-around;
   }
   .slots {
@@ -324,7 +329,7 @@
     z-index: 1;
   }
   .form-stepper.mobile progress.horizontal {
-    margin-top:0px;
+    margin-top: 0px;
     top: 43px;
     width: var(--form-stepper-width);
     height: 1px;

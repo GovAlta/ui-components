@@ -788,7 +788,7 @@
   class:dropdown-native={_native}
   class:compact={size === "compact"}
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
+    ${calculateMargin(mt, mr, mb, ml)}
     --width: ${_width};
   `}
 >
@@ -825,7 +825,7 @@
         stroke-linejoin="round"
         stroke-width="48"
         d="M112 184l144 144 144-144"
-      />
+      ></path>
     </svg>
   {:else}
     <slot />
@@ -852,7 +852,7 @@
             data-testid="leading-icon"
             size={size === "compact" ? "small" : "medium"}
             type={leadingicon}
-          />
+          ></goa-icon>
         {/if}
 
         <input
@@ -900,16 +900,16 @@
             theme="filled"
             variant="dark"
             icon="close"
-          />
+          ></goa-icon-button>
         {:else}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <goa-icon
             testid="chevron"
             id={name}
             class="dropdown-icon--arrow"
             size={size === "compact" ? "small" : "medium"}
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
-          />
+          ></goa-icon>
         {/if}
       </div>
 
@@ -929,7 +929,7 @@
         `}
       >
         {#each _filteredOptions as option, index (index)}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <li
             id={option.value}
             aria-selected={_selectedOption?.value === option.value}

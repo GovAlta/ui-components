@@ -85,7 +85,7 @@
         fillcolor={_error
           ? "var(--goa-filter-chip-icon-color-error)"
           : "var(--goa-filter-chip-icon-color)"}
-      />
+      ></goa-icon>
     {/if}
     {#if secondarytext}
       <div class="secondary-text">

@@ -15,7 +15,6 @@
 
   function closeDrawer() {
     open = false;
-
   }
 
   function openDrawer() {
@@ -25,7 +24,15 @@
 
 <button on:click={openDrawer} data-testid="open">Open</button>
 
-<Drawer {open} {testid} {position} {heading} {maxsize} {closeButtonVisibility} on:_close={closeDrawer}>
+<Drawer
+  {open}
+  {testid}
+  {position}
+  {heading}
+  {maxsize}
+  {closeButtonVisibility}
+  on:_close={closeDrawer}
+>
   {content}
   <div slot="actions">{actions}</div>
 </Drawer>

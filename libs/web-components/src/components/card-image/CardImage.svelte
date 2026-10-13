@@ -16,7 +16,7 @@
     background-size: cover; 
     background-position: center;
   `}
-/>
+></div>
 
 <!-- Style -->
 <style>

@@ -389,7 +389,7 @@
 
 <svelte:window bind:innerWidth={_screenSize} />
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="tooltip"
   class:use-anchor-based-positioning={!_needsManualPositioning}

@@ -140,10 +140,10 @@
     data-testid="status"
     class="status"
     class:incomplete={status === "incomplete"}
-    class:current={current}
+    class:current
   >
     {#if !current && status === "complete"}
-      <goa-icon type="checkmark" inverted />
+      <goa-icon type="checkmark" inverted></goa-icon>
     {:else}
       <div data-testid="step-number" class="step-number">
         {childindex || ""}
@@ -177,7 +177,7 @@
     background-color: var(--background-color, inherit);
     padding-left: 8px;
     padding-right: 8px;
-    max-width:fit-content;
+    max-width: fit-content;
   }
 
   label.desktop {
@@ -254,7 +254,7 @@
       [data-status="incomplete"],
       [aria-current="step"]
     )
-  .status {
+    .status {
     border-color: var(--goa-color-greyscale-500);
   }
 

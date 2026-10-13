@@ -134,7 +134,7 @@
   on:click={handleClick}
   aria-label={arialabel}
 >
-  <goa-icon {title} type={icon} {size} {theme} />
+  <goa-icon {title} type={icon} {size} {theme}></goa-icon>
 </button>
 
 <style>

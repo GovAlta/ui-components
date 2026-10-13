@@ -214,7 +214,7 @@
             icon="true"
             arialabel={type}
             emphasis="subtle"
-          />
+          ></goa-badge>
         </span>
       {/if}
     </div>
