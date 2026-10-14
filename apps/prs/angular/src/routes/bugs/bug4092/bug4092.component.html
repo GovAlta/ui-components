@@ -1,0 +1,123 @@
+<goab-text tag="h1" size="heading-l" mb="m">Bug 4092 - Blur form updates</goab-text>
+<goab-text mb="l">
+  Change a value, then move focus away. Blur events count component onBlur callbacks; Form
+  updates count Angular reactive form valueChanges emissions. A blur without a value
+  change does not need a form update. The dropdown multiselect also shows the values and
+  labels from its most recent blur event.
+</goab-text>
+
+<form [formGroup]="form">
+  <goab-form-item label="Input" mb="xs">
+    <goab-input
+      name="input"
+      formControlName="input"
+      (onBlur)="recordBlur('input')"
+    ></goab-input>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.input }}. Form updates: {{ formUpdateCount.input }}
+  </goab-text>
+
+  <goab-form-item label="Text area" mb="xs">
+    <goab-textarea
+      name="textArea"
+      formControlName="textArea"
+      (onBlur)="recordBlur('textArea')"
+    ></goab-textarea>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.textArea }}. Form updates: {{ formUpdateCount.textArea }}
+  </goab-text>
+
+  <goab-form-item label="Radio" mb="xs">
+    <goab-radio-group name="radio" formControlName="radio" (onBlur)="recordBlur('radio')">
+      <goab-radio-item value="first" label="First option"></goab-radio-item>
+      <goab-radio-item value="second" label="Second option"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.radio }}. Form updates: {{ formUpdateCount.radio }}
+  </goab-text>
+
+  <goab-form-item label="Checkbox" mb="xs">
+    <goab-checkbox
+      name="checkbox"
+      text="Select this option"
+      formControlName="checkbox"
+      (onBlur)="recordBlur('checkbox')"
+    ></goab-checkbox>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.checkbox }}. Form updates: {{ formUpdateCount.checkbox }}
+  </goab-text>
+
+  <goab-form-item label="Checkbox list" mb="xs">
+    <goab-checkbox-list
+      name="checkboxList"
+      formControlName="checkboxList"
+      (onBlur)="recordBlur('checkboxList')"
+    >
+      <goab-checkbox name="listFirst" value="first" text="First option"></goab-checkbox>
+      <goab-checkbox
+        name="listSecond"
+        value="second"
+        text="Second option"
+      ></goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.checkboxList }}. Form updates:
+    {{ formUpdateCount.checkboxList }}
+  </goab-text>
+
+  <goab-form-item label="Date picker" mb="xs">
+    <goab-date-picker
+      name="datePicker"
+      formControlName="datePicker"
+      (onBlur)="recordBlur('datePicker')"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.datePicker }}. Form updates:
+    {{ formUpdateCount.datePicker }}
+  </goab-text>
+
+  <goab-form-item label="Dropdown" mb="xs">
+    <goab-dropdown
+      name="dropdown"
+      formControlName="dropdown"
+      (onBlur)="recordBlur('dropdown')"
+    >
+      <goab-dropdown-item value="first" label="First option"></goab-dropdown-item>
+      <goab-dropdown-item value="second" label="Second option"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-text size="body-s" mb="l">
+    Blur events: {{ blurCount.dropdown }}. Form updates: {{ formUpdateCount.dropdown }}
+  </goab-text>
+
+  <goab-form-item label="Dropdown multiselect" mb="xs">
+    <goab-dropdown-multiselect
+      name="dropdownMultiselect"
+      formControlName="dropdownMultiselect"
+      (onBlur)="recordBlur('dropdownMultiselect', $event)"
+    >
+      <goab-dropdown-item value="first" label="First option"></goab-dropdown-item>
+      <goab-dropdown-item value="second" label="Second option"></goab-dropdown-item>
+    </goab-dropdown-multiselect>
+  </goab-form-item>
+  <goab-text size="body-s" mb="xs">
+    Blur events: {{ blurCount.dropdownMultiselect }}. Form updates:
+    {{ formUpdateCount.dropdownMultiselect }}
+  </goab-text>
+  @if (lastMultiselectBlur; as detail) {
+    <goab-text size="body-s" mb="l">
+      Values on last blur: {{ detail.value | json }}. Labels on last blur:
+      {{ detail.labels | json }}
+    </goab-text>
+  } @else {
+    <goab-text size="body-s" mb="l">No blur yet</goab-text>
+  }
+
+  <goab-button>Focus here to leave the multiselect</goab-button>
+</form>

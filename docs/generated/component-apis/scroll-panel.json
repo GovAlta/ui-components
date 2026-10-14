@@ -6,9 +6,15 @@
       "props": [
         {
           "name": "direction",
-          "type": "GoabScrollPanelDirectionType",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "typeLabel": "GoabScrollPanelDirectionType",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
           "required": false,
-          "default": null,
+          "default": "vertical",
           "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."
         },
         {
@@ -46,7 +52,13 @@
       "props": [
         {
           "name": "direction",
-          "type": "GoabScrollPanelDirectionType",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "typeLabel": "GoabScrollPanelDirectionType",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
           "required": false,
           "default": "vertical",
           "description": "The scroll direction(s). When content overflows, enables scrolling and shadow indicators for the specified direction(s). Accepts \"vertical\", \"horizontal\", or \"both\". Defaults to \"vertical\"."

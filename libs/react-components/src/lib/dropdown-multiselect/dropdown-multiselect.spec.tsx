@@ -5,7 +5,10 @@ import GoabDropdownMultiselect, {
 } from "./dropdown-multiselect";
 import { GoabDropdownItem } from "../dropdown/dropdown-item";
 import { describe, it, expect, vi } from "vitest";
-import { GoabDropdownMultiselectOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  GoabDropdownMultiselectOnBlurDetail,
+  GoabDropdownMultiselectOnChangeDetail,
+} from "@abgov/ui-components-common";
 
 describe("GoabDropdownMultiselect", () => {
   it("should render with required props", () => {
@@ -84,6 +87,22 @@ describe("GoabDropdownMultiselect", () => {
     expect(onChange.mock.calls[0][0].name).toBe("fruit");
     expect(onChange.mock.calls[0][0].value).toEqual(["apple"]);
     expect(onChange.mock.calls[0][0].labels).toEqual(["Apple"]);
+  });
+
+  it("should fire onBlur callback on _blur event", () => {
+    const onBlur = vi.fn();
+    render(<GoabDropdownMultiselect name="fruit" onBlur={onBlur} />);
+
+    const el = document.querySelector("goa-dropdown-multiselect") as HTMLElement;
+    const detail: Omit<GoabDropdownMultiselectOnBlurDetail, "event"> = {
+      name: "fruit",
+      value: ["apple"],
+      labels: ["Apple"],
+    };
+    const event = new CustomEvent("_blur", { detail });
+    fireEvent(el, event);
+
+    expect(onBlur).toHaveBeenCalledWith({ ...detail, event });
   });
 
   it("should render children", () => {

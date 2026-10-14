@@ -27,7 +27,13 @@
         },
         {
           "name": "color",
-          "type": "GoabLinkColor",
+          "type": "\"interactive\" | \"dark\" | \"light\"",
+          "typeLabel": "GoabLinkColor",
+          "values": [
+            "interactive",
+            "dark",
+            "light"
+          ],
           "required": false,
           "default": "interactive",
           "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
@@ -44,32 +50,39 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "size",
-          "type": "GoabLinkSize",
+          "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
+          "typeLabel": "GoabLinkSize",
+          "values": [
+            "xsmall",
+            "small",
+            "medium",
+            "large"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the text size and corresponding icon size."
@@ -117,7 +130,13 @@
         },
         {
           "name": "color",
-          "type": "GoabLinkColor",
+          "type": "\"interactive\" | \"dark\" | \"light\"",
+          "typeLabel": "GoabLinkColor",
+          "values": [
+            "interactive",
+            "dark",
+            "light"
+          ],
           "required": false,
           "default": "interactive",
           "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
@@ -159,7 +178,14 @@
         },
         {
           "name": "size",
-          "type": "GoabLinkSize",
+          "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
+          "typeLabel": "GoabLinkSize",
+          "values": [
+            "xsmall",
+            "small",
+            "medium",
+            "large"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the text size and corresponding icon size."

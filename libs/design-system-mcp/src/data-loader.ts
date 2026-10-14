@@ -20,6 +20,7 @@ import { fileURLToPath } from 'url';
 import {
   InvertedIndex,
   IndexedItem,
+  SearchCandidate,
   createSearchableText,
   extractTags,
 } from './inverted-index';
@@ -75,6 +76,17 @@ export interface SearchResult {
   preview?: string;
   score: number;
   aliases: string[];
+  status?: string;
+  size?: string;
+  productType?: string;
+  internal?: boolean;
+  subcomponent?: boolean;
+}
+
+export interface SearchPage {
+  /** Every match after filtering, before the page is cut to maxResults. */
+  total: number;
+  results: SearchResult[];
 }
 
 export interface SearchOptions {
@@ -84,8 +96,38 @@ export interface SearchOptions {
   framework?: string;
   status?: string;
   component?: string;
-  context?: string;
   maxResults?: number;
+}
+
+const COLLECTION_TO_TYPE: Record<string, string> = {
+  components: 'component',
+  examples: 'example',
+  guidance: 'guidance',
+  foundations: 'foundation',
+  'get-started': 'get-started',
+  productTypes: 'productType',
+};
+
+/** The field that holds a component's name in each framework. */
+const FRAMEWORK_NAME_FIELD: Record<string, string> = {
+  react: 'reactClassName',
+  angular: 'angularSelector',
+  'web-components': 'webComponentTag',
+};
+
+/**
+ * A component comes in a framework when it has a name there. An example says
+ * which frameworks it comes in; one with no list is unknown, not unsupported,
+ * because the generator records only what it can see. Nothing else is tied to
+ * a framework.
+ */
+function supportsFramework(item: IndexedItem, framework: string): boolean {
+  if (item.type === 'component') {
+    return Boolean(item.data[FRAMEWORK_NAME_FIELD[framework]]);
+  }
+  if (item.type !== 'example') return false;
+  const frameworks = item.data.frameworks;
+  return !Array.isArray(frameworks) || frameworks.includes(framework);
 }
 
 export class DataLoader {
@@ -126,7 +168,7 @@ export class DataLoader {
   async search(
     query: string,
     options: SearchOptions = {},
-  ): Promise<SearchResult[]> {
+  ): Promise<SearchPage> {
     const {
       collection,
       size,
@@ -134,38 +176,29 @@ export class DataLoader {
       framework,
       status,
       component,
-      context,
       maxResults = 10,
     } = options;
 
-    // Fetch a wider candidate set when filters are stacked, so the final
-    // top-N after filtering still has room. Cheap because the index is O(1).
-    const filterCount = [
-      size,
-      productType,
-      framework,
-      status,
-      component,
-      context,
-    ].filter(Boolean).length;
-    const candidatePoolMultiplier = 2 + filterCount;
-    const candidates = this.index.search(
-      query,
-      maxResults * candidatePoolMultiplier,
-    );
-
-    const collectionToType: Record<string, string> = {
-      components: 'component',
-      examples: 'example',
-      guidance: 'guidance',
-      foundations: 'foundation',
-      'get-started': 'get-started',
-      productTypes: 'productType',
-    };
+    // Rank every match, filter, then take the page. Cutting the ranking
+    // before filtering left filtered searches short or empty whenever the
+    // wanted records ranked below the cut, and the index scores every match
+    // anyway. An empty query lists everything the filters match, by id.
+    const candidates: SearchCandidate[] = query.trim()
+      ? this.index.search(query, Infinity)
+      : this.index
+          .getAllItems()
+          .sort((a, b) => a.id.localeCompare(b.id))
+          .map(
+            (item): SearchCandidate => ({
+              item,
+              matchCount: 0,
+              matchTypes: new Set(),
+            }),
+          );
 
     let filtered = candidates;
     if (collection) {
-      const targetType = collectionToType[collection];
+      const targetType = COLLECTION_TO_TYPE[collection];
       if (targetType) {
         filtered = candidates.filter((c) => c.item.type === targetType);
       } else {
@@ -181,10 +214,7 @@ export class DataLoader {
       );
     }
     if (framework) {
-      filtered = filtered.filter((c) => {
-        const frameworks = c.item.data.frameworks;
-        return Array.isArray(frameworks) && frameworks.includes(framework);
-      });
+      filtered = filtered.filter((c) => supportsFramework(c.item, framework));
     }
     if (status) {
       filtered = filtered.filter((c) => c.item.data.status === status);
@@ -196,12 +226,6 @@ export class DataLoader {
         ),
       );
     }
-    if (context) {
-      filtered = filtered.filter((c) => {
-        const contexts = c.item.data.appliesTo?.contexts;
-        return Array.isArray(contexts) && contexts.includes(context);
-      });
-    }
 
     const typeToCollection: Record<string, string> = {
       component: 'components',
@@ -212,7 +236,7 @@ export class DataLoader {
       productType: 'productTypes',
     };
 
-    return filtered.slice(0, maxResults).map((candidate) => {
+    const results = filtered.slice(0, maxResults).map((candidate) => {
       const data = candidate.item.data;
       return {
         id: candidate.item.id,
@@ -224,12 +248,57 @@ export class DataLoader {
           data.title ||
           data.patternName ||
           candidate.item.id,
-        summary: data.summary || data.description || data.purpose,
+        summary:
+          data.summary ||
+          data.description ||
+          data.purpose ||
+          firstParagraph(data.body),
         preview: this.createPreview(data),
         score: candidate.matchCount,
         aliases: Array.isArray(data.aliases) ? data.aliases : [],
+        status: data.status,
+        size: data.size,
+        productType: data.productType,
+        internal: data.internal,
+        subcomponent: data.subcomponent,
       };
     });
+    return { total: filtered.length, results };
+  }
+
+  /**
+   * The canonical id of a component named in any form (id, alias, React,
+   * web component, Angular or display name), or undefined when no component
+   * goes by that name.
+   */
+  resolveComponentId(raw: string): string | undefined {
+    const item = this.index.getItem(this.normalizeComponentId(raw));
+    return item?.type === 'component' ? item.id : undefined;
+  }
+
+  /**
+   * The values the records in a collection carry for a filter field, or those
+   * across every collection. A filter value outside these can never match.
+   */
+  valuesIn(
+    field: 'status' | 'size' | 'productType',
+    collection?: string,
+  ): string[] {
+    const type = collection ? COLLECTION_TO_TYPE[collection] : undefined;
+    const values = new Set<string>();
+    for (const item of this.index.getAllItems()) {
+      if (type && item.type !== type) continue;
+      const value = item.data[field];
+      if (typeof value === 'string' && value) values.add(value);
+    }
+    return [...values].sort();
+  }
+
+  /** The collections whose records carry a filter field at all. */
+  collectionsWith(field: 'status' | 'size' | 'productType'): string[] {
+    return Object.keys(COLLECTION_TO_TYPE).filter(
+      (collection) => this.valuesIn(field, collection).length > 0,
+    );
   }
 
   /**
@@ -287,9 +356,11 @@ export class DataLoader {
     const inCollection = (item: IndexedItem): boolean =>
       !targetType || item.type === targetType;
 
+    const key = id.trim();
+
     // Try direct lookup (exact id, then lowercased).
     const directItem =
-      this.index.getItem(id) ?? this.index.getItem(id.toLowerCase());
+      this.index.getItem(key) ?? this.index.getItem(key.toLowerCase());
     if (directItem && inCollection(directItem)) {
       return {
         id: directItem.id,
@@ -300,7 +371,7 @@ export class DataLoader {
     }
 
     // Try explicit aliases recorded from data.aliases.
-    const aliasedId = this.aliasMap.get(id.toLowerCase());
+    const aliasedId = this.aliasMap.get(key.toLowerCase());
     if (aliasedId) {
       const item =
         this.index.getItem(aliasedId) ??
@@ -315,19 +386,14 @@ export class DataLoader {
       }
     }
 
-    // Try common id variations.
-    const variations = [
-      id.replace(/[-_]/g, ''),
-      id
-        .replace(/([A-Z])/g, '-$1')
-        .toLowerCase()
-        .slice(1),
-    ];
+    // Any other spelling of a name (DatePicker, date_picker, "Date picker",
+    // <goa-date-picker>) goes through the normaliser the component filter
+    // uses; the hyphen-free form still catches "drop-down" for "dropdown".
+    const normalized = this.normalizeComponentId(key);
+    const variations = [normalized, normalized.replace(/-/g, '')];
 
     for (const variation of variations) {
-      const item =
-        this.index.getItem(variation) ??
-        this.index.getItem(variation.toLowerCase());
+      const item = this.index.getItem(variation);
       if (item && inCollection(item)) {
         return {
           id: item.id,
@@ -344,20 +410,23 @@ export class DataLoader {
   /**
    * Collapse any framework spelling of a component name to its canonical id.
    * Handles React PascalCase (GoabTable), web-component / Angular prefixes
-   * (goa-table, goab-table), casing, and legacy slugs recorded as aliases
+   * (goa-table, goab-table), display names ("Date picker"), markup
+   * (<goa-table>), casing, and legacy slugs recorded as aliases
    * (app-footer -> footer). Both the query and the stored refs run through
    * this, so a name in any form lines up with a ref stored in any form.
    */
   private normalizeComponentId(raw: string): string {
-    const lower = raw.trim().toLowerCase();
+    const cleaned = raw.trim().replace(/^<\/?\s*|\s*\/?>$/g, '');
+    const lower = cleaned.toLowerCase();
     // Direct alias hit on the raw spelling (alias keys are stored lowercased,
     // e.g. "goabappfooter" -> "footer", "app-footer" -> "footer").
     const directAlias = this.aliasMap.get(lower);
     if (directAlias) return directAlias;
-    // React PascalCase -> kebab, then drop the framework prefix.
-    const kebab = raw
-      .trim()
+    // React PascalCase -> kebab, spaces and underscores -> hyphens, then drop
+    // the framework prefix.
+    const kebab = cleaned
       .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+      .replace(/[\s_]+/g, '-')
       .toLowerCase()
       .replace(/^goab?-/, '');
     return this.aliasMap.get(kebab) ?? kebab;
@@ -423,6 +492,7 @@ export class DataLoader {
       );
     }
 
+    let loaded = 0;
     for (const file of files) {
       if (!file.endsWith('.json')) continue;
 
@@ -452,6 +522,7 @@ export class DataLoader {
         };
 
         this.index.addItem(indexed);
+        loaded++;
 
         // Register aliases for `get` lookups.
         if (Array.isArray(data.aliases)) {
@@ -461,12 +532,33 @@ export class DataLoader {
             }
           }
         }
+
+        // A component also answers to every name a developer types: its
+        // React, web component and Angular names and its display name.
+        // Recorded aliases keep priority.
+        if (type === 'component') {
+          const names = [
+            data.reactClassName,
+            data.webComponentTag,
+            data.angularSelector,
+            data.name,
+          ];
+          for (const name of names) {
+            if (typeof name !== 'string' || name.length === 0) continue;
+            if (!this.aliasMap.has(name.toLowerCase())) {
+              this.aliasMap.set(name.toLowerCase(), id);
+            }
+          }
+        }
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         throw new Error(
           `Unable to load data file '${filePath}': ${message}`,
         );
       }
+    }
+    if (loaded === 0) {
+      throw new Error(`Required data folder '${folderPath}' holds no records`);
     }
   }
 
@@ -487,6 +579,16 @@ export class DataLoader {
 
     return parts.join(' - ') || '';
   }
+}
+
+/** The first paragraph of a markdown body, skipping headings. */
+export function firstParagraph(body: unknown): string | undefined {
+  if (typeof body !== 'string') return undefined;
+  const block = body
+    .split(/\n\s*\n/)
+    .map((b) => b.trim())
+    .find((b) => b.length > 0 && !b.startsWith('#'));
+  return block ? block.replace(/\s+/g, ' ') : undefined;
 }
 
 function recordReferencesComponent(

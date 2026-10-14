@@ -137,12 +137,13 @@ function extractIntrinsicTags(src: string): string[] {
 
 function extractGoabComponentExports(src: string): string[] {
   // Goab classes that are components (functions or constants), not types.
-  // Filters out *Props/*Detail/*Event type exports.
+  // Filters out *Props/*Detail/*Event type exports. A deprecated component can
+  // still carry the older GoA prefix (GoALinkButton).
   const names = new Set<string>();
-  for (const m of src.matchAll(/export\s+function\s+(Goab[A-Z][A-Za-z0-9]*)/g)) {
+  for (const m of src.matchAll(/export\s+function\s+((?:Goab|GoA)[A-Z][A-Za-z0-9]*)/g)) {
     names.add(m[1]);
   }
-  for (const m of src.matchAll(/export\s+const\s+(Goab[A-Z][A-Za-z0-9]*)\s*[:=]/g)) {
+  for (const m of src.matchAll(/export\s+const\s+((?:Goab|GoA)[A-Z][A-Za-z0-9]*)\s*[:=]/g)) {
     names.add(m[1]);
   }
   for (const block of src.matchAll(/export\s*\{([^}]+)\}/g)) {

@@ -42,7 +42,7 @@ For full enumeration of sizes, product types, and aliases, see `taxonomy.md`.
 1. Read the intent. Determine which side of the service it's for — citizen-facing or worker-facing — and map to a product type: worker tools → `workspace`, citizen-facing form flows → `public-form` (see the routing table in `taxonomy.md`). If the intent doesn't map cleanly to today's product types, name the gap rather than forcing a fit.
 2. `goa-design-system:get` the product type from the productTypes collection to surface its summary, demo URL, and listed components.
 3. `goa-design-system:search` filtered by `size` and `productType` for sections, non-canonical pages, or filtered queries (step 2 already lists the canonical pages).
-4. For each template, `goa-design-system:get` the entry to surface its components, source URLs, preview, and embedded guidance. For each component, `goa-design-system:get` to confirm props, types, and token references before generating code.
+4. For each template, `goa-design-system:get` the entry to surface its summary, preview, and linked components and guidance; add `detail: "full"` when you need its source URLs or code. Before generating code with a component, `goa-design-system:get` it with `detail: "full"` to confirm props, types, and token references.
 5. If a task entry matches the intent, surface it. If no task captures it, name the gap and offer the closest pages so the developer can compose the job themselves.
 6. Surface result and gotchas to the developer before generating code. Apply the Decision calibration principles below: name what was defaulted (transparency) and frame through the developer's lens.
 
@@ -50,10 +50,10 @@ For full enumeration of sizes, product types, and aliases, see `taxonomy.md`.
 
 The MCP is intentionally narrow. Guidance and specs are not separate tools; the skill surfaces them by reading component and template entries with `goa-design-system:get`.
 
-| Tool                       | Use for                                                                                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `goa-design-system:search` | Open-ended discovery across the layered structure; supports filters on `size`, `productType`, `status`, etc.                                      |
-| `goa-design-system:get`    | Fetching a known entity by ID, alias, or name. Returns the entry's full record — components, sources, props, token references, embedded guidance. |
+| Tool                       | Use for                                                                                                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `goa-design-system:search` | Open-ended discovery across the layered structure; supports filters on `size`, `productType`, `status`, etc.                                                                                                                         |
+| `goa-design-system:get`    | Fetching a known entity by ID, alias, or name. Returns a summary and what the entry links to; add `detail: "full"` when you need the full record: sources, props, token references, embedded guidance and, for an example, its code. |
 
 ## Decision calibration
 

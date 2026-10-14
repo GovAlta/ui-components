@@ -64,13 +64,13 @@
         {
           "name": "meta",
           "type": "goa-app-footer-meta-section",
-          "description": "",
+          "description": "Copyright and legal links, in a goa-app-footer-meta-section.",
           "required": false
         },
         {
           "name": "nav",
           "type": "goa-app-footer-nav-section",
-          "description": "",
+          "description": "Navigation link sections, each a goa-app-footer-nav-section.",
           "required": false
         }
       ]

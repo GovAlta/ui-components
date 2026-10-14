@@ -779,8 +779,7 @@
     ],
     "components": [
       "tabs",
-      "tab",
-      "button"
+      "tab"
     ],
     "aliases": [],
     "slug": "activate-a-specific-tab-with-a-button"
@@ -798,8 +797,7 @@
       "dynamic"
     ],
     "components": [
-      "filter-chip",
-      "button"
+      "filter-chip"
     ],
     "aliases": [],
     "slug": "add-a-filter-chip"
@@ -819,14 +817,7 @@
       "data-entry"
     ],
     "components": [
-      "drawer",
-      "button",
-      "button-group",
-      "form-item",
-      "dropdown",
-      "input",
-      "radio-group",
-      "block"
+      "drawer"
     ],
     "aliases": [],
     "slug": "add-a-record-using-a-drawer"
@@ -847,13 +838,7 @@
     ],
     "components": [
       "drawer",
-      "button",
-      "button-group",
-      "form-item",
-      "checkbox-list",
-      "checkbox",
-      "dropdown",
-      "radio-group"
+      "checkbox-list"
     ],
     "aliases": [],
     "slug": "add-and-edit-lots-of-filters"
@@ -871,13 +856,7 @@
       "data-entry"
     ],
     "components": [
-      "modal",
-      "button",
-      "button-group",
-      "form-item",
-      "dropdown",
-      "input",
-      "text-area"
+      "modal"
     ],
     "aliases": [],
     "slug": "add-another-item-in-a-modal"
@@ -897,7 +876,6 @@
       "word-count"
     ],
     "components": [
-      "form-item",
       "text-area"
     ],
     "aliases": [],
@@ -917,7 +895,6 @@
       "ask-a-user-for"
     ],
     "components": [
-      "form-item",
       "date-picker"
     ],
     "aliases": [],
@@ -939,11 +916,7 @@
     "components": [
       "form-item",
       "input",
-      "dropdown",
-      "block",
-      "button",
-      "button-group",
-      "text"
+      "dropdown"
     ],
     "aliases": [],
     "slug": "ask-a-user-for-an-address"
@@ -962,9 +935,7 @@
       "registration"
     ],
     "components": [
-      "form-item",
-      "input",
-      "block"
+      "input"
     ],
     "aliases": [],
     "slug": "ask-a-user-for-an-indian-registration-number"
@@ -983,10 +954,8 @@
       "financial"
     ],
     "components": [
-      "form-item",
       "input",
-      "details",
-      "text"
+      "details"
     ],
     "aliases": [],
     "slug": "ask-a-user-for-direct-deposit-information"
@@ -1005,7 +974,6 @@
       "financial"
     ],
     "components": [
-      "form-item",
       "input"
     ],
     "aliases": [],
@@ -1027,8 +995,7 @@
       "app-header",
       "footer",
       "page-block",
-      "skeleton",
-      "grid"
+      "skeleton"
     ],
     "aliases": [],
     "slug": "basic-page-layout"
@@ -1046,9 +1013,7 @@
       "actions"
     ],
     "components": [
-      "button",
-      "button-group",
-      "icon"
+      "button"
     ],
     "aliases": [],
     "slug": "button-with-icon"
@@ -1068,9 +1033,7 @@
     ],
     "components": [
       "container",
-      "grid",
-      "link",
-      "text"
+      "grid"
     ],
     "aliases": [],
     "slug": "card-grid"
@@ -1090,10 +1053,7 @@
       "list"
     ],
     "components": [
-      "container",
-      "block",
-      "badge",
-      "button"
+      "container"
     ],
     "aliases": [],
     "slug": "card-view-of-case-files"
@@ -1112,12 +1072,7 @@
       "changes"
     ],
     "components": [
-      "modal",
-      "button",
-      "button-group",
-      "container",
-      "form-item",
-      "date-picker"
+      "modal"
     ],
     "aliases": [],
     "slug": "confirm-a-change"
@@ -1137,7 +1092,6 @@
     ],
     "components": [
       "modal",
-      "button",
       "button-group"
     ],
     "aliases": [],
@@ -1158,9 +1112,7 @@
       "routing"
     ],
     "components": [
-      "modal",
-      "button",
-      "button-group"
+      "modal"
     ],
     "aliases": [],
     "slug": "confirm-before-navigating-away"
@@ -1179,7 +1131,6 @@
       "icon-button"
     ],
     "components": [
-      "block",
       "icon-button",
       "tooltip"
     ],
@@ -1202,7 +1153,6 @@
     ],
     "components": [
       "button",
-      "button-group",
       "form-item",
       "input"
     ],
@@ -1246,11 +1196,7 @@
       "table"
     ],
     "components": [
-      "container",
-      "block",
-      "button",
-      "table",
-      "text"
+      "container"
     ],
     "aliases": [],
     "slug": "display-user-information"
@@ -1271,10 +1217,7 @@
     ],
     "components": [
       "dropdown",
-      "dropdown-item",
-      "form-item",
-      "input",
-      "button"
+      "dropdown-item"
     ],
     "aliases": [],
     "slug": "dynamically-add-an-item-to-a-dropdown-list"
@@ -1295,8 +1238,7 @@
     ],
     "components": [
       "dropdown",
-      "dropdown-item",
-      "form-item"
+      "dropdown-item"
     ],
     "aliases": [],
     "slug": "dynamically-change-items-in-a-dropdown-list"
@@ -1321,14 +1263,7 @@
       "server problem",
       "page-structure"
     ],
-    "components": [
-      "page-block",
-      "block",
-      "text",
-      "icon",
-      "link",
-      "button"
-    ],
+    "components": [],
     "aliases": [
       "401-error-page",
       "404-error-page",
@@ -1351,8 +1286,7 @@
       "badge"
     ],
     "components": [
-      "accordion",
-      "badge"
+      "accordion"
     ],
     "aliases": [],
     "slug": "expand-or-collapse-part-of-a-form"
@@ -1372,14 +1306,7 @@
       "search"
     ],
     "components": [
-      "push-drawer",
-      "button",
-      "table",
-      "badge",
-      "checkbox",
-      "checkbox-list",
-      "dropdown",
-      "form-item"
+      "push-drawer"
     ],
     "aliases": [],
     "slug": "filter-a-list-using-a-push-drawer"
@@ -1402,12 +1329,7 @@
     "components": [
       "table",
       "filter-chip",
-      "input",
-      "button",
-      "block",
-      "form-item",
-      "badge",
-      "text"
+      "input"
     ],
     "aliases": [],
     "slug": "filter-data-in-a-table"
@@ -1426,7 +1348,8 @@
     ],
     "components": [
       "app-header",
-      "app-header-menu"
+      "app-header-menu",
+      "menu-button"
     ],
     "aliases": [],
     "slug": "header-with-navigation"
@@ -1445,8 +1368,7 @@
       "landing"
     ],
     "components": [
-      "hero-banner",
-      "button"
+      "hero-banner"
     ],
     "aliases": [],
     "slug": "hero-banner-with-actions"
@@ -1465,8 +1387,7 @@
       "faq"
     ],
     "components": [
-      "accordion",
-      "button"
+      "accordion"
     ],
     "aliases": [],
     "slug": "hide-and-show-many-sections-of-information"
@@ -1485,8 +1406,7 @@
       "forms"
     ],
     "components": [
-      "checkbox",
-      "form-item"
+      "checkbox"
     ],
     "aliases": [],
     "slug": "include-a-link-in-the-helper-text-of-an-option"
@@ -1612,16 +1532,7 @@
     ],
     "components": [
       "form-item",
-      "input",
-      "text-area",
-      "radio-group",
-      "radio-item",
-      "dropdown",
-      "dropdown-item",
-      "details",
-      "block",
-      "button",
-      "button-group"
+      "radio-group"
     ],
     "aliases": [
       "ask-a-user-one-question-at-a-time",
@@ -1668,9 +1579,7 @@
       "action"
     ],
     "components": [
-      "modal",
-      "button",
-      "button-group"
+      "modal"
     ],
     "aliases": [],
     "slug": "require-user-action-before-continuing"
@@ -1689,10 +1598,7 @@
       "clear"
     ],
     "components": [
-      "date-picker",
-      "form-item",
-      "button",
-      "button-group"
+      "date-picker"
     ],
     "aliases": [],
     "slug": "reset-date-picker-field"
@@ -1713,10 +1619,7 @@
       "application"
     ],
     "components": [
-      "block",
-      "callout",
-      "button",
-      "button-group"
+      "callout"
     ],
     "aliases": [
       "confirm-that-an-application-was-submitted"
@@ -1741,7 +1644,6 @@
       "radio-group",
       "radio-item",
       "checkbox",
-      "form-item",
       "input"
     ],
     "aliases": [],
@@ -1764,13 +1666,7 @@
     ],
     "components": [
       "container",
-      "grid",
-      "block",
-      "form-item",
-      "radio-group",
-      "dropdown",
-      "text-area",
-      "button"
+      "grid"
     ],
     "aliases": [],
     "slug": "review-and-action"
@@ -1790,9 +1686,7 @@
       "submission"
     ],
     "components": [
-      "table",
-      "button",
-      "button-group"
+      "table"
     ],
     "aliases": [],
     "slug": "review-page"
@@ -1811,9 +1705,7 @@
     ],
     "components": [
       "input",
-      "button",
-      "block",
-      "form-item"
+      "button"
     ],
     "aliases": [],
     "slug": "search"
@@ -1832,8 +1724,7 @@
       "form"
     ],
     "components": [
-      "checkbox",
-      "form-item"
+      "checkbox"
     ],
     "aliases": [],
     "slug": "select-one-or-more-from-a-list-of-options"
@@ -1851,7 +1742,6 @@
       "layout"
     ],
     "components": [
-      "form-item",
       "radio-group",
       "radio-item"
     ],
@@ -1872,10 +1762,7 @@
     ],
     "components": [
       "tabs",
-      "tab",
-      "table",
-      "badge",
-      "button"
+      "tab"
     ],
     "aliases": [],
     "slug": "set-a-specific-tab-to-be-active"
@@ -1895,8 +1782,7 @@
     ],
     "components": [
       "icon-button",
-      "tooltip",
-      "button-group"
+      "tooltip"
     ],
     "aliases": [],
     "slug": "show-a-label-on-an-icon-only-button"
@@ -1915,8 +1801,7 @@
       "toast"
     ],
     "components": [
-      "temporary-notification",
-      "button"
+      "temporary-notification"
     ],
     "aliases": [],
     "slug": "show-a-notification"
@@ -1935,8 +1820,7 @@
       "toast"
     ],
     "components": [
-      "temporary-notification",
-      "button"
+      "temporary-notification"
     ],
     "aliases": [],
     "slug": "show-a-notification-with-an-action"
@@ -1955,8 +1839,7 @@
       "feedback"
     ],
     "components": [
-      "temporary-notification",
-      "button"
+      "temporary-notification"
     ],
     "aliases": [],
     "slug": "show-a-user-progress"
@@ -1976,8 +1859,7 @@
       "feedback"
     ],
     "components": [
-      "temporary-notification",
-      "button"
+      "temporary-notification"
     ],
     "aliases": [],
     "slug": "show-a-user-progress-when-the-time-is-unknown"
@@ -2000,9 +1882,7 @@
     "components": [
       "tabs",
       "tab",
-      "table",
-      "badge",
-      "button"
+      "table"
     ],
     "aliases": [],
     "slug": "show-different-views-of-data-in-a-table"
@@ -2021,8 +1901,7 @@
       "hover"
     ],
     "components": [
-      "tooltip",
-      "container"
+      "tooltip"
     ],
     "aliases": [],
     "slug": "show-full-date-in-a-tooltip"
@@ -2065,9 +1944,7 @@
     ],
     "components": [
       "table",
-      "icon-button",
-      "badge",
-      "block"
+      "icon-button"
     ],
     "aliases": [],
     "slug": "show-multiple-actions-in-a-compact-table"
@@ -2110,9 +1987,7 @@
       "pagination",
       "dropdown",
       "dropdown-item",
-      "table",
-      "block",
-      "spacer"
+      "table"
     ],
     "aliases": [],
     "slug": "show-number-of-results-per-page"
@@ -2152,8 +2027,7 @@
     ],
     "components": [
       "table",
-      "badge",
-      "button"
+      "badge"
     ],
     "aliases": [],
     "slug": "show-status-in-a-table"
@@ -2213,8 +2087,7 @@
       "slot"
     ],
     "components": [
-      "form-item",
-      "input"
+      "form-item"
     ],
     "aliases": [],
     "slug": "slotted-error-text-in-a-form-item"
@@ -2233,8 +2106,7 @@
       "slot"
     ],
     "components": [
-      "form-item",
-      "input"
+      "form-item"
     ],
     "aliases": [],
     "slug": "slotted-helper-text-in-a-form-item"
@@ -2273,9 +2145,7 @@
       "start",
       "citizen"
     ],
-    "components": [
-      "button"
-    ],
+    "components": [],
     "aliases": [],
     "slug": "start-page"
   },
@@ -2295,8 +2165,7 @@
     ],
     "components": [
       "table",
-      "badge",
-      "callout"
+      "badge"
     ],
     "aliases": [],
     "slug": "task-list-page"
@@ -2337,9 +2206,7 @@
       "callout"
     ],
     "components": [
-      "modal",
-      "button",
-      "button-group"
+      "modal"
     ],
     "aliases": [],
     "slug": "warn-a-user-of-a-deadline"
@@ -2358,10 +2225,7 @@
       "worker"
     ],
     "components": [
-      "accordion",
-      "badge",
-      "button",
-      "drawer"
+      "accordion"
     ],
     "aliases": [],
     "slug": "workspace/case-detail"
@@ -2380,9 +2244,7 @@
       "worker"
     ],
     "components": [
-      "container",
-      "block",
-      "badge"
+      "container"
     ],
     "aliases": [],
     "slug": "workspace/dashboard"
@@ -2404,11 +2266,22 @@
       "work-side-menu",
       "data-grid",
       "tabs",
-      "filter-chip",
-      "badge"
+      "filter-chip"
     ],
     "aliases": [],
     "slug": "workspace/index-page"
+  },
+  {
+    "type": "page",
+    "id": "ai-tools-and-resources/goa-design-system-mcp",
+    "title": "GoA Design System MCP",
+    "description": "A lookup tool your AI uses for component APIs, examples, and guidance",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "ai-tools-and-resources"
+    ],
+    "slug": "get-started/ai-tools-and-resources/goa-design-system-mcp"
   },
   {
     "type": "page",

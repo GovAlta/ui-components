@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { GoabFilterChip } from "./filter-chip";
 import { describe, it, expect, vi } from "vitest";
 
@@ -86,21 +86,8 @@ describe("GoabFilterChip", () => {
     expect(el?.getAttribute("icontheme")).toBe("outline");
   });
 
-  // This test was passing due to a false positive
-  it.skip("should not apply background fill on hover", async () => {
-    const { container } = render(<GoabFilterChip content="Test" testId="chip" />);
-    const chip = container.querySelector("goa-filter-chip");
-    fireEvent.mouseOver(chip!);
-    expect(chip).not.toHaveStyle("background-color: var(--goa-color-greyscale-200)");
-  });
-
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabFilterChip
-        content="test chip"
-        data-grid="cell"
-      />
-    );
+    const { container } = render(<GoabFilterChip content="test chip" data-grid="cell" />);
     const el = container.querySelector("goa-filter-chip");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

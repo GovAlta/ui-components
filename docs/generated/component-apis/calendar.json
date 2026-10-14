@@ -16,7 +16,7 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "min",
@@ -30,21 +30,21 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -85,10 +85,6 @@
         {
           "name": "max",
           "type": "Date | string | undefined",
-          "values": [
-            "Date",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
@@ -103,10 +99,6 @@
         {
           "name": "min",
           "type": "Date | string | undefined",
-          "values": [
-            "Date",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
@@ -149,10 +141,6 @@
         {
           "name": "value",
           "type": "Date | string",
-          "values": [
-            "Date",
-            "string"
-          ],
           "required": false,
           "default": null,
           "description": "The currently selected date value in YYYY-MM-DD format."
@@ -251,7 +239,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ type: string; name: string; value: unknown }>",
-          "description": "",
+          "description": "Emits when the selected date changes.",
           "frameworks": [
             "webComponents"
           ]

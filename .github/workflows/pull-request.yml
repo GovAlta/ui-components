@@ -8,6 +8,16 @@ on:
     branches:
       - main
       - dev
+  workflow_dispatch:
+    inputs:
+      base_ref:
+        description: Base branch used to determine affected projects
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - main
 
 jobs:
   build:
@@ -46,8 +56,8 @@ jobs:
 
       - name: Build
         run: |
-          npx nx affected --target=build --base=origin/${{ github.base_ref }}
-          npx nx affected --target=post --base=origin/${{ github.base_ref }}
+          npx nx affected --target=build --base=origin/${{ inputs.base_ref || github.base_ref }}
+          npx nx affected --target=post --base=origin/${{ inputs.base_ref || github.base_ref }}
 
       - name: Test
         run: |

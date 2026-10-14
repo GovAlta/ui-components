@@ -139,7 +139,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() prefix?: string;
   /** @deprecated Use trailingContent slot instead. */
   @Input() suffix?: string;
-  /** Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the input will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** Sets the maximum number of characters (as UTF-16 code units) the user can enter into the input. */
   @Input({ transform: numberAttribute }) maxLength?: number;

@@ -863,6 +863,7 @@ export type GoabIconBaseType =
   | "git-pull-request"
   | "glasses"
   | "globe"
+  | "goa-dashed-circle"
   | "golf"
   | "grid"
   | "hammer"
@@ -1323,9 +1324,13 @@ export type DataAttributes = {
 };
 
 export interface Margins {
+  /** Sets the top margin spacing token. */
   mt?: Spacing;
+  /** Sets the right margin spacing token. */
   mr?: Spacing;
+  /** Sets the bottom margin spacing token. */
   mb?: Spacing;
+  /** Sets the left margin spacing token. */
   ml?: Spacing;
 }
 
@@ -1503,6 +1508,18 @@ export type GoabDropdownMultiselectSize = "default" | "compact";
  * Provides details when a dropdown multiselect value changes.
  */
 export type GoabDropdownMultiselectOnChangeDetail = {
+  /** The group name. */
+  name: string;
+  /** The selected values. */
+  value: string[];
+  /** The display labels for each selected value. */
+  labels: string[];
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/** Provides details when focus leaves a dropdown multiselect. */
+export type GoabDropdownMultiselectOnBlurDetail = {
   /** The group name. */
   name: string;
   /** The selected values. */

@@ -6,6 +6,8 @@ import typescript from "highlight.js/lib/languages/typescript";
 import xml from "highlight.js/lib/languages/xml";
 import css from "highlight.js/lib/languages/css";
 import javascript from "highlight.js/lib/languages/javascript";
+import json from "highlight.js/lib/languages/json";
+import bash from "highlight.js/lib/languages/bash";
 import {
   extractReactCode,
   extractAngularClassBody,
@@ -30,8 +32,10 @@ hljs.registerLanguage("tsx", typescript);
 hljs.registerLanguage("html", xml);
 hljs.registerLanguage("css", css);
 hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("bash", bash);
 
-export type Language = "tsx" | "typescript" | "javascript" | "html" | "css";
+export type Language = "tsx" | "typescript" | "javascript" | "html" | "css" | "json" | "bash";
 
 interface FrameworkCode {
   react?: string | ReactExample;

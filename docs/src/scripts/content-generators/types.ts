@@ -49,6 +49,15 @@ export interface ExampleRecord extends BaseRecord {
   angularSourceUrl?: string;
   sourceUrl?: string;
   stackblitzUrl?: string;
+  // The example's source files by framework, apart from `body` so search never
+  // indexes code.
+  code?: Record<string, ExampleCodeFile[]>;
+}
+
+export interface ExampleCodeFile {
+  file: string;
+  language: string;
+  content: string;
 }
 
 export interface GuidanceRecord extends BaseRecord {

@@ -32,9 +32,6 @@
         {
           "name": "progress",
           "type": "number | null",
-          "values": [
-            "number"
-          ],
           "required": false,
           "default": null,
           "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
@@ -80,9 +77,6 @@
         {
           "name": "progress",
           "type": "number | null | undefined",
-          "values": [
-            "number"
-          ],
           "required": false,
           "default": null,
           "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."

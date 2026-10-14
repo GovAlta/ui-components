@@ -113,13 +113,15 @@
     });
     _rootEl.addEventListener("keydown", onKeyDown);
 
-    watchFocusWithin(
+    const stopWatchingFocus = watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
       () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+      { settlePointerFocus: true },
     );
 
     return () => {
+      stopWatchingFocus();
       _radioObserver.disconnect();
       clearTimeout(_bindTimeoutId);
     };

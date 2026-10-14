@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { paths, WEB_COMPONENT_ONLY } from "../config";
+import { EXAMPLE_SOURCE_FILES, paths, WEB_COMPONENT_ONLY } from "../config";
 import type {
   AnyRecord,
   ComponentRecord,
@@ -39,7 +39,7 @@ export interface FrameworkTarget {
   /** ComponentRecord field holding the identifier (e.g. `GoabButton`). */
   identifierKey: "reactClassName" | "angularSelector" | "webComponentTag";
   /** Example source files to embed, in render order, with fence languages. */
-  sources: { file: string; lang: string }[];
+  sources: readonly { file: string; lang: string }[];
   /**
    * Attribute on `<PreviewContainer>` that holds this framework's per-variant
    * source URL, for page-scale examples whose source lives in variant
@@ -57,7 +57,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     slotsLabel: "ReactNode",
     frontmatterKey: "react",
     identifierKey: "reactClassName",
-    sources: [{ file: "react.tsx", lang: "tsx" }],
+    sources: EXAMPLE_SOURCE_FILES.react,
     variantSourceAttr: "reactSourceUrl",
   },
   {
@@ -67,10 +67,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     slotsLabel: "Template Ref",
     frontmatterKey: "angular",
     identifierKey: "angularSelector",
-    sources: [
-      { file: "angular.html", lang: "html" },
-      { file: "angular.ts", lang: "typescript" },
-    ],
+    sources: EXAMPLE_SOURCE_FILES.angular,
     variantSourceAttr: "angularSourceUrl",
   },
   {
@@ -80,7 +77,7 @@ const FRAMEWORKS: FrameworkTarget[] = [
     slotsLabel: "Slots",
     frontmatterKey: "webComponent",
     identifierKey: "webComponentTag",
-    sources: [{ file: "web-components.html", lang: "html" }],
+    sources: EXAMPLE_SOURCE_FILES["web-components"],
     // PreviewContainer has no webComponentsSourceUrl attribute, so the WC
     // bundle skips variant links rather than emit relative-only previews.
   },

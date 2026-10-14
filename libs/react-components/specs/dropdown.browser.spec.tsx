@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 
 import { GoabAccordion, GoabDropdown, GoabDropdownItem } from "../src";
-import { expect, describe, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
 // Slotted content's DOM parent stays in the light DOM even once assigned, so
@@ -348,20 +348,23 @@ describe("Dropdown", () => {
       it("supports percentage width units", async () => {
         const Component = () => {
           return (
-            <GoabDropdown
-              name="favcolor"
-              testId="percentage-dropdown"
-              width="75%"
-              onChange={noop}
-            >
-              <GoabDropdownItem label="Red" value="red" />
-              <GoabDropdownItem label="Blue" value="blue" />
-              <GoabDropdownItem label="Green" value="green" />
-            </GoabDropdown>
+            <div data-testid="percentage-container" style={{ width: "800px" }}>
+              <GoabDropdown
+                name="favcolor"
+                testId="percentage-dropdown"
+                width="75%"
+                onChange={noop}
+              >
+                <GoabDropdownItem label="Red" value="red" />
+                <GoabDropdownItem label="Blue" value="blue" />
+                <GoabDropdownItem label="Green" value="green" />
+              </GoabDropdown>
+            </div>
           );
         };
 
         const result = render(<Component />);
+        const container = result.getByTestId("percentage-container");
         const dropdown = result.getByTestId("percentage-dropdown");
 
         await vi.waitFor(() => {
@@ -373,10 +376,9 @@ describe("Dropdown", () => {
           const computedStyle = window.getComputedStyle(dropdown.element());
           expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/); // Should be converted to pixels
 
-          // Check that it's a reasonable percentage width (should be substantial but not too large)
           const dropdownWidth = parseFloat(computedStyle.width);
-          expect(dropdownWidth).toBeGreaterThan(100); // Should be substantial
-          expect(dropdownWidth).toBeLessThan(800); // But not too large for 75%
+          const containerWidth = container.element().getBoundingClientRect().width;
+          expect(Math.abs(dropdownWidth - containerWidth * 0.75)).toBeLessThanOrEqual(2);
         });
       });
 
@@ -533,7 +535,15 @@ describe("Dropdown", () => {
     });
 
     describe("Popover position", () => {
-      it.skip("should display popover above when dropdown is at the bottom of the view port", async () => {
+      beforeEach(async () => {
+        await page.viewport(1280, 800);
+      });
+
+      afterEach(async () => {
+        await page.viewport(1280, 800);
+      });
+
+      it("should display popover above when dropdown is at the bottom of the view port", async () => {
         const Component = () => {
           return (
             <>

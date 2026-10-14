@@ -20,7 +20,12 @@
         },
         {
           "name": "countBy",
-          "type": "GoabTextAreaCountBy",
+          "type": "\"character\" | \"word\" | \"\"",
+          "typeLabel": "GoabTextAreaCountBy",
+          "values": [
+            "character",
+            "word"
+          ],
           "required": false,
           "default": null,
           "description": "Counting interval for characters or words, specifying whether to count every character or word."
@@ -65,28 +70,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -118,7 +123,12 @@
         },
         {
           "name": "size",
-          "type": "GoabTextAreaSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabTextAreaSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the visual size variant of the text area."
@@ -199,7 +209,12 @@
         },
         {
           "name": "countBy",
-          "type": "GoabTextAreaCountBy",
+          "type": "\"character\" | \"word\" | \"\"",
+          "typeLabel": "GoabTextAreaCountBy",
+          "values": [
+            "character",
+            "word"
+          ],
           "required": false,
           "default": "",
           "description": "Counting interval for characters or words, specifying whether to count every character or word."
@@ -297,7 +312,12 @@
         },
         {
           "name": "size",
-          "type": "GoabTextAreaSize",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabTextAreaSize",
+          "values": [
+            "default",
+            "compact"
+          ],
           "required": false,
           "default": "default",
           "description": "Sets the size variant of the textarea."
@@ -392,7 +412,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": "Sets the input to a disabled state. Use [attr.disabled] with [formControl]"
+          "description": "Sets the input to a disabled state."
         },
         {
           "name": "error",
@@ -484,7 +504,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": ""
+          "description": "Sets the visual size variant of the text area."
         },
         {
           "name": "testid",
@@ -512,7 +532,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the textarea loses focus.",
           "frameworks": [
             "webComponents"
           ]
@@ -520,7 +540,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the textarea value changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -528,7 +548,7 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string; value: string }>",
-          "description": "",
+          "description": "Emits when the textarea receives focus.",
           "frameworks": [
             "webComponents"
           ]
@@ -536,7 +556,7 @@
         {
           "name": "_keyPress",
           "type": "CustomEvent<{ name: string; value: string; key: string }>",
-          "description": "",
+          "description": "Emits when a key is pressed in the textarea.",
           "frameworks": [
             "webComponents"
           ]

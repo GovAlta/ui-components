@@ -6,7 +6,8 @@
       "props": [
         {
           "name": "hSpacing",
-          "type": "GoabSpacerHorizontalSpacing",
+          "type": "Spacing | \"fill\"",
+          "typeLabel": "GoabSpacerHorizontalSpacing",
           "required": false,
           "default": "none",
           "description": "Horizontal spacing."
@@ -33,7 +34,8 @@
       "props": [
         {
           "name": "hSpacing",
-          "type": "GoabSpacerHorizontalSpacing",
+          "type": "Spacing | \"fill\"",
+          "typeLabel": "GoabSpacerHorizontalSpacing",
           "required": false,
           "default": null,
           "description": "Horizontal spacing."
@@ -60,8 +62,7 @@
       "props": [
         {
           "name": "hspacing",
-          "type": "Spacing",
-          "typeLabel": "Spacing",
+          "type": "Spacing | \"fill\"",
           "required": false,
           "default": "none",
           "description": "Horizontal spacing."

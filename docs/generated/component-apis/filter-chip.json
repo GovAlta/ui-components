@@ -20,7 +20,12 @@
         },
         {
           "name": "iconTheme",
-          "type": "GoabFilterChipTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabFilterChipTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Theme style of the leading icon."
@@ -37,28 +42,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "removable",
@@ -113,10 +118,6 @@
         {
           "name": "content",
           "type": "string | TemplateRef<unknown>",
-          "values": [
-            "string",
-            "TemplateRef<unknown>"
-          ],
           "required": true,
           "default": null,
           "description": "Content displayed in the chip. Accepts a string or template for custom content."
@@ -130,7 +131,12 @@
         },
         {
           "name": "iconTheme",
-          "type": "GoabChipTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabChipTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the icon theme style for the filter chip."
@@ -138,9 +144,6 @@
         {
           "name": "leadingIcon",
           "type": "GoabIconType | null",
-          "values": [
-            "GoabIconType"
-          ],
           "required": false,
           "default": null,
           "description": "Icon displayed at the start of the chip."
@@ -303,7 +306,7 @@
         {
           "name": "_click",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the filter chip delete button is clicked.",
           "frameworks": [
             "webComponents"
           ]
@@ -312,7 +315,7 @@
       "slots": [
         {
           "name": "content",
-          "description": "Content displayed in the chip. Accepts a string or ReactNode for custom content.",
+          "description": "Content displayed in the chip.",
           "required": true
         }
       ]

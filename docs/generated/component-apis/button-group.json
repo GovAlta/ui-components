@@ -6,14 +6,25 @@
       "props": [
         {
           "name": "alignment",
-          "type": "GoabButtonGroupAlignment",
+          "type": "\"start\" | \"end\" | \"center\"",
+          "typeLabel": "GoabButtonGroupAlignment",
+          "values": [
+            "start",
+            "end",
+            "center"
+          ],
           "required": false,
           "default": "start",
           "description": "Positions the button group in the page layout."
         },
         {
           "name": "gap",
-          "type": "GoabButtonGroupGap",
+          "type": "\"relaxed\" | \"compact\"",
+          "typeLabel": "GoabButtonGroupGap",
+          "values": [
+            "relaxed",
+            "compact"
+          ],
           "required": false,
           "default": "relaxed",
           "description": "Sets the spacing between buttons in the button group."
@@ -23,28 +34,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "testId",
@@ -61,14 +72,25 @@
       "props": [
         {
           "name": "alignment",
-          "type": "GoabButtonGroupAlignment",
+          "type": "\"start\" | \"end\" | \"center\"",
+          "typeLabel": "GoabButtonGroupAlignment",
+          "values": [
+            "start",
+            "end",
+            "center"
+          ],
           "required": false,
           "default": "start",
           "description": "Positions the button group in the page layout."
         },
         {
           "name": "gap",
-          "type": "GoabButtonGroupGap",
+          "type": "\"relaxed\" | \"compact\"",
+          "typeLabel": "GoabButtonGroupGap",
+          "values": [
+            "relaxed",
+            "compact"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the spacing between buttons in the button group."

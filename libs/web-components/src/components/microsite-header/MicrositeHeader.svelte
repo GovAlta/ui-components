@@ -25,7 +25,7 @@
   export let maxcontentwidth = "100%";
   /** Sets the target attribute for the header link. */
   export let headerurltarget: UrlTargetType = "blank";
-  /** For internal feedback urls sets target= */
+  /** Sets the target attribute for the feedback URL link. */
   export let feedbackurltarget: UrlTargetType = "blank";
   /** When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl. */
   export let hasfeedbackhandler: string = "false";

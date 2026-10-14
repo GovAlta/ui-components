@@ -15,6 +15,18 @@
  *      matches the installed package.json (the version is read at runtime).
  *   4. tools/list exposes search and get.
  *   5. search finds the button component and get returns the record asked for.
+ *   6. A filtered search returns its top matches from the whole ranking, with
+ *      the true total.
+ *   7. An empty query with a filter lists what the filter matches; the
+ *      framework filter keeps examples whose frameworks were never recorded.
+ *   8. Every name a developer types (React, web component, Angular, display)
+ *      finds its component, in get and in the component filter.
+ *   9. get's default answer names and describes every record; search carries
+ *      status and the internal/subcomponent/size/productType fields.
+ *  10. Product types and guidance relate their components; every call a
+ *      component answer suggests next returns something.
+ *  11. Bad input is an error, never an empty success.
+ *  12. A question names its component ("how do I use the X component").
  */
 import { spawn, spawnSync } from "child_process";
 import {
@@ -144,6 +156,15 @@ if (records < RECORD_FLOOR) {
 if (edges <= 0) fail("packed data has no example-to-component relationship edges");
 if (!exampleId) fail("no example record with components found to test get against");
 ok(`${records} records, ${edges} relationship edges`);
+
+// Every record, read straight from the installed files. Checks 6 onward
+// compare the server's answers with these, never with its own lookups.
+const recordsBy = {};
+for (const collection of readdirSync(dataDir)) {
+  recordsBy[collection] = readdirSync(join(dataDir, collection))
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(readFileSync(join(dataDir, collection, f), "utf8")));
+}
 
 // 4. Drive the installed server over JSON-RPC through the bin symlink.
 // On Unix, start the server through the bin symlink itself: that is how MCP
@@ -292,6 +313,276 @@ try {
     );
   }
   ok(`get returned "${exampleId}" with its entry`);
+
+  // One tool call, parsed. A validation error can arrive as a JSON-RPC error
+  // or as an isError result; both count as an error here.
+  const call = async (name, args) => {
+    const res = await request("tools/call", { name, arguments: args });
+    const text = res.result?.content?.[0]?.text ?? res.error?.message ?? "";
+    let body = null;
+    try {
+      body = JSON.parse(text);
+    } catch {
+      // An error message, not JSON.
+    }
+    return { isError: Boolean(res.error || res.result?.isError), body, text };
+  };
+  const ids = (answer) => (answer.body?.results ?? []).map((r) => r.id);
+  const sameSet = (a, b) => a.length === b.length && [...a].sort().join() === [...b].sort().join();
+  const componentIds = recordsBy.components.map((c) => c.id);
+
+  // 6. Filtering after an early cut of the ranking left filtered searches
+  // short or empty, so the first page must equal the unfiltered ranking with
+  // the filter applied here, and the total must count every match.
+  const ranked = await call("search", { query: "error message", limit: 1000 });
+  const rankedExamples = (ranked.body?.results ?? []).filter((r) => r.collection === "examples");
+  const filtered = await call("search", { query: "error message", collection: "examples" });
+  const wantTop = rankedExamples.slice(0, 10).map((r) => r.id);
+  if (ids(filtered).join() !== wantTop.join()) {
+    fail(`search "error message" in examples returned [${ids(filtered).join(", ")}]; the ranking holds [${wantTop.join(", ")}]`);
+  }
+  if (filtered.body?.total !== rankedExamples.length) {
+    fail(`search "error message" in examples reports a total of ${filtered.body?.total}; ${rankedExamples.length} match`);
+  }
+  ok(`a filtered search returns its top ${wantTop.length} of ${rankedExamples.length} matches`);
+
+  // 7. Listing: an empty query with a filter answers with everything the
+  // filter matches. A framework filter keeps the components that have a name
+  // in that framework and the examples that come in it. An example with no
+  // recorded frameworks is unknown, not unsupported, so the filter keeps it.
+  const listed = await call("search", { query: "", collection: "components", limit: 1000 });
+  if (!sameSet(ids(listed), componentIds) || listed.body?.total !== componentIds.length) {
+    fail(`listing components returned ${ids(listed).length} (total ${listed.body?.total}); the data holds ${componentIds.length}`);
+  }
+  const frameworkNameField = { react: "reactClassName", angular: "angularSelector", "web-components": "webComponentTag" };
+  for (const [framework, nameField] of Object.entries(frameworkNameField)) {
+    const components = await call("search", { query: "", collection: "components", framework, limit: 1000 });
+    const wantComponents = recordsBy.components.filter((c) => c[nameField]).map((c) => c.id);
+    if (!sameSet(ids(components), wantComponents)) {
+      fail(`listing ${framework} components returned ${ids(components).length}; ${wantComponents.length} have a name in ${framework}`);
+    }
+    const examples = await call("search", { query: "", collection: "examples", framework, limit: 1000 });
+    const wantExamples = recordsBy.examples
+      .filter((e) => !Array.isArray(e.frameworks) || e.frameworks.includes(framework))
+      .map((e) => e.id);
+    if (!sameSet(ids(examples), wantExamples)) {
+      fail(`listing ${framework} examples returned ${ids(examples).length}; ${wantExamples.length} come in ${framework} or record no frameworks`);
+    }
+  }
+  ok(`lists all ${componentIds.length} components; the framework filter keeps what comes in each framework`);
+
+  // 8. Every name a developer types finds its component: the React, web
+  // component and Angular names and the display name, through get and
+  // through the search's component filter.
+  const nameMisses = [];
+  for (const c of recordsBy.components) {
+    for (const form of [c.reactClassName, c.webComponentTag, c.angularSelector, c.name]) {
+      if (!form) continue;
+      const hit = await call("get", { id: form });
+      if (hit.isError || hit.body?.id !== c.id) nameMisses.push(`${form} -> ${hit.body?.id ?? "not found"}`);
+    }
+  }
+  if (nameMisses.length) {
+    fail(`get missed ${nameMisses.length} component names, e.g. ${nameMisses.slice(0, 5).join("; ")}`);
+  }
+  const spaced = recordsBy.components.filter((c) => / /.test(c.name ?? ""));
+  let spacedWithGuidance = 0;
+  for (const c of spaced) {
+    const byId = await call("search", { query: "", collection: "guidance", component: c.id, limit: 1000 });
+    const byName = await call("search", { query: "", collection: "guidance", component: c.name, limit: 1000 });
+    if (byName.isError || !sameSet(ids(byName), ids(byId))) {
+      fail(`the component filter answers differently for "${c.name}" and "${c.id}"`);
+    }
+    if (ids(byId).length > 0) spacedWithGuidance++;
+  }
+  if (spacedWithGuidance === 0) {
+    fail("no component with a spaced display name had guidance, so the filter check proved nothing");
+  }
+  ok(`get resolves every component name; the component filter takes display names (${spaced.length} checked)`);
+
+  // 9. get's default answer says what every record is, and search carries the
+  // fields a developer needs, exactly as the data records them.
+  const nameless = [];
+  for (const [collection, list] of Object.entries(recordsBy)) {
+    for (const r of list) {
+      const e = (await call("get", { id: r.id, collection })).body?.entry ?? {};
+      if (!(e.name?.trim?.() && e.summary?.trim?.())) nameless.push(`${collection}/${r.id}`);
+    }
+  }
+  if (nameless.length) {
+    fail(`get's default answer has no name or summary for ${nameless.length} records, e.g. ${nameless.slice(0, 3).join(", ")}`);
+  }
+  const listedExamples = await call("search", { query: "", collection: "examples", limit: 1000 });
+  const recordOf = new Map([...recordsBy.components, ...recordsBy.examples].map((r) => [r.id, r]));
+  const fieldMisses = [];
+  for (const r of [...(listed.body?.results ?? []), ...(listedExamples.body?.results ?? [])]) {
+    for (const field of ["status", "internal", "subcomponent", "size", "productType"]) {
+      if (recordOf.get(r.id)?.[field] !== r[field]) fieldMisses.push(`${r.id}.${field}`);
+    }
+    if (!r.summary?.trim?.()) fieldMisses.push(`${r.id}.summary`);
+  }
+  if (!listedExamples.body?.results?.length) {
+    fail("listing examples returned nothing, so the field check proved nothing");
+  }
+  if (fieldMisses.length) {
+    fail(`search results differ from the data on ${fieldMisses.length} fields, e.g. ${fieldMisses.slice(0, 5).join(", ")}`);
+  }
+  ok(`get names and describes every record; search carries status and flags`);
+
+  // 10. get says what a record is connected to, as real component ids, and
+  // every call a component answer suggests next returns something.
+  const componentSet = new Set(componentIds);
+  for (const pt of recordsBy.productTypes) {
+    const related = (await call("get", { id: pt.id, collection: "productTypes" })).body?.related?.components ?? [];
+    if (!sameSet(related.map((c) => c.id), pt.components ?? [])) {
+      fail(`get "${pt.id}" relates ${related.length} components; the record lists ${(pt.components ?? []).length}`);
+    }
+  }
+  let guidanceLinks = 0;
+  for (const g of recordsBy.guidance) {
+    if (!(g.appliesTo?.components ?? []).length) continue;
+    const related = ((await call("get", { id: g.id, collection: "guidance" })).body?.related?.components ?? []).map((c) => c.id);
+    if (!related.length || related.some((id) => !componentSet.has(id))) {
+      fail(`get "${g.id}" relates [${related.join(", ")}]; it applies to [${g.appliesTo.components.join(", ")}]`);
+    }
+    guidanceLinks += related.length;
+  }
+  for (const c of recordsBy.components) {
+    for (const next of (await call("get", { id: c.id, collection: "components" })).body?.next?.suggested_calls ?? []) {
+      const asGet = next.match(/^get\(\{ id: '([^']+)' \}\)$/);
+      const asSearch = next.match(/^search\(\{ query: '([^']*)', collection: '([^']+)', component: '([^']+)' \}\)$/);
+      const follow = asGet
+        ? await call("get", { id: asGet[1] })
+        : asSearch
+          ? await call("search", { query: asSearch[1], collection: asSearch[2], component: asSearch[3] })
+          : null;
+      if (!follow || follow.isError || (asSearch && ids(follow).length === 0)) {
+        fail(`get "${c.id}" suggests ${next}, which answers nothing`);
+      }
+    }
+  }
+  ok(`product types and guidance relate their components (${guidanceLinks} guidance links); every suggested call answers`);
+
+  // 11. Bad input is an error, never an empty success.
+  for (const [args, what] of [
+    [{ query: "dropdown", limit: -5 }, "a negative limit"],
+    [{ query: "dropdown", limit: 0 }, "a zero limit"],
+    [{ query: "dropdown", limit: 2.5 }, "a fractional limit"],
+    [{ query: "dropdown", component: "not-a-component" }, "an unknown component"],
+    [{ query: "  " }, "a blank query and no filter"],
+  ]) {
+    const answer = await call("search", args);
+    if (!answer.isError) {
+      fail(`search with ${what} answered ${answer.body?.results?.length ?? "?"} results instead of an error`);
+    }
+  }
+  // A filter that can't match its collection is bad input too: a framework on
+  // a collection that isn't tied to one, or a status, size or product type no
+  // record there carries, in one collection or across all of them.
+  const noFramework = Object.keys(recordsBy).filter((collection) => !["components", "examples"].includes(collection));
+  for (const collection of noFramework) {
+    if ((await call("search", { query: "", collection, framework: "react" })).isError) continue;
+    fail(`search with a framework on ${collection} answered instead of an error`);
+  }
+  const filterValues = {
+    status: ["published", "stable", "deprecated"],
+    size: ["interaction", "section", "page", "task", "product"],
+    productType: ["workspace", "public-form"],
+  };
+  const everyRecord = Object.values(recordsBy).flat();
+  for (const [collection, list] of [...Object.entries(recordsBy), [undefined, everyRecord]]) {
+    for (const [field, values] of Object.entries(filterValues)) {
+      const used = new Set(list.map((r) => r[field]).filter(Boolean));
+      for (const value of values.filter((v) => !used.has(v))) {
+        if ((await call("search", { query: "", collection, [field]: value })).isError) continue;
+        fail(`search for ${field} ${value} in ${collection ?? "every collection"} answered instead of an error`);
+      }
+    }
+  }
+  const padded = await call("get", { id: `  ${componentIds[0]}  ` });
+  if (padded.isError || padded.body?.id !== componentIds[0]) {
+    fail(`get with surrounding spaces did not resolve "${componentIds[0]}"`);
+  }
+  ok("bad input answers with an error; an id with surrounding spaces still resolves");
+
+  // 12. A question names its component: "how do I use the X component" puts X
+  // first among the components, for every stable, public, top-level component,
+  // so the hint to fetch the first result points at the right one.
+  const askable = recordsBy.components.filter((c) => c.status === "stable" && !c.internal && !c.subcomponent);
+  const lost = [];
+  for (const c of askable) {
+    const answer = await call("search", {
+      query: `how do I use the ${c.name.toLowerCase()} component`,
+      collection: "components",
+    });
+    if (ids(answer)[0] !== c.id) lost.push(`${c.id} (first: ${ids(answer)[0] ?? "none"})`);
+  }
+  if (lost.length) {
+    fail(`a question about ${lost.length} of ${askable.length} components put another first, e.g. ${lost.slice(0, 5).join(", ")}`);
+  }
+  ok(`a question puts its component first, for all ${askable.length} stable public components`);
+
+  // 13. A component's API reads cleanly in every framework: every event and
+  // margin is described, no raw @default tag shows, and no slot outside React
+  // talks about React. These are rules, not named props, so renaming a prop
+  // never fails this check.
+  const frameworksOf = {};
+  for (const c of recordsBy.components) {
+    const full = await call("get", { id: c.id, collection: "components", detail: "full" });
+    frameworksOf[c.id] = full.body?.entry?.api?.frameworks ?? {};
+  }
+  const apiGaps = [];
+  for (const [id, frameworks] of Object.entries(frameworksOf)) {
+    for (const [fw, api] of Object.entries(frameworks)) {
+      for (const e of api.events ?? []) {
+        if (!e.description?.trim()) apiGaps.push(`${id} ${fw} event ${e.name} has no description`);
+      }
+      for (const p of api.props ?? []) {
+        if (["mt", "mr", "mb", "ml"].includes(p.name) && !p.description?.trim()) {
+          apiGaps.push(`${id} ${fw} ${p.name} has no description`);
+        }
+      }
+      for (const item of [...(api.props ?? []), ...(api.events ?? []), ...(api.slots ?? [])]) {
+        if (/@default\b/.test(item.description ?? "")) apiGaps.push(`${id} ${fw} ${item.name} shows a raw @default tag`);
+      }
+      for (const s of api.slots ?? []) {
+        if (fw !== "react" && /React/.test(s.description ?? "")) apiGaps.push(`${id} ${fw} slot ${s.name} names React`);
+      }
+    }
+  }
+  if (apiGaps.length) {
+    fail(`component APIs have ${apiGaps.length} gaps, e.g. ${apiGaps.slice(0, 5).join("; ")}`);
+  }
+  ok(`every component's events and margins are described, with no raw tags or React wording elsewhere`);
+
+  // 14. An example's code travels with it: get's full answer carries the files
+  // for each framework it was detected in, while get's default answer and
+  // search stay small. And an example with code or a source link for a
+  // framework says it comes in that framework, so the framework filter finds it.
+  let examplesWithCode = 0;
+  for (const e of recordsBy.examples) {
+    const detected = ["interaction", "section"].includes(e.size) ? (e.frameworks ?? []) : [];
+    const full = (await call("get", { id: e.id, collection: "examples", detail: "full" })).body?.entry;
+    const missing = detected.filter((fw) => !(full?.code?.[fw] ?? []).some((f) => f.content?.trim()));
+    if (missing.length) fail(`get "${e.id}" in full carries no ${missing.join(" or ")} code`);
+    if (full?.code) examplesWithCode++;
+    const summary = (await call("get", { id: e.id, collection: "examples" })).body?.entry;
+    if (summary?.code) fail(`get "${e.id}" carries code in its default answer`);
+  }
+  if (examplesWithCode === 0) fail("no example carried code, so the check proved nothing");
+  if ((listedExamples.body?.results ?? []).some((r) => r.code)) fail("search results carry example code");
+  const sourceLinkField = { react: "reactSourceUrl", angular: "angularSourceUrl", "web-components": "webComponentsSourceUrl" };
+  const unlisted = recordsBy.examples.filter((e) =>
+    Object.keys(frameworkNameField).some(
+      (framework) =>
+        (e.code?.[framework] || e[sourceLinkField[framework]]) &&
+        !(Array.isArray(e.frameworks) && e.frameworks.includes(framework)),
+    ),
+  );
+  if (unlisted.length) {
+    fail(`${unlisted.length} examples have code or a source link for a framework they don't list, e.g. ${unlisted.slice(0, 5).map((e) => e.id).join(", ")}`);
+  }
+  ok(`${examplesWithCode} examples carry their code in get's full answer`);
 } catch (err) {
   fail(err instanceof Error ? err.message : String(err));
 }

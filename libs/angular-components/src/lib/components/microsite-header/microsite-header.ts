@@ -52,7 +52,7 @@ export class GoabMicrositeHeader implements OnInit {
   @Input() testId?: string;
   /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
-  /** For internal feedback urls sets target. */
+  /** Sets the target attribute for the feedback URL link. */
   @Input() feedbackUrlTarget?: GoabLinkTarget;
   /** Sets the target attribute for the header link. */
   @Input() headerUrlTarget?: GoabLinkTarget;

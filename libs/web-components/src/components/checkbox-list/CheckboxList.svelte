@@ -10,7 +10,7 @@
    * - All value and error changes flow through a small relay bus (receive/relay helpers).
    * - Support both slotted goa-checkbox elements and direct child component instances.
    */
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import {
@@ -68,6 +68,7 @@
   let _childRecords: ChildRecord[] = [];
   let _isInitialized = false;
   let _selectedValues = new Set<string>(); // Component-level Set for efficient operations
+  let _stopWatchingFocus: (() => void) | undefined;
 
   // Reactive bindings
   $: isDisabled = toBoolean(disabled);
@@ -86,16 +87,19 @@
     addSlotEventListeners();
     sendMountedMessage();
 
-    watchFocusWithin(
+    _stopWatchingFocus = watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
       () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+      { settlePointerFocus: true },
     );
 
     // Initialize after a tick to ensure DOM is ready
     _isInitialized = true;
     updateChildCheckboxesState();
   });
+
+  onDestroy(() => _stopWatchingFocus?.());
 
   /**
    * Keep the internal Set synchronized with the external value array

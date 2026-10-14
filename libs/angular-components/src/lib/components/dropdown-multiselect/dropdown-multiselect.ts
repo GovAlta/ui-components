@@ -1,5 +1,6 @@
 import {
   GoabDropdownMultiselectLabelFormatOptions,
+  GoabDropdownMultiselectOnBlurDetail,
   GoabDropdownMultiselectOnChangeDetail,
   GoabDropdownMultiselectSize,
   GoabIconType,
@@ -44,6 +45,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.ml]="ml"
       [attr.mr]="mr"
       (_change)="_onChange($event)"
+      (_blur)="_onBlur($event)"
     >
       <ng-content />
     </goa-dropdown-multiselect>
@@ -87,8 +89,10 @@ export class GoabDropdownMultiselect extends GoabControlValueAccessor implements
   @Input() labelFormat?: GoabDropdownMultiselectLabelFormatOptions;
   /** Shows a "Select All" checkbox at the top of the options list. @default false */
   @Input({ transform: booleanAttribute }) showSelectAll?: boolean;
-  /** Emits when the selected value change. */
+  /** Callback fired when the selected value change. */
   @Output() onChange = new EventEmitter<GoabDropdownMultiselectOnChangeDetail>();
+  /** Callback fired when focus leaves the dropdown multiselect. */
+  @Output() onBlur = new EventEmitter<GoabDropdownMultiselectOnBlurDetail>();
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -103,9 +107,17 @@ export class GoabDropdownMultiselect extends GoabControlValueAccessor implements
       event: e,
     };
     this.onChange.emit(detail);
-    this.markAsTouched();
     this.value = [...(detail.value || [])];
     this.fcChange?.([...(detail.value || [])]);
+  }
+
+  _onBlur(e: Event) {
+    const detail = {
+      ...(e as CustomEvent<GoabDropdownMultiselectOnBlurDetail>).detail,
+      event: e,
+    };
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 
   override writeValue(value: string[] | null): void {

@@ -89,29 +89,66 @@ it("aligns tooltip according to provided alignment", () => {
   expect(tooltipEl?.classList).toContain("align-left");
 });
 
-it.skip("should try and change tooltip position on window resize", async () => {
+it("should try and change tooltip position on window resize", async () => {
   const { container } = render(Tooltip, {
     content: "Hello, Tooltip!",
     position: "bottom",
   });
 
-  const tooltipEl = container.querySelector(".tooltip-text");
-  expect(tooltipEl).toBeTruthy();
-  if (!tooltipEl) return;
+  const tooltipContainer = container.querySelector<HTMLElement>(".tooltip");
+  const tooltipTarget = container.querySelector<HTMLElement>(".tooltip-target");
+  const tooltipEl = container.querySelector<HTMLElement>(".tooltip-text");
+
+  expect(tooltipContainer).not.toBeNull();
+  expect(tooltipTarget).not.toBeNull();
+  expect(tooltipEl).not.toBeNull();
+  if (!tooltipContainer || !tooltipTarget || !tooltipEl) return;
 
   expect(tooltipEl.classList).toContain("bottom");
-  tooltipEl.getBoundingClientRect = () => ({
+  vi.spyOn(tooltipEl, "getBoundingClientRect").mockReturnValue({
     width: 100,
     height: 100,
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
-  });
-  global.innerHeight = 75; // make it less than tooltip height + target element height
-  global.dispatchEvent(new Event("resize"));
-  await tick();
-  expect(tooltipEl.classList).toContain("top");
+  } as DOMRect);
+  vi.spyOn(tooltipTarget, "getBoundingClientRect").mockReturnValue({
+    width: 20,
+    height: 20,
+    top: 100,
+    left: 100,
+    bottom: 120,
+    right: 120,
+  } as DOMRect);
+
+  const originalInnerHeight = window.innerHeight;
+  vi.useFakeTimers();
+  try {
+    Object.defineProperty(window, "innerHeight", {
+      configurable: true,
+      value: 500,
+    });
+    await fireEvent.mouseEnter(tooltipContainer);
+    await vi.advanceTimersByTimeAsync(350);
+    await tick();
+    expect(tooltipEl.classList).toContain("bottom");
+
+    Object.defineProperty(window, "innerHeight", {
+      configurable: true,
+      value: 150,
+    });
+    window.dispatchEvent(new Event("resize"));
+    await waitFor(() => {
+      expect(tooltipEl.classList).toContain("top");
+    });
+  } finally {
+    Object.defineProperty(window, "innerHeight", {
+      configurable: true,
+      value: originalInnerHeight,
+    });
+    vi.useRealTimers();
+  }
 });
 
 it("does not exceed 80% of the screen size or 400px", async () => {

@@ -13,7 +13,12 @@
         },
         {
           "name": "status",
-          "type": "GoabPublicFormStatus",
+          "type": "\"initializing\" | \"complete\"",
+          "typeLabel": "GoabPublicFormStatus",
+          "values": [
+            "initializing",
+            "complete"
+          ],
           "required": false,
           "default": "complete",
           "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
@@ -58,7 +63,12 @@
         },
         {
           "name": "status",
-          "type": "GoabPublicFormStatus",
+          "type": "\"initializing\" | \"complete\"",
+          "typeLabel": "GoabPublicFormStatus",
+          "values": [
+            "initializing",
+            "complete"
+          ],
           "required": false,
           "default": "complete",
           "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
@@ -115,9 +125,25 @@
       ],
       "events": [
         {
+          "name": "_complete",
+          "type": "CustomEvent<GoabFormState>",
+          "description": "Emits when the form is complete.",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
           "name": "_init",
           "type": "CustomEvent<{ el: unknown }>",
-          "description": "",
+          "description": "Emits when the form is initialized.",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_stateChange",
+          "type": "CustomEvent<{ type: \"details\"; data: GoabFormState } | { id: string; type: \"list\"; data: GoabFormState[] }>",
+          "description": "Emits when the form state changes.",
           "frameworks": [
             "webComponents"
           ]

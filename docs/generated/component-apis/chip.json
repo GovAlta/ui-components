@@ -9,28 +9,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         }
       ],
       "events": [
@@ -134,7 +134,7 @@
         {
           "name": "_click",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the chip is clicked.",
           "frameworks": [
             "webComponents"
           ]

@@ -146,7 +146,7 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() suffix?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. */
+  /** Defines how the input will be translated for the screen reader. */
   @Input() ariaLabel?: string;
   /** Sets the maximum number of characters (as UTF-16 code units) the user can enter into the input. */
   @Input({ transform: numberAttribute }) maxLength?: number;

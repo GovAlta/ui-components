@@ -24,7 +24,7 @@ import { fileURLToPath } from 'url';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { DataLoader } from './data-loader';
+import { DataLoader, firstParagraph } from './data-loader';
 
 // ─── Error handling ─────────────────────────────────────────────────────────
 
@@ -136,17 +136,17 @@ async function main() {
 function registerTools(server: McpServer, dataLoader: DataLoader) {
   server.tool(
     'search',
-    `Search the GoA Design System. Good for discovery: describe what you're trying to build ("worker case-management tool") or name something fuzzy ("table with filters"). For known IDs, use \`get\` instead. Filters narrow what comes back.
+    `Search the GoA Design System. Good for discovery: describe what you're trying to build ("worker case-management tool") or name something fuzzy ("table with filters"). For known IDs, use \`get\` instead. Filters narrow what comes back; an empty query with a filter lists everything the filter matches.
 
 collection: components | guidance | examples | foundations | get-started | productTypes
 size (examples): interaction (single gesture) | section (card-level) | page (full screen) | task (start to finish) | product (entire app)
 productType (examples): workspace | public-form
-framework (examples): react | angular | web-components
-status: published | stable | deprecated
-component (guidance scoping): a component named in any form (table, goa-table, GoabTable, app-footer)
-context (guidance scoping): an example id like "case-detail"
+framework (components and examples): react | angular | web-components (examples with no recorded frameworks are kept)
+status: stable | deprecated for components; published for everything else
+component (guidance scoping): a component named in any form (table, goa-table, GoabTable, app-footer, "Date picker")
 
-Returns: { results: [{ id, collection, name, size?, productType?, summary, aliases }], next: { suggested_call, why } }`,
+Returns: { total, results: [{ id, collection, name, status, size?, productType?, internal?, subcomponent?, summary, aliases }], next: { suggested_call, why } }
+internal: rendered by another component; teams don't use it directly. subcomponent: used inside its parent component.`,
     {
       query: z.string().describe("What you're looking for"),
       collection: z
@@ -171,7 +171,7 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
       framework: z
         .enum(['react', 'angular', 'web-components'])
         .optional()
-        .describe('Filter by framework support (examples only)'),
+        .describe('Filter by framework support (components and examples)'),
       status: z
         .enum(['published', 'stable', 'deprecated'])
         .optional()
@@ -182,14 +182,10 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
         .describe(
           "Scope results to a component, named in any form ('table', 'goa-table', 'GoabTable')",
         ),
-      context: z
-        .string()
-        .optional()
-        .describe(
-          "Scope guidance results to an example context id like 'case-detail'",
-        ),
       limit: z
         .number()
+        .int()
+        .min(1)
         .optional()
         .default(10)
         .describe('Max results (default: 10)'),
@@ -204,7 +200,6 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
         framework?: string;
         status?: string;
         component?: string;
-        context?: string;
         limit?: number;
       }) => {
         const {
@@ -215,17 +210,78 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
           framework,
           status,
           component,
-          context,
           limit = 10,
         } = args;
-        const results = await dataLoader.search(query, {
+
+        // Bad input answers with an error, never an empty success: an AI
+        // reads an empty answer as "none exist".
+        const hasFilter =
+          collection || size || productType || framework || status || component;
+        if (!query.trim() && !hasFilter) {
+          return toolError(
+            new Error(
+              'Give a query to search for, or a filter to list what it matches.',
+            ),
+          );
+        }
+        // A filter that can't match its collection is bad input too.
+        if (framework && collection && !['components', 'examples'].includes(collection)) {
+          return toolError(
+            new Error(
+              `The framework filter applies to components and examples; ${collection} aren't tied to a framework. Leave framework out.`,
+            ),
+          );
+        }
+        if (status) {
+          const used = dataLoader.valuesIn('status', collection);
+          if (!used.includes(status)) {
+            return toolError(
+              new Error(
+                `No ${collection ?? 'records'} are ${status}; ${collection ?? 'records'} are ${used.join(' or ')}.`,
+              ),
+            );
+          }
+        }
+        // Only some records carry a size or a product type, and not every size
+        // the schema allows is in use, so a value nothing carries is an error.
+        for (const [label, field, value] of [
+          ['size', 'size', size],
+          ['product type', 'productType', productType],
+        ] as const) {
+          if (!value) continue;
+          const used = dataLoader.valuesIn(field, collection);
+          if (used.includes(value)) continue;
+          const where = collection ?? 'records';
+          return toolError(
+            new Error(
+              used.length > 0
+                ? `No ${where} have ${label} ${value}; the ${label}s in use are ${used.join(', ')}.`
+                : `No ${where} have a ${label}; only ${dataLoader.collectionsWith(field).join(' and ')} do.`,
+            ),
+          );
+        }
+        if (component && !dataLoader.resolveComponentId(component)) {
+          const { results: near } = await dataLoader.search(component, {
+            collection: 'components',
+            maxResults: 5,
+          });
+          return toolError(
+            new Error(
+              `Unknown component '${component}'. ` +
+                (near.length > 0
+                  ? `Did you mean: ${near.map((s) => s.id).join(', ')}?`
+                  : 'Search the components collection to find it.'),
+            ),
+          );
+        }
+
+        const { total, results } = await dataLoader.search(query, {
           collection,
           size,
           productType,
           framework,
           status,
           component,
-          context,
           maxResults: limit,
         });
 
@@ -237,15 +293,21 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
                 {
                   query,
                   count: results.length,
+                  total,
                   results: results.map((r) => ({
                     id: r.id,
                     collection: r.collection,
                     name: r.name || r.id,
                     summary: r.summary,
+                    status: r.status,
+                    size: r.size,
+                    productType: r.productType,
+                    internal: r.internal,
+                    subcomponent: r.subcomponent,
                     score: r.score,
                     aliases: r.aliases,
                   })),
-                  next: buildSearchNext(results),
+                  next: buildSearchNext(results, total),
                 },
                 null,
                 2,
@@ -259,10 +321,10 @@ Returns: { results: [{ id, collection, name, size?, productType?, summary, alias
 
   server.tool(
     'get',
-    `Fetch one item by ID or alias. Use for known IDs, or after \`search\` returns a high-confidence match. Aliases work too. Old slugs like "confirm-that-an-application-was-submitted" resolve to current entries ("result-page"). The response's resolved_via field tells you which path matched.
+    `Fetch one item by ID or any name it goes by: an alias, or a component's React, web component, Angular or display name (GoabDropdown, goa-dropdown, "Date picker"). Use for known IDs, or after \`search\` returns a high-confidence match. Old slugs like "confirm-that-an-application-was-submitted" resolve to current entries ("result-page"). The response's resolved_via field tells you which path matched.
 
 collection: components | guidance | examples | foundations | get-started | productTypes (optional; scopes the lookup to one collection. Omit it and the first id or alias match wins.)
-detail: summary (default, ~1KB) | full (entire entry)
+detail: summary (default, ~1KB) | full (entire entry, including an example's code for each framework)
 
 Returns: { id, collection, resolved_via, entry, related: { components, examples, guidance }, next: { suggested_calls } }`,
     {
@@ -297,7 +359,9 @@ Returns: { id, collection, resolved_via, entry, related: { components, examples,
         const result = dataLoader.get(id, { collection });
 
         if (!result) {
-          const suggestions = await dataLoader.search(id, { maxResults: 5 });
+          const { results: suggestions } = id.trim()
+            ? await dataLoader.search(id, { maxResults: 5 })
+            : { results: [] };
           return toolError(
             new Error(
               `Item '${id}' not found. ` +
@@ -309,7 +373,9 @@ Returns: { id, collection, resolved_via, entry, related: { components, examples,
         }
 
         const entry =
-          detail === 'summary' ? toSummaryEntry(result.data) : result.data;
+          detail === 'summary'
+            ? toSummaryEntry(result.data, result.id)
+            : result.data;
 
         return {
           content: [
@@ -327,7 +393,12 @@ Returns: { id, collection, resolved_via, entry, related: { components, examples,
                     result.data,
                     dataLoader,
                   ),
-                  next: buildGetNext(result.collection, result.id, result.data),
+                  next: buildGetNext(
+                    result.collection,
+                    result.id,
+                    result.data,
+                    dataLoader,
+                  ),
                 },
                 null,
                 2,
@@ -341,13 +412,21 @@ Returns: { id, collection, resolved_via, entry, related: { components, examples,
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function toSummaryEntry(data: any): Record<string, unknown> {
+function toSummaryEntry(data: any, id: string): Record<string, unknown> {
   const summary: Record<string, unknown> = {
-    name: data.componentName || data.name || data.patternName,
-    summary: data.summary || data.description || data.purpose,
+    name:
+      data.componentName || data.name || data.title || data.patternName || id,
+    summary:
+      data.summary ||
+      data.description ||
+      data.purpose ||
+      firstParagraph(data.body),
     status: data.status,
+    internal: data.internal,
+    subcomponent: data.subcomponent,
     size: data.size,
     productType: data.productType,
+    demoUrl: data.demoUrl,
     aliases: data.aliases,
   };
   return Object.fromEntries(
@@ -359,18 +438,16 @@ function toSummaryEntry(data: any): Record<string, unknown> {
  * Build a hint for the most likely next call after a search response.
  */
 function buildSearchNext(
-  results: { id: string; score: number }[],
+  results: { id: string }[],
+  total: number,
 ): { suggested_call: string; why: string } | undefined {
   if (results.length === 0) return undefined;
-  if (results.length === 1) {
-    return {
-      suggested_call: `get({ id: '${results[0].id}' })`,
-      why: 'Single match. Fetch the full entry.',
-    };
-  }
   return {
     suggested_call: `get({ id: '${results[0].id}' })`,
-    why: `Top match (score ${results[0].score}). Fetch its full entry.`,
+    why:
+      total === 1
+        ? 'Single match. Fetch it.'
+        : `First of ${total} matches. Fetch it.`,
   };
 }
 
@@ -382,13 +459,15 @@ function buildGetNext(
   id: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
+  dataLoader: DataLoader,
 ): { suggested_calls: string[] } {
   const suggested_calls: string[] = [];
 
   if (collection === 'components') {
-    suggested_calls.push(
-      `search({ query: '${id}', collection: 'guidance', component: '${id}' })`,
-    );
+    // Its guidance is already listed in full under related, so the useful
+    // next step is an example of the component in use.
+    const example = dataLoader.getExamplesForComponent(id)[0];
+    if (example) suggested_calls.push(`get({ id: '${example}' })`);
   } else if (collection === 'examples') {
     if (
       Array.isArray(data.relatedExamples) &&
@@ -411,6 +490,8 @@ function buildGetNext(
  * atom.
  * For examples: components are read directly; relatedExamples surface as
  * sibling examples.
+ * For guidance and product types: the components they apply to or are built
+ * from, as canonical ids.
  */
 function buildGetRelated(
   collection: string,
@@ -448,6 +529,20 @@ function buildGetRelated(
     }
     if (Array.isArray(data.relatedExamples)) {
       data.relatedExamples.forEach((eid: string) => examples.push({ id: eid }));
+    }
+  } else if (collection === 'guidance' || collection === 'productTypes') {
+    const refs =
+      collection === 'guidance' ? data.appliesTo?.components : data.components;
+    if (Array.isArray(refs)) {
+      for (const ref of refs) {
+        const cid =
+          typeof ref === 'string'
+            ? dataLoader.resolveComponentId(ref)
+            : undefined;
+        if (cid && !components.some((c) => c.id === cid)) {
+          components.push({ id: cid });
+        }
+      }
     }
   }
 

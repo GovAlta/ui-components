@@ -181,7 +181,7 @@
         {
           "name": "_cancel",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the user cancels a file upload.",
           "frameworks": [
             "webComponents"
           ]
@@ -189,7 +189,7 @@
         {
           "name": "_delete",
           "type": "CustomEvent",
-          "description": "",
+          "description": "Emits when the user removes an uploaded file.",
           "frameworks": [
             "webComponents"
           ]

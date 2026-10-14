@@ -214,4 +214,32 @@ describe("Radio", () => {
       expect(onBlur.mock.calls[0][0].name).toBe("test");
     });
   });
+
+  it("does not blur when radio options are clicked with the mouse", async () => {
+    const onBlur = vi.fn();
+    const result = render(
+      <div>
+        <GoabRadioGroup name="test" onBlur={onBlur}>
+          <GoabRadioItem name="test" value="option1" label="Option 1" />
+          <GoabRadioItem name="test" value="option2" label="Option 2" />
+        </GoabRadioGroup>
+        <input data-testid="outside-input" />
+      </div>,
+    );
+    const first = result.getByTestId("radio-option-option1");
+    const second = result.getByTestId("radio-option-option2");
+    const outside = result.getByTestId("outside-input");
+
+    await vi.waitFor(() => {
+      expect(first).toBeInTheDocument();
+      expect(second).toBeInTheDocument();
+    });
+
+    await userEvent.click((first.element() as HTMLInputElement).closest("label") as HTMLElement);
+    await userEvent.click((second.element() as HTMLInputElement).closest("label") as HTMLElement);
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.click(outside);
+    await vi.waitFor(() => expect(onBlur).toHaveBeenCalledTimes(1));
+  });
 });

@@ -12,7 +12,7 @@ Claude Code:
 claude mcp add goa-design-system -- npx -y @abgov/design-system-mcp
 ```
 
-Any other MCP client (Cursor, VS Code, and similar):
+Any other MCP client (Cursor and similar):
 
 ```json
 {
@@ -25,12 +25,14 @@ Any other MCP client (Cursor, VS Code, and similar):
 }
 ```
 
+VS Code's own `mcp.json` uses `servers` in place of `mcpServers`.
+
 Every published version keeps its data forever. To freeze the knowledge your tools see, pin the same version you're using for `@abgov/web-components` (for example `@abgov/design-system-mcp@x.y.z`) instead of letting npx take the latest.
 
 ## Tools
 
 - `search`: find components, guidance, examples, and foundations by keyword
-- `get`: fetch one item in full by id
+- `get`: fetch one item by id, alias, or any name a component goes by (its React, web component, Angular or display name); a summary by default, the whole record with `detail: "full"`, which for an example includes its code for each framework
 
 ## Data
 

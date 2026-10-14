@@ -30,7 +30,7 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "min",
@@ -44,21 +44,21 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "name",
@@ -76,7 +76,12 @@
         },
         {
           "name": "type",
-          "type": "GoabDatePickerInputType",
+          "type": "\"calendar\" | \"input\"",
+          "typeLabel": "GoabDatePickerInputType",
+          "values": [
+            "calendar",
+            "input"
+          ],
           "required": false,
           "default": "calendar",
           "description": "Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input."
@@ -205,7 +210,12 @@
         },
         {
           "name": "type",
-          "type": "GoabDatePickerInputType",
+          "type": "\"calendar\" | \"input\"",
+          "typeLabel": "GoabDatePickerInputType",
+          "values": [
+            "calendar",
+            "input"
+          ],
           "required": false,
           "default": "calendar",
           "description": "Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input."
@@ -370,7 +380,7 @@
         {
           "name": "_blur",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus leaves all of the date picker's internal fields.",
           "frameworks": [
             "webComponents"
           ]
@@ -378,7 +388,7 @@
         {
           "name": "_change",
           "type": "CustomEvent<{ name: string; value: Date | string | null; valueStr: string }>",
-          "description": "",
+          "description": "Emits when the selected date changes.",
           "frameworks": [
             "webComponents"
           ]
@@ -386,7 +396,7 @@
         {
           "name": "_focus",
           "type": "CustomEvent<{ name: string }>",
-          "description": "",
+          "description": "Emits when focus enters any of the date picker's internal fields.",
           "frameworks": [
             "webComponents"
           ]

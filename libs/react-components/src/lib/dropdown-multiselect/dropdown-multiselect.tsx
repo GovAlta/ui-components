@@ -1,5 +1,6 @@
 import {
   GoabDropdownMultiselectLabelFormatOptions,
+  GoabDropdownMultiselectOnBlurDetail,
   GoabDropdownMultiselectOnChangeDetail,
   GoabDropdownMultiselectSize,
   GoabIconType,
@@ -70,6 +71,8 @@ export interface GoabDropdownMultiselectProps extends Margins {
   children?: React.ReactNode;
   /** Callback fired when the selected value change. */
   onChange?: (detail: GoabDropdownMultiselectOnChangeDetail) => void;
+  /** Callback fired when focus leaves the dropdown multiselect. */
+  onBlur?: (detail: GoabDropdownMultiselectOnBlurDetail) => void;
 }
 
 /** A dropdown that presents a list of checkboxes for multiple selection. */
@@ -91,6 +94,7 @@ export function GoabDropdownMultiselect({
   labelFormat,
   children,
   onChange,
+  onBlur,
   mt,
   mr,
   mb,
@@ -107,12 +111,19 @@ export function GoabDropdownMultiselect({
       onChange?.({ ...detail, event: e });
     };
 
+    const blurListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabDropdownMultiselectOnBlurDetail>).detail;
+      onBlur?.({ ...detail, event: e });
+    };
+
     current.addEventListener("_change", listener);
+    current.addEventListener("_blur", blurListener);
 
     return () => {
       current.removeEventListener("_change", listener);
+      current.removeEventListener("_blur", blurListener);
     };
-  }, [onChange]);
+  }, [onChange, onBlur]);
 
   return (
     <goa-dropdown-multiselect

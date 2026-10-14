@@ -14,10 +14,6 @@
         {
           "name": "heading",
           "type": "string | React.ReactNode",
-          "values": [
-            "string",
-            "React.ReactNode"
-          ],
           "required": false,
           "default": null,
           "description": "The text label for this tab. Can also pass React nodes for custom heading content."
@@ -52,10 +48,6 @@
         {
           "name": "heading",
           "type": "string | TemplateRef<any>",
-          "values": [
-            "string",
-            "TemplateRef<any>"
-          ],
           "required": false,
           "default": null,
           "description": "The text label for this tab. Can also use the heading slot for custom content."
@@ -73,7 +65,7 @@
         {
           "name": "heading",
           "type": "TemplateRef",
-          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "description": "The text label for this tab. Can also use the heading slot for custom content.",
           "required": false
         }
       ]
@@ -85,7 +77,7 @@
           "type": "boolean",
           "required": false,
           "default": "false",
-          "description": ""
+          "description": "When true, disables the tab so it cannot be selected."
         },
         {
           "name": "heading",
@@ -106,14 +98,14 @@
           "type": "string",
           "required": false,
           "default": "",
-          "description": ""
+          "description": "URL-friendly identifier for the tab, used for hash-based navigation."
         }
       ],
       "events": [],
       "slots": [
         {
           "name": "heading",
-          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "description": "The text label for this tab.",
           "required": false
         }
       ]

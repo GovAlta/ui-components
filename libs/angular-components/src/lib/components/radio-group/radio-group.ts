@@ -94,7 +94,6 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
       ...(e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail,
       event: e,
     };
-    this.markAsTouched();
     this.onChange.emit(detail);
 
     this.fcChange?.(detail.value);

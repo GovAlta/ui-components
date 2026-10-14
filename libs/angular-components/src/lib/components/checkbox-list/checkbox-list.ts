@@ -93,7 +93,6 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
       event: e,
     };
     this.onChange.emit(detail);
-    this.markAsTouched();
 
     // Update the form control with the selected values
     const selectedValues = detail.value || [];

@@ -4,6 +4,9 @@ import {
   GoabBadge,
   GoabButton,
   GoabButtonGroup,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
   GoabPushDrawer,
   GoabText,
   GoabWorkSideMenu,
@@ -15,13 +18,16 @@ import {
   GoabWorkspaceLayout,
   useGoabWorkspaceLayoutScrollState,
 } from "@abgov/react-components";
-import { GoabWorkspaceLayoutScrollState } from "@abgov/ui-components-common";
+import {
+  GoabDropdownOnChangeDetail,
+  GoabWorkspaceLayoutScrollState,
+} from "@abgov/ui-components-common";
 import {
   bugRouteDefinitions,
   docsRouteDefinitions,
   featureRouteDefinitions,
+  prRouteDefinitions,
 } from "./route-manifest";
-import "@abgov/style";
 
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -127,6 +133,7 @@ export function App() {
   const isDark = mode === "dark";
   const location = useLocation();
   const baseUrl = import.meta.env.BASE_URL;
+  const [sideMenuOpen, setSideMenuOpen] = useState(true);
 
   const isPushDrawerRoute =
     location.pathname === PUSH_DRAWER_ROUTE_PATH ||
@@ -160,6 +167,10 @@ export function App() {
     navigate(internal);
   };
 
+  const handleRouteSelect = (detail: GoabDropdownOnChangeDetail) => {
+    if (detail.value) navigate(`/${detail.value}`);
+  };
+
   // Sample notifications to populate the position-right panel for #4110.
   const [notifications, setNotifications] = useState<NotificationData[]>(() =>
     createSampleNotifications(),
@@ -189,7 +200,8 @@ export function App() {
     <GoabWorkSideMenu
       heading="Testing Playground"
       url={baseUrl}
-      open={true}
+      open={sideMenuOpen}
+      onToggle={() => setSideMenuOpen((open) => !open)}
       userName="Edna Mode"
       userSecondaryText="edna.mode@gov.ab.ca"
       onNavigate={handleSideMenuNavigate}
@@ -242,6 +254,33 @@ export function App() {
       }
       primaryContent={
         <>
+          {sideMenuOpen && (
+            <GoabFormItem label="Find a route" mb="m">
+              <GoabDropdown
+                name="route-search"
+                placeholder="Story #, component or title"
+                filterable={true}
+                size="compact"
+                width="100%"
+                onChange={handleRouteSelect}
+              >
+                {prRouteDefinitions.map((route) => (
+                  <GoabDropdownItem
+                    key={route.path}
+                    value={route.path}
+                    filter={
+                      route.type === "docs" ? route.title : `${route.id} ${route.title}`
+                    }
+                    label={
+                      route.type === "docs"
+                        ? route.title
+                        : `#${route.id} - ${route.title}`
+                    }
+                  />
+                ))}
+              </GoabDropdown>
+            </GoabFormItem>
+          )}
           <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
             {bugRouteDefinitions.map((route) => (
               <GoabWorkSideMenuItem

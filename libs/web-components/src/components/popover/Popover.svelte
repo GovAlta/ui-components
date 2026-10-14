@@ -49,17 +49,17 @@
   export let ml: Spacing = null;
 
   // Exposed privates - used internally by other components
-  /** Controls the open state of the popover programmatically. Used by Dropdown, AppHeaderMenu. */
+  /** @internal Controls the open state of the popover programmatically. Used by Dropdown, AppHeaderMenu. */
   export let open: string = "false";
-  /** Disables the popover interaction. Used by parent components like Dropdown. */
+  /** @internal Disables the popover interaction. Used by parent components like Dropdown. */
   export let disabled: string = "false";
-  /** Additional vertical offset added to the popover's position. */
+  /** @internal Additional vertical offset added to the popover's position. */
   export let voffset: string = "";
-  /** Additional horizontal offset added to the popover's position. */
+  /** @internal Additional horizontal offset added to the popover's position. */
   export let hoffset: string = "";
-  /** Width of the focus outline border. */
+  /** @internal Width of the focus outline border. */
   export let focusborderwidth: string = "var(--goa-border-width-l)";
-  /** Border radius of the popover window. */
+  /** @internal Border radius of the popover window. */
   export let borderradius: string = "var(--goa-border-radius-m)";
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";

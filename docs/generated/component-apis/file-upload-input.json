@@ -27,7 +27,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabFileUploadInputVariant",
+          "type": "\"dragdrop\" | \"button\"",
+          "typeLabel": "GoabFileUploadInputVariant",
+          "values": [
+            "dragdrop",
+            "button"
+          ],
           "required": false,
           "default": "dragdrop",
           "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
@@ -105,7 +110,12 @@
         },
         {
           "name": "variant",
-          "type": "GoabFileUploadInputVariant",
+          "type": "\"dragdrop\" | \"button\"",
+          "typeLabel": "GoabFileUploadInputVariant",
+          "values": [
+            "dragdrop",
+            "button"
+          ],
           "required": false,
           "default": "dragdrop",
           "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
@@ -161,8 +171,8 @@
       "events": [
         {
           "name": "_selectFile",
-          "type": "CustomEvent<{ file: File; event: Event }>",
-          "description": "",
+          "type": "CustomEvent<{ file: File }>",
+          "description": "Emits when a file is selected.",
           "frameworks": [
             "webComponents"
           ]

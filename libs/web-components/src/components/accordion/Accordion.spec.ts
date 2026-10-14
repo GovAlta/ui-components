@@ -1,7 +1,6 @@
 import Accordion from "./Accordion.svelte";
-import AccordionWithHeadingContent from "./AccordionWithHeadingContentWrapper.test.svelte";
 import AccordionWithActions from "./AccordionWithActionsWrapper.test.svelte";
-import { fireEvent, render, waitFor } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import { it, describe } from "vitest";
 
 describe("Accordion", () => {
@@ -70,23 +69,6 @@ describe("Accordion", () => {
     } finally {
       vitest.useRealTimers();
     }
-  });
-
-  // Although this test passes, it doesn't fail with the `position: relative` fix is removed.
-  // This test will need to be moved to Cypress
-  it.skip("should not expand the container if a clickable element within the header slot is clicked", async () => {
-    const { container, queryByTestId } = render(AccordionWithHeadingContent);
-    const button = queryByTestId("slot-button");
-    const handler = vitest.fn();
-
-    container.addEventListener("testClick", handler);
-
-    expect(button).toBeTruthy();
-    button && (await fireEvent(button, new CustomEvent("_click")));
-
-    await waitFor(() => {
-      expect(handler).toBeCalled();
-    });
   });
 
   it("does not render the actions slot container when actions slot is empty", async () => {

@@ -28,7 +28,9 @@ describe("GoADropdown", () => {
 
       expect(generatedName).toMatch(/^[a-z0-9]{7}$/);
       expect(input?.getAttribute("id")).toBe(generatedName);
-      expect(input?.getAttribute("aria-controls")).toBe(`menu-${generatedName}`);
+      expect(input?.getAttribute("aria-controls")).toBe(
+        `menu-${generatedName}`,
+      );
     });
 
     it("should render dropdown", async () => {
@@ -456,12 +458,12 @@ describe("GoADropdown", () => {
       );
 
       it.each`
-        query        | expectedOption | because
-        ${"alber"}   | ${"Alberta"}   | ${"an item without a label is matched by its value"}
-        ${"wild"}    | ${"ca-on"}     | ${"the filter property is matched"}
-        ${"ontar"}   | ${"ca-on"}     | ${"the label is matched alongside the filter property"}
-        ${"ca-"}     | ${null}        | ${"the value is not matched once a label is set"}
-        ${"zzz"}     | ${null}        | ${"unrelated text matches nothing"}
+        query      | expectedOption | because
+        ${"alber"} | ${"Alberta"}   | ${"an item without a label is matched by its value"}
+        ${"wild"}  | ${"ca-on"}     | ${"the filter property is matched"}
+        ${"ontar"} | ${"ca-on"}     | ${"the label is matched alongside the filter property"}
+        ${"ca-"}   | ${null}        | ${"the value is not matched once a label is set"}
+        ${"zzz"}   | ${null}        | ${"unrelated text matches nothing"}
       `(
         `search for $query matches $expectedOption: $because`,
         async ({ query, expectedOption }) => {
@@ -565,7 +567,11 @@ describe("GoADropdown", () => {
 
   describe("focus and blur events", () => {
     it("dispatches _focus when focus enters and _blur when focus leaves the dropdown", async () => {
-      const result = render(GoADropdownWrapper, { name, value: "orange", items });
+      const result = render(GoADropdownWrapper, {
+        name,
+        value: "orange",
+        items,
+      });
       const dropdown = result.queryByTestId("favcolor-dropdown");
       const inputField = dropdown?.querySelector("input") as HTMLInputElement;
 
@@ -821,81 +827,24 @@ describe("GoADropdown", () => {
     });
   });
 
-  describe.skip("keyboard bindings", () => {
-    const space = new KeyboardEvent("keydown", {
-      keyCode: 32,
-      key: " ",
-      code: "Space",
-    });
-    const enter = new KeyboardEvent("keydown", {
-      keyCode: 13,
-      key: "Enter",
-    });
-    // const downArrow = new KeyboardEvent('keydown', {
-    //   keyCode: 40, key: "ArrowDown", code: "ArrowDown"
-    // });
-    // const upArrow = new KeyboardEvent('keydown', {
-    //   keyCode: 38, key: "ArrowUp", code: "ArrowUp"
-    // });
-    // const altDownArrow = new KeyboardEvent('keydown', {
-    //   altKey: true, keyCode: 40, key: "ArrowDown", code: "ArrowDown"
-    // });
-    // const altUpArrow = new KeyboardEvent('keydown', {
-    //   altKey: true, keyCode: 38, key: "ArrowUp", code: "ArrowUp"
-    // });
-
-    for (const event of [space, enter]) {
-      it(`should show the dropdown menu on <${event.key}>`, async () => {
-        // const user = {};
-
-        const result = render(GoADropdown, {
+  describe("keyboard bindings", () => {
+    for (const key of [" ", "Enter"]) {
+      it(`should show the dropdown menu on <${key === " " ? "Space" : key}>`, async () => {
+        const result = render(GoADropdownWrapper, {
           name: "favcolor",
           items,
-          value: "red",
         });
-        // const dropdown = result.queryByTestId("favcolor-dropdown");
-        const input = result.queryByTestId("goa-input");
-        expect(input).toBeTruthy();
-        // == Focus menu
-        // await fireEvent.focus(input);
-        // // input.focus();
-        // expect(input).toHaveFocus();
+        const input = result.getByTestId("input");
+        const menu = result.getByTestId("dropdown-menu");
 
-        input && (await fireEvent.click(input));
+        expect(input).toHaveAttribute("aria-expanded", "false");
 
-        // == Open menu
-        // method 1
-        // await fireEvent.keyDown(menu, {key: " ", code: "Space", keyCode: 32})
-        // method 2
-        // await user.keyboard("[Space]")
-        // method 3
-        // document.dispatchEvent(event);
-        const menu = result.queryByTestId("dropdown-menu");
-        expect(menu).toBeTruthy();
+        await fireEvent.keyDown(input, { key });
+
         await waitFor(() => {
-          expect(menu?.classList).toContain("dropdown-active");
-        });
-
-        // == Select third item
-        // method 1
-        // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
-        // await fireEvent.keyDown(menu, {key: "ArrowDown", code: "ArrowDown", keyCode: 40})
-        // await fireEvent.keyDown(menu, {key: " ", code: "Space", keyCode: 32})
-
-        // method 2
-        // await user.keyboard("{ArrowDown}")
-        // await user.keyboard("{ArrowDown}")
-        // await user.keyboard("{Space}")
-
-        // method 3
-        // document.dispatchEvent(downArrow)
-        // document.dispatchEvent(downArrow)
-        // document.dispatchEvent(space)
-
-        const menuItem = result.queryByTestId("dropdown-item-pink");
-        await waitFor(() => {
-          expect(input?.innerHTML).toContain("pink");
-          expect(menuItem?.getAttribute("aria-selected")).toBe("true");
+          expect(input).toHaveAttribute("aria-expanded", "true");
+          expect(input).toHaveAttribute("aria-owns", "menu-favcolor");
+          expect(menu).toHaveAttribute("role", "listbox");
         });
       });
     }

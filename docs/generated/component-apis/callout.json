@@ -6,14 +6,26 @@
       "props": [
         {
           "name": "ariaLive",
-          "type": "GoabCalloutAriaLive",
+          "type": "\"off\" | \"polite\" | \"assertive\"",
+          "typeLabel": "GoabCalloutAriaLive",
+          "values": [
+            "off",
+            "polite",
+            "assertive"
+          ],
           "required": false,
           "default": "off",
           "description": "Indicates how assistive technology should handle updates to the live region."
         },
         {
           "name": "emphasis",
-          "type": "GoabCalloutEmphasis",
+          "type": "\"high\" | \"medium\" | \"low\"",
+          "typeLabel": "GoabCalloutEmphasis",
+          "values": [
+            "high",
+            "medium",
+            "low"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal."
@@ -27,7 +39,12 @@
         },
         {
           "name": "iconTheme",
-          "type": "GoabCalloutIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabCalloutIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
@@ -44,28 +61,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "testId",
@@ -76,7 +93,15 @@
         },
         {
           "name": "type",
-          "type": "GoabCalloutType",
+          "type": "\"information\" | \"success\" | \"important\" | \"emergency\" | \"event\"",
+          "typeLabel": "GoabCalloutType",
+          "values": [
+            "information",
+            "success",
+            "important",
+            "emergency",
+            "event"
+          ],
           "required": false,
           "default": "information",
           "description": "Sets the context and colour of the callout."
@@ -89,14 +114,26 @@
       "props": [
         {
           "name": "ariaLive",
-          "type": "GoabCalloutAriaLive",
+          "type": "\"off\" | \"polite\" | \"assertive\"",
+          "typeLabel": "GoabCalloutAriaLive",
+          "values": [
+            "off",
+            "polite",
+            "assertive"
+          ],
           "required": false,
           "default": "off",
           "description": "Indicates how assistive technology should handle updates to the live region."
         },
         {
           "name": "emphasis",
-          "type": "GoabCalloutEmphasis",
+          "type": "\"high\" | \"medium\" | \"low\"",
+          "typeLabel": "GoabCalloutEmphasis",
+          "values": [
+            "high",
+            "medium",
+            "low"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal."
@@ -110,7 +147,12 @@
         },
         {
           "name": "iconTheme",
-          "type": "GoabCalloutIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabCalloutIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
@@ -159,7 +201,15 @@
         },
         {
           "name": "type",
-          "type": "GoabCalloutType",
+          "type": "\"information\" | \"success\" | \"important\" | \"emergency\" | \"event\"",
+          "typeLabel": "GoabCalloutType",
+          "values": [
+            "information",
+            "success",
+            "important",
+            "emergency",
+            "event"
+          ],
           "required": false,
           "default": "information",
           "description": "Define the context and colour of the callout."
@@ -205,7 +255,11 @@
         },
         {
           "name": "icontheme",
-          "type": "IconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."

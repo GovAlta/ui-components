@@ -85,7 +85,7 @@
   export let trailingicon: GoAIconType | null = null;
   /** Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. */
   export let variant: GoAInputVariant = "goa";
-  /** Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]. */
+  /** Disables this input. The input will not receive focus or events. */
   export let disabled: string = "false";
   /** Flag that will result in an icon button component being rendered instead of an icon. */
   export let handletrailingiconclick: string = "false";

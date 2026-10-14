@@ -28,10 +28,6 @@
         {
           "name": "inverted",
           "type": "string | boolean",
-          "values": [
-            "string",
-            "boolean"
-          ],
           "required": false,
           "default": null,
           "description": "When true, inverts the icon colors for use on dark backgrounds."
@@ -41,28 +37,28 @@
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the bottom margin spacing token."
         },
         {
           "name": "ml",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the left margin spacing token."
         },
         {
           "name": "mr",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the right margin spacing token."
         },
         {
           "name": "mt",
           "type": "Spacing",
           "required": false,
           "default": null,
-          "description": ""
+          "description": "Sets the top margin spacing token."
         },
         {
           "name": "opacity",
@@ -80,7 +76,22 @@
         },
         {
           "name": "size",
-          "type": "GoabIconSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"2xsmall\" | \"xsmall\" | \"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabIconSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "2xsmall",
+            "xsmall",
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of the icon. Accepts numeric (1-6) or named sizes."
@@ -94,7 +105,12 @@
         },
         {
           "name": "theme",
-          "type": "GoabIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": "outline",
           "description": "Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons."
@@ -108,11 +124,8 @@
         },
         {
           "name": "type",
-          "type": "GoabIconType | GoabIconOverridesType",
-          "values": [
-            "GoabIconType",
-            "GoabIconOverridesType"
-          ],
+          "type": "GoabIconType | \"goa-file\" | \"goa-text\" | \"goa-pdf\" | \"goa-doc\" | \"goa-ppt\" | \"goa-xls\" | \"goa-zip\" | \"goa-video\" | \"goa-audio\" | \"goa-image\" | \"add-circle-filled\" | \"alert-circle-filled\" | \"arrow-bottom\" | \"arrow-end\" | \"arrow-start\" | \"arrow-top\" | \"bookmark-filled\" | \"calendar-filled\" | \"call-filled\" | \"checkmark-circle-filled\" | \"close-circle-filled\" | \"cloud-upload-filled\" | \"column-sort\" | \"documents-filled\" | \"download-filled\" | \"ellipsis-vertical-filled\" | \"eye-filled\" | \"eye-off-filled\" | \"filter-filled\" | \"flag-filled\" | \"help-circle-filled\" | \"information-circle-filled\" | \"mail-filled\" | \"notifications-filled\" | \"notifications-off-filled\" | \"open-filled\" | \"pencil-filled\" | \"person-circle-filled\" | \"remove-circle-filled\" | \"scroll-to\" | \"settings-filled\" | \"trash-filled\" | \"warning-filled\"",
+          "typeLabel": "GoabIconType | GoabIconOverridesType",
           "required": true,
           "default": null,
           "description": "The icon type to display. See GoabIconType for available icons."
@@ -195,7 +208,22 @@
         },
         {
           "name": "size",
-          "type": "GoabIconSize",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"2xsmall\" | \"xsmall\" | \"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "typeLabel": "GoabIconSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "2xsmall",
+            "xsmall",
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
           "required": false,
           "default": "medium",
           "description": "Sets the size of the icon. Accepts numeric (1-6) or named sizes."
@@ -209,7 +237,12 @@
         },
         {
           "name": "theme",
-          "type": "GoabIconTheme",
+          "type": "\"outline\" | \"filled\"",
+          "typeLabel": "GoabIconTheme",
+          "values": [
+            "outline",
+            "filled"
+          ],
           "required": false,
           "default": null,
           "description": "Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons."
@@ -223,11 +256,8 @@
         },
         {
           "name": "type",
-          "type": "GoabIconType | GoabIconOverridesType",
-          "values": [
-            "GoabIconType",
-            "GoabIconOverridesType"
-          ],
+          "type": "GoabIconType | \"goa-file\" | \"goa-text\" | \"goa-pdf\" | \"goa-doc\" | \"goa-ppt\" | \"goa-xls\" | \"goa-zip\" | \"goa-video\" | \"goa-audio\" | \"goa-image\" | \"add-circle-filled\" | \"alert-circle-filled\" | \"arrow-bottom\" | \"arrow-end\" | \"arrow-start\" | \"arrow-top\" | \"bookmark-filled\" | \"calendar-filled\" | \"call-filled\" | \"checkmark-circle-filled\" | \"close-circle-filled\" | \"cloud-upload-filled\" | \"column-sort\" | \"documents-filled\" | \"download-filled\" | \"ellipsis-vertical-filled\" | \"eye-filled\" | \"eye-off-filled\" | \"filter-filled\" | \"flag-filled\" | \"help-circle-filled\" | \"information-circle-filled\" | \"mail-filled\" | \"notifications-filled\" | \"notifications-off-filled\" | \"open-filled\" | \"pencil-filled\" | \"person-circle-filled\" | \"remove-circle-filled\" | \"scroll-to\" | \"settings-filled\" | \"trash-filled\" | \"warning-filled\"",
+          "typeLabel": "GoabIconType | GoabIconOverridesType",
           "required": true,
           "default": null,
           "description": "The icon type to display. See GoabIconType for available icons."
@@ -374,8 +404,7 @@
         },
         {
           "name": "type",
-          "type": "GoabIconType",
-          "typeLabel": "GoabIconType",
+          "type": "GoabIconType | \"goa-file\" | \"goa-text\" | \"goa-pdf\" | \"goa-doc\" | \"goa-ppt\" | \"goa-xls\" | \"goa-zip\" | \"goa-video\" | \"goa-audio\" | \"goa-image\"",
           "required": true,
           "default": null,
           "description": "The icon type to display. See GoAIconType for available icons."

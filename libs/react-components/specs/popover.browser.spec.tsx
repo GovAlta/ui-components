@@ -29,7 +29,7 @@ describe("Popover", () => {
     });
   });
 
-  it.skip("should close popover when pressing Escape", async () => {
+  it("should close popover when pressing Escape", async () => {
     const Component = () => {
       return (
         <GoabPopover target={<GoabButton testId={"target"}>Open popover</GoabButton>}>
@@ -60,7 +60,7 @@ describe("Popover", () => {
     });
   });
 
-  it.skip("should return focus to trigger after closing with Escape - issue3067", async () => {
+  it("should return focus to trigger after closing with Escape - issue3067", async () => {
     const Component = () => {
       return (
         <GoabPopover
@@ -134,7 +134,7 @@ describe("Popover", () => {
     });
   });
 
-  it.skip("should respect maxWidth when popover is placed above a button - issue3062", async () => {
+  it("should respect maxWidth when popover is placed above a button - issue3062", async () => {
     const Component = () => {
       return (
         <>

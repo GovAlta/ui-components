@@ -43,6 +43,18 @@ export const collectionNames: CollectionName[] = [
   "productTypes",
 ];
 
+// The source files an example keeps beside its index.mdx, per framework, in
+// render order with their fence languages. The MD bundle embeds them and the
+// MCP record carries them, so both read the same files.
+export const EXAMPLE_SOURCE_FILES = {
+  react: [{ file: "react.tsx", lang: "tsx" }],
+  angular: [
+    { file: "angular.html", lang: "html" },
+    { file: "angular.ts", lang: "typescript" },
+  ],
+  "web-components": [{ file: "web-components.html", lang: "html" }],
+} as const satisfies Record<string, readonly { file: string; lang: string }[]>;
+
 // Components that exist only as web components (no React or Angular wrapper).
 // The bundle keeps them in the Web Components set but drops them from the React
 // and Angular sets, so an AI is not shown a component it cannot use in that
