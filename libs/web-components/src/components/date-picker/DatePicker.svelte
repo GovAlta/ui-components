@@ -57,7 +57,7 @@
   export let testid: string = "";
   /** Sets the width of the date picker input. */
   export let width: string = "";
-  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. */
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts and is suggested for mobile delivery. */
   export let size: "default" | "compact" = "default";
 
   /** Top margin. */
@@ -381,7 +381,9 @@
           disabled={isDisabled}
           {size}
         >
-          <goa-dropdown-item value="0" label="—Select a month—"
+          <goa-dropdown-item
+            value="0"
+            label={size === "compact" ? "—Month—" : "—Select a month—"}
           ></goa-dropdown-item>
           <goa-dropdown-item value="1" label="January"></goa-dropdown-item>
           <goa-dropdown-item value="2" label="February"></goa-dropdown-item>

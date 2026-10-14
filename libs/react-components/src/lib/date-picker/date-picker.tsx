@@ -5,6 +5,7 @@ import {
   GoabDatePickerOnBlurDetail,
   GoabDatePickerOnChangeDetail,
   GoabDatePickerOnFocusDetail,
+  GoabDatePickerSize,
   Margins,
   DataAttributes,
 } from "@abgov/ui-components-common";
@@ -21,6 +22,7 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
+  size?: GoabDatePickerSize;
 }
 
 declare module "react" {
@@ -56,6 +58,8 @@ export interface GoabDatePickerProps extends Margins, DataAttributes {
   disabled?: boolean;
   /** Sets the width of the date picker input. */
   width?: string;
+  /** Sets the size of the date picker. Compact reduces height for dense layouts and is suggested for mobile delivery. @default "default" */
+  size?: GoabDatePickerSize;
   /** Callback fired when the selected date changes. */
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
   /** Callback fired when focus enters any of the date picker's internal fields. */
@@ -75,11 +79,12 @@ export function GoabDatePicker({
   onChange,
   onFocus,
   onBlur,
+  size = "default",
   ...rest
 }: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ size, ...rest }, lowercase);
 
   useEffect(() => {
     if (value && typeof value !== "string") {

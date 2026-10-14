@@ -35,6 +35,7 @@ describe("DatePicker", () => {
         error
         disabled
         type="input"
+        size="compact"
         onChange={noop}
       />,
     );
@@ -51,6 +52,7 @@ describe("DatePicker", () => {
     expect(el?.getAttribute("max")).toBe(new CalendarDate(max).toString());
     expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.getAttribute("type")).toBe("input");
+    expect(el?.getAttribute("size")).toBe("compact");
   });
 
   it("should handle event", async () => {

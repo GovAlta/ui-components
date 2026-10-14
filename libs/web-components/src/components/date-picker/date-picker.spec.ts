@@ -165,6 +165,30 @@ describe("placeholder property", () => {
     const monthInput = container.querySelector("[testid='input-month']");
     expect(monthInput?.getAttribute("value")).toBe("0");
   });
+
+  it("uses the full month placeholder for the default size", () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+      size: "default",
+    });
+
+    const monthPlaceholder = container.querySelector(
+      "goa-dropdown-item[value='0']",
+    );
+    expect(monthPlaceholder?.getAttribute("label")).toBe("—Select a month—");
+  });
+
+  it("uses the abbreviated month placeholder for the compact size", () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+      size: "compact",
+    });
+
+    const monthPlaceholder = container.querySelector(
+      "goa-dropdown-item[value='0']",
+    );
+    expect(monthPlaceholder?.getAttribute("label")).toBe("—Month—");
+  });
 });
 
 describe("day and year inputs", () => {
