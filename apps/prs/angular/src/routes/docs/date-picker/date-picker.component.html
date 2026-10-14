@@ -39,6 +39,40 @@
   </goab-form-item>
 </form>
 
+<h3>Sizes</h3>
+<form [formGroup]="sizesForm">
+  <goab-form-item label="Default size (calendar)" mb="l">
+    <goab-date-picker
+      name="defaultCalendar"
+      type="calendar"
+      formControlName="defaultCalendar"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (calendar)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactCalendar"
+      type="calendar"
+      size="compact"
+      formControlName="compactCalendar"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Default size (input)" mb="l">
+    <goab-date-picker name="defaultInput" type="input" formControlName="defaultInput">
+    </goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (input)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactInput"
+      type="input"
+      size="compact"
+      formControlName="compactInput"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+</form>
+
 <h3>Input type</h3>
 <form [formGroup]="inputTypeForm">
   <goab-form-item label="What day was the incident?" mb="l">

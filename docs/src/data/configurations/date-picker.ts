@@ -208,34 +208,162 @@ export const datePickerConfigurations: ComponentConfigurations = {
 </goa-form-item>`,
       },
     },
-    // TODO: Re-enable when GoabDatePicker exposes a `size` prop. The web
-    // component (goa-date-picker) does not currently support sizes; the
-    // snippet below is kept for reference only.
-    // {
-    //   id: "sizes",
-    //   name: "Sizes",
-    //   description: "Default and compact size variants",
-    //   code: {
-    //     react: `<GoabFormItem label="Default size" mb="l">
-    //   <GoabDatePicker name="sizeDefault" onChange={handleDateChange} />
-    // </GoabFormItem>
-    // <GoabFormItem label="Compact size" labelSize="compact" mb="l">
-    //   <GoabDatePicker name="sizeCompact" size="compact" onChange={handleDateChange} />
-    // </GoabFormItem>`,
-    //     angular: `<goab-form-item label="Default size" mb="l">
-    //   <goab-date-picker name="sizeDefault" (onChange)="handleDateChange($event)"></goab-date-picker>
-    // </goab-form-item>
-    // <goab-form-item label="Compact size" labelSize="compact" mb="l">
-    //   <goab-date-picker name="sizeCompact" size="compact" (onChange)="handleDateChange($event)"></goab-date-picker>
-    // </goab-form-item>`,
-    //     webComponents: `<goa-form-item label="Default size" mb="l">
-    //   <goa-date-picker name="sizeDefault"></goa-date-picker>
-    // </goa-form-item>
-    // <goa-form-item label="Compact size" labelsize="compact" mb="l">
-    //   <goa-date-picker name="sizeCompact" size="compact"></goa-date-picker>
-    // </goa-form-item>`,
-    //   },
-    // },
+    {
+      id: "sizes",
+      name: "Sizes",
+      description: "Default and compact sizes for calendar and input date pickers",
+      code: {
+        react: {
+          ts: `const [defaultCalendar, setDefaultCalendar] = useState<string | undefined>();
+const [compactCalendar, setCompactCalendar] = useState<string | undefined>();
+const [defaultInput, setDefaultInput] = useState<string | undefined>();
+const [compactInput, setCompactInput] = useState<string | undefined>();`,
+          jsx: `<GoabFormItem label="Default size (calendar)" mb="l">
+  <GoabDatePicker
+    name="defaultCalendar"
+    type="calendar"
+    value={defaultCalendar}
+    onChange={(detail) => setDefaultCalendar(detail.valueStr || undefined)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Compact size (calendar)" labelSize="compact" mb="l">
+  <GoabDatePicker
+    name="compactCalendar"
+    type="calendar"
+    size="compact"
+    value={compactCalendar}
+    onChange={(detail) => setCompactCalendar(detail.valueStr || undefined)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Default size (input)" mb="l">
+  <GoabDatePicker
+    name="defaultInput"
+    type="input"
+    value={defaultInput}
+    onChange={(detail) => setDefaultInput(detail.valueStr || undefined)}
+  />
+</GoabFormItem>
+<GoabFormItem label="Compact size (input)" labelSize="compact" mb="l">
+  <GoabDatePicker
+    name="compactInput"
+    type="input"
+    size="compact"
+    value={compactInput}
+    onChange={(detail) => setCompactInput(detail.valueStr || undefined)}
+  />
+</GoabFormItem>`,
+        },
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      defaultCalendar: [null],
+      compactCalendar: [null],
+      defaultInput: [null],
+      compactInput: [null],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Default size (calendar)" mb="l">
+    <goab-date-picker
+      name="defaultCalendar"
+      type="calendar"
+      formControlName="defaultCalendar"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (calendar)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactCalendar"
+      type="calendar"
+      size="compact"
+      formControlName="compactCalendar"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Default size (input)" mb="l">
+    <goab-date-picker
+      name="defaultInput"
+      type="input"
+      formControlName="defaultInput"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (input)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactInput"
+      type="input"
+      size="compact"
+      formControlName="compactInput"
+    ></goab-date-picker>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  defaultCalendar: string | undefined;
+  compactCalendar: string | undefined;
+  defaultInput: string | undefined;
+  compactInput: string | undefined;
+}`,
+            template: `<form>
+  <goab-form-item label="Default size (calendar)" mb="l">
+    <goab-date-picker
+      name="defaultCalendar"
+      type="calendar"
+      [(ngModel)]="defaultCalendar"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (calendar)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactCalendar"
+      type="calendar"
+      size="compact"
+      [(ngModel)]="compactCalendar"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Default size (input)" mb="l">
+    <goab-date-picker
+      name="defaultInput"
+      type="input"
+      [(ngModel)]="defaultInput"
+    ></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Compact size (input)" labelSize="compact" mb="l">
+    <goab-date-picker
+      name="compactInput"
+      type="input"
+      size="compact"
+      [(ngModel)]="compactInput"
+    ></goab-date-picker>
+  </goab-form-item>
+</form>`,
+          },
+        ],
+        webComponents: `<goa-form-item label="Default size (calendar)" mb="l">
+  <goa-date-picker name="defaultCalendar" type="calendar"></goa-date-picker>
+</goa-form-item>
+<goa-form-item label="Compact size (calendar)" labelsize="compact" mb="l">
+  <goa-date-picker
+    name="compactCalendar"
+    type="calendar"
+    size="compact"
+  ></goa-date-picker>
+</goa-form-item>
+<goa-form-item label="Default size (input)" mb="l">
+  <goa-date-picker name="defaultInput" type="input"></goa-date-picker>
+</goa-form-item>
+<goa-form-item label="Compact size (input)" labelsize="compact" mb="l">
+  <goa-date-picker
+    name="compactInput"
+    type="input"
+    size="compact"
+  ></goa-date-picker>
+</goa-form-item>`,
+      },
+    },
     {
       id: "input-type",
       name: "Input type",

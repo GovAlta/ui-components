@@ -68,6 +68,18 @@
           "description": "Name of the date field."
         },
         {
+          "name": "size",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabDatePickerSize",
+          "values": [
+            "default",
+            "compact"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Sets the size of the date picker. Compact reduces height for dense layouts and is suggested for mobile delivery."
+        },
+        {
           "name": "testId",
           "type": "string",
           "required": false,
@@ -200,6 +212,18 @@
           "required": false,
           "default": null,
           "description": "Sets the name of the date field."
+        },
+        {
+          "name": "size",
+          "type": "\"default\" | \"compact\"",
+          "typeLabel": "GoabDatePickerSize",
+          "values": [
+            "default",
+            "compact"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Sets the size of the date picker. Compact reduces height for dense layouts and is suggested for mobile delivery."
         },
         {
           "name": "testId",
@@ -341,7 +365,7 @@
           ],
           "required": false,
           "default": "default",
-          "description": "Sets the size of the date picker. 'compact' reduces height for dense layouts."
+          "description": "Sets the size of the date picker. 'compact' reduces height for dense layouts and is suggested for mobile delivery."
         },
         {
           "name": "testid",
