@@ -1,0 +1,54 @@
+<goab-text tag="h1" size="heading-l" mb="m">Bug #4251: Notification panel dark mode</goab-text>
+<goab-text tag="p" mb="s">
+  <a href="https://github.com/GovAlta/ui-components/issues/4251">View issue #4251</a>
+</goab-text>
+<goab-text tag="p" mb="s">
+  Switch to dark mode with the theme toggle in the side menu. Unread notifications should
+  sit on a dark surface, not a white card. Select the All tab to check that read
+  notifications look the same as before.
+</goab-text>
+<goab-text tag="p" mb="m">
+  Hover the urgent notification in both themes. Its hover colour comes from a design
+  token, so it follows the theme.
+</goab-text>
+
+<div style="max-width: 500px">
+  <goab-work-side-notification-panel heading="Notifications">
+    <goab-work-side-notification-item
+      title="New case assigned"
+      description="Case #12345 has been assigned to you for review."
+      timestamp="2025-03-15T10:30:00Z"
+      type="info"
+      readStatus="unread"
+      priority="normal"
+      testId="bug4251-unread"
+    ></goab-work-side-notification-item>
+    <goab-work-side-notification-item
+      title="Deadline approaching"
+      description="Case #12345 response is due in 2 hours."
+      timestamp="2025-03-15T09:00:00Z"
+      type="warning"
+      readStatus="unread"
+      priority="urgent"
+      testId="bug4251-unread-urgent"
+    ></goab-work-side-notification-item>
+    <goab-work-side-notification-item
+      title="Case resolved"
+      description="Case #12330 has been marked as resolved."
+      timestamp="2025-03-14T16:00:00Z"
+      type="success"
+      readStatus="read"
+      priority="normal"
+      testId="bug4251-read"
+    ></goab-work-side-notification-item>
+    <goab-work-side-notification-item
+      title="System maintenance"
+      description="Scheduled maintenance tonight at 11 PM."
+      timestamp="2025-03-14T14:00:00Z"
+      type="critical"
+      readStatus="read"
+      priority="urgent"
+      testId="bug4251-read-urgent"
+    ></goab-work-side-notification-item>
+  </goab-work-side-notification-panel>
+</div>

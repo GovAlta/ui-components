@@ -310,7 +310,7 @@
     cursor: pointer;
     border: none;
     border-bottom: 1px solid var(--goa-color-greyscale-100);
-    background: white;
+    background: var(--goa-work-side-notification-item-color-bg);
     width: 100%;
     box-sizing: border-box;
     text-align: left;
@@ -347,7 +347,7 @@
   }
 
   .card.urgent:hover {
-    background: #f5ecdb;
+    background: var(--goa-work-side-notification-item-urgent-color-bg-hover);
   }
 
   .card.urgent.read:hover {
