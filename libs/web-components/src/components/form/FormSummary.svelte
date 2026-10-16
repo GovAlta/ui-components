@@ -67,8 +67,8 @@
     e.preventDefault();
   }
 
-  function getHeading(page: string): string {
-    return _state.form?.[page]?.heading || "";
+  function getHeading(state: FormState, page: string): string {
+    return state.form?.[page]?.heading || "";
   }
 
   function getData(
@@ -171,10 +171,13 @@
     {#each _state.history as page}
       {#if _state.form[page]}
         <goa-container>
-          <div class="summary" class:summary-with-header={!!getHeading(page)}>
-            {#if getHeading(page)}
+          <div
+            class="summary"
+            class:summary-with-header={!!getHeading(_state, page)}
+          >
+            {#if getHeading(_state, page)}
               <goa-text class="heading" color="secondary" mt="none" mb="s"
-                >{getHeading(page)}</goa-text
+                >{getHeading(_state, page)}</goa-text
               >
             {/if}
 
