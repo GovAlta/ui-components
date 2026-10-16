@@ -67,8 +67,8 @@
     e.preventDefault();
   }
 
-  function getHeading(page: string): string {
-    return _state.form?.[page]?.heading || "";
+  function getHeading(state: FormState, page: string): string {
+    return state.form?.[page]?.heading || "";
   }
 
   function getData(
@@ -171,10 +171,13 @@
     {#each _state.history as page}
       {#if _state.form[page]}
         <goa-container>
-          <div class="summary" class:summary-with-header={!!getHeading(page)}>
-            {#if getHeading(page)}
+          <div
+            class="summary"
+            class:summary-with-header={!!getHeading(_state, page)}
+          >
+            {#if getHeading(_state, page)}
               <goa-text class="heading" color="secondary" mt="none" mb="s"
-                >{getHeading(page)}</goa-text
+                >{getHeading(_state, page)}</goa-text
               >
             {/if}
 
@@ -182,25 +185,8 @@
               {#if _state.form[page]?.data?.type}
                 {#if _state.form[page]?.data?.type === "details"}
                   <table>
-                    {#each Object.entries(getData(_state, page)) as [_, data]}
-                      <tr>
-                        <td class="label">{data.label}</td>
-                        <td class="value" class:empty={isBlank(data.value)}>
-                          {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
-                            {#each formatValue(data.value, data.valueLabel, data.labels) as label}
-                              <div>{label}</div>
-                            {/each}
-                          {:else}
-                            {formatValue(data.value, data.valueLabel, data.labels)}
-                          {/if}
-                        </td>
-                      </tr>
-                    {/each}
-                  </table>
-                {:else}
-                  {#each getDataList(_state, page) as item, index}
-                    <table>
-                      {#each Object.entries(item) as [_, data]}
+                    <tbody>
+                      {#each Object.entries(getData(_state, page)) as [_, data]}
                         <tr>
                           <td class="label">{data.label}</td>
                           <td class="value" class:empty={isBlank(data.value)}>
@@ -209,14 +195,43 @@
                                 <div>{label}</div>
                               {/each}
                             {:else}
-                              {formatValue(data.value, data.valueLabel, data.labels)}
+                              {formatValue(
+                                data.value,
+                                data.valueLabel,
+                                data.labels,
+                              )}
                             {/if}
                           </td>
                         </tr>
                       {/each}
+                    </tbody>
+                  </table>
+                {:else}
+                  {#each getDataList(_state, page) as item, index}
+                    <table>
+                      <tbody>
+                        {#each Object.entries(item) as [_, data]}
+                          <tr>
+                            <td class="label">{data.label}</td>
+                            <td class="value" class:empty={isBlank(data.value)}>
+                              {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
+                                {#each formatValue(data.value, data.valueLabel, data.labels) as label}
+                                  <div>{label}</div>
+                                {/each}
+                              {:else}
+                                {formatValue(
+                                  data.value,
+                                  data.valueLabel,
+                                  data.labels,
+                                )}
+                              {/if}
+                            </td>
+                          </tr>
+                        {/each}
+                      </tbody>
                     </table>
                     {#if index < getDataList(_state, page).length - 1}
-                      <goa-divider mt="m" mb="m" />
+                      <goa-divider mt="m" mb="m"></goa-divider>
                     {/if}
                   {/each}
                 {/if}

@@ -1,5 +1,3 @@
-<svelte:options customElement={null} />
-
 <script lang="ts">
   import "./assets/css/reset.css";
   import "./assets/css/fonts.css";

@@ -187,7 +187,7 @@
       role={showIconOnly && arialabel ? "presentation" : null}
       type={icontype || _defaultIconType}
       size={size === "large" ? "3" : "1"}
-    />
+    ></goa-icon>
   {:else}
     <div class="goa-badge-no-icon"></div>
   {/if}

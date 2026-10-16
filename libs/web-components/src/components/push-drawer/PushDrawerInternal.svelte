@@ -167,7 +167,7 @@
           icon="close"
           theme="filled"
           on:click={close}
-        />
+        ></goa-icon-button>
       </div>
     </div>
 

@@ -1,16 +1,19 @@
-<svelte:options customElement={{
-  tag: "goa-public-subform-index",
-  props: {
-    actionButtonText: { type: "String", attribute: "action-button-text" },
-    buttonVisibility: { type: "String", attribute: "button-visibility" },
-    sectionTitle: { type: "String", attribute: "section-title" },
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-public-subform-index",
+    props: {
+      actionButtonText: { type: "String", attribute: "action-button-text" },
+      buttonVisibility: { type: "String", attribute: "button-visibility" },
+      sectionTitle: { type: "String", attribute: "section-title" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { receive, relay } from "../../common/utils";
   import {
-    SubFormBindMsg, SubFormBindRelayDetail,
+    SubFormBindMsg,
+    SubFormBindRelayDetail,
     SubFormIndexContinueToSubFormMsg,
   } from "../../types/relay-types";
   import { onMount } from "svelte";
@@ -37,7 +40,7 @@
 
   onMount(() => {
     receiveMsgs();
-  })
+  });
 
   // =========
   // Functions
@@ -60,7 +63,9 @@
 
   function continueToSubform(e: Event) {
     e.stopPropagation();
-    relay(_subformEl, SubFormIndexContinueToSubFormMsg, null, { bubbles: true });
+    relay(_subformEl, SubFormIndexContinueToSubFormMsg, null, {
+      bubbles: true,
+    });
   }
 </script>
 
@@ -68,14 +73,16 @@
   id="index"
   type="step"
   {heading}
-  section-title="{sectionTitle}"
+  section-title={sectionTitle}
   button-visibility={buttonVisibility}
   active
 >
   <div data-bind bind:this={_el}>
     <slot />
     <goa-block direction="column" gap="3xl">
-      <goa-button type="secondary" on:_click={continueToSubform}>{actionButtonText}</goa-button>
+      <goa-button type="secondary" on:_click={continueToSubform}
+        >{actionButtonText}</goa-button
+      >
     </goa-block>
   </div>
 </goa-public-form-page>

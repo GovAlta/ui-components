@@ -113,7 +113,7 @@
             value="1"
             on:_change={handlePageChange}
           >
-            <goa-dropdown-item value="1" label="1" />
+            <goa-dropdown-item value="1" label="1"></goa-dropdown-item>
           </goa-dropdown>
         {:else}
           {#key _pageCount}
@@ -124,7 +124,8 @@
               on:_change={handlePageChange}
             >
               {#each { length: _pageCount } as _, i}
-                <goa-dropdown-item value={i + 1} label={i + 1} />
+                <goa-dropdown-item value={i + 1} label={i + 1}
+                ></goa-dropdown-item>
               {/each}
             </goa-dropdown>
           {/key}
@@ -133,8 +134,8 @@
       </goa-block>
     {/if}
     <div class="page-links" data-testid="page-links">
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
       <goa-button
         on:click={(e) => goto(e, -1)}
         type="tertiary"
@@ -143,8 +144,8 @@
         disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}
         >Previous</goa-button
       >
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
       <goa-button
         on:click={(e) => goto(e, 1)}
         type="tertiary"

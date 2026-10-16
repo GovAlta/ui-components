@@ -35,7 +35,7 @@
     </div>
 
     {#if navLinks?.length > 0}
-      <goa-divider mt="l" mb="l" />
+      <goa-divider mt="l" mb="l"></goa-divider>
     {/if}
 
     <div

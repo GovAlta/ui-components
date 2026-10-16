@@ -210,7 +210,7 @@ describe("GoA FormItem", () => {
   });
 
   it("should update aria-describedby", async () => {
-    const { component, findByTestId } = render(GoAFormItem, {
+    const { findByTestId, rerender } = render(GoAFormItem, {
       testid: "formitem-test",
       label: "Test Label",
       helptext: "Helper Text",
@@ -234,7 +234,7 @@ describe("GoA FormItem", () => {
     expect(input.getAttribute("aria-describedby")).toBeTruthy();
     expect(input.getAttribute("aria-describedby")).toContain("helptext-");
 
-    await component.$set({ error: "Error Message" });
+    await rerender({ error: "Error Message" });
 
     // Now both error and helptext should be in aria-describedby
     const describedBy = input.getAttribute("aria-describedby");
@@ -245,7 +245,7 @@ describe("GoA FormItem", () => {
     expect(errorMessage?.id).toBe(describedBy?.split(" ")[0]);
     expect(errorMessage?.textContent).toContain("Error Message");
 
-    await component.$set({ error: "" });
+    await rerender({ error: "" });
 
     // Back to only helptext in aria-describedby
     expect(input.getAttribute("aria-describedby")).toBeTruthy();

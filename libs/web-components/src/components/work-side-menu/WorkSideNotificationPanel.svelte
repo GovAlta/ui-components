@@ -254,7 +254,7 @@
         mr="s"
         testid={`close-${testid}`}
         on:_click={handleClose}
-      />
+      ></goa-icon-button>
     </div>
 
     <goa-tabs
@@ -273,7 +273,7 @@
               icon="false"
               content={`${_unreadCount}`}
               emphasis="subtle"
-            />
+            ></goa-badge>
           {/if}
         </span>
       </goa-tab>
@@ -286,7 +286,7 @@
               type="important"
               content={`${_urgentCount}`}
               emphasis="subtle"
-            />
+            ></goa-badge>
           {/if}
         </span>
       </goa-tab>

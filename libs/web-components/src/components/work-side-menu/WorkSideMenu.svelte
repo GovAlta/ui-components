@@ -360,7 +360,7 @@
     aria-label="Hide menu"
     data-testid="work-side-menu-background"
     on:click={handleToggleClick}
-  />
+  ></button>
   <div class="container" bind:this={_containerEl}>
     <goa-scroll-panel>
       <header slot="header" class="top-section">
@@ -418,7 +418,7 @@
                 type="person-circle"
                 fillcolor="var(--goa-color-greyscale-400)"
                 arialabel={userName}
-              />
+              ></goa-icon>
             </div>
 
             <div class="profile-details">
@@ -426,7 +426,7 @@
               <div class="profile-secondary">{userSecondaryText}</div>
             </div>
             <div class="profile-chevron">
-              <goa-icon size="small" type="chevron-down" />
+              <goa-icon size="small" type="chevron-down"></goa-icon>
             </div>
           </button>
 
@@ -454,7 +454,7 @@
               size="small"
               theme="outline"
               type={open ? "arrow-start" : "arrow-end"}
-            />
+            ></goa-icon>
             <span class="toggle-button-label"
               >{open ? "Collapse menu" : "Expand menu"}</span
             >

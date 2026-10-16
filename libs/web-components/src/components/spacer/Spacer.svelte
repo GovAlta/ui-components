@@ -27,4 +27,4 @@
     width: var(--goa-space-${hspacing});
   `}
   data-testid={testid}
-/>
+></div>

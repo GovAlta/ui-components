@@ -59,18 +59,14 @@
       class:fullscreen
       data-testid={testid}
     >
-      <goa-spinner size={spinnerSize} {progress} />
+      <goa-spinner size={spinnerSize} {progress}></goa-spinner>
       {#if message}
         <div class="message">{message}</div>
       {/if}
     </div>
   {:else if inline}
-    <div
-      class:inline
-      class={"spinner-" + spinnerSize}
-      data-testid={testid}
-    >
-      <goa-spinner size={spinnerSize} {progress} />
+    <div class:inline class={"spinner-" + spinnerSize} data-testid={testid}>
+      <goa-spinner size={spinnerSize} {progress}></goa-spinner>
       {#if message}
         <div class="message">{message}</div>
       {/if}

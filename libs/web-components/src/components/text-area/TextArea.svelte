@@ -198,7 +198,7 @@
     class:readonly={isReadonly}
     class:compact={size === "compact"}
     style={`
-      ${calculateMargin(mt, mr, mb, ml)};
+      ${calculateMargin(mt, mr, mb, ml)}
       --width: ${width};
       --char-count-padding: ${countby ? "2rem" : "0"};
     `}
@@ -220,7 +220,7 @@
       on:keyup={onKeyPress}
       on:focus={onFocus}
       on:blur={onBlur}
-    />
+    ></textarea>
 
     {#if maxcount > 0 && !isDisabled}
       <div class="counter" class:counter-error={count > maxcount}>

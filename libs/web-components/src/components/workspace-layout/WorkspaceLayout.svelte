@@ -212,7 +212,7 @@
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-          />
+          ></path>
         </svg>
       </button>
     {/if}

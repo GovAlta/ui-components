@@ -182,7 +182,7 @@
       size={size === "normal" ? "4" : "3"}
       variant={variant === "destructive" ? "destructive" : "dark"}
       arialabel={ariaLabel || "Open menu"}
-    />
+    ></goa-icon-button>
   {/if}
   <goa-block
     bind:this={_blockEl}

@@ -133,7 +133,7 @@
     const els = document.querySelectorAll("goa-details");
     els.forEach((el) => {
       el.setAttribute("style", "margin-top: -1rem");
-    })
+    });
   }
 
   function onToggleActiveState(detail: FormToggleActiveRelayDetail) {
@@ -204,7 +204,7 @@
       value: "",
       label: label,
       order: order || defaultOrderIndex,
-    }
+    };
   }
 
   // Collect list of child form item (input, dropdown, etc) elements
@@ -216,7 +216,6 @@
   }
 
   function onError(detail: ExternalErrorRelayDetail) {
-
     if (detail.grouped) {
       if (!Object.values(_errors).includes(detail.msg)) {
         _errors[detail.name] = detail.msg;
@@ -377,7 +376,6 @@
   <goa-block gap="xl" direction="column">
     <slot />
   </goa-block>
-
 </fieldset>
 
 <style>

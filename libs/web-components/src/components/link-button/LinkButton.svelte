@@ -66,15 +66,17 @@
   class="link-button"
   class:interactive={color === "interactive"}
   class:light={color === "light"}
-  class:disabled={disabled}
+  class:disabled
   disabled={disabled || undefined}
   data-testid={testid || null}
   style={calculateMargin(mt, mr, mb, ml)}
   on:click={onClick}
 >
-  {#if leadingicon}<goa-icon type={leadingicon} fillcolor="#0070C4" />{/if}
+  {#if leadingicon}<goa-icon type={leadingicon} fillcolor="#0070C4"
+    ></goa-icon>{/if}
   <slot />
-  {#if trailingicon}<goa-icon type={trailingicon} fillcolor="#0070C4" />{/if}
+  {#if trailingicon}<goa-icon type={trailingicon} fillcolor="#0070C4"
+    ></goa-icon>{/if}
 </button>
 
 <style>

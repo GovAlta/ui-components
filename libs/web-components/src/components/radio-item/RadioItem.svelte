@@ -51,7 +51,6 @@
     FormFieldMountRelayDetail,
   } from "../../types/relay-types";
 
-
   /** The value of this radio option. Will be emitted when selected. */
   export let value: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
@@ -281,7 +280,7 @@
       aria-checked={isChecked}
       on:click={onChange}
     />
-    <div class="icon" />
+    <div class="icon"></div>
     <span class="label">
       {label || value}
     </span>
@@ -360,7 +359,9 @@
   }
 
   .radio.compact ~ .description {
-    margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));
+    margin-left: calc(
+      var(--goa-radio-size) + var(--goa-radio-gap-label-compact)
+    );
     margin-top: var(--goa-space-3xs);
   }
 
@@ -373,7 +374,7 @@
     display: block;
   }
 
-   .reveal.visible.has-content {
+  .reveal.visible.has-content {
     padding: var(--goa-radio-reveal-padding);
     margin: var(--goa-radio-reveal-margin);
     border-left: var(--goa-radio-reveal-border);
@@ -414,7 +415,7 @@
   }
 
   .icon::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 44px;
     height: 44px;

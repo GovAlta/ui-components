@@ -6,7 +6,7 @@
   // ======
   // Public
   // ======
-  
+
   export let heading: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -15,15 +15,13 @@
 </script>
 
 <section>
-  <fieldset
-    style={calculateMargin(mt, mr, mb, ml)}
-  >
+  <fieldset style={calculateMargin(mt, mr, mb, ml)}>
     {#if heading}
-      <goa-text as="h2" size="heading-l" mt="none" mb="none">{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mt="none" mb="none">{heading}</goa-text
+      >
     {/if}
 
     <slot />
-
   </fieldset>
 </section>
 

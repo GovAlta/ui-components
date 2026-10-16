@@ -1,11 +1,21 @@
-<svelte:options customElement={{
-  tag: "goa-data-grid",
-  props: {
-    keyboardIconVisibility: { type: "String", reflect: true, attribute: "keyboard-icon-visibility" },
-    keyboardIconPosition: { type: "String", reflect: true, attribute: "keyboard-icon-position" },
-    keyboardNav: { type: "String", attribute: "keyboard-nav" }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-data-grid",
+    props: {
+      keyboardIconVisibility: {
+        type: "String",
+        reflect: true,
+        attribute: "keyboard-icon-visibility",
+      },
+      keyboardIconPosition: {
+        type: "String",
+        reflect: true,
+        attribute: "keyboard-icon-position",
+      },
+      keyboardNav: { type: "String", attribute: "keyboard-nav" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -32,7 +42,7 @@
   type GridCell3D = {
     cell: HTMLElement;
     focusables: HTMLElement[];
-  }
+  };
 
   let _rootEl: HTMLElement;
   let _grid: GridCell3D[][] = [];
@@ -49,7 +59,7 @@
   // Track last input modality so cell outline only appears on keyboard-driven focus.
   // Avoids browser :focus-visible heuristics around the first interaction on a fresh page,
   // which can match on the first mouse click.
-  let _lastInputModality: 'pointer' | 'keyboard' = 'keyboard';
+  let _lastInputModality: "pointer" | "keyboard" = "keyboard";
 
   onMount(() => {
     // Delay to allow nested shadow DOMs to fully render before grid setup - menu button is one case vs a lot of nested elements and shadow
@@ -67,70 +77,74 @@
         clearTimeout(_bindTimeoutId);
       }
       if (_rootEl) {
-        _rootEl.removeEventListener('keydown', handleKeyDown);
-        _rootEl.removeEventListener('click', handleCellClick);
-        _rootEl.removeEventListener('focusin', handleFocusIn);
-        _rootEl.removeEventListener('focusout', handleFocusOut);
-        const slot = _rootEl.querySelector('slot');
+        _rootEl.removeEventListener("keydown", handleKeyDown);
+        _rootEl.removeEventListener("click", handleCellClick);
+        _rootEl.removeEventListener("focusin", handleFocusIn);
+        _rootEl.removeEventListener("focusout", handleFocusOut);
+        const slot = _rootEl.querySelector("slot");
         if (slot) {
-          slot.removeEventListener('slotchange', handleSlotChange);
+          slot.removeEventListener("slotchange", handleSlotChange);
         }
       }
-      document.removeEventListener('click', handleOutsideClick);
-      document.removeEventListener('pointerdown', handlePointerdown, true);
-      document.removeEventListener('keydown', handleGlobalKeydown, true);
+      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("pointerdown", handlePointerdown, true);
+      document.removeEventListener("keydown", handleGlobalKeydown, true);
     };
-  })
+  });
 
   function setup3DGrid() {
     if (!_rootEl) return;
 
     _grid = [];
-    const slot = _rootEl.querySelector('slot');
+    const slot = _rootEl.querySelector("slot");
     if (!slot) return;
 
     const assignedNodes = slot.assignedElements();
 
     const rows: Element[] = [];
-    assignedNodes.forEach(node => {
+    assignedNodes.forEach((node) => {
       const foundElements = findAllElementsWithDataGridAttributes(node);
-      const foundRows = foundElements.filter(el => el.getAttribute('data-grid') === 'row');
+      const foundRows = foundElements.filter(
+        (el) => el.getAttribute("data-grid") === "row",
+      );
       rows.push(...foundRows);
     });
 
-    rows.forEach(row => {
-      row.setAttribute('role', 'row'); // for screen reader
+    rows.forEach((row) => {
+      row.setAttribute("role", "row"); // for screen reader
     });
 
     let globalCellIndex = 0; // keep track the first cell to tabindex 0, so when user "tabs", they can go to the first cell even no focusable elements
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       const foundElements = findAllElementsWithDataGridAttributes(row);
-      const rowCells = foundElements.filter(el => {
-        const value = el.getAttribute('data-grid');
-        return value === 'cell' || value?.startsWith('cell-');
+      const rowCells = foundElements.filter((el) => {
+        const value = el.getAttribute("data-grid");
+        return value === "cell" || value?.startsWith("cell-");
       }) as HTMLElement[];
 
       // Sort cells by their data-grid numeric value (if given, otherwise by HTML order like table)
       const sortedCells = rowCells.sort((a, b) => {
-        const valueA = a.getAttribute('data-grid') || 'cell-0';
-        const valueB = b.getAttribute('data-grid') || 'cell-0';
+        const valueA = a.getAttribute("data-grid") || "cell-0";
+        const valueB = b.getAttribute("data-grid") || "cell-0";
 
         // Extract numeric value from 'cell-N' or default to 0 for 'cell'
-        const orderA = valueA === 'cell' ? 0 : parseInt(valueA.split('-')[1] || '0');
-        const orderB = valueB === 'cell' ? 0 : parseInt(valueB.split('-')[1] || '0');
+        const orderA =
+          valueA === "cell" ? 0 : parseInt(valueA.split("-")[1] || "0");
+        const orderB =
+          valueB === "cell" ? 0 : parseInt(valueB.split("-")[1] || "0");
 
         return orderA - orderB;
       });
 
       const gridRow: GridCell3D[] = [];
 
-      sortedCells.forEach(cell => {
-        cell.setAttribute('role', 'gridcell'); // for screen reader
+      sortedCells.forEach((cell) => {
+        cell.setAttribute("role", "gridcell"); // for screen reader
 
         // Set first cell globally as focusable, others not focusable (so Tab focuses on first cell)
         if (globalCellIndex === 0) {
-          cell.setAttribute('tabindex', '0');
+          cell.setAttribute("tabindex", "0");
         }
         globalCellIndex++;
 
@@ -141,7 +155,7 @@
         }
         gridRow.push({
           cell: cell,
-          focusables: focusables
+          focusables: focusables,
         });
       });
 
@@ -154,29 +168,29 @@
   function setupEventListener() {
     if (!_rootEl) return;
 
-    _rootEl.addEventListener('keydown', handleKeyDown);
+    _rootEl.addEventListener("keydown", handleKeyDown);
 
-    _rootEl.addEventListener('click', handleCellClick);
+    _rootEl.addEventListener("click", handleCellClick);
 
     // Track focus state persistently to handle DOM mutations (e.g., row deletion)
-    _rootEl.addEventListener('focusin', handleFocusIn);
-    _rootEl.addEventListener('focusout', handleFocusOut);
+    _rootEl.addEventListener("focusin", handleFocusIn);
+    _rootEl.addEventListener("focusout", handleFocusOut);
 
     // Listen for clicks outside the grid to reset focus indices -> remove focusing style
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     // Track last input modality globally so cell focus rings only appear on keyboard input.
     // Capture phase so we record the signal before focus events fire.
-    document.addEventListener('pointerdown', handlePointerdown, true);
-    document.addEventListener('keydown', handleGlobalKeydown, true);
+    document.addEventListener("pointerdown", handlePointerdown, true);
+    document.addEventListener("keydown", handleGlobalKeydown, true);
   }
 
   function handlePointerdown() {
-    _lastInputModality = 'pointer';
+    _lastInputModality = "pointer";
   }
 
   function handleGlobalKeydown() {
-    _lastInputModality = 'keyboard';
+    _lastInputModality = "keyboard";
   }
 
   function handleFocusIn(event: FocusEvent) {
@@ -188,8 +202,8 @@
     // already shows its own focus indicator — applying our ring would stack.
     const target = event.target as HTMLElement | null;
     if (!target) return;
-    if (target.getAttribute('role') !== 'gridcell') return;
-    if (_lastInputModality !== 'keyboard') return;
+    if (target.getAttribute("role") !== "gridcell") return;
+    if (_lastInputModality !== "keyboard") return;
     const cellData = _grid[_focusingRowIndex]?.[_focusingColIndex];
     if (cellData?.cell === target && cellData.focusables.length > 0) return;
     setFocusedStyle(target);
@@ -228,9 +242,9 @@
       const firstCell = firstCellData.cell;
       const hasFocusableContent = firstCellData.focusables.length > 0;
       if (hasFocusableContent) {
-        firstCell.removeAttribute('tabindex');
+        firstCell.removeAttribute("tabindex");
       } else {
-        firstCell.setAttribute('tabindex', '0');
+        firstCell.setAttribute("tabindex", "0");
       }
     }
   }
@@ -238,7 +252,7 @@
   function listenForSlottedChanges() {
     if (!_rootEl) return;
 
-    const slot = _rootEl.querySelector('slot');
+    const slot = _rootEl.querySelector("slot");
     if (!slot) return;
 
     // Create observer to watch for changes in the slotted content such as sort table, delete items
@@ -248,21 +262,33 @@
 
       for (const mutation of mutations) {
         // Check if nodes were added or removed
-        if (mutation.type === 'childList' && (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0)) {
+        if (
+          mutation.type === "childList" &&
+          (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0)
+        ) {
           shouldRebuild = true;
           break;
         }
 
         // Check if attributes changed on grid elements
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-grid') {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-grid"
+        ) {
           shouldRebuild = true;
           break;
         }
 
         // Check if the order of elements changed (for sorting)
-        if (mutation.type === 'childList' && mutation.target instanceof HTMLElement) {
+        if (
+          mutation.type === "childList" &&
+          mutation.target instanceof HTMLElement
+        ) {
           const targetElement = mutation.target;
-          if (targetElement.hasAttribute('data-grid') || targetElement.querySelector('[data-grid]')) {
+          if (
+            targetElement.hasAttribute("data-grid") ||
+            targetElement.querySelector("[data-grid]")
+          ) {
             shouldRebuild = true;
             break;
           }
@@ -275,14 +301,14 @@
     });
 
     // Listen for slot changes (when React/Angular adds/removes direct children)
-    slot.addEventListener('slotchange', handleSlotChange);
+    slot.addEventListener("slotchange", handleSlotChange);
 
     // Observe the slot and its assigned elements
     observeAssignedNodes(slot);
   }
 
   function handleSlotChange() {
-    const slot = _rootEl?.querySelector('slot');
+    const slot = _rootEl?.querySelector("slot");
     if (!slot) return;
 
     // Re-observe the new assigned elements
@@ -294,13 +320,13 @@
 
   function observeAssignedNodes(slot: HTMLSlotElement) {
     const assignedNodes = slot.assignedElements();
-    assignedNodes.forEach(node => {
+    assignedNodes.forEach((node) => {
       if (node instanceof HTMLElement) {
         _mutationObserver?.observe(node, {
           childList: true,
           subtree: true,
           attributes: true,
-          attributeFilter: ['data-grid']
+          attributeFilter: ["data-grid"],
         });
       }
     });
@@ -320,7 +346,12 @@
     _bindTimeoutId = setTimeout(() => {
       cleanupOldCellFocus();
       setup3DGrid();
-      restoreFocusAfterRebuild(_focusingRowIndex, _focusingColIndex, _focusingElementIndex, gridHadFocus);
+      restoreFocusAfterRebuild(
+        _focusingRowIndex,
+        _focusingColIndex,
+        _focusingElementIndex,
+        gridHadFocus,
+      );
       // Re-enable navigation
       _bindTimeoutId = null;
       _isRebuilding = false;
@@ -335,7 +366,12 @@
     }
   }
 
-  function restoreFocusAfterRebuild(row: number, col: number, elementIndex: number, gridHadFocus: boolean) {
+  function restoreFocusAfterRebuild(
+    row: number,
+    col: number,
+    elementIndex: number,
+    gridHadFocus: boolean,
+  ) {
     // Only restore focus if this grid had focus before the rebuild
     // This prevents other grids on the page from stealing focus during their rebuild
     if (!isValidCell(row, col)) {
@@ -356,9 +392,9 @@
   }
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       // Listen for where focus moves to after Tab
-      document.addEventListener('focusin', handleTabFocusMove, { once: true });
+      document.addEventListener("focusin", handleTabFocusMove, { once: true });
       return;
     }
 
@@ -366,27 +402,27 @@
     if (_isRebuilding || _navigationDisabled) return;
 
     switch (event.key) {
-      case 'ArrowUp':
+      case "ArrowUp":
         event.preventDefault();
         event.stopPropagation();
         moveUp();
         break;
-      case 'ArrowDown':
+      case "ArrowDown":
         event.preventDefault();
         event.stopPropagation();
         moveDown();
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         event.preventDefault();
         event.stopPropagation();
         moveLeft();
         break;
-      case 'ArrowRight':
+      case "ArrowRight":
         event.preventDefault();
         event.stopPropagation();
         moveRight();
         break;
-      case 'Home':
+      case "Home":
         event.preventDefault();
         event.stopPropagation();
         if (event.ctrlKey) {
@@ -395,7 +431,7 @@
           moveToRowStart();
         }
         break;
-      case 'End':
+      case "End":
         event.preventDefault();
         event.stopPropagation();
         if (event.ctrlKey) {
@@ -416,21 +452,26 @@
     _focusingColIndex = col;
 
     const newCell = _grid[row][col]?.cell;
-    newCell?.setAttribute('tabindex', '0');
+    newCell?.setAttribute("tabindex", "0");
     // Outline is applied by handleFocusIn when the cell receives keyboard-driven focus,
     // so mouse clicks don't leave a ring on the cell.
 
     // Only disable arrow key navigation for input elements
-    _navigationDisabled = newCell.matches('input') || newCell.querySelector('input') !== null;
+    _navigationDisabled =
+      newCell.matches("input") || newCell.querySelector("input") !== null;
 
     return true;
   }
 
   function isValidCell(row: number, col: number): boolean {
-    return row >= 0 && col >= 0 &&
-      _grid && _grid.length > 0 &&
+    return (
+      row >= 0 &&
+      col >= 0 &&
+      _grid &&
+      _grid.length > 0 &&
       row < _grid.length &&
-      col < _grid[row].length;
+      col < _grid[row].length
+    );
   }
 
   function focusCell(row: number, col: number) {
@@ -453,7 +494,10 @@
       cell.focus();
       _focusingElementIndex = -1;
     } else {
-      if (_focusingElementIndex < 0 || _focusingElementIndex >= focusableElements.length) {
+      if (
+        _focusingElementIndex < 0 ||
+        _focusingElementIndex >= focusableElements.length
+      ) {
         _focusingElementIndex = 0; // We will focus on the first item of the cell's focusable elements
       }
       // Remove tabindex from cell and focus the element
@@ -471,9 +515,9 @@
     // Flip the attribute and let the host component's CSS apply the visual ring.
     // Table-mode rules (outline + corner radius) live alongside the rest of the
     // table styles in assets/css/components.css; layout-mode has its own rule.
-    el.setAttribute('data-focused', '');
+    el.setAttribute("data-focused", "");
 
-    if (keyboardNav !== 'table') return;
+    if (keyboardNav !== "table") return;
 
     // Tag corner cells so Table CSS can round them to follow the container radius.
     const row = _focusingRowIndex;
@@ -481,17 +525,17 @@
     const lastRow = _grid.length - 1;
     const lastCol = _grid[row] ? _grid[row].length - 1 : 0;
     let corner: string | null = null;
-    if (row === 0 && col === 0) corner = 'top-left';
-    else if (row === 0 && col === lastCol) corner = 'top-right';
-    else if (row === lastRow && col === 0) corner = 'bottom-left';
-    else if (row === lastRow && col === lastCol) corner = 'bottom-right';
-    if (corner) el.setAttribute('data-focus-corner', corner);
+    if (row === 0 && col === 0) corner = "top-left";
+    else if (row === 0 && col === lastCol) corner = "top-right";
+    else if (row === lastRow && col === 0) corner = "bottom-left";
+    else if (row === lastRow && col === lastCol) corner = "bottom-right";
+    if (corner) el.setAttribute("data-focus-corner", corner);
   }
 
   function removeFocusedStyle(el: HTMLElement) {
     if (!el) return;
-    el.removeAttribute('data-focused');
-    el.removeAttribute('data-focus-corner');
+    el.removeAttribute("data-focused");
+    el.removeAttribute("data-focus-corner");
   }
 
   function moveUp() {
@@ -534,9 +578,14 @@
 
   function moveLeft() {
     // move within the cell first, ex: second button will move to first button, same cell
-    const currentCellData = _grid[_focusingRowIndex] && _grid[_focusingRowIndex][_focusingColIndex];
+    const currentCellData =
+      _grid[_focusingRowIndex] && _grid[_focusingRowIndex][_focusingColIndex];
 
-    if (currentCellData && currentCellData.focusables.length > 0 && _focusingElementIndex > 0) {
+    if (
+      currentCellData &&
+      currentCellData.focusables.length > 0 &&
+      _focusingElementIndex > 0
+    ) {
       _focusingElementIndex = _focusingElementIndex - 1;
       focusCell(_focusingRowIndex, _focusingColIndex);
       return;
@@ -546,7 +595,9 @@
     if (_focusingColIndex === 0) {
       // If layout mode and not at first row, wrap to previous row's last cell
       if (keyboardNav === "layout" && _focusingRowIndex > 0) {
-        const previousRowLength = _grid[_focusingRowIndex - 1] ? _grid[_focusingRowIndex - 1].length : 0;
+        const previousRowLength = _grid[_focusingRowIndex - 1]
+          ? _grid[_focusingRowIndex - 1].length
+          : 0;
         if (previousRowLength > 0) {
           focusCell(_focusingRowIndex - 1, previousRowLength - 1);
         }
@@ -561,20 +612,30 @@
 
   function moveRight() {
     // Move within the cell first, ex: first button will move to second button, same cell
-    const currentCellData = _grid[_focusingRowIndex] && _grid[_focusingRowIndex][_focusingColIndex];
+    const currentCellData =
+      _grid[_focusingRowIndex] && _grid[_focusingRowIndex][_focusingColIndex];
 
-    if (currentCellData && currentCellData.focusables.length > 0 && _focusingElementIndex !== -1 && _focusingElementIndex < currentCellData.focusables.length - 1) {
+    if (
+      currentCellData &&
+      currentCellData.focusables.length > 0 &&
+      _focusingElementIndex !== -1 &&
+      _focusingElementIndex < currentCellData.focusables.length - 1
+    ) {
       _focusingElementIndex = _focusingElementIndex + 1;
       focusCell(_focusingRowIndex, _focusingColIndex);
       return;
     }
 
     // Check if we're at the last column of current row
-    const currentRowLength = _grid[_focusingRowIndex] ? _grid[_focusingRowIndex].length : 0;
+    const currentRowLength = _grid[_focusingRowIndex]
+      ? _grid[_focusingRowIndex].length
+      : 0;
     if (_focusingColIndex >= currentRowLength - 1) {
       // If layout mode and not at last row, wrap to next row's first cell
       if (keyboardNav === "layout" && _focusingRowIndex < _grid.length - 1) {
-        const nextRowLength = _grid[_focusingRowIndex + 1] ? _grid[_focusingRowIndex + 1].length : 0;
+        const nextRowLength = _grid[_focusingRowIndex + 1]
+          ? _grid[_focusingRowIndex + 1].length
+          : 0;
         if (nextRowLength > 0) {
           focusCell(_focusingRowIndex + 1, 0);
         }
@@ -609,7 +670,9 @@
     }
   }
 
-  function findCellPosition(cell: HTMLElement): { row: number; col: number } | null {
+  function findCellPosition(
+    cell: HTMLElement,
+  ): { row: number; col: number } | null {
     if (!_grid || _grid.length === 0) return null;
 
     for (let row = 0; row < _grid.length; row++) {
@@ -636,7 +699,10 @@
     const position = findCellPosition(cell);
     if (position) {
       // Only reset elementIndex if clicking on a different cell
-      if (position.row !== _focusingRowIndex || position.col !== _focusingColIndex) {
+      if (
+        position.row !== _focusingRowIndex ||
+        position.col !== _focusingColIndex
+      ) {
         _focusingElementIndex = -1;
       }
       focusCell(position.row, position.col);
@@ -668,13 +734,18 @@
     }
 
     // First try to find via closest gridcell (works for shadow DOM too)
-    const closestCell = focusedElement.closest('[role="gridcell"]') as HTMLElement;
+    const closestCell = focusedElement.closest(
+      '[role="gridcell"]',
+    ) as HTMLElement;
     if (!closestCell) return;
 
     const position = findCellPosition(closestCell);
     if (!position) return;
 
-    if (position.row !== _focusingRowIndex || position.col !== _focusingColIndex) {
+    if (
+      position.row !== _focusingRowIndex ||
+      position.col !== _focusingColIndex
+    ) {
       // Different cell, which means not focusing within the same cell, we can reset _focusingIndex
       _focusingElementIndex = -1;
       focusCell(position.row, position.col);
@@ -684,7 +755,9 @@
       const focusables = cellData.focusables;
 
       // Find which element is currently focused
-      const currentFocusedIndex = focusables.indexOf(focusedElement as HTMLElement);
+      const currentFocusedIndex = focusables.indexOf(
+        focusedElement as HTMLElement,
+      );
 
       if (currentFocusedIndex !== -1) {
         // Update the index to match the currently focused element
@@ -738,7 +811,7 @@
     // but are still focusable - allow these through
     if (element instanceof HTMLInputElement) {
       const type = element.type.toLowerCase();
-      if (type === 'checkbox' || type === 'radio') {
+      if (type === "checkbox" || type === "radio") {
         // Check if disabled instead of visual visibility
         return !element.disabled;
       }
@@ -750,7 +823,11 @@
 
     // Check computed styles for visibility
     const style = getComputedStyle(element);
-    if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+    if (
+      style.display === "none" ||
+      style.visibility === "hidden" ||
+      style.opacity === "0"
+    ) {
       return false;
     }
 
@@ -782,7 +859,11 @@
 
         // Check the node to break recursive (final point)
         // Add to set only if it's focusable AND not the cell itself AND visible
-        if (isFocusable(node) && node !== cell && isElementVisible(node as Element)) {
+        if (
+          isFocusable(node) &&
+          node !== cell &&
+          isElementVisible(node as Element)
+        ) {
           elementsSet.add(node as Element);
         }
       }
@@ -792,8 +873,46 @@
 
     return Array.from(elementsSet);
   }
-
 </script>
+
+<div bind:this={_rootEl} role="grid">
+  <slot />
+  {#if _showIcon && _showKeyboardIcon}
+    <div
+      class="keyboard-indicator show {keyboardIconPosition}"
+      aria-hidden="true"
+    >
+      <svg
+        width="78"
+        height="54"
+        viewBox="0 0 78 54"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="28" y="4" width="22" height="22" rx="3" fill="#333333"></rect>
+        <path
+          d="M39 12.8076C39.0718 12.8077 39.1428 12.8235 39.208 12.8535C39.2732 12.8835 39.3312 12.927 39.3779 12.9814L42.2812 16.3691C42.559 16.6925 42.329 17.1924 41.9033 17.1924H36.0967C35.6711 17.1922 35.4418 16.6924 35.7188 16.3691L38.6211 12.9814C38.6678 12.927 38.7259 12.8835 38.791 12.8535C38.8563 12.8235 38.9281 12.8076 39 12.8076Z"
+          fill="white"
+        ></path>
+        <rect x="4" y="28" width="22" height="22" rx="3" fill="#333333"></rect>
+        <path
+          d="M16.3682 35.7188C16.6915 35.441 17.1914 35.671 17.1914 36.0967V41.9033C17.1913 42.329 16.6915 42.5583 16.3682 42.2812L12.9805 39.3789C12.926 39.3322 12.8825 39.2741 12.8525 39.209C12.8225 39.1437 12.8066 39.0719 12.8066 39C12.8067 38.9282 12.8226 38.8572 12.8525 38.792C12.8825 38.7268 12.926 38.6688 12.9805 38.6221L16.3682 35.7188Z"
+          fill="white"
+        ></path>
+        <rect x="28" y="28" width="22" height="22" rx="3" fill="#333333"></rect>
+        <path
+          d="M41.9014 36.8076C42.3271 36.8076 42.5573 37.3075 42.2803 37.6309L39.377 41.0186C39.3302 41.073 39.2722 41.1165 39.207 41.1465C39.1418 41.1765 39.0708 41.1923 38.999 41.1924C38.9271 41.1924 38.8554 41.1765 38.79 41.1465C38.7249 41.1165 38.6668 41.073 38.6201 41.0186L35.7178 37.6309C35.44 37.3076 35.6692 36.8079 36.0947 36.8076H41.9014Z"
+          fill="white"
+        ></path>
+        <rect x="52" y="28" width="22" height="22" rx="3" fill="#333333"></rect>
+        <path
+          d="M60.8066 36.0967C60.8066 35.671 61.3065 35.4408 61.6299 35.7178L65.0176 38.6211C65.072 38.6678 65.1155 38.7259 65.1455 38.791C65.1755 38.8562 65.1913 38.9273 65.1914 38.999C65.1914 39.0709 65.1755 39.1427 65.1455 39.208C65.1155 39.2731 65.072 39.3312 65.0176 39.3779L61.6299 42.2803C61.3066 42.5581 60.8068 42.3289 60.8066 41.9033V36.0967Z"
+          fill="white"
+        ></path>
+      </svg>
+    </div>
+  {/if}
+</div>
 
 <style>
   :host {
@@ -832,21 +951,3 @@
     height: 100%;
   }
 </style>
-
-<div bind:this={_rootEl} role="grid">
-  <slot />
-  {#if _showIcon && _showKeyboardIcon}
-    <div class="keyboard-indicator show {keyboardIconPosition}" aria-hidden="true">
-      <svg width="78" height="54" viewBox="0 0 78 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="28" y="4" width="22" height="22" rx="3" fill="#333333"/>
-        <path d="M39 12.8076C39.0718 12.8077 39.1428 12.8235 39.208 12.8535C39.2732 12.8835 39.3312 12.927 39.3779 12.9814L42.2812 16.3691C42.559 16.6925 42.329 17.1924 41.9033 17.1924H36.0967C35.6711 17.1922 35.4418 16.6924 35.7188 16.3691L38.6211 12.9814C38.6678 12.927 38.7259 12.8835 38.791 12.8535C38.8563 12.8235 38.9281 12.8076 39 12.8076Z" fill="white"/>
-        <rect x="4" y="28" width="22" height="22" rx="3" fill="#333333"/>
-        <path d="M16.3682 35.7188C16.6915 35.441 17.1914 35.671 17.1914 36.0967V41.9033C17.1913 42.329 16.6915 42.5583 16.3682 42.2812L12.9805 39.3789C12.926 39.3322 12.8825 39.2741 12.8525 39.209C12.8225 39.1437 12.8066 39.0719 12.8066 39C12.8067 38.9282 12.8226 38.8572 12.8525 38.792C12.8825 38.7268 12.926 38.6688 12.9805 38.6221L16.3682 35.7188Z" fill="white"/>
-        <rect x="28" y="28" width="22" height="22" rx="3" fill="#333333"/>
-        <path d="M41.9014 36.8076C42.3271 36.8076 42.5573 37.3075 42.2803 37.6309L39.377 41.0186C39.3302 41.073 39.2722 41.1165 39.207 41.1465C39.1418 41.1765 39.0708 41.1923 38.999 41.1924C38.9271 41.1924 38.8554 41.1765 38.79 41.1465C38.7249 41.1165 38.6668 41.073 38.6201 41.0186L35.7178 37.6309C35.44 37.3076 35.6692 36.8079 36.0947 36.8076H41.9014Z" fill="white"/>
-        <rect x="52" y="28" width="22" height="22" rx="3" fill="#333333"/>
-        <path d="M60.8066 36.0967C60.8066 35.671 61.3065 35.4408 61.6299 35.7178L65.0176 38.6211C65.072 38.6678 65.1155 38.7259 65.1455 38.791C65.1755 38.8562 65.1913 38.9273 65.1914 38.999C65.1914 39.0709 65.1755 39.1427 65.1455 39.208C65.1155 39.2731 65.072 39.3312 65.0176 39.3779L61.6299 42.2803C61.3066 42.5581 60.8068 42.3289 60.8066 41.9033V36.0967Z" fill="white"/>
-      </svg>
-    </div>
-  {/if}
-</div>

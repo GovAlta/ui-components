@@ -1,4 +1,3 @@
-<!-- svelte-ignore missing-custom-element-compile-options -->
 <svelte:options customElement="goa-app-header" />
 
 <!-- Script -->
@@ -308,7 +307,7 @@
             <goa-icon
               type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"}
               size="small"
-            />
+            ></goa-icon>
           </button>
 
           {#if _utilitiesMenuOpen}

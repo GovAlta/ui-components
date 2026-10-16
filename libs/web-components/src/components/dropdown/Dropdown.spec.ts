@@ -1041,7 +1041,7 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const children = container.querySelectorAll("li");
         expect(children.length).toBe(4);
-        expect(children[0].innerHTML.trim()).toBe("cyan");
+        expect(children[0].textContent?.trim()).toBe("cyan");
       });
     });
 
@@ -1066,7 +1066,7 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const children = container.querySelectorAll("li");
         expect(children.length).toBe(4);
-        expect(children[3].innerHTML.trim()).toBe("cyan");
+        expect(children[3].textContent?.trim()).toBe("cyan");
       });
     });
   });

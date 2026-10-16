@@ -17,10 +17,10 @@ describe("Divider", () => {
       const divider = await baseElement.findByTestId("divider-test");
 
       expect(divider).toBeTruthy();
-      expect(divider.outerHTML).toContain("margin-top:var(--goa-space-s)");
-      expect(divider.outerHTML).toContain("margin-right:var(--goa-space-m)");
-      expect(divider.outerHTML).toContain("margin-bottom:var(--goa-space-l)");
-      expect(divider.outerHTML).toContain("margin-left:var(--goa-space-xl)");
+      expect(divider.style.marginTop).toBe("var(--goa-space-s)");
+      expect(divider.style.marginRight).toBe("var(--goa-space-m)");
+      expect(divider.style.marginBottom).toBe("var(--goa-space-l)");
+      expect(divider.style.marginLeft).toBe("var(--goa-space-xl)");
     });
   });
 });

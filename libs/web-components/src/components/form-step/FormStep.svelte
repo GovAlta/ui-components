@@ -101,11 +101,12 @@
   });
 
   function dispatchInit(el: HTMLElement) {
-    dispatch(el, "formstep:mounted",
+    dispatch(
+      el,
+      "formstep:mounted",
       { el: _rootEl, status },
       { bubbles: true, timeout: 10 },
     );
-
   }
 
   function onClick(e: Event) {
@@ -161,7 +162,9 @@
     if (current && childindex) {
       const announcement = getAriaLabel(text, arialabel);
 
-      const liveRegion = _rootEl.querySelector("[data-live-region]") as HTMLElement;
+      const liveRegion = _rootEl.querySelector(
+        "[data-live-region]",
+      ) as HTMLElement;
 
       if (liveRegion) {
         liveRegion.textContent = "";
@@ -199,14 +202,14 @@
   <div data-testid="status" class="status">
     {#if current}
       {#if _isLast && status === "complete"}
-        <goa-icon type="checkmark" inverted />
+        <goa-icon type="checkmark" inverted></goa-icon>
       {:else}
-        <goa-icon type="pencil" theme="filled" />
+        <goa-icon type="pencil" theme="filled"></goa-icon>
       {/if}
     {:else if status === "complete"}
-      <goa-icon type="checkmark" inverted />
+      <goa-icon type="checkmark" inverted></goa-icon>
     {:else if status === "incomplete"}
-      <goa-icon type="remove" theme="filled" />
+      <goa-icon type="remove" theme="filled"></goa-icon>
     {:else}
       <div data-testid="step-number" class="step-number">
         {childindex || ""}
@@ -219,7 +222,7 @@
       <div class="subtext" data-testid="subtext">Incomplete</div>
     {/if}
   </div>
-  <!-- svelte-ignore a11y-no-interactive-element-to-noninteractive-role -->
+  <!-- svelte-ignore a11y_no_interactive_element_to_noninteractive_role -->
   <button
     type="button"
     disabled={!_isEnabled}
@@ -332,7 +335,7 @@
       [data-status="incomplete"],
       [aria-current="step"]
     )
-  .status {
+    .status {
     border-color: var(--goa-step-color-border);
   }
 

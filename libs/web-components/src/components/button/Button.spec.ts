@@ -123,11 +123,10 @@ describe("GoAButtonComponent", () => {
 
       expect(button).toBeTruthy();
       await waitFor(() => {
-        const style = button.getAttribute("style");
-        expect(style).toContain("margin-top:var(--goa-space-s)");
-        expect(style).toContain("margin-right:var(--goa-space-m)");
-        expect(style).toContain("margin-bottom:var(--goa-space-l)");
-        expect(style).toContain("margin-left:var(--goa-space-xl)");
+        expect(button.style.marginTop).toBe("var(--goa-space-s)");
+        expect(button.style.marginRight).toBe("var(--goa-space-m)");
+        expect(button.style.marginBottom).toBe("var(--goa-space-l)");
+        expect(button.style.marginLeft).toBe("var(--goa-space-xl)");
       });
     });
   });

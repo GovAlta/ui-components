@@ -122,10 +122,10 @@ describe("GoACalloutComponent", () => {
       const callout = await baseElement.findByTestId("callout-test");
 
       expect(callout).toBeTruthy();
-      expect(callout).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(callout).toHaveStyle("margin-right:var(--goa-space-m)");
-      expect(callout).toHaveStyle("margin-bottom:var(--goa-space-l)");
-      expect(callout).toHaveStyle("margin-left:var(--goa-space-xl)");
+      expect(callout.style.marginTop).toBe("var(--goa-space-s)");
+      expect(callout.style.marginRight).toBe("var(--goa-space-m)");
+      expect(callout.style.marginBottom).toBe("var(--goa-space-l)");
+      expect(callout.style.marginLeft).toBe("var(--goa-space-xl)");
     });
   });
 

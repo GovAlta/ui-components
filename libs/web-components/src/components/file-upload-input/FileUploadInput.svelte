@@ -211,8 +211,8 @@
 </script>
 
 <!-- svelte-ignore
-  a11y-click-events-have-key-events
-  a11y-mouse-events-have-key-events
+  a11y_click_events_have_key_events
+  a11y_mouse_events_have_key_events
 -->
 {#if variant === "dragdrop"}
   <div
@@ -228,7 +228,7 @@
     on:dragover={onDrag}
   >
     <div class="instructions">
-      <goa-icon type="cloud-upload" size="large" />
+      <goa-icon type="cloud-upload" size="large"></goa-icon>
       <div>Drag and drop files here</div>
       <em class="or-text">or</em>
       <div class="browse-files">Browse files</div>
@@ -286,7 +286,7 @@
         size={issue.size}
         type={issue.filetype}
         error={issue.error}
-      />
+      ></goa-file-upload-card>
     {/each}
   </div>
 {/if}

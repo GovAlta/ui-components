@@ -65,11 +65,11 @@
 >
   <div class="content">
     {#if type === "success"}
-      <goa-icon type="checkmark-circle" size="large" />
+      <goa-icon type="checkmark-circle" size="large"></goa-icon>
     {/if}
 
     {#if type === "failure"}
-      <goa-icon type="close-circle" size="large" />
+      <goa-icon type="close-circle" size="large"></goa-icon>
     {/if}
 
     <span class="message">
@@ -96,9 +96,10 @@
       {progress}
       percent-visibility="hidden"
       aria-label={message}
-    />
+    ></goa-linear-progress>
   {:else if type === "indeterminate"}
-    <goa-linear-progress percent-visibility="hidden" aria-label={message} />
+    <goa-linear-progress percent-visibility="hidden" aria-label={message}
+    ></goa-linear-progress>
   {/if}
 </div>
 

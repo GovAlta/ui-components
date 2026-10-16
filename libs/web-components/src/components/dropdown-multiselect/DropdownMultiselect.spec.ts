@@ -191,14 +191,12 @@ describe("GoADropdownMultiselect", () => {
 
   describe("Select All", () => {
     // Simulate goa-dropdown-item mount relay so _options gets populated.
-    // Must await: onMount has an `await tick()` before addRelayListener, so we
-    // need one tick to pass before the listener is registered.
+    // Flush the component after each synthetic child-mount message.
     async function addOption(
       rootEl: HTMLElement,
       value: string,
       label: string,
     ) {
-      await tick();
       rootEl.dispatchEvent(
         new CustomEvent("msg", {
           detail: {
@@ -212,6 +210,7 @@ describe("GoADropdownMultiselect", () => {
           },
         }),
       );
+      await tick();
     }
 
     it("should not render Select All checkbox by default", async () => {

@@ -136,7 +136,7 @@
       on:click={close}
       tabindex="-1"
       class:active={open}
-    />
+    ></button>
     <div
       use:noscroll={{ enable: open }}
       style={styles(
@@ -196,7 +196,7 @@
               icon="close"
               theme="filled"
               on:click={close}
-            />
+            ></goa-icon-button>
           </div>
         {/if}
 

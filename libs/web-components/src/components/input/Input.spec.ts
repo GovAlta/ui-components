@@ -398,16 +398,15 @@ describe("GoAInput Component", () => {
       });
       const input = await baseElement.findByTestId("input-test");
       const containerElement =
-        baseElement.container.querySelector(".container");
+        baseElement.container.querySelector<HTMLElement>(".container");
 
       expect(input).toBeTruthy();
       expect(containerElement).toBeTruthy();
       await waitFor(() => {
-        const style = containerElement?.getAttribute("style");
-        expect(style).toContain("margin-top:var(--goa-space-s)");
-        expect(style).toContain("margin-right:var(--goa-space-m)");
-        expect(style).toContain("margin-bottom:var(--goa-space-l)");
-        expect(style).toContain("margin-left:var(--goa-space-xl)");
+        expect(containerElement?.style.marginTop).toBe("var(--goa-space-s)");
+        expect(containerElement?.style.marginRight).toBe("var(--goa-space-m)");
+        expect(containerElement?.style.marginBottom).toBe("var(--goa-space-l)");
+        expect(containerElement?.style.marginLeft).toBe("var(--goa-space-xl)");
       });
     });
   });

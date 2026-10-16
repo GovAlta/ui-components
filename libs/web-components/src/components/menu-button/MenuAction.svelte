@@ -63,7 +63,7 @@
       data-testid={`icon-${icon}`}
       size={size === "normal" ? "4" : "3"}
       type={icon}
-    />
+    ></goa-icon>
   {/if}
   <div class="text">{text}</div>
 </button>

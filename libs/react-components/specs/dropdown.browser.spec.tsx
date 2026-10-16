@@ -897,12 +897,15 @@ describe("Dropdown", () => {
 
       // Initial state
 
-      await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement;
-        inputEl.click();
+      await vi.waitFor(() => {
+        expect(input.elements().length).toBe(1);
+      });
+      const inputEl = input.element() as HTMLInputElement;
+      inputEl.click();
+      await vi.waitFor(() => {
         expect(items.elements().length).toBe(values.length);
         items.elements().forEach((el, index) => {
-          expect(el.innerHTML.trim()).toBe(values[index]);
+          expect(el.textContent?.trim()).toBe(values[index]);
         });
       });
 
@@ -911,12 +914,14 @@ describe("Dropdown", () => {
       values = ["blue"]; // the previous failure happened with this item, was one of the previous items
       result.rerender(<Component />);
 
-      await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement;
-        inputEl.click();
+      await vi.waitFor(() => {
+        const dropdown = result.container.querySelector("goa-dropdown");
+        expect(dropdown?.shadowRoot?.querySelectorAll('[role="option"]').length).toBe(1);
+      });
+      await vi.waitFor(() => {
         const items = result.getByRole("option");
         expect(items.elements().length).toBe(1);
-        expect(items.element().innerHTML.trim()).toBe("blue");
+        expect(items.element().textContent?.trim()).toBe("blue");
       });
     });
   });

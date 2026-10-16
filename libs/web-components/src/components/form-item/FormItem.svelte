@@ -188,7 +188,10 @@
     if (!$$slots.label) return label;
     const slot = _rootEl?.querySelector<HTMLSlotElement>('slot[name="label"]');
     const nodes = slot?.assignedNodes({ flatten: true }) ?? [];
-    return nodes.map((node) => node.textContent ?? "").join("").trim();
+    return nodes
+      .map((node) => node.textContent ?? "")
+      .join("")
+      .trim();
   }
 
   // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
@@ -219,7 +222,7 @@
   bind:this={_rootEl}
 >
   {#if $$slots.label || label}
-    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <!-- svelte-ignore a11y_label_has_associated_control -->
     <label class={`label ${labelsize}`}>
       <slot name="label">{label}</slot>
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
@@ -234,7 +237,8 @@
     <div class={`messages-container ${labelsize}`}>
       {#if $$slots.error || error}
         <div class="error-msg" id={_errorId} role="alert">
-          <goa-icon type="warning" size={errorIconSize} theme="filled" />
+          <goa-icon type="warning" size={errorIconSize} theme="filled"
+          ></goa-icon>
           <div class="error-text">
             <slot name="error">
               {error}
