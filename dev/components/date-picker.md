@@ -21,6 +21,7 @@ Lets users select a date through a calendar without the need to manually type it
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Name of the date field. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the date picker. Compact reduces height for dense layouts and is suggested for mobile delivery. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "calendar" \| "input" | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
 | `value` | string | (none) | No | Sets the calendar date as an ISO date string (yyyy-mm-dd). |
@@ -52,6 +53,7 @@ Lets users select a date through a calendar without the need to manually type it
 | `mr` | Spacing | (none) | No | Sets the right margin spacing token. |
 | `mt` | Spacing | (none) | No | Sets the top margin spacing token. |
 | `name` | string | (none) | No | Sets the name of the date field. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the date picker. Compact reduces height for dense layouts and is suggested for mobile delivery. |
 | `testId` | string | (none) | No | Sets the data-testid attribute for automated testing. |
 | `type` | "calendar" \| "input" | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
 | `value` | string | (none) | No | Sets the calendar date as an ISO date string (yyyy-mm-dd). |
@@ -84,7 +86,7 @@ Tag: `goa-date-picker`
 | `mr` | Spacing | (none) | No | Right margin. |
 | `mt` | Spacing | (none) | No | Top margin. |
 | `name` | string | (none) | No | Name of the date field. |
-| `size` | "default" \| "compact" | `default` | No | Sets the size of the date picker. 'compact' reduces height for dense layouts. |
+| `size` | "default" \| "compact" | `default` | No | Sets the size of the date picker. 'compact' reduces height for dense layouts and is suggested for mobile delivery. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 | `type` | "calendar" \| "input" | `calendar` | No | Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. |
 | `value` | string | (none) | No | Sets the calendar date as an ISO date string (yyyy-mm-dd). |
