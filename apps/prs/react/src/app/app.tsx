@@ -31,6 +31,20 @@ import {
 
 const PUSH_DRAWER_ROUTE_PATH = "/features/3347-push";
 const pushDrawerTestParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
+const LANGUAGE_STORAGE_KEY = "goa-prs-language";
+const SUPPORTED_LANGUAGES = ["en-CA", "fr-CA"] as const;
+
+type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+
+function getSelectedLanguage(): SupportedLanguage {
+  const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return SUPPORTED_LANGUAGES.includes(storedLanguage as SupportedLanguage)
+    ? (storedLanguage as SupportedLanguage)
+    : "en-CA";
+}
+
+const selectedLanguage = getSelectedLanguage();
+document.documentElement.lang = selectedLanguage;
 
 interface NotificationData {
   id: string;
@@ -171,6 +185,17 @@ export function App() {
     if (detail.value) navigate(`/${detail.value}`);
   };
 
+  const handleLanguageSelect = (detail: GoabDropdownOnChangeDetail) => {
+    if (
+      detail.value &&
+      detail.value !== selectedLanguage &&
+      SUPPORTED_LANGUAGES.includes(detail.value as SupportedLanguage)
+    ) {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, detail.value);
+      window.location.reload();
+    }
+  };
+
   // Sample notifications to populate the position-right panel for #4110.
   const [notifications, setNotifications] = useState<NotificationData[]>(() =>
     createSampleNotifications(),
@@ -254,6 +279,20 @@ export function App() {
       }
       primaryContent={
         <>
+          {sideMenuOpen && (
+            <GoabFormItem label="Language" mb="m">
+              <GoabDropdown
+                name="language"
+                value={selectedLanguage}
+                size="compact"
+                width="100%"
+                onChange={handleLanguageSelect}
+              >
+                <GoabDropdownItem value="en-CA" label="English (Canada)" />
+                <GoabDropdownItem value="fr-CA" label="Français (Canada)" />
+              </GoabDropdown>
+            </GoabFormItem>
+          )}
           {sideMenuOpen && (
             <GoabFormItem label="Find a route" mb="m">
               <GoabDropdown

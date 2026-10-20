@@ -18,6 +18,7 @@
     watchFocusWithin,
   } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
+  import { getTranslations } from "../../common/localization";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -75,6 +76,8 @@
   let _stopWatchingFocus: (() => void) | undefined;
 
   let _date: CalendarDate = CalendarDate.init();
+  // Initializes the langauge to the html tag lang attribute initially, if given
+  let _translations = getTranslations();
 
   $: isDisabled = toBoolean(disabled);
 
@@ -83,6 +86,7 @@
 
   onMount(async () => {
     await tick(); // for Angular's delay
+    _translations = getTranslations(_rootEl);
     setDate(value);
     addRelayListener();
     sendMountedMessage();
@@ -369,7 +373,7 @@
 {:else if type === "input"}
   <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
-      <goa-form-item helptext="Month">
+      <goa-form-item helptext={_translations.calendar.month}>
         <goa-dropdown
           name="month"
           testid="input-month"
@@ -383,23 +387,17 @@
         >
           <goa-dropdown-item
             value="0"
-            label={size === "compact" ? "—Month—" : "—Select a month—"}
-          ></goa-dropdown-item>
-          <goa-dropdown-item value="1" label="January"></goa-dropdown-item>
-          <goa-dropdown-item value="2" label="February"></goa-dropdown-item>
-          <goa-dropdown-item value="3" label="March"></goa-dropdown-item>
-          <goa-dropdown-item value="4" label="April"></goa-dropdown-item>
-          <goa-dropdown-item value="5" label="May"></goa-dropdown-item>
-          <goa-dropdown-item value="6" label="June"></goa-dropdown-item>
-          <goa-dropdown-item value="7" label="July"></goa-dropdown-item>
-          <goa-dropdown-item value="8" label="August"></goa-dropdown-item>
-          <goa-dropdown-item value="9" label="September"></goa-dropdown-item>
-          <goa-dropdown-item value="10" label="October"></goa-dropdown-item>
-          <goa-dropdown-item value="11" label="November"></goa-dropdown-item>
-          <goa-dropdown-item value="12" label="December"></goa-dropdown-item>
+            label={size === "compact"
+              ? _translations.calendar.selectMonthCompact
+              : _translations.calendar.selectMonth}
+          />
+          {#each _translations.calendar.months as month, index}
+            <goa-dropdown-item value={`${index + 1}`} label={month}
+            ></goa-dropdown-item>
+          {/each}
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext="Day (DD)">
+      <goa-form-item helptext={_translations.calendar.dayFormat}>
         <goa-input
           name="day"
           type="number"
@@ -417,7 +415,7 @@
           {size}
         ></goa-input>
       </goa-form-item>
-      <goa-form-item helptext="Year (YYYY)">
+      <goa-form-item helptext={_translations.calendar.yearFormat}>
         <goa-input
           name="year"
           type="number"

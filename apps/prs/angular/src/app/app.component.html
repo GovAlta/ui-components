@@ -63,6 +63,18 @@
 
   <ng-template #primaryTemplate>
     @if (sideMenuOpen) {
+      <goab-form-item label="Language" mb="m">
+        <goab-dropdown
+          name="language"
+          [value]="selectedLanguage"
+          size="compact"
+          width="100%"
+          (onChange)="handleLanguageSelect($event)"
+        >
+          <goab-dropdown-item value="en-CA" label="English (Canada)" />
+          <goab-dropdown-item value="fr-CA" label="Français (Canada)" />
+        </goab-dropdown>
+      </goab-form-item>
       <goab-form-item label="Find a route" mb="m">
         <goab-dropdown
           name="route-search"

@@ -4,6 +4,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { getTranslations } from "../../common/localization";
   import { CalendarDate } from "@abgov/ui-components-common";
 
   // ******
@@ -48,22 +49,10 @@
   let _previousMonthDays: CalendarDate[] = [];
   let _nextMonthDays: CalendarDate[] = [];
   let _nextMonthDayCount: number;
-  let _months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
   let _years: string[] = [];
   let _calendarEl: HTMLElement;
+  // Initializes the langauge to the html tag lang attribute initially, if given
+  let _translations = getTranslations();
 
   $: {
     if (value) {
@@ -118,6 +107,8 @@
   // *****
 
   onMount(() => {
+    _translations = getTranslations(_calendarEl);
+
     if (value) {
       _calendarDate = new CalendarDate(value);
       _selectedDate = _calendarDate.clone();
@@ -337,10 +328,14 @@
   tabindex="-1"
 >
   <goa-block gap="s" mb="s">
-    <goa-form-item label="Month" mt="0" labelsize="compact">
+    <goa-form-item
+      label={_translations.calendar.month}
+      mt="0"
+      labelsize="compact"
+    >
       <goa-dropdown
         name="month"
-        arialabel={`${name} month`}
+        arialabel={_translations.calendar.monthAriaLabel(name)}
         data-testid="months"
         width="160px"
         maxheight="240px"
@@ -348,17 +343,21 @@
         on:_change={setMonth}
         size="compact"
       >
-        {#each _months as month, i}
+        {#each _translations.calendar.months as month, i}
           <goa-dropdown-item value={i + 1 + ""} label={month}
           ></goa-dropdown-item>
         {/each}
       </goa-dropdown>
     </goa-form-item>
 
-    <goa-form-item label="Year" mt="0" labelsize="compact">
+    <goa-form-item
+      label={_translations.calendar.year}
+      mt="0"
+      labelsize="compact"
+    >
       <goa-dropdown
         name="year"
-        arialabel={`${name} year`}
+        arialabel={_translations.calendar.yearAriaLabel(name)}
         data-testid="years"
         width="104px"
         maxheight="240px"
@@ -374,13 +373,9 @@
   </goa-block>
 
   <div data-testid="calendar" class="calendar" bind:this={_calendarEl}>
-    <h5>Sun</h5>
-    <h5>Mon</h5>
-    <h5>Tue</h5>
-    <h5>Wed</h5>
-    <h5>Thu</h5>
-    <h5>Fri</h5>
-    <h5>Sat</h5>
+    {#each _translations.calendar.weekdays as weekday}
+      <h5>{weekday}</h5>
+    {/each}
     {#each _previousMonthDays as d}
       <button
         on:click={() => onDateClick(d.toString())}
