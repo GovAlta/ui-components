@@ -151,6 +151,14 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     return () => observer.disconnect();
   }, []);
 
+  // Read URL search parameter on mount (e.g., /tokens?search=color)
+  useEffect(() => {
+    const searchParam = new URLSearchParams(window.location.search).get("search");
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, []); // Only run on mount
+
   // Filter state
   const [pendingFilters, setPendingFilters] = useState<string[]>([]);
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
@@ -212,7 +220,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const filteredTokens = useMemo(() => {
     let result = tokens;
 
-    // Apply search filter (substring match on token name since search index groups tokens by category)
+    // Apply search filter (substring match on the token name or its category)
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(

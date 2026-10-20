@@ -1,7 +1,8 @@
 /**
  * Build Search Index Script
  *
- * Extracts searchable content from MDX files and outputs a JSON index.
+ * Extracts searchable content from MDX files and the design tokens package,
+ * and outputs a JSON index.
  * Run with: npm run build:search-index
  *
  * The index is consumed by useSearch.ts at runtime for client-side search.
@@ -10,6 +11,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'node:fs';
 import { join, basename, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getAllTokens, getCategoryFilterGroup } from '../lib/tokens';
 
 // Get directory paths relative to this script
 // Script is in docs/src/scripts/, so go up two levels to docs/
@@ -64,7 +66,18 @@ interface PageEntry {
   slug: string;         // URL path without leading slash (e.g. "get-started/developers/setup")
 }
 
-type SearchEntry = ComponentEntry | ExampleEntry | PageEntry;
+interface TokenEntry {
+  type: 'token';
+  id: string;
+  title: string;        // Full CSS variable name (e.g. "--goa-color-interactive-default")
+  description?: string;
+  status: string;
+  category: string;     // Token category as the tokens grid shows it (e.g. "color", "borderRadius")
+  tags: string[];       // Category and its filter group (e.g. "transition", "motion")
+  slug: string;         // Name without the "--goa-" prefix; results link to /tokens?search=<slug>
+}
+
+type SearchEntry = ComponentEntry | ExampleEntry | PageEntry | TokenEntry;
 
 // ============================================================================
 // Frontmatter Parsing
@@ -379,6 +392,38 @@ function processProductType(filePath: string): ExampleEntry | null {
 }
 
 /**
+ * Build one search entry per global design token.
+ *
+ * Reads tokens through getAllTokens(), the same helper the /tokens page uses,
+ * so search covers exactly the tokens the grid shows. Errors are not caught
+ * here: a failure should stop the build rather than write an index with no
+ * tokens in it.
+ *
+ * Tags hold the category and its filter group, so a word like "motion" finds
+ * transition tokens. Path segments stay out of tags: the title already makes
+ * them searchable, and repeating them ranks tokens above components and
+ * examples in unfiltered results.
+ */
+function processTokens(): TokenEntry[] {
+  return getAllTokens().map((token) => {
+    const slug = token.name.replace(/^--goa-/, '');
+    const group = getCategoryFilterGroup(token.category)?.toLowerCase();
+    const tags = [token.category, group].filter((tag): tag is string => Boolean(tag));
+
+    return {
+      type: 'token',
+      id: slug,
+      title: token.name,
+      description: normalizeDescription(token.description),
+      status: 'stable',
+      category: token.category,
+      tags: [...new Set(tags)],
+      slug,
+    };
+  });
+}
+
+/**
  * Recursively find all MDX files in a directory.
  */
 function findMdxFiles(dir: string): string[] {
@@ -463,6 +508,13 @@ function main() {
     }
   }
   console.log(`  Found ${productTypeFiles.length} files, indexed ${entries.length - productTypeCountBefore} productTypes`);
+
+  // Process design tokens: one entry per global token, so the Tokens filter
+  // in Cmd-K returns results that link to /tokens?search=<slug>.
+  console.log('Processing tokens...');
+  const tokenCountBefore = entries.length;
+  entries.push(...processTokens());
+  console.log(`  Indexed ${entries.length - tokenCountBefore} tokens`);
 
   // Ensure public directory exists
   const publicDir = dirname(OUTPUT_FILE);
