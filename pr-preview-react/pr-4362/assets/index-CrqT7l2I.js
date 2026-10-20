@@ -24081,6 +24081,7 @@ const Iu = {
     dayFormat: "Day (DD)",
     yearFormat: "Year (YYYY)",
     selectMonth: "—Select a month—",
+    selectMonthCompact: "—Month—",
     months: [
       "January",
       "February",
@@ -24106,6 +24107,7 @@ const Iu = {
     dayFormat: "Jour (JJ)",
     yearFormat: "Année (AAAA)",
     selectMonth: "—Sélectionnez un mois—",
+    selectMonthCompact: "—Mois—",
     months: [
       "janvier",
       "février",
@@ -27918,7 +27920,7 @@ function r0(o, e) {
       var ue = H(P);
       m(ue, "name", "month"), m(ue, "testid", "input-month"), _(() => m(ue, "error", l())), _(() => m(ue, "value", (t(E), he(() => t(E).month + "")))), _(() => m(ue, "disabled", t(r))), _(() => m(ue, "size", h()));
       var ke = H(ue);
-      m(ke, "value", "0"), _(() => m(ke, "label", (t(N), he(() => t(N).calendar.selectMonth))));
+      m(ke, "value", "0"), _(() => m(ke, "label", (k(h()), t(N), he(() => h() === "compact" ? t(N).calendar.selectMonthCompact : t(N).calendar.selectMonth))));
       var X = ne(ke, 2);
       Zt(
         X,
