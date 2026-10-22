@@ -107,7 +107,7 @@ Tag: `goa-dropdown`
 | `mt` | Spacing | (none) | No | Top margin. |
 | `name` | string | `generateRandomId()` | No | Identifier for the dropdown. If omitted, a unique name is generated. |
 | `native` | boolean | `false` | No | When true will render the native select HTML element. |
-| `noresults` | string | `No matches found` | No | Sets the text displayed when filtering returns no results. |
+| `noresults` | string | (none) | No | Sets the text displayed when filtering returns no results. |
 | `placeholder` | string | (none) | No | The text displayed for the dropdown before a selection is made. Non-native only. |
 | `size` | "default" \| "compact" | `default` | No | Sets the size of the dropdown. Compact reduces height for dense layouts. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |

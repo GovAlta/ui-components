@@ -12,7 +12,7 @@ A button with more than one action.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | `Open menu` | No | Sets the aria-label for the icon button in icon-only mode. |
+| `ariaLabel` | string | (none) | No | Sets the aria-label for the icon button in icon-only mode. Defaults to localized text. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the button text. When no text is provided, displays as an icon button. |
 | `maxWidth` | string | (none) | No | Maximum width of the dropdown menu. |
 | `size` | "compact" \| "normal" | `normal` | No | Sets the size of the button. |
@@ -60,7 +60,7 @@ Tag: `goa-menu-button`
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `aria-label` | string | `Open menu` | No | Sets the aria-label for the icon button in icon-only mode. |
+| `aria-label` | string | (none) | No | Sets the aria-label for the icon button in icon-only mode. |
 | `leading-icon` | GoabIconType | (none) | No | Icon displayed before the button text. When no text is provided, displays as an icon button. |
 | `max-width` | string | (none) | No | Maximum width of the dropdown menu. |
 | `size` | "normal" \| "compact" | `normal` | No | Sets the size of the button. |
