@@ -13,7 +13,7 @@ A notification center panel that displays notification items within a work side 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `activeTab` | "unread" \| "urgent" \| "all" | `unread` | No | Sets the initially active tab. |
-| `heading` | string | (none) | No | Sets the panel heading text. Defaults to localized text. |
+| `heading` | string | `Notifications` | No | Sets the panel heading text. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
@@ -32,7 +32,7 @@ A notification center panel that displays notification items within a work side 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `activeTab` | "unread" \| "urgent" \| "all" | (none) | No | Sets the initially active tab in the notification panel. |
-| `heading` | string | (none) | No | The heading text displayed at the top of the notification panel. |
+| `heading` | string | `Notifications` | No | The heading text displayed at the top of the notification panel. |
 | `testId` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
@@ -53,7 +53,7 @@ Tag: `goa-work-side-notification-panel`
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
 | `active-tab` | "unread" \| "urgent" \| "all" | `unread` | No | Sets the initially active tab. |
-| `heading` | string | (none) | No | Sets the panel heading text. |
+| `heading` | string | `Notifications` | No | Sets the panel heading text. |
 | `testid` | string | (none) | No | Sets a data-testid attribute for automated testing. |
 
 ### Events
