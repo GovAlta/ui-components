@@ -18,7 +18,7 @@ declare module "react" {
 }
 
 export interface GoabWorkSideNotificationPanelProps {
-  /** Sets the panel heading text. Defaults to localized text. */
+  /** Sets the panel heading text. @default "Notifications" */
   heading?: string;
   /** Sets the initially active tab. @default "unread" */
   activeTab?: GoabWorkSideNotificationActiveTabType;

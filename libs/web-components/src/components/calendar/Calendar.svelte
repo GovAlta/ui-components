@@ -381,7 +381,10 @@
         on:click={() => onDateClick(d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
-        aria-label={d.format("PPPP")}
+        aria-label={d.format(
+          "EEEE, MMMM do, yyyy",
+          _translations.dateFnsLocale,
+        )}
         data-day={d.format("eee")}
         class="day other-month"
         class:disabled={d.isBefore(_min) || d.isAfter(_max)}
@@ -395,7 +398,10 @@
         on:click={() => onDateClick(d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
-        aria-label={d.format("PPPP")}
+        aria-label={d.format(
+          "EEEE, MMMM do, yyyy",
+          _translations.dateFnsLocale,
+        )}
         data-day={d.format("eee")}
         class="day"
         class:today={d.isSameDay(new CalendarDate())}
@@ -411,7 +417,10 @@
         on:click={() => onDateClick(d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
-        aria-label={d.format("PPPP")}
+        aria-label={d.format(
+          "EEEE, MMMM do, yyyy",
+          _translations.dateFnsLocale,
+        )}
         data-day={d.format("eee")}
         class="day other-month"
         class:disabled={d.isBefore(_min) || d.isAfter(_max)}

@@ -4,6 +4,7 @@ import AppHeader from "../../components/app-header/AppHeader.svelte";
 import MicrositeHeader from "../../components/microsite-header/MicrositeHeader.svelte";
 import FileUploadInput from "../../components/file-upload-input/FileUploadInput.svelte";
 import FileUploadCard from "../../components/file-upload-card/FileUploadCard.svelte";
+import Footer from "../../components/footer/Footer.svelte";
 import FilterChip from "../../components/filter-chip/FilterChip.svelte";
 import MenuButton from "../../components/menu-button/MenuButton.svelte";
 import Modal from "../../components/modal/Modal.svelte";
@@ -93,6 +94,13 @@ describe("French component translations", () => {
     expect(
       uploadCard.getByTestId("actions").querySelector("goa-button"),
     ).toHaveTextContent("Supprimer");
+
+    const footer = render(Footer, { testid: "footer" });
+    await waitFor(() => {
+      expect(footer.getByTestId("footer")).toHaveTextContent(
+        `© ${new Date().getFullYear()} Gouvernement de l’Alberta`,
+      );
+    });
   });
 
   it("localizes standalone accessibility labels", async () => {

@@ -164,11 +164,7 @@
     const date = new Date(timestamp);
     if (isNaN(date.getTime())) return "";
 
-    return formatDateGroupUtil(
-      date,
-      _translations.dateTime.locale,
-      _translations.dateTime,
-    );
+    return formatDateGroupUtil(date, _translations.dateTime);
   }
 
   function getDateKey(timestamp: string): string {

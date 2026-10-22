@@ -99,12 +99,10 @@
     _showBadge = type !== "default";
     _transformTime = formatRelativeTimestamp(
       timestamp ? new Date(timestamp) : null,
-      _translations.dateTime.locale,
       _translations.dateTime,
     );
     _fullDate = formatFullDate(
       timestamp ? new Date(timestamp) : null,
-      _translations.dateTime.locale,
       _translations.dateTime,
     );
 

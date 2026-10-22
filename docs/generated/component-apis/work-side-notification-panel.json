@@ -21,8 +21,8 @@
           "name": "heading",
           "type": "string",
           "required": false,
-          "default": null,
-          "description": "Sets the panel heading text. Defaults to localized text."
+          "default": "Notifications",
+          "description": "Sets the panel heading text."
         },
         {
           "name": "testId",
@@ -71,7 +71,7 @@
           "name": "heading",
           "type": "string",
           "required": false,
-          "default": null,
+          "default": "Notifications",
           "description": "The heading text displayed at the top of the notification panel."
         },
         {
@@ -121,7 +121,7 @@
           "name": "heading",
           "type": "string",
           "required": false,
-          "default": "",
+          "default": "Notifications",
           "description": "Sets the panel heading text."
         },
         {

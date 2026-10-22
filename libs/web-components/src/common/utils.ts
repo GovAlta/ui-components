@@ -1,3 +1,5 @@
+import type { Translations } from "./localization/types";
+
 // Similar to React's useEffect. Svelte's $: puts a watch on any variables within the block
 // of code. The issue is that the block may then be unwantingly triggered when one of the
 // non-key properties change. Using the `watch` function provides the control and makes
@@ -396,30 +398,14 @@ export function getLocalDateValues(input: string | Date): {
 // Date formatting
 // ===============
 
-export interface DateTimeTranslations {
-  today: string;
-  yesterday: string;
-  now: string;
-  minutesAgo: (count: number) => string;
-  hoursAgo: (count: number) => string;
-  daysAgo: (count: number) => string;
-}
-
-const DEFAULT_DATE_TIME_TRANSLATIONS: DateTimeTranslations = {
-  today: "Today",
-  yesterday: "Yesterday",
-  now: "Now",
-  minutesAgo: (count) => `${count} min ago`,
-  hoursAgo: (count) => `${count} h ago`,
-  daysAgo: (count) => `${count} d ago`,
-};
+type DateTimeTranslations = Translations["dateTime"];
 
 /**
  * Returns "Today", "Yesterday", or null for other dates.
  */
 export function getRelativeDayLabel(
   date: Date,
-  translations: DateTimeTranslations = DEFAULT_DATE_TIME_TRANSLATIONS,
+  translations: DateTimeTranslations,
 ): string | null {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -442,8 +428,7 @@ export function getRelativeDayLabel(
  */
 export function formatRelativeTimestamp(
   date: Date | null,
-  locale = "en-CA",
-  translations: DateTimeTranslations = DEFAULT_DATE_TIME_TRANSLATIONS,
+  translations: DateTimeTranslations,
 ): string {
   if (!date || !date.getTime()) return "";
 
@@ -459,7 +444,7 @@ export function formatRelativeTimestamp(
   if (diffHours < 24) return translations.hoursAgo(diffHours);
   if (diffDays < 7) return translations.daysAgo(diffDays);
 
-  return date.toLocaleString(locale, {
+  return date.toLocaleString(translations.locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -474,13 +459,12 @@ export function formatRelativeTimestamp(
  */
 export function formatFullDate(
   date: Date | null,
-  locale = "en-CA",
-  translations: DateTimeTranslations = DEFAULT_DATE_TIME_TRANSLATIONS,
+  translations: DateTimeTranslations,
 ): string {
   if (!date || !date.getTime()) return "";
 
   const label = getRelativeDayLabel(date, translations);
-  const fullDateString = date.toLocaleString(locale, {
+  const fullDateString = date.toLocaleString(translations.locale, {
     weekday: label ? undefined : "long",
     month: "long",
     day: "numeric",
@@ -501,13 +485,12 @@ export function formatFullDate(
  */
 export function formatDateGroup(
   date: Date,
-  locale = "en-CA",
-  translations: DateTimeTranslations = DEFAULT_DATE_TIME_TRANSLATIONS,
+  translations: DateTimeTranslations,
 ): string {
   const label = getRelativeDayLabel(date, translations);
   if (label) return label;
 
-  return date.toLocaleDateString(locale, {
+  return date.toLocaleDateString(translations.locale, {
     month: "long",
     day: "numeric",
     year: "numeric",

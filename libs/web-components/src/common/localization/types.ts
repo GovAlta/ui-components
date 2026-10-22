@@ -79,6 +79,9 @@ export interface Translations {
     remove: string;
     unavailable: string;
   };
+  footer: {
+    copyright: (year: number) => string;
+  };
   filterChip: {
     removeFilter: (content?: string) => string;
   };

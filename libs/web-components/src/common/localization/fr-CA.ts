@@ -99,6 +99,9 @@ export const frCAMessages: Translations = {
     remove: "Supprimer",
     unavailable: "s. o.",
   },
+  footer: {
+    copyright: (year) => `© ${year} Gouvernement de l’Alberta`,
+  },
   filterChip: {
     removeFilter: (content) =>
       content ? `Supprimer le filtre : ${content}` : "Supprimer le filtre",

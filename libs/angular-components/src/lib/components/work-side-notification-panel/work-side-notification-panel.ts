@@ -32,7 +32,7 @@ import {
 export class GoabWorkSideNotificationPanel implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** The heading text displayed at the top of the notification panel. */
+  /** The heading text displayed at the top of the notification panel. @default "Notifications" */
   @Input() heading?: string;
   /** Sets the initially active tab in the notification panel. */
   @Input() activeTab?: GoabWorkSideNotificationActiveTabType;

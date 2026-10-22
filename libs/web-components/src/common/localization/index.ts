@@ -1,5 +1,7 @@
 import { enCAMessages } from "./en-CA";
 import { frCAMessages } from "./fr-CA";
+import type { Locale } from "date-fns";
+import { enCA, frCA } from "date-fns/locale";
 import {
   SUPPORTED_LANGUAGES,
   type SupportedLanguage,
@@ -8,9 +10,11 @@ import {
 
 export const DEFAULT_LANGUAGE: SupportedLanguage = "en-CA";
 
-const translations: Record<SupportedLanguage, Translations> = {
-  "en-CA": enCAMessages,
-  "fr-CA": frCAMessages,
+type LocalizedTranslations = Translations & { dateFnsLocale: Locale };
+
+const translations: Record<SupportedLanguage, LocalizedTranslations> = {
+  "en-CA": { ...enCAMessages, dateFnsLocale: enCA },
+  "fr-CA": { ...frCAMessages, dateFnsLocale: frCA },
 };
 
 export function normalizeLanguage(language?: string | null): SupportedLanguage {
@@ -52,6 +56,8 @@ export function resolveLanguage(element?: Element | null): SupportedLanguage {
   return normalizeLanguage(ownerDocument?.documentElement.getAttribute("lang"));
 }
 
-export function getTranslations(element?: Element | null): Translations {
+export function getTranslations(
+  element?: Element | null,
+): LocalizedTranslations {
   return translations[resolveLanguage(element)];
 }

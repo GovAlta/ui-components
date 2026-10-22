@@ -310,7 +310,7 @@
           width="100%"
           readonly="true"
           trailingicon="calendar"
-          value={_date.format("MMMM d, yyyy")}
+          value={_date.format("MMMM d, yyyy", _translations.dateFnsLocale)}
           {error}
           on:keydown={handleKeyDown}
           on:_focus={stopInnerFocusEvent}
@@ -350,7 +350,7 @@
         width={width || "16ch"}
         readonly="true"
         trailingicon="calendar"
-        value={_date.format("MMMM d, yyyy")}
+        value={_date.format("MMMM d, yyyy", _translations.dateFnsLocale)}
         {error}
         on:keydown={handleKeyDown}
         on:_focus={stopInnerFocusEvent}

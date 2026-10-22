@@ -58,13 +58,13 @@ it("localizes date input labels and month options", async () => {
   ).toHaveAttribute("label", "août");
 });
 
-it("does not change formatted date values when French is resolved", async () => {
+it("translates formatted date words without changing their structure", async () => {
   document.documentElement.lang = "fr-CA";
   const value = new Date(2026, 0, 30);
   const { container } = render(DatePicker, { value });
 
   const input = container.querySelector("goa-input");
-  expect(input).toHaveAttribute("value", "January 30, 2026");
+  expect(input).toHaveAttribute("value", "janvier 30, 2026");
 });
 
 it("shows an error state", async () => {

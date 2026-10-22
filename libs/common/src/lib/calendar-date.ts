@@ -10,6 +10,7 @@ import {
   isBefore as _isBefore,
   addYears as _addYears,
   isAfter as _isAfter,
+  type Locale,
 } from "date-fns";
 
 type CalendarDateInput =
@@ -177,11 +178,11 @@ export class CalendarDate {
     return true;
   }
 
-  format(tmpl: string): string {
+  format(tmpl: string, locale?: Locale): string {
     if (this.isZero()) {
       return "";
     }
-    return _format(this.date, tmpl);
+    return _format(this.date, tmpl, locale ? { locale } : undefined);
   }
 
   toString(): string {

@@ -498,7 +498,7 @@
           "name": "noresults",
           "type": "string",
           "required": false,
-          "default": "",
+          "default": "No matches found",
           "description": "Sets the text displayed when filtering returns no results."
         },
         {

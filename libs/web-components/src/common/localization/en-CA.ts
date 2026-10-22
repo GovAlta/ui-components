@@ -91,6 +91,9 @@ export const enCAMessages: Translations = {
     remove: "Remove",
     unavailable: "n/a",
   },
+  footer: {
+    copyright: (year) => `© ${year} Government of Alberta`,
+  },
   filterChip: {
     removeFilter: (content) =>
       content ? `Remove filter: ${content}` : "Remove filter",

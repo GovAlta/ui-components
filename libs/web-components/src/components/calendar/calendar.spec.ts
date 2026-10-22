@@ -66,7 +66,10 @@ it("it renders", async () => {
 
 it("localizes built-in calendar text using the document language", async () => {
   document.documentElement.lang = "fr-CA";
-  const { container, getByTestId } = render(Calendar, { name: "appointment" });
+  const { container, getByTestId } = render(Calendar, {
+    name: "appointment",
+    value: "2026-01-30",
+  });
   await tick();
 
   const monthDropdown = getByTestId("months");
@@ -92,6 +95,10 @@ it("localizes built-in calendar text using the document language", async () => {
     "ven.",
     "sam.",
   ]);
+  expect(getByTestId("2026-01-30")).toHaveAttribute(
+    "aria-label",
+    "vendredi, janvier 30, 2026",
+  );
 });
 
 it("should have no date selected if one not provided", async () => {
