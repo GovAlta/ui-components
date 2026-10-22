@@ -32,6 +32,7 @@
   // Slot detection
   let _hasBannerSlot = false;
   let _hasNavigationSlot = false;
+  let _hasPhaseSlot = false;
 
   // Utilities responsive
   let _utilitiesSlotItems: Element[] = [];
@@ -39,8 +40,10 @@
   let _showUtilitiesMenu = false; // Start false - show items initially to measure
   let _utilitiesMenuOpen = false;
   let _utilitiesPlaceholderEl: HTMLElement | null = null;
+  let _utilitiesItemsEl: HTMLElement;
   let _utilitiesInitialMeasurementDone = false;
   let _utilitiesCheckTimeout: number | null = null;
+  let _utilitiesResizeObserver: ResizeObserver | null = null;
 
   // Reactive
 
@@ -58,12 +61,27 @@
     detectSlots();
     detectUtilitiesItems();
 
+    const phaseSlot =
+      _rootEl.querySelector<HTMLSlotElement>('slot[name="phase"]');
+    const updatePhaseSlot = () => {
+      _hasPhaseSlot = (phaseSlot?.assignedElements().length ?? 0) > 0;
+    };
+    phaseSlot?.addEventListener("slotchange", updatePhaseSlot);
+    updatePhaseSlot();
+
     document.addEventListener("click", handleClickOutside);
 
     await tick();
 
-    if (_utilitiesPlaceholderEl && _utilitiesItemCount >= 2) {
+    const header = _utilitiesPlaceholderEl?.parentElement;
+    if (header && _utilitiesItemCount >= 2) {
       await tick();
+
+      // Retry when late tokens, fonts, or utility content change the layout.
+      _utilitiesResizeObserver = new ResizeObserver(checkUtilitiesSpace);
+      _utilitiesResizeObserver.observe(header);
+      _utilitiesResizeObserver.observe(_utilitiesItemsEl);
+      document.fonts?.addEventListener("loadingdone", checkUtilitiesSpace);
 
       checkUtilitiesSpace();
       _utilitiesInitialMeasurementDone = true;
@@ -72,6 +90,8 @@
 
   onDestroy(() => {
     document.removeEventListener("click", handleClickOutside);
+    document.fonts?.removeEventListener("loadingdone", checkUtilitiesSpace);
+    _utilitiesResizeObserver?.disconnect();
 
     // Clean up utilities check timeout
     if (_utilitiesCheckTimeout) {
@@ -150,79 +170,42 @@
         return;
       }
 
-      // MOBILE RULE: Always show menu button on mobile (<640px) when 2+ items
-      if (_mobile && _utilitiesItemCount >= 2) {
+      // Keep the existing mobile rule for two or more utilities.
+      if (_mobile) {
         if (_showUtilitiesMenu !== true) {
           _showUtilitiesMenu = true;
         }
         return;
       }
 
-      // TABLET/DESKTOP: Space-based calculation
-      // Get the header placeholder (parent container) width
-      const shadowRoot = _utilitiesPlaceholderEl.getRootNode() as ShadowRoot;
-      const headerPlaceholder = shadowRoot?.querySelector(
-        ".header-placeholder",
-      ) as HTMLElement;
+      const header = _utilitiesPlaceholderEl.parentElement;
+      const logo = header?.querySelector<HTMLElement>(".logo-area");
+      const service = header?.querySelector<HTMLElement>(
+        ".service-phase-wrapper",
+      );
+      if (!header || !logo || !service || !_utilitiesItemsEl) return;
 
-      if (!headerPlaceholder) {
-        if (_showUtilitiesMenu !== false) {
-          _showUtilitiesMenu = false;
-        }
-        return;
-      }
-
-      const headerWidth = headerPlaceholder.offsetWidth;
-
-      // Use minimum widths for predictable calculation
-      // Service/phase wrapper has min-width: 200px and uses flex: 1, so reserve that space
-      const logoArea = shadowRoot?.querySelector(".logo-area") as HTMLElement;
-      const logoWidth = logoArea?.offsetWidth || (_mobile ? 32 : 118); // Fixed logo sizes
-
-      const servicePhaseMinWidth = 200; // Minimum width for service area
-      const headerPadding = 96; // 48px left + 48px right padding on header
-      const gapBetweenElements = 48; // Gaps between major sections (24px * 2)
-
-      // Calculate available space for utilities using minimum service area width
-      // This prevents the service area flex growing/shrinking from affecting the calculation
+      const headerStyle = getComputedStyle(header);
+      const logoWidth = logo.getBoundingClientRect().width;
       const availableWidth =
-        headerWidth -
+        header.clientWidth -
+        parseFloat(headerStyle.paddingLeft) -
+        parseFloat(headerStyle.paddingRight) -
+        2 * parseFloat(headerStyle.columnGap) -
         logoWidth -
-        servicePhaseMinWidth -
-        headerPadding -
-        gapBetweenElements;
+        parseFloat(getComputedStyle(service).minWidth);
+      if (!Number.isFinite(availableWidth)) return;
 
-      // Measure actual utility items
-      const utilitySlot = shadowRoot?.querySelector(
-        'slot[name="utilities"]',
-      ) as HTMLSlotElement;
-      let totalItemsWidth = 0;
+      // Measure the same slot in its inline presentation, even when the menu is
+      // closed or open. Restore the dropdown before the browser paints.
+      const wasDropdown =
+        _utilitiesItemsEl.classList.contains("utilities-dropdown");
+      _utilitiesItemsEl.classList.remove("utilities-dropdown");
+      const utilitiesWidth = _utilitiesItemsEl.getBoundingClientRect().width;
+      _utilitiesItemsEl.classList.toggle("utilities-dropdown", wasDropdown);
+      if (!Number.isFinite(utilitiesWidth)) return;
 
-      if (utilitySlot) {
-        const slottedItems = utilitySlot.assignedElements();
-
-        if (slottedItems.length > 0) {
-          // Measure actual widths
-          slottedItems.forEach((item) => {
-            const itemEl = item as HTMLElement;
-            totalItemsWidth += itemEl.offsetWidth || 100;
-          });
-
-          // Add gaps between items
-          const gap = 12;
-          totalItemsWidth += (slottedItems.length - 1) * gap;
-        } else {
-          // Fallback: estimate if items not yet rendered
-          const estimatedItemWidth = 100;
-          const gap = 12;
-          totalItemsWidth =
-            _utilitiesItemCount * estimatedItemWidth +
-            (_utilitiesItemCount - 1) * gap;
-        }
-      }
-
-      // Determine if menu should be shown
-      const shouldShowMenu = totalItemsWidth > availableWidth;
+      const shouldShowMenu = utilitiesWidth > availableWidth;
 
       // Only update if state needs to change (prevents infinite loop)
       if (_showUtilitiesMenu !== shouldShowMenu) {
@@ -294,7 +277,7 @@
             <span class="secondary-text">{secondarytext}</span>
           {/if}
         </div>
-        <div class="phase-placeholder">
+        <div class="phase-placeholder" class:empty={!_hasPhaseSlot}>
           <slot name="phase"></slot>
         </div>
       </div>
@@ -314,16 +297,15 @@
               size="small"
             ></goa-icon>
           </button>
-
-          {#if _utilitiesMenuOpen}
-            <div class="utilities-dropdown">
-              <slot name="utilities"></slot>
-            </div>
-          {/if}
-        {:else}
-          <!-- 0-1 items: Show directly -->
-          <slot name="utilities"></slot>
         {/if}
+        <div
+          class="utilities-items"
+          class:utilities-dropdown={_showUtilitiesMenu && _utilitiesMenuOpen}
+          class:utilities-hidden={_showUtilitiesMenu && !_utilitiesMenuOpen}
+          bind:this={_utilitiesItemsEl}
+        >
+          <slot name="utilities"></slot>
+        </div>
       </div>
     </div>
 
@@ -373,7 +355,8 @@
 
   /* Header Section */
   .header-placeholder {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     gap: var(--goa-app-header-logo-service-gap);
     align-items: center;
     padding: var(--goa-app-header-padding-v)
@@ -382,6 +365,7 @@
   }
 
   .mobile .header-placeholder {
+    display: flex;
     gap: var(--goa-app-header-logo-service-gap-small-screen);
     padding: var(--goa-app-header-padding-v)
       var(--goa-app-header-padding-h-mobile);
@@ -429,6 +413,10 @@
     align-items: center;
   }
 
+  .phase-placeholder.empty {
+    display: none;
+  }
+
   /* Service name and secondary text styling */
   .service-name {
     font: var(--goa-app-header-typography-service-name);
@@ -454,8 +442,23 @@
   .utilities-placeholder {
     position: relative;
     display: flex;
+    justify-self: end;
+    align-items: center;
+  }
+
+  .utilities-items {
+    display: flex;
+    flex-shrink: 0;
+    width: max-content;
     gap: var(--goa-app-header-utilities-gap);
     align-items: center;
+  }
+
+  .utilities-hidden {
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   /* Style links in utilities slot - medium link style without underline */
@@ -521,6 +524,7 @@
     position: absolute;
     top: calc(100% + 4px);
     right: 0;
+    width: auto;
     min-width: 200px;
     background: var(--goa-color-greyscale-white);
     box-shadow:
@@ -532,6 +536,7 @@
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
   }
 
@@ -618,6 +623,7 @@
 
   /* Logo styling */
   .logo-area {
+    justify-self: start;
     display: flex;
     align-items: center;
   }
