@@ -1,0 +1,13 @@
+.bug4364-header-preview {
+  position: relative;
+}
+
+.bug4364-header-preview::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  border-left: var(--goa-border-width-s) dashed var(--goa-color-interactive-default);
+  pointer-events: none;
+  z-index: 1;
+}
