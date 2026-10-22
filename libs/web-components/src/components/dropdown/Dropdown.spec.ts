@@ -14,6 +14,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
+  document.documentElement.removeAttribute("lang");
 });
 
 describe("GoADropdown", () => {
@@ -720,6 +721,45 @@ describe("GoADropdown", () => {
       });
       const input = result.container.querySelector("input");
       expect(input?.getAttribute("placeholder")).toBe("some text");
+    });
+
+    it("localizes the default placeholder", async () => {
+      document.documentElement.lang = "fr-CA";
+      const result = render(GoADropdownWrapper, { name, items });
+      const input = result.container.querySelector("input");
+
+      await waitFor(() => {
+        expect(input?.getAttribute("placeholder")).toBe("—Sélectionner—");
+      });
+    });
+  });
+
+  it("localizes filter defaults", async () => {
+    document.documentElement.lang = "fr-CA";
+    const result = render(GoADropdown, {
+      name,
+      filterable: "true",
+    });
+
+    await waitFor(() => {
+      expect(result.getByTestId("dropdown-item-not-found")).toHaveTextContent(
+        "Aucune correspondance trouvée",
+      );
+    });
+
+    result.unmount();
+    const selectedResult = render(GoADropdownWrapper, {
+      name,
+      items,
+      value: "orange",
+      filterable: "true",
+    });
+
+    await waitFor(() => {
+      expect(selectedResult.getByTestId("clear-icon")).toHaveAttribute(
+        "arialabel",
+        "Effacer la saisie",
+      );
     });
   });
 

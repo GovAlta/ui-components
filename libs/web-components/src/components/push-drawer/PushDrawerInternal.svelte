@@ -13,6 +13,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import { dispatch, receive } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
   import {
     ScrollPanelStateChangeMsg,
     type ScrollPanelStateChangeRelayDetail,
@@ -30,6 +31,7 @@
   let closingTimeout: number | null = null;
   let _scrollPos: "top" | "middle" | "bottom" | null = null;
   let _actionsSlotHasContent: boolean = false;
+  let _translations = getTranslations();
 
   $: if (open && drawerState !== "open") {
     drawerState = "open";
@@ -48,6 +50,7 @@
   }
 
   onMount(() => {
+    _translations = getTranslations(_contentEl);
     drawerState = open ? "open" : "closed";
     if (width.endsWith("%")) {
       console.error(
@@ -162,7 +165,7 @@
           size="medium"
           data-ignore-focus="true"
           data-testid="drawer-close-button"
-          arialabel="Close the drawer"
+          arialabel={_translations.pushDrawer.closeDrawer}
           variant="dark"
           icon="close"
           theme="filled"

@@ -9,6 +9,7 @@
     toBoolean,
   } from "../../common/utils";
   import { onDestroy, onMount, tick } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
@@ -42,6 +43,7 @@
   let _isOpen: boolean = false;
   let _headingSlotHasContent = false;
   let _actionsSlotHasContent = false;
+  let _translations = getTranslations();
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -63,6 +65,7 @@
   $: _headingExists =
     heading !== "" || ($$slots.heading && _headingSlotHasContent);
   $: _headerHasContent = _headingExists || _isClosable;
+  $: if (_rootEl) _translations = getTranslations(_rootEl);
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
@@ -216,7 +219,9 @@
                   data-testid="modal-title"
                   class="modal-title"
                   id="goa-modal-heading"
-                  aria-label={_headingExists ? undefined : "Modal"}
+                  aria-label={_headingExists
+                    ? undefined
+                    : _translations.modal.modal}
                 >
                   {#if heading}
                     {heading}
@@ -233,7 +238,7 @@
                     size="medium"
                     data-ignore-focus="true"
                     data-testid="modal-close-button"
-                    arialabel="Close the modal"
+                    arialabel={_translations.modal.closeModal}
                     icon="close"
                     theme="filled"
                     on:click={close}

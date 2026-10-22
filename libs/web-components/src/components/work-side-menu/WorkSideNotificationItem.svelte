@@ -17,6 +17,7 @@
     formatRelativeTimestamp,
     formatFullDate,
   } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -71,6 +72,7 @@
   let _isUrgent: boolean = false;
   let _badgeType: string = "";
   let _showBadge: boolean = false;
+  let _translations = getTranslations();
 
   // ========
   // Reactive
@@ -87,6 +89,7 @@
   // *****
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     validateType(type);
     validateReadStatus(readStatus);
     validatePriority(priority);
@@ -96,8 +99,14 @@
     _showBadge = type !== "default";
     _transformTime = formatRelativeTimestamp(
       timestamp ? new Date(timestamp) : null,
+      _translations.dateTime.locale,
+      _translations.dateTime,
     );
-    _fullDate = formatFullDate(timestamp ? new Date(timestamp) : null);
+    _fullDate = formatFullDate(
+      timestamp ? new Date(timestamp) : null,
+      _translations.dateTime.locale,
+      _translations.dateTime,
+    );
 
     _rootEl.addEventListener("notification-panel:tabchange", handleTabChange);
     _rootEl.addEventListener(
@@ -182,6 +191,23 @@
         return "";
     }
   }
+
+  function getBadgeLabel(
+    notificationType: WorkSideNotificationItemType,
+  ): string {
+    switch (notificationType) {
+      case "info":
+        return _translations.workSideNotificationItem.information;
+      case "warning":
+        return _translations.workSideNotificationItem.warning;
+      case "success":
+        return _translations.workSideNotificationItem.success;
+      case "critical":
+        return _translations.workSideNotificationItem.critical;
+      default:
+        return "";
+    }
+  }
 </script>
 
 {#if _dateGroupHeading}
@@ -212,7 +238,7 @@
           <goa-badge
             type={_badgeType}
             icon="true"
-            arialabel={type}
+            arialabel={getBadgeLabel(type)}
             emphasis="subtle"
           ></goa-badge>
         </span>

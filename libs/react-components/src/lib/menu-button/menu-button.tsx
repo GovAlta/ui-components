@@ -43,7 +43,7 @@ export interface GoabMenuButtonProps extends DataAttributes {
   maxWidth?: string;
   /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   leadingIcon?: GoabIconType;
-  /** Sets the aria-label for the icon button in icon-only mode. @default "Open menu" */
+  /** Sets the aria-label for the icon button in icon-only mode. Defaults to localized text. */
   ariaLabel?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;

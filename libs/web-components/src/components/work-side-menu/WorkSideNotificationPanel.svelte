@@ -15,6 +15,7 @@
     performOnce,
     formatDateGroup as formatDateGroupUtil,
   } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   // Validators
 
@@ -37,7 +38,7 @@
   // Public
 
   /** Sets the panel heading text. */
-  export let heading: string = "Notifications";
+  export let heading: string = "";
   /** Sets the initially active tab. */
   export let activeTab: TabType = "unread";
   /** Sets a data-testid attribute for automated testing. */
@@ -51,6 +52,7 @@
   let _items: NotificationItem[] = [];
   let _dateGroupedItems = new Map<string, NotificationItem>();
   let _updateDateHeadersTimeout: ReturnType<typeof setTimeout> | null = null;
+  let _translations = getTranslations();
 
   const _emptyImage =
     "data:image/svg+xml,%3csvg%20width='100'%20height='78'%20viewBox='0%200%20100%2078'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M35.3916%2010.3377L89.7579%2019.1046C95.0394%2019.9563%2098.2025%2025.4482%2096.2887%2030.4439L78.9942%2075.591C78.846%2075.978%2078.5679%2076.2827%2078.2253%2076.469C77.9557%2076.7837%2077.6176%2076.7584%2077.1425%2076.651C77.1243%2076.648%2077.1061%2076.6447%2077.0879%2076.641L75.7496%2076.3725C76.3188%2076.4338%2076.7722%2076.5674%2077.1425%2076.651C77.5243%2076.7148%2077.9033%2076.6442%2078.2253%2076.469C78.2465%2076.4443%2078.2673%2076.4175%2078.2876%2076.3884C78.4498%2076.1572%2078.4664%2075.8597%2078.4317%2075.5794L73.4827%2035.6546C72.5591%2028.2041%2066.8211%2022.2617%2059.4075%2021.078L26.1553%2015.7688C27.5305%2011.9754%2031.4081%209.69529%2035.3916%2010.3377Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M95.5272%2022.3047C97.5167%2024.4198%2098.3017%2027.5943%2097.1683%2030.5801L80.0464%2075.6832C79.8681%2076.1528%2079.5193%2076.5121%2079.0948%2076.7125C78.7271%2076.9892%2078.301%2076.9332%2077.9393%2076.8551L77.9145%2076.8499C75.9533%2076.452%2077.424%2076.9001%2077.8885%2075.2938L78.5706%2073.3849L95.6772%2028.323C96.4561%2026.271%2096.3286%2024.1299%2095.5272%2022.3047Z'%20fill='black'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3cpath%20d='M19.7062%2014.8763L19.5582%2013.3068C18.999%207.37653%2014.5443%202.55192%208.67735%201.52252C4.33738%200.761031%200.48074%204.37732%200.961767%208.75726L6.59424%2060.0431C6.79604%2061.8806%208.17145%2063.3722%209.98658%2063.7221L76.1867%2076.4832C77.3099%2076.6997%2078.3181%2075.7589%2078.1797%2074.6235L73.4332%2035.6892C72.5207%2028.2049%2066.7506%2022.236%2059.3015%2021.0706L19.7062%2014.8763Z'%20fill='white'%20stroke='black'%20stroke-width='0.843087'%20stroke-linecap='round'/%3e%3c/svg%3e";
@@ -75,6 +77,7 @@
   // *****
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     validateTab(activeTab);
 
     _rootEl.addEventListener(
@@ -161,7 +164,11 @@
     const date = new Date(timestamp);
     if (isNaN(date.getTime())) return "";
 
-    return formatDateGroupUtil(date);
+    return formatDateGroupUtil(
+      date,
+      _translations.dateTime.locale,
+      _translations.dateTime,
+    );
   }
 
   function getDateKey(timestamp: string): string {
@@ -245,7 +252,8 @@
   <div slot="header" class="panel-header">
     <div class="header">
       <goa-text as="h2" size="heading-s" mt="l" mb="s" ml="m"
-        >{heading}</goa-text
+        >{heading ||
+          _translations.workSideNotificationPanel.notifications}</goa-text
       >
       <goa-icon-button
         icon="close"
@@ -253,6 +261,7 @@
         variant="dark"
         mr="s"
         testid={`close-${testid}`}
+        arialabel={_translations.workSideNotificationPanel.closeNotifications}
         on:_click={handleClose}
       ></goa-icon-button>
     </div>
@@ -265,7 +274,7 @@
     >
       <goa-tab>
         <span slot="heading">
-          Unread
+          {_translations.workSideNotificationPanel.unread}
           {#if _unreadCount > 0}
             <goa-badge
               testid="unreadCount"
@@ -279,7 +288,7 @@
       </goa-tab>
       <goa-tab>
         <span slot="heading">
-          Urgent
+          {_translations.workSideNotificationPanel.urgent}
           {#if _urgentCount > 0}
             <goa-badge
               icon="false"
@@ -291,7 +300,8 @@
         </span>
       </goa-tab>
       <goa-tab>
-        <span slot="heading">All</span>
+        <span slot="heading">{_translations.workSideNotificationPanel.all}</span
+        >
       </goa-tab>
     </goa-tabs>
   </div>
@@ -299,13 +309,15 @@
   {#if _isEmptyState}
     <div class="empty">
       <img alt="" src={_emptyImage} />
-      <span class="heading">You're all caught up</span>
+      <span class="heading"
+        >{_translations.workSideNotificationPanel.caughtUp}</span
+      >
       <span class="subline" data-testid={`empty-notifications-${testid}`}>
         {activeTab === "unread"
-          ? "No unread notifications"
+          ? _translations.workSideNotificationPanel.noUnreadNotifications
           : activeTab === "urgent"
-            ? "No urgent notifications"
-            : "No notifications"}
+            ? _translations.workSideNotificationPanel.noUrgentNotifications
+            : _translations.workSideNotificationPanel.noNotifications}
       </span>
     </div>
   {/if}
@@ -313,12 +325,13 @@
 
   <div slot="footer" class="footer">
     <goa-link-button on:_click={handleViewAll} testid={`view-all-${testid}`}
-      >View all</goa-link-button
+      >{_translations.workSideNotificationPanel.viewAll}</goa-link-button
     >
     <goa-link-button
       disabled={_unreadCount === 0}
       testid={`mark-all-as-read-${testid}`}
-      on:_click={handleMarkAllRead}>Mark all as read</goa-link-button
+      on:_click={handleMarkAllRead}
+      >{_translations.workSideNotificationPanel.markAllAsRead}</goa-link-button
     >
   </div>
 </goa-scroll-panel>

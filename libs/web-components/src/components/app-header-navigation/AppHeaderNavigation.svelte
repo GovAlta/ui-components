@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
+  import { getTranslations } from "../../common/localization";
 
   // Props
   export let windowWidth: number;
@@ -23,6 +24,7 @@
     indented?: boolean;
   }> = [];
   let _moreMenuElement: HTMLElement | null = null; // The More menu element in light DOM
+  let _translations = getTranslations();
 
   // Reactive statement - check overflow when window resizes
   $: if (windowWidth && _navigationInitialMeasurementDone) {
@@ -45,7 +47,7 @@
       // Exclude the More menu itself
       if (
         el.tagName === "GOA-APP-HEADER-MENU" &&
-        el.getAttribute("heading") === "More"
+        el.getAttribute("heading") === _translations.appHeaderNavigation.more
       )
         return false;
       return true;
@@ -104,7 +106,8 @@
         (item) =>
           !(
             item.tagName === "GOA-APP-HEADER-MENU" &&
-            item.getAttribute("heading") === "More"
+            item.getAttribute("heading") ===
+              _translations.appHeaderNavigation.more
           ),
       );
 
@@ -204,7 +207,7 @@
     // Create More menu element
     const moreMenu = document.createElement("goa-app-header-menu");
     moreMenu.setAttribute("slot", "navigation");
-    moreMenu.setAttribute("heading", "More");
+    moreMenu.setAttribute("heading", _translations.appHeaderNavigation.more);
 
     // Add overflow items (headers + links)
     _overflowItems.forEach((item) => {
@@ -310,7 +313,8 @@
       (item) =>
         !(
           item.tagName === "GOA-APP-HEADER-MENU" &&
-          item.getAttribute("heading") === "More"
+          item.getAttribute("heading") ===
+            _translations.appHeaderNavigation.more
         ),
     );
 
@@ -383,7 +387,8 @@
       (item) =>
         !(
           item.tagName === "GOA-APP-HEADER-MENU" &&
-          item.getAttribute("heading") === "More"
+          item.getAttribute("heading") ===
+            _translations.appHeaderNavigation.more
         ),
     );
 
@@ -418,7 +423,8 @@
       (item) =>
         !(
           item.tagName === "GOA-APP-HEADER-MENU" &&
-          item.getAttribute("heading") === "More"
+          item.getAttribute("heading") ===
+            _translations.appHeaderNavigation.more
         ),
     );
 
@@ -511,6 +517,7 @@
 
   // Lifecycle Hooks
   onMount(async () => {
+    _translations = getTranslations(_navigationPlaceholderEl);
     // Detect navigation items initially
     detectNavigationItems();
 

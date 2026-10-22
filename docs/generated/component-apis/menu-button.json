@@ -8,8 +8,8 @@
           "name": "ariaLabel",
           "type": "string",
           "required": false,
-          "default": "Open menu",
-          "description": "Sets the aria-label for the icon button in icon-only mode."
+          "default": null,
+          "description": "Sets the aria-label for the icon button in icon-only mode. Defaults to localized text."
         },
         {
           "name": "leadingIcon",
@@ -196,7 +196,7 @@
           "name": "aria-label",
           "type": "string",
           "required": false,
-          "default": "Open menu",
+          "default": "",
           "description": "Sets the aria-label for the icon button in icon-only mode."
         },
         {
