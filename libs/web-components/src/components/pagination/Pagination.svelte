@@ -4,6 +4,7 @@
   import { calculateMargin, type Spacing } from "../../common/styling";
   import { onMount, tick } from "svelte";
   import { typeValidator, validateRequired } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   // Types
 
@@ -50,11 +51,14 @@
 
   let pageDropdownEl: HTMLElement;
   let hiddenEl: HTMLInputElement; // needed to allow the inputEl's event to be cancelled
+  let _rootEl: HTMLElement;
+  let _translations = getTranslations();
 
   // hooks
 
   onMount(async () => {
     await tick();
+    _translations = getTranslations(_rootEl);
     validateRequired("GoAPagination", { itemcount, pagenumber });
     validateVariant(variant);
   });
@@ -100,11 +104,11 @@
   }
 </script>
 
-<div id="root" style={calculateMargin(mt, mr, mb, ml)}>
+<div bind:this={_rootEl} id="root" style={calculateMargin(mt, mr, mb, ml)}>
   <div class="controls" data-testid={testid}>
     {#if variant === "all"}
       <goa-block data-testid="page-selector" alignment="center" gap="s">
-        <span>Page</span>
+        <span>{_translations.pagination.page}</span>
         <input bind:this={hiddenEl} type="hidden" />
         {#if itemcount <= 0}
           <goa-dropdown
@@ -130,7 +134,11 @@
             </goa-dropdown>
           {/key}
         {/if}
-        <span>of {itemcount <= 0 ? "1" : _pageCount}</span>
+        <span
+          >{`${_translations.pagination.of} ${
+            itemcount <= 0 ? "1" : _pageCount
+          }`}</span
+        >
       </goa-block>
     {/if}
     <div class="page-links" data-testid="page-links">
@@ -142,7 +150,7 @@
         size="compact"
         leadingicon="arrow-back"
         disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}
-        >Previous</goa-button
+        >{_translations.pagination.previous}</goa-button
       >
       <!-- svelte-ignore a11y_no_static_element_interactions -->
       <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -152,7 +160,7 @@
         size="compact"
         trailingicon="arrow-forward"
         disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}
-        >Next</goa-button
+        >{_translations.pagination.next}</goa-button
       >
     </div>
   </div>

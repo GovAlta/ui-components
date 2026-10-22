@@ -11,6 +11,7 @@
   import { onMount } from "svelte";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { toBoolean, dispatch } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   /** The text displayed in the group heading. */
   export let heading: string;
@@ -22,8 +23,10 @@
   export let open: boolean = false;
 
   let _rootEl: HTMLElement;
+  let _translations = getTranslations();
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     _rootEl.addEventListener("_itemCurrent", handleItemCurrent);
   });
 
@@ -44,7 +47,9 @@
 <div class="root" data-testid={testid} bind:this={_rootEl}>
   <details
     {open}
-    aria-label={open ? "Close group" : "Open group"}
+    aria-label={open
+      ? _translations.workSideMenuGroup.closeGroup
+      : _translations.workSideMenuGroup.openGroup}
     on:toggle={({ target }) => (open = toBoolean(`${target?.open}`))}
     on:mouseenter={handleMouseEnter}
   >

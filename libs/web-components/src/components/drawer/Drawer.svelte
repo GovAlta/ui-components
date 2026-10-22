@@ -17,6 +17,7 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { dispatch, style, styles } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
+  import { getTranslations } from "../../common/localization";
 
   // ******
   // Public
@@ -45,6 +46,7 @@
   // computes the required absolute position offset to hide the drawer when not shown
   let _drawerSize: number;
   let _actionsSlotHasContent: boolean = false;
+  let _translations = getTranslations();
 
   // ========
   // Reactive
@@ -82,6 +84,7 @@
 
   onMount(async () => {
     await tick();
+    _translations = getTranslations(_contentEl);
 
     if (position === "bottom") {
       _drawerSize = _contentEl?.getBoundingClientRect().height ?? 0;
@@ -191,7 +194,7 @@
               size="medium"
               data-ignore-focus="true"
               data-testid="drawer-close-button"
-              arialabel="Close the drawer"
+              arialabel={_translations.drawer.closeDrawer}
               variant="dark"
               icon="close"
               theme="filled"

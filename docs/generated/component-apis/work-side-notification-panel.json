@@ -71,7 +71,7 @@
           "name": "heading",
           "type": "string",
           "required": false,
-          "default": null,
+          "default": "Notifications",
           "description": "The heading text displayed at the top of the notification panel."
         },
         {

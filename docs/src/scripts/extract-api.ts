@@ -233,6 +233,23 @@ const PROP_TYPE_OVERRIDES: Record<
     },
   },
 };
+// Localized element props use an empty string internally to detect that the
+// consumer did not provide a value. Document the effective English defaults
+// rather than that implementation detail.
+const PROP_DEFAULT_OVERRIDES: Record<
+  string,
+  Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
+> = {
+  dropdown: {
+    webComponents: { noresults: "No matches found" },
+  },
+  "menu-button": {
+    webComponents: { "aria-label": "Open menu" },
+  },
+  "work-side-notification-panel": {
+    webComponents: { heading: "Notifications" },
+  },
+};
 // Slots consumed as dedicated sub-components (e.g. GoabAppFooterMetaSection) rather than
 // typed props/inputs: documenting them as ReactNode/TemplateRef props would be wrong since
 // consumers never bind a value to them, they nest the sub-component instead.
@@ -303,6 +320,19 @@ function applyPropTypeOverrides(
     prop.type = type;
     delete prop.typeLabel;
     delete prop.values;
+  }
+}
+
+function applyPropDefaultOverrides(
+  componentName: string,
+  framework: "react" | "angular" | "webComponents",
+  props: ExtractedProp[],
+): void {
+  const overrides = PROP_DEFAULT_OVERRIDES[componentName]?.[framework];
+  if (!overrides) return;
+
+  for (const prop of props) {
+    if (prop.name in overrides) prop.default = overrides[prop.name];
   }
 }
 
@@ -3140,7 +3170,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     if (!prop.values || prop.deprecatedValues) continue;
     const accepted = new Set(prop.values);
     const validator = getDeprecatingValidators().find(
-      (v) => v.values.length === accepted.size && v.values.every((value) => accepted.has(value)),
+      (v) =>
+        v.values.length === accepted.size &&
+        v.values.every((value) => accepted.has(value)),
     );
     const deprecatedValues = validator?.deprecated;
     if (!deprecatedValues) continue;
@@ -3152,6 +3184,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
   applyPropTypeOverrides(componentName, "react", reactProps);
   applyPropTypeOverrides(componentName, "angular", angularProps);
   applyPropTypeOverrides(componentName, "webComponents", webComponentProps);
+  applyPropDefaultOverrides(componentName, "react", reactProps);
+  applyPropDefaultOverrides(componentName, "angular", angularProps);
+  applyPropDefaultOverrides(componentName, "webComponents", webComponentProps);
 
   reactProps = reactProps.filter((prop) => !shouldSkipInternalProp(prop.name));
   angularProps = angularProps.filter((prop) => !shouldSkipInternalProp(prop.name));

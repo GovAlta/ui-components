@@ -26,6 +26,7 @@
     WorkSideMenuCloseMsg,
   } from "../../types/relay-types";
   import { onMount, onDestroy, tick } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   // ******
   // Public
@@ -69,6 +70,7 @@
   let _toggleButtonEl: HTMLElement | undefined;
   let _tooltipEl: HTMLElement;
   let _tooltipLabel: string = "";
+  let _translations = getTranslations();
 
   let _bindTimeoutId: any;
   let _mouseEnterTimeoutId: any;
@@ -84,6 +86,7 @@
   // *****
 
   onMount(async () => {
+    _translations = getTranslations(_rootEl);
     await tick();
     addEventListeners();
     observer = watchPathChanges(setCurrentUrl);
@@ -216,7 +219,7 @@
   function handleToggleHover() {
     if (open || !_toggleButtonEl) return;
 
-    setTooltipPos("Expand menu", _toggleButtonEl);
+    setTooltipPos(_translations.workSideMenu.expandMenu, _toggleButtonEl);
     showTooltip();
   }
 
@@ -357,7 +360,7 @@
 >
   <button
     class="background"
-    aria-label="Hide menu"
+    aria-label={_translations.workSideMenu.hideMenu}
     data-testid="work-side-menu-background"
     on:click={handleToggleClick}
   ></button>
@@ -368,7 +371,7 @@
           <a href={url} class="header" role="menuitem" data-testid="url">
             <div
               role="img"
-              aria-label="GoA Logo"
+              aria-label={_translations.workSideMenu.governmentOfAlbertaLogo}
               class="logo"
               style="--logo-default: url({_logo});"
             ></div>
@@ -378,7 +381,7 @@
           <div class="header">
             <div
               role="img"
-              aria-label="GoA Logo"
+              aria-label={_translations.workSideMenu.governmentOfAlbertaLogo}
               class="logo"
               style="--logo-default: url({_logo});"
             ></div>
@@ -447,7 +450,9 @@
             on:click={handleToggleClick}
             on:mouseenter={handleToggleHover}
             on:mouseleave={handleMouseLeave}
-            aria-label={open ? "Collapse menu" : "Expand menu"}
+            aria-label={open
+              ? _translations.workSideMenu.collapseMenu
+              : _translations.workSideMenu.expandMenu}
             bind:this={_toggleButtonEl}
           >
             <goa-icon
@@ -456,7 +461,9 @@
               type={open ? "arrow-start" : "arrow-end"}
             ></goa-icon>
             <span class="toggle-button-label"
-              >{open ? "Collapse menu" : "Expand menu"}</span
+              >{open
+                ? _translations.workSideMenu.collapseMenu
+                : _translations.workSideMenu.expandMenu}</span
             >
           </button>
         </div>

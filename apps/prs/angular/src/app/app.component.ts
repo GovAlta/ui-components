@@ -29,6 +29,21 @@ import {
   prRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
 
+const LANGUAGE_STORAGE_KEY = "goa-prs-language";
+const SUPPORTED_LANGUAGES = ["en-CA", "fr-CA"] as const;
+
+type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+
+function getSelectedLanguage(): SupportedLanguage {
+  const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return SUPPORTED_LANGUAGES.includes(storedLanguage as SupportedLanguage)
+    ? (storedLanguage as SupportedLanguage)
+    : "en-CA";
+}
+
+const selectedLanguage = getSelectedLanguage();
+document.documentElement.lang = selectedLanguage;
+
 interface NotificationData {
   id: string;
   title: string;
@@ -72,6 +87,7 @@ export class AppComponent {
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
   readonly baseHref = inject(LocationStrategy).getBaseHref();
+  readonly selectedLanguage = selectedLanguage;
   readonly pushDrawerParagraphs = Array.from({ length: 30 }, (_, i) => i + 1);
 
   // Sample notifications for the work-side-menu notification panel (#4110 test).
@@ -183,5 +199,16 @@ export class AppComponent {
 
   handleRouteSelect(detail: GoabDropdownOnChangeDetail): void {
     if (detail.value) this.router.navigateByUrl(`/${detail.value}`);
+  }
+
+  handleLanguageSelect(detail: GoabDropdownOnChangeDetail): void {
+    if (
+      detail.value &&
+      detail.value !== this.selectedLanguage &&
+      SUPPORTED_LANGUAGES.includes(detail.value as SupportedLanguage)
+    ) {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, detail.value);
+      window.location.reload();
+    }
   }
 }

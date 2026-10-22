@@ -61,6 +61,7 @@
     watchFocusWithin,
   } from "../../common/utils";
   import { isFilterMatch } from "../../common/filtering";
+  import { getTranslations } from "../../common/localization";
   import type {
     DropdownItemMountedRelayDetail,
     DropdownItemDestroyRelayDetail,
@@ -149,6 +150,7 @@
   let _focusedIndex = -1;
   let _isTriggerMouseDown = false;
   let _skipNextTriggerFocusOpen = false;
+  let _translations = getTranslations();
 
   // Reactive
   $: value = Array.isArray(value) ? value : [];
@@ -164,7 +166,11 @@
   $: _labelMap = Object.fromEntries(
     _options.map((o) => [o.value, o.label || o.value]),
   );
-  $: _displayText = calculateDisplayText(value, _labelMap);
+  $: _displayText = calculateDisplayText(
+    value,
+    _labelMap,
+    _translations.dropdownMultiselect.selectedItems,
+  );
   // Filter the options based on _filterText if filterable is true
   $: _visibleOptions =
     filterable && _filterText.trim()
@@ -172,6 +178,7 @@
       : _options;
 
   onMount(async () => {
+    _translations = getTranslations(_rootEl);
     validateSize(size);
     validateLabelFormat(labelFormat);
     validateLeadingIcon();
@@ -212,9 +219,10 @@
   function calculateDisplayText(
     values: string[],
     labelMap: Record<string, string>,
+    selectedItems: (count: number) => string,
   ) {
     if (labelFormat === "count" && values.length > 1) {
-      return `${values.length} items`;
+      return selectedItems(values.length);
     }
 
     return values.map((v) => labelMap[v] || v).join(", ");
@@ -575,8 +583,8 @@
             bind:value={_filterText}
             class="filter-input"
             type="text"
-            placeholder="Filter..."
-            aria-label="Filter options"
+            placeholder={_translations.dropdownMultiselect.filter}
+            aria-label={_translations.dropdownMultiselect.filterOptions}
             autocomplete="off"
             data-testid={testid ? `${testid}-filter-input` : undefined}
             on:click|stopPropagation
@@ -584,7 +592,9 @@
           />
         {:else}
           <span class="value-display" class:placeholder={!_hasValue}>
-            {_hasValue ? _displayText : placeholder || "—Select—"}
+            {_hasValue
+              ? _displayText
+              : placeholder || _translations.dropdownMultiselect.select}
           </span>
         {/if}
         {#if _isOpen && filterable && _filterText.length > 0}
@@ -594,7 +604,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={disabled ? undefined : 0}
-            arialabel="clear filter"
+            arialabel={_translations.dropdownMultiselect.clearFilter}
             on:click={handleClearIconClick}
             on:keydown={handleClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -619,7 +629,7 @@
     <div
       id={_contentId}
       role="dialog"
-      aria-label={placeholder || "Options"}
+      aria-label={placeholder || _translations.dropdownMultiselect.options}
       class="content"
       style="max-height: {maxHeight}; "
       on:keydown={handleKeydown}
@@ -629,7 +639,7 @@
           bind:this={_selectAllEl}
           name="select-all"
           value="select-all"
-          text="Select all"
+          text={_translations.dropdownMultiselect.selectAll}
           data-testid={testid ? `${testid}-select-all` : undefined}
           checked={fromBoolean(_allVisibleSelected)}
           indeterminate={fromBoolean(_someVisibleSelected)}
