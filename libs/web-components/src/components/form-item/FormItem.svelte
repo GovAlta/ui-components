@@ -21,6 +21,7 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { getTranslations } from "../../common/localization";
   import {
     receive,
     relay,
@@ -99,6 +100,7 @@
   let _inputEl: HTMLElement;
   let _errorId = `error-${generateRandomId()}`;
   let _helpTextId = `helptext-${generateRandomId()}`;
+  let _translations = getTranslations();
 
   // Computed: Error icon size based on form item size
   // Compact: xsmall (16px), Regular/Large: small (18px)
@@ -106,6 +108,7 @@
   $: updateAriaDescribedBy(Boolean(error));
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
     validateType(type);
@@ -226,7 +229,11 @@
     <label class={`label ${labelsize}`}>
       <slot name="label">{label}</slot>
       {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
-        <em>({requirement})</em>
+        <em
+          >({requirement === "required"
+            ? _translations.formItem.required
+            : _translations.formItem.optional})</em
+        >
       {/if}
     </label>
   {/if}

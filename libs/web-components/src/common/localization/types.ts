@@ -82,11 +82,18 @@ export interface Translations {
   footer: {
     copyright: (year: number) => string;
   };
+  formItem: {
+    optional: string;
+    required: string;
+  };
   filterChip: {
     removeFilter: (content?: string) => string;
   };
   menuButton: {
     openMenu: string;
+  };
+  linearProgress: {
+    inProgress: string;
   };
   modal: {
     modal: string;
@@ -102,6 +109,11 @@ export interface Translations {
     header: string;
     content: string;
     footer: string;
+  };
+  textArea: {
+    count: (count: number, countBy: "character" | "word") => string;
+    tooMany: (count: number, countBy: "character" | "word") => string;
+    remaining: (count: number, countBy: "character" | "word") => string;
   };
   workspaceLayout: {
     openMenu: string;

@@ -1,5 +1,10 @@
 import type { Translations } from "./types";
 
+function countUnit(count: number, countBy: "character" | "word"): string {
+  const unit = countBy === "character" ? "caractère" : "mot";
+  return `${unit}${count === 1 ? "" : "s"}`;
+}
+
 export const frCAMessages: Translations = {
   dateTime: {
     locale: "fr-CA",
@@ -102,12 +107,19 @@ export const frCAMessages: Translations = {
   footer: {
     copyright: (year) => `© ${year} Gouvernement de l’Alberta`,
   },
+  formItem: {
+    optional: "facultatif",
+    required: "requis",
+  },
   filterChip: {
     removeFilter: (content) =>
       content ? `Supprimer le filtre : ${content}` : "Supprimer le filtre",
   },
   menuButton: {
     openMenu: "Ouvrir le menu",
+  },
+  linearProgress: {
+    inProgress: "En cours",
   },
   modal: {
     modal: "Fenêtre modale",
@@ -123,6 +135,13 @@ export const frCAMessages: Translations = {
     header: "En-tête du panneau",
     content: "Contenu défilant",
     footer: "Pied de page du panneau",
+  },
+  textArea: {
+    count: (count, countBy) => `${count} ${countUnit(count, countBy)}`,
+    tooMany: (count, countBy) =>
+      `${count} ${countUnit(count, countBy)} en trop`,
+    remaining: (count, countBy) =>
+      `${count} ${countUnit(count, countBy)} restant${count === 1 ? "" : "s"}`,
   },
   workspaceLayout: {
     openMenu: "Ouvrir le menu",

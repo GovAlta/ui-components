@@ -1,6 +1,10 @@
 import type { Translations } from "./types";
 import { getTimestamp } from "../utils";
 
+function countUnit(count: number, countBy: "character" | "word"): string {
+  return `${countBy}${count === 1 ? "" : "s"}`;
+}
+
 export const enCAMessages: Translations = {
   dateTime: {
     locale: "en-CA",
@@ -94,12 +98,19 @@ export const enCAMessages: Translations = {
   footer: {
     copyright: (year) => `© ${year} Government of Alberta`,
   },
+  formItem: {
+    optional: "optional",
+    required: "required",
+  },
   filterChip: {
     removeFilter: (content) =>
       content ? `Remove filter: ${content}` : "Remove filter",
   },
   menuButton: {
     openMenu: "Open menu",
+  },
+  linearProgress: {
+    inProgress: "In progress",
   },
   modal: {
     modal: "Modal",
@@ -115,6 +126,13 @@ export const enCAMessages: Translations = {
     header: "Panel header",
     content: "Scrollable content",
     footer: "Panel footer",
+  },
+  textArea: {
+    count: (count, countBy) => `${count} ${countUnit(count, countBy)}`,
+    tooMany: (count, countBy) =>
+      `${count} ${countUnit(count, countBy)} too many`,
+    remaining: (count, countBy) =>
+      `${count} ${countUnit(count, countBy)} remaining`,
   },
   workspaceLayout: {
     openMenu: "Open menu",

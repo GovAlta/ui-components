@@ -5,6 +5,9 @@ import MicrositeHeader from "../../components/microsite-header/MicrositeHeader.s
 import FileUploadInput from "../../components/file-upload-input/FileUploadInput.svelte";
 import FileUploadCard from "../../components/file-upload-card/FileUploadCard.svelte";
 import Footer from "../../components/footer/Footer.svelte";
+import FormItem from "../../components/form-item/FormItem.svelte";
+import TextArea from "../../components/text-area/TextArea.svelte";
+import LinearProgress from "../../components/linear-progress/LinearProgress.svelte";
 import FilterChip from "../../components/filter-chip/FilterChip.svelte";
 import MenuButton from "../../components/menu-button/MenuButton.svelte";
 import Modal from "../../components/modal/Modal.svelte";
@@ -165,6 +168,82 @@ describe("French component translations", () => {
         "aria-label",
         "Contenu de la page",
       );
+    });
+  });
+
+  it("localizes form item requirement labels", async () => {
+    document.documentElement.lang = "fr-CA";
+
+    const optional = render(FormItem, {
+      label: "Deuxième prénom",
+      requirement: "optional",
+    });
+    await waitFor(() => {
+      expect(optional.container.querySelector("em")).toHaveTextContent(
+        "(facultatif)",
+      );
+    });
+
+    const required = render(FormItem, {
+      label: "Prénom",
+      requirement: "required",
+    });
+    await waitFor(() => {
+      expect(required.container.querySelector("em")).toHaveTextContent(
+        "(requis)",
+      );
+    });
+  });
+
+  it("localizes text area counters", async () => {
+    document.documentElement.lang = "fr-CA";
+
+    const cases = [
+      {
+        props: { value: "abcd", countby: "character", maxcount: 2 },
+        expected: "2 caractères en trop",
+      },
+      {
+        props: { value: "un deux trois", countby: "word", maxcount: 2 },
+        expected: "1 mot en trop",
+      },
+      {
+        props: { value: "abc", countby: "character", maxcount: 5 },
+        expected: "2 caractères restants",
+      },
+      {
+        props: { value: "un deux", countby: "word", maxcount: 3 },
+        expected: "1 mot restant",
+      },
+      {
+        props: { value: "abc", countby: "character" },
+        expected: "3 caractères",
+      },
+      {
+        props: { value: "un deux", countby: "word" },
+        expected: "2 mots",
+      },
+    ] as const;
+
+    for (const testCase of cases) {
+      const textArea = render(TextArea, testCase.props);
+      await waitFor(() => {
+        expect(textArea.container.querySelector(".counter")).toHaveTextContent(
+          testCase.expected,
+        );
+      });
+      textArea.unmount();
+    }
+  });
+
+  it("localizes the indeterminate linear progress value", async () => {
+    document.documentElement.lang = "fr-CA";
+
+    const progress = render(LinearProgress, { testid: "progress" });
+    await waitFor(() => {
+      expect(
+        progress.getByTestId("progress-progressbar-container"),
+      ).toHaveAttribute("aria-valuetext", "En cours");
     });
   });
 
