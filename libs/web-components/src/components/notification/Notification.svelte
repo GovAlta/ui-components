@@ -93,7 +93,7 @@
         </div>
         <div class="close">
           <!-- svelte-ignore a11y_click_events_have_key_events -->
-          <button class={type} on:click={close}>
+          <button class={type} aria-label="Close the notification" on:click={close}>
             <goa-icon type="close" inverted={iconInverted} theme="filled"
             ></goa-icon>
           </button>
