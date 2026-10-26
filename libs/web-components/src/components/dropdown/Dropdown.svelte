@@ -276,7 +276,14 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _native ? _selectEl : _inputEl },
+      {
+        name,
+        el: _native ? _selectEl : _inputEl,
+        accessibility: {
+          target: _native ? _selectEl : _inputEl,
+          supportsAriaRequired: true,
+        },
+      },
       { bubbles: true, timeout: 10 },
     );
   }

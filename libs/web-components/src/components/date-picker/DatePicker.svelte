@@ -167,7 +167,11 @@
     relay<FormFieldMountRelayDetail>(
       _senderEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      {
+        name,
+        el: _rootEl,
+        accessibility: null, // Date Picker's fields are issue 4354.
+      },
       { bubbles: true, timeout: 5 },
     );
   }

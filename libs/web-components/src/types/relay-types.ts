@@ -218,6 +218,10 @@ export const FormFieldMountMsg = "form-field::bind";
 export type FormFieldMountRelayDetail = {
   name: string;
   el: HTMLElement;
+  accessibility: {
+    target: HTMLElement;
+    supportsAriaRequired: boolean;
+  } | null;
 };
 
 // ===========
