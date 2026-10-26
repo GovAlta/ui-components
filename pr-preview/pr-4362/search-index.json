@@ -2472,6 +2472,19 @@
   },
   {
     "type": "page",
+    "id": "developers/language-translations",
+    "title": "Language translations",
+    "description": "Use English and French translations in Design System components and your application content",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/language-translations"
+  },
+  {
+    "type": "page",
     "id": "developers/september-2026-component-update",
     "title": "September 2026 component library update",
     "description": "Breaking API changes in the September 2026 component library update",
