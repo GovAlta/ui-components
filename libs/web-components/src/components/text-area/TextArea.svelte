@@ -142,7 +142,11 @@
     relay<FormFieldMountRelayDetail>(
       _textareaEl,
       FormFieldMountMsg,
-      { name, el: _textareaEl },
+      {
+        name,
+        el: _textareaEl,
+        accessibility: { target: _textareaEl, supportsAriaRequired: true },
+      },
       { bubbles: true, timeout: 10 },
     );
   }

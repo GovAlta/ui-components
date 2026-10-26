@@ -280,7 +280,11 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      {
+        name,
+        el: _rootEl,
+        accessibility: { target: _rootEl, supportsAriaRequired: false },
+      },
       { bubbles: true, timeout: 10 },
     );
   }

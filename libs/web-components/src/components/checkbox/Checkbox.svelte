@@ -170,7 +170,11 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      {
+        name,
+        el: _rootEl,
+        accessibility: { target: _checkboxRef, supportsAriaRequired: true },
+      },
       { bubbles: true, timeout: 10 },
     );
   }

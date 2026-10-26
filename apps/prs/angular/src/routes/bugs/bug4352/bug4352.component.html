@@ -1,0 +1,89 @@
+<goab-text tag="h1" size="heading-l" mb="m">
+  Bug 4352 - Form Item requirements for screen readers
+</goab-text>
+<goab-text tag="p" mb="s">
+  <a href="https://github.com/GovAlta/ui-components/issues/4352"> View issue #4352 </a>
+</goab-text>
+<goab-text tag="p" mb="l">
+  Tab through the required, optional and unmarked fields with a screen reader. Check that
+  each field announces its label and requirement as described below.
+</goab-text>
+
+@for (example of cases; track example.id) {
+  <section>
+    <goab-divider mt="l" mb="l"></goab-divider>
+    <goab-text tag="h2">{{ example.title }}</goab-text>
+    <goab-text tag="p">{{ example.expected }}</goab-text>
+    <goab-block direction="column">
+      <goab-form-item label="Middle name" [requirement]="example.requirement">
+        <goab-input [name]="example.id + '-name'"></goab-input>
+      </goab-form-item>
+      <goab-form-item label="Notes" [requirement]="example.requirement">
+        <goab-textarea [name]="example.id + '-notes'"></goab-textarea>
+      </goab-form-item>
+      <goab-form-item label="Province" [requirement]="example.requirement">
+        <goab-dropdown [name]="example.id + '-province'">
+          <goab-dropdown-item value="ab" label="Alberta"></goab-dropdown-item>
+          <goab-dropdown-item value="bc" label="British Columbia"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+      <goab-form-item
+        label="Province, native dropdown"
+        [requirement]="example.requirement"
+      >
+        <goab-dropdown [name]="example.id + '-native-province'" [native]="true">
+          <goab-dropdown-item value="ab" label="Alberta"></goab-dropdown-item>
+          <goab-dropdown-item value="bc" label="British Columbia"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+      <goab-form-item
+        label="Contact method"
+        [requirement]="example.requirement"
+        type="radio-group"
+      >
+        <goab-radio-group [name]="example.id + '-contact-method'">
+          <goab-radio-item value="email" label="Email"></goab-radio-item>
+          <goab-radio-item value="phone" label="Phone"></goab-radio-item>
+        </goab-radio-group>
+      </goab-form-item>
+      <goab-form-item
+        label="Contact channels"
+        [requirement]="example.requirement"
+        type="checkbox-list"
+      >
+        <goab-checkbox-list [name]="example.id + '-contact-channels'">
+          <goab-checkbox
+            [name]="example.id + '-email'"
+            value="email"
+            text="Email"
+          ></goab-checkbox>
+          <goab-checkbox
+            [name]="example.id + '-phone'"
+            value="phone"
+            text="Phone"
+          ></goab-checkbox>
+        </goab-checkbox-list>
+      </goab-form-item>
+      <goab-form-item label="Consent" [requirement]="example.requirement">
+        <goab-checkbox [name]="example.id + '-consent'" text="I agree"></goab-checkbox>
+      </goab-form-item>
+    </goab-block>
+  </section>
+}
+
+<goab-divider mt="l" mb="l"></goab-divider>
+<goab-text tag="h2">Slotted label</goab-text>
+<goab-text tag="p">
+  This field should be named "Preferred name (optional)" with no required state.
+</goab-text>
+<ng-template #slottedLabel><strong>Preferred name</strong></ng-template>
+<goab-form-item [label]="slottedLabel" requirement="optional">
+  <goab-input name="slotted-name"></goab-input>
+</goab-form-item>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+<goab-text tag="h2">Plain HTML reference</goab-text>
+<label for="plain-required-name">First name (required)</label>
+<input id="plain-required-name" aria-label="First name" required />
+<label for="plain-optional-name">Middle name (optional)</label>
+<input id="plain-optional-name" />
