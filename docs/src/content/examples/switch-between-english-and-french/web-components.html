@@ -1,0 +1,67 @@
+<div id="language-switching-example"></div>
+
+<script>
+  const root = document.getElementById("language-switching-example");
+  let language = "en-CA";
+  let appointmentDate = "";
+
+  const translations = {
+    "en-CA": {
+      switchLanguage: "Français",
+      heading: "Book an appointment",
+      introduction: "Choose a date for your appointment.",
+      dateLabel: "Appointment date",
+      dateHelp: "Select a date from the calendar.",
+    },
+    "fr-CA": {
+      switchLanguage: "English",
+      heading: "Prendre un rendez-vous",
+      introduction: "Choisissez une date pour votre rendez-vous.",
+      dateLabel: "Date du rendez-vous",
+      dateHelp: "Sélectionnez une date dans le calendrier.",
+    },
+  };
+
+  function render() {
+    const text = translations[language];
+    const dateValue = appointmentDate ? `value="${appointmentDate}"` : "";
+
+    root.innerHTML = `
+      <section lang="${language}">
+        <goa-button id="language-switch" type="tertiary" mb="l">
+          ${text.switchLanguage}
+        </goa-button>
+
+        <goa-text as="h2" size="heading-m" mt="none" mb="s">
+          ${text.heading}
+        </goa-text>
+        <goa-text as="p" mt="none" mb="l">
+          ${text.introduction}
+        </goa-text>
+
+        <goa-form-item
+          label="${text.dateLabel}"
+          helptext="${text.dateHelp}"
+          requirement="optional"
+        >
+          <goa-date-picker
+            id="appointment-date"
+            name="appointmentDate"
+            ${dateValue}
+          ></goa-date-picker>
+        </goa-form-item>
+      </section>
+    `;
+
+    root.querySelector("#language-switch").addEventListener("_click", () => {
+      language = language === "en-CA" ? "fr-CA" : "en-CA";
+      render();
+    });
+
+    root.querySelector("#appointment-date").addEventListener("_change", (event) => {
+      appointmentDate = event.detail.valueStr;
+    });
+  }
+
+  render();
+</script>
