@@ -35,7 +35,7 @@ A button with more than one action.
 
 | Prop | Type | Default | Required | Description |
 |------|------|---------|----------|-------------|
-| `ariaLabel` | string | (none) | No | Sets the aria-label for the icon button in icon-only mode. |
+| `ariaLabel` | string | `Open menu` | No | Sets the aria-label for the icon button in icon-only mode. |
 | `leadingIcon` | GoabIconType | (none) | No | Icon displayed before the button text. When no text is provided, displays as an icon button. |
 | `maxWidth` | string | (none) | No | Maximum width of the dropdown menu. |
 | `size` | "compact" \| "normal" | (none) | No | Sets the size of the button. |
