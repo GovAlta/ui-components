@@ -6,7 +6,11 @@ import {
   waitFor,
 } from "@testing-library/svelte";
 import { addDays, format } from "date-fns";
-import { it, expect, vi, describe } from "vitest";
+import { afterEach, it, expect, vi, describe } from "vitest";
+
+afterEach(() => {
+  document.documentElement.removeAttribute("lang");
+});
 
 it("it renders", async () => {
   const { container } = render(DatePicker);
@@ -27,6 +31,40 @@ it("renders with props", async () => {
   const input = container.querySelector("goa-input");
 
   expect(input?.getAttribute("value")).toBe(format(value, "MMMM d, yyyy"));
+});
+
+it("localizes date input labels and month options", async () => {
+  document.documentElement.lang = "fr-CA";
+  const { container } = render(DatePicker, { type: "input" });
+  const monthDropdown = container.querySelector(
+    'goa-dropdown[testid="input-month"]',
+  );
+
+  expect(monthDropdown).not.toBeNull();
+  await waitFor(() => {
+    expect(monthDropdown).toHaveAttribute("value", "0");
+  });
+
+  const helpText = [...container.querySelectorAll("goa-form-item")]
+    .map((item) => item.getAttribute("helptext"))
+    .filter(Boolean);
+
+  expect(helpText).toEqual(["Mois", "Jour (JJ)", "Année (AAAA)"]);
+  expect(
+    monthDropdown.querySelector('goa-dropdown-item[value="0"]'),
+  ).toHaveAttribute("label", "—Sélectionnez un mois—");
+  expect(
+    monthDropdown.querySelector('goa-dropdown-item[value="8"]'),
+  ).toHaveAttribute("label", "août");
+});
+
+it("translates formatted date words without changing their structure", async () => {
+  document.documentElement.lang = "fr-CA";
+  const value = new Date(2026, 0, 30);
+  const { container } = render(DatePicker, { value });
+
+  const input = container.querySelector("goa-input");
+  expect(input).toHaveAttribute("value", "janvier 30, 2026");
 });
 
 it("shows an error state", async () => {
@@ -188,6 +226,21 @@ describe("placeholder property", () => {
       "goa-dropdown-item[value='0']",
     );
     expect(monthPlaceholder?.getAttribute("label")).toBe("—Month—");
+  });
+
+  it("localizes the abbreviated month placeholder", async () => {
+    document.documentElement.lang = "fr-CA";
+    const { container } = render(DatePicker, {
+      type: "input",
+      size: "compact",
+    });
+
+    const monthPlaceholder = container.querySelector(
+      "goa-dropdown-item[value='0']",
+    );
+    await waitFor(() => {
+      expect(monthPlaceholder?.getAttribute("label")).toBe("—Mois—");
+    });
   });
 });
 

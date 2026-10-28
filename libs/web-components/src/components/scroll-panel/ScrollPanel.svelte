@@ -11,6 +11,7 @@
     ScrollPanelStateChangeMsg,
     type ScrollPanelStateChangeRelayDetail,
   } from "../../types/relay-types";
+  import { getTranslations } from "../../common/localization";
 
   // ******
   // Public
@@ -72,6 +73,7 @@
   let _isVerticalScrollable: boolean = false;
   let _isHorizontallyScrollable: boolean = false;
   let _resizeObserver: ResizeObserver | null = null;
+  let _translations = getTranslations();
 
   // Derived: which directions are enabled based on the direction prop
   $: _trackVertical = direction === "vertical" || direction === "both";
@@ -101,6 +103,7 @@
   // Hooks
   // *****
   onMount(() => {
+    _translations = getTranslations(_scrollEl);
     if (!supportsHeight(height)) {
       console.error(
         `ScrollPanel: "${height}" is not a valid CSS height. Falling back to "100%".`,
@@ -239,7 +242,7 @@
     class="scroll-panel-header"
     class:scroll-panel-header--shadow={_scrollStateV === "middle" ||
       _scrollStateV === "at-end"}
-    aria-label="Panel header"
+    aria-label={_translations.scrollPanel.header}
   >
     <slot name="header" />
   </section>
@@ -262,7 +265,7 @@
     bind:this={_scrollEl}
     on:scroll={updateScrollState}
     role="region"
-    aria-label="Scrollable content"
+    aria-label={_translations.scrollPanel.content}
     tabindex={_trackVertical ? 0 : undefined}
     data-testid={testid || undefined}
   >
@@ -275,7 +278,7 @@
     class="scroll-panel-footer"
     class:scroll-panel-footer--shadow={_scrollStateV === "at-start" ||
       _scrollStateV === "middle"}
-    aria-label="Panel footer"
+    aria-label={_translations.scrollPanel.footer}
   >
     <slot name="footer" />
   </section>

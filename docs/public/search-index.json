@@ -2151,6 +2151,23 @@
   },
   {
     "type": "example",
+    "id": "switch-between-english-and-french",
+    "title": "Switch between English and French",
+    "description": "Switch application content and Design System components between English and French.",
+    "status": "published",
+    "size": "interaction",
+    "tags": [
+      "language",
+      "localization",
+      "bilingual",
+      "accessibility"
+    ],
+    "components": [],
+    "aliases": [],
+    "slug": "switch-between-english-and-french"
+  },
+  {
+    "type": "example",
     "id": "task-list-page",
     "title": "Task list page",
     "description": "A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.",
@@ -2469,6 +2486,19 @@
       "developer"
     ],
     "slug": "get-started/developers/dark-mode-theme"
+  },
+  {
+    "type": "page",
+    "id": "developers/language-translations",
+    "title": "Language translations",
+    "description": "Use English and French translations in Design System components and your application content",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/language-translations"
   },
   {
     "type": "page",

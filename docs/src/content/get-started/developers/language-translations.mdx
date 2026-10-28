@@ -1,0 +1,198 @@
+---
+id: developers/language-translations
+title: Language translations
+navLabel: Language
+description: Use English and French translations in Design System components and your application content
+section: developers
+order: 3
+status: published
+---
+
+import { withBase } from "@/lib/base-url";
+
+<goa-text size="heading-xl" mt="none" mb="m">Language translations</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">
+Set the language of your page or section to use the built-in translations in
+Design System components.
+</goa-text>
+
+<h2 id="supported-languages">Supported languages</h2>
+
+<ul>
+  <li>
+    <code>en-CA</code> for English (Canada)
+  </li>
+  <li>
+    <code>fr-CA</code> for French (Canada)
+  </li>
+</ul>
+
+<goa-text tag="p">
+  Components use English when they cannot find a supported language. Use a complete
+  language tag, such as <code>fr-CA</code>. The shorter <code>fr</code> tag is not
+  supported.
+</goa-text>
+
+<h2 id="how-component-translations-work">How component translations work</h2>
+
+<goa-text tag="p">
+  Set the standard HTML <code>lang</code> attribute. Each component reads the nearest{" "}
+  <code>lang</code> attribute on its parent components, then checks the document root.
+</goa-text>
+
+<goa-text tag="p">Set one language for the whole page:</goa-text>
+
+<pre>
+  <code>{`<html lang="fr-CA">`}</code>
+</pre>
+
+<goa-text tag="p">Or set a language for part of a page:</goa-text>
+
+<pre>
+  <code>{`<section lang="fr-CA">
+  <goa-form-item label="Adresse courriel" requirement="optional">
+    <goa-input name="email"></goa-input>
+  </goa-form-item>
+</section>`}</code>
+</pre>
+
+<goa-text tag="p">
+  Component-owned text changes automatically. This includes text such as requirement
+  labels, date words, empty states, and screen reader descriptions.
+</goa-text>
+
+<goa-callout type="information" emphasis="low" heading="Changing languages" mb="xl">
+  <goa-text tag="p">
+    Components read the language when they mount. Changing only the <code>lang</code>
+    attribute does not update components that are already mounted. If your application
+    switches languages you need to reload the page.
+  </goa-text>
+</goa-callout>
+
+<h2 id="translate-your-content">Translate your content</h2>
+
+<goa-text tag="p">
+  Design System components translate the text they own. Your application must translate
+  any content you provide, including:
+</goa-text>
+
+<ul>
+  <li>Labels and headings</li>
+  <li>Help text and error messages</li>
+  <li>Button and link text</li>
+  <li>Accessible labels</li>
+  <li>Content passed through slots or children</li>
+</ul>
+
+<goa-text tag="p">
+  Keep your application content in your translation library or message files. Pass the
+  translated values to Design System components. In the examples, the Form Item translates
+  its own optional indicator while the application supplies the translated label, help
+  text, and accessible label.
+</goa-text>
+
+<h2 id="react">React</h2>
+
+<goa-text tag="p">
+  Set <code>lang</code> on a containing HTML element. If the language can change while the
+  application is running, use the language as the element&apos;s <code>key</code> so React
+  recreates the component tree.
+</goa-text>
+
+<pre>
+  <code>{`import { GoabFormItem, GoabInput } from "@abgov/react-components";
+
+type Language = "en-CA" | "fr-CA";
+
+  const content = {
+    "en-CA": {
+      emailLabel: "Email address",
+      emailHelp: "We will use this address to contact you.",
+    },
+    "fr-CA": {
+      emailLabel: "Adresse courriel",
+      emailHelp: "Nous utiliserons cette adresse pour communiquer avec vous.",
+    },
+  } as const;
+
+export function ContactDetails({ language }: { language: Language }) {
+    const text = content[language];
+
+    return (
+      <section lang={language} key={language}>
+        <GoabFormItem
+          label={text.emailLabel}
+          requirement="optional"
+          helpText={text.emailHelp}
+        >
+          <GoabInput name="email" ariaLabel={text.emailLabel} />
+        </GoabFormItem>
+      </section>
+    );
+}`}</code>
+</pre>
+
+<h2 id="angular">Angular</h2>
+
+<goa-text tag="p">
+  Bind the language to the containing element with <code>[attr.lang]</code>. Keep
+  translated application content in your translation service or message files and bind the
+  resulting text to component inputs.
+</goa-text>
+
+<pre>
+  <code>{`// contact-details.component.ts
+import { Component, Input } from "@angular/core";
+import { GoabFormItem, GoabInput } from "@abgov/angular-components";
+
+type Language = "en-CA" | "fr-CA";
+
+const content = {
+    "en-CA": {
+      emailLabel: "Email address",
+      emailHelp: "We will use this address to contact you.",
+    },
+    "fr-CA": {
+      emailLabel: "Adresse courriel",
+      emailHelp: "Nous utiliserons cette adresse pour communiquer avec vous.",
+    },
+} as const;
+
+@Component({
+    selector: "app-contact-details",
+    standalone: true,
+    imports: [GoabFormItem, GoabInput],
+    templateUrl: "./contact-details.component.html",
+})
+export class ContactDetailsComponent {
+    @Input() language: Language = "en-CA";
+
+    get text() {
+      return content[this.language];
+    }
+}`}</code>
+</pre>
+
+<pre><code>{`<!-- contact-details.component.html -->
+<section [attr.lang]="language">
+    <goab-form-item
+      [label]="text.emailLabel"
+      requirement="optional"
+      [helpText]="text.emailHelp"
+    >
+      <goab-input name="email" [ariaLabel]="text.emailLabel"></goab-input>
+    </goab-form-item>
+</section>`}</code></pre>
+
+<goa-text tag="p">
+  If your Angular application switches languages in place, use routing or a conditional
+  view to recreate the affected component tree after the language changes.
+</goa-text>
+
+<h2 id="complete-example">Complete example</h2>
+
+<goa-link>
+  <a href={withBase("/examples/switch-between-english-and-french")}>
+    View the Switch between English and French example
+  </a>
+</goa-link>

@@ -1,0 +1,28 @@
+---
+id: switch-between-english-and-french
+title: Switch between English and French
+description: Switch application content and Design System components between English and French.
+size: interaction
+tags:
+  - language
+  - localization
+  - bilingual
+  - accessibility
+components: []
+status: published
+---
+
+Let users switch an application or part of a page between English and French.
+
+## When to use
+
+Use this approach when people need to change languages without leaving their current task.
+
+## How it works
+
+- Set the complete language tag, `en-CA` or `fr-CA`, on the containing element.
+- Translate the content supplied by your application.
+- Recreate the component tree after the language changes so components read the new language.
+- Keep form values outside the recreated component tree so the language change does not clear user input.
+
+The example starts in English. Select **Français** to switch to French, then select **English** to switch back.

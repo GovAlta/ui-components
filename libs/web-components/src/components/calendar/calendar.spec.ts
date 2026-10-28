@@ -7,8 +7,12 @@ import {
 } from "@testing-library/svelte";
 import { addDays, lastDayOfMonth, startOfDay, addMonths } from "date-fns";
 import { tick } from "svelte";
-import { it, expect, vi } from "vitest";
+import { afterEach, it, expect, vi } from "vitest";
 import { CalendarDate } from "@abgov/ui-components-common";
+
+afterEach(() => {
+  document.documentElement.removeAttribute("lang");
+});
 
 function toDayStart(d: Date): Date {
   d.setHours(0);
@@ -58,6 +62,43 @@ it("it renders", async () => {
     );
     expect(month).toBeTruthy();
   }
+});
+
+it("localizes built-in calendar text using the document language", async () => {
+  document.documentElement.lang = "fr-CA";
+  const { container, getByTestId } = render(Calendar, {
+    name: "appointment",
+    value: "2026-01-30",
+  });
+  await tick();
+
+  const monthDropdown = getByTestId("months");
+  const yearDropdown = getByTestId("years");
+  const formItems = container.querySelectorAll("goa-form-item");
+  const weekdayHeadings = [...container.querySelectorAll("h5")].map(
+    (heading) => heading.textContent,
+  );
+
+  expect(formItems[0]).toHaveAttribute("label", "Mois");
+  expect(formItems[1]).toHaveAttribute("label", "Année");
+  expect(monthDropdown).toHaveAttribute("arialabel", "appointment mois");
+  expect(yearDropdown).toHaveAttribute("arialabel", "appointment année");
+  expect(
+    monthDropdown.querySelector('goa-dropdown-item[value="1"]'),
+  ).toHaveAttribute("label", "janvier");
+  expect(weekdayHeadings).toEqual([
+    "dim.",
+    "lun.",
+    "mar.",
+    "mer.",
+    "jeu.",
+    "ven.",
+    "sam.",
+  ]);
+  expect(getByTestId("2026-01-30")).toHaveAttribute(
+    "aria-label",
+    "vendredi, janvier 30, 2026",
+  );
 });
 
 it("should have no date selected if one not provided", async () => {

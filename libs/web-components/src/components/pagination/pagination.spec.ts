@@ -1,8 +1,33 @@
 import Pagination from './Pagination.svelte'
 import { fireEvent, render, waitFor } from '@testing-library/svelte'
-import { it, describe, expect, vi } from "vitest";
+import { afterEach, it, describe, expect, vi } from "vitest";
+
+afterEach(() => {
+  document.documentElement.removeAttribute("lang");
+});
 
 describe("GoAPagination", () => {
+  it("localizes the pagination controls", async () => {
+    document.documentElement.lang = "fr-CA";
+    const { getByTestId } = render(Pagination, {
+      pagenumber: 1,
+      itemcount: 100,
+    });
+
+    const pageSelector = getByTestId("page-selector");
+    const pageLinks = getByTestId("page-links");
+    const pageText = pageSelector.querySelectorAll("span");
+    const dropdown = pageSelector.querySelector("goa-dropdown");
+
+    await waitFor(() => {
+      expect(pageText[0]).toHaveTextContent("Page");
+      expect(dropdown).toHaveAttribute("value", "1");
+      expect(pageText[1]).toHaveTextContent("sur 10");
+      expect(pageLinks).toHaveTextContent("Précédent");
+      expect(pageLinks).toHaveTextContent("Suivant");
+    });
+  });
+
   it("it renders all parts", async () => {
     const { getByTestId } = render(Pagination, { pagenumber: 1, itemcount: 100 })
 

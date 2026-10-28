@@ -47,7 +47,7 @@ export class GoabMenuButton {
   @Input() maxWidth?: string;
   /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   @Input() leadingIcon?: GoabIconType;
-  /** Sets the aria-label for the icon button in icon-only mode. */
+  /** Sets the aria-label for the icon button in icon-only mode. @default "Open menu" */
   @Input() ariaLabel?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;

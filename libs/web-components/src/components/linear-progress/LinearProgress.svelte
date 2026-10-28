@@ -12,6 +12,9 @@
 />
 
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { getTranslations } from "../../common/localization";
+
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string | undefined = undefined;
   /** Progress value (0-100). When undefined, shows an indeterminate loading animation. */
@@ -23,11 +26,18 @@
   /** ID of the element that labels this progress bar. */
   export let ariaLabelledby: string | undefined = undefined;
 
+  let _rootEl: HTMLElement;
+  let _translations = getTranslations();
+
   $: isDeterminate = progress !== undefined && progress !== null;
   $: determinateValue = Math.round(Math.max(0, Math.min(progress ?? 0, 100)));
+
+  onMount(() => {
+    _translations = getTranslations(_rootEl);
+  });
 </script>
 
-<div class="progressbar-wrapper" data-testid={testid}>
+<div class="progressbar-wrapper" data-testid={testid} bind:this={_rootEl}>
   <div
     data-testid="{testid}-progressbar-container"
     class="progressbar-container"
@@ -37,7 +47,9 @@
     aria-live="polite"
     aria-valuemin="0"
     aria-valuemax="100"
-    aria-valuetext={isDeterminate ? undefined : "In progress"}
+    aria-valuetext={isDeterminate
+      ? undefined
+      : _translations.linearProgress.inProgress}
     aria-valuenow={isDeterminate ? determinateValue : undefined}
   >
     {#if !isDeterminate}

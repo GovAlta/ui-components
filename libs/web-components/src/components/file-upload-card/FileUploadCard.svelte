@@ -1,7 +1,8 @@
 <svelte:options customElement="goa-file-upload-card" />
 
 <script lang="ts">
-  import { getTimestamp } from "../../common/utils";
+  import { onMount } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   // Public
 
@@ -23,6 +24,7 @@
   let _status: "uploading" | "uploaded" | "error" = "uploading";
   let _rootEl: HTMLElement;
   let _fileIcon: string = "goa-file";
+  let _translations = getTranslations();
 
   // Reactive
 
@@ -32,6 +34,10 @@
     "uploaded";
 
   $: _fileIcon = filename && type && getFiletypeIcon(filename, type);
+
+  onMount(() => {
+    _translations = getTranslations(_rootEl);
+  });
 
   // Functions
 
@@ -84,7 +90,7 @@
       case bytes < Math.pow(1024, 3):
         return Math.round(bytes / Math.pow(1024, 2)) + "MB";
       default:
-        return "n/a";
+        return _translations.fileUploadCard.unavailable;
     }
   }
 </script>
@@ -127,7 +133,7 @@
         </div>
       {:else if _status === "uploaded"}
         <div class="timestamp" data-testid="timestamp">
-          Uploaded on {getTimestamp()}
+          {_translations.fileUploadCard.uploadedOn(new Date())}
         </div>
       {:else if _status === "error"}
         <div class="error-msg" data-testid="error">
@@ -142,21 +148,23 @@
         <goa-button
           type="tertiary"
           size="compact"
-          on:click={() => dispatch("_cancel")}>Cancel</goa-button
+          on:click={() => dispatch("_cancel")}
+          >{_translations.fileUploadCard.cancel}</goa-button
         >
       {:else if _status === "uploaded"}
         <goa-button
           type="tertiary"
           size="compact"
           on:click={() => dispatch("_delete")}
-          leadingicon="trash">Remove</goa-button
+          leadingicon="trash">{_translations.fileUploadCard.remove}</goa-button
         >
       {:else if _status === "error"}
         <goa-button
           type="tertiary"
           size="compact"
           on:click={() => dispatch("_delete")}
-          variant="destructive">Cancel</goa-button
+          variant="destructive"
+          >{_translations.fileUploadCard.cancel}</goa-button
         >
       {/if}
     </div>

@@ -42,6 +42,7 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
   import { isFilterMatch } from "../../common/filtering";
+  import { getTranslations } from "../../common/localization";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -67,7 +68,7 @@
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
   /** Sets the text displayed when filtering returns no results. */
-  export let noresults: string = "No matches found";
+  export let noresults: string = "";
   /** Overrides the autosized menu width. Non-native only. */
   export let width: string = "";
   /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
@@ -119,6 +120,7 @@
   let _values: string[] = [];
 
   let _bindTimeoutId: any;
+  let _translations = getTranslations();
 
   let _error = toBoolean(error);
 
@@ -157,6 +159,7 @@
   //
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
@@ -877,7 +880,7 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          placeholder={placeholder || "—Select—"}
+          placeholder={placeholder || _translations.dropdown.select}
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
@@ -890,7 +893,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            arialabel="clear input"
+            arialabel={_translations.dropdown.clearInput}
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -955,7 +958,7 @@
         {:else}
           {#if _filterable}
             <li class="dropdown-item" data-testid="dropdown-item-not-found">
-              {noresults}
+              {noresults || _translations.dropdown.noMatchesFound}
             </li>
           {/if}
         {/each}

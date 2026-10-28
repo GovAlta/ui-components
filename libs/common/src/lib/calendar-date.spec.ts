@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { frCA } from "date-fns/locale";
 import { CalendarDate } from "./calendar-date";
 
 describe("CalendarDate", () => {
@@ -412,6 +413,12 @@ describe("CalendarDate", () => {
     it("formats with full month name", () => {
       const calDate = new CalendarDate("2024-03-15");
       expect(calDate.format("MMMM d, yyyy")).toBe("March 15, 2024");
+    });
+
+    it("translates date words without changing the format structure", () => {
+      const calDate = new CalendarDate("2024-03-15");
+
+      expect(calDate.format("EEEE, MMMM do, yyyy", frCA)).toBe("vendredi, mars 15, 2024");
     });
   });
 
