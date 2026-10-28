@@ -134,6 +134,7 @@
 - [Slotted helper text in a form item](/examples/slotted-helper-text-in-a-form-item)
 - [Sort data in a table](/examples/sort-data-in-a-table)
 - [Start page](/examples/start-page): The front door to a government service for a citizen. It is the way into the service and how citizens access it. Each government service has a start page on Alberta.ca.
+- [Switch between English and French](/examples/switch-between-english-and-french): Switch application content and Design System components between English and French.
 - [Task list page](/examples/task-list-page): A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
 - [Type to create a new filter](/examples/type-to-create-a-new-filter)
 - [Warn a user of a deadline](/examples/warn-a-user-of-a-deadline)
