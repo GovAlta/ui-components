@@ -2674,5 +2674,3321 @@
     ],
     "aliases": [],
     "slug": "workspace"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-default",
+    "title": "--goa-color-interactive-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-default"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-secondary",
+    "title": "--goa-color-interactive-secondary",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-secondary"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-hover",
+    "title": "--goa-color-interactive-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-secondary-hover",
+    "title": "--goa-color-interactive-secondary-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-secondary-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-disabled",
+    "title": "--goa-color-interactive-disabled",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-disabled"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-error",
+    "title": "--goa-color-interactive-error",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-error"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-error-hover",
+    "title": "--goa-color-interactive-error-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-error-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-error-disabled",
+    "title": "--goa-color-interactive-error-disabled",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-error-disabled"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-focus",
+    "title": "--goa-color-interactive-focus",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-focus"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-focus-black",
+    "title": "--goa-color-interactive-focus-black",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-focus-black"
+  },
+  {
+    "type": "token",
+    "id": "color-interactive-visited",
+    "title": "--goa-color-interactive-visited",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-interactive-visited"
+  },
+  {
+    "type": "token",
+    "id": "color-brand-default",
+    "title": "--goa-color-brand-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-brand-default"
+  },
+  {
+    "type": "token",
+    "id": "color-brand-dark",
+    "title": "--goa-color-brand-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-brand-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-brand-light",
+    "title": "--goa-color-brand-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-brand-light"
+  },
+  {
+    "type": "token",
+    "id": "color-text-default",
+    "title": "--goa-color-text-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-text-default"
+  },
+  {
+    "type": "token",
+    "id": "color-text-secondary",
+    "title": "--goa-color-text-secondary",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-text-secondary"
+  },
+  {
+    "type": "token",
+    "id": "color-text-light",
+    "title": "--goa-color-text-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-text-light"
+  },
+  {
+    "type": "token",
+    "id": "color-text-disabled",
+    "title": "--goa-color-text-disabled",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-text-disabled"
+  },
+  {
+    "type": "token",
+    "id": "color-info-default",
+    "title": "--goa-color-info-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-default"
+  },
+  {
+    "type": "token",
+    "id": "color-info-light",
+    "title": "--goa-color-info-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-light"
+  },
+  {
+    "type": "token",
+    "id": "color-info-dark",
+    "title": "--goa-color-info-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-info-background",
+    "title": "--goa-color-info-background",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-background"
+  },
+  {
+    "type": "token",
+    "id": "color-info-border",
+    "title": "--goa-color-info-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-border"
+  },
+  {
+    "type": "token",
+    "id": "color-info-text",
+    "title": "--goa-color-info-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-text"
+  },
+  {
+    "type": "token",
+    "id": "color-info-text-dark",
+    "title": "--goa-color-info-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-info-text-inverse",
+    "title": "--goa-color-info-text-inverse",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-info-text-inverse"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-default",
+    "title": "--goa-color-warning-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-default"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-light",
+    "title": "--goa-color-warning-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-light"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-dark",
+    "title": "--goa-color-warning-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-background",
+    "title": "--goa-color-warning-background",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-background"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-border",
+    "title": "--goa-color-warning-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-border"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-text",
+    "title": "--goa-color-warning-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-text"
+  },
+  {
+    "type": "token",
+    "id": "color-warning-text-dark",
+    "title": "--goa-color-warning-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-warning-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-important-default",
+    "title": "--goa-color-important-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-default"
+  },
+  {
+    "type": "token",
+    "id": "color-important-light",
+    "title": "--goa-color-important-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-light"
+  },
+  {
+    "type": "token",
+    "id": "color-important-dark",
+    "title": "--goa-color-important-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-important-background",
+    "title": "--goa-color-important-background",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-background"
+  },
+  {
+    "type": "token",
+    "id": "color-important-border",
+    "title": "--goa-color-important-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-border"
+  },
+  {
+    "type": "token",
+    "id": "color-important-text",
+    "title": "--goa-color-important-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-text"
+  },
+  {
+    "type": "token",
+    "id": "color-important-text-dark",
+    "title": "--goa-color-important-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-important-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-default",
+    "title": "--goa-color-emergency-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-default"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-light",
+    "title": "--goa-color-emergency-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-light"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-dark",
+    "title": "--goa-color-emergency-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-background",
+    "title": "--goa-color-emergency-background",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-background"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-border",
+    "title": "--goa-color-emergency-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-border"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-text",
+    "title": "--goa-color-emergency-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-text"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-text-dark",
+    "title": "--goa-color-emergency-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-emergency-text-inverse",
+    "title": "--goa-color-emergency-text-inverse",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-emergency-text-inverse"
+  },
+  {
+    "type": "token",
+    "id": "color-success-default",
+    "title": "--goa-color-success-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-default"
+  },
+  {
+    "type": "token",
+    "id": "color-success-light",
+    "title": "--goa-color-success-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-light"
+  },
+  {
+    "type": "token",
+    "id": "color-success-dark",
+    "title": "--goa-color-success-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-success-background",
+    "title": "--goa-color-success-background",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-background"
+  },
+  {
+    "type": "token",
+    "id": "color-success-border",
+    "title": "--goa-color-success-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-border"
+  },
+  {
+    "type": "token",
+    "id": "color-success-text",
+    "title": "--goa-color-success-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-text"
+  },
+  {
+    "type": "token",
+    "id": "color-success-text-dark",
+    "title": "--goa-color-success-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-success-text-inverse",
+    "title": "--goa-color-success-text-inverse",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-success-text-inverse"
+  },
+  {
+    "type": "token",
+    "id": "color-critical-default",
+    "title": "--goa-color-critical-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-critical-default"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-50",
+    "title": "--goa-color-greyscale-50",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-50"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-100",
+    "title": "--goa-color-greyscale-100",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-100"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-150",
+    "title": "--goa-color-greyscale-150",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-150"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-200",
+    "title": "--goa-color-greyscale-200",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-200"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-300",
+    "title": "--goa-color-greyscale-300",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-300"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-400",
+    "title": "--goa-color-greyscale-400",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-400"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-500",
+    "title": "--goa-color-greyscale-500",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-500"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-600",
+    "title": "--goa-color-greyscale-600",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-600"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-700",
+    "title": "--goa-color-greyscale-700",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-700"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-800",
+    "title": "--goa-color-greyscale-800",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-800"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-black",
+    "title": "--goa-color-greyscale-black",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-black"
+  },
+  {
+    "type": "token",
+    "id": "color-greyscale-white",
+    "title": "--goa-color-greyscale-white",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-greyscale-white"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-0",
+    "title": "--goa-color-surface-0",
+    "description": "Surface scale - lowest elevation",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-0"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-50",
+    "title": "--goa-color-surface-50",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-50"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-100",
+    "title": "--goa-color-surface-100",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-100"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-150",
+    "title": "--goa-color-surface-150",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-150"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-200",
+    "title": "--goa-color-surface-200",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-200"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-250",
+    "title": "--goa-color-surface-250",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-250"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-300",
+    "title": "--goa-color-surface-300",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-300"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-350",
+    "title": "--goa-color-surface-350",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-350"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-400",
+    "title": "--goa-color-surface-400",
+    "description": "Surface scale - highest elevation",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-400"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-page",
+    "title": "--goa-color-surface-page",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-page"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-default",
+    "title": "--goa-color-surface-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-default"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-card",
+    "title": "--goa-color-surface-card",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-card"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-section",
+    "title": "--goa-color-surface-section",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-section"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-input",
+    "title": "--goa-color-surface-input",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-input"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-content-body",
+    "title": "--goa-color-surface-content-body",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-content-body"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-widget",
+    "title": "--goa-color-surface-widget",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-widget"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-heading",
+    "title": "--goa-color-surface-heading",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-heading"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-item",
+    "title": "--goa-color-surface-item",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-item"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-table-data",
+    "title": "--goa-color-surface-table-data",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-table-data"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-container-heading",
+    "title": "--goa-color-surface-container-heading",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-container-heading"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-popover",
+    "title": "--goa-color-surface-popover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-popover"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-app-header",
+    "title": "--goa-color-surface-app-header",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-app-header"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-card-hover",
+    "title": "--goa-color-surface-card-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-card-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-widget-hover",
+    "title": "--goa-color-surface-widget-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-widget-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-heading-hover",
+    "title": "--goa-color-surface-heading-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-heading-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-surface-item-hover",
+    "title": "--goa-color-surface-item-hover",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-surface-item-hover"
+  },
+  {
+    "type": "token",
+    "id": "color-static-white",
+    "title": "--goa-color-static-white",
+    "description": "Static white - never flips, for white pigment on colored backgrounds",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-static-white"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sky-default",
+    "title": "--goa-color-extended-sky-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sky-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sky-light",
+    "title": "--goa-color-extended-sky-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sky-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sky-border",
+    "title": "--goa-color-extended-sky-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sky-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sky-text",
+    "title": "--goa-color-extended-sky-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sky-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sky-text-dark",
+    "title": "--goa-color-extended-sky-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sky-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-pasture-default",
+    "title": "--goa-color-extended-pasture-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-pasture-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-pasture-light",
+    "title": "--goa-color-extended-pasture-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-pasture-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-pasture-border",
+    "title": "--goa-color-extended-pasture-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-pasture-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-pasture-text",
+    "title": "--goa-color-extended-pasture-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-pasture-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-pasture-text-dark",
+    "title": "--goa-color-extended-pasture-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-pasture-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sunset-default",
+    "title": "--goa-color-extended-sunset-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sunset-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sunset-light",
+    "title": "--goa-color-extended-sunset-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sunset-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sunset-border",
+    "title": "--goa-color-extended-sunset-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sunset-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sunset-text",
+    "title": "--goa-color-extended-sunset-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sunset-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-sunset-text-dark",
+    "title": "--goa-color-extended-sunset-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-sunset-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-dawn-default",
+    "title": "--goa-color-extended-dawn-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-dawn-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-dawn-light",
+    "title": "--goa-color-extended-dawn-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-dawn-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-dawn-border",
+    "title": "--goa-color-extended-dawn-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-dawn-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-dawn-text",
+    "title": "--goa-color-extended-dawn-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-dawn-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-dawn-text-dark",
+    "title": "--goa-color-extended-dawn-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-dawn-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-lilac-default",
+    "title": "--goa-color-extended-lilac-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-lilac-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-lilac-light",
+    "title": "--goa-color-extended-lilac-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-lilac-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-lilac-border",
+    "title": "--goa-color-extended-lilac-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-lilac-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-lilac-text",
+    "title": "--goa-color-extended-lilac-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-lilac-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-lilac-text-dark",
+    "title": "--goa-color-extended-lilac-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-lilac-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-prairie-default",
+    "title": "--goa-color-extended-prairie-default",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-prairie-default"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-prairie-light",
+    "title": "--goa-color-extended-prairie-light",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-prairie-light"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-prairie-border",
+    "title": "--goa-color-extended-prairie-border",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-prairie-border"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-prairie-text",
+    "title": "--goa-color-extended-prairie-text",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-prairie-text"
+  },
+  {
+    "type": "token",
+    "id": "color-extended-prairie-text-dark",
+    "title": "--goa-color-extended-prairie-text-dark",
+    "status": "stable",
+    "category": "color",
+    "tags": [
+      "color"
+    ],
+    "slug": "color-extended-prairie-text-dark"
+  },
+  {
+    "type": "token",
+    "id": "opacity-page-transparent",
+    "title": "--goa-opacity-page-transparent",
+    "description": "0% for initial state of page/content load in or final state of page/content load out",
+    "status": "stable",
+    "category": "opacity",
+    "tags": [
+      "opacity"
+    ],
+    "slug": "opacity-page-transparent"
+  },
+  {
+    "type": "token",
+    "id": "opacity-page-full",
+    "title": "--goa-opacity-page-full",
+    "description": "100% for initial state of page/content load out or final state of page/content load in",
+    "status": "stable",
+    "category": "opacity",
+    "tags": [
+      "opacity"
+    ],
+    "slug": "opacity-page-full"
+  },
+  {
+    "type": "token",
+    "id": "opacity-background-modal",
+    "title": "--goa-opacity-background-modal",
+    "description": "Opacity for black scrim behind modal to disable the rest of the screen (light: 50%, dark: 70%)",
+    "status": "stable",
+    "category": "opacity",
+    "tags": [
+      "opacity"
+    ],
+    "slug": "opacity-background-modal"
+  },
+  {
+    "type": "token",
+    "id": "opacity-background-loading",
+    "title": "--goa-opacity-background-loading",
+    "description": "90% opacity for white scrum behind loading indicator",
+    "status": "stable",
+    "category": "opacity",
+    "tags": [
+      "opacity"
+    ],
+    "slug": "opacity-background-loading"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-none",
+    "title": "--goa-border-radius-none",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-none"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-xs",
+    "title": "--goa-border-radius-xs",
+    "description": "4px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-xs"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-s",
+    "title": "--goa-border-radius-s",
+    "description": "6px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-s"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-m",
+    "title": "--goa-border-radius-m",
+    "description": "8px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-m"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-l",
+    "title": "--goa-border-radius-l",
+    "description": "10px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-l"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-xl",
+    "title": "--goa-border-radius-xl",
+    "description": "12px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-xl"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-2xl",
+    "title": "--goa-border-radius-2xl",
+    "description": "16px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-2xl"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-3xl",
+    "title": "--goa-border-radius-3xl",
+    "description": "24px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-3xl"
+  },
+  {
+    "type": "token",
+    "id": "border-radius-round",
+    "title": "--goa-border-radius-round",
+    "description": "1024px",
+    "status": "stable",
+    "category": "borderRadius",
+    "tags": [
+      "borderRadius",
+      "border"
+    ],
+    "slug": "border-radius-round"
+  },
+  {
+    "type": "token",
+    "id": "border-width-none",
+    "title": "--goa-border-width-none",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-none"
+  },
+  {
+    "type": "token",
+    "id": "border-width-2xs",
+    "title": "--goa-border-width-2xs",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-2xs"
+  },
+  {
+    "type": "token",
+    "id": "border-width-xs",
+    "title": "--goa-border-width-xs",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-xs"
+  },
+  {
+    "type": "token",
+    "id": "border-width-s",
+    "title": "--goa-border-width-s",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-s"
+  },
+  {
+    "type": "token",
+    "id": "border-width-m",
+    "title": "--goa-border-width-m",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-m"
+  },
+  {
+    "type": "token",
+    "id": "border-width-l",
+    "title": "--goa-border-width-l",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-l"
+  },
+  {
+    "type": "token",
+    "id": "border-width-xl",
+    "title": "--goa-border-width-xl",
+    "status": "stable",
+    "category": "borderWidth",
+    "tags": [
+      "borderWidth",
+      "border"
+    ],
+    "slug": "border-width-xl"
+  },
+  {
+    "type": "token",
+    "id": "space-none",
+    "title": "--goa-space-none",
+    "description": "0px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-none"
+  },
+  {
+    "type": "token",
+    "id": "space-3xs",
+    "title": "--goa-space-3xs",
+    "description": "2px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-3xs"
+  },
+  {
+    "type": "token",
+    "id": "space-2xs",
+    "title": "--goa-space-2xs",
+    "description": "4px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-2xs"
+  },
+  {
+    "type": "token",
+    "id": "space-xs",
+    "title": "--goa-space-xs",
+    "description": "8px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-xs"
+  },
+  {
+    "type": "token",
+    "id": "space-s",
+    "title": "--goa-space-s",
+    "description": "12px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-s"
+  },
+  {
+    "type": "token",
+    "id": "space-m",
+    "title": "--goa-space-m",
+    "description": "16px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-m"
+  },
+  {
+    "type": "token",
+    "id": "space-l",
+    "title": "--goa-space-l",
+    "description": "24px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-l"
+  },
+  {
+    "type": "token",
+    "id": "space-xl",
+    "title": "--goa-space-xl",
+    "description": "32px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-xl"
+  },
+  {
+    "type": "token",
+    "id": "space-2xl",
+    "title": "--goa-space-2xl",
+    "description": "48px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-2xl"
+  },
+  {
+    "type": "token",
+    "id": "space-3xl",
+    "title": "--goa-space-3xl",
+    "description": "64px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-3xl"
+  },
+  {
+    "type": "token",
+    "id": "space-4xl",
+    "title": "--goa-space-4xl",
+    "description": "128px",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-4xl"
+  },
+  {
+    "type": "token",
+    "id": "space-fill",
+    "title": "--goa-space-fill",
+    "description": "fill the space",
+    "status": "stable",
+    "category": "space",
+    "tags": [
+      "space"
+    ],
+    "slug": "space-fill"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-1",
+    "title": "--goa-icon-size-1",
+    "description": "16px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-1"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-2",
+    "title": "--goa-icon-size-2",
+    "description": "18px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-2"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-3",
+    "title": "--goa-icon-size-3",
+    "description": "20px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-3"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-4",
+    "title": "--goa-icon-size-4",
+    "description": "24px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-4"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-5",
+    "title": "--goa-icon-size-5",
+    "description": "32px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-5"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-6",
+    "title": "--goa-icon-size-6",
+    "description": "40px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-6"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-xs",
+    "title": "--goa-icon-size-xs",
+    "description": "16px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-xs"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-s",
+    "title": "--goa-icon-size-s",
+    "description": "18px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-s"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-m",
+    "title": "--goa-icon-size-m",
+    "description": "20px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-m"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-l",
+    "title": "--goa-icon-size-l",
+    "description": "24px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-l"
+  },
+  {
+    "type": "token",
+    "id": "icon-size-xl",
+    "title": "--goa-icon-size-xl",
+    "description": "32px",
+    "status": "stable",
+    "category": "iconSize",
+    "tags": [
+      "iconSize",
+      "icon"
+    ],
+    "slug": "icon-size-xl"
+  },
+  {
+    "type": "token",
+    "id": "shadow-100",
+    "title": "--goa-shadow-100",
+    "description": "Subtle 1px elevation. Light: bottom-edge line. Dark: top-edge inner rim (1px-line shadows don't read on dark, inverted to a thin highlight at the top edge instead).",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-100"
+  },
+  {
+    "type": "token",
+    "id": "shadow-150",
+    "title": "--goa-shadow-150",
+    "description": "Stronger 1px elevation divider. Same rim pattern as 100 but more visible.",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-150"
+  },
+  {
+    "type": "token",
+    "id": "shadow-200",
+    "title": "--goa-shadow-200",
+    "description": "Stat card / subtle lift. Light: small drop. Dark: top-edge inner rim + small drop shadow underneath.",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-200"
+  },
+  {
+    "type": "token",
+    "id": "shadow-300",
+    "title": "--goa-shadow-300",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-300"
+  },
+  {
+    "type": "token",
+    "id": "shadow-400",
+    "title": "--goa-shadow-400",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-400"
+  },
+  {
+    "type": "token",
+    "id": "shadow-500",
+    "title": "--goa-shadow-500",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-500"
+  },
+  {
+    "type": "token",
+    "id": "shadow-600",
+    "title": "--goa-shadow-600",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-600"
+  },
+  {
+    "type": "token",
+    "id": "shadow-modal",
+    "title": "--goa-shadow-modal",
+    "description": "Layered shadow with deep elevation",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-modal"
+  },
+  {
+    "type": "token",
+    "id": "shadow-raised-light",
+    "title": "--goa-shadow-raised-light",
+    "description": "Subtle layered shadow with light elevation",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-raised-light"
+  },
+  {
+    "type": "token",
+    "id": "shadow-raised-heavy",
+    "title": "--goa-shadow-raised-heavy",
+    "description": "Layered shadow with pronounced elevation",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-raised-heavy"
+  },
+  {
+    "type": "token",
+    "id": "shadow-shallow-above",
+    "title": "--goa-shadow-shallow-above",
+    "description": "Upward shadow with negative vertical offset",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-shallow-above"
+  },
+  {
+    "type": "token",
+    "id": "shadow-shallow-below",
+    "title": "--goa-shadow-shallow-below",
+    "description": "Downward shadow with positive vertical offset",
+    "status": "stable",
+    "category": "shadow",
+    "tags": [
+      "shadow"
+    ],
+    "slug": "shadow-shallow-below"
+  },
+  {
+    "type": "token",
+    "id": "line-height-1",
+    "title": "--goa-line-height-1",
+    "description": "20px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-1"
+  },
+  {
+    "type": "token",
+    "id": "line-height-2",
+    "title": "--goa-line-height-2",
+    "description": "22px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-2"
+  },
+  {
+    "type": "token",
+    "id": "line-height-3",
+    "title": "--goa-line-height-3",
+    "description": "24px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-3"
+  },
+  {
+    "type": "token",
+    "id": "line-height-4",
+    "title": "--goa-line-height-4",
+    "description": "28px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-4"
+  },
+  {
+    "type": "token",
+    "id": "line-height-5",
+    "title": "--goa-line-height-5",
+    "description": "36px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-5"
+  },
+  {
+    "type": "token",
+    "id": "line-height-6",
+    "title": "--goa-line-height-6",
+    "description": "40px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-6"
+  },
+  {
+    "type": "token",
+    "id": "line-height-7",
+    "title": "--goa-line-height-7",
+    "description": "48px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-7"
+  },
+  {
+    "type": "token",
+    "id": "line-height-8",
+    "title": "--goa-line-height-8",
+    "description": "56px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-8"
+  },
+  {
+    "type": "token",
+    "id": "line-height-05",
+    "title": "--goa-line-height-05",
+    "description": "18px",
+    "status": "stable",
+    "category": "lineHeight",
+    "tags": [
+      "lineHeight",
+      "typography"
+    ],
+    "slug": "line-height-05"
+  },
+  {
+    "type": "token",
+    "id": "font-family-sans",
+    "title": "--goa-font-family-sans",
+    "description": "Default sans font family and fallback fonts when unavailable",
+    "status": "stable",
+    "category": "fontFamily",
+    "tags": [
+      "fontFamily",
+      "typography"
+    ],
+    "slug": "font-family-sans"
+  },
+  {
+    "type": "token",
+    "id": "font-family-number",
+    "title": "--goa-font-family-number",
+    "description": "monospace typeface for numbers and fallback fonts when unavailable",
+    "status": "stable",
+    "category": "fontFamily",
+    "tags": [
+      "fontFamily",
+      "typography"
+    ],
+    "slug": "font-family-number"
+  },
+  {
+    "type": "token",
+    "id": "font-variation-settings-sans",
+    "title": "--goa-font-variation-settings-sans",
+    "description": "Default font variation settings for sans font family",
+    "status": "stable",
+    "category": "fontVariationSettings",
+    "tags": [
+      "fontVariationSettings"
+    ],
+    "slug": "font-variation-settings-sans"
+  },
+  {
+    "type": "token",
+    "id": "font-size-1",
+    "title": "--goa-font-size-1",
+    "description": "12px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-1"
+  },
+  {
+    "type": "token",
+    "id": "font-size-2",
+    "title": "--goa-font-size-2",
+    "description": "14px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-2"
+  },
+  {
+    "type": "token",
+    "id": "font-size-3",
+    "title": "--goa-font-size-3",
+    "description": "16px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-3"
+  },
+  {
+    "type": "token",
+    "id": "font-size-4",
+    "title": "--goa-font-size-4",
+    "description": "18px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-4"
+  },
+  {
+    "type": "token",
+    "id": "font-size-5",
+    "title": "--goa-font-size-5",
+    "description": "20px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-5"
+  },
+  {
+    "type": "token",
+    "id": "font-size-6",
+    "title": "--goa-font-size-6",
+    "description": "24px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-6"
+  },
+  {
+    "type": "token",
+    "id": "font-size-7",
+    "title": "--goa-font-size-7",
+    "description": "28px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-7"
+  },
+  {
+    "type": "token",
+    "id": "font-size-8",
+    "title": "--goa-font-size-8",
+    "description": "32px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-8"
+  },
+  {
+    "type": "token",
+    "id": "font-size-9",
+    "title": "--goa-font-size-9",
+    "description": "40px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-9"
+  },
+  {
+    "type": "token",
+    "id": "font-size-10",
+    "title": "--goa-font-size-10",
+    "description": "48px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-10"
+  },
+  {
+    "type": "token",
+    "id": "font-size-05",
+    "title": "--goa-font-size-05",
+    "description": "18px",
+    "status": "stable",
+    "category": "fontSize",
+    "tags": [
+      "fontSize",
+      "typography"
+    ],
+    "slug": "font-size-05"
+  },
+  {
+    "type": "token",
+    "id": "font-weight-regular",
+    "title": "--goa-font-weight-regular",
+    "status": "stable",
+    "category": "fontWeight",
+    "tags": [
+      "fontWeight",
+      "typography"
+    ],
+    "slug": "font-weight-regular"
+  },
+  {
+    "type": "token",
+    "id": "font-weight-medium",
+    "title": "--goa-font-weight-medium",
+    "status": "stable",
+    "category": "fontWeight",
+    "tags": [
+      "fontWeight",
+      "typography"
+    ],
+    "slug": "font-weight-medium"
+  },
+  {
+    "type": "token",
+    "id": "font-weight-semi-bold",
+    "title": "--goa-font-weight-semi-bold",
+    "status": "stable",
+    "category": "fontWeight",
+    "tags": [
+      "fontWeight",
+      "typography"
+    ],
+    "slug": "font-weight-semi-bold"
+  },
+  {
+    "type": "token",
+    "id": "font-weight-bold",
+    "title": "--goa-font-weight-bold",
+    "status": "stable",
+    "category": "fontWeight",
+    "tags": [
+      "fontWeight",
+      "typography"
+    ],
+    "slug": "font-weight-bold"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-3xs",
+    "title": "--goa-letter-spacing-3xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-3xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-2xs",
+    "title": "--goa-letter-spacing-2xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-2xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-xs",
+    "title": "--goa-letter-spacing-xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-s",
+    "title": "--goa-letter-spacing-s",
+    "description": "-0.75px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-s"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-m",
+    "title": "--goa-letter-spacing-m",
+    "description": "-1px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-m"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-l",
+    "title": "--goa-letter-spacing-l",
+    "description": "-1.25px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-l"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-xl",
+    "title": "--goa-letter-spacing-xl",
+    "description": "-1.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-xl"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-2xl",
+    "title": "--goa-letter-spacing-2xl",
+    "description": "-1.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-2xl"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-3xs",
+    "title": "--goa-letter-spacing-mobile-3xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-3xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-2xs",
+    "title": "--goa-letter-spacing-mobile-2xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-2xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-xs",
+    "title": "--goa-letter-spacing-mobile-xs",
+    "description": "-0.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-xs"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-s",
+    "title": "--goa-letter-spacing-mobile-s",
+    "description": "-0.75px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-s"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-m",
+    "title": "--goa-letter-spacing-mobile-m",
+    "description": "-1px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-m"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-l",
+    "title": "--goa-letter-spacing-mobile-l",
+    "description": "-1.25px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-l"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-xl",
+    "title": "--goa-letter-spacing-mobile-xl",
+    "description": "-1.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-xl"
+  },
+  {
+    "type": "token",
+    "id": "letter-spacing-mobile-2xl",
+    "title": "--goa-letter-spacing-mobile-2xl",
+    "description": "-1.5px",
+    "status": "stable",
+    "category": "letterSpacing",
+    "tags": [
+      "letterSpacing"
+    ],
+    "slug": "letter-spacing-mobile-2xl"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-2xs",
+    "title": "--goa-typography-heading-2xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-2xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-2xs-letter-spacing",
+    "title": "--goa-typography-heading-2xs-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-2xs-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-xs",
+    "title": "--goa-typography-heading-xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-xs-letter-spacing",
+    "title": "--goa-typography-heading-xs-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-xs-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-s",
+    "title": "--goa-typography-heading-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-s-letter-spacing",
+    "title": "--goa-typography-heading-s-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-s-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-m",
+    "title": "--goa-typography-heading-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-m-letter-spacing",
+    "title": "--goa-typography-heading-m-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-m-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-l",
+    "title": "--goa-typography-heading-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-l"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-l-letter-spacing",
+    "title": "--goa-typography-heading-l-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-l-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-xl",
+    "title": "--goa-typography-heading-xl",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-xl"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-xl-letter-spacing",
+    "title": "--goa-typography-heading-xl-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-xl-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-2xl",
+    "title": "--goa-typography-heading-2xl",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-2xl"
+  },
+  {
+    "type": "token",
+    "id": "typography-heading-2xl-letter-spacing",
+    "title": "--goa-typography-heading-2xl-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-heading-2xl-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-body-xs",
+    "title": "--goa-typography-body-xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-body-xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-body-s",
+    "title": "--goa-typography-body-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-body-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-body-m",
+    "title": "--goa-typography-body-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-body-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-body-l",
+    "title": "--goa-typography-body-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-body-l"
+  },
+  {
+    "type": "token",
+    "id": "typography-number-s",
+    "title": "--goa-typography-number-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-number-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-number-m",
+    "title": "--goa-typography-number-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-number-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-number-l",
+    "title": "--goa-typography-number-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-number-l"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-2xs",
+    "title": "--goa-typography-mobile-heading-2xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-2xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-2xs-letter-spacing",
+    "title": "--goa-typography-mobile-heading-2xs-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-2xs-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-xs",
+    "title": "--goa-typography-mobile-heading-xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-xs-letter-spacing",
+    "title": "--goa-typography-mobile-heading-xs-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-xs-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-s",
+    "title": "--goa-typography-mobile-heading-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-s-letter-spacing",
+    "title": "--goa-typography-mobile-heading-s-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-s-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-m",
+    "title": "--goa-typography-mobile-heading-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-m-letter-spacing",
+    "title": "--goa-typography-mobile-heading-m-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-m-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-l",
+    "title": "--goa-typography-mobile-heading-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-l"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-l-letter-spacing",
+    "title": "--goa-typography-mobile-heading-l-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-l-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-xl",
+    "title": "--goa-typography-mobile-heading-xl",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-xl"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-xl-letter-spacing",
+    "title": "--goa-typography-mobile-heading-xl-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-xl-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-2xl",
+    "title": "--goa-typography-mobile-heading-2xl",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-2xl"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-heading-2xl-letter-spacing",
+    "title": "--goa-typography-mobile-heading-2xl-letter-spacing",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-heading-2xl-letter-spacing"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-body-xs",
+    "title": "--goa-typography-mobile-body-xs",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-body-xs"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-body-s",
+    "title": "--goa-typography-mobile-body-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-body-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-body-m",
+    "title": "--goa-typography-mobile-body-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-body-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-body-l",
+    "title": "--goa-typography-mobile-body-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-body-l"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-number-s",
+    "title": "--goa-typography-mobile-number-s",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-number-s"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-number-m",
+    "title": "--goa-typography-mobile-number-m",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-number-m"
+  },
+  {
+    "type": "token",
+    "id": "typography-mobile-number-l",
+    "title": "--goa-typography-mobile-number-l",
+    "status": "stable",
+    "category": "typography",
+    "tags": [
+      "typography"
+    ],
+    "slug": "typography-mobile-number-l"
+  },
+  {
+    "type": "token",
+    "id": "translate-default",
+    "title": "--goa-translate-default",
+    "status": "stable",
+    "category": "translate",
+    "tags": [
+      "translate",
+      "motion"
+    ],
+    "slug": "translate-default"
+  },
+  {
+    "type": "token",
+    "id": "translate-move-in",
+    "title": "--goa-translate-move-in",
+    "status": "stable",
+    "category": "translate",
+    "tags": [
+      "translate",
+      "motion"
+    ],
+    "slug": "translate-move-in"
+  },
+  {
+    "type": "token",
+    "id": "translate-move-out",
+    "title": "--goa-translate-move-out",
+    "status": "stable",
+    "category": "translate",
+    "tags": [
+      "translate",
+      "motion"
+    ],
+    "slug": "translate-move-out"
+  },
+  {
+    "type": "token",
+    "id": "motion-curve-expressive",
+    "title": "--goa-motion-curve-expressive",
+    "status": "stable",
+    "category": "motionCurve",
+    "tags": [
+      "motionCurve",
+      "motion"
+    ],
+    "slug": "motion-curve-expressive"
+  },
+  {
+    "type": "token",
+    "id": "motion-curve-productive",
+    "title": "--goa-motion-curve-productive",
+    "status": "stable",
+    "category": "motionCurve",
+    "tags": [
+      "motionCurve",
+      "motion"
+    ],
+    "slug": "motion-curve-productive"
+  },
+  {
+    "type": "token",
+    "id": "motion-curve-expressive-exit",
+    "title": "--goa-motion-curve-expressive-exit",
+    "status": "stable",
+    "category": "motionCurve",
+    "tags": [
+      "motionCurve",
+      "motion"
+    ],
+    "slug": "motion-curve-expressive-exit"
+  },
+  {
+    "type": "token",
+    "id": "motion-curve-expressive-reveal",
+    "title": "--goa-motion-curve-expressive-reveal",
+    "status": "stable",
+    "category": "motionCurve",
+    "tags": [
+      "motionCurve",
+      "motion"
+    ],
+    "slug": "motion-curve-expressive-reveal"
+  },
+  {
+    "type": "token",
+    "id": "motion-curve-expressive-transform",
+    "title": "--goa-motion-curve-expressive-transform",
+    "status": "stable",
+    "category": "motionCurve",
+    "tags": [
+      "motionCurve",
+      "motion"
+    ],
+    "slug": "motion-curve-expressive-transform"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-short-1",
+    "title": "--goa-motion-duration-short-1",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-short-1"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-short-2",
+    "title": "--goa-motion-duration-short-2",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-short-2"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-short-3",
+    "title": "--goa-motion-duration-short-3",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-short-3"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-short-4",
+    "title": "--goa-motion-duration-short-4",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-short-4"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-medium-1",
+    "title": "--goa-motion-duration-medium-1",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-medium-1"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-medium-2",
+    "title": "--goa-motion-duration-medium-2",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-medium-2"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-medium-3",
+    "title": "--goa-motion-duration-medium-3",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-medium-3"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-long-1",
+    "title": "--goa-motion-duration-long-1",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-long-1"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-long-2",
+    "title": "--goa-motion-duration-long-2",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-long-2"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-long-3",
+    "title": "--goa-motion-duration-long-3",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-long-3"
+  },
+  {
+    "type": "token",
+    "id": "motion-duration-long-4",
+    "title": "--goa-motion-duration-long-4",
+    "status": "stable",
+    "category": "motionDuration",
+    "tags": [
+      "motionDuration",
+      "motion"
+    ],
+    "slug": "motion-duration-long-4"
+  },
+  {
+    "type": "token",
+    "id": "transition-content-move-fade",
+    "title": "--goa-transition-content-move-fade",
+    "status": "stable",
+    "category": "transition",
+    "tags": [
+      "transition",
+      "motion"
+    ],
+    "slug": "transition-content-move-fade"
+  },
+  {
+    "type": "token",
+    "id": "transition-page-fade",
+    "title": "--goa-transition-page-fade",
+    "status": "stable",
+    "category": "transition",
+    "tags": [
+      "transition",
+      "motion"
+    ],
+    "slug": "transition-page-fade"
   }
 ]
