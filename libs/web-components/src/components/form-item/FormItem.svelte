@@ -21,12 +21,14 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
+  import { getTranslations } from "../../common/localization";
   import {
     receive,
     relay,
     generateRandomId,
     typeValidator,
     announceToScreenReader,
+    watch,
   } from "../../common/utils";
   import {
     FieldsetResetErrorsMsg,
@@ -99,13 +101,26 @@
   let _inputEl: HTMLElement;
   let _errorId = `error-${generateRandomId()}`;
   let _helpTextId = `helptext-${generateRandomId()}`;
+  let _translations = getTranslations();
+  const _fieldLabels = new Map<
+    HTMLElement,
+    { label: string; supportsAriaRequired: boolean }
+  >();
 
   // Computed: Error icon size based on form item size
   // Compact: xsmall (16px), Regular/Large: small (18px)
   $: errorIconSize = labelsize === "compact" ? "xsmall" : "small";
   $: updateAriaDescribedBy(Boolean(error));
+  $: requirementText =
+    requirement === "required"
+      ? `(${_translations.formItem.required})`
+      : requirement === "optional"
+        ? `(${_translations.formItem.optional})`
+        : "";
+  $: watch(updateFieldRequirements, [label, requirement, requirementText]);
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     validateRequirementType(requirement);
     validateLabelSize(labelsize);
     validateType(type);
@@ -126,6 +141,7 @@
 
     _rootEl?.addEventListener("form-field::bind", handleInputMounted);
     _rootEl?.addEventListener("help-text::announce", handleAnnounceHelperText);
+    _rootEl?.addEventListener("slotchange", updateFieldRequirements);
   });
 
   function handleInputMounted(e: Event) {
@@ -173,22 +189,59 @@
   }
 
   function onInputMount(props: FormFieldMountRelayDetail) {
-    const { el, name } = props;
+    const { el, name, accessibility } = props;
+    const host = (el.getRootNode() as ShadowRoot).host;
+    const formItem = host?.closest("goa-form-item");
 
-    // Check if aria-label is present and has a value in the child element
-    const ariaLabel = el.getAttribute("aria-label");
-    if (!ariaLabel || ariaLabel.trim() === "") {
-      el.setAttribute("aria-label", getLabelText());
+    if (
+      accessibility &&
+      (!formItem || formItem.shadowRoot?.contains(_rootEl))
+    ) {
+      const { target, supportsAriaRequired } = accessibility;
+      if (!_fieldLabels.has(target)) {
+        const ariaLabel = target.getAttribute("aria-label") ?? "";
+        _fieldLabels.set(target, {
+          label: ariaLabel.trim() ? ariaLabel : "",
+          supportsAriaRequired,
+        });
+      }
+      updateFieldRequirements();
     }
 
     sendMountedMessage(name);
+  }
+
+  function updateFieldRequirements() {
+    for (const [
+      el,
+      { label: ariaLabel, supportsAriaRequired },
+    ] of _fieldLabels) {
+      const name = ariaLabel || getLabelText();
+      const includeRequirement =
+        requirement === "optional" || !supportsAriaRequired;
+      el.setAttribute(
+        "aria-label",
+        includeRequirement && requirementText
+          ? `${name} ${requirementText}`
+          : name,
+      );
+
+      if (requirement === "required" && supportsAriaRequired) {
+        el.setAttribute("aria-required", "true");
+      } else {
+        el.removeAttribute("aria-required");
+      }
+    }
   }
 
   function getLabelText(): string {
     if (!$$slots.label) return label;
     const slot = _rootEl?.querySelector<HTMLSlotElement>('slot[name="label"]');
     const nodes = slot?.assignedNodes({ flatten: true }) ?? [];
-    return nodes.map((node) => node.textContent ?? "").join("").trim();
+    return nodes
+      .map((node) => node.textContent ?? "")
+      .join("")
+      .trim();
   }
 
   // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
@@ -219,11 +272,11 @@
   bind:this={_rootEl}
 >
   {#if $$slots.label || label}
-    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <!-- svelte-ignore a11y_label_has_associated_control -->
     <label class={`label ${labelsize}`}>
       <slot name="label">{label}</slot>
-      {#if requirement && REQUIREMENT_TYPES.includes(requirement)}
-        <em>({requirement})</em>
+      {#if requirementText}
+        <em>{requirementText}</em>
       {/if}
     </label>
   {/if}
@@ -234,7 +287,8 @@
     <div class={`messages-container ${labelsize}`}>
       {#if $$slots.error || error}
         <div class="error-msg" id={_errorId} role="alert">
-          <goa-icon type="warning" size={errorIconSize} theme="filled" />
+          <goa-icon type="warning" size={errorIconSize} theme="filled"
+          ></goa-icon>
           <div class="error-text">
             <slot name="error">
               {error}

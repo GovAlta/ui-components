@@ -121,14 +121,14 @@
   >
     <button slot="target" class:open={_open} class:current={_hasCurrentLink}>
       {#if leadingicon}
-        <goa-icon type={leadingicon} mt="1" />
+        <goa-icon type={leadingicon} mt="1"></goa-icon>
       {/if}
       {heading}
       <goa-icon
         type={_open ? "chevron-up" : "chevron-down"}
         mt="2"
         size="xsmall"
-      />
+      ></goa-icon>
     </button>
 
     <div class="menu" bind:this={_slotParentEl}>

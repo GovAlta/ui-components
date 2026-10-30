@@ -4,6 +4,12 @@ import { describe, it, expect, vi } from "vitest";
 
 describe('GoANotificationComponent', () => {
 
+  it("names the close button", () => {
+    const { container } = render(GoANotification, { type: "information" });
+    const closeIcon = container.querySelector(".close button");
+    expect(closeIcon?.getAttribute("aria-label")).toBe("Close the notification");
+  });
+
   ["important", "information", "emergency", "event"].forEach(type => {
     it(`renders the ${type} notification`, async () => {
       const { container } = render(GoANotification, { type: type });

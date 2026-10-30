@@ -10,6 +10,10 @@ export function DocsDatePickerRoute() {
   const [date, setDate] = useState<string | undefined>();
   const [startDate, setStartDate] = useState<string | undefined>("2024-01-15");
   const [appointment, setAppointment] = useState<string | undefined>();
+  const [defaultCalendar, setDefaultCalendar] = useState<string | undefined>();
+  const [compactCalendar, setCompactCalendar] = useState<string | undefined>();
+  const [defaultInput, setDefaultInput] = useState<string | undefined>();
+  const [compactInput, setCompactInput] = useState<string | undefined>();
   const [incident, setIncident] = useState<string | undefined>();
   const [birthday, setBirthday] = useState<string | undefined>();
   const [errorDate, setErrorDate] = useState<string | undefined>();
@@ -58,6 +62,42 @@ export function DocsDatePickerRoute() {
           max="2024-03-07"
           value={appointment}
           onChange={(detail) => setAppointment(detail.valueStr || undefined)}
+        />
+      </GoabFormItem>
+
+      <h3>Sizes</h3>
+      <GoabFormItem label="Default size (calendar)" mb="l">
+        <GoabDatePicker
+          name="defaultCalendar"
+          type="calendar"
+          value={defaultCalendar}
+          onChange={(detail) => setDefaultCalendar(detail.valueStr || undefined)}
+        />
+      </GoabFormItem>
+      <GoabFormItem label="Compact size (calendar)" labelSize="compact" mb="l">
+        <GoabDatePicker
+          name="compactCalendar"
+          type="calendar"
+          size="compact"
+          value={compactCalendar}
+          onChange={(detail) => setCompactCalendar(detail.valueStr || undefined)}
+        />
+      </GoabFormItem>
+      <GoabFormItem label="Default size (input)" mb="l">
+        <GoabDatePicker
+          name="defaultInput"
+          type="input"
+          value={defaultInput}
+          onChange={(detail) => setDefaultInput(detail.valueStr || undefined)}
+        />
+      </GoabFormItem>
+      <GoabFormItem label="Compact size (input)" labelSize="compact" mb="l">
+        <GoabDatePicker
+          name="compactInput"
+          type="input"
+          size="compact"
+          value={compactInput}
+          onChange={(detail) => setCompactInput(detail.valueStr || undefined)}
         />
       </GoabFormItem>
 

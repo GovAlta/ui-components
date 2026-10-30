@@ -261,7 +261,11 @@
       relay<FormFieldMountRelayDetail>(
         _rootEl,
         FormFieldMountMsg,
-        { name, el: _inputEl },
+        {
+          name,
+          el: _inputEl,
+          accessibility: { target: _inputEl, supportsAriaRequired: true },
+        },
         { bubbles: true, timeout: 10 },
       );
     }
@@ -402,7 +406,7 @@
         data-testid="leading-icon"
         type={leadingicon}
         tabindex="-1"
-      />
+      ></goa-icon>
     {/if}
 
     <input
@@ -446,13 +450,13 @@
         type={trailingicon}
         arialabel={trailingiconarialabel}
         tabindex="-1"
-      />
+      ></goa-icon>
     {/if}
 
     <!-- Trailing Icon Button -->
     {#if trailingicon && handlesTrailingIconClick}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
       <goa-icon-button
         on:click={doClick}
         disabled={isDisabled}
@@ -462,7 +466,7 @@
         data-testid="trailing-icon-button"
         class="trailing-icon-button"
         arialabel={trailingiconarialabel}
-      />
+      ></goa-icon-button>
     {/if}
 
     {#if suffix}

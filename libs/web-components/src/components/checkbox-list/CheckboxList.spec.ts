@@ -139,7 +139,7 @@ describe("GoACheckboxList", () => {
       relay<FormFieldMountRelayDetail>(
         checkboxRoot,
         FormFieldMountMsg,
-        { name: "option1", el: checkboxRoot },
+        { name: "option1", el: checkboxRoot, accessibility: null },
         { bubbles: true },
       );
 
@@ -163,7 +163,7 @@ describe("GoACheckboxList", () => {
         relay<FormFieldMountRelayDetail>(
           checkboxRoot,
           FormFieldMountMsg,
-          { name: "option1", el: checkboxRoot },
+          { name: "option1", el: checkboxRoot, accessibility: null },
           { bubbles: true },
         );
         expect(checkbox.getAttribute("error")).toBe("true");
@@ -241,7 +241,7 @@ describe("GoACheckboxList", () => {
       relay<FormFieldMountRelayDetail>(
         root,
         FormFieldMountMsg,
-        { name: "option1", el: checkbox },
+        { name: "option1", el: checkbox, accessibility: null },
         { bubbles: true },
       );
 

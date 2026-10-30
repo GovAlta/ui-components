@@ -7,8 +7,12 @@ import {
 } from "@testing-library/svelte";
 import { addDays, lastDayOfMonth, startOfDay, addMonths } from "date-fns";
 import { tick } from "svelte";
-import { it, expect, vi } from "vitest";
+import { afterEach, it, expect, vi } from "vitest";
 import { CalendarDate } from "@abgov/ui-components-common";
+
+afterEach(() => {
+  document.documentElement.removeAttribute("lang");
+});
 
 function toDayStart(d: Date): Date {
   d.setHours(0);
@@ -58,6 +62,43 @@ it("it renders", async () => {
     );
     expect(month).toBeTruthy();
   }
+});
+
+it("localizes built-in calendar text using the document language", async () => {
+  document.documentElement.lang = "fr-CA";
+  const { container, getByTestId } = render(Calendar, {
+    name: "appointment",
+    value: "2026-01-30",
+  });
+  await tick();
+
+  const monthDropdown = getByTestId("months");
+  const yearDropdown = getByTestId("years");
+  const formItems = container.querySelectorAll("goa-form-item");
+  const weekdayHeadings = [...container.querySelectorAll("h5")].map(
+    (heading) => heading.textContent,
+  );
+
+  expect(formItems[0]).toHaveAttribute("label", "Mois");
+  expect(formItems[1]).toHaveAttribute("label", "Année");
+  expect(monthDropdown).toHaveAttribute("arialabel", "appointment mois");
+  expect(yearDropdown).toHaveAttribute("arialabel", "appointment année");
+  expect(
+    monthDropdown.querySelector('goa-dropdown-item[value="1"]'),
+  ).toHaveAttribute("label", "janvier");
+  expect(weekdayHeadings).toEqual([
+    "dim.",
+    "lun.",
+    "mar.",
+    "mer.",
+    "jeu.",
+    "ven.",
+    "sam.",
+  ]);
+  expect(getByTestId("2026-01-30")).toHaveAttribute(
+    "aria-label",
+    "vendredi, janvier 30, 2026",
+  );
 });
 
 it("should have no date selected if one not provided", async () => {
@@ -391,7 +432,7 @@ it("updates year dropdown when min date changes", async () => {
   const initialMin = new Date(2020, 0, 1);
   const initialMax = new Date(2025, 0, 1);
 
-  const { component, queryByTestId } = render(Calendar, {
+  const { queryByTestId, rerender } = render(Calendar, {
     min: new CalendarDate(initialMin).toString(),
     max: new CalendarDate(initialMax).toString(),
   });
@@ -412,8 +453,7 @@ it("updates year dropdown when min date changes", async () => {
 
   // Update min to 2022, reducing the range
   const newMin = new Date(2022, 0, 1);
-  component.$set({ min: new CalendarDate(newMin).toString() });
-  await tick();
+  await rerender({ min: new CalendarDate(newMin).toString() });
 
   // Check updated years in dropdown
   yearDropdown = queryByTestId("years");
@@ -444,7 +484,7 @@ it("updates year dropdown when max date changes", async () => {
   const initialMin = new Date(2020, 0, 1);
   const initialMax = new Date(2025, 0, 1);
 
-  const { component, queryByTestId } = render(Calendar, {
+  const { queryByTestId, rerender } = render(Calendar, {
     min: new CalendarDate(initialMin).toString(),
     max: new CalendarDate(initialMax).toString(),
   });
@@ -465,8 +505,7 @@ it("updates year dropdown when max date changes", async () => {
 
   // Update max to 2023, reducing the range
   const newMax = new Date(2023, 0, 1);
-  component.$set({ max: new CalendarDate(newMax).toString() });
-  await tick();
+  await rerender({ max: new CalendarDate(newMax).toString() });
 
   // Check updated years in dropdown
   yearDropdown = queryByTestId("years");

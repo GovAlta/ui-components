@@ -195,7 +195,9 @@ describe("GoATextArea", () => {
         value: "Jim likes apples",
       });
       const counterEl = container.querySelector(".counter");
-      expect(counterEl.innerHTML).toContain("16 characters");
+      expect(counterEl.textContent?.replace(/\s+/g, " ").trim()).toBe(
+        "16 characters",
+      );
     });
 
     it("shows a word count", async () => {
@@ -205,7 +207,9 @@ describe("GoATextArea", () => {
         value: "Jim likes apples",
       });
       const counterEl = container.querySelector(".counter");
-      expect(counterEl.innerHTML).toContain("3 words");
+      expect(counterEl.textContent?.replace(/\s+/g, " ").trim()).toBe(
+        "3 words",
+      );
     });
 
     it("shows the number of characters remaining", async () => {

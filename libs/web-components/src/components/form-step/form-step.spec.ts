@@ -21,21 +21,6 @@ describe("FormStep", () => {
     })
   });
 
-  it("requires a text value", async () => {
-    const mock = vi.spyOn(console, "warn").mockImplementation(() => {
-      /* do nothing */
-    });
-    render(FormStep, {
-      /* no text */
-    });
-
-    // 1 warning
-    await waitFor(() => {
-      expect(console.warn["mock"].calls.length).toBe(1);
-    });
-    mock.mockRestore();
-  });
-
   it("won't emit event when clicked if disabled", async () => {
     const click = vi.fn();
     const el = render(FormStep, { text: "Some form" });

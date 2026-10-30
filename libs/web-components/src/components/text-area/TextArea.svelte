@@ -5,7 +5,6 @@
   import {
     dispatch,
     generateRandomId,
-    pluralize,
     receive,
     relay,
     toBoolean,
@@ -16,6 +15,7 @@
     injectCss,
     type Spacing,
   } from "../../common/styling";
+  import { getTranslations } from "../../common/localization";
   import { onMount } from "svelte";
   import {
     FieldsetErrorRelayDetail,
@@ -89,10 +89,12 @@
 
   let _textareaEl: HTMLTextAreaElement;
   let _rootEl: HTMLElement;
+  let _translations = getTranslations();
 
   // Hooks
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     validateSize(size);
     addRelayListener();
     sendMountedMessage();
@@ -140,7 +142,11 @@
     relay<FormFieldMountRelayDetail>(
       _textareaEl,
       FormFieldMountMsg,
-      { name, el: _textareaEl },
+      {
+        name,
+        el: _textareaEl,
+        accessibility: { target: _textareaEl, supportsAriaRequired: true },
+      },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -198,7 +204,7 @@
     class:readonly={isReadonly}
     class:compact={size === "compact"}
     style={`
-      ${calculateMargin(mt, mr, mb, ml)};
+      ${calculateMargin(mt, mr, mb, ml)}
       --width: ${width};
       --char-count-padding: ${countby ? "2rem" : "0"};
     `}
@@ -220,22 +226,21 @@
       on:keyup={onKeyPress}
       on:focus={onFocus}
       on:blur={onBlur}
-    />
+    ></textarea>
 
     {#if maxcount > 0 && !isDisabled}
       <div class="counter" class:counter-error={count > maxcount}>
         {#if countby && count > maxcount}
-          {count - maxcount} {pluralize(countby, count - maxcount)} too many
+          {_translations.textArea.tooMany(count - maxcount, countby)}
         {:else if countby && count <= maxcount}
-          {maxcount - count} {pluralize(countby, maxcount - count)} remaining
+          {_translations.textArea.remaining(maxcount - count, countby)}
         {/if}
       </div>
     {/if}
 
     {#if countby && maxcount < 0 && count > 0 && !isDisabled}
       <div class="counter">
-        {count}
-        {pluralize(countby, count)}
+        {_translations.textArea.count(count, countby)}
       </div>
     {/if}
   </div>

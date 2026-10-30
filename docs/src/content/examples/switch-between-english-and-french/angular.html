@@ -1,0 +1,22 @@
+@for (currentLanguage of [language]; track currentLanguage) {
+<section [attr.lang]="currentLanguage">
+  <goab-button type="tertiary" (onClick)="switchLanguage()" mb="l">
+    {{ text.switchLanguage }}
+  </goab-button>
+
+  <goab-text tag="h2" size="heading-m" mt="none" mb="s"> {{ text.heading }} </goab-text>
+  <goab-text tag="p" mt="none" mb="l"> {{ text.introduction }} </goab-text>
+
+  <goab-form-item
+    [label]="text.dateLabel"
+    [helpText]="text.dateHelp"
+    requirement="optional"
+  >
+    <goab-date-picker
+      name="appointmentDate"
+      [value]="appointmentDate"
+      (onChange)="onDateChange($event)"
+    ></goab-date-picker>
+  </goab-form-item>
+</section>
+}

@@ -6,6 +6,8 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import type { GoAIconType } from "../icon/Icon.svelte";
+  import { onMount } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   /** Top margin. */
   export let mt: Spacing = null;
@@ -38,14 +40,18 @@
   // booleans
   let _error: boolean;
   let _slottedContent: string = "";
+  let _translations = getTranslations();
 
   // Reactive declarations
   $: _error = toBoolean(error);
   $: _removable = toBoolean(removable);
   $: accessibleContent = ariaLabel || content || _slottedContent;
-  $: removeFilterAriaLabel = accessibleContent
-    ? `Remove filter: ${accessibleContent}`
-    : "Remove filter";
+  $: removeFilterAriaLabel =
+    _translations.filterChip.removeFilter(accessibleContent);
+
+  onMount(() => {
+    _translations = getTranslations(el);
+  });
 
   // Event handlers
   function onDelete(e: Event) {
@@ -85,7 +91,7 @@
         fillcolor={_error
           ? "var(--goa-filter-chip-icon-color-error)"
           : "var(--goa-filter-chip-icon-color)"}
-      />
+      ></goa-icon>
     {/if}
     {#if secondarytext}
       <div class="secondary-text">

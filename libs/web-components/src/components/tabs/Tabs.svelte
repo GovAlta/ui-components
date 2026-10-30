@@ -752,8 +752,7 @@
     width: var(--segmented-indicator-width, 0);
     height: var(--segmented-indicator-height, 30px);
     background: var(--goa-color-greyscale-white);
-    border: var(--goa-border-width-s) solid
-      var(--goa-color-greyscale-150);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-150);
     border-radius: var(--goa-border-radius-m);
     pointer-events: none;
     z-index: 0;
@@ -832,8 +831,7 @@
   }
 
   .segmented :global([role="tab"]:focus-visible) {
-    outline: var(--goa-border-width-l) solid
-      var(--goa-color-interactive-focus);
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: 1px;
     border-radius: var(--goa-border-radius-s);
   }

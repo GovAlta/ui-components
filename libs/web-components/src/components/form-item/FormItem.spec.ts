@@ -1,10 +1,282 @@
 import { render, fireEvent, cleanup } from "@testing-library/svelte";
 import GoAFormItem from "./FormItem.svelte";
+import Checkbox from "../checkbox/Checkbox.svelte";
+import "../checkbox-list/CheckboxList.svelte";
 import { it, describe } from "vitest";
+import { relay } from "../../common/utils";
+import {
+  FormFieldMountMsg,
+  type FormFieldMountRelayDetail,
+} from "../../types/relay-types";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  document.documentElement.removeAttribute("lang");
+});
 
 describe("GoA FormItem", () => {
+  describe("field requirements through the mount relay", () => {
+    const controls = [
+      { host: "goa-input", tag: "input", role: "textbox" },
+      { host: "goa-textarea", tag: "textarea", role: "textbox" },
+      { host: "goa-dropdown", tag: "input", role: "combobox" },
+      { host: "goa-radio-group", tag: "div", role: "radiogroup" },
+      { host: "goa-checkbox-list", tag: "div", role: "group" },
+    ];
+
+    function mountControl(
+      parent: HTMLElement,
+      control: (typeof controls)[number],
+      ariaLabel = "",
+    ) {
+      const host = document.createElement("div");
+      const field = document.createElement(control.tag);
+      field.setAttribute("role", control.role);
+      field.setAttribute("aria-label", ariaLabel);
+      host.attachShadow({ mode: "open" }).appendChild(field);
+      parent.appendChild(host);
+      relay<FormFieldMountRelayDetail>(
+        host,
+        FormFieldMountMsg,
+        {
+          name: "field",
+          el: field,
+          accessibility: {
+            target: field,
+            supportsAriaRequired: control.role !== "group",
+          },
+        },
+        { bubbles: true },
+      );
+      return field;
+    }
+
+    it.each([
+      {
+        control: controls[0],
+        requirement: "optional",
+        label: "Deuxième prénom",
+        expectedName: "Deuxième prénom (facultatif)",
+        expectedRequired: null,
+      },
+      {
+        control: controls[4],
+        requirement: "required",
+        label: "Choix",
+        expectedName: "Choix (requis)",
+        expectedRequired: null,
+      },
+      {
+        control: controls[0],
+        requirement: "required",
+        label: "Prénom",
+        expectedName: "Prénom",
+        expectedRequired: "true",
+      },
+    ])(
+      "uses the French accessible name '$expectedName' and required state",
+      ({ control, requirement, label, expectedName, expectedRequired }) => {
+        document.documentElement.lang = "fr-CA";
+        const result = render(GoAFormItem, {
+          testid: "form-item",
+          label,
+          requirement,
+        });
+        const field = mountControl(result.getByTestId("form-item"), control);
+
+        expect(field.getAttribute("aria-label")).toBe(expectedName);
+        expect(field.getAttribute("aria-required")).toBe(expectedRequired);
+      },
+    );
+
+    it("uses the translations resolved on mount for the indicator and accessible name", async () => {
+      document.documentElement.lang = "en-CA";
+      const target = document.createElement("div");
+      target.lang = "fr-CA";
+      document.body.appendChild(target);
+      const result = render(GoAFormItem, {
+        target,
+        props: {
+          testid: "form-item",
+          label: "Deuxième prénom",
+          requirement: "optional",
+        },
+      });
+      const formItem = result.getByTestId("form-item");
+      const field = mountControl(formItem, controls[0]);
+
+      await vi.waitFor(() => {
+        expect(formItem.querySelector("em")).toHaveTextContent("(facultatif)");
+        expect(field.getAttribute("aria-label")).toBe(
+          "Deuxième prénom (facultatif)",
+        );
+      });
+      target.remove();
+    });
+
+    describe.each(controls)("$host", (control) => {
+      it.each(["required", "optional", ""] as const)(
+        "exposes the name and state for requirement '%s'",
+        (requirement) => {
+          const result = render(GoAFormItem, {
+            testid: "form-item",
+            label: "Middle name",
+            requirement,
+          });
+          const formItem = result.getByTestId("form-item");
+          const field = mountControl(formItem, control);
+          const namedRequirement =
+            requirement === "optional" ||
+            (requirement === "required" && control.role === "group");
+
+          expect(field.getAttribute("aria-label")).toBe(
+            namedRequirement ? `Middle name (${requirement})` : "Middle name",
+          );
+          expect(field.getAttribute("aria-required")).toBe(
+            requirement === "required" && control.role !== "group"
+              ? "true"
+              : null,
+          );
+        },
+      );
+
+      it("updates the name and state when the requirement changes", async () => {
+        const result = render(GoAFormItem, {
+          testid: "form-item",
+          label: "Middle name",
+          requirement: "optional",
+        });
+        const formItem = result.getByTestId("form-item");
+        const field = mountControl(formItem, control);
+        expect(field.getAttribute("aria-label")).toBe("Middle name (optional)");
+
+        await result.rerender({ requirement: "required" });
+        expect(field.getAttribute("aria-label")).toBe(
+          control.role === "group" ? "Middle name (required)" : "Middle name",
+        );
+        expect(field.getAttribute("aria-required")).toBe(
+          control.role === "group" ? null : "true",
+        );
+
+        await result.rerender({ requirement: "", label: "First name" });
+        expect(field.getAttribute("aria-label")).toBe("First name");
+        expect(field.hasAttribute("aria-required")).toBe(false);
+      });
+
+      it("does not apply an outer form item's requirement to a nested field", () => {
+        const result = render(GoAFormItem, {
+          testid: "outer-form-item",
+          label: "Outer label",
+          requirement: "required",
+        });
+        const outer = result.getByTestId("outer-form-item");
+        const inner = document.createElement("goa-form-item");
+        const content = document.createElement("div");
+        inner.appendChild(content);
+        outer.appendChild(inner);
+        const field = mountControl(content, control, "Inner label (optional)");
+
+        expect(field.getAttribute("aria-label")).toBe("Inner label (optional)");
+        expect(field.hasAttribute("aria-required")).toBe(false);
+      });
+    });
+
+    it("keeps a consumer's aria-label when adding and removing optional text", async () => {
+      const result = render(GoAFormItem, {
+        testid: "form-item",
+        label: "Name",
+        requirement: "optional",
+      });
+      const field = mountControl(
+        result.getByTestId("form-item"),
+        controls[0],
+        "Full name",
+      );
+      expect(field.getAttribute("aria-label")).toBe("Full name (optional)");
+
+      await result.rerender({ requirement: "" });
+      expect(field.getAttribute("aria-label")).toBe("Full name");
+    });
+  });
+
+  describe("single Checkbox requirements", () => {
+    it.each(["required", "optional", ""] as const)(
+      "keeps the checkbox's own name and exposes requirement '%s' on its box",
+      async (requirement) => {
+        const result = render(GoAFormItem, {
+          testid: "form-item",
+          label: "Consent",
+          requirement,
+        });
+        const formItem = result.getByTestId("form-item");
+        const mounted = vi.fn();
+        formItem.addEventListener("msg", (event) => {
+          const { action, data } = (event as CustomEvent).detail;
+          if (action === FormFieldMountMsg) mounted(data);
+        });
+        const checkbox = render(Checkbox, {
+          target: formItem,
+          props: { name: "consent", text: "I agree" },
+        });
+        const box = checkbox.container.querySelector('input[type="checkbox"]');
+        const root = checkbox.container.querySelector(".root");
+
+        await vi.waitFor(() => {
+          expect(mounted).toHaveBeenCalledWith({
+            name: "consent",
+            el: root,
+            accessibility: { target: box, supportsAriaRequired: true },
+          });
+        });
+        expect(box?.getAttribute("aria-label")).toBe(
+          requirement === "optional" ? "I agree (optional)" : "I agree",
+        );
+        expect(box?.getAttribute("aria-required")).toBe(
+          requirement === "required" ? "true" : null,
+        );
+        expect(root?.hasAttribute("aria-required")).toBe(false);
+      },
+    );
+
+    it.each(["required", "optional", ""] as const)(
+      "does not pass requirement '%s' from a Checkbox List to its checkbox",
+      async (requirement) => {
+        const result = render(GoAFormItem, {
+          testid: "form-item",
+          label: "Contact channels",
+          requirement,
+        });
+        const list = document.createElement("goa-checkbox-list");
+        list.setAttribute("name", "channels");
+        const checkbox = document.createElement("goa-checkbox");
+        checkbox.setAttribute("name", "email");
+        checkbox.setAttribute("text", "Email");
+        const mounted = vi.fn();
+        checkbox.addEventListener("msg", (event) => {
+          if ((event as CustomEvent).detail.action === FormFieldMountMsg)
+            mounted();
+        });
+        list.appendChild(checkbox);
+        result.getByTestId("form-item").appendChild(list);
+        const box = () =>
+          checkbox.shadowRoot?.querySelector('input[type="checkbox"]');
+        const group = () => list.shadowRoot?.querySelector('[role="group"]');
+
+        await vi.waitFor(() => {
+          expect(mounted).toHaveBeenCalledTimes(1);
+          expect(group()).toHaveAttribute(
+            "aria-label",
+            requirement
+              ? `Contact channels (${requirement})`
+              : "Contact channels",
+          );
+        });
+        expect(box()).toHaveAttribute("aria-label", "Email");
+        expect(box()?.hasAttribute("aria-required")).toBe(false);
+      },
+    );
+  });
+
   it("should render with no params", async () => {
     const result = render(GoAFormItem, { testid: "foo" });
     const el = result.queryByTestId("foo");
@@ -210,7 +482,7 @@ describe("GoA FormItem", () => {
   });
 
   it("should update aria-describedby", async () => {
-    const { component, findByTestId } = render(GoAFormItem, {
+    const { findByTestId, rerender } = render(GoAFormItem, {
       testid: "formitem-test",
       label: "Test Label",
       helptext: "Helper Text",
@@ -234,7 +506,7 @@ describe("GoA FormItem", () => {
     expect(input.getAttribute("aria-describedby")).toBeTruthy();
     expect(input.getAttribute("aria-describedby")).toContain("helptext-");
 
-    await component.$set({ error: "Error Message" });
+    await rerender({ error: "Error Message" });
 
     // Now both error and helptext should be in aria-describedby
     const describedBy = input.getAttribute("aria-describedby");
@@ -245,7 +517,7 @@ describe("GoA FormItem", () => {
     expect(errorMessage?.id).toBe(describedBy?.split(" ")[0]);
     expect(errorMessage?.textContent).toContain("Error Message");
 
-    await component.$set({ error: "" });
+    await rerender({ error: "" });
 
     // Back to only helptext in aria-describedby
     expect(input.getAttribute("aria-describedby")).toBeTruthy();

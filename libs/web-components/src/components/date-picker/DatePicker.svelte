@@ -8,7 +8,7 @@
 />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
   import {
@@ -18,6 +18,7 @@
     watchFocusWithin,
   } from "../../common/utils";
   import { isValidDimension } from "../../common/validators";
+  import { getTranslations } from "../../common/localization";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -57,7 +58,7 @@
   export let testid: string = "";
   /** Sets the width of the date picker input. */
   export let width: string = "";
-  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. */
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts and is suggested for mobile delivery. */
   export let size: "default" | "compact" = "default";
 
   /** Top margin. */
@@ -72,8 +73,11 @@
   let _error: boolean = toBoolean(error);
   let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let _stopWatchingFocus: (() => void) | undefined;
 
   let _date: CalendarDate = CalendarDate.init();
+  // Initializes the langauge to the html tag lang attribute initially, if given
+  let _translations = getTranslations();
 
   $: isDisabled = toBoolean(disabled);
 
@@ -82,15 +86,17 @@
 
   onMount(async () => {
     await tick(); // for Angular's delay
+    _translations = getTranslations(_rootEl);
     setDate(value);
     addRelayListener();
     sendMountedMessage();
     showDeprecationWarnings();
 
-    watchFocusWithin(
+    _stopWatchingFocus = watchFocusWithin(
       _rootEl,
       () => dispatch(_rootEl, "_focus", { name }, { bubbles: true }),
       () => dispatch(_rootEl, "_blur", { name }, { bubbles: true }),
+      { settlePointerFocus: true },
     );
 
     if (width && !isValidDimension(width)) {
@@ -99,6 +105,8 @@
       );
     }
   });
+
+  onDestroy(() => _stopWatchingFocus?.());
 
   function stopInnerFocusEvent(e: Event) {
     e.stopPropagation();
@@ -159,7 +167,11 @@
     relay<FormFieldMountRelayDetail>(
       _senderEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      {
+        name,
+        el: _rootEl,
+        accessibility: null, // Date Picker's fields are issue 4354.
+      },
       { bubbles: true, timeout: 5 },
     );
   }
@@ -294,7 +306,7 @@
         width="100%"
         disabled={isDisabled}
       >
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <goa-input
           slot="target"
           testid="calendar-input"
@@ -302,14 +314,14 @@
           width="100%"
           readonly="true"
           trailingicon="calendar"
-          value={_date.format("MMMM d, yyyy")}
+          value={_date.format("MMMM d, yyyy", _translations.dateFnsLocale)}
           {error}
           on:keydown={handleKeyDown}
           on:_focus={stopInnerFocusEvent}
           on:_blur={stopInnerFocusEvent}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
         <goa-calendar
           {name}
           {value}
@@ -334,7 +346,7 @@
       {mr}
       disabled={isDisabled}
     >
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
       <goa-input
         slot="target"
         testid="calendar-input"
@@ -342,14 +354,14 @@
         width={width || "16ch"}
         readonly="true"
         trailingicon="calendar"
-        value={_date.format("MMMM d, yyyy")}
+        value={_date.format("MMMM d, yyyy", _translations.dateFnsLocale)}
         {error}
         on:keydown={handleKeyDown}
         on:_focus={stopInnerFocusEvent}
         on:_blur={stopInnerFocusEvent}
         disabled={isDisabled}
         {size}
-      />
+      ></goa-input>
       <goa-calendar
         {name}
         {value}
@@ -365,7 +377,7 @@
 {:else if type === "input"}
   <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
-      <goa-form-item helptext="Month">
+      <goa-form-item helptext={_translations.calendar.month}>
         <goa-dropdown
           name="month"
           testid="input-month"
@@ -377,22 +389,19 @@
           disabled={isDisabled}
           {size}
         >
-          <goa-dropdown-item value="0" label="—Select a month—" />
-          <goa-dropdown-item value="1" label="January" />
-          <goa-dropdown-item value="2" label="February" />
-          <goa-dropdown-item value="3" label="March" />
-          <goa-dropdown-item value="4" label="April" />
-          <goa-dropdown-item value="5" label="May" />
-          <goa-dropdown-item value="6" label="June" />
-          <goa-dropdown-item value="7" label="July" />
-          <goa-dropdown-item value="8" label="August" />
-          <goa-dropdown-item value="9" label="September" />
-          <goa-dropdown-item value="10" label="October" />
-          <goa-dropdown-item value="11" label="November" />
-          <goa-dropdown-item value="12" label="December" />
+          <goa-dropdown-item
+            value="0"
+            label={size === "compact"
+              ? _translations.calendar.selectMonthCompact
+              : _translations.calendar.selectMonth}
+          />
+          {#each _translations.calendar.months as month, index}
+            <goa-dropdown-item value={`${index + 1}`} label={month}
+            ></goa-dropdown-item>
+          {/each}
         </goa-dropdown>
       </goa-form-item>
-      <goa-form-item helptext="Day (DD)">
+      <goa-form-item helptext={_translations.calendar.dayFormat}>
         <goa-input
           name="day"
           type="number"
@@ -408,9 +417,9 @@
           {error}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
       </goa-form-item>
-      <goa-form-item helptext="Year (YYYY)">
+      <goa-form-item helptext={_translations.calendar.yearFormat}>
         <goa-input
           name="year"
           type="number"
@@ -426,7 +435,7 @@
           {error}
           disabled={isDisabled}
           {size}
-        />
+        ></goa-input>
       </goa-form-item>
     </goa-block>
   </goa-form-item>

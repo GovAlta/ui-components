@@ -6,6 +6,7 @@ import DropdownMultiselect from "./DropdownMultiselect.svelte";
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
+  document.documentElement.removeAttribute("lang");
 });
 
 describe("GoADropdownMultiselect", () => {
@@ -45,6 +46,56 @@ describe("GoADropdownMultiselect", () => {
       });
       const valueDisplay = container.querySelector(".value-display");
       expect(valueDisplay?.textContent?.trim()).toBe("apple, banana");
+    });
+
+    it("localizes the default and filtering text", async () => {
+      document.documentElement.lang = "fr-CA";
+      const { container } = render(DropdownMultiselect, {
+        name: "fruit",
+        testid: "dropdown-multiselect",
+        filterable: "true",
+      });
+      const trigger = container.querySelector(".trigger") as HTMLElement;
+      const content = container.querySelector(".content");
+
+      expect(trigger).toHaveTextContent("—Sélectionner—");
+      expect(content).toHaveAttribute("aria-label", "Options");
+
+      await fireEvent.keyDown(trigger, { key: "ArrowDown" });
+
+      const filterInput = container.querySelector(
+        ".filter-input",
+      ) as HTMLInputElement;
+      await waitFor(() => {
+        expect(filterInput).toHaveAttribute("placeholder", "Filtrer...");
+        expect(filterInput).toHaveAttribute(
+          "aria-label",
+          "Filtrer les options",
+        );
+      });
+
+      await fireEvent.input(filterInput, { target: { value: "pom" } });
+      await waitFor(() => {
+        expect(container.querySelector("goa-icon-button")).toHaveAttribute(
+          "arialabel",
+          "Effacer le filtre",
+        );
+      });
+    });
+
+    it("localizes the selected item count", async () => {
+      document.documentElement.lang = "fr-CA";
+      const { container } = render(DropdownMultiselect, {
+        ...defaultProps,
+        value: ["apple", "banana"],
+        labelFormat: "count",
+      });
+
+      await waitFor(() => {
+        expect(container.querySelector(".value-display")).toHaveTextContent(
+          "2 éléments",
+        );
+      });
     });
   });
 
@@ -191,14 +242,12 @@ describe("GoADropdownMultiselect", () => {
 
   describe("Select All", () => {
     // Simulate goa-dropdown-item mount relay so _options gets populated.
-    // Must await: onMount has an `await tick()` before addRelayListener, so we
-    // need one tick to pass before the listener is registered.
+    // Flush the component after each synthetic child-mount message.
     async function addOption(
       rootEl: HTMLElement,
       value: string,
       label: string,
     ) {
-      await tick();
       rootEl.dispatchEvent(
         new CustomEvent("msg", {
           detail: {
@@ -212,6 +261,7 @@ describe("GoADropdownMultiselect", () => {
           },
         }),
       );
+      await tick();
     }
 
     it("should not render Select All checkbox by default", async () => {
@@ -247,6 +297,22 @@ describe("GoADropdownMultiselect", () => {
           "goa-checkbox[name='select-all']",
         );
         expect(selectAll).not.toBeNull();
+      });
+    });
+
+    it("localizes the Select All checkbox", async () => {
+      document.documentElement.lang = "fr-CA";
+      const { container, queryByTestId } = render(DropdownMultiselect, {
+        ...defaultProps,
+        showSelectAll: "true",
+      });
+      const rootEl = queryByTestId("dropdown-multiselect") as HTMLElement;
+      await addOption(rootEl, "apple", "Apple");
+
+      await waitFor(() => {
+        expect(
+          container.querySelector("goa-checkbox[name='select-all']"),
+        ).toHaveAttribute("text", "Tout sélectionner");
       });
     });
 

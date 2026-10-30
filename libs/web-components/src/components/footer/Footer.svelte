@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   /** The maximum width of the main content area */
   export let maxcontentwidth: string = "";
@@ -11,11 +12,13 @@
   let rootEl: HTMLElement;
   let navLinks: Element[];
   let metaLinks: Element[];
+  let _translations = getTranslations();
 
   const year = new Date().getFullYear();
 
   onMount(async () => {
     await tick();
+    _translations = getTranslations(rootEl);
     const navSlot = rootEl.querySelector("slot[name=nav]") as HTMLSlotElement;
     const metaSlot = rootEl.querySelector("slot[name=meta]") as HTMLSlotElement;
     metaLinks = metaSlot?.assignedElements();
@@ -35,7 +38,7 @@
     </div>
 
     {#if navLinks?.length > 0}
-      <goa-divider mt="l" mb="l" />
+      <goa-divider mt="l" mb="l"></goa-divider>
     {/if}
 
     <div
@@ -50,7 +53,8 @@
         class="abgov"
         class:with-meta-links={metaLinks && metaLinks.length > 0}
       >
-        <span class="goa-copyright">© {year} Government of Alberta</span>
+        <span class="goa-copyright">{_translations.footer.copyright(year)}</span
+        >
       </div>
     </div>
   </div>

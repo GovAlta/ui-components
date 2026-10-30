@@ -35,9 +35,8 @@
   // used to obtain component dimensions
   let _gridEl: HTMLElement;
 
-
   // collection of references to the child goa-form-step web components
-  let _steps: { el: HTMLElement, status: FormStepStatus}[] = [];
+  let _steps: { el: HTMLElement; status: FormStepStatus }[] = [];
 
   // calculated x distance (px) between each step point
   let _stepWidth: number;
@@ -93,7 +92,7 @@
   // =====
 
   onMount(async () => {
-    await tick();  // needed to ensure Angular's delay, when rendering within a route, doesn't break things
+    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
 
     _stepType = +step === -1 ? "free" : "constrained";
 
@@ -139,7 +138,6 @@
         _currentStep = step < 1 ? 1 : step;
         dispatchCurrentStep(); // so app can display first step's content
       });
-
     });
   }
 
@@ -233,7 +231,7 @@
 
     // ensure progress bar is not shows until initial calcs are complete, timeout needed to
     // prevent flickering of the scrollbar
-    setTimeout(() => _showProgressBars = true, 100);
+    setTimeout(() => (_showProgressBars = true), 100);
   }
 
   // notify outside app of step change
@@ -269,7 +267,7 @@
   <div
     class="form-stepper"
     style={`
-      ${calculateMargin(mt, mr, mb, ml)};
+      ${calculateMargin(mt, mr, mb, ml)}
       --progress: ${_progress}%;
       --step-width: ${_stepWidth}px;
       --step-height: ${_stepHeight}px;
@@ -284,13 +282,12 @@
       <progress class="vertical" value={_progress} max="100"></progress>
     {/if}
     <div class="slots" bind:this={_gridEl}>
-        <slot />
+      <slot />
     </div>
   </div>
 </div>
 
 <style>
-
   .slots {
     position: relative;
     inset: 0;
@@ -366,8 +363,6 @@
       gap: var(--goa-space-m);
     }
   }
-
-
 
   /* iOS tweaks */
   progress::-webkit-progress-value {

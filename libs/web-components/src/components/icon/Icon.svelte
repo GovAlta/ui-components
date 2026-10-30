@@ -757,7 +757,7 @@
           _iconOverrides[_iconType]}
       </div>
     {:else}
-      <ion-icon name={_iconName} />
+      <ion-icon name={_iconName}></ion-icon>
     {/if}
   {/if}
 </div>

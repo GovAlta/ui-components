@@ -77,20 +77,13 @@ describe("RadioItem", () => {
       ml: "xl",
     });
 
-    const radio = baseElement.container.querySelector("[data-testid=root]");
+    const radio =
+      baseElement.container.querySelector<HTMLElement>("[data-testid=root]");
     expect(radio).toBeTruthy();
-    expect(radio?.getAttribute("style")).toContain(
-      "margin-top:var(--goa-space-s)",
-    );
-    expect(radio?.getAttribute("style")).toContain(
-      "margin-right:var(--goa-space-m)",
-    );
-    expect(radio?.getAttribute("style")).toContain(
-      "margin-bottom:var(--goa-space-l)",
-    );
-    expect(radio?.getAttribute("style")).toContain(
-      "margin-left:var(--goa-space-xl)",
-    );
+    expect(radio?.style.marginTop).toBe("var(--goa-space-s)");
+    expect(radio?.style.marginRight).toBe("var(--goa-space-m)");
+    expect(radio?.style.marginBottom).toBe("var(--goa-space-l)");
+    expect(radio?.style.marginLeft).toBe("var(--goa-space-xl)");
   });
 
   it("should handle the change event and emit _radioItemChange event with value and label", async () => {

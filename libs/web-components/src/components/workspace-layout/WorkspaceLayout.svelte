@@ -8,6 +8,7 @@
   import { onMount, onDestroy } from "svelte";
   import { dispatch, relay, receive } from "../../common/utils";
   import { MOBILE_BP } from "../../common/breakpoints";
+  import { getTranslations } from "../../common/localization";
   import {
     WorkSideMenuBindMsg,
     type WorkSideMenuBindRelayDetail,
@@ -37,6 +38,7 @@
   let _resizeDebounceId: ReturnType<typeof setTimeout> | null = null;
   let _windowWidth = 0;
   let _workSideMenuRef: HTMLElement | null = null;
+  let _translations = getTranslations();
 
   // Debounce ResizeObserver longer than the .card-container padding transition
   // (150ms) so state isn't recalculated mid-animation while clientHeight is
@@ -75,6 +77,7 @@
   // *****
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     if (_scrollEl) {
       calculateScrollState();
       _resizeObserver = new ResizeObserver(() => {
@@ -197,7 +200,7 @@
       <button
         type="button"
         class="mobile-menu-toggle"
-        aria-label="Open menu"
+        aria-label={_translations.workspaceLayout.openMenu}
         on:click={openMobileSideMenu}
       >
         <svg
@@ -212,12 +215,15 @@
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-          />
+          ></path>
         </svg>
       </button>
     {/if}
 
-    <aside class="side-menu" aria-label="Side navigation">
+    <aside
+      class="side-menu"
+      aria-label={_translations.workspaceLayout.sideNavigation}
+    >
       <slot name="side-menu" />
     </aside>
   {/if}
@@ -228,7 +234,7 @@
       bind:this={_scrollEl}
       on:scroll={handleScroll}
       role="region"
-      aria-label="Page content"
+      aria-label={_translations.workspaceLayout.pageContent}
     >
       {#if $$slots["page-header"]}
         <header class="page-header">
@@ -249,7 +255,10 @@
   </div>
 
   {#if $$slots["push-drawer"]}
-    <aside class="push-drawer-region" aria-label="Push drawer">
+    <aside
+      class="push-drawer-region"
+      aria-label={_translations.workspaceLayout.pushDrawer}
+    >
       <slot name="push-drawer" />
     </aside>
   {/if}

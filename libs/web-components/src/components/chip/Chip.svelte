@@ -45,7 +45,9 @@
   $: _deletable = toBoolean(deletable);
 
   onMount(async () => {
-    console.warn("GoAChip is deprecated. Use the Filter Chip component instead.");
+    console.warn(
+      "GoAChip is deprecated. Use the Filter Chip component instead.",
+    );
   });
 
   function onDelete(e: Event) {
@@ -57,9 +59,9 @@
 </script>
 
 <!-- HTML -->
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   bind:this={el}
   data-testid={testid}
@@ -81,7 +83,7 @@
       size="medium"
       type={leadingicon}
       theme={icontheme}
-    />
+    ></goa-icon>
   {/if}
   <div class="text">
     {content}
@@ -98,7 +100,7 @@
           ? "var(--goa-color-interactive-hover)"
           : "var(--goa-color-greyscale-700)"}
       opacity={_error ? (_hovering ? 1 : 0.5) : 1}
-    />
+    ></goa-icon>
   {/if}
 </div>
 

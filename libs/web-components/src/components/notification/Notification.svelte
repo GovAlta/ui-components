@@ -85,15 +85,17 @@
         aria-atomic="true"
       >
         <div class="icon">
-          <goa-icon type={iconType} inverted={iconInverted} theme={iconTheme} />
+          <goa-icon type={iconType} inverted={iconInverted} theme={iconTheme}
+          ></goa-icon>
         </div>
         <div class="content">
           <slot />
         </div>
         <div class="close">
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <button class={type} on:click={close}>
-            <goa-icon type="close" inverted={iconInverted} theme="filled" />
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
+          <button class={type} aria-label="Close the notification" on:click={close}>
+            <goa-icon type="close" inverted={iconInverted} theme="filled"
+            ></goa-icon>
           </button>
         </div>
       </div>

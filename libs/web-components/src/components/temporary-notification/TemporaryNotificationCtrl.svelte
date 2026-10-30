@@ -223,7 +223,7 @@
       visible={_notification.visible}
       animation-direction={vPosition === "top" ? "up" : "down"}
       on:action={_notification.action}
-    />
+    ></goa-temp-notification>
   {/if}
   <span
     class="sr-only"

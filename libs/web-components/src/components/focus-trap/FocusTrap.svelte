@@ -64,7 +64,9 @@
     if (!sibling) return;
 
     // for Modal/Drawer containers with tabindex="-1"
-    const firstFocusEl = sibling.querySelector('[data-first-focus="true"]') as HTMLElement;
+    const firstFocusEl = sibling.querySelector(
+      '[data-first-focus="true"]',
+    ) as HTMLElement;
     if (firstFocusEl) {
       firstFocusEl.focus();
       return;
@@ -129,14 +131,13 @@
       focusedElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }
-
 </script>
 
 <div bind:this={rootEl}>
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
   <span data-tab-boundry="start" data-ignore-focus-datagrid tabindex="0"></span>
   <slot />
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
   <span data-tab-boundry="end" data-ignore-focus-datagrid tabindex="0"></span>
 </div>
 

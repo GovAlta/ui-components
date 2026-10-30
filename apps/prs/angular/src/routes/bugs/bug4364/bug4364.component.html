@@ -1,0 +1,76 @@
+<goab-text tag="h1" mt="m">4364: Centre the app header service name</goab-text>
+<goab-text tag="p">
+  <a href="https://github.com/GovAlta/ui-components/issues/4364">Issue 4364</a>: The
+  service name was centred in the space between the logo and utilities, so it drifted away
+  from the page centre. It should line up with the centre of each header below. The dashed
+  vertical line marks the centre of each header's own box. Resize the browser to check the
+  cases. The side menu makes these headers narrower than the window, so the names give way
+  sooner than in a full width header; select Collapse menu at the bottom left to give them
+  more room.
+</goab-text>
+
+<ng-template #utilities>
+  <goab-button type="secondary" size="compact" leadingIcon="mail">Messages</goab-button>
+  <goab-button type="secondary" size="compact" leadingIcon="person-circle"
+    >Jordan Smith</goab-button
+  >
+</ng-template>
+<ng-template #phase>
+  <goab-badge type="information" content="Beta" />
+</ng-template>
+<ng-template #alphaPhase>
+  <goab-badge type="important" content="Alpha" />
+</ng-template>
+<ng-template #oneUtility>
+  <a href="#account">Jordan Smith</a>
+</ng-template>
+
+<goab-text tag="h2">No utilities or phase badge</goab-text>
+<goab-text tag="p">The name itself should be centred, with no empty badge gap.</goab-text>
+<div class="bug4364-header-preview">
+  <goab-app-header heading="My benefits" />
+</div>
+
+<goab-text tag="h2">Two utilities</goab-text>
+<goab-text tag="p">
+  The name stays centred while there is room. At narrower widths it moves just enough to
+  fit the utilities. Menu appears only when they stop fitting. Resize again after it folds
+  to confirm it stays folded, then open Menu.
+</goab-text>
+<div class="bug4364-header-preview">
+  <goab-app-header heading="My benefits" [utilities]="utilities" />
+</div>
+
+<goab-text tag="h2">Phase and secondary text</goab-text>
+<goab-text tag="p">
+  The name and Beta badge stay together, with secondary text below the name. Below 624px
+  they align left, with the badge below the secondary text.
+</goab-text>
+<div class="bug4364-header-preview">
+  <goab-app-header
+    heading="My benefits"
+    secondaryText="Manage your benefits"
+    [phase]="phase"
+    [utilities]="utilities"
+  />
+</div>
+
+<goab-text tag="h2">Long service name with phase and utilities</goab-text>
+<goab-text tag="p">
+  A long name gives way because there is not enough room on both sides to keep it centred.
+  The name and Alpha badge stay together while the utilities remain visible until they
+  stop fitting.
+</goab-text>
+<div class="bug4364-header-preview">
+  <goab-app-header
+    heading="Apply for financial support for a family member"
+    [phase]="alphaPhase"
+    [utilities]="utilities"
+  />
+</div>
+
+<goab-text tag="h2">One utility on mobile</goab-text>
+<goab-text tag="p">A single utility stays visible without a Menu button.</goab-text>
+<div class="bug4364-header-preview">
+  <goab-app-header heading="My benefits" [utilities]="oneUtility" />
+</div>

@@ -17,6 +17,7 @@
   import { GoAIconType } from "../icon/Icon.svelte";
   import { dispatch, receive } from "../../common/utils";
   import { MenuActionProps } from "./MenuAction.svelte";
+  import { getTranslations } from "../../common/localization";
 
   // Public props
 
@@ -35,12 +36,13 @@
   /** Sets the color variant for semantic meaning. */
   export let variant: "normal" | "destructive" = "normal";
   /** Sets the aria-label for the icon button in icon-only mode. */
-  export let ariaLabel: string = "Open menu";
+  export let ariaLabel: string = "";
 
   // Private props
 
   let _rootEl: HTMLElement;
   let _icon: GoAIconType = "chevron-down";
+  let _translations = getTranslations();
 
   let _blockEl: HTMLElement;
   let _buttons: HTMLElement[] = [];
@@ -57,6 +59,7 @@
 
   // Hooks
   onMount(async () => {
+    _translations = getTranslations(_rootEl);
     receive(_rootEl, (action, data, event) => {
       switch (action) {
         case "click":
@@ -181,8 +184,8 @@
       icon={leadingIcon || "ellipsis-horizontal"}
       size={size === "normal" ? "4" : "3"}
       variant={variant === "destructive" ? "destructive" : "dark"}
-      arialabel={ariaLabel || "Open menu"}
-    />
+      arialabel={ariaLabel || _translations.menuButton.openMenu}
+    ></goa-icon-button>
   {/if}
   <goa-block
     bind:this={_blockEl}

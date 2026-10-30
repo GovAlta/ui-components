@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   type Variant = "dragdrop" | "button";
   type Issue = {
@@ -28,12 +29,14 @@
   let _el: HTMLElement;
   let _fileInput: HTMLInputElement;
   let _state: "hover" | "dragenter" | "default" = "default";
+  let _translations = getTranslations();
 
   let issues: Issue[] = [];
 
   // Hooks
 
   onMount(() => {
+    _translations = getTranslations(_el);
     _fileInput.addEventListener(
       "change",
       () => {
@@ -65,10 +68,10 @@
 
   function validate(file: File): string | null {
     if (!isValidFileType(file)) {
-      return "Invalid file type";
+      return _translations.fileUploadInput.invalidFileType;
     }
     if (!isValidFileSize(file)) {
-      return `The file must be less than ${maxfilesize}`;
+      return _translations.fileUploadInput.fileTooLarge(maxfilesize);
     }
     return null;
   }
@@ -211,8 +214,8 @@
 </script>
 
 <!-- svelte-ignore
-  a11y-click-events-have-key-events
-  a11y-mouse-events-have-key-events
+  a11y_click_events_have_key_events
+  a11y_mouse_events_have_key_events
 -->
 {#if variant === "dragdrop"}
   <div
@@ -228,15 +231,17 @@
     on:dragover={onDrag}
   >
     <div class="instructions">
-      <goa-icon type="cloud-upload" size="large" />
-      <div>Drag and drop files here</div>
-      <em class="or-text">or</em>
-      <div class="browse-files">Browse files</div>
+      <goa-icon type="cloud-upload" size="large"></goa-icon>
+      <div>{_translations.fileUploadInput.dragAndDrop}</div>
+      <em class="or-text">{_translations.fileUploadInput.or}</em>
+      <div class="browse-files">
+        {_translations.fileUploadInput.browseFiles}
+      </div>
     </div>
 
     {#if maxfilesize}
       <em class="max-file-size" data-testid="max-file-size"
-        >Maximum file size is {maxfilesize}</em
+        >{_translations.fileUploadInput.maximumFileSize(maxfilesize)}</em
       >
     {/if}
 
@@ -254,12 +259,12 @@
 {#if variant === "button"}
   <div class="button" bind:this={_el}>
     <goa-button on:click={openFilePicker} type="secondary">
-      Choose file
+      {_translations.fileUploadInput.chooseFile}
     </goa-button>
 
     {#if maxfilesize}
       <em class="max-file-size" data-testid="max-file-size">
-        Maximum file size is {maxfilesize}
+        {_translations.fileUploadInput.maximumFileSize(maxfilesize)}
       </em>
     {/if}
   </div>
@@ -286,7 +291,7 @@
         size={issue.size}
         type={issue.filetype}
         error={issue.error}
-      />
+      ></goa-file-upload-card>
     {/each}
   </div>
 {/if}

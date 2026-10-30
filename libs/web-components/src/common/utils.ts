@@ -1,3 +1,5 @@
+import type { Translations } from "./localization/types";
+
 // Similar to React's useEffect. Svelte's $: puts a watch on any variables within the block
 // of code. The issue is that the block may then be unwantingly triggered when one of the
 // non-key properties change. Using the `watch` function provides the control and makes
@@ -396,10 +398,15 @@ export function getLocalDateValues(input: string | Date): {
 // Date formatting
 // ===============
 
+type DateTimeTranslations = Translations["dateTime"];
+
 /**
  * Returns "Today", "Yesterday", or null for other dates.
  */
-export function getRelativeDayLabel(date: Date): "Today" | "Yesterday" | null {
+export function getRelativeDayLabel(
+  date: Date,
+  translations: DateTimeTranslations,
+): string | null {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const yesterday = new Date(today);
@@ -410,8 +417,8 @@ export function getRelativeDayLabel(date: Date): "Today" | "Yesterday" | null {
     date.getDate(),
   );
 
-  if (dateOnly.getTime() === today.getTime()) return "Today";
-  if (dateOnly.getTime() === yesterday.getTime()) return "Yesterday";
+  if (dateOnly.getTime() === today.getTime()) return translations.today;
+  if (dateOnly.getTime() === yesterday.getTime()) return translations.yesterday;
   return null;
 }
 
@@ -419,7 +426,10 @@ export function getRelativeDayLabel(date: Date): "Today" | "Yesterday" | null {
  * Formats a relative timestamp: "Now", "5 min ago", "2 h ago", "3 d ago",
  * or a short date string for older dates.
  */
-export function formatRelativeTimestamp(date: Date | null): string {
+export function formatRelativeTimestamp(
+  date: Date | null,
+  translations: DateTimeTranslations,
+): string {
   if (!date || !date.getTime()) return "";
 
   const now = new Date();
@@ -429,12 +439,12 @@ export function formatRelativeTimestamp(date: Date | null): string {
   const diffHours = Math.floor(diffMins / 60);
   const diffDays = Math.floor(diffHours / 24);
 
-  if (diffSecs < 60) return "Now";
-  if (diffMins < 60) return `${diffMins} min ago`;
-  if (diffHours < 24) return `${diffHours} h ago`;
-  if (diffDays < 7) return `${diffDays} d ago`;
+  if (diffSecs < 60) return translations.now;
+  if (diffMins < 60) return translations.minutesAgo(diffMins);
+  if (diffHours < 24) return translations.hoursAgo(diffHours);
+  if (diffDays < 7) return translations.daysAgo(diffDays);
 
-  return date.toLocaleString("en-CA", {
+  return date.toLocaleString(translations.locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -447,11 +457,15 @@ export function formatRelativeTimestamp(date: Date | null): string {
 /**
  * Formats a full date for tooltips: "Today, February 24, 2026, 2:30 p.m."
  */
-export function formatFullDate(date: Date | null): string {
+export function formatFullDate(
+  date: Date | null,
+  translations: DateTimeTranslations,
+): string {
   if (!date || !date.getTime()) return "";
 
-  const fullDateString = date.toLocaleString("en-CA", {
-    weekday: "long",
+  const label = getRelativeDayLabel(date, translations);
+  const fullDateString = date.toLocaleString(translations.locale, {
+    weekday: label ? undefined : "long",
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -460,9 +474,8 @@ export function formatFullDate(date: Date | null): string {
     hour12: true,
   });
 
-  const label = getRelativeDayLabel(date);
   if (label) {
-    return `${label}, ${fullDateString.split(", ").slice(1).join(", ")}`;
+    return `${label}, ${fullDateString}`;
   }
   return fullDateString;
 }
@@ -470,11 +483,14 @@ export function formatFullDate(date: Date | null): string {
 /**
  * Formats a date group heading: "Today", "Yesterday", or "February 24, 2026".
  */
-export function formatDateGroup(date: Date): string {
-  const label = getRelativeDayLabel(date);
+export function formatDateGroup(
+  date: Date,
+  translations: DateTimeTranslations,
+): string {
+  const label = getRelativeDayLabel(date, translations);
   if (label) return label;
 
-  return date.toLocaleDateString("en-CA", {
+  return date.toLocaleDateString(translations.locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -630,19 +646,43 @@ export function watchFocusWithin(
   let focused = false;
   let pointerDownInside = false;
   let lastFocusOut: FocusEvent | undefined;
+  let leaveTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
-  const checkLeave = (event: FocusEvent) => {
+  const cancelLeaveCheck = () => {
+    if (leaveTimeoutId !== undefined) {
+      clearTimeout(leaveTimeoutId);
+      leaveTimeoutId = undefined;
+    }
+  };
+
+  const checkLeave = (event: FocusEvent, canSettle = true) => {
+    leaveTimeoutId = undefined;
     if (focused && !isFocusWithin(hostEl)) {
+      // Firefox can temporarily report body as active while a popover closes and
+      // restores focus to its trigger. Allow that restoration one more task to settle.
+      if (
+        settlePointerFocus &&
+        canSettle &&
+        document.activeElement === document.body
+      ) {
+        leaveTimeoutId = setTimeout(() => checkLeave(event, false), 0);
+        return;
+      }
       focused = false;
       onLeave(event);
     }
+  };
+
+  const scheduleLeaveCheck = (event: FocusEvent) => {
+    cancelLeaveCheck();
+    leaveTimeoutId = setTimeout(() => checkLeave(event), 0);
   };
 
   const onPointerDown = (event: PointerEvent) => {
     pointerDownInside = event.composedPath().includes(hostEl);
     if (!pointerDownInside) {
       // A click outside must also end focus when an internal click left no DOM node focused.
-      setTimeout(() => checkLeave(lastFocusOut ?? new FocusEvent("focusout")), 0);
+      scheduleLeaveCheck(lastFocusOut ?? new FocusEvent("focusout"));
     }
   };
 
@@ -659,24 +699,30 @@ export function watchFocusWithin(
     document.addEventListener("pointercancel", onPointerUp, true);
   }
 
-  rootEl.addEventListener("focusin", (e) => {
+  const onFocusIn = (e: FocusEvent) => {
+    // Moving between nested shadow roots can briefly leave document.activeElement on
+    // body. A subsequent focusin proves focus is still within this component.
+    cancelLeaveCheck();
     if (!focused) {
       focused = true;
-      onEnter(e as FocusEvent);
+      onEnter(e);
     }
-  });
+  };
 
-  rootEl.addEventListener("focusout", (e) => {
-    const evt = e as FocusEvent;
+  const onFocusOut = (evt: FocusEvent) => {
     lastFocusOut = evt;
     const fromInternalPointer = pointerDownInside;
-    setTimeout(() => {
-      // An option click can briefly put focus on body before the next option receives it.
-      if (!fromInternalPointer) checkLeave(evt);
-    }, 0);
-  });
+    // An option click can briefly put focus on body before the next option receives it.
+    if (!fromInternalPointer) scheduleLeaveCheck(evt);
+  };
+
+  rootEl.addEventListener("focusin", onFocusIn);
+  rootEl.addEventListener("focusout", onFocusOut);
 
   return () => {
+    cancelLeaveCheck();
+    rootEl.removeEventListener("focusin", onFocusIn);
+    rootEl.removeEventListener("focusout", onFocusOut);
     if (settlePointerFocus) {
       document.removeEventListener("pointerdown", onPointerDown, true);
       document.removeEventListener("pointerup", onPointerUp, true);

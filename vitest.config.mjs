@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 
 import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import { svelteTesting } from "@testing-library/svelte/vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { playwright } from "@vitest/browser-playwright";
@@ -18,12 +19,13 @@ export default defineConfig({
       {
         plugins: [
           svelte({
-            preprocess: vitePreprocess(),
+            preprocess: vitePreprocess({ script: true }),
             include: ["**/*.svelte"],
             compilerOptions: {
               customElement: true,
             },
           }),
+          svelteTesting(),
         ],
         resolve: {
           alias: {
@@ -37,7 +39,6 @@ export default defineConfig({
           name: "web-component-unit",
           globals: true,
           environment: "jsdom",
-          alias: [{ find: /^svelte$/, replacement: "svelte/internal" }],
           include: ["libs/web-components/src/**/*.{test,spec}.ts"],
           setupFiles: ["vitest.web-component.setup.ts"],
         },
@@ -73,6 +74,7 @@ export default defineConfig({
           name: "react-browser",
           globals: true,
           environment: "jsdom",
+          fileParallelism: false,
           include: ["libs/react-components/**/*.browser.{test,spec}.tsx"],
           setupFiles: ["vitest.browser.setup.ts"],
           browser: {
@@ -101,6 +103,7 @@ export default defineConfig({
           name: "react-headless",
           globals: true,
           environment: "jsdom",
+          fileParallelism: false,
           include: ["libs/react-components/**/*.browser.{test,spec}.tsx"],
           setupFiles: ["vitest.browser.setup.ts"],
           browser: {

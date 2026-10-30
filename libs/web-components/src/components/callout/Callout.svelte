@@ -9,10 +9,13 @@
 
   // Validators
 
-  const [Types, validateType] = typeValidator(
-    "Callout type",
-    ["emergency", "important", "information", "event", "success"],
-  );
+  const [Types, validateType] = typeValidator("Callout type", [
+    "emergency",
+    "important",
+    "information",
+    "event",
+    "success",
+  ]);
   const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator(
     "Callout emphasis",
     ["high", "medium", "low"],
@@ -78,7 +81,7 @@
 <div
   role="region"
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
+    ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
   `}
   class="notification {type} emphasis-{emphasis}"
@@ -86,10 +89,8 @@
   aria-live={arialive}
 >
   <div class="heading">
-    <goa-icon
-      type={iconType}
-      theme={emphasis === "high" ? "outline" : "filled"}
-    />
+    <goa-icon type={iconType} theme={emphasis === "high" ? "outline" : "filled"}
+    ></goa-icon>
     <h3 class="heading-label">{heading}</h3>
   </div>
   <div class="body">

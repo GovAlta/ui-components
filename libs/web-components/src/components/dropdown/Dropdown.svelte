@@ -42,6 +42,7 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
   import { isFilterMatch } from "../../common/filtering";
+  import { getTranslations } from "../../common/localization";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -67,7 +68,7 @@
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
   /** Sets the text displayed when filtering returns no results. */
-  export let noresults: string = "No matches found";
+  export let noresults: string = "";
   /** Overrides the autosized menu width. Non-native only. */
   export let width: string = "";
   /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
@@ -119,6 +120,7 @@
   let _values: string[] = [];
 
   let _bindTimeoutId: any;
+  let _translations = getTranslations();
 
   let _error = toBoolean(error);
 
@@ -157,6 +159,7 @@
   //
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
@@ -273,7 +276,14 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _native ? _selectEl : _inputEl },
+      {
+        name,
+        el: _native ? _selectEl : _inputEl,
+        accessibility: {
+          target: _native ? _selectEl : _inputEl,
+          supportsAriaRequired: true,
+        },
+      },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -788,7 +798,7 @@
   class:dropdown-native={_native}
   class:compact={size === "compact"}
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
+    ${calculateMargin(mt, mr, mb, ml)}
     --width: ${_width};
   `}
 >
@@ -825,7 +835,7 @@
         stroke-linejoin="round"
         stroke-width="48"
         d="M112 184l144 144 144-144"
-      />
+      ></path>
     </svg>
   {:else}
     <slot />
@@ -852,7 +862,7 @@
             data-testid="leading-icon"
             size={size === "compact" ? "small" : "medium"}
             type={leadingicon}
-          />
+          ></goa-icon>
         {/if}
 
         <input
@@ -877,7 +887,7 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          placeholder={placeholder || "—Select—"}
+          placeholder={placeholder || _translations.dropdown.select}
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
@@ -890,7 +900,7 @@
             id={name}
             data-testid="clear-icon"
             tabindex={_disabled ? -1 : 0}
-            arialabel="clear input"
+            arialabel={_translations.dropdown.clearInput}
             on:click={onClearIconClick}
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -900,16 +910,16 @@
             theme="filled"
             variant="dark"
             icon="close"
-          />
+          ></goa-icon-button>
         {:else}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <goa-icon
             testid="chevron"
             id={name}
             class="dropdown-icon--arrow"
             size={size === "compact" ? "small" : "medium"}
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
-          />
+          ></goa-icon>
         {/if}
       </div>
 
@@ -929,7 +939,7 @@
         `}
       >
         {#each _filteredOptions as option, index (index)}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <li
             id={option.value}
             aria-selected={_selectedOption?.value === option.value}
@@ -955,7 +965,7 @@
         {:else}
           {#if _filterable}
             <li class="dropdown-item" data-testid="dropdown-item-not-found">
-              {noresults}
+              {noresults || _translations.dropdown.noMatchesFound}
             </li>
           {/if}
         {/each}

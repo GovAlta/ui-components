@@ -24,14 +24,15 @@
     FieldsetResetErrorsMsg,
     FormFieldMountRelayDetail,
     FormFieldMountMsg,
-    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
+    FieldsetErrorRelayDetail,
+    FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
   // Validators
-  const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
-    "vertical",
-    "horizontal",
-  ]);
+  const [Orientations, validateOrientation] = typeValidator(
+    "Radio group orientation",
+    ["vertical", "horizontal"],
+  );
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
 
   // Types
@@ -142,7 +143,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          onSetValue({ name, value: ""})
+          onSetValue({ name, value: "" });
           break;
       }
     });
@@ -162,7 +163,11 @@
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
-      { name, el: _rootEl },
+      {
+        name,
+        el: _rootEl,
+        accessibility: { target: _rootEl, supportsAriaRequired: true },
+      },
       { bubbles: true, timeout: 10 },
     );
   }
@@ -215,13 +220,17 @@
       .sort((a, b) => {
         const aHost = (a.el.getRootNode() as ShadowRoot).host ?? a.el;
         const bHost = (b.el.getRootNode() as ShadowRoot).host ?? b.el;
-        return aHost.compareDocumentPosition(bHost) & Node.DOCUMENT_POSITION_FOLLOWING
+        return aHost.compareDocumentPosition(bHost) &
+          Node.DOCUMENT_POSITION_FOLLOWING
           ? -1
           : 1;
       })
-      .map((item) => item.el.querySelector<HTMLInputElement>('input[type="radio"]'))
-      .filter((input): input is HTMLInputElement =>
-        input !== null && (includeDisabled || !input.disabled),
+      .map((item) =>
+        item.el.querySelector<HTMLInputElement>('input[type="radio"]'),
+      )
+      .filter(
+        (input): input is HTMLInputElement =>
+          input !== null && (includeDisabled || !input.disabled),
       );
   }
 
@@ -249,7 +258,8 @@
   }
 
   function onKeyDown(e: KeyboardEvent) {
-    if (!["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(e.key)) return;
+    if (!["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(e.key))
+      return;
 
     const inputs = getRadioInputs();
     const index = inputs.indexOf(e.composedPath()[0] as HTMLInputElement);
@@ -319,8 +329,7 @@
 </div>
 
 <style>
-
-:host {
+  :host {
     font-family: var(--goa-font-family-sans);
   }
 
@@ -336,8 +345,8 @@
 
   .goa-radio-group--vertical {
     display: flex;
-    flex-direction: column;  /* Vertical stacking */
-    gap: var(--goa-radio-group-gap-vertical);  /* Adds spacing */
+    flex-direction: column; /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
     width: 100%;
   }
 

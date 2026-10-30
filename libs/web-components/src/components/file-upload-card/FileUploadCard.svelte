@@ -1,7 +1,8 @@
 <svelte:options customElement="goa-file-upload-card" />
 
 <script lang="ts">
-  import { getTimestamp } from "../../common/utils";
+  import { onMount } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   // Public
 
@@ -23,15 +24,20 @@
   let _status: "uploading" | "uploaded" | "error" = "uploading";
   let _rootEl: HTMLElement;
   let _fileIcon: string = "goa-file";
+  let _translations = getTranslations();
 
   // Reactive
 
   $: _status =
-      error && "error"
-      || (progress >= 0 && progress < 100) && "uploading"
-      || "uploaded"
+    (error && "error") ||
+    (progress >= 0 && progress < 100 && "uploading") ||
+    "uploaded";
 
   $: _fileIcon = filename && type && getFiletypeIcon(filename, type);
+
+  onMount(() => {
+    _translations = getTranslations(_rootEl);
+  });
 
   // Functions
 
@@ -40,30 +46,29 @@
     const parts = filename.split(".");
     const ext = parts[parts.length - 1];
     const extTypeIcon =
-      ext === "xlxs"     && "goa-xls"
-      || ext === "xls"   && "goa-xls"
-      || ext === "zip"   && "goa-zip"
-      || ext === "docx"  && "goa-doc"
-      || ext === "doc"   && "goa-doc"
-      || ext === "pptx"  && "goa-ppt"
-      || ext === "ppt"   && "goa-ppt"
-      || ext === "pdf"   && "goa-pdf"
-      || ext === "html"  && "goa-html"
-
+      (ext === "xlxs" && "goa-xls") ||
+      (ext === "xls" && "goa-xls") ||
+      (ext === "zip" && "goa-zip") ||
+      (ext === "docx" && "goa-doc") ||
+      (ext === "doc" && "goa-doc") ||
+      (ext === "pptx" && "goa-ppt") ||
+      (ext === "ppt" && "goa-ppt") ||
+      (ext === "pdf" && "goa-pdf") ||
+      (ext === "html" && "goa-html");
 
     if (extTypeIcon) return extTypeIcon;
 
     // mimetype
     const mimeTypeIcon =
-      type === "application/vnd.ms-powerpoint"  && "goa-ppt"
-      || type.includes("presentationml")        && "goa-ppt"
-      || type.includes("wordprocessingml")      && "goa-doc"
-      || type.includes("spreadsheet")           && "goa-xls"
-      || type.startsWith("video")               && "goa-video"
-      || type.startsWith("audio")               && "goa-audio"
-      || type.startsWith("image")               && "goa-image"
-      || type === "application/msword"          && "goa-doc"
-      || "goa-file"
+      (type === "application/vnd.ms-powerpoint" && "goa-ppt") ||
+      (type.includes("presentationml") && "goa-ppt") ||
+      (type.includes("wordprocessingml") && "goa-doc") ||
+      (type.includes("spreadsheet") && "goa-xls") ||
+      (type.startsWith("video") && "goa-video") ||
+      (type.startsWith("audio") && "goa-audio") ||
+      (type.startsWith("image") && "goa-image") ||
+      (type === "application/msword" && "goa-doc") ||
+      "goa-file";
 
     return mimeTypeIcon;
   }
@@ -85,7 +90,7 @@
       case bytes < Math.pow(1024, 3):
         return Math.round(bytes / Math.pow(1024, 2)) + "MB";
       default:
-        return "n/a";
+        return _translations.fileUploadCard.unavailable;
     }
   }
 </script>
@@ -104,7 +109,7 @@
         type={_fileIcon}
         fillcolor="#0070c4"
         size="xlarge"
-      />
+      ></goa-icon>
     {:else}
       <goa-icon
         class="fileicon"
@@ -112,25 +117,27 @@
         type="goa-file"
         fillcolor="#dcdcdc"
         size="xlarge"
-      />
+      ></goa-icon>
     {/if}
     <div class="details">
       <div class="filename" data-testid="filename">{filename}</div>
       {#if _status !== "error"}
-        <div class="filesize" data-testid="filesize">{formatFileSize(size)}</div>
+        <div class="filesize" data-testid="filesize">
+          {formatFileSize(size)}
+        </div>
       {/if}
       {#if _status === "uploading"}
         <div class="progress" data-testid="progress">
-          <progress value={progress} max="100" />
+          <progress value={progress} max="100"></progress>
           {Math.ceil(progress)}%
         </div>
       {:else if _status === "uploaded"}
         <div class="timestamp" data-testid="timestamp">
-          Uploaded on {getTimestamp()}
+          {_translations.fileUploadCard.uploadedOn(new Date())}
         </div>
       {:else if _status === "error"}
         <div class="error-msg" data-testid="error">
-          <goa-icon type="warning" size="small" theme="filled" />
+          <goa-icon type="warning" size="small" theme="filled"></goa-icon>
           {error}
         </div>
       {/if}
@@ -141,21 +148,23 @@
         <goa-button
           type="tertiary"
           size="compact"
-          on:click={() => dispatch("_cancel")}>Cancel</goa-button
+          on:click={() => dispatch("_cancel")}
+          >{_translations.fileUploadCard.cancel}</goa-button
         >
       {:else if _status === "uploaded"}
         <goa-button
           type="tertiary"
           size="compact"
           on:click={() => dispatch("_delete")}
-          leadingicon="trash">Remove</goa-button
+          leadingicon="trash">{_translations.fileUploadCard.remove}</goa-button
         >
       {:else if _status === "error"}
         <goa-button
           type="tertiary"
           size="compact"
           on:click={() => dispatch("_delete")}
-          variant="destructive">Cancel</goa-button
+          variant="destructive"
+          >{_translations.fileUploadCard.cancel}</goa-button
         >
       {/if}
     </div>

@@ -61,6 +61,7 @@
     watchFocusWithin,
   } from "../../common/utils";
   import { isFilterMatch } from "../../common/filtering";
+  import { getTranslations } from "../../common/localization";
   import type {
     DropdownItemMountedRelayDetail,
     DropdownItemDestroyRelayDetail,
@@ -149,6 +150,7 @@
   let _focusedIndex = -1;
   let _isTriggerMouseDown = false;
   let _skipNextTriggerFocusOpen = false;
+  let _translations = getTranslations();
 
   // Reactive
   $: value = Array.isArray(value) ? value : [];
@@ -164,7 +166,11 @@
   $: _labelMap = Object.fromEntries(
     _options.map((o) => [o.value, o.label || o.value]),
   );
-  $: _displayText = calculateDisplayText(value, _labelMap);
+  $: _displayText = calculateDisplayText(
+    value,
+    _labelMap,
+    _translations.dropdownMultiselect.selectedItems,
+  );
   // Filter the options based on _filterText if filterable is true
   $: _visibleOptions =
     filterable && _filterText.trim()
@@ -172,7 +178,7 @@
       : _options;
 
   onMount(async () => {
-    await tick();
+    _translations = getTranslations(_rootEl);
     validateSize(size);
     validateLabelFormat(labelFormat);
     validateLeadingIcon();
@@ -180,6 +186,8 @@
 
     ensureSlotExists(_rootEl);
     addRelayListener();
+
+    await tick();
     updatePopoverWidth();
     _stopWatchingFocus = watchFocusWithin(
       _rootEl,
@@ -211,9 +219,10 @@
   function calculateDisplayText(
     values: string[],
     labelMap: Record<string, string>,
+    selectedItems: (count: number) => string,
   ) {
     if (labelFormat === "count" && values.length > 1) {
-      return `${values.length} items`;
+      return selectedItems(values.length);
     }
 
     return values.map((v) => labelMap[v] || v).join(", ");
@@ -566,7 +575,7 @@
             data-testid={testid ? `${testid}-leading-icon` : undefined}
             size={size === "compact" ? "small" : "medium"}
             type={filterable ? "search" : leadingIcon}
-          />
+          ></goa-icon>
         {/if}
         {#if _isOpen && filterable}
           <input
@@ -574,8 +583,8 @@
             bind:value={_filterText}
             class="filter-input"
             type="text"
-            placeholder="Filter..."
-            aria-label="Filter options"
+            placeholder={_translations.dropdownMultiselect.filter}
+            aria-label={_translations.dropdownMultiselect.filterOptions}
             autocomplete="off"
             data-testid={testid ? `${testid}-filter-input` : undefined}
             on:click|stopPropagation
@@ -583,17 +592,19 @@
           />
         {:else}
           <span class="value-display" class:placeholder={!_hasValue}>
-            {_hasValue ? _displayText : placeholder || "—Select—"}
+            {_hasValue
+              ? _displayText
+              : placeholder || _translations.dropdownMultiselect.select}
           </span>
         {/if}
         {#if _isOpen && filterable && _filterText.length > 0}
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+          <!-- svelte-ignore a11y_no_static_element_interactions -->
+          <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
           <goa-icon-button
             id={name}
             data-testid="clear-icon"
             tabindex={disabled ? undefined : 0}
-            arialabel="clear filter"
+            arialabel={_translations.dropdownMultiselect.clearFilter}
             on:click={handleClearIconClick}
             on:keydown={handleClearIconKeyDown}
             class="dropdown-icon--clear"
@@ -603,22 +614,22 @@
             theme="filled"
             variant="dark"
             icon="close"
-          />
+          ></goa-icon-button>
         {:else}
           <goa-icon
             type={_isOpen ? "chevron-up" : "chevron-down"}
             size="medium"
             aria-hidden="true"
-          />
+          ></goa-icon>
         {/if}
       </div>
     </div>
 
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <div
       id={_contentId}
       role="dialog"
-      aria-label={placeholder || "Options"}
+      aria-label={placeholder || _translations.dropdownMultiselect.options}
       class="content"
       style="max-height: {maxHeight}; "
       on:keydown={handleKeydown}
@@ -628,7 +639,7 @@
           bind:this={_selectAllEl}
           name="select-all"
           value="select-all"
-          text="Select all"
+          text={_translations.dropdownMultiselect.selectAll}
           data-testid={testid ? `${testid}-select-all` : undefined}
           checked={fromBoolean(_allVisibleSelected)}
           indeterminate={fromBoolean(_someVisibleSelected)}
@@ -657,7 +668,7 @@
               text={option.label || option.value}
               checked={fromBoolean(value.includes(option.value))}
               {size}
-            />
+            ></goa-checkbox>
           {/each}
         </goa-checkbox-list>
       {/if}

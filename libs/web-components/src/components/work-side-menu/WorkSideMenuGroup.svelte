@@ -11,6 +11,7 @@
   import { onMount } from "svelte";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { toBoolean, dispatch } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   /** The text displayed in the group heading. */
   export let heading: string;
@@ -22,8 +23,10 @@
   export let open: boolean = false;
 
   let _rootEl: HTMLElement;
+  let _translations = getTranslations();
 
   onMount(() => {
+    _translations = getTranslations(_rootEl);
     _rootEl.addEventListener("_itemCurrent", handleItemCurrent);
   });
 
@@ -44,20 +47,20 @@
 <div class="root" data-testid={testid} bind:this={_rootEl}>
   <details
     {open}
-    aria-label={open ? "Close group" : "Open group"}
+    aria-label={open
+      ? _translations.workSideMenuGroup.closeGroup
+      : _translations.workSideMenuGroup.openGroup}
     on:toggle={({ target }) => (open = toBoolean(`${target?.open}`))}
     on:mouseenter={handleMouseEnter}
   >
     <summary aria-expanded={open}>
       {#if icon}
-        <goa-icon
-          type={icon}
-          size="small"
-          theme={open ? "filled" : "outline"}
-        />
+        <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"}
+        ></goa-icon>
       {/if}
       <span class="label">{heading}</span>
-      <goa-icon class="marker-icon" type="chevron-forward" size="small" />
+      <goa-icon class="marker-icon" type="chevron-forward" size="small"
+      ></goa-icon>
     </summary>
     <div class="group" data-testid="group">
       <slot />
@@ -119,9 +122,15 @@
 
     /* Menu item styling */
     --goa-work-side-menu-item-icon-display: none;
-    --goa-work-side-menu-item-padding: var(--goa-work-side-menu-group-item-padding);
-    --goa-work-side-menu-item-min-height: var(--goa-work-side-menu-group-item-min-height);
-    --goa-work-side-menu-item-text-size: var(--goa-work-side-menu-group-item-text-size);
+    --goa-work-side-menu-item-padding: var(
+      --goa-work-side-menu-group-item-padding
+    );
+    --goa-work-side-menu-item-min-height: var(
+      --goa-work-side-menu-group-item-min-height
+    );
+    --goa-work-side-menu-item-text-size: var(
+      --goa-work-side-menu-group-item-text-size
+    );
   }
 
   .label {

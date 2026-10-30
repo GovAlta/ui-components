@@ -146,12 +146,8 @@
     <span class="text">
       <slot />
     </span>
-    <goa-icon
-      id="trailing-icon"
-      size="4"
-      type="arrow-forward"
-      inverted="true"
-    />
+    <goa-icon id="trailing-icon" size="4" type="arrow-forward" inverted="true"
+    ></goa-icon>
   {:else}
     {#if leadingicon}
       <goa-icon
@@ -159,7 +155,7 @@
         size={size === "normal" ? "4" : "3"}
         type={leadingicon}
         inverted={isButtonDark}
-      />
+      ></goa-icon>
     {/if}
     <span class="text">
       <slot />
@@ -170,7 +166,7 @@
         size={size === "normal" ? "4" : "3"}
         type={trailingicon}
         inverted={isButtonDark}
-      />
+      ></goa-icon>
     {/if}
   {/if}
 </button>

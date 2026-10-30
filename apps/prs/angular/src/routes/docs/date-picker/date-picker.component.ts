@@ -30,6 +30,12 @@ export class DocsDatePickerComponent {
   rangeForm: FormGroup = this.fb.group({
     appointment: [null],
   });
+  sizesForm: FormGroup = this.fb.group({
+    defaultCalendar: [null],
+    compactCalendar: [null],
+    defaultInput: [null],
+    compactInput: [null],
+  });
   inputTypeForm: FormGroup = this.fb.group({
     incident: [null],
     birthday: [null],

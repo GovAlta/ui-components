@@ -141,7 +141,7 @@
   class:current={_current}
   data-testid={testid}
   style={`
-    ${calculateMargin(mt, mr, mb, ml)};
+    ${calculateMargin(mt, mr, mb, ml)}
   `}
 >
   <a
@@ -153,15 +153,15 @@
   >
     {#if icon}
       <div class="leading-icon">
-        <goa-icon type={icon} size="3" />
+        <goa-icon type={icon} size="3"></goa-icon>
       </div>
     {/if}
     {heading}
     <div class="trailing-icon">
       {#if _open}
-        <goa-icon type="chevron-down" size="3" />
+        <goa-icon type="chevron-down" size="3"></goa-icon>
       {:else}
-        <goa-icon type="chevron-forward" size="3" />
+        <goa-icon type="chevron-forward" size="3"></goa-icon>
       {/if}
     </div>
   </a>

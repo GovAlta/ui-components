@@ -7,18 +7,22 @@
 </script>
 
 <goa-table {width}>
-  <thead>
-    {#each columnTitles as title}
-      <th>{title}</th>
-    {/each}
-  </thead>
-  <tbody>
-    {#each data as row}
+  <table>
+    <thead>
       <tr>
-        {#each row as item}
-          <td>{item}</td>
+        {#each columnTitles as title}
+          <th>{title}</th>
         {/each}
       </tr>
-    {/each}
-  </tbody>
+    </thead>
+    <tbody>
+      {#each data as row}
+        <tr>
+          {#each row as item}
+            <td>{item}</td>
+          {/each}
+        </tr>
+      {/each}
+    </tbody>
+  </table>
 </goa-table>

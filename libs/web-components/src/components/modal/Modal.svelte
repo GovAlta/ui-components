@@ -9,6 +9,7 @@
     toBoolean,
   } from "../../common/utils";
   import { onDestroy, onMount, tick } from "svelte";
+  import { getTranslations } from "../../common/localization";
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
@@ -42,6 +43,7 @@
   let _isOpen: boolean = false;
   let _headingSlotHasContent = false;
   let _actionsSlotHasContent = false;
+  let _translations = getTranslations();
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -63,6 +65,7 @@
   $: _headingExists =
     heading !== "" || ($$slots.heading && _headingSlotHasContent);
   $: _headerHasContent = _headingExists || _isClosable;
+  $: if (_rootEl) _translations = getTranslations(_rootEl);
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
   // reference to allow for creation of the @keyframes for the in:fade and out:fade transitions.
@@ -182,9 +185,13 @@
       role="presentation"
       bind:this={_rootEl}
     >
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <div data-testid="modal-overlay" class="modal-overlay" on:click={close} />
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <div
+        data-testid="modal-overlay"
+        class="modal-overlay"
+        on:click={close}
+      ></div>
       <div
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
@@ -205,13 +212,16 @@
             >
               <div class="modal-heading-content">
                 {#if _iconType}
-                  <goa-icon type={_iconType} size="medium" theme="filled" />
+                  <goa-icon type={_iconType} size="medium" theme="filled"
+                  ></goa-icon>
                 {/if}
                 <div
                   data-testid="modal-title"
                   class="modal-title"
                   id="goa-modal-heading"
-                  aria-label={_headingExists ? undefined : "Modal"}
+                  aria-label={_headingExists
+                    ? undefined
+                    : _translations.modal.modal}
                 >
                   {#if heading}
                     {heading}
@@ -222,18 +232,18 @@
               </div>
               {#if _isClosable}
                 <div class="modal-close">
-                  <!-- svelte-ignore a11y-click-events-have-key-events -->
-                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <!-- svelte-ignore a11y_click_events_have_key_events -->
+                  <!-- svelte-ignore a11y_no_static_element_interactions -->
                   <goa-icon-button
                     size="medium"
                     data-ignore-focus="true"
                     data-testid="modal-close-button"
-                    arialabel="Close the modal"
+                    arialabel={_translations.modal.closeModal}
                     icon="close"
                     theme="filled"
                     on:click={close}
                     variant="dark"
-                  />
+                  ></goa-icon-button>
                 </div>
               {/if}
             </header>

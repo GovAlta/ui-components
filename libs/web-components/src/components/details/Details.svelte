@@ -91,7 +91,7 @@
       fillcolor={_isMouseOver
         ? "var(--goa-details-icon-color-hover)"
         : "var(--goa-details-icon-color)"}
-    />
+    ></goa-icon>
     <span id={`${_detailsId}-heading`}>{heading}</span>
   </summary>
   <div

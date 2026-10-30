@@ -102,7 +102,7 @@
           "name": "ariaLabel",
           "type": "string",
           "required": false,
-          "default": null,
+          "default": "Open menu",
           "description": "Sets the aria-label for the icon button in icon-only mode."
         },
         {

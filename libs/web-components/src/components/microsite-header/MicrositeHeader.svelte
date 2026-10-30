@@ -5,6 +5,7 @@
   import { onMount, tick } from "svelte";
   import { typeValidator } from "../../common/utils";
   import { toBoolean } from "../../common/utils";
+  import { getTranslations } from "../../common/localization";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -41,14 +42,11 @@
   $: _hasfeedbackhandler = toBoolean(hasfeedbackhandler);
 
   let _feedbackElement: HTMLElement;
+  let _rootEl: HTMLElement;
+  let _translations = getTranslations();
 
   // Types
   type UrlTargetType = (typeof UrlTarget)[number];
-
-  function capitalize(val: string): string {
-    if (!val || (val && val.length === 0)) return "";
-    return val[0].toUpperCase() + val.slice(1);
-  }
 
   function handleFeedbackClick(event: MouseEvent) {
     if (_hasfeedbackhandler == true) {
@@ -61,6 +59,7 @@
   }
 
   onMount(async () => {
+    _translations = getTranslations(_rootEl);
     setTimeout(() => validateType(type), 1);
     validateUrlTargetType(headerurltarget);
     validateUrlTargetType(feedbackurltarget);
@@ -68,29 +67,38 @@
 </script>
 
 <!-- HTML -->
-<div id="container" data-testid={testid}>
+<div id="container" data-testid={testid} bind:this={_rootEl}>
   <div
     class="content-container"
     style={`--max-content-width: ${maxcontentwidth}`}
   >
     {#if type === "live"}
       <div data-testid="type" class="site-text">
-        An official site of the <a
+        {_translations.micrositeHeader.officialSiteBeforeGovernment}
+        <a
           href="https://www.alberta.ca/index.aspx"
-          target={`_${headerurltarget}`}>Alberta Government</a
+          target={`_${headerurltarget}`}
+          >{_translations.micrositeHeader.governmentOfAlberta}</a
         >
+        {#if _translations.micrositeHeader.officialSiteAfterGovernment}
+          {_translations.micrositeHeader.officialSiteAfterGovernment}
+        {/if}
         {#if feedbackurl}
           <span data-testid="feedback">
-            — help us improve it by giving
+            {_translations.micrositeHeader.feedbackPrompt}
             <span class="feedback-link">
-              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}
+                >{_translations.micrositeHeader.feedback}</a
+              >
             </span>
           </span>
         {:else if _hasfeedbackhandler}
           <span data-testid="feedback-click" bind:this={_feedbackElement}>
-            — help us improve it by giving
-            <!-- svelte-ignore a11y-invalid-attribute -->
-            <a href="#" on:click={handleFeedbackClick}>feedback</a>
+            {_translations.micrositeHeader.feedbackPrompt}
+            <!-- svelte-ignore a11y_invalid_attribute -->
+            <a href="#" on:click={handleFeedbackClick}
+              >{_translations.micrositeHeader.feedback}</a
+            >
           </span>
         {/if}
       </div>
@@ -101,32 +109,42 @@
         data-testid="type"
         class="service-type service-type--{type.toLowerCase()}"
       >
-        {capitalize(type)}
+        {type === "alpha"
+          ? _translations.micrositeHeader.alpha
+          : _translations.micrositeHeader.beta}
       </div>
       <div data-testid="site-text" class="site-text">
-        This is a new <a
+        {_translations.micrositeHeader.newServiceBeforeGovernment}
+        <a
           href="https://www.alberta.ca/index.aspx"
-          target={`_${headerurltarget}`}>Alberta Government</a
+          target={`_${headerurltarget}`}
+          >{_translations.micrositeHeader.governmentOfAlberta}</a
         >
-        service
+        {#if _translations.micrositeHeader.newServiceAfterGovernment}
+          {_translations.micrositeHeader.newServiceAfterGovernment}
+        {/if}
 
         {#if feedbackurl}
           <span data-testid="feedback">
-            — help us improve it by giving
+            {_translations.micrositeHeader.feedbackPrompt}
             <span class="feedback-link">
-              <a href={feedbackurl} target={`_${feedbackurltarget}`}>feedback</a>
+              <a href={feedbackurl} target={`_${feedbackurltarget}`}
+                >{_translations.micrositeHeader.feedback}</a
+              >
             </span>
           </span>
         {:else if _hasfeedbackhandler}
           <span data-testid="feedback-click" bind:this={_feedbackElement}>
-            — help us improve it by giving
-            <!-- svelte-ignore a11y-invalid-attribute -->
-            <a href="#" on:click={handleFeedbackClick}>feedback</a>
+            {_translations.micrositeHeader.feedbackPrompt}
+            <!-- svelte-ignore a11y_invalid_attribute -->
+            <a href="#" on:click={handleFeedbackClick}
+              >{_translations.micrositeHeader.feedback}</a
+            >
           </span>
         {/if}
       </div>
     {/if}
-    <div class="spacer" />
+    <div class="spacer"></div>
     {#if $$slots.version || version}
       <div data-testid="version" class="version">
         <slot name="version">
@@ -146,7 +164,7 @@
 
   .feedback-link {
     display: inline-flex; /* Keeps the text and icon together when text wraps */
-}
+  }
 
   #container {
     background-color: var(--goa-microsite-header-color-bg);

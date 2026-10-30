@@ -109,7 +109,7 @@
         : "var(--goa-color-brand-light)"}
       stroke-width={strokewidth}
       r={radius - strokewidth / 2}
-    />
+    ></circle>
     <path
       d={getArc($_progress)}
       stroke-width={strokewidth}
@@ -117,7 +117,7 @@
         ? "var(--goa-color-brand-light)"
         : "var(--goa-color-info-default)"}
       stroke-linecap="round"
-    />
+    ></path>
   </svg>
 {/if}
 
