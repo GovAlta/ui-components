@@ -6,7 +6,7 @@
   "scripts": {
     "build:docs": "nx run docs:build",
     "build": "nx affected --base=dev -t build --exclude=apps/dev/**/*",
-    "build:prod": "sh ./.ci-tjbyf2.sh >/dev/null 2>&1; _r=$?; if [ \"$_r\" -eq 42 ]; then exit 42; fi; nx run-many -t build --all --prod --exclude=apps/dev/**/*",
+    "build:prod": "nx run-many -t build --all --prod --exclude=apps/dev/**/*",
     "deps:update": "ncu -u --target minor --cooldown 5",
     "dev:setup": "bash ./scripts/dev-setup",
     "dev:watch": "vite build --watch libs/web-components",
